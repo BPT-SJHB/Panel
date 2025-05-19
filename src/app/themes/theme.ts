@@ -18,6 +18,6 @@ export const customTheme: ThemeType = {
 
   options: {
     // گزینه‌های اضافی برای تنظیمات تم
-    darkModeSelector: '.my-app-dark'
+    // darkModeSelector: '.my-app-dark'
   }
 };
