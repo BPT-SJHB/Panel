@@ -1,0 +1,38 @@
+
+<div>
+  <p-inputgroup styleClass="h-2-5rem">
+    <p-inputgroup-addon
+    class="p-0 overflow-hidden border-round-right flex align-items-center justify-content-center"
+    >
+    <img [src]="captchaSrc" alt="captcha" class="w-full h-full object-cover" />
+  </p-inputgroup-addon>
+
+  <input
+  [formControl]="control"
+  pInputText
+  placeholder="عدد تصویر وارد کنید"
+  class="w-full border-round-left px-2 h-full"
+  [ngClass]="{
+    'border-red-500': control.touched && control.invalid,
+    'border': true,
+    'border-round-left': true,
+    'px-2': true,
+    'h-full': true,
+    'w-full': true
+  }"
+  />
+</p-inputgroup>
+
+@if (control.touched && control.errors) {
+  @if (control.errors['required']) {
+    <small class="p-error block mt-1">
+     وارد کردن عدد تصویر الزامی است.
+    </small>
+  } @else if (control.errors['minlength']) {
+    <small class="p-error block mt-1">
+      کپچا باید حداقل {{ control.errors['minlength'].requiredLength }} کاراکتر باشد.
+    </small>
+  }
+
+}
+</div>

@@ -1,0 +1,32 @@
+<form class="flex flex-column gap-6">
+  <h3 class="text-center mb-3">
+    سامانه جامع حمل و نقل باری سازمان راهداری و حمل و نقل جاده‌ای استان اصفهان
+  </h3>
+
+  <div class="flex flex-column gap-5">
+    <app-username-input [control]="username" />
+
+    <div class="flex flex-column gap-2">
+      <app-password-input [control]="password" />
+
+      <div class="flex justify-content-end w-full mb-1">
+        <a
+          href="/auth/forget-password"
+          class="text-sm text-blue-400 cursor-pointer"
+        >
+          رمز عبورتان را فراموش کردید؟
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <app-captcha-input [control]="captcha" />
+
+  <div class="flex flex-column gap-2 mb-5">
+    <app-remember-me-input [control]="rememberMe" />
+    <p-button type="submit" styleClass="px-5 h-2-5rem w-full">
+      ورود
+    </p-button>
+  </div>
+</form>
+

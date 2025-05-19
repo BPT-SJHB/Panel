@@ -1,0 +1,45 @@
+<div>
+  <p-inputgroup styleClass="h-2-5rem border-0">
+    <p-inputgroup-addon
+    class="bg-primary text-white border-round-right flex align-items-center justify-content-center px-3">
+    <span class="text-sm" style="white-space: nowrap;">شماره تلفن</span>
+  </p-inputgroup-addon>
+
+    <input
+      [formControl]="control"
+      pInputText
+      placeholder="شماره تلفن خود را وارد کنید"
+      [ngClass]="{
+        'border-red-500': control.touched && control.invalid,
+        'border': true,
+        'border-round-left': true,
+        'px-2': true,
+        'h-full': true,
+        'w-full': true
+      }"
+    />
+
+  </p-inputgroup>
+
+  @if (control.touched) {
+    @if (control.errors?.['required']) {
+      <small class="text-red-500 text-xs block">
+        وارد کردن شماره تلفن الزامی است.
+      </small>
+    } @else if (control.errors?.['minlength']) {
+      <small class="text-red-500 text-xs block">
+        شماره تلفن باید حداقل {{ control.errors?.['minlength'].requiredLength }} کاراکتر باشد.
+      </small>
+
+    }
+    @else if (control.errors?.['maxlength']) {
+      <small class="text-red-500 text-xs block">
+        شماره تلفن باید حداکثر {{ control.errors?.['maxlength'].requiredLength }} کاراکتر باشد.
+      </small>
+    } @else if (control.errors?.['pattern']) {
+      <small class="text-red-500 text-xs block">
+        فرمت شماره تلفن صحیح نمی‌باشد.
+      </small>
+    }
+  }
+</div>
