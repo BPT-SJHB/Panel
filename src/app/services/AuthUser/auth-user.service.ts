@@ -7,4 +7,3 @@ import { IAuthUserApiRespond } from './IAuthUserApiRespond';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthUserService {}
