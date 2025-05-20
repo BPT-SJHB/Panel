@@ -25,6 +25,9 @@ export class CaptchaInputComponent {
     this._control = value || new FormControl('');
   }
 
+  @Input() captchaString: string = '';
+  get captchaSrc(): string {
+    return 'data:image/png;base64,' + this.captchaString;
   }
 
   get control(): FormControl {
