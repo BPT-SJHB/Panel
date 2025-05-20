@@ -24,6 +24,9 @@ export class GetCaptchaService {
   }
 
   private Run(): void {
+      this.http.get<IGetCaptchaApiResult>(this.apiUrl).subscribe((data) => {
+        this.apiResult = data;
+      });
     // this.apiResult = {
     //   SessionId: 'cb3d7916307b7713875d7cf0fd9639e4a5qddt$oRi2A',
     //   Captcha:
