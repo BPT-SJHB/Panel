@@ -17,4 +17,11 @@ export class AuthUserService {
   private userValues: IAuthUserValues | undefined;
   private apiRequest: IAuthUserApiRequest | undefined;
   private apiRespond: IAuthUserApiRespond | undefined;
+
+  constructor(private http: HttpClient) {
+    this.apiUrl = this.apiDomain_Ip
+      .concat(':')
+      .concat(this.apiPort)
+      .concat(this.apiPath);
+  }
 }
