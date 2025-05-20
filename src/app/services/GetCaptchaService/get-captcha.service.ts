@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IGetCaptchaApiResult } from './IGetCaptchaApiResult';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,10 @@ export class GetCaptchaService {
       .concat(this.apiPath);
   }
 
+  public async GetApiResult(): Promise<IGetCaptchaApiResult | undefined> {
+    return await firstValueFrom(
+      this.http.get<IGetCaptchaApiResult>(this.apiUrl)
+    );
 
     // this.apiResult = {
     //   SessionId: 'cb3d7916307b7713875d7cf0fd9639e4a5qddt$oRi2A',
