@@ -13,4 +13,8 @@ export class AuthUserService {
   private readonly apiDomain_Ip = 'http://192.168.1.2';
   private readonly apiPort = '81';
   private readonly apiPath = '/api/AuthUser';
+
+  private userValues: IAuthUserValues | undefined;
+  private apiRequest: IAuthUserApiRequest | undefined;
+  private apiRespond: IAuthUserApiRespond | undefined;
 }
