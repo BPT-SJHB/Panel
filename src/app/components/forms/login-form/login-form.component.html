@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <app-captcha-input [control]="captcha" />
+  <app-captcha-input [control]="captcha" [captchaString]="getCaptchaResult?.Captcha ?? ''"/>
 
   <div class="flex flex-column gap-2 mb-5">
     <app-remember-me-input [control]="rememberMe" />
