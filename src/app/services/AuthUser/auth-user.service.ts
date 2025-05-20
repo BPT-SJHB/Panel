@@ -23,9 +23,26 @@ export class AuthUserService {
       .concat(':')
       .concat(this.apiPort)
       .concat(this.apiPath);
+
+    //#region  for test
+
+    //#1
+    // this.Run({
+    //   Captcha: 'captchaTest',
+    //   SessionId: 'sessionIdTest',
+    //   Userpassword: 'userpasswordTest',
+    //   UserShenaseh: 'userShenasehTest',
+    // });
+
+    //#endregion
   }
+
   public Run(authUserValues: IAuthUserValues): IAuthUserApiRespond | undefined {
     this.apiRequest = { Value: this.concatUserValues(authUserValues) };
+
+    // console.log(this.apiRequest?.Value);
+
+    //#2
     try {
       this.http
         .post<IAuthUserApiRespond>(this.apiUrl, this.apiRequest)
@@ -36,6 +53,17 @@ export class AuthUserService {
       throw error;
     }
     return this.apiRespond;
+
+    //#region for test
+
+    //#2
+    // return (this.apiRespond = {
+    //   SessionId: 'cb3d7916307b7713875d7cf0fd9639e4a5qddt$oRi2A',
+    // });
+
+    //#endregion
+  }
+
   private concatUserValues(authUserValues: IAuthUserValues): string {
     this.userValues = authUserValues;
 
