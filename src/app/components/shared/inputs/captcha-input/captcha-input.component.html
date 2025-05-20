@@ -25,13 +25,13 @@
 
 @if (control.touched && control.errors) {
   @if (control.errors['required']) {
-    <small class="p-error block mt-1">
-     وارد کردن عدد تصویر الزامی است.
-    </small>
+    <p-message severity="error" variant="simple" size="small">
+      وارد کردن عدد تصویر الزامی است.
+    </p-message>
   } @else if (control.errors['minlength']) {
-    <small class="p-error block mt-1">
+    <p-message severity="error" variant="simple" size="small">
       کپچا باید حداقل {{ control.errors['minlength'].requiredLength }} کاراکتر باشد.
-    </small>
+    </p-message>
   }
 
 }

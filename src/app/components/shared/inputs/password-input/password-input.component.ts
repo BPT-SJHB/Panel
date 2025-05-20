@@ -3,11 +3,12 @@ import { Component, Input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { MessageModule } from 'primeng/message';
 
 @Component({
   selector: 'app-password-input',
   standalone: true,
-  imports: [InputGroupModule, ReactiveFormsModule,InputGroupAddonModule,NgClass],
+  imports: [InputGroupModule, ReactiveFormsModule,InputGroupAddonModule,MessageModule,NgClass],
   templateUrl: './password-input.component.html',
   styleUrls: ['./password-input.component.scss']
 })

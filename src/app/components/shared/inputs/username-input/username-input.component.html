@@ -22,13 +22,13 @@
 
     @if (control.touched) {
       @if (control.errors?.['required']) {
-        <small class="text-red-500 text-xs block">
+        <p-message severity="error" variant="simple" size="small">
           وارد کردن شناسه کاربری الزامی است.
-        </small>
+        </p-message>
       } @else if (control.errors?.['minlength']) {
-        <small class="text-red-500 text-xs block">
+        <p-message severity="error" variant="simple" size="small">
           شناسه کاربری باید حداقل {{ control.errors?.['minlength'].requiredLength }} کاراکتر باشد.
-        </small>
+        </p-message>
       }
     }
 </div>
