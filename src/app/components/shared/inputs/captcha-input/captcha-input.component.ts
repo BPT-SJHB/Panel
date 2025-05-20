@@ -25,9 +25,9 @@ export class CaptchaInputComponent {
     this._control = value || new FormControl('');
   }
 
-  get control(): FormControl {
-    return this._control;
   }
 
+  get control(): FormControl {
+    return this._control;
   }
 }
