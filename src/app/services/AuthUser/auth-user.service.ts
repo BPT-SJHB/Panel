@@ -25,5 +25,15 @@ export class AuthUserService {
       .concat(this.apiPath);
   }
   public Run(authUserValues: IAuthUserValues): IAuthUserApiRespond | undefined {
+    this.apiRequest = { Value: this.concatUserValues(authUserValues) };
+  private concatUserValues(authUserValues: IAuthUserValues): string {
+    this.userValues = authUserValues;
+
+    return this.userValues.SessionId.concat(';')
+      .concat(this.userValues.Captcha)
+      .concat(';')
+      .concat(this.userValues.UserShenaseh)
+      .concat(';')
+      .concat(this.userValues.Userpassword);
   }
 }
