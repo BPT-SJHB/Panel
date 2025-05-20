@@ -26,11 +26,15 @@ export class AuthUserService {
   }
   public Run(authUserValues: IAuthUserValues): IAuthUserApiRespond | undefined {
     this.apiRequest = { Value: this.concatUserValues(authUserValues) };
+    try {
       this.http
         .post<IAuthUserApiRespond>(this.apiUrl, this.apiRequest)
         .subscribe((data) => {
           this.apiRespond = data;
         });
+    } catch (error) {
+      throw error;
+    }
     return this.apiRespond;
   private concatUserValues(authUserValues: IAuthUserValues): string {
     this.userValues = authUserValues;
