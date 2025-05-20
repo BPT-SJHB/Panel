@@ -40,6 +40,15 @@ export class LoginFormComponent {
     });
   }
 
+  async ngOnInit(): Promise<void> {
+    this.getCaptchaResult = await this.call_get_captcha();
+  }
+
+  async call_get_captcha(): Promise<IGetCaptchaApiResult | undefined> {
+    await this.getCaptchaService.GetApiResult();
+    return this.getCaptchaService.GetApiResult();
+  }
+
   onSubmit(): void {
     if (this.loginForm.valid) {
       const isSuccess = Math.random() < 0.5;
