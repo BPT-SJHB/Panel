@@ -8,4 +8,5 @@ import { IAuthUserApiRespond } from './IAuthUserApiRespond';
   providedIn: 'root',
 })
 export class AuthUserService {
+  private apiUrl = '';
 }
