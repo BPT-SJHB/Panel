@@ -5,4 +5,3 @@ import { IGetCaptchaApiResult } from './IGetCaptchaApiResult';
 @Injectable({
   providedIn: 'root',
 })
-export class GetCaptchaService {}
