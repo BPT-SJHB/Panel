@@ -13,4 +13,13 @@ export class GetCaptchaService {
   private readonly apiPath = '/api/GetCaptcha/';
 
   private apiResult: IGetCaptchaApiResult | undefined;
+
+  constructor(private http: HttpClient) {
+    this.apiUrl = this.apiDomain_Ip
+      .concat(':')
+      .concat(this.apiPort)
+      .concat(this.apiPath);
+
+    this.Run();
+  }
 }
