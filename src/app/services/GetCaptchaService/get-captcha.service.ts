@@ -22,4 +22,7 @@ export class GetCaptchaService {
 
     this.Run();
   }
+
+  private Run(): void {
+  }
 }
