@@ -24,4 +24,6 @@ export class AuthUserService {
       .concat(this.apiPort)
       .concat(this.apiPath);
   }
+  public Run(authUserValues: IAuthUserValues): IAuthUserApiRespond | undefined {
+  }
 }
