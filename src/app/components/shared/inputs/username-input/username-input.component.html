@@ -1,0 +1,36 @@
+<div>
+  <p-inputgroup styleClass="h-2-5rem boarder-0">
+    <p-inputgroup-addon
+      class="bg-primary text-white border-round-right flex align-items-center justify-content-center px-3">
+      <i class="pi pi-user"></i>
+    </p-inputgroup-addon>
+
+    <input
+      [formControl]="control"
+      pInputText
+      placeholder="شناسه کاربری"
+      [ngClass]="{
+        'border-red-500': control.touched && control.invalid,
+        'border': true,
+        'border-round-left': true,
+        'px-2': true,
+        'h-full': true,
+        'w-full': true
+      }"
+    />
+  </p-inputgroup>
+
+    @if (control.touched) {
+      @if (control.errors?.['required']) {
+        <p-message severity="error" variant="simple" size="small">
+          وارد کردن شناسه کاربری الزامی است.
+        </p-message>
+      } @else if (control.errors?.['minlength']) {
+        <p-message severity="error" variant="simple" size="small">
+          شناسه کاربری باید حداقل {{ control.errors?.['minlength'].requiredLength }} کاراکتر باشد.
+        </p-message>
+      }
+    }
+</div>
+
+
