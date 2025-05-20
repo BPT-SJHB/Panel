@@ -1,1 +1,37 @@
 // استایل‌های سراسری تم را در اینجا اضافه کنید
+html,body {
+  padding: 0;
+  margin: 0;
+}
+
+.h-2-5rem {
+  height: 2.5rem;
+}
+
+.p-error {
+  color: #f87171; // red-400 or any suitable red
+  font-size: 0.875rem; // text-sm
+}
+
+/* input with error and focus */
+input.border-red-500:focus {
+  border-color: #f87171 !important; /* Tailwind's red-400 */
+  box-shadow: none !important;      /* remove default focus shadow */
+  outline: none !important;         /* remove default outline */
+}
+
+a{
+  text-decoration: none;
+}
+
+.text-shadow-sm {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.text-shadow-md {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.text-shadow-lg {
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.35);
+}
