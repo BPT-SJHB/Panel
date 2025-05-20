@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormControl, NgForm } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+  FormControl,
+  NgForm,
+} from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { UsernameInputComponent } from '../../shared/inputs/username-input/username-input.component';
 import { PasswordInputComponent } from '../../shared/inputs/password-input/password-input.component';
@@ -16,10 +23,10 @@ import { ToastService } from '../../../services/toast-service.service';
     UsernameInputComponent,
     PasswordInputComponent,
     RememberMeInputComponent,
-    CaptchaInputComponent
+    CaptchaInputComponent,
   ],
   templateUrl: './login-form.component.html',
-  styleUrl: './login-form.component.scss'
+  styleUrl: './login-form.component.scss',
 })
 export class LoginFormComponent {
   loginForm: FormGroup;
@@ -29,7 +36,7 @@ export class LoginFormComponent {
       username: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       captcha: ['', [Validators.required]],
-      rememberMe: [false]
+      rememberMe: [false],
     });
   }
 
@@ -37,10 +44,10 @@ export class LoginFormComponent {
     if (this.loginForm.valid) {
       const isSuccess = Math.random() < 0.5;
       if (isSuccess) {
-        this.toast.success("موفق","ورود موفقیت آمیز بود.")
+        this.toast.success('موفق', 'ورود موفقیت آمیز بود.');
         this.loginForm.reset();
       } else {
-        this.toast.error("خطا","نام کاربری یا رمز عبور اشتباه است.")
+        this.toast.error('خطا', 'نام کاربری یا رمز عبور اشتباه است.');
         this.loginForm.reset();
       }
     }
