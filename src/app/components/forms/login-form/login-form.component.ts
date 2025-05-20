@@ -32,6 +32,7 @@ import { IGetCaptchaApiResult } from '../../../services/GetCaptchaService/IGetCa
 })
 export class LoginFormComponent {
   loginForm: FormGroup;
+  public getCaptchaResult: IGetCaptchaApiResult | undefined;
 
   constructor(private fb: FormBuilder,private toast: ToastService) {
     this.loginForm = this.fb.group({
