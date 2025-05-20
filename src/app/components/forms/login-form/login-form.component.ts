@@ -13,6 +13,8 @@ import { PasswordInputComponent } from '../../shared/inputs/password-input/passw
 import { RememberMeInputComponent } from '../../shared/inputs/remember-me-input/remember-me-input.component';
 import { CaptchaInputComponent } from '../../shared/inputs/captcha-input/captcha-input.component';
 import { ToastService } from '../../../services/toast-service.service';
+import { GetCaptchaService } from '../../../services/GetCaptchaService/get-captcha.service';
+import { IGetCaptchaApiResult } from '../../../services/GetCaptchaService/IGetCaptchaApiResult';
 
 @Component({
   selector: 'app-login-form',
