@@ -6,4 +6,5 @@ import { IGetCaptchaApiResult } from './IGetCaptchaApiResult';
   providedIn: 'root',
 })
 export class GetCaptchaService {
+  private apiUrl = '';
 }
