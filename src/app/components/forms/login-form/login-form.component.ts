@@ -34,7 +34,11 @@ export class LoginFormComponent {
   loginForm: FormGroup;
   public getCaptchaResult: IGetCaptchaApiResult | undefined;
 
-  constructor(private fb: FormBuilder,private toast: ToastService) {
+  constructor(
+    private fb: FormBuilder,
+    private toast: ToastService,
+    private getCaptchaService: GetCaptchaService
+  ) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
