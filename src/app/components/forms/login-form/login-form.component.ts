@@ -40,7 +40,8 @@ export class LoginFormComponent {
   constructor(
     private fb: FormBuilder,
     private toast: ToastService,
-    private getCaptchaService: GetCaptchaService
+    private getCaptchaService: GetCaptchaService,
+    private authUser: AuthUserService
   ) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
