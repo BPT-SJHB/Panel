@@ -9,7 +9,7 @@ import { firstValueFrom } from 'rxjs';
 export class GetCaptchaService {
   private apiUrl = '';
 
-  private readonly apiDomain_Ip = 'http://192.168.1.2';
+  private readonly apiDomain_Ip = 'http://192.168.1.3';
   private readonly apiPort = '81';
   private readonly apiPath = '/api/GetCaptcha/';
 
