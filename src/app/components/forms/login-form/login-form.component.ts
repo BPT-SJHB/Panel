@@ -60,7 +60,13 @@ export class LoginFormComponent {
     return this.getCaptchaService.GetApiResult();
   }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
+    this.authRespond = await this.authUser.Run({
+      SessionId: this.getCaptchaResult?.SessionId ?? '',
+      UserShenaseh: await CryptographyService.SHA256(this.username.value),
+      Userpassword: await CryptographyService.SHA256(this.password.value),
+      Captcha: this.captcha.value,
+    });
     if (this.loginForm.valid) {
       const isSuccess = Math.random() < 0.5;
       if (isSuccess) {
