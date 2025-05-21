@@ -76,8 +76,12 @@ export class LoginFormComponent {
 
         // TODO: Save session id in token
       } else {
-        this.toast.error('خطا', 'نام کاربری یا رمز عبور اشتباه است.');
+        this.toast.error('خطا', this.authRespond?.ErrorMessage ?? '');
         this.loginForm.reset();
+
+        await this.ngOnInit();
+
+        this.authRespond = { SessionId: undefined, ErrorMessage: undefined };
       }
     }
   }
