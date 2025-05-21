@@ -9,7 +9,7 @@ import { firstValueFrom } from 'rxjs';
 export class GetCaptchaService {
   private apiUrl = '';
 
-  private readonly apiDomain_Ip = 'http://192.168.1.2';
+  private readonly apiDomain_Ip = 'http://192.168.1.3';
   private readonly apiPort = '81';
   private readonly apiPath = '/api/GetCaptcha/';
 
@@ -21,9 +21,14 @@ export class GetCaptchaService {
   }
 
   public async GetApiResult(): Promise<IGetCaptchaApiResult | undefined> {
-    return await firstValueFrom(
-      this.http.get<IGetCaptchaApiResult>(this.apiUrl)
-    );
+    try {
+      return await firstValueFrom(
+        this.http.get<IGetCaptchaApiResult>(this.apiUrl)
+      );
+    } catch (error: any) {
+      console.error('Unexpected error:', error.message);
+      return undefined;
+    }
 
     // this.apiResult = {
     //   SessionId: 'cb3d7916307b7713875d7cf0fd9639e4a5qddt$oRi2A',

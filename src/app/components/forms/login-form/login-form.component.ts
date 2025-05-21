@@ -4,8 +4,7 @@ import {
   FormGroup,
   Validators,
   ReactiveFormsModule,
-  FormControl,
-  NgForm,
+  FormControl
 } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { UsernameInputComponent } from '../../shared/inputs/username-input/username-input.component';
@@ -15,6 +14,9 @@ import { CaptchaInputComponent } from '../../shared/inputs/captcha-input/captcha
 import { ToastService } from '../../../services/toast-service.service';
 import { GetCaptchaService } from '../../../services/GetCaptchaService/get-captcha.service';
 import { IGetCaptchaApiResult } from '../../../services/GetCaptchaService/IGetCaptchaApiResult';
+import { IAuthUserApiRespond } from '../../../services/AuthUser/IAuthUserApiRespond';
+import { AuthUserService } from '../../../services/AuthUser/auth-user.service';
+import { CryptographyService } from '../../../services/Cryptography/cryptography.service';
 
 @Component({
   selector: 'app-login-form',
@@ -33,11 +35,13 @@ import { IGetCaptchaApiResult } from '../../../services/GetCaptchaService/IGetCa
 export class LoginFormComponent {
   loginForm: FormGroup;
   public getCaptchaResult: IGetCaptchaApiResult | undefined;
+  private authRespond: IAuthUserApiRespond | undefined;
 
   constructor(
     private fb: FormBuilder,
     private toast: ToastService,
-    private getCaptchaService: GetCaptchaService
+    private getCaptchaService: GetCaptchaService,
+    private authUser: AuthUserService
   ) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
@@ -56,15 +60,28 @@ export class LoginFormComponent {
     return this.getCaptchaService.GetApiResult();
   }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
+    this.authRespond = await this.authUser.Run({
+      SessionId: this.getCaptchaResult?.SessionId ?? '',
+      UserShenaseh: await CryptographyService.SHA256(this.username.value),
+      Userpassword: await CryptographyService.SHA256(this.password.value),
+      Captcha: this.captcha.value,
+    });
+
     if (this.loginForm.valid) {
-      const isSuccess = Math.random() < 0.5;
+      const isSuccess = this.authRespond?.SessionId != undefined;
       if (isSuccess) {
         this.toast.success('موفق', 'ورود موفقیت آمیز بود.');
         this.loginForm.reset();
+
+        // TODO: Save session id in token
       } else {
-        this.toast.error('خطا', 'نام کاربری یا رمز عبور اشتباه است.');
+        this.toast.error('خطا', this.authRespond?.ErrorMessage ?? '');
         this.loginForm.reset();
+
+        await this.ngOnInit();
+
+        this.authRespond = { SessionId: undefined, ErrorMessage: undefined };
       }
     }
   }

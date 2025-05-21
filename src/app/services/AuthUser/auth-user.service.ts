@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IAuthUserValues } from './IAuthUserValues';
 import { IAuthUserApiRequest } from './IAuthUserApiRequest';
 import { IAuthUserApiRespond } from './IAuthUserApiRespond';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,11 +10,10 @@ import { IAuthUserApiRespond } from './IAuthUserApiRespond';
 export class AuthUserService {
   private apiUrl = '';
 
-  private readonly apiDomain_Ip = 'http://192.168.1.2';
+  private readonly apiDomain_Ip = 'http://192.168.1.3';
   private readonly apiPort = '81';
   private readonly apiPath = '/api/AuthUser';
 
-  private userValues: IAuthUserValues | undefined;
   private apiRequest: IAuthUserApiRequest | undefined;
   private apiRespond: IAuthUserApiRespond | undefined;
 
@@ -37,21 +36,24 @@ export class AuthUserService {
     //#endregion
   }
 
-  public Run(authUserValues: IAuthUserValues): IAuthUserApiRespond | undefined {
-    this.apiRequest = { Value: this.concatUserValues(authUserValues) };
-
-    // console.log(this.apiRequest?.Value);
+  public async Run(
+    authUserRequest: IAuthUserApiRequest
+  ): Promise<IAuthUserApiRespond | undefined> {
+    this.apiRequest = authUserRequest;
 
     //#2
     try {
-      this.http
-        .post<IAuthUserApiRespond>(this.apiUrl, this.apiRequest)
-        .subscribe((data) => {
-          this.apiRespond = data;
-        });
-    } catch (error) {
-      throw error;
+      this.apiRespond = await firstValueFrom(
+        this.http.post<IAuthUserApiRespond>(this.apiUrl, authUserRequest)
+      );
+    } catch (error: any) {
+      if (error.status === 500) {
+        this.apiRespond = { SessionId: undefined, ErrorMessage: error.error };
+      } else {
+        console.error('Unexpected error:', error.message);
+      }
     }
+    
     return this.apiRespond;
 
     //#region for test
@@ -62,16 +64,5 @@ export class AuthUserService {
     // });
 
     //#endregion
-  }
-
-  private concatUserValues(authUserValues: IAuthUserValues): string {
-    this.userValues = authUserValues;
-
-    return this.userValues.SessionId.concat(';')
-      .concat(this.userValues.Captcha)
-      .concat(';')
-      .concat(this.userValues.UserShenaseh)
-      .concat(';')
-      .concat(this.userValues.Userpassword);
   }
 }

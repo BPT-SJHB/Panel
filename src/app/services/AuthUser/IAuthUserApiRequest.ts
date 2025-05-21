@@ -1,3 +1,6 @@
 export interface IAuthUserApiRequest {
-  Value: string;
+  SessionId: string;
+  Captcha: string;
+  UserShenaseh: string;
+  Userpassword: string;
 }

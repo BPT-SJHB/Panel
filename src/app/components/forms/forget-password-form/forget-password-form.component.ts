@@ -16,10 +16,10 @@ onSubmit(): void {
   if (this.forgetPasswordForm.valid) {
     const isSuccess = Math.random() < 0.5;
     if (isSuccess) {
-      this.toast.success("موفق","رمز عبور شما ارسال گردید.")
+      this.toast.success("موفق","رمز عبور شما ارسال گردید.It's default")
       this.forgetPasswordForm.reset();
     } else {
-      this.toast.error("خطا","شماره تلفن مورد نظر در سامانه یافت نشد.")
+      this.toast.error("خطا","شماره تلفن مورد نظر در سامانه یافت نشد.It's default")
       this.forgetPasswordForm.reset();
     }
   }

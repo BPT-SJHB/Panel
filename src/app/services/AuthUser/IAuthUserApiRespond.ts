@@ -1,3 +1,4 @@
 export interface IAuthUserApiRespond {
-  SessionId: string;
+  SessionId: string | undefined;
+  ErrorMessage: string | undefined;
 }
