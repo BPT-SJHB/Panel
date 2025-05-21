@@ -21,9 +21,14 @@ export class GetCaptchaService {
   }
 
   public async GetApiResult(): Promise<IGetCaptchaApiResult | undefined> {
-    return await firstValueFrom(
-      this.http.get<IGetCaptchaApiResult>(this.apiUrl)
-    );
+    try {
+      return await firstValueFrom(
+        this.http.get<IGetCaptchaApiResult>(this.apiUrl)
+      );
+    } catch (error: any) {
+      console.error('Unexpected error:', error.message);
+      return undefined;
+    }
 
     // this.apiResult = {
     //   SessionId: 'cb3d7916307b7713875d7cf0fd9639e4a5qddt$oRi2A',
