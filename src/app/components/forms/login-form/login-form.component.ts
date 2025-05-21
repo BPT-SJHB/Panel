@@ -67,11 +67,14 @@ export class LoginFormComponent {
       Userpassword: await CryptographyService.SHA256(this.password.value),
       Captcha: this.captcha.value,
     });
+
     if (this.loginForm.valid) {
       const isSuccess = this.authRespond?.SessionId != undefined;
       if (isSuccess) {
         this.toast.success('موفق', 'ورود موفقیت آمیز بود.');
         this.loginForm.reset();
+
+        // TODO: Save session id in token
       } else {
         this.toast.error('خطا', 'نام کاربری یا رمز عبور اشتباه است.');
         this.loginForm.reset();
