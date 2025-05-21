@@ -68,7 +68,7 @@ export class LoginFormComponent {
       Captcha: this.captcha.value,
     });
     if (this.loginForm.valid) {
-      const isSuccess = Math.random() < 0.5;
+      const isSuccess = this.authRespond?.SessionId != undefined;
       if (isSuccess) {
         this.toast.success('موفق', 'ورود موفقیت آمیز بود.');
         this.loginForm.reset();
