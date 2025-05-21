@@ -61,15 +61,4 @@ export class AuthUserService {
 
     //#endregion
   }
-
-  private concatUserValues(authUserValues: IAuthUserValues): string {
-    this.userValues = authUserValues;
-
-    return this.userValues.SessionId.concat(';')
-      .concat(this.userValues.Captcha)
-      .concat(';')
-      .concat(this.userValues.UserShenaseh)
-      .concat(';')
-      .concat(this.userValues.Userpassword);
-  }
 }
