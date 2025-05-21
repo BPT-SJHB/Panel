@@ -35,6 +35,7 @@ import { CryptographyService } from '../../../services/Cryptography/cryptography
 export class LoginFormComponent {
   loginForm: FormGroup;
   public getCaptchaResult: IGetCaptchaApiResult | undefined;
+  private authRespond: IAuthUserApiRespond | undefined;
 
   constructor(
     private fb: FormBuilder,
