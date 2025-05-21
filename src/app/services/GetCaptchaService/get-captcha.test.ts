@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http/testing';
 
 import { TestBed } from '@angular/core/testing';
-import { IGetCaptchaApiResult } from './IGetCaptchaApiResult';
+import { IGetCaptchaApiResult } from './GetCaptchaApiResult.interface';
 
 describe('GetCaptchaService', () => {
   let service: GetCaptchaService;

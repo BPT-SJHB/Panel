@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IGetCaptchaApiResult } from './IGetCaptchaApiResult';
+import { IGetCaptchaApiResult } from './GetCaptchaApiResult.interface';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable({
