@@ -4,7 +4,7 @@ import {
   FormGroup,
   Validators,
   ReactiveFormsModule,
-  FormControl
+  FormControl,
 } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { UsernameInputComponent } from '../../shared/inputs/username-input/username-input.component';
@@ -13,8 +13,8 @@ import { RememberMeInputComponent } from '../../shared/inputs/remember-me-input/
 import { CaptchaInputComponent } from '../../shared/inputs/captcha-input/captcha-input.component';
 import { ToastService } from '../../../services/toast-service.service';
 import { GetCaptchaService } from '../../../services/GetCaptchaService/get-captcha.service';
-import { IGetCaptchaApiResult } from '../../../services/GetCaptchaService/IGetCaptchaApiResult';
-import { IAuthUserApiRespond } from '../../../services/AuthUser/IAuthUserApiRespond';
+import { IGetCaptchaApiResult } from '../../../services/GetCaptchaService/GetCaptchaApiResult.interface';
+import { IAuthUserApiRespond } from '../../../services/AuthUser/AuthUserApiRespond.interface';
 import { AuthUserService } from '../../../services/AuthUser/auth-user.service';
 import { CryptographyService } from '../../../services/Cryptography/cryptography.service';
 

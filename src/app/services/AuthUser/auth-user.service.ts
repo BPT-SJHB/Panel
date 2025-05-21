@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IAuthUserApiRequest } from './IAuthUserApiRequest';
-import { IAuthUserApiRespond } from './IAuthUserApiRespond';
+import { IAuthUserApiRequest } from './AuthUserApiRequest.interface';
+import { IAuthUserApiRespond } from './AuthUserApiRespond.interface';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable({
@@ -53,7 +53,7 @@ export class AuthUserService {
         console.error('Unexpected error:', error.message);
       }
     }
-    
+
     return this.apiRespond;
 
     //#region for test
