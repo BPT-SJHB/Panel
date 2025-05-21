@@ -4,8 +4,7 @@ import {
   FormGroup,
   Validators,
   ReactiveFormsModule,
-  FormControl,
-  NgForm,
+  FormControl
 } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { UsernameInputComponent } from '../../shared/inputs/username-input/username-input.component';
@@ -15,6 +14,9 @@ import { CaptchaInputComponent } from '../../shared/inputs/captcha-input/captcha
 import { ToastService } from '../../../services/toast-service.service';
 import { GetCaptchaService } from '../../../services/GetCaptchaService/get-captcha.service';
 import { IGetCaptchaApiResult } from '../../../services/GetCaptchaService/IGetCaptchaApiResult';
+import { IAuthUserApiRespond } from '../../../services/AuthUser/IAuthUserApiRespond';
+import { AuthUserService } from '../../../services/AuthUser/auth-user.service';
+import { CryptographyService } from '../../../services/Cryptography/cryptography.service';
 
 @Component({
   selector: 'app-login-form',
