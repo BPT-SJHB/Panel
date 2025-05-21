@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IAuthUserApiRequest } from './IAuthUserApiRequest';
 import { IAuthUserApiRespond } from './IAuthUserApiRespond';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -42,14 +43,17 @@ export class AuthUserService {
 
     //#2
     try {
-      this.http
-        .post<IAuthUserApiRespond>(this.apiUrl, this.apiRequest)
-        .subscribe((data) => {
-          this.apiRespond = data;
-        });
-    } catch (error) {
-      throw error;
+      this.apiRespond = await firstValueFrom(
+        this.http.post<IAuthUserApiRespond>(this.apiUrl, authUserRequest)
+      );
+    } catch (error: any) {
+      if (error.status === 500) {
+        this.apiRespond = { SessionId: undefined, ErrorMessage: error.error };
+      } else {
+        console.error('Unexpected error:', error.message);
+      }
     }
+    
     return this.apiRespond;
 
     //#region for test
