@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IAuthUserValues } from './IAuthUserValues';
 import { IAuthUserApiRequest } from './IAuthUserApiRequest';
 import { IAuthUserApiRespond } from './IAuthUserApiRespond';
 
@@ -14,7 +13,6 @@ export class AuthUserService {
   private readonly apiPort = '81';
   private readonly apiPath = '/api/AuthUser';
 
-  private userValues: IAuthUserValues | undefined;
   private apiRequest: IAuthUserApiRequest | undefined;
   private apiRespond: IAuthUserApiRespond | undefined;
 
