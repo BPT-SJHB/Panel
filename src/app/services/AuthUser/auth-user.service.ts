@@ -35,10 +35,10 @@ export class AuthUserService {
     //#endregion
   }
 
-  public Run(authUserValues: IAuthUserValues): IAuthUserApiRespond | undefined {
-    this.apiRequest = { Value: this.concatUserValues(authUserValues) };
-
-    // console.log(this.apiRequest?.Value);
+  public async Run(
+    authUserRequest: IAuthUserApiRequest
+  ): Promise<IAuthUserApiRespond | undefined> {
+    this.apiRequest = authUserRequest;
 
     //#2
     try {
