@@ -1,4 +1,4 @@
-<form class="flex flex-column gap-6" [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
+<form class="flex flex-column gap-5" [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
   <h3 class="text-center mb-3">
     سامانه جامع حمل و نقل کالا<br>اداره کل راهداری و حمل و نقل جاده ای استان اصفهان
   </h3>
@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <app-captcha-input [control]="captcha" [captchaString]="getCaptchaResult?.Captcha ?? ''"/>
+  <app-captcha-input #captchaRef [captchaIdControl]="captchaId" [captchaInputControl]="captchaValue" />
 
   <div class="flex flex-column gap-2 mb-5">
     <app-remember-me-input [control]="rememberMe" />

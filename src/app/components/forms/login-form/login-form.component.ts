@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -6,17 +6,16 @@ import {
   ReactiveFormsModule,
   FormControl,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { UsernameInputComponent } from '../../shared/inputs/username-input/username-input.component';
 import { PasswordInputComponent } from '../../shared/inputs/password-input/password-input.component';
 import { RememberMeInputComponent } from '../../shared/inputs/remember-me-input/remember-me-input.component';
 import { CaptchaInputComponent } from '../../shared/inputs/captcha-input/captcha-input.component';
-import { ToastService } from '../../../services/toast-service.service';
-import { GetCaptchaService } from '../../../services/GetCaptchaService/get-captcha.service';
-import { IGetCaptchaApiResult } from '../../../services/GetCaptchaService/GetCaptchaApiResult.interface';
-import { IAuthUserApiRespond } from '../../../services/AuthUser/AuthUserApiRespond.interface';
-import { AuthUserService } from '../../../services/AuthUser/auth-user.service';
-import { CryptographyService } from '../../../services/Cryptography/cryptography.service';
+import { ToastService } from '../../../services/toast-service/toast-service.service';
+import { CryptographyService } from '../../../services/cryptography-service/cryptography.service';
+import { UserAuthService } from '../../../services/user-auth-service/user-auth.service';
+import { APP_ROUTES } from '../../../constants/routes';
 
 @Component({
   selector: 'app-login-form',
@@ -32,58 +31,54 @@ import { CryptographyService } from '../../../services/Cryptography/cryptography
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',
 })
-export class LoginFormComponent {
+ export class LoginFormComponent {
   loginForm: FormGroup;
-  public getCaptchaResult: IGetCaptchaApiResult | undefined;
-  private authRespond: IAuthUserApiRespond | undefined;
+  @ViewChild('captchaRef') captchaComponent!: CaptchaInputComponent;
 
   constructor(
     private fb: FormBuilder,
     private toast: ToastService,
-    private getCaptchaService: GetCaptchaService,
-    private authUser: AuthUserService
+    private userAuth: UserAuthService,
+    private cryptography: CryptographyService,
+    private router: Router
   ) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      captcha: ['', [Validators.required]],
-      rememberMe: [false],
+      captchaId: ['', [Validators.required]],
+      captchaValue: ['', [Validators.required]],
+      rememberMe: [true],
     });
-  }
-
-  async ngOnInit(): Promise<void> {
-    this.getCaptchaResult = await this.call_get_captcha();
-  }
-
-  async call_get_captcha(): Promise<IGetCaptchaApiResult | undefined> {
-    await this.getCaptchaService.GetApiResult();
-    return this.getCaptchaService.GetApiResult();
   }
 
   async onSubmit(): Promise<void> {
-    this.authRespond = await this.authUser.Run({
-      SessionId: this.getCaptchaResult?.SessionId ?? '',
-      UserShenaseh: await CryptographyService.SHA256(this.username.value),
-      Userpassword: await CryptographyService.SHA256(this.password.value),
-      Captcha: this.captcha.value,
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
+
+    const formValue = this.loginForm.value;
+
+    const loginResult = await this.userAuth.login({
+      username: await this.cryptography.SHA256(formValue.username),
+      password: await this.cryptography.SHA256(formValue.password),
+      rememberMe: formValue.rememberMe,
+      captcha: {
+        id: formValue.captchaId,
+        value: formValue.captchaValue,
+      },
     });
 
-    if (this.loginForm.valid) {
-      const isSuccess = this.authRespond?.SessionId != undefined;
-      if (isSuccess) {
-        this.toast.success('موفق', 'ورود موفقیت آمیز بود.');
-        this.loginForm.reset();
-
-        // TODO: Save session id in token
-      } else {
-        this.toast.error('خطا', this.authRespond?.ErrorMessage ?? '');
-        this.loginForm.reset();
-
-        await this.ngOnInit();
-
-        this.authRespond = { SessionId: undefined, ErrorMessage: undefined };
-      }
+    if (loginResult.success || !loginResult.error) {
+      this.toast.success('موفق', 'ورود موفقیت آمیز بود.');
+      this.router.navigate([APP_ROUTES.DASHBOARD.HOME]);
+      return;
     }
+
+
+    this.toast.error('خطا', loginResult.error?.message);
+    console.log(loginResult.error.details);
+    await this.resetLoginForm();
   }
 
   get username() {
@@ -94,11 +89,24 @@ export class LoginFormComponent {
     return this.loginForm.get('password') as FormControl;
   }
 
-  get captcha() {
-    return this.loginForm.get('captcha') as FormControl;
+  get captchaId() {
+    return this.loginForm.get('captchaId') as FormControl;
   }
 
+  get captchaValue() {
+    return this.loginForm.get('captchaValue') as FormControl;
+  }
   get rememberMe() {
     return this.loginForm.get('rememberMe') as FormControl;
+  }
+
+
+  public async resetLoginForm(){
+    this.password.reset();
+    this.username.reset();
+    // کپچای جدید
+    this.captchaValue.reset();
+    this.captchaValue.reset();
+    await this.captchaComponent.getCaptchaInformation();
   }
 }

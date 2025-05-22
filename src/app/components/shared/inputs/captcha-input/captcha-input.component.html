@@ -1,19 +1,21 @@
 
 <div>
+  <input hidden  [formControl]="captchaIdControl" readonly   />
+
   <p-inputgroup styleClass="h-2-5rem">
     <p-inputgroup-addon
     class="p-0 overflow-hidden border-round-right flex align-items-center justify-content-center"
     >
-    <img [src]="captchaSrc" alt="captcha" class="w-full h-full object-cover" />
+      <img [src]="imageData" alt="کپچا" class="w-full h-full object-cover" />
   </p-inputgroup-addon>
 
   <input
-  [formControl]="control"
+  [formControl]="captchaInputControl"
   pInputText
   placeholder="عدد تصویر وارد کنید"
   class="w-full border-round-left px-2 h-full"
   [ngClass]="{
-    'border-red-500': control.touched && control.invalid,
+    'border-red-500': captchaInputControl.touched && captchaInputControl.invalid,
     'border': true,
     'border-round-left': true,
     'px-2': true,
@@ -21,16 +23,25 @@
     'w-full': true
   }"
   />
+
+  <p-inputgroup-addon
+      (click)="onRefreshClick()"
+      class="bg-secondary border-round-left flex align-items-center justify-content-center px-3 cursor-pointer"
+    >
+      <i
+      [ngClass]="{ 'rotate': disableRefresh }"
+      class="pi pi-refresh"></i>
+    </p-inputgroup-addon>
 </p-inputgroup>
 
-@if (control.touched && control.errors) {
-  @if (control.errors['required']) {
+@if (captchaInputControl.touched && captchaInputControl.errors) {
+  @if (captchaInputControl.errors['required']) {
     <p-message severity="error" variant="simple" size="small">
       وارد کردن عدد تصویر الزامی است.
     </p-message>
-  } @else if (control.errors['minlength']) {
+  } @else if (captchaInputControl.errors['minlength']) {
     <p-message severity="error" variant="simple" size="small">
-      کپچا باید حداقل {{ control.errors['minlength'].requiredLength }} کاراکتر باشد.
+      کپچا باید حداقل {{ captchaInputControl.errors['minlength'].requiredLength }} کاراکتر باشد.
     </p-message>
   }
 

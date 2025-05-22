@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { IToastService } from './toast-service.interface';
 
 @Injectable({ providedIn: 'root' })
-export class ToastService {
+export class ToastService implements IToastService {
   constructor(private messageService: MessageService) {}
 
   success(summary: string, detail: string) {
