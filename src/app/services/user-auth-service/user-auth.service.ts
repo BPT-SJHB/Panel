@@ -54,14 +54,14 @@ export class UserAuthService implements IUserAuthService {
     //#region  end
 
     try {
-      const { username, password, captcha } = loginFormData;
+      const { sessionId,username, password, captcha } = loginFormData;
 
       const result: { SessionId: string } = await firstValueFrom(
         this.http.post<{ SessionId: string }>(this.apiUrl, {
-          SessionId: captcha.sessionId,
+          SessionId: sessionId,
           UserShenaseh: username,
           Userpassword: password,
-          Captcha: captcha.value,
+          Captcha: captcha,
         })
       );
 

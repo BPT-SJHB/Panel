@@ -5,7 +5,7 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { MessageModule } from 'primeng/message';
 import { CaptchaService } from '../../../../services/captcha-service/captcha.service';
-import { ToastService } from '../../../../services/toast-service/toast-service.service';
+import { ToastService } from '../../../../services/toast-service/toast.service';
 
 @Component({
   selector: 'app-captcha-input',
@@ -22,7 +22,7 @@ import { ToastService } from '../../../../services/toast-service/toast-service.s
 
 
 export class CaptchaInputComponent implements OnInit {
-  @Input() captchaIdControl: FormControl = new FormControl('');
+  @Input() sessionIdControl: FormControl = new FormControl('');
   @Input() captchaInputControl: FormControl = new FormControl('');
   imageData = '';
   disableRefresh = false;
@@ -45,7 +45,7 @@ export class CaptchaInputComponent implements OnInit {
     }
 
     this.imageData = 'data:image/png;base64,' + captcha.data.imageData;
-    this.captchaIdControl.setValue(captcha.data.sessionId);
+    this.sessionIdControl.setValue(captcha.data.sessionId);
   }
 
 

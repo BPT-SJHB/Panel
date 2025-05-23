@@ -3,7 +3,7 @@ import { UserAuthService } from '../../services/user-auth-service/user-auth.serv
 import { Router } from '@angular/router';
 import { APP_ROUTES } from '../../constants/routes';
 import { ButtonModule } from 'primeng/button';
-import { ToastService } from '../../services/toast-service/toast-service.service';
+import { ToastService } from '../../services/toast-service/toast.service';
 
 
 @Component({
@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
 
   logout() {
     this.userAuth.logout();
-    this.toast.info('اطلاعیه','شما از حساب کاربری خود خارج شدید')
+    this.toast.success('موفق','شما از حساب کاربری خود خارج شدید')
     this.router.navigate([APP_ROUTES.HOME]);
   }
 }

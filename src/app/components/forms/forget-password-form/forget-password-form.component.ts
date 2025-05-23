@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { PhoneInputComponent } from "../../shared/inputs/phone-input/phone-input.component";
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ToastService } from '../../../services/toast-service/toast-service.service';
+import { ToastService } from '../../../services/toast-service/toast.service';
 
 @Component({
   selector: 'app-forget-password-form',

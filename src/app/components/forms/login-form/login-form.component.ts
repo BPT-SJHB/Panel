@@ -12,7 +12,7 @@ import { UsernameInputComponent } from '../../shared/inputs/username-input/usern
 import { PasswordInputComponent } from '../../shared/inputs/password-input/password-input.component';
 import { RememberMeInputComponent } from '../../shared/inputs/remember-me-input/remember-me-input.component';
 import { CaptchaInputComponent } from '../../shared/inputs/captcha-input/captcha-input.component';
-import { ToastService } from '../../../services/toast-service/toast-service.service';
+import { ToastService } from '../../../services/toast-service/toast.service';
 import { CryptographyService } from '../../../services/cryptography-service/cryptography.service';
 import { UserAuthService } from '../../../services/user-auth-service/user-auth.service';
 import { APP_ROUTES } from '../../../constants/routes';
@@ -31,7 +31,7 @@ import { APP_ROUTES } from '../../../constants/routes';
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',
 })
- export class LoginFormComponent {
+export class LoginFormComponent {
   loginForm: FormGroup;
   @ViewChild('captchaRef') captchaComponent!: CaptchaInputComponent;
 
@@ -45,8 +45,8 @@ import { APP_ROUTES } from '../../../constants/routes';
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      captchaId: ['', [Validators.required]],
-      captchaValue: ['', [Validators.required]],
+      sessionId: ['', [Validators.required]],
+      captcha: ['', [Validators.required]],
       rememberMe: [true],
     });
   }
@@ -63,10 +63,8 @@ import { APP_ROUTES } from '../../../constants/routes';
       username: await this.cryptography.SHA256(formValue.username),
       password: await this.cryptography.SHA256(formValue.password),
       rememberMe: formValue.rememberMe,
-      captcha: {
-        sessionId: formValue.captchaId,
-        value: formValue.captchaValue,
-      },
+      sessionId: formValue.sessionId,
+      captcha: formValue.captchaValue,
     });
 
     if (loginResult.success || !loginResult.error) {
@@ -81,6 +79,17 @@ import { APP_ROUTES } from '../../../constants/routes';
     await this.resetLoginForm();
   }
 
+  public async resetLoginForm() {
+    this.password.reset();
+    this.username.reset();
+    this.captcha.reset();
+    this.sessionId.reset();
+
+    // این خط، تابعی از کامپوننت کپچا را فراخوانی می‌کند تا یک تصویر جدید کپچا به همراه sessionId جدید تولید شود.
+    // این کار زمانی انجام می‌شود که کاربر رمز عبور اشتباه وارد کرده تا از حملات brute-force جلوگیری شود.
+    await this.captchaComponent.getCaptchaInformation();
+  }
+
   get username() {
     return this.loginForm.get('username') as FormControl;
   }
@@ -89,24 +98,15 @@ import { APP_ROUTES } from '../../../constants/routes';
     return this.loginForm.get('password') as FormControl;
   }
 
-  get captchaId() {
-    return this.loginForm.get('captchaId') as FormControl;
+  get sessionId() {
+    return this.loginForm.get('sessionId') as FormControl;
   }
 
-  get captchaValue() {
-    return this.loginForm.get('captchaValue') as FormControl;
+  get captcha() {
+    return this.loginForm.get('captcha') as FormControl;
   }
   get rememberMe() {
     return this.loginForm.get('rememberMe') as FormControl;
   }
 
-
-  public async resetLoginForm(){
-    this.password.reset();
-    this.username.reset();
-    // کپچای جدید
-    this.captchaValue.reset();
-    this.captchaId.reset();
-    await this.captchaComponent.getCaptchaInformation();
-  }
 }
