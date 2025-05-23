@@ -17,6 +17,8 @@ import { CryptographyService } from 'app/services/cryptography-service/cryptogra
 import { UserAuthService } from 'app/services/user-auth-service/user-auth.service';
 import { APP_ROUTES } from 'app/constants/routes';
 
+
+
 @Component({
   selector: 'app-login-form',
   standalone: true,
@@ -33,6 +35,7 @@ import { APP_ROUTES } from 'app/constants/routes';
 })
 export class LoginFormComponent {
   loginForm: FormGroup;
+  hrefForgetPassword:string = APP_ROUTES.AUTH.FORGET_PASSWORD;
   @ViewChild('captchaRef') captchaComponent!: CaptchaInputComponent;
 
   constructor(

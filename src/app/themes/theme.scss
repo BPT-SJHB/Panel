@@ -8,11 +8,6 @@ html,body {
   height: 2.5rem;
 }
 
-.p-error {
-  color: #f87171; // red-400 or any suitable red
-  font-size: 0.875rem; // text-sm
-}
-
 /* input with error and focus */
 input.border-red-500:focus {
   border-color: #f87171 !important; /* Tailwind's red-400 */

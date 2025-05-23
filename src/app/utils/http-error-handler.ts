@@ -20,12 +20,14 @@ export function handleHttpError<T>(error: unknown): ApiResponse<T> {
 
     return response;
   }
+
+  const message = (error as any)?.message ?? '';
   return {
     success: false,
     error: {
       code: ErrorCodes.InternalServerError,
       message: ERROR_MESSAGES[ErrorCodes.InternalServerError],
-      details: 'یک خطای غیرمنتظره رخ داده است.',
+      details: `یک خطای غیرمنتظره رخ داده است. \n ${message}`,
     },
   };
 }

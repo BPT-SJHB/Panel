@@ -24,7 +24,7 @@ export class CaptchaService {
 
     //#region  mock data
     // این قسمت برای من هست که دسترسی به api ندارم
-    if (!environment.production && environment.mockTest) {
+    if (!environment.production && environment.disableApi) {
      return{
        success: true,
        data: mockCaptcha,

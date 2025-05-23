@@ -6,5 +6,5 @@ export const environment = {
   apiUrl: `${apiBaseUrl}:${apiPort}`,
   // این قسمت برای من هست که دسترسی به api ندارم
   // اکه فعال کنی از api استفاده نمی کنه
-  mockTest: false,
+  disableApi: false,
 };

@@ -38,7 +38,7 @@ export class UserAuthService implements IUserAuthService {
 
     //#region  mock data
     // این قسمت برای من هست که دسترسی به api ندارم
-    if (!environment.production && environment.mockTest) {
+    if (!environment.production && environment.disableApi) {
       this.cookieService.set(this.sessionKey, mockUserSession.sessionId, {
         path: '/',
         secure: environment.production,
@@ -90,6 +90,8 @@ export class UserAuthService implements IUserAuthService {
    */
   public logout(): void {
      this.cookieService.delete(this.sessionKey);
+     // سمت سرور اضافه شود در صورت نیاز
+
   }
 
   /**
@@ -97,6 +99,16 @@ export class UserAuthService implements IUserAuthService {
    * (در حال حاضر پیاده‌سازی نشده است؛ باید با سرور بررسی شود)
    */
   public isLoggedIn(): Promise<boolean> {
+    const sessionId = this.getSessionId();
+    if (sessionId == null) {
+       return new Promise(function(resolve, _) {
+        resolve(false);
+      });
+    }
+
+    // true
+    // سمت سرور چک شود که نشست کاربر معتبر است یا خیر
+
     throw new Error('Method not implemented.');
   }
 
