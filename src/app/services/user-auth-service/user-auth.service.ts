@@ -58,7 +58,7 @@ export class UserAuthService implements IUserAuthService {
 
       const result: { SessionId: string } = await firstValueFrom(
         this.http.post<{ SessionId: string }>(this.apiUrl, {
-          SessionId: captcha.id,
+          SessionId: captcha.sessionId,
           UserShenaseh: username,
           Userpassword: password,
           Captcha: captcha.value,
@@ -77,7 +77,6 @@ export class UserAuthService implements IUserAuthService {
         success: true,
         data: {
           sessionId: result.SessionId,
-          username: loginFormData.username,
         },
       };
     } catch (error: unknown) {

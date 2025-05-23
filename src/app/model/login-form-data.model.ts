@@ -3,7 +3,7 @@ export interface LoginFormData {
   password: string;
   rememberMe:boolean,
   captcha: {
-    id:string,
+    sessionId:string,
     value:string,
   };
 }

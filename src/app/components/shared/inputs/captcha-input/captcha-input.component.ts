@@ -45,7 +45,7 @@ export class CaptchaInputComponent implements OnInit {
     }
 
     this.imageData = 'data:image/png;base64,' + captcha.data.imageData;
-    this.captchaIdControl.setValue(captcha.data.challengeId);
+    this.captchaIdControl.setValue(captcha.data.sessionId);
   }
 
 

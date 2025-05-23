@@ -1,4 +1,4 @@
 export interface CaptchaChallenge {
-  challengeId: string;
+  sessionId: string;
   imageData: string;
 }

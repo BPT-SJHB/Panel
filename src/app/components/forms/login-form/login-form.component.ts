@@ -64,7 +64,7 @@ import { APP_ROUTES } from '../../../constants/routes';
       password: await this.cryptography.SHA256(formValue.password),
       rememberMe: formValue.rememberMe,
       captcha: {
-        id: formValue.captchaId,
+        sessionId: formValue.captchaId,
         value: formValue.captchaValue,
       },
     });
@@ -106,7 +106,7 @@ import { APP_ROUTES } from '../../../constants/routes';
     this.username.reset();
     // کپچای جدید
     this.captchaValue.reset();
-    this.captchaValue.reset();
+    this.captchaId.reset();
     await this.captchaComponent.getCaptchaInformation();
   }
 }

@@ -18,7 +18,7 @@ export class CaptchaService {
 
   /**
    * این تابع برای دریافت کپچا از سمت سرور است.
-   * کپچا شامل شناسه‌ی کپچا و تصویر آن است.
+   * کپچا شامل شناسه نشست و تصویر آن است.
    */
   public async getCaptcha(): Promise<ApiResponse<CaptchaChallenge>> {
 
@@ -41,7 +41,7 @@ export class CaptchaService {
       return {
         success: true,
         data: {
-          challengeId: response.SessionId,
+          sessionId: response.SessionId,
           imageData: response.Captcha,
         },
       };
