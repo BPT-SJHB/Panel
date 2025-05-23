@@ -8,14 +8,14 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
-import { UsernameInputComponent } from '../../shared/inputs/username-input/username-input.component';
-import { PasswordInputComponent } from '../../shared/inputs/password-input/password-input.component';
-import { RememberMeInputComponent } from '../../shared/inputs/remember-me-input/remember-me-input.component';
-import { CaptchaInputComponent } from '../../shared/inputs/captcha-input/captcha-input.component';
-import { ToastService } from '../../../services/toast-service/toast.service';
-import { CryptographyService } from '../../../services/cryptography-service/cryptography.service';
-import { UserAuthService } from '../../../services/user-auth-service/user-auth.service';
-import { APP_ROUTES } from '../../../constants/routes';
+import { UsernameInputComponent } from 'app/components/shared/inputs/username-input/username-input.component';
+import { PasswordInputComponent } from 'app/components/shared/inputs/password-input/password-input.component';
+import { RememberMeInputComponent } from 'app/components/shared/inputs/remember-me-input/remember-me-input.component';
+import { CaptchaInputComponent } from 'app/components/shared/inputs/captcha-input/captcha-input.component';
+import { ToastService } from 'app/services/toast-service/toast.service';
+import { CryptographyService } from 'app/services/cryptography-service/cryptography.service';
+import { UserAuthService } from 'app/services/user-auth-service/user-auth.service';
+import { APP_ROUTES } from 'app/constants/routes';
 
 @Component({
   selector: 'app-login-form',

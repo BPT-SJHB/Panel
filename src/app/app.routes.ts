@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { LoginPageComponent } from './pages/auth/login-page/login-page.component';
-import { ForgetPasswordPageComponent } from './pages/auth/forget-password-page/forget-password-page.component';
-import { APP_ROUTES } from './constants/routes';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { LoginPageComponent } from 'app/pages/auth/login-page/login-page.component';
+import { ForgetPasswordPageComponent } from 'app/pages/auth/forget-password-page/forget-password-page.component';
+import { APP_ROUTES } from 'app/constants/routes';
+import { DashboardComponent } from 'app/pages/dashboard/dashboard.component';
 
 export const routes: Routes = [
   {path: APP_ROUTES.HOME,redirectTo:'auth/login',pathMatch: 'full'},

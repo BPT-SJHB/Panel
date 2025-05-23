@@ -1,7 +1,7 @@
 // این جهت نگهداری تست من در نبود api ها هست
 
-import { CaptchaChallenge } from "../model/captcha-challenge.model";
-import { UserSession } from "../model/user-session.model";
+import { CaptchaChallenge } from "app/model/captcha-challenge.model";
+import { UserSession } from "app/model/user-session.model";
 
 export const mockCaptcha:CaptchaChallenge = {
   sessionId:"cb3d7916307b7713875d7cf0fd9639e4a5qddt$oRi2A",

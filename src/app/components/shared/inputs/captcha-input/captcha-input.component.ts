@@ -1,11 +1,11 @@
 import { NgClass } from '@angular/common';
-import { Component, Input, OnInit, signal } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { MessageModule } from 'primeng/message';
-import { CaptchaService } from '../../../../services/captcha-service/captcha.service';
-import { ToastService } from '../../../../services/toast-service/toast.service';
+import { CaptchaService } from 'app/services/captcha-service/captcha.service';
+import { ToastService } from 'app/services/toast-service/toast.service';
 
 @Component({
   selector: 'app-captcha-input',

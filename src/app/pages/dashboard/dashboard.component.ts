@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UserAuthService } from '../../services/user-auth-service/user-auth.service';
+import { UserAuthService } from 'app/services/user-auth-service/user-auth.service';
 import { Router } from '@angular/router';
-import { APP_ROUTES } from '../../constants/routes';
+import { APP_ROUTES } from 'app/constants/routes';
 import { ButtonModule } from 'primeng/button';
-import { ToastService } from '../../services/toast-service/toast.service';
+import { ToastService } from 'app/services/toast-service/toast.service';
 
 
 @Component({

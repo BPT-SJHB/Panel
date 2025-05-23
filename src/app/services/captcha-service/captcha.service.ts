@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
-import { CaptchaChallenge } from '../../model/captcha-challenge.model';
-import { ApiResponse } from '../../model/api-Response.model';
-import { API_ROUTES } from '../../constants/api';
-import { handleHttpError } from '../../utils/http-error-handler';
-import { environment } from '../../../environments/environment';
-import { mockCaptcha } from '../../constants/dev';
+import { CaptchaChallenge } from 'app/model/captcha-challenge.model';
+import { ApiResponse } from 'app/model/api-Response.model';
+import { API_ROUTES } from 'app/constants/api';
+import { handleHttpError } from 'app/utils/http-error-handler';
+import { environment } from 'environments/environment';
+import { mockCaptcha } from 'app/constants/dev';
 
 @Injectable({
   providedIn: 'root',

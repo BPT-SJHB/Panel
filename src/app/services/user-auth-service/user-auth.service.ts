@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { API_ROUTES } from '../../constants/api';
-import { LoginFormData } from '../../model/login-form-data.model';
-import { ApiResponse } from '../../model/api-Response.model';
-import { handleHttpError } from '../../utils/http-error-handler';
+import { API_ROUTES } from 'app/constants/api';
+import { LoginFormData } from 'app/model/login-form-data.model';
+import { ApiResponse } from 'app/model/api-Response.model';
+import { handleHttpError } from 'app/utils/http-error-handler';
 import { IUserAuthService } from './user-auth.interface';
-import { UserSession } from '../../model/user-session.model';
+import { UserSession } from 'app/model/user-session.model';
 import { CookieService } from 'ngx-cookie-service';
-import { environment } from '../../../environments/environment';
-import { mockUserSession } from '../../constants/dev';
+import { environment } from 'environments/environment';
+import { mockUserSession } from 'app/constants/dev';
 
 @Injectable({
   providedIn: 'root',
