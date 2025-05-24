@@ -28,4 +28,7 @@ export class ApiProcessesService {
       return;
     }
   }
+
+  public async getApiProcesses(): Promise<ApiResponse<[ApiGroupProcess]>> {
+  }
 }
