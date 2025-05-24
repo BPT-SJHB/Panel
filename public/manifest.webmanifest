@@ -1,9 +1,11 @@
 {
   "name": "bpt-sjhb-panel",
-  "short_name": "bpt-sjhb-panel",
+  "short_name": "bpt-sjhb",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
+  "background_color": "#ffffff",
+  "theme_color": "#1976d2",
   "icons": [
     {
       "src": "icons/icon-72x72.png",
