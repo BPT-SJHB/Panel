@@ -14,5 +14,6 @@ import { ApiResponse } from 'app/model/api-Response.model';
 })
 export class ApiProcessesService {
   private readonly apiUrl = API_ROUTES.Processes;
+  private sessionId: string = '';
 
 }
