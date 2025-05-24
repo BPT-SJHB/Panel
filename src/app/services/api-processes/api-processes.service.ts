@@ -13,5 +13,6 @@ import { ApiResponse } from 'app/model/api-Response.model';
   providedIn: 'root',
 })
 export class ApiProcessesService {
+  private readonly apiUrl = API_ROUTES.Processes;
 
 }
