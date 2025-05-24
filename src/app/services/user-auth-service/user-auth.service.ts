@@ -39,13 +39,7 @@ export class UserAuthService implements IUserAuthService {
     //#region  mock data
     // این قسمت برای من هست که دسترسی به api ندارم
     if (!environment.production && environment.disableApi) {
-      this.cookieService.set(this.sessionKey, mockUserSession.sessionId, {
-        path: '/',
-        secure: environment.production,
-        sameSite: 'None',
-        expires: new Date(Date.now() + 1000 * 60 * 60 * 24),// یک روز
-      });
-
+      this.setSessionId(mockUserSession.sessionId);
       return {
         success: true,
         data: mockUserSession,
@@ -54,7 +48,7 @@ export class UserAuthService implements IUserAuthService {
     //#region  end
 
     try {
-      const { sessionId,username, password, captcha } = loginFormData;
+      const { sessionId, username, password, captcha } = loginFormData;
 
       const result: { SessionId: string } = await firstValueFrom(
         this.http.post<{ SessionId: string }>(this.apiUrl, {
@@ -65,13 +59,7 @@ export class UserAuthService implements IUserAuthService {
         })
       );
 
-      // ذخیره SessionId در کوکی برای یک روز (24 ساعت)
-      this.cookieService.set(this.sessionKey, result.SessionId, {
-        path: '/',
-        secure: environment.production,
-        sameSite: 'None',
-        expires: new Date(Date.now() + 1000 * 60 * 60 * 24),// یک روز
-      });
+      this.setSessionId(result.SessionId)
 
       return {
         success: true,
@@ -89,8 +77,8 @@ export class UserAuthService implements IUserAuthService {
    * در صورت نیاز، می‌توان درخواست logout نیز به سمت سرور ارسال کرد.
    */
   public logout(): void {
-     this.cookieService.delete(this.sessionKey);
-     // سمت سرور اضافه شود در صورت نیاز
+    this.cookieService.delete(this.sessionKey);
+    // سمت سرور اضافه شود در صورت نیاز
 
   }
 
@@ -101,7 +89,7 @@ export class UserAuthService implements IUserAuthService {
   public isLoggedIn(): Promise<boolean> {
     const sessionId = this.getSessionId();
     if (sessionId == null) {
-       return new Promise(function(resolve, _) {
+      return new Promise(function (resolve, _) {
         resolve(false);
       });
     }
@@ -119,6 +107,20 @@ export class UserAuthService implements IUserAuthService {
   public getSessionId(): string | null {
     return this.cookieService.get(this.sessionKey) || null;
   }
+
+  private setSessionId(sessionId: string): void {
+    if (this.getSessionId()) {
+      this.logout();
+    }
+
+    this.cookieService.set(this.sessionKey, sessionId, {
+      path: '/',
+      secure: environment.production,
+      sameSite: environment.production ? 'None' : 'Lax',
+      expires: new Date(Date.now() + 1000 * 60 * 30), // 30 minutes
+    });
+  }
+
 }
 
 
