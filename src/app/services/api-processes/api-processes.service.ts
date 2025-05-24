@@ -102,5 +102,8 @@ export class ApiProcessesService {
       //     },
       //   ],
       // };
+    } catch (error: unknown) {
+      return handleHttpError<[ApiGroupProcess]>(error);
+    }
   }
 }
