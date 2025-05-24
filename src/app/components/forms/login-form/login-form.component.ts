@@ -61,7 +61,6 @@ export class LoginFormComponent {
     }
 
     const formValue = this.loginForm.value;
-
     const loginResult = await this.userAuth.login({
       username: await this.cryptography.SHA256(formValue.username),
       password: await this.cryptography.SHA256(formValue.password),
@@ -75,7 +74,6 @@ export class LoginFormComponent {
       this.router.navigate([APP_ROUTES.DASHBOARD.HOME]);
       return;
     }
-
 
     this.toast.error('خطا', loginResult.error?.message);
     console.log(loginResult.error.details);

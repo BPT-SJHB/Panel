@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ICryptographyService } from './cryptography.interface';
+import SHA256 from 'crypto-js/sha256';
 
 @Injectable({
   providedIn: 'root',
@@ -8,13 +9,7 @@ export class CryptographyService  implements ICryptographyService{
   constructor() {}
 
   public async SHA256(message: string): Promise<string> {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(message);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray
-      .map((b) => b.toString(16).padStart(2, '0'))
-      .join('');
+    const hashHex = SHA256(message).toString();
     return hashHex;
   }
 }
