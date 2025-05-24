@@ -41,5 +41,66 @@ export class ApiProcessesService {
         success: true,
         data: response,
       };
+
+      // return {
+      //   success: true,
+      //   data: [
+      //     {
+      //       PGTitle: 'اطلاعات پایه',
+      //       PGIconName: 'BaseInformation',
+      //       WebProcesses: [
+      //         {
+      //           PTitle:
+      //             'رانندگان ، کامیونداران                                                                              ',
+      //           PName: 'DriversAndTruckDrivers                            ',
+      //           Description: ' ',
+      //           PIconName: 'DriversAndTruckDrivers                            ',
+      //         },
+      //         {
+      //           PTitle:
+      //             'خودرو ، ناوگان حمل                                                                                  ',
+      //           PName: 'CarsAndTrucks                                     ',
+      //           Description: ' ',
+      //           PIconName: 'CarsAndTrucks',
+      //         },
+      //         {
+      //           PTitle:
+      //             'شرکت های حمل و نقل                                                                                  ',
+      //           PName: 'TransportCompanies                                ',
+      //           Description: ' ',
+      //           PIconName: 'TransportCompanies',
+      //         },
+      //         {
+      //           PTitle:
+      //             'صنوف                                                                                                ',
+      //           PName: 'Associations                                      ',
+      //           Description: ' ',
+      //           PIconName: 'Associatons',
+      //         },
+      //         {
+      //           PTitle:
+      //             'صاحبین بار                                                                                          ',
+      //           PName: 'BarOwner                                          ',
+      //           Description: ' ',
+      //           PIconName: 'BarOwner',
+      //         },
+      //         {
+      //           PTitle:
+      //             'کارخانجات و مراکز تولید                                                                             ',
+      //           PName: 'Manufactures                                      ',
+      //           Description: ' ',
+      //           PIconName: 'Manufactures',
+      //         },
+      //         {
+      //           PTitle:
+      //             'مبادی و مقاصد حمل                                                                                   ',
+      //           PName: 'LoadingDischargingLocations                       ',
+      //           Description: ' ',
+      //           PIconName: 'LoadingDischargingLocations                       ',
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // };
   }
 }
