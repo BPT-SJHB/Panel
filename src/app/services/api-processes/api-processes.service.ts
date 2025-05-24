@@ -16,4 +16,16 @@ export class ApiProcessesService {
   private readonly apiUrl = API_ROUTES.Processes;
   private sessionId: string = '';
 
+  constructor(
+    private http: HttpClient,
+    private auth: UserAuthService,
+    private router: Router
+  ) {
+    this.sessionId = this.auth.getSessionId() ?? '';
+
+    if (this.sessionId == '') {
+      this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
+      return;
+    }
+  }
 }
