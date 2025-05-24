@@ -30,5 +30,16 @@ export class ApiProcessesService {
   }
 
   public async getApiProcesses(): Promise<ApiResponse<[ApiGroupProcess]>> {
+    try {
+      const response = await firstValueFrom(
+        this.http.post<[ApiGroupProcess]>(this.apiUrl, {
+          sessionId: this.sessionId,
+        })
+      );
+
+      return {
+        success: true,
+        data: response,
+      };
   }
 }
