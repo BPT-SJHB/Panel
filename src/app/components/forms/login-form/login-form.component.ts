@@ -67,7 +67,7 @@ export class LoginFormComponent {
       password: await this.cryptography.SHA256(formValue.password),
       rememberMe: formValue.rememberMe,
       sessionId: formValue.sessionId,
-      captcha: formValue.captchaValue,
+      captcha: formValue.captcha,
     });
 
     if (loginResult.success || !loginResult.error) {
