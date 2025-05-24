@@ -27,8 +27,7 @@ export class ApiProcessesService {
       this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
       return;
     }
-  }
-
+    
   public async getApiProcesses(): Promise<ApiResponse<[ApiGroupProcess]>> {
     try {
       const response = await firstValueFrom(
