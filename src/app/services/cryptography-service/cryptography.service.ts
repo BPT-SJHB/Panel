@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
+import { ICryptographyService } from './cryptography.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CryptographyService {
+export class CryptographyService  implements ICryptographyService{
   constructor() {}
 
-  public static async SHA256(message: string): Promise<string> {
+  public async SHA256(message: string): Promise<string> {
     const encoder = new TextEncoder();
     const data = encoder.encode(message);
     const hashBuffer = await crypto.subtle.digest('SHA-256', data);

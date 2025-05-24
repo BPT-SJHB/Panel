@@ -1,13 +1,16 @@
 import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { providePrimeNG } from 'primeng/config';
-import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
-import { customTheme } from './themes/theme';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
+import { providePrimeNG } from 'primeng/config';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 
+import { CookieService } from 'ngx-cookie-service';
+
+import { routes } from './app.routes';
+import { customTheme } from './themes/theme';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,10 +18,9 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     provideAnimationsAsync(),
-    providePrimeNG({
-      theme: customTheme
-    }),
-    { provide: MessageService, useClass: MessageService },
-    importProvidersFrom(ToastModule)
+    providePrimeNG({ theme: customTheme }),
+    importProvidersFrom(ToastModule),
+    MessageService,
+    CookieService
   ]
 };
