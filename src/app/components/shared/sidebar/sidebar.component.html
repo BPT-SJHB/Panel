@@ -1,0 +1,30 @@
+<!-- Define the content template once -->
+<ng-template #contentTemplate>
+  <ng-content></ng-content>
+</ng-template>
+
+@if (isMobile) {
+  <p-drawer styleClass="w-18rem" [(visible)]="isOpen" position="right">
+    <app-sidebar-menu [items]="menuItems" />
+  </p-drawer>
+
+  <div>
+    <ng-container [ngTemplateOutlet]="contentTemplate"></ng-container>
+  </div>
+}
+@else {
+  <div class="flex">
+    <!-- Sidebar -->
+    <div
+      [style.width]="width"
+      class="h-screen fixed top-1 shadow-6 overflow-auto px-2 border-noround"
+    >
+      <app-sidebar-menu  [items]="menuItems"/>
+    </div>
+
+    <!-- Main content -->
+    <div class="flex-1 p-4" [style.marginRight]="width">
+      <ng-container [ngTemplateOutlet]="contentTemplate"></ng-container>
+    </div>
+  </div>
+}

@@ -1,0 +1,9 @@
+<header class="sticky-header sticky bg-primary">
+  <p-button styleClass="lg:hidden" (onClick)="openSidebar()">
+      <i class="pi pi-align-right text-xl"></i>
+  </p-button>
+  <div class="flex align-items-center justify-content-between px-3 py-2">
+      <span class="text-xl font-bold">{{headerData.title}}</span>
+      <i class="pi text-xl" [class]="headerData.icon"></i>
+  </div>
+</header>
