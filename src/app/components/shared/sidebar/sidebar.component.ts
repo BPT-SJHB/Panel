@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, HostListener, input, Input, OnInit, TemplateRef } from '@angular/core';
 import { DrawerModule } from 'primeng/drawer';
 import { SidebarMenuComponent } from "../sidebar-menu/sidebar-menu.component";
 import { SidebarService } from 'app/services/side-bar-service/sidebar.service';
@@ -12,7 +12,7 @@ import { MenuItemData } from 'app/model/menu-item.model';
 })
 export class SidebarComponent implements OnInit {
   @Input() width:string = '18rem';
-  menuItems:MenuItemData[] = [];
+  @Input() menuItems:MenuItemData[] = [];
   isMobile = false;
   isOpen = false;
 
@@ -25,7 +25,9 @@ export class SidebarComponent implements OnInit {
     this.sidebarService.isOpen$.subscribe(state => {
       this.isOpen = state;
     });
-    this.menuItems = this.sidebarService.getPages();
+    // this.sidebarService.selectedPageGroup$.subscribe(()=>{
+    //   this.menuItems = this.sidebarService.getPages();
+    // } )
   }
 
   @HostListener('window:resize')

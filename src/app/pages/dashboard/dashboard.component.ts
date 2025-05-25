@@ -11,30 +11,38 @@ import { ToastService } from 'app/services/toast-service/toast.service';
 import { APP_ROUTES } from 'app/constants/routes';
 import { HeaderComponent } from '../../components/shared/header/header.component';
 import { SidebarComponent } from '../../components/shared/sidebar/sidebar.component';
-import { SubMenuComponent } from "../../components/shared/sub-menu/sub-menu.component";
+import { SubMenuComponent } from '../../components/shared/sub-menu/sub-menu.component';
 
 import { HeaderData } from 'app/model/header-data.model';
 import { WebProcess } from 'app/model/web-process.model';
+import { mockPageGroup } from 'app/constants/dev';
+import { MenuItemData } from 'app/model/menu-item.model';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, ButtonModule, HeaderComponent, SidebarComponent, SubMenuComponent],
+  imports: [
+    CommonModule,
+    ButtonModule,
+    HeaderComponent,
+    SidebarComponent,
+    SubMenuComponent,
+  ],
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-
   // هدر صفحه: عنوان و آیکون
   headerData: HeaderData = { title: '', icon: '' };
 
   // لیست فرآیندهای صفحه جاری
   webProcesses: WebProcess[] = [];
+  menuItems: MenuItemData[] = [];
 
   constructor(
-    private userAuth: UserAuthService,         // سرویس احراز هویت کاربر
+    private userAuth: UserAuthService, // سرویس احراز هویت کاربر
     private router: Router,
-    private toast: ToastService,                // سرویس نمایش پیام‌ها (Toast)
-    private sidebarService: SidebarService,    // سرویس مدیریت داده‌های سایدبار
+    private toast: ToastService, // سرویس نمایش پیام‌ها (Toast)
+    private sidebarService: SidebarService, // سرویس مدیریت داده‌های سایدبار
     private apiProcessesService: ApiProcessesService // سرویس دریافت داده‌های API
   ) {}
 
@@ -60,9 +68,10 @@ export class DashboardComponent implements OnInit {
       this.toast.error('خطا', response.error?.message ?? 'خطایی رخ داده است');
       console.error('API error details:', response.error?.details);
     }
+    // this.sidebarService.setPageGroups(mockPageGroup);
 
     // مشترک شدن روی تغییرات گروه صفحه انتخاب شده جهت به‌روزرسانی هدر و فرآیندها
-    this.sidebarService.selectedPageGroup$.subscribe(page => {
+    this.sidebarService.selectedPageGroup$.subscribe((page) => {
       if (!page) return;
 
       this.headerData = {
@@ -71,6 +80,8 @@ export class DashboardComponent implements OnInit {
       };
 
       this.webProcesses = page.processes;
+
+      this.menuItems = this.sidebarService.getPages();
     });
   }
 }
