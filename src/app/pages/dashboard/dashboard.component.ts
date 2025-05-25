@@ -5,15 +5,16 @@ import { ButtonModule } from 'primeng/button';
 
 import { UserAuthService } from 'app/services/user-auth-service/user-auth.service';
 import { SidebarService } from 'app/services/side-bar-service/sidebar.service';
+import { ApiProcessesService } from 'app/services/api-processes/api-processes.service';
+import { ToastService } from 'app/services/toast-service/toast.service';
 
 import { APP_ROUTES } from 'app/constants/routes';
 import { HeaderComponent } from '../../components/shared/header/header.component';
 import { SidebarComponent } from '../../components/shared/sidebar/sidebar.component';
+import { SubMenuComponent } from "../../components/shared/sub-menu/sub-menu.component";
 
 import { HeaderData } from 'app/model/header-data.model';
 import { WebProcess } from 'app/model/web-process.model';
-import { SubMenuComponent } from "../../components/shared/sub-menu/sub-menu.component";
-import { mockPageGroup } from 'app/constants/dev';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,31 +24,44 @@ import { mockPageGroup } from 'app/constants/dev';
 })
 export class DashboardComponent implements OnInit {
 
-  // داده‌های هدر صفحه (عنوان و آیکون)
+  // هدر صفحه: عنوان و آیکون
   headerData: HeaderData = { title: '', icon: '' };
 
-  // لیست فرآیندهای وب نمایش داده شده در صفحه
+  // لیست فرآیندهای صفحه جاری
   webProcesses: WebProcess[] = [];
 
   constructor(
-    private userAuth: UserAuthService,    // سرویس احراز هویت کاربر
+    private userAuth: UserAuthService,         // سرویس احراز هویت کاربر
     private router: Router,
-    private sidebarService: SidebarService // سرویس مدیریت سایدبار
+    private toast: ToastService,                // سرویس نمایش پیام‌ها (Toast)
+    private sidebarService: SidebarService,    // سرویس مدیریت داده‌های سایدبار
+    private apiProcessesService: ApiProcessesService // سرویس دریافت داده‌های API
   ) {}
 
   ngOnInit(): void {
-    // اگر سشن کاربر موجود نبود، به صفحه ورود هدایت شود
+    this.initializeDashboard();
+  }
+
+  // متد async جدا برای بارگذاری داده‌ها و مقداردهی اولیه صفحه
+  private async initializeDashboard(): Promise<void> {
+    // بررسی وجود سشن کاربر، در صورت عدم وجود هدایت به صفحه ورود
     if (!this.userAuth.getSessionId()) {
       this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
       return;
     }
 
-    // --------- بارگذاری داده‌ها ---------
-    // این بخش می‌تواند با دریافت داده‌ها از API جایگزین شود
-    const pageGroupsAPI = mockPageGroup;
-    this.sidebarService.setPageGroups(pageGroupsAPI);
+    // درخواست داده‌های گروه صفحه از API
+    const response = await this.apiProcessesService.getApiProcesses();
 
-    // مشترک شدن روی صفحه گروه انتخاب شده برای به‌روزرسانی headerData و webProcesses
+    if (response.success && response.data) {
+      this.sidebarService.setPageGroups(response.data);
+    } else {
+      // نمایش خطا به کاربر در صورت عدم موفقیت دریافت داده‌ها
+      this.toast.error('خطا', response.error?.message ?? 'خطایی رخ داده است');
+      console.error('API error details:', response.error?.details);
+    }
+
+    // مشترک شدن روی تغییرات گروه صفحه انتخاب شده جهت به‌روزرسانی هدر و فرآیندها
     this.sidebarService.selectedPageGroup$.subscribe(page => {
       if (!page) return;
 

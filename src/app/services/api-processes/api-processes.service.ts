@@ -8,6 +8,7 @@ import { APP_ROUTES } from 'app/constants/routes';
 import { firstValueFrom } from 'rxjs';
 import { ApiGroupProcess } from 'app/model/api-group-process.model';
 import { ApiResponse } from 'app/model/api-Response.model';
+import { PageGroup } from 'app/model/page-group.model';
 
 @Injectable({
   providedIn: 'root',
@@ -28,20 +29,45 @@ export class ApiProcessesService {
       return;
     }
   }
-  public async getApiProcesses(): Promise<ApiResponse<[ApiGroupProcess]>> {
+
+  public async getApiProcesses(): Promise<ApiResponse<PageGroup[]>> {
     try {
       const response = await firstValueFrom(
-        this.http.post<[ApiGroupProcess]>(this.apiUrl, {
+        this.http.post<ApiGroupProcess[]>(this.apiUrl, {
           sessionId: this.sessionId,
         })
       );
 
+      const pageGroups = this.convertApiGroupsToPageGroups(response);
+
       return {
         success: true,
-        data: response,
+        data: pageGroups,
       };
 
-      // return {
+    } catch (error: unknown) {
+      return handleHttpError<PageGroup[]>(error);
+    }
+  }
+
+
+  private convertApiGroupsToPageGroups(apiGroups: ApiGroupProcess[]): PageGroup[] {
+    return apiGroups.map((group, index) => ({
+      id: index,
+      title: group.PGTitle.trim(),
+      icon: group.PGIconName.trim(),
+      processes: group.WebProcesses.map(proc => ({
+        title: proc.PTitle.trim(),
+        name: proc.PName.trim(),
+        description: proc.Description.trim(),
+        icon: proc.PIconName.trim(),
+      }))
+    }));
+  }
+
+
+
+   // return {
       //   success: true,
       //   data: [
       //     {
@@ -101,8 +127,4 @@ export class ApiProcessesService {
       //     },
       //   ],
       // };
-    } catch (error: unknown) {
-      return handleHttpError<[ApiGroupProcess]>(error);
-    }
-  }
 }
