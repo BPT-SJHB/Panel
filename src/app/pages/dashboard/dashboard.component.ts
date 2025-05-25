@@ -18,12 +18,13 @@ export class DashboardComponent implements OnInit {
 
   sessionId:string = ""
 
-  ngOnInit(): void {
-     this.sessionId = this.userAuth.getSessionId() ?? "";
-     if (this.sessionId == "") {
+  async ngOnInit(): Promise<void> {
+    if (!(await this.userAuth.isLoggedIn()).success) {
       this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
       return;
-     }
+    }
+
+    this.sessionId = this.userAuth.getSessionId() ?? '';
   }
 
   logout() {
