@@ -39,4 +39,12 @@ export class FooterComponent {
     private toast: ToastService,
     private router: Router
   ) {}
+
+  async showDialog() {
+    this.dialog = true;
+    if (!(await this.auth.isLoggedIn()).success) {
+      this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
+      return;
+    }
+  }
 }
