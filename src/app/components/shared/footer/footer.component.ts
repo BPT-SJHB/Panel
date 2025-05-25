@@ -32,4 +32,9 @@ import { Router } from '@angular/router';
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
+  constructor(
+    private auth: UserAuthService,
+    private toast: ToastService,
+    private router: Router
+  ) {}
 }
