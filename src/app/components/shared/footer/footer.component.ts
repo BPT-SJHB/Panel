@@ -52,4 +52,8 @@ export class FooterComponent {
     this.toast.success('تیکت ارسال شد', 'لطفا منتظر جواب همکاران ما باشد.');
     this.dialog = false;
   }
+
+  copyToClipboard() {
+    this.toast.success('متن در کلیپبورد ذخیره شد', '');
+  }
 }
