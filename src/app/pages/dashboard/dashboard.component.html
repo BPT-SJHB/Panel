@@ -1,7 +1,8 @@
-<div class="flex flex-column gap-2 mt-5 text-center">
-  <h2>خوش آمدید</h2>
-  <span>شماره نشست شما : {{sessionId}}</span>
-  <p-button styleClass="px-8 mt-5" severity="secondary"
-  (onClick)="logout()"
-  >خروج</p-button>
-</div>
+<app-header [headerData]="headerData" />
+
+
+<app-sidebar [menuItems]="menuItems">
+  <div class="my-5 lg:my-2">
+    <app-sub-menu [processes]="webProcesses" />
+  </div>
+</app-sidebar>

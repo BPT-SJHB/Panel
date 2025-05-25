@@ -24,7 +24,7 @@ export interface IUserAuthService {
    * بررسی اینکه آیا کاربر در حال حاضر وارد شده است یا خیر.
    * @returns یک Promise که مقدار true یا false برمی‌گرداند.
    */
-  isLoggedIn(): Promise<boolean>;
+  isLoggedIn(): Promise<ApiResponse<{ ISSessionLive: boolean }>>;
 
   /**
    * دریافت شناسه نشست (Session ID) از روی کوکی یا ذخیره‌سازی محلی.
