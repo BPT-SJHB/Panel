@@ -32,6 +32,8 @@ import { Router } from '@angular/router';
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
+  dialog: boolean = false;
+
   constructor(
     private auth: UserAuthService,
     private toast: ToastService,
