@@ -84,20 +84,27 @@ export class UserAuthService implements IUserAuthService {
 
   /**
    * بررسی اینکه آیا کاربر در حال حاضر وارد شده است یا خیر.
-   * (در حال حاضر پیاده‌سازی نشده است؛ باید با سرور بررسی شود)
    */
-  public isLoggedIn(): Promise<boolean> {
+  public async isLoggedIn(): Promise<ApiResponse<{ ISSessionLive: boolean }>> {
     const sessionId = this.getSessionId();
     if (sessionId == null) {
       return new Promise(function (resolve, _) {
-        resolve(false);
+        resolve({ success: false });
       });
     }
 
-    // true
-    // سمت سرور چک شود که نشست کاربر معتبر است یا خیر
+    try {
+      const respond: { ISSessionLive: boolean } = await firstValueFrom(
+        this.http.post<{ ISSessionLive: boolean }>(
+          this.apiUrl + '/isSessionLive',
+          { sessionId: this.getSessionId() }
+        )
+      );
 
-    throw new Error('Method not implemented.');
+      return { success: true, data: respond };
+    } catch (error: unknown) {
+      return handleHttpError<{ ISSessionLive: boolean }>(error);
+    }
   }
 
   /**
