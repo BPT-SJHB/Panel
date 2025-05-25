@@ -47,4 +47,9 @@ export class FooterComponent {
       return;
     }
   }
+
+  submitTicket() {
+    this.toast.success('تیکت ارسال شد', 'لطفا منتظر جواب همکاران ما باشد.');
+    this.dialog = false;
+  }
 }
