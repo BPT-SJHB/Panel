@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ApiResponse } from 'app/model/api-Response.model';
+import { ApiResponse } from 'app/data/model/api-Response.model';
 import { ERROR_MESSAGES, ErrorCodes } from 'app/constants/error-messages';
 
 export function handleHttpError<T>(error: unknown): ApiResponse<T> {

@@ -5,8 +5,6 @@ import { DividerModule } from 'primeng/divider';
 import { PopoverModule } from 'primeng/popover';
 import { DialogModule } from 'primeng/dialog';
 import { TextareaModule } from 'primeng/textarea';
-import { UsernameInputComponent } from '../inputs/username-input/username-input.component';
-import { PasswordInputComponent } from '../inputs/password-input/password-input.component';
 import { CaptchaInputComponent } from '../inputs/captcha-input/captcha-input.component';
 import { UserAuthService } from 'app/services/user-auth-service/user-auth.service';
 import { ToastService } from 'app/services/toast-service/toast.service';
@@ -22,8 +20,6 @@ import { Router } from '@angular/router';
     DividerModule,
     PopoverModule,
     DialogModule,
-    UsernameInputComponent,
-    PasswordInputComponent,
     CaptchaInputComponent,
     TextareaModule,
     TextAreaInputComponent,

@@ -6,9 +6,9 @@ import { UserAuthService } from '../user-auth-service/user-auth.service';
 import { Router } from '@angular/router';
 import { APP_ROUTES } from 'app/constants/routes';
 import { firstValueFrom } from 'rxjs';
-import { ApiGroupProcess } from 'app/model/api-group-process.model';
-import { ApiResponse } from 'app/model/api-Response.model';
-import { PageGroup } from 'app/model/page-group.model';
+import { ApiGroupProcess } from 'app/data/model/api-group-process.model';
+import { ApiResponse } from 'app/data/model/api-Response.model';
+import { PageGroup } from 'app/data/model/page-group.model';
 
 @Injectable({
   providedIn: 'root',

@@ -1,6 +1,6 @@
-import { ApiResponse } from '../../model/api-Response.model';
-import { LoginFormData } from '../../model/login-form-data.model';
-import { UserSession } from '../../model/user-session.model';
+import { ApiResponse } from '../../data/model/api-Response.model';
+import { LoginFormData } from '../../data/model/login-form-data.model';
+import { UserSession } from '../../data/model/user-session.model';
 
 /**
  * اینترفیس مربوط به سرویس احراز هویت کاربر.

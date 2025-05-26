@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { HeaderData } from 'app/model/header-data.model';
+import { HeaderData } from 'app/data/model/header-data.model';
 import { SidebarService } from 'app/services/side-bar-service/sidebar.service';
 import { ButtonModule } from 'primeng/button';
 @Component({

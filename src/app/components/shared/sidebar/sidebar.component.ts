@@ -3,7 +3,7 @@ import { DrawerModule } from 'primeng/drawer';
 import { SidebarMenuComponent } from "../sidebar-menu/sidebar-menu.component";
 import { SidebarService } from 'app/services/side-bar-service/sidebar.service';
 import { CommonModule } from '@angular/common';
-import { MenuItemData } from 'app/model/menu-item.model';
+import { MenuItemData } from 'app/data/model/menu-item.model';
 @Component({
   selector: 'app-sidebar',
   imports: [CommonModule,DrawerModule, SidebarMenuComponent],
@@ -25,9 +25,6 @@ export class SidebarComponent implements OnInit {
     this.sidebarService.isOpen$.subscribe(state => {
       this.isOpen = state;
     });
-    // this.sidebarService.selectedPageGroup$.subscribe(()=>{
-    //   this.menuItems = this.sidebarService.getPages();
-    // } )
   }
 
   @HostListener('window:resize')

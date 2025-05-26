@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MenuItemData } from 'app/model/menu-item.model';
+import { MenuItemData } from 'app/data/model/menu-item.model';
 import { PanelMenuModule } from 'primeng/panelmenu';
 
 @Component({
