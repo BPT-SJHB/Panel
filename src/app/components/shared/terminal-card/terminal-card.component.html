@@ -1,0 +1,17 @@
+@if (terminal) {
+  <p-card styleClass="w-full shadow-8 border-round-lg p-4">
+    <ng-template #header>
+      <div class="text-xl font-bold text-primary mb-3">
+        {{ terminal.name }}
+      </div>
+    </ng-template>
+    <div class="mb-4 text-gray-700">
+      {{ terminal.description }}
+    </div>
+    <div class="flex justify-content-center">
+      <a [href]="getLoginLink()">
+        <p-button label="ورود به صفحه" styleClass="px-6 text-md"  />
+      </a>
+    </div>
+  </p-card>
+}
