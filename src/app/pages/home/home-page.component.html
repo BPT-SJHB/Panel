@@ -1,0 +1,11 @@
+<div class="min-h-95vh flex flex-wrap justify-content-around align-items-center gap-4 p-4">
+  @for (terminal of cargoTerminals; track $index) {
+    <div style="width: 400px;"
+    pAnimateOnScroll
+    enterClass="animate-enter fade-in-10 slide-in-from-t-20 animate-duration"
+    leaveClass="animate-leave fade-out-0"
+    >
+      <app-terminal-card [terminal]="terminal"/>
+    </div>
+  }
+</div>
