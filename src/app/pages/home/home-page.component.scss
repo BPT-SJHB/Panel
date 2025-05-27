@@ -62,4 +62,15 @@
   .min-h-95vh {
     min-height: 90vh;
   }
+
+  p-panel {
+    .pi-search-plus {
+      font-size: 20px !important;
+
+      @media (max-width: 768px) {
+        font-size: 18px !important;
+      }
+    }
+  }
+
 }
