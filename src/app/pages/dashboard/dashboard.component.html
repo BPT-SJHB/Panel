@@ -1,13 +1,13 @@
 <app-header [headerData]="headerData" />
 
+<app-sidebar [menuItems]="menuItems">
+  <div class="my-5 lg:my-2">
+    <app-sub-menu [processes]="webProcesses" />
+  </div>
+</app-sidebar>
 
-  <app-sidebar [menuItems]="menuItems">
-    <div class="my-5 lg:my-2">
-      <app-sub-menu [processes]="webProcesses" />
-    </div>
-  </app-sidebar>
+<app-support-button></app-support-button>
 
-  <!-- <div class="fixed w-full bottom-0">
-    <app-footer />
-  </div> -->
-
+<div class="fixed w-full bottom-0">
+  <app-footer />
+</div>

@@ -17,6 +17,7 @@ import { FooterComponent } from "app/components/shared/footer/footer.component";
 import { HeaderData } from 'app/data/model/header-data.model';
 import { WebProcess } from 'app/data/model/web-process.model';
 import { MenuItemData } from 'app/data/model/menu-item.model';
+import { SupportButtonComponent } from "../../components/shared/support-button/support-button.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -26,7 +27,8 @@ import { MenuItemData } from 'app/data/model/menu-item.model';
     HeaderComponent,
     SidebarComponent,
     SubMenuComponent,
-    FooterComponent
+    FooterComponent,
+    SupportButtonComponent
 ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
