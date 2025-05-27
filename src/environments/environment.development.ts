@@ -1,4 +1,4 @@
-const apiBaseUrl = "http://192.168.1.3";
+const apiBaseUrl = "http://192.168.1.2";
 const apiPort = 81;
 
 export const environment = {
