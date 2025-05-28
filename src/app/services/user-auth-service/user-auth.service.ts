@@ -91,6 +91,12 @@ export class UserAuthService implements IUserAuthService {
       });
     }
 
+    // mock data
+    if (!environment.production && environment.disableApi) {
+      return { success: true, data: { ISSessionLive: true } };
+    }
+
+    // real data
     try {
       const respond: { ISSessionLive: boolean } = await firstValueFrom(
         this.http.post<{ ISSessionLive: boolean }>(

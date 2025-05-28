@@ -9,6 +9,8 @@ import { firstValueFrom } from 'rxjs';
 import { ApiGroupProcess } from 'app/data/model/api-group-process.model';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { PageGroup } from 'app/data/model/page-group.model';
+import { environment } from 'environments/environment';
+import { mockPageGroup } from 'app/data/mock/page-group.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +33,12 @@ export class ApiProcessesService {
   }
 
   public async getApiProcesses(): Promise<ApiResponse<PageGroup[]>> {
+    // mock data
+    if (!environment.production && environment.disableApi) {
+      return { success: true, data: mockPageGroup };
+    }
+
+    // real data
     try {
       const response = await firstValueFrom(
         this.http.post<ApiGroupProcess[]>(this.apiUrl, {
