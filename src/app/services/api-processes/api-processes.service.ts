@@ -44,87 +44,24 @@ export class ApiProcessesService {
         success: true,
         data: pageGroups,
       };
-
     } catch (error: unknown) {
       return handleHttpError<PageGroup[]>(error);
     }
   }
 
-
-  private convertApiGroupsToPageGroups(apiGroups: ApiGroupProcess[]): PageGroup[] {
+  private convertApiGroupsToPageGroups(
+    apiGroups: ApiGroupProcess[]
+  ): PageGroup[] {
     return apiGroups.map((group, index) => ({
       id: index,
       title: group.PGTitle.trim(),
       icon: group.PGIconName.trim(),
-      processes: group.WebProcesses.map(proc => ({
+      processes: group.WebProcesses.map((proc) => ({
         title: proc.PTitle.trim(),
         name: proc.PName.trim(),
         description: proc.Description.trim(),
         icon: proc.PIconName.trim(),
-      }))
+      })),
     }));
   }
-
-
-
-   // return {
-      //   success: true,
-      //   data: [
-      //     {
-      //       PGTitle: 'اطلاعات پایه',
-      //       PGIconName: 'BaseInformation',
-      //       WebProcesses: [
-      //         {
-      //           PTitle:
-      //             'رانندگان ، کامیونداران                                                                              ',
-      //           PName: 'DriversAndTruckDrivers                            ',
-      //           Description: ' ',
-      //           PIconName: 'DriversAndTruckDrivers                            ',
-      //         },
-      //         {
-      //           PTitle:
-      //             'خودرو ، ناوگان حمل                                                                                  ',
-      //           PName: 'CarsAndTrucks                                     ',
-      //           Description: ' ',
-      //           PIconName: 'CarsAndTrucks',
-      //         },
-      //         {
-      //           PTitle:
-      //             'شرکت های حمل و نقل                                                                                  ',
-      //           PName: 'TransportCompanies                                ',
-      //           Description: ' ',
-      //           PIconName: 'TransportCompanies',
-      //         },
-      //         {
-      //           PTitle:
-      //             'صنوف                                                                                                ',
-      //           PName: 'Associations                                      ',
-      //           Description: ' ',
-      //           PIconName: 'Associatons',
-      //         },
-      //         {
-      //           PTitle:
-      //             'صاحبین بار                                                                                          ',
-      //           PName: 'BarOwner                                          ',
-      //           Description: ' ',
-      //           PIconName: 'BarOwner',
-      //         },
-      //         {
-      //           PTitle:
-      //             'کارخانجات و مراکز تولید                                                                             ',
-      //           PName: 'Manufactures                                      ',
-      //           Description: ' ',
-      //           PIconName: 'Manufactures',
-      //         },
-      //         {
-      //           PTitle:
-      //             'مبادی و مقاصد حمل                                                                                   ',
-      //           PName: 'LoadingDischargingLocations                       ',
-      //           Description: ' ',
-      //           PIconName: 'LoadingDischargingLocations                       ',
-      //         },
-      //       ],
-      //     },
-      //   ],
-      // };
 }

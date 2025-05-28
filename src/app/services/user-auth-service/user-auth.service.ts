@@ -21,7 +21,7 @@ export class UserAuthService implements IUserAuthService {
   // کلید مربوط به ذخیره‌سازی session ID در کوکی
   private readonly sessionKey = 'sessionId';
 
-  constructor(private http: HttpClient, private cookieService: CookieService) { }
+  constructor(private http: HttpClient, private cookieService: CookieService) {}
 
   /**
    * احراز هویت کاربر از طریق ارسال اطلاعات فرم ورود به سرور.
@@ -35,7 +35,6 @@ export class UserAuthService implements IUserAuthService {
   public async login(
     loginFormData: LoginFormData
   ): Promise<ApiResponse<UserSession>> {
-
     //#region  mock data
     // این قسمت برای من هست که دسترسی به api ندارم
     if (!environment.production && environment.disableApi) {
@@ -43,7 +42,7 @@ export class UserAuthService implements IUserAuthService {
       return {
         success: true,
         data: mockUserSession,
-      }
+      };
     }
     //#region  end
 
@@ -59,7 +58,7 @@ export class UserAuthService implements IUserAuthService {
         })
       );
 
-      this.setSessionId(result.SessionId)
+      this.setSessionId(result.SessionId);
 
       return {
         success: true,
@@ -79,7 +78,6 @@ export class UserAuthService implements IUserAuthService {
   public logout(): void {
     this.cookieService.delete(this.sessionKey);
     // سمت سرور اضافه شود در صورت نیاز
-
   }
 
   /**
@@ -127,33 +125,4 @@ export class UserAuthService implements IUserAuthService {
       expires: new Date(Date.now() + 1000 * 60 * 30), // 30 minutes
     });
   }
-
 }
-
-
-
-
-
-
-//#region  for test
-
-//#1
-// this.Run({
-//   Captcha: 'captchaTest',
-//   SessionId: 'sessionIdTest',
-//   Userpassword: 'userpasswordTest',
-//   UserShenaseh: 'userShenasehTest',
-// });
-
-
-
-//#endregion
-
-//#region for test
-
-//#2
-// return (this.apiRespond = {
-//   SessionId: 'cb3d7916307b7713875d7cf0fd9639e4a5qddt$oRi2A',
-// });
-
-//#endregion
