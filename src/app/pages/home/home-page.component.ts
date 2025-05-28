@@ -4,9 +4,10 @@ import { CargoTerminal } from 'app/data/model/cargo-terminal.model';
 import { AnimateOnScroll } from 'primeng/animateonscroll';
 import { TerminalCardComponent } from 'app/components/shared/terminal-card/terminal-card.component';
 import { ButtonModule } from 'primeng/button';
-import { SearchInputComponent } from "../../components/shared/inputs/search-input/search-input.component";
+import { SearchInputComponent } from '../../components/shared/inputs/search-input/search-input.component';
 import { CommonModule } from '@angular/common';
-import {PanelModule} from 'primeng/panel'
+import { PanelModule } from 'primeng/panel';
+import { appTitles } from 'app/constants/Titles';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,7 @@ import {PanelModule} from 'primeng/panel'
     PanelModule,
     AnimateOnScroll,
     TerminalCardComponent,
-    SearchInputComponent
+    SearchInputComponent,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
@@ -26,6 +27,7 @@ export class HomePageComponent implements OnInit {
   allCargoTerminals: CargoTerminal[] = [];
   displayedCargoTerminals: CargoTerminal[] = [];
   currentSearchTerm: string = '';
+  headerTitle: string = appTitles.appOnLineTitle;
 
   ngOnInit(): void {
     this.initializeCargoTerminals();
@@ -42,9 +44,14 @@ export class HomePageComponent implements OnInit {
     const minSearchLength = 2;
 
     if (trimmedSearchTerm.length >= minSearchLength) {
-      this.displayedCargoTerminals = this.allCargoTerminals.filter(terminal =>
-        terminal.name.toLowerCase().includes(trimmedSearchTerm.toLowerCase()) ||
-        terminal.description.toLowerCase().includes(trimmedSearchTerm.toLowerCase())
+      this.displayedCargoTerminals = this.allCargoTerminals.filter(
+        (terminal) =>
+          terminal.name
+            .toLowerCase()
+            .includes(trimmedSearchTerm.toLowerCase()) ||
+          terminal.description
+            .toLowerCase()
+            .includes(trimmedSearchTerm.toLowerCase())
       );
     } else {
       this.displayedCargoTerminals = [...this.allCargoTerminals];
