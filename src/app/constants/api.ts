@@ -1,8 +1,14 @@
 import { environment } from 'environments/environment';
+const softwareUserAPIPort = 81;
+const transportationAPIPort = 82;
 
 export const API_ROUTES = {
-  CAPTCHA: `${environment.apiUrl}:81/api/GetCaptcha`,
-  Auth: `${environment.apiUrl}:81/api/AuthUser`,
-  Processes: `${environment.apiUrl}:81/api/GetWebProcesses`,
-  LoadAnnouncementPlaces: `${environment.apiUrl}:82/api/GetLoadAnnouncementPlaces`,
+  SoftwareUserAPI: {
+    CAPTCHA: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetCaptcha`,
+    Auth: `${environment.apiUrl}:${softwareUserAPIPort}/api/AuthUser`,
+    Processes: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetWebProcesses`,
+  },
+  TransportationAPI: {
+    LoadAnnouncementPlaces: `${environment.apiUrl}:${transportationAPIPort}/api/GetLoadAnnouncementPlaces`,
+  },
 };

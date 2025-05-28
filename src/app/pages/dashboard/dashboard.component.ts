@@ -20,6 +20,7 @@ import { MenuItemData } from 'app/data/model/menu-item.model';
 import { SupportButtonComponent } from '../../components/shared/support-button/support-button.component';
 import { environment } from 'environments/environment';
 import { mockPageGroup } from 'app/data/mock/page-group.mock';
+import { UserManagementService } from 'app/services/user-management/user-management.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -48,7 +49,8 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private toast: ToastService, // سرویس نمایش پیام‌ها (Toast)
     private sidebarService: SidebarService, // سرویس مدیریت داده‌های سایدبار
-    private apiProcessesService: ApiProcessesService // سرویس دریافت داده‌های API
+    private apiProcessesService: ApiProcessesService, // سرویس دریافت داده‌های API
+    private userManagement: UserManagementService
   ) {}
 
   ngOnInit(): void {

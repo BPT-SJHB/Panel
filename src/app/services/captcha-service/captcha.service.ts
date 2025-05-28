@@ -12,7 +12,7 @@ import { mockCaptcha } from 'app/data/mock/captcha-challenge.mock';
   providedIn: 'root',
 })
 export class CaptchaService {
-  private readonly apiUrl = API_ROUTES.CAPTCHA;
+  private readonly apiUrl = API_ROUTES.SoftwareUserAPI.CAPTCHA;
 
   constructor(private http: HttpClient) {}
 

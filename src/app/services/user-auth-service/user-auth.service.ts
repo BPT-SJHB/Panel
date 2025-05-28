@@ -16,7 +16,7 @@ import { mockUserSession } from 'app/data/mock/user-session.mock';
 })
 export class UserAuthService implements IUserAuthService {
   // آدرس API مربوط به احراز هویت
-  private readonly apiUrl = API_ROUTES.Auth;
+  private readonly apiUrl = API_ROUTES.SoftwareUserAPI.Auth;
 
   // کلید مربوط به ذخیره‌سازی session ID در کوکی
   private readonly sessionKey = 'sessionId';

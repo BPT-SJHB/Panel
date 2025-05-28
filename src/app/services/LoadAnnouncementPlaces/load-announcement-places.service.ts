@@ -12,7 +12,7 @@ import { firstValueFrom } from 'rxjs';
   providedIn: 'root',
 })
 export class LoadAnnouncementPlacesService {
-  private readonly apiUrl = API_ROUTES.LoadAnnouncementPlaces;
+  private readonly apiUrl = API_ROUTES.TransportationAPI.LoadAnnouncementPlaces;
 
   constructor(private http: HttpClient) {}
 
