@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { mockCargoTerminals } from 'app/data/mock/cargo-terminal.mock';
-import { CargoTerminal } from 'app/data/model/cargo-terminal.model';
+import { LoadAnnouncementPlace } from 'app/data/model/load-announcement-place.model';
 import { AnimateOnScroll } from 'primeng/animateonscroll';
 import { TerminalCardComponent } from 'app/components/shared/terminal-card/terminal-card.component';
 import { ButtonModule } from 'primeng/button';
@@ -8,6 +8,7 @@ import { SearchInputComponent } from '../../components/shared/inputs/search-inpu
 import { CommonModule } from '@angular/common';
 import { PanelModule } from 'primeng/panel';
 import { appTitles } from 'app/constants/Titles';
+import { LoadAnnouncementPlacesService } from 'app/services/LoadAnnouncementPlaces/load-announcement-places.service';
 
 @Component({
   selector: 'app-home',
@@ -24,18 +25,22 @@ import { appTitles } from 'app/constants/Titles';
   styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent implements OnInit {
-  allCargoTerminals: CargoTerminal[] = [];
-  displayedCargoTerminals: CargoTerminal[] = [];
+  allLoadAnnouncementPlaces: LoadAnnouncementPlace[] = [];
+  displayedLoadAnnouncementPlaces: LoadAnnouncementPlace[] = [];
+
   currentSearchTerm: string = '';
   headerTitle: string = appTitles.appOnLineTitle;
 
-  ngOnInit(): void {
-    this.initializeCargoTerminals();
+  constructor(private lap: LoadAnnouncementPlacesService) {}
+
+  async ngOnInit(): Promise<void> {
+    await this.initializeLoadAnnouncementPlaces();
   }
 
-  async initializeCargoTerminals() {
-    this.allCargoTerminals = mockCargoTerminals;
-    this.displayedCargoTerminals = [...this.allCargoTerminals];
+  async initializeLoadAnnouncementPlaces() {
+    const terminals = await this.lap.getLoadAnnouncementPlaces();
+    this.allLoadAnnouncementPlaces = terminals.data!;
+    this.displayedLoadAnnouncementPlaces = this.allLoadAnnouncementPlaces;
   }
 
   handleSearch(searchTerm: string): void {
@@ -44,22 +49,22 @@ export class HomePageComponent implements OnInit {
     const minSearchLength = 2;
 
     if (trimmedSearchTerm.length >= minSearchLength) {
-      this.displayedCargoTerminals = this.allCargoTerminals.filter(
+      this.displayedLoadAnnouncementPlaces = this.allLoadAnnouncementPlaces.filter(
         (terminal) =>
-          terminal.name
-            .toLowerCase()
-            .includes(trimmedSearchTerm.toLowerCase()) ||
-          terminal.description
-            .toLowerCase()
-            .includes(trimmedSearchTerm.toLowerCase())
+          terminal.LAPTitle.toLowerCase().includes(
+            trimmedSearchTerm.toLowerCase()
+          ) ||
+          terminal.Description.toLowerCase().includes(
+            trimmedSearchTerm.toLowerCase()
+          )
       );
     } else {
-      this.displayedCargoTerminals = [...this.allCargoTerminals];
+      this.displayedLoadAnnouncementPlaces = [...this.allLoadAnnouncementPlaces];
     }
   }
 
   handleClear(): void {
     this.currentSearchTerm = '';
-    this.displayedCargoTerminals = [...this.allCargoTerminals];
+    this.displayedLoadAnnouncementPlaces = [...this.allLoadAnnouncementPlaces];
   }
 }
