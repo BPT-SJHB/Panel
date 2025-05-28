@@ -9,6 +9,8 @@ import { firstValueFrom } from 'rxjs';
 import { ApiGroupProcess } from 'app/data/model/api-group-process.model';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { PageGroup } from 'app/data/model/page-group.model';
+import { environment } from 'environments/environment';
+import { mockPageGroup } from 'app/data/mock/page-group.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +33,12 @@ export class ApiProcessesService {
   }
 
   public async getApiProcesses(): Promise<ApiResponse<PageGroup[]>> {
+    // mock data
+    if (!environment.production && environment.disableApi) {
+      return { success: true, data: mockPageGroup };
+    }
+
+    // real data
     try {
       const response = await firstValueFrom(
         this.http.post<ApiGroupProcess[]>(this.apiUrl, {
@@ -44,87 +52,24 @@ export class ApiProcessesService {
         success: true,
         data: pageGroups,
       };
-
     } catch (error: unknown) {
       return handleHttpError<PageGroup[]>(error);
     }
   }
 
-
-  private convertApiGroupsToPageGroups(apiGroups: ApiGroupProcess[]): PageGroup[] {
+  private convertApiGroupsToPageGroups(
+    apiGroups: ApiGroupProcess[]
+  ): PageGroup[] {
     return apiGroups.map((group, index) => ({
       id: index,
       title: group.PGTitle.trim(),
       icon: group.PGIconName.trim(),
-      processes: group.WebProcesses.map(proc => ({
+      processes: group.WebProcesses.map((proc) => ({
         title: proc.PTitle.trim(),
         name: proc.PName.trim(),
         description: proc.Description.trim(),
         icon: proc.PIconName.trim(),
-      }))
+      })),
     }));
   }
-
-
-
-   // return {
-      //   success: true,
-      //   data: [
-      //     {
-      //       PGTitle: 'اطلاعات پایه',
-      //       PGIconName: 'BaseInformation',
-      //       WebProcesses: [
-      //         {
-      //           PTitle:
-      //             'رانندگان ، کامیونداران                                                                              ',
-      //           PName: 'DriversAndTruckDrivers                            ',
-      //           Description: ' ',
-      //           PIconName: 'DriversAndTruckDrivers                            ',
-      //         },
-      //         {
-      //           PTitle:
-      //             'خودرو ، ناوگان حمل                                                                                  ',
-      //           PName: 'CarsAndTrucks                                     ',
-      //           Description: ' ',
-      //           PIconName: 'CarsAndTrucks',
-      //         },
-      //         {
-      //           PTitle:
-      //             'شرکت های حمل و نقل                                                                                  ',
-      //           PName: 'TransportCompanies                                ',
-      //           Description: ' ',
-      //           PIconName: 'TransportCompanies',
-      //         },
-      //         {
-      //           PTitle:
-      //             'صنوف                                                                                                ',
-      //           PName: 'Associations                                      ',
-      //           Description: ' ',
-      //           PIconName: 'Associatons',
-      //         },
-      //         {
-      //           PTitle:
-      //             'صاحبین بار                                                                                          ',
-      //           PName: 'BarOwner                                          ',
-      //           Description: ' ',
-      //           PIconName: 'BarOwner',
-      //         },
-      //         {
-      //           PTitle:
-      //             'کارخانجات و مراکز تولید                                                                             ',
-      //           PName: 'Manufactures                                      ',
-      //           Description: ' ',
-      //           PIconName: 'Manufactures',
-      //         },
-      //         {
-      //           PTitle:
-      //             'مبادی و مقاصد حمل                                                                                   ',
-      //           PName: 'LoadingDischargingLocations                       ',
-      //           Description: ' ',
-      //           PIconName: 'LoadingDischargingLocations                       ',
-      //         },
-      //       ],
-      //     },
-      //   ],
-      // };
 }
