@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { WebProcess } from 'app/model/web-process.model';
+import { WebProcess } from 'app/data/model/web-process.model';
 import { CardModule } from 'primeng/card';
 
 @Component({

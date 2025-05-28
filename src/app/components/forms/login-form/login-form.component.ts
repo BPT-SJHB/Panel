@@ -16,8 +16,7 @@ import { ToastService } from 'app/services/toast-service/toast.service';
 import { CryptographyService } from 'app/services/cryptography-service/cryptography.service';
 import { UserAuthService } from 'app/services/user-auth-service/user-auth.service';
 import { APP_ROUTES } from 'app/constants/routes';
-
-
+import { appTitles } from 'app/constants/Titles';
 
 @Component({
   selector: 'app-login-form',
@@ -35,7 +34,8 @@ import { APP_ROUTES } from 'app/constants/routes';
 })
 export class LoginFormComponent {
   loginForm: FormGroup;
-  hrefForgetPassword:string = APP_ROUTES.AUTH.FORGET_PASSWORD;
+  hrefForgetPassword: string = APP_ROUTES.AUTH.FORGET_PASSWORD;
+  loginTitle: string = appTitles.appBrokenTitle;
   @ViewChild('captchaRef') captchaComponent!: CaptchaInputComponent;
 
   constructor(
@@ -109,5 +109,4 @@ export class LoginFormComponent {
   get rememberMe() {
     return this.loginForm.get('rememberMe') as FormControl;
   }
-
 }

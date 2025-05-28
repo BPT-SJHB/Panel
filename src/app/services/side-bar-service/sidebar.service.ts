@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { MenuItemData } from 'app/model/menu-item.model';
-import { PageGroup } from 'app/model/page-group.model';
-import { WebProcess } from 'app/model/web-process.model';
+import { MenuItemData } from 'app/data/model/menu-item.model';
+import { PageGroup } from 'app/data/model/page-group.model';
+import { WebProcess } from 'app/data/model/web-process.model';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 
 @Injectable({

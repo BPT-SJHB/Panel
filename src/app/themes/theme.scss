@@ -1,7 +1,12 @@
 // استایل‌های سراسری تم را در اینجا اضافه کنید
-html,body {
+html,
+body {
   padding: 0;
   margin: 0;
+
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 .h-2-5rem {
@@ -11,11 +16,11 @@ html,body {
 /* input with error and focus */
 input.border-red-500:focus {
   border-color: #f87171 !important; /* Tailwind's red-400 */
-  box-shadow: none !important;      /* remove default focus shadow */
-  outline: none !important;         /* remove default outline */
+  box-shadow: none !important; /* remove default focus shadow */
+  outline: none !important; /* remove default outline */
 }
 
-a{
+a {
   text-decoration: none;
 }
 

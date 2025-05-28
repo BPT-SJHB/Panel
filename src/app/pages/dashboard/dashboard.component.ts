@@ -9,14 +9,15 @@ import { ApiProcessesService } from 'app/services/api-processes/api-processes.se
 import { ToastService } from 'app/services/toast-service/toast.service';
 
 import { APP_ROUTES } from 'app/constants/routes';
-import { HeaderComponent } from '../../components/shared/header/header.component';
-import { SidebarComponent } from '../../components/shared/sidebar/sidebar.component';
-import { SubMenuComponent } from '../../components/shared/sub-menu/sub-menu.component';
+import { HeaderComponent } from 'app/components/shared/header/header.component';
+import { SidebarComponent } from 'app/components/shared/sidebar/sidebar.component';
+import { SubMenuComponent } from 'app/components/shared/sub-menu/sub-menu.component';
+import { FooterComponent } from "app/components/shared/footer/footer.component";
 
-import { HeaderData } from 'app/model/header-data.model';
-import { WebProcess } from 'app/model/web-process.model';
-import { mockPageGroup } from 'app/constants/dev';
-import { MenuItemData } from 'app/model/menu-item.model';
+import { HeaderData } from 'app/data/model/header-data.model';
+import { WebProcess } from 'app/data/model/web-process.model';
+import { MenuItemData } from 'app/data/model/menu-item.model';
+import { SupportButtonComponent } from "../../components/shared/support-button/support-button.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -26,7 +27,9 @@ import { MenuItemData } from 'app/model/menu-item.model';
     HeaderComponent,
     SidebarComponent,
     SubMenuComponent,
-  ],
+    FooterComponent,
+    SupportButtonComponent
+],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
@@ -52,14 +55,18 @@ export class DashboardComponent implements OnInit {
 
   // متد async جدا برای بارگذاری داده‌ها و مقداردهی اولیه صفحه
   private async initializeDashboard(): Promise<void> {
+
     // بررسی وجود سشن کاربر، در صورت عدم وجود هدایت به صفحه ورود
-    if (!(await this.userAuth.isLoggedIn()).success) {
+    const isLoggedInResponse = await this.userAuth.isLoggedIn();
+
+    if (!isLoggedInResponse.success && !isLoggedInResponse.data?.ISSessionLive) {
       this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
       return;
     }
 
     // درخواست داده‌های گروه صفحه از API
     const response = await this.apiProcessesService.getApiProcesses();
+
 
     if (response.success && response.data) {
       this.sidebarService.setPageGroups(response.data);
@@ -68,7 +75,6 @@ export class DashboardComponent implements OnInit {
       this.toast.error('خطا', response.error?.message ?? 'خطایی رخ داده است');
       console.error('API error details:', response.error?.details);
     }
-    // this.sidebarService.setPageGroups(mockPageGroup);
 
     // مشترک شدن روی تغییرات گروه صفحه انتخاب شده جهت به‌روزرسانی هدر و فرآیندها
     this.sidebarService.selectedPageGroup$.subscribe((page) => {

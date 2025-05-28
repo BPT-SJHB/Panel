@@ -1,7 +1,8 @@
-import { environment } from "environments/environment";
+import { environment } from 'environments/environment';
 
 export const API_ROUTES = {
-  CAPTCHA: `${environment.apiUrl}/api/GetCaptcha`,
-  Auth:`${environment.apiUrl}/api/AuthUser`,
-  Processes:`${environment.apiUrl}/api/GetWebProcesses`
+  CAPTCHA: `${environment.apiUrl}:81/api/GetCaptcha`,
+  Auth: `${environment.apiUrl}:81/api/AuthUser`,
+  Processes: `${environment.apiUrl}:81/api/GetWebProcesses`,
+  LoadAnnouncementPlaces: `${environment.apiUrl}:82/api/GetLoadAnnouncementPlaces`,
 };

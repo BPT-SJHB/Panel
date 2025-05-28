@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http/testing';
 
 import { TestBed } from '@angular/core/testing';
-import { CaptchaChallenge } from '../../model/captcha-challenge.model';
+import { CaptchaChallenge } from '../../data/model/captcha-challenge.model';
 
 describe('GetCaptchaService', () => {
   let service: CaptchaService;

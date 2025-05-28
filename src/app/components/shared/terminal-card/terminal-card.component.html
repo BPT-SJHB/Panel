@@ -1,0 +1,24 @@
+@if (terminal) {
+<p-card styleClass="w-full shadow-8 border-round-lg px-4 h-10rem">
+  <ng-template #header>
+    <div class="text-md md:text-lg font-bold text-primary mt-3">
+      {{ terminal.LAPTitle }}
+    </div>
+  </ng-template>
+
+  @if (terminal.Description.trim() != '') {
+  <div class="mb-4 text-gray-700">
+    {{ terminal.Description }}
+  </div>
+  }
+
+  <div class="flex justify-content-center">
+    <a [href]="getLoginLink()">
+      <p-button
+        label="ورود به صفحه"
+        styleClass="w-9rem  md:w-full md:px-6 text-sm md:text-base"
+      />
+    </a>
+  </div>
+</p-card>
+}
