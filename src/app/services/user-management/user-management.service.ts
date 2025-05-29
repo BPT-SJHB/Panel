@@ -25,5 +25,18 @@ export class UserManagementService implements OnInit {
   ): Promise<ApiResponse<SoftwareUserInfoResponse>> {
     const apiUrl =
       API_ROUTES.SoftwareUserAPI.UserManagement.GetSoftwareUserInfo;
+
+    try {
+      const response = await firstValueFrom(
+        this.http.post<SoftwareUserInfoResponse>(apiUrl, {
+          SessionId: this.userAuth.getSessionId(),
+          SoftwareUserMobileNumber: mobileNumber,
+        })
+      );
+
+      return { success: true, data: response };
+    } catch (error: unknown) {
+      return handleHttpError<SoftwareUserInfoResponse>(error);
+    }
   }
 }
