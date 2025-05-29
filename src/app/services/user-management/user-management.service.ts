@@ -23,5 +23,7 @@ export class UserManagementService implements OnInit {
   public async GetSoftwareUserInfo(
     mobileNumber: string
   ): Promise<ApiResponse<SoftwareUserInfoResponse>> {
+    const apiUrl =
+      API_ROUTES.SoftwareUserAPI.UserManagement.GetSoftwareUserInfo;
   }
 }
