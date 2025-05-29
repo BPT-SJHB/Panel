@@ -39,4 +39,34 @@ export class UserManagementService implements OnInit {
       return handleHttpError<SoftwareUserInfoResponse>(error);
     }
   }
+
+  /**
+   * تمام انواع کاربر را از سرور میگیرد
+   */
+  public async GetUserTypes(): Promise<ApiResponse<UserType[]>> {
+    const apiUrl = API_ROUTES.SoftwareUserAPI.UserManagement.GetUserTypes;
+
+    try {
+      const userSession: UserSession = {
+        sessionId: this.userAuth.getSessionId() ?? '',
+      };
+
+      const response = await firstValueFrom(
+        this.http.post<[UserType]>(apiUrl, userSession)
+      );
+
+      // Trim
+      const newRespond = response.map((x) => ({
+        UTId: x.UTId,
+        UTTitle: x.UTTitle.trim(),
+      }));
+
+      return {
+        success: true,
+        data: newRespond,
+      };
+    } catch (error: unknown) {
+      return handleHttpError<[UserType]>(error);
+    }
+  }
 }
