@@ -15,4 +15,13 @@ import { SoftwareUserInfoResponse } from 'app/data/model/software-user-info-resp
 export class UserManagementService implements OnInit {
   constructor(private http: HttpClient, private userAuth: UserAuthService) {}
 
+  /**
+   * این تابع برای گرفتن اطلاعات کاربر استفاده خواهد شد
+   * @param mobileNumber شماره موبایل کاربر برای جست‌وجو
+   * @returns اطلاعات کاربری در قالب پاسخ از سرور
+   */
+  public async GetSoftwareUserInfo(
+    mobileNumber: string
+  ): Promise<ApiResponse<SoftwareUserInfoResponse>> {
+  }
 }
