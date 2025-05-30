@@ -1,4 +1,4 @@
-import { Component, HostListener, input, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { DrawerModule } from 'primeng/drawer';
 import { SidebarMenuComponent } from "../sidebar-menu/sidebar-menu.component";
 import { SidebarService } from 'app/services/side-bar-service/sidebar.service';
