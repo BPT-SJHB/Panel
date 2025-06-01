@@ -6,12 +6,14 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { providePrimeNG } from 'primeng/config';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-
 import { CookieService } from 'ngx-cookie-service';
 
 import { routes } from './app.routes';
 import { customTheme } from './themes/theme';
 import { provideServiceWorker } from '@angular/service-worker';
+import { provideStore } from '@ngrx/store';
+
+import { sidebarReducer } from './store/sidebar/sidebar.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,10 +23,14 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     providePrimeNG({ theme: customTheme }),
     importProvidersFrom(ToastModule),
+    provideStore({
+      sidebar: sidebarReducer
+    }),
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
     MessageService,
-    CookieService, provideServiceWorker('ngsw-worker.js', {
-            enabled: !isDevMode(),
-            registrationStrategy: 'registerWhenStable:30000'
-          })
+    CookieService,
   ]
 };

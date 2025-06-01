@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { HeaderData } from 'app/data/model/header-data.model';
-import { SidebarService } from 'app/services/side-bar-service/sidebar.service';
+import {openSidebar} from 'app/store/sidebar/sidebar.actions';
 import { ButtonModule } from 'primeng/button';
 @Component({
   selector: 'app-header',
@@ -13,11 +14,11 @@ export class HeaderComponent {
     title: "عنوان صفحه",
     icon: 'pi-user'
   }
-  constructor(private sidebarService: SidebarService) {
+  constructor(private store:Store) {
 
   }
 
   openSidebar() {
-    this.sidebarService.open();
+    this.store.dispatch(openSidebar())
   }
 }
