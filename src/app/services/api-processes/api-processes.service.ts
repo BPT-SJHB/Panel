@@ -16,7 +16,7 @@ import { mockPageGroup } from 'app/data/mock/page-group.mock';
   providedIn: 'root',
 })
 export class ApiProcessesService {
-  private readonly apiUrl = API_ROUTES.SoftwareUserAPI.Processes;
+  private readonly apiUrl = API_ROUTES.SoftwareUserAPI.GetWebProcesses;
   private sessionId: string = '';
 
   constructor(
