@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { API_ROUTES } from 'app/constants/api';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, map } from 'rxjs';
 import { UserAuthService } from '../user-auth-service/user-auth.service';
 import { UserSession } from 'app/data/model/user-session.model';
 import { UserType } from 'app/data/model/user-type.model';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { handleHttpError } from 'app/utils/http-error-handler';
-import { SoftwareUserInfoResponse } from 'app/data/model/software-user-info-response.model';
+import { SoftwareUserInfo } from 'app/data/model/software-user-info.model';
+import { ShortResponse } from 'app/data/model/short-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -180,18 +181,18 @@ export class UserManagementService implements OnInit {
 
   /**
    * این تابع برای گرفتن اطلاعات کاربر استفاده خواهد شد
-   * @param mobileNumber شماره موبایل کاربر برای جست‌وجو
+   * @param mobileNumber شماره موبایل کاربر
    * @returns اطلاعات کاربری در قالب پاسخ از سرور
    */
   public async GetSoftwareUserInfo(
     mobileNumber: string
-  ): Promise<ApiResponse<SoftwareUserInfoResponse>> {
+  ): Promise<ApiResponse<SoftwareUserInfo>> {
     const apiUrl =
       API_ROUTES.SoftwareUserAPI.UserManagement.GetSoftwareUserInfo;
 
     try {
       const response = await firstValueFrom(
-        this.http.post<SoftwareUserInfoResponse>(apiUrl, {
+        this.http.post<SoftwareUserInfo>(apiUrl, {
           SessionId: this.userAuth.getSessionId(),
           SoftwareUserMobileNumber: mobileNumber,
         })
@@ -199,12 +200,13 @@ export class UserManagementService implements OnInit {
 
       return { success: true, data: response };
     } catch (error: unknown) {
-      return handleHttpError<SoftwareUserInfoResponse>(error);
+      return handleHttpError<SoftwareUserInfo>(error);
     }
   }
 
   /**
-   * تمام انواع کاربر را از سرور میگیرد
+   * این متود برای دریافت لیست انواع کاربران ممکن در سیستم را برمیگرداند
+   * @returns لیستی از تمامی انواع کاربران
    */
   public async GetUserTypes(): Promise<ApiResponse<UserType[]>> {
     const apiUrl = API_ROUTES.SoftwareUserAPI.UserManagement.GetUserTypes;
