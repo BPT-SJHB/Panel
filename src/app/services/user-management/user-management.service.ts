@@ -16,6 +16,33 @@ export class UserManagementService implements OnInit {
   constructor(private http: HttpClient, private userAuth: UserAuthService) {}
 
   /**
+   * این متود برای ارسال لینک سامانه به کاربر مورد استفاده قرار خواهد گرفت
+   * @param userInfo اطلاعات کاربری
+   * @returns پیام تایید ارسال لینک سامانه
+   */
+  public async SendWebsiteLike(
+    userInfo: SoftwareUserInfo
+  ): Promise<ApiResponse<ShortResponse>> {
+    const apiUrl = API_ROUTES.SoftwareUserAPI.UserManagement.SendWebsiteLink;
+
+    try {
+      const response = await firstValueFrom(
+        this.http.post<ShortResponse>(apiUrl, {
+          SessionId: this.userAuth.getSessionId(),
+          SoftwareUserId: userInfo.UserId,
+        })
+      );
+
+      return {
+        success: true,
+        data: response,
+      };
+    } catch (error: unknown) {
+      return handleHttpError<ShortResponse>(error);
+    }
+  }
+
+  /**
    * این متود برای تغییر رمز عبور کاربران مورد استفاده قرار خواهد گرفت
    * @param userInfo اطلاعات کاربری
    * @returns شناسه و رمز جدید کاربر
