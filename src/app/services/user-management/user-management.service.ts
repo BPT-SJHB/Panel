@@ -9,6 +9,8 @@ import { ApiResponse } from 'app/data/model/api-Response.model';
 import { handleHttpError } from 'app/utils/http-error-handler';
 import { SoftwareUserInfo } from 'app/data/model/software-user-info.model';
 import { ShortResponse } from 'app/data/model/short-response.model';
+import { ApiGroupProcess } from 'app/data/model/api-group-process.model';
+import { ApiProcess } from 'app/data/model/api-process.model';
 
 @Injectable({
   providedIn: 'root',
