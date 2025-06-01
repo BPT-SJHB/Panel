@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MenuItemData } from 'app/data/model/menu-item.model';
 import { PanelMenuModule } from 'primeng/panelmenu';
 
