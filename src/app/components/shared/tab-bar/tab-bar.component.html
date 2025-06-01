@@ -1,0 +1,24 @@
+<div class="card">
+    <p-tabs [value]="(tabActive$ | async)?.id ?? 0" class="w-full">
+        <div class="overflow-x-auto w-full">
+            <p-tablist class="flex-nowrap flex min-w-max border-none">
+                @for(tab of tabs; track tab.id){
+                <div class="relative mx-1">
+                    @if (tab.closable) {
+                    <i 
+                    style="position: absolute;  top: 10px; z-index: 2;"
+                    class="pi pi-times text-xs cursor-pointer text-red-300 hover:text-red-500"
+                        (click)="onCloseTab(tab.id)"></i>
+                    }
+                    <div (click)="onTabClick(tab.id)">
+                        <p-tab [value]="tab.id" class="border-none">
+                            <span class="text-xs">{{ tab.title }}</span>
+                        </p-tab>
+                    </div>
+                </div>
+                }
+
+            </p-tablist>
+        </div>
+    </p-tabs>
+</div>

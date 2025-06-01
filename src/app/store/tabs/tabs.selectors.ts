@@ -15,6 +15,6 @@ export const selectActiveTab = createSelector(
 );
 
 export const selectTabById = (id: number) => createSelector(
-  selectTabsState,
+  selectTabsState, 
   (state) => state.tabs.find(tab => tab.id === id)
 );

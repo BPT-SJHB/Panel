@@ -1,8 +1,13 @@
 <app-header [headerData]="headerData" />
-
 <app-sidebar [menuItems]="menuItems">
-  <div class="my-5 lg:my-2">
-    <app-sub-menu [processes]="webProcesses" />
+  <div class="fixed z-2 w-full">
+    <app-tab-bar />
+  </div>
+  <div class="my-5 lg:my-8 p-4">
+    <app-sub-menu [hidden]="!subMenuVisable" [processes]="webProcesses" />
+    <div [hidden]="subMenuVisable">
+      <ng-template #tabView></ng-template>
+    </div>
   </div>
 </app-sidebar>
 

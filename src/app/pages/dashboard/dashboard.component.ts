@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, Type, ViewChild, ViewContainerRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -22,6 +22,9 @@ import { selectSelectedPageGroup } from 'app/store/sidebar/sidebar.selectors';
 import { HeaderData } from 'app/data/model/header-data.model';
 import { WebProcess } from 'app/data/model/web-process.model';
 import { MenuItemData } from 'app/data/model/menu-item.model';
+import { TabBarComponent } from "../../components/shared/tab-bar/tab-bar.component";
+import { selectActiveTab } from 'app/store/tabs/tabs.selectors';
+import { TabComponentKey, TabComponentRegistry } from 'app/constants/tab-component-registry';
 
 @Component({
   selector: 'app-dashboard',
@@ -34,11 +37,14 @@ import { MenuItemData } from 'app/data/model/menu-item.model';
     SubMenuComponent,
     FooterComponent,
     SupportButtonComponent,
+    TabBarComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements OnInit {
+  @ViewChild('tabView', { read: ViewContainerRef }) container!: ViewContainerRef;
+
   private userAuth = inject(UserAuthService);
   private router = inject(Router);
   private toast = inject(ToastService);
@@ -49,6 +55,8 @@ export class DashboardComponent implements OnInit {
   headerData: HeaderData = { title: '', icon: '' };
   webProcesses: WebProcess[] = [];
   menuItems: MenuItemData[] = [];
+  subMenuVisable: boolean = false;
+
 
   ngOnInit(): void {
     this.setupDashboard();
@@ -87,6 +95,16 @@ export class DashboardComponent implements OnInit {
         icon: page.icon,
       };
       this.webProcesses = page.processes;
+      this.subMenuVisable=true;
     });
+
+    this.store.select(selectActiveTab).subscribe((tab)=>{
+      this.subMenuVisable=false;
+      this.renderComponent(TabComponentRegistry[tab?.component ?? TabComponentKey.Main]);
+    })
+  }
+  renderComponent(type: Type<any>) {
+    this.container.clear();
+    this.container.createComponent(type);
   }
 }
