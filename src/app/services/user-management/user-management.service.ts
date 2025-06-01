@@ -16,6 +16,39 @@ export class UserManagementService implements OnInit {
   constructor(private http: HttpClient, private userAuth: UserAuthService) {}
 
   /**
+   * این متود برای اعمال تغییر بر روی اطلاعات کاربر از قبل ثبت‌نام شده است
+   * @param userInfo اطلاعات کاربری
+   * @returns پیام تایید ثبت تغییرات اطلاعات کاربر در صورت تغییر اطلاعات کاربر
+   */
+  public async EditSoftwareUser(
+    userInfo: SoftwareUserInfo
+  ): Promise<ApiResponse<ShortResponse>> {
+    const apiUrl = API_ROUTES.SoftwareUserAPI.UserManagement.EditSoftwareUser;
+
+    // const sampleData: SoftwareUserInfo = {
+    //   UserId: 21,
+    //   UserName: 'مرتضی شاهمرادی',
+    //   MobileNumber: '09132043148',
+    //   UserTypeId: 1,
+    //   UserActive: true,
+    //   SMSOwnerActive: false,
+    // };
+
+    try {
+      const response = await firstValueFrom(
+        this.http.post<ShortResponse>(apiUrl, {
+          SessionId: this.userAuth.getSessionId(),
+          RawSoftwareUser: userInfo,
+        })
+      );
+
+      return { success: true, data: response };
+    } catch (error: unknown) {
+      return handleHttpError<ShortResponse>(error);
+    }
+  }
+
+  /**
    * این متود برای ثبت کاربر جدید مورد استفاده قرار خواهد گرفت.
    * @param userInfo اطلاعات کاربری
    * @returns کد کاربری اختصاص داده شده در قالب اطلاعات کاربری
