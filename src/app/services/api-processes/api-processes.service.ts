@@ -62,13 +62,13 @@ export class ApiProcessesService {
   ): PageGroup[] {
     return apiGroups.map((group, index) => ({
       id: index,
-      title: group.PGTitle.trim(),
-      icon: group.PGIconName.trim(),
-      processes: group.WebProcesses.map((proc) => ({
-        title: proc.PTitle.trim(),
-        name: proc.PName.trim(),
-        description: proc.Description.trim(),
-        icon: proc.PIconName.trim(),
+      title: group.PGTitle!.trim(),
+      icon: group.PGIconName!.trim(),
+      processes: group.WebProcesses!.map((proc) => ({
+        title: proc.PTitle!.trim(),
+        name: proc.PName!.trim(),
+        description: proc.Description!.trim(),
+        icon: proc.PIconName!.trim(),
       })),
     }));
   }
