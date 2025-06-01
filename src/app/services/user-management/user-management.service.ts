@@ -16,6 +16,42 @@ export class UserManagementService implements OnInit {
   constructor(private http: HttpClient, private userAuth: UserAuthService) {}
 
   /**
+   * این متود برای ثبت کاربر جدید مورد استفاده قرار خواهد گرفت.
+   * @param userInfo اطلاعات کاربری
+   * @returns کد کاربری اختصاص داده شده در قالب اطلاعات کاربری
+   */
+  public async RegisterNewSoftwareUser(
+    userInfo: SoftwareUserInfo
+  ): Promise<ApiResponse<SoftwareUserInfo>> {
+    const apiUrl =
+      API_ROUTES.SoftwareUserAPI.UserManagement.RegisteringSoftwareUser;
+
+    // const userInfo: SoftwareUserInfo = {
+    //   UserId: 0,
+    //   UserName: 'مرتضی شاهمرادی',
+    //   MobileNumber: '09132043172',
+    //   UserTypeId: 1,
+    //   UserActive: true,
+    //   SMSOwnerActive: false,
+    // };response
+
+    try {
+      const response = await firstValueFrom(
+        this.http
+          .post<any>(apiUrl, {
+            SessionId: this.userAuth.getSessionId(),
+            RawSoftwareUser: userInfo,
+          })
+          .pipe(map((x) => ({ UserId: x.SoftwareUserId } as SoftwareUserInfo)))
+      );
+
+      return { success: true, data: response };
+    } catch (error: unknown) {
+      return handleHttpError<SoftwareUserInfo>(error);
+    }
+  }
+
+  /**
    * این تابع برای گرفتن اطلاعات کاربر استفاده خواهد شد
    * @param mobileNumber شماره موبایل کاربر برای جست‌وجو
    * @returns اطلاعات کاربری در قالب پاسخ از سرور
