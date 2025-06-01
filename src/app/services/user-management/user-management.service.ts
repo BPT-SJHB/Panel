@@ -304,14 +304,14 @@ export class UserManagementService implements OnInit {
    */
   public async GetWebProcessGroups_WebProcesses(
     mobileNumber: string
-  ): Promise<ApiResponse<ApiGroupProcess>> {
+  ): Promise<ApiResponse<ApiGroupProcess[]>> {
     const apiUrl =
       API_ROUTES.SoftwareUserAPI.UserManagement
         .GetWebProcessGroups_WebProcesses;
 
     try {
       const response = await firstValueFrom(
-        this.http.post<ApiGroupProcess>(apiUrl, {
+        this.http.post<ApiGroupProcess[]>(apiUrl, {
           SessionId: this.userAuth.getSessionId(),
           SoftwareUserMobileNumber: mobileNumber,
         })
@@ -319,7 +319,7 @@ export class UserManagementService implements OnInit {
 
       return { success: true, data: response };
     } catch (error: unknown) {
-      return handleHttpError<ApiGroupProcess>(error);
+      return handleHttpError<ApiGroupProcess[]>(error);
     }
   }
 
