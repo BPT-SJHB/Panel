@@ -15,7 +15,7 @@ import { ApiProcess } from 'app/data/model/api-process.model';
 @Injectable({
   providedIn: 'root',
 })
-export class UserManagementService implements OnInit {
+export class UserManagementService {
   constructor(private http: HttpClient, private userAuth: UserAuthService) {}
 
   /**
@@ -324,5 +324,4 @@ export class UserManagementService implements OnInit {
       return handleHttpError<ApiGroupProcess[]>(error);
     }
   }
-
 }
