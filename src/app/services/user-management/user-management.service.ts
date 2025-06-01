@@ -16,6 +16,33 @@ export class UserManagementService implements OnInit {
   constructor(private http: HttpClient, private userAuth: UserAuthService) {}
 
   /**
+   * این متود برای برای فعال سازی سرویس پیامک کاربر مورد استفاده قرار خواهد گرفت
+   * @param userInfo اطلاعات کاربری
+   * @returns پیام ثبت در صورت فعال شدن سرویس
+   */
+  public async ActivateUserSMS(
+    userInfo: SoftwareUserInfo
+  ): Promise<ApiResponse<ShortResponse>> {
+    const apiUrl = API_ROUTES.SoftwareUserAPI.UserManagement.ActivateSMSOwner;
+
+    try {
+      const response = await firstValueFrom(
+        this.http.post<ShortResponse>(apiUrl, {
+          SessionId: this.userAuth.getSessionId(),
+          SoftwareUserId: userInfo.UserId,
+        })
+      );
+
+      return {
+        success: true,
+        data: response,
+      };
+    } catch (error: unknown) {
+      return handleHttpError<ShortResponse>(error);
+    }
+  }
+
+  /**
    * این متود برای اعمال تغییر بر روی اطلاعات کاربر از قبل ثبت‌نام شده است
    * @param userInfo اطلاعات کاربری
    * @returns پیام تایید ثبت تغییرات اطلاعات کاربر در صورت تغییر اطلاعات کاربر
