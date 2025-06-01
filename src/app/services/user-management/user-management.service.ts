@@ -265,4 +265,35 @@ export class UserManagementService implements OnInit {
       return handleHttpError<ShortResponse>(error);
     }
   }
+
+  /**
+   * این متود برای تغییر دسترسی کاربر مورد نظر در سطح منو اصلی است.
+   * فعال یا غیر فعال شدن بستگی به محتوای ارسالی ما دارد
+   * @param userInfo اطلاعات کاربری(آیدی کاربر مورد انتظار است)
+   * @param needToChange منو اصلی که نیاز به تغییر دارد(آیدی منو اصلی و وضعیت دسترسی مورد انتظار است)
+   * @returns پیام پاسخ کوتاه سرور
+   */
+  public async ChangeUserWebProcessGroupAccess(
+    userInfo: SoftwareUserInfo,
+    needToChange: ApiGroupProcess
+  ): Promise<ApiResponse<ShortResponse>> {
+    const apiUrl =
+      API_ROUTES.SoftwareUserAPI.UserManagement
+        .ChangeSoftwareUserWebProcessGroupAccess;
+
+    try {
+      const response = await firstValueFrom(
+        this.http.post<ShortResponse>(apiUrl, {
+          SessionId: this.userAuth.getSessionId(),
+          SoftwareUserId: userInfo.UserId,
+          PGId: needToChange.PGId,
+          PGAccess: needToChange.PGAccess,
+        })
+      );
+
+      return { success: true, data: response };
+    } catch (error: unknown) {
+      return handleHttpError<ShortResponse>(error);
+    }
+  }
 }
