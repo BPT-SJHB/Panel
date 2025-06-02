@@ -16,7 +16,7 @@ import { mockPageGroup } from 'app/data/mock/page-group.mock';
   providedIn: 'root',
 })
 export class ApiProcessesService {
-  private readonly apiUrl = API_ROUTES.SoftwareUserAPI.Processes;
+  private readonly apiUrl = API_ROUTES.SoftwareUserAPI.GetWebProcesses;
   private sessionId: string = '';
 
   constructor(
@@ -62,13 +62,13 @@ export class ApiProcessesService {
   ): PageGroup[] {
     return apiGroups.map((group, index) => ({
       id: index,
-      title: group.PGTitle.trim(),
-      icon: group.PGIconName.trim(),
-      processes: group.WebProcesses.map((proc) => ({
-        title: proc.PTitle.trim(),
-        name: proc.PName.trim(),
-        description: proc.Description.trim(),
-        icon: proc.PIconName.trim(),
+      title: group.PGTitle!.trim(),
+      icon: group.PGIconName!.trim(),
+      processes: group.WebProcesses!.map((proc) => ({
+        title: proc.PTitle!.trim(),
+        name: proc.PName!.trim(),
+        description: proc.Description!.trim(),
+        icon: proc.PIconName!.trim(),
       })),
     }));
   }
