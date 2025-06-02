@@ -1,7 +1,9 @@
 import { ApiProcess } from './api-process.model';
 
 export interface ApiGroupProcess {
-  PGTitle: string;
-  PGIconName: string;
-  WebProcesses: [ApiProcess];
+  PGId: number;
+  PGTitle?: string;
+  PGIconName?: string;
+  WebProcesses?: [ApiProcess];
+  PGAccess?: boolean;
 }

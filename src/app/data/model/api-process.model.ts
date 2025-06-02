@@ -1,6 +1,8 @@
 export interface ApiProcess {
-  PTitle: string;
-  PIconName: string;
-  PName: string;
-  Description:string,
+  PId: number;
+  PTitle?: string;
+  PIconName?: string;
+  PName?: string;
+  Description?: string;
+  PAccess?: boolean;
 }

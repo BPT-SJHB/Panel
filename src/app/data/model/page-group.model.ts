@@ -1,8 +1,8 @@
-import { WebProcess } from "./web-process.model";
+import { WebProcess } from './web-process.model';
 
 export interface PageGroup {
-  id:number,
+  id: number;
   title: string;
   icon: string;
-  processes:WebProcess[]
+  processes: WebProcess[];
 }
