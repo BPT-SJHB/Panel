@@ -18,3 +18,8 @@ export const selectTabById = (id: number) => createSelector(
   selectTabsState, 
   (state) => state.tabs.find(tab => tab.id === id)
 );
+
+export const selectLastClosedTabId = createSelector(
+  selectTabsState,
+  state => state.lastClosedTabId
+);

@@ -1,4 +1,13 @@
-import { Component, OnInit, Type, ViewChild, ViewContainerRef, inject } from '@angular/core';
+import {
+  Component,
+  ComponentRef,
+  OnInit,
+  AfterViewInit,
+  OnDestroy,
+  ViewChild,
+  ViewContainerRef,
+  inject
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -13,7 +22,6 @@ import { SupportButtonComponent } from 'app/components/shared/support-button/sup
 import { UserAuthService } from 'app/services/user-auth-service/user-auth.service';
 import { ApiProcessesService } from 'app/services/api-processes/api-processes.service';
 import { ToastService } from 'app/services/toast-service/toast.service';
-import { UserManagementService } from 'app/services/user-management/user-management.service';
 
 import { APP_ROUTES } from 'app/constants/routes';
 import { setPageGroups, selectPageGroup, closeSidebar } from 'app/store/sidebar/sidebar.actions';
@@ -22,9 +30,10 @@ import { selectSelectedPageGroup } from 'app/store/sidebar/sidebar.selectors';
 import { HeaderData } from 'app/data/model/header-data.model';
 import { WebProcess } from 'app/data/model/web-process.model';
 import { MenuItemData } from 'app/data/model/menu-item.model';
-import { TabBarComponent } from "../../components/shared/tab-bar/tab-bar.component";
-import { selectActiveTab } from 'app/store/tabs/tabs.selectors';
-import { TabComponentKey, TabComponentRegistry } from 'app/constants/tab-component-registry';
+import { selectActiveTab, selectLastClosedTabId } from 'app/store/tabs/tabs.selectors';
+import { TabComponentRegistry } from 'app/constants/tab-component-registry';
+import { TabItem } from 'app/data/model/tabs.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -37,12 +46,11 @@ import { TabComponentKey, TabComponentRegistry } from 'app/constants/tab-compone
     SubMenuComponent,
     FooterComponent,
     SupportButtonComponent,
-    TabBarComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('tabView', { read: ViewContainerRef }) container!: ViewContainerRef;
 
   private userAuth = inject(UserAuthService);
@@ -50,16 +58,49 @@ export class DashboardComponent implements OnInit {
   private toast = inject(ToastService);
   private store = inject(Store);
   private apiProcessesService = inject(ApiProcessesService);
-  private userManagement = inject(UserManagementService);
+
+  private componentCache = new Map<number, ComponentRef<any>>();
+  private tabSub?: Subscription;
+  private closeTabSub?: Subscription;
+  private pageGroupSub?: Subscription;
 
   headerData: HeaderData = { title: '', icon: '' };
   webProcesses: WebProcess[] = [];
   menuItems: MenuItemData[] = [];
-  subMenuVisable: boolean = false;
+  subMenuVisible = false;
 
+  async ngOnInit(): Promise<void> {
+    await this.setupDashboard();
+  }
 
-  ngOnInit(): void {
-    this.setupDashboard();
+  ngAfterViewInit(): void {
+    this.tabSub = this.store.select(selectActiveTab).subscribe(tab => {
+      this.subMenuVisible = false;
+      if (tab) this.renderComponent(tab);
+    });
+
+    this.closeTabSub = this.store.select(selectLastClosedTabId).subscribe(id => {
+      if (id !== null) this.removeComponent(id);
+    });
+
+    this.pageGroupSub = this.store.select(selectSelectedPageGroup).subscribe(page => {
+      if (!page) return;
+
+      if (this.headerData.title.trim()) 
+        this.subMenuVisible = true;
+      
+      this.headerData = {
+        title: page.title,
+        icon: page.icon,
+      };
+      this.webProcesses = page.processes;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.tabSub?.unsubscribe();
+    this.closeTabSub?.unsubscribe();
+    this.pageGroupSub?.unsubscribe();
   }
 
   private async setupDashboard(): Promise<void> {
@@ -83,28 +124,40 @@ export class DashboardComponent implements OnInit {
       icon: pg.icon,
       command: () => {
         this.store.dispatch(selectPageGroup({ id: pg.id }));
+        this.subMenuVisible = true;
         this.store.dispatch(closeSidebar());
       },
     }));
-
-    this.store.select(selectSelectedPageGroup).subscribe(page => {
-      if (!page) return;
-
-      this.headerData = {
-        title: page.title,
-        icon: page.icon,
-      };
-      this.webProcesses = page.processes;
-      this.subMenuVisable=true;
-    });
-
-    this.store.select(selectActiveTab).subscribe((tab)=>{
-      this.subMenuVisable=false;
-      this.renderComponent(TabComponentRegistry[tab?.component ?? TabComponentKey.Main]);
-    })
   }
-  renderComponent(type: Type<any>) {
-    this.container.clear();
-    this.container.createComponent(type);
+
+  renderComponent(tab: TabItem) {
+    const cached = this.componentCache.get(tab.id);
+
+    if (this.container.length > 0) {
+      this.container.detach(0);
+    }
+
+    if (cached && !cached.hostView.destroyed) {
+      this.container.insert(cached.hostView);
+      return;
+    }
+
+    const type = TabComponentRegistry[tab.component];
+    const compRef = this.container.createComponent(type);
+    this.container.insert(compRef.hostView);
+    this.componentCache.set(tab.id, compRef);
+  }
+
+  removeComponent(id: number) {
+    const compRef = this.componentCache.get(id);
+    if (!compRef) return;
+
+    const index = this.container.indexOf(compRef.hostView);
+    if (index !== -1) {
+      this.container.detach(index);
+    }
+
+    compRef.destroy();
+    this.componentCache.delete(id);
   }
 }

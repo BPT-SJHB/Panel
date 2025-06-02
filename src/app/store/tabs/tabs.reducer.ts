@@ -6,6 +6,7 @@ import { TabComponentKey } from 'app/constants/tab-component-registry';
 
 export interface TabsState {
   tabs: TabItem[];
+  lastClosedTabId: number | null;
 }
 
 const initialState: TabsState = {
@@ -18,6 +19,7 @@ const initialState: TabsState = {
       active: true,
     }
   ],
+  lastClosedTabId: null
 };
 
 let idCounter = 1;
@@ -59,7 +61,8 @@ export const tabReducer = createReducer(
 
     return {
       ...state,
-      tabs: filtered
+      tabs: filtered,
+      lastClosedTabId:id
     };
   }),
 
