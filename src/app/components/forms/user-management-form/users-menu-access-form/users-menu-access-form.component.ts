@@ -30,3 +30,4 @@ interface SelectedNodes {
   templateUrl: './users-menu-access-form.component.html',
   styleUrl: './users-menu-access-form.component.scss',
 })
+export class UsersMenuAccessFormComponent implements OnInit {
