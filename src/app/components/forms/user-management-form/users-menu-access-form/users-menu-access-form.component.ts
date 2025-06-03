@@ -1,15 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TreeNode, TreeTableNode } from 'primeng/api';
+import { TreeNode } from 'primeng/api';
 import { TreeTableModule } from 'primeng/treetable';
 import { CommonModule } from '@angular/common';
-import { ApiProcessesService } from 'app/services/api-processes/api-processes.service';
 import { UserManagementService } from 'app/services/user-management/user-management.service';
-import { ApiResponse } from 'app/data/model/api-Response.model';
-import { ApiGroupProcess } from 'app/data/model/api-group-process.model';
-import { ApiProcess } from 'app/data/model/api-process.model';
 import { UserAuthService } from 'app/services/user-auth-service/user-auth.service';
 import { SearchInputComponent } from 'app/components/shared/inputs/search-input/search-input.component';
-import { filter } from 'rxjs';
 import { SoftwareUserInfo } from 'app/data/model/software-user-info.model';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ButtonModule } from 'primeng/button';
@@ -136,3 +131,5 @@ export class UsersMenuAccessFormComponent implements OnInit {
     });
 
     this.selectedNodesCopy = structuredClone(this.selectedNodes);
+  }
+}
