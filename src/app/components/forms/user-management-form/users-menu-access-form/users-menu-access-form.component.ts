@@ -44,3 +44,7 @@ export class UsersMenuAccessFormComponent implements OnInit {
 
   @Input() userInfo: SoftwareUserInfo = {
   };
+  constructor(
+    private userAuth: UserAuthService,
+    private userManager: UserManagementService
+  ) {}
