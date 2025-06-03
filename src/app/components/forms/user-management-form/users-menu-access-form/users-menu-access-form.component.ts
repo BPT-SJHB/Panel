@@ -38,3 +38,6 @@ export class UsersMenuAccessFormComponent implements OnInit {
     { field: 'PGTitle', header: 'نام منو' },
     { field: 'Description', header: 'توضیحات' },
   ];
+
+  selectedNodes: SelectedNodes = {};
+  selectedNodesCopy: SelectedNodes = {};
