@@ -8,7 +8,7 @@
     <input
       [formControl]="control"
       pInputText
-      placeholder="شماره تلفن خود را وارد کنید"
+      [placeholder]="placeholder"
       [ngClass]="{
         'border-red-500': control.touched && control.invalid,
         'border': true,

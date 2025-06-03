@@ -15,6 +15,9 @@ export class PhoneInputComponent {
   private _control = new FormControl('');
 
   @Input()
+  placeholder:string = "شماره تلفن خود را وارد کنید.";
+
+  @Input()
   set control(value: FormControl) {
     this._control = value || new FormControl('');
   }
