@@ -56,4 +56,5 @@ export class UsersMenuAccessFormComponent implements OnInit {
   }
 
   async SaveChanges() {
+    this.isLoading = true;
   }
