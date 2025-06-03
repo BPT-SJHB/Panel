@@ -13,6 +13,11 @@ import { filter } from 'rxjs';
 import { SoftwareUserInfo } from 'app/data/model/software-user-info.model';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ButtonModule } from 'primeng/button';
+
+interface SelectedNodes {
+  [key: string]: { checked: boolean; partialChecked?: boolean };
+}
+
 @Component({
   selector: 'app-users-menu-access-form',
   imports: [
