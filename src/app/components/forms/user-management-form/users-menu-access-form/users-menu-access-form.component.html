@@ -5,3 +5,9 @@
     fill="transparent"
   />
 </div>
+
+<div *ngIf="!isLoading">
+  <div class="card">
+    <app-search-input
+      (input)="tt.filter($any($event.target).value, 'PGTitle', 'contains')"
+    ></app-search-input>
