@@ -11,3 +11,35 @@
     <app-search-input
       (input)="tt.filter($any($event.target).value, 'PGTitle', 'contains')"
     ></app-search-input>
+
+    <p-treetable
+      #tt
+      [value]="accessTableFiltered"
+      [columns]="cols"
+      selectionMode="checkbox"
+      [(selectionKeys)]="selectedNodes"
+      dataKey="key"
+    >
+      <ng-template #header let-columns>
+        <tr>
+          <th *ngFor="let col of columns">
+            {{ col.header }}
+          </th>
+        </tr>
+      </ng-template>
+
+      <ng-template
+        #body
+        let-rowNode
+        let-rowData="rowData"
+        let-columns="columns"
+      >
+        <tr [ttRow]="rowNode" [ttSelectableRow]="rowNode">
+          <td *ngFor="let col of columns; let i = index">
+            <p-treetable-toggler [rowNode]="rowNode" *ngIf="i === 0" />
+            <p-treetable-checkbox [value]="rowNode" *ngIf="i === 0" />
+            {{ rowData[col.field] }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-treetable>
