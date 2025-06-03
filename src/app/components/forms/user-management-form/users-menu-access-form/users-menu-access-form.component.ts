@@ -37,8 +37,7 @@ export class UsersMenuAccessFormComponent implements OnInit {
   selectedNodes: SelectedNodes = {};
   selectedNodesCopy: SelectedNodes = {};
 
-  @Input() userInfo: SoftwareUserInfo = {
-  };
+  @Input() userInfo: SoftwareUserInfo = { UserId: 0 };
   constructor(
     private userAuth: UserAuthService,
     private userManager: UserManagementService
