@@ -60,11 +60,12 @@ export class ApiProcessesService {
   private convertApiGroupsToPageGroups(
     apiGroups: ApiGroupProcess[]
   ): PageGroup[] {
-    return apiGroups.map((group, index) => ({
-      id: index,
+    return apiGroups.map((group) => ({
+      id: group.PGId,
       title: group.PGTitle!.trim(),
       icon: group.PGIconName!.trim(),
       processes: group.WebProcesses!.map((proc) => ({
+        id:proc.PId,
         title: proc.PTitle!.trim(),
         name: proc.PName!.trim(),
         description: proc.Description!.trim(),
