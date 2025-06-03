@@ -32,3 +32,5 @@ interface SelectedNodes {
 })
 export class UsersMenuAccessFormComponent implements OnInit {
   isLoading: boolean = false;
+  accessTable?: TreeNode[] = [];
+  accessTableFiltered?: TreeNode[] = [];
