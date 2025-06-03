@@ -41,3 +41,6 @@ export class UsersMenuAccessFormComponent implements OnInit {
 
   selectedNodes: SelectedNodes = {};
   selectedNodesCopy: SelectedNodes = {};
+
+  @Input() userInfo: SoftwareUserInfo = {
+  };
