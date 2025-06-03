@@ -34,3 +34,7 @@ export class UsersMenuAccessFormComponent implements OnInit {
   isLoading: boolean = false;
   accessTable?: TreeNode[] = [];
   accessTableFiltered?: TreeNode[] = [];
+  cols = [
+    { field: 'PGTitle', header: 'نام منو' },
+    { field: 'Description', header: 'توضیحات' },
+  ];
