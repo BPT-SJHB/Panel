@@ -134,3 +134,5 @@ export class UsersMenuAccessFormComponent implements OnInit {
         };
       });
     });
+
+    this.selectedNodesCopy = structuredClone(this.selectedNodes);
