@@ -98,3 +98,8 @@ export class UsersMenuAccessFormComponent implements OnInit {
     await this.ngOnInit();
     this.isLoading = false;
   }
+
+  private async LoadWebProcessGroups_WebProcessesTable(): Promise<void> {
+    const loadedTable = await this.userManager.GetWebProcessGroups_WebProcesses(
+      this.userInfo.MobileNumber!
+    );
