@@ -121,3 +121,16 @@ export class UsersMenuAccessFormComponent implements OnInit {
           children: [],
         })),
       })) ?? [];
+
+    this.accessTable.forEach((parentNode) => {
+      this.selectedNodes[parentNode.key!] = {
+        checked: parentNode.checked!,
+        partialChecked: parentNode.partialSelected,
+      };
+      parentNode.children?.forEach((childNode) => {
+        this.selectedNodes[childNode.key!] = {
+          checked: childNode.checked!,
+          partialChecked: childNode.partialSelected,
+        };
+      });
+    });
