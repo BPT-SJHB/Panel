@@ -54,3 +54,6 @@ export class UsersMenuAccessFormComponent implements OnInit {
 
     this.accessTableFiltered = this.accessTable;
   }
+
+  async SaveChanges() {
+  }
