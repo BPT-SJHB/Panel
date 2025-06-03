@@ -103,3 +103,21 @@ export class UsersMenuAccessFormComponent implements OnInit {
     const loadedTable = await this.userManager.GetWebProcessGroups_WebProcesses(
       this.userInfo.MobileNumber!
     );
+    this.accessTable =
+      loadedTable.data?.map((x) => ({
+        key: x.PGId.toString(),
+        data: {
+          PGTitle: x.PGTitle,
+          Description: '',
+        },
+        checked: x.PGAccess === true,
+        children: x.WebProcesses?.map((y) => ({
+          key: x.PGId.toString() + '-' + y.PId.toString(),
+          data: {
+            PGTitle: y.PTitle,
+            Description: y.Description,
+          },
+          checked: y.PAccess === true,
+          children: [],
+        })),
+      })) ?? [];
