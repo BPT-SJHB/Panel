@@ -95,4 +95,6 @@ export class UsersMenuAccessFormComponent implements OnInit {
         }
       }
     }
+    await this.ngOnInit();
+    this.isLoading = false;
   }
