@@ -1,19 +1,20 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 
 @Component({
   selector: 'app-search-input',
-  imports:[InputGroupAddonModule,InputGroupModule,FormsModule],
+  imports: [InputGroupAddonModule, InputGroupModule, FormsModule],
   templateUrl: './search-input.component.html',
-  styleUrl: './search-input.component.scss'
+  styleUrl: './search-input.component.scss',
 })
 export class SearchInputComponent {
   @Input() placeholder: string = 'جستجو';
   @Input() initialValue: string = '';
   @Input() showClearButton: boolean = true;
 
+  @Output() input = new EventEmitter<any>();
   @Output() search = new EventEmitter<string>();
   @Output() cleared = new EventEmitter<void>();
   @Output() valueChange = new EventEmitter<string>();
