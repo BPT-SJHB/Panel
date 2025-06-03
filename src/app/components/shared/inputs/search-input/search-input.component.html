@@ -3,6 +3,6 @@
     <p-inputgroup-addon class="bg-primary text-white flex align-items-center justify-content-center px-3 border-round-right">
         <i class="pi pi-search"></i>
     </p-inputgroup-addon>
-    <input  type="text" pInputText placeholder="جستجو..." class="flex-grow-1" [(ngModel)]="searchTerm" />
+    <input (input)="input" type="text" pInputText placeholder="جستجو..." class="flex-grow-1" [(ngModel)]="searchTerm" />
   </p-input-group>
 </div>

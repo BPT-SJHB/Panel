@@ -14,6 +14,7 @@ export class SearchInputComponent {
   @Input() initialValue: string = '';
   @Input() showClearButton: boolean = true;
 
+  @Output() input = new EventEmitter<any>();
   @Output() search = new EventEmitter<string>();
   @Output() cleared = new EventEmitter<void>();
   @Output() valueChange = new EventEmitter<string>();
