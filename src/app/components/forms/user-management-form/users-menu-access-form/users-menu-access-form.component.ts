@@ -57,4 +57,42 @@ export class UsersMenuAccessFormComponent implements OnInit {
 
   async SaveChanges() {
     this.isLoading = true;
+
+    for (const key in this.selectedNodesCopy) {
+      if (
+        this.selectedNodesCopy[key].checked ||
+        this.selectedNodesCopy[key].partialChecked
+      ) {
+        if (key.includes('-')) {
+          await this.userManager.ChangeUserWebProcessAccess(
+            { UserId: this.userInfo.UserId },
+            { PId: Number(key.split('-')[1]), PAccess: false }
+          );
+        } else {
+          await this.userManager.ChangeUserWebProcessGroupAccess(
+            { UserId: this.userInfo.UserId },
+            { PGId: Number(key), PGAccess: false }
+          );
+        }
+      }
+    }
+
+    for (const key in this.selectedNodes) {
+      if (
+        this.selectedNodes[key].checked ||
+        this.selectedNodes[key].partialChecked
+      ) {
+        if (key.includes('-')) {
+          await this.userManager.ChangeUserWebProcessAccess(
+            { UserId: this.userInfo.UserId },
+            { PId: Number(key.split('-')[1]), PAccess: true }
+          );
+        } else {
+          await this.userManager.ChangeUserWebProcessGroupAccess(
+            { UserId: this.userInfo.UserId },
+            { PGId: Number(key), PGAccess: true }
+          );
+        }
+      }
+    }
   }
