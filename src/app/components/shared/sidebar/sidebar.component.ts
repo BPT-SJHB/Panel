@@ -7,10 +7,11 @@ import { closeSidebar } from 'app/store/sidebar/sidebar.actions';
 import {DrawerModule} from "primeng/drawer"
 import { AsyncPipe,NgTemplateOutlet } from '@angular/common';
 import { SidebarMenuComponent } from '../sidebar-menu/sidebar-menu.component';
+import { TabBarComponent } from "../tab-bar/tab-bar.component";
 
 @Component({
   selector: 'app-sidebar',
-  imports:[AsyncPipe,NgTemplateOutlet,DrawerModule,SidebarMenuComponent],
+  imports: [AsyncPipe, NgTemplateOutlet, DrawerModule, SidebarMenuComponent, TabBarComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })

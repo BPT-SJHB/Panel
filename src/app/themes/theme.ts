@@ -11,7 +11,7 @@ const customPreset: ThemePreset = {
       200: '{emerald.200}',
       300: '{emerald.300}',
       400: '{emerald.400}',
-      500: '{emerald.400}',
+      500: '{emerald.600}',
       600: '{emerald.600}',
       700: '{emerald.700}',
       800: '{emerald.800}',

@@ -1,0 +1,41 @@
+<div class="card flex justify-center" style="margin-top: -.5rem;">
+  <div class="flex align-items-center gap-4 flex-wrap">
+    <span class="font-medium whitespace-nowrap mt-2">{{ label }}</span>
+
+    <div class="flex gap-3">
+      <!-- فعال -->
+      <div 
+        class="flex align-items-center gap-2"
+        [ngClass]="{ 'text-green-600': control.value === true }"
+      >
+        <p-radiobutton 
+          [disabled]="readonly"
+          [name]="radioName"
+          [value]="true"
+          [formControl]="control"
+          inputId="sms-active-option"
+          [ngClass]="{ 'p-highlight': control.value === true }"
+          (click)="preventIfReadonly($event)"
+          />
+        <label for="sms-active-option" class="cursor-pointer mt-2">فعال</label>
+      </div>
+
+      <!-- غیرفعال -->
+      <div 
+        class="flex align-items-center gap-2"
+        [ngClass]="{ 'text-red-500': control.value === false }"
+      >
+        <p-radiobutton 
+          [disabled]="readonly"
+          [name]="radioName"
+          [value]="false"
+          [formControl]="control"
+          inputId="disable-option"
+          [ngClass]="{ 'p-highlight': control.value === false }"
+          (click)="preventIfReadonly($event)"
+          />
+        <label for="sms-disable-option" class="cursor-pointer mt-2">غیرفعال</label>
+      </div>
+    </div>
+  </div>
+</div>

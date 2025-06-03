@@ -7,6 +7,7 @@ export const mockPageGroup: PageGroup[] = [
     icon: 'pi-address-book',
     processes: [
       {
+        id: 0, 
         title: 'مدیریت کاربران',
         name: 'UserManagement',
         description:
@@ -14,6 +15,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-user',
       },
       {
+        id: 1, 
         title: 'رانندگان ، کامیونداران',
         name: 'DriversAndTruckDrivers',
         description:
@@ -21,6 +23,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-id-card',
       },
       {
+        id: 2, 
         title: 'رانندگان ، کامیونداران',
         name: 'DriversAndTruckDrivers',
         description:
@@ -28,6 +31,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-id-card',
       },
       {
+        id: 3, 
         title: 'خودرو ، ناوگان حمل',
         name: 'CarsAndTrucks',
         description:
@@ -35,6 +39,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-truck',
       },
       {
+        id: 4, 
         title: 'شرکت های حمل و نقل',
         name: 'TransportCompanies',
         description:
@@ -42,13 +47,15 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-warehouse',
       },
       {
+        id: 5, 
         title: 'صنوف',
         name: 'Associations',
         description:
-          'صنوف حمل و نقل شامل انجمن صنفی شرکت های حمل و نقل  ، انجمن صنفی کامیونداران و انجمن صنفی کارگری رانندگان می باشد.امکان ثبت و یا ویرایش اطلاعات صنوف مذکور از طریق این منو فراهم است',
+          'صنوف حمل و نقل شامل انجمن صنفی شرکت های حمل و نقل  ، انجمن صنفی کامیونداران و انجمن صنفی کارگری رانندگان می باشد.امکان ثبت و یا ویرایش اطلاعات صنوف مذکور از طریق این منو فراهم است',
         icon: 'pi-users',
       },
       {
+        id: 6,
         title: 'صاحبین بار',
         name: 'BarOwner',
         description:
@@ -56,6 +63,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-box',
       },
       {
+        id: 7,
         title: 'کارخانجات و مراکز تولید بار',
         name: 'Manufactures',
         description:
@@ -63,6 +71,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-hammer',
       },
       {
+        id: 8,
         title: 'مبادی و مقاصد حمل بار',
         name: 'LoadingDischargingLocations',
         description:
@@ -70,6 +79,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-map-marker',
       },
       {
+        id: 9,
         title: 'استان ها ، شهرها',
         name: 'ProvincesCities',
         description:
@@ -77,6 +87,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-map-marker',
       },
       {
+        id: 10,
         title: 'کالا',
         name: 'Goods',
         description:
@@ -84,6 +95,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-box',
       },
       {
+        id: 11,
         title: 'مشخصات راننده',
         name: 'DriverInformation',
         description:
@@ -91,6 +103,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-id-card',
       },
       {
+        id: 12,
         title: 'مشخصات ناوگان',
         name: 'TruckInformation',
         description:
@@ -98,6 +111,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-truck',
       },
       {
+        id: 13,
         title: 'بارگیرها',
         name: 'Loaders',
         description:
@@ -105,6 +119,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-cart-arrow-down',
       },
       {
+        id: 14,
         title: 'ناوگان ملکی',
         name: 'CorporateTrucks',
         description:
@@ -112,6 +127,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-warehouse',
       },
       {
+        id: 15,
         title: 'مدت سفر',
         name: 'TravelDurations',
         description:
@@ -119,6 +135,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-stopwatch',
       },
       {
+        id: 16,
         title: 'خود اظهاری راننده گان و کامیونداران',
         name: 'DriverSelfDeclaration',
         description:
@@ -126,6 +143,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-exclamation-circle',
       },
       {
+        id: 17,
         title: 'تعرفه های حمل بار',
         name: 'TransportPrices',
         description:
@@ -140,6 +158,7 @@ export const mockPageGroup: PageGroup[] = [
     icon: 'pi-stop',
     processes: [
       {
+        id: 18,
         title: 'ثبت تردد',
         name: 'Terrafic',
         description:
@@ -147,6 +166,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-list-check',
       },
       {
+        id: 19,
         title: 'کارت تردد',
         name: 'TerraficCard',
         description:
@@ -154,6 +174,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-id-card',
       },
       {
+        id: 20,
         title: 'سوابق تردد',
         name: 'TerraficRecords',
         description:
@@ -161,6 +182,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-bars',
       },
       {
+        id: 21,
         title: 'قبوض دستی پارکینگ',
         name: 'ParkingHandyBills',
         description:
@@ -175,6 +197,7 @@ export const mockPageGroup: PageGroup[] = [
     icon: 'pi-list',
     processes: [
       {
+        id: 22,
         title: 'درخواست صدور ، ابطال و احیاء نوبت',
         name: 'TurnIssueRequestAndTurnCancellation',
         description:
@@ -182,13 +205,15 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-check',
       },
       {
+        id: 23,
         title: 'نوبت های صادر شده ناوگان',
         name: 'TruckTurnsIssued',
         description:
           'راننده ناوگان باری می تواند تعداد محدودی از نوبت های صادر شده ناوگان خود را که شامل شماره نوبت ، عدد فاصله تا اعتبار و وضعیت فعال بودن و یا غیر فعال بودن نوبت است را از طریق این منو مشاهده نماید',
         icon: 'pi-file',
-      },
+        },
       {
+        id: 24,
         title: 'سیستم نوبت دهی سراسری',
         name: 'CentralizeTurnSystem',
         description:
@@ -196,6 +221,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-list',
       },
       {
+        id: 25,
         title: 'درخواست صدور و ابطال نوبت',
         name: 'TurnIssueTurnCancelRequest',
         description:
@@ -210,6 +236,7 @@ export const mockPageGroup: PageGroup[] = [
     icon: 'pi-wallet',
     processes: [
       {
+        id: 26,
         title: 'تراکنش های کیف پول',
         name: 'MoneyWalletTransactions',
         description:
@@ -217,6 +244,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-refresh',
       },
       {
+        id: 27,
         title: 'مشاهده مشخصات کیف پول',
         name: 'MoneyWalletInformation',
         description:
@@ -224,6 +252,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-cog',
       },
       {
+        id: 28,
         title: 'سوابق شارژ کیف پول',
         name: 'MoneyWalletChargingRecords',
         description:
@@ -231,6 +260,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-arrow-right-arrow-left',
       },
       {
+        id: 29,
         title: 'شارژ کیف پول',
         name: 'MoneyWalletCharging',
         description:
@@ -238,6 +268,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-download',
       },
       {
+        id: 30,
         title: 'انتقال موجودی کیف پول',
         name: 'TransferMoneyWalletBalance',
         description:
@@ -245,6 +276,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-file-export',
       },
       {
+        id: 31,
         title: 'شارژ کیف پول از طریق پلاک',
         name: 'TruckMoneyWalletCharging',
         description:
@@ -252,6 +284,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-truck',
       },
       {
+        id: 32,
         title: 'شارژ کیف پول شرکت حمل و نقل',
         name: 'TransportCompanyMoneyWalletCharging',
         description:
@@ -259,6 +292,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-warehouse',
       },
       {
+        id: 33,
         title: 'کیف پول کنترلی کامیونداران',
         name: 'TruckersAssociationControllingMoneyWallet',
         description:
@@ -273,6 +307,7 @@ export const mockPageGroup: PageGroup[] = [
     icon: 'pi-folder-open',
     processes: [
       {
+        id: 34,
         title: 'اعلام بار شرکت حمل و نقل',
         name: 'TCLoadAnnouncement',
         description:
@@ -280,6 +315,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-warehouse',
       },
       {
+        id: 35,
         title: 'اعلام بار کارخانجات و مراکز تولید بار',
         name: 'FactoryLoadAnnouncement',
         description:
@@ -287,6 +323,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-hammer',
       },
       {
+        id: 36,
         title: 'تایید بار ثبت شده',
         name: 'LoadAnnounceApproval',
         description:
@@ -294,6 +331,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-file-check',
       },
       {
+        id: 37,
         title: 'مخزن بار',
         name: 'LoadCapacitor',
         description:
@@ -301,6 +339,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-inbox',
       },
       {
+        id: 38,
         title: 'تخصیص بار شرکت حمل و نقل',
         name: 'TCLoadAllocation',
         description:
@@ -308,6 +347,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-warehouse',
       },
       {
+        id: 39,
         title: 'تخصیص بار راننده',
         name: 'DriverLoadAllocation',
         description:
@@ -315,6 +355,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-user-edit',
       },
       {
+        id: 40,
         title: 'بازارگاه بار',
         name: 'MarketPlace',
         description:
@@ -322,6 +363,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-megaphone',
       },
       {
+        id: 41,
         title: 'ثبت ، ویرایش ، کنسلی و حذف بار',
         name: 'LoadRegisteringEditing',
         description:
@@ -329,6 +371,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-pen-to-square',
       },
       {
+        id: 42,
         title: 'ثبت درخواست حمل صاحبین کالا',
         name: 'BarOwnerTransportationRequest',
         description:
@@ -336,6 +379,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-verified',
       },
       {
+        id: 43,
         title: 'اولویت بندی بار انتخاب شده',
         name: 'LoadAllocationPrioriity',
         description:
@@ -343,6 +387,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-sort-amount-up',
       },
       {
+        id: 44,
         title: 'مجوزهای صادر شده ناوگان',
         name: 'LoadTransportationPermissions',
         description:
@@ -350,6 +395,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-check-circle',
       },
       {
+        id: 45,
         title: 'درخواست ابطال مجوز حمل بار',
         name: 'LoadTransportationPermissionCancellationRequest',
         description:
@@ -357,6 +403,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-times-circle',
       },
       {
+        id: 46,
         title: 'مدیریت مجوزهای بارگیری',
         name: 'LoadingPermissionsManage',
         description:
@@ -364,6 +411,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-check-circle',
       },
       {
+        id: 47,
         title: 'اعلام بار فردا',
         name: 'TomorrowLoadAnnouncement',
         description:
@@ -371,6 +419,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-warehouse',
       },
       {
+        id: 48,
         title: 'مدیریت تخصیص بار',
         name: 'LoadAllocationMange',
         description:
@@ -385,6 +434,7 @@ export const mockPageGroup: PageGroup[] = [
     icon: 'pi-cog',
     processes: [
       {
+        id: 49,
         title: 'پیکر بندی عمومی سیستم',
         name: 'GeneralConfiguration',
         description:
@@ -392,6 +442,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-table',
       },
       {
+        id: 50,
         title: 'پیکربندی اعلام بار',
         name: 'LoadAnnouncementConfiguration',
         description:
@@ -399,6 +450,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-sitemap',
       },
       {
+        id: 51,
         title: 'پیکر بندی تجهیزات',
         name: 'ComponentConfiguration',
         description:
@@ -406,6 +458,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-th-large',
       },
       {
+        id: 52,
         title: 'تقویم حمل و نقلی',
         name: 'TransportationCalendar',
         description:
@@ -413,6 +466,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-calendar-clock',
       },
       {
+        id: 53,
         title: 'مدیریت گروهی کاربران',
         name: 'UserTypesManagement',
         description:
@@ -420,13 +474,15 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-users',
       },
       {
+        id: 54,
         title: 'لیست سیاه',
         name: 'BlackLists',
         description:
-          'لیست سیاه شامل ایجاد محدودیت هایی برای  آبجکت های موجود و فعال در سامانه است.راننده ، شرکت حمل و نقل ، خودرو ، کاربر و حتی مبادی و مقاصد حمل بار جزو آبچکت های مورد نظر هستند',
+          'لیست سیاه شامل ایجاد محدودیت هایی برای  آبجکت های موجود و فعال در سامانه است.راننده ، شرکت حمل و نقل ، خودرو ، کاربر و حتی مبادی و مقاصد حمل بار جزو آبچکت های مورد نظر هستند',
         icon: 'pi-ban',
       },
       {
+        id: 55,
         title: 'مشاهده وقایع',
         name: 'SystemLoggingView',
         description:
@@ -434,6 +490,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-calendar-plus',
       },
       {
+        id: 56,
         title: 'اس ام اس انبوه',
         name: 'BulkSMSSending',
         description:
@@ -448,6 +505,7 @@ export const mockPageGroup: PageGroup[] = [
     icon: 'pi-copy',
     processes: [
       {
+        id: 57,
         title: 'گزارش نوبت ها',
         name: 'TurnsReport',
         description:
@@ -455,6 +513,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-sort-amount-up',
       },
       {
+        id: 58,
         title: 'گزارش تخصیص بار',
         name: 'LoadAllocationsReport',
         description:
@@ -462,6 +521,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-list-check',
       },
       {
+        id: 59,
         title: 'گزارش مجوزهای حمل صادر شده',
         name: 'LoadTransportationPermissionsReport',
         description:
@@ -469,6 +529,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-verified',
       },
       {
+        id: 60,
         title: 'گزارش بارهای کنسل شده',
         name: 'LoadAnnouncementCancellation',
         description:
@@ -476,6 +537,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-times-circle',
       },
       {
+        id: 61,
         title: 'گزارش کلی عملکرد اعلام بار',
         name: 'LoadAnnouncementOveralReport',
         description:
@@ -483,6 +545,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-times-circle',
       },
       {
+        id: 62,
         title: 'گزارش مجوزهای حمل بار کنسل شده',
         name: 'LoadTransportationPermissionCancellationsReport',
         description:
@@ -490,6 +553,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-stop-circle',
       },
       {
+        id: 63,
         title: 'گزارشات مالی پارکینگ',
         name: 'ParkingAccountingReport',
         description:
@@ -497,6 +561,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-money-bill',
       },
       {
+        id: 64,
         title: 'درآمدهای حاصل از نوبت دهی',
         name: 'TurnAccountingReport',
         description:
@@ -504,6 +569,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-chart-line',
       },
       {
+        id: 65,
         title: 'گزارش بارنامه های صادر شده',
         name: 'BillOfLadingsReport',
         description:
@@ -511,6 +577,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-chart-scatter',
       },
       {
+        id: 66,
         title: 'گزارش ابطالی بر اساس بارنامه',
         name: 'BillOfLadingTurnCancellationReport',
         description:
@@ -518,6 +585,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-receipt',
       },
       {
+        id: 67,
         title: 'گزارش ابطالی نوبت ها',
         name: 'TurnCancellationsReport',
         description:
@@ -525,6 +593,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-sort-amount-up',
       },
       {
+        id: 68,
         title: 'گزارش بار',
         name: 'LoadAnnouncementsReport',
         description:
@@ -532,6 +601,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-chart-bar',
       },
       {
+        id: 69,
         title: 'رانندگان منتظر دریافت مجوز بارگیری',
         name: 'DriversWhoWaitToLoadingPermissionReport',
         description:
@@ -546,6 +616,7 @@ export const mockPageGroup: PageGroup[] = [
     icon: 'pi-desktop',
     processes: [
       {
+        id: 70,
         title: 'ثبت نام غیر حضوری',
         name: 'VirtualRegisteration',
         description:
@@ -553,6 +624,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-user-plus',
       },
       {
+        id: 71,
         title: 'تغییر رمز کاربر',
         name: 'ChangeUserPassword',
         description:
@@ -560,6 +632,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-lock',
       },
       {
+        id: 72,
         title: 'پشتیبانی سامانه',
         name: 'Ticketing',
         description:
@@ -567,6 +640,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-headphones',
       },
       {
+        id: 73,
         title: 'مدیریت تیکت',
         name: 'TicketingManage',
         description:

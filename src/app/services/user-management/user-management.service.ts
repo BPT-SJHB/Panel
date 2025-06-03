@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { API_ROUTES } from 'app/constants/api';
 import { firstValueFrom, map } from 'rxjs';
 import { UserAuthService } from '../user-auth-service/user-auth.service';

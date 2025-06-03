@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { mockCargoTerminals } from 'app/data/mock/cargo-terminal.mock';
 import { LoadAnnouncementPlace } from 'app/data/model/load-announcement-place.model';
 import { AnimateOnScroll } from 'primeng/animateonscroll';
 import { TerminalCardComponent } from 'app/components/shared/terminal-card/terminal-card.component';
@@ -9,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { PanelModule } from 'primeng/panel';
 import { appTitles } from 'app/constants/Titles';
 import { LoadAnnouncementPlacesService } from 'app/services/LoadAnnouncementPlaces/load-announcement-places.service';
+import { TabBarComponent } from "../../components/shared/tab-bar/tab-bar.component";
 
 @Component({
   selector: 'app-home',
@@ -20,7 +20,7 @@ import { LoadAnnouncementPlacesService } from 'app/services/LoadAnnouncementPlac
     AnimateOnScroll,
     TerminalCardComponent,
     SearchInputComponent,
-  ],
+],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })

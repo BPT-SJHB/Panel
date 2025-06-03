@@ -27,5 +27,5 @@ export const sidebarReducer = createReducer(
   on(SidebarActions.selectPageGroup, (state, { id }) => {
     const exists = state.pageGroups.some(g => g.id === id);
     return exists ? { ...state, selectedPageGroupId: id } : state;
-  })
+  }),
 );
