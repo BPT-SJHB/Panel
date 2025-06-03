@@ -48,3 +48,9 @@ export class UsersMenuAccessFormComponent implements OnInit {
     private userAuth: UserAuthService,
     private userManager: UserManagementService
   ) {}
+
+  async ngOnInit() {
+    await this.LoadWebProcessGroups_WebProcessesTable();
+
+    this.accessTableFiltered = this.accessTable;
+  }
