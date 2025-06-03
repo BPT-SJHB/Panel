@@ -31,3 +31,4 @@ interface SelectedNodes {
   styleUrl: './users-menu-access-form.component.scss',
 })
 export class UsersMenuAccessFormComponent implements OnInit {
+  isLoading: boolean = false;
