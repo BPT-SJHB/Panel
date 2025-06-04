@@ -17,4 +17,29 @@ import {
 })
 export class TruckDriverManagementService {
   constructor(private http: HttpClient, private userAuth: UserAuthService) {}
+
+  /**
+   * این تابع برای دریافت اطلاعات راننده از سرور های خارج از سیستم مورد استفاده قرار خواهد گرفت
+   * @param truckDriverInfo اطلاعات راننده(در این متود فقط کد ملی راننده نیاز است)
+   * @returns اطلاعات راننده در قالب پاسخ از سرور
+   */
+  public async GetDriverInfoFromOutdoorAPI(
+    truckDriverInfo: TruckDriverInfo
+  ): Promise<ApiResponse<TruckDriverInfo>> {
+    const apiUrl =
+      API_ROUTES.TransportationAPI.GetTruckDriverInfoFromOutdoorAPI;
+
+    try {
+      const response = await firstValueFrom(
+        this.http.post<TruckDriverInfo>(apiUrl, {
+          SessionId: this.userAuth.getSessionId(),
+          TruckDriverNationalCode: truckDriverInfo.NationalCode,
+        })
+      );
+
+      return { success: true, data: response };
+    } catch (error: unknown) {
+      return handleHttpError<TruckDriverInfo>(error);
+    }
+  }
 }
