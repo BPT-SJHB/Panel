@@ -92,4 +92,28 @@ export class TruckDriverManagementService {
       return handleHttpError<ShortResponse>(error);
     }
   }
+
+  /**
+   * این متود برای فعال کردن سرویس پیامک راننده مورد استفاده قرار خواهد گرفت
+   * @param truckDriverInfo اطلاعات راننده(در این متود فقط کد راننده مورد نیاز است)
+   * @returns پیام تایید در قالب پاسخ از سرور
+   */
+  public async ActivateTruckDriverSMS(
+    truckDriverInfo: TruckDriverInfo
+  ): Promise<ApiResponse<ShortResponse>> {
+    const apiUrl = API_ROUTES.TransportationAPI.ActivateTruckDriverSMSOwner;
+
+    try {
+      const response = await firstValueFrom(
+        this.http.post<ShortResponse>(apiUrl, {
+          SessionId: this.userAuth.getSessionId(),
+          TruckDriverId: truckDriverInfo.DriverId,
+        })
+      );
+
+      return { success: true, data: response };
+    } catch (error: unknown) {
+      return handleHttpError<ShortResponse>(error);
+    }
+  }
 }
