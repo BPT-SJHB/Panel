@@ -11,6 +11,10 @@ import { SoftwareUserInfo } from 'app/data/model/software-user-info.model';
 import { ShortResponse } from 'app/data/model/short-response.model';
 import { ApiGroupProcess } from 'app/data/model/api-group-process.model';
 import { ApiProcess } from 'app/data/model/api-process.model';
+import {
+  APIUsernamePassword,
+  UsernamePassword,
+} from 'app/data/model/username-password.model';
 
 @Injectable({
   providedIn: 'root',
@@ -50,21 +54,15 @@ export class UserManagementService {
    * @param userInfo اطلاعات کاربری
    * @returns شناسه و رمز جدید کاربر
    */
-  public async ResetSoftwareUserPassword(userInfo: SoftwareUserInfo): Promise<
-    ApiResponse<{
-      UserName: string;
-      Password: string;
-    }>
-  > {
+  public async ResetSoftwareUserPassword(
+    userInfo: SoftwareUserInfo
+  ): Promise<ApiResponse<UsernamePassword>> {
     const apiUrl =
       API_ROUTES.SoftwareUserAPI.UserManagement.ResetSoftwareUserPassword;
 
     try {
       const response = await firstValueFrom(
-        this.http.post<{
-          UserShenaseh: string;
-          UserPassword: string;
-        }>(apiUrl, {
+        this.http.post<APIUsernamePassword>(apiUrl, {
           SessionId: this.userAuth.getSessionId(),
           SoftwareUserId: userInfo.UserId,
         })
@@ -73,15 +71,12 @@ export class UserManagementService {
       return {
         success: true,
         data: {
-          UserName: response.UserShenaseh,
+          Username: response.UserShenaseh,
           Password: response.UserPassword,
         },
       };
     } catch (error: unknown) {
-      return handleHttpError<{
-        UserName: string;
-        Password: string;
-      }>(error);
+      return handleHttpError<UsernamePassword>(error);
     }
   }
 

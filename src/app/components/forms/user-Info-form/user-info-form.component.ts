@@ -126,10 +126,10 @@ export class UserInfoFormComponent implements OnInit {
       const response = await this.userManager.ResetSoftwareUserPassword({ UserId: this.id.value });
       if (!this.isSuccessful(response)) return;
 
-      const { UserName, Password } = response.data!;
-      this.toast.success('موفق', `رمز عبور کاربر ${UserName} تغییر یافت.`);
+      const { Username, Password } = response.data!;
+      this.toast.success('موفق', `رمز عبور کاربر ${Username} تغییر یافت.`);
 
-      this.userNameDialog = UserName;
+      this.userNameDialog = Username;
       this.newUserPasswordDialog = Password;
       this.passwordDialogVisible = true;
 
