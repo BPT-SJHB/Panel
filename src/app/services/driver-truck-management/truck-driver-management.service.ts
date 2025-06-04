@@ -66,4 +66,30 @@ export class TruckDriverManagementService {
       return handleHttpError<TruckDriverInfo>(error);
     }
   }
+
+  /**
+   * این تابع برای ذخیره و تغییر شماره تماس راننده مورد استفاده قرار خواهد گرفت
+   * @param truckDriverInfo اطلاعات راننده(در این متود کد راننده و شماره تلفن راننده مورد نیاز است)
+   * @returns پیام تایید در قالب پاسخ از سرور
+   */
+  public async RegisterNew_EditTruckDriverMobileNumber(
+    truckDriverInfo: TruckDriverInfo
+  ): Promise<ApiResponse<ShortResponse>> {
+    const apiUrl =
+      API_ROUTES.TransportationAPI.TruckDriverRegisteringMobileNumber;
+
+    try {
+      const response = await firstValueFrom(
+        this.http.post<ShortResponse>(apiUrl, {
+          SessionId: this.userAuth.getSessionId(),
+          TruckDriverId: truckDriverInfo.DriverId,
+          MobileNumber: truckDriverInfo.MobileNumber,
+        })
+      );
+
+      return { success: true, data: response };
+    } catch (error: unknown) {
+      return handleHttpError<ShortResponse>(error);
+    }
+  }
 }
