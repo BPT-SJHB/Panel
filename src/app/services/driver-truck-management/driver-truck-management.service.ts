@@ -15,7 +15,7 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class TruckDriverManagementService {
+export class Driver_TruckManagementService {
   constructor(private http: HttpClient, private userAuth: UserAuthService) {}
 
   //#region
@@ -29,7 +29,7 @@ export class TruckDriverManagementService {
     truckDriverInfo: TruckDriverInfo
   ): Promise<ApiResponse<TruckDriverInfo>> {
     const apiUrl =
-      API_ROUTES.TransportationAPI.GetTruckDriverInfoFromOutdoorAPI;
+      API_ROUTES.TransportationAPI.Driver.GetTruckDriverInfoFromOutdoorAPI;
 
     try {
       const response = await firstValueFrom(
@@ -53,7 +53,8 @@ export class TruckDriverManagementService {
   public async GetDriverInfoFromLocalAPI(
     truckDriverInfo: TruckDriverInfo
   ): Promise<ApiResponse<TruckDriverInfo>> {
-    const apiUrl = API_ROUTES.TransportationAPI.GetTruckDriverInfoFromLocalAPI;
+    const apiUrl =
+      API_ROUTES.TransportationAPI.Driver.GetTruckDriverInfoFromLocalAPI;
 
     try {
       const response = await firstValueFrom(
@@ -78,7 +79,7 @@ export class TruckDriverManagementService {
     truckDriverInfo: TruckDriverInfo
   ): Promise<ApiResponse<ShortResponse>> {
     const apiUrl =
-      API_ROUTES.TransportationAPI.TruckDriverRegisteringMobileNumber;
+      API_ROUTES.TransportationAPI.Driver.TruckDriverRegisteringMobileNumber;
 
     try {
       const response = await firstValueFrom(
@@ -103,7 +104,8 @@ export class TruckDriverManagementService {
   public async ActivateDriverSMS(
     truckDriverInfo: TruckDriverInfo
   ): Promise<ApiResponse<ShortResponse>> {
-    const apiUrl = API_ROUTES.TransportationAPI.ActivateTruckDriverSMSOwner;
+    const apiUrl =
+      API_ROUTES.TransportationAPI.Driver.ActivateTruckDriverSMSOwner;
 
     try {
       const response = await firstValueFrom(
@@ -127,7 +129,8 @@ export class TruckDriverManagementService {
   public async ResetDriverPassword(
     truckDriverInfo: TruckDriverInfo
   ): Promise<ApiResponse<UsernamePassword>> {
-    const apiUrl = API_ROUTES.TransportationAPI.ResetTruckDriverUserPassword;
+    const apiUrl =
+      API_ROUTES.TransportationAPI.Driver.ResetTruckDriverUserPassword;
 
     try {
       const response = await firstValueFrom(
@@ -157,7 +160,7 @@ export class TruckDriverManagementService {
   public async SendWebsiteLink(
     truckDriverInfo: TruckDriverInfo
   ): Promise<ApiResponse<ShortResponse>> {
-    const apiUrl = API_ROUTES.TransportationAPI.SendWebsiteLink;
+    const apiUrl = API_ROUTES.TransportationAPI.Driver.SendWebsiteLink;
 
     try {
       const response = await firstValueFrom(
