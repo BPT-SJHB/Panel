@@ -23,7 +23,7 @@ export class TruckDriverManagementService {
    * @param truckDriverInfo اطلاعات راننده(در این متود فقط کد ملی راننده نیاز است)
    * @returns اطلاعات راننده در قالب پاسخ از سرور
    */
-  public async GetDriverInfoFromOutdoorAPI(
+  public async GetTruckDriverInfoFromOutdoorAPI(
     truckDriverInfo: TruckDriverInfo
   ): Promise<ApiResponse<TruckDriverInfo>> {
     const apiUrl =
