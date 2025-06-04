@@ -214,4 +214,38 @@ export class Driver_TruckManagementService {
       return handleHttpError<TruckInfo>(error);
     }
   }
+
+  /**
+   * این متود برای گرفتن اطلاعات ناوگان از سرور های داخلی
+   * مورد استفاده قرار خواهد گرفت
+   * @param truckInfo SmartCardNo
+   * @returns ApiResponse <= TruckInfo
+   */
+  public async GetTruckInfoFromLocalAPI(
+    truckInfo: TruckInfo
+  ): Promise<ApiResponse<TruckInfo>> {
+    const apiUrl = API_ROUTES.TransportationAPI.Truck.GetTruckInfoFromLocalAPI;
+
+    try {
+      const response = await firstValueFrom(
+        this.http.post<TruckInfo>(apiUrl, {
+          SessionId: this.userAuth.getSessionId(),
+          SmartCardNo: truckInfo.SmartCardNo,
+        })
+      );
+
+      return {
+        success: true,
+        data: {
+          TruckId: response.TruckId,
+          LoaderTypeId: response.LoaderTypeId,
+          Pelak: response.Pelak?.split('ع').join('-'),
+          Serial: response.Serial,
+          SmartCardNo: response.SmartCardNo,
+        },
+      };
+    } catch (error: unknown) {
+      return handleHttpError<TruckInfo>(error);
+    }
+  }
 }
