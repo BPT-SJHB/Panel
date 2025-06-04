@@ -11,6 +11,8 @@ import {
   APIUsernamePassword,
   UsernamePassword,
 } from 'app/data/model/username-password.model';
+import { TruckInfo } from 'app/data/model/truck-info.model';
+import { TruckNativenessInfo } from 'app/data/model/truck-nativeness-info.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +20,7 @@ import {
 export class Driver_TruckManagementService {
   constructor(private http: HttpClient, private userAuth: UserAuthService) {}
 
-  //#region
+  //#region Driver
 
   /**
    * این تابع برای دریافت اطلاعات راننده از سرور های خارج از سیستم مورد استفاده قرار خواهد گرفت
@@ -180,6 +182,9 @@ export class Driver_TruckManagementService {
   }
 
   //#endregion
+
+  //#region Truck
+
   /**
    * این متود برای گرفتن اطلاعات ناوگان از سرور های خارجی
    * مورد استفاده قرار خواهد گرفت
@@ -308,4 +313,6 @@ export class Driver_TruckManagementService {
       return handleHttpError<TruckInfo>(error);
     }
   }
+
+  //#endregion
 }
