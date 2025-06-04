@@ -18,12 +18,14 @@ import {
 export class TruckDriverManagementService {
   constructor(private http: HttpClient, private userAuth: UserAuthService) {}
 
+  //#region
+
   /**
    * این تابع برای دریافت اطلاعات راننده از سرور های خارج از سیستم مورد استفاده قرار خواهد گرفت
    * @param truckDriverInfo اطلاعات راننده(در این متود فقط کد ملی راننده نیاز است)
    * @returns اطلاعات راننده در قالب پاسخ از سرور
    */
-  public async GetTruckDriverInfoFromOutdoorAPI(
+  public async GetDriverInfoFromOutdoorAPI(
     truckDriverInfo: TruckDriverInfo
   ): Promise<ApiResponse<TruckDriverInfo>> {
     const apiUrl =
@@ -48,7 +50,7 @@ export class TruckDriverManagementService {
    * @param truckDriverInfo اطلاعات راننده (در این متود فقط کد ملی راننده نیاز است)
    * @returns اطلاعات راننده در قالب پاسخ از سرور
    */
-  public async GetTruckDriverInfoFromLocalAPI(
+  public async GetDriverInfoFromLocalAPI(
     truckDriverInfo: TruckDriverInfo
   ): Promise<ApiResponse<TruckDriverInfo>> {
     const apiUrl = API_ROUTES.TransportationAPI.GetTruckDriverInfoFromLocalAPI;
@@ -72,7 +74,7 @@ export class TruckDriverManagementService {
    * @param truckDriverInfo اطلاعات راننده(در این متود کد راننده و شماره تلفن راننده مورد نیاز است)
    * @returns پیام تایید در قالب پاسخ از سرور
    */
-  public async RegisterNew_EditTruckDriverMobileNumber(
+  public async RegisterNew_EditDriverMobileNumber(
     truckDriverInfo: TruckDriverInfo
   ): Promise<ApiResponse<ShortResponse>> {
     const apiUrl =
@@ -98,7 +100,7 @@ export class TruckDriverManagementService {
    * @param truckDriverInfo اطلاعات راننده(در این متود فقط کد راننده مورد نیاز است)
    * @returns پیام تایید در قالب پاسخ از سرور
    */
-  public async ActivateTruckDriverSMS(
+  public async ActivateDriverSMS(
     truckDriverInfo: TruckDriverInfo
   ): Promise<ApiResponse<ShortResponse>> {
     const apiUrl = API_ROUTES.TransportationAPI.ActivateTruckDriverSMSOwner;
@@ -122,7 +124,7 @@ export class TruckDriverManagementService {
    * @param truckDriverInfo اطلاعات راننده(در این متود فقط کد راننده مورد نیاز است)
    * @returns رمزعبور و شناسه جدید راننده در قالب پاسخ از سرور
    */
-  public async ResetTruckDriverPassword(
+  public async ResetDriverPassword(
     truckDriverInfo: TruckDriverInfo
   ): Promise<ApiResponse<UsernamePassword>> {
     const apiUrl = API_ROUTES.TransportationAPI.ResetTruckDriverUserPassword;
@@ -173,4 +175,6 @@ export class TruckDriverManagementService {
       return handleHttpError<ShortResponse>(error);
     }
   }
+
+  //#endregion
 }
