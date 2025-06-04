@@ -116,4 +116,34 @@ export class TruckDriverManagementService {
       return handleHttpError<ShortResponse>(error);
     }
   }
+
+  /**
+   * این متود برای ریست کردن رمزعبور راننده مورد استفاده قرار خواهد گرفت
+   * @param truckDriverInfo اطلاعات راننده(در این متود فقط کد راننده مورد نیاز است)
+   * @returns رمزعبور و شناسه جدید راننده در قالب پاسخ از سرور
+   */
+  public async ResetTruckDriverPassword(
+    truckDriverInfo: TruckDriverInfo
+  ): Promise<ApiResponse<UsernamePassword>> {
+    const apiUrl = API_ROUTES.TransportationAPI.ResetTruckDriverUserPassword;
+
+    try {
+      const response = await firstValueFrom(
+        this.http.post<APIUsernamePassword>(apiUrl, {
+          SessionId: this.userAuth.getSessionId(),
+          TruckDriverId: truckDriverInfo.DriverId,
+        })
+      );
+
+      return {
+        success: true,
+        data: {
+          Username: response.UserShenaseh,
+          Password: response.UserPassword,
+        },
+      };
+    } catch (error: unknown) {
+      return handleHttpError<UsernamePassword>(error);
+    }
+  }
 }
