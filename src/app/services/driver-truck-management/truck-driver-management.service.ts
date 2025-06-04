@@ -146,4 +146,31 @@ export class TruckDriverManagementService {
       return handleHttpError<UsernamePassword>(error);
     }
   }
+
+  /**
+   * این متود برای ارسال لینک سامانه به راننده مورد استفاده قرار خواهد گرفت
+   * @param userInfo اطلاعات راننده(در این متود فقط کد راننده مورد استفاده قرار خواهد گرفت)
+   * @returns پیام تایید ارسال لینک سامانه در قالب پاسخ از سرور
+   */
+  public async SendWebsiteLink(
+    truckDriverInfo: TruckDriverInfo
+  ): Promise<ApiResponse<ShortResponse>> {
+    const apiUrl = API_ROUTES.TransportationAPI.SendWebsiteLink;
+
+    try {
+      const response = await firstValueFrom(
+        this.http.post<ShortResponse>(apiUrl, {
+          SessionId: this.userAuth.getSessionId(),
+          TruckDriverId: truckDriverInfo.DriverId,
+        })
+      );
+
+      return {
+        success: true,
+        data: response,
+      };
+    } catch (error: unknown) {
+      return handleHttpError<ShortResponse>(error);
+    }
+  }
 }
