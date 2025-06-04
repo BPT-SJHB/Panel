@@ -248,4 +248,32 @@ export class Driver_TruckManagementService {
       return handleHttpError<TruckInfo>(error);
     }
   }
+
+  /**
+   * این متود برای گرفتن اطلاعات بومی‌گری ناوگان
+   * مورد استفاده قرار خواهد گرفت
+   * @param truckInfo TruckId
+   * @returns ApiResponse <= TruckInfo
+   */
+  public async GetTruckNativeness(
+    truckInfo: TruckInfo
+  ): Promise<ApiResponse<TruckInfo>> {
+    const apiUrl = API_ROUTES.TransportationAPI.Truck.GetTruckNativeness;
+
+    try {
+      const response = await firstValueFrom(
+        this.http.post<TruckInfo>(apiUrl, {
+          SessionId: this.userAuth.getSessionId(),
+          TruckId: truckInfo.TruckId,
+        })
+      );
+
+      return {
+        success: true,
+        data: response,
+      };
+    } catch (error: unknown) {
+      return handleHttpError<TruckInfo>(error);
+    }
+  }
 }
