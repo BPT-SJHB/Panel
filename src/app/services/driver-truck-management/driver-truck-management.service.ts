@@ -172,7 +172,7 @@ export class Driver_TruckManagementService {
     };
     const localApiUrl =
       API_ROUTES.TransportationAPI.Truck.GetTruckInfoFromLocalAPI;
-    const outDoorApiUrl =
+    const outdoorApiUrl =
       API_ROUTES.TransportationAPI.Truck.GetTruckInfoFromOutdoorAPI;
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
@@ -190,7 +190,7 @@ export class Driver_TruckManagementService {
       response = await this.apiCommunicator.CommunicateWithAPI_Post<
         typeof bodyValue,
         TruckInfo
-      >(outDoorApiUrl, bodyValue);
+      >(outdoorApiUrl, bodyValue);
     }
     //#endregion
 
@@ -209,32 +209,24 @@ export class Driver_TruckManagementService {
     //#endregion
   }
 
-  /**
-   * این متود برای گرفتن اطلاعات بومی‌گری ناوگان
-   * مورد استفاده قرار خواهد گرفت
-   * @param truckInfo TruckId
-   * @returns ApiResponse <= TruckInfo
-   */
   public async GetTruckNativeness(
-    truckInfo: TruckInfo
+    truckId: number
   ): Promise<ApiResponse<TruckInfo>> {
+    //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.Truck.GetTruckNativeness;
+    const truckInfo: TruckInfo = { TruckId: truckId };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TruckId: truckInfo.TruckId,
+    };
+    //#endregion
 
-    try {
-      const response = await firstValueFrom(
-        this.http.post<TruckInfo>(apiUrl, {
-          SessionId: this.userAuth.getSessionId(),
-          TruckId: truckInfo.TruckId,
-        })
-      );
-
-      return {
-        success: true,
-        data: response,
-      };
-    } catch (error: unknown) {
-      return handleHttpError<TruckInfo>(error);
-    }
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      TruckInfo
+    >(apiUrl, bodyValue);
+    //#endregion
   }
 
   /**
