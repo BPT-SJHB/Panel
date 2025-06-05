@@ -4,6 +4,6 @@ export interface ApiGroupProcess {
   PGId: number;
   PGTitle?: string;
   PGIconName?: string;
-  WebProcesses?: [ApiProcess];
+  WebProcesses: ApiProcess[];
   PGAccess?: boolean;
 }
