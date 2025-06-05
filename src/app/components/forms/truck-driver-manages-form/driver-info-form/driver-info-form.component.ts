@@ -66,7 +66,8 @@ export class DriverInfoFormComponent {
       const driverInfo = this.getDriverInfoFromForm();
       const response =
         await this.driverTruckManager.RegisterNew_EditDriverMobileNumber(
-          driverInfo
+          driverInfo.DriverId,
+          driverInfo.MobileNumber!
         );
 
       if (!this.isSuccessful(response)) return;
@@ -88,9 +89,9 @@ export class DriverInfoFormComponent {
     this.loading = true;
 
     try {
-      const response = await this.driverTruckManager.GetDriverInfoFromAPI({
-        NationalCode: this.searchNationalId.value,
-      });
+      const response = await this.driverTruckManager.GetDriverInfoFromAPI(
+        this.searchNationalId.value
+      );
 
       if (!this.isSuccessful(response)) return;
       this.populateDriverForm(response.data as TruckDriverInfo);
@@ -109,9 +110,9 @@ export class DriverInfoFormComponent {
     this.loading = true;
 
     try {
-      const response = await this.driverTruckManager.GetDriverInfoFromLocalAPI({
-        NationalCode: this.searchNationalId.value,
-      });
+      const response = await this.driverTruckManager.GetDriverInfoFromAPI(
+        this.searchNationalId.value
+      );
 
       if (!this.isSuccessful(response)) return;
       this.populateDriverForm(response.data as TruckDriverInfo);
@@ -132,7 +133,7 @@ export class DriverInfoFormComponent {
     try {
       const driverInfo = this.getDriverInfoFromForm();
       const response = await this.driverTruckManager.ResetDriverPassword(
-        driverInfo
+        driverInfo.DriverId
       );
 
       if (!this.isSuccessful(response)) return;
@@ -154,7 +155,7 @@ export class DriverInfoFormComponent {
     try {
       const driverInfo = this.getDriverInfoFromForm();
       const response = await this.driverTruckManager.ActivateDriverSMS(
-        driverInfo
+        driverInfo.DriverId
       );
 
       if (!this.isSuccessful(response)) return;
@@ -176,7 +177,7 @@ export class DriverInfoFormComponent {
     try {
       const driverInfo = this.getDriverInfoFromForm();
       const response = await this.driverTruckManager.SendWebsiteLink(
-        driverInfo
+        driverInfo.DriverId
       );
 
       if (!this.isSuccessful(response)) return;
