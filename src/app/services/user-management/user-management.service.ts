@@ -115,40 +115,32 @@ export class UserManagementService {
     //#endregion
   }
 
-  /**
-   * این متود برای ثبت کاربر جدید مورد استفاده قرار خواهد گرفت.
-   * @param userInfo اطلاعات کاربری
-   * @returns کد کاربری اختصاص داده شده در قالب اطلاعات کاربری
-   */
   public async RegisterNewSoftwareUser(
     userInfo: SoftwareUserInfo
   ): Promise<ApiResponse<SoftwareUserInfo>> {
+    //#region Consts
     const apiUrl =
       API_ROUTES.SoftwareUserAPI.UserManagement.RegisteringSoftwareUser;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      RawSoftwareUser: userInfo,
+    };
+    //#endregion
 
-    // const userInfo: SoftwareUserInfo = {
-    //   UserId: 0,
-    //   UserName: 'مرتضی شاهمرادی',
-    //   MobileNumber: '09132043172',
-    //   UserTypeId: 1,
-    //   UserActive: true,
-    //   SMSOwnerActive: false,
-    // };response
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      any
+    >(apiUrl, bodyValue);
+    //#endregion
 
-    try {
-      const response = await firstValueFrom(
-        this.http
-          .post<any>(apiUrl, {
-            SessionId: this.userAuth.getSessionId(),
-            RawSoftwareUser: userInfo,
-          })
-          .pipe(map((x) => ({ UserId: x.SoftwareUserId } as SoftwareUserInfo)))
-      );
-
-      return { success: true, data: response };
-    } catch (error: unknown) {
-      return handleHttpError<SoftwareUserInfo>(error);
-    }
+    //#region Return
+    return {
+      success: response.success,
+      data: { UserId: response.data?.SoftwareUserId! },
+      error: response.error,
+    };
+    //#endregion
   }
 
   /**
