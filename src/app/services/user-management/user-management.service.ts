@@ -190,35 +190,27 @@ export class UserManagementService {
     //#endregion
   }
 
-  /**
-   * این متود برای تغییر دسترسی کاربر مورد نظر در سطح زیرمنو است.
-   * فعال یا غیر فعال شدن بستگی به محتوای ارسالی ما دارد
-   * @param userInfo اطلاعات کاربری(آیدی کاربر مورد انتظار است)
-   * @param needToChange زیرمنو که نیاز به تغییر دارد(آیدی زیرمنو و وضعیت دسترسی مورد انتظار است)
-   * @returns پیام پاسخ کوتاه سرور
-   */
   public async ChangeUserWebProcessAccess(
-    userInfo: SoftwareUserInfo,
-    needToChange: ApiProcess
+    userId: number,
+    pId: number,
+    pAccess: boolean
   ): Promise<ApiResponse<ShortResponse>> {
     const apiUrl =
       API_ROUTES.SoftwareUserAPI.UserManagement
         .ChangeSoftwareUserWebProcessAccess;
+    const userInfo: SoftwareUserInfo = { UserId: userId };
+    const needToChange: ApiProcess = { PId: pId, PAccess: pAccess };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SoftwareUserId: userInfo.UserId,
+      PId: needToChange.PId,
+      PAccess: needToChange.PAccess,
+    };
 
-    try {
-      const response = await firstValueFrom(
-        this.http.post<ShortResponse>(apiUrl, {
-          SessionId: this.userAuth.getSessionId(),
-          SoftwareUserId: userInfo.UserId,
-          PId: needToChange.PId,
-          PAccess: needToChange.PAccess,
-        })
-      );
-
-      return { success: true, data: response };
-    } catch (error: unknown) {
-      return handleHttpError<ShortResponse>(error);
-    }
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue);
   }
 
   /**
