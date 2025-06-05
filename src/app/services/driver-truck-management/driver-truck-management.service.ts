@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { API_ROUTES } from 'app/constants/api';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { TruckDriverInfo } from 'app/data/model/truck-driver-info.model';
@@ -13,13 +13,15 @@ import {
 } from 'app/data/model/username-password.model';
 import { TruckInfo } from 'app/data/model/truck-info.model';
 import { TruckNativenessInfo } from 'app/data/model/truck-nativeness-info.model';
+import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Driver_TruckManagementService {
-  constructor(private http: HttpClient, private userAuth: UserAuthService) {}
-
+  private http = inject(HttpClient);
+  private userAuth = inject(UserAuthService);
+  private apiCommunicator = inject(APICommunicationManagementService);
   //#region Driver
 
   /**
