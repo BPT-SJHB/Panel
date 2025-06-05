@@ -213,35 +213,27 @@ export class UserManagementService {
     >(apiUrl, bodyValue);
   }
 
-  /**
-   * این متود برای تغییر دسترسی کاربر مورد نظر در سطح منو اصلی است.
-   * فعال یا غیر فعال شدن بستگی به محتوای ارسالی ما دارد
-   * @param userInfo اطلاعات کاربری(آیدی کاربر مورد انتظار است)
-   * @param needToChange منو اصلی که نیاز به تغییر دارد(آیدی منو اصلی و وضعیت دسترسی مورد انتظار است)
-   * @returns پیام پاسخ کوتاه سرور
-   */
   public async ChangeUserWebProcessGroupAccess(
-    userInfo: SoftwareUserInfo,
-    needToChange: ApiGroupProcess
+    userId: number,
+    pGId: number,
+    pGAccess: boolean
   ): Promise<ApiResponse<ShortResponse>> {
     const apiUrl =
       API_ROUTES.SoftwareUserAPI.UserManagement
         .ChangeSoftwareUserWebProcessGroupAccess;
+    const userInfo: SoftwareUserInfo = { UserId: userId };
+    const needToChange: ApiGroupProcess = { PGId: pGId, PGAccess: pGAccess };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SoftwareUserId: userInfo.UserId,
+      PGId: needToChange.PGId,
+      PGAccess: needToChange.PGAccess,
+    };
 
-    try {
-      const response = await firstValueFrom(
-        this.http.post<ShortResponse>(apiUrl, {
-          SessionId: this.userAuth.getSessionId(),
-          SoftwareUserId: userInfo.UserId,
-          PGId: needToChange.PGId,
-          PGAccess: needToChange.PGAccess,
-        })
-      );
-
-      return { success: true, data: response };
-    } catch (error: unknown) {
-      return handleHttpError<ShortResponse>(error);
-    }
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue);
   }
 
   /**
