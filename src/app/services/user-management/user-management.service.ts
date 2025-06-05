@@ -16,6 +16,11 @@ import {
   UsernamePassword,
 } from 'app/data/model/username-password.model';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
+import { mockUserTypes } from 'app/data/mock/user-types.mock';
+import { mockSoftwareUserInfo } from 'app/data/mock/software-user-info.mock';
+import { mockShortResponse } from 'app/data/mock/short-response.mock';
+import { mockAPIUsernamePassword } from 'app/data/mock/username-password.mock';
+import { mockApiGroupProcess } from 'app/data/mock/api-group-process.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -43,7 +48,7 @@ export class UserManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue);
+    >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
 
@@ -64,7 +69,7 @@ export class UserManagementService {
     var response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       APIUsernamePassword
-    >(apiUrl, bodyValue);
+    >(apiUrl, bodyValue, mockAPIUsernamePassword);
     //#endregion
 
     //#region Return
@@ -95,7 +100,7 @@ export class UserManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue);
+    >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
 
@@ -114,7 +119,7 @@ export class UserManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue);
+    >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
 
@@ -134,7 +139,7 @@ export class UserManagementService {
     const response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       any
-    >(apiUrl, bodyValue);
+    >(apiUrl, bodyValue, mockSoftwareUserInfo);
     //#endregion
 
     //#region Return
@@ -162,7 +167,7 @@ export class UserManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       SoftwareUserInfo
-    >(apiUrl, bodyValue);
+    >(apiUrl, bodyValue, mockSoftwareUserInfo);
     //#endregion
   }
 
@@ -178,7 +183,7 @@ export class UserManagementService {
     const response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       UserType[]
-    >(apiUrl, bodyValue);
+    >(apiUrl, bodyValue, mockUserTypes);
     //#endregion
 
     //#region Return
@@ -213,7 +218,7 @@ export class UserManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue);
+    >(apiUrl, bodyValue, mockShortResponse);
   }
 
   public async ChangeUserWebProcessGroupAccess(
@@ -225,7 +230,11 @@ export class UserManagementService {
       API_ROUTES.SoftwareUserAPI.UserManagement
         .ChangeSoftwareUserWebProcessGroupAccess;
     const userInfo: SoftwareUserInfo = { UserId: userId };
-    const needToChange: ApiGroupProcess = { PGId: pGId, PGAccess: pGAccess };
+    const needToChange: ApiGroupProcess = {
+      PGId: pGId,
+      WebProcesses: [],
+      PGAccess: pGAccess,
+    };
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
       SoftwareUserId: userInfo.UserId,
@@ -236,7 +245,7 @@ export class UserManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue);
+    >(apiUrl, bodyValue, mockShortResponse);
   }
 
   public async GetWebProcessGroups_WebProcesses(
@@ -257,6 +266,6 @@ export class UserManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ApiGroupProcess[]
-    >(apiUrl, bodyValue);
+    >(apiUrl, bodyValue, mockApiGroupProcess);
   }
 }
