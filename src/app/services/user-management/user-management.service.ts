@@ -143,29 +143,24 @@ export class UserManagementService {
     //#endregion
   }
 
-  /**
-   * این تابع برای گرفتن اطلاعات کاربر استفاده خواهد شد
-   * @param mobileNumber شماره موبایل کاربر
-   * @returns اطلاعات کاربری در قالب پاسخ از سرور
-   */
   public async GetSoftwareUserInfo(
     mobileNumber: string
   ): Promise<ApiResponse<SoftwareUserInfo>> {
+    //#region Consts
     const apiUrl =
       API_ROUTES.SoftwareUserAPI.UserManagement.GetSoftwareUserInfo;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SoftwareUserMobileNumber: mobileNumber,
+    };
+    //#endregion
 
-    try {
-      const response = await firstValueFrom(
-        this.http.post<SoftwareUserInfo>(apiUrl, {
-          SessionId: this.userAuth.getSessionId(),
-          SoftwareUserMobileNumber: mobileNumber,
-        })
-      );
-
-      return { success: true, data: response };
-    } catch (error: unknown) {
-      return handleHttpError<SoftwareUserInfo>(error);
-    }
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      SoftwareUserInfo
+    >(apiUrl, bodyValue);
+    //#endregion
   }
 
   /**
