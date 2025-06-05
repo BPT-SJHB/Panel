@@ -8,13 +8,22 @@
 
 <div *ngIf="!isLoading">
   <div class="card">
+     <form class="col-12" (ngSubmit)="getUserAccessMenu()" [class.pointer-events-none]="isLoading"
+    [class.opacity-60]="isLoading" [formGroup]="searchForm">
+    <!-- Search Phone + Refresh -->
+    <div class="flex gap-2">
+      <app-phone-input class="flex-1" placeholder="جستجو کاربر" [control]="searchPhone" />
+      <p-button type="submit" icon="pi pi-search" styleClass="mt-1 w-2rem h-2rem border-circle"
+        (click)="getUserAccessMenu()" [disabled]="this.searchForm.invalid || isLoading" />
+    </div>
+  </form>
     <app-search-input
       (input)="tt.filter($any($event.target).value, 'PGTitle', 'contains')"
     ></app-search-input>
 
     <p-treetable
       #tt
-      [value]="accessTableFiltered"
+      [value]="accessTable"
       [columns]="cols"
       selectionMode="checkbox"
       [(selectionKeys)]="selectedNodes"
