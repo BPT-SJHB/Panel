@@ -163,35 +163,31 @@ export class UserManagementService {
     //#endregion
   }
 
-  /**
-   * این متود برای دریافت لیست انواع کاربران ممکن در سیستم را برمیگرداند
-   * @returns لیستی از تمامی انواع کاربران
-   */
   public async GetUserTypes(): Promise<ApiResponse<UserType[]>> {
+    //#region Consts
     const apiUrl = API_ROUTES.SoftwareUserAPI.UserManagement.GetUserTypes;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
 
-    try {
-      const userSession: UserSession = {
-        sessionId: this.userAuth.getSessionId() ?? '',
-      };
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      UserType[]
+    >(apiUrl, bodyValue);
+    //#endregion
 
-      const response = await firstValueFrom(
-        this.http.post<[UserType]>(apiUrl, userSession)
-      );
-
-      // Trim
-      const newRespond = response.map((x) => ({
+    //#region Return
+    return {
+      success: response.success,
+      data: response.data?.map((x) => ({
         UTId: x.UTId,
         UTTitle: x.UTTitle.trim(),
-      }));
-
-      return {
-        success: true,
-        data: newRespond,
-      };
-    } catch (error: unknown) {
-      return handleHttpError<[UserType]>(error);
-    }
+      })),
+      error: response.error,
+    };
+    //#endregion
   }
 
   /**
