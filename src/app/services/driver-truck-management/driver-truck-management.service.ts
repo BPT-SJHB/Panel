@@ -279,5 +279,37 @@ export class Driver_TruckManagementService {
     //#endregion
   }
 
+  public async SetComposedTruckInfo(
+    truckId: number,
+    driverId: number,
+    turnId: number,
+    moneyWalletId: number
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.Driver_Truck_Wallet.GetComposedTruckInfo;
+    const truckComposedInfo: TruckComposedInfo = {
+      Truck: { TruckId: truckId },
+      TruckDriver: { DriverId: driverId },
+      Turn: { nEnterExitId: turnId },
+      MoneyWallet: { MoneyWalletId: moneyWalletId },
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TruckId: truckComposedInfo.Truck.TruckId,
+      TruckDriverId: truckComposedInfo.TruckDriver.DriverId,
+      TurnId: truckComposedInfo.Turn.nEnterExitId,
+      MoneyWalletId: truckComposedInfo.MoneyWallet.MoneyWalletId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue);
+    //#endregion
+  }
+
   //#endregion
 }
