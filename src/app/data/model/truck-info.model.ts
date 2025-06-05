@@ -1,5 +1,5 @@
 export interface TruckInfo {
-  TruckId?: number;
+  TruckId: number;
   LoaderTypeId?: number;
   Pelak?: string;
   Serial?: string;
