@@ -1,0 +1,216 @@
+<div class="p-fluid grid gap-4 relative">
+  <!-- @if loading spinner -->
+  @if (loading) {
+  <div
+    style="position: absolute"
+    class="h-full z-5 flex align-items-center justify-content-center w-full"
+  >
+    <div
+      style="position: absolute; opacity: 0.2"
+      class="h-full w-full bg-white"
+    ></div>
+    <i class="pi pi-spin pi-spinner primary" style="font-size: 5rem"></i>
+  </div>
+  }
+
+  <form
+    class="col-12"
+    [class.pointer-events-none]="loading"
+    [class.opacity-60]="loading"
+  >
+    <div class="flex gap-2">
+      <app-generic-input
+        [control]="searchNationalId"
+        validationField="nationalId"
+        icon="pi pi-id-card"
+        class="flex-1"
+        placeholder="جستجو براساس شماره ملی راننده"
+      />
+      <p-button
+        (click)="loadDriverInfoFromOutdoorApi()"
+        [disabled]="this.searchForm.invalid"
+        size="small"
+        severity="info"
+        label="استعلام از سازمان"
+      />
+      <p-button
+        (click)="loadDriverInfoFromLocalApi()"
+        [disabled]="this.searchForm.invalid"
+        size="small"
+        severity="warn"
+        label="استعلام از سامانه"
+      />
+    </div>
+  </form>
+
+  <div
+    class="p-fluid grid gap-4 relative"
+    [class.pointer-events-none]="loading"
+    [class.opacity-60]="loading"
+  >
+    <div class="grid">
+      <div class="col-12 md:col-6">
+        <app-generic-input
+          label="کد راننده"
+          class="flex-1"
+          placeholder="کد راننده"
+          [readOnly]="true"
+          [control]="driverId"
+          validationField="driverId"
+          [addonWidth]="addonWidth"
+        />
+      </div>
+
+      <div class="col-12 md:col-6">
+        <app-generic-input
+          label="کدملی"
+          class="flex-1"
+          placeholder="کدملی راننده"
+          [control]="nationalId"
+          validationField="nationalId"
+          [readOnly]="true"
+          [addonWidth]="addonWidth"
+        />
+      </div>
+
+      <div class="col-12 md:col-6">
+        <app-generic-input
+          label="نام راننده"
+          class="flex-1"
+          placeholder="نام راننده"
+          [control]="fullName"
+          validationField="fullName"
+          [readOnly]="true"
+          [addonWidth]="addonWidth"
+        />
+      </div>
+
+      <div class="col-12 md:col-6 relative">
+        <app-generic-input
+          label="شماره  تلفن"
+          class="flex-1"
+          placeholder="شماره تلفن"
+          buttonIcon="pi pi-save"
+          [control]="mobile"
+          validationField="mobile"
+          [addonWidth]="addonWidth"
+          [buttonDisabled]="driverForm.invalid"
+          (clickButton)="updateDriverMobileNumber()"
+        />
+      </div>
+
+      <div class="col-12 md:col-6">
+        <app-generic-input
+          label="نام پدر"
+          class="flex-1"
+          placeholder="نام پدر"
+          [control]="fatherName"
+          validationField="fatherName"
+          [readOnly]="true"
+          [addonWidth]="addonWidth"
+        />
+      </div>
+
+      <div class="col-12 md:col-6">
+        <app-generic-input
+          label="شماره گواهینامه"
+          class="flex-1"
+          placeholder="شماره گواهینامه"
+          [control]="licenseNumber"
+          validationField="licenseNumber"
+          [readOnly]="true"
+          [addonWidth]="addonWidth"
+        />
+      </div>
+
+      <div class="col-12 md:col-6">
+        <app-generic-input
+          label="شماره هوشمند"
+          class="flex-1"
+          placeholder="شماره هوشمند"
+          [control]="smartCard"
+          validationField="smartCard"
+          [readOnly]="true"
+          [addonWidth]="addonWidth"
+        />
+      </div>
+
+      <div class="col-12 md:col-6">
+        <app-generic-input
+          label="آدرس"
+          class="flex-1"
+          placeholder="آدرس راننده"
+          [control]="address"
+          validationField="address"
+          [readOnly]="true"
+          [addonWidth]="addonWidth"
+        />
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div
+      class="col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center"
+    >
+      <p-button
+        (click)="activateDriverSms()"
+        [disabled]="this.driverForm.invalid || loading"
+        severity="warn"
+        label="فعال سازی پیامک"
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+      ></p-button>
+
+      <p-button
+        (click)="sendWebsiteLink()"
+        [disabled]="this.driverForm.invalid || loading"
+        severity="warn"
+        label="ارسال لینک سامانه"
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+      ></p-button>
+
+      <p-button
+        (click)="resetDriverPassword()"
+        [disabled]="this.driverForm.invalid || loading"
+        severity="info"
+        label="ایجاد رمز عبور جدید"
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+      ></p-button>
+    </div>
+  </div>
+
+  <div class="card flex justify-center">
+    <p-dialog
+      header="رمز عبور جدید"
+      [modal]="true"
+      (onHide)="onCloseDialog()"
+      [(visible)]="passwordDialogVisible"
+      [style]="{ width: '25rem' }"
+    >
+      <div class="flex gap-3 flex-column">
+        <div class="flex align-items-center justify-content-between">
+          <span class="w-8rem"> شناسه کابری: </span>
+          <p-button
+            (click)="copyToClipboard(driverUserNameDialog)"
+            size="small"
+            styleClass="px-4 w-10rem"
+            severity="info"
+          >
+            {{ driverUserNameDialog }}
+          </p-button>
+        </div>
+
+        <div class="flex align-items-center justify-content-between">
+          <span class="w-8rem"> رمز عبور جدید </span>
+          <p-button
+            (click)="copyToClipboard(driverNewPasswordDialog)"
+            size="small"
+            styleClass="px-4 w-10rem"
+            severity="primary"
+          >
+            {{ driverNewPasswordDialog }}
+          </p-button>
+        </div>
+      </div>
+    </p-dialog>
+  </div>
+</div>
