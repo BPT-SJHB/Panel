@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { API_ROUTES } from 'app/constants/api';
-import { firstValueFrom, map } from 'rxjs';
+import { firstValueFrom, map, retry } from 'rxjs';
 import { UserAuthService } from '../user-auth-service/user-auth.service';
 import { UserSession } from 'app/data/model/user-session.model';
 import { UserType } from 'app/data/model/user-type.model';
@@ -15,12 +15,15 @@ import {
   APIUsernamePassword,
   UsernamePassword,
 } from 'app/data/model/username-password.model';
+import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserManagementService {
-  constructor(private http: HttpClient, private userAuth: UserAuthService) {}
+  private apiCommunicator = inject(APICommunicationManagementService);
+  private http = inject(HttpClient);
+  private userAuth = inject(UserAuthService);
 
   public async SendWebsiteLink(
     userId: number
