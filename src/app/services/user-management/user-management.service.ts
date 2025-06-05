@@ -236,29 +236,24 @@ export class UserManagementService {
     >(apiUrl, bodyValue);
   }
 
-  /**
-   * آین متود برای گرفتن همه انواع منو‌ها و زیر منوهای موجود در سیستم طراحی شده است
-   * @param mobileNumber شماره تلفن ثبت شده کاربر
-   * @returns اطلاعات منو ها و زیر منو ها در قالب پاسح سرور
-   */
   public async GetWebProcessGroups_WebProcesses(
     mobileNumber: string
   ): Promise<ApiResponse<ApiGroupProcess[]>> {
     const apiUrl =
       API_ROUTES.SoftwareUserAPI.UserManagement
         .GetWebProcessGroups_WebProcesses;
+    const userInfo: SoftwareUserInfo = {
+      UserId: 0,
+      MobileNumber: mobileNumber,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SoftwareUserMobileNumber: userInfo.MobileNumber,
+    };
 
-    try {
-      const response = await firstValueFrom(
-        this.http.post<ApiGroupProcess[]>(apiUrl, {
-          SessionId: this.userAuth.getSessionId(),
-          SoftwareUserMobileNumber: mobileNumber,
-        })
-      );
-
-      return { success: true, data: response };
-    } catch (error: unknown) {
-      return handleHttpError<ApiGroupProcess[]>(error);
-    }
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ApiGroupProcess[]
+    >(apiUrl, bodyValue);
   }
 }
