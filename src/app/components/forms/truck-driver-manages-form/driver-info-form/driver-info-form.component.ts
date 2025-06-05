@@ -57,20 +57,25 @@ export class DriverInfoFormComponent {
   }
 
   async updateDriverMobileNumber(): Promise<void> {
-    console.log("click");
-    
+    console.log('click');
+
     if (this.driverForm.invalid || this.loading) return;
     this.loading = true;
 
     try {
       const driverInfo = this.getDriverInfoFromForm();
-      const response = await this.driverTruckManager.RegisterNew_EditDriverMobileNumber(driverInfo);
+      const response =
+        await this.driverTruckManager.RegisterNew_EditDriverMobileNumber(
+          driverInfo
+        );
 
       if (!this.isSuccessful(response)) return;
       console.log(response.data);
-      
-      this.toast.success('موفق', response.data?.Message ?? 'شماره تلفن راننده  تغییر یافت.');
-      
+
+      this.toast.success(
+        'موفق',
+        response.data?.Message ?? 'شماره تلفن راننده  تغییر یافت.'
+      );
     } catch {
       this.toast.error('خطا', 'در بروزرسانی شماره همراه راننده مشکلی پیش آمد.');
     } finally {
@@ -83,14 +88,17 @@ export class DriverInfoFormComponent {
     this.loading = true;
 
     try {
-      const response = await this.driverTruckManager.GetDriverInfoFromOutdoorAPI({
+      const response = await this.driverTruckManager.GetDriverInfoFromAPI({
         NationalCode: this.searchNationalId.value,
       });
 
       if (!this.isSuccessful(response)) return;
       this.populateDriverForm(response.data as TruckDriverInfo);
     } catch {
-      this.toast.error('خطا', 'در دریافت اطلاعات از سامانه بیرونی مشکلی پیش آمد.');
+      this.toast.error(
+        'خطا',
+        'در دریافت اطلاعات از سامانه بیرونی مشکلی پیش آمد.'
+      );
     } finally {
       this.loading = false;
     }
@@ -108,7 +116,10 @@ export class DriverInfoFormComponent {
       if (!this.isSuccessful(response)) return;
       this.populateDriverForm(response.data as TruckDriverInfo);
     } catch {
-      this.toast.error('خطا', 'در دریافت اطلاعات از سامانه محلی مشکلی پیش آمد.');
+      this.toast.error(
+        'خطا',
+        'در دریافت اطلاعات از سامانه محلی مشکلی پیش آمد.'
+      );
     } finally {
       this.loading = false;
     }
@@ -120,7 +131,9 @@ export class DriverInfoFormComponent {
 
     try {
       const driverInfo = this.getDriverInfoFromForm();
-      const response = await this.driverTruckManager.ResetDriverPassword(driverInfo);
+      const response = await this.driverTruckManager.ResetDriverPassword(
+        driverInfo
+      );
 
       if (!this.isSuccessful(response)) return;
 
@@ -140,10 +153,15 @@ export class DriverInfoFormComponent {
 
     try {
       const driverInfo = this.getDriverInfoFromForm();
-      const response = await this.driverTruckManager.ActivateDriverSMS(driverInfo);
+      const response = await this.driverTruckManager.ActivateDriverSMS(
+        driverInfo
+      );
 
       if (!this.isSuccessful(response)) return;
-      this.toast.success('موفق', response.data?.Message ?? 'سیستم پیامک با موفقیت فعال شد.');
+      this.toast.success(
+        'موفق',
+        response.data?.Message ?? 'سیستم پیامک با موفقیت فعال شد.'
+      );
     } catch {
       this.toast.error('خطا', 'در فعال‌سازی سیستم پیامک مشکلی پیش آمد.');
     } finally {
@@ -157,10 +175,15 @@ export class DriverInfoFormComponent {
 
     try {
       const driverInfo = this.getDriverInfoFromForm();
-      const response = await this.driverTruckManager.SendWebsiteLink(driverInfo);
+      const response = await this.driverTruckManager.SendWebsiteLink(
+        driverInfo
+      );
 
       if (!this.isSuccessful(response)) return;
-      this.toast.success('موفق', response.data?.Message ?? 'لینک سامانه با موفقیت ارسال شد.');
+      this.toast.success(
+        'موفق',
+        response.data?.Message ?? 'لینک سامانه با موفقیت ارسال شد.'
+      );
     } catch {
       this.toast.error('خطا', 'در ارسال لینک سامانه مشکلی پیش آمد.');
     } finally {
@@ -170,7 +193,10 @@ export class DriverInfoFormComponent {
 
   private isSuccessful(response: ApiResponse<any>): boolean {
     if (!response.success || !response.data) {
-      this.toast.error('خطا', response.error?.message ?? 'خطای غیرمنتظره‌ای رخ داد');
+      this.toast.error(
+        'خطا',
+        response.error?.message ?? 'خطای غیرمنتظره‌ای رخ داد'
+      );
       return false;
     }
     return true;
