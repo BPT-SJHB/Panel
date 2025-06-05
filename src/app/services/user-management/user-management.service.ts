@@ -44,35 +44,36 @@ export class UserManagementService {
     //#endregion
   }
 
-  /**
-   * این متود برای تغییر رمز عبور کاربران مورد استفاده قرار خواهد گرفت
-   * @param userInfo اطلاعات کاربری
-   * @returns شناسه و رمز جدید کاربر
-   */
   public async ResetSoftwareUserPassword(
-    userInfo: SoftwareUserInfo
+    userId: number
   ): Promise<ApiResponse<UsernamePassword>> {
+    //#region Consts
     const apiUrl =
       API_ROUTES.SoftwareUserAPI.UserManagement.ResetSoftwareUserPassword;
+    const userInfo: SoftwareUserInfo = { UserId: userId };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SoftwareUserId: userInfo.UserId,
+    };
+    //#endregion
 
-    try {
-      const response = await firstValueFrom(
-        this.http.post<APIUsernamePassword>(apiUrl, {
-          SessionId: this.userAuth.getSessionId(),
-          SoftwareUserId: userInfo.UserId,
-        })
-      );
+    //#region Request
+    var response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      APIUsernamePassword
+    >(apiUrl, bodyValue);
+    //#endregion
 
-      return {
-        success: true,
-        data: {
-          Username: response.UserShenaseh,
-          Password: response.UserPassword,
-        },
-      };
-    } catch (error: unknown) {
-      return handleHttpError<UsernamePassword>(error);
-    }
+    //#region Return
+    return {
+      success: response.success,
+      data: {
+        Username: response.data?.UserShenaseh!,
+        Password: response.data?.UserPassword!,
+      },
+      error: response.error,
+    };
+    //#endregion
   }
 
   /**
