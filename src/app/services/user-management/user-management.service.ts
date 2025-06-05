@@ -96,37 +96,23 @@ export class UserManagementService {
     //#endregion
   }
 
-  /**
-   * این متود برای اعمال تغییر بر روی اطلاعات کاربر از قبل ثبت‌نام شده است
-   * @param userInfo اطلاعات کاربری
-   * @returns پیام تایید ثبت تغییرات اطلاعات کاربر در صورت تغییر اطلاعات کاربر
-   */
   public async EditSoftwareUser(
     userInfo: SoftwareUserInfo
   ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
     const apiUrl = API_ROUTES.SoftwareUserAPI.UserManagement.EditSoftwareUser;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      RawSoftwareUser: userInfo,
+    };
+    //#endregion
 
-    // const sampleData: SoftwareUserInfo = {
-    //   UserId: 21,
-    //   UserName: 'مرتضی شاهمرادی',
-    //   MobileNumber: '09132043148',
-    //   UserTypeId: 1,
-    //   UserActive: true,
-    //   SMSOwnerActive: false,
-    // };
-
-    try {
-      const response = await firstValueFrom(
-        this.http.post<ShortResponse>(apiUrl, {
-          SessionId: this.userAuth.getSessionId(),
-          RawSoftwareUser: userInfo,
-        })
-      );
-
-      return { success: true, data: response };
-    } catch (error: unknown) {
-      return handleHttpError<ShortResponse>(error);
-    }
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue);
+    //#endregion
   }
 
   /**
