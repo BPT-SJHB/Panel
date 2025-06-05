@@ -90,15 +90,17 @@ export class UsersMenuAccessFormComponent {
           if (key.includes('-')) {
             disablePromises.push(
               this.userManager.ChangeUserWebProcessAccess(
-                { UserId: this.userInfo.UserId },
-                { PId: Number(key.split('-')[1]), PAccess: false }
+                this.userInfo.UserId,
+                Number(key.split('-')[1]),
+                false
               )
             );
           } else {
             disablePromises.push(
               this.userManager.ChangeUserWebProcessGroupAccess(
-                { UserId: this.userInfo.UserId },
-                { PGId: Number(key), PGAccess: false }
+                this.userInfo.UserId,
+                Number(key),
+                false
               )
             );
           }
@@ -129,15 +131,17 @@ export class UsersMenuAccessFormComponent {
           if (key.includes('-')) {
             enablePromises.push(
               this.userManager.ChangeUserWebProcessAccess(
-                { UserId: this.userInfo.UserId },
-                { PId: Number(key.split('-')[1]), PAccess: true }
+                this.userInfo.UserId,
+                Number(key.split('-')[1]),
+                true
               )
             );
           } else {
             enablePromises.push(
               this.userManager.ChangeUserWebProcessGroupAccess(
-                { UserId: this.userInfo.UserId },
-                { PGId: Number(key), PGAccess: true }
+                this.userInfo.UserId,
+                Number(key),
+                true
               )
             );
           }
