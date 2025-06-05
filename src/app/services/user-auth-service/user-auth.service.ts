@@ -119,7 +119,7 @@ export class UserAuthService implements IUserAuthService {
     return this.cookieService.get(this.sessionKey) || null;
   }
 
-  private setSessionId(sessionId: string): void {
+  public setSessionId(sessionId: string): void {
     if (this.getSessionId()) {
       this.logout();
     }
