@@ -254,6 +254,29 @@ export class Driver_TruckManagementService {
     //#endregion
   }
 
+  //#endregion
+
+  //#region Relations of Driver, Truck, MoneyWallet
+
+  public async GetComposedTruckInfo(
+    truckId: number
+  ): Promise<ApiResponse<TruckComposedInfo>> {
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.Driver_Truck_Wallet.GetComposedTruckInfo;
+    const truckInfo: TruckInfo = { TruckId: truckId };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TruckId: truckInfo.TruckId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      TruckComposedInfo
+    >(apiUrl, bodyValue);
+    //#endregion
   }
 
   //#endregion
