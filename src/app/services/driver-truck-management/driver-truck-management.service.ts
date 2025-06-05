@@ -185,73 +185,51 @@ export class Driver_TruckManagementService {
 
   //#region Truck
 
-  /**
-   * این متود برای گرفتن اطلاعات ناوگان از سرور های خارجی
-   * مورد استفاده قرار خواهد گرفت
-   * @param truckInfo SmartCardNo
-   * @returns ApiResponse <= TruckInfo
-   */
-  public async GetTruckInfoFromOutdoorAPI(
-    truckInfo: TruckInfo
+  public async GetTruckInfoFromAPI(
+    smartCardNo: string
   ): Promise<ApiResponse<TruckInfo>> {
-    const apiUrl =
+    //#region Consts
+    const truckInfo: TruckInfo = {
+      TruckId: 0,
+      SmartCardNo: smartCardNo,
+    };
+    const localApiUrl =
+      API_ROUTES.TransportationAPI.Truck.GetTruckInfoFromLocalAPI;
+    const outDoorApiUrl =
       API_ROUTES.TransportationAPI.Truck.GetTruckInfoFromOutdoorAPI;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SmartCardNo: truckInfo.SmartCardNo,
+    };
+    //#endregion
 
-    try {
-      const response = await firstValueFrom(
-        this.http.post<TruckInfo>(apiUrl, {
-          SessionId: this.userAuth.getSessionId(),
-          SmartCardNo: truckInfo.SmartCardNo,
-        })
-      );
+    //#region Request
+    var response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      TruckInfo
+    >(localApiUrl, bodyValue);
 
-      return {
-        success: true,
-        data: {
-          TruckId: response.TruckId,
-          LoaderTypeId: response.LoaderTypeId,
-          Pelak: response.Pelak?.split('ع').join('-'),
-          Serial: response.Serial,
-          SmartCardNo: response.SmartCardNo,
-        },
-      };
-    } catch (error: unknown) {
-      return handleHttpError<TruckInfo>(error);
+    if (!response.success) {
+      response = await this.apiCommunicator.CommunicateWithAPI_Post<
+        typeof bodyValue,
+        TruckInfo
+      >(outDoorApiUrl, bodyValue);
     }
-  }
+    //#endregion
 
-  /**
-   * این متود برای گرفتن اطلاعات ناوگان از سرور های داخلی
-   * مورد استفاده قرار خواهد گرفت
-   * @param truckInfo SmartCardNo
-   * @returns ApiResponse <= TruckInfo
-   */
-  public async GetTruckInfoFromLocalAPI(
-    truckInfo: TruckInfo
-  ): Promise<ApiResponse<TruckInfo>> {
-    const apiUrl = API_ROUTES.TransportationAPI.Truck.GetTruckInfoFromLocalAPI;
-
-    try {
-      const response = await firstValueFrom(
-        this.http.post<TruckInfo>(apiUrl, {
-          SessionId: this.userAuth.getSessionId(),
-          SmartCardNo: truckInfo.SmartCardNo,
-        })
-      );
-
-      return {
-        success: true,
-        data: {
-          TruckId: response.TruckId,
-          LoaderTypeId: response.LoaderTypeId,
-          Pelak: response.Pelak?.split('ع').join('-'),
-          Serial: response.Serial,
-          SmartCardNo: response.SmartCardNo,
-        },
-      };
-    } catch (error: unknown) {
-      return handleHttpError<TruckInfo>(error);
-    }
+    //#region Return
+    return {
+      success: response.success,
+      data: {
+        TruckId: response.data?.TruckId!,
+        LoaderTypeId: response.data?.LoaderTypeId,
+        Pelak: response.data?.Pelak?.split('ع').join('-'),
+        Serial: response.data?.Serial,
+        SmartCardNo: response.data?.SmartCardNo,
+      },
+      error: response.error,
+    };
+    //#endregion
   }
 
   /**
