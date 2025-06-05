@@ -8,7 +8,13 @@ import { SearchInputComponent } from 'app/components/shared/inputs/search-input/
 import { SoftwareUserInfo } from 'app/data/model/software-user-info.model';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ButtonModule } from 'primeng/button';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { PhoneInputComponent } from 'app/components/shared/inputs/phone-input/phone-input.component';
 import { ToastService } from 'app/services/toast-service/toast.service';
 import { ApiResponse } from 'app/data/model/api-Response.model';
@@ -27,13 +33,12 @@ interface SelectedNodes {
     ButtonModule,
     ProgressSpinnerModule,
     ReactiveFormsModule,
-    PhoneInputComponent
+    PhoneInputComponent,
   ],
   templateUrl: './users-menu-access-form.component.html',
   styleUrl: './users-menu-access-form.component.scss',
 })
 export class UsersMenuAccessFormComponent {
-
   searchForm: FormGroup;
 
   isLoading: boolean = false;
@@ -56,15 +61,16 @@ export class UsersMenuAccessFormComponent {
     private fb: FormBuilder
   ) {
     this.searchForm = this.fb.group({
-      searchPhone: ['',
+      searchPhone: [
+        '',
         [
           Validators.required,
           Validators.minLength(11),
           Validators.maxLength(11),
-          Validators.pattern('09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}')
-        ]
-      ]
-    })
+          Validators.pattern('09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}'),
+        ],
+      ],
+    });
   }
 
   async SaveChanges() {
@@ -100,10 +106,14 @@ export class UsersMenuAccessFormComponent {
       }
 
       const disableResults = await Promise.allSettled(disablePromises);
-      const firstDisableError = disableResults.find(r => r.status === 'rejected') as PromiseRejectedResult | undefined;
+      const firstDisableError = disableResults.find(
+        (r) => r.status === 'rejected'
+      ) as PromiseRejectedResult | undefined;
 
       if (firstDisableError) {
-        const error = (firstDisableError.reason as any)?.error?.message ?? 'خطای غیرمنتظره‌ای در حذف دسترسی رخ داد';
+        const error =
+          (firstDisableError.reason as any)?.error?.message ??
+          'خطای غیرمنتظره‌ای در حذف دسترسی رخ داد';
         this.toast.error('خطا', error);
         return;
       }
@@ -135,20 +145,27 @@ export class UsersMenuAccessFormComponent {
       }
 
       const enableResults = await Promise.allSettled(enablePromises);
-      const firstEnableError = enableResults.find(r => r.status === 'rejected') as PromiseRejectedResult | undefined;
-      const firstEnableSuccess = enableResults.find(r => r.status === 'fulfilled') as PromiseFulfilledResult<ApiResponse<ShortResponse>> | undefined;
+      const firstEnableError = enableResults.find(
+        (r) => r.status === 'rejected'
+      ) as PromiseRejectedResult | undefined;
+      const firstEnableSuccess = enableResults.find(
+        (r) => r.status === 'fulfilled'
+      ) as PromiseFulfilledResult<ApiResponse<ShortResponse>> | undefined;
 
       if (firstEnableError) {
-        const error = (firstEnableError.reason as any)?.error?.message ?? 'خطای غیرمنتظره‌ای در اعمال دسترسی رخ داد';
+        const error =
+          (firstEnableError.reason as any)?.error?.message ??
+          'خطای غیرمنتظره‌ای در اعمال دسترسی رخ داد';
         this.toast.error('خطا', error);
       } else {
-        const message = firstEnableSuccess?.value?.data?.Message ?? 'دسترسی با موفقیت اعمال شد';
+        const message =
+          firstEnableSuccess?.value?.data?.Message ??
+          'دسترسی با موفقیت اعمال شد';
         this.toast.success('موفق', message);
       }
 
       // === Reload the table ===
       await this.LoadWebProcessGroups_WebProcessesTable();
-
     } catch (err) {
       this.toast.error('خطا', 'خطای بحرانی در ذخیره‌سازی رخ داد');
     } finally {
@@ -161,7 +178,10 @@ export class UsersMenuAccessFormComponent {
       this.userInfo.MobileNumber!
     );
     if (!response.success || !response.data) {
-      this.toast.error('خطا', response.error?.message ?? 'خطا در هنگام براگزاری اطلاعات');
+      this.toast.error(
+        'خطا',
+        response.error?.message ?? 'خطا در هنگام براگزاری اطلاعات'
+      );
       this.accessTable = [];
       return;
     }
@@ -203,21 +223,28 @@ export class UsersMenuAccessFormComponent {
   }
 
   async getUserAccessMenu() {
-    if (this.searchForm.invalid || this.isLoading)
-      return;
+    if (this.searchForm.invalid || this.isLoading) return;
 
     this.isLoading = true;
     try {
-      const response = await this.userManager.GetSoftwareUserInfo(this.searchPhone.value);
+      const response = await this.userManager.GetSoftwareUserInfo(
+        this.searchPhone.value
+      );
       if (!response.success || !response.data) {
-        this.toast.error('خطا', response.error?.message ?? 'خطا در هنگام براگزاری اطلاعات');
+        this.toast.error(
+          'خطا',
+          response.error?.message ?? 'خطا در هنگام براگزاری اطلاعات'
+        );
         this.accessTable = [];
         return;
       }
 
-      this.userInfo = {UserId:response.data?.UserId, MobileNumber:response.data?.MobileNumber}
+      this.userInfo = {
+        UserId: response.data?.UserId,
+        MobileNumber: response.data?.MobileNumber,
+      };
     } finally {
-      this.isLoading =false;
+      this.isLoading = false;
     }
 
     this.isLoading = true;
