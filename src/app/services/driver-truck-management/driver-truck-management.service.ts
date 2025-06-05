@@ -1,27 +1,25 @@
-import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { API_ROUTES } from 'app/constants/api';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { TruckDriverInfo } from 'app/data/model/truck-driver-info.model';
-import { firstValueFrom } from 'rxjs';
 import { UserAuthService } from '../user-auth-service/user-auth.service';
-import { handleHttpError } from 'app/utils/http-error-handler';
 import { ShortResponse } from 'app/data/model/short-response.model';
 import {
   APIUsernamePassword,
   UsernamePassword,
 } from 'app/data/model/username-password.model';
-import { TruckInfo } from 'app/data/model/truck-info.model';
+import { TruckComposedInfo, TruckInfo } from 'app/data/model/truck-info.model';
 import { TruckNativenessInfo } from 'app/data/model/truck-nativeness-info.model';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
+import { ErrorCodes } from 'app/constants/error-messages';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Driver_TruckManagementService {
-  private http = inject(HttpClient);
   private userAuth = inject(UserAuthService);
   private apiCommunicator = inject(APICommunicationManagementService);
+
   //#region Driver
 
   public async GetDriverInfoFromAPI(
