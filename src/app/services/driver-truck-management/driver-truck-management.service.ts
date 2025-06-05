@@ -229,36 +229,31 @@ export class Driver_TruckManagementService {
     //#endregion
   }
 
-  /**
-   * این متود برای تغییر اطلاعات بومی‌گری ناوگان
-   * مورد استفاده قرار خواهد گرفت
-   * @param truckInfo TruckId
-   * @param truckNativenessInfo TruckNativenessExpireDate
-   * @returns ApiResponse <= TruckInfo + TruckNativenessExpireDate
-   */
   public async ChangeTruckNativeness(
-    truckInfo: TruckInfo,
-    truckNativenessInfo: TruckNativenessInfo
+    truckId: number,
+    truckNativenessExpireDate: string
   ): Promise<ApiResponse<TruckInfo>> {
+    //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.Truck.ChangeTruckNativeness;
+    const truckInfo: TruckInfo = { TruckId: truckId };
+    const truckNativenessInfo: TruckNativenessInfo = {
+      TruckNativenessExpireDate: truckNativenessExpireDate,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TruckId: truckInfo.TruckId,
+      TruckNativenessExpireDate: truckNativenessInfo.TruckNativenessExpireDate,
+    };
+    //#endregion
 
-    try {
-      const response = await firstValueFrom(
-        this.http.post<TruckInfo>(apiUrl, {
-          SessionId: this.userAuth.getSessionId(),
-          TruckId: truckInfo.TruckId,
-          TruckNativenessExpireDate:
-            truckNativenessInfo.TruckNativenessExpireDate,
-        })
-      );
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      TruckInfo
+    >(apiUrl, bodyValue);
+    //#endregion
+  }
 
-      return {
-        success: true,
-        data: response,
-      };
-    } catch (error: unknown) {
-      return handleHttpError<TruckInfo>(error);
-    }
   }
 
   //#endregion
