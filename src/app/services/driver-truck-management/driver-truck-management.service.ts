@@ -12,6 +12,14 @@ import { TruckComposedInfo, TruckInfo } from 'app/data/model/truck-info.model';
 import { TruckNativenessInfo } from 'app/data/model/truck-nativeness-info.model';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
 import { ErrorCodes } from 'app/constants/error-messages';
+import { mockTruckDriverInfo } from 'app/data/mock/truck-driver-info.model';
+import { mockShortResponse } from 'app/data/mock/short-response.mock';
+import { mockAPIUsernamePassword } from 'app/data/mock/username-password.mock';
+import {
+  mockTruckComposedInfo,
+  mockTruckInfo,
+} from 'app/data/mock/truck-info.mock';
+import { mockTruckNativenessInfo } from 'app/data/mock/truck-nativeness-info.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -50,7 +58,7 @@ export class Driver_TruckManagementService {
       response = await this.apiCommunicator.CommunicateWithAPI_Post<
         typeof bodyValue,
         TruckDriverInfo
-      >(outdoorApiUrl, bodyValue);
+      >(outdoorApiUrl, bodyValue, mockTruckDriverInfo);
     }
 
     return response;
@@ -79,7 +87,7 @@ export class Driver_TruckManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue);
+    >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
 
@@ -100,7 +108,7 @@ export class Driver_TruckManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue);
+    >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
 
@@ -121,7 +129,7 @@ export class Driver_TruckManagementService {
     var response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       APIUsernamePassword
-    >(apiUrl, bodyValue);
+    >(apiUrl, bodyValue, mockAPIUsernamePassword);
     //#endregion
 
     //#region Return
@@ -152,7 +160,7 @@ export class Driver_TruckManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue);
+    >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
 
@@ -182,7 +190,7 @@ export class Driver_TruckManagementService {
     var response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TruckInfo
-    >(localApiUrl, bodyValue);
+    >(localApiUrl, bodyValue, mockTruckInfo);
 
     if (!response.success) {
       response = await this.apiCommunicator.CommunicateWithAPI_Post<
@@ -209,7 +217,7 @@ export class Driver_TruckManagementService {
 
   public async GetTruckNativeness(
     truckId: number
-  ): Promise<ApiResponse<TruckInfo>> {
+  ): Promise<ApiResponse<TruckNativenessInfo>> {
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.Truck.GetTruckNativeness;
     const truckInfo: TruckInfo = { TruckId: truckId };
@@ -222,15 +230,15 @@ export class Driver_TruckManagementService {
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      TruckInfo
-    >(apiUrl, bodyValue);
+      TruckNativenessInfo
+    >(apiUrl, bodyValue, mockTruckNativenessInfo);
     //#endregion
   }
 
   public async ChangeTruckNativeness(
     truckId: number,
     truckNativenessExpireDate: string
-  ): Promise<ApiResponse<TruckInfo>> {
+  ): Promise<ApiResponse<TruckNativenessInfo>> {
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.Truck.ChangeTruckNativeness;
     const truckInfo: TruckInfo = { TruckId: truckId };
@@ -247,8 +255,8 @@ export class Driver_TruckManagementService {
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      TruckInfo
-    >(apiUrl, bodyValue);
+      TruckNativenessInfo
+    >(apiUrl, bodyValue, mockTruckNativenessInfo);
     //#endregion
   }
 
@@ -273,7 +281,7 @@ export class Driver_TruckManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TruckComposedInfo
-    >(apiUrl, bodyValue);
+    >(apiUrl, bodyValue, mockTruckComposedInfo);
     //#endregion
   }
 
@@ -305,7 +313,7 @@ export class Driver_TruckManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue);
+    >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
 
