@@ -24,54 +24,39 @@ export class Driver_TruckManagementService {
   private apiCommunicator = inject(APICommunicationManagementService);
   //#region Driver
 
-  /**
-   * این تابع برای دریافت اطلاعات راننده از سرور های خارج از سیستم مورد استفاده قرار خواهد گرفت
-   * @param truckDriverInfo اطلاعات راننده(در این متود فقط کد ملی راننده نیاز است)
-   * @returns اطلاعات راننده در قالب پاسخ از سرور
-   */
-  public async GetDriverInfoFromOutdoorAPI(
-    truckDriverInfo: TruckDriverInfo
+  public async GetDriverInfoFromAPI(
+    nationalCode: string
   ): Promise<ApiResponse<TruckDriverInfo>> {
-    const apiUrl =
+    //#region Consts
+    const outdoorApiUrl =
       API_ROUTES.TransportationAPI.Driver.GetTruckDriverInfoFromOutdoorAPI;
-
-    try {
-      const response = await firstValueFrom(
-        this.http.post<TruckDriverInfo>(apiUrl, {
-          SessionId: this.userAuth.getSessionId(),
-          TruckDriverNationalCode: truckDriverInfo.NationalCode,
-        })
-      );
-
-      return { success: true, data: response };
-    } catch (error: unknown) {
-      return handleHttpError<TruckDriverInfo>(error);
-    }
-  }
-
-  /**
-   * این تابع برای دریافت اطلاعات راننده از سرور های داخلی سیستم مورد استفاده قرار خواهد گرفت
-   * @param truckDriverInfo اطلاعات راننده (در این متود فقط کد ملی راننده نیاز است)
-   * @returns اطلاعات راننده در قالب پاسخ از سرور
-   */
-  public async GetDriverInfoFromLocalAPI(
-    truckDriverInfo: TruckDriverInfo
-  ): Promise<ApiResponse<TruckDriverInfo>> {
-    const apiUrl =
+    const localApiUrl =
       API_ROUTES.TransportationAPI.Driver.GetTruckDriverInfoFromLocalAPI;
+    const truckDriverInfo: TruckDriverInfo = {
+      DriverId: 0,
+      NationalCode: nationalCode,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TruckDriverNationalCode: truckDriverInfo.NationalCode,
+    };
+    //#endregion
 
-    try {
-      const response = await firstValueFrom(
-        this.http.post<TruckDriverInfo>(apiUrl, {
-          SessionId: this.userAuth.getSessionId(),
-          TruckDriverNationalCode: truckDriverInfo.NationalCode,
-        })
-      );
+    //#region Request + Return
+    var response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      TruckDriverInfo
+    >(localApiUrl, bodyValue);
 
-      return { success: true, data: response };
-    } catch (error: unknown) {
-      return handleHttpError<TruckDriverInfo>(error);
+    if (response.error?.code == ErrorCodes.NotFoundInLocalAPI) {
+      response = await this.apiCommunicator.CommunicateWithAPI_Post<
+        typeof bodyValue,
+        TruckDriverInfo
+      >(outdoorApiUrl, bodyValue);
     }
+
+    return response;
+    //#endregion
   }
 
   /**
