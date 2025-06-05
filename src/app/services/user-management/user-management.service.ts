@@ -76,31 +76,24 @@ export class UserManagementService {
     //#endregion
   }
 
-  /**
-   * این متود برای برای فعال سازی سرویس پیامک کاربر مورد استفاده قرار خواهد گرفت
-   * @param userInfo اطلاعات کاربری
-   * @returns پیام ثبت در صورت فعال شدن سرویس
-   */
   public async ActivateUserSMS(
-    userInfo: SoftwareUserInfo
+    userId: number
   ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
     const apiUrl = API_ROUTES.SoftwareUserAPI.UserManagement.ActivateSMSOwner;
+    const userInfo: SoftwareUserInfo = { UserId: userId };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SoftwareUserId: userInfo.UserId,
+    };
+    //#endregion
 
-    try {
-      const response = await firstValueFrom(
-        this.http.post<ShortResponse>(apiUrl, {
-          SessionId: this.userAuth.getSessionId(),
-          SoftwareUserId: userInfo.UserId,
-        })
-      );
-
-      return {
-        success: true,
-        data: response,
-      };
-    } catch (error: unknown) {
-      return handleHttpError<ShortResponse>(error);
-    }
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue);
+    //#endregion
   }
 
   /**
