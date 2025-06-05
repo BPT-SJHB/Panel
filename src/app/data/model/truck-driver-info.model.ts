@@ -1,6 +1,6 @@
 export interface TruckDriverInfo {
+  DriverId: number;
   NationalCode?: string;
-  DriverId?: number;
   NameFamily?: string;
   MobileNumber?: string;
   FatherName?: string;
