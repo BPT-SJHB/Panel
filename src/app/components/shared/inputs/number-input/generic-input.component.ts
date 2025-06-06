@@ -10,12 +10,14 @@ import {
   ValidationField,
   ValidationSchema,
 } from 'app/constants/validation-schema';
+import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
 
 @Component({
   selector: 'app-generic-input',
   standalone: true,
   imports: [
     ReactiveFormsModule,
+    NgPersianDatepickerModule,
     NgClass,
     InputGroupModule,
     InputGroupAddonModule,
@@ -26,6 +28,7 @@ import {
   styleUrl: './generic-input.component.scss',
 })
 export class GenericInputComponent {
+
   private _control = new FormControl(null);
 
   @Input() validationField: ValidationField | null = null;
@@ -37,6 +40,7 @@ export class GenericInputComponent {
   @Input() addonWidth: string | null = null;
   @Input() buttonIcon = '';
   @Input() buttonDisabled: boolean = false;
+  @Input() type:"text" | "date" = "text"
 
   @Output() clickButton = new EventEmitter<void>();
 
@@ -61,10 +65,17 @@ export class GenericInputComponent {
     if (this.disabled) {
       input.blur();
     }
+
+  }
+
+  onBlurInput(_: HTMLInputElement) {
+    if (this.readOnly) {
+      this.control.markAsUntouched();
+    }
   }
 
   handleClick() {
-    console.log("click");  
+    console.log("click");
     this.clickButton.emit();
   }
 }
