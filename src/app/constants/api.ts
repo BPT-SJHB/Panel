@@ -42,5 +42,14 @@ export const API_ROUTES = {
       SetComposedTruckInfo: `${environment.apiUrl}:${transportationAPIPort}/api/SetComposedTruckInf`,
       GetVirtualWallet: `${environment.apiUrl}:${transportationAPIPort}/api/GetVirtualMoneyWallet`,
     },
+    FPC: {
+      GetFPCs: `${environment.apiUrl}:${transportationAPIPort}/api/GetFPCs`,
+      GetFPC: `${environment.apiUrl}:${transportationAPIPort}/api/GetFPC`,
+      FPCRegistering: `${environment.apiUrl}:${transportationAPIPort}/api/FPCRegistering`,
+      EditFPC: `${environment.apiUrl}:${transportationAPIPort}/api/EditFPC`,
+      ActivateFPCSmsOwner: `${environment.apiUrl}:${transportationAPIPort}/api/ActivateFPCSmsOwner`,
+      ResetFPCUserPassword: `${environment.apiUrl}:${transportationAPIPort}/api/ResetFPCUserPassword`,
+      FPCChangeActiveStatus: `${environment.apiUrl}:${transportationAPIPort}/api/FPCChangeActiveStatus`,
+    },
   },
 };
