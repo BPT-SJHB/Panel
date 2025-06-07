@@ -16,6 +16,7 @@ import { Driver_TruckManagementService } from 'app/services/driver-truck-managem
 import { ToastService } from 'app/services/toast-service/toast.service';
 
 import { GenericInputComponent } from 'app/components/shared/inputs/number-input/generic-input.component';
+import { Jalali } from "jalali-ts";
 
 @Component({
   selector: 'app-truck-info-form',
@@ -54,6 +55,12 @@ export class TruckInfoFormComponent {
     truckNativenessExpiredDate: [Date.now(), ValidationSchema.truckNativenessExpiredDate],
   });
 
+
+  async loadFormsInformation():Promise<void>{
+    await this.loadTruckInfoFromAPI();
+    await this.loadNativenessForm();
+  }
+
   async loadTruckInfoFromAPI(): Promise<void> {
     if (this.searchForm.invalid || this.loading) return;
 
@@ -63,20 +70,21 @@ export class TruckInfoFormComponent {
       if (this.isSuccessful(response)) {
         this.populateTruckInfoForm(response.data!);
       }
-    } finally {
+    }  finally {
       this.loading = false;
     }
   }
 
   async loadNativenessForm(): Promise<void> {
-    if (this.truckInfoForm.invalid || this.loading) return;
+    if (this.truckId.invalid  || this.loading) return;
 
     try {
       this.loading = true;
       const response = await this.truckService.GetTruckNativeness(this.truckId.value);
-      if (this.isSuccessful(response)) {
-        this.populateTruckNativenessForm(response.data!);
-      }
+      if (!this.isSuccessful(response)) return;
+
+      this.populateTruckNativenessForm(response.data!);
+
     } finally {
       this.loading = false;
     }
@@ -118,6 +126,9 @@ export class TruckInfoFormComponent {
   }
 
   populateTruckNativenessForm(info: TruckNativenessInfo): void {
+console.log( info);
+
+
     this.truckNativenessForm.patchValue({
       nativeness: info.TruckNativenessTypeTitle ?? '',
       truckNativenessExpiredDate: info.TruckNativenessExpireDate ?? '',

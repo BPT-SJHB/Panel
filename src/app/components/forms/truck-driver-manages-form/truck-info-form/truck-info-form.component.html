@@ -20,7 +20,6 @@
     class="col-12 mt-4"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
-    (ngSubmit)="loadTruckInfoFromAPI()"
   >
     <div class="flex gap-2">
       <app-generic-input
@@ -32,11 +31,11 @@
       ></app-generic-input>
 
       <p-button
-        type="submit"
         [disabled]="searchForm.invalid || loading"
         size="small"
         severity="warn"
         label="استعلام از سیستم"
+        (click)="loadFormsInformation()"
       ></p-button>
     </div>
   </form>
@@ -93,8 +92,20 @@
             placeholder="نوع بارگیر"
             [control]="loaderType"
             validationField="loaderType"
+            [readOnly]="true"
             [addonWidth]="addonWidth"
           ></app-generic-input>
+        </div>
+        <div class="col-12 md:col-5">
+          <app-generic-input
+            label="شماره پلاک"
+            class="flex-1"
+            placeholder="شماره پلاک"
+            [control]="licensePlateNumber"
+            validationField="licenseNumber"
+            [readOnly]="true"
+            [addonWidth]="addonWidth"
+          />
         </div>
       </div>
     </div>
@@ -106,7 +117,7 @@
     [class.opacity-60]="loading"
   >
     <span class="text-lg font-bold">بومی گری</span>
-    <div class="p-fluid grid gap-4 col-12">
+    <div class="p-fluid grid col-12">
       <div class="grid col-12 gap-4">
         <div class="col-12 md:col-5">
           <app-generic-input
@@ -140,7 +151,6 @@
     >
       <p-button
         (click)="changeNativeness()"
-
         label="تغییر وضعیت بومی گری"
         styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-12rem lg:w-15rem"
       ></p-button>
