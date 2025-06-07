@@ -69,6 +69,20 @@ export const ValidationSchema = {
     },
   },
 
+  walletId: {
+    validators: [Validators.required],
+    getErrorMessage: (e: ErrorsValidation) =>
+      e.required ? 'شناسه کیف پول الزامی است.' : null,
+  },
+
+  wallet:{
+      Validators:[Validators.required],
+      getErrorMessage: (e: ErrorsValidation) => {
+        if (e.required) return 'کیف پول الزامی است.';
+        return null;
+      },
+  },
+
   licenseNumber: {
     validators: [
       Validators.required,
@@ -81,6 +95,23 @@ export const ValidationSchema = {
       if (e.pattern) return 'شماره گواهینامه فقط باید عدد باشد.';
       return null;
     },
+  },
+
+
+  turn: {
+    validators: [
+      Validators.required,
+    ],
+    getErrorMessage: (e: ErrorsValidation) => {
+      if (e.required) return 'نوبت الزامی است.';
+      return null;
+    },
+  },
+
+  turnId: {
+    validators: [Validators.required],
+    getErrorMessage: (e: ErrorsValidation) =>
+      e.required ? 'شناسه نوبت الزامی است.' : null,
   },
 
   smsActive: {

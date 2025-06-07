@@ -1,0 +1,214 @@
+<div class="flex flex-column gap-3">
+  <!-- Loading Spinner -->
+  @if (loading) {
+  <div
+    class="h-full w-full z-5 flex align-items-center justify-content-center absolute"
+  >
+    <div class="h-full w-full bg-white absolute" style="opacity: 0.2"></div>
+    <i class="pi pi-spin pi-spinner primary" style="font-size: 5rem"></i>
+  </div>
+  }
+
+  <!-- Search by SmartCard -->
+  <form
+    class="col-12"
+    [class.pointer-events-none]="loading"
+    [class.opacity-60]="loading"
+    (ngSubmit)="loadComposedForm()"
+  >
+    <div class="flex gap-3">
+      <app-generic-input
+        [control]="searchSmartCard"
+        validationField="smartCard"
+        icon="pi pi-id-card"
+        class="flex-1"
+        placeholder="جستجو براساس شماره هوشمند"
+      />
+      <p-button
+        (click)="loadComposedForm()"
+        [disabled]="mainSearchForm.invalid"
+        size="small"
+        severity="primary"
+        styleClass="mt-1 w-2rem h-2rem border-circle"
+        icon="pi pi-search"
+      />
+    </div>
+  </form>
+
+  <!-- Truck Info -->
+  <div class="grid px-4 mt-4">
+    <span class="text-lg font-bold mb-4">اطلاعات ناوگان</span>
+
+    <div class="grid">
+      <form
+        class="grid col-12"
+        [class.pointer-events-none]="loading"
+        [class.opacity-60]="loading"
+      >
+        <div class="grid col-12">
+          <app-generic-input
+            hidden
+            label="کد ناوگان"
+            [readOnly]="true"
+            [control]="truckId"
+            validationField="truckId"
+            [addonWidth]="addonWidth"
+          />
+
+          <div class="flex gap-2 col-12 md:col-6">
+            <app-generic-input
+              label="شماره هوشمند"
+              class="flex-1"
+              placeholder="شماره هوشمند"
+              [control]="smartCard"
+              validationField="smartCard"
+              [addonWidth]="addonWidth"
+            />
+            <p-button
+              (click)="loadTruckInfo()"
+              [disabled]="truckComposedInfoForm.invalid || loading"
+              size="small"
+              severity="primary"
+              styleClass="mt-1 w-2rem h-2rem border-circle"
+              icon="pi pi-refresh"
+            />
+          </div>
+
+          <div class="col-12 md:col-6">
+            <app-generic-input
+              label="شماره پلاک"
+              class="flex-1"
+              placeholder="شماره پلاک"
+              [readOnly]="true"
+              [control]="licensePlateNumber"
+              validationField="licenseNumber"
+              [addonWidth]="addonWidth"
+            />
+          </div>
+        </div>
+      </form>
+
+      <!-- Driver Info -->
+      <form
+        class="grid col-12"
+        [class.pointer-events-none]="loading"
+        [class.opacity-60]="loading"
+      >
+        <div class="grid col-12">
+          <app-generic-input
+            hidden
+            label="کد راننده"
+            [readOnly]="true"
+            [control]="driverId"
+            validationField="driverId"
+            [addonWidth]="addonWidth"
+          />
+
+          <div class="flex gap-2 col-12 md:col-6">
+            <app-generic-input
+              label="کدملی راننده"
+              class="flex-1"
+              placeholder="کدملی راننده"
+              [control]="nationalId"
+              validationField="nationalId"
+              [addonWidth]="addonWidth"
+            />
+            <p-button
+              (click)="loadDriverInfo()"
+              [disabled]="truckComposedInfoForm.invalid || loading"
+              size="small"
+              severity="primary"
+              styleClass="mt-1 w-2rem h-2rem border-circle"
+              icon="pi pi-refresh"
+            />
+          </div>
+
+          <div class="col-12 md:col-6">
+            <app-generic-input
+              label="نام راننده"
+              class="flex-1"
+              placeholder="نام راننده"
+              [readOnly]="true"
+              [control]="fullName"
+              validationField="fullName"
+              [addonWidth]="addonWidth"
+            />
+          </div>
+        </div>
+      </form>
+
+      <!-- Wallet / Turn Info -->
+      <form
+        class="grid col-12"
+        [class.pointer-events-none]="loading"
+        [class.opacity-60]="loading"
+      >
+        <div class="grid col-12">
+          <app-generic-input
+            hidden
+            label="شناسه کیف پول"
+            [readOnly]="true"
+            [control]="walletId"
+            validationField="walletId"
+            [addonWidth]="addonWidth"
+          />
+
+          <app-generic-input
+            hidden
+            label="شناسه نوبت"
+            [readOnly]="true"
+            [control]="turnId"
+            validationField="turnId"
+            [addonWidth]="addonWidth"
+          />
+
+          <div class="col-12 md:col-6">
+            <app-generic-input
+              label="نوبت"
+              class="flex-1"
+              placeholder="نوبت"
+              [readOnly]="true"
+              [control]="turn"
+              validationField="turn"
+              [addonWidth]="addonWidth"
+            />
+          </div>
+
+          <div class="col-12 md:col-6">
+            <app-generic-input
+              label="کیف پول"
+              class="flex-1"
+              placeholder="کیف پول"
+              [readOnly]="true"
+              [control]="wallet"
+              validationField="wallet"
+              [addonWidth]="addonWidth"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Action Buttons -->
+    <div
+      class="px-3 col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center"
+    >
+      <p-button
+        (click)="setComposedInformation()"
+        [disabled]="this.truckComposedInfoForm.invalid || loading"
+        label="ثبت و ویرایش"
+        size="small"
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+      ></p-button>
+
+      <p-button
+        (click)="createNewWallet()"
+        [disabled]="this.truckComposedInfoForm.invalid || loading"
+        severity="info"
+        label="ساخت کیف پول جدید"
+        size="small"
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+      ></p-button>
+    </div>
+  </div>
+</div>
