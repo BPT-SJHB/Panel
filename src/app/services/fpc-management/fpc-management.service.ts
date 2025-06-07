@@ -19,4 +19,23 @@ import { mockAPIUsernamePassword } from 'app/data/mock/username-password.mock';
 export class FpcManagementService {
   private userAuth = inject(UserAuthService);
   private apiCommunicator = inject(APICommunicationManagementService);
+
+  public async GetFPCsInfo(
+    fpcNameToSearch: string
+  ): Promise<ApiResponse<FPCInfo[]>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.FPC.GetFPCs;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SearchString: fpcNameToSearch,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      FPCInfo[]
+    >(apiUrl, bodyValue, mockFPCsInfo);
+    //#endregion
+  }
 }
