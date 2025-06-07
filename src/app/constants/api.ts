@@ -7,7 +7,7 @@ export const API_ROUTES = {
     CAPTCHA: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetCaptcha`,
     AuthUser: `${environment.apiUrl}:${softwareUserAPIPort}/api/AuthUser`,
     GetWebProcesses: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetWebProcesses`,
-    GetUserOfSession:`${environment.apiUrl}:${softwareUserAPIPort}/api/GetSessionSoftwareUser`,
+    GetUserOfSession: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetSessionSoftwareUser`,
     UserManagement: {
       GetSoftwareUserInfo: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetSoftwareUser`,
       GetUserTypes: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetUserTypes`,
