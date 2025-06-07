@@ -27,17 +27,10 @@
         placeholder="جستجو براساس شماره ملی راننده"
       />
       <p-button
-        (click)="loadDriverInfoFromOutdoorApi()"
+        (click)="loadDriverInfoFromAPI()"
         [disabled]="this.searchForm.invalid"
         size="small"
         severity="info"
-        label="استعلام از سازمان"
-      />
-      <p-button
-        (click)="loadDriverInfoFromLocalApi()"
-        [disabled]="this.searchForm.invalid"
-        size="small"
-        severity="warn"
         label="استعلام از سامانه"
       />
     </div>

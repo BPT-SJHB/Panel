@@ -15,8 +15,7 @@
     >
       <span class="text-sm" style="white-space: nowrap">{{ label }}</span>
     </p-inputgroup-addon>
-    }
-
+    } @if (type == "text") {
     <!-- Input -->
     <input
       #inputRef
@@ -36,7 +35,37 @@
           disabled
       }"
       (focus)="onFocusInput(inputRef)"
+      (blur)="onBlurInput(inputRef)"
     />
+    } @if (type=='date') {
+      <div class="w-full" style="position: relative;">
+
+        <ng-persian-datepicker>
+          <div class="h-2-5rem">
+        <input
+        #inputRef
+        pInputText
+        [formControl]="control"
+        [placeholder]="placeholder"
+        [readOnly]="readOnly"
+        [disabled]="disabled"
+        [ngClass]="{
+          'border-red-500': control.touched && control.invalid,
+          border: true,
+          'border-round-left': buttonIcon == '',
+          'px-2': true,
+          'h-full': true,
+          'w-full': true,
+          'bg-gray-100 text-gray-500 pointer-events-none opacity-60 cursor-not-allowed':
+          disabled
+        }"
+          (focus)="onFocusInput(inputRef)"
+          (blur)="onBlurInput(inputRef)"
+          />
+        </div>
+      </ng-persian-datepicker>
+    </div>
+    }
   </p-input-group>
 
   @if (buttonIcon.trim() != '') {
@@ -44,8 +73,9 @@
     <p-button
       [icon]="buttonIcon"
       [disabled]="buttonDisabled"
-      (click)= "handleClick()"
-      styleClass="border-round-left"
+      (click)="handleClick()"
+      styleClass="border-round-left h-full w-full"
+      class="w-full h-full"
     />
   </p-inputgroup-addon>
   }

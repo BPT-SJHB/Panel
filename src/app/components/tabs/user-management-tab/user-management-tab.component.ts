@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {TabsModule} from "primeng/tabs";
-import { UserInfoFormComponent } from 'app/components/forms/user-Info-form/user-info-form.component';
+import { UserInfoFormComponent } from 'app/components/forms/user-management-form/user-Info-form/user-info-form.component';
 import { UsersMenuAccessFormComponent } from "../../forms/user-management-form/users-menu-access-form/users-menu-access-form.component";
 
 @Component({
