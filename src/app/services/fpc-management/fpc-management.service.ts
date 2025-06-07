@@ -38,4 +38,22 @@ export class FpcManagementService {
     >(apiUrl, bodyValue, mockFPCsInfo);
     //#endregion
   }
+
+  public async GetFPCInfo(fpcId: number): Promise<ApiResponse<FPCInfo>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.FPC.GetFPC;
+    const fpcInfo: FPCInfo = { FPCId: fpcId };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      FPCId: fpcInfo.FPCId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      FPCInfo
+    >(apiUrl, bodyValue, mockFPCsInfo[0]);
+    //#endregion
+  }
 }
