@@ -17,7 +17,9 @@
     class="col-12"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
-  >
+    [formGroup]="searchForm"
+    (ngSubmit)="loadDriverInfoFromAPI()"
+    >
     <div class="flex gap-2">
       <app-generic-input
         [control]="searchNationalId"
