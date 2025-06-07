@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { GenericInputComponent } from 'app/components/shared/inputs/number-input/generic-input.component';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { ApiResponse } from 'app/data/model/api-Response.model';
@@ -12,7 +12,7 @@ import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-driver-truck-wallet-form',
-  imports: [ButtonModule, GenericInputComponent],
+  imports: [ButtonModule, GenericInputComponent,ReactiveFormsModule],
   templateUrl: './driver-truck-wallet-form.component.html',
   styleUrl: './driver-truck-wallet-form.component.scss',
 })
@@ -32,6 +32,7 @@ export class DriverTruckWalletFormComponent {
     truckId: ['', ValidationSchema.truckId],
     smartCard: ['', ValidationSchema.smartCard],
     licensePlateNumber: ['', ValidationSchema.licensePlateNumber],
+    serialNumber:['',ValidationSchema.serialNumber],
     driverId: ['', ValidationSchema.driverId],
     nationalId: ['', ValidationSchema.nationalId],
     fullName: ['', ValidationSchema.fullName],
@@ -84,7 +85,7 @@ export class DriverTruckWalletFormComponent {
       const response = await this.driverTruckManager.GetDriverInfoFromAPI(
         this.nationalId.value
       );
-      console.log(response);
+
       if (!this.isSuccessful(response)) return;
 
       this.populateDriverInfo(response.data!);
@@ -157,20 +158,21 @@ export class DriverTruckWalletFormComponent {
   }
 
   private populateTruckInfo(info: TruckInfo) {
-    this.truckId.setValue(info.TruckId);
-    this.smartCard.setValue(info.SmartCardNo);
-    this.licensePlateNumber.setValue(info.Pelak);
+    this.truckId.setValue(info.TruckId ?? '');
+    this.smartCard.setValue(info.SmartCardNo ?? '');
+    this.licensePlateNumber.setValue(info.Pelak ?? '');
+    this.serialNumber.setValue(info.Serial ?? '');
   }
 
   private populateDriverInfo(info: TruckDriverInfo) {
     this.driverId.setValue(info.DriverId);
-    this.fullName.setValue(info.NameFamily);
+    this.fullName.setValue(info.NameFamily ?? '');
     this.nationalId.setValue(info.NationalCode ?? '');
   }
 
   private populateWalletInfo(info: Wallet) {
     this.walletId.setValue(info.MoneyWalletId);
-    this.wallet.setValue(info.MoneyWalletCode);
+    this.wallet.setValue(info.MoneyWalletCode ?? '');
   }
 
   // --- Form Control Getters ---
@@ -189,6 +191,11 @@ export class DriverTruckWalletFormComponent {
   get licensePlateNumber(): FormControl {
     return this.truckComposedInfoForm.get('licensePlateNumber') as FormControl;
   }
+
+  get serialNumber(): FormControl {
+    return this.truckComposedInfoForm.get('serialNumber') as FormControl;
+  }
+
 
   get driverId(): FormControl {
     return this.truckComposedInfoForm.get('driverId') as FormControl;

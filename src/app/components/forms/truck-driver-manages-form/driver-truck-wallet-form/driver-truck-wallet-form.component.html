@@ -15,6 +15,7 @@
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
     (ngSubmit)="loadComposedForm()"
+    [formGroup]="mainSearchForm"
   >
     <div class="flex gap-3">
       <app-generic-input
@@ -28,9 +29,9 @@
         (click)="loadComposedForm()"
         [disabled]="mainSearchForm.invalid"
         size="small"
-        severity="primary"
-        styleClass="mt-1 w-2rem h-2rem border-circle"
-        icon="pi pi-search"
+        severity="info"
+        styleClass="w-8rem h-2-5rem"
+        label="استعلام"
       />
     </div>
   </form>
@@ -44,6 +45,8 @@
         class="grid col-12"
         [class.pointer-events-none]="loading"
         [class.opacity-60]="loading"
+        [formGroup]="truckComposedInfoForm"
+        (ngSubmit)="loadTruckInfo()"
       >
         <div class="grid col-12">
           <app-generic-input
@@ -62,15 +65,16 @@
               placeholder="شماره هوشمند"
               [control]="smartCard"
               validationField="smartCard"
-              [addonWidth]="addonWidth"
+              addonWidth="10rem"
             />
-            <p-button
+          <p-button
               (click)="loadTruckInfo()"
-              [disabled]="truckComposedInfoForm.invalid || loading"
+              [disabled]="this.truckId.invalid || this.smartCard.invalid || loading"
               size="small"
               severity="primary"
-              styleClass="mt-1 w-2rem h-2rem border-circle"
-              icon="pi pi-refresh"
+              styleClass="mt-1 w-6rem h-2rem"
+              type="submit"
+              label="استعلام"
             />
           </div>
 
@@ -85,6 +89,17 @@
               [addonWidth]="addonWidth"
             />
           </div>
+          <div class="col-12 md:col-6">
+            <app-generic-input
+              label="شماره سریال"
+              class="flex-1"
+              placeholder="شماره سریال"
+              [readOnly]="true"
+              [control]="serialNumber"
+              validationField="serialNumber"
+              [addonWidth]="addonWidth"
+            />
+          </div>
         </div>
       </form>
 
@@ -93,6 +108,8 @@
         class="grid col-12"
         [class.pointer-events-none]="loading"
         [class.opacity-60]="loading"
+        [formGroup]="truckComposedInfoForm"
+        (ngSubmit)="loadDriverInfo()"
       >
         <div class="grid col-12">
           <app-generic-input
@@ -111,15 +128,16 @@
               placeholder="کدملی راننده"
               [control]="nationalId"
               validationField="nationalId"
-              [addonWidth]="addonWidth"
+              addonWidth="10rem"
             />
             <p-button
               (click)="loadDriverInfo()"
-              [disabled]="truckComposedInfoForm.invalid || loading"
+              [disabled]="this.driverId.invalid || this.nationalId.invalid || loading"
               size="small"
               severity="primary"
-              styleClass="mt-1 w-2rem h-2rem border-circle"
-              icon="pi pi-refresh"
+              type="submit"
+              styleClass="mt-1 w-6rem h-2rem "
+              label="استعلام"
             />
           </div>
 
