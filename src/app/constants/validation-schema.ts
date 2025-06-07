@@ -148,7 +148,7 @@ export const ValidationSchema = {
   },
 
   serialNumber: {
-    validators: [Validators.required, Validators.pattern(/^\d$/)],
+    validators: [Validators.required, Validators.pattern(/^\d+$/)],
     getErrorMessage: (e: ErrorsValidation) => {
       if (e.required) return 'شماره سریال الزامی است.';
       if (e.pattern) return 'شماره سریال باید فقط عدد باشد.';
