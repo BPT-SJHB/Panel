@@ -147,4 +147,24 @@ export class FpcManagementService {
     };
     //#endregion
   }
+
+  public async FPCChangeActiveStatus(
+    fpcId: number
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.FPC.FPCChangeActiveStatus;
+    const fpcInfo: FPCInfo = { FPCId: fpcId };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      FPCId: fpcInfo.FPCId,
+    };
+    //#endregion
+
+    //#region  Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
