@@ -131,4 +131,18 @@ export class UserAuthService implements IUserAuthService {
       expires: new Date(Date.now() + 1000 * 60 * 30), // 30 minutes
     });
   }
+
+  public async GetUserOfSession(
+    sessionId: string
+  ): Promise<ApiResponse<SoftwareUserInfo>> {
+    const apiUrl = API_ROUTES.SoftwareUserAPI.GetUserOfSession;
+    const bodyValue = {
+      SessionId: sessionId,
+    };
+
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      SoftwareUserInfo
+    >(apiUrl, bodyValue, mockSoftwareUserInfo);
+  }
 }
