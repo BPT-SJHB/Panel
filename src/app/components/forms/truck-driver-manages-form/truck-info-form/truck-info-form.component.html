@@ -20,6 +20,8 @@
     class="col-12 mt-4"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
+    (ngSubmit)="loadFormsInformation()"
+    [formGroup]="searchForm"
   >
     <div class="flex gap-2">
       <app-generic-input
@@ -45,11 +47,12 @@
     class="p-fluid grid gap-2 col-12"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
+    [formGroup]="truckInfoForm"
   >
     <span class="text-lg font-bold">اطلاعات ناوگان</span>
     <div class="p-fluid grid gap-4 col-12">
-      <div class="grid col-12 gap-4">
-        <div class="col-12 md:col-5">
+      <div class="grid col-12">
+        <div class="col-12 md:col-6">
           <app-generic-input
             label="کد ناوگان"
             class="flex-1"
@@ -61,7 +64,7 @@
           ></app-generic-input>
         </div>
 
-        <div class="col-12 md:col-5">
+        <div class="col-12 md:col-6">
           <app-generic-input
             label="سریال"
             class="flex-1"
@@ -73,7 +76,7 @@
           ></app-generic-input>
         </div>
 
-        <div class="col-12 md:col-5">
+        <div class="col-12 md:col-6">
           <app-generic-input
             label="شماره هوشمند"
             class="flex-1"
@@ -85,7 +88,7 @@
           ></app-generic-input>
         </div>
 
-        <div class="col-12 md:col-5">
+        <div class="col-12 md:col-6">
           <app-generic-input
             label="بارگیر"
             class="flex-1"
@@ -96,7 +99,7 @@
             [addonWidth]="addonWidth"
           ></app-generic-input>
         </div>
-        <div class="col-12 md:col-5">
+        <div class="col-12 md:col-6">
           <app-generic-input
             label="شماره پلاک"
             class="flex-1"
@@ -115,11 +118,13 @@
     class="p-fluid grid gap-2 col-12"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
+    [formGroup]="truckNativenessForm"
+    (ngSubmit)="changeNativeness()"
   >
     <span class="text-lg font-bold">بومی گری</span>
     <div class="p-fluid grid col-12">
-      <div class="grid col-12 gap-4">
-        <div class="col-12 md:col-5">
+      <div class="grid col-12">
+        <div class="col-12 md:col-6">
           <app-generic-input
             label="بومی"
             class="flex-1"
@@ -131,7 +136,7 @@
           ></app-generic-input>
         </div>
 
-        <div class="col-12 md:col-5">
+        <div class="col-12 md:col-6">
           <app-generic-input
             class="flex-1"
             type="date"

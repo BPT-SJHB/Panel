@@ -16,7 +16,6 @@ import { Driver_TruckManagementService } from 'app/services/driver-truck-managem
 import { ToastService } from 'app/services/toast-service/toast.service';
 
 import { GenericInputComponent } from 'app/components/shared/inputs/number-input/generic-input.component';
-import { Jalali } from "jalali-ts";
 
 @Component({
   selector: 'app-truck-info-form',
@@ -66,7 +65,7 @@ export class TruckInfoFormComponent {
 
     try {
       this.loading = true;
-      const response = await this.truckService.GetTruckInfoFromAPI(this.smartCard.value);
+      const response = await this.truckService.GetTruckInfoFromAPI(this.searchSmartCard.value);
       if (this.isSuccessful(response)) {
         this.populateTruckInfoForm(response.data!);
       }
@@ -126,9 +125,6 @@ export class TruckInfoFormComponent {
   }
 
   populateTruckNativenessForm(info: TruckNativenessInfo): void {
-console.log( info);
-
-
     this.truckNativenessForm.patchValue({
       nativeness: info.TruckNativenessTypeTitle ?? '',
       truckNativenessExpiredDate: info.TruckNativenessExpireDate ?? '',
