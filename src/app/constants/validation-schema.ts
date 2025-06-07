@@ -107,7 +107,7 @@ export const ValidationSchema = {
   licensePlateNumber: {
     validators: [
       Validators.required,
-      Validators.pattern(/^\d{2}[A-Zآ-ی]\d{3}\d{2}$/),
+      // Validators.pattern(/^\d{2}[A-Zآ-ی]\d{3}\d{2}$/),
     ],
     getErrorMessage: (e: ErrorsValidation) => {
       if (e.required) return 'شماره پلاک الزامی است.';
@@ -117,7 +117,7 @@ export const ValidationSchema = {
   },
 
   serialNumber: {
-    validators: [Validators.required, Validators.pattern(/^\d{13}$/)],
+    validators: [Validators.required, Validators.pattern(/^\d$/)],
     getErrorMessage: (e: ErrorsValidation) => {
       if (e.required) return 'شماره سریال الزامی است.';
       if (e.pattern) return 'شماره سریال باید فقط عدد باشد.';
