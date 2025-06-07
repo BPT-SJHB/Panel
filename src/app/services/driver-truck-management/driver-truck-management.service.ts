@@ -186,7 +186,7 @@ export class Driver_TruckManagementService {
     };
     //#endregion
 
-    //#region Request
+    //#region Request + Return
     var response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TruckInfo
@@ -198,20 +198,8 @@ export class Driver_TruckManagementService {
         TruckInfo
       >(outdoorApiUrl, bodyValue, mockTruckInfo);
     }
-    //#endregion
 
-    //#region Return
-    return {
-      success: response.success,
-      data: {
-        TruckId: response.data?.TruckId!,
-        LoaderTypeId: response.data?.LoaderTypeId,
-        Pelak: response.data?.Pelak?.split('ع').join('-'),
-        Serial: response.data?.Serial,
-        SmartCardNo: response.data?.SmartCardNo,
-      },
-      error: response.error,
-    };
+    return response;
     //#endregion
   }
 
