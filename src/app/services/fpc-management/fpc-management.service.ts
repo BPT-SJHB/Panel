@@ -116,4 +116,35 @@ export class FpcManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  public async ResetFPCUserPassword(
+    fpcId: number
+  ): Promise<ApiResponse<UsernamePassword>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.FPC.ResetFPCUserPassword;
+    const fpcInfo: FPCInfo = { FPCId: fpcId };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      FPCId: fpcInfo.FPCId,
+    };
+    //#endregion
+
+    //#region  Request
+    var response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      APIUsernamePassword
+    >(apiUrl, bodyValue, mockAPIUsernamePassword);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: {
+        Username: response.data?.UserShenaseh!,
+        Password: response.data?.UserPassword!,
+      },
+      error: response.error,
+    };
+    //#endregion
+  }
 }
