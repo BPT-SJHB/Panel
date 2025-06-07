@@ -76,4 +76,24 @@ export class FpcManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  public async EditFPC(
+    rawFPCInfo: FPCInfo
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.FPC.EditFPC;
+    const fpcInfo: FPCInfo = rawFPCInfo;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      RawFPC: fpcInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
