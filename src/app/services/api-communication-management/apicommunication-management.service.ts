@@ -6,6 +6,7 @@ import { environment } from 'environments/environment';
 import { firstValueFrom } from 'rxjs';
 import { UserAuthService } from '../user-auth-service/user-auth.service';
 import { mockUserSession } from 'app/data/mock/user-session.mock';
+import { ShortResponse } from 'app/data/model/short-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -34,9 +35,12 @@ export class APICommunicationManagementService {
         this.http.post<TExpect>(apiUrl, bodyValue)
       );
 
-      // console.log(response);
+      const mappedResponse =
+        typeof response === 'string'
+          ? ({ Message: response } as ShortResponse as TExpect)
+          : (response as TExpect);
 
-      return { success: true, data: response };
+      return { success: true, data: mappedResponse };
     } catch (error: unknown) {
       return handleHttpError<TExpect>(error);
     }
