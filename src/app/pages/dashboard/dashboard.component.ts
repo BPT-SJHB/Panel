@@ -34,6 +34,7 @@ import { selectActiveTab, selectLastClosedTabId } from 'app/store/tabs/tabs.sele
 import { TabComponentRegistry } from 'app/constants/tab-component-registry';
 import { TabItem } from 'app/data/model/tabs.model';
 import { Subscription } from 'rxjs';
+import { TabViewComponent } from 'app/components/shared/tab-view/tab-view.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -86,9 +87,9 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     this.pageGroupSub = this.store.select(selectSelectedPageGroup).subscribe(page => {
       if (!page) return;
 
-      if (this.headerData.title.trim()) 
+      if (this.headerData.title.trim())
         this.subMenuVisible = true;
-      
+
       this.headerData = {
         title: page.title,
         icon: page.icon,
@@ -142,8 +143,10 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    const type = TabComponentRegistry[tab.component];
-    const compRef = this.container.createComponent(type);
+    const compRef = this.container.createComponent(TabViewComponent);
+    const views = TabComponentRegistry[tab.component];
+    compRef.instance.views = views;
+
     this.container.insert(compRef.hostView);
     this.componentCache.set(tab.id, compRef);
   }

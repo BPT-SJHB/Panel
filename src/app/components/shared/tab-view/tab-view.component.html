@@ -1,0 +1,18 @@
+<ng-container *ngIf="views.length === 1; else multiView">
+  <ng-container #singleContainer></ng-container>
+</ng-container>
+
+<ng-template #multiView>
+  <p-tabs [(value)]="activeIndex" (valueChange)="onTabChange($event)">
+    <p-tablist>
+      @for (view of views; track $index) {
+      <p-tab class="text-sm" [value]="$index">{{ view.title }}</p-tab>
+      }
+    </p-tablist>
+  </p-tabs>
+
+  <!-- Only one container rendered below the tabs -->
+  <div class="mt-5">
+    <ng-container #tabContainer></ng-container>
+  </div>
+</ng-template>
