@@ -52,7 +52,7 @@ export class Driver_TruckManagementService {
     var response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TruckDriverInfo
-    >(localApiUrl, bodyValue);
+    >(localApiUrl, bodyValue, mockTruckDriverInfo);
 
     if (response.error?.code == ErrorCodes.NotFoundInLocalAPI) {
       response = await this.apiCommunicator.CommunicateWithAPI_Post<
@@ -196,7 +196,7 @@ export class Driver_TruckManagementService {
       response = await this.apiCommunicator.CommunicateWithAPI_Post<
         typeof bodyValue,
         TruckInfo
-      >(outdoorApiUrl, bodyValue);
+      >(outdoorApiUrl, bodyValue, mockTruckInfo);
     }
     //#endregion
 
