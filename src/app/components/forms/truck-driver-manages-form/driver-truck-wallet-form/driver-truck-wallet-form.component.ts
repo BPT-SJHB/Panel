@@ -36,10 +36,10 @@ export class DriverTruckWalletFormComponent {
     driverId: ['', ValidationSchema.driverId],
     nationalId: ['', ValidationSchema.nationalId],
     fullName: ['', ValidationSchema.fullName],
-    turnId:['',ValidationSchema.turnId],
-    turn: ['', ValidationSchema.turn],
-    walletId: ['', ValidationSchema.walletId],
-    wallet: ['', ValidationSchema.wallet],
+    turnId: [],
+    turn: [],
+    walletId: [],
+    wallet: [],
   });
 
   // --- Public Methods ---
@@ -151,28 +151,28 @@ export class DriverTruckWalletFormComponent {
 
   private populateComposedForm(info: TruckComposedInfo) {
     this.populateTruckInfo(info.Truck);
-    this.populateDriverInfo(info.TruckDriver);
-    this.populateWalletInfo(info.MoneyWallet);
-    this.turnId.setValue(info.Turn.nEnterExitId  ?? '');
-    this.turn.setValue(info.Turn.OtaghdarTurnNumber ?? '');
+    this.populateDriverInfo(info.TruckDriver!);
+    this.populateWalletInfo(info.MoneyWallet!);
+    this.turnId.setValue(info.Turn?.nEnterExitId);
+    this.turn.setValue(info.Turn?.OtaghdarTurnNumber);
   }
 
   private populateTruckInfo(info: TruckInfo) {
-    this.truckId.setValue(info.TruckId ?? '');
-    this.smartCard.setValue(info.SmartCardNo ?? '');
-    this.licensePlateNumber.setValue(info.Pelak ?? '');
-    this.serialNumber.setValue(info.Serial ?? '');
+    this.truckId.setValue(info.TruckId ?? -1);
+    this.smartCard.setValue(info.SmartCardNo);
+    this.licensePlateNumber.setValue(info.Pelak);
+    this.serialNumber.setValue(info.Serial);
   }
 
-  private populateDriverInfo(info: TruckDriverInfo) {
-    this.driverId.setValue(info.DriverId);
-    this.fullName.setValue(info.NameFamily ?? '');
-    this.nationalId.setValue(info.NationalCode ?? '');
+  private populateDriverInfo(info?: TruckDriverInfo) {
+    this.driverId.setValue(info?.DriverId ?? -1);
+    this.fullName.setValue(info?.NameFamily);
+    this.nationalId.setValue(info?.NationalCode);
   }
 
-  private populateWalletInfo(info: Wallet) {
-    this.walletId.setValue(info.MoneyWalletId);
-    this.wallet.setValue(info.MoneyWalletCode ?? '');
+  private populateWalletInfo(info?: Wallet) {
+    this.walletId.setValue(info?.MoneyWalletId ?? -1);
+    this.wallet.setValue(info?.MoneyWalletCode);
   }
 
   // --- Form Control Getters ---
