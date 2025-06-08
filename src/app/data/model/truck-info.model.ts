@@ -12,7 +12,7 @@ export interface TruckInfo {
 
 export interface TruckComposedInfo {
   Truck: TruckInfo;
-  TruckDriver: TruckDriverInfo;
-  Turn: Turn;
-  MoneyWallet: Wallet;
+  TruckDriver?: TruckDriverInfo;
+  Turn?: Turn;
+  MoneyWallet?: Wallet;
 }
