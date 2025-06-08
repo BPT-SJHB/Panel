@@ -38,7 +38,7 @@ export const API_ROUTES = {
       ChangeTruckNativeness: `${environment.apiUrl}:${transportationAPIPort}/api/ChangeTruckNativeness`,
     },
     Driver_Truck_Wallet: {
-      GetComposedTruckInfo: `${environment.apiUrl}:${transportationAPIPort}/api/GetComposedTruckInfo`,
+      GetComposedTruckInfo: `${environment.apiUrl}:${transportationAPIPort}/api/GetComposedTruckInf`,
       SetComposedTruckInfo: `${environment.apiUrl}:${transportationAPIPort}/api/SetComposedTruckInf`,
       GetVirtualWallet: `${environment.apiUrl}:${transportationAPIPort}/api/GetVirtualMoneyWallet`,
     },
