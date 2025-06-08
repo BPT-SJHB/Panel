@@ -52,5 +52,8 @@ export const API_ROUTES = {
       ResetFPCUserPassword: `${environment.apiUrl}:${transportationAPIPort}/api/ResetFPCUserPassword`,
       FPCChangeActiveStatus: `${environment.apiUrl}:${transportationAPIPort}/api/FPCChangeActiveStatus`,
     },
+    LoadCapacitor: {
+      GetLoad: `${environment.apiUrl}:${transportationAPIPort}/api/GetLoad`,
+    },
   },
 };
