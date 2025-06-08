@@ -7,7 +7,7 @@ export const mockPageGroup: PageGroup[] = [
     icon: 'pi-address-book',
     processes: [
       {
-        id: 0, 
+        id: 0,
         title: 'مدیریت کاربران',
         name: 'UserManagement',
         description:
@@ -15,23 +15,23 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-user',
       },
       {
-        id: 1, 
+        id: 1,
         title: 'رانندگان ، کامیونداران',
         name: 'DriversAndTruckDrivers',
         description:
           'امکان استعلام و ثبت اطلاعات راننده از طریق کد ملی فراهم می باشد.استعلام کد ملی از درگاه سازمان راهداری موجب ویرایش اطلاعت راننده در سامانه می گردد.پس از ثبت مجوزهای دسترسی به صورت خودکار ایجاد می گردد',
         icon: 'pi-id-card',
       },
+      // {
+      //   id: 2,
+      //   title: 'رانندگان ، کامیونداران',
+      //   name: 'DriversAndTruckDrivers',
+      //   description:
+      //     'امکان استعلام و ثبت اطلاعات راننده از طریق کد ملی فراهم می باشد.استعلام کد ملی از درگاه سازمان راهداری موجب ویرایش اطلاعت راننده در سامانه می گردد.پس از ثبت مجوزهای دسترسی به صورت خودکار ایجاد می گردد',
+      //   icon: 'pi-id-card',
+      // },
       {
-        id: 2, 
-        title: 'رانندگان ، کامیونداران',
-        name: 'DriversAndTruckDrivers',
-        description:
-          'امکان استعلام و ثبت اطلاعات راننده از طریق کد ملی فراهم می باشد.استعلام کد ملی از درگاه سازمان راهداری موجب ویرایش اطلاعت راننده در سامانه می گردد.پس از ثبت مجوزهای دسترسی به صورت خودکار ایجاد می گردد',
-        icon: 'pi-id-card',
-      },
-      {
-        id: 3, 
+        id: 3,
         title: 'خودرو ، ناوگان حمل',
         name: 'CarsAndTrucks',
         description:
@@ -39,7 +39,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-truck',
       },
       {
-        id: 4, 
+        id: 4,
         title: 'شرکت های حمل و نقل',
         name: 'TransportCompanies',
         description:
@@ -47,7 +47,7 @@ export const mockPageGroup: PageGroup[] = [
         icon: 'pi-warehouse',
       },
       {
-        id: 5, 
+        id: 5,
         title: 'صنوف',
         name: 'Associations',
         description:
