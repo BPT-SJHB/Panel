@@ -20,6 +20,7 @@ import {
   mockTruckInfo,
 } from 'app/data/mock/truck-info.mock';
 import { mockTruckNativenessInfo } from 'app/data/mock/truck-nativeness-info.mock';
+import { Wallet } from 'app/data/model/wallet.model';
 
 @Injectable({
   providedIn: 'root',
@@ -281,7 +282,7 @@ export class Driver_TruckManagementService {
   ): Promise<ApiResponse<ShortResponse>> {
     //#region Consts
     const apiUrl =
-      API_ROUTES.TransportationAPI.Driver_Truck_Wallet.GetComposedTruckInfo;
+      API_ROUTES.TransportationAPI.Driver_Truck_Wallet.SetComposedTruckInfo;
     const truckComposedInfo: TruckComposedInfo = {
       Truck: { TruckId: truckId },
       TruckDriver: { DriverId: driverId },
@@ -291,9 +292,9 @@ export class Driver_TruckManagementService {
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
       TruckId: truckComposedInfo.Truck.TruckId,
-      TruckDriverId: truckComposedInfo.TruckDriver.DriverId,
-      TurnId: truckComposedInfo.Turn.nEnterExitId,
-      MoneyWalletId: truckComposedInfo.MoneyWallet.MoneyWalletId,
+      TruckDriverId: truckComposedInfo.TruckDriver?.DriverId,
+      TurnId: truckComposedInfo.Turn?.nEnterExitId,
+      MoneyWalletId: truckComposedInfo.MoneyWallet?.MoneyWalletId,
     };
     //#endregion
 
