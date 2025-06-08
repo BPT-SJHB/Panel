@@ -12,4 +12,21 @@ import { mockLoadInfo } from 'app/data/mock/load-info.mock';
 export class LoadCapacitorManagementService {
   private userAuth = inject(UserAuthService);
   private apiCommunicator = inject(APICommunicationManagementService);
+
+  public async GetLoad(loadId: number): Promise<ApiResponse<LoadInfo>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.LoadCapacitor.GetLoad;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LoadId: loadId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoadInfo
+    >(apiUrl, bodyValue, mockLoadInfo);
+    //#endregion
+  }
 }
