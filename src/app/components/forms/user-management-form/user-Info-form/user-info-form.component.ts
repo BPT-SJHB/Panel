@@ -4,7 +4,7 @@ import { PhoneInputComponent } from 'app/components/shared/inputs/phone-input/ph
 import { ButtonModule } from 'primeng/button';
 import { UserTypeInputComponent } from 'app/components/shared/inputs/user-type-input/user-type-input.component';
 import { UserIdInputComponent } from 'app/components/shared/inputs/user-id-input/user-id-input.component';
-import { SmsActiveInputComponent } from 'app/components/shared/inputs/binary-radio-input/binary-radio-input.component';
+import { BinaryRadioInputComponent } from 'app/components/shared/inputs/binary-radio-input/binary-radio-input.component';
 import { UserFullNameInputComponent } from "app/components/shared/inputs/user-full-name-input/user-full-name-input.component"
 import { UserManagementService } from 'app/services/user-management/user-management.service';
 import { ToastService } from 'app/services/toast-service/toast.service';
@@ -22,7 +22,7 @@ import { DialogModule } from 'primeng/dialog';
     UserFullNameInputComponent,
     UserTypeInputComponent,
     UserIdInputComponent,
-    SmsActiveInputComponent,
+    BinaryRadioInputComponent,
     DialogModule
   ],
   templateUrl: './user-info-form.component.html',
