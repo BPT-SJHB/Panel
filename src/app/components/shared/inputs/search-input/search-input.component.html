@@ -1,8 +1,37 @@
 <div class="flex justify-content-center align-items-center p-3">
-  <p-input-group >
-    <p-inputgroup-addon class="bg-primary text-white flex align-items-center justify-content-center px-3 border-round-right">
-        <i class="pi pi-search"></i>
+  <p-input-group>
+    <p-inputgroup-addon
+      class="bg-primary text-white flex align-items-center justify-content-center px-3 border-round-right"
+    >
+      <i class="pi pi-search"></i>
     </p-inputgroup-addon>
-    <input (input)="input" type="text" pInputText placeholder="جستجو..." class="flex-grow-1" [(ngModel)]="searchTerm" />
+
+    @if (autoComplete) {
+    <p-autoComplete
+      [(ngModel)]="searchTerm"
+      [suggestions]="autoCompleteItem"
+      [optionLabel]="autoCompleteOptionLabel"
+      [optionValue]="autoCompleteOptionValue"
+      (completeMethod)="onLazySearch($event)"
+      [showEmptyMessage]="showEmptyMessage"
+      (onSelect)="onSelectAutoComplete($event)"
+      emptyMessage="موردی یافت نشد"
+      pInputText
+      [placeholder]="placeholder"
+      class="flex-grow-1"
+      styleClass="w-full h-2-5rem"
+    />
+
+    } @else {
+    <input
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="onValueChange($event)"
+      (input)="(input)"
+      type="text"
+      pInputText
+      [placeholder]="placeholder"
+      class="flex-grow-1 w-full"
+    />
+    }
   </p-input-group>
 </div>
