@@ -8,6 +8,7 @@ export const API_ROUTES = {
     AuthUser: `${environment.apiUrl}:${softwareUserAPIPort}/api/AuthUser`,
     GetWebProcesses: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetWebProcesses`,
     GetUserOfSession: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetSessionSoftwareUser`,
+    GetVirtualWallet: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetVirtualMoneyWallet`,
     UserManagement: {
       GetSoftwareUserInfo: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetSoftwareUser`,
       GetUserTypes: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetUserTypes`,
