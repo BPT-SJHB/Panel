@@ -305,5 +305,17 @@ export class Driver_TruckManagementService {
     //#endregion
   }
 
+  public async GetVirtualWallet(): Promise<ApiResponse<Wallet>> {
+    const apiUrl = API_ROUTES.SoftwareUserAPI.GetVirtualWallet;
+
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      Wallet
+    >(apiUrl, bodyValue);
+  }
   //#endregion
 }
