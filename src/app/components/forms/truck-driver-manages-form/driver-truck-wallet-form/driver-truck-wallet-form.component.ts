@@ -123,9 +123,10 @@ export class DriverTruckWalletFormComponent {
     }
   }
 
-
-  async createNewWallet() {
-    this.toast.info('توجه','ساخت کیف پول جدید در دست توسعه است.')
+  async createNewWallet(): Promise<void> {
+    const response = await this.driverTruckManager.GetVirtualWallet();
+    if (!this.isSuccessful(response)) return;
+    this.populateWalletInfo(response.data!);
   }
 
   // --- Private Methods ---
