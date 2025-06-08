@@ -1,41 +1,14 @@
-import {
-  Validators,
-} from '@angular/forms';
-
-
+import { Validators } from '@angular/forms';
 
 export interface ErrorsValidation {
   required?: any;
+  email?: any;
   pattern?: any;
   minlength?: any;
   maxlength?: any;
 }
 
 export const ValidationSchema = {
-  driverId: {
-    validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) =>
-      e.required ? 'شناسه راننده الزامی است.' : null,
-  },
-
-  nationalId: {
-    validators: [Validators.required, Validators.pattern(/^\d{10}$/)],
-    getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'کد ملی الزامی است.';
-      if (e.pattern) return 'کد ملی باید ۱۰ رقم باشد.';
-      return null;
-    },
-  },
-
-  fullName: {
-    validators: [Validators.required, Validators.minLength(3)],
-    getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'نام کاربر الزامی است.';
-      if (e.minlength) return 'نام کاربر باید حداقل ۳ حرف باشد.';
-      return null;
-    },
-  },
-
   mobile: {
     validators: [
       Validators.required,
@@ -51,6 +24,78 @@ export const ValidationSchema = {
     },
   },
 
+  nationalId: {
+    validators: [Validators.required, Validators.pattern(/^\d{10}$/)],
+    getErrorMessage: (e: ErrorsValidation) => {
+      if (e.required) return 'کد ملی الزامی است.';
+      if (e.pattern) return 'کد ملی باید ۱۰ رقم باشد.';
+      return null;
+    },
+  },
+
+  email: {
+    validators: [Validators.required, Validators.email],
+    getErrorMessage: (e: ErrorsValidation) => {
+      if (e.required) return 'ایمیل الزامی است.';
+      if (e.email) return 'فرمت ایمیل نامعتبر است.';
+      return null;
+    },
+  },
+
+  fullName: {
+    validators: [Validators.required, Validators.minLength(3)],
+    getErrorMessage: (e: ErrorsValidation) => {
+      if (e.required) return 'نام کاربر الزامی است.';
+      if (e.minlength) return 'نام کاربر باید حداقل ۳ حرف باشد.';
+      return null;
+    },
+  },
+
+  id: {
+    validators: [Validators.required],
+    getErrorMessage: (e: ErrorsValidation) =>
+      e.required ? 'شناسه الزامی است.' : null,
+  },
+
+  driverId: {
+    validators: [Validators.required],
+    getErrorMessage: (e: ErrorsValidation) =>
+      e.required ? 'شناسه راننده الزامی است.' : null,
+  },
+
+  telephone: {
+    validators: [Validators.required,Validators.pattern(/^0\d{10}$/)],
+    getErrorMessage: (e: ErrorsValidation) => {
+      if (e.required) return 'شماره تلفن الزامی است.';
+      if (e.pattern) return 'فرمت شماره تلفن معتبر نیست.';
+      return null;
+    },
+  },
+
+  address: {
+    validators: [Validators.required, Validators.minLength(5)],
+    getErrorMessage: (e: ErrorsValidation) => {
+      if (e.required) return 'آدرس الزامی است.';
+      if (e.minlength) return 'آدرس باید حداقل ۵ کاراکتر باشد.';
+      return null;
+    },
+  },
+
+  title: {
+    validators: [Validators.required],
+    getErrorMessage: (e: ErrorsValidation) =>
+      e.required ? 'عنوان الزامی است.' : null,
+  },
+
+  managerName: {
+    validators: [Validators.required, Validators.minLength(3)],
+    getErrorMessage: (e: ErrorsValidation) => {
+      if (e.required) return 'نام کاربر الزامی است.';
+      if (e.minlength) return 'نام کاربر باید حداقل ۳ حرف باشد.';
+      return null;
+    },
+  },
+
   fatherName: {
     validators: [Validators.required, Validators.minLength(3)],
     getErrorMessage: (e: ErrorsValidation) => {
@@ -60,11 +105,10 @@ export const ValidationSchema = {
     },
   },
 
-  smartCard: {
-    validators: [Validators.required, Validators.pattern(/^\d{7}$/)],
+  wallet: {
+    Validators: [Validators.required],
     getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'شماره هوشمند الزامی است.';
-      if (e.pattern) return 'شماره هوشمند باید ۷ رقم باشد.';
+      if (e.required) return 'کیف پول الزامی است.';
       return null;
     },
   },
@@ -73,14 +117,6 @@ export const ValidationSchema = {
     validators: [Validators.required],
     getErrorMessage: (e: ErrorsValidation) =>
       e.required ? 'شناسه کیف پول الزامی است.' : null,
-  },
-
-  wallet:{
-      Validators:[Validators.required],
-      getErrorMessage: (e: ErrorsValidation) => {
-        if (e.required) return 'کیف پول الزامی است.';
-        return null;
-      },
   },
 
   licenseNumber: {
@@ -97,34 +133,20 @@ export const ValidationSchema = {
     },
   },
 
-
-  turn: {
-    validators: [
-      Validators.required,
-    ],
+  serialNumber: {
+    validators: [Validators.required, Validators.pattern(/^\d+$/)],
     getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'نوبت الزامی است.';
+      if (e.required) return 'شماره سریال الزامی است.';
+      if (e.pattern) return 'شماره سریال باید فقط عدد باشد.';
       return null;
     },
   },
 
-  turnId: {
-    validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) =>
-      e.required ? 'شناسه نوبت الزامی است.' : null,
-  },
-
-  smsActive: {
-    validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) =>
-      e.required ? 'فعال‌سازی پیامک الزامی است.' : null,
-  },
-
-  address: {
-    validators: [Validators.required, Validators.minLength(5)],
+  smartCard: {
+    validators: [Validators.required, Validators.pattern(/^\d{7}$/)],
     getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'آدرس الزامی است.';
-      if (e.minlength) return 'آدرس باید حداقل ۵ کاراکتر باشد.';
+      if (e.required) return 'شماره هوشمند الزامی است.';
+      if (e.pattern) return 'شماره هوشمند باید ۷ رقم باشد.';
       return null;
     },
   },
@@ -147,13 +169,24 @@ export const ValidationSchema = {
     },
   },
 
-  serialNumber: {
-    validators: [Validators.required, Validators.pattern(/^\d+$/)],
+  turn: {
+    validators: [Validators.required],
     getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'شماره سریال الزامی است.';
-      if (e.pattern) return 'شماره سریال باید فقط عدد باشد.';
+      if (e.required) return 'نوبت الزامی است.';
       return null;
     },
+  },
+
+  turnId: {
+    validators: [Validators.required],
+    getErrorMessage: (e: ErrorsValidation) =>
+      e.required ? 'شناسه نوبت الزامی است.' : null,
+  },
+
+  smsActive: {
+    validators: [Validators.required],
+    getErrorMessage: (e: ErrorsValidation) =>
+      e.required ? 'فعال‌سازی پیامک الزامی است.' : null,
   },
 
   loaderType: {
@@ -170,8 +203,10 @@ export const ValidationSchema = {
 
   truckNativenessExpiredDate: {
     validators: [
-          Validators.required,
-          Validators.pattern(/^(13|14)\d{2}\/(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])$/)
+      Validators.required,
+      Validators.pattern(
+        /^(13|14)\d{2}\/(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])$/
+      ),
     ],
     getErrorMessage: (e: ErrorsValidation) => {
       if (e.required) return 'تاریخ انقضای بومی‌گری الزامی است.';

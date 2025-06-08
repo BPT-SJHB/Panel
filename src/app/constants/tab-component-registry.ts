@@ -5,11 +5,13 @@ import { TruckInfoFormComponent } from 'app/components/forms/truck-driver-manage
 import { DriverInfoFormComponent } from 'app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component';
 import { UsersMenuAccessFormComponent } from 'app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component';
 import { DriverTruckWalletFormComponent } from 'app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component';
+import { FactoriesAndFreightFormComponent } from 'app/components/forms/factories-and-freight-form/factories-and-freight-form.component';
 
 export enum TabComponentKey {
   Main = -1,
   UserManagement = 0,
   TruckDriverManagement = 1,
+  FactoriesAndFreightManagement = 7,
 }
 export interface TabView {
   title: string;
@@ -17,7 +19,9 @@ export interface TabView {
 }
 
 export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
-  [TabComponentKey.Main]: [{ title: 'صفحه اصلی', component: MainViewComponent }],
+  [TabComponentKey.Main]: [
+    { title: 'صفحه اصلی', component: MainViewComponent },
+  ],
 
   [TabComponentKey.UserManagement]: [
     {
@@ -42,6 +46,12 @@ export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
     {
       title: 'راننده ناوگان کیف پول',
       component: DriverTruckWalletFormComponent,
+    },
+  ],
+  [TabComponentKey.FactoriesAndFreightManagement]: [
+    {
+      title: 'کارخانجات و مراکز تولید بار ',
+      component: FactoriesAndFreightFormComponent,
     },
   ],
 };
