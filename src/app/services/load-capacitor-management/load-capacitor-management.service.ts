@@ -10,4 +10,6 @@ import { mockLoadInfo } from 'app/data/mock/load-info.mock';
   providedIn: 'root',
 })
 export class LoadCapacitorManagementService {
+  private userAuth = inject(UserAuthService);
+  private apiCommunicator = inject(APICommunicationManagementService);
 }
