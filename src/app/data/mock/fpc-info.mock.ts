@@ -4,9 +4,9 @@ export const mockFPCsInfo: FPCInfo[] = [
   {
     FPCId: 1002,
     FPCTitle: 'فولاد کوهپایه',
-    FPCTel: ' ',
+    FPCTel: '',
     FPCAddress: 'کوهپایه',
-    FPCManagerMobileNumber: '0912043215',
+    FPCManagerMobileNumber: '09120432155',
     FPCManagerNameFamily: 'محمدی',
     EmailAddress: 'y@gmail.com',
     Active: true,
@@ -14,7 +14,7 @@ export const mockFPCsInfo: FPCInfo[] = [
   {
     FPCId: 1003,
     FPCTitle: 'فولاد کوير',
-    FPCTel: ' ',
+    FPCTel: '',
     FPCAddress: 'آران و بيدگل',
     FPCManagerMobileNumber: '09234522155',
     FPCManagerNameFamily: 'خوروش',
