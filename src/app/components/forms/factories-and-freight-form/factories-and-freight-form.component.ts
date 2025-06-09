@@ -44,13 +44,13 @@ export class FactoriesAndFreightFormComponent {
   newUserPasswordDialog = '';
 
   private startKey = '';
-  private cachedFcpResults: FPCInfo[] = [];
-  private cachedFcp?: FPCInfo;
+  private cachedFpcResults: FPCInfo[] = [];
+  private cachedFpc?: FPCInfo;
   private readonly cachingEnabled = true;
   readonly cacheKeyLength = 3;
 
-  fcpForm = this.fb.group({
-    fcpId: [0, ValidationSchema.id],
+  fpcForm = this.fb.group({
+    fpcId: [0, ValidationSchema.id],
     title: ['', ValidationSchema.title],
     managerName: ['', ValidationSchema.managerName],
     managerMobile: ['', ValidationSchema.mobile],
@@ -66,7 +66,7 @@ export class FactoriesAndFreightFormComponent {
     const newStartKey = query.substring(0, this.cacheKeyLength);
 
     if (this.cachingEnabled && newStartKey === this.startKey) {
-      return this.cachedFcpResults.filter(item =>
+      return this.cachedFpcResults.filter((item) =>
         item.FPCTitle?.toLowerCase().includes(query.toLowerCase())
       );
     }
@@ -75,18 +75,19 @@ export class FactoriesAndFreightFormComponent {
     if (!this.isSuccessful(response)) return [];
 
     this.startKey = newStartKey;
-    this.cachedFcpResults = response.data!;
+    this.cachedFpcResults = response.data!;
     return response.data!;
-  }
+  };
 
   async selectSearchItem(event: AutoCompleteSelectEvent): Promise<void> {
-    await this.loadFcpDetails(event.value.fcpId);
+    console.log(event.value.FPCId);
+    await this.loadFpcDetails(event.value.FPCId);
   }
 
-  resetFcpForm(): void {
-    this.fcpForm.reset();
-    this.fcpId.setValue(0);
-    this.fcpActive.setValue(true);
+  resetFpcForm(): void {
+    this.fpcForm.reset();
+    this.fpcId.setValue(0);
+    this.fpcActive.setValue(true);
     this.searchTerm = '';
     this.searchInputComponent.onClear();
   }
@@ -101,12 +102,12 @@ export class FactoriesAndFreightFormComponent {
     this.newUserPasswordDialog = '';
   }
 
-  async activateFcpSms(): Promise<void> {
-    if (this.fcpId.invalid || this.fcpId.value === 0 || this.loading) return;
+  async activateFpcSms(): Promise<void> {
+    if (this.fpcId.invalid || this.fpcId.value === 0 || this.loading) return;
 
     try {
       this.loading = true;
-      const response = await this.fpcService.ActivateFPCSms(this.fcpId.value);
+      const response = await this.fpcService.ActivateFPCSms(this.fpcId.value);
       this.toast.success(
         'موفق',
         response.data?.Message ?? 'پیامک فعال سازی با موفقیت انجام شد.'
@@ -116,12 +117,14 @@ export class FactoriesAndFreightFormComponent {
     }
   }
 
-  async resetPasswordFcp(): Promise<void> {
-    if (this.fcpId.invalid || this.fcpId.value === 0 || this.loading) return;
+  async resetPasswordFpc(): Promise<void> {
+    if (this.fpcId.invalid || this.fpcId.value === 0 || this.loading) return;
 
     try {
       this.loading = true;
-      const response = await this.fpcService.ResetFPCUserPassword(this.fcpId.value);
+      const response = await this.fpcService.ResetFPCUserPassword(
+        this.fpcId.value
+      );
       if (!this.isSuccessful(response)) return;
 
       this.userNameDialog = response.data!.Username;
@@ -132,124 +135,135 @@ export class FactoriesAndFreightFormComponent {
     }
   }
 
-  async registerOrEditFcp(): Promise<void> {
-    if (this.fcpForm.invalid || this.loading) return;
+  async registerOrEditFpc(): Promise<void> {
+    if (this.fpcForm.invalid || this.loading) return;
 
     try {
       this.loading = true;
 
-      if (this.fcpId.value === 0) {
-        await this.registerFcp();
+      if (this.fpcId.value === 0) {
+        await this.registerFpc();
       } else {
-        await this.editFcp();
+        await this.editFpc();
       }
 
-      if (this.cachedFcp?.Active !== this.fcpActive.value) {
-        await this.changeFcpActiveStatus();
+      if (this.cachedFpc?.Active !== this.fpcActive.value) {
+        await this.changeFpcActiveStatus();
       }
     } finally {
       this.loading = false;
     }
   }
 
-  private async registerFcp(): Promise<void> {
-    const fcpInfo = this.buildFcpInfo();
-    const response = await this.fpcService.FPCRegistering(fcpInfo);
+  private async registerFpc(): Promise<void> {
+    const fpcInfo = this.buildFpcInfo();
+    const response = await this.fpcService.FPCRegistering(fpcInfo);
     if (this.isSuccessful(response)) {
-      this.toast.success('موفق', response.data?.Message ?? 'اطلاعات با موفقیت ثبت شد.');
+      this.toast.success(
+        'موفق',
+        response.data?.Message ?? 'اطلاعات با موفقیت ثبت شد.'
+      );
     }
-    this.resetFcpForm();
+    this.resetFpcForm();
   }
 
-  private async editFcp(): Promise<void> {
-    if (this.fcpId.invalid) return;
+  private async editFpc(): Promise<void> {
+    if (this.fpcId.invalid) return;
 
-    const fcpInfo = this.buildFcpInfo();
-    const response = await this.fpcService.EditFPC(fcpInfo);
+    const fpcInfo = this.buildFpcInfo();
+    const response = await this.fpcService.EditFPC(fpcInfo);
     if (this.isSuccessful(response)) {
-      this.toast.success('موفق', response.data?.Message ?? 'اطلاعات با موفقیت تغییر یافت.');
+      this.toast.success(
+        'موفق',
+        response.data?.Message ?? 'اطلاعات با موفقیت تغییر یافت.'
+      );
     }
   }
 
-  private async changeFcpActiveStatus(): Promise<void> {
-    if (this.fcpId.value === 0) return;
+  private async changeFpcActiveStatus(): Promise<void> {
+    if (this.fpcId.value === 0) return;
 
-    const response = await this.fpcService.FPCChangeActiveStatus(this.fcpActive.value);
-    if (this.isSuccessful(response) && this.cachedFcp) {
-      this.cachedFcp.Active = !this.cachedFcp.Active;
+    const response = await this.fpcService.FPCChangeActiveStatus(
+      this.fpcActive.value
+    );
+    if (this.isSuccessful(response) && this.cachedFpc) {
+      this.cachedFpc.Active = !this.cachedFpc.Active;
     }
   }
 
-  private async loadFcpDetails(fcpId: number): Promise<void> {
-    const response = await this.fpcService.GetFPCInfo(fcpId);
+  private async loadFpcDetails(fpcId: number): Promise<void> {
+    const response = await this.fpcService.GetFPCInfo(fpcId);
     if (!this.isSuccessful(response)) return;
 
     const data = response.data!;
-    this.fcpForm.patchValue({
-      fcpId: data.FPCId,
+    this.fpcForm.patchValue({
+      fpcId: data.FPCId,
       title: data.FPCTitle,
       managerName: data.FPCManagerNameFamily,
       managerMobile: data.FPCManagerMobileNumber,
       telephone: data.FPCTel,
       address: data.FPCAddress,
       email: data.EmailAddress,
-      fcpActive: data.Active,
+      fpcActive: data.Active,
     });
 
-    this.cachedFcp = data;
+    this.cachedFpc = data;
   }
 
-  private buildFcpInfo(): FPCInfo {
+  private buildFpcInfo(): FPCInfo {
     return {
-      FPCId: this.fcpId.value,
+      FPCId: this.fpcId.value,
       FPCTitle: this.title.value,
       FPCManagerNameFamily: this.managerName.value,
       FPCManagerMobileNumber: this.managerMobile.value,
       FPCTel: this.telephone.value,
       FPCAddress: this.address.value,
       EmailAddress: this.email.value,
-      Active: this.fcpActive.value,
+      Active: this.fpcActive.value,
     };
   }
 
   private isSuccessful(response: ApiResponse<any>): boolean {
     if (!response.success || !response.data) {
-      this.toast.error('خطا', response.error?.message ?? 'خطای غیرمنتظره‌ای رخ داد');
+      this.toast.error(
+        'خطا',
+        response.error?.message ?? 'خطای غیرمنتظره‌ای رخ داد'
+      );
       return false;
     }
     return true;
   }
 
   // Form Getters
-  get fcpId(): FormControl {
-    return this.fcpForm.get('fcpId') as FormControl;
+  get fpcId(): FormControl {
+    return this.fpcForm.get('fpcId') as FormControl;
   }
 
   get title(): FormControl {
-    return this.fcpForm.get('title') as FormControl;
+    return this.fpcForm.get('title') as FormControl;
   }
 
   get managerName(): FormControl {
-    return this.fcpForm.get('managerName') as FormControl;
+    return this.fpcForm.get('managerName') as FormControl;
   }
 
   get managerMobile(): FormControl {
-    return this.fcpForm.get('managerMobile') as FormControl;
+    return this.fpcForm.get('managerMobile') as FormControl;
   }
 
   get telephone(): FormControl {
-    return this.fcpForm.get('telephone') as FormControl;
+    return this.fpcForm.get('telephone') as FormControl;
   }
 
   get address(): FormControl {
-    return this.fcpForm.get('address') as FormControl;
+    return this.fpcForm.get('address') as FormControl;
   }
 
   get email(): FormControl {
-    return this.fcpForm.get('email') as FormControl;
+    return this.fpcForm.get('email') as FormControl;
   }
 
-  get fcpActive(): FormControl {
-    return this.fcpForm.get('fcpActive') as FormControl;
+  get fpcActive(): FormControl {
+    return this.fpcForm.get('fpcActive') as FormControl;
   }
 }

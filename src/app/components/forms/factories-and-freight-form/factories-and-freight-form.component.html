@@ -17,22 +17,21 @@
     class="grid col-12"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
-    [formGroup]="fcpForm"
+    [formGroup]="fpcForm"
   >
     <div class="grid col-12">
-      <!-- Hidden FCP ID -->
+      <!-- Hidden FPC ID -->
       <div class="col-12 md:col-6">
         <app-generic-input
           label="شناسه مرکز"
           [readOnly]="true"
           [disabled]="true"
-          [control]="fcpId"
+          [control]="fpcId"
           validationField="id"
           [addonWidth]="addonWidth"
           buttonIcon="pi pi-user-plus"
-          (clickButton)="resetFcpForm()"
-          />
-
+          (clickButton)="resetFpcForm()"
+        />
       </div>
 
       <!-- Title -->
@@ -107,13 +106,13 @@
         />
       </div>
 
-      <!-- FCP Active -->
+      <!-- FPC Active -->
       <div class="col-12 md:col-6">
         <app-binary-radio-input
           label="وضعیت مرکز"
-          radioName="fcp-active"
+          radioName="fpc-active"
           class="flex-1"
-          [control]="fcpActive"
+          [control]="fpcActive"
         />
       </div>
     </div>
@@ -124,56 +123,62 @@
     class="col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center"
   >
     <p-button
-      (click)="registerOrEditFcp()"
-      [disabled]="fcpForm.invalid || loading"
+      (click)="registerOrEditFpc()"
+      [disabled]="fpcForm.invalid || loading"
       label="ثبت و ویرایش"
       styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
     ></p-button>
 
     <p-button
-      (click)="activateFcpSms()"
-      [disabled]="fcpId.value == '0' || loading"
+      (click)="activateFpcSms()"
+      [disabled]="fpcId.value == '0' || loading"
       severity="warn"
       label="فعال سازی پیامک"
       styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
     ></p-button>
 
     <p-button
-    (click)="resetPasswordFcp()"
-    [disabled]="fcpId.value == '0' || fcpId.invalid || loading"
-    severity="info"
-    label="رمز عبور جدید"
-    styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
-  ></p-button>
+      (click)="resetPasswordFpc()"
+      [disabled]="fpcId.value == '0' || fpcId.invalid || loading"
+      severity="info"
+      label="رمز عبور جدید"
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+    ></p-button>
   </div>
 
+  <div class="card flex justify-center">
+    <p-dialog
+      header="رمز عبور جدید"
+      [modal]="true"
+      (onHide)="onCloseDialog()"
+      [(visible)]="passwordDialogVisible"
+      [style]="{ width: '25rem' }"
+    >
+      <div class="flex gap-3 flex-column">
+        <div class="flex align-items-center justify-content-between">
+          <span class="w-8rem"> شناسه کابری: </span>
+          <p-button
+            (click)="copyToClipboard(userNameDialog)"
+            size="small"
+            styleClass="px-4 w-10rem"
+            severity="info"
+          >
+            {{ userNameDialog }}
+          </p-button>
+        </div>
 
-<div class="card flex justify-center">
-  <p-dialog header="رمز عبور جدید" [modal]="true" (onHide)="onCloseDialog()" [(visible)]="passwordDialogVisible" [style]="{ width: '25rem' }">
-
-    <div class="flex gap-3 flex-column">
-      <div class="flex align-items-center justify-content-between">
-        <span class="w-8rem">
-        شناسه کابری:
-      </span>
-      <p-button (click)="copyToClipboard(userNameDialog)"  size="small" styleClass="px-4 w-10rem"  severity="info">
-        {{userNameDialog}}
-      </p-button>
-    </div>
-
-     <div class="flex align-items-center justify-content-between">
-      <span class="w-8rem">
-          رمز عبور جدید
-      </span>
-      <p-button
-      (click)="copyToClipboard(newUserPasswordDialog)"
-      size="small" styleClass="px-4 w-10rem" severity="primary">
-        {{newUserPasswordDialog}}
-      </p-button>
-    </div>
+        <div class="flex align-items-center justify-content-between">
+          <span class="w-8rem"> رمز عبور جدید </span>
+          <p-button
+            (click)="copyToClipboard(newUserPasswordDialog)"
+            size="small"
+            styleClass="px-4 w-10rem"
+            severity="primary"
+          >
+            {{ newUserPasswordDialog }}
+          </p-button>
+        </div>
+      </div>
+    </p-dialog>
   </div>
-
-
-  </p-dialog>
-</div>
 </div>
