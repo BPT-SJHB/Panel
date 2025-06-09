@@ -11,7 +11,7 @@ export enum TabComponentKey {
   Main = -1,
   UserManagement = 0,
   TruckDriverManagement = 1,
-  FactoriesAndFreightManagement = 7,
+  FactoriesAndFreightManagement = 6,
 }
 export interface TabView {
   title: string;
