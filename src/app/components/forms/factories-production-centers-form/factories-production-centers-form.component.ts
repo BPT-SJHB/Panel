@@ -18,8 +18,8 @@ import { SearchInputComponent } from 'app/components/shared/inputs/search-input/
 @Component({
   selector: 'app-factories-and-freight-form',
   standalone: true,
-  templateUrl: './factories-and-freight-form.component.html',
-  styleUrl: './factories-and-freight-form.component.scss',
+  templateUrl: './factories-production-centers-form.component.html',
+  styleUrl: './factories-production-centers-form.component.scss',
   imports: [
     ButtonModule,
     DialogModule,
@@ -53,11 +53,11 @@ export class FactoriesAndFreightFormComponent {
     fpcId: [0, ValidationSchema.id],
     title: ['', ValidationSchema.title],
     managerName: ['', ValidationSchema.managerName],
-    managerMobile: ['', ValidationSchema.mobile],
-    telephone: ['', ValidationSchema.telephone],
+    managerMobile: [''],
+    telephone: [''],
     address: ['', ValidationSchema.address],
-    email: ['', ValidationSchema.email],
-    fcpActive: [true, ValidationSchema.smsActive],
+    email: [''],
+    fpcActive: [true, ValidationSchema.smsActive],
   });
 
   searchFPCs = async (query: string): Promise<FPCInfo[]> => {
