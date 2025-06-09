@@ -5,7 +5,7 @@ import { TruckInfoFormComponent } from 'app/components/forms/truck-driver-manage
 import { DriverInfoFormComponent } from 'app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component';
 import { UsersMenuAccessFormComponent } from 'app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component';
 import { DriverTruckWalletFormComponent } from 'app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component';
-import { FactoriesAndFreightFormComponent } from 'app/components/forms/factories-and-freight-form/factories-and-freight-form.component';
+import { FactoriesAndFreightFormComponent } from 'app/components/forms/factories-production-centers-form/factories-production-centers-form.component';
 
 export enum TabComponentKey {
   Main = -1,
