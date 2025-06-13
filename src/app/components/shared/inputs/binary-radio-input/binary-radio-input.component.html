@@ -4,12 +4,11 @@
 
     <div class="flex gap-3">
       <!-- فعال -->
-      <div 
+      <div
         class="flex align-items-center gap-2"
         [ngClass]="{ 'text-green-600': control.value === true }"
       >
-        <p-radiobutton 
-          [disabled]="readonly"
+        <p-radiobutton
           [name]="radioName"
           [value]="true"
           [formControl]="control"
@@ -21,12 +20,11 @@
       </div>
 
       <!-- غیرفعال -->
-      <div 
+      <div
         class="flex align-items-center gap-2"
         [ngClass]="{ 'text-red-500': control.value === false }"
       >
-        <p-radiobutton 
-          [disabled]="readonly"
+        <p-radiobutton
           [name]="radioName"
           [value]="false"
           [formControl]="control"

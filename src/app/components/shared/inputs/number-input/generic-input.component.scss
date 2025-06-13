@@ -1,0 +1,16 @@
+::ng-deep ng-persian-datepicker.position-top .datepicker-outer-container {
+  bottom:  40px !important;
+  top: auto !important;
+}
+
+::ng-deep ng-persian-datepicker.position-bottom .datepicker-outer-container {
+  top: 40px !important;
+  top: auto !important;
+}
+
+::ng-deep ng-persian-datepicker .datepicker-outer-container {
+  position: absolute;
+  max-width: 300px;
+  height: 280px;
+  z-index: 2;
+}

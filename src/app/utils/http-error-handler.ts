@@ -5,20 +5,34 @@ import { ERROR_MESSAGES, ErrorCodes } from 'app/constants/error-messages';
 export function handleHttpError<T>(error: unknown): ApiResponse<T> {
   if (error instanceof HttpErrorResponse) {
     const code = error.status as ErrorCodes;
-    const response = {
+    let message = ERROR_MESSAGES[code] ?? 'خطای نامشخصی رخ داده است.';
+    let details = error.message;
+
+    if (
+      code === ErrorCodes.InternalServerError &&
+      typeof error.error === 'object' &&
+      error.error !== null
+    ) {
+      const apiError = error.error as {
+        ErrorMessage?: string;
+        ErrorMessageCode?: number;
+      };
+
+      if (apiError.ErrorMessage) {
+        message = apiError.ErrorMessage;
+        details = `کد خطا: ${apiError.ErrorMessageCode ?? 'نامشخص'}`;
+      } else if (typeof error.error === 'string') {
+        message = error.error;
+      }
+    }
+    return {
       success: false,
       error: {
         code,
-        message: ERROR_MESSAGES[code] ?? 'خطای نامشخصی رخ داده است.',
-        details: error.message,
+        message,
+        details,
       },
     };
-
-    if (code == ErrorCodes.InternalServerError && error.error) {
-      response.error.message = error.error;
-    }
-
-    return response;
   }
 
   const message = (error as any)?.message ?? '';

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { API_ROUTES } from 'app/constants/api';
 import { LoginFormData } from 'app/data/model/login-form-data.model';
@@ -10,18 +10,20 @@ import { UserSession } from 'app/data/model/user-session.model';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'environments/environment';
 import { mockUserSession } from 'app/data/mock/user-session.mock';
+import { SoftwareUserInfo } from 'app/data/model/software-user-info.model';
+import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
+import { mockSoftwareUserInfo } from 'app/data/mock/software-user-info.mock';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserAuthService implements IUserAuthService {
-  // آدرس API مربوط به احراز هویت
   private readonly apiUrl = API_ROUTES.SoftwareUserAPI.AuthUser;
-
-  // کلید مربوط به ذخیره‌سازی session ID در کوکی
   private readonly sessionKey = 'sessionId';
 
-  constructor(private http: HttpClient, private cookieService: CookieService) {}
+  private http = inject(HttpClient);
+  private cookieService = inject(CookieService);
+  private apiCommunicator = inject(APICommunicationManagementService);
 
   /**
    * احراز هویت کاربر از طریق ارسال اطلاعات فرم ورود به سرور.
@@ -119,7 +121,7 @@ export class UserAuthService implements IUserAuthService {
     return this.cookieService.get(this.sessionKey) || null;
   }
 
-  private setSessionId(sessionId: string): void {
+  public setSessionId(sessionId: string): void {
     if (this.getSessionId()) {
       this.logout();
     }
@@ -130,5 +132,19 @@ export class UserAuthService implements IUserAuthService {
       sameSite: environment.production ? 'None' : 'Lax',
       expires: new Date(Date.now() + 1000 * 60 * 30), // 30 minutes
     });
+  }
+
+  public async GetUserOfSession(
+    sessionId: string
+  ): Promise<ApiResponse<SoftwareUserInfo>> {
+    const apiUrl = API_ROUTES.SoftwareUserAPI.GetUserOfSession;
+    const bodyValue = {
+      SessionId: sessionId,
+    };
+
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      SoftwareUserInfo
+    >(apiUrl, bodyValue, mockSoftwareUserInfo);
   }
 }

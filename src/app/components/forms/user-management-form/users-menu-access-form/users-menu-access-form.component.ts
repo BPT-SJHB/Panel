@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { TreeNode } from 'primeng/api';
 import { TreeTableModule } from 'primeng/treetable';
 import { CommonModule } from '@angular/common';
@@ -8,6 +8,17 @@ import { SearchInputComponent } from 'app/components/shared/inputs/search-input/
 import { SoftwareUserInfo } from 'app/data/model/software-user-info.model';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ButtonModule } from 'primeng/button';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { PhoneInputComponent } from 'app/components/shared/inputs/phone-input/phone-input.component';
+import { ToastService } from 'app/services/toast-service/toast.service';
+import { ApiResponse } from 'app/data/model/api-Response.model';
+import { ShortResponse } from 'app/data/model/short-response.model';
 
 interface SelectedNodes {
   [key: string]: { checked: boolean; partialChecked?: boolean };
@@ -21,14 +32,18 @@ interface SelectedNodes {
     SearchInputComponent,
     ButtonModule,
     ProgressSpinnerModule,
+    ReactiveFormsModule,
+    PhoneInputComponent,
   ],
   templateUrl: './users-menu-access-form.component.html',
   styleUrl: './users-menu-access-form.component.scss',
 })
-export class UsersMenuAccessFormComponent implements OnInit {
+export class UsersMenuAccessFormComponent {
+  searchForm: FormGroup;
+
   isLoading: boolean = false;
   accessTable?: TreeNode[] = [];
-  accessTableFiltered?: TreeNode[] = [];
+
   cols = [
     { field: 'PGTitle', header: 'نام منو' },
     { field: 'Description', header: 'توضیحات' },
@@ -37,68 +52,147 @@ export class UsersMenuAccessFormComponent implements OnInit {
   selectedNodes: SelectedNodes = {};
   selectedNodesCopy: SelectedNodes = {};
 
-  @Input() userInfo: SoftwareUserInfo = { UserId: 0 };
+  userInfo: SoftwareUserInfo = { UserId: 0 };
+
   constructor(
     private userAuth: UserAuthService,
-    private userManager: UserManagementService
-  ) {}
-
-  async ngOnInit() {
-    await this.LoadWebProcessGroups_WebProcessesTable();
-
-    this.accessTableFiltered = this.accessTable;
+    private userManager: UserManagementService,
+    private toast: ToastService,
+    private fb: FormBuilder
+  ) {
+    this.searchForm = this.fb.group({
+      searchPhone: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(11),
+          Validators.maxLength(11),
+          Validators.pattern('09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}'),
+        ],
+      ],
+    });
   }
 
   async SaveChanges() {
+    if (this.isLoading) return;
+
     this.isLoading = true;
 
-    for (const key in this.selectedNodesCopy) {
-      if (
-        this.selectedNodesCopy[key].checked ||
-        this.selectedNodesCopy[key].partialChecked
-      ) {
-        if (key.includes('-')) {
-          await this.userManager.ChangeUserWebProcessAccess(
-            { UserId: this.userInfo.UserId },
-            { PId: Number(key.split('-')[1]), PAccess: false }
-          );
-        } else {
-          await this.userManager.ChangeUserWebProcessGroupAccess(
-            { UserId: this.userInfo.UserId },
-            { PGId: Number(key), PGAccess: false }
-          );
-        }
-      }
-    }
+    try {
+      // === Step 1: Disable old access (selectedNodesCopy, PAccess: false) ===
+      const disablePromises: Promise<ApiResponse<ShortResponse>>[] = [];
 
-    for (const key in this.selectedNodes) {
-      if (
-        this.selectedNodes[key].checked ||
-        this.selectedNodes[key].partialChecked
-      ) {
-        if (key.includes('-')) {
-          await this.userManager.ChangeUserWebProcessAccess(
-            { UserId: this.userInfo.UserId },
-            { PId: Number(key.split('-')[1]), PAccess: true }
-          );
-        } else {
-          await this.userManager.ChangeUserWebProcessGroupAccess(
-            { UserId: this.userInfo.UserId },
-            { PGId: Number(key), PGAccess: true }
-          );
+      for (const key in this.selectedNodesCopy) {
+        if (
+          this.selectedNodesCopy[key].checked ||
+          this.selectedNodesCopy[key].partialChecked
+        ) {
+          if (key.includes('-')) {
+            disablePromises.push(
+              this.userManager.ChangeUserWebProcessAccess(
+                this.userInfo.UserId,
+                Number(key.split('-')[1]),
+                false
+              )
+            );
+          } else {
+            disablePromises.push(
+              this.userManager.ChangeUserWebProcessGroupAccess(
+                this.userInfo.UserId,
+                Number(key),
+                false
+              )
+            );
+          }
         }
       }
+
+      const disableResults = await Promise.allSettled(disablePromises);
+      const firstDisableError = disableResults.find(
+        (r) => r.status === 'rejected'
+      ) as PromiseRejectedResult | undefined;
+
+      if (firstDisableError) {
+        const error =
+          (firstDisableError.reason as any)?.error?.message ??
+          'خطای غیرمنتظره‌ای در حذف دسترسی رخ داد';
+        this.toast.error('خطا', error);
+        return;
+      }
+
+      // === Step 2: Enable new access (selectedNodes, PAccess: true) ===
+      const enablePromises: Promise<ApiResponse<ShortResponse>>[] = [];
+
+      for (const key in this.selectedNodes) {
+        if (
+          this.selectedNodes[key].checked ||
+          this.selectedNodes[key].partialChecked
+        ) {
+          if (key.includes('-')) {
+            enablePromises.push(
+              this.userManager.ChangeUserWebProcessAccess(
+                this.userInfo.UserId,
+                Number(key.split('-')[1]),
+                true
+              )
+            );
+          } else {
+            enablePromises.push(
+              this.userManager.ChangeUserWebProcessGroupAccess(
+                this.userInfo.UserId,
+                Number(key),
+                true
+              )
+            );
+          }
+        }
+      }
+
+      const enableResults = await Promise.allSettled(enablePromises);
+      const firstEnableError = enableResults.find(
+        (r) => r.status === 'rejected'
+      ) as PromiseRejectedResult | undefined;
+      const firstEnableSuccess = enableResults.find(
+        (r) => r.status === 'fulfilled'
+      ) as PromiseFulfilledResult<ApiResponse<ShortResponse>> | undefined;
+
+      if (firstEnableError) {
+        const error =
+          (firstEnableError.reason as any)?.error?.message ??
+          'خطای غیرمنتظره‌ای در اعمال دسترسی رخ داد';
+        this.toast.error('خطا', error);
+      } else {
+        const message =
+          firstEnableSuccess?.value?.data?.Message ??
+          'دسترسی با موفقیت اعمال شد';
+        this.toast.success('موفق', message);
+      }
+
+      // === Reload the table ===
+      await this.LoadWebProcessGroups_WebProcessesTable();
+    } catch (err) {
+      this.toast.error('خطا', 'خطای بحرانی در ذخیره‌سازی رخ داد');
+    } finally {
+      this.isLoading = false;
     }
-    await this.ngOnInit();
-    this.isLoading = false;
   }
 
   private async LoadWebProcessGroups_WebProcessesTable(): Promise<void> {
-    const loadedTable = await this.userManager.GetWebProcessGroups_WebProcesses(
+    const response = await this.userManager.GetWebProcessGroups_WebProcesses(
       this.userInfo.MobileNumber!
     );
+    if (!response.success || !response.data) {
+      this.toast.error(
+        'خطا',
+        response.error?.message ?? 'خطا در هنگام براگزاری اطلاعات'
+      );
+      this.accessTable = [];
+      return;
+    }
+
+    const loadedTable = response.data;
     this.accessTable =
-      loadedTable.data?.map((x) => ({
+      loadedTable.map((x) => ({
         key: x.PGId.toString(),
         data: {
           PGTitle: x.PGTitle,
@@ -130,5 +224,39 @@ export class UsersMenuAccessFormComponent implements OnInit {
     });
 
     this.selectedNodesCopy = structuredClone(this.selectedNodes);
+  }
+
+  async getUserAccessMenu() {
+    if (this.searchForm.invalid || this.isLoading) return;
+
+    this.isLoading = true;
+    try {
+      const response = await this.userManager.GetSoftwareUserInfo(
+        this.searchPhone.value
+      );
+      if (!response.success || !response.data) {
+        this.toast.error(
+          'خطا',
+          response.error?.message ?? 'خطا در هنگام براگزاری اطلاعات'
+        );
+        this.accessTable = [];
+        return;
+      }
+
+      this.userInfo = {
+        UserId: response.data?.UserId,
+        MobileNumber: response.data?.MobileNumber,
+      };
+    } finally {
+      this.isLoading = false;
+    }
+
+    this.isLoading = true;
+    await this.LoadWebProcessGroups_WebProcessesTable();
+    this.isLoading = false;
+  }
+
+  get searchPhone() {
+    return this.searchForm.get('searchPhone') as FormControl;
   }
 }

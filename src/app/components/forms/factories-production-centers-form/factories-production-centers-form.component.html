@@ -1,0 +1,184 @@
+<div class="grid">
+  <!-- Search Input -->
+  <div class="col-12 w-full">
+    <app-search-input
+      class="w-full"
+      [autoComplete]="true"
+      autoCompleteOptionLabel="FPCTitle"
+      autoCompleteOptionValue="FPCTitle"
+      (selectAutoComplete)="selectSearchItem($event)"
+      [lazySearch]="searchFPCs"
+      [autoCompleteMinLength]="cacheKeyLength"
+    />
+  </div>
+
+  <!-- Form -->
+  <form
+    class="grid col-12"
+    [class.pointer-events-none]="loading"
+    [class.opacity-60]="loading"
+    [formGroup]="fpcForm"
+  >
+    <div class="grid col-12">
+      <!-- Hidden FPC ID -->
+      <div class="col-12 md:col-6">
+        <app-generic-input
+          label="شناسه مرکز"
+          [readOnly]="true"
+          [disabled]="true"
+          [control]="fpcId"
+          validationField="id"
+          [addonWidth]="addonWidth"
+          buttonIcon="pi pi-user-plus"
+          (clickButton)="resetFpcForm()"
+        />
+      </div>
+
+      <!-- Title -->
+      <div class="col-12 md:col-6">
+        <app-generic-input
+          label="عنوان"
+          placeholder="عنوان"
+          class="flex-1"
+          [control]="title"
+          validationField="title"
+          [addonWidth]="addonWidth"
+        />
+      </div>
+
+      <!-- Manager Name -->
+      <div class="col-12 md:col-6">
+        <app-generic-input
+          label="نام مدیر"
+          placeholder="نام مدیر"
+          class="flex-1"
+          [control]="managerName"
+          validationField="managerName"
+          [addonWidth]="addonWidth"
+        />
+      </div>
+
+      <!-- Manager Mobile -->
+      <div class="col-12 md:col-6">
+        <app-generic-input
+          label="شماره موبایل مدیر"
+          placeholder="شماره موبایل"
+          class="flex-1"
+          [control]="managerMobile"
+          validationField="mobile"
+          [addonWidth]="addonWidth"
+        />
+      </div>
+
+      <!-- Telephone -->
+      <div class="col-12 md:col-6">
+        <app-generic-input
+          label="تلفن"
+          placeholder="شماره تلفن مثال 02123456789"
+          class="flex-1"
+          [control]="telephone"
+          validationField="telephone"
+          [addonWidth]="addonWidth"
+        />
+      </div>
+
+      <!-- Address -->
+      <div class="col-12 md:col-6">
+        <app-generic-input
+          label="آدرس"
+          placeholder="آدرس"
+          class="flex-1"
+          [control]="address"
+          validationField="address"
+          [addonWidth]="addonWidth"
+        />
+      </div>
+
+      <!-- Email -->
+      <div class="col-12 md:col-6">
+        <app-generic-input
+          label="ایمیل"
+          placeholder="ایمیل"
+          class="flex-1"
+          [control]="email"
+          validationField="email"
+          [addonWidth]="addonWidth"
+        />
+      </div>
+
+      <!-- FPC Active -->
+      <div class="col-12 md:col-6">
+        <app-binary-radio-input
+          label="وضعیت مرکز"
+          radioName="fpc-active"
+          class="flex-1"
+          [control]="fpcActive"
+        />
+      </div>
+    </div>
+  </form>
+
+  <!-- Action Buttons -->
+  <div
+    class="col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center"
+  >
+    <p-button
+      (click)="registerOrEditFpc()"
+      [disabled]="fpcForm.invalid || loading"
+      label="ثبت و ویرایش"
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+    ></p-button>
+
+    <p-button
+      (click)="activateFpcSms()"
+      [disabled]="fpcId.value == '0' || loading"
+      severity="warn"
+      label="فعال سازی پیامک"
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+    ></p-button>
+
+    <p-button
+      (click)="resetPasswordFpc()"
+      [disabled]="fpcId.value == '0' || fpcId.invalid || loading"
+      severity="info"
+      label="رمز عبور جدید"
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+    ></p-button>
+  </div>
+
+  <div class="card flex justify-center">
+    <p-dialog
+      header="رمز عبور جدید"
+      [modal]="true"
+      (onHide)="onCloseDialog()"
+      [(visible)]="passwordDialogVisible"
+      [style]="{ width: '25rem' }"
+    >
+      <div class="flex gap-3 flex-column">
+        <div class="flex align-items-center justify-content-between">
+          <span class="w-8rem"> شناسه کابری: </span>
+          <p-button
+            (click)="copyToClipboard(userNameDialog)"
+            size="small"
+            styleClass="px-4 w-10rem"
+            severity="info"
+          >
+            {{ userNameDialog }}
+          </p-button>
+        </div>
+
+        <div class="flex align-items-center justify-content-between">
+          <span class="w-8rem"> رمز عبور جدید </span>
+          <p-button
+            (click)="copyToClipboard(newUserPasswordDialog)"
+            size="small"
+            styleClass="px-4 w-10rem"
+            severity="primary"
+          >
+            {{ newUserPasswordDialog }}
+          </p-button>
+        </div>
+      </div>
+    </p-dialog>
+  </div>
+</div>

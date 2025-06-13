@@ -1,0 +1,94 @@
+<div class="flex w-full">
+  <p-input-group styleClass="h-2-5rem w-full">
+    @if (label.trim() === '') {
+      <!-- Icon Addon -->
+      <p-inputgroup-addon
+        class="bg-primary text-white flex items-center justify-center px-3 border-round-right"
+          [style.width]="addonWidth"
+        >
+        <i [class]="icon"></i>
+      </p-inputgroup-addon>
+    } @else {
+      <!-- Label Addon -->
+      <p-inputgroup-addon
+        class="bg-primary border-round-right flex align-items-center justify-content-center"
+        [style.width]="addonWidth"
+      >
+        <span class="text-sm" style="white-space: nowrap">{{ label }}</span>
+      </p-inputgroup-addon>
+    }
+
+    @if (type === 'text') {
+      <!-- Text Input -->
+      <input
+        #inputRef
+        pInputText
+        [formControl]="control"
+        [placeholder]="placeholder"
+        [readOnly]="readOnly"
+        [ngClass]="{
+          'border-red-500': control.touched && control.invalid,
+          border: true,
+          'border-round-left': buttonIcon === '',
+          'px-2': true,
+          'h-full': true,
+          'w-full': true,
+          'bg-gray-100 text-gray-500 pointer-events-none opacity-60 cursor-not-allowed':
+            control.disabled
+        }"
+        (focus)="onFocusInput(inputRef)"
+        (blur)="onBlurInput(inputRef)"
+      />
+    } @if (type === 'date') {
+      <!-- Date Input -->
+      <div class="w-full" style="position: relative;">
+        <ng-persian-datepicker
+        [ngClass]="datePickerPosition == 'top' ? 'position-top' : 'position-bottom'"
+        >
+          <div class="h-2-5rem">
+            <input
+              #inputRef
+              pInputText
+              [formControl]="control"
+              [placeholder]="placeholder"
+              [readOnly]="readOnly"
+              [ngClass]="{
+                'border-red-500': control.touched && control.invalid,
+                border: true,
+                'border-round-left': buttonIcon === '',
+                'px-2': true,
+                'h-full': true,
+                'w-full': true,
+                'bg-gray-100 text-gray-500 pointer-events-none opacity-60 cursor-not-allowed':
+                  control.disabled
+              }"
+              (focus)="onFocusInput(inputRef)"
+              (blur)="onBlurInput(inputRef)"
+            />
+          </div>
+        </ng-persian-datepicker>
+      </div>
+    }
+  </p-input-group>
+
+  @if (buttonIcon.trim() !== '') {
+    <!-- Button Addon -->
+    <p-inputgroup-addon class="flex items-center justify-center">
+      <p-button
+        [icon]="buttonIcon"
+        [disabled]="buttonDisabled"
+        (click)="handleClick()"
+        styleClass="border-round-left h-full w-full"
+        class="w-full h-full"
+      />
+    </p-inputgroup-addon>
+  }
+</div>
+
+@if (control.touched && firstErrorMessage) {
+  <div class="px-3 mt-1">
+    <p-message severity="error" variant="simple" size="small">
+      {{ firstErrorMessage }}
+    </p-message>
+  </div>
+}

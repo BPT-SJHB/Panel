@@ -12,7 +12,8 @@ import { firstValueFrom } from 'rxjs';
   providedIn: 'root',
 })
 export class LoadAnnouncementPlacesService {
-  private readonly apiUrl = API_ROUTES.TransportationAPI.LoadAnnouncementPlaces;
+  private readonly apiUrl =
+    API_ROUTES.TransportationAPI.Driver.LoadAnnouncementPlaces;
 
   constructor(private http: HttpClient) {}
 
