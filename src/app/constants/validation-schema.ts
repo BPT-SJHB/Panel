@@ -6,6 +6,7 @@ export interface ErrorsValidation {
   pattern?: any;
   minlength?: any;
   maxlength?: any;
+  min?:any,
 }
 
 export const ValidationSchema = {
@@ -214,6 +215,109 @@ export const ValidationSchema = {
       return null;
     },
   },
+
+  announceDate: {
+    validators: [Validators.required],
+    getErrorMessage: (e: ErrorsValidation) =>
+      e.required ? 'تاریخ ثبت بار الزامی است.' : null,
+  },
+
+  loadStatus: {
+    validators: [Validators.required],
+    getErrorMessage: (e: ErrorsValidation) =>
+      e.required ? 'وضعیت بار الزامی است.' : null,
+  },
+
+  good: {
+    validators: [Validators.required],
+    getErrorMessage: (e: ErrorsValidation) =>
+      e.required ? 'نوع بار الزامی است.' : null,
+  },
+
+  loadAnnouncementGroup: {
+    validators: [Validators.required],
+    getErrorMessage: (e: ErrorsValidation) =>
+      e.required ? 'گروه اعلام بار الزامی است.' : null,
+  },
+
+  loadAnnouncementSubGroup: {
+    validators: [Validators.required],
+    getErrorMessage: (e: ErrorsValidation) =>
+      e.required ? 'زیرگروه اعلام بار الزامی است.' : null,
+  },
+
+  sourceCity: {
+    validators: [Validators.required],
+    getErrorMessage: (e: ErrorsValidation) =>
+      e.required ? 'شهر مبدا الزامی است.' : null,
+  },
+
+  targetCity: {
+    validators: [Validators.required],
+    getErrorMessage: (e: ErrorsValidation) =>
+      e.required ? 'شهر مقصد الزامی است.' : null,
+  },
+
+  loadingPlace: {
+    validators: [Validators.required],
+    getErrorMessage: (e: ErrorsValidation) =>
+      e.required ? 'محل بارگیری الزامی است.' : null,
+  },
+
+  dischargingPlace: {
+    validators: [Validators.required],
+    getErrorMessage: (e: ErrorsValidation) =>
+      e.required ? 'محل تخلیه الزامی است.' : null,
+  },
+
+  transportCompany: {
+    validators: [Validators.required],
+    getErrorMessage: (e: ErrorsValidation) =>
+      e.required ? 'شرکت حمل و نقل الزامی است.' : null,
+  },
+
+  totalNumber: {
+    validators: [Validators.required, Validators.min(1)],
+    getErrorMessage: (e: ErrorsValidation) => {
+      if (e.required) return 'تعداد الزامی است.';
+      if (e.min) return 'تعداد نمی‌تواند صفر باشد.';
+      return null;
+    },
+  },
+
+  tonaj: {
+    validators: [Validators.required, Validators.min(0.1)],
+    getErrorMessage: (e: ErrorsValidation) => {
+      if (e.required) return 'تناژ الزامی است.';
+      if (e.min) return 'تناژ باید بیشتر از صفر باشد.';
+      return null;
+    },
+  },
+
+  recipient: {
+    validators: [Validators.required],
+    getErrorMessage: (e: ErrorsValidation) =>
+      e.required ? 'گیرنده الزامی است.' : null,
+  },
+
+  tarrif: {
+    validators: [Validators.required, Validators.min(1)],
+    getErrorMessage: (e: ErrorsValidation) => {
+      if (e.required) return 'تعرفه الزامی است.';
+      if (e.min) return 'تعرفه نمی‌تواند صفر باشد.';
+      return null;
+    },
+  },
+
+  description: {
+  validators: [Validators.required, Validators.minLength(5)],
+  getErrorMessage: (e: ErrorsValidation) => {
+    if (e.required) return 'توضیحات الزامی است.';
+    if (e.minlength) return 'توضیحات باید حداقل ۵ کاراکتر باشد.';
+    return null;
+  },
+},
+
 };
 
 export type ValidationField = keyof typeof ValidationSchema;

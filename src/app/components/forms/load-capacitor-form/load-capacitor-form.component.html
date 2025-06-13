@@ -1,0 +1,255 @@
+<div class="flex flex-column gap-2">
+  <!-- Loading Spinner -->
+  @if (loading) {
+  <div
+    class="h-full w-full z-5 flex align-items-center justify-content-center absolute"
+  >
+    <div class="h-full w-full" style="opacity: 0.2"></div>
+    <i class="pi pi-spin pi-spinner primary" style="font-size: 5rem"></i>
+  </div>
+  }
+
+  <!-- Search Form -->
+  <form
+    class="col-12"
+    [formGroup]="searchForm"
+    [class.pointer-events-none]="loading"
+    [class.opacity-60]="loading"
+    (ngSubmit)="loadCapacitorForm()"
+  >
+    <div class="flex gap-3">
+      <app-generic-input
+        [control]="barcode"
+        icon="pi pi-barcode"
+        class="flex-1"
+        placeholder="کد بار"
+        addonWidth="5rem"
+      />
+      <p-button
+        (click)="loadCapacitorForm()"
+        [disabled]="searchForm.invalid"
+        size="small"
+        severity="info"
+        styleClass="w-8rem h-2-5rem"
+        label="جستجو"
+      />
+    </div>
+  </form>
+
+  <!-- Capacitor Form -->
+  <form
+    class="grid col-12"
+    [formGroup]="capacitorForm"
+    [class.pointer-events-none]="loading"
+    [class.opacity-60]="loading"
+    [formGroup]="capacitorForm"
+    (ngSubmit)="editOrRegister()"
+  >
+    <div class="grid col-12 border-gray-400 border-bottom-2">
+      <app-generic-input
+        class="col-12 sm:col-6"
+        [addonWidth]="addonWidth"
+        label="تاریخ ثبت بار"
+        type="date"
+        [control]="announceDate"
+        validationField="announceDate"
+      />
+
+      <app-generic-input  hidden [control]="loadStatusId" />
+      <app-generic-input
+        class="col-12 sm:col-6"
+        [addonWidth]="addonWidth"
+        label="وضعیت بار"
+        [control]="loadStatusTitle"
+        validationField="loadStatus"
+      />
+    </div>
+
+    <div class="grid col-12 mt-3 border-gray-400 border-bottom-2">
+      <app-generic-input  hidden [control]="transportCompanyId" />
+      
+      <app-generic-input
+        class="col-12 sm:col-6 md:col-4"
+        [addonWidth]="addonWidth"
+        label="شرکت حمل و نقل"
+        [control]="transportCompanyTitle"
+        validationField="transportCompany"
+      />
+
+      <app-generic-input  hidden [control]="goodId" />
+      <app-generic-input
+        class="col-12 sm:col-6 md:col-4"
+        [addonWidth]="addonWidth"
+        label=" کالا"
+        [control]="goodTitle"
+        validationField="good"
+      />
+
+      <app-generic-input  hidden [control]="loadAnnouncementGroupId" />
+      <app-generic-input
+        class="col-12 sm:col-6 md:col-4"
+        [addonWidth]="addonWidth"
+        label="گروه اعلام بار"
+        [control]="loadAnnouncementGroupTitle"
+        validationField="loadAnnouncementGroup"
+      />
+
+      <app-generic-input  hidden [control]="loadAnnouncementSubGroupId" />
+      <app-generic-input
+        class="col-12 sm:col-6 md:col-4"
+        [addonWidth]="addonWidth"
+        label="زیرگروه اعلام بار"
+        [control]="loadAnnouncementSubGroupTitle"
+        validationField="loadAnnouncementSubGroup"
+      />
+    </div>
+
+    <div class="grid col-12 mt-3 border-gray-400 border-bottom-2">
+      <app-generic-input  hidden [control]="sourceCityId" />
+      <app-generic-input
+        class="col-12 sm:col-6 md:col-4"
+        [addonWidth]="addonWidth"
+        label="شهر مبدا"
+        [control]="sourceCityTitle"
+        validationField="sourceCity"
+      />
+
+      <app-generic-input  hidden [control]="targetCityId" />
+      <app-generic-input
+        class="col-12 sm:col-6 md:col-4"
+        [addonWidth]="addonWidth"
+        label="شهر مقصد"
+        [control]="targetCityTitle"
+        validationField="targetCity"
+      />
+
+      <app-generic-input  hidden [control]="loadingPlaceId" />
+      <app-generic-input
+        class="col-12 sm:col-6 md:col-4"
+        [addonWidth]="addonWidth"
+        label="مبدا بارگیری"
+        [control]="loadingPlaceTitle"
+        validationField="loadingPlace"
+      />
+
+      <app-generic-input  hidden [control]="dischargingPlaceId" />
+      <app-generic-input
+        class="col-12 sm:col-6 md:col-4"
+        [addonWidth]="addonWidth"
+        label="مقصد تخلیه"
+        [control]="dischargingPlaceTitle"
+        validationField="dischargingPlace"
+      />
+    </div>
+
+    <div class="grid col-12 mt-3 border-gray-400 border-bottom-2">
+      <app-generic-input
+        class="col-12 sm:col-6 md:col-4"
+        [addonWidth]="addonWidth"
+        label="تعداد کل"
+        [control]="totalNumber"
+        validationField="totalNumber"
+      />
+      <app-generic-input
+        class="col-12 sm:col-6 md:col-4"
+        [addonWidth]="addonWidth"
+        label="تناژ"
+        [control]="tonaj"
+        validationField="tonaj"
+      />
+      <app-generic-input
+        class="col-12 sm:col-6 md:col-4"
+        [addonWidth]="addonWidth"
+        label="گیرنده"
+        [control]="recipient"
+        validationField="recipient"
+      />
+      <app-generic-input
+        class="col-12 sm:col-6 md:col-4"
+        [addonWidth]="addonWidth"
+        label="تعرفه"
+        [control]="tarrif"
+        validationField="tarrif"
+      />
+    </div>
+
+    <div class="grid col-12 mt-3 border-gray-400 border-bottom-2">
+      <app-generic-input
+        class="col-12"
+        [addonWidth]="addonWidth"
+        label="آدرس"
+        [control]="address"
+        validationField="address"
+      />
+      <app-generic-input
+        class="col-12"
+        [addonWidth]="addonWidth"
+        label="توضیحات"
+        [control]="description"
+        validationField="description"
+      />
+    </div>
+
+    <span class="mt-2 font-bold text-xl">پارامترهای موثر</span>
+    <div class="w-full overflow-x-auto">
+      <div class="flex flex-column gap-2 min-w-30rem">
+        @for ((item of ptpFormArray.controls); track $index) {
+        <div
+          class="flex align-items-center border-bottom-1 surface-border py-2 gap-4"
+        >
+          <!-- Checkbox + ID -->
+          <div class="flex align-items-center gap-2" style="width: 5rem">
+            <p-checkbox
+              [binary]="true"
+              class="mb-1"
+              [formControl]="getCheckedControl($index)"
+            ></p-checkbox>
+            <span class="mt-1">{{ item.get("TPTPDId")?.value }}</span>
+          </div>
+
+          <!-- Title -->
+          <span class="white-space-nowrap" style="width: 500px">
+            {{ item.get("TPTPTitle")?.value }}
+          </span>
+
+          <!-- Cost -->
+          <span class="text-right" style="min-width: 6rem">
+            {{ item.get("Cost")?.value | number : "1.0-0" }}
+          </span>
+        </div>
+        }
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div
+      class="px-3 col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center"
+    >
+      <p-button
+        (click)="editOrRegister()"
+        [disabled]="capacitorForm.invalid || loading"
+        label="ثبت و ویرایش"
+        size="small"
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+      ></p-button>
+
+      <p-button
+        (click)="editOrRegister()"
+        [disabled]="capacitorForm.invalid || loading"
+        label="حذف بار"
+        size="small"
+        severity="danger"
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+      ></p-button>
+
+        <p-button
+        (click)="editOrRegister()"
+        [disabled]="capacitorForm.invalid || loading"
+        label="کشتی بار"
+        size="small"
+        severity="info"
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+      ></p-button>
+    </div>
+  </form>
+</div>

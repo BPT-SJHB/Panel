@@ -6,12 +6,14 @@ import { DriverInfoFormComponent } from 'app/components/forms/truck-driver-manag
 import { UsersMenuAccessFormComponent } from 'app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component';
 import { DriverTruckWalletFormComponent } from 'app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component';
 import { FactoriesAndFreightFormComponent } from 'app/components/forms/factories-production-centers-form/factories-production-centers-form.component';
+import { LoadCapacitorFormComponent } from 'app/components/forms/load-capacitor-form/load-capacitor-form.component';
 
 export enum TabComponentKey {
   Main = -1,
   UserManagement = 0,
   TruckDriverManagement = 1,
   FactoriesAndFreightManagement = 6,
+  LoadCapacitorManagement = 37,
 }
 export interface TabView {
   title: string;
@@ -54,4 +56,8 @@ export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
       component: FactoriesAndFreightFormComponent,
     },
   ],
+  [TabComponentKey.LoadCapacitorManagement]: [{
+    title:'مخزن بار',
+    component:LoadCapacitorFormComponent
+  }],
 };
