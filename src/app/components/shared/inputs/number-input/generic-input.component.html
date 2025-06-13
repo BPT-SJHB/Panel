@@ -4,7 +4,8 @@
       <!-- Icon Addon -->
       <p-inputgroup-addon
         class="bg-primary text-white flex items-center justify-center px-3 border-round-right"
-      >
+          [style.width]="addonWidth"
+        >
         <i [class]="icon"></i>
       </p-inputgroup-addon>
     } @else {
@@ -41,7 +42,9 @@
     } @if (type === 'date') {
       <!-- Date Input -->
       <div class="w-full" style="position: relative;">
-        <ng-persian-datepicker>
+        <ng-persian-datepicker
+        [ngClass]="datePickerPosition == 'top' ? 'position-top' : 'position-bottom'"
+        >
           <div class="h-2-5rem">
             <input
               #inputRef
