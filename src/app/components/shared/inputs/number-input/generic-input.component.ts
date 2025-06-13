@@ -49,6 +49,7 @@ export class GenericInputComponent implements OnInit, OnChanges {
   @Input() buttonIcon = '';
   @Input() buttonDisabled = false;
   @Input() type: 'text' | 'date' = 'text';
+  @Input() datePickerPosition: 'top' | 'bottom' = 'bottom';
 
   @Output() clickButton = new EventEmitter<void>();
 
