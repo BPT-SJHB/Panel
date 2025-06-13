@@ -108,10 +108,17 @@ export class FactoriesAndFreightFormComponent {
     try {
       this.loading = true;
       const response = await this.fpcService.ActivateFPCSms(this.fpcId.value);
-      this.toast.success(
-        'موفق',
-        response.data?.Message ?? 'پیامک فعال سازی با موفقیت انجام شد.'
-      );
+      if (!this.isSuccessful(response)) {
+        this.toast.error(
+          'خطا',
+          response.error?.message ?? 'عملیات ناموفقیت بود'
+        );
+      } else {
+        this.toast.success(
+          'موفق',
+          response.data?.Message ?? 'پیامک فعال سازی با موفقیت انجام شد.'
+        );
+      }
     } finally {
       this.loading = false;
     }
@@ -184,7 +191,7 @@ export class FactoriesAndFreightFormComponent {
     if (this.fpcId.value === 0) return;
 
     const response = await this.fpcService.FPCChangeActiveStatus(
-      this.fpcActive.value
+      this.fpcId.value
     );
     if (this.isSuccessful(response) && this.cachedFpc) {
       this.cachedFpc.Active = !this.cachedFpc.Active;

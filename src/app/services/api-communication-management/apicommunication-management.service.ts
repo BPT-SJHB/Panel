@@ -13,7 +13,7 @@ import { ShortResponse } from 'app/data/model/short-response.model';
 })
 export class APICommunicationManagementService {
   private http = inject(HttpClient);
-  private userAuth = inject(UserAuthService);
+  // private userAuth = inject(UserAuthService);
 
   public async CommunicateWithAPI_Post<TBody, TExpect>(
     url: string,
@@ -21,7 +21,7 @@ export class APICommunicationManagementService {
     mockValue?: any
   ): Promise<ApiResponse<TExpect>> {
     if (!environment.production && environment.disableApi) {
-      this.userAuth.setSessionId(mockUserSession.sessionId);
+      // this.userAuth.setSessionId(mockUserSession.sessionId);
       return {
         success: true,
         data: mockValue,
