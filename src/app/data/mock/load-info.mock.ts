@@ -21,7 +21,7 @@ export const mockLoadInfo = {
   TotalNumber: 1,
   Tonaj: 22.0,
   Tarrif: 247136000,
-  Recipient: '',
+  Recipient: 'شرکت ساختمانی ایرانیان اطلس',
   Address: 'حضورراننده صددرصدالزاميست فوري  بارگيري',
   Description:
     'امكان افزايش حواله نمي باشد-بعدزظهرامروز تاساعت3بايدبارگيري گردد-فقط كفي تخليه 48ساعته ميباشد-حضورراننده دردفترجهت دريافت حواله بارنامه الزامي ميباشد',
@@ -32,7 +32,7 @@ export const mockLoadInfo = {
       TPTPDId: 137,
       TPTPTitle: 'دو باسکوله (ذوب آهنی)',
       Cost: 6000000,
-      Checked: false,
+      Checked: true,
     },
     {
       TPTPDId: 141,
@@ -44,7 +44,7 @@ export const mockLoadInfo = {
       TPTPDId: 145,
       TPTPTitle: 'چهار باسکوله (ذوب آهنی)',
       Cost: 14000000,
-      Checked: false,
+      Checked: true,
     },
     {
       TPTPDId: 149,
