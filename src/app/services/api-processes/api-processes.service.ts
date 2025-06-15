@@ -1,60 +1,46 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { API_ROUTES } from 'app/constants/api';
-import { handleHttpError } from 'app/utils/http-error-handler';
-import { UserAuthService } from '../user-auth-service/user-auth.service';
-import { Router } from '@angular/router';
-import { APP_ROUTES } from 'app/constants/routes';
-import { firstValueFrom } from 'rxjs';
+import { UserAuthService } from 'app/services/user-auth-service/user-auth.service';
 import { ApiGroupProcess } from 'app/data/model/api-group-process.model';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { PageGroup } from 'app/data/model/page-group.model';
-import { environment } from 'environments/environment';
 import { mockPageGroup } from 'app/data/mock/page-group.mock';
+import { APICommunicationManagementService } from 'app/services/api-communication-management/apicommunication-management.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiProcessesService {
   private readonly apiUrl = API_ROUTES.SoftwareUserAPI.GetWebProcesses;
-  private sessionId: string = '';
 
-  constructor(
-    private http: HttpClient,
-    private auth: UserAuthService,
-    private router: Router
-  ) {
-    this.sessionId = this.auth.getSessionId() ?? '';
-
-    if (this.sessionId == '') {
-      this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
-      return;
-    }
-  }
+  private userAuth = inject(UserAuthService);
+  private apiCommunicator = inject(APICommunicationManagementService);
 
   public async getApiProcesses(): Promise<ApiResponse<PageGroup[]>> {
-    // mock data
-    if (!environment.production && environment.disableApi) {
-      return { success: true, data: mockPageGroup };
-    }
+    await this.userAuth.isLoggedIn();
 
-    // real data
-    try {
-      const response = await firstValueFrom(
-        this.http.post<ApiGroupProcess[]>(this.apiUrl, {
-          sessionId: this.sessionId,
-        })
-      );
+    //#region Consts
+    const bodyValue = {
+      sessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
 
-      const pageGroups = this.convertApiGroupsToPageGroups(response);
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ApiGroupProcess[]
+    >(this.apiUrl, bodyValue, mockPageGroup);
+    //#endregion
 
-      return {
-        success: true,
-        data: pageGroups,
-      };
-    } catch (error: unknown) {
-      return handleHttpError<PageGroup[]>(error);
-    }
+    //#region Return
+    const pageGroups = this.convertApiGroupsToPageGroups(response.data ?? []);
+
+    return {
+      success: response.success,
+      data: pageGroups!,
+      error: response.error,
+    };
+    //#endregion
   }
 
   private convertApiGroupsToPageGroups(
@@ -65,7 +51,7 @@ export class ApiProcessesService {
       title: group.PGTitle!.trim(),
       icon: group.PGIconName!.trim(),
       processes: group.WebProcesses!.map((proc) => ({
-        id:proc.PId,
+        id: proc.PId,
         title: proc.PTitle!.trim(),
         name: proc.PName!.trim(),
         description: proc.Description!.trim(),
