@@ -1,659 +1,734 @@
-import { PageGroup } from 'app/data/model/page-group.model';
+import { ApiGroupProcess } from '../model/api-group-process.model';
 
-export const mockPageGroup: PageGroup[] = [
+export const mockApiGroupProcesses: ApiGroupProcess[] = [
   {
-    id: 0,
-    title: 'اطلاعات پایه',
-    icon: 'pi-address-book',
-    processes: [
+    PGId: 0,
+    PGTitle: 'اطلاعات پایه',
+    PGIconName: 'pi-address-book',
+    WebProcesses: [
       {
-        id: 0,
-        title: 'مدیریت کاربران',
-        name: 'UserManagement',
-        description:
-          'مدیریت کاربر شامل ایجاد، ویرایش، حذف، و تعیین دسترسی‌های کاربران می‌ شود.از طریق این منو می توانید فرآیند فعال سازی پکیج اس ام اس کاربر را نیز انجام دهید و نیز می توانید کاربر را غیر فعال نمایید',
-        icon: 'pi-user',
+        PId: 0,
+        PTitle:
+          'مدیریت کاربران                                                                                      ',
+        PName: 'UserManagement                                    ',
+        Description:
+          'مدیریت کاربر شامل ایجاد، ویرایش، حذف، و تعیین دسترسی\u200cهای کاربران می\u200c شود.از طریق این منو می توانید فرآیند فعال سازی پکیج اس ام اس کاربر را نیز انجام دهید و نیز می توانید کاربر را غیر فعال نمایید',
+        PIconName: 'pi-user',
       },
       {
-        id: 1,
-        title: 'رانندگان ، کامیونداران',
-        name: 'DriversAndTruckDrivers',
-        description:
+        PId: 1,
+        PTitle:
+          'رانندگان ، کامیونداران                                                                              ',
+        PName: 'DriversAndTruckDrivers                            ',
+        Description:
           'امکان استعلام و ثبت اطلاعات راننده از طریق کد ملی فراهم می باشد.استعلام کد ملی از درگاه سازمان راهداری موجب ویرایش اطلاعت راننده در سامانه می گردد.پس از ثبت مجوزهای دسترسی به صورت خودکار ایجاد می گردد',
-        icon: 'pi-id-card',
+        PIconName: 'pi-id-card',
       },
       {
-        id: 2,
-        title: 'خودرو ، ناوگان حمل',
-        name: 'CarsAndTrucks',
-        description:
+        PId: 2,
+        PTitle:
+          'خودرو ، ناوگان حمل                                                                                  ',
+        PName: 'CarsAndTrucks                                     ',
+        Description:
           'استعلام و ثبت اطلاعات ناوگان باری با شماره هوشمند و از طریق درگاه سازمان راهداری فراهم شده است.دقت نمایید تغییر نوع بارگیر می تواند محدودیتی درر انتخاب بار برای راننده ایجاد نماید',
-        icon: 'pi-truck',
+        PIconName: 'pi-truck',
       },
       {
-        id: 3,
-        title: 'شرکت های حمل و نقل',
-        name: 'TransportCompanies',
-        description:
+        PId: 3,
+        PTitle:
+          'شرکت های حمل و نقل                                                                                  ',
+        PName: 'TransportCompanies                                ',
+        Description:
           'از طریق این منو امکان مشاهده لیست شرکت های حمل و نقل بار یا شرکت های باربری وجود دارد.امکان تغییر عناوین وجود ندارد.برای ارتباط سامانه با شرکت شماره همراه مدیر عامل الزامی است',
-        icon: 'pi-warehouse',
+        PIconName: 'pi-warehouse',
       },
       {
-        id: 4,
-        title: 'صنوف',
-        name: 'Associations',
-        description:
+        PId: 4,
+        PTitle:
+          'صنوف                                                                                                ',
+        PName: 'Associations                                      ',
+        Description:
           'صنوف حمل و نقل شامل انجمن صنفی شرکت های حمل و نقل  ، انجمن صنفی کامیونداران و انجمن صنفی کارگری رانندگان می باشد.امکان ثبت و یا ویرایش اطلاعات صنوف مذکور از طریق این منو فراهم است',
-        icon: 'pi-users',
+        PIconName: 'pi-users',
       },
       {
-        id: 5,
-        title: 'صاحبین بار',
-        name: 'BarOwner',
-        description:
+        PId: 5,
+        PTitle:
+          'صاحبین بار                                                                                          ',
+        PName: 'BarOwner                                          ',
+        Description:
           'موجودیت صاحب بار در این سامانه به منظور ردیابی محموله ، یکپارچگی در اطلاع رسانی های صورت گرفته و ایجاد ارتباط هماهنگ بین شرکت حمل و نقل ، راننده و صاحب بار است',
-        icon: 'pi-box',
+        PIconName: 'pi-box',
       },
       {
-        id: 6,
-        title: 'کارخانجات و مراکز تولید بار',
-        name: 'Manufactures',
-        description:
+        PId: 6,
+        PTitle:
+          'کارخانجات و مراکز تولید بار                                                                         ',
+        PName: 'Manufactures                                      ',
+        Description:
           'امکان اعلام بار یکپارچه و خودکار تولیدات مراکز تولید و کارخانجات تولیدی در سامانه وجود دارد.از طریق این منو مدیریت اطلاعات مراکز مذکور ، ردیابی بارهای اعلام شده و مشاهده اطلاعات دفاتر مرکزی وجود دارد',
-        icon: 'pi-hammer',
+        PIconName: 'pi-hammer',
       },
       {
-        id: 7,
-        title: 'مبادی و مقاصد حمل بار',
-        name: 'LoadingDischargingLocations',
-        description:
+        PId: 7,
+        PTitle:
+          'مبادی و مقاصد حمل بار                                                                               ',
+        PName: 'LoadingDischargingLocations                       ',
+        Description:
           'مبادی و مقاصد حمل شامل انبارها ، پروژه ها ، تعلقات صاحبین بار ، کارخانجات ، مراکز دپوی بار و ... می باشد.امکان کنترل وضعیت بارگیری و تخلیه مبادی و مقاصد حمل از طریق این منو امکان پذیر است',
-        icon: 'pi-map-marker',
+        PIconName: 'pi-map-marker',
       },
       {
-        id: 8,
-        title: 'استان ها ، شهرها',
-        name: 'ProvincesCities',
-        description:
+        PId: 8,
+        PTitle:
+          'استان ها ، شهرها                                                                                    ',
+        PName: 'ProvincesCities                                   ',
+        Description:
           'از طریق این واسط امکان مشاهده لیست استان ها و شهرها همراه با کدینگ سازمان راهداری وجود دارد.کدینگ مذکور قابل تغییر نیست و به صورت خودکار و در صورت نیاز به روز رسانی می گردد.',
-        icon: 'pi-map-marker',
+        PIconName: 'pi-map-marker',
       },
       {
-        id: 9,
-        title: 'کالا',
-        name: 'Goods',
-        description:
+        PId: 9,
+        PTitle:
+          'کالا                                                                                                ',
+        PName: 'Goods                                             ',
+        Description:
           'کدینگ کالا استاندارد تعیین شده توسط سازمان راهداری از طریق این واسط قابل مشاهده است.قابل ذکر است کدینگ مذکور قابل تغییر نیست و به صورت خودکار و در صورت نیاز بروز رسانی می گردد',
-        icon: 'pi-box',
+        PIconName: 'pi-box',
       },
       {
-        id: 10,
-        title: 'مشخصات راننده',
-        name: 'DriverInformation',
-        description:
+        PId: 10,
+        PTitle:
+          'مشخصات راننده                                                                                       ',
+        PName: 'DriverInformation                                 ',
+        Description:
           'امکان مشاهده مشخصات راننده فعال شامل نام و نام خانوادگی ، اطلاعات شناسنامه ای و شماره هوشمند از طریق این واسط فراهم است.قبل از هر گونه فعالیت در سامانه از صحت اطلاعات اطمینان یابید',
-        icon: 'pi-id-card',
+        PIconName: 'pi-id-card',
       },
       {
-        id: 11,
-        title: 'مشخصات ناوگان',
-        name: 'TruckInformation',
-        description:
+        PId: 11,
+        PTitle:
+          'مشخصات ناوگان                                                                                       ',
+        PName: 'TruckInformation                                  ',
+        Description:
           'امکان مشاهده مشخصات ناوگان فعال شامل پلاک و سریال و شماره هوشمند از طریق این واسط فراهم است.قبل از هر گونه فعالیت در سامانه از صحت اطلاعات اطمینان یابید',
-        icon: 'pi-truck',
+        PIconName: 'pi-truck',
       },
       {
-        id: 12,
-        title: 'بارگیرها',
-        name: 'Loaders',
-        description:
+        PId: 12,
+        PTitle:
+          'بارگیرها                                                                                            ',
+        PName: 'Loaders                                           ',
+        Description:
           'از طریق این واسط می توانید کدینگ استاندارد بارگیرها وضع شده توسط سازمان راهداری را مشاهده نمایید.قابل ذکر است تغییر این کدینگ امکان پذیر نیست و در صورت نیاز به صورت خودکار بروز رسانی می گردند',
-        icon: 'pi-cart-arrow-down',
+        PIconName: 'pi-cart-arrow-down',
       },
       {
-        id: 13,
-        title: 'ناوگان ملکی',
-        name: 'CorporateTrucks',
-        description:
+        PId: 13,
+        PTitle:
+          'ناوگان ملکی                                                                                         ',
+        PName: 'CorporateTrucks                                   ',
+        Description:
           'از طریق این واسط می توانید لیست ناوگان ملکی متعلق به شرکت حمل و نقل را مشاهده و در صورت نیاز تغییراتی را لحاظ نمایید',
-        icon: 'pi-warehouse',
+        PIconName: 'pi-warehouse',
       },
       {
-        id: 14,
-        title: 'مدت سفر',
-        name: 'TravelDurations',
-        description:
+        PId: 14,
+        PTitle:
+          'مدت سفر                                                                                             ',
+        PName: 'TravelDurations                                   ',
+        Description:
           'فاصله مبدا بارگیری تا مقصد تخلیه بار به عنوان مدت سفر در نظر گرفته می شود.از طریق این واسط می توانید تغییراتی را به مدت سفر که در واحد ساعت می باشد لحاظ نمایید',
-        icon: 'pi-stopwatch',
+        PIconName: 'pi-stopwatch',
       },
       {
-        id: 44,
-        title: 'خود اظهاری راننده گان و کامیونداران',
-        name: 'DriverSelfDeclaration',
-        description:
-          'به منظور تدوین و تکمیل و اصلاح قواعد حمل نتایج خوداظهاری راننده به کارگرفته می شود.در فرآیند خود اظهاری صریحا شرایط ناوگان مثل طول و عرض و تعداد محور و وزن خالی بارگیر را لحاظ می شود',
-        icon: 'pi-exclamation-circle',
+        PId: 44,
+        PTitle:
+          'خود اظهاری راننده گان و کامیونداران                                                                 ',
+        PName: 'DriverSelfDeclaration                             ',
+        Description:
+          'به منظور تدوین و تکمیل و اصلاح قواعد حمل نتایج خوداظهاری راننده به کارگرفته می شود.در فرآیند خود اظهاری صریحا شرایط ناوگان مثل طول و عرض و تعداد محور و وزن خالی بارگیر را لحاظ می شود ',
+        PIconName: 'pi-exclamation-circle',
       },
       {
-        id: 53,
-        title: 'تعرفه های حمل بار',
-        name: 'TransportPrices',
-        description:
+        PId: 53,
+        PTitle:
+          'تعرفه های حمل بار                                                                                   ',
+        PName: 'TransportPrices                                   ',
+        Description:
           'مدیر سیستم از طریق این منو می تواند تعرفه های حمل بار را مدیریت نماید.افزایش مبلغ تعرفه به صورت گروهی و یا تکی مبنی بر مبدا و مقصد حمل صورت می گیرد',
-        icon: 'pi-objects-column',
+        PIconName: 'pi-objects-column',
       },
       {
-        id: 73,
-        title: 'گروه ها و زیرگروه های اعلام بار',
-        name: 'AnnouncementHallsManage',
-        description:
+        PId: 73,
+        PTitle:
+          'گروه ها و زیرگروه های اعلام بار                                                                     ',
+        PName: 'AnnouncementHallsManage                           ',
+        Description:
           'از طریق این واسط گروه ها و زیرگروه های اعلام بار تعریف و ارتباط آنها برقرار می شود',
-        icon: 'pi-warehouse',
+        PIconName: 'pi-warehouse',
       },
       {
-        id: 74,
-        title: 'صفوف نوبت دهی',
-        name: 'SequentialTurnsManage',
-        description:
+        PId: 74,
+        PTitle:
+          'صفوف نوبت دهی                                                                                       ',
+        PName: 'SequentialTurnsManage                             ',
+        Description:
           'از طریق این واسط صفوف نوبت دهی قابل ثبت و ویرایش هستند.صفوف نوبت دهی محدودیت هایی برای دریافت انواع بار و انواع بارگیر ایجاد می نماید',
-        icon: 'pi-chart-line',
+        PIconName: 'pi-chart-line',
       },
     ],
   },
   {
-    id: 1,
-    title: 'پارکینگ و تردد',
-    icon: 'pi-stop',
-    processes: [
+    PGId: 1,
+    PGTitle: 'پارکینگ و تردد',
+    PGIconName: 'pi-stop',
+    WebProcesses: [
       {
-        id: 15,
-        title: 'ثبت تردد',
-        name: 'Terrafic',
-        description:
+        PId: 15,
+        PTitle:
+          'ثبت تردد                                                                                            ',
+        PName: 'Terrafic                                          ',
+        Description:
           'تردد و توقف خودرو در پارکینگ از طریق فرآیند پلاک خوانی و کارت تردد که از نوع آر اف می باشد صورت می گیرد.هزینه ها به صورت خودکار محاسبه می شوند و راننده خودرو موظف است قبل از خروج اقدام به تسویه نماید',
-        icon: 'pi-list-check',
+        PIconName: 'pi-list-check',
       },
       {
-        id: 16,
-        title: 'کارت تردد',
-        name: 'TerraficCard',
-        description:
-          'کارت تردد شاخصی به منظور یکتایی در شناسایی خودرو و کیف پول مرتبط است.هنگام تردد کاربر انتظامات و گیت تردد اقدام به دریافت کارت مذکور و اتصال موقت آن به دستگاه کارت خوان می نماید',
-        icon: 'pi-id-card',
+        PId: 16,
+        PTitle:
+          'کارت تردد                                                                                           ',
+        PName: 'TerraficCard                                      ',
+        Description:
+          'کارت تردد شاخصی به منظور یکتایی در شناسایی خودرو و کیف پول مرتبط است.هنگام تردد کاربر انتظامات و گیت تردد اقدام به دریافت کارت مذکور و اتصال موقت آن به دستگاه کارت خوان می نماید ',
+        PIconName: 'pi-id-card',
       },
       {
-        id: 17,
-        title: 'سوابق تردد',
-        name: 'TerraficRecords',
-        description:
-          'امکان مشاهده سوابق تردد و توقف خودرو از طریق این واسط فراهم شده است.در صورتی که تصویری از تردد موجود باشد تصویر مذکور نمایش داده می شود',
-        icon: 'pi-bars',
+        PId: 17,
+        PTitle:
+          'سوابق تردد                                                                                          ',
+        PName: 'TerraficRecords                                   ',
+        Description:
+          'امکان مشاهده سوابق تردد و توقف خودرو از طریق این واسط فراهم شده است.در صورتی که تصویری از تردد موجود باشد تصویر مذکور نمایش داده می شود ',
+        PIconName: 'pi-bars',
       },
       {
-        id: 18,
-        title: 'قبوض دستی پارکینگ',
-        name: 'ParkingHandyBills',
-        description:
+        PId: 18,
+        PTitle:
+          'قبوض دستی پارکینگ                                                                                   ',
+        PName: 'ParkingHandyBills                                 ',
+        Description:
           'ممکن است در مواقعی به صورت اضطراری ثبت تردد از طریق سیستم امکان پذیر نباشد و کاربر اقدام به ثبت دستی قبوض پارکینگ می نماید.از طریق این واسط قبوض مذکور در سیستم ثبت خواهند شد',
-        icon: 'pi-receipt',
+        PIconName: 'pi-receipt',
       },
     ],
   },
   {
-    id: 2,
-    title: 'ناوگان باری و نوبت دهی',
-    icon: 'pi-list',
-    processes: [
+    PGId: 2,
+    PGTitle: 'ناوگان باری و نوبت دهی',
+    PGIconName: 'pi-list',
+    WebProcesses: [
       {
-        id: 19,
-        title: 'درخواست صدور ، ابطال و احیاء نوبت',
-        name: 'TurnIssueRequestAndTurnCancellation',
-        description:
-          'صدور نوبت ناوگان باری به منظور شرکت در فرآیند اعلام بار از طریق این منو انجام می گیرد.با ورود پلاک ناوگان می توانید اقدام به ابطال و یا احیاء نوبت با قید موازین سازمانی و صنفی نماید',
-        icon: 'pi-check',
+        PId: 19,
+        PTitle:
+          'درخواست صدور ، ابطال و احیاء نوبت                                                                   ',
+        PName: 'TurnIssueRequestAndTurnCancellation               ',
+        Description:
+          'صدور نوبت ناوگان باری به منظور شرکت در فرآیند اعلام بار از طریق این منو انجام می گیرد.با ورود پلاک ناوگان می توانید اقدام به ابطال و یا احیاء نوبت با قید موازین سازمانی و صنفی نماید  ',
+        PIconName: 'pi-check',
       },
       {
-        id: 21,
-        title: 'نوبت های صادر شده ناوگان',
-        name: 'TruckTurnsIssued',
-        description:
-          'راننده ناوگان باری می تواند تعداد محدودی از نوبت های صادر شده ناوگان خود را که شامل شماره نوبت ، عدد فاصله تا اعتبار و وضعیت فعال بودن و یا غیر فعال بودن نوبت است را از طریق این منو مشاهده نماید',
-        icon: 'pi-file',
+        PId: 21,
+        PTitle:
+          'نوبت های صادر شده ناوگان                                                                            ',
+        PName: 'TruckTurnsIssued                                  ',
+        Description:
+          'راننده ناوگان باری می تواند تعداد محدودی از نوبت های صادر شده ناوگان خود را که شامل شماره نوبت ، عدد فاصله تا اعتبار و وضعیت فعال بودن و یا غیر فعال بودن نوبت است را از طریق این منو مشاهده نماید ',
+        PIconName: 'pi-file',
       },
       {
-        id: 22,
-        title: 'سیستم نوبت دهی سراسری',
-        name: 'CentralizeTurnSystem',
-        description:
-          'با توجه به شرایط هر استان و شهر مشمول اعلام بار ممکن است محدودیتی در دریافت نوبت های همزمان در چندین شهر و محل اعلام بار وجود داشته باشد.با این واسط امکان ردیابی نوبت های همزمان ناوگان فراهم شده است',
-        icon: 'pi-list',
+        PId: 22,
+        PTitle:
+          'سیستم نوبت دهی سراسری                                                                               ',
+        PName: 'CentralizeTurnSystem                              ',
+        Description:
+          'با توجه به شرایط هر استان و شهر مشمول اعلام بار ممکن است محدودیتی در دریافت نوبت های همزمان در چندین شهر و محل اعلام بار وجود داشته باشد.با این واسط امکان ردیابی نوبت های همزمان ناوگان فراهم شده است ',
+        PIconName: 'pi-list',
       },
       {
-        id: 23,
-        title: 'درخواست صدور و ابطال نوبت',
-        name: 'TurnIssueTurnCancelRequest',
-        description:
+        PId: 23,
+        PTitle:
+          'درخواست صدور و ابطال نوبت                                                                           ',
+        PName: 'TurnIssueTurnCancelRequest                        ',
+        Description:
           'امان دریافت نوبت مجازی توسط راننده از طریق این منو امکان پذیر است.راننده ممکن است با توجه به شرایط خود اقدام به ابطال نوبت نماید که از طریق این منو انجام می شود',
-        icon: 'pi-globe',
+        PIconName: 'pi-globe',
       },
     ],
   },
   {
-    id: 3,
-    title: 'کیف پول',
-    icon: 'pi-wallet',
-    processes: [
+    PGId: 3,
+    PGTitle: 'کیف پول',
+    PGIconName: 'pi-wallet',
+    WebProcesses: [
       {
-        id: 20,
-        title: 'تراکنش های کیف پول',
-        name: 'MoneyWalletTransactions',
-        description:
-          'با توجه به نوع کیف پول ، کلیه تراکنش ها ائم از هزینه های تردد و توقف خودرو ، هزینه های مرتبط با امور نوبت دهی ، هزینه های مرتبط با اعلام بار و آزاد سازی بار و ... از طریق این واسط قابل مشاهده و ردیابی است',
-        icon: 'pi-refresh',
+        PId: 20,
+        PTitle:
+          'تراکنش های کیف پول                                                                                  ',
+        PName: 'MoneyWalletTransactions                           ',
+        Description:
+          'با توجه به نوع کیف پول ، کلیه تراکنش ها ائم از هزینه های تردد و توقف خودرو ، هزینه های مرتبط با امور نوبت دهی ، هزینه های مرتبط با اعلام بار و آزاد سازی بار و ... از طریق این واسط قابل مشاهده و ردیابی است ',
+        PIconName: 'pi-refresh',
       },
       {
-        id: 25,
-        title: 'مشاهده مشخصات کیف پول',
-        name: 'MoneyWalletInformation',
-        description:
+        PId: 25,
+        PTitle:
+          'مشاهده مشخصات کیف پول                                                                               ',
+        PName: 'MoneyWalletInformation                            ',
+        Description:
           'هر کیف پول دارای شاخص استاندارد و یکتایی است.از طریق این منو امکان مشاهده مشخصات ثبتی و موجودی لحظه ای کیف پول امکان پذیر است',
-        icon: 'pi-cog',
+        PIconName: 'pi-cog',
       },
       {
-        id: 26,
-        title: 'سوابق شارژ کیف پول',
-        name: 'MoneyWalletChargingRecords',
-        description:
+        PId: 26,
+        PTitle:
+          'سوابق شارژ کیف پول                                                                                  ',
+        PName: 'MoneyWalletChargingRecords                        ',
+        Description:
           'امکان مشاهده تراکنش های شارژ کیف پول از طریق این منو فراهم شده است.هر تراکنش شامل تاریخ و زمان شارژ ، مبلغ شارژ و موجودی پس از شارژ کیف پول می باشد',
-        icon: 'pi-arrow-right-arrow-left',
+        PIconName: 'pi-arrow-right-arrow-left',
       },
       {
-        id: 27,
-        title: 'شارژ کیف پول',
-        name: 'MoneyWalletCharging',
-        description:
+        PId: 27,
+        PTitle:
+          'شارژ کیف پول                                                                                        ',
+        PName: 'MoneyWalletCharging                               ',
+        Description:
           'احصاء فرآیندهای مالی همراه با کسر هزینه از کیف پول می باشد لذا دارنده کیف پول می بایست اقدام به شارژ آن نماید.شارژ کیف پول از طریق همین منو و به واسطه درگاههای پرداخت صورت می گیرد',
-        icon: 'pi-download',
+        PIconName: 'pi-download',
       },
       {
-        id: 28,
-        title: 'انتقال موجودی کیف پول',
-        name: 'TransferMoneyWalletBalance',
-        description:
-          'کارت های آر اف در واقع نقش کیف پول را نیز دارند و با توجه به ماهیت شان امکان مفقودی و یا خرابی دارند.کاربر می تواند از طریق این منو موجودی کیف مفقود و یا خراب شده را به کیف پول دیگری انتقال دهد',
-        icon: 'pi-file-export',
+        PId: 28,
+        PTitle:
+          'انتقال موجودی کیف پول                                                                               ',
+        PName: 'TransferMoneyWalletBalance                        ',
+        Description:
+          'کارت های آر اف در واقع نقش کیف پول را نیز دارند و با توجه به ماهیت شان امکان مفقودی و یا خرابی دارند.کاربر می تواند از طریق این منو موجودی کیف مفقود و یا خراب شده را به کیف پول دیگری انتقال دهد ',
+        PIconName: 'pi-file-export',
       },
       {
-        id: 29,
-        title: 'شارژ کیف پول از طریق پلاک',
-        name: 'TruckMoneyWalletCharging',
-        description:
+        PId: 29,
+        PTitle:
+          'شارژ کیف پول از طریق پلاک                                                                           ',
+        PName: 'TruckMoneyWalletCharging                          ',
+        Description:
           'شارژ کیف پول از طریق پلاک مشمول ارائه سندی مبنی بر واریز وجه به حساب ذینفع است.لذا کاربر می تواند پس از تایید سند مذکور و از طریق پلاک خودرو اقدام به شارژ کیف پول مرتبط نماید',
-        icon: 'pi-truck',
+        PIconName: 'pi-truck',
       },
       {
-        id: 30,
-        title: 'شارژ کیف پول شرکت حمل و نقل',
-        name: 'TransportCompanyMoneyWalletCharging',
-        description:
+        PId: 30,
+        PTitle:
+          'شارژ کیف پول شرکت حمل و نقل                                                                         ',
+        PName: 'TransportCompanyMoneyWalletCharging               ',
+        Description:
           'شارژ کیف پول شرکت حمل و نقل مشمول ارائه سندی مبنی بر واریز وجه به حساب ذینفع است.لذا کاربر می تواند پس از تایید سند مذکور و از طریق کد و نام شرکت حمل و نقل اقدام به شارژ کیف پول مرتبط نماید',
-        icon: 'pi-warehouse',
+        PIconName: 'pi-warehouse',
       },
       {
-        id: 31,
-        title: 'کیف پول کنترلی کامیونداران',
-        name: 'TruckersAssociationControllingMoneyWallet',
-        description:
+        PId: 31,
+        PTitle:
+          'کیف پول کنترلی کامیونداران                                                                          ',
+        PName: 'TruckersAssociationControllingMoneyWallet         ',
+        Description:
           'مطابق قواعد سازمانی و صنفی هزینه نوبت متعلق به صنوف است.از طریق این منو امکان ردیابی و شارژ کیف پول مذکور وجود دارد.کیف پول مذکور یک کیف پول کنترلی و درون سیستمی است',
-        icon: 'pi-users',
+        PIconName: 'pi-users',
       },
     ],
   },
   {
-    id: 4,
-    title: 'اطلاع رسانی و اعلام بار',
-    icon: 'pi-folder-open',
-    processes: [
+    PGId: 4,
+    PGTitle: 'اطلاع رسانی و اعلام بار',
+    PGIconName: 'pi-folder-open',
+    WebProcesses: [
       {
-        id: 32,
-        title: 'اعلام بار شرکت حمل و نقل',
-        name: 'TCLoadAnnouncement',
-        description:
+        PId: 32,
+        PTitle:
+          'اعلام بار شرکت حمل و نقل                                                                            ',
+        PName: 'TCLoadAnnouncement                                ',
+        Description:
           'شرکت های حمل و نقل می توانند با استفاده از این منو اقدام به اعلام بار نماید.بار شامل نوع بار،مبدا،مقصد،تناژ ، تعداد بار،مبا و مقصد حمل و تعرفه حمل است.تعرفه حمل به صورت خودکار و با احتساب تن کیلومتر محاسبه می گردد',
-        icon: 'pi-warehouse',
+        PIconName: 'pi-warehouse',
       },
       {
-        id: 33,
-        title: 'اعلام بار کارخانجات و مراکز تولید بار',
-        name: 'FactoryLoadAnnouncement',
-        description:
+        PId: 33,
+        PTitle:
+          'اعلام بار کارخانجات و مراکز تولید بار                                                               ',
+        PName: 'FactoryLoadAnnouncement                           ',
+        Description:
           'کارخانجات و مراکز تولید بار می توانند با استفاده از این منو اقدام به اعلام بار نماید.بار شامل نوع بار،مبدا،مقصد،تناژ ، تعداد بار،مبا و مقصد حمل و تعرفه حمل است.تعرفه حمل به صورت خودکار و با احتساب تن کیلومتر محاسبه می گردد',
-        icon: 'pi-hammer',
+        PIconName: 'pi-hammer',
       },
       {
-        id: 34,
-        title: 'تایید بار ثبت شده',
-        name: 'LoadAnnounceApproval',
-        description:
+        PId: 34,
+        PTitle:
+          'تایید بار ثبت شده                                                                                   ',
+        PName: 'LoadAnnounceApproval                              ',
+        Description:
           'ممکن است مواردی در مشخصات بار اعلامی موجود باشد که مشمول محدودیت هایی شده است لذا کاربر متصدی اعلام بار موظف است پس از بررسی و تایید بار آن را تایید نموده و ثبت آن را قطعی نماید',
-        icon: 'pi-file-check',
+        PIconName: 'pi-file-check',
       },
       {
-        id: 35,
-        title: 'مخزن بار',
-        name: 'LoadCapacitor',
-        description:
-          'امکان مشاهده بار موجود از طریق این منو فراهم شده است.بار پس از گذشت تام لپس اعلام بار در صورت عدم انتخاب توسط رانندگان وارد قسمت رسوب می شود',
-        icon: 'pi-inbox',
+        PId: 35,
+        PTitle:
+          'مخزن بار                                                                                            ',
+        PName: 'LoadCapacitor                                     ',
+        Description:
+          'امکان مشاهده بار موجود از طریق این منو فراهم شده است.بار پس از گذشت تام لپس اعلام بار در صورت عدم انتخاب توسط رانندگان وارد قسمت رسوب می شود ',
+        PIconName: 'pi-inbox',
       },
       {
-        id: 36,
-        title: 'تخصیص بار شرکت حمل و نقل',
-        name: 'TCLoadAllocation',
-        description:
+        PId: 36,
+        PTitle:
+          'تخصیص بار شرکت حمل و نقل                                                                            ',
+        PName: 'TCLoadAllocation                                  ',
+        Description:
           'شرکت حمل و نقل از طریق این منو قادر به تخصیص بار رسوب شده به راننده مورد نظر خود می نماید.تخصیص بار رسوب شده ممکن است مشمول قواعد زمانی مصوب شده توسط سازمان و صنوف گردد',
-        icon: 'pi-warehouse',
+        PIconName: 'pi-warehouse',
       },
       {
-        id: 37,
-        title: 'تخصیص بار راننده',
-        name: 'DriverLoadAllocation',
-        description:
-          'زمان بندی اعلام بار از طریق منوی پشتیبانی سامانه قابل مشاهده استوراننده می تواند مطابق زمانبندی وارد این منو شده و بار خود را انتخاب نموده و تخصیص دهد.تعداد بار انتخاب شده محدودیت هایی خواهد داشت',
-        icon: 'pi-user-edit',
+        PId: 37,
+        PTitle:
+          'تخصیص بار راننده                                                                                    ',
+        PName: 'DriverLoadAllocation                              ',
+        Description:
+          'زمان بندی اعلام بار از طریق منوی پشتیبانی سامانه قابل مشاهده استوراننده می تواند مطابق زمانبندی وارد این منو شده و بار خود را انتخاب نموده و تخصیص دهد.تعداد بار انتخاب شده محدودیت هایی خواهد داشت ',
+        PIconName: 'pi-user-edit',
       },
       {
-        id: 38,
-        title: 'بازارگاه بار',
-        name: 'MarketPlace',
-        description:
-          'از طریق این منو امکان مشاهده و دریافت بار غیر سالنی وجود دارد.در بازارگاه بار دریافت بار مشمول دریافت نوبت نمی باشدو سامانه بر اساس اولویت انتخاب رانندگان بار را اختصاص می دهد',
-        icon: 'pi-megaphone',
+        PId: 38,
+        PTitle:
+          'بازارگاه بار                                                                                        ',
+        PName: 'MarketPlace                                       ',
+        Description:
+          'از طریق این منو امکان مشاهده و دریافت بار غیر سالنی وجود دارد.در بازارگاه بار دریافت بار مشمول دریافت نوبت نمی باشدو سامانه بر اساس اولویت انتخاب رانندگان بار را اختصاص می دهد ',
+        PIconName: 'pi-megaphone',
       },
       {
-        id: 39,
-        title: 'ثبت ، ویرایش ، کنسلی و حذف بار',
-        name: 'LoadRegisteringEditing',
-        description:
-          'امکان مدیریت اطلاعات بار اعلام شده در سامانه شامل هرگونه اصلاحات و یا کنسلی و حذف بار توسط کاربر پشتیبان سامانه از طریق این منو قابل انجام است',
-        icon: 'pi-pen-to-square',
+        PId: 39,
+        PTitle:
+          'ثبت ، ویرایش ، کنسلی و حذف بار                                                                      ',
+        PName: 'LoadRegisteringEditing                            ',
+        Description:
+          'امکان مدیریت اطلاعات بار اعلام شده در سامانه شامل هرگونه اصلاحات و یا کنسلی و حذف بار توسط کاربر پشتیبان سامانه از طریق این منو قابل انجام است ',
+        PIconName: 'pi-pen-to-square',
       },
       {
-        id: 40,
-        title: 'ثبت درخواست حمل صاحبین کالا',
-        name: 'BarOwnerTransportationRequest',
-        description:
+        PId: 40,
+        PTitle:
+          'ثبت درخواست حمل صاحبین کالا                                                                         ',
+        PName: 'BarOwnerTransportationRequest                     ',
+        Description:
           'اعلام بار و ثبت درخواست حمل بار از طرف صاحب بار که ماهیت شرکت حمل و نقل و یا مراکز و کارخانجات تولید را ندارد از طریق این منو صورت می گیرد',
-        icon: 'pi-verified',
+        PIconName: 'pi-verified',
       },
       {
-        id: 41,
-        title: 'اولویت بندی بار انتخاب شده',
-        name: 'LoadAllocationPrioriity',
-        description:
+        PId: 41,
+        PTitle:
+          'اولویت بندی بار انتخاب شده                                                                          ',
+        PName: 'LoadAllocationPrioriity                           ',
+        Description:
           'راننده می تواند پس از انتخاب بارهای مورد نظر خود اقدام به تغییر اولویت های انتخابی خود کند.اولویت در انتخاب بار به منظور وزن دهی به بار انتخاب شده انجام می شود که ممکن است ناموفق باشد',
-        icon: 'pi-sort-amount-up',
+        PIconName: 'pi-sort-amount-up',
       },
       {
-        id: 42,
-        title: 'مجوزهای صادر شده ناوگان',
-        name: 'LoadTransportationPermissions',
-        description:
+        PId: 42,
+        PTitle:
+          'مجوزهای صادر شده ناوگان                                                                             ',
+        PName: 'LoadTransportationPermissions                     ',
+        Description:
           'رانندگان می توانند لیست محدودی از مجوزهای حمل صادر شده در سامانه را از طریق این منو مشاهده نمایند',
-        icon: 'pi-check-circle',
+        PIconName: 'pi-check-circle',
       },
       {
-        id: 43,
-        title: 'درخواست ابطال مجوز حمل بار',
-        name: 'LoadTransportationPermissionCancellationRequest',
-        description:
-          'راننده می تواند پس از تخصیص و آزاد سازی بار با توجه به شرایط خویش از طریق این منو اقدام به ثبت درخواست کنسلی مجوز حمل صادر شده نماید.ممکن است قواعد سازمانی و صنفی محدودیتی برای نوبت ناوگان ایجاد نماید',
-        icon: 'pi-times-circle',
+        PId: 43,
+        PTitle:
+          'درخواست ابطال مجوز حمل بار                                                                          ',
+        PName: 'LoadTransportationPermissionCancellationRequest   ',
+        Description:
+          'راننده می تواند پس از تخصیص و آزاد سازی بار با توجه به شرایط خویش از طریق این منو اقدام به ثبت درخواست کنسلی مجوز حمل صادر شده نماید.ممکن است قواعد سازمانی و صنفی محدودیتی برای نوبت ناوگان ایجاد نماید ',
+        PIconName: 'pi-times-circle',
       },
       {
-        id: 52,
-        title: 'مدیریت مجوزهای بارگیری',
-        name: 'LoadingPermissionsManage',
-        description:
+        PId: 52,
+        PTitle:
+          'مدیریت مجوزهای بارگیری                                                                              ',
+        PName: 'LoadingPermissionsManage                          ',
+        Description:
           'کاربر پشتیبان سامانه می تواند از طریق این منو مجوزهای حمل صادر شده را رصد نموده و بر اساس قواعد موجود اقدام به کنسلی آن ها نماید',
-        icon: 'pi-check-circle',
+        PIconName: 'pi-check-circle',
       },
       {
-        id: 63,
-        title: 'اعلام بار فردا',
-        name: 'TomorrowLoadAnnouncement',
-        description:
+        PId: 63,
+        PTitle:
+          'اعلام بار فردا                                                                                      ',
+        PName: 'TomorrowLoadAnnouncement                          ',
+        Description:
           'ثبت بار خارج از زمانبندی اعلام بار مفهوم بار قردا را دارد.سامانه ضمن ثبت بار آن را در صف انتقال به بار فردا می نماید.سرویس ثبت بار در نیمه شب بار فردا را تحت عنوان بار جاری تغییر وضعیت می دهد',
-        icon: 'pi-warehouse',
+        PIconName: 'pi-warehouse',
       },
       {
-        id: 72,
-        title: 'مدیریت تخصیص بار',
-        name: 'LoadAllocationManage',
-        description:
+        PId: 72,
+        PTitle:
+          'مدیریت تخصیص بار                                                                                    ',
+        PName: 'LoadAllocationManage                              ',
+        Description:
           'از طریق این واسط امکان مدیریت تخصیص های صادر شده و یا صدور تخصیص برای کاربران پشتیبان سامانه فراهم شده است',
-        icon: 'pi-user-edit',
+        PIconName: 'pi-user-edit',
       },
     ],
   },
   {
-    id: 5,
-    title: 'مدیریت سیستم',
-    icon: 'pi-cog',
-    processes: [
+    PGId: 5,
+    PGTitle: 'مدیریت سیستم',
+    PGIconName: 'pi-cog',
+    WebProcesses: [
       {
-        id: 45,
-        title: 'پیکر بندی عمومی سیستم',
-        name: 'GeneralConfiguration',
-        description:
+        PId: 45,
+        PTitle:
+          'پیکر بندی عمومی سیستم                                                                               ',
+        PName: 'GeneralConfiguration                              ',
+        Description:
           'مدیر سیستم می تواند از طریق این منو اقدام به تغییر تنظیمات عمومی سیستم مثل رنگ ، فونت و یا حتی قواعد عمومی حمل نماید.فعالیت در این واسط نیاز به اطلاعات تخصصی در سامانه دارد',
-        icon: 'pi-table',
+        PIconName: 'pi-table',
       },
       {
-        id: 46,
-        title: 'پیکربندی اعلام بار',
-        name: 'LoadAnnouncementConfiguration',
-        description:
+        PId: 46,
+        PTitle:
+          'پیکربندی اعلام بار                                                                                  ',
+        PName: 'LoadAnnouncementConfiguration                     ',
+        Description:
           'بارهای اعلام شده در گروههای اعلام بار و زیرگروه های اعلام بار دسته بندی می شوند.تنظیمات ساعات اعلام بار ، قواعد رسوب بار و زمانبندی های هر فرآیند مختص گروه ها و زیرگروه های بار از طریق این منو صورت می گیرد',
-        icon: 'pi-sitemap',
+        PIconName: 'pi-sitemap',
       },
       {
-        id: 47,
-        title: 'پیکر بندی تجهیزات',
-        name: 'ComponentConfiguration',
-        description:
-          'تجهیزاتی مثل دوربین پلاک خوان ، دستگاههای پوز ، دستگاههای کارت خوان آر اف ، دستگاههای اثر انگشت و ... که به صورت فیزیکی به سامانه متصل می باشند مشمول تنظیماتی هستند تا هنگام اجرا عملکرد مطلوبی ارائه دهند',
-        icon: 'pi-th-large',
+        PId: 47,
+        PTitle:
+          'پیکر بندی تجهیزات                                                                                   ',
+        PName: 'ComponentConfiguration                            ',
+        Description:
+          'تجهیزاتی مثل دوربین پلاک خوان ، دستگاههای پوز ، دستگاههای کارت خوان آر اف ، دستگاههای اثر انگشت و ... که به صورت فیزیکی به سامانه متصل می باشند مشمول تنظیماتی هستند تا هنگام اجرا عملکرد مطلوبی ارائه دهند ',
+        PIconName: 'pi-th-large',
       },
       {
-        id: 48,
-        title: 'تقویم حمل و نقلی',
-        name: 'TransportationCalendar',
-        description:
+        PId: 48,
+        PTitle:
+          'تقویم حمل و نقلی                                                                                    ',
+        PName: 'TransportationCalendar                            ',
+        Description:
           'همزمان با ارائه تقویم شمسی در این واسط تنظیماتی برای شرایط احتمالی حمل و نقلی در این واسط ارائه شده است .اعلام بار در روزهای تعطیل و یا ابطال نوبت ها و رسوب بار و قواعدی از این نمونه از طریق این تقویم منترل می شوند',
-        icon: 'pi-calendar-clock',
+        PIconName: 'pi-calendar-clock',
       },
       {
-        id: 49,
-        title: 'مدیریت گروهی کاربران',
-        name: 'UserTypesManagement',
-        description:
+        PId: 49,
+        PTitle:
+          'مدیریت گروهی کاربران                                                                                ',
+        PName: 'UserTypesManagement                               ',
+        Description:
           'از طریق این منو امکان اعمال تغییرات و اعمال ویژگی ها و دسترسی هایی به کاربران بر اساس دسته بندی کاربر وجود دارد.کاربر ممکن است یک رانندهو یا شرکت حمل و نقل و یا مدیرانی در سطوح بالا باشند',
-        icon: 'pi-users',
+        PIconName: 'pi-users',
       },
       {
-        id: 50,
-        title: 'لیست سیاه',
-        name: 'BlackLists',
-        description:
+        PId: 50,
+        PTitle:
+          'لیست سیاه                                                                                           ',
+        PName: 'BlackLists                                        ',
+        Description:
           'لیست سیاه شامل ایجاد محدودیت هایی برای  آبجکت های موجود و فعال در سامانه است.راننده ، شرکت حمل و نقل ، خودرو ، کاربر و حتی مبادی و مقاصد حمل بار جزو آبچکت های مورد نظر هستند',
-        icon: 'pi-ban',
+        PIconName: 'pi-ban',
       },
       {
-        id: 51,
-        title: 'مشاهده وقایع',
-        name: 'SystemLoggingView',
-        description:
+        PId: 51,
+        PTitle:
+          'مشاهده وقایع                                                                                        ',
+        PName: 'SystemLoggingView                                 ',
+        Description:
           'کلیه وقایع که سامانه در تعامل با آبجکت های فعال دارد در مخزن لاگ سیستم ثبت می شوند.از طریق این منو امکان مشاهده و ردیابی کلیه وقایع موجود امکان پذیر است',
-        icon: 'pi-calendar-plus',
+        PIconName: 'pi-calendar-plus',
       },
       {
-        id: 70,
-        title: 'اس ام اس انبوه',
-        name: 'BulkSMSSending',
-        description:
-          'امکان تنظیم و ارسال اس ام اس شامل اطلاع رسانی های سازمانی و یا صنفی در حوزه حمل و نقل و یا اطلاع رسانی از طرف پشتیبانی سامانه در حوزه شرایط احتمالی سامانه از طریق این واسط وجود دارد',
-        icon: 'pi-envelope',
+        PId: 70,
+        PTitle:
+          'اس ام اس انبوه                                                                                      ',
+        PName: 'BulkSMSSending                                    ',
+        Description:
+          'امکان تنظیم و ارسال اس ام اس شامل اطلاع رسانی های سازمانی و یا صنفی در حوزه حمل و نقل و یا اطلاع رسانی از طرف پشتیبانی سامانه در حوزه شرایط احتمالی سامانه از طریق این واسط وجود دارد ',
+        PIconName: 'pi-envelope',
       },
     ],
   },
   {
-    id: 6,
-    title: 'گزارشات',
-    icon: 'pi-copy',
-    processes: [
+    PGId: 6,
+    PGTitle: 'گزارشات',
+    PGIconName: 'pi-copy',
+    WebProcesses: [
       {
-        id: 54,
-        title: 'گزارش نوبت ها',
-        name: 'TurnsReport',
-        description:
+        PId: 54,
+        PTitle:
+          'گزارش نوبت ها                                                                                       ',
+        PName: 'TurnsReport                                       ',
+        Description:
           'این گزارش لیست کاملی از نوبت های صادر شده اخیر و نوبت های عیر فعال را ارائه می دهد.خواب ناوگان دارای نوبت نیز در این گزارش لحاظ گردیده است',
-        icon: 'pi-sort-amount-up',
+        PIconName: 'pi-sort-amount-up',
       },
       {
-        id: 55,
-        title: 'گزارش تخصیص بار',
-        name: 'LoadAllocationsReport',
-        description:
+        PId: 55,
+        PTitle:
+          'گزارش تخصیص بار                                                                                     ',
+        PName: 'LoadAllocationsReport                             ',
+        Description:
           'سوابق کلیه تخصیص های صادر شده در سامانه در این گزارش موجود است.تخصیص ممکن است از طریق کاربر راننده و یا شرکت حمل و نقل و یا کاربر پشتیبان سامانه صورت گرفته باشد',
-        icon: 'pi-list-check',
+        PIconName: 'pi-list-check',
       },
       {
-        id: 56,
-        title: 'گزارش مجوزهای حمل صادر شده',
-        name: 'LoadTransportationPermissionsReport',
-        description:
+        PId: 56,
+        PTitle:
+          'گزارش مجوزهای حمل صادر شده                                                                          ',
+        PName: 'LoadTransportationPermissionsReport               ',
+        Description:
           'در این گزارش لیست کامل مجوزهای صادر شده به تفکیک گروه اعلام بار و زیرگروه اعلام بار همراه با مشخصاتی از قبیل نوع بار و مبدا و مقصد حمل ارائه شده است',
-        icon: 'pi-verified',
+        PIconName: 'pi-verified',
       },
       {
-        id: 57,
-        title: 'گزارش بارهای کنسل شده',
-        name: 'LoadAnnouncementCancellation',
-        description:
+        PId: 57,
+        PTitle:
+          'گزارش بارهای کنسل شده                                                                               ',
+        PName: 'LoadAnnouncementCancellation                      ',
+        Description:
           'کنسلی بار با توجه به شرایط احتمالی حمل به وجود می آید.در این گزارش سوابق کنسلی بار و دلایل آن ارائه شده است',
-        icon: 'pi-times-circle',
+        PIconName: 'pi-times-circle',
       },
       {
-        id: 58,
-        title: 'گزارش کلی عملکرد اعلام بار',
-        name: 'LoadAnnouncementOveralReport',
-        description:
+        PId: 58,
+        PTitle:
+          'گزارش کلی عملکرد اعلام بار                                                                          ',
+        PName: 'LoadAnnouncementOveralReport                      ',
+        Description:
           'این گزارش آماری از کلیه بارهای اعلام شده ، آزاد شده و رسوب شده به تفکیک گروه اعلام بار و زیر گروه اعلام بار ارائه می دهد',
-        icon: 'pi-times-circle',
+        PIconName: 'pi-times-circle',
       },
       {
-        id: 59,
-        title: 'گزارش مجوزهای حمل بار کنسل شده',
-        name: 'LoadTransportationPermissionCancellationsReport',
-        description:
+        PId: 59,
+        PTitle:
+          'گزارش مجوزهای حمل بار کنسل شده                                                                      ',
+        PName: 'LoadTransportationPermissionCancellationsReport   ',
+        Description:
           'کنسلی مجوز حمل با توجه به شرایط احتمالی حمل به وجود می آید.در این گزارش سوابق کنسلی مجوز حمل و دلایل آن ارائه شده است',
-        icon: 'pi-stop-circle',
+        PIconName: 'pi-stop-circle',
       },
       {
-        id: 60,
-        title: 'گزارشات مالی پارکینگ',
-        name: 'ParkingAccountingReport',
-        description:
+        PId: 60,
+        PTitle:
+          'گزارشات مالی پارکینگ                                                                                ',
+        PName: 'ParkingAccountingReport                           ',
+        Description:
           'با توجه به وجود زیر سیستم حسابداری توکار و لذا ثبت کلیه تراکنش های مالی و بخصوص تراکنش های مرتبط با تردد و توقف خودرو امکان ارائه گزارشی بر پایه پارکینگ ارائه شده است',
-        icon: 'pi-money-bill',
+        PIconName: 'pi-money-bill',
       },
       {
-        id: 61,
-        title: 'درآمدهای حاصل از نوبت دهی',
-        name: 'TurnAccountingReport',
-        description:
+        PId: 61,
+        PTitle:
+          'درآمدهای حاصل از نوبت دهی                                                                           ',
+        PName: 'TurnAccountingReport                              ',
+        Description:
           'این گزارش با توجه به تراکنش های مالی مرتبط با فرآیند نوبت دهی لیستی از تراکنش های مذکور را در قالب درآمد حاصل از نوبت دهی ارائه می دهد',
-        icon: 'pi-chart-line',
+        PIconName: 'pi-chart-line',
       },
       {
-        id: 62,
-        title: 'گزارش بارنامه های صادر شده',
-        name: 'BillOfLadingsReport',
-        description:
+        PId: 62,
+        PTitle:
+          'گزارش بارنامه های صادر شده                                                                          ',
+        PName: 'BillOfLadingsReport                               ',
+        Description:
           'مجوز حمل پس از صدور وارد فرآیند صدور بارنامه می گردد.اطلاعات بارنامه های صادر شده پس از صدور در سامانه ذخیره می گردند.در این گزارش لیست بارنامه های صادر شده ارائه شده است',
-        icon: 'pi-chart-scatter',
+        PIconName: 'pi-chart-scatter',
       },
       {
-        id: 64,
-        title: 'گزارش ابطالی بر اساس بارنامه',
-        name: 'BillOfLadingTurnCancellationReport',
-        description:
+        PId: 64,
+        PTitle:
+          'گزارش ابطالی بر اساس بارنامه                                                                        ',
+        PName: 'BillOfLadingTurnCancellationReport                ',
+        Description:
           'با توجه به قواعد موجود صنفی مبنی بر ابطال نوبت های فعالی که پس از صدور آن ها بارنامه صادر شده است گزارش حاضر لیستی از نوبت های مذکور را ارائه می دهد',
-        icon: 'pi-receipt',
+        PIconName: 'pi-receipt',
       },
       {
-        id: 65,
-        title: 'گزارش ابطالی نوبت ها',
-        name: 'TurnCancellationsReport',
-        description:
+        PId: 65,
+        PTitle:
+          'گزارش ابطالی نوبت ها                                                                                ',
+        PName: 'TurnCancellationsReport                           ',
+        Description:
           'با توجه به قواعد صنفی نوبت های رسوب شده می بایست در پایان هر روز ابطال گردند.گزارش حاضر عملکردی از فرآیند باطلی گروهی نوبت ها را ارئه می دهد',
-        icon: 'pi-sort-amount-up',
+        PIconName: 'pi-sort-amount-up',
       },
       {
-        id: 66,
-        title: 'گزارش بار',
-        name: 'LoadAnnouncementsReport',
-        description:
-          'گزارش کاملی از مشخصات و آمار بار اعلام شده به تفکیک گروه و زیرگروه اعلام بار و کاربر ثبت بار در این گزارش ارائه شده است',
-        icon: 'pi-chart-bar',
+        PId: 66,
+        PTitle:
+          'گزارش بار                                                                                           ',
+        PName: 'LoadAnnouncementsReport                           ',
+        Description:
+          'گزارش کاملی از مشخصات و آمار بار اعلام شده به تفکیک گروه و زیرگروه اعلام بار و کاربر ثبت بار در این گزارش ارائه شده است ',
+        PIconName: 'pi-chart-bar',
       },
       {
-        id: 67,
-        title: 'رانندگان منتظر دریافت مجوز بارگیری',
-        name: 'DriversWhoWaitToLoadingPermissionReport',
-        description:
+        PId: 67,
+        PTitle:
+          'رانندگان منتظر دریافت مجوز بارگیری                                                                  ',
+        PName: 'DriversWhoWaitToLoadingPermissionReport           ',
+        Description:
           'لیست کامل نوبت های فعال موجود در سامانه همراه با مشخصات راننده و ناوگان دارای نوبت در این گزارش ارائه شده است',
-        icon: 'pi-user',
+        PIconName: 'pi-user',
       },
     ],
   },
   {
-    id: 7,
-    title: 'عملیات',
-    icon: 'pi-desktop',
-    processes: [
+    PGId: 7,
+    PGTitle: 'عملیات',
+    PGIconName: 'pi-desktop',
+    WebProcesses: [
       {
-        id: 24,
-        title: 'ثبت نام غیر حضوری',
-        name: 'VirtualRegisteration',
-        description:
+        PId: 24,
+        PTitle:
+          'ثبت نام غیر حضوری                                                                                   ',
+        PName: 'VirtualRegisteration                              ',
+        Description:
           'امکان ارسال مدارک شناسایی برای راننده و یا شرکت حمل و نقل و درخواست ثبت مدارک از طریق منوی پشتیبانی سامانه فراهم است.کاربر پس از بررسی و تایید نهایی می تواند اقدام به رجیستر نمودن راننده و یا شرکت حمل و نقل نماید',
-        icon: 'pi-user-plus',
+        PIconName: 'pi-user-plus',
       },
       {
-        id: 68,
-        title: 'تغییر رمز کاربر',
-        name: 'ChangeUserPassword',
-        description:
-          'کاربر از طریق این منو می تواند اقدام به تغییر رمز کاربری خود نماید.ممکن است قواعد رمز قوی محدودیت هایی را هنگام ثبت رمز جدید ایجاد نماید.رمز نمی تواند کمتر از 8 کاراکتر طول داشته باشد از طرفی باید از ترکیب کاراکترها استفاده کرد',
-        icon: 'pi-lock',
+        PId: 68,
+        PTitle:
+          'تغییر رمز کاربر                                                                                     ',
+        PName: 'ChangeUserPassword                                ',
+        Description:
+          'کاربر از طریق این منو می تواند اقدام به تغییر رمز کاربری خود نماید.ممکن است قواعد رمز قوی محدودیت هایی را هنگام ثبت رمز جدید ایجاد نماید.رمز نمی تواند کمتر از 8 کاراکتر طول داشته باشد از طرفی باید از ترکیب کاراکترها استفاده کرد ',
+        PIconName: 'pi-lock',
       },
       {
-        id: 69,
-        title: 'پشتیبانی سامانه',
-        name: 'Ticketing',
-        description:
-          'کلیه کاربران سامانه می توانند درخواست های خود در حوزه مشکلات فنی ، نحوه عملکرد سامانه و نیازمندی هایی که نیاز به پشتیبانی دارد را در قالب تیکت به گروه پشتیبانی سامانه اعلام نمایند',
-        icon: 'pi-headphones',
+        PId: 69,
+        PTitle:
+          'پشتیبانی سامانه                                                                                     ',
+        PName: 'Ticketing                                         ',
+        Description:
+          'کلیه کاربران سامانه می توانند درخواست های خود در حوزه مشکلات فنی ، نحوه عملکرد سامانه و نیازمندی هایی که نیاز به پشتیبانی دارد را در قالب تیکت به گروه پشتیبانی سامانه اعلام نمایند ',
+        PIconName: 'pi-headphones',
       },
       {
-        id: 71,
-        title: 'مدیریت تیکت',
-        name: 'TicketingManage',
-        description:
+        PId: 71,
+        PTitle:
+          'مدیریت تیکت                                                                                         ',
+        PName: 'TicketingManage                                   ',
+        Description:
           'کاربران پشتیبان سامانه از طریق این منو تیکت های ارسالی کاربران را پایش و اقدام به ارائه راه حل و پاسخ مطلوب می نمایند',
-        icon: 'pi-headphones',
+        PIconName: 'pi-headphones',
       },
     ],
   },
