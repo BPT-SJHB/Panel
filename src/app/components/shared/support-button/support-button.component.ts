@@ -33,10 +33,7 @@ export class SupportButtonComponent {
     private router: Router
   ) {}
   async showDialog() {
-    if (!(await this.auth.isLoggedIn()).success) {
-      this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
-      return;
-    }
+    await this.auth.isLoggedIn();
     this.visible = true;
   }
   showTicketDialog() {
