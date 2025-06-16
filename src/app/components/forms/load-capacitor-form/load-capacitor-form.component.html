@@ -18,7 +18,7 @@
     (ngSubmit)="loadCapacitorForm()"
   >
     <div class="flex gap-3">
-      <app-generic-input
+      <app-text-input
         [control]="barcode"
         icon="pi pi-barcode"
         class="flex-1"
@@ -46,7 +46,7 @@
     (ngSubmit)="editOrRegister()"
   >
     <div class="grid col-12 border-gray-400 border-bottom-2">
-      <app-generic-input
+      <app-text-input
         class="col-12 sm:col-6"
         [addonWidth]="addonWidth"
         label="تاریخ ثبت بار"
@@ -55,8 +55,8 @@
         validationField="announceDate"
       />
 
-      <app-generic-input  hidden [control]="loadStatusId" />
-      <app-generic-input
+      <app-text-input hidden [control]="loadStatusId" />
+      <app-text-input
         class="col-12 sm:col-6"
         [addonWidth]="addonWidth"
         label="وضعیت بار"
@@ -66,9 +66,9 @@
     </div>
 
     <div class="grid col-12 mt-3 border-gray-400 border-bottom-2">
-      <app-generic-input  hidden [control]="transportCompanyId" />
-      
-      <app-generic-input
+      <app-text-input hidden [control]="transportCompanyId" />
+
+      <app-text-input
         class="col-12 sm:col-6 md:col-4"
         [addonWidth]="addonWidth"
         label="شرکت حمل و نقل"
@@ -76,8 +76,8 @@
         validationField="transportCompany"
       />
 
-      <app-generic-input  hidden [control]="goodId" />
-      <app-generic-input
+      <app-text-input hidden [control]="goodId" />
+      <app-text-input
         class="col-12 sm:col-6 md:col-4"
         [addonWidth]="addonWidth"
         label=" کالا"
@@ -85,8 +85,8 @@
         validationField="good"
       />
 
-      <app-generic-input  hidden [control]="loadAnnouncementGroupId" />
-      <app-generic-input
+      <app-text-input hidden [control]="loadAnnouncementGroupId" />
+      <app-text-input
         class="col-12 sm:col-6 md:col-4"
         [addonWidth]="addonWidth"
         label="گروه اعلام بار"
@@ -94,8 +94,8 @@
         validationField="loadAnnouncementGroup"
       />
 
-      <app-generic-input  hidden [control]="loadAnnouncementSubGroupId" />
-      <app-generic-input
+      <app-text-input hidden [control]="loadAnnouncementSubGroupId" />
+      <app-text-input
         class="col-12 sm:col-6 md:col-4"
         [addonWidth]="addonWidth"
         label="زیرگروه اعلام بار"
@@ -105,8 +105,8 @@
     </div>
 
     <div class="grid col-12 mt-3 border-gray-400 border-bottom-2">
-      <app-generic-input  hidden [control]="sourceCityId" />
-      <app-generic-input
+      <app-text-input hidden [control]="sourceCityId" />
+      <app-text-input
         class="col-12 sm:col-6 md:col-4"
         [addonWidth]="addonWidth"
         label="شهر مبدا"
@@ -114,8 +114,8 @@
         validationField="sourceCity"
       />
 
-      <app-generic-input  hidden [control]="targetCityId" />
-      <app-generic-input
+      <app-text-input hidden [control]="targetCityId" />
+      <app-text-input
         class="col-12 sm:col-6 md:col-4"
         [addonWidth]="addonWidth"
         label="شهر مقصد"
@@ -123,8 +123,8 @@
         validationField="targetCity"
       />
 
-      <app-generic-input  hidden [control]="loadingPlaceId" />
-      <app-generic-input
+      <app-text-input hidden [control]="loadingPlaceId" />
+      <app-text-input
         class="col-12 sm:col-6 md:col-4"
         [addonWidth]="addonWidth"
         label="مبدا بارگیری"
@@ -132,8 +132,8 @@
         validationField="loadingPlace"
       />
 
-      <app-generic-input  hidden [control]="dischargingPlaceId" />
-      <app-generic-input
+      <app-text-input hidden [control]="dischargingPlaceId" />
+      <app-text-input
         class="col-12 sm:col-6 md:col-4"
         [addonWidth]="addonWidth"
         label="مقصد تخلیه"
@@ -143,28 +143,28 @@
     </div>
 
     <div class="grid col-12 mt-3 border-gray-400 border-bottom-2">
-      <app-generic-input
+      <app-text-input
         class="col-12 sm:col-6 md:col-4"
         [addonWidth]="addonWidth"
         label="تعداد کل"
         [control]="totalNumber"
         validationField="totalNumber"
       />
-      <app-generic-input
+      <app-text-input
         class="col-12 sm:col-6 md:col-4"
         [addonWidth]="addonWidth"
         label="تناژ"
         [control]="tonaj"
         validationField="tonaj"
       />
-      <app-generic-input
+      <app-text-input
         class="col-12 sm:col-6 md:col-4"
         [addonWidth]="addonWidth"
         label="گیرنده"
         [control]="recipient"
         validationField="recipient"
       />
-      <app-generic-input
+      <app-text-input
         class="col-12 sm:col-6 md:col-4"
         [addonWidth]="addonWidth"
         label="تعرفه"
@@ -174,14 +174,14 @@
     </div>
 
     <div class="grid col-12 mt-3 border-gray-400 border-bottom-2">
-      <app-generic-input
+      <app-text-input
         class="col-12"
         [addonWidth]="addonWidth"
         label="آدرس"
         [control]="address"
         validationField="address"
       />
-      <app-generic-input
+      <app-text-input
         class="col-12"
         [addonWidth]="addonWidth"
         label="توضیحات"
@@ -191,35 +191,32 @@
     </div>
 
     <span class="mt-2 font-bold text-xl">پارامترهای موثر</span>
-    <div class="w-full overflow-x-auto">
-      <div class="flex flex-column gap-2 min-w-30rem">
-        @for ((item of ptpFormArray.controls); track $index) {
-        <div
-          class="flex align-items-center border-bottom-1 surface-border py-2 gap-4"
-        >
-          <!-- Checkbox + ID -->
-          <div class="flex align-items-center gap-2" style="width: 5rem">
-            <p-checkbox
-              [binary]="true"
-              class="mb-1"
-              [formControl]="getCheckedControl($index)"
-            ></p-checkbox>
-            <span class="mt-1">{{ item.get("TPTPDId")?.value }}</span>
-          </div>
-
-          <!-- Title -->
-          <span class="white-space-nowrap" style="width: 500px">
-            {{ item.get("TPTPTitle")?.value }}
-          </span>
-
-          <!-- Cost -->
-          <span class="text-right" style="min-width: 6rem">
-            {{ item.get("Cost")?.value | number : "1.0-0" }}
-          </span>
-        </div>
-        }
-      </div>
-    </div>
+    <p-table
+    class="col-12"
+    [value]="this.ptpFormArray.controls"
+      styleClass="overflow-x-auto"
+      [tableStyle]="{ 'min-width': '40rem' }"
+    >
+      <ng-template #body let-control>
+        <tr>
+          <td>
+            <!-- Checkbox + ID -->
+            <div class="flex align-items-center gap-2" style="width: 5rem">
+              <p-checkbox
+                [binary]="true"
+                class="mb-1"
+                [formControl]="control.get('Checked')"
+              ></p-checkbox>
+              <span class="mt-1">{{ control.get("TPTPDId")?.value }}</span>
+            </div>
+          </td>
+          <td>{{ control.get("TPTPTitle")?.value }}</td>
+          <td>
+            {{ control.get("Cost")?.value | number : "1.0-0" }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
 
     <!-- Action Buttons -->
     <div
@@ -242,7 +239,7 @@
         styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
       ></p-button>
 
-        <p-button
+      <p-button
         (click)="editOrRegister()"
         [disabled]="capacitorForm.invalid || loading"
         label="کنسلی بار"

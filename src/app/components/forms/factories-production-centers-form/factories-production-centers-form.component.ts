@@ -12,7 +12,7 @@ import { FpcManagementService } from 'app/services/fpc-management/fpc-management
 import { ToastService } from 'app/services/toast-service/toast.service';
 
 import { BinaryRadioInputComponent } from 'app/components/shared/inputs/binary-radio-input/binary-radio-input.component';
-import { GenericInputComponent } from 'app/components/shared/inputs/number-input/generic-input.component';
+import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { SearchInputComponent } from 'app/components/shared/inputs/search-input/search-input.component';
 
 @Component({
@@ -24,7 +24,7 @@ import { SearchInputComponent } from 'app/components/shared/inputs/search-input/
     ButtonModule,
     DialogModule,
     ReactiveFormsModule,
-    GenericInputComponent,
+    TextInputComponent,
     SearchInputComponent,
     BinaryRadioInputComponent,
   ],
