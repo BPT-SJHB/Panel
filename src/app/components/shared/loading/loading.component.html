@@ -1,0 +1,20 @@
+@if (loading$ | async) {
+<div
+  style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 20;
+  "
+  class="flex align-items-center justify-content-center"
+>
+  <p-progress-spinner
+    strokeWidth="8"
+    fill="transparent"
+    styleClass="w-6rem h-6rem"
+  />
+</div>
+}
