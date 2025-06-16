@@ -3,16 +3,15 @@
     <!-- Icon -->
     <p-inputgroup-addon
       class="bg-primary text-white flex items-center justify-center px-3 border-round-right">
-      <i class="pi pi pi-users"></i>
+      <i [class]="icon"></i>
     </p-inputgroup-addon>
 
     <p-select
-      [options]="userType"
+      [options]="options"
       [formControl]="control"
+      [placeholder]="placeholder"
       optionLabel="label"
       optionValue="value"
-      [disabled]="disabled"
-      
       [ngClass]="{
         'border-red-500': control.touched && control.invalid,
         'border-round-left': true,

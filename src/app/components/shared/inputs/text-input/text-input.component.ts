@@ -17,12 +17,13 @@ import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
 
 import {
   ErrorsValidation,
+  getDefaultErrorMessage,
   ValidationField,
   ValidationSchema,
 } from 'app/constants/validation-schema';
 
 @Component({
-  selector: 'app-generic-input',
+  selector: 'app-text-input',
   standalone: true,
   imports: [
     ReactiveFormsModule,
@@ -33,12 +34,12 @@ import {
     MessageModule,
     ButtonModule,
   ],
-  templateUrl: './generic-input.component.html',
-  styleUrl: './generic-input.component.scss',
+  templateUrl: './text-input.component.html',
+  styleUrl: './text-input.component.scss',
 })
-export class GenericInputComponent implements OnInit, OnChanges {
-  private _control = new FormControl(null);
-
+export class TextInputComponent implements OnInit, OnChanges {
+  
+  @Input() control = new FormControl('');
   @Input() validationField: ValidationField | null = null;
   @Input() placeholder = '';
   @Input() readOnly = false;
@@ -48,26 +49,18 @@ export class GenericInputComponent implements OnInit, OnChanges {
   @Input() addonWidth: string | null = null;
   @Input() buttonIcon = '';
   @Input() buttonDisabled = false;
-  @Input() type: 'text' | 'date' = 'text';
+  @Input() type: 'password' | 'text' | 'date' = 'text';
   @Input() datePickerPosition: 'top' | 'bottom' = 'bottom';
 
   @Output() clickButton = new EventEmitter<void>();
 
-  @Input()
-  set control(value: FormControl) {
-    this._control = value ?? new FormControl(null);
-  }
-
-  get control(): FormControl {
-    return this._control;
-  }
 
   get firstErrorMessage(): string | null {
     const errors = this.control?.errors as ErrorsValidation;
     if (!this.validationField || !errors) return null;
 
     const rule = ValidationSchema[this.validationField];
-    return rule?.getErrorMessage(errors) ?? null;
+    return getDefaultErrorMessage(rule.name,errors);
   }
 
   get isDisabled(): boolean {
@@ -84,7 +77,7 @@ export class GenericInputComponent implements OnInit, OnChanges {
     }
   }
 
-  private setDisabledState(): void {
+  setDisabledState(): void {
     if (this.disabled) {
       this.control.disable({ emitEvent: false });
     } else {

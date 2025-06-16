@@ -1,31 +1,50 @@
-<form class="flex flex-column gap-5" [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
-  <h3 class="text-center mb-3" [innerHTML]="loginTitle">
-  </h3>
+<form
+  class="flex flex-column gap-5"
+  [formGroup]="loginForm"
+  (ngSubmit)="onSubmit()"
+>
+  <h3 class="text-center mb-3" [innerHTML]="loginTitle"></h3>
 
   <div class="flex flex-column gap-5">
-    <app-username-input [control]="username" />
+    <app-text-input
+      [control]="username"
+      icon="pi pi-user"
+      validationField="username"
+      placeholder="نام کابری"
+    />
 
     <div class="flex flex-column gap-2">
-      <app-password-input [control]="password" />
+      <app-password-input
+        [control]="password"
+        placeholder="رمز عبور خود را وارد کنید."
+      />
 
       <div class="flex justify-content-end w-full mb-1">
-
-        <a
-        [href]="hrefForgetPassword"
-        >
-        <p-button styleClass="text-cyan-500 text-shadow-sm text-sm" label="رمز عبورتان را فراموش کردید؟" [link]="true" />
+        <a [href]="hrefForgetPassword">
+          <p-button
+            styleClass="text-cyan-500 text-shadow-sm text-sm"
+            label="رمز عبورتان را فراموش کردید؟"
+            [link]="true"
+          />
         </a>
       </div>
     </div>
   </div>
 
-  <app-captcha-input #captchaRef [sessionIdControl]="sessionId" [captchaInputControl]="captcha" />
+  <app-captcha-input
+    #captchaRef
+    [sessionIdControl]="sessionId"
+    [captchaInputControl]="captcha"
+  />
 
   <div class="flex flex-column gap-2 mb-5">
-    <app-remember-me-input [control]="rememberMe" />
-    <p-button [disabled]="loginForm.invalid" type="submit"  styleClass="px-5 h-2-5rem w-full">
+    <app-checkbox-input label="مرا به خاطر بسپار" [control]="rememberMe" />
+    <p-button
+      [disabled]="loginForm.invalid"
+      type="submit"
+      styleClass="px-5 h-2-5rem w-full"
+    >
       ورود
     </p-button>
   </div>
 </form>
-

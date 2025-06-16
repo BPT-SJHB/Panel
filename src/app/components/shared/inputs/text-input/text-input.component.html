@@ -18,11 +18,12 @@
       </p-inputgroup-addon>
     }
 
-    @if (type === 'text') {
+    @if (type != 'date') {
       <!-- Text Input -->
       <input
         #inputRef
         pInputText
+        [type]="type"
         [formControl]="control"
         [placeholder]="placeholder"
         [readOnly]="readOnly"

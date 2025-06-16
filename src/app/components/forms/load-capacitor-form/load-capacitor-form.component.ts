@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common'; // <-- import this
+import { CommonModule } from '@angular/common';
 import {
   FormArray,
   FormBuilder,
@@ -8,7 +8,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { GenericInputComponent } from 'app/components/shared/inputs/number-input/generic-input.component';
+import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { LoadInfo } from 'app/data/model/load-info.model';
@@ -17,10 +17,11 @@ import { LoadCapacitorManagementService } from 'app/services/load-capacitor-mana
 import { ToastService } from 'app/services/toast-service/toast.service';
 import { ButtonModule } from 'primeng/button';
 import { Checkbox } from 'primeng/checkbox';
+import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-load-capacitor-form',
-  imports: [ReactiveFormsModule,CommonModule, GenericInputComponent, ButtonModule, Checkbox],
+  imports: [ ReactiveFormsModule,CommonModule, TextInputComponent, ButtonModule, TableModule, Checkbox],
   templateUrl: './load-capacitor-form.component.html',
   styleUrl: './load-capacitor-form.component.scss',
 })
@@ -92,7 +93,6 @@ export class LoadCapacitorFormComponent {
     const response = await this.capacitorService.GetLoad(this.barcode.value);
     if (!this.isSuccessful(response)) return;
     this.populateCapacitorForm(response.data!);
-    console.log(response.data);
 
     this.ptpFormArray.clear();
     response.data?.TPTParams.map((params) => {
@@ -155,9 +155,6 @@ export class LoadCapacitorFormComponent {
     });
   }
 
-  getCheckedControl(i: number): FormControl {
-    return this.ptpFormArray.at(i).get('Checked') as FormControl;
-  }
 
   private isSuccessful(response: ApiResponse<any>): boolean {
     if (!response.success || !response.data) {

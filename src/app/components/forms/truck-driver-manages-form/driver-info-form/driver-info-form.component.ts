@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
-import { GenericInputComponent } from '../../../shared/inputs/number-input/generic-input.component';
+import { TextInputComponent } from '../../../shared/inputs/text-input/text-input.component';
 
 import { ToastService } from 'app/services/toast-service/toast.service';
 import { Driver_TruckManagementService } from 'app/services/driver-truck-management/driver-truck-management.service';
@@ -15,6 +15,8 @@ import { Driver_TruckManagementService } from 'app/services/driver-truck-managem
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { TruckDriverInfo } from 'app/data/model/truck-driver-info.model';
 import { ValidationSchema } from 'app/constants/validation-schema';
+import { LoadingService } from 'app/services/loading-service/loading-service.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-driver-info-form',
@@ -22,7 +24,7 @@ import { ValidationSchema } from 'app/constants/validation-schema';
     ButtonModule,
     ReactiveFormsModule,
     DialogModule,
-    GenericInputComponent,
+    TextInputComponent,
   ],
   templateUrl: './driver-info-form.component.html',
   styleUrl: './driver-info-form.component.scss',
@@ -31,6 +33,8 @@ export class DriverInfoFormComponent {
   private fb = inject(FormBuilder);
   private toast = inject(ToastService);
   private driverTruckManager = inject(Driver_TruckManagementService);
+  private loadingService = inject(LoadingService);
+  private destroy$ = new Subject<void>();
 
   driverForm: FormGroup;
   searchForm: FormGroup;
@@ -41,6 +45,18 @@ export class DriverInfoFormComponent {
   passwordDialogVisible = false;
   driverUserNameDialog = '';
   driverNewPasswordDialog = '';
+  
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  ngOnInit(): void {
+    this.loadingService.loading$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => (this.loading = value));
+  }
 
   constructor() {
     this.searchForm = this.fb.group({
@@ -62,7 +78,7 @@ export class DriverInfoFormComponent {
   async updateDriverMobileNumber(): Promise<void> {
     if (this.driverForm.invalid || this.loading) return;
 
-    this.loading = true;
+    this.loadingService.setLoading(true)
     try {
       const driverId = this.driverId.value;
       const mobile = this.mobile.value;
@@ -79,14 +95,14 @@ export class DriverInfoFormComponent {
         response.data?.Message ?? 'شماره تلفن راننده تغییر یافت.'
       );
     } finally {
-      this.loading = false;
+     this.loadingService.setLoading(false)
     }
   }
 
   async loadDriverInfoFromAPI(): Promise<void> {
     if (this.searchForm.invalid || this.loading) return;
 
-    this.loading = true;
+    this.loadingService.setLoading(true)
     try {
       const nationalId = this.searchNationalId.value;
       const response = await this.driverTruckManager.GetDriverInfoFromAPI(
@@ -97,14 +113,14 @@ export class DriverInfoFormComponent {
 
       this.populateDriverForm(response.data as TruckDriverInfo);
     } finally {
-      this.loading = false;
+      this.loadingService.setLoading(false)
     }
   }
 
   async resetDriverPassword(): Promise<void> {
     if (this.driverForm.invalid || this.loading) return;
 
-    this.loading = true;
+    this.loadingService.setLoading(true);
     try {
       const driverId = this.driverId.value;
       const response = await this.driverTruckManager.ResetDriverPassword(
@@ -118,14 +134,14 @@ export class DriverInfoFormComponent {
     } catch {
       this.toast.error('خطا', 'در بازنشانی رمز عبور مشکلی پیش آمد.');
     } finally {
-      this.loading = false;
+      this.loadingService.setLoading(false)
     }
   }
 
   async activateDriverSms(): Promise<void> {
     if (this.driverForm.invalid || this.loading) return;
 
-    this.loading = true;
+    this.loadingService.setLoading(true)
     try {
       const driverId = this.driverId.value;
       const response = await this.driverTruckManager.ActivateDriverSMS(
@@ -141,14 +157,14 @@ export class DriverInfoFormComponent {
     } catch {
       this.toast.error('خطا', 'در فعال‌سازی سیستم پیامک مشکلی پیش آمد.');
     } finally {
-      this.loading = false;
+      this.loadingService.setLoading(false)
     }
   }
 
   async sendWebsiteLink(): Promise<void> {
     if (this.driverForm.invalid || this.loading) return;
 
-    this.loading = true;
+    this.loadingService.setLoading(true)
     try {
       const driverId = this.driverId.value;
       const response = await this.driverTruckManager.SendWebsiteLink(driverId);
@@ -162,7 +178,7 @@ export class DriverInfoFormComponent {
     } catch {
       this.toast.error('خطا', 'در ارسال لینک ورود مشکلی پیش آمد.');
     } finally {
-      this.loading = false;
+      this.loadingService.setLoading(false)
     }
   }
 

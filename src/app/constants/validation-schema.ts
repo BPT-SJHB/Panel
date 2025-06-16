@@ -6,318 +6,213 @@ export interface ErrorsValidation {
   pattern?: any;
   minlength?: any;
   maxlength?: any;
-  min?:any,
+  min?: any;
+}
+
+export function getDefaultErrorMessage(name: string, e: ErrorsValidation): string | null {
+  if (e.required) return `${name} الزامی است.`;
+  if (e.email) return `فرمت ${name} نامعتبر است.`;
+
+  if (e.minlength?.requiredLength && e.maxlength?.requiredLength &&
+    e.minlength.requiredLength === e.maxlength.requiredLength) {
+    return `${name} باید دقیقا ${e.minlength.requiredLength} رقم باشد.`;
+  }
+
+  if (e.minlength) return `${name} باید حداقل ${e.minlength.requiredLength} کاراکتر باشد.`;
+  if (e.maxlength) return `${name} باید حداکثر ${e.maxlength.requiredLength} کاراکتر باشد.`;
+
+  if (e.pattern) return `فرمت ${name} معتبر نیست.`;
+  if (e.min) return `${name} نمی‌تواند کمتر از مقدار مجاز باشد.`;
+
+  return null;
 }
 
 export const ValidationSchema = {
   mobile: {
+    name: 'شماره موبایل',
     validators: [
       Validators.required,
       Validators.minLength(11),
       Validators.maxLength(11),
       Validators.pattern(/09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}/),
     ],
-    getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'شماره موبایل الزامی است.';
-      if (e.minlength || e.maxlength) return 'شماره موبایل باید ۱۱ رقم باشد.';
-      if (e.pattern) return 'فرمت شماره موبایل معتبر نیست.';
-      return null;
-    },
   },
-
   nationalId: {
+    name: 'کد ملی',
     validators: [Validators.required, Validators.pattern(/^\d{10}$/)],
-    getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'کد ملی الزامی است.';
-      if (e.pattern) return 'کد ملی باید ۱۰ رقم باشد.';
-      return null;
-    },
   },
-
   email: {
+    name: 'ایمیل',
     validators: [Validators.required, Validators.email],
-    getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'ایمیل الزامی است.';
-      if (e.email) return 'فرمت ایمیل نامعتبر است.';
-      return null;
-    },
   },
-
   fullName: {
+    name: 'نام کاربر',
     validators: [Validators.required, Validators.minLength(3)],
-    getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'نام کاربر الزامی است.';
-      if (e.minlength) return 'نام کاربر باید حداقل ۳ حرف باشد.';
-      return null;
-    },
   },
-
+  username:{
+    name:'نام کابری',
+    validators:[
+      Validators.required,Validators.minLength(5)
+    ]
+  },
+  password:{
+    name:'رمز عبور',
+    validators:[
+      Validators.required,
+      Validators.minLength(1),
+    ]
+  },
+  captcha:{
+    name:'کپچا',
+    validators:[Validators.required]
+  },
   id: {
+    name: 'شناسه',
     validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) =>
-      e.required ? 'شناسه الزامی است.' : null,
   },
-
   driverId: {
+    name: 'شناسه راننده',
     validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) =>
-      e.required ? 'شناسه راننده الزامی است.' : null,
   },
-
   telephone: {
-    validators: [Validators.required,Validators.pattern(/^0\d{10}$/)],
-    getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'شماره تلفن الزامی است.';
-      if (e.pattern) return 'فرمت شماره تلفن معتبر نیست.';
-      return null;
-    },
+    name: 'شماره تلفن',
+    validators: [Validators.required, Validators.pattern(/^0\d{10}$/)],
   },
-
   address: {
+    name: 'آدرس',
     validators: [Validators.required, Validators.minLength(5)],
-    getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'آدرس الزامی است.';
-      if (e.minlength) return 'آدرس باید حداقل ۵ کاراکتر باشد.';
-      return null;
-    },
   },
-
   title: {
+    name: 'عنوان',
     validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) =>
-      e.required ? 'عنوان الزامی است.' : null,
   },
-
   managerName: {
+    name: 'نام مدیر',
     validators: [Validators.required, Validators.minLength(3)],
-    getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'نام کاربر الزامی است.';
-      if (e.minlength) return 'نام کاربر باید حداقل ۳ حرف باشد.';
-      return null;
-    },
   },
-
   fatherName: {
+    name: 'نام پدر',
     validators: [Validators.required, Validators.minLength(3)],
-    getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'نام پدر الزامی است.';
-      if (e.minlength) return 'نام پدر باید حداقل ۳ حرف باشد.';
-      return null;
-    },
   },
-
   wallet: {
-    Validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'کیف پول الزامی است.';
-      return null;
-    },
-  },
-
-  walletId: {
+    name: 'کیف پول',
     validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) =>
-      e.required ? 'شناسه کیف پول الزامی است.' : null,
   },
-
+  walletId: {
+    name: 'شناسه کیف پول',
+    validators: [Validators.required],
+  },
   licenseNumber: {
+    name: 'شماره گواهینامه',
     validators: [
       Validators.required,
       Validators.minLength(10),
       Validators.pattern(/^\d{10}$/),
     ],
-    getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'شماره گواهینامه الزامی است.';
-      if (e.minlength) return 'شماره گواهینامه باید ۱۰ رقم باشد.';
-      if (e.pattern) return 'شماره گواهینامه فقط باید عدد باشد.';
-      return null;
-    },
   },
-
   serialNumber: {
+    name: 'شماره سریال',
     validators: [Validators.required, Validators.pattern(/^\d+$/)],
-    getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'شماره سریال الزامی است.';
-      if (e.pattern) return 'شماره سریال باید فقط عدد باشد.';
-      return null;
-    },
   },
-
   smartCard: {
+    name: 'شماره هوشمند',
     validators: [Validators.required, Validators.pattern(/^\d{7}$/)],
-    getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'شماره هوشمند الزامی است.';
-      if (e.pattern) return 'شماره هوشمند باید ۷ رقم باشد.';
-      return null;
-    },
   },
-
   truckId: {
+    name: 'شناسه ناوگان',
     validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) =>
-      e.required ? 'شناسه ناوگان الزامی است.' : null,
   },
-
   licensePlateNumber: {
-    validators: [
-      Validators.required,
-      // Validators.pattern(/^\d{2}[A-Zآ-ی]\d{3}\d{2}$/),
-    ],
-    getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'شماره پلاک الزامی است.';
-      if (e.pattern) return 'فرمت شماره پلاک معتبر نیست.';
-      return null;
-    },
+    name: 'شماره پلاک',
+    validators: [Validators.required],
   },
-
   turn: {
+    name: 'نوبت',
     validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'نوبت الزامی است.';
-      return null;
-    },
   },
-
   turnId: {
+    name: 'شناسه نوبت',
     validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) =>
-      e.required ? 'شناسه نوبت الزامی است.' : null,
   },
-
   smsActive: {
+    name: 'فعال‌سازی پیامک',
     validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) =>
-      e.required ? 'فعال‌سازی پیامک الزامی است.' : null,
   },
-
   loaderType: {
+    name: 'نوع بارگیر',
     validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) =>
-      e.required ? 'نوع بارگیر الزامی است.' : null,
   },
-
   nativeness: {
+    name: 'بومی گری ناوگان',
     validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) =>
-      e.required ? 'بومی گری ناوگان الزامی است.' : null,
   },
-
   truckNativenessExpiredDate: {
+    name: 'تاریخ انقضای بومی‌گری',
     validators: [
       Validators.required,
-      Validators.pattern(
-        /^(13|14)\d{2}\/(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])$/
-      ),
+      Validators.pattern(/^(13|14)\d{2}\/(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])$/),
     ],
-    getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'تاریخ انقضای بومی‌گری الزامی است.';
-      if (e.pattern) return 'فرمت تاریخ اشتباه است.';
-      return null;
-    },
   },
-
   announceDate: {
+    name: 'تاریخ ثبت بار',
     validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) =>
-      e.required ? 'تاریخ ثبت بار الزامی است.' : null,
   },
-
   loadStatus: {
+    name: 'وضعیت بار',
     validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) =>
-      e.required ? 'وضعیت بار الزامی است.' : null,
   },
-
   good: {
+    name: 'نوع بار',
     validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) =>
-      e.required ? 'نوع بار الزامی است.' : null,
   },
-
   loadAnnouncementGroup: {
+    name: 'گروه اعلام بار',
     validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) =>
-      e.required ? 'گروه اعلام بار الزامی است.' : null,
   },
-
   loadAnnouncementSubGroup: {
+    name: 'زیرگروه اعلام بار',
     validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) =>
-      e.required ? 'زیرگروه اعلام بار الزامی است.' : null,
   },
-
   sourceCity: {
+    name: 'شهر مبدا',
     validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) =>
-      e.required ? 'شهر مبدا الزامی است.' : null,
   },
-
   targetCity: {
+    name: 'شهر مقصد',
     validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) =>
-      e.required ? 'شهر مقصد الزامی است.' : null,
   },
-
   loadingPlace: {
+    name: 'محل بارگیری',
     validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) =>
-      e.required ? 'محل بارگیری الزامی است.' : null,
   },
-
   dischargingPlace: {
+    name: 'محل تخلیه',
     validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) =>
-      e.required ? 'محل تخلیه الزامی است.' : null,
   },
-
   transportCompany: {
+    name: 'شرکت حمل و نقل',
     validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) =>
-      e.required ? 'شرکت حمل و نقل الزامی است.' : null,
   },
-
   totalNumber: {
+    name: 'تعداد',
     validators: [Validators.required, Validators.min(1)],
-    getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'تعداد الزامی است.';
-      if (e.min) return 'تعداد نمی‌تواند صفر باشد.';
-      return null;
-    },
   },
-
   tonaj: {
+    name: 'تناژ',
     validators: [Validators.required, Validators.min(0.1)],
-    getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'تناژ الزامی است.';
-      if (e.min) return 'تناژ باید بیشتر از صفر باشد.';
-      return null;
-    },
   },
-
   recipient: {
+    name: 'گیرنده',
     validators: [Validators.required],
-    getErrorMessage: (e: ErrorsValidation) =>
-      e.required ? 'گیرنده الزامی است.' : null,
   },
-
   tarrif: {
+    name: 'تعرفه',
     validators: [Validators.required, Validators.min(1)],
-    getErrorMessage: (e: ErrorsValidation) => {
-      if (e.required) return 'تعرفه الزامی است.';
-      if (e.min) return 'تعرفه نمی‌تواند صفر باشد.';
-      return null;
-    },
   },
-
   description: {
-  validators: [Validators.required, Validators.minLength(5)],
-  getErrorMessage: (e: ErrorsValidation) => {
-    if (e.required) return 'توضیحات الزامی است.';
-    if (e.minlength) return 'توضیحات باید حداقل ۵ کاراکتر باشد.';
-    return null;
+    name: 'توضیحات',
+    validators: [Validators.required, Validators.minLength(5)],
   },
-},
-
 };
 
 export type ValidationField = keyof typeof ValidationSchema;

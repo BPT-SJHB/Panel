@@ -2,10 +2,9 @@ import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
-  FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { GenericInputComponent } from 'app/components/shared/inputs/number-input/generic-input.component';
+import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { TruckDriverInfo } from 'app/data/model/truck-driver-info.model';
@@ -17,7 +16,7 @@ import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-driver-truck-wallet-form',
-  imports: [ButtonModule, GenericInputComponent, ReactiveFormsModule],
+  imports: [ButtonModule, TextInputComponent, ReactiveFormsModule],
   templateUrl: './driver-truck-wallet-form.component.html',
   styleUrl: './driver-truck-wallet-form.component.scss',
 })

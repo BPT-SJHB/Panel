@@ -1,16 +1,17 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { PhoneInputComponent } from 'app/components/shared/inputs/phone-input/phone-input.component';
 import { ButtonModule } from 'primeng/button';
-import { UserTypeInputComponent } from 'app/components/shared/inputs/user-type-input/user-type-input.component';
-import { UserIdInputComponent } from 'app/components/shared/inputs/user-id-input/user-id-input.component';
+import { SelectInputComponent } from 'app/components/shared/inputs/select-input/select-input.component';
 import { BinaryRadioInputComponent } from 'app/components/shared/inputs/binary-radio-input/binary-radio-input.component';
-import { UserFullNameInputComponent } from "app/components/shared/inputs/user-full-name-input/user-full-name-input.component"
 import { UserManagementService } from 'app/services/user-management/user-management.service';
 import { ToastService } from 'app/services/toast-service/toast.service';
 import { SoftwareUserInfo } from 'app/data/model/software-user-info.model';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { DialogModule } from 'primeng/dialog';
+import { ValidationSchema } from 'app/constants/validation-schema';
+import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
+import { LoadingService } from 'app/services/loading-service/loading-service.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-user-info-form',
@@ -18,12 +19,10 @@ import { DialogModule } from 'primeng/dialog';
   imports: [
     ReactiveFormsModule,
     ButtonModule,
-    PhoneInputComponent,
-    UserFullNameInputComponent,
-    UserTypeInputComponent,
-    UserIdInputComponent,
+    SelectInputComponent,
     BinaryRadioInputComponent,
-    DialogModule
+    DialogModule,
+    TextInputComponent
   ],
   templateUrl: './user-info-form.component.html',
   styleUrl: './user-info-form.component.scss'
@@ -32,6 +31,20 @@ export class UserInfoFormComponent implements OnInit {
   private fb: FormBuilder = inject(FormBuilder);
   private userManager: UserManagementService = inject(UserManagementService);
   private toast: ToastService = inject(ToastService);
+  private loadingService = inject(LoadingService);
+  private destroy$ = new Subject<void>();
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  ngOnInit(): void {
+    this.loadingService.loading$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => (this.loading = value));
+    this.loadUserTypes();
+  }
 
   userInfoForm: FormGroup;
   searchForm: FormGroup;
@@ -45,37 +58,21 @@ export class UserInfoFormComponent implements OnInit {
 
   constructor() {
     this.searchForm = this.fb.group({
-      searchPhone: ['',
-        [
-          Validators.required,
-          Validators.minLength(11),
-          Validators.maxLength(11),
-          Validators.pattern('09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}')
-        ]
-      ]
+      searchPhone: ['',ValidationSchema.mobile]
     })
 
     this.userInfoForm = this.fb.group({
-      id: ['0', Validators.required],
-      phone: ['', [
-        Validators.required,
-        Validators.minLength(11),
-        Validators.maxLength(11),
-        Validators.pattern('09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}')
-      ]],
-      name: ['', Validators.required],
+      id: ['0', ValidationSchema.id],
+      phone: ['',ValidationSchema.mobile],
+      name: ['', ValidationSchema.fullName],
       userType: [0],
       smsActive: [false],
       userActive: [true],
     });
   }
 
-  ngOnInit(): void {
-    this.loadUserTypes();
-  }
-
   async loadUserTypes(): Promise<void> {
-    this.setLoading(true);
+    this.loadingService.setLoading(true);
     try {
       const response = await this.userManager.GetUserTypes();
       if (!this.isSuccessful(response)) return;
@@ -85,35 +82,35 @@ export class UserInfoFormComponent implements OnInit {
         label: type.UTTitle,
       })) ?? [];
     } finally {
-      this.setLoading(false);
+      this.loadingService.setLoading(false);
     }
   }
 
   async fetchUserByPhone(): Promise<void> {
     if (this.searchForm.invalid || this.loading) return;
 
-    this.setLoading(true);
+    this.loadingService.setLoading(true);
     try {
       const response = await this.userManager.GetSoftwareUserInfo(this.searchPhone.value);
       if (!this.isSuccessful(response)) return;
 
       this.populateForm(response.data!);
     } finally {
-      this.setLoading(false);
+      this.loadingService.setLoading(false);
     }
   }
 
   async activateUserSms(): Promise<void> {
     if (this.id.value == '0' || this.smsActive.invalid || this.smsActive.value || this.loading) return;
 
-    this.setLoading(true);
+    this.loadingService.setLoading(true);
     try {
       const response = await this.userManager.ActivateUserSMS(this.id.value);
       if (!this.isSuccessful(response)) return;
       this.smsActive.setValue(true);
       this.toast.success('موفق', response.data?.Message ?? 'عملیات موفق آمیز بود.');
     } finally {
-      this.setLoading(false);
+      this.loadingService.setLoading(false);
     }
   }
 
@@ -121,7 +118,7 @@ export class UserInfoFormComponent implements OnInit {
     if (this.id.value == '0' || this.loading)
       return;
 
-    this.setLoading(true);
+    this.loadingService.setLoading(true);
     try {
       const response = await this.userManager.ResetSoftwareUserPassword(this.id.value);
       if (!this.isSuccessful(response)) return;
@@ -134,7 +131,7 @@ export class UserInfoFormComponent implements OnInit {
       this.passwordDialogVisible = true;
 
     } finally {
-      this.setLoading(false);
+      this.loadingService.setLoading(false);
     }
 
   }
@@ -149,7 +146,7 @@ export class UserInfoFormComponent implements OnInit {
       return;
     }
 
-    this.setLoading(true);
+    this.loadingService.setLoading(true);
     try {
       const user = this.getSoftwareUser();
       const response = await this.userManager.RegisterNewSoftwareUser({ ...user, UserId: this.id.value });
@@ -163,7 +160,7 @@ export class UserInfoFormComponent implements OnInit {
 
       this.populateForm({ ...softwareUser, UserId: response.data?.UserId ?? 0 });
     } finally {
-      this.setLoading(false);
+      this.loadingService.setLoading(false);
     }
   }
 
@@ -274,12 +271,6 @@ export class UserInfoFormComponent implements OnInit {
     }
     return true;
   }
-
-  private setLoading(state: boolean): void {
-    this.loading = state;
-  }
-
-
 
   // Form control getters
   get searchPhone(): FormControl {
