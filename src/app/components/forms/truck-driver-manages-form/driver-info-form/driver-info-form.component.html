@@ -1,18 +1,4 @@
 <div class="p-fluid grid gap-4 relative">
-  <!-- @if loading spinner -->
-  @if (loading) {
-  <div
-    style="position: absolute"
-    class="h-full z-5 flex align-items-center justify-content-center w-full"
-  >
-    <div
-      style="position: absolute; opacity: 0.2"
-      class="h-full w-full bg-white"
-    ></div>
-    <i class="pi pi-spin pi-spinner primary" style="font-size: 5rem"></i>
-  </div>
-  }
-
   <form
     class="col-12"
     [class.pointer-events-none]="loading"
@@ -21,7 +7,7 @@
     (ngSubmit)="loadDriverInfoFromAPI()"
     >
     <div class="flex gap-2">
-      <app-generic-input
+      <app-text-input
         [control]="searchNationalId"
         validationField="nationalId"
         icon="pi pi-id-card"
@@ -45,7 +31,7 @@
   >
     <div class="grid">
       <div class="col-12 md:col-6">
-        <app-generic-input
+        <app-text-input
           label="کد راننده"
           class="flex-1"
           placeholder="کد راننده"
@@ -57,7 +43,7 @@
       </div>
 
       <div class="col-12 md:col-6">
-        <app-generic-input
+        <app-text-input
           label="کدملی"
           class="flex-1"
           placeholder="کدملی راننده"
@@ -69,7 +55,7 @@
       </div>
 
       <div class="col-12 md:col-6">
-        <app-generic-input
+        <app-text-input
           label="نام راننده"
           class="flex-1"
           placeholder="نام راننده"
@@ -81,7 +67,7 @@
       </div>
 
       <div class="col-12 md:col-6 relative">
-        <app-generic-input
+        <app-text-input
           label="شماره  تلفن"
           class="flex-1"
           placeholder="شماره تلفن"
@@ -95,7 +81,7 @@
       </div>
 
       <div class="col-12 md:col-6">
-        <app-generic-input
+        <app-text-input
           label="نام پدر"
           class="flex-1"
           placeholder="نام پدر"
@@ -107,7 +93,7 @@
       </div>
 
       <div class="col-12 md:col-6">
-        <app-generic-input
+        <app-text-input
           label="شماره گواهینامه"
           class="flex-1"
           placeholder="شماره گواهینامه"
@@ -119,7 +105,7 @@
       </div>
 
       <div class="col-12 md:col-6">
-        <app-generic-input
+        <app-text-input
           label="شماره هوشمند"
           class="flex-1"
           placeholder="شماره هوشمند"
@@ -131,7 +117,7 @@
       </div>
 
       <div class="col-12 md:col-6">
-        <app-generic-input
+        <app-text-input
           label="آدرس"
           class="flex-1"
           placeholder="آدرس راننده"

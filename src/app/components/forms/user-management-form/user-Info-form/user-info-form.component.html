@@ -1,116 +1,174 @@
 <div class="p-fluid grid gap-4 relative">
-
-  <!-- @if loading spinner -->
-  @if (loading) {
-  <div style="position: absolute;" class="h-full z-5 flex align-items-center justify-content-center w-full">
-    <div style="position: absolute; opacity: 0.2;" class="h-full w-full bg-white">
-    </div>
-    <i class="pi pi-spin pi-spinner primary" style="font-size: 5rem"></i>
-  </div>
-  }
-
-
-  <form class="col-12" (ngSubmit)="fetchUserByPhone()" [class.pointer-events-none]="loading"
-    [class.opacity-60]="loading" [formGroup]="searchForm">
+  <form
+    class="col-12"
+    (ngSubmit)="fetchUserByPhone()"
+    [class.pointer-events-none]="loading"
+    [class.opacity-60]="loading"
+    [formGroup]="searchForm"
+  >
     <!-- Search Phone + Refresh -->
     <div class="flex gap-2">
-      <app-phone-input class="flex-1" placeholder="جستجو کاربر" [control]="searchPhone" />
-      <p-button type="submit" icon="pi pi-search" styleClass="mt-1 w-2rem h-2rem border-circle"
-        (click)="fetchUserByPhone()" [disabled]="this.searchForm.invalid || loading" />
+      <app-text-input
+        label="شماره تلفن"
+        class="flex-1"
+        placeholder="جستجو کاربر"
+        [control]="searchPhone"
+      />
+      <p-button
+        type="submit"
+        icon="pi pi-search"
+        styleClass="mt-1 w-2rem h-2rem border-circle"
+        (click)="fetchUserByPhone()"
+        [disabled]="this.searchForm.invalid || loading"
+      />
     </div>
   </form>
 
-  <form class="p-fluid grid gap-4 relative" [class.pointer-events-none]="loading" [class.opacity-60]="loading"
-    [formGroup]="userInfoForm">
+  <form
+    class="p-fluid grid gap-4 relative"
+    [class.pointer-events-none]="loading"
+    [class.opacity-60]="loading"
+    [formGroup]="userInfoForm"
+  >
     <!-- User ID (ReadOnly) -->
     <div class="flex align-items-center gap-2 col-12 md:col-5">
-      <app-user-id-input class="flex-1" [readOnly]="true" [disabled]="true" [control]="id" />
-      <p-button 
+      <app-text-input
+        class="flex-1"
+        [readOnly]="true"
+        [disabled]="true"
+        [control]="id"
+        validationField="id"
+        placeholder="شناسه کاربر"
+        icon="pi pi-id-card"
+      />
+      <p-button
         (click)="resetUserInfoForm()"
-      styleClass="border-circle w-2rem h-2rem"  [disabled]="id.value == '0'" size="small" severity="info">
-        <i
-          class="pi pi-user-plus text-lg" 
-          iconPos="left"
-        ></i>
+        styleClass="border-circle w-2rem h-2rem"
+        [disabled]="id.value == '0'"
+        size="small"
+        severity="info"
+      >
+        <i class="pi pi-user-plus text-lg" iconPos="left"></i>
       </p-button>
     </div>
 
-
     <!-- Full Name -->
     <div class="col-12 md:col-5">
-      <app-user-full-name-input placeholder="نام کاربر" [control]="name" />
+      <app-text-input
+        validationField="fullName"
+        icon="pi pi-user"
+        placeholder="نام کاربر"
+        [control]="name"
+      />
     </div>
 
     <!-- Phone -->
     <div class="col-12 md:col-5">
       <div>
-        <app-phone-input class="flex-1" placeholder="شماره تلفن کاربر" [control]="phone" />
+        <app-text-input
+          label="شماره موبایل"
+          addonWidth="7rem"
+          class="flex-1"
+          placeholder="شماره موبایل کاربر"
+          [control]="phone"
+        />
       </div>
     </div>
 
     <!-- User Type -->
     <div class="col-12 md:col-5">
-      <app-user-type-input [control]="userType" [userType]="roles" />
+      <app-select-input icon="pi pi-users" [control]="userType" [options]="roles" />
     </div>
 
     <!-- Radio: SMS System -->
     <div class="col-12 md:col-5">
-      <app-binary-radio-input [readonly]="true" label="وضعیت پیامک" [control]="smsActive" radioName="sms-active" />
+      <app-binary-radio-input
+        [readonly]="true"
+        label="وضعیت پیامک"
+        [control]="smsActive"
+        radioName="sms-active"
+      />
     </div>
 
     <!-- Radio: User Active -->
     <div class="col-12 md:col-6">
-      <app-binary-radio-input label="کاربر" [control]="userActive" radioName="user-active" />
+      <app-binary-radio-input
+        label="کاربر"
+        [control]="userActive"
+        radioName="user-active"
+      />
     </div>
 
     <!-- Action Buttons -->
-    <div class="col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center">
-      <p-button (click)="submitUserInfo()" [disabled]="userInfoForm.invalid || loading" label="ثبت و ویرایش"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"></p-button>
+    <div
+      class="col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center"
+    >
+      <p-button
+        (click)="submitUserInfo()"
+        [disabled]="userInfoForm.invalid || loading"
+        label="ثبت و ویرایش"
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+      ></p-button>
 
-      <p-button (click)="activateUserSms()" [disabled]="id.value == '0' || smsActive.value || loading" severity="warn"
+      <p-button
+        (click)="activateUserSms()"
+        [disabled]="id.value == '0' || smsActive.value || loading"
+        severity="warn"
         label="فعال سازی پیامک"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"></p-button>
-        
-        <p-button (click)="sendWebsiteLink()" [disabled]="id.value == '0' || loading" severity="warn"
-        label="ارسال لینک سامانه"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"></p-button>
-      
-      <p-button (click)="resetUserPassword()" [disabled]="id.value == '0' || loading" severity="info"
-        label="ایجاد رمز عبور جدید"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"></p-button>
-      
-    </div>
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+      ></p-button>
 
+      <p-button
+        (click)="sendWebsiteLink()"
+        [disabled]="id.value == '0' || loading"
+        severity="warn"
+        label="ارسال لینک سامانه"
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+      ></p-button>
+
+      <p-button
+        (click)="resetUserPassword()"
+        [disabled]="id.value == '0' || loading"
+        severity="info"
+        label="ایجاد رمز عبور جدید"
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+      ></p-button>
+    </div>
   </form>
 
-
-<div class="card flex justify-center">
-    <p-dialog header="رمز عبور جدید" [modal]="true" (onHide)="onCloseDialog()" [(visible)]="passwordDialogVisible" [style]="{ width: '25rem' }">
- 
+  <div class="card flex justify-center">
+    <p-dialog
+      header="رمز عبور جدید"
+      [modal]="true"
+      (onHide)="onCloseDialog()"
+      [(visible)]="passwordDialogVisible"
+      [style]="{ width: '25rem' }"
+    >
       <div class="flex gap-3 flex-column">
         <div class="flex align-items-center justify-content-between">
-          <span class="w-8rem">
-          شناسه کابری:
-        </span>
-        <p-button (click)="copyToClipboard(userNameDialog)"  size="small" styleClass="px-4 w-10rem"  severity="info">
-          {{userNameDialog}}
-        </p-button>
+          <span class="w-8rem"> شناسه کابری: </span>
+          <p-button
+            (click)="copyToClipboard(userNameDialog)"
+            size="small"
+            styleClass="px-4 w-10rem"
+            severity="info"
+          >
+            {{ userNameDialog }}
+          </p-button>
+        </div>
+
+        <div class="flex align-items-center justify-content-between">
+          <span class="w-8rem"> رمز عبور جدید </span>
+          <p-button
+            (click)="copyToClipboard(newUserPasswordDialog)"
+            size="small"
+            styleClass="px-4 w-10rem"
+            severity="primary"
+          >
+            {{ newUserPasswordDialog }}
+          </p-button>
+        </div>
       </div>
- 
-       <div class="flex align-items-center justify-content-between">
-        <span class="w-8rem">
-            رمز عبور جدید
-        </span>
-        <p-button
-        (click)="copyToClipboard(newUserPasswordDialog)"
-        size="small" styleClass="px-4 w-10rem" severity="primary">
-          {{newUserPasswordDialog}}
-        </p-button>
-      </div>
-    </div>
-      
-      
     </p-dialog>
-</div>
+  </div>
 </div>

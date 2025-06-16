@@ -1,21 +1,5 @@
 <div class="p-fluid grid gap-4 relative">
-  <!-- Loading Spinner -->
-  @if (loading) {
-
-  <div
-    style="position: absolute"
-    class="h-full z-5 flex align-items-center justify-content-center w-full"
-  >
-    <div
-      style="position: absolute; opacity: 0.2"
-      class="h-full w-full bg-white"
-    ></div>
-    <i class="pi pi-spin pi-spinner primary" style="font-size: 5rem"></i>
-  </div>
-
-  }
-
-  <!-- Search Form -->
+ <!-- Search Form -->
   <form
     class="col-12 mt-4"
     [class.pointer-events-none]="loading"
@@ -24,13 +8,13 @@
     [formGroup]="searchForm"
   >
     <div class="flex gap-2">
-      <app-generic-input
+      <app-text-input
         [control]="searchSmartCard"
         validationField="smartCard"
         icon="pi pi-id-card"
         class="flex-1"
         placeholder="جستجو براساس شماره هوشمند"
-      ></app-generic-input>
+      ></app-text-input>
 
       <p-button
         [disabled]="searchForm.invalid || loading"
@@ -53,7 +37,7 @@
     <div class="p-fluid grid gap-4 col-12">
       <div class="grid col-12">
         <div class="col-12 md:col-6">
-          <app-generic-input
+          <app-text-input
             label="کد ناوگان"
             class="flex-1"
             placeholder="کد ناوگان"
@@ -61,11 +45,11 @@
             [control]="truckId"
             validationField="truckId"
             [addonWidth]="addonWidth"
-          ></app-generic-input>
+          ></app-text-input>
         </div>
 
         <div class="col-12 md:col-6">
-          <app-generic-input
+          <app-text-input
             label="سریال"
             class="flex-1"
             placeholder="کدملی راننده"
@@ -73,11 +57,11 @@
             validationField="serialNumber"
             [readOnly]="true"
             [addonWidth]="addonWidth"
-          ></app-generic-input>
+          ></app-text-input>
         </div>
 
         <div class="col-12 md:col-6">
-          <app-generic-input
+          <app-text-input
             label="شماره هوشمند"
             class="flex-1"
             placeholder="شماره هوشمند"
@@ -85,11 +69,11 @@
             validationField="smartCard"
             [readOnly]="true"
             [addonWidth]="addonWidth"
-          ></app-generic-input>
+          ></app-text-input>
         </div>
 
         <div class="col-12 md:col-6">
-          <app-generic-input
+          <app-text-input
             label="بارگیر"
             class="flex-1"
             placeholder="نوع بارگیر"
@@ -97,10 +81,10 @@
             validationField="loaderType"
             [readOnly]="true"
             [addonWidth]="addonWidth"
-          ></app-generic-input>
+          ></app-text-input>
         </div>
         <div class="col-12 md:col-6">
-          <app-generic-input
+          <app-text-input
             label="شماره پلاک"
             class="flex-1"
             placeholder="شماره پلاک"
@@ -125,7 +109,7 @@
     <div class="p-fluid grid col-12">
       <div class="grid col-12">
         <div class="col-12 md:col-6">
-          <app-generic-input
+          <app-text-input
             label="بومی"
             class="flex-1"
             placeholder="بومی / غیر بومی"
@@ -133,11 +117,11 @@
             validationField="nativeness"
             [readOnly]="true"
             [addonWidth]="addonWidth"
-          ></app-generic-input>
+          ></app-text-input>
         </div>
 
         <div class="col-12 md:col-6">
-          <app-generic-input
+          <app-text-input
             class="flex-1"
             type="date"
             label="تاریخ اتمام"
@@ -147,7 +131,7 @@
             validationField="truckNativenessExpiredDate"
             [readOnly]="true"
             [addonWidth]="addonWidth"
-          ></app-generic-input>
+          ></app-text-input>
         </div>
       </div>
     </div>

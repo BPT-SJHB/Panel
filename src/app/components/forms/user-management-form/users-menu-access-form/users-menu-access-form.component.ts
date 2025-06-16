@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { TreeNode } from 'primeng/api';
 import { TreeTableModule } from 'primeng/treetable';
 import { CommonModule } from '@angular/common';
 import { UserManagementService } from 'app/services/user-management/user-management.service';
-import { UserAuthService } from 'app/services/user-auth-service/user-auth.service';
 import { SearchInputComponent } from 'app/components/shared/inputs/search-input/search-input.component';
 import { SoftwareUserInfo } from 'app/data/model/software-user-info.model';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
@@ -13,12 +12,14 @@ import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
-import { PhoneInputComponent } from 'app/components/shared/inputs/phone-input/phone-input.component';
 import { ToastService } from 'app/services/toast-service/toast.service';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { ShortResponse } from 'app/data/model/short-response.model';
+import { TextInputComponent } from '../../../shared/inputs/text-input/text-input.component';
+import { ValidationSchema } from 'app/constants/validation-schema';
+import {Subject, takeUntil } from 'rxjs';
+import { LoadingService } from 'app/services/loading-service/loading-service.service';
 
 interface SelectedNodes {
   [key: string]: { checked: boolean; partialChecked?: boolean };
@@ -33,50 +34,47 @@ interface SelectedNodes {
     ButtonModule,
     ProgressSpinnerModule,
     ReactiveFormsModule,
-    PhoneInputComponent,
+    TextInputComponent,
   ],
   templateUrl: './users-menu-access-form.component.html',
   styleUrl: './users-menu-access-form.component.scss',
 })
-export class UsersMenuAccessFormComponent {
-  searchForm: FormGroup;
+export class UsersMenuAccessFormComponent implements OnInit, OnDestroy {
+  private userManager = inject(UserManagementService);
+  private toast = inject(ToastService);
+  private fb = inject(FormBuilder);
+  private loadingService = inject(LoadingService);
+  private destroy$ = new Subject<void>();
 
   isLoading: boolean = false;
   accessTable?: TreeNode[] = [];
+  selectedNodes: SelectedNodes = {};
+  selectedNodesCopy: SelectedNodes = {};
+  userInfo: SoftwareUserInfo = { UserId: 0 };
 
+  searchForm: FormGroup = this.fb.group({
+    searchPhone: ['', ValidationSchema.mobile],
+  });
   cols = [
     { field: 'PGTitle', header: 'نام منو' },
     { field: 'Description', header: 'توضیحات' },
   ];
 
-  selectedNodes: SelectedNodes = {};
-  selectedNodesCopy: SelectedNodes = {};
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
-  userInfo: SoftwareUserInfo = { UserId: 0 };
-
-  constructor(
-    private userAuth: UserAuthService,
-    private userManager: UserManagementService,
-    private toast: ToastService,
-    private fb: FormBuilder
-  ) {
-    this.searchForm = this.fb.group({
-      searchPhone: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(11),
-          Validators.maxLength(11),
-          Validators.pattern('09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}'),
-        ],
-      ],
-    });
+  ngOnInit(): void {
+    this.loadingService.loading$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => (this.isLoading = value));
   }
 
   async SaveChanges() {
     if (this.isLoading) return;
 
-    this.isLoading = true;
+    this.loadingService.setLoading(true);
 
     try {
       // === Step 1: Disable old access (selectedNodesCopy, PAccess: false) ===
@@ -173,7 +171,7 @@ export class UsersMenuAccessFormComponent {
     } catch (err) {
       this.toast.error('خطا', 'خطای بحرانی در ذخیره‌سازی رخ داد');
     } finally {
-      this.isLoading = false;
+      this.loadingService.setLoading(false);
     }
   }
 
@@ -229,7 +227,7 @@ export class UsersMenuAccessFormComponent {
   async getUserAccessMenu() {
     if (this.searchForm.invalid || this.isLoading) return;
 
-    this.isLoading = true;
+    this.loadingService.setLoading(true);
     try {
       const response = await this.userManager.GetSoftwareUserInfo(
         this.searchPhone.value
@@ -248,12 +246,12 @@ export class UsersMenuAccessFormComponent {
         MobileNumber: response.data?.MobileNumber,
       };
     } finally {
-      this.isLoading = false;
+      this.loadingService.setLoading(false);
     }
 
-    this.isLoading = true;
+    this.loadingService.setLoading(true);
     await this.LoadWebProcessGroups_WebProcessesTable();
-    this.isLoading = false;
+    this.loadingService.setLoading(false);
   }
 
   get searchPhone() {

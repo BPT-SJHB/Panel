@@ -1,18 +1,10 @@
-<div class="flex justify-content-center flex-wrap" *ngIf="isLoading">
-  <p-progress-spinner
-    class="flex align-items-center justify-content-center h-screen"
-    strokeWidth="8"
-    fill="transparent"
-  />
-</div>
-
 <div *ngIf="!isLoading">
   <div class="card">
      <form class="col-12" (ngSubmit)="getUserAccessMenu()" [class.pointer-events-none]="isLoading"
     [class.opacity-60]="isLoading" [formGroup]="searchForm">
     <!-- Search Phone + Refresh -->
     <div class="flex gap-2">
-      <app-phone-input class="flex-1" placeholder="جستجو کاربر" [control]="searchPhone" />
+      <app-text-input class="flex-1" placeholder="جستجو کاربر" addonWidth="7rem" [control]="searchPhone"  validationField="mobile" label="شماره موبایل"/>
       <p-button type="submit" icon="pi pi-search" styleClass="mt-1 w-2rem h-2rem border-circle"
         (click)="getUserAccessMenu()" [disabled]="this.searchForm.invalid || isLoading" />
     </div>
