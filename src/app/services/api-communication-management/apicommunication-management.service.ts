@@ -45,4 +45,24 @@ export class APICommunicationManagementService {
       return handleHttpError<TExpect>(error);
     }
   }
+
+  public async CommunicateWithAPI_Get<TExpect>(
+    url: string,
+    mockValue?: any
+  ): Promise<ApiResponse<TExpect>> {
+    if (!environment.production && environment.disableApi) {
+      return { success: true, data: mockValue };
+    }
+
+    try {
+      const response = await firstValueFrom(this.http.get<TExpect>(url));
+
+      return {
+        success: true,
+        data: response,
+      };
+    } catch (error: unknown) {
+      return handleHttpError<TExpect>(error);
+    }
+  }
 }
