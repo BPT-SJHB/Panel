@@ -23,6 +23,8 @@ export class FpcManagementService {
   public async GetFPCsInfo(
     fpcNameToSearch: string
   ): Promise<ApiResponse<FPCInfo[]>> {
+    this.userAuth.isLoggedIn();
+
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.FPC.GetFPCs;
     const bodyValue = {
@@ -40,6 +42,8 @@ export class FpcManagementService {
   }
 
   public async GetFPCInfo(fpcId: number): Promise<ApiResponse<FPCInfo>> {
+    this.userAuth.isLoggedIn();
+
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.FPC.GetFPC;
     const fpcInfo: FPCInfo = { FPCId: fpcId };
@@ -60,6 +64,8 @@ export class FpcManagementService {
   public async FPCRegistering(
     rawFPCInfo: FPCInfo
   ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.FPC.FPCRegistering;
     const fpcInfo: FPCInfo = rawFPCInfo;
@@ -80,6 +86,8 @@ export class FpcManagementService {
   public async EditFPC(
     rawFPCInfo: FPCInfo
   ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.FPC.EditFPC;
     const fpcInfo: FPCInfo = rawFPCInfo;
@@ -100,6 +108,8 @@ export class FpcManagementService {
   public async ActivateFPCSms(
     fpcId: number
   ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.FPC.ActivateFPCSmsOwner;
     const fpcInfo: FPCInfo = { FPCId: fpcId };
@@ -120,6 +130,8 @@ export class FpcManagementService {
   public async ResetFPCUserPassword(
     fpcId: number
   ): Promise<ApiResponse<UsernamePassword>> {
+    this.userAuth.isLoggedIn();
+
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.FPC.ResetFPCUserPassword;
     const fpcInfo: FPCInfo = { FPCId: fpcId };
@@ -151,6 +163,8 @@ export class FpcManagementService {
   public async FPCChangeActiveStatus(
     fpcId: number
   ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.FPC.FPCChangeActiveStatus;
     const fpcInfo: FPCInfo = { FPCId: fpcId };
