@@ -337,7 +337,7 @@ export class Driver_TruckManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       Wallet
-    >(apiUrl, bodyValue);
+    >(apiUrl, bodyValue, mockWallet);
   }
   //#endregion
 }
