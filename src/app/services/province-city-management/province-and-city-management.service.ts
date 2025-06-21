@@ -52,4 +52,29 @@ export class ProvinceAndCityManagementService {
     };
     //#endregion
   }
+
+  public async ChangeProvinceStatus(
+    provinceId: number
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.ProvinceAndCities.ChangeProvinceStatus;
+    const provinceInfo: Province = {
+      ProvinceId: provinceId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      ProvinceId: provinceInfo.ProvinceId,
+    };
+    //#endregion
+
+    //#region Request
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
