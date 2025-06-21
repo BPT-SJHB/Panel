@@ -77,4 +77,29 @@ export class ProvinceAndCityManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  public async ChangeCityStatus(
+    cityCode: number
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.ProvinceAndCities.ChangeCityStatus;
+    const cityInfo: City = {
+      CityCode: cityCode,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      CityId: cityInfo.CityCode,
+    };
+    //#endregion
+
+    //#region Request
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
