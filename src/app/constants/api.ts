@@ -55,5 +55,14 @@ export const API_ROUTES = {
     LoadCapacitor: {
       GetLoad: `${environment.apiUrl}:${transportationAPIPort}/api/GetLoad`,
     },
+    ProvinceAndCities: {
+      GetCities: `${environment.apiUrl}:${transportationAPIPort}/api/GetCities`,
+      ChangeProvinceStatus: `${environment.apiUrl}:${transportationAPIPort}/api/ChangeActivateStatusOfProvince`,
+      ChangeCityStatus: `${environment.apiUrl}:${transportationAPIPort}/api/ChangeActivateStatusOfCity`,
+    },
+    LoaderTypes: {
+      GetLoaderTypes: `${environment.apiUrl}:${transportationAPIPort}/api/GetLoaderTypes`,
+      ChangeLoaderTypeStatus: `${environment.apiUrl}:${transportationAPIPort}/api/ChangeActivateStatusOfLoaderType`,
+    },
   },
 };
