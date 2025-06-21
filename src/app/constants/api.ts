@@ -64,5 +64,10 @@ export const API_ROUTES = {
       GetLoaderTypes: `${environment.apiUrl}:${transportationAPIPort}/api/GetLoaderTypes`,
       ChangeLoaderTypeStatus: `${environment.apiUrl}:${transportationAPIPort}/api/ChangeActivateStatusOfLoaderType`,
     },
+    ProductTypes: {
+      GetProducts: `${environment.apiUrl}:${transportationAPIPort}/api/GetProducts`,
+      ChangeProductTypeStatus: `${environment.apiUrl}:${transportationAPIPort}/api/ChangeActivateStatusOfProductType`,
+      ChangeProductStatus: `${environment.apiUrl}:${transportationAPIPort}/api/ChangeActivateStatusOfProduct`,
+    },
   },
 };
