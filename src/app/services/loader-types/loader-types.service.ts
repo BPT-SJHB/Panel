@@ -54,4 +54,29 @@ export class LoaderTypesService {
     };
     //#endregion
   }
+
+  public async ChangeLoaderTypeStatus(
+    loaderTypeId: number
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.LoaderTypes.ChangeLoaderTypeStatus;
+    const loaderTypeInfo: LoaderType = {
+      LoaderTypeId: loaderTypeId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LoaderTypeId: loaderTypeInfo.LoaderTypeId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
