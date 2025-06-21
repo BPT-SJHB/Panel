@@ -12,4 +12,6 @@ import { ShortResponse } from 'app/data/model/short-response.model';
   providedIn: 'root',
 })
 export class ProvinceAndCityManagementService {
+  private userAuth = inject(UserAuthService);
+  private apiCommunicator = inject(APICommunicationManagementService);
 }
