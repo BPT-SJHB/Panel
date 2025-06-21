@@ -14,4 +14,44 @@ import { mockShortResponse } from 'app/data/mock/short-response.mock';
 export class LoaderTypesService {
   private userAuth = inject(UserAuthService);
   private apiCommunicator = inject(APICommunicationManagementService);
+
+  public async GetLoaderTypesInfo(
+    searchString: string
+  ): Promise<ApiResponse<LoaderType[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.LoaderTypes.GetLoaderTypes;
+    const loaderTypesInfo: LoaderType = {
+      LoaderTypeId: 0,
+      LoaderTypeTitle: searchString,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SearchString: loaderTypesInfo.LoaderTypeTitle,
+    };
+    //#endregion
+
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoaderType[]
+    >(apiUrl, bodyValue, mockLoaderTypes);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: response.data?.map((loaderType) => ({
+        LoaderTypeId: loaderType.LoaderTypeId,
+        LoaderTypeTitle: loaderType.LoaderTypeTitle?.trim(),
+        LoaderTypeOrganizationId: loaderType.LoaderTypeOrganizationId,
+        LoaderTypeFixStatusId: loaderType.LoaderTypeFixStatusId,
+        LoaderTypeFixStatusTitle: loaderType.LoaderTypeFixStatusTitle?.trim(),
+        Active: loaderType.Active,
+      })),
+      error: response.error,
+    };
+    //#endregion
+  }
 }
