@@ -1,4 +1,4 @@
-import { Province } from '../model/province.model';
+import { Province } from '../model/province-city.model';
 
 export const mockProvinceAndCities: Province[] = [
   {
