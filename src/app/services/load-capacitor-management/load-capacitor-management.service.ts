@@ -14,6 +14,8 @@ export class LoadCapacitorManagementService {
   private apiCommunicator = inject(APICommunicationManagementService);
 
   public async GetLoad(loadId: number): Promise<ApiResponse<LoadInfo>> {
+    this.userAuth.isLoggedIn();
+
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.LoadCapacitor.GetLoad;
     const bodyValue = {

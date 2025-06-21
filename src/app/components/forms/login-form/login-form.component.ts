@@ -58,8 +58,8 @@ export class LoginFormComponent {
 
     const formValue = this.loginForm.value;
     const loginResult = await this.userAuth.login({
-      username: await this.cryptography.SHA256(formValue.username!),
-      password: await this.cryptography.SHA256(formValue.password!),
+      username: this.cryptography.SHA256(formValue.username!),
+      password: this.cryptography.SHA256(formValue.password!),
       rememberMe: formValue?.rememberMe!,
       sessionId: formValue?.sessionId!,
       captcha: formValue?.captcha!,
@@ -83,7 +83,7 @@ export class LoginFormComponent {
     this.sessionId.reset();
     await this.captchaComponent.getCaptchaInformation();
   }
-  
+
   get username() {
     return this.loginForm.get('username') as FormControl;
   }

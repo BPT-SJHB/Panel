@@ -69,7 +69,6 @@ export class UserAuthService {
     const sessionId = this.getSessionId();
     if (sessionId == null) {
       this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
-      // this.toast.error('خطا', 'نشست یافت نشد!');
       await this.logout();
       return new Promise(function (resolve, _) {
         resolve({ success: false });
@@ -88,7 +87,6 @@ export class UserAuthService {
       typeof bodyValue,
       { ISSessionLive: boolean }
     >(this.apiUrl + '/isSessionLive', bodyValue);
-    console.log(response);
     return response;
   }
 

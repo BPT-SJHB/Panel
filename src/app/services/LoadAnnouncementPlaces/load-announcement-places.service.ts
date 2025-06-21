@@ -1,43 +1,27 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { API_ROUTES } from 'app/constants/api';
 import { mockCargoTerminals } from 'app/data/mock/cargo-terminal.mock';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { LoadAnnouncementPlace } from 'app/data/model/load-announcement-place.model';
-import { handleHttpError } from 'app/utils/http-error-handler';
-import { environment } from 'environments/environment';
-import { firstValueFrom } from 'rxjs';
+import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoadAnnouncementPlacesService {
-  private readonly apiUrl =
-    API_ROUTES.TransportationAPI.Driver.LoadAnnouncementPlaces;
-
-  constructor(private http: HttpClient) {}
+  private apiCommunicator = inject(APICommunicationManagementService);
 
   public async getLoadAnnouncementPlaces(): Promise<
     ApiResponse<LoadAnnouncementPlace[]>
   > {
-    // mock data
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.Driver.LoadAnnouncementPlaces;
+    //#endregion
 
-    if (!environment.production && environment.disableApi) {
-      return { success: true, data: mockCargoTerminals };
-    }
-
-    // real data
-    try {
-      const response = await firstValueFrom(
-        this.http.get<[LoadAnnouncementPlace]>(this.apiUrl)
-      );
-
-      return {
-        success: true,
-        data: response,
-      };
-    } catch (error: unknown) {
-      return handleHttpError<[LoadAnnouncementPlace]>(error);
-    }
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Get<
+      [LoadAnnouncementPlace]
+    >(apiUrl, mockCargoTerminals);
+    //#endregion
   }
 }

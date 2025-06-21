@@ -4,8 +4,6 @@ import { ApiResponse } from 'app/data/model/api-Response.model';
 import { handleHttpError } from 'app/utils/http-error-handler';
 import { environment } from 'environments/environment';
 import { firstValueFrom } from 'rxjs';
-import { UserAuthService } from '../user-auth-service/user-auth.service';
-import { mockUserSession } from 'app/data/mock/user-session.mock';
 import { ShortResponse } from 'app/data/model/short-response.model';
 
 @Injectable({
@@ -13,7 +11,6 @@ import { ShortResponse } from 'app/data/model/short-response.model';
 })
 export class APICommunicationManagementService {
   private http = inject(HttpClient);
-  // private userAuth = inject(UserAuthService);
 
   public async CommunicateWithAPI_Post<TBody, TExpect>(
     url: string,
@@ -21,18 +18,15 @@ export class APICommunicationManagementService {
     mockValue?: any
   ): Promise<ApiResponse<TExpect>> {
     if (!environment.production && environment.disableApi) {
-      // this.userAuth.setSessionId(mockUserSession.sessionId);
       return {
         success: true,
         data: mockValue,
       };
     }
 
-    const apiUrl = url;
-
     try {
       const response = await firstValueFrom(
-        this.http.post<TExpect>(apiUrl, bodyValue)
+        this.http.post<TExpect>(url, bodyValue)
       );
 
       const mappedResponse =
@@ -41,6 +35,26 @@ export class APICommunicationManagementService {
           : (response as TExpect);
 
       return { success: true, data: mappedResponse };
+    } catch (error: unknown) {
+      return handleHttpError<TExpect>(error);
+    }
+  }
+
+  public async CommunicateWithAPI_Get<TExpect>(
+    url: string,
+    mockValue?: any
+  ): Promise<ApiResponse<TExpect>> {
+    if (!environment.production && environment.disableApi) {
+      return { success: true, data: mockValue };
+    }
+
+    try {
+      const response = await firstValueFrom(this.http.get<TExpect>(url));
+
+      return {
+        success: true,
+        data: response,
+      };
     } catch (error: unknown) {
       return handleHttpError<TExpect>(error);
     }
