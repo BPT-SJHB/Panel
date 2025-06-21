@@ -39,4 +39,29 @@ export class ProductTypesService {
     >(apiUrl, bodyValue, mockProductTypes);
     //#endregion
   }
+
+  public async ChangeProductTypeStatus(
+    productTypeId: number
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.ProductTypes.ChangeProductTypeStatus;
+    const productTypeInfo: ProductType = {
+      ProductTypeId: productTypeId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      ProductTypeId: productTypeInfo.ProductTypeId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
