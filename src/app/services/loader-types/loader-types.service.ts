@@ -12,4 +12,6 @@ import { mockShortResponse } from 'app/data/mock/short-response.mock';
   providedIn: 'root',
 })
 export class LoaderTypesService {
+  private userAuth = inject(UserAuthService);
+  private apiCommunicator = inject(APICommunicationManagementService);
 }
