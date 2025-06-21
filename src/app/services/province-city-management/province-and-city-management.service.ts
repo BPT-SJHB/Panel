@@ -14,4 +14,42 @@ import { ShortResponse } from 'app/data/model/short-response.model';
 export class ProvinceAndCityManagementService {
   private userAuth = inject(UserAuthService);
   private apiCommunicator = inject(APICommunicationManagementService);
+
+  public async GetProvincesAndCitiesInfo(
+    provinceAndCityName: string
+  ): Promise<ApiResponse<Province[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.ProvinceAndCities.GetCities;
+    const provinceAndCities: Province = {
+      ProvinceId: 0,
+      ProvinceName: provinceAndCityName,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SearchString: provinceAndCities.ProvinceName,
+    };
+    //#endregion
+
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      Province[]
+    >(apiUrl, bodyValue, mockProvinceAndCities);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: response.data?.map((province) => ({
+        ProvinceId: province.ProvinceId,
+        ProvinceName: province.ProvinceName?.trim(),
+        ProvinceActive: province.ProvinceActive,
+        Cities: province.Cities,
+      })),
+      error: response.error,
+    };
+    //#endregion
+  }
 }
