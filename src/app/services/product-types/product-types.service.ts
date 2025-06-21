@@ -14,4 +14,29 @@ import { mockShortResponse } from 'app/data/mock/short-response.mock';
 export class ProductTypesService {
   private userAuth = inject(UserAuthService);
   private apiCommunicator = inject(APICommunicationManagementService);
+
+  public async GetProductsInfo(
+    productTypeTitle: string
+  ): Promise<ApiResponse<ProductType[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.ProductTypes.GetProducts;
+    const productTypeInfo: ProductType = {
+      ProductTypeId: 0,
+      ProductTypeTitle: productTypeTitle,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SearchString: productTypeInfo.ProductTypeTitle,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ProductType[]
+    >(apiUrl, bodyValue, mockProductTypes);
+    //#endregion
+  }
 }
