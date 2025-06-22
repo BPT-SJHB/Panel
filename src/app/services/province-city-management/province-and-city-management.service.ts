@@ -54,7 +54,8 @@ export class ProvinceAndCityManagementService {
   }
 
   public async ChangeProvinceStatus(
-    provinceId: number
+    provinceId: number,
+    status: boolean
   ): Promise<ApiResponse<ShortResponse>> {
     this.userAuth.isLoggedIn();
 
@@ -63,10 +64,12 @@ export class ProvinceAndCityManagementService {
       API_ROUTES.TransportationAPI.ProvinceAndCities.ChangeProvinceStatus;
     const provinceInfo: Province = {
       ProvinceId: provinceId,
+      ProvinceActive: status,
     };
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
       ProvinceId: provinceInfo.ProvinceId,
+      ProvinceActive: provinceInfo.ProvinceActive,
     };
     //#endregion
 
@@ -79,7 +82,8 @@ export class ProvinceAndCityManagementService {
   }
 
   public async ChangeCityStatus(
-    cityCode: number
+    cityCode: number,
+    status: boolean
   ): Promise<ApiResponse<ShortResponse>> {
     this.userAuth.isLoggedIn();
 
@@ -88,10 +92,12 @@ export class ProvinceAndCityManagementService {
       API_ROUTES.TransportationAPI.ProvinceAndCities.ChangeCityStatus;
     const cityInfo: City = {
       CityCode: cityCode,
+      CityActive: status,
     };
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
       CityId: cityInfo.CityCode,
+      CityActive: cityInfo.CityActive,
     };
     //#endregion
 
