@@ -41,7 +41,8 @@ export class ProductTypesService {
   }
 
   public async ChangeProductTypeStatus(
-    productTypeId: number
+    productTypeId: number,
+    status: boolean
   ): Promise<ApiResponse<ShortResponse>> {
     this.userAuth.isLoggedIn();
 
@@ -50,10 +51,12 @@ export class ProductTypesService {
       API_ROUTES.TransportationAPI.ProductTypes.ChangeProductTypeStatus;
     const productTypeInfo: ProductType = {
       ProductTypeId: productTypeId,
+      ProductTypeActive: status,
     };
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
       ProductTypeId: productTypeInfo.ProductTypeId,
+      ProductTypeActive: productTypeInfo.ProductTypeActive,
     };
     //#endregion
 
@@ -66,17 +69,22 @@ export class ProductTypesService {
   }
 
   public async ChangeProductStatus(
-    productId: number
+    productId: number,
+    status: boolean
   ): Promise<ApiResponse<ShortResponse>> {
     this.userAuth.isLoggedIn();
 
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.ProductTypes.ChangeProductStatus;
-    const productInfo: Product = { ProductId: productId };
+    const productInfo: Product = {
+      ProductId: productId,
+      ProductActive: status,
+    };
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
       ProductId: productInfo.ProductId,
+      ProductActive: productInfo.ProductActive,
     };
     //#endregion
 
