@@ -113,4 +113,29 @@ export class LADPlaceManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  public async DeleteLADPlace(
+    ladPlaceId: number
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.LADPlaces.DeleteLADPlace;
+    const ladPlaceInfo: LADPlace = {
+      LADPlaceId: ladPlaceId,
+      LADPlaceTitle: '',
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LADPlaceId: ladPlaceInfo.LADPlaceId,
+    };
+    //#endregion
+
+    //#region Request
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
