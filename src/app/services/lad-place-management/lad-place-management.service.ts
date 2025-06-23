@@ -37,4 +37,27 @@ export class LADPlaceManagementService {
     >(apiUrl, bodyValue, mockLADPlaces);
     //#endregion
   }
+
+  public async GetLADPlace(id: number): Promise<ApiResponse<LADPlace>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.LADPlaces.GetLADPlace;
+    const ladPlaceInfo: LADPlace = {
+      LADPlaceId: id,
+      LADPlaceTitle: '',
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LADPlaceId: ladPlaceInfo.LADPlaceId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LADPlace
+    >(apiUrl, bodyValue, mockLADPlaces[0]);
+    //#endregion
+  }
 }
