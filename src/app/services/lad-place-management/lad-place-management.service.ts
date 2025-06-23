@@ -92,4 +92,25 @@ export class LADPlaceManagementService {
     };
     //#endregion
   }
+
+  public async UpdateLADPlace(
+    ladPlaceInfo: LADPlace
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.LADPlaces.UpdateLADPlace;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      RawLADPlaceInf: ladPlaceInfo,
+    };
+    //#endregion
+
+    //#region Request
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
