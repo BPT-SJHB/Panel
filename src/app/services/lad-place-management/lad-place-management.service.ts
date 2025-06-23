@@ -164,4 +164,30 @@ export class LADPlaceManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  public async ChangeDischargingPlaceStatus(
+    ladPlaceId: number
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.LADPlaces.ChangeDischargingPlaceStatus;
+    const ladPlaceInfo: LADPlace = {
+      LADPlaceId: ladPlaceId,
+      LADPlaceTitle: '',
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LADPlaceId: ladPlaceInfo.LADPlaceId,
+    };
+    //#endregion
+
+    //#region Request
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
