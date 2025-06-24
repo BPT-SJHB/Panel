@@ -1,0 +1,2286 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bpt-sjhb-panel documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">bpt-sjhb-panel documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  FactoriesAndFreightFormComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-factories-and-freight-form</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>ButtonModule</code>
+                            <code>DialogModule</code>
+                            <code>ReactiveFormsModule</code>
+                                <code><a href="../components/TextInputComponent.html" target="_self" >TextInputComponent</a></code>
+                                <code><a href="../components/SearchInputComponent.html" target="_self" >SearchInputComponent</a></code>
+                                <code><a href="../components/BinaryRadioInputComponent.html" target="_self" >BinaryRadioInputComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./factories-production-centers-form.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./factories-production-centers-form.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addonWidth" >addonWidth</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#cachedFpc" >cachedFpc</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#cachedFpcResults" >cachedFpcResults</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#cacheKeyLength" >cacheKeyLength</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#cachingEnabled" >cachingEnabled</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <a href="#fpcForm" >fpcForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#fpcService" >fpcService</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                <a href="#newUserPasswordDialog" >newUserPasswordDialog</a>
+                            </li>
+                            <li>
+                                <a href="#passwordDialogVisible" >passwordDialogVisible</a>
+                            </li>
+                            <li>
+                                <a href="#searchFPCs" >searchFPCs</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#searchInputComponent" >searchInputComponent</a>
+                            </li>
+                            <li>
+                                <a href="#searchTerm" >searchTerm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#startKey" >startKey</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#toast" >toast</a>
+                            </li>
+                            <li>
+                                <a href="#userNameDialog" >userNameDialog</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#activateFpcSms" >activateFpcSms</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#buildFpcInfo" >buildFpcInfo</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#changeFpcActiveStatus" >changeFpcActiveStatus</a>
+                            </li>
+                            <li>
+                                <a href="#copyToClipboard" >copyToClipboard</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#editFpc" >editFpc</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isSuccessful" >isSuccessful</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#loadFpcDetails" >loadFpcDetails</a>
+                            </li>
+                            <li>
+                                <a href="#onCloseDialog" >onCloseDialog</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#registerFpc" >registerFpc</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#registerOrEditFpc" >registerOrEditFpc</a>
+                            </li>
+                            <li>
+                                <a href="#resetFpcForm" >resetFpcForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#resetPasswordFpc" >resetPasswordFpc</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#selectSearchItem" >selectSearchItem</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#fpcId" >fpcId</a>
+                                </li>
+                                <li>
+                                    <a href="#title" >title</a>
+                                </li>
+                                <li>
+                                    <a href="#managerName" >managerName</a>
+                                </li>
+                                <li>
+                                    <a href="#managerMobile" >managerMobile</a>
+                                </li>
+                                <li>
+                                    <a href="#telephone" >telephone</a>
+                                </li>
+                                <li>
+                                    <a href="#address" >address</a>
+                                </li>
+                                <li>
+                                    <a href="#email" >email</a>
+                                </li>
+                                <li>
+                                    <a href="#fpcActive" >fpcActive</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activateFpcSms"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>activateFpcSms</b></span>
+                        <a href="#activateFpcSms"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>activateFpcSms()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="105"
+                                    class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:105</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="buildFpcInfo"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>buildFpcInfo</b></span>
+                        <a href="#buildFpcInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>buildFpcInfo()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="220"
+                                    class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:220</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/FPCInfo.html" target="_self" >FPCInfo</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changeFpcActiveStatus"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>changeFpcActiveStatus</b></span>
+                        <a href="#changeFpcActiveStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>changeFpcActiveStatus()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="190"
+                                    class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:190</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="copyToClipboard"></a>
+                    <span class="name">
+                        <span ><b>copyToClipboard</b></span>
+                        <a href="#copyToClipboard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>copyToClipboard(text: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:95</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>text</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editFpc"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>editFpc</b></span>
+                        <a href="#editFpc"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>editFpc()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="177"
+                                    class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:177</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSuccessful"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>isSuccessful</b></span>
+                        <a href="#isSuccessful"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isSuccessful(response: <a href="../interfaces/ApiResponse.html" target="_self">ApiResponse&lt;any&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="233"
+                                    class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:233</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>response</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ApiResponse.html" target="_self" >ApiResponse&lt;any&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadFpcDetails"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>loadFpcDetails</b></span>
+                        <a href="#loadFpcDetails"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadFpcDetails(fpcId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="201"
+                                    class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:201</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>fpcId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onCloseDialog"></a>
+                    <span class="name">
+                        <span ><b>onCloseDialog</b></span>
+                        <a href="#onCloseDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onCloseDialog()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="100"
+                                    class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:100</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registerFpc"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>registerFpc</b></span>
+                        <a href="#registerFpc"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>registerFpc()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="165"
+                                    class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:165</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registerOrEditFpc"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>registerOrEditFpc</b></span>
+                        <a href="#registerOrEditFpc"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>registerOrEditFpc()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="145"
+                                    class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:145</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetFpcForm"></a>
+                    <span class="name">
+                        <span ><b>resetFpcForm</b></span>
+                        <a href="#resetFpcForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>resetFpcForm()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="87"
+                                    class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:87</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetPasswordFpc"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>resetPasswordFpc</b></span>
+                        <a href="#resetPasswordFpc"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>resetPasswordFpc()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="127"
+                                    class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:127</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectSearchItem"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>selectSearchItem</b></span>
+                        <a href="#selectSearchItem"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>selectSearchItem(event: AutoCompleteSelectEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="82"
+                                    class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:82</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>AutoCompleteSelectEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addonWidth"></a>
+                    <span class="name">
+                        <span ><b>addonWidth</b></span>
+                        <a href="#addonWidth"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;9rem&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cachedFpc"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Optional</span>
+                        <span ><b>cachedFpc</b></span>
+                        <a href="#cachedFpc"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/FPCInfo.html" target="_self" >FPCInfo</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cachedFpcResults"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>cachedFpcResults</b></span>
+                        <a href="#cachedFpcResults"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/FPCInfo.html" target="_self" >FPCInfo[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cacheKeyLength"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>cacheKeyLength</b></span>
+                        <a href="#cacheKeyLength"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>3</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cachingEnabled"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>cachingEnabled</b></span>
+                        <a href="#cachingEnabled"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fpcForm"></a>
+                    <span class="name">
+                        <span ><b>fpcForm</b></span>
+                        <a href="#fpcForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.fb.group({
+    fpcId: [0, ValidationSchema.id],
+    title: [&#x27;&#x27;, ValidationSchema.title],
+    managerName: [&#x27;&#x27;, ValidationSchema.managerName],
+    managerMobile: [&#x27;&#x27;],
+    telephone: [&#x27;&#x27;],
+    address: [&#x27;&#x27;, ValidationSchema.address],
+    email: [&#x27;&#x27;],
+    fpcActive: [true, ValidationSchema.smsActive],
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fpcService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>fpcService</b></span>
+                        <a href="#fpcService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FpcManagementService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="newUserPasswordDialog"></a>
+                    <span class="name">
+                        <span ><b>newUserPasswordDialog</b></span>
+                        <a href="#newUserPasswordDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="passwordDialogVisible"></a>
+                    <span class="name">
+                        <span ><b>passwordDialogVisible</b></span>
+                        <a href="#passwordDialogVisible"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchFPCs"></a>
+                    <span class="name">
+                        <span ><b>searchFPCs</b></span>
+                        <a href="#searchFPCs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:63</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchInputComponent"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>searchInputComponent</b></span>
+                        <a href="#searchInputComponent"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../components/SearchInputComponent.html" target="_self" >SearchInputComponent</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(SearchInputComponent)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchTerm"></a>
+                    <span class="name">
+                        <span ><b>searchTerm</b></span>
+                        <a href="#searchTerm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="startKey"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>startKey</b></span>
+                        <a href="#startKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toast"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>toast</b></span>
+                        <a href="#toast"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userNameDialog"></a>
+                    <span class="name">
+                        <span ><b>userNameDialog</b></span>
+                        <a href="#userNameDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="fpcId"></a>
+                        <span class="name"><b>fpcId</b><a href="#fpcId"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>fpcId()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="245" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:245</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="title"></a>
+                        <span class="name"><b>title</b><a href="#title"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>title()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="249" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:249</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="managerName"></a>
+                        <span class="name"><b>managerName</b><a href="#managerName"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>managerName()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="253" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:253</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="managerMobile"></a>
+                        <span class="name"><b>managerMobile</b><a href="#managerMobile"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>managerMobile()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="257" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:257</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="telephone"></a>
+                        <span class="name"><b>telephone</b><a href="#telephone"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>telephone()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="261" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:261</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="address"></a>
+                        <span class="name"><b>address</b><a href="#address"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>address()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="265" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:265</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="email"></a>
+                        <span class="name"><b>email</b><a href="#email"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>email()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="269" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:269</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="fpcActive"></a>
+                        <span class="name"><b>fpcActive</b><a href="#fpcActive"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>fpcActive()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="273" class="link-to-prism">src/app/components/forms/factories-production-centers-form/factories-production-centers-form.component.ts:273</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, ViewChild, inject } from &#x27;@angular/core&#x27;;
+import { FormBuilder, FormControl, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
+import { AutoCompleteSelectEvent } from &#x27;primeng/autocomplete&#x27;;
+import { ButtonModule } from &#x27;primeng/button&#x27;;
+import { DialogModule } from &#x27;primeng/dialog&#x27;;
+
+import { ValidationSchema } from &#x27;app/constants/validation-schema&#x27;;
+import { ApiResponse } from &#x27;app/data/model/api-Response.model&#x27;;
+import { FPCInfo } from &#x27;app/data/model/fpc-info.model&#x27;;
+
+import { FpcManagementService } from &#x27;app/services/fpc-management/fpc-management.service&#x27;;
+import { ToastService } from &#x27;app/services/toast-service/toast.service&#x27;;
+
+import { BinaryRadioInputComponent } from &#x27;app/components/shared/inputs/binary-radio-input/binary-radio-input.component&#x27;;
+import { TextInputComponent } from &#x27;app/components/shared/inputs/text-input/text-input.component&#x27;;
+import { SearchInputComponent } from &#x27;app/components/shared/inputs/search-input/search-input.component&#x27;;
+
+@Component({
+  selector: &#x27;app-factories-and-freight-form&#x27;,
+  standalone: true,
+  templateUrl: &#x27;./factories-production-centers-form.component.html&#x27;,
+  styleUrl: &#x27;./factories-production-centers-form.component.scss&#x27;,
+  imports: [
+    ButtonModule,
+    DialogModule,
+    ReactiveFormsModule,
+    TextInputComponent,
+    SearchInputComponent,
+    BinaryRadioInputComponent,
+  ],
+})
+export class FactoriesAndFreightFormComponent {
+  @ViewChild(SearchInputComponent) searchInputComponent!: SearchInputComponent;
+
+  private fb &#x3D; inject(FormBuilder);
+  private toast &#x3D; inject(ToastService);
+  private fpcService &#x3D; inject(FpcManagementService);
+
+  loading &#x3D; false;
+  searchTerm &#x3D; &#x27;&#x27;;
+  addonWidth &#x3D; &#x27;9rem&#x27;;
+  passwordDialogVisible &#x3D; false;
+  userNameDialog &#x3D; &#x27;&#x27;;
+  newUserPasswordDialog &#x3D; &#x27;&#x27;;
+
+  private startKey &#x3D; &#x27;&#x27;;
+  private cachedFpcResults: FPCInfo[] &#x3D; [];
+  private cachedFpc?: FPCInfo;
+  private readonly cachingEnabled &#x3D; true;
+  readonly cacheKeyLength &#x3D; 3;
+
+  fpcForm &#x3D; this.fb.group({
+    fpcId: [0, ValidationSchema.id],
+    title: [&#x27;&#x27;, ValidationSchema.title],
+    managerName: [&#x27;&#x27;, ValidationSchema.managerName],
+    managerMobile: [&#x27;&#x27;],
+    telephone: [&#x27;&#x27;],
+    address: [&#x27;&#x27;, ValidationSchema.address],
+    email: [&#x27;&#x27;],
+    fpcActive: [true, ValidationSchema.smsActive],
+  });
+
+  searchFPCs &#x3D; async (query: string): Promise&lt;FPCInfo[]&gt; &#x3D;&gt; {
+    if (query.length &lt; this.cacheKeyLength) return [];
+
+    const newStartKey &#x3D; query.substring(0, this.cacheKeyLength);
+
+    if (this.cachingEnabled &amp;&amp; newStartKey &#x3D;&#x3D;&#x3D; this.startKey) {
+      return this.cachedFpcResults.filter((item) &#x3D;&gt;
+        item.FPCTitle?.toLowerCase().includes(query.toLowerCase())
+      );
+    }
+
+    const response &#x3D; await this.fpcService.GetFPCsInfo(query);
+    if (!this.isSuccessful(response)) return [];
+
+    this.startKey &#x3D; newStartKey;
+    this.cachedFpcResults &#x3D; response.data!;
+    return response.data!;
+  };
+
+  async selectSearchItem(event: AutoCompleteSelectEvent): Promise&lt;void&gt; {
+    console.log(event.value.FPCId);
+    await this.loadFpcDetails(event.value.FPCId);
+  }
+
+  resetFpcForm(): void {
+    this.fpcForm.reset();
+    this.fpcId.setValue(0);
+    this.fpcActive.setValue(true);
+    this.searchTerm &#x3D; &#x27;&#x27;;
+    this.searchInputComponent.onClear();
+  }
+
+  copyToClipboard(text: string): void {
+    navigator.clipboard.writeText(text);
+    this.toast.success(&#x27;متن در کلیپبورد ذخیره شد&#x27;, &#x27;&#x27;);
+  }
+
+  onCloseDialog(): void {
+    this.userNameDialog &#x3D; &#x27;&#x27;;
+    this.newUserPasswordDialog &#x3D; &#x27;&#x27;;
+  }
+
+  async activateFpcSms(): Promise&lt;void&gt; {
+    if (this.fpcId.invalid || this.fpcId.value &#x3D;&#x3D;&#x3D; 0 || this.loading) return;
+
+    try {
+      this.loading &#x3D; true;
+      const response &#x3D; await this.fpcService.ActivateFPCSms(this.fpcId.value);
+      if (!this.isSuccessful(response)) {
+        this.toast.error(
+          &#x27;خطا&#x27;,
+          response.error?.message ?? &#x27;عملیات ناموفقیت بود&#x27;
+        );
+      } else {
+        this.toast.success(
+          &#x27;موفق&#x27;,
+          response.data?.Message ?? &#x27;پیامک فعال سازی با موفقیت انجام شد.&#x27;
+        );
+      }
+    } finally {
+      this.loading &#x3D; false;
+    }
+  }
+
+  async resetPasswordFpc(): Promise&lt;void&gt; {
+    if (this.fpcId.invalid || this.fpcId.value &#x3D;&#x3D;&#x3D; 0 || this.loading) return;
+
+    try {
+      this.loading &#x3D; true;
+      const response &#x3D; await this.fpcService.ResetFPCUserPassword(
+        this.fpcId.value
+      );
+      if (!this.isSuccessful(response)) return;
+
+      this.userNameDialog &#x3D; response.data!.Username;
+      this.newUserPasswordDialog &#x3D; response.data!.Password;
+      this.passwordDialogVisible &#x3D; true;
+    } finally {
+      this.loading &#x3D; false;
+    }
+  }
+
+  async registerOrEditFpc(): Promise&lt;void&gt; {
+    if (this.fpcForm.invalid || this.loading) return;
+
+    try {
+      this.loading &#x3D; true;
+
+      if (this.fpcId.value &#x3D;&#x3D;&#x3D; 0) {
+        await this.registerFpc();
+      } else {
+        await this.editFpc();
+      }
+
+      if (this.cachedFpc?.Active !&#x3D;&#x3D; this.fpcActive.value) {
+        await this.changeFpcActiveStatus();
+      }
+    } finally {
+      this.loading &#x3D; false;
+    }
+  }
+
+  private async registerFpc(): Promise&lt;void&gt; {
+    const fpcInfo &#x3D; this.buildFpcInfo();
+    const response &#x3D; await this.fpcService.FPCRegistering(fpcInfo);
+    if (this.isSuccessful(response)) {
+      this.toast.success(
+        &#x27;موفق&#x27;,
+        response.data?.Message ?? &#x27;اطلاعات با موفقیت ثبت شد.&#x27;
+      );
+    }
+    this.resetFpcForm();
+  }
+
+  private async editFpc(): Promise&lt;void&gt; {
+    if (this.fpcId.invalid) return;
+
+    const fpcInfo &#x3D; this.buildFpcInfo();
+    const response &#x3D; await this.fpcService.EditFPC(fpcInfo);
+    if (this.isSuccessful(response)) {
+      this.toast.success(
+        &#x27;موفق&#x27;,
+        response.data?.Message ?? &#x27;اطلاعات با موفقیت تغییر یافت.&#x27;
+      );
+    }
+  }
+
+  private async changeFpcActiveStatus(): Promise&lt;void&gt; {
+    if (this.fpcId.value &#x3D;&#x3D;&#x3D; 0) return;
+
+    const response &#x3D; await this.fpcService.FPCChangeActiveStatus(
+      this.fpcId.value
+    );
+    if (this.isSuccessful(response) &amp;&amp; this.cachedFpc) {
+      this.cachedFpc.Active &#x3D; !this.cachedFpc.Active;
+    }
+  }
+
+  private async loadFpcDetails(fpcId: number): Promise&lt;void&gt; {
+    const response &#x3D; await this.fpcService.GetFPCInfo(fpcId);
+    if (!this.isSuccessful(response)) return;
+
+    const data &#x3D; response.data!;
+    this.fpcForm.patchValue({
+      fpcId: data.FPCId,
+      title: data.FPCTitle,
+      managerName: data.FPCManagerNameFamily,
+      managerMobile: data.FPCManagerMobileNumber,
+      telephone: data.FPCTel,
+      address: data.FPCAddress,
+      email: data.EmailAddress,
+      fpcActive: data.Active,
+    });
+
+    this.cachedFpc &#x3D; data;
+  }
+
+  private buildFpcInfo(): FPCInfo {
+    return {
+      FPCId: this.fpcId.value,
+      FPCTitle: this.title.value,
+      FPCManagerNameFamily: this.managerName.value,
+      FPCManagerMobileNumber: this.managerMobile.value,
+      FPCTel: this.telephone.value,
+      FPCAddress: this.address.value,
+      EmailAddress: this.email.value,
+      Active: this.fpcActive.value,
+    };
+  }
+
+  private isSuccessful(response: ApiResponse&lt;any&gt;): boolean {
+    if (!response.success || !response.data) {
+      this.toast.error(
+        &#x27;خطا&#x27;,
+        response.error?.message ?? &#x27;خطای غیرمنتظره‌ای رخ داد&#x27;
+      );
+      return false;
+    }
+    return true;
+  }
+
+  // Form Getters
+  get fpcId(): FormControl {
+    return this.fpcForm.get(&#x27;fpcId&#x27;) as FormControl;
+  }
+
+  get title(): FormControl {
+    return this.fpcForm.get(&#x27;title&#x27;) as FormControl;
+  }
+
+  get managerName(): FormControl {
+    return this.fpcForm.get(&#x27;managerName&#x27;) as FormControl;
+  }
+
+  get managerMobile(): FormControl {
+    return this.fpcForm.get(&#x27;managerMobile&#x27;) as FormControl;
+  }
+
+  get telephone(): FormControl {
+    return this.fpcForm.get(&#x27;telephone&#x27;) as FormControl;
+  }
+
+  get address(): FormControl {
+    return this.fpcForm.get(&#x27;address&#x27;) as FormControl;
+  }
+
+  get email(): FormControl {
+    return this.fpcForm.get(&#x27;email&#x27;) as FormControl;
+  }
+
+  get fpcActive(): FormControl {
+    return this.fpcForm.get(&#x27;fpcActive&#x27;) as FormControl;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;grid&quot;&gt;
+  &lt;!-- Search Input --&gt;
+  &lt;div class&#x3D;&quot;col-12 w-full&quot;&gt;
+    &lt;app-search-input
+      class&#x3D;&quot;w-full&quot;
+      [autoComplete]&#x3D;&quot;true&quot;
+      autoCompleteOptionLabel&#x3D;&quot;FPCTitle&quot;
+      autoCompleteOptionValue&#x3D;&quot;FPCTitle&quot;
+      (selectAutoComplete)&#x3D;&quot;selectSearchItem($event)&quot;
+      [lazySearch]&#x3D;&quot;searchFPCs&quot;
+      [autoCompleteMinLength]&#x3D;&quot;cacheKeyLength&quot;
+    /&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Form --&gt;
+  &lt;form
+    class&#x3D;&quot;grid col-12&quot;
+    [class.pointer-events-none]&#x3D;&quot;loading&quot;
+    [class.opacity-60]&#x3D;&quot;loading&quot;
+    [formGroup]&#x3D;&quot;fpcForm&quot;
+  &gt;
+    &lt;div class&#x3D;&quot;grid col-12&quot;&gt;
+      &lt;!-- Hidden FPC ID --&gt;
+      &lt;div class&#x3D;&quot;col-12 md:col-6&quot;&gt;
+        &lt;app-text-input
+          label&#x3D;&quot;شناسه مرکز&quot;
+          [readOnly]&#x3D;&quot;true&quot;
+          [disabled]&#x3D;&quot;true&quot;
+          [control]&#x3D;&quot;fpcId&quot;
+          validationField&#x3D;&quot;id&quot;
+          [addonWidth]&#x3D;&quot;addonWidth&quot;
+          buttonIcon&#x3D;&quot;pi pi-user-plus&quot;
+          (clickButton)&#x3D;&quot;resetFpcForm()&quot;
+        /&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Title --&gt;
+      &lt;div class&#x3D;&quot;col-12 md:col-6&quot;&gt;
+        &lt;app-text-input
+          label&#x3D;&quot;عنوان&quot;
+          placeholder&#x3D;&quot;عنوان&quot;
+          class&#x3D;&quot;flex-1&quot;
+          [control]&#x3D;&quot;title&quot;
+          validationField&#x3D;&quot;title&quot;
+          [addonWidth]&#x3D;&quot;addonWidth&quot;
+        /&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Manager Name --&gt;
+      &lt;div class&#x3D;&quot;col-12 md:col-6&quot;&gt;
+        &lt;app-text-input
+          label&#x3D;&quot;نام مدیر&quot;
+          placeholder&#x3D;&quot;نام مدیر&quot;
+          class&#x3D;&quot;flex-1&quot;
+          [control]&#x3D;&quot;managerName&quot;
+          validationField&#x3D;&quot;managerName&quot;
+          [addonWidth]&#x3D;&quot;addonWidth&quot;
+        /&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Manager Mobile --&gt;
+      &lt;div class&#x3D;&quot;col-12 md:col-6&quot;&gt;
+        &lt;app-text-input
+          label&#x3D;&quot;شماره موبایل مدیر&quot;
+          placeholder&#x3D;&quot;شماره موبایل&quot;
+          class&#x3D;&quot;flex-1&quot;
+          [control]&#x3D;&quot;managerMobile&quot;
+          validationField&#x3D;&quot;mobile&quot;
+          [addonWidth]&#x3D;&quot;addonWidth&quot;
+        /&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Telephone --&gt;
+      &lt;div class&#x3D;&quot;col-12 md:col-6&quot;&gt;
+        &lt;app-text-input
+          label&#x3D;&quot;تلفن&quot;
+          placeholder&#x3D;&quot;شماره تلفن مثال 02123456789&quot;
+          class&#x3D;&quot;flex-1&quot;
+          [control]&#x3D;&quot;telephone&quot;
+          validationField&#x3D;&quot;telephone&quot;
+          [addonWidth]&#x3D;&quot;addonWidth&quot;
+        /&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Address --&gt;
+      &lt;div class&#x3D;&quot;col-12 md:col-6&quot;&gt;
+        &lt;app-text-input
+          label&#x3D;&quot;آدرس&quot;
+          placeholder&#x3D;&quot;آدرس&quot;
+          class&#x3D;&quot;flex-1&quot;
+          [control]&#x3D;&quot;address&quot;
+          validationField&#x3D;&quot;address&quot;
+          [addonWidth]&#x3D;&quot;addonWidth&quot;
+        /&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Email --&gt;
+      &lt;div class&#x3D;&quot;col-12 md:col-6&quot;&gt;
+        &lt;app-text-input
+          label&#x3D;&quot;ایمیل&quot;
+          placeholder&#x3D;&quot;ایمیل&quot;
+          class&#x3D;&quot;flex-1&quot;
+          [control]&#x3D;&quot;email&quot;
+          validationField&#x3D;&quot;email&quot;
+          [addonWidth]&#x3D;&quot;addonWidth&quot;
+        /&gt;
+      &lt;/div&gt;
+
+      &lt;!-- FPC Active --&gt;
+      &lt;div class&#x3D;&quot;col-12 md:col-6&quot;&gt;
+        &lt;app-binary-radio-input
+          label&#x3D;&quot;وضعیت مرکز&quot;
+          radioName&#x3D;&quot;fpc-active&quot;
+          class&#x3D;&quot;flex-1&quot;
+          [control]&#x3D;&quot;fpcActive&quot;
+        /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+
+  &lt;!-- Action Buttons --&gt;
+  &lt;div
+    class&#x3D;&quot;col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center&quot;
+  &gt;
+    &lt;p-button
+      (click)&#x3D;&quot;registerOrEditFpc()&quot;
+      [disabled]&#x3D;&quot;fpcForm.invalid || loading&quot;
+      label&#x3D;&quot;ثبت و ویرایش&quot;
+      styleClass&#x3D;&quot;my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem&quot;
+    &gt;&lt;/p-button&gt;
+
+    &lt;p-button
+      (click)&#x3D;&quot;activateFpcSms()&quot;
+      [disabled]&#x3D;&quot;fpcId.value &#x3D;&#x3D; &#x27;0&#x27; || loading&quot;
+      severity&#x3D;&quot;warn&quot;
+      label&#x3D;&quot;فعال سازی پیامک&quot;
+      styleClass&#x3D;&quot;my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem&quot;
+    &gt;&lt;/p-button&gt;
+
+    &lt;p-button
+      (click)&#x3D;&quot;resetPasswordFpc()&quot;
+      [disabled]&#x3D;&quot;fpcId.value &#x3D;&#x3D; &#x27;0&#x27; || fpcId.invalid || loading&quot;
+      severity&#x3D;&quot;info&quot;
+      label&#x3D;&quot;رمز عبور جدید&quot;
+      styleClass&#x3D;&quot;my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem&quot;
+    &gt;&lt;/p-button&gt;
+  &lt;/div&gt;
+
+  &lt;div class&#x3D;&quot;card flex justify-center&quot;&gt;
+    &lt;p-dialog
+      header&#x3D;&quot;رمز عبور جدید&quot;
+      [modal]&#x3D;&quot;true&quot;
+      (onHide)&#x3D;&quot;onCloseDialog()&quot;
+      [(visible)]&#x3D;&quot;passwordDialogVisible&quot;
+      [style]&#x3D;&quot;{ width: &#x27;25rem&#x27; }&quot;
+    &gt;
+      &lt;div class&#x3D;&quot;flex gap-3 flex-column&quot;&gt;
+        &lt;div class&#x3D;&quot;flex align-items-center justify-content-between&quot;&gt;
+          &lt;span class&#x3D;&quot;w-8rem&quot;&gt; شناسه کابری: &lt;/span&gt;
+          &lt;p-button
+            (click)&#x3D;&quot;copyToClipboard(userNameDialog)&quot;
+            size&#x3D;&quot;small&quot;
+            styleClass&#x3D;&quot;px-4 w-10rem&quot;
+            severity&#x3D;&quot;info&quot;
+          &gt;
+            {{ userNameDialog }}
+          &lt;/p-button&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;flex align-items-center justify-content-between&quot;&gt;
+          &lt;span class&#x3D;&quot;w-8rem&quot;&gt; رمز عبور جدید &lt;/span&gt;
+          &lt;p-button
+            (click)&#x3D;&quot;copyToClipboard(newUserPasswordDialog)&quot;
+            size&#x3D;&quot;small&quot;
+            styleClass&#x3D;&quot;px-4 w-10rem&quot;
+            severity&#x3D;&quot;primary&quot;
+          &gt;
+            {{ newUserPasswordDialog }}
+          &lt;/p-button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/p-dialog&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="grid">  <!-- Search Input -->  <div class="col-12 w-full">    <app-search-input      class="w-full"      [autoComplete]="true"      autoCompleteOptionLabel="FPCTitle"      autoCompleteOptionValue="FPCTitle"      (selectAutoComplete)="selectSearchItem($event)"      [lazySearch]="searchFPCs"      [autoCompleteMinLength]="cacheKeyLength"    />  </div>  <!-- Form -->  <form    class="grid col-12"    [class.pointer-events-none]="loading"    [class.opacity-60]="loading"    [formGroup]="fpcForm"  >    <div class="grid col-12">      <!-- Hidden FPC ID -->      <div class="col-12 md:col-6">        <app-text-input          label="شناسه مرکز"          [readOnly]="true"          [disabled]="true"          [control]="fpcId"          validationField="id"          [addonWidth]="addonWidth"          buttonIcon="pi pi-user-plus"          (clickButton)="resetFpcForm()"        />      </div>      <!-- Title -->      <div class="col-12 md:col-6">        <app-text-input          label="عنوان"          placeholder="عنوان"          class="flex-1"          [control]="title"          validationField="title"          [addonWidth]="addonWidth"        />      </div>      <!-- Manager Name -->      <div class="col-12 md:col-6">        <app-text-input          label="نام مدیر"          placeholder="نام مدیر"          class="flex-1"          [control]="managerName"          validationField="managerName"          [addonWidth]="addonWidth"        />      </div>      <!-- Manager Mobile -->      <div class="col-12 md:col-6">        <app-text-input          label="شماره موبایل مدیر"          placeholder="شماره موبایل"          class="flex-1"          [control]="managerMobile"          validationField="mobile"          [addonWidth]="addonWidth"        />      </div>      <!-- Telephone -->      <div class="col-12 md:col-6">        <app-text-input          label="تلفن"          placeholder="شماره تلفن مثال 02123456789"          class="flex-1"          [control]="telephone"          validationField="telephone"          [addonWidth]="addonWidth"        />      </div>      <!-- Address -->      <div class="col-12 md:col-6">        <app-text-input          label="آدرس"          placeholder="آدرس"          class="flex-1"          [control]="address"          validationField="address"          [addonWidth]="addonWidth"        />      </div>      <!-- Email -->      <div class="col-12 md:col-6">        <app-text-input          label="ایمیل"          placeholder="ایمیل"          class="flex-1"          [control]="email"          validationField="email"          [addonWidth]="addonWidth"        />      </div>      <!-- FPC Active -->      <div class="col-12 md:col-6">        <app-binary-radio-input          label="وضعیت مرکز"          radioName="fpc-active"          class="flex-1"          [control]="fpcActive"        />      </div>    </div>  </form>  <!-- Action Buttons -->  <div    class="col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center"  >    <p-button      (click)="registerOrEditFpc()"      [disabled]="fpcForm.invalid || loading"      label="ثبت و ویرایش"      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"    ></p-button>    <p-button      (click)="activateFpcSms()"      [disabled]="fpcId.value == \'0\' || loading"      severity="warn"      label="فعال سازی پیامک"      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"    ></p-button>    <p-button      (click)="resetPasswordFpc()"      [disabled]="fpcId.value == \'0\' || fpcId.invalid || loading"      severity="info"      label="رمز عبور جدید"      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"    ></p-button>  </div>  <div class="card flex justify-center">    <p-dialog      header="رمز عبور جدید"      [modal]="true"      (onHide)="onCloseDialog()"      [(visible)]="passwordDialogVisible"      [style]="{ width: \'25rem\' }"    >      <div class="flex gap-3 flex-column">        <div class="flex align-items-center justify-content-between">          <span class="w-8rem"> شناسه کابری: </span>          <p-button            (click)="copyToClipboard(userNameDialog)"            size="small"            styleClass="px-4 w-10rem"            severity="info"          >            {{ userNameDialog }}          </p-button>        </div>        <div class="flex align-items-center justify-content-between">          <span class="w-8rem"> رمز عبور جدید </span>          <p-button            (click)="copyToClipboard(newUserPasswordDialog)"            size="small"            styleClass="px-4 w-10rem"            severity="primary"          >            {{ newUserPasswordDialog }}          </p-button>        </div>      </div>    </p-dialog>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarMenuComponent', 'selector': 'app-sidebar-menu'},{'name': 'SubMenuComponent', 'selector': 'app-sub-menu'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TabBarComponent', 'selector': 'app-tab-bar'},{'name': 'TabViewComponent', 'selector': 'app-tab-view'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'FactoriesAndFreightFormComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'FactoriesAndFreightFormComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

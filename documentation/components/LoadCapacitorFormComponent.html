@@ -1,0 +1,2144 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bpt-sjhb-panel documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">bpt-sjhb-panel documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  LoadCapacitorFormComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-load-capacitor-form</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>ReactiveFormsModule</code>
+                            <code>CommonModule</code>
+                                <code><a href="../components/TextInputComponent.html" target="_self" >TextInputComponent</a></code>
+                            <code>ButtonModule</code>
+                            <code>TableModule</code>
+                            <code>Checkbox</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./load-capacitor-form.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./load-capacitor-form.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addonWidth" >addonWidth</a>
+                            </li>
+                            <li>
+                                <a href="#capacitorForm" >capacitorForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#capacitorService" >capacitorService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                <a href="#ptpFormArray" >ptpFormArray</a>
+                            </li>
+                            <li>
+                                <a href="#searchForm" >searchForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#toast" >toast</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#createPTPGroup" >createPTPGroup</a>
+                            </li>
+                            <li>
+                                <a href="#editOrRegister" >editOrRegister</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isSuccessful" >isSuccessful</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#loadCapacitorForm" >loadCapacitorForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#populateCapacitorForm" >populateCapacitorForm</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#barcode" >barcode</a>
+                                </li>
+                                <li>
+                                    <a href="#announceDate" >announceDate</a>
+                                </li>
+                                <li>
+                                    <a href="#loadStatusId" >loadStatusId</a>
+                                </li>
+                                <li>
+                                    <a href="#loadStatusTitle" >loadStatusTitle</a>
+                                </li>
+                                <li>
+                                    <a href="#goodId" >goodId</a>
+                                </li>
+                                <li>
+                                    <a href="#goodTitle" >goodTitle</a>
+                                </li>
+                                <li>
+                                    <a href="#loadAnnouncementGroupId" >loadAnnouncementGroupId</a>
+                                </li>
+                                <li>
+                                    <a href="#loadAnnouncementGroupTitle" >loadAnnouncementGroupTitle</a>
+                                </li>
+                                <li>
+                                    <a href="#loadAnnouncementSubGroupId" >loadAnnouncementSubGroupId</a>
+                                </li>
+                                <li>
+                                    <a href="#loadAnnouncementSubGroupTitle" >loadAnnouncementSubGroupTitle</a>
+                                </li>
+                                <li>
+                                    <a href="#sourceCityId" >sourceCityId</a>
+                                </li>
+                                <li>
+                                    <a href="#sourceCityTitle" >sourceCityTitle</a>
+                                </li>
+                                <li>
+                                    <a href="#targetCityId" >targetCityId</a>
+                                </li>
+                                <li>
+                                    <a href="#targetCityTitle" >targetCityTitle</a>
+                                </li>
+                                <li>
+                                    <a href="#loadingPlaceId" >loadingPlaceId</a>
+                                </li>
+                                <li>
+                                    <a href="#loadingPlaceTitle" >loadingPlaceTitle</a>
+                                </li>
+                                <li>
+                                    <a href="#dischargingPlaceId" >dischargingPlaceId</a>
+                                </li>
+                                <li>
+                                    <a href="#dischargingPlaceTitle" >dischargingPlaceTitle</a>
+                                </li>
+                                <li>
+                                    <a href="#transportCompanyId" >transportCompanyId</a>
+                                </li>
+                                <li>
+                                    <a href="#transportCompanyTitle" >transportCompanyTitle</a>
+                                </li>
+                                <li>
+                                    <a href="#totalNumber" >totalNumber</a>
+                                </li>
+                                <li>
+                                    <a href="#tonaj" >tonaj</a>
+                                </li>
+                                <li>
+                                    <a href="#recipient" >recipient</a>
+                                </li>
+                                <li>
+                                    <a href="#tarrif" >tarrif</a>
+                                </li>
+                                <li>
+                                    <a href="#address" >address</a>
+                                </li>
+                                <li>
+                                    <a href="#description" >description</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createPTPGroup"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>createPTPGroup</b></span>
+                        <a href="#createPTPGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createPTPGroup(item: <a href="../interfaces/PTPInfo.html" target="_self">PTPInfo</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="149"
+                                    class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:149</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>item</td>
+                                            <td>
+                                                            <code><a href="../interfaces/PTPInfo.html" target="_self" >PTPInfo</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>FormGroup</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editOrRegister"></a>
+                    <span class="name">
+                        <span ><b>editOrRegister</b></span>
+                        <a href="#editOrRegister"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>editOrRegister()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:104</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSuccessful"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>isSuccessful</b></span>
+                        <a href="#isSuccessful"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isSuccessful(response: <a href="../interfaces/ApiResponse.html" target="_self">ApiResponse&lt;any&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="159"
+                                    class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:159</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>response</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ApiResponse.html" target="_self" >ApiResponse&lt;any&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadCapacitorForm"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>loadCapacitorForm</b></span>
+                        <a href="#loadCapacitorForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadCapacitorForm()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="91"
+                                    class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:91</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="populateCapacitorForm"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>populateCapacitorForm</b></span>
+                        <a href="#populateCapacitorForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>populateCapacitorForm(load: <a href="../interfaces/LoadInfo.html" target="_self">LoadInfo</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="108"
+                                    class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:108</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>load</td>
+                                            <td>
+                                                            <code><a href="../interfaces/LoadInfo.html" target="_self" >LoadInfo</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addonWidth"></a>
+                    <span class="name">
+                        <span ><b>addonWidth</b></span>
+                        <a href="#addonWidth"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;9rem&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="capacitorForm"></a>
+                    <span class="name">
+                        <span ><b>capacitorForm</b></span>
+                        <a href="#capacitorForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.fb.group({
+    announceDate: [&#x27;&#x27;,ValidationSchema.announceDate], // زمان ثبت بار
+
+    // وضعیت نهایی بار
+    loadStatusId: [0,ValidationSchema.id],
+    loadStatusTitle: [&#x27;&#x27;],
+
+    // نوع بار
+    goodId: [0,ValidationSchema.id],
+    goodTitle: [&#x27;&#x27;,ValidationSchema.good],
+
+    // گروه اعلام بار
+    loadAnnouncementGroupId: [0,ValidationSchema.id],
+    loadAnnouncementGroupTitle: [&#x27;&#x27;,ValidationSchema.loadAnnouncementGroup],
+
+    // زیر گروه اعلام بار
+    loadAnnouncementSubGroupId: [0],
+    loadAnnouncementSubGroupTitle: [&#x27;&#x27;,ValidationSchema.loadAnnouncementSubGroup],
+
+    // شهر مبدا
+    sourceCityId: [0,ValidationSchema.id],
+    sourceCityTitle: [&#x27;&#x27;,ValidationSchema.sourceCity],
+
+    // شهر مقصد
+    targetCityId: [0,ValidationSchema.id],
+    targetCityTitle: [&#x27;&#x27;,ValidationSchema.targetCity],
+
+    // مبدا بارگیری,
+    loadingPlaceId: [0,ValidationSchema.id],
+    loadingPlaceTitle: [&#x27;&#x27;,ValidationSchema.loadingPlace],
+
+    // مقصد تخلیه
+    dischargingPlaceId: [0,ValidationSchema.id],
+    dischargingPlaceTitle: [&#x27;&#x27;,ValidationSchema.dischargingPlace],
+
+    // شرکت اعلام کننده بار
+    transportCompanyId: [0,ValidationSchema.id],
+    transportCompanyTitle: [&#x27;&#x27;,ValidationSchema.transportCompany],
+
+    // تعداد، تناژ، گیرنده، تعرفه
+    totalNumber: [0,ValidationSchema.totalNumber],
+    tonaj: [0,ValidationSchema.tonaj],
+    recipient: [&#x27;&#x27;,ValidationSchema.recipient],
+    tarrif: [0,ValidationSchema.tarrif],
+
+    // آدرس و توضیحات
+    address: [&#x27;&#x27;,ValidationSchema.address],
+    description: [&#x27;&#x27;,ValidationSchema.description],
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="capacitorService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>capacitorService</b></span>
+                        <a href="#capacitorService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(LoadCapacitorManagementService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:89</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ptpFormArray"></a>
+                    <span class="name">
+                        <span ><b>ptpFormArray</b></span>
+                        <a href="#ptpFormArray"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>FormArray</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.fb.array&lt;PTPInfo&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchForm"></a>
+                    <span class="name">
+                        <span ><b>searchForm</b></span>
+                        <a href="#searchForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.fb.group({
+    barcode: [&#x27;&#x27;, ValidationSchema.id], // کدبار
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toast"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>toast</b></span>
+                        <a href="#toast"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="barcode"></a>
+                        <span class="name"><b>barcode</b><a href="#barcode"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>barcode()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="170" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:170</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="announceDate"></a>
+                        <span class="name"><b>announceDate</b><a href="#announceDate"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>announceDate()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="174" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:174</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="loadStatusId"></a>
+                        <span class="name"><b>loadStatusId</b><a href="#loadStatusId"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>loadStatusId()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="178" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:178</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="loadStatusTitle"></a>
+                        <span class="name"><b>loadStatusTitle</b><a href="#loadStatusTitle"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>loadStatusTitle()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="181" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:181</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="goodId"></a>
+                        <span class="name"><b>goodId</b><a href="#goodId"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>goodId()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="185" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:185</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="goodTitle"></a>
+                        <span class="name"><b>goodTitle</b><a href="#goodTitle"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>goodTitle()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="188" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:188</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="loadAnnouncementGroupId"></a>
+                        <span class="name"><b>loadAnnouncementGroupId</b><a href="#loadAnnouncementGroupId"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>loadAnnouncementGroupId()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="192" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:192</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="loadAnnouncementGroupTitle"></a>
+                        <span class="name"><b>loadAnnouncementGroupTitle</b><a href="#loadAnnouncementGroupTitle"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>loadAnnouncementGroupTitle()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="195" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:195</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="loadAnnouncementSubGroupId"></a>
+                        <span class="name"><b>loadAnnouncementSubGroupId</b><a href="#loadAnnouncementSubGroupId"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>loadAnnouncementSubGroupId()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="199" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:199</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="loadAnnouncementSubGroupTitle"></a>
+                        <span class="name"><b>loadAnnouncementSubGroupTitle</b><a href="#loadAnnouncementSubGroupTitle"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>loadAnnouncementSubGroupTitle()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="203" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:203</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="sourceCityId"></a>
+                        <span class="name"><b>sourceCityId</b><a href="#sourceCityId"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>sourceCityId()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="209" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:209</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="sourceCityTitle"></a>
+                        <span class="name"><b>sourceCityTitle</b><a href="#sourceCityTitle"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>sourceCityTitle()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="212" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:212</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="targetCityId"></a>
+                        <span class="name"><b>targetCityId</b><a href="#targetCityId"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>targetCityId()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="216" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:216</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="targetCityTitle"></a>
+                        <span class="name"><b>targetCityTitle</b><a href="#targetCityTitle"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>targetCityTitle()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="219" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:219</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="loadingPlaceId"></a>
+                        <span class="name"><b>loadingPlaceId</b><a href="#loadingPlaceId"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>loadingPlaceId()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="223" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:223</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="loadingPlaceTitle"></a>
+                        <span class="name"><b>loadingPlaceTitle</b><a href="#loadingPlaceTitle"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>loadingPlaceTitle()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="226" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:226</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dischargingPlaceId"></a>
+                        <span class="name"><b>dischargingPlaceId</b><a href="#dischargingPlaceId"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>dischargingPlaceId()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="230" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:230</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dischargingPlaceTitle"></a>
+                        <span class="name"><b>dischargingPlaceTitle</b><a href="#dischargingPlaceTitle"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>dischargingPlaceTitle()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="233" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:233</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="transportCompanyId"></a>
+                        <span class="name"><b>transportCompanyId</b><a href="#transportCompanyId"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>transportCompanyId()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="237" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:237</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="transportCompanyTitle"></a>
+                        <span class="name"><b>transportCompanyTitle</b><a href="#transportCompanyTitle"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>transportCompanyTitle()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="240" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:240</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="totalNumber"></a>
+                        <span class="name"><b>totalNumber</b><a href="#totalNumber"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>totalNumber()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="244" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:244</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="tonaj"></a>
+                        <span class="name"><b>tonaj</b><a href="#tonaj"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>tonaj()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="247" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:247</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="recipient"></a>
+                        <span class="name"><b>recipient</b><a href="#recipient"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>recipient()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="250" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:250</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="tarrif"></a>
+                        <span class="name"><b>tarrif</b><a href="#tarrif"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>tarrif()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="253" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:253</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="address"></a>
+                        <span class="name"><b>address</b><a href="#address"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>address()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="257" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:257</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="description"></a>
+                        <span class="name"><b>description</b><a href="#description"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>description()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="260" class="link-to-prism">src/app/components/forms/load-capacitor-form/load-capacitor-form.component.ts:260</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from &#x27;@angular/forms&#x27;;
+import { TextInputComponent } from &#x27;app/components/shared/inputs/text-input/text-input.component&#x27;;
+import { ValidationSchema } from &#x27;app/constants/validation-schema&#x27;;
+import { ApiResponse } from &#x27;app/data/model/api-Response.model&#x27;;
+import { LoadInfo } from &#x27;app/data/model/load-info.model&#x27;;
+import { PTPInfo } from &#x27;app/data/model/ptp-info-model&#x27;;
+import { LoadCapacitorManagementService } from &#x27;app/services/load-capacitor-management/load-capacitor-management.service&#x27;;
+import { ToastService } from &#x27;app/services/toast-service/toast.service&#x27;;
+import { ButtonModule } from &#x27;primeng/button&#x27;;
+import { Checkbox } from &#x27;primeng/checkbox&#x27;;
+import { TableModule } from &#x27;primeng/table&#x27;;
+
+@Component({
+  selector: &#x27;app-load-capacitor-form&#x27;,
+  imports: [ ReactiveFormsModule,CommonModule, TextInputComponent, ButtonModule, TableModule, Checkbox],
+  templateUrl: &#x27;./load-capacitor-form.component.html&#x27;,
+  styleUrl: &#x27;./load-capacitor-form.component.scss&#x27;,
+})
+export class LoadCapacitorFormComponent {
+  private fb &#x3D; inject(FormBuilder);
+  private capacitorService &#x3D; inject(LoadCapacitorManagementService);
+  private toast &#x3D; inject(ToastService);
+
+  addonWidth &#x3D; &#x27;9rem&#x27;;
+  searchForm &#x3D; this.fb.group({
+    barcode: [&#x27;&#x27;, ValidationSchema.id], // کدبار
+  });
+
+  ptpFormArray: FormArray &#x3D; this.fb.array&lt;PTPInfo&gt;([]);
+
+  capacitorForm &#x3D; this.fb.group({
+    announceDate: [&#x27;&#x27;,ValidationSchema.announceDate], // زمان ثبت بار
+
+    // وضعیت نهایی بار
+    loadStatusId: [0,ValidationSchema.id],
+    loadStatusTitle: [&#x27;&#x27;],
+
+    // نوع بار
+    goodId: [0,ValidationSchema.id],
+    goodTitle: [&#x27;&#x27;,ValidationSchema.good],
+
+    // گروه اعلام بار
+    loadAnnouncementGroupId: [0,ValidationSchema.id],
+    loadAnnouncementGroupTitle: [&#x27;&#x27;,ValidationSchema.loadAnnouncementGroup],
+
+    // زیر گروه اعلام بار
+    loadAnnouncementSubGroupId: [0],
+    loadAnnouncementSubGroupTitle: [&#x27;&#x27;,ValidationSchema.loadAnnouncementSubGroup],
+
+    // شهر مبدا
+    sourceCityId: [0,ValidationSchema.id],
+    sourceCityTitle: [&#x27;&#x27;,ValidationSchema.sourceCity],
+
+    // شهر مقصد
+    targetCityId: [0,ValidationSchema.id],
+    targetCityTitle: [&#x27;&#x27;,ValidationSchema.targetCity],
+
+    // مبدا بارگیری,
+    loadingPlaceId: [0,ValidationSchema.id],
+    loadingPlaceTitle: [&#x27;&#x27;,ValidationSchema.loadingPlace],
+
+    // مقصد تخلیه
+    dischargingPlaceId: [0,ValidationSchema.id],
+    dischargingPlaceTitle: [&#x27;&#x27;,ValidationSchema.dischargingPlace],
+
+    // شرکت اعلام کننده بار
+    transportCompanyId: [0,ValidationSchema.id],
+    transportCompanyTitle: [&#x27;&#x27;,ValidationSchema.transportCompany],
+
+    // تعداد، تناژ، گیرنده، تعرفه
+    totalNumber: [0,ValidationSchema.totalNumber],
+    tonaj: [0,ValidationSchema.tonaj],
+    recipient: [&#x27;&#x27;,ValidationSchema.recipient],
+    tarrif: [0,ValidationSchema.tarrif],
+
+    // آدرس و توضیحات
+    address: [&#x27;&#x27;,ValidationSchema.address],
+    description: [&#x27;&#x27;,ValidationSchema.description],
+  });
+  loading: any;
+
+  async loadCapacitorForm(): Promise&lt;void&gt; {
+    if (this.searchForm.invalid) return;
+    const response &#x3D; await this.capacitorService.GetLoad(this.barcode.value);
+    if (!this.isSuccessful(response)) return;
+    this.populateCapacitorForm(response.data!);
+
+    this.ptpFormArray.clear();
+    response.data?.TPTParams.map((params) &#x3D;&gt; {
+      this.ptpFormArray.push(this.createPTPGroup(params));
+    });
+  }
+
+
+  editOrRegister() {
+    this.toast.info(&quot;اطلاعیه&quot;,&#x27;در دست توسعه&#x27;);
+  }
+
+  private populateCapacitorForm(load: LoadInfo): void {
+    this.capacitorForm.setValue({
+      announceDate: load.AnnounceDate,
+
+      loadStatusId: load.LoadStatusId,
+      loadStatusTitle: load.LoadStatusTitle,
+
+      goodId: load.GoodId,
+      goodTitle: load.GoodTitle,
+
+      loadAnnouncementGroupId: load.LoadAnnouncementGroupId,
+      loadAnnouncementGroupTitle: load.LoadAnnouncementGroupTitle,
+
+      loadAnnouncementSubGroupId: load.LoadAnnouncementSubGroupId,
+      loadAnnouncementSubGroupTitle: load.LoadAnnouncementSubGroupTitle,
+
+      sourceCityId: load.SourceCityId,
+      sourceCityTitle: load.SourceCityTitle,
+
+      targetCityId: load.TargetCityId,
+      targetCityTitle: load.TargetCityTitle,
+
+      loadingPlaceId: load.LoadingPlaceId,
+      loadingPlaceTitle: load.LoadingPlaceTitle,
+
+      dischargingPlaceId: load.DischargingPlaceId,
+      dischargingPlaceTitle: load.DischargingPlaceTitle,
+
+      transportCompanyId: load.TransportCompanyId,
+      transportCompanyTitle: load.TransportCompanyTitle,
+
+      totalNumber: load.TotalNumber,
+      tonaj: load.Tonaj,
+      recipient: load.Recipient,
+      tarrif: load.Tarrif,
+
+      address: load.Address,
+      description: load.Description,
+    });
+  }
+
+  private createPTPGroup(item: PTPInfo): FormGroup {
+    return this.fb.group({
+      TPTPDId: [item.TPTPDId],
+      TPTPTitle: [item.TPTPTitle],
+      Cost: [item.Cost, [Validators.required]],
+      Checked: [item.Checked],
+    });
+  }
+
+
+  private isSuccessful(response: ApiResponse&lt;any&gt;): boolean {
+    if (!response.success || !response.data) {
+      this.toast.error(
+        &#x27;خطا&#x27;,
+        response.error?.message ?? &#x27;خطای غیرمنتظره‌ای رخ داد&#x27;
+      );
+      return false;
+    }
+    return true;
+  }
+
+  get barcode(): FormControl {
+    return this.searchForm.get(&#x27;barcode&#x27;) as FormControl;
+  }
+
+  get announceDate(): FormControl {
+    return this.capacitorForm.get(&#x27;announceDate&#x27;) as FormControl;
+  }
+
+  get loadStatusId(): FormControl {
+    return this.capacitorForm.get(&#x27;loadStatusId&#x27;) as FormControl;
+  }
+  get loadStatusTitle(): FormControl {
+    return this.capacitorForm.get(&#x27;loadStatusTitle&#x27;) as FormControl;
+  }
+
+  get goodId(): FormControl {
+    return this.capacitorForm.get(&#x27;goodId&#x27;) as FormControl;
+  }
+  get goodTitle(): FormControl {
+    return this.capacitorForm.get(&#x27;goodTitle&#x27;) as FormControl;
+  }
+
+  get loadAnnouncementGroupId(): FormControl {
+    return this.capacitorForm.get(&#x27;loadAnnouncementGroupId&#x27;) as FormControl;
+  }
+  get loadAnnouncementGroupTitle(): FormControl {
+    return this.capacitorForm.get(&#x27;loadAnnouncementGroupTitle&#x27;) as FormControl;
+  }
+
+  get loadAnnouncementSubGroupId(): FormControl {
+    return this.capacitorForm.get(&#x27;loadAnnouncementSubGroupId&#x27;) as FormControl;
+  }
+
+  get loadAnnouncementSubGroupTitle(): FormControl {
+    return this.capacitorForm.get(
+      &#x27;loadAnnouncementSubGroupTitle&#x27;
+    ) as FormControl;
+  }
+
+  get sourceCityId(): FormControl {
+    return this.capacitorForm.get(&#x27;sourceCityId&#x27;) as FormControl;
+  }
+  get sourceCityTitle(): FormControl {
+    return this.capacitorForm.get(&#x27;sourceCityTitle&#x27;) as FormControl;
+  }
+
+  get targetCityId(): FormControl {
+    return this.capacitorForm.get(&#x27;targetCityId&#x27;) as FormControl;
+  }
+  get targetCityTitle(): FormControl {
+    return this.capacitorForm.get(&#x27;targetCityTitle&#x27;) as FormControl;
+  }
+
+  get loadingPlaceId(): FormControl {
+    return this.capacitorForm.get(&#x27;loadingPlaceId&#x27;) as FormControl;
+  }
+  get loadingPlaceTitle(): FormControl {
+    return this.capacitorForm.get(&#x27;loadingPlaceTitle&#x27;) as FormControl;
+  }
+
+  get dischargingPlaceId(): FormControl {
+    return this.capacitorForm.get(&#x27;dischargingPlaceId&#x27;) as FormControl;
+  }
+  get dischargingPlaceTitle(): FormControl {
+    return this.capacitorForm.get(&#x27;dischargingPlaceTitle&#x27;) as FormControl;
+  }
+
+  get transportCompanyId(): FormControl {
+    return this.capacitorForm.get(&#x27;transportCompanyId&#x27;) as FormControl;
+  }
+  get transportCompanyTitle(): FormControl {
+    return this.capacitorForm.get(&#x27;transportCompanyTitle&#x27;) as FormControl;
+  }
+
+  get totalNumber(): FormControl {
+    return this.capacitorForm.get(&#x27;totalNumber&#x27;) as FormControl;
+  }
+  get tonaj(): FormControl {
+    return this.capacitorForm.get(&#x27;tonaj&#x27;) as FormControl;
+  }
+  get recipient(): FormControl {
+    return this.capacitorForm.get(&#x27;recipient&#x27;) as FormControl;
+  }
+  get tarrif(): FormControl {
+    return this.capacitorForm.get(&#x27;tarrif&#x27;) as FormControl;
+  }
+
+  get address(): FormControl {
+    return this.capacitorForm.get(&#x27;address&#x27;) as FormControl;
+  }
+  get description(): FormControl {
+    return this.capacitorForm.get(&#x27;description&#x27;) as FormControl;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;flex flex-column gap-2&quot;&gt;
+  &lt;!-- Loading Spinner --&gt;
+  @if (loading) {
+  &lt;div
+    class&#x3D;&quot;h-full w-full z-5 flex align-items-center justify-content-center absolute&quot;
+  &gt;
+    &lt;div class&#x3D;&quot;h-full w-full&quot; style&#x3D;&quot;opacity: 0.2&quot;&gt;&lt;/div&gt;
+    &lt;i class&#x3D;&quot;pi pi-spin pi-spinner primary&quot; style&#x3D;&quot;font-size: 5rem&quot;&gt;&lt;/i&gt;
+  &lt;/div&gt;
+  }
+
+  &lt;!-- Search Form --&gt;
+  &lt;form
+    class&#x3D;&quot;col-12&quot;
+    [formGroup]&#x3D;&quot;searchForm&quot;
+    [class.pointer-events-none]&#x3D;&quot;loading&quot;
+    [class.opacity-60]&#x3D;&quot;loading&quot;
+    (ngSubmit)&#x3D;&quot;loadCapacitorForm()&quot;
+  &gt;
+    &lt;div class&#x3D;&quot;flex gap-3&quot;&gt;
+      &lt;app-text-input
+        [control]&#x3D;&quot;barcode&quot;
+        icon&#x3D;&quot;pi pi-barcode&quot;
+        class&#x3D;&quot;flex-1&quot;
+        placeholder&#x3D;&quot;کد بار&quot;
+        addonWidth&#x3D;&quot;5rem&quot;
+      /&gt;
+      &lt;p-button
+        (click)&#x3D;&quot;loadCapacitorForm()&quot;
+        [disabled]&#x3D;&quot;searchForm.invalid&quot;
+        size&#x3D;&quot;small&quot;
+        severity&#x3D;&quot;info&quot;
+        styleClass&#x3D;&quot;w-8rem h-2-5rem&quot;
+        label&#x3D;&quot;جستجو&quot;
+      /&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+
+  &lt;!-- Capacitor Form --&gt;
+  &lt;form
+    class&#x3D;&quot;grid col-12&quot;
+    [formGroup]&#x3D;&quot;capacitorForm&quot;
+    [class.pointer-events-none]&#x3D;&quot;loading&quot;
+    [class.opacity-60]&#x3D;&quot;loading&quot;
+    [formGroup]&#x3D;&quot;capacitorForm&quot;
+    (ngSubmit)&#x3D;&quot;editOrRegister()&quot;
+  &gt;
+    &lt;div class&#x3D;&quot;grid col-12 border-gray-400 border-bottom-2&quot;&gt;
+      &lt;app-text-input
+        class&#x3D;&quot;col-12 sm:col-6&quot;
+        [addonWidth]&#x3D;&quot;addonWidth&quot;
+        label&#x3D;&quot;تاریخ ثبت بار&quot;
+        type&#x3D;&quot;date&quot;
+        [control]&#x3D;&quot;announceDate&quot;
+        validationField&#x3D;&quot;announceDate&quot;
+      /&gt;
+
+      &lt;app-text-input hidden [control]&#x3D;&quot;loadStatusId&quot; /&gt;
+      &lt;app-text-input
+        class&#x3D;&quot;col-12 sm:col-6&quot;
+        [addonWidth]&#x3D;&quot;addonWidth&quot;
+        label&#x3D;&quot;وضعیت بار&quot;
+        [control]&#x3D;&quot;loadStatusTitle&quot;
+        validationField&#x3D;&quot;loadStatus&quot;
+      /&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;grid col-12 mt-3 border-gray-400 border-bottom-2&quot;&gt;
+      &lt;app-text-input hidden [control]&#x3D;&quot;transportCompanyId&quot; /&gt;
+
+      &lt;app-text-input
+        class&#x3D;&quot;col-12 sm:col-6 md:col-4&quot;
+        [addonWidth]&#x3D;&quot;addonWidth&quot;
+        label&#x3D;&quot;شرکت حمل و نقل&quot;
+        [control]&#x3D;&quot;transportCompanyTitle&quot;
+        validationField&#x3D;&quot;transportCompany&quot;
+      /&gt;
+
+      &lt;app-text-input hidden [control]&#x3D;&quot;goodId&quot; /&gt;
+      &lt;app-text-input
+        class&#x3D;&quot;col-12 sm:col-6 md:col-4&quot;
+        [addonWidth]&#x3D;&quot;addonWidth&quot;
+        label&#x3D;&quot; کالا&quot;
+        [control]&#x3D;&quot;goodTitle&quot;
+        validationField&#x3D;&quot;good&quot;
+      /&gt;
+
+      &lt;app-text-input hidden [control]&#x3D;&quot;loadAnnouncementGroupId&quot; /&gt;
+      &lt;app-text-input
+        class&#x3D;&quot;col-12 sm:col-6 md:col-4&quot;
+        [addonWidth]&#x3D;&quot;addonWidth&quot;
+        label&#x3D;&quot;گروه اعلام بار&quot;
+        [control]&#x3D;&quot;loadAnnouncementGroupTitle&quot;
+        validationField&#x3D;&quot;loadAnnouncementGroup&quot;
+      /&gt;
+
+      &lt;app-text-input hidden [control]&#x3D;&quot;loadAnnouncementSubGroupId&quot; /&gt;
+      &lt;app-text-input
+        class&#x3D;&quot;col-12 sm:col-6 md:col-4&quot;
+        [addonWidth]&#x3D;&quot;addonWidth&quot;
+        label&#x3D;&quot;زیرگروه اعلام بار&quot;
+        [control]&#x3D;&quot;loadAnnouncementSubGroupTitle&quot;
+        validationField&#x3D;&quot;loadAnnouncementSubGroup&quot;
+      /&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;grid col-12 mt-3 border-gray-400 border-bottom-2&quot;&gt;
+      &lt;app-text-input hidden [control]&#x3D;&quot;sourceCityId&quot; /&gt;
+      &lt;app-text-input
+        class&#x3D;&quot;col-12 sm:col-6 md:col-4&quot;
+        [addonWidth]&#x3D;&quot;addonWidth&quot;
+        label&#x3D;&quot;شهر مبدا&quot;
+        [control]&#x3D;&quot;sourceCityTitle&quot;
+        validationField&#x3D;&quot;sourceCity&quot;
+      /&gt;
+
+      &lt;app-text-input hidden [control]&#x3D;&quot;targetCityId&quot; /&gt;
+      &lt;app-text-input
+        class&#x3D;&quot;col-12 sm:col-6 md:col-4&quot;
+        [addonWidth]&#x3D;&quot;addonWidth&quot;
+        label&#x3D;&quot;شهر مقصد&quot;
+        [control]&#x3D;&quot;targetCityTitle&quot;
+        validationField&#x3D;&quot;targetCity&quot;
+      /&gt;
+
+      &lt;app-text-input hidden [control]&#x3D;&quot;loadingPlaceId&quot; /&gt;
+      &lt;app-text-input
+        class&#x3D;&quot;col-12 sm:col-6 md:col-4&quot;
+        [addonWidth]&#x3D;&quot;addonWidth&quot;
+        label&#x3D;&quot;مبدا بارگیری&quot;
+        [control]&#x3D;&quot;loadingPlaceTitle&quot;
+        validationField&#x3D;&quot;loadingPlace&quot;
+      /&gt;
+
+      &lt;app-text-input hidden [control]&#x3D;&quot;dischargingPlaceId&quot; /&gt;
+      &lt;app-text-input
+        class&#x3D;&quot;col-12 sm:col-6 md:col-4&quot;
+        [addonWidth]&#x3D;&quot;addonWidth&quot;
+        label&#x3D;&quot;مقصد تخلیه&quot;
+        [control]&#x3D;&quot;dischargingPlaceTitle&quot;
+        validationField&#x3D;&quot;dischargingPlace&quot;
+      /&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;grid col-12 mt-3 border-gray-400 border-bottom-2&quot;&gt;
+      &lt;app-text-input
+        class&#x3D;&quot;col-12 sm:col-6 md:col-4&quot;
+        [addonWidth]&#x3D;&quot;addonWidth&quot;
+        label&#x3D;&quot;تعداد کل&quot;
+        [control]&#x3D;&quot;totalNumber&quot;
+        validationField&#x3D;&quot;totalNumber&quot;
+      /&gt;
+      &lt;app-text-input
+        class&#x3D;&quot;col-12 sm:col-6 md:col-4&quot;
+        [addonWidth]&#x3D;&quot;addonWidth&quot;
+        label&#x3D;&quot;تناژ&quot;
+        [control]&#x3D;&quot;tonaj&quot;
+        validationField&#x3D;&quot;tonaj&quot;
+      /&gt;
+      &lt;app-text-input
+        class&#x3D;&quot;col-12 sm:col-6 md:col-4&quot;
+        [addonWidth]&#x3D;&quot;addonWidth&quot;
+        label&#x3D;&quot;گیرنده&quot;
+        [control]&#x3D;&quot;recipient&quot;
+        validationField&#x3D;&quot;recipient&quot;
+      /&gt;
+      &lt;app-text-input
+        class&#x3D;&quot;col-12 sm:col-6 md:col-4&quot;
+        [addonWidth]&#x3D;&quot;addonWidth&quot;
+        label&#x3D;&quot;تعرفه&quot;
+        [control]&#x3D;&quot;tarrif&quot;
+        validationField&#x3D;&quot;tarrif&quot;
+      /&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;grid col-12 mt-3 border-gray-400 border-bottom-2&quot;&gt;
+      &lt;app-text-input
+        class&#x3D;&quot;col-12&quot;
+        [addonWidth]&#x3D;&quot;addonWidth&quot;
+        label&#x3D;&quot;آدرس&quot;
+        [control]&#x3D;&quot;address&quot;
+        validationField&#x3D;&quot;address&quot;
+      /&gt;
+      &lt;app-text-input
+        class&#x3D;&quot;col-12&quot;
+        [addonWidth]&#x3D;&quot;addonWidth&quot;
+        label&#x3D;&quot;توضیحات&quot;
+        [control]&#x3D;&quot;description&quot;
+        validationField&#x3D;&quot;description&quot;
+      /&gt;
+    &lt;/div&gt;
+
+    &lt;span class&#x3D;&quot;mt-2 font-bold text-xl&quot;&gt;پارامترهای موثر&lt;/span&gt;
+    &lt;p-table
+    class&#x3D;&quot;col-12&quot;
+    [value]&#x3D;&quot;this.ptpFormArray.controls&quot;
+      styleClass&#x3D;&quot;overflow-x-auto&quot;
+      [tableStyle]&#x3D;&quot;{ &#x27;min-width&#x27;: &#x27;40rem&#x27; }&quot;
+    &gt;
+      &lt;ng-template #body let-control&gt;
+        &lt;tr&gt;
+          &lt;td&gt;
+            &lt;!-- Checkbox + ID --&gt;
+            &lt;div class&#x3D;&quot;flex align-items-center gap-2&quot; style&#x3D;&quot;width: 5rem&quot;&gt;
+              &lt;p-checkbox
+                [binary]&#x3D;&quot;true&quot;
+                class&#x3D;&quot;mb-1&quot;
+                [formControl]&#x3D;&quot;control.get(&#x27;Checked&#x27;)&quot;
+              &gt;&lt;/p-checkbox&gt;
+              &lt;span class&#x3D;&quot;mt-1&quot;&gt;{{ control.get(&quot;TPTPDId&quot;)?.value }}&lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/td&gt;
+          &lt;td&gt;{{ control.get(&quot;TPTPTitle&quot;)?.value }}&lt;/td&gt;
+          &lt;td&gt;
+            {{ control.get(&quot;Cost&quot;)?.value | number : &quot;1.0-0&quot; }}
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/ng-template&gt;
+    &lt;/p-table&gt;
+
+    &lt;!-- Action Buttons --&gt;
+    &lt;div
+      class&#x3D;&quot;px-3 col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center&quot;
+    &gt;
+      &lt;p-button
+        (click)&#x3D;&quot;editOrRegister()&quot;
+        [disabled]&#x3D;&quot;capacitorForm.invalid || loading&quot;
+        label&#x3D;&quot;ثبت و ویرایش&quot;
+        size&#x3D;&quot;small&quot;
+        styleClass&#x3D;&quot;my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem&quot;
+      &gt;&lt;/p-button&gt;
+
+      &lt;p-button
+        (click)&#x3D;&quot;editOrRegister()&quot;
+        [disabled]&#x3D;&quot;capacitorForm.invalid || loading&quot;
+        label&#x3D;&quot;حذف بار&quot;
+        size&#x3D;&quot;small&quot;
+        severity&#x3D;&quot;danger&quot;
+        styleClass&#x3D;&quot;my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem&quot;
+      &gt;&lt;/p-button&gt;
+
+      &lt;p-button
+        (click)&#x3D;&quot;editOrRegister()&quot;
+        [disabled]&#x3D;&quot;capacitorForm.invalid || loading&quot;
+        label&#x3D;&quot;کنسلی بار&quot;
+        size&#x3D;&quot;small&quot;
+        severity&#x3D;&quot;info&quot;
+        styleClass&#x3D;&quot;my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem&quot;
+      &gt;&lt;/p-button&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="flex flex-column gap-2">  <!-- Loading Spinner -->  @if (loading) {  <div    class="h-full w-full z-5 flex align-items-center justify-content-center absolute"  >    <div class="h-full w-full" style="opacity: 0.2"></div>    <i class="pi pi-spin pi-spinner primary" style="font-size: 5rem"></i>  </div>  }  <!-- Search Form -->  <form    class="col-12"    [formGroup]="searchForm"    [class.pointer-events-none]="loading"    [class.opacity-60]="loading"    (ngSubmit)="loadCapacitorForm()"  >    <div class="flex gap-3">      <app-text-input        [control]="barcode"        icon="pi pi-barcode"        class="flex-1"        placeholder="کد بار"        addonWidth="5rem"      />      <p-button        (click)="loadCapacitorForm()"        [disabled]="searchForm.invalid"        size="small"        severity="info"        styleClass="w-8rem h-2-5rem"        label="جستجو"      />    </div>  </form>  <!-- Capacitor Form -->  <form    class="grid col-12"    [formGroup]="capacitorForm"    [class.pointer-events-none]="loading"    [class.opacity-60]="loading"    [formGroup]="capacitorForm"    (ngSubmit)="editOrRegister()"  >    <div class="grid col-12 border-gray-400 border-bottom-2">      <app-text-input        class="col-12 sm:col-6"        [addonWidth]="addonWidth"        label="تاریخ ثبت بار"        type="date"        [control]="announceDate"        validationField="announceDate"      />      <app-text-input hidden [control]="loadStatusId" />      <app-text-input        class="col-12 sm:col-6"        [addonWidth]="addonWidth"        label="وضعیت بار"        [control]="loadStatusTitle"        validationField="loadStatus"      />    </div>    <div class="grid col-12 mt-3 border-gray-400 border-bottom-2">      <app-text-input hidden [control]="transportCompanyId" />      <app-text-input        class="col-12 sm:col-6 md:col-4"        [addonWidth]="addonWidth"        label="شرکت حمل و نقل"        [control]="transportCompanyTitle"        validationField="transportCompany"      />      <app-text-input hidden [control]="goodId" />      <app-text-input        class="col-12 sm:col-6 md:col-4"        [addonWidth]="addonWidth"        label=" کالا"        [control]="goodTitle"        validationField="good"      />      <app-text-input hidden [control]="loadAnnouncementGroupId" />      <app-text-input        class="col-12 sm:col-6 md:col-4"        [addonWidth]="addonWidth"        label="گروه اعلام بار"        [control]="loadAnnouncementGroupTitle"        validationField="loadAnnouncementGroup"      />      <app-text-input hidden [control]="loadAnnouncementSubGroupId" />      <app-text-input        class="col-12 sm:col-6 md:col-4"        [addonWidth]="addonWidth"        label="زیرگروه اعلام بار"        [control]="loadAnnouncementSubGroupTitle"        validationField="loadAnnouncementSubGroup"      />    </div>    <div class="grid col-12 mt-3 border-gray-400 border-bottom-2">      <app-text-input hidden [control]="sourceCityId" />      <app-text-input        class="col-12 sm:col-6 md:col-4"        [addonWidth]="addonWidth"        label="شهر مبدا"        [control]="sourceCityTitle"        validationField="sourceCity"      />      <app-text-input hidden [control]="targetCityId" />      <app-text-input        class="col-12 sm:col-6 md:col-4"        [addonWidth]="addonWidth"        label="شهر مقصد"        [control]="targetCityTitle"        validationField="targetCity"      />      <app-text-input hidden [control]="loadingPlaceId" />      <app-text-input        class="col-12 sm:col-6 md:col-4"        [addonWidth]="addonWidth"        label="مبدا بارگیری"        [control]="loadingPlaceTitle"        validationField="loadingPlace"      />      <app-text-input hidden [control]="dischargingPlaceId" />      <app-text-input        class="col-12 sm:col-6 md:col-4"        [addonWidth]="addonWidth"        label="مقصد تخلیه"        [control]="dischargingPlaceTitle"        validationField="dischargingPlace"      />    </div>    <div class="grid col-12 mt-3 border-gray-400 border-bottom-2">      <app-text-input        class="col-12 sm:col-6 md:col-4"        [addonWidth]="addonWidth"        label="تعداد کل"        [control]="totalNumber"        validationField="totalNumber"      />      <app-text-input        class="col-12 sm:col-6 md:col-4"        [addonWidth]="addonWidth"        label="تناژ"        [control]="tonaj"        validationField="tonaj"      />      <app-text-input        class="col-12 sm:col-6 md:col-4"        [addonWidth]="addonWidth"        label="گیرنده"        [control]="recipient"        validationField="recipient"      />      <app-text-input        class="col-12 sm:col-6 md:col-4"        [addonWidth]="addonWidth"        label="تعرفه"        [control]="tarrif"        validationField="tarrif"      />    </div>    <div class="grid col-12 mt-3 border-gray-400 border-bottom-2">      <app-text-input        class="col-12"        [addonWidth]="addonWidth"        label="آدرس"        [control]="address"        validationField="address"      />      <app-text-input        class="col-12"        [addonWidth]="addonWidth"        label="توضیحات"        [control]="description"        validationField="description"      />    </div>    <span class="mt-2 font-bold text-xl">پارامترهای موثر</span>    <p-table    class="col-12"    [value]="this.ptpFormArray.controls"      styleClass="overflow-x-auto"      [tableStyle]="{ \'min-width\': \'40rem\' }"    >      <ng-template #body let-control>        <tr>          <td>            <!-- Checkbox + ID -->            <div class="flex align-items-center gap-2" style="width: 5rem">              <p-checkbox                [binary]="true"                class="mb-1"                [formControl]="control.get(\'Checked\')"              ></p-checkbox>              <span class="mt-1">{{ control.get("TPTPDId")?.value }}</span>            </div>          </td>          <td>{{ control.get("TPTPTitle")?.value }}</td>          <td>            {{ control.get("Cost")?.value | number : "1.0-0" }}          </td>        </tr>      </ng-template>    </p-table>    <!-- Action Buttons -->    <div      class="px-3 col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center"    >      <p-button        (click)="editOrRegister()"        [disabled]="capacitorForm.invalid || loading"        label="ثبت و ویرایش"        size="small"        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"      ></p-button>      <p-button        (click)="editOrRegister()"        [disabled]="capacitorForm.invalid || loading"        label="حذف بار"        size="small"        severity="danger"        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"      ></p-button>      <p-button        (click)="editOrRegister()"        [disabled]="capacitorForm.invalid || loading"        label="کنسلی بار"        size="small"        severity="info"        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"      ></p-button>    </div>  </form></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarMenuComponent', 'selector': 'app-sidebar-menu'},{'name': 'SubMenuComponent', 'selector': 'app-sub-menu'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TabBarComponent', 'selector': 'app-tab-bar'},{'name': 'TabViewComponent', 'selector': 'app-tab-view'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'LoadCapacitorFormComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'LoadCapacitorFormComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
