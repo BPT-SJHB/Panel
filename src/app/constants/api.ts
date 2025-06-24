@@ -69,5 +69,14 @@ export const API_ROUTES = {
       ChangeProductTypeStatus: `${environment.apiUrl}:${transportationAPIPort}/api/ChangeActivateStatusOfProductType`,
       ChangeProductStatus: `${environment.apiUrl}:${transportationAPIPort}/api/ChangeActivateStatusOfProduct`,
     },
+    LADPlaces: {
+      GetLADPlaces: `${environment.apiUrl}:${transportationAPIPort}/api/GetLADPlaces`,
+      GetLADPlace: `${environment.apiUrl}:${transportationAPIPort}/api/GetLADPlace`,
+      RegisterLADPlace: `${environment.apiUrl}:${transportationAPIPort}/api/LADPlaceRegister`,
+      UpdateLADPlace: `${environment.apiUrl}:${transportationAPIPort}/api/LADPlaceUpdate`,
+      DeleteLADPlace: `${environment.apiUrl}:${transportationAPIPort}/api/LADPlaceDelete`,
+      ChangeLoadingPlaceStatus: `${environment.apiUrl}:${transportationAPIPort}/api/LoadingPlaceChangeActiveStatus`,
+      ChangeDischargingPlaceStatus: `${environment.apiUrl}:${transportationAPIPort}/api/DischargingPlaceChangeActiveStatus`,
+    },
   },
 };
