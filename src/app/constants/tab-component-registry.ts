@@ -10,6 +10,7 @@ import { LoaderTypeFormComponent } from 'app/components/forms/loader-type-form/l
 import { ProvinceAndCityFormComponent } from 'app/components/forms/province-and-city-form/province-and-city-form.component';
 import { ProductFormComponent } from 'app/components/forms/product-form/product-form.component';
 import { MainViewComponent } from 'app/components/shared/main-view/main-view.component';
+import { LadPlacesFormComponent } from 'app/components/forms/lad-places-form/lad-places-form.component';
 
 export enum TabComponentKey {
   Main = -1,
@@ -17,6 +18,7 @@ export enum TabComponentKey {
   TruckDriverManagement = 1,
   FactoriesAndFreightManagement = 6,
   LoaderTypeManagement = 12,
+  LADPlaceManagementService = 7,
   ProvinceAndCityManagement = 8,
   ProductTypesManagement = 9,
   LoaderManagemet = 13,
@@ -93,4 +95,8 @@ export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
       component: ProductFormComponent,
     },
   ],
+  [TabComponentKey.LADPlaceManagementService]: [{
+    title:'مبادی و مقاصد حمل بار',
+    component:  LadPlacesFormComponent
+  }]
 };
