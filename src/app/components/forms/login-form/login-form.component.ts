@@ -72,7 +72,6 @@ export class LoginFormComponent {
     }
 
     this.toast.error('خطا', loginResult.error?.message);
-    console.log(loginResult.error.details);
     await this.resetLoginForm();
   }
 

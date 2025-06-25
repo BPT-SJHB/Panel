@@ -1,0 +1,150 @@
+<p-confirm-dialog />
+
+<app-search-input
+  placeholder="قسمتی از نام را کنید."
+  (valueChange)="searchLadPlace($event)"
+/>
+
+<p-table
+  class="col-12"
+  [columns]="cols"
+  [value]="ladPlaces"
+  styleClass="overflow-x-auto"
+  [tableStyle]="{ 'min-width': '40rem' }"
+>
+  <ng-template #caption>
+    <div class="flex items-center justify-between">
+      <p-button (click)="onNew()" label="جدید" size="small"  styleClass="px-4 md:px-5 py-1" />
+    </div>
+  </ng-template>
+
+  <ng-template #header let-columns>
+    <tr>
+      @for (col of columns; track $index) {
+      <th>{{ col }}</th>
+      }
+    </tr>
+  </ng-template>
+
+  <ng-template #body let-rowData>
+    <tr>
+      <td>{{ rowData.LADPlaceId }}</td>
+
+      <td (click)="onEdit(rowData)">
+        <p-button
+          [disabled]="loading"
+          icon="pi pi-pencil"
+          severity="info"
+          variant="text"
+        ></p-button>
+      </td>
+
+      <td (click)="onDelete(rowData)">
+        <p-button
+          icon="pi pi-trash"
+          severity="danger"
+          variant="text"
+          [disabled]="loading"
+        ></p-button>
+      </td>
+
+      <td>{{ rowData.LADPlaceTitle }}</td>
+
+      <td>
+        <i
+          class="pi"
+          [ngClass]="
+            rowData.LoadingActive
+              ? 'pi-check-circle text-green-500'
+              : 'pi-times-circle text-red-500'
+          "
+        ></i>
+      </td>
+
+      <td>
+        <i
+          class="pi"
+          [ngClass]="
+            rowData.DischargingActive
+              ? 'pi-check-circle text-green-500'
+              : 'pi-times-circle text-red-500'
+          "
+        ></i>
+      </td>
+
+      <td>{{ rowData.LADPlaceTel }}</td>
+      <td>{{ rowData.LADPlaceAddress }}</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  draggable="false"
+  [header]="headerTitle"
+  [modal]="true"
+  (onHide)="onCloseDialog()"
+  [(visible)]="formDialogVisible"
+  maskStyleClass="px-3"
+  [style]="{ 'max-width': '30rem' }"
+>
+  <form
+    class="grid gap-3"
+    (ngSubmit)="registerOrEdit()"
+    [class.pointer-events-none]="loading"
+    [class.opacity-60]="loading"
+    [formGroup]="ladPlacesForm"
+  >
+    <div class="grid col-12 gap-3">
+      <app-text-input
+        [readOnly]="true"
+        [disabled]="true"
+        [control]="ladPlacesId"
+        icon="pi pi-card-id"
+        validationField="id"
+        class="col-12"
+      />
+      <app-text-input
+        placeholder="عنوان"
+        label="عنوان"
+        validationField="title"
+        class="col-12"
+        [control]="ladPlacesTitle"
+      />
+      <app-text-input
+        [control]="ladPlacesTel"
+        label="تلفن"
+        placeholder="تلفن"
+        validationField="telephone"
+        class="col-12"
+      />
+      <app-text-input
+        label="آدرس"
+        class="col-12"
+        icon="pi pi-card-id"
+        validationField="address"
+        [control]="ladPlacesAddress"
+      />
+      <div class="grid col-12">
+        <app-binary-radio-input
+          label="وضعیت مبدا بارگیری"
+          radioName="loadingActive"
+          [control]="loadingActive"
+          class="col-12"
+        />
+        <app-binary-radio-input
+          label="وضعیت مقصد بارگیری"
+          [control]="dischargingActive"
+          radioName="dischargingActive"
+          class="col-12"
+        />
+      </div>
+    </div>
+    <div class="w-full flex justify-content-end">
+      <p-button
+        (click)="registerOrEdit()"
+        label="ثبت و ویرایش اطلاعات"
+        [disabled]="ladPlacesForm.invalid || loading"
+      />
+    </div>
+  </form>
+</p-dialog>

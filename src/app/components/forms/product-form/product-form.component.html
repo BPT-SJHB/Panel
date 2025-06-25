@@ -1,0 +1,15 @@
+<app-tree-table-checkbox
+  [tree]="products"
+  [cols]="['فعال/غیرفعال']"
+  [rows]="[['ProductTypeTitle', 'ProductTitle']]"
+  [enabledSearch]="true"
+  [searchFields]="['ProductTitle','ProductTypeTitle']"
+  [paginator]="true"
+  childField="ProductActive"
+  parentField="ProductTypeActive"
+  searchPlaceholder="بخشی از نام کالا را وارد نمایید."
+  paginatorLocale="fa-IR"
+  (onSearch)="searchProduct($event)"
+  (onTableCheckBoxChange)="onChangeProduct($event)"
+/>
+

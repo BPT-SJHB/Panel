@@ -60,6 +60,7 @@
           <td>
             <p-checkbox
               [binary]="true"
+              (onChange)="onChangeCheckBox(control)"
               class="mb-1"
               [formControl]="control.get('status')"
             ></p-checkbox>
