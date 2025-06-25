@@ -20,6 +20,7 @@ import { BinaryRadioInputComponent } from '../../shared/inputs/binary-radio-inpu
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { ShortResponse } from 'app/data/model/short-response.model';
+import {  ErrorCodes } from 'app/constants/error-messages';
 
 @Component({
   selector: 'app-lad-places-form',
@@ -221,6 +222,7 @@ export class LadPlacesFormComponent implements OnInit, OnDestroy {
       if (hasError) return;
       this.toast.success('موفق', response.data?.Message ?? '');
     } finally {
+      this.updateTable();
       this.closeDialog();
     }
   }
@@ -230,12 +232,21 @@ export class LadPlacesFormComponent implements OnInit, OnDestroy {
     try {
       const ladPlace = this.extractLadPlaceFromForm();
       const response = await this.ladPlaceService.RegisterNewLADPlace(ladPlace);
-      console.log(response.data);
-      
+    
       if (!this.handleResponse(response)) return;
+
+
+       const changes = await this.updateLoadingAndDischarging(
+        response.data!.LADPlaceId
+      );
+      const hasError = changes.some((res) => !this.handleResponse(res));
+
+      if (hasError) return;
+      
       this.populateLadPlaceForm({...ladPlace,LADPlaceId:response.data?.LADPlaceId ?? 0});
     } finally {
       this.updateTable();
+      this.closeDialog();
     }
   }
 
@@ -257,6 +268,9 @@ export class LadPlacesFormComponent implements OnInit, OnDestroy {
         'خطا',
         response.error?.message ?? 'خطای غیرمنتظره‌ای رخ داد'
       );
+      if(response.error?.code === ErrorCodes.NoRecordFound){
+        return true;
+      }
       return false;
     }
     return true;
