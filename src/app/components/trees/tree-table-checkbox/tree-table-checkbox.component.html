@@ -1,0 +1,72 @@
+<p-tree-table
+  #treeTable
+  [value]="tree"
+  [columns]="cols"
+  [selectionKeys]="selectionKeys"
+  [paginator]="paginator"
+  [rows]="rowsPerPage"
+  [rowsPerPageOptions]="[5, 10, 25, 50, 100]"
+  [paginatorLocale]="paginatorLocale"
+  [scrollable]="true"
+  [globalFilterFields]="searchFields"
+  dataKey="key"
+  selectionMode="checkbox"
+  (selectionKeysChange)="selectionKeysChanged($event)"
+>
+  @if (enabledSearch) {
+  <ng-template pTemplate="caption" >
+    <div class="flex justify-content-center align-items-center">
+      <app-search-input  
+      class="flex-1"
+      [placeholder]="searchPlaceholder"
+      pInputText
+      (input)="filterTree($event.target.value)"
+      (valueChange)="searchTerm = $event"
+      />
+      
+      @if (!enabledAutoSearch) {
+        <p-button label="جستجو" styleClass="md:px-4 py-1" severity="info" (click)="onClickSearch()" />
+      }
+    </div>
+  </ng-template>
+  }
+
+  <ng-template pTemplate="togglericon" let-expanded>
+    <i
+      class="pi"
+      [ngClass]="{
+        'pi-chevron-left': !expanded,
+        'pi-chevron-down': expanded
+      }"
+    ></i>
+  </ng-template>
+
+  <!-- Header -->
+  <ng-template #header let-columns>
+    <tr>
+      @for (col of columns; track $index) {
+      <th>{{ col }}</th>
+      }
+    </tr>
+  </ng-template>
+
+  <!-- Body -->
+  <ng-template pTemplate="body" let-rowNode let-node let-rowData="rowData">
+    <tr [ttRow]="rowNode">
+      @for (rowItem of rows; track $index) {
+      <td>
+        @if ($index == 0) {
+        <p-treetable-toggler [rowNode]="rowNode" />
+        <p-treetable-checkbox
+          [value]="rowNode"
+          [id]="rowData.key"
+          class="ml-2"
+        />
+        } @for (field of rowItem; track $index) {
+        {{ rowData[field] }}
+        }
+      </td>
+      }
+    </tr>
+  </ng-template>
+</p-tree-table>
