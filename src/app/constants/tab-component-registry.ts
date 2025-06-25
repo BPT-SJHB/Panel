@@ -7,6 +7,8 @@ import { DriverTruckWalletFormComponent } from 'app/components/forms/truck-drive
 import { FactoriesAndFreightFormComponent } from 'app/components/forms/factories-production-centers-form/factories-production-centers-form.component';
 import { LoadCapacitorFormComponent } from 'app/components/forms/load-capacitor-form/load-capacitor-form.component';
 import { LoaderTypeFormComponent } from 'app/components/forms/loader-type-form/loader-type-form.component';
+import { ProvinceAndCityFormComponent } from 'app/components/forms/province-and-city-form/province-and-city-form.component';
+import { ProductFormComponent } from 'app/components/forms/product-form/product-form.component';
 import { MainViewComponent } from 'app/components/shared/main-view/main-view.component';
 
 export enum TabComponentKey {
@@ -14,6 +16,9 @@ export enum TabComponentKey {
   UserManagement = 0,
   TruckDriverManagement = 1,
   FactoriesAndFreightManagement = 6,
+  LoaderTypeManagement = 12,
+  ProvinceAndCityManagement = 8,
+  ProductTypesManagement = 9,
   LoaderManagemet = 13,
   LoadCapacitorManagement = 35,
 }
@@ -68,6 +73,24 @@ export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
     {
       title: 'بارگیر',
       component: LoaderTypeFormComponent,
+    },
+  ],
+  [TabComponentKey.ProvinceAndCityManagement]: [
+    {
+      title: 'استان شهرها',
+      component: ProvinceAndCityFormComponent,
+    },
+  ],
+  [TabComponentKey.LoaderTypeManagement]: [
+    {
+      title: 'بارگیرها',
+      component: LoaderTypeFormComponent,
+    },
+  ],
+  [TabComponentKey.ProductTypesManagement]: [
+    {
+      title: 'کالاها',
+      component: ProductFormComponent,
     },
   ],
 };
