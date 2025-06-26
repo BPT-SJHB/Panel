@@ -1,8 +1,8 @@
 export interface TravelTime {
   LoaderTypeId: number;
-  SourceCityId: number;
+  SourceCityId: number | undefined;
   SourceCityName?: string;
-  TargetCityId: number;
+  TargetCityId: number | undefined;
   TargetCityName?: string;
   TravelTime?: number;
   Active?: boolean;
