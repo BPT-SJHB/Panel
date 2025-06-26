@@ -120,4 +120,34 @@ export class TravelTimeManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  public async EditTravelTime(
+    loaderTypeId: number,
+    sourceCityId: number,
+    targetCityId: number,
+    time: number
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.TravelTime.EditTravelTime;
+    const travelTimeInfo: TravelTime = {
+      LoaderTypeId: loaderTypeId,
+      SourceCityId: sourceCityId,
+      TargetCityId: targetCityId,
+      TravelTime: time,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TravelTime: travelTimeInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
