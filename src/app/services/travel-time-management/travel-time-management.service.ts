@@ -14,4 +14,51 @@ import { mockShortResponse } from 'app/data/mock/short-response.mock';
 export class TravelTimeManagementService {
   private userAuth = inject(UserAuthService);
   private apiCommunicator = inject(APICommunicationManagementService);
+
+  public async GetTravelTimes(
+    loaderTypeId: number,
+    sourceCityId?: number | undefined,
+    targetCityId?: number | undefined
+  ): Promise<ApiResponse<TravelTime[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.TravelTime.GetTravelTimes;
+    const travelTimeInfo: TravelTime = {
+      LoaderTypeId: loaderTypeId,
+      SourceCityId: sourceCityId ?? undefined,
+      TargetCityId: targetCityId ?? undefined,
+    };
+    const bodyValue: {
+      SessionId: string;
+      LoaderTypeId: number;
+      SourceCityId?: number;
+      TargetCityId?: number;
+    } = {
+      SessionId: this.userAuth.getSessionId() ?? '',
+      LoaderTypeId: travelTimeInfo.LoaderTypeId,
+    };
+
+    if (travelTimeInfo.SourceCityId != undefined) {
+      bodyValue.SourceCityId = travelTimeInfo.SourceCityId;
+    }
+    if (travelTimeInfo.TargetCityId != undefined) {
+      bodyValue.TargetCityId = travelTimeInfo.TargetCityId;
+    }
+    if (
+      travelTimeInfo.SourceCityId == undefined &&
+      travelTimeInfo.TargetCityId == undefined
+    ) {
+      bodyValue.SourceCityId = 0;
+    }
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      TravelTime[]
+    >(apiUrl, bodyValue, mockTravelTimes);
+    //#endregion
+  }
+
 }
