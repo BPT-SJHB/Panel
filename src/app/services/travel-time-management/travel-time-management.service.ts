@@ -150,4 +150,32 @@ export class TravelTimeManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  public async DeleteTravelTime(
+    loaderId: number,
+    sourceCityId: number,
+    targetCityId: number
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.TravelTime.DeleteTravelTime;
+    const travelTimeInfo: TravelTime = {
+      LoaderTypeId: loaderId,
+      SourceCityId: sourceCityId,
+      TargetCityId: targetCityId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TravelTime: travelTimeInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
