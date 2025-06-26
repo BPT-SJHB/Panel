@@ -61,4 +61,33 @@ export class TravelTimeManagementService {
     //#endregion
   }
 
+  public async GetTravelTime(
+    loaderTypeId: number,
+    sourceCityId: number,
+    targetCityId: number
+  ): Promise<ApiResponse<TravelTime>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.TravelTime.GetTravelTime;
+    const travelTimeInfo: TravelTime = {
+      LoaderTypeId: loaderTypeId,
+      SourceCityId: sourceCityId,
+      TargetCityId: targetCityId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LoaderTypeId: travelTimeInfo.LoaderTypeId,
+      SourceCityId: travelTimeInfo.SourceCityId,
+      TargetCityId: travelTimeInfo.TargetCityId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      TravelTime
+    >(apiUrl, bodyValue, mockTravelTimes[0]);
+    //#endregion
+  }
 }
