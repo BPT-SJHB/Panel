@@ -78,5 +78,13 @@ export const API_ROUTES = {
       ChangeLoadingPlaceStatus: `${environment.apiUrl}:${transportationAPIPort}/api/LoadingPlaceChangeActiveStatus`,
       ChangeDischargingPlaceStatus: `${environment.apiUrl}:${transportationAPIPort}/api/DischargingPlaceChangeActiveStatus`,
     },
+    TravelTime: {
+      GetTravelTimes: `${environment.apiUrl}:${transportationAPIPort}/api/GetTravelTimes`,
+      GetTravelTime: `${environment.apiUrl}:${transportationAPIPort}/api/GetTravelTime`,
+      RegisterTravelTime: `${environment.apiUrl}:${transportationAPIPort}/api/TravelTimeRegistering`,
+      EditTravelTime: `${environment.apiUrl}:${transportationAPIPort}/api/TravelTimeEditing`,
+      DeleteTravelTime: `${environment.apiUrl}:${transportationAPIPort}/api/TravelTimeDeleting`,
+      ChangeTravelTimeStatus: `${environment.apiUrl}:${transportationAPIPort}/api/TravelTimeChangeActivateStatus`,
+    },
   },
 };
