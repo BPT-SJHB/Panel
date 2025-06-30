@@ -1,0 +1,46 @@
+<div class="flex justify-content-center align-items-center w-full">
+  <p-input-group class="w-full relative">
+    <!-- Addon: Icon or Label -->
+    <p-inputgroup-addon
+      class="bg-primary border-round-right flex items-center justify-center px-3 h-2-5rem"
+      [style.width]="addonWidth"
+    >
+      <ng-container *ngIf="label.trim() === ''; else labelTemplate">
+        <i [class]="icon"></i>
+      </ng-container>
+      <ng-template #labelTemplate>
+        <span class="text-sm text-white" style="white-space: nowrap">
+          {{ label }}
+        </span>
+      </ng-template>
+    </p-inputgroup-addon>
+
+    <!-- AutoComplete Input -->
+    <p-autoComplete
+      pInputText
+      class="flex-grow-1 border-input"
+      styleClass="w-full h-2-5rem"
+      [formControl]="control"
+      [suggestions]="suggestions"
+      [optionLabel]="optionLabel"
+      [optionValue]="optionValue"
+      [placeholder]="placeholder"
+      [showEmptyMessage]="showEmptyMessage"
+      emptyMessage="موردی یافت نشد"
+      (completeMethod)="onSearch($event)"
+      (onSelect)="onSelectAutoComplete($event)"
+      (onFocus)="onFocusInput($event.target)"
+      (onBlur)="onBlurInput($event.target)"
+      (input)="onValueChanged($event.target)"
+    />
+
+    <!-- Optional Select Icon -->
+    <div
+      *ngIf="showIconOptionSelected"
+      class="absolute"
+      style="z-index: 3; left: 10px; top: 5px;"
+    >
+      <i class="pi pi-check-circle text-lg text-green-600"></i>
+    </div>
+  </p-input-group>
+</div>
