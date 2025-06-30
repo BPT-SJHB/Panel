@@ -211,6 +211,12 @@
                             <a href="#mockSoftwareUserInfo" title="src/app/data/mock/software-user-info.mock.ts" ><b>mockSoftwareUserInfo</b>&nbsp;&nbsp;&nbsp;(src/.../software-user-info.mock.ts)</a>
                         </li>
                         <li>
+                            <a href="#mockTariffs" title="src/app/data/mock/tariff.mock.ts" ><b>mockTariffs</b>&nbsp;&nbsp;&nbsp;(src/.../tariff.mock.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#mockTravelTimes" title="src/app/data/mock/travel-time.mock.ts" ><b>mockTravelTimes</b>&nbsp;&nbsp;&nbsp;(src/.../travel-time.mock.ts)</a>
+                        </li>
+                        <li>
                             <a href="#mockTruckComposedInfo" title="src/app/data/mock/truck-info.mock.ts" ><b>mockTruckComposedInfo</b>&nbsp;&nbsp;&nbsp;(src/.../truck-info.mock.ts)</a>
                         </li>
                         <li>
@@ -484,6 +490,14 @@
       DeleteLADPlace: &#x60;${environment.apiUrl}:${transportationAPIPort}/api/LADPlaceDelete&#x60;,
       ChangeLoadingPlaceStatus: &#x60;${environment.apiUrl}:${transportationAPIPort}/api/LoadingPlaceChangeActiveStatus&#x60;,
       ChangeDischargingPlaceStatus: &#x60;${environment.apiUrl}:${transportationAPIPort}/api/DischargingPlaceChangeActiveStatus&#x60;,
+    },
+    TravelTime: {
+      GetTravelTimes: &#x60;${environment.apiUrl}:${transportationAPIPort}/api/GetTravelTimes&#x60;,
+      GetTravelTime: &#x60;${environment.apiUrl}:${transportationAPIPort}/api/GetTravelTime&#x60;,
+      RegisterTravelTime: &#x60;${environment.apiUrl}:${transportationAPIPort}/api/TravelTimeRegistering&#x60;,
+      EditTravelTime: &#x60;${environment.apiUrl}:${transportationAPIPort}/api/TravelTimeEditing&#x60;,
+      DeleteTravelTime: &#x60;${environment.apiUrl}:${transportationAPIPort}/api/TravelTimeDeleting&#x60;,
+      ChangeTravelTimeStatus: &#x60;${environment.apiUrl}:${transportationAPIPort}/api/TravelTimeChangeActivateStatus&#x60;,
     },
   },
 }</code>
@@ -1027,9 +1041,9 @@
   [ErrorCodes.Unauthorized]: &#x27;جلسه شما منقضی شده است. لطفاً دوباره وارد شوید.&#x27;,
   [ErrorCodes.Forbidden]: &#x27;شما اجازه انجام این عملیات را ندارید.&#x27;,
   [ErrorCodes.NotFound]: &#x27;منبع درخواستی یافت نشد.&#x27;,
-  [ErrorCodes.InternalServerError]:
-    &#x27;خطای سرور داخلی رخ داده است. لطفاً بعداً تلاش کنید.&#x27;,
+  [ErrorCodes.InternalServerError]: &#x27;خطای سرور داخلی رخ داده است. لطفاً بعداً تلاش کنید.&#x27;,
   [ErrorCodes.NotFoundInLocalAPI]: &#x27;اطلاعات در سرور داخلی یافت نشد&#x27;,
+  [ErrorCodes.NoRecordFound]: &quot;رکورد پیدا مورد نظر یاقت نشد.&quot;
 }</code>
                     </td>
                 </tr>
@@ -5786,6 +5800,129 @@
         </tbody>
     </table>
 </section>
+    <h3>src/app/data/mock/tariff.mock.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mockTariffs"></a>
+                    <span class="name">
+                        <span ><b>mockTariffs</b></span>
+                        <a href="#mockTariffs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Tariff.html" target="_self" >Tariff[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+  {
+    SourceCityId: 21451004,
+    SourceCityTitle: &#x27;اصفهان - ذوب آهن&#x27;,
+    TargetCityId: 11320000,
+    TargetCityTitle: &#x27;تهران&#x27;,
+    LoaderTypeId: 504,
+    LoaderTypeTitle:
+      &#x27;كفي 12چرخ\r\n                                                                                         &#x27;,
+    GoodId: 2710000,
+    GoodTitle: &#x27;آهن آلات&#x27;,
+    Tariff: 13020000,
+    BaseTonnag: 22,
+    CalculationReference: &#x27;&#x27;,
+    Active: true,
+  },
+  {
+    SourceCityId: 21451004,
+    SourceCityTitle: &#x27;اصفهان - ذوب آهن&#x27;,
+    TargetCityId: 11320000,
+    TargetCityTitle: &#x27;تهران&#x27;,
+    LoaderTypeId: 504,
+    LoaderTypeTitle:
+      &#x27;كفي 12چرخ\r\n                                                                                         &#x27;,
+    GoodId: 2710000,
+    GoodTitle: &#x27;آهن آلات&#x27;,
+    Tariff: 15950000,
+    BaseTonnag: 22,
+    CalculationReference: &#x27;&#x27;,
+    Active: true,
+  },
+  {
+    SourceCityId: 21451004,
+    SourceCityTitle: &#x27;اصفهان - ذوب آهن&#x27;,
+    TargetCityId: 11320000,
+    TargetCityTitle: &#x27;تهران&#x27;,
+    LoaderTypeId: 504,
+    LoaderTypeTitle:
+      &#x27;كفي 12چرخ\r\n                                                                                         &#x27;,
+    GoodId: 2710000,
+    GoodTitle: &#x27;آهن آلات&#x27;,
+    Tariff: 17447000,
+    BaseTonnag: 22,
+    CalculationReference: &#x27;&#x27;,
+    Active: true,
+  },
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/data/mock/travel-time.mock.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mockTravelTimes"></a>
+                    <span class="name">
+                        <span ><b>mockTravelTimes</b></span>
+                        <a href="#mockTravelTimes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/TravelTime.html" target="_self" >TravelTime[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+  {
+    LoaderTypeId: 505,
+    SourceCityId: 21310000,
+    SourceCityName: &#x27;اصفهان - اصفهان  &#x27;,
+    TargetCityId: 11320000,
+    TargetCityName: &#x27;تهران&#x27;,
+    TravelTime: 24,
+    Active: true,
+  },
+  {
+    LoaderTypeId: 505,
+    SourceCityId: 21310000,
+    SourceCityName: &#x27;اصفهان - اصفهان  &#x27;,
+    TargetCityId: 11321004,
+    TargetCityName: &#x27;تهران - پايانه غرب&#x27;,
+    TravelTime: 25,
+    Active: true,
+  },
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
     <h3>src/app/data/mock/truck-info.mock.ts</h3>
     <section data-compodoc="block-properties">
     <h3></h3>    <table class="table table-sm table-bordered">
@@ -6427,6 +6564,28 @@
       component: LoaderTypeFormComponent,
     },
   ],
+  [TabComponentKey.ProvinceAndCityManagement]: [
+    {
+      title: &#x27;استان شهرها&#x27;,
+      component: ProvinceAndCityFormComponent,
+    },
+  ],
+  [TabComponentKey.LoaderTypeManagement]: [
+    {
+      title: &#x27;بارگیرها&#x27;,
+      component: LoaderTypeFormComponent,
+    },
+  ],
+  [TabComponentKey.ProductTypesManagement]: [
+    {
+      title: &#x27;کالاها&#x27;,
+      component: ProductFormComponent,
+    },
+  ],
+  [TabComponentKey.LADPlaceManagementService]: [{
+    title:&#x27;مبادی و مقاصد حمل بار&#x27;,
+    component:  LadPlacesFormComponent
+  }]
 }</code>
                     </td>
                 </tr>
