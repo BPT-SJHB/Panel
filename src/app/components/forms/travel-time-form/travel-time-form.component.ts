@@ -190,7 +190,7 @@ export class TravelTimeFormComponent {
   }
 
   isSearchFormValid(): boolean {
-    if (this.searchLoaderType.value === 0) return false;
+    if (this.searchLoaderTypeId.value === 0) return false;
     return [this.searchSourceCityId.value, this.searchTargetCityId.value].some(
       (v) => v && v !== 0
     );
