@@ -133,4 +133,24 @@ export class TariffsManagementService {
     //#endregion
   }
 
+  public async ChangeTariffsStatus(
+    tariffs: Tariff[]
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.Tariffs.ChangeTariffsStatus;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      Tariffs: tariffs,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
