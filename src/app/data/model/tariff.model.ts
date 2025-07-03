@@ -1,8 +1,8 @@
 export interface Tariff {
-  SourceCityId: number;
-  TargetCityId: number;
   LoaderTypeId: number;
-  GoodId: number;
+  SourceCityId: number | undefined;
+  TargetCityId: number | undefined;
+  GoodId: number | undefined;
   TargetCityTitle?: string;
   SourceCityTitle?: string;
   LoaderTypeTitle?: string;
