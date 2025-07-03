@@ -112,6 +112,7 @@ export class TariffsManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
   public async EditTariffs(
     tariffs: Tariff
   ): Promise<ApiResponse<ShortResponse>> {
