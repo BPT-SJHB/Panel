@@ -1,0 +1,214 @@
+<!-- Search Form -->
+<form
+  [formGroup]="travelTimeSearchForm"
+  (ngSubmit)="searchTimeTravel()"
+  class="grid gap-3 sm:gap-0"
+>
+
+  <app-search-auto-complete
+    class="col-12 sm:col-6 lg:col-4"
+    placeholder="نوع بارگیر"
+    label="نوع بارگیر"
+    optionLabel="LoaderTypeTitle"
+    optionValue="LoaderTypeTitle"
+    (selectSuggestion)="onSelectSearchLoaderType($event)"
+    (valueChange)="onAutoCompleteChange(searchLoaderTypeId)"
+    [lazySearch]="onSearchLoaderType"
+    [showIconOptionSelected]="searchLoaderTypeId.value !== 0"
+  />
+
+  <app-search-auto-complete
+    class="col-12 sm:col-6 lg:col-4"
+    placeholder="شهر مبدا"
+    label="شهر مبدا"
+    [control]="searchSourceCity"
+    optionLabel="CityTitle"
+    optionValue="CityTitle"
+    (selectSuggestion)="onSelectSearchSourceCity($event)"
+    (valueChange)="onAutoCompleteChange(searchSourceCityId)"
+    [lazySearch]="onSearchCity"
+    [showIconOptionSelected]="searchSourceCityId.value != 0"
+  />
+
+  <app-search-auto-complete
+    class="col-12 sm:col-6 lg:col-4"
+    placeholder="شهر مقصد"
+    label="شهر مقصد"
+    [control]="searchTargetCity"
+    optionLabel="CityTitle"
+    optionValue="CityTitle"
+    (selectSuggestion)="onSelectSearchTargetCity($event)"
+    (valueChange)="onAutoCompleteChange(searchSourceCityId)"
+    [lazySearch]="onSearchCity"
+    [showIconOptionSelected]="searchTargetCityId.value != 0"
+  />
+
+  <div class="col-12 flex justify-content-end">
+    <p-button
+      label="جستجو"
+      severity="info"
+      size="small"
+      styleClass="px-4 py-1"
+      type="ngSubmit"
+      [disabled]="!isSearchFormValid()"
+    />
+  </div>
+</form>
+
+<!-- Results Table -->
+<p-table
+  class="col-12 overflow-x-auto"
+  [columns]="cols"
+  [value]="travelTimes"
+  [tableStyle]="{ 'min-width': '40rem' }"
+>
+  <ng-template #caption>
+    <div class="flex justify-between items-center">
+      <p-button
+        label="جدید"
+        size="small"
+        styleClass="px-4 md:px-5 py-1"
+        (click)="onNew()"
+      />
+    </div>
+  </ng-template>
+
+  <ng-template #header let-columns>
+    <tr>
+      @for (col of columns; track $index) {
+      <th>{{ col }}</th>
+      }
+    </tr>
+  </ng-template>
+
+  <ng-template #body let-rowData>
+    <tr>
+      <td (click)="onEdit(rowData)">
+        <p-button
+          icon="pi pi-pencil"
+          severity="info"
+          variant="text"
+          [disabled]="loading"
+        />
+      </td>
+
+      <td (click)="onDelete(rowData)">
+        <p-button
+          icon="pi pi-trash"
+          severity="danger"
+          variant="text"
+          [disabled]="loading"
+        />
+      </td>
+
+      <td>{{ rowData.LoaderTypeId }}</td>
+      <td>{{ rowData.SourceCityId }}</td>
+      <td>{{ rowData.SourceCityName }}</td>
+      <td>{{ rowData.TargetCityId }}</td>
+      <td>{{ rowData.TargetCityName }}</td>
+      <td>{{ rowData.TravelTime }}</td>
+      <td>
+        <i
+          class="pi"
+          [ngClass]="
+            rowData.Active
+              ? 'pi-check-circle text-green-500'
+              : 'pi-times-circle text-red-500'
+          "
+        ></i>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<!-- Dialog Form -->
+<p-dialog
+  [(visible)]="formDialogVisible"
+  [modal]="true"
+  draggable="false"
+  [header]="headerTitle"
+  [style]="{ 'max-width': '30rem' }"
+  maskStyleClass="px-3"
+  (onHide)="onCloseDialog()"
+>
+  <form
+    [formGroup]="travelTimeForm"
+    [class.pointer-events-none]="loading"
+    [class.opacity-60]="loading"
+    (ngSubmit)="registerOrEdit()"
+  >
+    <div class="grid gap-3">
+      <div class="grid col-12 gap-3">
+        <app-search-auto-complete
+          class="col-12"
+          placeholder="نوع بارگیر"
+          label="نوع بارگیر"
+          optionLabel="LoaderTypeTitle"
+          optionValue="LoaderTypeTitle"
+          [control]="loaderType"
+          (selectSuggestion)="onSelectLoaderType($event)"
+          (valueChange)="onAutoCompleteChange(loaderTypeId)"
+          [lazySearch]="onSearchLoaderType"
+          [showIconOptionSelected]="loaderTypeId.value != 0"
+          addonWidth="6rem"
+          [readOnly]="isTravelTimeFormReadonly()"
+          [disabled]="isTravelTimeFormReadonly()"
+        />
+
+        <app-search-auto-complete
+          class="col-12"
+          placeholder="شهر مبدا"
+          label="شهر مبدا"
+          [control]="sourceCityName"
+          optionLabel="CityTitle"
+          optionValue="CityTitle"
+          (selectSuggestion)="onSelectSourceCity($event)"
+          (valueChange)="onAutoCompleteChange(sourceCityId)"
+          [lazySearch]="onSearchCity"
+          [showIconOptionSelected]="sourceCityId.value != 0"
+          addonWidth="6rem"
+          [readOnly]="isTravelTimeFormReadonly()"
+          [disabled]="isTravelTimeFormReadonly()"
+        />
+
+        <app-search-auto-complete
+          class="col-12"
+          placeholder="شهر مقصد"
+          label="شهر مقصد"
+          [control]="targetCityName"
+          optionLabel="CityTitle"
+          optionValue="CityTitle"
+          (selectSuggestion)="onSelectTargetCity($event)"
+          (valueChange)="onAutoCompleteChange(targetCityId)"
+          [lazySearch]="onSearchCity"
+          [showIconOptionSelected]="targetCityId.value != 0"
+          addonWidth="6rem"
+          [readOnly]="isTravelTimeFormReadonly()"
+          [disabled]="isTravelTimeFormReadonly()"
+        />
+
+        <app-text-input
+          class="col-12"
+          placeholder="زمان سفر"
+          label="زمان سفر"
+          [control]="travelTimeTake"
+          addonWidth="8rem"
+        />
+      </div>
+
+      <div class="col-12">
+        <app-binary-radio-input label="وضعیت" [control]="travelTimeActive" />
+      </div>
+
+      <div class="col-12 flex justify-content-end mt-4">
+        <p-button
+          label="ثبت و ویرایش اطلاعات"
+          [disabled]="travelTimeForm.invalid || loading"
+          (click)="registerOrEdit()"
+        />
+      </div>
+    </div>
+  </form>
+</p-dialog>
+
+<p-confirm-dialog />

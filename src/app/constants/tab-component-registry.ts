@@ -9,8 +9,10 @@ import { LoadCapacitorFormComponent } from 'app/components/forms/load-capacitor-
 import { LoaderTypeFormComponent } from 'app/components/forms/loader-type-form/loader-type-form.component';
 import { ProvinceAndCityFormComponent } from 'app/components/forms/province-and-city-form/province-and-city-form.component';
 import { ProductFormComponent } from 'app/components/forms/product-form/product-form.component';
-import { MainViewComponent } from 'app/components/shared/main-view/main-view.component';
 import { LadPlacesFormComponent } from 'app/components/forms/lad-places-form/lad-places-form.component';
+import { TravelTimeFormComponent } from 'app/components/forms/travel-time-form/travel-time-form.component';
+import { TariffsFormComponent } from 'app/components/forms/tariffs-manages-form/tariffs-form.component';
+import { MainViewComponent } from 'app/components/shared/main-view/main-view.component';
 
 export enum TabComponentKey {
   Main = -1,
@@ -21,8 +23,10 @@ export enum TabComponentKey {
   LADPlaceManagementService = 7,
   ProvinceAndCityManagement = 8,
   ProductTypesManagement = 9,
-  LoaderManagemet = 13,
+  LoaderManagement = 13,
+  TravelTimeManagement = 14,
   LoadCapacitorManagement = 35,
+  TariffsManagement = 53,
 }
 export interface TabView {
   title: string;
@@ -71,7 +75,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
       component: LoadCapacitorFormComponent,
     },
   ],
-  [TabComponentKey.LoaderManagemet]: [
+  [TabComponentKey.LoaderManagement]: [
     {
       title: 'بارگیر',
       component: LoaderTypeFormComponent,
@@ -95,8 +99,22 @@ export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
       component: ProductFormComponent,
     },
   ],
-  [TabComponentKey.LADPlaceManagementService]: [{
-    title:'مبادی و مقاصد حمل بار',
-    component:  LadPlacesFormComponent
-  }]
+  [TabComponentKey.LADPlaceManagementService]: [
+    {
+      title: 'مبادی و مقاصد حمل بار',
+      component: LadPlacesFormComponent,
+    },
+  ],
+  [TabComponentKey.TravelTimeManagement]: [
+    {
+      title: 'مدت سفر',
+      component: TravelTimeFormComponent,
+    },
+  ],
+  [TabComponentKey.TariffsManagement]: [
+    {
+      title: 'تعرفه های حمل بار',
+      component: TariffsFormComponent,
+    },
+  ],
 };

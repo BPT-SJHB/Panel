@@ -17,15 +17,25 @@ const initialState: SidebarState = {
 
 export const sidebarReducer = createReducer(
   initialState,
-  on(SidebarActions.openSidebar, state => ({ ...state, isOpen: true })),
-  on(SidebarActions.closeSidebar, state => ({ ...state, isOpen: false })),
-  on(SidebarActions.toggleSidebar, state => ({ ...state, isOpen: !state.isOpen })),
+  on(SidebarActions.openSidebar, (state) => ({ ...state, isOpen: true })),
+  on(SidebarActions.closeSidebar, (state) => ({ ...state, isOpen: false })),
+  on(SidebarActions.toggleSidebar, (state) => ({
+    ...state,
+    isOpen: !state.isOpen,
+  })),
   on(SidebarActions.setPageGroups, (state, { groups }) => {
-    const validId = groups.find(g => g.id === state.selectedPageGroupId)?.id || groups[0]?.id || 0;
+    const validId =
+      groups.find((g) => g.id === state.selectedPageGroupId)?.id ||
+      groups[0]?.id ||
+      0;
     return { ...state, pageGroups: groups, selectedPageGroupId: validId };
   }),
   on(SidebarActions.selectPageGroup, (state, { id }) => {
-    const exists = state.pageGroups.some(g => g.id === id);
+    window.scrollTo({
+      top: 0,
+      behavior: 'auto',
+    });    
+    const exists = state.pageGroups.some((g) => g.id === id);
     return exists ? { ...state, selectedPageGroupId: id } : state;
-  }),
+  })
 );

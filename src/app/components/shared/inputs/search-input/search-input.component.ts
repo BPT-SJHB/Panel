@@ -1,27 +1,36 @@
-import { Component, Input, Output, EventEmitter, input } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, Input, Output, EventEmitter, input, output } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import {
   AutoCompleteModule,
   AutoCompleteSelectEvent,
 } from 'primeng/autocomplete';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-search-input',
   imports: [
+    CommonModule,
     InputGroupAddonModule,
     InputGroupModule,
     FormsModule,
     AutoCompleteModule,
+    ReactiveFormsModule
   ],
   templateUrl: './search-input.component.html',
   styleUrl: './search-input.component.scss',
 })
-export class SearchInputComponent {
+export class SearchInputComponent  {
   @Input() placeholder: string = 'جستجو';
   @Input() initialValue: string = '';
   @Input() showClearButton: boolean = true;
+  @Input() icon:string ='pi pi-search'
+  @Input() label:string = ''
+  @Input() addonWidth = '';
+  @Input() showSelectIcon:boolean = false;
+  @Input() readOnly:boolean = false;
+  @Input() control = new FormControl('');
 
   @Input() autoComplete: boolean = false;
   @Input() autoCompleteOptionLabel = 'label';
