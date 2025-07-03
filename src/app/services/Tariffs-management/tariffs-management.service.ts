@@ -112,4 +112,25 @@ export class TariffsManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+  public async EditTariffs(
+    tariffs: Tariff
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.Tariffs.EditTariffs;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      Tariffs: tariffs,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
 }
