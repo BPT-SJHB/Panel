@@ -68,4 +68,27 @@ export class TariffsManagementService {
     >(apiUrl, bodyValue, mockTariffs);
     //#endregion
   }
+
+  public async AddPercentageToTariffs(
+    tariffs: Tariff[],
+    percentage: number
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.Tariffs.ChangeTariffsPercentage;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      Tariffs: tariffs,
+      AddPercentage: percentage,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      any
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
