@@ -89,7 +89,7 @@
   <li class="breadcrumb-item">Components</li>
   <li class="breadcrumb-item"
   >
-  LoaderTypeFormComponent</li>
+  ProductFormComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -106,10 +106,6 @@
                 role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
-            <a href="#styleData" class="nav-link"
-                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
-        </li>
-        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -120,12 +116,18 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>src/app/components/forms/loader-type-form/loader-type-form.component.ts</code>
+    <code>src/app/components/forms/product-form/product-form.component.ts</code>
 </p>
 
 
 
 
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
 
 
 <section data-compodoc="block-metadata">
@@ -146,7 +148,7 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>app-loader-type-form</code></td>
+                <td class="col-md-9"><code>app-product-form</code></td>
             </tr>
 
             <tr>
@@ -157,28 +159,27 @@
             <tr>
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
+                            <code>CommonModule</code>
                             <code>ButtonModule</code>
-                            <code>ReactiveFormsModule</code>
-                                <code><a href="../components/TextInputComponent.html" target="_self" >TextInputComponent</a></code>
-                            <code>CheckboxModule</code>
-                            <code>TableModule</code>
+                            <code>TreeTableModule</code>
+                                <code><a href="../components/TreeTableCheckboxComponent.html" target="_self" >TreeTableCheckboxComponent</a></code>
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>./loader-type-form.component.scss</code></td>
-            </tr>
 
 
 
             <tr>
                 <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./loader-type-form.component.html</code></td>
+                <td class="col-md-9"><code>./product-form.component.html</code></td>
             </tr>
 
 
 
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./product-form.component.scss</code></td>
+            </tr>
 
 
 
@@ -201,21 +202,20 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#cachedProducts" >cachedProducts</a>
+                            </li>
+                            <li>
+                                <a href="#cacheKeyLength" >cacheKeyLength</a>
+                            </li>
+                            <li>
+                                <a href="#cachingEnabled" >cachingEnabled</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Private</span>
                                 <a href="#destroy$" >destroy$</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#fb" >fb</a>
-                            </li>
-                            <li>
-                                <a href="#loadersFormArray" >loadersFormArray</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#loaderTypeService" >loaderTypeService</a>
-                            </li>
-                            <li>
                                 <a href="#loading" >loading</a>
                             </li>
                             <li>
@@ -223,7 +223,17 @@
                                 <a href="#loadingService" >loadingService</a>
                             </li>
                             <li>
-                                <a href="#searchForm" >searchForm</a>
+                                <a href="#products" >products</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#productTypeService" >productTypeService</a>
+                            </li>
+                            <li>
+                                <a href="#selectionKey" >selectionKey</a>
+                            </li>
+                            <li>
+                                <a href="#startKey" >startKey</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
@@ -242,19 +252,21 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#createLoaderGroup" >createLoaderGroup</a>
+                                <a href="#convertToTreeNode" >convertToTreeNode</a>
                             </li>
                             <li>
-                                <a href="#getCheckedControl" >getCheckedControl</a>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#handleProductChange" >handleProductChange</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#handleProductTypeChange" >handleProductTypeChange</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                 <a href="#isSuccessful" >isSuccessful</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Async</span>
-                                <a href="#loadLoadersType" >loadLoadersType</a>
                             </li>
                             <li>
                                 <a href="#ngOnDestroy" >ngOnDestroy</a>
@@ -264,11 +276,16 @@
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#onChangeCheckBox" >onChangeCheckBox</a>
+                                <a href="#onChangeProduct" >onChangeProduct</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#searchLoaders" >searchLoaders</a>
+                                <a href="#searchProduct" >searchProduct</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#updateProductsInfo" >updateProductsInfo</a>
                             </li>
                         </ul>
                     </td>
@@ -278,20 +295,6 @@
 
 
 
-                    <tr>
-                        <td class="col-md-4">
-                            <h6><b>Accessors</b></h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <ul class="index-list">
-                                <li>
-                                    <a href="#searchTitle" >searchTitle</a>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
         </tbody>
     </table>
 </section>
@@ -310,26 +313,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="createLoaderGroup"></a>
+                    <a name="convertToTreeNode"></a>
                     <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>createLoaderGroup</b></span>
-                        <a href="#createLoaderGroup"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>convertToTreeNode</b></span>
+                        <a href="#convertToTreeNode"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>createLoaderGroup(item: <a href="../interfaces/LoaderType.html" target="_self">LoaderType</a>)</code>
+<code>convertToTreeNode(productsType: ProductType[])</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="92"
-                                    class="link-to-prism">src/app/components/forms/loader-type-form/loader-type-form.component.ts:92</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="87"
+                                    class="link-to-prism">src/app/components/forms/product-form/product-form.component.ts:87</a></div>
                         </td>
                     </tr>
 
@@ -350,9 +351,9 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>item</td>
+                                                <td>productsType</td>
                                             <td>
-                                                            <code><a href="../interfaces/LoaderType.html" target="_self" >LoaderType</a></code>
+                                                        <code>ProductType[]</code>
                                             </td>
 
                                             <td>
@@ -365,7 +366,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>FormGroup</code>
+                            <b>Returns : </b>    <code>TreeNode[]</code>
 
                         </div>
                             <div class="io-description">
@@ -379,24 +380,27 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getCheckedControl"></a>
+                    <a name="handleProductChange"></a>
                     <span class="name">
-                        <span ><b>getCheckedControl</b></span>
-                        <a href="#getCheckedControl"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>handleProductChange</b></span>
+                        <a href="#handleProductChange"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>getCheckedControl(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleProductChange(productId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, active: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="113"
-                                    class="link-to-prism">src/app/components/forms/loader-type-form/loader-type-form.component.ts:113</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="172"
+                                    class="link-to-prism">src/app/components/forms/product-form/product-form.component.ts:172</a></div>
                         </td>
                     </tr>
 
@@ -417,9 +421,21 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>index</td>
+                                                <td>productId</td>
                                             <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>active</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
                                             </td>
 
                                             <td>
@@ -432,7 +448,89 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>FormControl&lt;any&gt;</code>
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleProductTypeChange"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>handleProductTypeChange</b></span>
+                        <a href="#handleProductTypeChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleProductTypeChange(productTypeId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, active: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="157"
+                                    class="link-to-prism">src/app/components/forms/product-form/product-form.component.ts:157</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>productTypeId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>active</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
                             <div class="io-description">
@@ -464,8 +562,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="102"
-                                    class="link-to-prism">src/app/components/forms/loader-type-form/loader-type-form.component.ts:102</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="193"
+                                    class="link-to-prism">src/app/components/forms/product-form/product-form.component.ts:193</a></div>
                         </td>
                     </tr>
 
@@ -515,45 +613,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="loadLoadersType"></a>
-                    <span class="name">
-                            <span class="modifier">Async</span>
-                        <span ><b>loadLoadersType</b></span>
-                        <a href="#loadLoadersType"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>loadLoadersType()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="69"
-                                    class="link-to-prism">src/app/components/forms/loader-type-form/loader-type-form.component.ts:69</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="ngOnDestroy"></a>
                     <span class="name">
                         <span ><b>ngOnDestroy</b></span>
@@ -570,8 +629,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="47"
-                                    class="link-to-prism">src/app/components/forms/loader-type-form/loader-type-form.component.ts:47</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="48"
+                                    class="link-to-prism">src/app/components/forms/product-form/product-form.component.ts:48</a></div>
                         </td>
                     </tr>
 
@@ -607,8 +666,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="52"
-                                    class="link-to-prism">src/app/components/forms/loader-type-form/loader-type-form.component.ts:52</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="53"
+                                    class="link-to-prism">src/app/components/forms/product-form/product-form.component.ts:53</a></div>
                         </td>
                     </tr>
 
@@ -628,26 +687,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="onChangeCheckBox"></a>
+                    <a name="onChangeProduct"></a>
                     <span class="name">
                             <span class="modifier">Async</span>
-                        <span ><b>onChangeCheckBox</b></span>
-                        <a href="#onChangeCheckBox"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>onChangeProduct</b></span>
+                        <a href="#onChangeProduct"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>onChangeCheckBox(control: FormGroup)</code>
+                    <code>onChangeProduct(change: <a href="../interfaces/TreeTableChangedData.html" target="_self">TreeTableChangedData</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="79"
-                                    class="link-to-prism">src/app/components/forms/loader-type-form/loader-type-form.component.ts:79</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="101"
+                                    class="link-to-prism">src/app/components/forms/product-form/product-form.component.ts:101</a></div>
                         </td>
                     </tr>
 
@@ -668,9 +727,9 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>control</td>
+                                                <td>change</td>
                                             <td>
-                                                        <code>FormGroup</code>
+                                                            <code><a href="../interfaces/TreeTableChangedData.html" target="_self" >TreeTableChangedData</a></code>
                                             </td>
 
                                             <td>
@@ -697,26 +756,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="searchLoaders"></a>
+                    <a name="searchProduct"></a>
                     <span class="name">
                             <span class="modifier">Async</span>
-                        <span ><b>searchLoaders</b></span>
-                        <a href="#searchLoaders"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>searchProduct</b></span>
+                        <a href="#searchProduct"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>searchLoaders(query: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>searchProduct(query: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="58"
-                                    class="link-to-prism">src/app/components/forms/loader-type-form/loader-type-form.component.ts:58</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="66"
+                                    class="link-to-prism">src/app/components/forms/product-form/product-form.component.ts:66</a></div>
                         </td>
                     </tr>
 
@@ -762,12 +821,145 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateProductsInfo"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>updateProductsInfo</b></span>
+                        <a href="#updateProductsInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateProductsInfo()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="180"
+                                    class="link-to-prism">src/app/components/forms/product-form/product-form.component.ts:180</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
     <section data-compodoc="block-properties">
     
     <h3 id="inputs">
         Properties
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cachedProducts"></a>
+                    <span class="name">
+                        <span ><b>cachedProducts</b></span>
+                        <a href="#cachedProducts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>TreeNode[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/components/forms/product-form/product-form.component.ts:60</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cacheKeyLength"></a>
+                    <span class="name">
+                        <span ><b>cacheKeyLength</b></span>
+                        <a href="#cacheKeyLength"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>3</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/components/forms/product-form/product-form.component.ts:62</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cachingEnabled"></a>
+                    <span class="name">
+                        <span ><b>cachingEnabled</b></span>
+                        <a href="#cachingEnabled"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/components/forms/product-form/product-form.component.ts:63</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -787,90 +979,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/forms/loader-type-form/loader-type-form.component.ts:39</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="fb"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>fb</b></span>
-                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>inject(FormBuilder)</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/forms/loader-type-form/loader-type-form.component.ts:35</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="loadersFormArray"></a>
-                    <span class="name">
-                        <span ><b>loadersFormArray</b></span>
-                        <a href="#loadersFormArray"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>FormArray</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>this.fb.array([])</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/components/forms/loader-type-form/loader-type-form.component.ts:42</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="loaderTypeService"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>loaderTypeService</b></span>
-                        <a href="#loaderTypeService"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>inject(LoaderTypesService)</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/forms/loader-type-form/loader-type-form.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/forms/product-form/product-form.component.ts:45</a></div>
                         </td>
                     </tr>
 
@@ -883,6 +992,7 @@
                 <td class="col-md-4">
                     <a name="loading"></a>
                     <span class="name">
+                            <span class="modifier">Private</span>
                         <span ><b>loading</b></span>
                         <a href="#loading"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -890,12 +1000,18 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>false</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/forms/loader-type-form/loader-type-form.component.ts:41</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/forms/product-form/product-form.component.ts:46</a></div>
                         </td>
                     </tr>
 
@@ -921,7 +1037,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/components/forms/loader-type-form/loader-type-form.component.ts:38</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/forms/product-form/product-form.component.ts:43</a></div>
                         </td>
                     </tr>
 
@@ -932,23 +1048,110 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="searchForm"></a>
+                    <a name="products"></a>
                     <span class="name">
-                        <span ><b>searchForm</b></span>
-                        <a href="#searchForm"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>products</b></span>
+                        <a href="#products"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.fb.group({
-    title: [&#x27;&#x27;, [Validators.required, Validators.minLength(2)]],
-  })</code>
+                        <i>Type : </i>    <code>TreeNode[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/forms/loader-type-form/loader-type-form.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/components/forms/product-form/product-form.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="productTypeService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>productTypeService</b></span>
+                        <a href="#productTypeService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ProductTypesService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/components/forms/product-form/product-form.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectionKey"></a>
+                    <span class="name">
+                        <span ><b>selectionKey</b></span>
+                        <a href="#selectionKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Record&lt;string | SelectionOption&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/components/forms/product-form/product-form.component.ts:61</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="startKey"></a>
+                    <span class="name">
+                        <span ><b>startKey</b></span>
+                        <a href="#startKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/components/forms/product-form/product-form.component.ts:64</a></div>
                         </td>
                     </tr>
 
@@ -974,7 +1177,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/forms/loader-type-form/loader-type-form.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/components/forms/product-form/product-form.component.ts:44</a></div>
                         </td>
                     </tr>
 
@@ -983,82 +1186,56 @@
     </table>
 </section>
 
-    <section data-compodoc="block-accessors">
-    <h3 id="accessors">
-        Accessors
-    </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="searchTitle"></a>
-                        <span class="name"><b>searchTitle</b><a href="#searchTitle"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>searchTitle()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">src/app/components/forms/loader-type-form/loader-type-form.component.ts:117</a></div>
-                                </td>
-                            </tr>
-
-            </tbody>
-        </table>
-</section>
 </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, OnInit } from &#x27;@angular/core&#x27;;
+import { ButtonModule } from &#x27;primeng/button&#x27;;
+import { TreeTableModule } from &#x27;primeng/treetable&#x27;;
+import { TreeNode } from &#x27;primeng/api&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
 import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from &#x27;@angular/forms&#x27;;
-import { TextInputComponent } from &#x27;app/components/shared/inputs/text-input/text-input.component&#x27;;
-import { ApiResponse } from &#x27;app/data/model/api-Response.model&#x27;;
-import { LoaderType } from &#x27;app/data/model/loader-type.model&#x27;;
-import { LoaderTypesService } from &#x27;app/services/loader-types/loader-types.service&#x27;;
+  TreeTableChangedData,
+  TreeTableCheckboxComponent,
+} from &#x27;../../trees/tree-table-checkbox/tree-table-checkbox.component&#x27;;
+import { ProductType } from &#x27;app/data/model/product-type.model&#x27;;
+import { ProductTypesService } from &#x27;app/services/product-types/product-types.service&#x27;;
 import { LoadingService } from &#x27;app/services/loading-service/loading-service.service&#x27;;
 import { ToastService } from &#x27;app/services/toast-service/toast.service&#x27;;
-import { ButtonModule } from &#x27;primeng/button&#x27;;
-import { CheckboxModule } from &#x27;primeng/checkbox&#x27;;
-import { TableModule } from &#x27;primeng/table&#x27;;
+import { ApiResponse } from &#x27;app/data/model/api-Response.model&#x27;;
 import { Subject, takeUntil } from &#x27;rxjs&#x27;;
+import { ErrorCodes } from &#x27;app/constants/error-messages&#x27;;
+
+export interface ProductParent {
+  ProductTypeId: number;
+  ProductTypeTitle: string;
+  ProductTypeActive: boolean;
+}
+
+interface SelectionOption {
+  checked: boolean;
+  partialChecked?: boolean;
+}
 
 @Component({
-  selector: &#x27;app-loader-type-form&#x27;,
+  selector: &#x27;app-product-form&#x27;,
   standalone: true,
   imports: [
+    CommonModule,
     ButtonModule,
-    ReactiveFormsModule,
-    TextInputComponent,
-    CheckboxModule,
-    TableModule,
+    TreeTableModule,
+    TreeTableCheckboxComponent,
   ],
-  templateUrl: &#x27;./loader-type-form.component.html&#x27;,
-  styleUrls: [&#x27;./loader-type-form.component.scss&#x27;],
+  templateUrl: &#x27;./product-form.component.html&#x27;,
+  styleUrl: &#x27;./product-form.component.scss&#x27;,
 })
-export class LoaderTypeFormComponent {
-  private fb &#x3D; inject(FormBuilder);
-  private toast &#x3D; inject(ToastService);
-  private loaderTypeService &#x3D; inject(LoaderTypesService);
+export class ProductFormComponent implements OnInit {
+  private productTypeService &#x3D; inject(ProductTypesService);
   private loadingService &#x3D; inject(LoadingService);
+  private toast &#x3D; inject(ToastService);
   private destroy$ &#x3D; new Subject&lt;void&gt;();
-
-  loading &#x3D; false;
-  loadersFormArray: FormArray &#x3D; this.fb.array([]);
-  searchForm &#x3D; this.fb.group({
-    title: [&#x27;&#x27;, [Validators.required, Validators.minLength(2)]],
-  });
+  private loading: boolean &#x3D; false;
 
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -1071,158 +1248,179 @@ export class LoaderTypeFormComponent {
       .subscribe((value) &#x3D;&gt; (this.loading &#x3D; value));
   }
 
-  async searchLoaders(query: string): Promise&lt;void&gt; {
-    const response &#x3D; await this.loaderTypeService.GetLoaderTypesInfo(query);
-    if (!this.isSuccessful(response)) {
-      this.loadersFormArray.clear();
+  products: TreeNode[] &#x3D; [];
+  cachedProducts: TreeNode[] &#x3D; [];
+  selectionKey!: Record&lt;string, SelectionOption&gt;;
+  cacheKeyLength: number &#x3D; 3;
+  cachingEnabled: boolean &#x3D; true;
+  startKey: string &#x3D; &#x27;&#x27;;
+
+  async searchProduct(query: string): Promise&lt;void&gt; {
+    if (query.length &lt; this.cacheKeyLength) {
+      this.products &#x3D; [];
+      return;
     }
-    this.loadersFormArray.clear();
-    response.data!.forEach((loader: any) &#x3D;&gt;
-      this.loadersFormArray.push(this.createLoaderGroup(loader))
-    );
+
+    const newStartKey &#x3D; query.substring(0, this.cacheKeyLength);
+
+    if (this.cachingEnabled &amp;&amp; newStartKey &#x3D;&#x3D;&#x3D; this.startKey) {
+      if (this.products.length &#x3D;&#x3D; 0) this.products &#x3D; [...this.cachedProducts];
+      return;
+    }
+
+    const response &#x3D; await this.productTypeService.GetProductsInfo(query);
+    if (!this.isSuccessful(response)) return;
+
+    this.startKey &#x3D; newStartKey;
+    this.products &#x3D; this.convertToTreeNode(response.data!);
+    this.cachedProducts &#x3D; this.products;
   }
 
-  async loadLoadersType() {
-    if (this.searchForm.invalid || this.loading) return;
+  convertToTreeNode(productsType: ProductType[]): TreeNode[] {
+    return productsType.map((productType) &#x3D;&gt; ({
+      data: {
+        ProductTypeId: productType.ProductTypeId,
+        ProductTypeTitle: productType.ProductTypeTitle,
+        ProductTypeActive: productType.ProductTypeActive,
+      },
+      children:
+        productType.Products?.map((product) &#x3D;&gt; ({
+          data: product,
+        })) ?? [],
+    }));
+  }
+
+  async onChangeProduct(change: TreeTableChangedData) {
+    if (this.loading) return;
+
     try {
       this.loadingService.setLoading(true);
-      await this.searchLoaders(this.searchTitle.value);
+      const parent &#x3D; change.parent;
+      const children &#x3D; change.children;
+     
+      if (!parent &amp;&amp; children.length &#x3D;&#x3D; 0)
+        return;  
+      
+
+      // Handle only-child case
+      if (!parent &amp;&amp; children.length &gt; 0) {
+        const { ProductId, ProductActive } &#x3D; children[0];
+        const response &#x3D; await this.handleProductChange(ProductId, ProductActive);
+        if (!this.isSuccessful(response)) return;
+        this.toast.success(&#x27;موفق&#x27;,response.data?.Message??&#x27;&#x27;);
+        return;
+      }
+
+      // Handle parent is inactive
+      if (!parent.ProductTypeActive) {
+        const { ProductTypeId, ProductTypeActive } &#x3D; parent;
+        await this.handleProductTypeChange(ProductTypeId, ProductTypeActive);
+        return;
+      }
+
+      // Handle parent is active
+      if (parent.ProductTypeActive) {
+        const requests &#x3D; children.map(({ ProductId, ProductActive }) &#x3D;&gt;
+          this.handleProductChange(ProductId, ProductActive)
+        );
+        const results &#x3D; await Promise.allSettled(requests);
+
+        const firstError &#x3D; results.find((r) &#x3D;&gt; r.status &#x3D;&#x3D;&#x3D; &#x27;rejected&#x27;) as
+          | PromiseRejectedResult
+          | undefined;
+
+        if (firstError) {
+          const error &#x3D;
+            (firstError.reason as any)?.error?.message ??
+            &#x27;خطای غیرمنتظره‌ای در حذف دسترسی رخ داد&#x27;;
+          this.toast.error(&#x27;خطا&#x27;, error);
+          await this.updateProductsInfo();
+          return;
+        }
+
+        const { ProductTypeId, ProductTypeActive } &#x3D; parent;
+        await this.handleProductTypeChange(ProductTypeId, ProductTypeActive);
+      }
     } finally {
       this.loadingService.setLoading(false);
     }
   }
-
-  async onChangeCheckBox(control: FormGroup) {
-    const id &#x3D; control.get(&#x27;id&#x27;)?.value ?? -1;
-    const status &#x3D; control.get(&#x27;status&#x27;)?.value ?? false;
-
-    const response &#x3D; await this.loaderTypeService.ChangeLoaderTypeStatus(id);
-    if (!this.isSuccessful(response) &amp;&amp; control.get(&#x27;status&#x27;)) {
-      control.get(&#x27;status&#x27;)?.setValue(!status);
+  
+  private async handleProductTypeChange(
+    productTypeId: number,
+    active: boolean
+  ) {
+    const response &#x3D; await this.productTypeService.ChangeProductTypeStatus(
+      productTypeId,
+      active
+    );
+    if (!this.isSuccessful(response)) {
+      // await this.updateProductsInfo()
       return;
-    }
-
+    };
     this.toast.success(&#x27;موفق&#x27;, response.data?.Message ?? &#x27;&#x27;);
   }
 
-  private createLoaderGroup(item: LoaderType): FormGroup {
-    return this.fb.group({
-      id: [item.LoaderTypeId],
-      code: [item.LoaderTypeOrganizationId],
-      title: [item.LoaderTypeTitle],
-      type: [item.LoaderTypeTitle],
-      status: [item.Active],
-    });
+  private async handleProductChange(productId: number, active: boolean) {
+    const response &#x3D; await this.productTypeService.ChangeProductStatus(
+      productId,
+      active
+    );
+    return response;
+  }
+
+  private async updateProductsInfo() {
+    if (this.startKey.length &lt; this.cacheKeyLength) {
+      return;
+    }  
+    const productsResponse &#x3D; await this.productTypeService.GetProductsInfo(
+      this.startKey
+    );
+
+    if (this.isSuccessful(productsResponse)) {
+      this.products &#x3D; this.convertToTreeNode(productsResponse.data!);
+    }
   }
 
   private isSuccessful(response: ApiResponse&lt;any&gt;): boolean {
+    
     if (!response.success || !response.data) {
       this.toast.error(
         &#x27;خطا&#x27;,
         response.error?.message ?? &#x27;خطای غیرمنتظره‌ای رخ داد&#x27;
       );
+      console.log(response);
+      if (response.error?.code &#x3D;&#x3D; ErrorCodes.NoRecordFound) {
+        
+        return true;
+      }
       return false;
     }
     return true;
-  }
-
-  getCheckedControl(index: number): FormControl&lt;any&gt; {
-    return this.loadersFormArray.at(index).get(&#x27;status&#x27;) as FormControl;
-  }
-
-  get searchTitle(): FormControl {
-    return this.searchForm.get(&#x27;title&#x27;) as FormControl;
   }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;flex flex-column gap-2&quot;&gt;
-  &lt;!-- Loading Spinner --&gt;
-  @if (loading) {
-  &lt;div
-    class&#x3D;&quot;h-full w-full z-5 flex align-items-center justify-content-center absolute&quot;
-  &gt;
-    &lt;div class&#x3D;&quot;h-full w-full&quot; style&#x3D;&quot;opacity: 0.2&quot;&gt;&lt;/div&gt;
-    &lt;i class&#x3D;&quot;pi pi-spin pi-spinner primary&quot; style&#x3D;&quot;font-size: 5rem&quot;&gt;&lt;/i&gt;
-  &lt;/div&gt;
-  }
+        <pre class="line-numbers"><code class="language-html">&lt;app-tree-table-checkbox
+  [tree]&#x3D;&quot;products&quot;
+  [cols]&#x3D;&quot;[&#x27;فعال/غیرفعال&#x27;]&quot;
+  [rows]&#x3D;&quot;[[&#x27;ProductTypeTitle&#x27;, &#x27;ProductTitle&#x27;]]&quot;
+  [enabledSearch]&#x3D;&quot;true&quot;
+  [searchFields]&#x3D;&quot;[&#x27;ProductTitle&#x27;,&#x27;ProductTypeTitle&#x27;]&quot;
+  [paginator]&#x3D;&quot;true&quot;
+  childField&#x3D;&quot;ProductActive&quot;
+  parentField&#x3D;&quot;ProductTypeActive&quot;
+  searchPlaceholder&#x3D;&quot;بخشی از نام کالا را وارد نمایید.&quot;
+  paginatorLocale&#x3D;&quot;fa-IR&quot;
+  (onSearch)&#x3D;&quot;searchProduct($event)&quot;
+  (onTableCheckBoxChange)&#x3D;&quot;onChangeProduct($event)&quot;
+/&gt;
 
-  &lt;!-- Search Form --&gt;
-  &lt;form
-    class&#x3D;&quot;col-12&quot;
-    [formGroup]&#x3D;&quot;searchForm&quot;
-    [class.pointer-events-none]&#x3D;&quot;loading&quot;
-    [class.opacity-60]&#x3D;&quot;loading&quot;
-    (ngSubmit)&#x3D;&quot;loadLoadersType()&quot;
-  &gt;
-    &lt;div class&#x3D;&quot;flex gap-3&quot;&gt;
-      &lt;app-text-input
-        [control]&#x3D;&quot;searchTitle&quot;
-        icon&#x3D;&quot;pi pi-search&quot;
-        class&#x3D;&quot;flex-1&quot;
-        placeholder&#x3D;&quot;قسمتی از عنوان بارگیر را وارد نمایید.&quot;
-        addonWidth&#x3D;&quot;5rem&quot;
-      /&gt;
-      &lt;p-button
-        (click)&#x3D;&quot;loadLoadersType()&quot;
-        [disabled]&#x3D;&quot;searchForm.invalid || loading&quot;
-        size&#x3D;&quot;small&quot;
-        severity&#x3D;&quot;info&quot;
-        styleClass&#x3D;&quot;w-8rem h-2-5rem&quot;
-        label&#x3D;&quot;جستجو&quot;
-      /&gt;
-    &lt;/div&gt;
-  &lt;/form&gt;
-
-  &lt;!-- Loader Form --&gt;
-  &lt;div
-    [class.pointer-events-none]&#x3D;&quot;loading&quot;
-    [class.opacity-60]&#x3D;&quot;loading&quot;
-  &gt;
-    &lt;p-table
-      [value]&#x3D;&quot;this.loadersFormArray.controls&quot;
-    styleClass&#x3D;&quot;overflow-x-auto&quot;
-    [tableStyle]&#x3D;&quot;{&#x27;min-width&#x27;:&#x27;50rem&#x27;}&quot;
-      &gt;
-      &lt;ng-template #header&gt;
-        &lt;tr&gt;
-          &lt;th&gt;فعال و غیر فعال&lt;/th&gt;
-          &lt;th&gt;کد&lt;/th&gt;
-          &lt;th&gt;کد سازمانی&lt;/th&gt;
-          &lt;th&gt;عنوان بارگیر&lt;/th&gt;
-          &lt;th&gt;بارگیر ثابت و غیر ثابت&lt;/th&gt;
-        &lt;/tr&gt;
-      &lt;/ng-template&gt;
-      &lt;ng-template #body let-control&gt;
-        &lt;tr&gt;
-          &lt;td&gt;
-            &lt;p-checkbox
-              [binary]&#x3D;&quot;true&quot;
-              (onChange)&#x3D;&quot;onChangeCheckBox(control)&quot;
-              class&#x3D;&quot;mb-1&quot;
-              [formControl]&#x3D;&quot;control.get(&#x27;status&#x27;)&quot;
-            &gt;&lt;/p-checkbox&gt;
-          &lt;/td&gt;
-          &lt;td&gt;{{ control.get(&quot;id&quot;)?.value }}&lt;/td&gt;
-          &lt;td&gt;{{ control.get(&quot;code&quot;)?.value }}&lt;/td&gt;
-          &lt;td&gt;{{ control.get(&quot;title&quot;)?.value }}&lt;/td&gt;
-          &lt;td&gt;{{ control.get(&quot;type&quot;)?.value }}&lt;/td&gt;
-        &lt;/tr&gt;
-      &lt;/ng-template&gt;
-    &lt;/p-table&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="styleData">
-                <p class="comment">
-                    <code>./loader-type-form.component.scss</code>
-                </p>
-                <pre class="line-numbers"><code class="language-scss"></code></pre>
-    </div>
 
     <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>
@@ -1249,10 +1447,10 @@ export class LoaderTypeFormComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="flex flex-column gap-2">  <!-- Loading Spinner -->  @if (loading) {  <div    class="h-full w-full z-5 flex align-items-center justify-content-center absolute"  >    <div class="h-full w-full" style="opacity: 0.2"></div>    <i class="pi pi-spin pi-spinner primary" style="font-size: 5rem"></i>  </div>  }  <!-- Search Form -->  <form    class="col-12"    [formGroup]="searchForm"    [class.pointer-events-none]="loading"    [class.opacity-60]="loading"    (ngSubmit)="loadLoadersType()"  >    <div class="flex gap-3">      <app-text-input        [control]="searchTitle"        icon="pi pi-search"        class="flex-1"        placeholder="قسمتی از عنوان بارگیر را وارد نمایید."        addonWidth="5rem"      />      <p-button        (click)="loadLoadersType()"        [disabled]="searchForm.invalid || loading"        size="small"        severity="info"        styleClass="w-8rem h-2-5rem"        label="جستجو"      />    </div>  </form>  <!-- Loader Form -->  <div    [class.pointer-events-none]="loading"    [class.opacity-60]="loading"  >    <p-table      [value]="this.loadersFormArray.controls"    styleClass="overflow-x-auto"    [tableStyle]="{\'min-width\':\'50rem\'}"      >      <ng-template #header>        <tr>          <th>فعال و غیر فعال</th>          <th>کد</th>          <th>کد سازمانی</th>          <th>عنوان بارگیر</th>          <th>بارگیر ثابت و غیر ثابت</th>        </tr>      </ng-template>      <ng-template #body let-control>        <tr>          <td>            <p-checkbox              [binary]="true"              (onChange)="onChangeCheckBox(control)"              class="mb-1"              [formControl]="control.get(\'status\')"            ></p-checkbox>          </td>          <td>{{ control.get("id")?.value }}</td>          <td>{{ control.get("code")?.value }}</td>          <td>{{ control.get("title")?.value }}</td>          <td>{{ control.get("type")?.value }}</td>        </tr>      </ng-template>    </p-table>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><app-tree-table-checkbox  [tree]="products"  [cols]="[\'فعال/غیرفعال\']"  [rows]="[[\'ProductTypeTitle\', \'ProductTitle\']]"  [enabledSearch]="true"  [searchFields]="[\'ProductTitle\',\'ProductTypeTitle\']"  [paginator]="true"  childField="ProductActive"  parentField="ProductTypeActive"  searchPlaceholder="بخشی از نام کالا را وارد نمایید."  paginatorLocale="fa-IR"  (onSearch)="searchProduct($event)"  (onTableCheckBoxChange)="onChangeProduct($event)"/></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarMenuComponent', 'selector': 'app-sidebar-menu'},{'name': 'SubMenuComponent', 'selector': 'app-sub-menu'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TabBarComponent', 'selector': 'app-tab-bar'},{'name': 'TabViewComponent', 'selector': 'app-tab-view'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'}];
     var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'LoaderTypeFormComponent'};
+    var ACTUAL_COMPONENT = {'name': 'ProductFormComponent'};
 </script>
 <script src="../js/tree.js"></script>
 
@@ -1298,7 +1496,7 @@ export class LoaderTypeFormComponent {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'LoaderTypeFormComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ProductFormComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

@@ -86,5 +86,13 @@ export const API_ROUTES = {
       DeleteTravelTime: `${environment.apiUrl}:${transportationAPIPort}/api/TravelTimeDeleting`,
       ChangeTravelTimeStatus: `${environment.apiUrl}:${transportationAPIPort}/api/TravelTimeChangeActivateStatus`,
     },
+    Tariffs: {
+      GetTariffs: `${environment.apiUrl}:${transportationAPIPort}/api/GetTariffs`,
+      ChangeTariffsPercentage: `${environment.apiUrl}:${transportationAPIPort}/api/TariffsRegisteringWithAddPercentage`,
+      ChangeTariffsStatus: `${environment.apiUrl}:${transportationAPIPort}/api/TariffsDeactivate`,
+      DeleteTariffs: `${environment.apiUrl}:${transportationAPIPort}/api/TariffsDeleting`,
+      EditTariffs: `${environment.apiUrl}:${transportationAPIPort}/api/TariffsEditing`,
+      UploadTariffsFile: `${environment.apiUrl}:${transportationAPIPort}/api/TariffsUploading`,
+    },
   },
 };
