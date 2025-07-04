@@ -53,8 +53,9 @@ export class TextInputComponent implements OnInit, OnChanges {
   @Input() datePickerPosition: 'top' | 'bottom' = 'bottom';
 
   @Output() clickButton = new EventEmitter<void>();
+  @Output() input = new EventEmitter<any>();
 
-
+  
   get firstErrorMessage(): string | null {
     const errors = this.control?.errors as ErrorsValidation;
     if (!this.validationField || !errors) return null;
