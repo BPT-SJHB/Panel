@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, input, output } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
@@ -7,92 +7,96 @@ import {
   AutoCompleteSelectEvent,
 } from 'primeng/autocomplete';
 import { CommonModule } from '@angular/common';
+import { ValidationField } from 'app/constants/validation-schema';
+import { TextInputComponent } from '../text-input/text-input.component';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-search-input',
+  standalone: true,
   imports: [
     CommonModule,
     InputGroupAddonModule,
     InputGroupModule,
     FormsModule,
     AutoCompleteModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TextInputComponent,
+    ButtonModule,
   ],
   templateUrl: './search-input.component.html',
   styleUrl: './search-input.component.scss',
 })
-export class SearchInputComponent  {
-  @Input() placeholder: string = 'جستجو';
-  @Input() initialValue: string = '';
-  @Input() showClearButton: boolean = true;
-  @Input() icon:string ='pi pi-search'
-  @Input() label:string = ''
-  @Input() addonWidth = '';
-  @Input() showSelectIcon:boolean = false;
-  @Input() readOnly:boolean = false;
+export class SearchInputComponent<T> {
   @Input() control = new FormControl('');
+  @Input() autoSearch = false;
+  @Input() validationField: ValidationField | null = null;
+  @Input() placeholder = '';
+  @Input() readOnly = false;
+  @Input() disabled = false;
+  @Input() icon = 'pi pi-user';
+  @Input() label = '';
+  @Input() addonWidth: string | null = null;
+  @Input() data: T[] = [];
+  @Input() lazySearch?: (query: string) => Promise<T[]>;
 
-  @Input() autoComplete: boolean = false;
-  @Input() autoCompleteOptionLabel = 'label';
-  @Input() autoCompleteOptionValue = 'value';
-  @Input() autoCompleteMinLength: number = 3;
-  @Input() lazySearch!: (query: string) => Promise<any[]>;
+  @Input() cachingEnabled = true;
+  @Input() optionLabel = 'label';
+  @Input() optionValue = 'value';
+  @Input() minLength = 3;
+
+  // ✅ Optional custom filtering function
+  @Input() filterFn?: (item: T, query: string) => boolean;
 
   @Output() input = new EventEmitter<any>();
-  @Output() search = new EventEmitter<string>();
-  @Output() cleared = new EventEmitter<void>();
-  @Output() valueChange = new EventEmitter<string>();
-  @Output() selectAutoComplete = new EventEmitter<AutoCompleteSelectEvent>();
+  @Output() search = new EventEmitter<T[]>();
 
-  _searchTerm: string = '';
-  showEmptyMessage: boolean = false;
-  autoCompleteItem: any[] = [];
+  cachedData: T[] = [];
+  lastSearchKey: string = '';
+  buttonLabel: string = 'جستجو';
 
-  ngOnInit() {
-    this._searchTerm = this.initialValue;
-  }
+  async searchData(query: string,forceUpdate = false): Promise<T[]> {
+    query = query.trimStart();
 
-  set searchTerm(value: string) {
-    this._searchTerm = value;
-    this.valueChange.emit(value);
-  }
-
-  get searchTerm(): string {
-    return this._searchTerm;
-  }
-
-  onValueChange(value: string) {
-    this.searchTerm = value;
-  }
-
-  onSearch() {
-    if (this.searchTerm.trim()) {
-      this.search.emit(this.searchTerm.trim());
-    }
-  }
-
-  onSelectAutoComplete(event: AutoCompleteSelectEvent) {
-    this.selectAutoComplete.emit(event);
-  }
-
-  onClear() {
-    this.searchTerm = '';
-    this.cleared.emit();
-    this.search.emit('');
-  }
-
-  async onLazySearch(event: { query: string }) {
-    const term = event.query.trimStart();
-
-    if (term.length < this.autoCompleteMinLength) {
-      this.autoCompleteItem = [];
-      this.showEmptyMessage = false;
-      return;
+    if (query.length < this.minLength) {
+      return [];
     }
 
-    const result = await this.lazySearch(term);
+    if (!this.filterFn) return [];
 
-    this.autoCompleteItem = result;
-    this.showEmptyMessage = this.autoCompleteItem.length === 0;
+    if (!this.lazySearch) {
+      return this.data.filter((item) => this.filterFn!(item, query));
+    }
+
+    const currentKey = query.substring(0, this.minLength);
+
+    if (!forceUpdate && this.cachingEnabled && currentKey === this.lastSearchKey) {
+      return this.cachedData.filter((item) => this.filterFn!(item, query));
+    }
+
+    // Fetch fresh results
+    const result = await this.lazySearch(query);
+    this.lastSearchKey = currentKey;
+    this.cachedData = result;
+    return result;
+  }
+
+  async refreshSearch(): Promise<T[]> {
+    const query = this.control.value ?? '';
+    return await this.searchData(query, true);
+  }
+
+  async onSearch(query: string): Promise<void> {
+    const filterData = await this.searchData(query);
+    this.search.emit(filterData);
+  }
+
+  onInputValueChange(event: { query: string }) {
+    this.input.emit(event);
+    if (this.autoSearch) this.onSearch(event.query);
+  }
+
+  clickSearchButton() {
+    if (!this.autoSearch) this.onSearch(this.control.value ?? '');
   }
 }
