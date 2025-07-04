@@ -1,5 +1,6 @@
-<div class="flex justify-content-center align-items-center">
+<div class="flex justify-content-center align-items-center gap-3">
   <app-text-input
+    class="flex-grow-1"
     [control]="control"
     [validationField]="validationField"
     [label]="label"
@@ -10,9 +11,10 @@
     (input)="onInputValueChange($event)"
   />
   <p-button
+    *ngIf="!autoSearch"
     (click)="clickSearchButton()"
     [label]="buttonLabel"
     size="small"
-    styleClass="px-2 py-1"
+    styleClass="px-4 py-1"
   />
 </div>
