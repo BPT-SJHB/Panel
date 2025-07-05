@@ -18,3 +18,40 @@ import { mockRelationOfAnnouncementGroupAndSubGroups } from './mock/relation-of-
 export class AnnouncementGroupSubgroupManagementService {
   private userAuth = inject(UserAuthService);
   private apiCommunicator = inject(APICommunicationManagementService);
+  public async GetAnnouncementGroups(
+    title: string
+  ): Promise<ApiResponse<AnnouncementGroup[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.Announcements.Groups.GetAnnouncementGroups;
+    const announcementGroupInfo: AnnouncementGroup = {
+      AnnouncementId: 0,
+      AnnouncementTitle: title,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SearchString: announcementGroupInfo.AnnouncementTitle,
+    };
+    //#endregion
+
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      AnnouncementGroup[]
+    >(apiUrl, bodyValue, mockAnnouncementGroups);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: response.data?.map((data) => ({
+        AnnouncementId: data.AnnouncementId,
+        AnnouncementTitle: data.AnnouncementTitle?.trim(),
+        Active: data.Active,
+      })),
+      error: response.error,
+    };
+    //#endregion
+  }
