@@ -84,3 +84,32 @@ export class AnnouncementGroupSubgroupManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  public async EditAnnouncementGroup(
+    id: number,
+    title: string,
+    status: boolean
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.Announcements.Groups.EditAnnouncementGroup;
+    const announcementGroupInfo: AnnouncementGroup = {
+      AnnouncementId: id,
+      AnnouncementTitle: title,
+      Active: status,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      RawAnnouncement: announcementGroupInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
