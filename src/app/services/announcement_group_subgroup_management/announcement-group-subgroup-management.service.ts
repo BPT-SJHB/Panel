@@ -138,3 +138,41 @@ export class AnnouncementGroupSubgroupManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+  public async GetAnnouncementSupGroups(
+    title: string
+  ): Promise<ApiResponse<AnnouncementSubGroup[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.Announcements.SubGroups
+        .GetAnnouncementSubGroups;
+    const announcementSubGroupInfo: AnnouncementSubGroup = {
+      AnnouncementSGId: 0,
+      AnnouncementSGTitle: title,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SearchString: announcementSubGroupInfo.AnnouncementSGTitle,
+    };
+    //#endregion
+
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      AnnouncementSubGroup[]
+    >(apiUrl, bodyValue, mockAnnouncementSubGroups);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: response.data?.map((data) => ({
+        AnnouncementSGId: data.AnnouncementSGId,
+        AnnouncementSGTitle: data.AnnouncementSGTitle?.trim(),
+        Active: data.Active,
+      })),
+      error: response.error,
+    };
+    //#endregion
+  }
