@@ -106,7 +106,7 @@ export class LADPlaceManagementService {
     };
     //#endregion
 
-    //#region Request
+    //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
@@ -131,7 +131,7 @@ export class LADPlaceManagementService {
     };
     //#endregion
 
-    //#region Request
+    //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
@@ -157,7 +157,7 @@ export class LADPlaceManagementService {
     };
     //#endregion
 
-    //#region Request
+    //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
@@ -183,7 +183,7 @@ export class LADPlaceManagementService {
     };
     //#endregion
 
-    //#region Request
+    //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
