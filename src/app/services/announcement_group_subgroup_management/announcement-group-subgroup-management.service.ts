@@ -113,3 +113,28 @@ export class AnnouncementGroupSubgroupManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  public async DeleteAnnouncementGroup(
+    id: number
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.Announcements.Groups.DeleteAnnouncementGroup;
+    const announcementGroupInfo: AnnouncementGroup = {
+      AnnouncementId: id,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      AnnouncementId: announcementGroupInfo.AnnouncementId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
