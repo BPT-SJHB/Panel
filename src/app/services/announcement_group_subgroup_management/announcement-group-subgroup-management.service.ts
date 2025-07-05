@@ -261,3 +261,45 @@ export class AnnouncementGroupSubgroupManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+  public async GetRelationOfAnnouncementGroupAndSubGroup(
+    id: number
+  ): Promise<ApiResponse<RelationOfAnnouncementGroupAndSubGroup[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.Announcements
+        .RelationOfAnnouncementGroupAndSubGroup.GetRelations;
+    const relationOfAnnouncementGroupAndSubGroupInfo: RelationOfAnnouncementGroupAndSubGroup =
+      {
+        AnnouncementId: id,
+        AnnouncementSubGroups: [],
+      };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      AnnouncementId: relationOfAnnouncementGroupAndSubGroupInfo.AnnouncementId,
+    };
+    //#endregion
+
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      RelationOfAnnouncementGroupAndSubGroup[]
+    >(apiUrl, bodyValue, mockRelationOfAnnouncementGroupAndSubGroups);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: response.data?.map((data) => ({
+        AnnouncementId: data.AnnouncementId,
+        AnnouncementTitle: data.AnnouncementTitle?.trim(),
+        AnnouncementSubGroups: data.AnnouncementSubGroups?.map((subData) => ({
+          AnnouncementSGId: subData.AnnouncementSGId,
+          AnnouncementSGTitle: subData.AnnouncementSGTitle?.trim(),
+        })),
+      })),
+      error: response.error,
+    };
+    //#endregion
+  }
