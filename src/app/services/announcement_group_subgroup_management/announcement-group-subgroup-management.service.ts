@@ -16,3 +16,5 @@ import { mockRelationOfAnnouncementGroupAndSubGroups } from './mock/relation-of-
   providedIn: 'root',
 })
 export class AnnouncementGroupSubgroupManagementService {
+  private userAuth = inject(UserAuthService);
+  private apiCommunicator = inject(APICommunicationManagementService);
