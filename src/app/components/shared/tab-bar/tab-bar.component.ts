@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TabItem } from 'app/data/model/tabs.model';
@@ -8,7 +8,7 @@ import { TabsModule } from 'primeng/tabs'
 import { Observable } from 'rxjs';
 @Component({
   selector: 'app-tab-bar',
-  imports: [AsyncPipe, TabsModule],
+  imports: [AsyncPipe, TabsModule,NgClass],
   templateUrl: './tab-bar.component.html',
   styleUrl: './tab-bar.component.scss'
 })
