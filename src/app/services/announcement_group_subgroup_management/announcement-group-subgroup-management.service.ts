@@ -18,6 +18,9 @@ import { mockRelationOfAnnouncementGroupAndSubGroups } from './mock/relation-of-
 export class AnnouncementGroupSubgroupManagementService {
   private userAuth = inject(UserAuthService);
   private apiCommunicator = inject(APICommunicationManagementService);
+
+  //#region Announcement Groups
+
   public async GetAnnouncementGroups(
     title: string
   ): Promise<ApiResponse<AnnouncementGroup[]>> {
@@ -138,6 +141,11 @@ export class AnnouncementGroupSubgroupManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  //#endregion
+
+  //#region Announcement SubGroups
+
   public async GetAnnouncementSupGroups(
     title: string
   ): Promise<ApiResponse<AnnouncementSubGroup[]>> {
@@ -261,6 +269,11 @@ export class AnnouncementGroupSubgroupManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  //#endregion
+
+  //#region Announcement Group/SubGroup
+
   public async GetRelationOfAnnouncementGroupAndSubGroup(
     id: number
   ): Promise<ApiResponse<RelationOfAnnouncementGroupAndSubGroup[]>> {
