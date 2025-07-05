@@ -17,6 +17,9 @@ import { TruckDriverInfo } from 'app/data/model/truck-driver-info.model';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
 import { Subject, takeUntil } from 'rxjs';
+import { SearchInputComponent } from '../../../shared/inputs/search-input/search-input.component';
+import { DialogService } from 'primeng/dynamicdialog';
+import { NewPasswordDialogComponent } from 'app/components/shared/dialog/new-password-dialog/new-password-dialog.component';
 
 @Component({
   selector: 'app-driver-info-form',
@@ -25,7 +28,9 @@ import { Subject, takeUntil } from 'rxjs';
     ReactiveFormsModule,
     DialogModule,
     TextInputComponent,
+    SearchInputComponent,
   ],
+  providers:[DialogService],
   templateUrl: './driver-info-form.component.html',
   styleUrl: './driver-info-form.component.scss',
 })
@@ -35,17 +40,12 @@ export class DriverInfoFormComponent {
   private driverTruckManager = inject(Driver_TruckManagementService);
   private loadingService = inject(LoadingService);
   private destroy$ = new Subject<void>();
-
+  private dialogService = inject(DialogService);
   driverForm: FormGroup;
   searchForm: FormGroup;
 
   loading = false;
   addonWidth = '8rem';
-
-  passwordDialogVisible = false;
-  driverUserNameDialog = '';
-  driverNewPasswordDialog = '';
-  
 
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -78,7 +78,7 @@ export class DriverInfoFormComponent {
   async updateDriverMobileNumber(): Promise<void> {
     if (this.driverForm.invalid || this.loading) return;
 
-    this.loadingService.setLoading(true)
+    this.loadingService.setLoading(true);
     try {
       const driverId = this.driverId.value;
       const mobile = this.mobile.value;
@@ -95,26 +95,30 @@ export class DriverInfoFormComponent {
         response.data?.Message ?? 'شماره تلفن راننده تغییر یافت.'
       );
     } finally {
-     this.loadingService.setLoading(false)
+      this.loadingService.setLoading(false);
     }
   }
 
-  async loadDriverInfoFromAPI(): Promise<void> {
-    if (this.searchForm.invalid || this.loading) return;
+  loadDriverInfoFromAPI: (query: string) => Promise<TruckDriverInfo | null> =
+    async (nationalId) => {
+      if (this.searchForm.invalid || this.loading) return null;
 
-    this.loadingService.setLoading(true)
-    try {
-      const nationalId = this.searchNationalId.value;
-      const response = await this.driverTruckManager.GetDriverInfoFromAPI(
-        nationalId
-      );
+      this.loadingService.setLoading(true);
+      try {
+        const response = await this.driverTruckManager.GetDriverInfoFromAPI(
+          nationalId
+        );
 
-      if (!this.isSuccessful(response)) return;
+        if (!this.isSuccessful(response)) return null;
+        return response.data!;
+      } finally {
+        this.loadingService.setLoading(false);
+      }
+    };
 
-      this.populateDriverForm(response.data as TruckDriverInfo);
-    } finally {
-      this.loadingService.setLoading(false)
-    }
+  onSearchDriver(driver: TruckDriverInfo[]) {
+    if (driver.length === 0) return;
+    this.populateDriverForm(driver[0]);
   }
 
   async resetDriverPassword(): Promise<void> {
@@ -130,18 +134,18 @@ export class DriverInfoFormComponent {
       if (!this.isSuccessful(response)) return;
 
       const { Username, Password } = response.data!;
-      this.showDialog(Username, Password);
-    } catch {
-      this.toast.error('خطا', 'در بازنشانی رمز عبور مشکلی پیش آمد.');
+      console.log(Username);
+      
+      this.showNewPasswordDialog(Username, Password);
     } finally {
-      this.loadingService.setLoading(false)
+      this.loadingService.setLoading(false);
     }
   }
 
   async activateDriverSms(): Promise<void> {
     if (this.driverForm.invalid || this.loading) return;
 
-    this.loadingService.setLoading(true)
+    this.loadingService.setLoading(true);
     try {
       const driverId = this.driverId.value;
       const response = await this.driverTruckManager.ActivateDriverSMS(
@@ -157,14 +161,14 @@ export class DriverInfoFormComponent {
     } catch {
       this.toast.error('خطا', 'در فعال‌سازی سیستم پیامک مشکلی پیش آمد.');
     } finally {
-      this.loadingService.setLoading(false)
+      this.loadingService.setLoading(false);
     }
   }
 
   async sendWebsiteLink(): Promise<void> {
     if (this.driverForm.invalid || this.loading) return;
 
-    this.loadingService.setLoading(true)
+    this.loadingService.setLoading(true);
     try {
       const driverId = this.driverId.value;
       const response = await this.driverTruckManager.SendWebsiteLink(driverId);
@@ -178,7 +182,7 @@ export class DriverInfoFormComponent {
     } catch {
       this.toast.error('خطا', 'در ارسال لینک ورود مشکلی پیش آمد.');
     } finally {
-      this.loadingService.setLoading(false)
+      this.loadingService.setLoading(false);
     }
   }
 
@@ -187,12 +191,17 @@ export class DriverInfoFormComponent {
     navigator.clipboard.writeText(text);
   }
 
-  onCloseDialog() {
-    this.driverUserNameDialog = '';
-    this.driverNewPasswordDialog = '';
+  // Open dialog showing new username and password
+  private showNewPasswordDialog(username: string, password: string): void {
+    this.dialogService.open(NewPasswordDialogComponent, {
+      header: 'رمز عبور جدید',
+      width: '20rem',
+      modal: true,
+      inputValues: { username, password },
+    });
   }
 
-  populateDriverForm(driverInfo: TruckDriverInfo): void {
+  private populateDriverForm(driverInfo: TruckDriverInfo): void {
     this.driverForm.patchValue({
       driverId: driverInfo.DriverId ?? '',
       nationalId: driverInfo.NationalCode ?? '',
@@ -216,11 +225,6 @@ export class DriverInfoFormComponent {
     return true;
   }
 
-  private showDialog(username: string, password: string) {
-    this.driverNewPasswordDialog = password;
-    this.driverUserNameDialog = username;
-    this.passwordDialogVisible = true;
-  }
 
   // Form control getters
   get searchNationalId(): FormControl {
