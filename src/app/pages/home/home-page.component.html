@@ -15,12 +15,12 @@
     <div class="w-full">
       <app-search-input
         class="w-full"
-        [data]="allLoadAnnouncementPlaces"
-        [filterFn]="filterAnnouncementPlaces"
-        [autoSearch]="true"
-        [showAllWhenQueryTooShort]="true"
-        [minLength]="2"
-        (search)="handleSearch($event)"
+        [staticData]="allLoadAnnouncementPlaces"
+        [itemMatchesQuery]="filterAnnouncementPlaces"
+        [autoTriggerSearch]="true"
+        [fallbackToAllWhenQueryShort]="true"
+        [minSearchLength]="2"
+        (searchResult)="handleSearch($event)"
       />
     </div>
   </div>
