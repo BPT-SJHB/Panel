@@ -205,3 +205,33 @@ export class AnnouncementGroupSubgroupManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  public async EditAnnouncementSubGroup(
+    id: number,
+    title: string,
+    status: boolean
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.Announcements.SubGroups
+        .EditAnnouncementSubGroup;
+    const announcementSubGroupInfo: AnnouncementSubGroup = {
+      AnnouncementSGId: id,
+      AnnouncementSGTitle: title,
+      Active: status,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      RawAnnouncementSubGroup: announcementSubGroupInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
