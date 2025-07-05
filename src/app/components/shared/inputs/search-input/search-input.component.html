@@ -1,20 +1,29 @@
-<div class="flex justify-content-center align-items-center gap-3">
+<div class="relative flex justify-content-center align-items-center gap-3 h-4rem">
   <app-text-input
-    class="flex-grow-1"
+    class="flex-grow-1 h-full"
     [control]="control"
     [validationField]="validationField"
     [label]="label"
+    [placeholder]="placeholder"
     [readOnly]="readOnly"
     [disabled]="disabled"
     [icon]="icon"
     [addonWidth]="addonWidth"
-    (input)="onInputValueChange($event)"
-  />
-  <p-button
-    *ngIf="!autoSearch"
-    (click)="clickSearchButton()"
-    [label]="buttonLabel"
-    size="small"
-    styleClass="px-4 py-1"
-  />
+    (input)="onInputChanged($event)"
+    (keydown.enter)="onSearchButtonClick()"
+  ></app-text-input>
+
+  <div class="flex items-center">
+    <p-button
+      *ngIf="!autoTriggerSearch"
+      (click)="onSearchButtonClick()"
+      [label]="searchButtonLabel"
+      [disabled]="disableSearchButton"
+      size="small"
+      styleClass="px-4 py-1"
+      severity="info"
+      class="h-full"
+      [style]="{ 'margin-bottom': '23px' }"
+    ></p-button>
+  </div>
 </div>

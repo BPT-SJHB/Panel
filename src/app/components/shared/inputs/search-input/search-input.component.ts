@@ -32,10 +32,10 @@ import { TextInputComponent } from '../text-input/text-input.component';
   styleUrl: './search-input.component.scss',
 })
 export class SearchInputComponent<T> implements OnInit, OnDestroy {
-  private valueChangesSub?: Subscription;
+  private controlSubscription?: Subscription;
 
   // -------------------------
-  // 🔧 Core Control
+  // 🔧 Form & Validation
   // -------------------------
   @Input() control = new FormControl('');
   @Input() validationField: ValidationField | null = null;
@@ -49,119 +49,125 @@ export class SearchInputComponent<T> implements OnInit, OnDestroy {
   @Input() readOnly = false;
   @Input() disabled = false;
   @Input() addonWidth: string | null = null;
-  @Input() buttonLabel = 'جستجو';
+  @Input() searchButtonLabel = 'جستجو';
+  @Input() disableSearchButton = false;
 
   // -------------------------
   // 🔍 Search Behavior
   // -------------------------
-  @Input() data: T[] = [];
-  @Input() lazySearch?: (query: string) => Promise<T[]>;
-  @Input() filterFn?: (item: T, query: string) => boolean;
-  @Input() minLength = 3; // Minimum length to start filtering
-  @Input() optionLabel = 'label'; // Property to show in dropdown (if applicable)
-  @Input() optionValue = 'value'; // Property to use as value (if applicable)
-  @Input() autoSearch = false; // If true, triggers search on input change
-  @Input() cachingEnabled = true; // Enables simple caching for repeated queries
-  @Input() debounceInputChanged = 300; // Delay before triggering auto search (ms)
-  @Input() showAllWhenQueryTooShort = false;
+  @Input() staticData: T[] = [];
+  @Input() asyncSearchFn?: (query: string) => Promise<T[]>;
+  @Input() singleResultSearchFn?: (query: string) => Promise<T | null>;
+  @Input() itemMatchesQuery?: (item: T, query: string) => boolean;
+  @Input() minSearchLength = 3;
+  @Input() autoTriggerSearch = false;
+  @Input() enableCaching = true;
+  @Input() debounceTimeMs = 300;
+  @Input() fallbackToAllWhenQueryShort = false;
 
   // -------------------------
   // 📤 Output Events
-  // -------------------------
-  @Output() input = new EventEmitter<string>(); // Emits on raw user input (no debounce)
-  @Output() search = new EventEmitter<T[]>(); // Emits on actual search result
+  @Output() rawInput = new EventEmitter<string>(); // Emits raw user input
+  @Output() searchResult = new EventEmitter<T[]>(); // Emits processed results
 
   // -------------------------
   // 🧠 Internal State
-  // -------------------------
-  cachedData: T[] = [];
-  lastSearchKey = '';
+  private cachedResults: T[] = [];
+  private lastCachedKey = '';
 
   /**
-   * Subscribe to control value changes with debounce and trigger search if autoSearch is enabled.
+   * Subscribes to form control changes and triggers search if auto search is enabled.
    */
   ngOnInit(): void {
-    this.valueChangesSub = this.control.valueChanges
-      .pipe(debounceTime(this.debounceInputChanged), distinctUntilChanged())
+    this.controlSubscription = this.control.valueChanges
+      .pipe(debounceTime(this.debounceTimeMs), distinctUntilChanged())
       .subscribe((value) => {
-        if (this.autoSearch) {
-          this.onSearch(value ?? '');
+        if (this.autoTriggerSearch) {
+          this.triggerSearch(value ?? '');
         }
       });
   }
 
-  /**
-   * Unsubscribe to avoid memory leaks.
-   */
   ngOnDestroy(): void {
-    this.valueChangesSub?.unsubscribe();
+    this.controlSubscription?.unsubscribe();
   }
 
   /**
-   * Main search logic, supports optional lazy loading and basic caching.
+   * Core search logic — chooses between static filtering, async search, or single-result search.
    */
-  async searchData(query: string, forceUpdate = false): Promise<T[]> {
+  async performSearch(query: string, forceRefresh = false): Promise<T[]> {
     query = query.trimStart();
 
-    if (query.length < this.minLength || !this.filterFn) {
-      if (this.showAllWhenQueryTooShort) {
-        return this.data; // return full data when flag is true
-      }
-      return []; // otherwise return empty
+    // Show fallback data if query is too short
+    if (query.length < this.minSearchLength) {
+      return this.fallbackToAllWhenQueryShort ? this.staticData : [];
+    }
+    // If single result lookup is defined, use it
+    if (this.singleResultSearchFn) {
+      const result = await this.singleResultSearchFn(query);      
+      return result ? [result] : [];
     }
 
-    // Static filtering (local)
-    if (!this.lazySearch) {
-      return this.data.filter((item) => this.filterFn!(item, query));
+    if (!this.itemMatchesQuery) {
+      return[];
     }
 
-    // Cached filtering logic
-    const currentKey = query.substring(0, this.minLength);
+    // Static filtering
+    if (!this.asyncSearchFn) {
+      return this.staticData.filter((item) =>
+        this.itemMatchesQuery!(item, query)
+      );
+    }
+
+    // Cached async filtering
+    const queryKey = query.substring(0, this.minSearchLength);
     if (
-      !forceUpdate &&
-      this.cachingEnabled &&
-      currentKey === this.lastSearchKey
+      !forceRefresh &&
+      this.enableCaching &&
+      queryKey === this.lastCachedKey
     ) {
-      return this.cachedData.filter((item) => this.filterFn!(item, query));
+      return this.cachedResults.filter((item) =>
+        this.itemMatchesQuery!(item, query)
+      );
     }
 
-    // Lazy load new results
-    const result = await this.lazySearch(query);
-    this.lastSearchKey = currentKey;
-    this.cachedData = result;
-    return result;
+    const freshData = await this.asyncSearchFn(query);
+    this.lastCachedKey = queryKey;
+    this.cachedResults = freshData;
+    return freshData;
   }
 
   /**
-   * Public method to force refresh search results (bypasses cache).
+   * Exposed method to manually force refresh search results.
    */
   refreshSearch(): Promise<T[]> {
     const query = this.control.value ?? '';
-    return this.searchData(query, true);
+    return this.performSearch(query, true);
   }
 
   /**
-   * Triggers a search and emits the result.
+   * Trigger search and emit final results.
    */
-  async onSearch(query: string): Promise<void> {
-    const results = await this.searchData(query);
-    this.search.emit(results);
+  async triggerSearch(query: string): Promise<void> {
+    const results = await this.performSearch(query);
+    this.searchResult.emit(results);
   }
 
   /**
-   * Emits raw input text immediately (e.g., for external filtering).
+   * Handle raw input value change — emits unprocessed string.
    */
-  onInputValueChange(event: Event): void {
-    const value = (event.target as HTMLInputElement).value;
-    this.input.emit(value);
+  onInputChanged(event: Event): void {
+    const rawValue = (event.target as HTMLInputElement).value;
+    this.rawInput.emit(rawValue);
   }
 
   /**
-   * Called when the user clicks the search button manually.
+   * Triggered when user clicks the search button manually.
    */
-  clickSearchButton(): void {
-    if (!this.autoSearch) {
-      this.onSearch(this.control.value ?? '');
+  onSearchButtonClick(): void {
+    if (!this.autoTriggerSearch) {
+      this.control.markAllAsTouched();
+      this.triggerSearch(this.control.value ?? '');
     }
   }
 }
