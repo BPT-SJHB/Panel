@@ -94,5 +94,24 @@ export const API_ROUTES = {
       EditTariffs: `${environment.apiUrl}:${transportationAPIPort}/api/TariffsEditing`,
       UploadTariffsFile: `${environment.apiUrl}:${transportationAPIPort}/api/TariffsUploading`,
     },
+    Announcements: {
+      Groups: {
+        GetAnnouncementGroups: `${environment.apiUrl}:${transportationAPIPort}/api/GetAnnouncements`,
+        RegisterAnnouncementGroup: `${environment.apiUrl}:${transportationAPIPort}/api/AnnouncementRegistering`,
+        EditAnnouncementGroup: `${environment.apiUrl}:${transportationAPIPort}/api/AnnouncementEditing`,
+        DeleteAnnouncementGroup: `${environment.apiUrl}:${transportationAPIPort}/api/AnnouncementDeleting`,
+      },
+      SubGroups: {
+        GetAnnouncementSubGroups: `${environment.apiUrl}:${transportationAPIPort}/api/GetAnnouncementSubGroups`,
+        RegisterAnnouncementSubGroup: `${environment.apiUrl}:${transportationAPIPort}/api/AnnouncementSubGroupRegistering`,
+        EditAnnouncementSubGroup: `${environment.apiUrl}:${transportationAPIPort}/api/AnnouncementSubGroupEditing`,
+        DeleteAnnouncementSubGroup: `${environment.apiUrl}:${transportationAPIPort}/api/AnnouncementSubGroupDeleting`,
+      },
+      RelationOfAnnouncementGroupAndSubGroup: {
+        GetRelations: `${environment.apiUrl}:${transportationAPIPort}/api/GetAnnouncementRelationAnnouncementSubGroups`,
+        DeleteRelation: `${environment.apiUrl}:${transportationAPIPort}/api/AnnouncementRelationAnnouncementSubGroupDeleting`,
+        RegisterRelation: `${environment.apiUrl}:${transportationAPIPort}/api/AnnouncementRelationAnnouncementSubGroupRegistering`,
+      },
+    },
   },
 };
