@@ -303,3 +303,35 @@ export class AnnouncementGroupSubgroupManagementService {
     };
     //#endregion
   }
+
+  public async RegisterNewRelationOfAnnouncementGroupAndSubGroup(
+    announcementGroupId: number,
+    announcementSubGroupId: number
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.Announcements
+        .RelationOfAnnouncementGroupAndSubGroup.RegisterRelation;
+    const relationOfAnnouncementGroupAndSubGroupInfo: RelationOfAnnouncementGroupAndSubGroup =
+      {
+        AnnouncementId: announcementGroupId,
+        AnnouncementSubGroups: [{ AnnouncementSGId: announcementSubGroupId }],
+      };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      AnnouncementId: relationOfAnnouncementGroupAndSubGroupInfo.AnnouncementId,
+      AnnouncementSubGroupId:
+        relationOfAnnouncementGroupAndSubGroupInfo.AnnouncementSubGroups[0]
+          .AnnouncementSGId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
