@@ -57,7 +57,7 @@ export class SearchInputComponent<T> implements OnInit, OnDestroy {
   // -------------------------
   @Input() staticData: T[] = [];
   @Input() asyncSearchFn?: (query: string) => Promise<T[]>;
-  @Input() singleResultSearchFn?: (query: string) => Promise<T | null>;
+  @Input() onSearchQuery?: (query: string) => Promise<void>;
   @Input() itemMatchesQuery?: (item: T, query: string) => boolean;
   @Input() minSearchLength = 3;
   @Input() autoTriggerSearch = false;
@@ -102,10 +102,10 @@ export class SearchInputComponent<T> implements OnInit, OnDestroy {
     if (query.length < this.minSearchLength) {
       return this.fallbackToAllWhenQueryShort ? this.staticData : [];
     }
-    // If single result lookup is defined, use it
-    if (this.singleResultSearchFn) {
-      const result = await this.singleResultSearchFn(query);      
-      return result ? [result] : [];
+    // onSearchQuery replaces the default search behavior
+    if (this.onSearchQuery) {
+      await this.onSearchQuery(query);      
+      return [];
     }
 
     if (!this.itemMatchesQuery) {
