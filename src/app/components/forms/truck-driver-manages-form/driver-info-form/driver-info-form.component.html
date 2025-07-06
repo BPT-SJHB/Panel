@@ -14,8 +14,7 @@
         placeholder="جستجو براساس شماره ملی راننده"
         searchButtonLabel="استعلام از سامانه"
         [disableSearchButton]="this.searchForm.invalid"
-        [singleResultSearchFn]="loadDriverInfoFromAPI"
-        (searchResult)="onSearchDriver($event)"
+        [onSearchQuery]="loadDriverInfoFromAPI"
       />
     </div>
   </form>
