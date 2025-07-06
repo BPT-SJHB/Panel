@@ -14,20 +14,15 @@
   (selectionKeysChange)="selectionKeysChanged($event)"
 >
   @if (enabledSearch) {
-  <ng-template pTemplate="caption" >
-    <div class="flex justify-content-center align-items-center">
-      <app-search-input  
+  <ng-template pTemplate="caption">
+    <app-search-input
+      pInputText
       class="flex-1"
       [placeholder]="searchPlaceholder"
-      pInputText
-      (input)="filterTree($event.target.value)"
-      (valueChange)="searchTerm = $event"
-      />
-      
-      @if (!enabledAutoSearch) {
-        <p-button label="جستجو" styleClass="md:px-4 py-1" severity="info" (click)="onClickSearch()" />
-      }
-    </div>
+      [control]="searchTerm"
+      (rawInput)="filterTree($event)"
+      [autoTriggerSearch]="enabledAutoSearch"
+    />
   </ng-template>
   }
 
