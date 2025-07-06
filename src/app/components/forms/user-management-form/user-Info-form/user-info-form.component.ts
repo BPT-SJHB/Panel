@@ -103,24 +103,18 @@ export class UserInfoFormComponent implements OnInit, OnDestroy {
   }
 
   // Fetch user info using phone number (called by search)
-  fetchUserByPhone = async (
-    phone: string
-  ): Promise<SoftwareUserInfo | null> => {
-    if (this.searchForm.invalid || this.loading) return null;
+  fetchUserByPhone = async (phone: string) => {
+    if (this.searchForm.invalid || this.loading) return;
 
     this.loadingService.setLoading(true);
     try {
       const res = await this.userManager.GetSoftwareUserInfo(phone);
-      return this.isSuccessful(res) ? res.data! : null;
+      if (!this.isSuccessful(res)) return;
+      this.populateForm(res.data!);
     } finally {
       this.loadingService.setLoading(false);
     }
   };
-
-  // Called when user selects a search result
-  onSearch(users: SoftwareUserInfo[]) {
-    if (users.length) this.populateForm(users[0]);
-  }
 
   // Activate SMS access for a user
   async activateUserSms(): Promise<void> {

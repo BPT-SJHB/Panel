@@ -14,8 +14,7 @@
         [control]="searchPhone"
         validationField="mobile"
         [disableSearchButton]="this.searchForm.invalid || loading"
-        [singleResultSearchFn]="fetchUserByPhone"
-        (searchResult)="onSearch($event)"
+        [onSearchQuery]="fetchUserByPhone"
       />
     </div>
   </form>
