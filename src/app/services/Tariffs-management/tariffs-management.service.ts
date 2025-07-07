@@ -114,7 +114,7 @@ export class TariffsManagementService {
   }
 
   public async EditTariffs(
-    tariffs: Tariff
+    tariff: Tariff
   ): Promise<ApiResponse<ShortResponse>> {
     this.userAuth.isLoggedIn();
 
@@ -122,7 +122,7 @@ export class TariffsManagementService {
     const apiUrl = API_ROUTES.TransportationAPI.Tariffs.EditTariffs;
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
-      Tariffs: tariffs,
+      Tariffs: tariff,
     };
     //#endregion
 
@@ -144,6 +144,27 @@ export class TariffsManagementService {
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
       Tariffs: tariffs,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async RegisterTariff(
+    tariff: Tariff
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.Tariffs.RegisterTariff;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      Tariffs: tariff,
     };
     //#endregion
 

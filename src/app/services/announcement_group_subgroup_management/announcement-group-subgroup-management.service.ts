@@ -60,8 +60,7 @@ export class AnnouncementGroupSubgroupManagementService {
   }
 
   public async RegisterNewAnnouncementGroup(
-    title: string,
-    status: boolean
+    title: string
   ): Promise<ApiResponse<ShortResponse>> {
     this.userAuth.isLoggedIn();
 
@@ -72,7 +71,6 @@ export class AnnouncementGroupSubgroupManagementService {
     const announcementGroupInfo: AnnouncementGroup = {
       AnnouncementId: 0,
       AnnouncementTitle: title,
-      Active: status,
     };
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
