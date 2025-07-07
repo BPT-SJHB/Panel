@@ -4,25 +4,19 @@
     class="col-12 mt-4"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
-    (ngSubmit)="loadFormsInformation()"
     [formGroup]="searchForm"
   >
     <div class="flex gap-2">
-      <app-text-input
+      <app-search-input
         [control]="searchSmartCard"
         validationField="smartCard"
         icon="pi pi-id-card"
         class="flex-1"
         placeholder="جستجو براساس شماره هوشمند"
-      ></app-text-input>
-
-      <p-button
-        [disabled]="searchForm.invalid || loading"
-        size="small"
-        severity="warn"
-        label="استعلام از سیستم"
-        (click)="loadFormsInformation()"
-      ></p-button>
+        [disableSearchButton]="searchForm.invalid || loading"
+        searchButtonLabel="استعلام از سیستم"
+        [onSearchQuery]="loadFormsInformation"
+      ></app-search-input>
     </div>
   </form>
 

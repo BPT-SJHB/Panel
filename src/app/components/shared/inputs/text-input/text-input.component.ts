@@ -38,7 +38,6 @@ import {
   styleUrl: './text-input.component.scss',
 })
 export class TextInputComponent implements OnInit, OnChanges {
-  
   @Input() control = new FormControl('');
   @Input() validationField: ValidationField | null = null;
   @Input() placeholder = '';
@@ -53,14 +52,15 @@ export class TextInputComponent implements OnInit, OnChanges {
   @Input() datePickerPosition: 'top' | 'bottom' = 'bottom';
 
   @Output() clickButton = new EventEmitter<void>();
-
+  @Output() input = new EventEmitter<any>();
+  @Output() keydown = new EventEmitter<KeyboardEvent>();
 
   get firstErrorMessage(): string | null {
     const errors = this.control?.errors as ErrorsValidation;
     if (!this.validationField || !errors) return null;
 
     const rule = ValidationSchema[this.validationField];
-    return getDefaultErrorMessage(rule.name,errors);
+    return getDefaultErrorMessage(rule.name, errors);
   }
 
   get isDisabled(): boolean {
@@ -97,6 +97,10 @@ export class TextInputComponent implements OnInit, OnChanges {
     }
   }
 
+  onKeyDown(event: KeyboardEvent) {
+    this.keydown.emit(event);
+  }
+  
   handleClick(): void {
     this.clickButton.emit();
   }

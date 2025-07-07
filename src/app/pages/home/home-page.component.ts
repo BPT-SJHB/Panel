@@ -8,8 +8,6 @@ import { CommonModule } from '@angular/common';
 import { PanelModule } from 'primeng/panel';
 import { appTitles } from 'app/constants/Titles';
 import { LoadAnnouncementPlacesService } from 'app/services/LoadAnnouncementPlaces/load-announcement-places.service';
-import { TabBarComponent } from "../../components/shared/tab-bar/tab-bar.component";
-
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -20,7 +18,7 @@ import { TabBarComponent } from "../../components/shared/tab-bar/tab-bar.compone
     AnimateOnScroll,
     TerminalCardComponent,
     SearchInputComponent,
-],
+  ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
@@ -43,28 +41,14 @@ export class HomePageComponent implements OnInit {
     this.displayedLoadAnnouncementPlaces = this.allLoadAnnouncementPlaces;
   }
 
-  handleSearch(searchTerm: string): void {
-    this.currentSearchTerm = searchTerm;
-    const trimmedSearchTerm = searchTerm.trim();
-    const minSearchLength = 2;
+  filterAnnouncementPlaces = (
+    announcementPlace: LoadAnnouncementPlace,
+    query: string
+  ) =>
+    announcementPlace.LAPTitle.includes(query) ||
+    announcementPlace.Description.includes(query);
 
-    if (trimmedSearchTerm.length >= minSearchLength) {
-      this.displayedLoadAnnouncementPlaces = this.allLoadAnnouncementPlaces.filter(
-        (terminal) =>
-          terminal.LAPTitle.toLowerCase().includes(
-            trimmedSearchTerm.toLowerCase()
-          ) ||
-          terminal.Description.toLowerCase().includes(
-            trimmedSearchTerm.toLowerCase()
-          )
-      );
-    } else {
-      this.displayedLoadAnnouncementPlaces = [...this.allLoadAnnouncementPlaces];
-    }
-  }
-
-  handleClear(): void {
-    this.currentSearchTerm = '';
-    this.displayedLoadAnnouncementPlaces = [...this.allLoadAnnouncementPlaces];
+  handleSearch(result: LoadAnnouncementPlace[]): void {
+    this.displayedLoadAnnouncementPlaces = result;
   }
 }

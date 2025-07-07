@@ -1,9 +1,7 @@
-import { Component, inject } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  ReactiveFormsModule,
-} from '@angular/forms';
+// feat(driver-truck-wallet-form): manage loading via loadingService, clean up state handling
+
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { ApiResponse } from 'app/data/model/api-Response.model';
@@ -13,25 +11,54 @@ import { Wallet } from 'app/data/model/wallet.model';
 import { Driver_TruckManagementService } from 'app/services/driver-truck-management/driver-truck-management.service';
 import { ToastService } from 'app/services/toast-service/toast.service';
 import { ButtonModule } from 'primeng/button';
+import { SearchInputComponent } from '../../../shared/inputs/search-input/search-input.component';
+import { LoadingService } from 'app/services/loading-service/loading-service.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-driver-truck-wallet-form',
-  imports: [ButtonModule, TextInputComponent, ReactiveFormsModule],
+  imports: [
+    ButtonModule,
+    TextInputComponent,
+    ReactiveFormsModule,
+    SearchInputComponent,
+  ],
   templateUrl: './driver-truck-wallet-form.component.html',
   styleUrl: './driver-truck-wallet-form.component.scss',
 })
-export class DriverTruckWalletFormComponent {
+export class DriverTruckWalletFormComponent implements OnInit, OnDestroy {
+  // feat: inject required services
   private fb = inject(FormBuilder);
   private toast = inject(ToastService);
   private driverTruckManager = inject(Driver_TruckManagementService);
-
-  addonWidth = '8rem';
+  private loadingService = inject(LoadingService);
+  
+  // feat: handle unsubscribe via destroy$
+  private destroy$ = new Subject<void>();
   loading = false;
 
+  // feat: handle global loading state on init
+  ngOnInit(): void {
+    this.loadingService.loading$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value)=>this.loading = value); // just triggers change detection if needed
+  }
+
+  // fix: unsubscribe from observables
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  // ui: style config
+  addonWidth = '8rem';
+
+  // feat: composed truck search form
   mainSearchForm = this.fb.group({
     searchSmartCard: ['', ValidationSchema.smartCard],
   });
 
+  // feat: composed truck driver wallet form
   truckComposedInfoForm = this.fb.group({
     truckId: ['', ValidationSchema.truckId],
     smartCard: ['', ValidationSchema.smartCard],
@@ -46,14 +73,13 @@ export class DriverTruckWalletFormComponent {
     wallet: [],
   });
 
-  // --- Public Methods ---
+  // feat: load composed form with full info
+  loadComposedForm = async (smartCard: string) => {
+    if (this.mainSearchForm.invalid) return;
 
-  async loadComposedForm() {
-    if (this.mainSearchForm.invalid || this.loading) return;
-
-    this.loading = true;
+    this.loadingService.setLoading(true);
     try {
-      const truckInfo = await this.getTruckInfo(this.searchSmartCard.value);
+      const truckInfo = await this.getTruckInfo(smartCard);
       if (!truckInfo) return;
 
       const response = await this.driverTruckManager.GetComposedTruckInfo(
@@ -63,28 +89,30 @@ export class DriverTruckWalletFormComponent {
 
       this.populateComposedForm(response.data!);
     } finally {
-      this.loading = false;
+      this.loadingService.setLoading(false);
     }
-  }
+  };
 
+  // feat: load truck info by smart card
   async loadTruckInfo() {
-    if (this.smartCard.invalid || this.loading) return;
+    if (this.smartCard.invalid) return;
 
-    this.loading = true;
+    this.loadingService.setLoading(true);
     try {
       const truckInfo = await this.getTruckInfo(this.smartCard.value);
       if (!truckInfo) return;
 
       this.populateTruckInfo(truckInfo);
     } finally {
-      this.loading = false;
+      this.loadingService.setLoading(false);
     }
   }
 
+  // feat: load driver info by national ID
   async loadDriverInfo() {
-    if (this.nationalId.invalid || this.loading) return;
+    if (this.nationalId.invalid) return;
 
-    this.loading = true;
+    this.loadingService.setLoading(true);
     try {
       const response = await this.driverTruckManager.GetDriverInfoFromAPI(
         this.nationalId.value
@@ -94,15 +122,15 @@ export class DriverTruckWalletFormComponent {
 
       this.populateDriverInfo(response.data!);
     } finally {
-      this.loading = false;
+      this.loadingService.setLoading(false);
     }
   }
 
+  // feat: set composed truck-driver-wallet-turn info
   async setComposedInformation(): Promise<void> {
-    if (this.nationalId.invalid || this.loading) return;
+    if (this.nationalId.invalid) return;
 
-    this.loading = true;
-
+    this.loadingService.setLoading(true);
     try {
       const { value: truckId } = this.truckId;
       const { value: driverId } = this.driverId;
@@ -123,10 +151,11 @@ export class DriverTruckWalletFormComponent {
         response.data?.Message ?? 'تغییرات با موفقیت ثبت شد.'
       );
     } finally {
-      this.loading = false;
+      this.loadingService.setLoading(false);
     }
   }
 
+  // feat: generate new virtual wallet
   async createNewWallet(): Promise<void> {
     const response = await this.driverTruckManager.GetVirtualWallet();
     if (!this.isSuccessful(response)) return;
@@ -135,6 +164,7 @@ export class DriverTruckWalletFormComponent {
 
   // --- Private Methods ---
 
+  // util: fetch truck info
   private async getTruckInfo(smartCard: string): Promise<TruckInfo | null> {
     const response = await this.driverTruckManager.GetTruckInfoFromAPI(
       smartCard
@@ -143,6 +173,7 @@ export class DriverTruckWalletFormComponent {
     return response.data!;
   }
 
+  // util: check api response success
   private isSuccessful(response: ApiResponse<any>): boolean {
     if (!response.success || !response.data) {
       this.toast.error(
@@ -154,6 +185,7 @@ export class DriverTruckWalletFormComponent {
     return true;
   }
 
+  // ui: populate full form with composed info
   private populateComposedForm(info: TruckComposedInfo) {
     this.populateTruckInfo(info.Truck);
     this.populateDriverInfo(info.TruckDriver!);
@@ -162,6 +194,7 @@ export class DriverTruckWalletFormComponent {
     this.turn.setValue(info.Turn?.OtaghdarTurnNumber);
   }
 
+  // ui: populate truck info fields
   private populateTruckInfo(info: TruckInfo) {
     this.truckId.setValue(info.TruckId ?? -1);
     this.smartCard.setValue(info.SmartCardNo);
@@ -169,12 +202,14 @@ export class DriverTruckWalletFormComponent {
     this.serialNumber.setValue(info.Serial);
   }
 
+  // ui: populate driver info fields
   private populateDriverInfo(info?: TruckDriverInfo) {
     this.driverId.setValue(info?.DriverId ?? -1);
     this.fullName.setValue(info?.NameFamily);
     this.nationalId.setValue(info?.NationalCode);
   }
 
+  // ui: populate wallet info fields
   private populateWalletInfo(info?: Wallet) {
     this.walletId.setValue(info?.MoneyWalletId ?? -1);
     this.wallet.setValue(info?.MoneyWalletCode);

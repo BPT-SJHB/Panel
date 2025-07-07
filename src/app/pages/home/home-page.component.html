@@ -13,7 +13,15 @@
 
   <div class="flex justify-center items-center p-3 w-full">
     <div class="w-full">
-      <app-search-input class="w-full" (valueChange)="handleSearch($event)" />
+      <app-search-input
+        class="w-full"
+        [staticData]="allLoadAnnouncementPlaces"
+        [itemMatchesQuery]="filterAnnouncementPlaces"
+        [autoTriggerSearch]="true"
+        [fallbackToAllWhenQueryShort]="true"
+        [minSearchLength]="2"
+        (searchResult)="handleSearch($event)"
+      />
     </div>
   </div>
 </p-panel>
