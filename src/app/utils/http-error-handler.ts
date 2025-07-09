@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { ERROR_MESSAGES, ErrorCodes } from 'app/constants/error-messages';
+import { APP_ROUTES } from 'app/constants/routes';
 
 export function handleHttpError<T>(error: unknown): ApiResponse<T> {
   if (error instanceof HttpErrorResponse) {
@@ -17,6 +18,10 @@ export function handleHttpError<T>(error: unknown): ApiResponse<T> {
         ErrorMessage?: string;
         ErrorMessageCode?: number;
       };
+      
+      if (apiError.ErrorMessageCode === ErrorCodes.NotAuthenticated) {
+        window.location.href = APP_ROUTES.AUTH.LOGIN;
+      }
 
       if (apiError.ErrorMessage) {
         message = apiError.ErrorMessage;
