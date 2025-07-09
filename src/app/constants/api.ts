@@ -93,6 +93,7 @@ export const API_ROUTES = {
       DeleteTariffs: `${environment.apiUrl}:${transportationAPIPort}/api/TariffsDeleting`,
       EditTariffs: `${environment.apiUrl}:${transportationAPIPort}/api/TariffsEditing`,
       UploadTariffsFile: `${environment.apiUrl}:${transportationAPIPort}/api/TariffsUploading`,
+      RegisterTariff: `${environment.apiUrl}:${transportationAPIPort}/api/TariffsRegistering`,
     },
     Announcements: {
       Groups: {

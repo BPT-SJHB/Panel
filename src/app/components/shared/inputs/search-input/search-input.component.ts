@@ -1,98 +1,188 @@
-import { Component, Input, Output, EventEmitter, input, output } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnDestroy,
+  SimpleChanges,
+  OnChanges,
+} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
-import {
-  AutoCompleteModule,
-  AutoCompleteSelectEvent,
-} from 'primeng/autocomplete';
-import { CommonModule } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
+import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
+
+import { ValidationField } from 'app/constants/validation-schema';
+import { TextInputComponent } from '../text-input/text-input.component';
 
 @Component({
   selector: 'app-search-input',
+  standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     InputGroupAddonModule,
     InputGroupModule,
-    FormsModule,
-    AutoCompleteModule,
-    ReactiveFormsModule
+    ButtonModule,
+    TextInputComponent,
   ],
   templateUrl: './search-input.component.html',
   styleUrl: './search-input.component.scss',
 })
-export class SearchInputComponent  {
-  @Input() placeholder: string = 'جستجو';
-  @Input() initialValue: string = '';
-  @Input() showClearButton: boolean = true;
-  @Input() icon:string ='pi pi-search'
-  @Input() label:string = ''
-  @Input() addonWidth = '';
-  @Input() showSelectIcon:boolean = false;
-  @Input() readOnly:boolean = false;
+export class SearchInputComponent<T> implements OnInit, OnDestroy,OnChanges {
+  private controlSubscription?: Subscription;
+
+  // -------------------------
+  // 🔧 Form & Validation
+  // -------------------------
   @Input() control = new FormControl('');
+  @Input() validationField: ValidationField | null = null;
 
-  @Input() autoComplete: boolean = false;
-  @Input() autoCompleteOptionLabel = 'label';
-  @Input() autoCompleteOptionValue = 'value';
-  @Input() autoCompleteMinLength: number = 3;
-  @Input() lazySearch!: (query: string) => Promise<any[]>;
+  // -------------------------
+  // 🎨 UI Customization
+  // -------------------------
+  @Input() placeholder = '';
+  @Input() label = '';
+  @Input() icon = 'pi pi-search';
+  @Input() readOnly = false;
+  @Input() disabled = false;
+  @Input() addonWidth: string | null = null;
+  @Input() searchButtonLabel = 'جستجو';
+  @Input() disableSearchButton = false;
 
-  @Output() input = new EventEmitter<any>();
-  @Output() search = new EventEmitter<string>();
-  @Output() cleared = new EventEmitter<void>();
-  @Output() valueChange = new EventEmitter<string>();
-  @Output() selectAutoComplete = new EventEmitter<AutoCompleteSelectEvent>();
+  // -------------------------
+  // 🔍 Search Behavior
+  // -------------------------
+  @Input() staticData: T[] = [];
+  @Input() asyncSearchFn?: (query: string) => Promise<T[]>;
+  @Input() onSearchQuery?: (query: string) => Promise<void>;
+  @Input() itemMatchesQuery?: (item: T, query: string) => boolean;
+  @Input() minSearchLength = 3;
+  @Input() autoTriggerSearch = false;
+  @Input() enableCaching = true;
+  @Input() debounceTimeMs = 300;
+  @Input() fallbackToAllWhenQueryShort = false;
 
-  _searchTerm: string = '';
-  showEmptyMessage: boolean = false;
-  autoCompleteItem: any[] = [];
+  // -------------------------
+  // 📤 Output Events
+  @Output() rawInput = new EventEmitter<string>(); // Emits raw user input
+  @Output() searchResult = new EventEmitter<T[]>(); // Emits processed results
 
-  ngOnInit() {
-    this._searchTerm = this.initialValue;
+  // -------------------------
+  // 🧠 Internal State
+  private cachedResults: T[] = [];
+  private lastCachedKey = '';
+
+  /**
+   * Subscribes to form control changes and triggers search if auto search is enabled.
+   */
+  ngOnInit(): void {
+    this.controlSubscription = this.control.valueChanges
+      .pipe(debounceTime(this.debounceTimeMs), distinctUntilChanged())
+      .subscribe((value) => {
+        if (this.autoTriggerSearch) {
+          this.triggerSearch(value ?? '');
+        }
+      });
   }
 
-  set searchTerm(value: string) {
-    this._searchTerm = value;
-    this.valueChange.emit(value);
+  ngOnDestroy(): void {
+    this.controlSubscription?.unsubscribe();
   }
 
-  get searchTerm(): string {
-    return this._searchTerm;
-  }
-
-  onValueChange(value: string) {
-    this.searchTerm = value;
-  }
-
-  onSearch() {
-    if (this.searchTerm.trim()) {
-      this.search.emit(this.searchTerm.trim());
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['staticData'] && !changes['staticData'].firstChange) {
+      const query = this.control?.value ?? '';
+      if (
+        !this.asyncSearchFn &&
+        this.autoTriggerSearch &&
+        query.length >= this.minSearchLength
+      ) {
+        this.triggerSearch(query);
+      }
     }
   }
 
-  onSelectAutoComplete(event: AutoCompleteSelectEvent) {
-    this.selectAutoComplete.emit(event);
-  }
+  /**
+   * Core search logic — chooses between static filtering, async search, or single-result search.
+   */
+  async performSearch(query: string, forceRefresh = false): Promise<T[]> {
+    query = query.trimStart();
 
-  onClear() {
-    this.searchTerm = '';
-    this.cleared.emit();
-    this.search.emit('');
-  }
-
-  async onLazySearch(event: { query: string }) {
-    const term = event.query.trimStart();
-
-    if (term.length < this.autoCompleteMinLength) {
-      this.autoCompleteItem = [];
-      this.showEmptyMessage = false;
-      return;
+    // Show fallback data if query is too short
+    if (query.length < this.minSearchLength) {
+      return this.fallbackToAllWhenQueryShort ? this.staticData : [];
+    }
+    // onSearchQuery replaces the default search behavior
+    if (this.onSearchQuery) {
+      await this.onSearchQuery(query);
+      return [];
     }
 
-    const result = await this.lazySearch(term);
+    if (!this.itemMatchesQuery) {
+      return [];
+    }
 
-    this.autoCompleteItem = result;
-    this.showEmptyMessage = this.autoCompleteItem.length === 0;
+    // Static filtering
+    if (!this.asyncSearchFn) {
+      return this.staticData.filter((item) =>
+        this.itemMatchesQuery!(item, query)
+      );
+    }
+
+    // Cached async filtering
+    const queryKey = query.substring(0, this.minSearchLength);
+    if (
+      !forceRefresh &&
+      this.enableCaching &&
+      queryKey === this.lastCachedKey
+    ) {
+      return this.cachedResults.filter((item) =>
+        this.itemMatchesQuery!(item, query)
+      );
+    }
+
+    const freshData = await this.asyncSearchFn(query);
+    this.lastCachedKey = queryKey;
+    this.cachedResults = freshData;
+    return freshData;
+  }
+
+  /**
+   * Exposed method to manually force refresh search results.
+   */
+  refreshSearch(): Promise<T[]> {
+    const query = this.control.value ?? '';
+    return this.performSearch(query, true);
+  }
+
+  /**
+   * Trigger search and emit final results.
+   */
+  async triggerSearch(query: string): Promise<void> {
+    const results = await this.performSearch(query);
+    this.searchResult.emit(results);
+  }
+
+  /**
+   * Handle raw input value change — emits unprocessed string.
+   */
+  onInputChanged(event: Event): void {
+    const rawValue = (event.target as HTMLInputElement).value;
+    this.rawInput.emit(rawValue);
+  }
+
+  /**
+   * Triggered when user clicks the search button manually.
+   */
+  onSearchButtonClick(): void {
+    if (!this.autoTriggerSearch) {
+      this.control.markAllAsTouched();
+      this.triggerSearch(this.control.value ?? '');
+    }
   }
 }

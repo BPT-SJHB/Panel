@@ -13,7 +13,9 @@ import { ToastService } from 'app/services/toast-service/toast.service';
 
 import { BinaryRadioInputComponent } from 'app/components/shared/inputs/binary-radio-input/binary-radio-input.component';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
-import { SearchInputComponent } from 'app/components/shared/inputs/search-input/search-input.component';
+import { SearchAutoCompleteComponent } from 'app/components/shared/inputs/search-auto-complete/search-auto-complete.component';
+import { LoadingService } from 'app/services/loading-service/loading-service.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-factories-and-freight-form',
@@ -25,29 +27,36 @@ import { SearchInputComponent } from 'app/components/shared/inputs/search-input/
     DialogModule,
     ReactiveFormsModule,
     TextInputComponent,
-    SearchInputComponent,
     BinaryRadioInputComponent,
+    SearchAutoCompleteComponent,
   ],
 })
 export class FactoriesAndFreightFormComponent {
-  @ViewChild(SearchInputComponent) searchInputComponent!: SearchInputComponent;
-
   private fb = inject(FormBuilder);
   private toast = inject(ToastService);
   private fpcService = inject(FpcManagementService);
+  private cachedFpc?: FPCInfo;
+  private loadingService = inject(LoadingService)
+  private destroy$ = new Subject<void>();
+
+ ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  ngOnInit(): void {
+    this.loadingService.loading$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => (this.loading = value));
+  }
+
 
   loading = false;
-  searchTerm = '';
   addonWidth = '9rem';
   passwordDialogVisible = false;
   userNameDialog = '';
   newUserPasswordDialog = '';
-
-  private startKey = '';
-  private cachedFpcResults: FPCInfo[] = [];
-  private cachedFpc?: FPCInfo;
-  private readonly cachingEnabled = true;
-  readonly cacheKeyLength = 3;
+  searchTerm: FormControl = new FormControl('');
 
   fpcForm = this.fb.group({
     fpcId: [0, ValidationSchema.id],
@@ -61,35 +70,20 @@ export class FactoriesAndFreightFormComponent {
   });
 
   searchFPCs = async (query: string): Promise<FPCInfo[]> => {
-    if (query.length < this.cacheKeyLength) return [];
-
-    const newStartKey = query.substring(0, this.cacheKeyLength);
-
-    if (this.cachingEnabled && newStartKey === this.startKey) {
-      return this.cachedFpcResults.filter((item) =>
-        item.FPCTitle?.toLowerCase().includes(query.toLowerCase())
-      );
-    }
-
     const response = await this.fpcService.GetFPCsInfo(query);
     if (!this.isSuccessful(response)) return [];
-
-    this.startKey = newStartKey;
-    this.cachedFpcResults = response.data!;
     return response.data!;
   };
 
-  async selectSearchItem(event: AutoCompleteSelectEvent): Promise<void> {
-    console.log(event.value.FPCId);
-    await this.loadFpcDetails(event.value.FPCId);
+  async selectSearchItem(fpc: FPCInfo): Promise<void> {
+    await this.loadFpcDetails(fpc.FPCId);
   }
 
   resetFpcForm(): void {
     this.fpcForm.reset();
     this.fpcId.setValue(0);
     this.fpcActive.setValue(true);
-    this.searchTerm = '';
-    this.searchInputComponent.onClear();
+    this.searchTerm.setValue('');
   }
 
   copyToClipboard(text: string): void {

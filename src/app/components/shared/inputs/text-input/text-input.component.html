@@ -65,6 +65,8 @@
               }"
               (focus)="onFocusInput(inputRef)"
               (blur)="onBlurInput(inputRef)"
+              (input)="input.emit($event)"
+              (keydown)="onKeyDown($event)"
             />
           </div>
         </ng-persian-datepicker>

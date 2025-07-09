@@ -5,6 +5,7 @@ export enum ErrorCodes {
   NotFound = 404,
   InternalServerError = 500,
   NotFoundInLocalAPI = 27,
+  NotAuthenticated = 25,
   NoRecordFound=28,
 }
 
@@ -15,5 +16,6 @@ export const ERROR_MESSAGES: Record<ErrorCodes, string> = {
   [ErrorCodes.NotFound]: 'منبع درخواستی یافت نشد.',
   [ErrorCodes.InternalServerError]: 'خطای سرور داخلی رخ داده است. لطفاً بعداً تلاش کنید.',
   [ErrorCodes.NotFoundInLocalAPI]: 'اطلاعات در سرور داخلی یافت نشد',
-  [ErrorCodes.NoRecordFound]: "رکورد پیدا مورد نظر یاقت نشد."
+  [ErrorCodes.NoRecordFound]: "رکورد پیدا مورد نظر یاقت نشد.",
+  [ErrorCodes.NotAuthenticated]: ""
 };

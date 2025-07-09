@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -17,10 +17,15 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SearchInputComponent } from '../../shared/inputs/search-input/search-input.component';
 import { TextInputComponent } from '../../shared/inputs/text-input/text-input.component';
 import { BinaryRadioInputComponent } from '../../shared/inputs/binary-radio-input/binary-radio-input.component';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { ShortResponse } from 'app/data/model/short-response.model';
-import {  ErrorCodes } from 'app/constants/error-messages';
+import { ErrorCodes } from 'app/constants/error-messages';
 
 @Component({
   selector: 'app-lad-places-form',
@@ -34,20 +39,21 @@ import {  ErrorCodes } from 'app/constants/error-messages';
     SearchInputComponent,
     TextInputComponent,
     BinaryRadioInputComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   templateUrl: './lad-places-form.component.html',
   styleUrl: './lad-places-form.component.scss',
   providers: [ConfirmationService],
 })
 export class LadPlacesFormComponent implements OnInit, OnDestroy {
+  @ViewChild(SearchInputComponent) searchInput!: SearchInputComponent<LADPlace>;
+
   private destroy$ = new Subject<void>();
   private loadingService = inject(LoadingService);
   private toast = inject(ToastService);
   private ladPlaceService = inject(LADPlaceManagementService);
   private confirmationService = inject(ConfirmationService);
   private fb = inject(FormBuilder);
-  private searchTerm = '';
 
   formDialogVisible = false;
   loading = false;
@@ -67,14 +73,10 @@ export class LadPlacesFormComponent implements OnInit, OnDestroy {
     'آدرس',
   ];
 
-  private readonly cacheKeyLength = 3;
-  private startKey = '';
-  cachingEnabled = true;
-
   ladPlacesForm = this.fb.group({
     ladPlacesId: [0, ValidationSchema.id],
     ladPlacesTitle: ['', ValidationSchema.title],
-    ladPlacesTel: ['',Validators.pattern(/^0\d{10}$/)],
+    ladPlacesTel: ['', Validators.pattern(/^0\d{10}$/)],
     ladPlacesAddress: [''],
     loadingActive: [true],
     dischargingActive: [true],
@@ -91,27 +93,20 @@ export class LadPlacesFormComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  async searchLadPlace(query: string): Promise<void> {
-    this.searchTerm = query;
-    if (query.length < this.cacheKeyLength) {
-      this.ladPlaces = [];
-      return;
-    }
-
-    const newStartKey = query.substring(0, this.cacheKeyLength);
-    if (this.cachingEnabled && newStartKey === this.startKey) {
-      this.ladPlaces = this.ladPlacesCached.filter((item) =>
-        item.LADPlaceTitle.includes(query)
-      );
-      return;
-    }
-
+  searchLADPlace: (query: string) => Promise<LADPlace[]> = async (
+    query: string
+  ) => {
     const response = await this.ladPlaceService.GetLADPlaces(query);
-    if (!this.handleResponse(response)) return;
+    if (!this.handleResponse(response)) return [];
+    return response.data!;
+  };
 
-    this.startKey = newStartKey;
-    this.ladPlaces = response.data!;
-    this.ladPlacesCached = [...this.ladPlaces];
+  filterLADPlace = (ladPlace: LADPlace, query: string) => {
+    return ladPlace.LADPlaceTitle.includes(query);
+  };
+
+  handelSearchLADPlaces(ladPlaces: LADPlace[]) {
+    this.ladPlaces = ladPlaces;
   }
 
   onDelete(row: LADPlace): void {
@@ -136,9 +131,9 @@ export class LadPlacesFormComponent implements OnInit, OnDestroy {
       accept: async () => {
         try {
           this.loadingService.setLoading(true);
-          await this.deleteLadPlaces(row.LADPlaceId)
+          await this.deleteLadPlaces(row.LADPlaceId);
         } finally {
-          this.loadingService.setLoading(false)
+          this.loadingService.setLoading(false);
         }
       },
     });
@@ -232,18 +227,20 @@ export class LadPlacesFormComponent implements OnInit, OnDestroy {
     try {
       const ladPlace = this.extractLadPlaceFromForm();
       const response = await this.ladPlaceService.RegisterNewLADPlace(ladPlace);
-    
+
       if (!this.handleResponse(response)) return;
 
-
-       const changes = await this.updateLoadingAndDischarging(
+      const changes = await this.updateLoadingAndDischarging(
         response.data!.LADPlaceId
       );
       const hasError = changes.some((res) => !this.handleResponse(res));
 
       if (hasError) return;
-      
-      this.populateLadPlaceForm({...ladPlace,LADPlaceId:response.data?.LADPlaceId ?? 0});
+
+      this.populateLadPlaceForm({
+        ...ladPlace,
+        LADPlaceId: response.data?.LADPlaceId ?? 0,
+      });
     } finally {
       this.updateTable();
       this.closeDialog();
@@ -268,7 +265,7 @@ export class LadPlacesFormComponent implements OnInit, OnDestroy {
         'خطا',
         response.error?.message ?? 'خطای غیرمنتظره‌ای رخ داد'
       );
-      if(response.error?.code === ErrorCodes.NoRecordFound){
+      if (response.error?.code === ErrorCodes.NoRecordFound) {
         return true;
       }
       return false;
@@ -304,9 +301,7 @@ export class LadPlacesFormComponent implements OnInit, OnDestroy {
   }
 
   private async updateTable() {
-    this.startKey = '';
-    this.ladPlacesCached = [];
-    this.searchLadPlace(this.searchTerm);
+    this.searchInput.refreshSearch();
   }
   // Form control getters
   get ladPlacesId(): FormControl {

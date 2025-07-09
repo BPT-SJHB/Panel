@@ -10,7 +10,8 @@
     </div>
   </form>
     <app-search-input
-      (input)="tt.filter($any($event.target).value, 'PGTitle', 'contains')"
+      (rawInput)="tt.filter($any($event), 'PGTitle', 'contains')"
+      [autoTriggerSearch]="true"
     ></app-search-input>
 
     <p-treetable

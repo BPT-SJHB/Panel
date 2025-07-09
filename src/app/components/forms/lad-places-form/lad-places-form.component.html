@@ -2,14 +2,16 @@
 
 <app-search-input
   placeholder="قسمتی از نام را کنید."
-  (valueChange)="searchLadPlace($event)"
+  [asyncSearchFn]="searchLADPlace"
+  [itemMatchesQuery]="filterLADPlace"
+  (searchResult)="handelSearchLADPlaces($event)"  
 />
 
 <p-table
   class="col-12"
+  styleClass="overflow-x-auto"
   [columns]="cols"
   [value]="ladPlaces"
-  styleClass="overflow-x-auto"
   [tableStyle]="{ 'min-width': '40rem' }"
 >
   <ng-template #caption>

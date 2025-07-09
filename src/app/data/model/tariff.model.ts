@@ -3,9 +3,9 @@ export interface Tariff {
   SourceCityId: number | undefined;
   TargetCityId: number | undefined;
   GoodId: number | undefined;
-  TargetCityTitle?: string;
-  SourceCityTitle?: string;
   LoaderTypeTitle?: string;
+  SourceCityTitle?: string;
+  TargetCityTitle?: string;
   GoodTitle?: string;
   Tariff?: number;
   BaseTonnag?: number;

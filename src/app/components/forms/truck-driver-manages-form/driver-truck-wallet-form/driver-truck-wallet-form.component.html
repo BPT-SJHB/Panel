@@ -1,37 +1,21 @@
 <div class="flex flex-column gap-3">
-  <!-- Loading Spinner -->
-  @if (loading) {
-  <div
-    class="h-full w-full z-5 flex align-items-center justify-content-center absolute"
-  >
-    <div class="h-full w-full bg-white absolute" style="opacity: 0.2"></div>
-    <i class="pi pi-spin pi-spinner primary" style="font-size: 5rem"></i>
-  </div>
-  }
-
   <!-- Search by SmartCard -->
   <form
     class="col-12"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
-    (ngSubmit)="loadComposedForm()"
     [formGroup]="mainSearchForm"
   >
     <div class="flex gap-3">
-      <app-text-input
+      <app-search-input
         [control]="searchSmartCard"
         validationField="smartCard"
         icon="pi pi-id-card"
         class="flex-1"
         placeholder="جستجو براساس شماره هوشمند"
-      />
-      <p-button
-        (click)="loadComposedForm()"
-        [disabled]="mainSearchForm.invalid"
-        size="small"
-        severity="info"
-        styleClass="w-8rem h-2-5rem"
-        label="استعلام"
+        [disableSearchButton]="mainSearchForm.invalid"
+        searchButtonLabel="استعلام"
+        [onSearchQuery]="loadComposedForm"
       />
     </div>
   </form>
@@ -67,9 +51,11 @@
               validationField="smartCard"
               addonWidth="10rem"
             />
-          <p-button
+            <p-button
               (click)="loadTruckInfo()"
-              [disabled]="this.truckId.invalid || this.smartCard.invalid || loading"
+              [disabled]="
+                this.truckId.invalid || this.smartCard.invalid || loading
+              "
               size="small"
               severity="primary"
               styleClass="mt-1 w-6rem h-2rem"
@@ -132,7 +118,9 @@
             />
             <p-button
               (click)="loadDriverInfo()"
-              [disabled]="this.driverId.invalid || this.nationalId.invalid || loading"
+              [disabled]="
+                this.driverId.invalid || this.nationalId.invalid || loading
+              "
               size="small"
               severity="primary"
               type="submit"

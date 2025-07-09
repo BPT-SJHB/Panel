@@ -1,56 +1,29 @@
-<div class="flex justify-content-center align-items-center">
-  <p-input-group>
-    <!-- Addon: Icon or Label -->
-    <p-inputgroup-addon
-      class="bg-primary border-round-right flex items-center justify-center px-3 h-2-5rem"
-      [style.width]="addonWidth"
-    >
-      <ng-container *ngIf="label.trim() === ''; else labelTemplate">
-        <i [class]="icon"></i>
-      </ng-container>
-      <ng-template #labelTemplate>
-        <span class="text-sm text-white" style="white-space: nowrap">
-          {{ label }}
-        </span>
-      </ng-template>
-    </p-inputgroup-addon>
+<div class="relative flex justify-content-center align-items-center gap-3 h-4rem">
+  <app-text-input
+    class="flex-grow-1 h-full"
+    [control]="control"
+    [validationField]="validationField"
+    [label]="label"
+    [placeholder]="placeholder"
+    [readOnly]="readOnly"
+    [disabled]="disabled"
+    [icon]="icon"
+    [addonWidth]="addonWidth"
+    (input)="onInputChanged($event)"
+    (keydown.enter)="onSearchButtonClick()"
+  ></app-text-input>
 
-    <!-- Input: AutoComplete or Plain -->
-    <ng-container *ngIf="autoComplete; else plainInput">
-      <p-autoComplete
-        pInputText
-        [(ngModel)]="searchTerm"
-        [formControl]="control"
-        [suggestions]="autoCompleteItem"
-        [optionLabel]="autoCompleteOptionLabel"
-        [optionValue]="autoCompleteOptionValue"
-        [placeholder]="placeholder"
-        [showEmptyMessage]="showEmptyMessage"
-        (completeMethod)="onLazySearch($event)"
-        (onSelect)="onSelectAutoComplete($event)"
-        emptyMessage="موردی یافت نشد"
-        class="flex-grow-1 border-input"
-        styleClass="w-full h-2-5rem"
-      />
-      <div
-        *ngIf="showSelectIcon"
-        class="absolute"
-        style="left: 45px; margin-top: 6px; z-index: 3;"
-      >
-        <i class="pi pi-check-circle text-lg text-green-600"></i>
-      </div>
-    </ng-container>
-
-    <ng-template #plainInput>
-      <input
-        pInputText
-        type="text"
-        [(ngModel)]="searchTerm"
-        (ngModelChange)="onValueChange($event)"
-        [placeholder]="placeholder"
-        [readonly]="readOnly"
-        class="flex-grow-1 w-full h-2-5rem"
-      />
-    </ng-template>
-  </p-input-group>
+  <div class="flex items-center">
+    <p-button
+      *ngIf="!autoTriggerSearch"
+      (click)="onSearchButtonClick()"
+      [label]="searchButtonLabel"
+      [disabled]="disableSearchButton"
+      size="small"
+      styleClass="px-4 py-1"
+      severity="info"
+      class="h-full"
+      [style]="{ 'margin-bottom': '23px' }"
+    ></p-button>
+  </div>
 </div>

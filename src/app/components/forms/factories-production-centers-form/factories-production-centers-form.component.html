@@ -1,14 +1,12 @@
 <div class="grid">
   <!-- Search Input -->
   <div class="col-12 w-full">
-    <app-search-input
-      class="w-full"
-      [autoComplete]="true"
-      autoCompleteOptionLabel="FPCTitle"
-      autoCompleteOptionValue="FPCTitle"
-      (selectAutoComplete)="selectSearchItem($event)"
+    <app-search-auto-complete
       [lazySearch]="searchFPCs"
-      [autoCompleteMinLength]="cacheKeyLength"
+      class="w-full"
+      optionLabel="FPCTitle"
+      optionValue="FPCTitle"
+      (selectSuggestion)="selectSearchItem($event)"
     />
   </div>
 

@@ -18,6 +18,7 @@ import { ToastService } from 'app/services/toast-service/toast.service';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
 import { Subject, takeUntil } from 'rxjs';
+import { SearchInputComponent } from "../../../shared/inputs/search-input/search-input.component";
 
 @Component({
   selector: 'app-truck-info-form',
@@ -28,7 +29,8 @@ import { Subject, takeUntil } from 'rxjs';
     ButtonModule,
     ReactiveFormsModule,
     TextInputComponent,
-  ],
+    SearchInputComponent
+],
 })
 
 export class TruckInfoFormComponent {
@@ -70,18 +72,18 @@ export class TruckInfoFormComponent {
   }
  
 
-  async loadFormsInformation():Promise<void>{
-    await this.loadTruckInfoFromAPI();
+  loadFormsInformation = async(smartCard:string) => {
+    await this.loadTruckInfoFromAPI(smartCard);
     await this.loadNativenessForm();
   }
 
 
-  async loadTruckInfoFromAPI(): Promise<void> {
+  async loadTruckInfoFromAPI(smartCard:string): Promise<void> {
     if (this.searchForm.invalid || this.loading) return;
 
     try {
       this.loadingService.setLoading(true);
-      const response = await this.truckService.GetTruckInfoFromAPI(this.searchSmartCard.value);
+      const response = await this.truckService.GetTruckInfoFromAPI(smartCard);
       if (this.isSuccessful(response)) {
         this.populateTruckInfoForm(response.data!);
       }
