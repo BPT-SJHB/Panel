@@ -52,9 +52,9 @@ export class TariffsManagementService {
       bodyValue.GoodId = tariffsInfo.GoodId;
     }
     if (
-      tariffsInfo.SourceCityId != undefined &&
-      tariffsInfo.TargetCityId != undefined &&
-      tariffsInfo.GoodId != undefined
+      tariffsInfo.SourceCityId == undefined &&
+      tariffsInfo.TargetCityId == undefined &&
+      tariffsInfo.GoodId == undefined
     ) {
       bodyValue.SourceCityId = 0;
     }
