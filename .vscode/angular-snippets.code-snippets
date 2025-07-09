@@ -1,0 +1,34 @@
+{
+  "inject for services": {
+    "prefix": "serviceInjections",
+    "body": [
+      "private userAuth = inject(UserAuthService);",
+      "private apiCommunicator = inject(APICommunicationManagementService);",
+      "$0"
+    ]
+  },
+  "add method to services": {
+    "prefix": "serviceMethod",
+    "body": [
+      "public async ${1:method name}(): Promise<ApiResponse<${2:return model}>> {",
+      "this.userAuth.isLoggedIn();",
+      "",
+      "//#region Consts",
+      "const apiUrl = API_ROUTES.${3:select route}",
+      "const ${4:model name}Info : ${5:model name} = {$6};",
+      "const bodyValue = {",
+      "SessionId: this.userAuth.getSessionId(),",
+      "${7:send key name}",
+      "};",
+      "//#endregion",
+      "",
+      "//#region",
+      "return await this.apiCommunicator.CommunicateWithAPI_Post<",
+      "typeof bodyValue,",
+      "${8:return model}",
+      ">(apiUrl, bodyValue, ${9:mock name});",
+      "//#endregion",
+      "}"
+    ]
+  }
+}
