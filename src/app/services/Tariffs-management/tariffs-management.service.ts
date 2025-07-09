@@ -122,7 +122,7 @@ export class TariffsManagementService {
     const apiUrl = API_ROUTES.TransportationAPI.Tariffs.EditTariffs;
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
-      Tariffs: tariff,
+      Tariffs: [tariff],
     };
     //#endregion
 
@@ -164,7 +164,7 @@ export class TariffsManagementService {
     const apiUrl = API_ROUTES.TransportationAPI.Tariffs.RegisterTariff;
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
-      Tariffs: tariff,
+      Tariffs: [tariff],
     };
     //#endregion
 
