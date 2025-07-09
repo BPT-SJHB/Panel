@@ -1,0 +1,77 @@
+{
+  "inject for services": {
+    "prefix": "serviceInjections",
+    "body": [
+      "private userAuth = inject(UserAuthService);",
+      "private apiCommunicator = inject(APICommunicationManagementService);",
+      "$0"
+    ]
+  },
+  "add noraml method to services": {
+    "prefix": "serviceNormalMethod",
+    "body": [
+      "public async ${methodName}(${params}): Promise<ApiResponse<${returnModel}>> {",
+      "this.userAuth.isLoggedIn();",
+      "",
+      "//#region Consts",
+      "const apiUrl = API_ROUTES.${selectRoute}",
+      "const ${modelName}Info : ${ModelName} = {${modelKeys}};",
+      "const bodyValue = {",
+      "SessionId: this.userAuth.getSessionId(),",
+      "${sendKeyName}",
+      "};",
+      "//#endregion",
+      "",
+      "//#region Request + Return",
+      "return await this.apiCommunicator.CommunicateWithAPI_Post<",
+      "typeof bodyValue,",
+      "${returnModel}",
+      ">(apiUrl, bodyValue, ${mockName});",
+      "//#endregion",
+      "}"
+    ]
+  },
+  "add mapped method to services": {
+    "prefix": "serviceMappedMethod",
+    "body": [
+      "public async ${methodName}(${params}): Promise<ApiResponse<${returnModel}>> {",
+      "this.userAuth.isLoggedIn();",
+      "",
+      "//#region Consts",
+      "const apiUrl = API_ROUTES.${selectRoute}",
+      "const ${modelName}Info : ${ModelName} = {${addModelKeys}};",
+      "const bodyValue = {",
+      "SessionId: this.userAuth.getSessionId(),",
+      "${sendKeyName}",
+      "};",
+      "//#endregion",
+      "",
+      "//#region Request",
+      "const response = await this.apiCommunicator.CommunicateWithAPI_Post<",
+      "typeof bodyValue,",
+      "${returnType}",
+      ">(apiUrl, bodyValue, ${mock});",
+      "//#endregion",
+      "",
+      "//#region Return",
+      "return {",
+      "success: response.success,",
+      "data: response.data?.map((data) => ({",
+      "${modelKeys}",
+      "})),",
+      "error: response.error,",
+      "};",
+      "//#endregion",
+      "}",
+      "$0"
+    ]
+  },
+  "add softwareUser api routes": {
+    "prefix": "apiSoftwareUserRoute",
+    "body": "${apiRouteName}: `${environment.apiUrl}:\\${softwareUserAPIPort}/api/${realNameFromAPI}`,$0"
+  },
+  "add transportaion api routes": {
+    "prefix": "apiTransportaionRoute",
+    "body": "${apiRouteName}: `${environment.apiUrl}:\\${transportationAPIPort}/api/${realNameFromAPI}`,$0"
+  },
+}
