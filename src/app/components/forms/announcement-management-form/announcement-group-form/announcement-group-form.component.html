@@ -1,0 +1,144 @@
+<!-- 🔍 Search Input -->
+<div class="w-full">
+  <app-search-input
+    placeholder="بخشی از عنوان گروه وارد کنید."
+    class="w-full"
+    [staticData]="announcementsGroup"
+    [itemMatchesQuery]="filterAnnouncementsGroup"
+    [autoTriggerSearch]="true"
+    [fallbackToAllWhenQueryShort]="true"
+    [minSearchLength]="2"
+    [control]="searchAnnouncementTitle"
+    (searchResult)="handleSearch($event)"
+  />
+</div>
+
+<!-- 📋 Announcement Table -->
+<p-table
+  class="col-12 overflow-x-auto"
+  [columns]="cols"
+  [value]="displayAnnouncementsGroup"
+  [tableStyle]="{ 'min-width': '40rem' }"
+>
+  <!-- Table Header -->
+  <ng-template #caption>
+    <div class="flex items-center justify-between">
+      <p-button
+        label="جدید"
+        size="small"
+        styleClass="px-4 md:px-5 py-1"
+        (click)="onNew()"
+      />
+    </div>
+  </ng-template>
+
+  <ng-template #header let-columns>
+    <tr>
+      @for (col of columns; track $index) {
+        <th>{{ col }}</th>
+      }
+    </tr>
+  </ng-template>
+
+  <!-- Table Rows -->
+  <ng-template #body let-rowData>
+    <tr>
+      <td>{{ rowData.AnnouncementId }}</td>
+
+      <td>
+        <p-button
+          icon="pi pi-pencil"
+          severity="info"
+          variant="text"
+          [disabled]="loading"
+          (click)="onEdit(rowData)"
+        />
+      </td>
+
+      <td>
+        <p-button
+          icon="pi pi-trash"
+          severity="danger"
+          variant="text"
+          [disabled]="loading"
+          (click)="onDelete(rowData)"
+        />
+      </td>
+
+      <td>{{ rowData.AnnouncementTitle }}</td>
+
+      <td>
+        <i
+          class="pi"
+          [ngClass]="
+            rowData.Active
+              ? 'pi-check-circle text-green-500'
+              : 'pi-times-circle text-red-500'
+          "
+        ></i>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<!-- 📝 Form Dialog -->
+<p-dialog
+  draggable="false"
+  [header]="headerTitle"
+  [modal]="true"
+  [style]="{ 'max-width': '30rem' }"
+  maskStyleClass="px-3"
+  [(visible)]="formDialogVisible"
+  (onHide)="closeAnnouncementFormGroup()"
+>
+  <form
+    class="grid gap-3"
+    [formGroup]="announcementGroupForm"
+    (ngSubmit)="registerOrEdit()"
+    [class.pointer-events-none]="loading"
+    [class.opacity-60]="loading"
+  >
+    <div class="grid col-12 gap-3">
+      <app-text-input
+        class="col-12"
+        label="کد"
+        validationField="id"
+        addonWidth="5rem"
+        [readOnly]="true"
+        [disabled]="true"
+        [control]="AnnouncementId"
+      />
+
+      <app-text-input
+        class="col-12"
+        label="عنوان"
+        placeholder="عنوان"
+        validationField="title"
+        addonWidth="5rem"
+        [control]="AnnouncementTitle"
+      />
+
+      <div class="grid col-12">
+        <app-binary-radio-input
+          class="col-12"
+          label="وضعیت گروه:"
+          radioName="AnnouncementActive"
+          [control]="AnnouncementActive"
+          [readonly]="!isFormEditable()"
+          [disabled]="!isFormEditable()"
+        />
+      </div>
+    </div>
+
+    <div class="w-full flex justify-end">
+      <p-button
+        label="ثبت و ویرایش اطلاعات"
+        (click)="registerOrEdit()"
+        [disabled]="announcementGroupForm.invalid || loading"
+      />
+    </div>
+  </form>
+</p-dialog>
+
+<!-- 🛑 Confirm Dialog -->
+<p-confirm-dialog />
