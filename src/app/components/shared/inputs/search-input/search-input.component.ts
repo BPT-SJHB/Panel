@@ -5,6 +5,8 @@ import {
   EventEmitter,
   OnInit,
   OnDestroy,
+  SimpleChanges,
+  OnChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
@@ -31,7 +33,7 @@ import { TextInputComponent } from '../text-input/text-input.component';
   templateUrl: './search-input.component.html',
   styleUrl: './search-input.component.scss',
 })
-export class SearchInputComponent<T> implements OnInit, OnDestroy {
+export class SearchInputComponent<T> implements OnInit, OnDestroy,OnChanges {
   private controlSubscription?: Subscription;
 
   // -------------------------
@@ -92,6 +94,19 @@ export class SearchInputComponent<T> implements OnInit, OnDestroy {
     this.controlSubscription?.unsubscribe();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['staticData'] && !changes['staticData'].firstChange) {
+      const query = this.control?.value ?? '';
+      if (
+        !this.asyncSearchFn &&
+        this.autoTriggerSearch &&
+        query.length >= this.minSearchLength
+      ) {
+        this.triggerSearch(query);
+      }
+    }
+  }
+
   /**
    * Core search logic — chooses between static filtering, async search, or single-result search.
    */
@@ -104,12 +119,12 @@ export class SearchInputComponent<T> implements OnInit, OnDestroy {
     }
     // onSearchQuery replaces the default search behavior
     if (this.onSearchQuery) {
-      await this.onSearchQuery(query);      
+      await this.onSearchQuery(query);
       return [];
     }
 
     if (!this.itemMatchesQuery) {
-      return[];
+      return [];
     }
 
     // Static filtering
