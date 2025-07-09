@@ -12,13 +12,17 @@ import { ProductFormComponent } from 'app/components/forms/product-form/product-
 import { LadPlacesFormComponent } from 'app/components/forms/lad-places-form/lad-places-form.component';
 import { TravelTimeFormComponent } from 'app/components/forms/travel-time-form/travel-time-form.component';
 import { TariffsFormComponent } from 'app/components/forms/tariffs-manages-form/tariffs-form.component';
+import { AnnouncementGroupFormComponent } from 'app/components/forms/announcement-management-form/announcement-group-form/announcement-group-form.component';
+import { AnnouncementSubGroupFormComponent } from 'app/components/forms/announcement-management-form/announcement-sub-group-form/announcement-sub-group-form.component';
 import { MainViewComponent } from 'app/components/shared/main-view/main-view.component';
+import { RelationOfAnnouncementGroupAndSubGroupComponent } from 'app/components/forms/announcement-management-form/relation-of-announcement-group-and-sub-group/relation-of-announcement-group-and-sub-group.component';
 
 export enum TabComponentKey {
   Main = -1,
   UserManagement = 0,
   TruckDriverManagement = 1,
   FactoriesAndFreightManagement = 6,
+  AnnouncementManagement = 11,
   LoaderTypeManagement = 12,
   LADPlaceManagementService = 7,
   ProvinceAndCityManagement = 8,
@@ -115,6 +119,17 @@ export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
     {
       title: 'تعرفه های حمل بار',
       component: TariffsFormComponent,
+    },
+  ],
+  [TabComponentKey.AnnouncementManagement]: [
+    { title: 'گروه ها اعلام بار', component: AnnouncementGroupFormComponent },
+    {
+      title: 'زیر گروه ها اعلام بار',
+      component: AnnouncementSubGroupFormComponent,
+    },
+    {
+      title: 'گروه و زیرگروه اعلام بار',
+      component: RelationOfAnnouncementGroupAndSubGroupComponent,
     },
   ],
 };
