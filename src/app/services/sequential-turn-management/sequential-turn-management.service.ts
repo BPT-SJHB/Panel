@@ -16,4 +16,6 @@ import { mockRelationOfSequentialTurnToAnnouncementSubGroups } from './mock/rela
   providedIn: 'root',
 })
 export class SequentialTurnManagementService {
+  private userAuth = inject(UserAuthService);
+  private apiCommunicator = inject(APICommunicationManagementService);
 }
