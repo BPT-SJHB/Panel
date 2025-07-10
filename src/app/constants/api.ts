@@ -114,5 +114,21 @@ export const API_ROUTES = {
         RegisterRelation: `${environment.apiUrl}:${transportationAPIPort}/api/AnnouncementRelationAnnouncementSubGroupRegistering`,
       },
     },
+    SequentialTurns: {
+      GetSequentialTurns: `${environment.apiUrl}:${transportationAPIPort}/api/GetSequentialTurns`,
+      RegisterSequentialTurn: `${environment.apiUrl}:${transportationAPIPort}/api/SequentialTurnRegistering`,
+      EditSequentialTurn: `${environment.apiUrl}:${transportationAPIPort}/api/SequentialTurnEditing`,
+      DeleteSequentialTurn: `${environment.apiUrl}:${transportationAPIPort}/api/SequentialTurnDeleting`,
+      RelationToLoaderTypes: {
+        GetRelationToLoaderTypes: `${environment.apiUrl}:${transportationAPIPort}/api/GetSequentialTurnsRelationLoaderTypes`,
+        RegisterRelationToLoaderType: `${environment.apiUrl}:${transportationAPIPort}/api/SequentialTurnRelationLoaderTypeRegistering`,
+        DeleteRelationToLoaderType: `${environment.apiUrl}:${transportationAPIPort}/api/SequentialTurnRelationLoaderTypeDeleting`,
+      },
+      RelationToAnnouncementSubGroups: {
+        GetRelationToAnnouncementSubGroups: `${environment.apiUrl}:${transportationAPIPort}/api/GetSequentialTurnRelationAnnouncementSubGroups`,
+        RegisterRelationToAnnouncementSubGroup: `${environment.apiUrl}:${transportationAPIPort}/api/SequentialTurnRelationAnnouncementSubGroupRegistering`,
+        DeleteRelationToAnnouncementSubGroupDeleting: `${environment.apiUrl}:${transportationAPIPort}/api/SequentialTurnRelationAnnouncementSubGroupDeleting`,
+      },
+    },
   },
 };
