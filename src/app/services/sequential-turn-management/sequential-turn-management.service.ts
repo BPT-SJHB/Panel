@@ -141,4 +141,46 @@ export class SequentialTurnManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+  public async GetRelationOfSequentialTurnToLoaderTypes(
+    id: number
+  ): Promise<ApiResponse<RelationOfSequentialTurnToLoaderType[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.SequentialTurns.RelationToLoaderTypes
+        .GetRelationToLoaderTypes;
+    const relationOfSequentialToLoaderTypeInfo: RelationOfSequentialTurnToLoaderType =
+      {
+        SeqTurnId: id,
+        LoaderTypes: [],
+      };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SequentialTurnId: relationOfSequentialToLoaderTypeInfo.SeqTurnId,
+    };
+    //#endregion
+
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      RelationOfSequentialTurnToLoaderType[]
+    >(apiUrl, bodyValue, mockRelationOfSequentialTurnToLoaderTypes);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: response.data?.map((data) => ({
+        SeqTurnId: data.SeqTurnId,
+        SeqTurnTitle: data.SeqTurnTitle?.trim(),
+        LoaderTypes: data.LoaderTypes.map((subData) => ({
+          LoaderTypeId: subData.LoaderTypeId,
+          LoaderTypeTitle: subData.LoaderTypeTitle?.trim(),
+        })),
+      })),
+      error: response.error,
+    };
+    //#endregion
+  }
 }
