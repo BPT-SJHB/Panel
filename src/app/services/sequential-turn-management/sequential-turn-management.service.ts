@@ -214,4 +214,35 @@ export class SequentialTurnManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  public async DeleteRelationOfSequentialTurnToLoaderType(
+    sequentialTurnId: number,
+    loaderTypeId: number
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.SequentialTurns.RelationToLoaderTypes
+        .DeleteRelationToLoaderType;
+    const relationOfSequentialTurnToLoaderTypeInfo: RelationOfSequentialTurnToLoaderType =
+      {
+        SeqTurnId: sequentialTurnId,
+        LoaderTypes: [{ LoaderTypeId: loaderTypeId }],
+      };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SequentialTurnId: relationOfSequentialTurnToLoaderTypeInfo.SeqTurnId,
+      LoaderTypeId:
+        relationOfSequentialTurnToLoaderTypeInfo.LoaderTypes[0].LoaderTypeId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
