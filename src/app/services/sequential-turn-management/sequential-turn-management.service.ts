@@ -183,4 +183,35 @@ export class SequentialTurnManagementService {
     };
     //#endregion
   }
+
+  public async RegisterNewRelationOfSequentialTurnToLoaderType(
+    sequentialTurnId: number,
+    loaderTypeId: number
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.SequentialTurns.RelationToLoaderTypes
+        .RegisterRelationToLoaderType;
+    const relationOfSequentialToLoaderTypeInfo: RelationOfSequentialTurnToLoaderType =
+      {
+        SeqTurnId: sequentialTurnId,
+        LoaderTypes: [{ LoaderTypeId: loaderTypeId }],
+      };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SequentialTurnId: relationOfSequentialToLoaderTypeInfo.SeqTurnId,
+      LoaderTypeId:
+        relationOfSequentialToLoaderTypeInfo.LoaderTypes[0].LoaderTypeId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
