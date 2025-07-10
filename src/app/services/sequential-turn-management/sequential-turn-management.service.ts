@@ -56,4 +56,35 @@ export class SequentialTurnManagementService {
     };
     //#endregion
   }
+
+  public async RegisterNewSequentialTurn(
+    id: number,
+    title: string,
+    keyWord: string,
+    status: boolean
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.SequentialTurns.RegisterSequentialTurn;
+    const sequentialTurnInfo: SequentialTurn = {
+      SeqTurnId: id,
+      SeqTurnTitle: title,
+      SeqTurnKeyWord: keyWord,
+      Active: status,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      RawSequentialTurn: sequentialTurnInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
