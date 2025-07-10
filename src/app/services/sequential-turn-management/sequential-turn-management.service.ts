@@ -18,4 +18,42 @@ import { mockRelationOfSequentialTurnToAnnouncementSubGroups } from './mock/rela
 export class SequentialTurnManagementService {
   private userAuth = inject(UserAuthService);
   private apiCommunicator = inject(APICommunicationManagementService);
+  public async GetSequentialTurns(
+    title: string
+  ): Promise<ApiResponse<SequentialTurn[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.SequentialTurns.GetSequentialTurns;
+    const SequentialTurnInfo: SequentialTurn = {
+      SeqTurnId: 0,
+      SeqTurnTitle: title,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SearchString: SequentialTurnInfo.SeqTurnTitle,
+    };
+    //#endregion
+
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      SequentialTurn[]
+    >(apiUrl, bodyValue, mockSequentialTurns);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: response.data?.map((data) => ({
+        SeqTurnId: data.SeqTurnId,
+        SeqTurnTitle: data.SeqTurnTitle?.trim(),
+        SeqTurnKeyWord: data.SeqTurnKeyWord,
+        Active: data.Active,
+      })),
+      error: response.error,
+    };
+    //#endregion
+  }
 }
