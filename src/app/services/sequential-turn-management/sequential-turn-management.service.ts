@@ -118,4 +118,27 @@ export class SequentialTurnManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  public async DeleteSequentialTurn(
+    id: number
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.SequentialTurns.DeleteSequentialTurn;
+    const sequentialTurnInfo: SequentialTurn = { SeqTurnId: id };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SequentialTurnId: sequentialTurnInfo.SeqTurnId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
