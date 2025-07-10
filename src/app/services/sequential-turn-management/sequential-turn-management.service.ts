@@ -245,4 +245,47 @@ export class SequentialTurnManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+  public async GetRelationOfSequentialTurnToAnnouncementSubGroups(
+    id: number
+  ): Promise<ApiResponse<RelationOfSequentialTurnToAnnouncementSubGroup[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.SequentialTurns
+        .RelationToAnnouncementSubGroups.GetRelationToAnnouncementSubGroups;
+    const relationOfSequentialTurnToAnnouncementSubGroupInfo: RelationOfSequentialTurnToAnnouncementSubGroup =
+      {
+        SeqTurnId: id,
+        AnnouncementSubGroups: [],
+      };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SequentialTurnId:
+        relationOfSequentialTurnToAnnouncementSubGroupInfo.SeqTurnId,
+    };
+    //#endregion
+
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      RelationOfSequentialTurnToAnnouncementSubGroup[]
+    >(apiUrl, bodyValue, mockRelationOfSequentialTurnToAnnouncementSubGroups);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: response.data?.map((data) => ({
+        SeqTurnId: data.SeqTurnId,
+        SeqTurnTitle: data.SeqTurnTitle?.trim(),
+        AnnouncementSubGroups: data.AnnouncementSubGroups.map((subData) => ({
+          AnnouncementSGId: subData.AnnouncementSGId,
+          AnnouncementSGTitle: subData.AnnouncementSGTitle?.trim(),
+        })),
+      })),
+      error: response.error,
+    };
+    //#endregion
+  }
 }
