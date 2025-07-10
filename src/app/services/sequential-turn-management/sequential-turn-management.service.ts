@@ -18,6 +18,9 @@ import { mockRelationOfSequentialTurnToAnnouncementSubGroups } from './mock/rela
 export class SequentialTurnManagementService {
   private userAuth = inject(UserAuthService);
   private apiCommunicator = inject(APICommunicationManagementService);
+
+  //#region Sequential Turn
+
   public async GetSequentialTurns(
     title: string
   ): Promise<ApiResponse<SequentialTurn[]>> {
@@ -141,6 +144,11 @@ export class SequentialTurnManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  //#endregion
+
+  //#region To LoaderType Relation
+
   public async GetRelationOfSequentialTurnToLoaderTypes(
     id: number
   ): Promise<ApiResponse<RelationOfSequentialTurnToLoaderType[]>> {
@@ -245,6 +253,11 @@ export class SequentialTurnManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  //#endregion
+
+  //#region To AnnouncementSubGroup Relation
+
   public async GetRelationOfSequentialTurnToAnnouncementSubGroups(
     id: number
   ): Promise<ApiResponse<RelationOfSequentialTurnToAnnouncementSubGroup[]>> {
@@ -355,4 +368,5 @@ export class SequentialTurnManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+  //#endregion
 }
