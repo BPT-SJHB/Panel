@@ -14,13 +14,16 @@ import { TravelTimeFormComponent } from 'app/components/forms/travel-time-form/t
 import { TariffsFormComponent } from 'app/components/forms/tariffs-manages-form/tariffs-form.component';
 import { AnnouncementGroupFormComponent } from 'app/components/forms/announcement-management-form/announcement-group-form/announcement-group-form.component';
 import { AnnouncementSubGroupFormComponent } from 'app/components/forms/announcement-management-form/announcement-sub-group-form/announcement-sub-group-form.component';
-import { MainViewComponent } from 'app/components/shared/main-view/main-view.component';
 import { RelationOfAnnouncementGroupAndSubGroupComponent } from 'app/components/forms/announcement-management-form/relation-of-announcement-group-and-sub-group/relation-of-announcement-group-and-sub-group.component';
+import { SequentialTurnsFormComponent } from 'app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component';
+import { RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent } from 'app/components/forms/sequential-turns-management-form/relation-of-sequential-turn-to-announcement-sub-groups/relation-of-sequential-turn-to-announcement-sub-groups-form.component';
+import { MainViewComponent } from 'app/components/shared/main-view/main-view.component';
 
 export enum TabComponentKey {
   Main = -1,
   UserManagement = 0,
   TruckDriverManagement = 1,
+  SequentialTurnManagement = 4,
   FactoriesAndFreightManagement = 6,
   AnnouncementManagement = 11,
   LoaderTypeManagement = 12,
@@ -130,6 +133,13 @@ export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
     {
       title: 'گروه و زیرگروه اعلام بار',
       component: RelationOfAnnouncementGroupAndSubGroupComponent,
+    },
+  ],
+  [TabComponentKey.SequentialTurnManagement]: [
+    { title: 'صفوف نوبت دهی', component: SequentialTurnsFormComponent },
+    {
+      title: 'صفوف نوبت دهی - زیرگروه اعلام بار',
+      component: RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent,
     },
   ],
 };
