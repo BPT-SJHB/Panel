@@ -19,6 +19,9 @@ import { Turn } from './model/turn.model';
 export class TurnManagementService {
   private userAuth = inject(UserAuthService);
   private apiCommunicator = inject(APICommunicationManagementService);
+
+  //#region Turn main methods
+
   public async GetLatestTurns(truckId: number): Promise<ApiResponse<Turn[]>> {
     this.userAuth.isLoggedIn();
 
@@ -145,6 +148,11 @@ export class TurnManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  //#endregion
+
+  //#region Turn Registering method
+
   public async RealTimeTurnRegister(
     truckId: number,
     sequentialTurnId: number
@@ -208,6 +216,11 @@ export class TurnManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  //#endregion
+
+  //#region Reserve Turn
+
   public async ResuscitateReserveTurn(
     truckId: number,
     sequentialTurnId: number,
@@ -262,4 +275,6 @@ export class TurnManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  //#endregion
 }
