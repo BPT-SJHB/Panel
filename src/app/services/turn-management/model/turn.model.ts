@@ -1,4 +1,4 @@
-export interface TurnInfo {
+export interface Turn {
   TurnId: number;
   TurnIssueDate?: string;
   TurnIssueTime?: string;
