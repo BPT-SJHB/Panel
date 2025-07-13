@@ -19,4 +19,45 @@ import { Turn } from './model/turn.model';
 export class TurnManagementService {
   private userAuth = inject(UserAuthService);
   private apiCommunicator = inject(APICommunicationManagementService);
+  public async GetLatestTurns(truckId: number): Promise<ApiResponse<Turn[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.Turns.GetLatestTurns;
+    const truckInfo: TruckInfo = {
+      TruckId: truckId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TruckId: truckInfo.TruckId,
+    };
+    //#endregion
+
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      Turn[]
+    >(apiUrl, bodyValue, mockTurns);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: response.data?.map((data) => ({
+        TurnId: data.TurnId,
+        TurnIssueDate: data.TurnIssueDate?.trim(),
+        TurnIssueTime: data.TurnIssueTime?.trim(),
+        TruckDriver: data.TruckDriver?.trim(),
+        SoftwareUserName: data.SoftwareUserName?.trim(),
+        BillOfLadingNumber: data.BillOfLadingNumber?.trim(),
+        OtaghdarTurnNumber: data.OtaghdarTurnNumber?.trim(),
+        TurnStatusTitle: data.TurnStatusTitle?.trim(),
+        TurnStatusDescription: data.TurnStatusDescription?.trim(),
+        DateOfLastChanged: data.DateOfLastChanged?.trim(),
+        SequentialTurnTitle: data.SequentialTurnTitle?.trim(),
+      })),
+      error: response.error,
+    };
+    //#endregion
+  }
 }
