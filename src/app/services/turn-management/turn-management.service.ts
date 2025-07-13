@@ -60,4 +60,43 @@ export class TurnManagementService {
     };
     //#endregion
   }
+
+  public async GetTurnAccounting(
+    turnId: number
+  ): Promise<ApiResponse<TurnAccounting[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.Turns.GetAccounting;
+    const turnInfo: Turn = {
+      TurnId: turnId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TurnId: turnInfo.TurnId,
+    };
+    //#endregion
+
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      TurnAccounting[]
+    >(apiUrl, bodyValue, mockTurnAccounting);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: response.data?.map((data) => ({
+        TurnId: data.TurnId,
+        SequentialTurnId: data.SequentialTurnId?.trim(),
+        DateShamsi: data.DateShamsi?.trim(),
+        Time: data.Time?.trim(),
+        AccountingTypeTitle: data.Time?.trim(),
+        UserName: data.UserName?.trim(),
+      })),
+      error: response.error,
+    };
+    //#endregion
+  }
 }
