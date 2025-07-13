@@ -123,4 +123,26 @@ export class TurnManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  public async CancelTurn(turnId: number): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.Turns.CancelTurn;
+    const turnInfo: Turn = {
+      TurnId: turnId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TurnId: turnInfo.TurnId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
