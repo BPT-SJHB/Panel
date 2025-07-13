@@ -38,11 +38,11 @@ export const API_ROUTES = {
       GetTruckInfoFromLocalAPI: `${environment.apiUrl}:${transportationAPIPort}/api/GetTruckFromWebsite`,
       GetTruckNativeness: `${environment.apiUrl}:${transportationAPIPort}/api/GetTruckNativeness`,
       ChangeTruckNativeness: `${environment.apiUrl}:${transportationAPIPort}/api/ChangeTruckNativeness`,
-    },
-    Driver_Truck_Wallet: {
-      GetComposedTruckInfo: `${environment.apiUrl}:${transportationAPIPort}/api/GetComposedTruckInf`,
-      SetComposedTruckInfo: `${environment.apiUrl}:${transportationAPIPort}/api/SetComposedTruckInf`,
-      GetVirtualWallet: `${environment.apiUrl}:${transportationAPIPort}/api/GetVirtualMoneyWallet`,
+      ComposedInfos: {
+        GetComposedTruckInfo: `${environment.apiUrl}:${transportationAPIPort}/api/GetComposedTruckInf`,
+        SetComposedTruckInfo: `${environment.apiUrl}:${transportationAPIPort}/api/SetComposedTruckInf`,
+        GetComposedTruckInfoForTurnIssues: `${environment.apiUrl}:${transportationAPIPort}/api/GetComposedTruckInfForTurnIssue`,
+      },
     },
     FPC: {
       GetFPCs: `${environment.apiUrl}:${transportationAPIPort}/api/GetFPCs`,
