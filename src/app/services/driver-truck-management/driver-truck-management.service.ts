@@ -276,7 +276,7 @@ export class Driver_TruckManagementService {
 
     //#region Consts
     const apiUrl =
-      API_ROUTES.TransportationAPI.Driver_Truck_Wallet.GetComposedTruckInfo;
+      API_ROUTES.TransportationAPI.Truck.ComposedInfos.GetComposedTruckInfo;
     const truckInfo: TruckInfo = { TruckId: truckId };
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
@@ -284,12 +284,77 @@ export class Driver_TruckManagementService {
     };
     //#endregion
 
-    //#region Request + Return
-    return await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TruckComposedInfo
     >(apiUrl, bodyValue, mockTruckComposedInfo);
     //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: this.TrimComposedTruckInfo(response.data!),
+      error: response.error,
+    };
+    //#endregion
+  }
+
+  public async GetComposedTruckInfoWithLastTurn(
+    truckId: number
+  ): Promise<ApiResponse<TruckComposedInfo>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.Truck.ComposedInfos
+        .GetComposedTruckInfoForTurnIssues;
+    const truckInfo: TruckInfo = {
+      TruckId: truckId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TruckId: truckInfo.TruckId,
+    };
+    //#endregion
+
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      TruckComposedInfo
+    >(apiUrl, bodyValue, mockTruckComposedInfo);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: this.TrimComposedTruckInfo(response.data!),
+      error: response.error,
+    };
+    //#endregion
+  }
+
+  private TrimComposedTruckInfo(
+    response: TruckComposedInfo
+  ): TruckComposedInfo {
+    return {
+      Truck: response.Truck,
+      TruckDriver: response?.TruckDriver,
+      MoneyWallet: response?.MoneyWallet,
+      Turn: {
+        TurnId: response.Turn!.TurnId,
+        TurnIssueDate: response?.Turn?.TurnIssueDate?.trim(),
+        TurnIssueTime: response?.Turn?.TurnIssueTime?.trim(),
+        TruckDriver: response?.Turn?.TruckDriver?.trim(),
+        SoftwareUserName: response?.Turn?.SoftwareUserName?.trim(),
+        BillOfLadingNumber: response?.Turn?.BillOfLadingNumber?.trim(),
+        OtaghdarTurnNumber: response?.Turn?.OtaghdarTurnNumber?.trim(),
+        TurnStatusTitle: response?.Turn?.TurnStatusTitle?.trim(),
+        TurnStatusDescription: response?.Turn?.TurnStatusDescription?.trim(),
+        DateOfLastChanged: response?.Turn?.DateOfLastChanged?.trim(),
+        SequentialTurnTitle: response?.Turn?.SequentialTurnTitle?.trim(),
+      },
+    };
   }
 
   public async SetComposedTruckInfo(
@@ -302,18 +367,18 @@ export class Driver_TruckManagementService {
 
     //#region Consts
     const apiUrl =
-      API_ROUTES.TransportationAPI.Driver_Truck_Wallet.SetComposedTruckInfo;
+      API_ROUTES.TransportationAPI.Truck.ComposedInfos.SetComposedTruckInfo;
     const truckComposedInfo: TruckComposedInfo = {
       Truck: { TruckId: truckId },
       TruckDriver: { DriverId: driverId },
-      Turn: { nEnterExitId: turnId },
+      Turn: { TurnId: turnId },
       MoneyWallet: { MoneyWalletId: moneyWalletId },
     };
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
       TruckId: truckComposedInfo.Truck.TruckId,
       TruckDriverId: truckComposedInfo.TruckDriver?.DriverId,
-      TurnId: truckComposedInfo.Turn?.nEnterExitId,
+      TurnId: truckComposedInfo.Turn?.TurnId,
       MoneyWalletId: truckComposedInfo.MoneyWallet?.MoneyWalletId,
     };
     //#endregion
