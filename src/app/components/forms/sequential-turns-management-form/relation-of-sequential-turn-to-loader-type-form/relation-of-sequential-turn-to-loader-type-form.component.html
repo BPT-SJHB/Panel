@@ -1,0 +1,78 @@
+<div class="grid">
+  <app-search-auto-complete
+    class="col-12 sm:col-6"
+    placeholder="صفوف نوبت دهی"
+    label="صفوف نوبت دهی"
+    [control]="sequentialTitle"
+    optionLabel="SeqTurnTitle"
+    optionValue="SeqTurnTitle"
+    (selectSuggestion)="onSelectSequentialTurn($event)"
+    (valueChange)="onAutoCompleteChange(sequentialId)"
+    [lazySearch]="searchSequentialTurn"
+    [showIconOptionSelected]="sequentialId.value !== -1"
+    [addonWidth]="addonWidth"
+    [minLength]="0"
+    cachingMode="Focus"
+  />
+  <app-search-auto-complete
+    class="col-12 sm:col-6"
+    placeholder="بارگیرها"
+    label="بارگیرها"
+    [control]="loaderTypeTitle"
+    optionLabel="LoaderTypeTitle"
+    optionValue="LoaderTypeTitle"
+    (selectSuggestion)="onSelectLoaderType($event)"
+    (valueChange)="onAutoCompleteChange(loaderTypeId)"
+    [lazySearch]="searchLoaderType"
+    [showIconOptionSelected]="loaderTypeId.valid"
+    [addonWidth]="addonWidth"
+    [disabled]="sequentialId.invalid"
+    [minLength]="0"
+    cachingMode="Focus"
+  />
+</div>
+
+<p-table
+  class="col-12"
+  [columns]="cols"
+  [paginator]="true"
+  [rows]="10"
+  [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
+  [tableStyle]="{ 'min-width': '50rem' }"
+  [value]="relationsAnnouncement"
+>
+  <ng-template #header let-columns>
+    <tr>
+      @for (col of columns; track $index) {
+      <th>{{ col }}</th>
+      }
+    </tr>
+  </ng-template>
+
+  <ng-template #body let-rowData>
+    <tr>
+      <td (click)="onDelete(rowData)">
+        <p-button
+          icon="pi pi-trash"
+          severity="danger"
+          variant="text"
+          [disabled]="loading"
+        ></p-button>
+      </td>
+      <td>{{ rowData.SeqTurnTitle }}</td>
+      <td>{{ rowData.LoaderTypeTitle }}</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<div class="w-full flex justify-content-end">
+  <p-button
+    size="small"
+    label="ثبت"
+    styleClass="px-5 py-1"
+    (click)="registerRelationSequentialToLoader()"
+    [disabled]="loading || relationSequentialToLoaderForm.invalid"
+  />
+</div>
+
+<p-confirm-dialog />
