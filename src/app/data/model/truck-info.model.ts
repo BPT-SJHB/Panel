@@ -1,5 +1,5 @@
 import { TruckDriverInfo } from './truck-driver-info.model';
-import { Turn } from './turn.model';
+import { Turn } from '../../services/turn-management/model/turn.model';
 import { Wallet } from './wallet.model';
 
 export interface TruckInfo {
