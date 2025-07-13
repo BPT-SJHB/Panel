@@ -17,4 +17,6 @@ import { Turn } from './model/turn.model';
   providedIn: 'root',
 })
 export class TurnManagementService {
+  private userAuth = inject(UserAuthService);
+  private apiCommunicator = inject(APICommunicationManagementService);
 }
