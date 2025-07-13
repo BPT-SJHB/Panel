@@ -269,7 +269,7 @@ export class Driver_TruckManagementService {
 
   //#region Relations of Driver, Truck, MoneyWallet
 
-  public async GetComposedTruckInfo(
+  public async GetComposedTruckInfoWithLastActiveTurn(
     truckId: number
   ): Promise<ApiResponse<TruckComposedInfo>> {
     this.userAuth.isLoggedIn();

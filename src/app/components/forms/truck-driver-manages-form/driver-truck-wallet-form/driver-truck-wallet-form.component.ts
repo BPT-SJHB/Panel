@@ -32,7 +32,7 @@ export class DriverTruckWalletFormComponent implements OnInit, OnDestroy {
   private toast = inject(ToastService);
   private driverTruckManager = inject(Driver_TruckManagementService);
   private loadingService = inject(LoadingService);
-  
+
   // feat: handle unsubscribe via destroy$
   private destroy$ = new Subject<void>();
   loading = false;
@@ -41,7 +41,7 @@ export class DriverTruckWalletFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadingService.loading$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((value)=>this.loading = value); // just triggers change detection if needed
+      .subscribe((value) => (this.loading = value)); // just triggers change detection if needed
   }
 
   // fix: unsubscribe from observables
@@ -82,9 +82,10 @@ export class DriverTruckWalletFormComponent implements OnInit, OnDestroy {
       const truckInfo = await this.getTruckInfo(smartCard);
       if (!truckInfo) return;
 
-      const response = await this.driverTruckManager.GetComposedTruckInfo(
-        truckInfo.TruckId
-      );
+      const response =
+        await this.driverTruckManager.GetComposedTruckInfoWithLastActiveTurn(
+          truckInfo.TruckId
+        );
       if (!this.isSuccessful(response)) return;
 
       this.populateComposedForm(response.data!);
