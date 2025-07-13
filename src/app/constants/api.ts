@@ -6,6 +6,7 @@ export const API_ROUTES = {
   SoftwareUserAPI: {
     CAPTCHA: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetCaptcha`,
     AuthUser: `${environment.apiUrl}:${softwareUserAPIPort}/api/AuthUser`,
+    SessionChecker: `${environment.apiUrl}:${softwareUserAPIPort}/api/IsSessionLive`,
     GetWebProcesses: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetWebProcesses`,
     GetUserOfSession: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetSessionSoftwareUser`,
     GetVirtualWallet: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetVirtualMoneyWallet`,

@@ -67,6 +67,8 @@ export class UserAuthService {
 
   public async isLoggedIn(): Promise<ApiResponse<{ ISSessionLive: boolean }>> {
     const sessionId = this.getSessionId();
+
+    const apiUrl = API_ROUTES.SoftwareUserAPI.SessionChecker;
     if (sessionId == null) {
       this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
       await this.logout();
@@ -86,7 +88,7 @@ export class UserAuthService {
     const response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       { ISSessionLive: boolean }
-    >(this.apiUrl + '/isSessionLive', bodyValue);
+    >(apiUrl, bodyValue);
     return response;
   }
 
