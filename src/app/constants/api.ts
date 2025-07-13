@@ -131,5 +131,19 @@ export const API_ROUTES = {
         DeleteRelationToAnnouncementSubGroupDeleting: `${environment.apiUrl}:${transportationAPIPort}/api/SequentialTurnRelationAnnouncementSubGroupDeleting`,
       },
     },
+    Turns: {
+      GetLatestTurns: `${environment.apiUrl}:${transportationAPIPort}/api/GetTop10TruckTurns`,
+      GetAccounting: `${environment.apiUrl}:${transportationAPIPort}/api/GetTurnAccounting`,
+      CancelTurn: `${environment.apiUrl}:${transportationAPIPort}/api/TurnCancellation`,
+      ResuscitateTurn: `${environment.apiUrl}:${transportationAPIPort}/api/TurnResuscitation`,
+      TurnRegisterRequests: {
+        RealTimeTurnRegister: `${environment.apiUrl}:${transportationAPIPort}/api/RealTimeTurnRegisterRequest`,
+        EmergencyTurnRegister: `${environment.apiUrl}:${transportationAPIPort}/api/EmergencyTurnRegisterRequest`,
+      },
+      ReserveTurnRequests: {
+        ResuscitateReserveTurn: `${environment.apiUrl}:${transportationAPIPort}/api/ResuscitationReserveTurn`,
+        RegisterReserveTurn: `${environment.apiUrl}:${transportationAPIPort}/api/ReserveTurnRegisterRequest`,
+      },
+    },
   },
 };
