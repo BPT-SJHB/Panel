@@ -99,4 +99,28 @@ export class TurnManagementService {
     };
     //#endregion
   }
+
+  public async ResuscitateTurn(
+    turnId: number
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.Turns.ResuscitateTurn;
+    const turnInfo: Turn = {
+      TurnId: turnId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TurnId: turnInfo.TurnId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
