@@ -18,6 +18,7 @@ import { RelationOfAnnouncementGroupAndSubGroupComponent } from 'app/components/
 import { SequentialTurnsFormComponent } from 'app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component';
 import { RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent } from 'app/components/forms/sequential-turns-management-form/relation-of-sequential-turn-to-announcement-sub-groups/relation-of-sequential-turn-to-announcement-sub-groups-form.component';
 import { MainViewComponent } from 'app/components/shared/main-view/main-view.component';
+import { RelationOfSequentialTurnToLoaderTypeFormComponent } from 'app/components/forms/sequential-turns-management-form/relation-of-sequential-turn-to-loader-type-form/relation-of-sequential-turn-to-loader-type-form.component';
 
 export enum TabComponentKey {
   Main = -1,
@@ -42,7 +43,7 @@ export interface TabView {
 
 export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
   [TabComponentKey.Main]: [
-    { title: 'صفحه اصلی', component: MainViewComponent },
+    { title: 'صفحه اصلی', component:MainViewComponent },
   ],
 
   [TabComponentKey.UserManagement]: [
@@ -137,6 +138,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
   ],
   [TabComponentKey.SequentialTurnManagement]: [
     { title: 'صفوف نوبت دهی', component: SequentialTurnsFormComponent },
+    {title:'صفوف نوبت دهی و بارگیرها',component:RelationOfSequentialTurnToLoaderTypeFormComponent},
     {
       title: 'صفوف نوبت دهی - زیرگروه اعلام بار',
       component: RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent,
