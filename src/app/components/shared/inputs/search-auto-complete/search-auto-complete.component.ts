@@ -37,6 +37,7 @@ export class SearchAutoCompleteComponent<T extends Record<string, any>>
 
   suggestions: T[] = []; // List of suggestions currently displayed
   showEmptyMessage = false; // Flag to show "No results found" message
+  loading = false;
 
   // ---------- INPUTS ----------
 
@@ -123,7 +124,7 @@ export class SearchAutoCompleteComponent<T extends Record<string, any>>
 
   /** On input focus: blur immediately if disabled to prevent interaction */
   onFocusInput(input: EventTarget | null): void {
-    const inputElement = input as HTMLInputElement
+    const inputElement = input as HTMLInputElement;
     if (this.disabled) {
       inputElement?.blur();
     }
@@ -179,11 +180,17 @@ export class SearchAutoCompleteComponent<T extends Record<string, any>>
     }
 
     // Fetch fresh results asynchronously
-    const result = await this.lazySearch(query);
-    this.lastSearchKey = currentKey;
-    this.cachedResults = result;
-    this.suggestions = result;
-    this.showEmptyMessage = result.length === 0;
+    try {
+      this.loading = true;
+      const searchQuery = this.cachingEnabled ? currentKey : query;
+      const result = await this.lazySearch(searchQuery);
+      this.lastSearchKey = currentKey;
+      this.cachedResults = result;
+      this.suggestions = result;
+      this.showEmptyMessage = result.length === 0;
+    } finally {
+      this.loading = false;
+    }
   }
 
   /**
@@ -193,7 +200,7 @@ export class SearchAutoCompleteComponent<T extends Record<string, any>>
     this.selectSuggestion.emit(event.value);
   }
 
-  onValueChanged(input:any) {
-    this.valueChange.emit(input.value)
+  onValueChanged(input: any) {
+    this.valueChange.emit(input.value);
   }
 }

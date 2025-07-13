@@ -1,0 +1,145 @@
+<!-- 🔍 Search Input -->
+<div class="w-full">
+  <app-search-input
+    class="w-full"
+    placeholder="بخشی از عنوان زیرگروه وارد کنید."
+    [staticData]="announcementsSubGroup"
+    [itemMatchesQuery]="filterAnnouncementsSubGroup"
+    [autoTriggerSearch]="true"
+    [fallbackToAllWhenQueryShort]="true"
+    [minSearchLength]="2"
+    [control]="searchControl"
+    (searchResult)="handleSearch($event)"
+  />
+</div>
+
+<!-- 📋 SubGroup Table -->
+<p-table
+  class="col-12 overflow-x-auto"
+  [columns]="cols"
+  [value]="displayAnnouncementsSubGroup"
+  [tableStyle]="{ 'min-width': '40rem' }"
+  placeholder="بخشی از عنوان زیرگروه وارد کنید."
+>
+  <!-- Header with New Button -->
+  <ng-template #caption>
+    <div class="flex items-center justify-between">
+      <p-button
+        label="جدید"
+        size="small"
+        styleClass="px-4 md:px-5 py-1"
+        (click)="onNew()"
+      />
+    </div>
+  </ng-template>
+
+  <ng-template #header let-columns>
+    <tr>
+      @for (col of columns; track $index) {
+      <th>{{ col }}</th>
+      }
+    </tr>
+  </ng-template>
+
+  <!-- Table Body -->
+  <ng-template #body let-rowData>
+    <tr>
+      <td>{{ rowData.AnnouncementSGId }}</td>
+
+      <td>
+        <p-button
+          icon="pi pi-pencil"
+          severity="info"
+          variant="text"
+          [disabled]="loading"
+          (click)="onEdit(rowData)"
+        />
+      </td>
+
+      <td>
+        <p-button
+          icon="pi pi-trash"
+          severity="danger"
+          variant="text"
+          [disabled]="loading"
+          (click)="onDelete(rowData)"
+        />
+      </td>
+
+      <td>{{ rowData.AnnouncementSGTitle }}</td>
+
+      <td>
+        <i
+          class="pi"
+          [ngClass]="
+            rowData.Active
+              ? 'pi-check-circle text-green-500'
+              : 'pi-times-circle text-red-500'
+          "
+        ></i>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<!-- 📝 Dialog for Add/Edit -->
+<p-dialog
+  draggable="false"
+  [header]="headerTitle"
+  [modal]="true"
+  [style]="{ 'max-width': '30rem' }"
+  maskStyleClass="px-3"
+  [(visible)]="formDialogVisible"
+  (onHide)="closeForm()"
+>
+  <form
+    class="grid gap-3"
+    [formGroup]="announcementSubGroupForm"
+    (ngSubmit)="registerOrEdit()"
+    [class.pointer-events-none]="loading"
+    [class.opacity-60]="loading"
+  >
+    <div class="grid col-12 gap-3">
+      <app-text-input
+        class="col-12"
+        label="کد"
+        validationField="id"
+        addonWidth="5rem"
+        [readOnly]="true"
+        [disabled]="true"
+        [control]="AnnouncementSGId"
+      />
+
+      <app-text-input
+        class="col-12"
+        label="عنوان"
+        placeholder="عنوان"
+        validationField="title"
+        addonWidth="5rem"
+        [control]="AnnouncementSGTitle"
+      />
+
+      <div class="grid col-12">
+        <app-binary-radio-input
+          class="col-12"
+          label="وضعیت زیرگروه:"
+          radioName="AnnouncementActive"
+          [control]="AnnouncementActive"
+          [readonly]="!isFormEditable()"
+          [disabled]="!isFormEditable()"
+        />
+      </div>
+    </div>
+
+    <div class="w-full flex justify-end">
+      <p-button
+        label="ثبت و ویرایش اطلاعات"
+        [disabled]="announcementSubGroupForm.invalid || loading"
+        (click)="registerOrEdit()"
+      />
+    </div>
+  </form>
+</p-dialog>
+
+<!-- 🛑 Confirmation Dialog -->
+<p-confirm-dialog />

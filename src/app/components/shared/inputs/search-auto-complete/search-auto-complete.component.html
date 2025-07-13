@@ -36,11 +36,19 @@
 
     <!-- Optional Select Icon -->
     <div
-      *ngIf="showIconOptionSelected"
+      *ngIf="!loading && showIconOptionSelected"
       class="absolute"
-      style="z-index: 3; left: 10px; top: 5px;"
+      style="z-index: 3; left: 10px; top: 5px"
     >
       <i class="pi pi-check-circle text-lg text-green-600"></i>
+    </div>
+
+    <div
+      *ngIf="loading"
+      class="absolute"
+      style="z-index: 3; left: 10px; top: 5px"
+    >
+      <i class="pi pi-spin pi-spinner ml-2"></i>
     </div>
   </p-input-group>
 </div>

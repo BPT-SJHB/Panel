@@ -87,7 +87,7 @@ export class TariffsManagementService {
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      any
+      ShortResponse
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
