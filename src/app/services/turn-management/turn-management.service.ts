@@ -145,4 +145,34 @@ export class TurnManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+  public async RealTimeTurnRegister(
+    truckId: number,
+    sequentialTurnId: number
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.Turns.TurnRegisterRequests
+        .RealTimeTurnRegister;
+    const truckInfo: TruckInfo = {
+      TruckId: truckId,
+    };
+    const sequentialTurnInfo: SequentialTurn = {
+      SeqTurnId: sequentialTurnId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TruckId: truckInfo.TruckId,
+      SequentialTurnId: sequentialTurnInfo.SeqTurnId,
+    };
+    //#endregion
+
+    //#region Request
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
