@@ -18,7 +18,7 @@ import { ToastService } from 'app/services/toast-service/toast.service';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
 import { Subject, takeUntil } from 'rxjs';
-import { SearchInputComponent } from "../../../shared/inputs/search-input/search-input.component";
+import { SearchInputComponent } from '../../../shared/inputs/search-input/search-input.component';
 
 @Component({
   selector: 'app-truck-info-form',
@@ -29,18 +29,17 @@ import { SearchInputComponent } from "../../../shared/inputs/search-input/search
     ButtonModule,
     ReactiveFormsModule,
     TextInputComponent,
-    SearchInputComponent
-],
+    SearchInputComponent,
+  ],
 })
-
 export class TruckInfoFormComponent {
   private fb = inject(FormBuilder);
   private truckService = inject(Driver_TruckManagementService);
   private toast = inject(ToastService);
-  private loadingService  = inject(LoadingService);
-  
+  private loadingService = inject(LoadingService);
+
   private destroy$ = new Subject<void>();
-  
+
   loading = false;
   addonWidth = '8rem';
   searchForm: FormGroup = this.fb.group({
@@ -57,7 +56,10 @@ export class TruckInfoFormComponent {
 
   truckNativenessForm: FormGroup = this.fb.group({
     nativeness: ['', ValidationSchema.nativeness],
-    truckNativenessExpiredDate: [Date.now(), ValidationSchema.truckNativenessExpiredDate],
+    truckNativenessExpiredDate: [
+      Date.now(),
+      ValidationSchema.truckNativenessExpiredDate,
+    ],
   });
 
   ngOnDestroy(): void {
@@ -70,15 +72,13 @@ export class TruckInfoFormComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe((value) => (this.loading = value));
   }
- 
 
-  loadFormsInformation = async(smartCard:string) => {
+  loadFormsInformation = async (smartCard: string) => {
     await this.loadTruckInfoFromAPI(smartCard);
     await this.loadNativenessForm();
-  }
+  };
 
-
-  async loadTruckInfoFromAPI(smartCard:string): Promise<void> {
+  async loadTruckInfoFromAPI(smartCard: string): Promise<void> {
     if (this.searchForm.invalid || this.loading) return;
 
     try {
@@ -87,49 +87,54 @@ export class TruckInfoFormComponent {
       if (this.isSuccessful(response)) {
         this.populateTruckInfoForm(response.data!);
       }
-    }  finally {
+    } finally {
       this.loadingService.setLoading(false);
     }
   }
 
   async loadNativenessForm(): Promise<void> {
-    if (this.truckId.invalid  || this.loading) return;
+    if (this.truckId.invalid || this.loading) return;
 
     try {
       this.loadingService.setLoading(true);
-      const response = await this.truckService.GetTruckNativeness(this.truckId.value);
+      const response = await this.truckService.GetTruckNativeness(
+        this.truckId.value
+      );
       if (!this.isSuccessful(response)) return;
 
       this.populateTruckNativenessForm(response.data!);
-
     } finally {
-    this.loadingService.setLoading(false);  
+      this.loadingService.setLoading(false);
     }
   }
 
   private isSuccessful(response: ApiResponse<any>): boolean {
     if (!response.success || !response.data) {
-      this.toast.error('خطا', response.error?.message ?? 'خطای غیرمنتظره‌ای رخ داد');
+      this.toast.error(
+        'خطا',
+        response.error?.message ?? 'خطای غیرمنتظره‌ای رخ داد'
+      );
       return false;
     }
     return true;
   }
 
-  
- async changeNativeness():Promise<void> {
+  async changeNativeness(): Promise<void> {
     if (this.truckNativenessForm.invalid || this.loading) return;
 
     try {
       this.loadingService.setLoading(true);
-      const response = await this.truckService.ChangeTruckNativeness(this.truckId.value,this.truckNativenessExpiredDate.value);
+      const response = await this.truckService.ChangeTruckNativeness(
+        this.truckId.value,
+        this.truckNativenessExpiredDate.value
+      );
 
       if (this.isSuccessful(response)) {
         this.populateTruckNativenessForm(response.data!);
       }
     } finally {
-      this.loadingService.setLoading(false)
+      this.loadingService.setLoading(false);
     }
-
   }
 
   populateTruckInfoForm(truck: TruckInfo): void {
@@ -167,7 +172,7 @@ export class TruckInfoFormComponent {
   }
 
   // Form Control Getters
-  get searchSmartCard():FormControl {
+  get searchSmartCard(): FormControl {
     return this.searchForm.get('searchSmartCard') as FormControl;
   }
 
@@ -196,6 +201,8 @@ export class TruckInfoFormComponent {
   }
 
   get truckNativenessExpiredDate(): FormControl {
-    return this.truckNativenessForm.get('truckNativenessExpiredDate') as FormControl;
+    return this.truckNativenessForm.get(
+      'truckNativenessExpiredDate'
+    ) as FormControl;
   }
 }
