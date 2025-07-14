@@ -37,6 +37,7 @@ export const API_ROUTES = {
     Truck: {
       GetTruckInfoFromOutdoorAPI: `${environment.apiUrl}:${transportationAPIPort}/api/GetTruckFromRMTO`,
       GetTruckInfoFromLocalAPI: `${environment.apiUrl}:${transportationAPIPort}/api/GetTruckFromWebsite`,
+      GetTruckInfoForSoftwareUser: `${environment.apiUrl}:${transportationAPIPort}/api/GetTruckBySoftwareUser`,
       GetTruckNativeness: `${environment.apiUrl}:${transportationAPIPort}/api/GetTruckNativeness`,
       ChangeTruckNativeness: `${environment.apiUrl}:${transportationAPIPort}/api/ChangeTruckNativeness`,
       ComposedInfos: {
