@@ -6,6 +6,7 @@ export const API_ROUTES = {
   SoftwareUserAPI: {
     CAPTCHA: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetCaptcha`,
     AuthUser: `${environment.apiUrl}:${softwareUserAPIPort}/api/AuthUser`,
+    SessionChecker: `${environment.apiUrl}:${softwareUserAPIPort}/api/IsSessionLive`,
     GetWebProcesses: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetWebProcesses`,
     GetUserOfSession: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetSessionSoftwareUser`,
     GetVirtualWallet: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetVirtualMoneyWallet`,
@@ -27,6 +28,7 @@ export const API_ROUTES = {
       LoadAnnouncementPlaces: `${environment.apiUrl}:${transportationAPIPort}/api/GetLoadAnnouncementPlaces`,
       GetTruckDriverInfoFromOutdoorAPI: `${environment.apiUrl}:${transportationAPIPort}/api/GetTruckDriverFromRMTO`,
       GetTruckDriverInfoFromLocalAPI: `${environment.apiUrl}:${transportationAPIPort}/api/GetTruckDriverFromWebsite`,
+      GetTruckDriverInfoForSoftwareUser: `${environment.apiUrl}:${transportationAPIPort}/api/GetTruckDriverBySoftwareUser`,
       TruckDriverRegisteringMobileNumber: `${environment.apiUrl}:${transportationAPIPort}/api/TruckDriverRegisteringMobileNumber`,
       ActivateTruckDriverSMSOwner: `${environment.apiUrl}:${transportationAPIPort}/api/ActivateTruckDriverSMSOwner`,
       ResetTruckDriverUserPassword: `${environment.apiUrl}:${transportationAPIPort}/api/ResetTruckDriverUserPassword`,
@@ -35,13 +37,14 @@ export const API_ROUTES = {
     Truck: {
       GetTruckInfoFromOutdoorAPI: `${environment.apiUrl}:${transportationAPIPort}/api/GetTruckFromRMTO`,
       GetTruckInfoFromLocalAPI: `${environment.apiUrl}:${transportationAPIPort}/api/GetTruckFromWebsite`,
+      GetTruckInfoForSoftwareUser: `${environment.apiUrl}:${transportationAPIPort}/api/GetTruckBySoftwareUser`,
       GetTruckNativeness: `${environment.apiUrl}:${transportationAPIPort}/api/GetTruckNativeness`,
       ChangeTruckNativeness: `${environment.apiUrl}:${transportationAPIPort}/api/ChangeTruckNativeness`,
-    },
-    Driver_Truck_Wallet: {
-      GetComposedTruckInfo: `${environment.apiUrl}:${transportationAPIPort}/api/GetComposedTruckInf`,
-      SetComposedTruckInfo: `${environment.apiUrl}:${transportationAPIPort}/api/SetComposedTruckInf`,
-      GetVirtualWallet: `${environment.apiUrl}:${transportationAPIPort}/api/GetVirtualMoneyWallet`,
+      ComposedInfos: {
+        GetComposedTruckInfo: `${environment.apiUrl}:${transportationAPIPort}/api/GetComposedTruckInf`,
+        SetComposedTruckInfo: `${environment.apiUrl}:${transportationAPIPort}/api/SetComposedTruckInf`,
+        GetComposedTruckInfoForTurnIssues: `${environment.apiUrl}:${transportationAPIPort}/api/GetComposedTruckInfForTurnIssue`,
+      },
     },
     FPC: {
       GetFPCs: `${environment.apiUrl}:${transportationAPIPort}/api/GetFPCs`,
@@ -62,6 +65,7 @@ export const API_ROUTES = {
     },
     LoaderTypes: {
       GetLoaderTypes: `${environment.apiUrl}:${transportationAPIPort}/api/GetLoaderTypes`,
+      GetLoaderTypeInfoForSoftwareUser: `${environment.apiUrl}:${transportationAPIPort}/api/GetLoaderTypeBySoftwareUser`,
       ChangeLoaderTypeStatus: `${environment.apiUrl}:${transportationAPIPort}/api/ChangeActivateStatusOfLoaderType`,
     },
     ProductTypes: {
@@ -120,6 +124,7 @@ export const API_ROUTES = {
       EditSequentialTurn: `${environment.apiUrl}:${transportationAPIPort}/api/SequentialTurnEditing`,
       DeleteSequentialTurn: `${environment.apiUrl}:${transportationAPIPort}/api/SequentialTurnDeleting`,
       RelationToLoaderTypes: {
+        GetSequentialTurnWithLoaderType: `${environment.apiUrl}:${transportationAPIPort}/api/GetSequentialTurnByLoaderType`,
         GetRelationToLoaderTypes: `${environment.apiUrl}:${transportationAPIPort}/api/GetSequentialTurnsRelationLoaderTypes`,
         RegisterRelationToLoaderType: `${environment.apiUrl}:${transportationAPIPort}/api/SequentialTurnRelationLoaderTypeRegistering`,
         DeleteRelationToLoaderType: `${environment.apiUrl}:${transportationAPIPort}/api/SequentialTurnRelationLoaderTypeDeleting`,
@@ -128,6 +133,20 @@ export const API_ROUTES = {
         GetRelationToAnnouncementSubGroups: `${environment.apiUrl}:${transportationAPIPort}/api/GetSequentialTurnRelationAnnouncementSubGroups`,
         RegisterRelationToAnnouncementSubGroup: `${environment.apiUrl}:${transportationAPIPort}/api/SequentialTurnRelationAnnouncementSubGroupRegistering`,
         DeleteRelationToAnnouncementSubGroupDeleting: `${environment.apiUrl}:${transportationAPIPort}/api/SequentialTurnRelationAnnouncementSubGroupDeleting`,
+      },
+    },
+    Turns: {
+      GetLatestTurns: `${environment.apiUrl}:${transportationAPIPort}/api/GetTop10TruckTurns`,
+      GetAccounting: `${environment.apiUrl}:${transportationAPIPort}/api/GetTurnAccounting`,
+      CancelTurn: `${environment.apiUrl}:${transportationAPIPort}/api/TurnCancellation`,
+      ResuscitateTurn: `${environment.apiUrl}:${transportationAPIPort}/api/TurnResuscitation`,
+      TurnRegisterRequests: {
+        RealTimeTurnRegister: `${environment.apiUrl}:${transportationAPIPort}/api/RealTimeTurnRegisterRequest`,
+        EmergencyTurnRegister: `${environment.apiUrl}:${transportationAPIPort}/api/EmergencyTurnRegisterRequest`,
+      },
+      ReserveTurnRequests: {
+        ResuscitateReserveTurn: `${environment.apiUrl}:${transportationAPIPort}/api/ResuscitationReserveTurn`,
+        RegisterReserveTurn: `${environment.apiUrl}:${transportationAPIPort}/api/ReserveTurnRegisterRequest`,
       },
     },
   },

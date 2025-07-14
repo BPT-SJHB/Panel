@@ -13,7 +13,7 @@ import { ToastService } from 'app/services/toast-service/toast.service';
 import { Driver_TruckManagementService } from 'app/services/driver-truck-management/driver-truck-management.service';
 
 import { ApiResponse } from 'app/data/model/api-Response.model';
-import { TruckDriverInfo } from 'app/data/model/truck-driver-info.model';
+import { TruckDriverInfo } from 'app/services/driver-truck-management/model/truck-driver-info.model';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
 import { Subject, takeUntil } from 'rxjs';

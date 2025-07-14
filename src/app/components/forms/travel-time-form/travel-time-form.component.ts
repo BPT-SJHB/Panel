@@ -9,7 +9,7 @@ import { NgClass } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
 
 import { TravelTime } from 'app/data/model/travel-time.model';
-import { LoaderType } from 'app/data/model/loader-type.model';
+import { LoaderType } from 'app/services/loader-types/model/loader-type.model';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { City } from 'app/data/model/province-city.model';
 

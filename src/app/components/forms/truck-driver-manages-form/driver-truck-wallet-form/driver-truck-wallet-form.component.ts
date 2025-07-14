@@ -5,8 +5,11 @@ import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { ApiResponse } from 'app/data/model/api-Response.model';
-import { TruckDriverInfo } from 'app/data/model/truck-driver-info.model';
-import { TruckComposedInfo, TruckInfo } from 'app/data/model/truck-info.model';
+import { TruckDriverInfo } from 'app/services/driver-truck-management/model/truck-driver-info.model';
+import {
+  TruckComposedInfo,
+  TruckInfo,
+} from 'app/services/driver-truck-management/model/truck-info.model';
 import { Wallet } from 'app/data/model/wallet.model';
 import { Driver_TruckManagementService } from 'app/services/driver-truck-management/driver-truck-management.service';
 import { ToastService } from 'app/services/toast-service/toast.service';
@@ -32,7 +35,7 @@ export class DriverTruckWalletFormComponent implements OnInit, OnDestroy {
   private toast = inject(ToastService);
   private driverTruckManager = inject(Driver_TruckManagementService);
   private loadingService = inject(LoadingService);
-  
+
   // feat: handle unsubscribe via destroy$
   private destroy$ = new Subject<void>();
   loading = false;
@@ -41,7 +44,7 @@ export class DriverTruckWalletFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadingService.loading$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((value)=>this.loading = value); // just triggers change detection if needed
+      .subscribe((value) => (this.loading = value)); // just triggers change detection if needed
   }
 
   // fix: unsubscribe from observables
@@ -82,9 +85,10 @@ export class DriverTruckWalletFormComponent implements OnInit, OnDestroy {
       const truckInfo = await this.getTruckInfo(smartCard);
       if (!truckInfo) return;
 
-      const response = await this.driverTruckManager.GetComposedTruckInfo(
-        truckInfo.TruckId
-      );
+      const response =
+        await this.driverTruckManager.GetComposedTruckInfoWithLastActiveTurn(
+          truckInfo.TruckId
+        );
       if (!this.isSuccessful(response)) return;
 
       this.populateComposedForm(response.data!);
@@ -190,7 +194,7 @@ export class DriverTruckWalletFormComponent implements OnInit, OnDestroy {
     this.populateTruckInfo(info.Truck);
     this.populateDriverInfo(info.TruckDriver!);
     this.populateWalletInfo(info.MoneyWallet!);
-    this.turnId.setValue(info.Turn?.nEnterExitId);
+    this.turnId.setValue(info.Turn?.TurnId);
     this.turn.setValue(info.Turn?.OtaghdarTurnNumber);
   }
 
