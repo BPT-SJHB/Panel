@@ -32,7 +32,7 @@ import { Tariff } from 'app/data/model/tariff.model';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { ShortResponse } from 'app/data/model/short-response.model';
 import { City } from 'app/data/model/province-city.model';
-import { LoaderType } from 'app/data/model/loader-type.model';
+import { LoaderType } from 'app/services/loader-types/model/loader-type.model';
 import { Product } from 'app/data/model/product-type.model';
 
 enum TariffsFormMode {
