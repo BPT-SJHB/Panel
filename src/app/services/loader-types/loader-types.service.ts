@@ -42,14 +42,7 @@ export class LoaderTypesService {
     //#region Return
     return {
       success: response.success,
-      data: response.data?.map((loaderType) => ({
-        LoaderTypeId: loaderType.LoaderTypeId,
-        LoaderTypeTitle: loaderType.LoaderTypeTitle?.trim(),
-        LoaderTypeOrganizationId: loaderType.LoaderTypeOrganizationId,
-        LoaderTypeFixStatusId: loaderType.LoaderTypeFixStatusId,
-        LoaderTypeFixStatusTitle: loaderType.LoaderTypeFixStatusTitle?.trim(),
-        Active: loaderType.Active,
-      })),
+      data: response.data?.map((loaderType) => this.TrimLoaderType(loaderType)),
       error: response.error,
     };
     //#endregion
@@ -83,6 +76,18 @@ export class LoaderTypesService {
     };
     //#endregion
   }
+
+  private TrimLoaderType(loaderType: LoaderType): LoaderType {
+    return {
+      LoaderTypeId: loaderType.LoaderTypeId,
+      LoaderTypeTitle: loaderType.LoaderTypeTitle?.trim(),
+      LoaderTypeOrganizationId: loaderType.LoaderTypeOrganizationId,
+      LoaderTypeFixStatusId: loaderType.LoaderTypeFixStatusId,
+      LoaderTypeFixStatusTitle: loaderType.LoaderTypeFixStatusTitle?.trim(),
+      Active: loaderType.Active,
+    };
+  }
+
   public async ChangeLoaderTypeStatus(
     loaderTypeId: number
   ): Promise<ApiResponse<ShortResponse>> {
