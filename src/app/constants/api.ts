@@ -65,6 +65,7 @@ export const API_ROUTES = {
     },
     LoaderTypes: {
       GetLoaderTypes: `${environment.apiUrl}:${transportationAPIPort}/api/GetLoaderTypes`,
+      GetLoaderTypeInfoForSoftwareUser: `${environment.apiUrl}:${transportationAPIPort}/api/GetLoaderTypeBySoftwareUser`,
       ChangeLoaderTypeStatus: `${environment.apiUrl}:${transportationAPIPort}/api/ChangeActivateStatusOfLoaderType`,
     },
     ProductTypes: {

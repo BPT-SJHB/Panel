@@ -55,6 +55,34 @@ export class LoaderTypesService {
     //#endregion
   }
 
+  public async GetLoaderTypeInfoForSoftwareUser(): Promise<
+    ApiResponse<LoaderType>
+  > {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.LoaderTypes.GetLoaderTypeInfoForSoftwareUser;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoaderType
+    >(apiUrl, bodyValue, mockLoaderTypes);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: this.TrimLoaderType(response.data!),
+      error: response.error,
+    };
+    //#endregion
+  }
   public async ChangeLoaderTypeStatus(
     loaderTypeId: number
   ): Promise<ApiResponse<ShortResponse>> {
