@@ -68,7 +68,14 @@ export class Driver_TruckManagementService {
       >(outdoorApiUrl, bodyValue, mockTruckDriverInfo);
     }
 
-    return response;
+    return {
+      success: response.success,
+      data: this.TrimTruckDriver(response.data!),
+      error: response.error,
+    };
+    //#endregion
+  }
+
   public async GetDriverInfoForSoftwareUser(): Promise<
     ApiResponse<TruckDriverInfo>
   > {
@@ -96,6 +103,19 @@ export class Driver_TruckManagementService {
       error: response.error,
     };
     //#endregion
+  }
+
+  private TrimTruckDriver(truckDriver: TruckDriverInfo): TruckDriverInfo {
+    return {
+      DriverId: truckDriver.DriverId,
+      NationalCode: truckDriver.NationalCode?.trim(),
+      NameFamily: truckDriver.NameFamily?.trim(),
+      MobileNumber: truckDriver.MobileNumber?.trim(),
+      FatherName: truckDriver.FatherName?.trim(),
+      DrivingLicenseNo: truckDriver.DrivingLicenseNo?.trim(),
+      Address: truckDriver.Address?.trim(),
+      SmartCardNo: truckDriver.SmartCardNo?.trim(),
+    };
   }
 
   public async RegisterNew_EditDriverMobileNumber(
