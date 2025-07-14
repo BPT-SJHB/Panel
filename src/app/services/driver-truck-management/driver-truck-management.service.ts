@@ -69,6 +69,32 @@ export class Driver_TruckManagementService {
     }
 
     return response;
+  public async GetDriverInfoForSoftwareUser(): Promise<
+    ApiResponse<TruckDriverInfo>
+  > {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.Driver.GetTruckDriverInfoForSoftwareUser;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      TruckDriverInfo
+    >(apiUrl, bodyValue, mockTruckDriverInfo);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: this.TrimTruckDriver(response.data!),
+      error: response.error,
+    };
     //#endregion
   }
 
