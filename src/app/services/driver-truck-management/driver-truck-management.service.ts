@@ -1,25 +1,28 @@
 import { inject, Injectable } from '@angular/core';
 import { API_ROUTES } from 'app/constants/api';
 import { ApiResponse } from 'app/data/model/api-Response.model';
-import { TruckDriverInfo } from 'app/data/model/truck-driver-info.model';
+import { TruckDriverInfo } from 'app/services/driver-truck-management/model/truck-driver-info.model';
 import { UserAuthService } from '../user-auth-service/user-auth.service';
 import { ShortResponse } from 'app/data/model/short-response.model';
 import {
   APIUsernamePassword,
   UsernamePassword,
 } from 'app/data/model/username-password.model';
-import { TruckComposedInfo, TruckInfo } from 'app/data/model/truck-info.model';
-import { TruckNativenessInfo } from 'app/data/model/truck-nativeness-info.model';
+import {
+  TruckComposedInfo,
+  TruckInfo,
+} from 'app/services/driver-truck-management/model/truck-info.model';
+import { TruckNativenessInfo } from 'app/services/driver-truck-management/model/truck-nativeness-info.model';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
 import { ErrorCodes } from 'app/constants/error-messages';
-import { mockTruckDriverInfo } from 'app/data/mock/truck-driver-info.model';
+import { mockTruckDriverInfo } from 'app/services/driver-truck-management/mock/truck-driver-info.model';
 import { mockShortResponse } from 'app/data/mock/short-response.mock';
 import { mockAPIUsernamePassword } from 'app/data/mock/username-password.mock';
 import {
   mockTruckComposedInfo,
   mockTruckInfo,
-} from 'app/data/mock/truck-info.mock';
-import { mockTruckNativenessInfo } from 'app/data/mock/truck-nativeness-info.mock';
+} from 'app/services/driver-truck-management/mock/truck-info.mock';
+import { mockTruckNativenessInfo } from 'app/services/driver-truck-management/mock/truck-nativeness-info.mock';
 import { Wallet } from 'app/data/model/wallet.model';
 import { mockWallet } from 'app/data/mock/wallet.mock';
 

@@ -10,8 +10,8 @@ import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
 
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { ApiResponse } from 'app/data/model/api-Response.model';
-import { TruckInfo } from 'app/data/model/truck-info.model';
-import { TruckNativenessInfo } from 'app/data/model/truck-nativeness-info.model';
+import { TruckInfo } from 'app/services/driver-truck-management/model/truck-info.model';
+import { TruckNativenessInfo } from 'app/services/driver-truck-management/model/truck-nativeness-info.model';
 import { Driver_TruckManagementService } from 'app/services/driver-truck-management/driver-truck-management.service';
 import { ToastService } from 'app/services/toast-service/toast.service';
 
