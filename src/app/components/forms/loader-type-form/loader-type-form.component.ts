@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { ApiResponse } from 'app/data/model/api-Response.model';
-import { LoaderType } from 'app/data/model/loader-type.model';
+import { LoaderType } from 'app/services/loader-types/model/loader-type.model';
 import { LoaderTypesService } from 'app/services/loader-types/loader-types.service';
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
 import { ToastService } from 'app/services/toast-service/toast.service';

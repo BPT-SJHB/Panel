@@ -11,6 +11,7 @@ import { RelationOfSequentialTurnToLoaderType } from './model/relation-of-sequen
 import { mockRelationOfSequentialTurnToLoaderTypes } from './mock/relation-of-sequentialTurn-to-loaderType.mock';
 import { RelationOfSequentialTurnToAnnouncementSubGroup } from './model/relation-of-sequentialTurn-to-announcementSubGroup.model';
 import { mockRelationOfSequentialTurnToAnnouncementSubGroups } from './mock/relation-of-sequentialTurn-to-announcementSubGroup.mock';
+import { LoaderType } from '../loader-types/model/loader-type.model';
 
 @Injectable({
   providedIn: 'root',
@@ -251,6 +252,45 @@ export class SequentialTurnManagementService {
       typeof bodyValue,
       ShortResponse
     >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async GetSequentialTurnWithLoaderType(
+    loaderTypeId: number
+  ): Promise<ApiResponse<SequentialTurn[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.SequentialTurns.RelationToLoaderTypes
+        .GetSequentialTurnWithLoaderType;
+    const loaderTypeInfo: LoaderType = {
+      LoaderTypeId: loaderTypeId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LoaderTypeId: loaderTypeInfo.LoaderTypeId,
+    };
+    //#endregion
+
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      SequentialTurn[]
+    >(apiUrl, bodyValue, mockSequentialTurns);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: response.data?.map((data) => ({
+        SeqTurnId: data.SeqTurnId,
+        SeqTurnTitle: data.SeqTurnTitle?.trim(),
+        SeqTurnKeyWord: data.SeqTurnKeyWord?.trim(),
+        Active: data.Active,
+      })),
+      error: response.error,
+    };
     //#endregion
   }
 
