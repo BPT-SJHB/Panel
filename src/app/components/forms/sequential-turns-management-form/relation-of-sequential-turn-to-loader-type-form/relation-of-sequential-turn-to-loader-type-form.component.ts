@@ -14,7 +14,6 @@ import { TableModule } from 'primeng/table';
 import { ConfirmationService } from 'primeng/api';
 
 import { SearchAutoCompleteComponent } from 'app/components/shared/inputs/search-auto-complete/search-auto-complete.component';
-import { LoaderType } from 'app/data/model/loader-type.model';
 import { LoaderTypesService } from 'app/services/loader-types/loader-types.service';
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
 import { ToastService } from 'app/services/toast-service/toast.service';
@@ -23,6 +22,7 @@ import { SequentialTurn } from 'app/services/sequential-turn-management/model/se
 import { RelationOfSequentialTurnToLoaderType } from 'app/services/sequential-turn-management/model/relation-of-sequentialTurn-to-loaderType.model';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { ERROR_MESSAGES, ErrorCodes } from 'app/constants/error-messages';
+import { LoaderType } from 'app/services/loader-types/model/loader-type.model';
 
 // =======================
 // 📄 Table Row Interface
