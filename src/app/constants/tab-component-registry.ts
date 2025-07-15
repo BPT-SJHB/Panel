@@ -19,6 +19,7 @@ import { SequentialTurnsFormComponent } from 'app/components/forms/sequential-tu
 import { RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent } from 'app/components/forms/sequential-turns-management-form/relation-of-sequential-turn-to-announcement-sub-groups/relation-of-sequential-turn-to-announcement-sub-groups-form.component';
 import { MainViewComponent } from 'app/components/shared/main-view/main-view.component';
 import { RelationOfSequentialTurnToLoaderTypeFormComponent } from 'app/components/forms/sequential-turns-management-form/relation-of-sequential-turn-to-loader-type-form/relation-of-sequential-turn-to-loader-type-form.component';
+import { TruckAndDriverInformationFormComponent } from 'app/components/forms/truck-and-driver-information-form/truck-and-driver-information-form.component';
 
 export enum TabComponentKey {
   Main = -1,
@@ -35,6 +36,7 @@ export enum TabComponentKey {
   TravelTimeManagement = 14,
   LoadCapacitorManagement = 35,
   TariffsManagement = 53,
+  Driver_TruckManagement = 10
 }
 export interface TabView {
   title: string;
@@ -145,4 +147,25 @@ export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
       component: RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent,
     },
   ],
+  [TabComponentKey.Driver_TruckManagement]: [{
+      title: 'ناوگان',
+      component: TruckAndDriverInformationFormComponent,
+      data: {
+        insideTabType: 'Truck',
+      },
+    },
+    {
+      title: 'بارگیر',
+      component: TruckAndDriverInformationFormComponent,
+      data: {
+        insideTabType: 'LoaderType',
+      },
+    },
+    {
+      title: 'راننده',
+      component: TruckAndDriverInformationFormComponent,
+      data: {
+        insideTabType: 'Driver',
+      },
+    },]
 };
