@@ -39,6 +39,7 @@ export enum TabComponentKey {
 export interface TabView {
   title: string;
   component: Type<any>;
+  data?:object;
 }
 
 export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
