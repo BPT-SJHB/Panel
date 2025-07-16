@@ -12,6 +12,7 @@ export const API_ROUTES = {
     GetVirtualWallet: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetVirtualMoneyWallet`,
     UserManagement: {
       GetSoftwareUserInfo: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetSoftwareUser`,
+      GetSoftwareUserProfile: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetSoftwareUserProfile`,
       GetUserTypes: `${environment.apiUrl}:${softwareUserAPIPort}/api/GetUserTypes`,
       RegisteringSoftwareUser: `${environment.apiUrl}:${softwareUserAPIPort}/api/RegisteringSoftwareUser`,
       EditSoftwareUser: `${environment.apiUrl}:${softwareUserAPIPort}/api/EditSoftwareUser`,
@@ -137,6 +138,7 @@ export const API_ROUTES = {
     },
     Turns: {
       GetLatestTurns: `${environment.apiUrl}:${transportationAPIPort}/api/GetTop10TruckTurns`,
+      GetLatestTurnsForSoftwareUser: `${environment.apiUrl}:${transportationAPIPort}/api/GetTop5TruckTurns`,
       GetAccounting: `${environment.apiUrl}:${transportationAPIPort}/api/GetTurnAccounting`,
       CancelTurn: `${environment.apiUrl}:${transportationAPIPort}/api/TurnCancellation`,
       ResuscitateTurn: `${environment.apiUrl}:${transportationAPIPort}/api/TurnResuscitation`,
