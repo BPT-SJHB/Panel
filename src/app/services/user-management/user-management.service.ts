@@ -158,11 +158,21 @@ export class UserManagementService {
     };
     //#endregion
 
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       SoftwareUserInfo
     >(apiUrl, bodyValue, mockSoftwareUserInfo);
     //#endregion
 
+    //#region Return
+    return {
+      success: response.success,
+      data: this.TrimSoftwareUserInfo(response.data!),
+      error: response.error,
+    };
+    //#endregion
+  }
   private TrimSoftwareUserInfo(
     softwareUserInfo: SoftwareUserInfo
   ): SoftwareUserInfo {
