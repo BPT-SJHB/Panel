@@ -20,6 +20,10 @@ import { RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent } from 'ap
 import { MainViewComponent } from 'app/components/shared/main-view/main-view.component';
 import { RelationOfSequentialTurnToLoaderTypeFormComponent } from 'app/components/forms/sequential-turns-management-form/relation-of-sequential-turn-to-loader-type-form/relation-of-sequential-turn-to-loader-type-form.component';
 import { TruckAndDriverInformationFormComponent } from 'app/components/forms/truck-and-driver-information-form/truck-and-driver-information-form.component';
+import { TurnsListFormComponent } from 'app/components/forms/turns-management-form/turns-list-form/turns-list-form.component';
+import { RealTimeTurnsFormComponent } from 'app/components/forms/turns-management-form/real-time-turns-form/real-time-turns-form.component';
+import { EmergencyTurnsFormComponent } from 'app/components/forms/turns-management-form/emergency-time-turns-form copy/emergency-turns-form.component';
+import { ResuscitateTurnsFormComponent } from 'app/components/forms/turns-management-form/resuscitate-time-turns-form/resuscitate-turns-form.component';
 
 export enum TabComponentKey {
   Main = -1,
@@ -34,14 +38,15 @@ export enum TabComponentKey {
   ProductTypesManagement = 9,
   LoaderManagement = 13,
   TravelTimeManagement = 14,
+  TurnsManagement = 19,
   LoadCapacitorManagement = 35,
   TariffsManagement = 53,
-  Driver_TruckManagement = 10
+  Driver_TruckManagement = 10,
 }
 export interface TabView {
   title: string;
   component: Type<any>;
-  data?:object;
+  data?: object;
 }
 
 export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
@@ -141,13 +146,17 @@ export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
   ],
   [TabComponentKey.SequentialTurnManagement]: [
     { title: 'صفوف نوبت دهی', component: SequentialTurnsFormComponent },
-    {title:'صفوف نوبت دهی و بارگیرها',component:RelationOfSequentialTurnToLoaderTypeFormComponent},
+    {
+      title: 'صفوف نوبت دهی و بارگیرها',
+      component: RelationOfSequentialTurnToLoaderTypeFormComponent,
+    },
     {
       title: 'صفوف نوبت دهی - زیرگروه اعلام بار',
       component: RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent,
     },
   ],
-  [TabComponentKey.Driver_TruckManagement]: [{
+  [TabComponentKey.Driver_TruckManagement]: [
+    {
       title: 'ناوگان',
       component: TruckAndDriverInformationFormComponent,
       data: {
@@ -167,5 +176,24 @@ export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
       data: {
         insideTabType: 'Driver',
       },
-    },]
+    },
+  ],
+  [TabComponentKey.TurnsManagement]: [
+    {
+      title: 'لیست نوبت ها',
+      component: TurnsListFormComponent,
+    },
+    {
+      title: 'نوبت دهی بلادرنگ',
+      component: RealTimeTurnsFormComponent,
+    },
+    {
+      title: 'نوبت دهی - نوبت اضطراری',
+      component: EmergencyTurnsFormComponent,
+    },
+    {
+      title: 'نوبت دهی - احیای نوبت رزور',
+      component: ResuscitateTurnsFormComponent,
+    }
+  ],
 };
