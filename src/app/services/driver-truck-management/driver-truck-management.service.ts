@@ -405,23 +405,27 @@ export class Driver_TruckManagementService {
   private TrimComposedTruckInfo(
     response: TruckComposedInfo
   ): TruckComposedInfo {
+    let turn = response.Turn;
+    if (turn) {
+      turn = {
+        TurnId: turn.TurnId,
+        TurnIssueDate: turn.TurnIssueDate?.trim(),
+        TurnIssueTime: turn.TurnIssueTime?.trim(),
+        TruckDriver: turn.TruckDriver?.trim(),
+        SoftwareUserName: turn.SoftwareUserName?.trim(),
+        BillOfLadingNumber: turn.BillOfLadingNumber?.trim(),
+        OtaghdarTurnNumber: turn.OtaghdarTurnNumber?.trim(),
+        TurnStatusTitle: turn.TurnStatusTitle?.trim(),
+        TurnStatusDescription: turn.TurnStatusDescription?.trim(),
+        DateOfLastChanged: turn.DateOfLastChanged?.trim(),
+        SequentialTurnTitle: turn.SequentialTurnTitle?.trim(),
+      };
+    }
     return {
       Truck: response.Truck,
       TruckDriver: response?.TruckDriver,
       MoneyWallet: response?.MoneyWallet,
-      Turn: {
-        TurnId: response.Turn!.TurnId,
-        TurnIssueDate: response?.Turn?.TurnIssueDate?.trim(),
-        TurnIssueTime: response?.Turn?.TurnIssueTime?.trim(),
-        TruckDriver: response?.Turn?.TruckDriver?.trim(),
-        SoftwareUserName: response?.Turn?.SoftwareUserName?.trim(),
-        BillOfLadingNumber: response?.Turn?.BillOfLadingNumber?.trim(),
-        OtaghdarTurnNumber: response?.Turn?.OtaghdarTurnNumber?.trim(),
-        TurnStatusTitle: response?.Turn?.TurnStatusTitle?.trim(),
-        TurnStatusDescription: response?.Turn?.TurnStatusDescription?.trim(),
-        DateOfLastChanged: response?.Turn?.DateOfLastChanged?.trim(),
-        SequentialTurnTitle: response?.Turn?.SequentialTurnTitle?.trim(),
-      },
+      Turn: turn,
     };
   }
 
