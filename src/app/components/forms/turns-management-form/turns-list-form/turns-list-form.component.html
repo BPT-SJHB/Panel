@@ -1,0 +1,145 @@
+<div class="grid">
+  <app-search-input
+    class="col-12"
+    [onSearchQuery]="searchTruckInformation"
+    placeholder="هوشمند ناوگان را وارد کنید."
+    searchButtonLabel="استعلام"
+    validationField="smartCard"
+    [control]="smartCode"
+    [disableSearchButton]="smartCode.invalid"
+  />
+
+  <app-text-input
+    [control]="truckId"
+    label="کدناوگان"
+    placeholder="کدناوگان"
+    [disabled]="true"
+    [readOnly]="true"
+    class="col-12 md:col-6"
+    addonWidth="6rem"
+  />
+
+  <app-text-input
+    [control]="licensePlate"
+    label="شماره پلاک"
+    placeholder="شماره پلاک"
+    [disabled]="true"
+    [readOnly]="true"
+    class="col-12 md:col-6"
+    addonWidth="6rem"
+  />
+</div>
+
+<p-table
+  class="col-12"
+  [columns]="turnsCols"
+  [paginator]="true"
+  [rows]="10"
+  [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
+  [tableStyle]="{ 'min-width': '50rem' }"
+  [value]="truckTurnsList"
+    paginatorLocale="fa"
+
+>
+  <ng-template #header let-columns>
+    <tr>
+      @for (col of columns; track $index) {
+      <th>{{ col }}</th>
+      }
+    </tr>
+  </ng-template>
+
+  <ng-template #body let-rowData>
+    <tr>
+      <td>{{ rowData.TurnId }}</td>
+      <td>{{ rowData.OtaghdarTurnNumber || "-" }}</td>
+      <td>{{ rowData.TurnIssueDate || "-" }}</td>
+      <td>{{ rowData.TurnIssueTime || "-" }}</td>
+      <td>{{ rowData.TruckDriver || "-" }}</td>
+      <td>{{ rowData.TurnStatusTitle || "-" }}</td>
+      <td>{{ rowData.TurnStatusDescription || "-" }}</td>
+      <td>{{ rowData.DateOfLastChanged || "-" }}</td>
+      <td>{{ rowData.SequentialTurnTitle || "-" }}</td>
+      <td>{{ rowData.SoftwareUserName || "-" }}</td>
+      <td>
+        <p-button
+          icon="pi pi-times"
+          severity="danger"
+          variant="text"
+          [disabled]="loading"
+          (onClick)="confirmDeactivation(rowData)"
+        ></p-button>
+      </td>
+
+      <td>
+        <p-button
+          icon="pi pi-refresh"
+          severity="info"
+          variant="text"
+          [disabled]="loading"
+          (onClick)="confirmActivation(rowData)"
+        ></p-button>
+      </td>
+
+      <td>
+        <p-button
+          icon="pi pi-align-justify"
+          severity="primary"
+          variant="text"
+          [disabled]="loading"
+          (onClick)="openTurnAccounting(rowData)"
+        ></p-button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  draggable="false"
+  [header]="headerTitle"
+  [modal]="true"
+  (onHide)="onCloseDialog()"
+  [(visible)]="dialogTurnAccounting"
+  maskStyleClass="px-3 overflow-visible"
+  [style]="{ 'max-width': '90vw' }"
+>
+  <p-table
+    [columns]="accountingCols"
+    [paginator]="true"
+    [rows]="10"
+    [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
+    paginatorLocale="fa"
+    [value]="turnsAccounting"
+  >
+    <ng-template #header let-columns>
+      <tr>
+        @for (col of columns; track $index) {
+        <th>{{ col }}</th>
+        }
+      </tr>
+    </ng-template>
+
+    <ng-template #body let-rowData>
+      <tr>
+        <td>{{ rowData.TurnId || "-" }}</td>
+        <td>{{ rowData.SequentialTurnId || "-" }}</td>
+        <td>{{ rowData.DateShamsi || "-" }}</td>
+        <td>{{ rowData.Time || "-" }}</td>
+        <td>{{ rowData.AccountingTypeTitle || "-" }}</td>
+        <td>{{ rowData.UserName || "-" }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-dialog>
+
+<p-confirmDialog
+  [style]="{ width: '350px' }"
+  maskStyleClass="z-15"
+  header="تایید عملیات"
+  icon="pi pi-exclamation-triangle"
+  acceptLabel="تایید"
+  rejectLabel="انصراف"
+  acceptButtonStyleClass="px-5 py-1"
+  rejectButtonStyleClass="px-4 py-1"
+>
+</p-confirmDialog>
