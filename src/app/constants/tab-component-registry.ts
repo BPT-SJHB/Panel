@@ -24,6 +24,7 @@ import { TurnsListFormComponent } from 'app/components/forms/turns-management-fo
 import { RealTimeTurnsFormComponent } from 'app/components/forms/turns-management-form/real-time-turns-form/real-time-turns-form.component';
 import { EmergencyTurnsFormComponent } from 'app/components/forms/turns-management-form/emergency-time-turns-form copy/emergency-turns-form.component';
 import { ResuscitateTurnsFormComponent } from 'app/components/forms/turns-management-form/resuscitate-time-turns-form/resuscitate-turns-form.component';
+import { RegisterTurnFormComponent } from 'app/components/forms/register-turn-form/register-turn-form.component';
 
 export enum TabComponentKey {
   Main = -1,
@@ -39,6 +40,7 @@ export enum TabComponentKey {
   LoaderManagement = 13,
   TravelTimeManagement = 14,
   TurnsManagement = 19,
+  TurnsRegisterManagement = 23,
   LoadCapacitorManagement = 35,
   TariffsManagement = 53,
   Driver_TruckManagement = 10,
@@ -51,7 +53,7 @@ export interface TabView {
 
 export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
   [TabComponentKey.Main]: [
-    { title: 'صفحه اصلی', component:MainViewComponent },
+    { title: 'صفحه اصلی', component: MainViewComponent },
   ],
 
   [TabComponentKey.UserManagement]: [
@@ -194,6 +196,9 @@ export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
     {
       title: 'نوبت دهی - احیای نوبت رزور',
       component: ResuscitateTurnsFormComponent,
-    }
+    },
+  ],
+  [TabComponentKey.TurnsRegisterManagement]: [
+    { title: 'درخواست - صدورنوبت', component: RegisterTurnFormComponent },
   ],
 };
