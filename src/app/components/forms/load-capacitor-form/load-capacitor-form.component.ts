@@ -80,7 +80,7 @@ export class LoadCapacitorFormComponent {
     totalNumber: [0,ValidationSchema.totalNumber],
     tonaj: [0,ValidationSchema.tonaj],
     recipient: ['',ValidationSchema.recipient],
-    tarrif: [0,ValidationSchema.tarrif],
+    tarrif: [0,ValidationSchema.tariff],
 
     // آدرس و توضیحات
     address: ['',ValidationSchema.address],

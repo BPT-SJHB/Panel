@@ -54,7 +54,12 @@ export class TabViewComponent implements AfterViewInit {
       return;
     }
 
-    const compRef = this.tabContainer.createComponent(this.views[index].component);
+    const view = this.views[index];
+    const compRef = this.tabContainer.createComponent(view.component);
+
+    if (view.data) {
+      Object.assign(compRef.instance, view.data);
+    }
     this.tabContainer.insert(compRef.hostView);
     this.componentCache.set(index, compRef);
   }

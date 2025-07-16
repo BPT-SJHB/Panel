@@ -105,7 +105,7 @@ export class UserAuthService {
       path: '/',
       secure: environment.production,
       sameSite: environment.production ? 'None' : 'Lax',
-      expires: new Date(Date.now() + 1000 * 60 * 30), // 30 minutes
+      // expires: new Date(Date.now() + 1000 * 60 * 30), // 30 minutes
     });
   }
 

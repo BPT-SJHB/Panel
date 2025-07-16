@@ -14,13 +14,22 @@ import { TravelTimeFormComponent } from 'app/components/forms/travel-time-form/t
 import { TariffsFormComponent } from 'app/components/forms/tariffs-manages-form/tariffs-form.component';
 import { AnnouncementGroupFormComponent } from 'app/components/forms/announcement-management-form/announcement-group-form/announcement-group-form.component';
 import { AnnouncementSubGroupFormComponent } from 'app/components/forms/announcement-management-form/announcement-sub-group-form/announcement-sub-group-form.component';
-import { MainViewComponent } from 'app/components/shared/main-view/main-view.component';
 import { RelationOfAnnouncementGroupAndSubGroupComponent } from 'app/components/forms/announcement-management-form/relation-of-announcement-group-and-sub-group/relation-of-announcement-group-and-sub-group.component';
+import { SequentialTurnsFormComponent } from 'app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component';
+import { RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent } from 'app/components/forms/sequential-turns-management-form/relation-of-sequential-turn-to-announcement-sub-groups/relation-of-sequential-turn-to-announcement-sub-groups-form.component';
+import { MainViewComponent } from 'app/components/shared/main-view/main-view.component';
+import { RelationOfSequentialTurnToLoaderTypeFormComponent } from 'app/components/forms/sequential-turns-management-form/relation-of-sequential-turn-to-loader-type-form/relation-of-sequential-turn-to-loader-type-form.component';
+import { TruckAndDriverInformationFormComponent } from 'app/components/forms/truck-and-driver-information-form/truck-and-driver-information-form.component';
+import { TurnsListFormComponent } from 'app/components/forms/turns-management-form/turns-list-form/turns-list-form.component';
+import { RealTimeTurnsFormComponent } from 'app/components/forms/turns-management-form/real-time-turns-form/real-time-turns-form.component';
+import { EmergencyTurnsFormComponent } from 'app/components/forms/turns-management-form/emergency-time-turns-form copy/emergency-turns-form.component';
+import { ResuscitateTurnsFormComponent } from 'app/components/forms/turns-management-form/resuscitate-time-turns-form/resuscitate-turns-form.component';
 
 export enum TabComponentKey {
   Main = -1,
   UserManagement = 0,
   TruckDriverManagement = 1,
+  SequentialTurnManagement = 4,
   FactoriesAndFreightManagement = 6,
   AnnouncementManagement = 11,
   LoaderTypeManagement = 12,
@@ -29,17 +38,20 @@ export enum TabComponentKey {
   ProductTypesManagement = 9,
   LoaderManagement = 13,
   TravelTimeManagement = 14,
+  TurnsManagement = 19,
   LoadCapacitorManagement = 35,
   TariffsManagement = 53,
+  Driver_TruckManagement = 10,
 }
 export interface TabView {
   title: string;
   component: Type<any>;
+  data?: object;
 }
 
 export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
   [TabComponentKey.Main]: [
-    { title: 'صفحه اصلی', component: MainViewComponent },
+    { title: 'صفحه اصلی', component:MainViewComponent },
   ],
 
   [TabComponentKey.UserManagement]: [
@@ -131,5 +143,57 @@ export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
       title: 'گروه و زیرگروه اعلام بار',
       component: RelationOfAnnouncementGroupAndSubGroupComponent,
     },
+  ],
+  [TabComponentKey.SequentialTurnManagement]: [
+    { title: 'صفوف نوبت دهی', component: SequentialTurnsFormComponent },
+    {
+      title: 'صفوف نوبت دهی و بارگیرها',
+      component: RelationOfSequentialTurnToLoaderTypeFormComponent,
+    },
+    {
+      title: 'صفوف نوبت دهی - زیرگروه اعلام بار',
+      component: RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent,
+    },
+  ],
+  [TabComponentKey.Driver_TruckManagement]: [
+    {
+      title: 'ناوگان',
+      component: TruckAndDriverInformationFormComponent,
+      data: {
+        insideTabType: 'Truck',
+      },
+    },
+    {
+      title: 'بارگیر',
+      component: TruckAndDriverInformationFormComponent,
+      data: {
+        insideTabType: 'LoaderType',
+      },
+    },
+    {
+      title: 'راننده',
+      component: TruckAndDriverInformationFormComponent,
+      data: {
+        insideTabType: 'Driver',
+      },
+    },
+  ],
+  [TabComponentKey.TurnsManagement]: [
+    {
+      title: 'لیست نوبت ها',
+      component: TurnsListFormComponent,
+    },
+    {
+      title: 'نوبت دهی بلادرنگ',
+      component: RealTimeTurnsFormComponent,
+    },
+    {
+      title: 'نوبت دهی - نوبت اضطراری',
+      component: EmergencyTurnsFormComponent,
+    },
+    {
+      title: 'نوبت دهی - احیای نوبت رزور',
+      component: ResuscitateTurnsFormComponent,
+    }
   ],
 };

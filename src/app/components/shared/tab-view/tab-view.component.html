@@ -4,11 +4,13 @@
 
 <ng-template #multiView>
   <p-tabs [(value)]="activeIndex" (valueChange)="onTabChange($event)">
-    <p-tablist>
-      @for (view of views; track $index) {
-      <p-tab class="text-sm" [value]="$index">{{ view.title }}</p-tab>
-      }
-    </p-tablist>
+    <div class="w-full overflow-x-auto">
+      <p-tablist>
+        @for (view of views; track $index) {
+          <p-tab class="text-sm" [value]="$index">{{ view.title }}</p-tab>
+        }
+      </p-tablist>
+    </div>
   </p-tabs>
 
   <!-- Only one container rendered below the tabs -->

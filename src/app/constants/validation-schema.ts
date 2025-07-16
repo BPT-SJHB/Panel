@@ -86,6 +86,10 @@ export const ValidationSchema = {
     name: 'عنوان',
     validators: [Validators.required],
   },
+  keyword:{
+    name:'کلمه کلیدی',
+    validators:[Validators.required]
+  },
   managerName: {
     name: 'نام مدیر',
     validators: [Validators.required, Validators.minLength(3)],
@@ -205,7 +209,7 @@ export const ValidationSchema = {
     name: 'گیرنده',
     validators: [Validators.required],
   },
-  tarrif: {
+  tariff: {
     name: 'تعرفه',
     validators: [Validators.required, Validators.min(1)],
   },
@@ -213,6 +217,10 @@ export const ValidationSchema = {
     name: 'توضیحات',
     validators: [Validators.required, Validators.minLength(5)],
   },
+  parentage:{
+    name:'درصد',
+    validators:[Validators.required,Validators.min(0.1)]
+  }
 };
 
 export type ValidationField = keyof typeof ValidationSchema;

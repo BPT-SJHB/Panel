@@ -1,0 +1,194 @@
+<!-- 🔍 Search Form: Smart Card -->
+<form
+  [formGroup]="searchTruckInfoForm"
+  class="grid"
+  [class.pointer-events-none]="loading"
+  [class.opacity-60]="loading"
+>
+  <div class="col-12">
+    <app-search-input
+      class="w-full"
+      placeholder="هوشمند ناوگان را وارد کنید."
+      searchButtonLabel="استعلام"
+      validationField="smartCard"
+      [control]="smart"
+      [autoTriggerSearch]="false"
+      [minSearchLength]="2"
+      [disableSearchButton]="loading || smart.invalid"
+      [onSearchQuery]="searchTruckDriverInfo"
+      label="هوشمند"
+      [addonWidth]="addonWidth"
+    />
+  </div>
+</form>
+
+<!-- 🚚 Truck Info Form -->
+<p-card [style]="{ 'box-shadow': '0 0 10px rgba(0, 0, 0, 0.3)' }">
+  <form
+    [formGroup]="truckInfoForm"
+    [class.pointer-events-none]="loading"
+    [class.opacity-60]="loading"
+    class="grid gap-2"
+  >
+    <!-- 🧱 Truck Section -->
+    <div class="grid col-12">
+      <span class="w-full text-xl font-bold w-full px-2">ناوگان</span>
+      <div class="col-12 md:col-6 py-1 md:py-0">
+        <app-text-input
+          label="کد ناوگان"
+          placeholder="کد ناوگان"
+          [control]="truckId"
+          validationField="truckId"
+          [readOnly]="true"
+          [disabled]="true"
+          [addonWidth]="addonWidth"
+        />
+      </div>
+
+      <div class="col-12 md:col-6 py-1 md:py-0">
+        <app-text-input
+          label="شماره پلاک"
+          placeholder="شماره پلاک"
+          [control]="licensePlate"
+          validationField="licensePlateNumber"
+          [readOnly]="true"
+          [disabled]="true"
+          [addonWidth]="addonWidth"
+        />
+      </div>
+    </div>
+
+    <!-- 👤 Driver Section -->
+    <div class="grid col-12">
+      <span class="w-full text-xl font-bold w-full px-2">راننده</span>
+      <div class="col-12 md:col-6 lg:col-4 py-1 md:py-0">
+        <app-text-input
+          label="کد راننده"
+          placeholder="کد راننده"
+          [control]="driverId"
+          validationField="driverId"
+          [addonWidth]="addonWidth"
+          [readOnly]="true"
+          [disabled]="true"
+        />
+      </div>
+
+      <div class="col-12 md:col-6 lg:col-4 py-1 md:py-0">
+        <app-text-input
+          label="کد ملی راننده"
+          placeholder="کد ملی راننده"
+          [control]="driverNationalId"
+          validationField="nationalId"
+          [addonWidth]="addonWidth"
+          [readOnly]="true"
+          [disabled]="true"
+        />
+      </div>
+
+      <div class="col-12 md:col-6 lg:col-4 py-1 lg:py-0">
+        <app-text-input
+          label="نام راننده"
+          placeholder="نام و نام خانوادگی"
+          [control]="driverName"
+          validationField="turnId"
+          [addonWidth]="addonWidth"
+          [readOnly]="true"
+          [disabled]="true"
+        />
+      </div>
+    </div>
+
+    <!-- 🔁 Turn Status Section -->
+    <div class="grid col-12">
+      <span class="w-full text-xl font-bold w-full px-2">آخرین صف نوبت</span>
+      <div class="col-12 md:col-6 lg:col-4 xl:col-3 py-1 xl:py-0">
+        <app-text-input
+          label="تسلسل نوبت"
+          placeholder="تسلسل نوبت"
+          [control]="otaghdarTurnNumber"
+          [addonWidth]="addonWidth"
+          [readOnly]="true"
+          [disabled]="true"
+        />
+      </div>
+
+      <div class="col-12 md:col-6 lg:col-4 xl:col-3 py-1 xl:py-0">
+        <app-text-input
+          label="صف نوبت"
+          placeholder="صف نوبت"
+          [control]="sequentialTurn"
+          [addonWidth]="addonWidth"
+          [readOnly]="true"
+          [disabled]="true"
+        />
+      </div>
+
+      <div class="col-12 md:col-6 lg:col-4 xl:col-3 py-1 xl:py-0">
+        <app-text-input
+          label="وضعیت"
+          placeholder="وضعیت"
+          [control]="turnStats"
+          [addonWidth]="addonWidth"
+          [readOnly]="true"
+          [disabled]="true"
+        />
+      </div>
+
+      <div class="col-12 md:col-6 lg:col-4 xl:col-3 py-1 xl:py-0">
+        <app-text-input
+          label="شرح"
+          placeholder="شرح"
+          [control]="turnDescription"
+          [addonWidth]="addonWidth"
+          [readOnly]="true"
+          [disabled]="true"
+        />
+      </div>
+    </div>
+
+    <!-- 💳 Wallet Section -->
+    <div class="grid col-12">
+      <span class="text-xl font-bold w-full px-2">کیف پول</span>
+
+      <div class="col-12 md:col-6 py-1 md:py-0">
+        <app-text-input
+          label=" کد کیف پول"
+          placeholder="کد کیف پول"
+          [control]="walletCode"
+          [readOnly]="true"
+          [addonWidth]="addonWidth"
+          [disabled]="true"
+        />
+      </div>
+
+      <div class="col-12 md:col-6 py-1 md:py-0">
+        <app-text-input
+          label="موجودی"
+          placeholder="موجودی"
+          [control]="walletBalance"
+          [readOnly]="true"
+          [addonWidth]="addonWidth"
+          [disabled]="true"
+        />
+      </div>
+    </div>
+
+    <!-- 🔍 Autocomplete: Sequential Turn -->
+  </form>
+</p-card>
+<app-search-auto-complete
+  class="col-12 sm:col-6"
+  placeholder="صف نوبت"
+  label="صف نوبت"
+  [control]="sequentialTurnTitle"
+  optionLabel="SeqTurnTitle"
+  optionValue="SeqTurnTitle"
+  (selectSuggestion)="onSelectSequentialTurn($event)"
+  (valueChange)="onAutoCompleteChange(sequentialTurnId)"
+  [lazySearch]="searchSequentialTurnWithLoaderType"
+  [showIconOptionSelected]="sequentialTurnId.valid"
+  addonWidth="6rem"
+  [minLength]="0"
+  cachingMode="Focus"
+  [disabled]="loading || loaderTypeId.invalid"
+/>

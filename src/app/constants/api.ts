@@ -124,7 +124,7 @@ export const API_ROUTES = {
       EditSequentialTurn: `${environment.apiUrl}:${transportationAPIPort}/api/SequentialTurnEditing`,
       DeleteSequentialTurn: `${environment.apiUrl}:${transportationAPIPort}/api/SequentialTurnDeleting`,
       RelationToLoaderTypes: {
-        GetSequentialTurnWithLoaderType: `${environment.apiUrl}:${transportationAPIPort}/api/GetSequentialTurnByLoaderType`,
+        GetSequentialTurnWithLoaderType: `${environment.apiUrl}:${transportationAPIPort}/api/GetSequentialTurnsByLoaderType`,
         GetRelationToLoaderTypes: `${environment.apiUrl}:${transportationAPIPort}/api/GetSequentialTurnsRelationLoaderTypes`,
         RegisterRelationToLoaderType: `${environment.apiUrl}:${transportationAPIPort}/api/SequentialTurnRelationLoaderTypeRegistering`,
         DeleteRelationToLoaderType: `${environment.apiUrl}:${transportationAPIPort}/api/SequentialTurnRelationLoaderTypeDeleting`,
