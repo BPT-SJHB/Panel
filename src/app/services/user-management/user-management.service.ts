@@ -162,6 +162,19 @@ export class UserManagementService {
       SoftwareUserInfo
     >(apiUrl, bodyValue, mockSoftwareUserInfo);
     //#endregion
+
+  private TrimSoftwareUserInfo(
+    softwareUserInfo: SoftwareUserInfo
+  ): SoftwareUserInfo {
+    return {
+      UserId: softwareUserInfo.UserId,
+      UserName: softwareUserInfo.UserName?.trim(),
+      MobileNumber: softwareUserInfo.MobileNumber?.trim(),
+      UserTypeId: softwareUserInfo.UserTypeId,
+      UserActive: softwareUserInfo.UserActive,
+      SMSOwnerActive: softwareUserInfo.SMSOwnerActive,
+      UserTypeTitle: softwareUserInfo.UserTypeTitle?.trim(),
+    };
   }
 
   public async GetUserTypes(): Promise<ApiResponse<UserType[]>> {
