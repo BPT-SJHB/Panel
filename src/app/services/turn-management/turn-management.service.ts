@@ -46,22 +46,25 @@ export class TurnManagementService {
     //#region Return
     return {
       success: response.success,
-      data: response.data?.map((data) => ({
-        TurnId: data.TurnId,
-        TurnIssueDate: data.TurnIssueDate?.trim(),
-        TurnIssueTime: data.TurnIssueTime?.trim(),
-        TruckDriver: data.TruckDriver?.trim(),
-        SoftwareUserName: data.SoftwareUserName?.trim(),
-        BillOfLadingNumber: data.BillOfLadingNumber?.trim(),
-        OtaghdarTurnNumber: data.OtaghdarTurnNumber?.trim(),
-        TurnStatusTitle: data.TurnStatusTitle?.trim(),
-        TurnStatusDescription: data.TurnStatusDescription?.trim(),
-        DateOfLastChanged: data.DateOfLastChanged?.trim(),
-        SequentialTurnTitle: data.SequentialTurnTitle?.trim(),
-      })),
       error: response.error,
     };
     //#endregion
+  }
+
+  private TrimTurn(turn: Turn): Turn {
+    return {
+      TurnId: turn.TurnId,
+      TurnIssueDate: turn.TurnIssueDate?.trim(),
+      TurnIssueTime: turn.TurnIssueTime?.trim(),
+      TruckDriver: turn.TruckDriver?.trim(),
+      SoftwareUserName: turn.SoftwareUserName?.trim(),
+      BillOfLadingNumber: turn.BillOfLadingNumber?.trim(),
+      OtaghdarTurnNumber: turn.OtaghdarTurnNumber?.trim(),
+      TurnStatusTitle: turn.TurnStatusTitle?.trim(),
+      TurnStatusDescription: turn.TurnStatusDescription?.trim(),
+      DateOfLastChanged: turn.DateOfLastChanged?.trim(),
+      SequentialTurnTitle: turn.SequentialTurnTitle?.trim(),
+    };
   }
 
   public async GetTurnAccounting(
