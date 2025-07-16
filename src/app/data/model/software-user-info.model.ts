@@ -5,4 +5,5 @@ export interface SoftwareUserInfo {
   UserTypeId?: number;
   UserActive?: boolean;
   SMSOwnerActive?: boolean;
+  UserTypeTitle?: string;
 }
