@@ -1,6 +1,6 @@
 @if (insideTabType === "Truck") {
 <div class="flex align-items-center justify-content-center w-12">
-  <p-card class="w-12 md:w-6">
+  <app-form-card class="w-12 md:w-6">
     <div class="costumeText">
       <label>کد ناوگان :</label>
       <span>{{ TruckInfo?.TruckId || "نامشخص" }}</span>
@@ -40,30 +40,30 @@
         }
       </div>
     </div>
-  </p-card>
+  </app-form-card>
 </div>
 
 } @if (insideTabType === "LoaderType") {
 <div class="flex align-items-center justify-content-center w-12">
-  <p-card class="w-12 md:w-6">
+  <app-form-card class="w-12 md:w-6">
     @for (item of loaderTypeDataForHtml; track $index) {
     <div class="costumeText">
       <label>{{ item.title || "نامشخص" }}</label>
       <span>{{ item.value || "نامشخص" }}</span>
     </div>
     }
-  </p-card>
+  </app-form-card>
 </div>
 
 } @if (insideTabType === "Driver") {
 <div class="flex align-items-center justify-content-center w-12">
-  <p-card class="w-12 md:w-6">
+  <app-form-card class="w-12 md:w-6">
     @for (item of driverDataForHtml; track $index) {
     <div class="costumeText">
       <label>{{ item.title || "نامشخص" }}</label>
       <span>{{ item.value || "نامشخص" }}</span>
     </div>
     }
-  </p-card>
+  </app-form-card>
 </div>
 }
