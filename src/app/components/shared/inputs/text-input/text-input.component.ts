@@ -38,7 +38,7 @@ import {
   styleUrl: './text-input.component.scss',
 })
 export class TextInputComponent implements OnInit, OnChanges {
-  @Input() control = new FormControl('');
+  @Input() control = new FormControl<any>('');
   @Input() validationField: ValidationField | null = null;
   @Input() placeholder = '';
   @Input() readOnly = false;
