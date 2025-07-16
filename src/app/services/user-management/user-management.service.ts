@@ -1,12 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { API_ROUTES } from 'app/constants/api';
-import { firstValueFrom, map, retry } from 'rxjs';
 import { UserAuthService } from '../user-auth-service/user-auth.service';
-import { UserSession } from 'app/data/model/user-session.model';
 import { UserType } from 'app/data/model/user-type.model';
 import { ApiResponse } from 'app/data/model/api-Response.model';
-import { handleHttpError } from 'app/utils/http-error-handler';
 import { SoftwareUserInfo } from 'app/data/model/software-user-info.model';
 import { ShortResponse } from 'app/data/model/short-response.model';
 import { ApiGroupProcess } from 'app/data/model/api-group-process.model';
@@ -27,7 +23,6 @@ import { mockApiGroupProcess } from 'app/data/mock/api-group-process.mock';
 })
 export class UserManagementService {
   private apiCommunicator = inject(APICommunicationManagementService);
-  private http = inject(HttpClient);
   private userAuth = inject(UserAuthService);
 
   public async SendWebsiteLink(
@@ -163,8 +158,6 @@ export class UserManagementService {
     };
     //#endregion
 
-    //#region Request + Return
-    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       SoftwareUserInfo
     >(apiUrl, bodyValue, mockSoftwareUserInfo);
