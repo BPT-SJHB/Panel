@@ -173,6 +173,36 @@ export class UserManagementService {
     };
     //#endregion
   }
+
+  public async GetSoftwareUserProfile(): Promise<
+    ApiResponse<SoftwareUserInfo>
+  > {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.SoftwareUserAPI.UserManagement.GetSoftwareUserProfile;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      SoftwareUserInfo
+    >(apiUrl, bodyValue, mockSoftwareUserInfo);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: this.TrimSoftwareUserInfo(response.data!),
+      error: response.error,
+    };
+    //#endregion
+  }
+
   private TrimSoftwareUserInfo(
     softwareUserInfo: SoftwareUserInfo
   ): SoftwareUserInfo {
