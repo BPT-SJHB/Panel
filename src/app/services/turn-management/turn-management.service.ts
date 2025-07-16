@@ -46,6 +46,34 @@ export class TurnManagementService {
     //#region Return
     return {
       success: response.success,
+      data: response.data?.map((data) => this.TrimTurn(data)),
+      error: response.error,
+    };
+    //#endregion
+  }
+
+  public async GetLatestTurnsForSoftwareUser(): Promise<ApiResponse<Turn>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.Turns.GetLatestTurnsForSoftwareUser;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      Turn
+    >(apiUrl, bodyValue, mockTurns[0]);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: this.TrimTurn(response.data!),
       error: response.error,
     };
     //#endregion
