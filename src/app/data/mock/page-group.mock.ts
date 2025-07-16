@@ -239,8 +239,8 @@ export const mockApiGroupProcesses: ApiGroupProcess[] = [
       {
         PId: 23,
         PTitle:
-          'نوبت دهی - درخواست صدور و ابطال نوبت                                                                ',
-        PName: 'TurnIssueTurnCancelRequest                        ',
+          'نوبت دهی - درخواست صدور نوبت                                                                        ',
+        PName: 'TruckDriver-TurnIssueRequest                      ',
         Description:
           'از طریق این واسط امکان انتخاب و دریافت نوبت مجازی بر مبنای صف نوبت انتخابی وجود دارد.موجودی کیف پول می بایست کافی باشد',
         PIconName: 'pi-globe',
