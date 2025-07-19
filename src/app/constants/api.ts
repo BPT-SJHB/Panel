@@ -1,6 +1,7 @@
 import { environment } from 'environments/environment';
 const softwareUserAPIPort = 81;
 const transportationAPIPort = 82;
+const walletAndTrafficPort = 83;
 
 export const API_ROUTES = {
   SoftwareUserAPI: {
@@ -150,6 +151,18 @@ export const API_ROUTES = {
         ResuscitateReserveTurn: `${environment.apiUrl}:${transportationAPIPort}/api/ResuscitationReserveTurn`,
         RegisterReserveTurn: `${environment.apiUrl}:${transportationAPIPort}/api/ReserveTurnRegisterRequest`,
       },
+    },
+  },
+  WalletAndTrafficApi: {
+    WalletInfo: {
+      GetUserWallet: `${environment.apiUrl}:${walletAndTrafficPort}/api/GetUserMoneyWallet`,
+      GetWalletBalance: `${environment.apiUrl}:${walletAndTrafficPort}/api/GetMoneyWalletBalance`,
+      GetDefaultAmounts: `${environment.apiUrl}:${walletAndTrafficPort}/api/GetDefaultAmounts`,
+      GetWalletTransactions: `${environment.apiUrl}:${walletAndTrafficPort}/api/GetMoneyWalletTransactions`,
+      GetWalletPaymentRecords: `${environment.apiUrl}:${walletAndTrafficPort}/api/GetMoneyWalletChargeRecords`,
+    },
+    WalletRequests: {
+      PaymentRequest: `${environment.apiUrl}:${walletAndTrafficPort}/api/PaymentRequest`,
     },
   },
 };
