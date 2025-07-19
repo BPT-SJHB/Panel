@@ -23,7 +23,7 @@ import {
   mockTruckInfo,
 } from 'app/services/driver-truck-management/mock/truck-info.mock';
 import { mockTruckNativenessInfo } from 'app/services/driver-truck-management/mock/truck-nativeness-info.mock';
-import { Wallet } from 'app/data/model/wallet.model';
+import { Wallet } from 'app/services/wallet-management/model/wallet.model';
 import { mockWallet } from 'app/data/mock/wallet.mock';
 
 @Injectable({
