@@ -14,7 +14,7 @@ import { TruckDriverInfo } from 'app/services/driver-truck-management/model/truc
 import { TruckInfo } from 'app/services/driver-truck-management/model/truck-info.model';
 import { Turn } from 'app/services/turn-management/model/turn.model';
 import { SequentialTurn } from 'app/services/sequential-turn-management/model/sequential-turn.model';
-import { Wallet } from 'app/data/model/wallet.model';
+import { Wallet } from 'app/services/wallet-management/model/wallet.model';
 
 // 🧩 Services
 import { Driver_TruckManagementService } from 'app/services/driver-truck-management/driver-truck-management.service';
@@ -30,7 +30,7 @@ import { SearchInputComponent } from 'app/components/shared/inputs/search-input/
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { SearchAutoCompleteComponent } from 'app/components/shared/inputs/search-auto-complete/search-auto-complete.component';
 import { Card } from 'primeng/card';
-``
+``;
 @Component({
   selector: 'app-turns-truck-info-base-form',
   imports: [
@@ -39,7 +39,7 @@ import { Card } from 'primeng/card';
     TextInputComponent,
     SearchAutoCompleteComponent,
     Card,
-],
+  ],
   templateUrl: './turns-truck-info-base-form.component.html',
   styleUrl: './turns-truck-info-base-form.component.scss',
 })
@@ -137,14 +137,14 @@ export class TurnsTruckInfoBaseFormComponent {
       truckId: truck.TruckId,
       loaderTypeId: truck.LoaderTypeId,
       licensePlate: truck.Pelak,
-      driverId: driver?.DriverId?? '',
-      driverNationalId: driver?.NationalCode?? '',
-      driverName: driver?.NameFamily??'',
-      turnId: turn?.TurnId?? '',
+      driverId: driver?.DriverId ?? '',
+      driverNationalId: driver?.NationalCode ?? '',
+      driverName: driver?.NameFamily ?? '',
+      turnId: turn?.TurnId ?? '',
       sequentialTurn: turn?.SequentialTurnTitle ?? '',
       otaghdarTurnNumber: turn?.OtaghdarTurnNumber ?? '',
-      turnStats: turn?.TurnStatusTitle?? '',
-      turnDescription: turn?.TurnStatusDescription?? '',
+      turnStats: turn?.TurnStatusTitle ?? '',
+      turnDescription: turn?.TurnStatusDescription ?? '',
       walletCode: wallet?.MoneyWalletCode ?? '',
       walletBalance: wallet?.Balance ?? 0,
     });
