@@ -9,6 +9,10 @@ import { mockWalletTransactions } from './mock/wallet-transaction.mock';
 import { WalletPaymentHistory } from './model/wallet-payment-history.model';
 import { mockWalletPaymentHistories } from './mock/wallet-payment-history.mock';
 import { mockWallet } from './mock/wallet.mock';
+import { WalletDefaultAmount } from './model/wallet-default-amount.model';
+import { mockWalletDefaultAmounts } from './mock/wallet-default-amount.mock';
+import { WalletPaymentRequest } from './model/wallet-payment-request.model';
+import { mockWalletPaymentRequest } from './mock/wallet-payment-request.mock';
 @Injectable({
   providedIn: 'root',
 })
