@@ -79,6 +79,37 @@ export class WalletManagementService {
     });
     //#endregion
   }
+
+  public async GetWalletDefaultAmounts(): Promise<
+    ApiResponse<WalletDefaultAmount[]>
+  > {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.WalletAndTrafficApi.WalletInfo.GetDefaultAmounts;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      WalletDefaultAmount[]
+    >(apiUrl, bodyValue, mockWalletDefaultAmounts);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: response.data?.map((data) => ({
+        AmountTitle: data.AmountTitle.trim(),
+        Amount: data.Amount,
+      })),
+      error: response.error,
+    };
+    //#endregion
+  }
   public async GetWalletTransactions(
     walletId: number
   ): Promise<ApiResponse<WalletTransaction[]>> {
