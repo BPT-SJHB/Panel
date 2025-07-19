@@ -110,6 +110,28 @@ export class WalletManagementService {
     };
     //#endregion
   }
+
+  public async SendPaymentRequest(
+    amount: number
+  ): Promise<ApiResponse<WalletPaymentRequest>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.WalletAndTrafficApi.WalletRequests.PaymentRequest;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      Amount: amount,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      WalletPaymentRequest
+    >(apiUrl, bodyValue, mockWalletPaymentRequest);
+    //#endregion
+  }
+
   public async GetWalletTransactions(
     walletId: number
   ): Promise<ApiResponse<WalletTransaction[]>> {
