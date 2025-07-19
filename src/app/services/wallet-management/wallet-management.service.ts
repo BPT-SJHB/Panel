@@ -15,4 +15,45 @@ import { mockWallet } from './mock/wallet.mock';
 export class WalletManagementService {
   private userAuth = inject(UserAuthService);
   private apiCommunicator = inject(APICommunicationManagementService);
+  public async GetWalletTransactions(
+    walletId: number
+  ): Promise<ApiResponse<WalletTransaction[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.WalletAndTrafficApi.WalletInfo.GetWalletTransactions;
+    const walletInfo: Wallet = {
+      MoneyWalletId: walletId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      MoneyWalletId: walletInfo.MoneyWalletId,
+    };
+    //#endregion
+
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      WalletTransaction[]
+    >(apiUrl, bodyValue, mockWalletTransactions);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: response.data?.map((data) => ({
+        TransactionTitle: data.TransactionTitle.trim(),
+        TransactionColor: data.TransactionColor.trim(),
+        ShamsiDate: data.ShamsiDate.trim(),
+        Time: data.Time.trim(),
+        CurrentBalance: data.CurrentBalance,
+        Amount: data.Amount,
+        Reminder: data.Reminder,
+        UserName: data.UserName.trim(),
+      })),
+      error: response.error,
+    };
+    //#endregion
+  }
 }
