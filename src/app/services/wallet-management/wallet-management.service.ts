@@ -19,6 +19,32 @@ import { mockWalletPaymentRequest } from './mock/wallet-payment-request.mock';
 export class WalletManagementService {
   private userAuth = inject(UserAuthService);
   private apiCommunicator = inject(APICommunicationManagementService);
+
+  public async GetUserWalletInfo(): Promise<ApiResponse<Wallet>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.WalletAndTrafficApi.WalletInfo.GetUserWallet;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      Wallet
+    >(apiUrl, bodyValue, mockWallet);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: this.TrimWallet(response.data!),
+      error: response.error,
+    };
+    //#endregion
+  }
   public async GetWalletTransactions(
     walletId: number
   ): Promise<ApiResponse<WalletTransaction[]>> {
