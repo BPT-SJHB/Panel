@@ -53,6 +53,32 @@ export class WalletManagementService {
       MoneyWalletCode: wallet.MoneyWalletCode?.trim(),
     };
   }
+
+  public async GetWalletBalance(
+    walletId: number
+  ): Promise<ApiResponse<{ Balance: number }>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.WalletAndTrafficApi.WalletInfo.GetWalletBalance;
+    const walletInfo: Wallet = {
+      MoneyWalletId: walletId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      MoneyWalletId: walletInfo.MoneyWalletId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      { Balance: number }
+    >(apiUrl, bodyValue, {
+      Balance: 10000000,
+    });
+    //#endregion
+  }
   public async GetWalletTransactions(
     walletId: number
   ): Promise<ApiResponse<WalletTransaction[]>> {
