@@ -13,4 +13,6 @@ import { mockWallet } from './mock/wallet.mock';
   providedIn: 'root',
 })
 export class WalletManagementService {
+  private userAuth = inject(UserAuthService);
+  private apiCommunicator = inject(APICommunicationManagementService);
 }
