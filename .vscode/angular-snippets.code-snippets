@@ -74,4 +74,8 @@
     "prefix": "apiTransportaionRoute",
     "body": "${apiRouteName}: `${environment.apiUrl}:\\${transportationAPIPort}/api/${realNameFromAPI}`,$0"
   },
+  "add wallet and traffic api routes": {
+    "prefix": "apiWalletAndTrafficRoute",
+    "body": "${apiRouteName}: `${environment.apiUrl}:\\${walletAndTrafficPort}/api/${realNameFromAPI}`,$0"
+  },
 }
