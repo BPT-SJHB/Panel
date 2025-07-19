@@ -10,7 +10,7 @@ import {
   TruckComposedInfo,
   TruckInfo,
 } from 'app/services/driver-truck-management/model/truck-info.model';
-import { Wallet } from 'app/data/model/wallet.model';
+import { Wallet } from 'app/services/wallet-management/model/wallet.model';
 import { Driver_TruckManagementService } from 'app/services/driver-truck-management/driver-truck-management.service';
 import { ToastService } from 'app/services/toast-service/toast.service';
 import { ButtonModule } from 'primeng/button';

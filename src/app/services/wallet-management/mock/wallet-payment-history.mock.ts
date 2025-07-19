@@ -1,6 +1,6 @@
 import { WalletPaymentHistory } from '../model/wallet-payment-history.model';
 
-export const mockWalletPaymentHistory: WalletPaymentHistory[] = [
+export const mockWalletPaymentHistories: WalletPaymentHistory[] = [
   {
     ShamsiDate: '1404/04/01',
     Time: '11:19:14  ',
