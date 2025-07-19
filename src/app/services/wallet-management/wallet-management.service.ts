@@ -45,6 +45,14 @@ export class WalletManagementService {
     };
     //#endregion
   }
+
+  private TrimWallet(wallet: Wallet): Wallet {
+    return {
+      MoneyWalletId: wallet.MoneyWalletId,
+      Balance: wallet.Balance,
+      MoneyWalletCode: wallet.MoneyWalletCode?.trim(),
+    };
+  }
   public async GetWalletTransactions(
     walletId: number
   ): Promise<ApiResponse<WalletTransaction[]>> {
