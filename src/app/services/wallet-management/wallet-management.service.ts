@@ -40,18 +40,10 @@ export class WalletManagementService {
     //#region Return
     return {
       success: response.success,
-      data: this.TrimWallet(response.data!),
+      data: response.data,
       error: response.error,
     };
     //#endregion
-  }
-
-  private TrimWallet(wallet: Wallet): Wallet {
-    return {
-      MoneyWalletId: wallet.MoneyWalletId,
-      Balance: wallet.Balance,
-      MoneyWalletCode: wallet.MoneyWalletCode?.trim(),
-    };
   }
 
   public async GetWalletBalance(
