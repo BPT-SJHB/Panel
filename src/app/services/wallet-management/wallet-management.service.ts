@@ -14,6 +14,8 @@ import { mockWalletDefaultAmounts } from './mock/wallet-default-amount.mock';
 import { WalletPaymentRequest } from './model/wallet-payment-request.model';
 import { mockWalletPaymentRequest } from './mock/wallet-payment-request.mock';
 import { TruckInfo } from '../driver-truck-management/model/truck-info.model';
+import { WalletUserChargingFunction } from './model/wallet-user-charging-function.model';
+import { mockWalletUserChargingFunctions } from './mock/wallet-user-charging-function.mock';
 @Injectable({
   providedIn: 'root',
 })
@@ -105,6 +107,40 @@ export class WalletManagementService {
       typeof bodyValue,
       Wallet
     >(apiUrl, bodyValue, mockWallet);
+    //#endregion
+  }
+
+  public async GetTotalOfUserFunctions(
+    startData: string,
+    endData: string,
+    startTime: string,
+    endTime: string
+  ): Promise<
+    ApiResponse<{
+      Total: number;
+    }>
+  > {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.WalletAndTrafficApi.WalletInfo.GetTotalOfUserFunctions;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      StartDate: startData,
+      EndDate: endData,
+      StartTime: startTime,
+      EndTime: endTime,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      { Total: number }
+    >(apiUrl, bodyValue, {
+      Total: 236200,
+    });
     //#endregion
   }
   public async GetWalletBalance(
