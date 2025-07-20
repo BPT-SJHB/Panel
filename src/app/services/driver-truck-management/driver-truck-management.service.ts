@@ -24,7 +24,7 @@ import {
 } from 'app/services/driver-truck-management/mock/truck-info.mock';
 import { mockTruckNativenessInfo } from 'app/services/driver-truck-management/mock/truck-nativeness-info.mock';
 import { Wallet } from 'app/services/wallet-management/model/wallet.model';
-import { mockWallet } from 'app/data/mock/wallet.mock';
+import { mockWallet } from '../wallet-management/mock/wallet.mock';
 
 @Injectable({
   providedIn: 'root',
