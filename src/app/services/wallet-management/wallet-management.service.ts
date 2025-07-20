@@ -70,6 +70,25 @@ export class WalletManagementService {
     >(apiUrl, bodyValue, mockWallet);
     //#endregion
   }
+
+  public async GetTruckerAssociationWalletInfo(): Promise<ApiResponse<Wallet>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.WalletAndTrafficApi.WalletInfo.GetTruckerAssociationWallet;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      Wallet
+    >(apiUrl, bodyValue, mockWallet);
+    //#endregion
+  }
   public async GetWalletBalance(
     walletId: number
   ): Promise<ApiResponse<{ Balance: number }>> {
