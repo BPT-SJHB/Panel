@@ -167,12 +167,27 @@
                             <li>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#GetComposedTruckInfo" >GetComposedTruckInfo</a>
+                                <a href="#GetComposedTruckInfoWithLastActiveTurn" >GetComposedTruckInfoWithLastActiveTurn</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#GetComposedTruckInfoWithLastTurn" >GetComposedTruckInfoWithLastTurn</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#GetDriverInfoForSoftwareUser" >GetDriverInfoForSoftwareUser</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
                                 <a href="#GetDriverInfoFromAPI" >GetDriverInfoFromAPI</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#GetTruckInfoForSoftwareUser" >GetTruckInfoForSoftwareUser</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
@@ -208,6 +223,14 @@
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
                                 <a href="#SetComposedTruckInfo" >SetComposedTruckInfo</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#TrimComposedTruckInfo" >TrimComposedTruckInfo</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#TrimTruckDriver" >TrimTruckDriver</a>
                             </li>
                         </ul>
                     </td>
@@ -250,8 +273,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="100"
-                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:100</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="149"
+                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:149</a></div>
                         </td>
                     </tr>
 
@@ -320,8 +343,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="241"
-                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:241</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="309"
+                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:309</a></div>
                         </td>
                     </tr>
 
@@ -383,27 +406,27 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="GetComposedTruckInfo"></a>
+                    <a name="GetComposedTruckInfoWithLastActiveTurn"></a>
                     <span class="name">
                             <span class="modifier">Public</span>
                             <span class="modifier">Async</span>
-                        <span ><b>GetComposedTruckInfo</b></span>
-                        <a href="#GetComposedTruckInfo"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>GetComposedTruckInfoWithLastActiveTurn</b></span>
+                        <a href="#GetComposedTruckInfoWithLastActiveTurn"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>GetComposedTruckInfo(truckId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                    <code>GetComposedTruckInfoWithLastActiveTurn(truckId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="272"
-                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:272</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="340"
+                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:340</a></div>
                         </td>
                     </tr>
 
@@ -453,6 +476,116 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="GetComposedTruckInfoWithLastTurn"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>GetComposedTruckInfoWithLastTurn</b></span>
+                        <a href="#GetComposedTruckInfoWithLastTurn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>GetComposedTruckInfoWithLastTurn(truckId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="371"
+                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:371</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>truckId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;TruckComposedInfo&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetDriverInfoForSoftwareUser"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>GetDriverInfoForSoftwareUser</b></span>
+                        <a href="#GetDriverInfoForSoftwareUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>GetDriverInfoForSoftwareUser()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="79"
+                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:79</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;TruckDriverInfo&gt;&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="GetDriverInfoFromAPI"></a>
                     <span class="name">
                             <span class="modifier">Public</span>
@@ -472,8 +605,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="38"
+                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:38</a></div>
                         </td>
                     </tr>
 
@@ -523,6 +656,46 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="GetTruckInfoForSoftwareUser"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>GetTruckInfoForSoftwareUser</b></span>
+                        <a href="#GetTruckInfoForSoftwareUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>GetTruckInfoForSoftwareUser()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="268"
+                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:268</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;TruckInfo&gt;&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="GetTruckInfoFromAPI"></a>
                     <span class="name">
                             <span class="modifier">Public</span>
@@ -542,8 +715,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="183"
-                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:183</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="232"
+                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:232</a></div>
                         </td>
                     </tr>
 
@@ -612,8 +785,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="219"
-                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:219</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="287"
+                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:287</a></div>
                         </td>
                     </tr>
 
@@ -682,8 +855,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="329"
-                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:329</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="466"
+                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:466</a></div>
                         </td>
                     </tr>
 
@@ -722,8 +895,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="72"
-                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:72</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="121"
+                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:121</a></div>
                         </td>
                     </tr>
 
@@ -804,8 +977,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="123"
-                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:123</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="172"
+                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:172</a></div>
                         </td>
                     </tr>
 
@@ -874,8 +1047,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="157"
-                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:157</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="206"
+                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:206</a></div>
                         </td>
                     </tr>
 
@@ -944,8 +1117,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="295"
-                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:295</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="432"
+                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:432</a></div>
                         </td>
                     </tr>
 
@@ -1027,6 +1200,144 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TrimComposedTruckInfo"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>TrimComposedTruckInfo</b></span>
+                        <a href="#TrimComposedTruckInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>TrimComposedTruckInfo(response: <a href="../interfaces/TruckComposedInfo.html" target="_self">TruckComposedInfo</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="405"
+                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:405</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>response</td>
+                                            <td>
+                                                            <code><a href="../interfaces/TruckComposedInfo.html" target="_self" >TruckComposedInfo</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/TruckComposedInfo.html" target="_self" >TruckComposedInfo</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TrimTruckDriver"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>TrimTruckDriver</b></span>
+                        <a href="#TrimTruckDriver"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>TrimTruckDriver(truckDriver: <a href="../interfaces/TruckDriverInfo.html" target="_self">TruckDriverInfo</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="108"
+                                    class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:108</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>truckDriver</td>
+                                            <td>
+                                                            <code><a href="../interfaces/TruckDriverInfo.html" target="_self" >TruckDriverInfo</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/TruckDriverInfo.html" target="_self" >TruckDriverInfo</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
             <section data-compodoc="block-properties">
     
@@ -1052,7 +1363,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:34</a></div>
                         </td>
                     </tr>
 
@@ -1078,7 +1389,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/services/driver-truck-management/driver-truck-management.service.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -1094,27 +1405,30 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { inject, Injectable } from &#x27;@angular/core&#x27;;
 import { API_ROUTES } from &#x27;app/constants/api&#x27;;
 import { ApiResponse } from &#x27;app/data/model/api-Response.model&#x27;;
-import { TruckDriverInfo } from &#x27;app/data/model/truck-driver-info.model&#x27;;
+import { TruckDriverInfo } from &#x27;app/services/driver-truck-management/model/truck-driver-info.model&#x27;;
 import { UserAuthService } from &#x27;../user-auth-service/user-auth.service&#x27;;
 import { ShortResponse } from &#x27;app/data/model/short-response.model&#x27;;
 import {
   APIUsernamePassword,
   UsernamePassword,
 } from &#x27;app/data/model/username-password.model&#x27;;
-import { TruckComposedInfo, TruckInfo } from &#x27;app/data/model/truck-info.model&#x27;;
-import { TruckNativenessInfo } from &#x27;app/data/model/truck-nativeness-info.model&#x27;;
+import {
+  TruckComposedInfo,
+  TruckInfo,
+} from &#x27;app/services/driver-truck-management/model/truck-info.model&#x27;;
+import { TruckNativenessInfo } from &#x27;app/services/driver-truck-management/model/truck-nativeness-info.model&#x27;;
 import { APICommunicationManagementService } from &#x27;../api-communication-management/apicommunication-management.service&#x27;;
 import { ErrorCodes } from &#x27;app/constants/error-messages&#x27;;
-import { mockTruckDriverInfo } from &#x27;app/data/mock/truck-driver-info.model&#x27;;
+import { mockTruckDriverInfo } from &#x27;app/services/driver-truck-management/mock/truck-driver-info.model&#x27;;
 import { mockShortResponse } from &#x27;app/data/mock/short-response.mock&#x27;;
 import { mockAPIUsernamePassword } from &#x27;app/data/mock/username-password.mock&#x27;;
 import {
   mockTruckComposedInfo,
   mockTruckInfo,
-} from &#x27;app/data/mock/truck-info.mock&#x27;;
-import { mockTruckNativenessInfo } from &#x27;app/data/mock/truck-nativeness-info.mock&#x27;;
-import { Wallet } from &#x27;app/data/model/wallet.model&#x27;;
-import { mockWallet } from &#x27;app/data/mock/wallet.mock&#x27;;
+} from &#x27;app/services/driver-truck-management/mock/truck-info.mock&#x27;;
+import { mockTruckNativenessInfo } from &#x27;app/services/driver-truck-management/mock/truck-nativeness-info.mock&#x27;;
+import { Wallet } from &#x27;app/services/wallet-management/model/wallet.model&#x27;;
+import { mockWallet } from &#x27;../wallet-management/mock/wallet.mock&#x27;;
 
 @Injectable({
   providedIn: &#x27;root&#x27;,
@@ -1158,8 +1472,54 @@ export class Driver_TruckManagementService {
       &gt;(outdoorApiUrl, bodyValue, mockTruckDriverInfo);
     }
 
-    return response;
+    return {
+      success: response.success,
+      data: this.TrimTruckDriver(response.data!),
+      error: response.error,
+    };
     //#endregion
+  }
+
+  public async GetDriverInfoForSoftwareUser(): Promise&lt;
+    ApiResponse&lt;TruckDriverInfo&gt;
+  &gt; {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl &#x3D;
+      API_ROUTES.TransportationAPI.Driver.GetTruckDriverInfoForSoftwareUser;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request
+    const response &#x3D; await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      TruckDriverInfo
+    &gt;(apiUrl, bodyValue, mockTruckDriverInfo);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: this.TrimTruckDriver(response.data!),
+      error: response.error,
+    };
+    //#endregion
+  }
+
+  private TrimTruckDriver(truckDriver: TruckDriverInfo): TruckDriverInfo {
+    return {
+      DriverId: truckDriver.DriverId,
+      NationalCode: truckDriver.NationalCode?.trim(),
+      NameFamily: truckDriver.NameFamily?.trim(),
+      MobileNumber: truckDriver.MobileNumber?.trim(),
+      FatherName: truckDriver.FatherName?.trim(),
+      DrivingLicenseNo: truckDriver.DrivingLicenseNo?.trim(),
+      Address: truckDriver.Address?.trim(),
+      SmartCardNo: truckDriver.SmartCardNo?.trim(),
+    };
   }
 
   public async RegisterNew_EditDriverMobileNumber(
@@ -1309,6 +1669,25 @@ export class Driver_TruckManagementService {
     //#endregion
   }
 
+  public async GetTruckInfoForSoftwareUser(): Promise&lt;ApiResponse&lt;TruckInfo&gt;&gt; {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl &#x3D;
+      API_ROUTES.TransportationAPI.Truck.GetTruckInfoForSoftwareUser;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      TruckInfo
+    &gt;(apiUrl, bodyValue, mockTruckInfo);
+    //#endregion
+  }
+
   public async GetTruckNativeness(
     truckId: number
   ): Promise&lt;ApiResponse&lt;TruckNativenessInfo&gt;&gt; {
@@ -1362,14 +1741,14 @@ export class Driver_TruckManagementService {
 
   //#region Relations of Driver, Truck, MoneyWallet
 
-  public async GetComposedTruckInfo(
+  public async GetComposedTruckInfoWithLastActiveTurn(
     truckId: number
   ): Promise&lt;ApiResponse&lt;TruckComposedInfo&gt;&gt; {
     this.userAuth.isLoggedIn();
 
     //#region Consts
     const apiUrl &#x3D;
-      API_ROUTES.TransportationAPI.Driver_Truck_Wallet.GetComposedTruckInfo;
+      API_ROUTES.TransportationAPI.Truck.ComposedInfos.GetComposedTruckInfo;
     const truckInfo: TruckInfo &#x3D; { TruckId: truckId };
     const bodyValue &#x3D; {
       SessionId: this.userAuth.getSessionId(),
@@ -1377,12 +1756,81 @@ export class Driver_TruckManagementService {
     };
     //#endregion
 
-    //#region Request + Return
-    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+    //#region Request
+    const response &#x3D; await this.apiCommunicator.CommunicateWithAPI_Post&lt;
       typeof bodyValue,
       TruckComposedInfo
     &gt;(apiUrl, bodyValue, mockTruckComposedInfo);
     //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: this.TrimComposedTruckInfo(response.data!),
+      error: response.error,
+    };
+    //#endregion
+  }
+
+  public async GetComposedTruckInfoWithLastTurn(
+    truckId: number
+  ): Promise&lt;ApiResponse&lt;TruckComposedInfo&gt;&gt; {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl &#x3D;
+      API_ROUTES.TransportationAPI.Truck.ComposedInfos
+        .GetComposedTruckInfoForTurnIssues;
+    const truckInfo: TruckInfo &#x3D; {
+      TruckId: truckId,
+    };
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      TruckId: truckInfo.TruckId,
+    };
+    //#endregion
+
+    //#region Request
+    const response &#x3D; await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      TruckComposedInfo
+    &gt;(apiUrl, bodyValue, mockTruckComposedInfo);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: this.TrimComposedTruckInfo(response.data!),
+      error: response.error,
+    };
+    //#endregion
+  }
+
+  private TrimComposedTruckInfo(
+    response: TruckComposedInfo
+  ): TruckComposedInfo {
+    let turn &#x3D; response.Turn;
+    if (turn) {
+      turn &#x3D; {
+        TurnId: turn.TurnId,
+        TurnIssueDate: turn.TurnIssueDate?.trim(),
+        TurnIssueTime: turn.TurnIssueTime?.trim(),
+        TruckDriver: turn.TruckDriver?.trim(),
+        SoftwareUserName: turn.SoftwareUserName?.trim(),
+        BillOfLadingNumber: turn.BillOfLadingNumber?.trim(),
+        OtaghdarTurnNumber: turn.OtaghdarTurnNumber?.trim(),
+        TurnStatusTitle: turn.TurnStatusTitle?.trim(),
+        TurnStatusDescription: turn.TurnStatusDescription?.trim(),
+        DateOfLastChanged: turn.DateOfLastChanged?.trim(),
+        SequentialTurnTitle: turn.SequentialTurnTitle?.trim(),
+      };
+    }
+    return {
+      Truck: response.Truck,
+      TruckDriver: response?.TruckDriver,
+      MoneyWallet: response?.MoneyWallet,
+      Turn: turn,
+    };
   }
 
   public async SetComposedTruckInfo(
@@ -1395,18 +1843,18 @@ export class Driver_TruckManagementService {
 
     //#region Consts
     const apiUrl &#x3D;
-      API_ROUTES.TransportationAPI.Driver_Truck_Wallet.SetComposedTruckInfo;
+      API_ROUTES.TransportationAPI.Truck.ComposedInfos.SetComposedTruckInfo;
     const truckComposedInfo: TruckComposedInfo &#x3D; {
       Truck: { TruckId: truckId },
       TruckDriver: { DriverId: driverId },
-      Turn: { nEnterExitId: turnId },
+      Turn: { TurnId: turnId },
       MoneyWallet: { MoneyWalletId: moneyWalletId },
     };
     const bodyValue &#x3D; {
       SessionId: this.userAuth.getSessionId(),
       TruckId: truckComposedInfo.Truck.TruckId,
       TruckDriverId: truckComposedInfo.TruckDriver?.DriverId,
-      TurnId: truckComposedInfo.Turn?.nEnterExitId,
+      TurnId: truckComposedInfo.Turn?.TurnId,
       MoneyWalletId: truckComposedInfo.MoneyWallet?.MoneyWalletId,
     };
     //#endregion

@@ -237,8 +237,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="93"
-                                    class="link-to-prism">src/app/services/user-auth-service/user-auth.service.ts:93</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">src/app/services/user-auth-service/user-auth.service.ts:95</a></div>
                         </td>
                     </tr>
 
@@ -277,8 +277,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="110"
-                                    class="link-to-prism">src/app/services/user-auth-service/user-auth.service.ts:110</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="112"
+                                    class="link-to-prism">src/app/services/user-auth-service/user-auth.service.ts:112</a></div>
                         </td>
                     </tr>
 
@@ -497,8 +497,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="97"
-                                    class="link-to-prism">src/app/services/user-auth-service/user-auth.service.ts:97</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/services/user-auth-service/user-auth.service.ts:99</a></div>
                         </td>
                     </tr>
 
@@ -763,6 +763,8 @@ export class UserAuthService {
 
   public async isLoggedIn(): Promise&lt;ApiResponse&lt;{ ISSessionLive: boolean }&gt;&gt; {
     const sessionId &#x3D; this.getSessionId();
+
+    const apiUrl &#x3D; API_ROUTES.SoftwareUserAPI.SessionChecker;
     if (sessionId &#x3D;&#x3D; null) {
       this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
       await this.logout();
@@ -782,7 +784,7 @@ export class UserAuthService {
     const response &#x3D; await this.apiCommunicator.CommunicateWithAPI_Post&lt;
       typeof bodyValue,
       { ISSessionLive: boolean }
-    &gt;(this.apiUrl + &#x27;/isSessionLive&#x27;, bodyValue);
+    &gt;(apiUrl, bodyValue);
     return response;
   }
 
@@ -799,7 +801,7 @@ export class UserAuthService {
       path: &#x27;/&#x27;,
       secure: environment.production,
       sameSite: environment.production ? &#x27;None&#x27; : &#x27;Lax&#x27;,
-      expires: new Date(Date.now() + 1000 * 60 * 30), // 30 minutes
+      // expires: new Date(Date.now() + 1000 * 60 * 30), // 30 minutes
     });
   }
 

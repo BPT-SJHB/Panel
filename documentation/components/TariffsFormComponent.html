@@ -1,0 +1,3750 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bpt-sjhb-panel documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">bpt-sjhb-panel documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  TariffsFormComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+                <code>OnDestroy</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                            <code>ConfirmationService</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-tariffs-editor-form</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>ButtonModule</code>
+                            <code>DialogModule</code>
+                            <code>TableModule</code>
+                            <code>ReactiveFormsModule</code>
+                            <code>ConfirmDialogModule</code>
+                                <code><a href="../components/TextInputComponent.html" target="_self" >TextInputComponent</a></code>
+                                <code><a href="../components/BinaryRadioInputComponent.html" target="_self" >BinaryRadioInputComponent</a></code>
+                                <code><a href="../components/SearchAutoCompleteComponent.html" target="_self" >SearchAutoCompleteComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./tariffs-form.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./tariffs-form.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#cols" >cols</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#confirmationService" >confirmationService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#destroy$" >destroy$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <a href="#formDialogVisible" >formDialogVisible</a>
+                            </li>
+                            <li>
+                                <a href="#headerTitle" >headerTitle</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#loaderTypeService" >loaderTypeService</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#loadingService" >loadingService</a>
+                            </li>
+                            <li>
+                                <a href="#onSearchCity" >onSearchCity</a>
+                            </li>
+                            <li>
+                                <a href="#onSearchLoaderType" >onSearchLoaderType</a>
+                            </li>
+                            <li>
+                                <a href="#onSearchProduct" >onSearchProduct</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#productService" >productService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#provinceService" >provinceService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Optional</span>
+                                <a href="#tariffCached" >tariffCached</a>
+                            </li>
+                            <li>
+                                <a href="#tariffForm" >tariffForm</a>
+                            </li>
+                            <li>
+                                <a href="#tariffs" >tariffs</a>
+                            </li>
+                            <li>
+                                <a href="#tariffSearchForm" >tariffSearchForm</a>
+                            </li>
+                            <li>
+                                <a href="#tariffsFormMode" >tariffsFormMode</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#toast" >toast</a>
+                            </li>
+                            <li>
+                                <a href="#widthAddon" >widthAddon</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#closeDialogTariffForm" >closeDialogTariffForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#deleteTariff" >deleteTariff</a>
+                            </li>
+                            <li>
+                                <a href="#editTariffForm" >editTariffForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#extractTariffFromForm" >extractTariffFromForm</a>
+                            </li>
+                            <li>
+                                <a href="#isSearchFormValid" >isSearchFormValid</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isSuccessful" >isSuccessful</a>
+                            </li>
+                            <li>
+                                <a href="#isTariffsFormReadonly" >isTariffsFormReadonly</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onAutoCompleteChange" >onAutoCompleteChange</a>
+                            </li>
+                            <li>
+                                <a href="#onDelete" >onDelete</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#onEdit" >onEdit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#onNew" >onNew</a>
+                            </li>
+                            <li>
+                                <a href="#onSelectLoaderType" >onSelectLoaderType</a>
+                            </li>
+                            <li>
+                                <a href="#onSelectProduct" >onSelectProduct</a>
+                            </li>
+                            <li>
+                                <a href="#onSelectSearchLoaderType" >onSelectSearchLoaderType</a>
+                            </li>
+                            <li>
+                                <a href="#onSelectSearchProduct" >onSelectSearchProduct</a>
+                            </li>
+                            <li>
+                                <a href="#onSelectSearchSourceCity" >onSelectSearchSourceCity</a>
+                            </li>
+                            <li>
+                                <a href="#onSelectSearchTargetCity" >onSelectSearchTargetCity</a>
+                            </li>
+                            <li>
+                                <a href="#onSelectSourceCity" >onSelectSourceCity</a>
+                            </li>
+                            <li>
+                                <a href="#onSelectTargetCity" >onSelectTargetCity</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#populateFormFromTariff" >populateFormFromTariff</a>
+                            </li>
+                            <li>
+                                <a href="#registerTariffs" >registerTariffs</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#resetTariffsForm" >resetTariffsForm</a>
+                            </li>
+                            <li>
+                                <a href="#searchTariffs" >searchTariffs</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#updateTable" >updateTable</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#searchLoaderType" >searchLoaderType</a>
+                                </li>
+                                <li>
+                                    <a href="#searchSourceCity" >searchSourceCity</a>
+                                </li>
+                                <li>
+                                    <a href="#searchTargetCity" >searchTargetCity</a>
+                                </li>
+                                <li>
+                                    <a href="#searchLoaderTypeId" >searchLoaderTypeId</a>
+                                </li>
+                                <li>
+                                    <a href="#searchGoodsId" >searchGoodsId</a>
+                                </li>
+                                <li>
+                                    <a href="#searchSourceCityId" >searchSourceCityId</a>
+                                </li>
+                                <li>
+                                    <a href="#searchTargetCityId" >searchTargetCityId</a>
+                                </li>
+                                <li>
+                                    <a href="#searchGoods" >searchGoods</a>
+                                </li>
+                                <li>
+                                    <a href="#SourceCityId" >SourceCityId</a>
+                                </li>
+                                <li>
+                                    <a href="#TargetCityId" >TargetCityId</a>
+                                </li>
+                                <li>
+                                    <a href="#LoaderTypeId" >LoaderTypeId</a>
+                                </li>
+                                <li>
+                                    <a href="#GoodId" >GoodId</a>
+                                </li>
+                                <li>
+                                    <a href="#SourceCityTitle" >SourceCityTitle</a>
+                                </li>
+                                <li>
+                                    <a href="#TargetCityTitle" >TargetCityTitle</a>
+                                </li>
+                                <li>
+                                    <a href="#LoaderTypeTitle" >LoaderTypeTitle</a>
+                                </li>
+                                <li>
+                                    <a href="#GoodTitle" >GoodTitle</a>
+                                </li>
+                                <li>
+                                    <a href="#Tariff" >Tariff</a>
+                                </li>
+                                <li>
+                                    <a href="#BaseTonnag" >BaseTonnag</a>
+                                </li>
+                                <li>
+                                    <a href="#CalculationReference" >CalculationReference</a>
+                                </li>
+                                <li>
+                                    <a href="#Active" >Active</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeDialogTariffForm"></a>
+                    <span class="name">
+                        <span ><b>closeDialogTariffForm</b></span>
+                        <a href="#closeDialogTariffForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeDialogTariffForm()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="184"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:184</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteTariff"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>deleteTariff</b></span>
+                        <a href="#deleteTariff"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteTariff(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="302"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:302</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editTariffForm"></a>
+                    <span class="name">
+                        <span ><b>editTariffForm</b></span>
+                        <a href="#editTariffForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>editTariffForm()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="239"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:239</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="extractTariffFromForm"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>extractTariffFromForm</b></span>
+                        <a href="#extractTariffFromForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>extractTariffFromForm()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="155"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:155</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Tariff.html" target="_self" >Tariff</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSearchFormValid"></a>
+                    <span class="name">
+                        <span ><b>isSearchFormValid</b></span>
+                        <a href="#isSearchFormValid"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isSearchFormValid()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="142"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:142</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSuccessful"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>isSuccessful</b></span>
+                        <a href="#isSuccessful"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isSuccessful(response: <a href="../interfaces/ApiResponse.html" target="_self">ApiResponse&lt;any&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="317"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:317</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>response</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ApiResponse.html" target="_self" >ApiResponse&lt;any&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isTariffsFormReadonly"></a>
+                    <span class="name">
+                        <span ><b>isTariffsFormReadonly</b></span>
+                        <a href="#isTariffsFormReadonly"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isTariffsFormReadonly()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="266"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:266</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="131"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:131</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="125"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:125</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onAutoCompleteChange"></a>
+                    <span class="name">
+                        <span ><b>onAutoCompleteChange</b></span>
+                        <a href="#onAutoCompleteChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onAutoCompleteChange(control: FormControl)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="262"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:262</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>control</td>
+                                            <td>
+                                                        <code>FormControl</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDelete"></a>
+                    <span class="name">
+                        <span ><b>onDelete</b></span>
+                        <a href="#onDelete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onDelete(row: <a href="../interfaces/Tariff.html" target="_self">Tariff</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="190"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:190</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>row</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Tariff.html" target="_self" >Tariff</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onEdit"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>onEdit</b></span>
+                        <a href="#onEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onEdit(row: <a href="../interfaces/Tariff.html" target="_self">Tariff</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="211"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:211</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>row</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Tariff.html" target="_self" >Tariff</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onNew"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>onNew</b></span>
+                        <a href="#onNew"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onNew()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="226"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:226</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSelectLoaderType"></a>
+                    <span class="name">
+                        <span ><b>onSelectLoaderType</b></span>
+                        <a href="#onSelectLoaderType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSelectLoaderType(value: <a href="../interfaces/LoaderType.html" target="_self">LoaderType</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="294"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:294</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="../interfaces/LoaderType.html" target="_self" >LoaderType</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSelectProduct"></a>
+                    <span class="name">
+                        <span ><b>onSelectProduct</b></span>
+                        <a href="#onSelectProduct"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSelectProduct(value: <a href="../interfaces/Product.html" target="_self">Product</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="298"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:298</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Product.html" target="_self" >Product</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSelectSearchLoaderType"></a>
+                    <span class="name">
+                        <span ><b>onSelectSearchLoaderType</b></span>
+                        <a href="#onSelectSearchLoaderType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSelectSearchLoaderType(value: <a href="../interfaces/LoaderType.html" target="_self">LoaderType</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="278"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:278</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="../interfaces/LoaderType.html" target="_self" >LoaderType</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSelectSearchProduct"></a>
+                    <span class="name">
+                        <span ><b>onSelectSearchProduct</b></span>
+                        <a href="#onSelectSearchProduct"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSelectSearchProduct(value: <a href="../interfaces/Product.html" target="_self">Product</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="282"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:282</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Product.html" target="_self" >Product</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSelectSearchSourceCity"></a>
+                    <span class="name">
+                        <span ><b>onSelectSearchSourceCity</b></span>
+                        <a href="#onSelectSearchSourceCity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSelectSearchSourceCity(value: <a href="../interfaces/City.html" target="_self">City</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="274"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:274</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="../interfaces/City.html" target="_self" >City</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSelectSearchTargetCity"></a>
+                    <span class="name">
+                        <span ><b>onSelectSearchTargetCity</b></span>
+                        <a href="#onSelectSearchTargetCity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSelectSearchTargetCity(value: <a href="../interfaces/City.html" target="_self">City</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="270"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:270</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="../interfaces/City.html" target="_self" >City</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSelectSourceCity"></a>
+                    <span class="name">
+                        <span ><b>onSelectSourceCity</b></span>
+                        <a href="#onSelectSourceCity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSelectSourceCity(value: <a href="../interfaces/City.html" target="_self">City</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="290"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:290</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="../interfaces/City.html" target="_self" >City</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSelectTargetCity"></a>
+                    <span class="name">
+                        <span ><b>onSelectTargetCity</b></span>
+                        <a href="#onSelectTargetCity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSelectTargetCity(value: <a href="../interfaces/City.html" target="_self">City</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="286"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:286</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="../interfaces/City.html" target="_self" >City</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="populateFormFromTariff"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>populateFormFromTariff</b></span>
+                        <a href="#populateFormFromTariff"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>populateFormFromTariff(tariff: <a href="../interfaces/Tariff.html" target="_self">Tariff</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="151"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:151</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>tariff</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Tariff.html" target="_self" >Tariff</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registerTariffs"></a>
+                    <span class="name">
+                        <span ><b>registerTariffs</b></span>
+                        <a href="#registerTariffs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>registerTariffs()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="235"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:235</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetTariffsForm"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>resetTariffsForm</b></span>
+                        <a href="#resetTariffsForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>resetTariffsForm()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="172"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:172</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchTariffs"></a>
+                    <span class="name">
+                        <span ><b>searchTariffs</b></span>
+                        <a href="#searchTariffs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>searchTariffs()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="136"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:136</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateTable"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>updateTable</b></span>
+                        <a href="#updateTable"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateTable()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="312"
+                                    class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:312</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cols"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>cols</b></span>
+                        <a href="#cols"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    &#x27;ویرایش&#x27;,
+    &#x27;حذف&#x27;,
+    &#x27;کد نوع بارگیر&#x27;,
+    &#x27;نوع بارگیر&#x27;,
+    &#x27;کد نوع بار&#x27;,
+    &#x27;نوع بار&#x27;,
+    &#x27;کد شهر مبدا&#x27;,
+    &#x27;شهر مبدا&#x27;,
+    &#x27;کد شهر مقصد&#x27;,
+    &#x27;شهر مقصد&#x27;,
+    &#x27;تعرفه&#x27;,
+    &#x27;تناژ پایه&#x27;,
+    &#x27;مبنای محاسبه&#x27;,
+    &#x27;فعال/غیرفعال&#x27;,
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:108</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmationService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>confirmationService</b></span>
+                        <a href="#confirmationService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ConfirmationService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:67</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroy$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>destroy$</b></span>
+                        <a href="#destroy$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:71</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formDialogVisible"></a>
+                    <span class="name">
+                        <span ><b>formDialogVisible</b></span>
+                        <a href="#formDialogVisible"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:73</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="headerTitle"></a>
+                    <span class="name">
+                        <span ><b>headerTitle</b></span>
+                        <a href="#headerTitle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:74</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loaderTypeService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>loaderTypeService</b></span>
+                        <a href="#loaderTypeService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(LoaderTypesService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:68</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:75</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>loadingService</b></span>
+                        <a href="#loadingService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(LoadingService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:66</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSearchCity"></a>
+                    <span class="name">
+                        <span ><b>onSearchCity</b></span>
+                        <a href="#onSearchCity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="243" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:243</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSearchLoaderType"></a>
+                    <span class="name">
+                        <span ><b>onSearchLoaderType</b></span>
+                        <a href="#onSearchLoaderType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="257" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:257</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSearchProduct"></a>
+                    <span class="name">
+                        <span ><b>onSearchProduct</b></span>
+                        <a href="#onSearchProduct"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="250" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:250</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="productService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>productService</b></span>
+                        <a href="#productService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ProductTypesService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:70</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="provinceService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>provinceService</b></span>
+                        <a href="#provinceService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ProvinceAndCityManagementService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tariffCached"></a>
+                    <span class="name">
+                            <span class="modifier">Optional</span>
+                        <span ><b>tariffCached</b></span>
+                        <a href="#tariffCached"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Tariff.html" target="_self" >Tariff</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tariffForm"></a>
+                    <span class="name">
+                        <span ><b>tariffForm</b></span>
+                        <a href="#tariffForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.fb.group({
+    SourceCityId: [0, Validators.min(1)],
+    TargetCityId: [0, Validators.min(1)],
+    LoaderTypeId: [0, Validators.min(1)],
+    GoodId: [0, Validators.min(1)],
+    SourceCityTitle: [&#x27;&#x27;],
+    TargetCityTitle: [&#x27;&#x27;],
+    LoaderTypeTitle: [&#x27;&#x27;],
+    GoodTitle: [&#x27;&#x27;],
+    Tariff: [0, Validators.min(1)],
+    BaseTonnag: [0, Validators.min(1)],
+    CalculationReference: [&#x27;&#x27;],
+    Active: [true, Validators.required],
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:93</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tariffs"></a>
+                    <span class="name">
+                        <span ><b>tariffs</b></span>
+                        <a href="#tariffs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Tariff.html" target="_self" >Tariff[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:79</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tariffSearchForm"></a>
+                    <span class="name">
+                        <span ><b>tariffSearchForm</b></span>
+                        <a href="#tariffSearchForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.fb.group({
+    searchLoaderTypeId: [0],
+    searchGoodsId: [0],
+    searchSourceCityId: [0],
+    searchTargetCityId: [0],
+    searchLoaderType: [&#x27;&#x27;],
+    searchSourceCity: [&#x27;&#x27;],
+    searchTargetCity: [&#x27;&#x27;],
+    searchGoods: [&#x27;&#x27;],
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:82</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tariffsFormMode"></a>
+                    <span class="name">
+                        <span ><b>tariffsFormMode</b></span>
+                        <a href="#tariffsFormMode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/enumerations.html#TariffsFormMode" target="_self" >TariffsFormMode</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>TariffsFormMode.REGISTER</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:78</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toast"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>toast</b></span>
+                        <a href="#toast"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="widthAddon"></a>
+                    <span class="name">
+                        <span ><b>widthAddon</b></span>
+                        <a href="#widthAddon"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;6rem&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:76</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="searchLoaderType"></a>
+                        <span class="name"><b>searchLoaderType</b><a href="#searchLoaderType"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>searchLoaderType()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="326" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:326</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="searchSourceCity"></a>
+                        <span class="name"><b>searchSourceCity</b><a href="#searchSourceCity"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>searchSourceCity()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="329" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:329</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="searchTargetCity"></a>
+                        <span class="name"><b>searchTargetCity</b><a href="#searchTargetCity"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>searchTargetCity()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="332" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:332</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="searchLoaderTypeId"></a>
+                        <span class="name"><b>searchLoaderTypeId</b><a href="#searchLoaderTypeId"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>searchLoaderTypeId()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="335" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:335</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="searchGoodsId"></a>
+                        <span class="name"><b>searchGoodsId</b><a href="#searchGoodsId"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>searchGoodsId()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="338" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:338</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="searchSourceCityId"></a>
+                        <span class="name"><b>searchSourceCityId</b><a href="#searchSourceCityId"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>searchSourceCityId()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="341" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:341</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="searchTargetCityId"></a>
+                        <span class="name"><b>searchTargetCityId</b><a href="#searchTargetCityId"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>searchTargetCityId()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="344" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:344</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="searchGoods"></a>
+                        <span class="name"><b>searchGoods</b><a href="#searchGoods"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>searchGoods()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="347" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:347</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="SourceCityId"></a>
+                        <span class="name"><b>SourceCityId</b><a href="#SourceCityId"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>SourceCityId()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="351" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:351</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="TargetCityId"></a>
+                        <span class="name"><b>TargetCityId</b><a href="#TargetCityId"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>TargetCityId()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="354" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:354</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="LoaderTypeId"></a>
+                        <span class="name"><b>LoaderTypeId</b><a href="#LoaderTypeId"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>LoaderTypeId()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="357" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:357</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="GoodId"></a>
+                        <span class="name"><b>GoodId</b><a href="#GoodId"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>GoodId()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="360" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:360</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="SourceCityTitle"></a>
+                        <span class="name"><b>SourceCityTitle</b><a href="#SourceCityTitle"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>SourceCityTitle()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="363" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:363</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="TargetCityTitle"></a>
+                        <span class="name"><b>TargetCityTitle</b><a href="#TargetCityTitle"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>TargetCityTitle()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="366" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:366</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="LoaderTypeTitle"></a>
+                        <span class="name"><b>LoaderTypeTitle</b><a href="#LoaderTypeTitle"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>LoaderTypeTitle()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="369" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:369</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="GoodTitle"></a>
+                        <span class="name"><b>GoodTitle</b><a href="#GoodTitle"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>GoodTitle()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="372" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:372</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="Tariff"></a>
+                        <span class="name"><b>Tariff</b><a href="#Tariff"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>Tariff()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="375" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:375</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="BaseTonnag"></a>
+                        <span class="name"><b>BaseTonnag</b><a href="#BaseTonnag"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>BaseTonnag()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="378" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:378</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="CalculationReference"></a>
+                        <span class="name"><b>CalculationReference</b><a href="#CalculationReference"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>CalculationReference()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="381" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:381</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="Active"></a>
+                        <span class="name"><b>Active</b><a href="#Active"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>Active()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="384" class="link-to-prism">src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts:384</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
+import { Component, OnInit, OnDestroy, inject } from &#x27;@angular/core&#x27;;
+import {
+  FormBuilder,
+  FormControl,
+  ReactiveFormsModule,
+  Validators,
+} from &#x27;@angular/forms&#x27;;
+import { Subject, takeUntil } from &#x27;rxjs&#x27;;
+
+// PrimeNG UI Components
+import { ButtonModule } from &#x27;primeng/button&#x27;;
+import { DialogModule } from &#x27;primeng/dialog&#x27;;
+import { TableModule } from &#x27;primeng/table&#x27;;
+import { ConfirmDialogModule } from &#x27;primeng/confirmdialog&#x27;;
+import { ConfirmationService } from &#x27;primeng/api&#x27;;
+
+// Shared Components
+import { TextInputComponent } from &#x27;app/components/shared/inputs/text-input/text-input.component&#x27;;
+import { BinaryRadioInputComponent } from &#x27;app/components/shared/inputs/binary-radio-input/binary-radio-input.component&#x27;;
+import { SearchAutoCompleteComponent } from &#x27;app/components/shared/inputs/search-auto-complete/search-auto-complete.component&#x27;;
+
+// Services &amp; Models
+import { LoadingService } from &#x27;app/services/loading-service/loading-service.service&#x27;;
+import { ToastService } from &#x27;app/services/toast-service/toast.service&#x27;;
+import { LoaderTypesService } from &#x27;app/services/loader-types/loader-types.service&#x27;;
+import { ProvinceAndCityManagementService } from &#x27;app/services/province-city-management/province-and-city-management.service&#x27;;
+import { ProductTypesService } from &#x27;app/services/product-types/product-types.service&#x27;;
+
+import { mockTariffs } from &#x27;app/data/mock/tariff.mock&#x27;;
+import { Tariff } from &#x27;app/data/model/tariff.model&#x27;;
+import { ApiResponse } from &#x27;app/data/model/api-Response.model&#x27;;
+import { ShortResponse } from &#x27;app/data/model/short-response.model&#x27;;
+import { City } from &#x27;app/data/model/province-city.model&#x27;;
+import { LoaderType } from &#x27;app/services/loader-types/model/loader-type.model&#x27;;
+import { Product } from &#x27;app/data/model/product-type.model&#x27;;
+
+enum TariffsFormMode {
+  EDITABLE,
+  REGISTER,
+}
+
+@Component({
+  selector: &#x27;app-tariffs-editor-form&#x27;,
+  standalone: true,
+  imports: [
+    CommonModule,
+    ButtonModule,
+    DialogModule,
+
+    TableModule,
+    ReactiveFormsModule,
+    ConfirmDialogModule,
+    TextInputComponent,
+    BinaryRadioInputComponent,
+    SearchAutoCompleteComponent,
+  ],
+  templateUrl: &#x27;./tariffs-form.component.html&#x27;,
+  styleUrl: &#x27;./tariffs-form.component.scss&#x27;,
+
+  providers: [ConfirmationService],
+})
+export class TariffsFormComponent implements OnInit, OnDestroy {
+  private readonly fb &#x3D; inject(FormBuilder);
+  private readonly toast &#x3D; inject(ToastService);
+  private readonly loadingService &#x3D; inject(LoadingService);
+  private readonly confirmationService &#x3D; inject(ConfirmationService);
+  private readonly loaderTypeService &#x3D; inject(LoaderTypesService);
+  private readonly provinceService &#x3D; inject(ProvinceAndCityManagementService);
+  private readonly productService &#x3D; inject(ProductTypesService);
+  private readonly destroy$ &#x3D; new Subject&lt;void&gt;();
+
+  formDialogVisible &#x3D; false;
+  headerTitle &#x3D; &#x27;&#x27;;
+  loading &#x3D; false;
+  widthAddon &#x3D; &#x27;6rem&#x27;;
+
+  tariffsFormMode: TariffsFormMode &#x3D; TariffsFormMode.REGISTER;
+  tariffs: Tariff[] &#x3D; [];
+  tariffCached?: Tariff;
+
+  tariffSearchForm &#x3D; this.fb.group({
+    searchLoaderTypeId: [0],
+    searchGoodsId: [0],
+    searchSourceCityId: [0],
+    searchTargetCityId: [0],
+    searchLoaderType: [&#x27;&#x27;],
+    searchSourceCity: [&#x27;&#x27;],
+    searchTargetCity: [&#x27;&#x27;],
+    searchGoods: [&#x27;&#x27;],
+  });
+
+  tariffForm &#x3D; this.fb.group({
+    SourceCityId: [0, Validators.min(1)],
+    TargetCityId: [0, Validators.min(1)],
+    LoaderTypeId: [0, Validators.min(1)],
+    GoodId: [0, Validators.min(1)],
+    SourceCityTitle: [&#x27;&#x27;],
+    TargetCityTitle: [&#x27;&#x27;],
+    LoaderTypeTitle: [&#x27;&#x27;],
+    GoodTitle: [&#x27;&#x27;],
+    Tariff: [0, Validators.min(1)],
+    BaseTonnag: [0, Validators.min(1)],
+    CalculationReference: [&#x27;&#x27;],
+    Active: [true, Validators.required],
+  });
+
+  readonly cols &#x3D; [
+    &#x27;ویرایش&#x27;,
+    &#x27;حذف&#x27;,
+    &#x27;کد نوع بارگیر&#x27;,
+    &#x27;نوع بارگیر&#x27;,
+    &#x27;کد نوع بار&#x27;,
+    &#x27;نوع بار&#x27;,
+    &#x27;کد شهر مبدا&#x27;,
+    &#x27;شهر مبدا&#x27;,
+    &#x27;کد شهر مقصد&#x27;,
+    &#x27;شهر مقصد&#x27;,
+    &#x27;تعرفه&#x27;,
+    &#x27;تناژ پایه&#x27;,
+    &#x27;مبنای محاسبه&#x27;,
+    &#x27;فعال/غیرفعال&#x27;,
+  ];
+
+  ngOnInit(): void {
+    this.loadingService.loading$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) &#x3D;&gt; (this.loading &#x3D; value));
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  searchTariffs(): void {
+    if (this.isSearchFormValid()) {
+      this.tariffs &#x3D; mockTariffs;
+    }
+  }
+
+  isSearchFormValid(): boolean {
+    return (
+      this.searchLoaderTypeId.value &amp;&amp;
+      (this.searchSourceCityId.value ||
+        this.searchTargetCityId.value ||
+        this.searchGoodsId.value)
+    );
+  }
+
+  private populateFormFromTariff(tariff: Tariff): void {
+    this.tariffForm.patchValue({ ...tariff });
+  }
+
+  private extractTariffFromForm(): Tariff {
+    return {
+      SourceCityId: this.SourceCityId.value,
+      TargetCityId: this.TargetCityId.value,
+      LoaderTypeId: this.LoaderTypeId.value,
+      GoodId: this.GoodId.value,
+      SourceCityTitle: this.SourceCityTitle.value,
+      TargetCityTitle: this.TargetCityTitle.value,
+      LoaderTypeTitle: this.LoaderTypeTitle.value,
+      GoodTitle: this.GoodTitle.value,
+      Tariff: this.Tariff.value,
+      BaseTonnag: this.BaseTonnag.value,
+      CalculationReference: this.CalculationReference.value,
+      Active: this.Active.value,
+    };
+  }
+
+  private resetTariffsForm(): void {
+    this.tariffForm.reset({
+      SourceCityId: 0,
+      TargetCityId: 0,
+      LoaderTypeId: 0,
+      GoodId: 0,
+      Tariff: 0,
+      BaseTonnag: 0,
+      Active: true,
+    });
+  }
+
+  closeDialogTariffForm(): void {
+    this.formDialogVisible &#x3D; false;
+    this.resetTariffsForm();
+    this.headerTitle &#x3D; &#x27;&#x27;;
+  }
+
+  onDelete(row: Tariff): void {
+    this.confirmationService.confirm({
+      message: &#x60;آیا می‌خواهید با کد ${row.LoaderTypeId} حذف شود؟&#x60;,
+      header: &#x60;حذف رکورد ${row.LoaderTypeId}&#x60;,
+      icon: &#x27;pi pi-info-circle&#x27;,
+      closable: true,
+      closeOnEscape: true,
+      rejectButtonProps: {
+        label: &#x27;لغو&#x27;,
+        severity: &#x27;secondary&#x27;,
+        outlined: true,
+      },
+      acceptButtonProps: { label: &#x27;حذف&#x27;, severity: &#x27;danger&#x27; },
+      accept: async () &#x3D;&gt; {
+        this.loadingService.setLoading(true);
+        await this.deleteTariff(row.LoaderTypeId ?? 0);
+        this.loadingService.setLoading(false);
+      },
+    });
+  }
+
+  async onEdit(row: Tariff) {
+    if (this.loading) return;
+    try {
+      this.loadingService.setLoading(true);
+      const tariff &#x3D; mockTariffs[0]; // TODO: Replace with real API call
+      this.tariffsFormMode &#x3D; TariffsFormMode.EDITABLE;
+      this.tariffCached &#x3D; tariff;
+      this.populateFormFromTariff(tariff);
+      this.headerTitle &#x3D; &#x60;ویرایش&#x60;;
+      this.formDialogVisible &#x3D; true;
+    } finally {
+      this.loadingService.setLoading(false);
+    }
+  }
+
+  async onNew(): Promise&lt;void&gt; {
+    if (this.loading) return;
+    this.tariffCached &#x3D; this.extractTariffFromForm();
+    this.tariffsFormMode &#x3D; TariffsFormMode.REGISTER;
+    this.resetTariffsForm();
+    this.headerTitle &#x3D; &#x27;افزودن تعرفه&#x27;;
+    this.formDialogVisible &#x3D; true;
+  }
+
+  registerTariffs(): void {
+    throw new Error(&#x27;registerTariffs not implemented&#x27;);
+  }
+
+  editTariffForm(): void {
+    throw new Error(&#x27;editTariffForm not implemented&#x27;);
+  }
+
+  onSearchCity &#x3D; async (query: string): Promise&lt;City[]&gt; &#x3D;&gt; {
+    const res &#x3D; await this.provinceService.GetProvincesAndCitiesInfo(query);
+    return this.isSuccessful(res)
+      ? res.data?.flatMap((p) &#x3D;&gt; p?.Cities ?? []) || []
+      : [];
+  };
+
+  onSearchProduct &#x3D; async (query: string): Promise&lt;Product[]&gt; &#x3D;&gt; {
+    const res &#x3D; await this.productService.GetProductsInfo(query);
+    return this.isSuccessful(res)
+      ? res.data?.flatMap((p) &#x3D;&gt; p?.Products ?? []) || []
+      : [];
+  };
+
+  onSearchLoaderType &#x3D; async (query: string): Promise&lt;LoaderType[]&gt; &#x3D;&gt; {
+    const res &#x3D; await this.loaderTypeService.GetLoaderTypesInfo(query);
+    return this.isSuccessful(res) ? res.data! : [];
+  };
+
+  onAutoCompleteChange(control: FormControl): void {
+    control.setValue(0);
+  }
+
+  isTariffsFormReadonly(): boolean {
+    return this.tariffsFormMode &#x3D;&#x3D;&#x3D; TariffsFormMode.EDITABLE;
+  }
+
+  onSelectSearchTargetCity(value: City) {
+    this.searchTargetCityId.setValue(value.CityCode);
+  }
+
+  onSelectSearchSourceCity(value: City) {
+    this.searchSourceCityId.setValue(value.CityCode);
+  }
+
+  onSelectSearchLoaderType(value: LoaderType) {
+    this.searchLoaderTypeId.setValue(value.LoaderTypeId);
+  }
+
+  onSelectSearchProduct(value: Product) {
+    this.searchGoodsId.setValue(value.ProductId);
+  }
+
+  onSelectTargetCity(value: City) {
+    this.TargetCityId.setValue(value.CityCode);
+  }
+
+  onSelectSourceCity(value: City) {
+    this.SourceCityId.setValue(value.CityCode);
+  }
+
+  onSelectLoaderType(value: LoaderType) {
+    this.LoaderTypeId.setValue(value.LoaderTypeId);
+  }
+
+  onSelectProduct(value: Product) {
+    this.GoodId.setValue(value.ProductId);
+  }
+
+  async deleteTariff(id: number): Promise&lt;void&gt; {
+    // TODO: Replace mock response with API
+    const response: ApiResponse&lt;ShortResponse&gt; &#x3D; {
+      success: true,
+      data: { Message: &#x27;حذف موفق بود&#x27; },
+    };
+    this.toast.success(&#x27;موفق&#x27;, response.data?.Message ?? &#x27;با موفقیت حذف شد&#x27;);
+    this.updateTable();
+  }
+
+  private updateTable(): void {
+    // TODO: Reload tariffs from API
+    this.searchTariffs();
+  }
+
+  private isSuccessful(response: ApiResponse&lt;any&gt;): boolean {
+    if (!response.success || !response.data) {
+      this.toast.error(&#x27;خطا&#x27;, response.error?.message ?? &#x27;خطای غیرمنتظره&#x27;);
+      return false;
+    }
+    return true;
+  }
+
+  // Getters for FormControls
+  get searchLoaderType() {
+    return this.tariffSearchForm.get(&#x27;searchLoaderType&#x27;) as FormControl;
+  }
+  get searchSourceCity() {
+    return this.tariffSearchForm.get(&#x27;searchSourceCity&#x27;) as FormControl;
+  }
+  get searchTargetCity() {
+    return this.tariffSearchForm.get(&#x27;searchTargetCity&#x27;) as FormControl;
+  }
+  get searchLoaderTypeId() {
+    return this.tariffSearchForm.get(&#x27;searchLoaderTypeId&#x27;) as FormControl;
+  }
+  get searchGoodsId() {
+    return this.tariffSearchForm.get(&#x27;searchGoodsId&#x27;) as FormControl;
+  }
+  get searchSourceCityId() {
+    return this.tariffSearchForm.get(&#x27;searchSourceCityId&#x27;) as FormControl;
+  }
+  get searchTargetCityId() {
+    return this.tariffSearchForm.get(&#x27;searchTargetCityId&#x27;) as FormControl;
+  }
+  get searchGoods() {
+    return this.tariffSearchForm.get(&#x27;searchGoods&#x27;) as FormControl;
+  }
+
+  get SourceCityId() {
+    return this.tariffForm.get(&#x27;SourceCityId&#x27;) as FormControl;
+  }
+  get TargetCityId() {
+    return this.tariffForm.get(&#x27;TargetCityId&#x27;) as FormControl;
+  }
+  get LoaderTypeId() {
+    return this.tariffForm.get(&#x27;LoaderTypeId&#x27;) as FormControl;
+  }
+  get GoodId() {
+    return this.tariffForm.get(&#x27;GoodId&#x27;) as FormControl;
+  }
+  get SourceCityTitle() {
+    return this.tariffForm.get(&#x27;SourceCityTitle&#x27;) as FormControl;
+  }
+  get TargetCityTitle() {
+    return this.tariffForm.get(&#x27;TargetCityTitle&#x27;) as FormControl;
+  }
+  get LoaderTypeTitle() {
+    return this.tariffForm.get(&#x27;LoaderTypeTitle&#x27;) as FormControl;
+  }
+  get GoodTitle() {
+    return this.tariffForm.get(&#x27;GoodTitle&#x27;) as FormControl;
+  }
+  get Tariff() {
+    return this.tariffForm.get(&#x27;Tariff&#x27;) as FormControl;
+  }
+  get BaseTonnag() {
+    return this.tariffForm.get(&#x27;BaseTonnag&#x27;) as FormControl;
+  }
+  get CalculationReference() {
+    return this.tariffForm.get(&#x27;CalculationReference&#x27;) as FormControl;
+  }
+  get Active() {
+    return this.tariffForm.get(&#x27;Active&#x27;) as FormControl;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;!-- 🔍 Search Form --&gt;
+&lt;form
+  class&#x3D;&quot;grid gap-3 sm:gap-0 mb-4&quot;
+  [formGroup]&#x3D;&quot;tariffForm&quot;
+  (ngSubmit)&#x3D;&quot;searchTariffs()&quot;
+&gt;
+  &lt;app-search-auto-complete
+    class&#x3D;&quot;col-12 sm:col-6 lg:col-4&quot;
+    placeholder&#x3D;&quot;نوع بارگیر&quot;
+    label&#x3D;&quot;نوع بارگیر&quot;
+    optionLabel&#x3D;&quot;LoaderTypeTitle&quot;
+    optionValue&#x3D;&quot;LoaderTypeTitle&quot;
+    (selectSuggestion)&#x3D;&quot;onSelectSearchLoaderType($event)&quot;
+    (valueChange)&#x3D;&quot;onAutoCompleteChange(searchLoaderTypeId)&quot;
+    [lazySearch]&#x3D;&quot;onSearchLoaderType&quot;
+    [showIconOptionSelected]&#x3D;&quot;searchLoaderTypeId.value !&#x3D;&#x3D; 0&quot;
+    [addonWidth]&#x3D;&quot;widthAddon&quot;
+  /&gt;
+
+  &lt;app-search-auto-complete
+    class&#x3D;&quot;col-12 sm:col-6 lg:col-4&quot;
+    placeholder&#x3D;&quot;شهر مبدا&quot;
+    label&#x3D;&quot;شهر مبدا&quot;
+    [control]&#x3D;&quot;searchSourceCity&quot;
+    optionLabel&#x3D;&quot;CityTitle&quot;
+    optionValue&#x3D;&quot;CityTitle&quot;
+    (selectSuggestion)&#x3D;&quot;onSelectSearchSourceCity($event)&quot;
+    (valueChange)&#x3D;&quot;onAutoCompleteChange(searchSourceCityId)&quot;
+    [lazySearch]&#x3D;&quot;onSearchCity&quot;
+    [showIconOptionSelected]&#x3D;&quot;searchSourceCityId.value !&#x3D;&#x3D; 0&quot;
+    [addonWidth]&#x3D;&quot;widthAddon&quot;
+  /&gt;
+
+  &lt;app-search-auto-complete
+    class&#x3D;&quot;col-12 sm:col-6 lg:col-4&quot;
+    placeholder&#x3D;&quot;شهر مقصد&quot;
+    label&#x3D;&quot;شهر مقصد&quot;
+    [control]&#x3D;&quot;searchTargetCity&quot;
+    optionLabel&#x3D;&quot;CityTitle&quot;
+    optionValue&#x3D;&quot;CityTitle&quot;
+    (selectSuggestion)&#x3D;&quot;onSelectSearchTargetCity($event)&quot;
+    (valueChange)&#x3D;&quot;onAutoCompleteChange(searchTargetCityId)&quot;
+    [lazySearch]&#x3D;&quot;onSearchCity&quot;
+    [showIconOptionSelected]&#x3D;&quot;searchTargetCityId.value !&#x3D;&#x3D; 0&quot;
+    [addonWidth]&#x3D;&quot;widthAddon&quot;
+  /&gt;
+
+  &lt;app-search-auto-complete
+    class&#x3D;&quot;col-12 sm:col-6 lg:col-4&quot;
+    placeholder&#x3D;&quot;نوع بار&quot;
+    label&#x3D;&quot;نوع بار&quot;
+    [control]&#x3D;&quot;searchGoods&quot;
+    optionLabel&#x3D;&quot;ProductTitle&quot;
+    optionValue&#x3D;&quot;ProductTitle&quot;
+    (selectSuggestion)&#x3D;&quot;onSelectSearchProduct($event)&quot;
+    (valueChange)&#x3D;&quot;onAutoCompleteChange(searchGoodsId)&quot;
+    [lazySearch]&#x3D;&quot;onSearchProduct&quot;
+    [showIconOptionSelected]&#x3D;&quot;searchGoodsId.value !&#x3D;&#x3D; 0&quot;
+    [addonWidth]&#x3D;&quot;widthAddon&quot;
+  /&gt;
+
+  &lt;div class&#x3D;&quot;col-12 flex justify-content-end&quot;&gt;
+    &lt;p-button
+      label&#x3D;&quot;جستجو&quot;
+      severity&#x3D;&quot;info&quot;
+      size&#x3D;&quot;small&quot;
+      styleClass&#x3D;&quot;px-4 py-1&quot;
+      [disabled]&#x3D;&quot;!isSearchFormValid()&quot;
+      type&#x3D;&quot;submit&quot;
+    /&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+
+&lt;!-- 📊 Tariff Table --&gt;
+&lt;p-table
+  class&#x3D;&quot;col-12 overflow-x-auto&quot;
+  [columns]&#x3D;&quot;cols&quot;
+  [value]&#x3D;&quot;tariffs&quot;
+  [tableStyle]&#x3D;&quot;{ &#x27;min-width&#x27;: &#x27;50rem&#x27; }&quot;
+&gt;
+  &lt;ng-template #caption&gt;
+    &lt;div class&#x3D;&quot;flex justify-between items-center&quot;&gt;
+      &lt;p-button
+        label&#x3D;&quot;جدید&quot;
+        size&#x3D;&quot;small&quot;
+        styleClass&#x3D;&quot;px-4 md:px-5 py-1&quot;
+        (click)&#x3D;&quot;onNew()&quot;
+      /&gt;
+    &lt;/div&gt;
+  &lt;/ng-template&gt;
+
+  &lt;ng-template #header let-columns&gt;
+    &lt;tr&gt;
+      @for (col of columns; track $index) {
+      &lt;th&gt;{{ col }}&lt;/th&gt;
+      }
+    &lt;/tr&gt;
+  &lt;/ng-template&gt;
+
+  &lt;ng-template #body let-rowData&gt;
+    &lt;tr&gt;
+      &lt;td&gt;
+        &lt;p-button
+          icon&#x3D;&quot;pi pi-pencil&quot;
+          severity&#x3D;&quot;info&quot;
+          variant&#x3D;&quot;text&quot;
+          [disabled]&#x3D;&quot;loading&quot;
+          (click)&#x3D;&quot;onEdit(rowData)&quot;
+        /&gt;
+      &lt;/td&gt;
+      &lt;td&gt;
+        &lt;p-button
+          icon&#x3D;&quot;pi pi-trash&quot;
+          severity&#x3D;&quot;danger&quot;
+          variant&#x3D;&quot;text&quot;
+          [disabled]&#x3D;&quot;loading&quot;
+          (click)&#x3D;&quot;onDelete(rowData)&quot;
+        /&gt;
+      &lt;/td&gt;
+      &lt;td&gt;{{ rowData.LoaderTypeId }}&lt;/td&gt;
+      &lt;td&gt;{{ rowData.LoaderTypeTitle }}&lt;/td&gt;
+      &lt;td&gt;{{ rowData.GoodId }}&lt;/td&gt;
+      &lt;td&gt;{{ rowData.GoodTitle }}&lt;/td&gt;
+      &lt;td&gt;{{ rowData.SourceCityId }}&lt;/td&gt;
+      &lt;td&gt;{{ rowData.SourceCityTitle }}&lt;/td&gt;
+      &lt;td&gt;{{ rowData.TargetCityId }}&lt;/td&gt;
+      &lt;td&gt;{{ rowData.TargetCityTitle }}&lt;/td&gt;
+      &lt;td&gt;{{ rowData.Tariff }}&lt;/td&gt;
+      &lt;td&gt;{{ rowData.BaseTonnag }}&lt;/td&gt;
+      &lt;td&gt;{{ rowData.CalculationReference }}&lt;/td&gt;
+      &lt;td&gt;
+        &lt;i
+          class&#x3D;&quot;pi&quot;
+          [ngClass]&#x3D;&quot;
+            rowData.Active
+              ? &#x27;pi-check-circle text-green-500&#x27;
+              : &#x27;pi-times-circle text-red-500&#x27;
+          &quot;
+        &gt;&lt;/i&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/ng-template&gt;
+&lt;/p-table&gt;
+
+&lt;!-- 📦 Actions --&gt;
+&lt;div class&#x3D;&quot;flex w-full justify-content-end gap-3 mt-4&quot;&gt;
+  &lt;p-button label&#x3D;&quot;بارگزاری فایل اکسل&quot; severity&#x3D;&quot;warn&quot; /&gt;
+  &lt;p-button
+    [disabled]&#x3D;&quot;tariffs.length &#x3D;&#x3D;&#x3D; 0&quot;
+    label&#x3D;&quot;غیرفعال کردن تعرفه&quot;
+    severity&#x3D;&quot;danger&quot;
+  /&gt;
+  &lt;p-button
+    [disabled]&#x3D;&quot;tariffs.length &#x3D;&#x3D;&#x3D; 0&quot;
+    label&#x3D;&quot;افزایش تعرفه&quot;
+    severity&#x3D;&quot;info&quot;
+  /&gt;
+&lt;/div&gt;
+
+&lt;!-- 📝 Tariff Dialog Form --&gt;
+&lt;p-dialog
+  [(visible)]&#x3D;&quot;formDialogVisible&quot;
+  [modal]&#x3D;&quot;true&quot;
+  [closable]&#x3D;&quot;true&quot;
+  [header]&#x3D;&quot;headerTitle&quot;
+  [style]&#x3D;&quot;{ &#x27;max-width&#x27;: &#x27;30rem&#x27; }&quot;
+  (onHide)&#x3D;&quot;closeDialogTariffForm()&quot;
+  draggable&#x3D;&quot;false&quot;
+  maskStyleClass&#x3D;&quot;px-2&quot;
+&gt;
+  &lt;form
+    [formGroup]&#x3D;&quot;tariffForm&quot;
+    class&#x3D;&quot;grid gap-3 sm:gap-0&quot;
+    (ngSubmit)&#x3D;&quot;editTariffForm()&quot;
+  &gt;
+    &lt;app-search-auto-complete
+      class&#x3D;&quot;col-12&quot;
+      placeholder&#x3D;&quot;نوع بارگیر&quot;
+      label&#x3D;&quot;نوع بارگیر&quot;
+      optionLabel&#x3D;&quot;LoaderTypeTitle&quot;
+      optionValue&#x3D;&quot;LoaderTypeTitle&quot;
+      (selectSuggestion)&#x3D;&quot;onSelectLoaderType($event)&quot;
+      (valueChange)&#x3D;&quot;onAutoCompleteChange(LoaderTypeId)&quot;
+      [lazySearch]&#x3D;&quot;onSearchLoaderType&quot;
+      [showIconOptionSelected]&#x3D;&quot;LoaderTypeId.value !&#x3D;&#x3D; 0&quot;
+      [readOnly]&#x3D;&quot;isTariffsFormReadonly()&quot;
+      [disabled]&#x3D;&quot;isTariffsFormReadonly()&quot;
+      [addonWidth]&#x3D;&quot;widthAddon&quot;
+    /&gt;
+
+    &lt;app-search-auto-complete
+      class&#x3D;&quot;col-12&quot;
+      placeholder&#x3D;&quot;شهر مبدا&quot;
+      label&#x3D;&quot;شهر مبدا&quot;
+      [control]&#x3D;&quot;SourceCityTitle&quot;
+      optionLabel&#x3D;&quot;CityTitle&quot;
+      optionValue&#x3D;&quot;CityTitle&quot;
+      (selectSuggestion)&#x3D;&quot;onSelectSourceCity($event)&quot;
+      (valueChange)&#x3D;&quot;onAutoCompleteChange(SourceCityId)&quot;
+      [lazySearch]&#x3D;&quot;onSearchCity&quot;
+      [showIconOptionSelected]&#x3D;&quot;SourceCityId.value !&#x3D;&#x3D; 0&quot;
+      [readOnly]&#x3D;&quot;isTariffsFormReadonly()&quot;
+      [disabled]&#x3D;&quot;isTariffsFormReadonly()&quot;
+      [addonWidth]&#x3D;&quot;widthAddon&quot;
+    /&gt;
+
+    &lt;app-search-auto-complete
+      class&#x3D;&quot;col-12&quot;
+      placeholder&#x3D;&quot;شهر مقصد&quot;
+      label&#x3D;&quot;شهر مقصد&quot;
+      [control]&#x3D;&quot;TargetCityTitle&quot;
+      optionLabel&#x3D;&quot;CityTitle&quot;
+      optionValue&#x3D;&quot;CityTitle&quot;
+      (selectSuggestion)&#x3D;&quot;onSelectTargetCity($event)&quot;
+      (valueChange)&#x3D;&quot;onAutoCompleteChange(TargetCityId)&quot;
+      [lazySearch]&#x3D;&quot;onSearchCity&quot;
+      [showIconOptionSelected]&#x3D;&quot;TargetCityId.value !&#x3D;&#x3D; 0&quot;
+      [readOnly]&#x3D;&quot;isTariffsFormReadonly()&quot;
+      [disabled]&#x3D;&quot;isTariffsFormReadonly()&quot;
+      [addonWidth]&#x3D;&quot;widthAddon&quot;
+    /&gt;
+
+    &lt;app-search-auto-complete
+      class&#x3D;&quot;col-12&quot;
+      placeholder&#x3D;&quot;نوع بار&quot;
+      label&#x3D;&quot;نوع بار&quot;
+      [control]&#x3D;&quot;GoodTitle&quot;
+      optionLabel&#x3D;&quot;ProductTitle&quot;
+      optionValue&#x3D;&quot;ProductTitle&quot;
+      (selectSuggestion)&#x3D;&quot;onSelectProduct($event)&quot;
+      (valueChange)&#x3D;&quot;onAutoCompleteChange(GoodId)&quot;
+      [lazySearch]&#x3D;&quot;onSearchProduct&quot;
+      [showIconOptionSelected]&#x3D;&quot;GoodId.value !&#x3D;&#x3D; 0&quot;
+      [readOnly]&#x3D;&quot;isTariffsFormReadonly()&quot;
+      [disabled]&#x3D;&quot;isTariffsFormReadonly()&quot;
+      [addonWidth]&#x3D;&quot;widthAddon&quot;
+    /&gt;
+
+    &lt;app-text-input
+      class&#x3D;&quot;col-12&quot;
+      label&#x3D;&quot;مبنای محاسبه&quot;
+      [control]&#x3D;&quot;CalculationReference&quot;
+      [readOnly]&#x3D;&quot;true&quot;
+      addonWidth&#x3D;&quot;7rem&quot;
+    /&gt;
+
+    &lt;!-- Editable Fields --&gt;
+    &lt;app-text-input
+      class&#x3D;&quot;col-12&quot;
+      label&#x3D;&quot;تعرفه&quot;
+      [control]&#x3D;&quot;Tariff&quot;
+      inputType&#x3D;&quot;number&quot;
+      addonWidth&#x3D;&quot;7rem&quot;
+    /&gt;
+
+    &lt;app-text-input
+      class&#x3D;&quot;col-12&quot;
+      label&#x3D;&quot;تناژ پایه&quot;
+      [control]&#x3D;&quot;BaseTonnag&quot;
+      inputType&#x3D;&quot;number&quot;
+      addonWidth&#x3D;&quot;7rem&quot;
+    /&gt;
+
+    &lt;app-binary-radio-input
+      class&#x3D;&quot;col-12&quot;
+      label&#x3D;&quot;وضعیت&quot;
+      [control]&#x3D;&quot;Active&quot;
+      [disabled]&#x3D;&quot;true&quot;
+    /&gt;
+
+    &lt;!-- Submit --&gt;
+    &lt;div class&#x3D;&quot;col-12 flex justify-content-end mt-3&quot;&gt;
+      &lt;p-button
+        label&#x3D;&quot;ثبت تغییرات&quot;
+        type&#x3D;&quot;submit&quot;
+        [disabled]&#x3D;&quot;tariffForm.invalid || loading&quot;
+      /&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+&lt;/p-dialog&gt;
+
+&lt;!-- Confirm Dialog --&gt;
+&lt;p-confirm-dialog /&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!-- 🔍 Search Form --><form  class="grid gap-3 sm:gap-0 mb-4"  [formGroup]="tariffForm"  (ngSubmit)="searchTariffs()">  <app-search-auto-complete    class="col-12 sm:col-6 lg:col-4"    placeholder="نوع بارگیر"    label="نوع بارگیر"    optionLabel="LoaderTypeTitle"    optionValue="LoaderTypeTitle"    (selectSuggestion)="onSelectSearchLoaderType($event)"    (valueChange)="onAutoCompleteChange(searchLoaderTypeId)"    [lazySearch]="onSearchLoaderType"    [showIconOptionSelected]="searchLoaderTypeId.value !== 0"    [addonWidth]="widthAddon"  />  <app-search-auto-complete    class="col-12 sm:col-6 lg:col-4"    placeholder="شهر مبدا"    label="شهر مبدا"    [control]="searchSourceCity"    optionLabel="CityTitle"    optionValue="CityTitle"    (selectSuggestion)="onSelectSearchSourceCity($event)"    (valueChange)="onAutoCompleteChange(searchSourceCityId)"    [lazySearch]="onSearchCity"    [showIconOptionSelected]="searchSourceCityId.value !== 0"    [addonWidth]="widthAddon"  />  <app-search-auto-complete    class="col-12 sm:col-6 lg:col-4"    placeholder="شهر مقصد"    label="شهر مقصد"    [control]="searchTargetCity"    optionLabel="CityTitle"    optionValue="CityTitle"    (selectSuggestion)="onSelectSearchTargetCity($event)"    (valueChange)="onAutoCompleteChange(searchTargetCityId)"    [lazySearch]="onSearchCity"    [showIconOptionSelected]="searchTargetCityId.value !== 0"    [addonWidth]="widthAddon"  />  <app-search-auto-complete    class="col-12 sm:col-6 lg:col-4"    placeholder="نوع بار"    label="نوع بار"    [control]="searchGoods"    optionLabel="ProductTitle"    optionValue="ProductTitle"    (selectSuggestion)="onSelectSearchProduct($event)"    (valueChange)="onAutoCompleteChange(searchGoodsId)"    [lazySearch]="onSearchProduct"    [showIconOptionSelected]="searchGoodsId.value !== 0"    [addonWidth]="widthAddon"  />  <div class="col-12 flex justify-content-end">    <p-button      label="جستجو"      severity="info"      size="small"      styleClass="px-4 py-1"      [disabled]="!isSearchFormValid()"      type="submit"    />  </div></form><!-- 📊 Tariff Table --><p-table  class="col-12 overflow-x-auto"  [columns]="cols"  [value]="tariffs"  [tableStyle]="{ \'min-width\': \'50rem\' }">  <ng-template #caption>    <div class="flex justify-between items-center">      <p-button        label="جدید"        size="small"        styleClass="px-4 md:px-5 py-1"        (click)="onNew()"      />    </div>  </ng-template>  <ng-template #header let-columns>    <tr>      @for (col of columns; track $index) {      <th>{{ col }}</th>      }    </tr>  </ng-template>  <ng-template #body let-rowData>    <tr>      <td>        <p-button          icon="pi pi-pencil"          severity="info"          variant="text"          [disabled]="loading"          (click)="onEdit(rowData)"        />      </td>      <td>        <p-button          icon="pi pi-trash"          severity="danger"          variant="text"          [disabled]="loading"          (click)="onDelete(rowData)"        />      </td>      <td>{{ rowData.LoaderTypeId }}</td>      <td>{{ rowData.LoaderTypeTitle }}</td>      <td>{{ rowData.GoodId }}</td>      <td>{{ rowData.GoodTitle }}</td>      <td>{{ rowData.SourceCityId }}</td>      <td>{{ rowData.SourceCityTitle }}</td>      <td>{{ rowData.TargetCityId }}</td>      <td>{{ rowData.TargetCityTitle }}</td>      <td>{{ rowData.Tariff }}</td>      <td>{{ rowData.BaseTonnag }}</td>      <td>{{ rowData.CalculationReference }}</td>      <td>        <i          class="pi"          [ngClass]="            rowData.Active              ? \'pi-check-circle text-green-500\'              : \'pi-times-circle text-red-500\'          "        ></i>      </td>    </tr>  </ng-template></p-table><!-- 📦 Actions --><div class="flex w-full justify-content-end gap-3 mt-4">  <p-button label="بارگزاری فایل اکسل" severity="warn" />  <p-button    [disabled]="tariffs.length === 0"    label="غیرفعال کردن تعرفه"    severity="danger"  />  <p-button    [disabled]="tariffs.length === 0"    label="افزایش تعرفه"    severity="info"  /></div><!-- 📝 Tariff Dialog Form --><p-dialog  [(visible)]="formDialogVisible"  [modal]="true"  [closable]="true"  [header]="headerTitle"  [style]="{ \'max-width\': \'30rem\' }"  (onHide)="closeDialogTariffForm()"  draggable="false"  maskStyleClass="px-2">  <form    [formGroup]="tariffForm"    class="grid gap-3 sm:gap-0"    (ngSubmit)="editTariffForm()"  >    <app-search-auto-complete      class="col-12"      placeholder="نوع بارگیر"      label="نوع بارگیر"      optionLabel="LoaderTypeTitle"      optionValue="LoaderTypeTitle"      (selectSuggestion)="onSelectLoaderType($event)"      (valueChange)="onAutoCompleteChange(LoaderTypeId)"      [lazySearch]="onSearchLoaderType"      [showIconOptionSelected]="LoaderTypeId.value !== 0"      [readOnly]="isTariffsFormReadonly()"      [disabled]="isTariffsFormReadonly()"      [addonWidth]="widthAddon"    />    <app-search-auto-complete      class="col-12"      placeholder="شهر مبدا"      label="شهر مبدا"      [control]="SourceCityTitle"      optionLabel="CityTitle"      optionValue="CityTitle"      (selectSuggestion)="onSelectSourceCity($event)"      (valueChange)="onAutoCompleteChange(SourceCityId)"      [lazySearch]="onSearchCity"      [showIconOptionSelected]="SourceCityId.value !== 0"      [readOnly]="isTariffsFormReadonly()"      [disabled]="isTariffsFormReadonly()"      [addonWidth]="widthAddon"    />    <app-search-auto-complete      class="col-12"      placeholder="شهر مقصد"      label="شهر مقصد"      [control]="TargetCityTitle"      optionLabel="CityTitle"      optionValue="CityTitle"      (selectSuggestion)="onSelectTargetCity($event)"      (valueChange)="onAutoCompleteChange(TargetCityId)"      [lazySearch]="onSearchCity"      [showIconOptionSelected]="TargetCityId.value !== 0"      [readOnly]="isTariffsFormReadonly()"      [disabled]="isTariffsFormReadonly()"      [addonWidth]="widthAddon"    />    <app-search-auto-complete      class="col-12"      placeholder="نوع بار"      label="نوع بار"      [control]="GoodTitle"      optionLabel="ProductTitle"      optionValue="ProductTitle"      (selectSuggestion)="onSelectProduct($event)"      (valueChange)="onAutoCompleteChange(GoodId)"      [lazySearch]="onSearchProduct"      [showIconOptionSelected]="GoodId.value !== 0"      [readOnly]="isTariffsFormReadonly()"      [disabled]="isTariffsFormReadonly()"      [addonWidth]="widthAddon"    />    <app-text-input      class="col-12"      label="مبنای محاسبه"      [control]="CalculationReference"      [readOnly]="true"      addonWidth="7rem"    />    <!-- Editable Fields -->    <app-text-input      class="col-12"      label="تعرفه"      [control]="Tariff"      inputType="number"      addonWidth="7rem"    />    <app-text-input      class="col-12"      label="تناژ پایه"      [control]="BaseTonnag"      inputType="number"      addonWidth="7rem"    />    <app-binary-radio-input      class="col-12"      label="وضعیت"      [control]="Active"      [disabled]="true"    />    <!-- Submit -->    <div class="col-12 flex justify-content-end mt-3">      <p-button        label="ثبت تغییرات"        type="submit"        [disabled]="tariffForm.invalid || loading"      />    </div>  </form></p-dialog><!-- Confirm Dialog --><p-confirm-dialog /></div>'
+    var COMPONENTS = [{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarMenuComponent', 'selector': 'app-sidebar-menu'},{'name': 'SubMenuComponent', 'selector': 'app-sub-menu'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TabBarComponent', 'selector': 'app-tab-bar'},{'name': 'TabViewComponent', 'selector': 'app-tab-view'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'TariffsFormComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'TariffsFormComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
