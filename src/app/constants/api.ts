@@ -160,9 +160,17 @@ export const API_ROUTES = {
       GetDefaultAmounts: `${environment.apiUrl}:${walletAndTrafficPort}/api/GetDefaultAmounts`,
       GetWalletTransactions: `${environment.apiUrl}:${walletAndTrafficPort}/api/GetMoneyWalletTransactions`,
       GetWalletPaymentRecords: `${environment.apiUrl}:${walletAndTrafficPort}/api/GetMoneyWalletChargeRecords`,
+      GetSmsWallet: `${environment.apiUrl}:${walletAndTrafficPort}/api/GetSmsMoneyWallet`,
+      GetTruckerAssociationWallet: `${environment.apiUrl}:${walletAndTrafficPort}/api/GetTruckerAssociationMoneyWallet`,
+      GetTransportCompanyWallet: `${environment.apiUrl}:${walletAndTrafficPort}/api/GetTransportCompanyMoneyWallet`,
+      GetTruckWallet: `${environment.apiUrl}:${walletAndTrafficPort}/api/GetTruckMoneyWallet`,
+      GetWalletWithCardNumber: `${environment.apiUrl}:${walletAndTrafficPort}/api/GetMoneyWalletByCardNo`,
+      GetTotalOfUserFunctions: `${environment.apiUrl}:${walletAndTrafficPort}/api/GetTotalAmountOfUserFunction`,
+      GetUserChargingFunctions: `${environment.apiUrl}:${walletAndTrafficPort}/api/GetUserChargingFunction`,
     },
     WalletRequests: {
       PaymentRequest: `${environment.apiUrl}:${walletAndTrafficPort}/api/PaymentRequest`,
+      TransferWalletBalance: `${environment.apiUrl}:${walletAndTrafficPort}/api/TransferMoneyWalletBalance`,
     },
   },
 };

@@ -13,6 +13,7 @@ import { WalletDefaultAmount } from './model/wallet-default-amount.model';
 import { mockWalletDefaultAmounts } from './mock/wallet-default-amount.mock';
 import { WalletPaymentRequest } from './model/wallet-payment-request.model';
 import { mockWalletPaymentRequest } from './mock/wallet-payment-request.mock';
+import { TruckInfo } from '../driver-truck-management/model/truck-info.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -40,20 +41,72 @@ export class WalletManagementService {
     //#region Return
     return {
       success: response.success,
-      data: this.TrimWallet(response.data!),
+      data: response.data,
       error: response.error,
     };
     //#endregion
   }
 
-  private TrimWallet(wallet: Wallet): Wallet {
-    return {
-      MoneyWalletId: wallet.MoneyWalletId,
-      Balance: wallet.Balance,
-      MoneyWalletCode: wallet.MoneyWalletCode?.trim(),
+  public async GetTruckWalletInfo(
+    truckId: number
+  ): Promise<ApiResponse<Wallet>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.WalletAndTrafficApi.WalletInfo.GetTruckWallet;
+    const truckInfo: TruckInfo = {
+      TruckId: truckId,
     };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TruckId: truckInfo.TruckId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      Wallet
+    >(apiUrl, bodyValue, mockWallet);
+    //#endregion
   }
 
+  public async GetTruckerAssociationWalletInfo(): Promise<ApiResponse<Wallet>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.WalletAndTrafficApi.WalletInfo.GetTruckerAssociationWallet;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      Wallet
+    >(apiUrl, bodyValue, mockWallet);
+    //#endregion
+  }
+
+  public async GetSmsWalletInfo(): Promise<ApiResponse<Wallet>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.WalletAndTrafficApi.WalletInfo.GetSmsWallet;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      Wallet
+    >(apiUrl, bodyValue, mockWallet);
+    //#endregion
+  }
   public async GetWalletBalance(
     walletId: number
   ): Promise<ApiResponse<{ Balance: number }>> {
