@@ -122,6 +122,13 @@
 
 
 
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+                <code>OnDestroy</code>
+    </p>
 
 
 <section data-compodoc="block-metadata">
@@ -152,6 +159,7 @@
                             <code>ButtonModule</code>
                                 <code><a href="../components/TextInputComponent.html" target="_self" >TextInputComponent</a></code>
                             <code>ReactiveFormsModule</code>
+                                <code><a href="../components/SearchInputComponent.html" target="_self" >SearchInputComponent</a></code>
                 </td>
             </tr>
 
@@ -195,6 +203,10 @@
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
+                                <a href="#destroy$" >destroy$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
                                 <a href="#driverTruckManager" >driverTruckManager</a>
                             </li>
                             <li>
@@ -202,7 +214,14 @@
                                 <a href="#fb" >fb</a>
                             </li>
                             <li>
+                                <a href="#loadComposedForm" >loadComposedForm</a>
+                            </li>
+                            <li>
                                 <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#loadingService" >loadingService</a>
                             </li>
                             <li>
                                 <a href="#mainSearchForm" >mainSearchForm</a>
@@ -241,15 +260,17 @@
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#loadComposedForm" >loadComposedForm</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Async</span>
                                 <a href="#loadDriverInfo" >loadDriverInfo</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
                                 <a href="#loadTruckInfo" >loadTruckInfo</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
@@ -362,8 +383,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="130"
-                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:130</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="163"
+                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:163</a></div>
                         </td>
                     </tr>
 
@@ -402,8 +423,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="138"
-                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:138</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="172"
+                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:172</a></div>
                         </td>
                     </tr>
 
@@ -471,8 +492,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="146"
-                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:146</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="181"
+                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:181</a></div>
                         </td>
                     </tr>
 
@@ -522,45 +543,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="loadComposedForm"></a>
-                    <span class="name">
-                            <span class="modifier">Async</span>
-                        <span ><b>loadComposedForm</b></span>
-                        <a href="#loadComposedForm"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>loadComposedForm()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="51"
-                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:51</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="loadDriverInfo"></a>
                     <span class="name">
                             <span class="modifier">Async</span>
@@ -579,8 +561,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="84"
-                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:84</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="116"
+                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:116</a></div>
                         </td>
                     </tr>
 
@@ -618,8 +600,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="70"
-                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:70</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="101"
+                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:101</a></div>
                         </td>
                     </tr>
 
@@ -629,6 +611,80 @@
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="51"
+                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="44"
+                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
                 </td>
@@ -657,8 +713,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="157"
-                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:157</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="193"
+                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:193</a></div>
                         </td>
                     </tr>
 
@@ -726,8 +782,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="172"
-                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:172</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="210"
+                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:210</a></div>
                         </td>
                     </tr>
 
@@ -795,8 +851,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="165"
-                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:165</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="202"
+                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:202</a></div>
                         </td>
                     </tr>
 
@@ -864,8 +920,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="178"
-                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:178</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="217"
+                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:217</a></div>
                         </td>
                     </tr>
 
@@ -933,8 +989,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="101"
-                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:101</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="134"
+                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:134</a></div>
                         </td>
                     </tr>
 
@@ -980,7 +1036,33 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroy$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>destroy$</b></span>
+                        <a href="#destroy$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:40</a></div>
                         </td>
                     </tr>
 
@@ -1006,7 +1088,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:36</a></div>
                         </td>
                     </tr>
 
@@ -1032,7 +1114,32 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadComposedForm"></a>
+                    <span class="name">
+                        <span ><b>loadComposedForm</b></span>
+                        <a href="#loadComposedForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:80</a></div>
                         </td>
                     </tr>
 
@@ -1057,7 +1164,33 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>loadingService</b></span>
+                        <a href="#loadingService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(LoadingService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -1084,7 +1217,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:60</a></div>
                         </td>
                     </tr>
 
@@ -1110,7 +1243,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -1147,7 +1280,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:65</a></div>
                         </td>
                     </tr>
 
@@ -1176,7 +1309,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="184" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:184</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="223" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:223</a></div>
                                 </td>
                             </tr>
 
@@ -1198,7 +1331,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="188" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:188</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="227" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:227</a></div>
                                 </td>
                             </tr>
 
@@ -1220,7 +1353,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="192" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:192</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="231" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:231</a></div>
                                 </td>
                             </tr>
 
@@ -1242,7 +1375,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="196" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:196</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="235" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:235</a></div>
                                 </td>
                             </tr>
 
@@ -1264,7 +1397,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="200" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:200</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="239" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:239</a></div>
                                 </td>
                             </tr>
 
@@ -1286,7 +1419,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="204" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:204</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="243" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:243</a></div>
                                 </td>
                             </tr>
 
@@ -1308,7 +1441,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="208" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:208</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="247" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:247</a></div>
                                 </td>
                             </tr>
 
@@ -1330,7 +1463,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="212" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:212</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="251" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:251</a></div>
                                 </td>
                             </tr>
 
@@ -1352,7 +1485,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="216" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:216</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="255" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:255</a></div>
                                 </td>
                             </tr>
 
@@ -1374,7 +1507,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="220" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:220</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="259" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:259</a></div>
                                 </td>
                             </tr>
 
@@ -1396,7 +1529,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="224" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:224</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="263" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:263</a></div>
                                 </td>
                             </tr>
 
@@ -1418,7 +1551,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="228" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:228</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="267" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component.ts:267</a></div>
                                 </td>
                             </tr>
 
@@ -1429,40 +1562,68 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject } from &#x27;@angular/core&#x27;;
-import {
-  FormBuilder,
-  FormControl,
-  ReactiveFormsModule,
-} from &#x27;@angular/forms&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
+import { FormBuilder, FormControl, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
 import { TextInputComponent } from &#x27;app/components/shared/inputs/text-input/text-input.component&#x27;;
 import { ValidationSchema } from &#x27;app/constants/validation-schema&#x27;;
 import { ApiResponse } from &#x27;app/data/model/api-Response.model&#x27;;
-import { TruckDriverInfo } from &#x27;app/data/model/truck-driver-info.model&#x27;;
-import { TruckComposedInfo, TruckInfo } from &#x27;app/data/model/truck-info.model&#x27;;
-import { Wallet } from &#x27;app/data/model/wallet.model&#x27;;
+import { TruckDriverInfo } from &#x27;app/services/driver-truck-management/model/truck-driver-info.model&#x27;;
+import {
+  TruckComposedInfo,
+  TruckInfo,
+} from &#x27;app/services/driver-truck-management/model/truck-info.model&#x27;;
+import { Wallet } from &#x27;app/services/wallet-management/model/wallet.model&#x27;;
 import { Driver_TruckManagementService } from &#x27;app/services/driver-truck-management/driver-truck-management.service&#x27;;
 import { ToastService } from &#x27;app/services/toast-service/toast.service&#x27;;
 import { ButtonModule } from &#x27;primeng/button&#x27;;
+import { SearchInputComponent } from &#x27;../../../shared/inputs/search-input/search-input.component&#x27;;
+import { LoadingService } from &#x27;app/services/loading-service/loading-service.service&#x27;;
+import { Subject, takeUntil } from &#x27;rxjs&#x27;;
 
 @Component({
   selector: &#x27;app-driver-truck-wallet-form&#x27;,
-  imports: [ButtonModule, TextInputComponent, ReactiveFormsModule],
+  imports: [
+    ButtonModule,
+    TextInputComponent,
+    ReactiveFormsModule,
+    SearchInputComponent,
+  ],
   templateUrl: &#x27;./driver-truck-wallet-form.component.html&#x27;,
   styleUrl: &#x27;./driver-truck-wallet-form.component.scss&#x27;,
 })
-export class DriverTruckWalletFormComponent {
+export class DriverTruckWalletFormComponent implements OnInit, OnDestroy {
+  // feat: inject required services
   private fb &#x3D; inject(FormBuilder);
   private toast &#x3D; inject(ToastService);
   private driverTruckManager &#x3D; inject(Driver_TruckManagementService);
+  private loadingService &#x3D; inject(LoadingService);
 
-  addonWidth &#x3D; &#x27;8rem&#x27;;
+  // feat: handle unsubscribe via destroy$
+  private destroy$ &#x3D; new Subject&lt;void&gt;();
   loading &#x3D; false;
 
+  // feat: handle global loading state on init
+  ngOnInit(): void {
+    this.loadingService.loading$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) &#x3D;&gt; (this.loading &#x3D; value)); // just triggers change detection if needed
+  }
+
+  // fix: unsubscribe from observables
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  // ui: style config
+  addonWidth &#x3D; &#x27;8rem&#x27;;
+
+  // feat: composed truck search form
   mainSearchForm &#x3D; this.fb.group({
     searchSmartCard: [&#x27;&#x27;, ValidationSchema.smartCard],
   });
 
+  // feat: composed truck driver wallet form
   truckComposedInfoForm &#x3D; this.fb.group({
     truckId: [&#x27;&#x27;, ValidationSchema.truckId],
     smartCard: [&#x27;&#x27;, ValidationSchema.smartCard],
@@ -1477,45 +1638,47 @@ export class DriverTruckWalletFormComponent {
     wallet: [],
   });
 
-  // --- Public Methods ---
+  // feat: load composed form with full info
+  loadComposedForm &#x3D; async (smartCard: string) &#x3D;&gt; {
+    if (this.mainSearchForm.invalid) return;
 
-  async loadComposedForm() {
-    if (this.mainSearchForm.invalid || this.loading) return;
-
-    this.loading &#x3D; true;
+    this.loadingService.setLoading(true);
     try {
-      const truckInfo &#x3D; await this.getTruckInfo(this.searchSmartCard.value);
+      const truckInfo &#x3D; await this.getTruckInfo(smartCard);
       if (!truckInfo) return;
 
-      const response &#x3D; await this.driverTruckManager.GetComposedTruckInfo(
-        truckInfo.TruckId
-      );
+      const response &#x3D;
+        await this.driverTruckManager.GetComposedTruckInfoWithLastActiveTurn(
+          truckInfo.TruckId
+        );
       if (!this.isSuccessful(response)) return;
 
       this.populateComposedForm(response.data!);
     } finally {
-      this.loading &#x3D; false;
+      this.loadingService.setLoading(false);
     }
-  }
+  };
 
+  // feat: load truck info by smart card
   async loadTruckInfo() {
-    if (this.smartCard.invalid || this.loading) return;
+    if (this.smartCard.invalid) return;
 
-    this.loading &#x3D; true;
+    this.loadingService.setLoading(true);
     try {
       const truckInfo &#x3D; await this.getTruckInfo(this.smartCard.value);
       if (!truckInfo) return;
 
       this.populateTruckInfo(truckInfo);
     } finally {
-      this.loading &#x3D; false;
+      this.loadingService.setLoading(false);
     }
   }
 
+  // feat: load driver info by national ID
   async loadDriverInfo() {
-    if (this.nationalId.invalid || this.loading) return;
+    if (this.nationalId.invalid) return;
 
-    this.loading &#x3D; true;
+    this.loadingService.setLoading(true);
     try {
       const response &#x3D; await this.driverTruckManager.GetDriverInfoFromAPI(
         this.nationalId.value
@@ -1525,15 +1688,15 @@ export class DriverTruckWalletFormComponent {
 
       this.populateDriverInfo(response.data!);
     } finally {
-      this.loading &#x3D; false;
+      this.loadingService.setLoading(false);
     }
   }
 
+  // feat: set composed truck-driver-wallet-turn info
   async setComposedInformation(): Promise&lt;void&gt; {
-    if (this.nationalId.invalid || this.loading) return;
+    if (this.nationalId.invalid) return;
 
-    this.loading &#x3D; true;
-
+    this.loadingService.setLoading(true);
     try {
       const { value: truckId } &#x3D; this.truckId;
       const { value: driverId } &#x3D; this.driverId;
@@ -1554,10 +1717,11 @@ export class DriverTruckWalletFormComponent {
         response.data?.Message ?? &#x27;تغییرات با موفقیت ثبت شد.&#x27;
       );
     } finally {
-      this.loading &#x3D; false;
+      this.loadingService.setLoading(false);
     }
   }
 
+  // feat: generate new virtual wallet
   async createNewWallet(): Promise&lt;void&gt; {
     const response &#x3D; await this.driverTruckManager.GetVirtualWallet();
     if (!this.isSuccessful(response)) return;
@@ -1566,6 +1730,7 @@ export class DriverTruckWalletFormComponent {
 
   // --- Private Methods ---
 
+  // util: fetch truck info
   private async getTruckInfo(smartCard: string): Promise&lt;TruckInfo | null&gt; {
     const response &#x3D; await this.driverTruckManager.GetTruckInfoFromAPI(
       smartCard
@@ -1574,6 +1739,7 @@ export class DriverTruckWalletFormComponent {
     return response.data!;
   }
 
+  // util: check api response success
   private isSuccessful(response: ApiResponse&lt;any&gt;): boolean {
     if (!response.success || !response.data) {
       this.toast.error(
@@ -1585,14 +1751,16 @@ export class DriverTruckWalletFormComponent {
     return true;
   }
 
+  // ui: populate full form with composed info
   private populateComposedForm(info: TruckComposedInfo) {
     this.populateTruckInfo(info.Truck);
     this.populateDriverInfo(info.TruckDriver!);
     this.populateWalletInfo(info.MoneyWallet!);
-    this.turnId.setValue(info.Turn?.nEnterExitId);
+    this.turnId.setValue(info.Turn?.TurnId);
     this.turn.setValue(info.Turn?.OtaghdarTurnNumber);
   }
 
+  // ui: populate truck info fields
   private populateTruckInfo(info: TruckInfo) {
     this.truckId.setValue(info.TruckId ?? -1);
     this.smartCard.setValue(info.SmartCardNo);
@@ -1600,12 +1768,14 @@ export class DriverTruckWalletFormComponent {
     this.serialNumber.setValue(info.Serial);
   }
 
+  // ui: populate driver info fields
   private populateDriverInfo(info?: TruckDriverInfo) {
     this.driverId.setValue(info?.DriverId ?? -1);
     this.fullName.setValue(info?.NameFamily);
     this.nationalId.setValue(info?.NationalCode);
   }
 
+  // ui: populate wallet info fields
   private populateWalletInfo(info?: Wallet) {
     this.walletId.setValue(info?.MoneyWalletId ?? -1);
     this.wallet.setValue(info?.MoneyWalletCode);
@@ -1665,39 +1835,23 @@ export class DriverTruckWalletFormComponent {
 
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;flex flex-column gap-3&quot;&gt;
-  &lt;!-- Loading Spinner --&gt;
-  @if (loading) {
-  &lt;div
-    class&#x3D;&quot;h-full w-full z-5 flex align-items-center justify-content-center absolute&quot;
-  &gt;
-    &lt;div class&#x3D;&quot;h-full w-full bg-white absolute&quot; style&#x3D;&quot;opacity: 0.2&quot;&gt;&lt;/div&gt;
-    &lt;i class&#x3D;&quot;pi pi-spin pi-spinner primary&quot; style&#x3D;&quot;font-size: 5rem&quot;&gt;&lt;/i&gt;
-  &lt;/div&gt;
-  }
-
   &lt;!-- Search by SmartCard --&gt;
   &lt;form
     class&#x3D;&quot;col-12&quot;
     [class.pointer-events-none]&#x3D;&quot;loading&quot;
     [class.opacity-60]&#x3D;&quot;loading&quot;
-    (ngSubmit)&#x3D;&quot;loadComposedForm()&quot;
     [formGroup]&#x3D;&quot;mainSearchForm&quot;
   &gt;
     &lt;div class&#x3D;&quot;flex gap-3&quot;&gt;
-      &lt;app-text-input
+      &lt;app-search-input
         [control]&#x3D;&quot;searchSmartCard&quot;
         validationField&#x3D;&quot;smartCard&quot;
         icon&#x3D;&quot;pi pi-id-card&quot;
         class&#x3D;&quot;flex-1&quot;
         placeholder&#x3D;&quot;جستجو براساس شماره هوشمند&quot;
-      /&gt;
-      &lt;p-button
-        (click)&#x3D;&quot;loadComposedForm()&quot;
-        [disabled]&#x3D;&quot;mainSearchForm.invalid&quot;
-        size&#x3D;&quot;small&quot;
-        severity&#x3D;&quot;info&quot;
-        styleClass&#x3D;&quot;w-8rem h-2-5rem&quot;
-        label&#x3D;&quot;استعلام&quot;
+        [disableSearchButton]&#x3D;&quot;mainSearchForm.invalid&quot;
+        searchButtonLabel&#x3D;&quot;استعلام&quot;
+        [onSearchQuery]&#x3D;&quot;loadComposedForm&quot;
       /&gt;
     &lt;/div&gt;
   &lt;/form&gt;
@@ -1733,9 +1887,11 @@ export class DriverTruckWalletFormComponent {
               validationField&#x3D;&quot;smartCard&quot;
               addonWidth&#x3D;&quot;10rem&quot;
             /&gt;
-          &lt;p-button
+            &lt;p-button
               (click)&#x3D;&quot;loadTruckInfo()&quot;
-              [disabled]&#x3D;&quot;this.truckId.invalid || this.smartCard.invalid || loading&quot;
+              [disabled]&#x3D;&quot;
+                this.truckId.invalid || this.smartCard.invalid || loading
+              &quot;
               size&#x3D;&quot;small&quot;
               severity&#x3D;&quot;primary&quot;
               styleClass&#x3D;&quot;mt-1 w-6rem h-2rem&quot;
@@ -1798,7 +1954,9 @@ export class DriverTruckWalletFormComponent {
             /&gt;
             &lt;p-button
               (click)&#x3D;&quot;loadDriverInfo()&quot;
-              [disabled]&#x3D;&quot;this.driverId.invalid || this.nationalId.invalid || loading&quot;
+              [disabled]&#x3D;&quot;
+                this.driverId.invalid || this.nationalId.invalid || loading
+              &quot;
               size&#x3D;&quot;small&quot;
               severity&#x3D;&quot;primary&quot;
               type&#x3D;&quot;submit&quot;
@@ -1925,8 +2083,8 @@ export class DriverTruckWalletFormComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="flex flex-column gap-3">  <!-- Loading Spinner -->  @if (loading) {  <div    class="h-full w-full z-5 flex align-items-center justify-content-center absolute"  >    <div class="h-full w-full bg-white absolute" style="opacity: 0.2"></div>    <i class="pi pi-spin pi-spinner primary" style="font-size: 5rem"></i>  </div>  }  <!-- Search by SmartCard -->  <form    class="col-12"    [class.pointer-events-none]="loading"    [class.opacity-60]="loading"    (ngSubmit)="loadComposedForm()"    [formGroup]="mainSearchForm"  >    <div class="flex gap-3">      <app-text-input        [control]="searchSmartCard"        validationField="smartCard"        icon="pi pi-id-card"        class="flex-1"        placeholder="جستجو براساس شماره هوشمند"      />      <p-button        (click)="loadComposedForm()"        [disabled]="mainSearchForm.invalid"        size="small"        severity="info"        styleClass="w-8rem h-2-5rem"        label="استعلام"      />    </div>  </form>  <!-- Truck Info -->  <div class="grid px-4 mt-4">    <span class="text-lg font-bold mb-4">اطلاعات ناوگان</span>    <div class="grid">      <form        class="grid col-12"        [class.pointer-events-none]="loading"        [class.opacity-60]="loading"        [formGroup]="truckComposedInfoForm"        (ngSubmit)="loadTruckInfo()"      >        <div class="grid col-12">          <app-text-input            hidden            label="کد ناوگان"            [readOnly]="true"            [control]="truckId"            validationField="truckId"            [addonWidth]="addonWidth"          />          <div class="flex gap-2 col-12 md:col-6">            <app-text-input              label="شماره هوشمند"              class="flex-1"              placeholder="شماره هوشمند"              [control]="smartCard"              validationField="smartCard"              addonWidth="10rem"            />          <p-button              (click)="loadTruckInfo()"              [disabled]="this.truckId.invalid || this.smartCard.invalid || loading"              size="small"              severity="primary"              styleClass="mt-1 w-6rem h-2rem"              type="submit"              label="استعلام"            />          </div>          <div class="col-12 md:col-6">            <app-text-input              label="شماره پلاک"              class="flex-1"              placeholder="شماره پلاک"              [readOnly]="true"              [control]="licensePlateNumber"              validationField="licenseNumber"              [addonWidth]="addonWidth"            />          </div>          <div class="col-12 md:col-6">            <app-text-input              label="شماره سریال"              class="flex-1"              placeholder="شماره سریال"              [readOnly]="true"              [control]="serialNumber"              validationField="serialNumber"              [addonWidth]="addonWidth"            />          </div>        </div>      </form>      <!-- Driver Info -->      <form        class="grid col-12"        [class.pointer-events-none]="loading"        [class.opacity-60]="loading"        [formGroup]="truckComposedInfoForm"        (ngSubmit)="loadDriverInfo()"      >        <div class="grid col-12">          <app-text-input            hidden            label="کد راننده"            [readOnly]="true"            [control]="driverId"            validationField="driverId"            [addonWidth]="addonWidth"          />          <div class="flex gap-2 col-12 md:col-6">            <app-text-input              label="کدملی راننده"              class="flex-1"              placeholder="کدملی راننده"              [control]="nationalId"              validationField="nationalId"              addonWidth="10rem"            />            <p-button              (click)="loadDriverInfo()"              [disabled]="this.driverId.invalid || this.nationalId.invalid || loading"              size="small"              severity="primary"              type="submit"              styleClass="mt-1 w-6rem h-2rem "              label="استعلام"            />          </div>          <div class="col-12 md:col-6">            <app-text-input              label="نام راننده"              class="flex-1"              placeholder="نام راننده"              [readOnly]="true"              [control]="fullName"              validationField="fullName"              [addonWidth]="addonWidth"            />          </div>        </div>      </form>      <!-- Wallet / Turn Info -->      <form        class="grid col-12"        [class.pointer-events-none]="loading"        [class.opacity-60]="loading"      >        <div class="grid col-12">          <app-text-input            hidden            label="شناسه کیف پول"            [readOnly]="true"            [control]="walletId"            validationField="walletId"            [addonWidth]="addonWidth"          />          <app-text-input            hidden            label="شناسه نوبت"            [readOnly]="true"            [control]="turnId"            validationField="turnId"            [addonWidth]="addonWidth"          />          <div class="col-12 md:col-6">            <app-text-input              label="نوبت"              class="flex-1"              placeholder="نوبت"              [readOnly]="true"              [control]="turn"              validationField="turn"              [addonWidth]="addonWidth"            />          </div>          <div class="col-12 md:col-6">            <app-text-input              label="کیف پول"              class="flex-1"              placeholder="کیف پول"              [readOnly]="true"              [control]="wallet"              validationField="wallet"              [addonWidth]="addonWidth"            />          </div>        </div>      </form>    </div>    <!-- Action Buttons -->    <div      class="px-3 col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center"    >      <p-button        (click)="setComposedInformation()"        [disabled]="this.truckComposedInfoForm.invalid || loading"        label="ثبت و ویرایش"        size="small"        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"      ></p-button>      <p-button        (click)="createNewWallet()"        [disabled]="this.truckComposedInfoForm.invalid || loading"        severity="info"        label="ساخت کیف پول جدید"        size="small"        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"      ></p-button>    </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarMenuComponent', 'selector': 'app-sidebar-menu'},{'name': 'SubMenuComponent', 'selector': 'app-sub-menu'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TabBarComponent', 'selector': 'app-tab-bar'},{'name': 'TabViewComponent', 'selector': 'app-tab-view'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'}];
+        var COMPONENT_TEMPLATE = '<div><div class="flex flex-column gap-3">  <!-- Search by SmartCard -->  <form    class="col-12"    [class.pointer-events-none]="loading"    [class.opacity-60]="loading"    [formGroup]="mainSearchForm"  >    <div class="flex gap-3">      <app-search-input        [control]="searchSmartCard"        validationField="smartCard"        icon="pi pi-id-card"        class="flex-1"        placeholder="جستجو براساس شماره هوشمند"        [disableSearchButton]="mainSearchForm.invalid"        searchButtonLabel="استعلام"        [onSearchQuery]="loadComposedForm"      />    </div>  </form>  <!-- Truck Info -->  <div class="grid px-4 mt-4">    <span class="text-lg font-bold mb-4">اطلاعات ناوگان</span>    <div class="grid">      <form        class="grid col-12"        [class.pointer-events-none]="loading"        [class.opacity-60]="loading"        [formGroup]="truckComposedInfoForm"        (ngSubmit)="loadTruckInfo()"      >        <div class="grid col-12">          <app-text-input            hidden            label="کد ناوگان"            [readOnly]="true"            [control]="truckId"            validationField="truckId"            [addonWidth]="addonWidth"          />          <div class="flex gap-2 col-12 md:col-6">            <app-text-input              label="شماره هوشمند"              class="flex-1"              placeholder="شماره هوشمند"              [control]="smartCard"              validationField="smartCard"              addonWidth="10rem"            />            <p-button              (click)="loadTruckInfo()"              [disabled]="                this.truckId.invalid || this.smartCard.invalid || loading              "              size="small"              severity="primary"              styleClass="mt-1 w-6rem h-2rem"              type="submit"              label="استعلام"            />          </div>          <div class="col-12 md:col-6">            <app-text-input              label="شماره پلاک"              class="flex-1"              placeholder="شماره پلاک"              [readOnly]="true"              [control]="licensePlateNumber"              validationField="licenseNumber"              [addonWidth]="addonWidth"            />          </div>          <div class="col-12 md:col-6">            <app-text-input              label="شماره سریال"              class="flex-1"              placeholder="شماره سریال"              [readOnly]="true"              [control]="serialNumber"              validationField="serialNumber"              [addonWidth]="addonWidth"            />          </div>        </div>      </form>      <!-- Driver Info -->      <form        class="grid col-12"        [class.pointer-events-none]="loading"        [class.opacity-60]="loading"        [formGroup]="truckComposedInfoForm"        (ngSubmit)="loadDriverInfo()"      >        <div class="grid col-12">          <app-text-input            hidden            label="کد راننده"            [readOnly]="true"            [control]="driverId"            validationField="driverId"            [addonWidth]="addonWidth"          />          <div class="flex gap-2 col-12 md:col-6">            <app-text-input              label="کدملی راننده"              class="flex-1"              placeholder="کدملی راننده"              [control]="nationalId"              validationField="nationalId"              addonWidth="10rem"            />            <p-button              (click)="loadDriverInfo()"              [disabled]="                this.driverId.invalid || this.nationalId.invalid || loading              "              size="small"              severity="primary"              type="submit"              styleClass="mt-1 w-6rem h-2rem "              label="استعلام"            />          </div>          <div class="col-12 md:col-6">            <app-text-input              label="نام راننده"              class="flex-1"              placeholder="نام راننده"              [readOnly]="true"              [control]="fullName"              validationField="fullName"              [addonWidth]="addonWidth"            />          </div>        </div>      </form>      <!-- Wallet / Turn Info -->      <form        class="grid col-12"        [class.pointer-events-none]="loading"        [class.opacity-60]="loading"      >        <div class="grid col-12">          <app-text-input            hidden            label="شناسه کیف پول"            [readOnly]="true"            [control]="walletId"            validationField="walletId"            [addonWidth]="addonWidth"          />          <app-text-input            hidden            label="شناسه نوبت"            [readOnly]="true"            [control]="turnId"            validationField="turnId"            [addonWidth]="addonWidth"          />          <div class="col-12 md:col-6">            <app-text-input              label="نوبت"              class="flex-1"              placeholder="نوبت"              [readOnly]="true"              [control]="turn"              validationField="turn"              [addonWidth]="addonWidth"            />          </div>          <div class="col-12 md:col-6">            <app-text-input              label="کیف پول"              class="flex-1"              placeholder="کیف پول"              [readOnly]="true"              [control]="wallet"              validationField="wallet"              [addonWidth]="addonWidth"            />          </div>        </div>      </form>    </div>    <!-- Action Buttons -->    <div      class="px-3 col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center"    >      <p-button        (click)="setComposedInformation()"        [disabled]="this.truckComposedInfoForm.invalid || loading"        label="ثبت و ویرایش"        size="small"        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"      ></p-button>      <p-button        (click)="createNewWallet()"        [disabled]="this.truckComposedInfoForm.invalid || loading"        severity="info"        label="ساخت کیف پول جدید"        size="small"        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"      ></p-button>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarMenuComponent', 'selector': 'app-sidebar-menu'},{'name': 'SubMenuComponent', 'selector': 'app-sub-menu'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TabBarComponent', 'selector': 'app-tab-bar'},{'name': 'TabViewComponent', 'selector': 'app-tab-view'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'DriverTruckWalletFormComponent'};
 </script>

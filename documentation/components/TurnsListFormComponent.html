@@ -1,0 +1,1986 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bpt-sjhb-panel documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">bpt-sjhb-panel documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  TurnsListFormComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                            <code>ConfirmationService</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-turns-list-form</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>ButtonModule</code>
+                                <code><a href="../components/TextInputComponent.html" target="_self" >TextInputComponent</a></code>
+                                <code><a href="../components/SearchInputComponent.html" target="_self" >SearchInputComponent</a></code>
+                            <code>TableModule</code>
+                            <code>Dialog</code>
+                            <code>ConfirmDialogModule</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./turns-list-form.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./turns-list-form.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#accountingCols" >accountingCols</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#confirmationService" >confirmationService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#destroy$" >destroy$</a>
+                            </li>
+                            <li>
+                                <a href="#dialogTurnAccounting" >dialogTurnAccounting</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <a href="#headerTitle" >headerTitle</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#loadingService" >loadingService</a>
+                            </li>
+                            <li>
+                                <a href="#searchTruckInformation" >searchTruckInformation</a>
+                            </li>
+                            <li>
+                                <a href="#searchTrukForm" >searchTrukForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#toast" >toast</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#truckManagerService" >truckManagerService</a>
+                            </li>
+                            <li>
+                                <a href="#truckTurnsList" >truckTurnsList</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#turnManagerService" >turnManagerService</a>
+                            </li>
+                            <li>
+                                <a href="#turnsAccounting" >turnsAccounting</a>
+                            </li>
+                            <li>
+                                <a href="#turnsCols" >turnsCols</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#activeTurn" >activeTurn</a>
+                            </li>
+                            <li>
+                                <a href="#confirmActivation" >confirmActivation</a>
+                            </li>
+                            <li>
+                                <a href="#confirmDeactivation" >confirmDeactivation</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#deActiveTurn" >deActiveTurn</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#loadTurnsList" >loadTurnsList</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onCloseDialog" >onCloseDialog</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#openTurnAccounting" >openTurnAccounting</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#populateSearchForm" >populateSearchForm</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#smartCode" >smartCode</a>
+                                </li>
+                                <li>
+                                    <a href="#truckId" >truckId</a>
+                                </li>
+                                <li>
+                                    <a href="#licensePlate" >licensePlate</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activeTurn"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>activeTurn</b></span>
+                        <a href="#activeTurn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>activeTurn(row: <a href="../interfaces/Turn.html" target="_self">Turn</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="123"
+                                    class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:123</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>row</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Turn.html" target="_self" >Turn</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmActivation"></a>
+                    <span class="name">
+                        <span ><b>confirmActivation</b></span>
+                        <a href="#confirmActivation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>confirmActivation(rowData: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="169"
+                                    class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:169</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>rowData</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmDeactivation"></a>
+                    <span class="name">
+                        <span ><b>confirmDeactivation</b></span>
+                        <a href="#confirmDeactivation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>confirmDeactivation(rowData: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="186"
+                                    class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:186</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>rowData</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deActiveTurn"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>deActiveTurn</b></span>
+                        <a href="#deActiveTurn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deActiveTurn(row: <a href="../interfaces/Turn.html" target="_self">Turn</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="138"
+                                    class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:138</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>row</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Turn.html" target="_self" >Turn</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadTurnsList"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>loadTurnsList</b></span>
+                        <a href="#loadTurnsList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadTurnsList(smartCode: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="97"
+                                    class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:97</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>smartCode</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="87"
+                                    class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:87</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onCloseDialog"></a>
+                    <span class="name">
+                        <span ><b>onCloseDialog</b></span>
+                        <a href="#onCloseDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onCloseDialog()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="165"
+                                    class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:165</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openTurnAccounting"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>openTurnAccounting</b></span>
+                        <a href="#openTurnAccounting"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>openTurnAccounting(row: <a href="../interfaces/Turn.html" target="_self">Turn</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="150"
+                                    class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:150</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>row</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Turn.html" target="_self" >Turn</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="populateSearchForm"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>populateSearchForm</b></span>
+                        <a href="#populateSearchForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>populateSearchForm(truckId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, licensePlateNumber: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="203"
+                                    class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:203</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>truckId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>licensePlateNumber</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="accountingCols"></a>
+                    <span class="name">
+                        <span ><b>accountingCols</b></span>
+                        <a href="#accountingCols"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    &#x27;شماره نوبت&#x27;,
+    &#x27;شماره صفوف نوبت دهی&#x27;,
+    &#x27;تاریخ&#x27;,
+    &#x27;زمان&#x27;,
+    &#x27;تراکنش&#x27;,
+    &#x27;کاربر&#x27;,
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmationService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>confirmationService</b></span>
+                        <a href="#confirmationService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ConfirmationService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroy$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>destroy$</b></span>
+                        <a href="#destroy$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dialogTurnAccounting"></a>
+                    <span class="name">
+                        <span ><b>dialogTurnAccounting</b></span>
+                        <a href="#dialogTurnAccounting"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:75</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="headerTitle"></a>
+                    <span class="name">
+                        <span ><b>headerTitle</b></span>
+                        <a href="#headerTitle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:77</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:68</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>loadingService</b></span>
+                        <a href="#loadingService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(LoadingService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchTruckInformation"></a>
+                    <span class="name">
+                        <span ><b>searchTruckInformation</b></span>
+                        <a href="#searchTruckInformation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:92</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchTrukForm"></a>
+                    <span class="name">
+                        <span ><b>searchTrukForm</b></span>
+                        <a href="#searchTrukForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.fb.group({
+    smart: [&#x27;&#x27;, ValidationSchema.smartCard],
+    truckId: [&#x27;&#x27;, ValidationSchema.truckId],
+    licensePlate: [&#x27;&#x27;, ValidationSchema.licensePlateNumber],
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:70</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toast"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>toast</b></span>
+                        <a href="#toast"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="truckManagerService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>truckManagerService</b></span>
+                        <a href="#truckManagerService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Driver_TruckManagementService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="truckTurnsList"></a>
+                    <span class="name">
+                        <span ><b>truckTurnsList</b></span>
+                        <a href="#truckTurnsList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Turn.html" target="_self" >Turn[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="turnManagerService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>turnManagerService</b></span>
+                        <a href="#turnManagerService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(TurnManagementService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="turnsAccounting"></a>
+                    <span class="name">
+                        <span ><b>turnsAccounting</b></span>
+                        <a href="#turnsAccounting"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>TurnAccounting[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:76</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="turnsCols"></a>
+                    <span class="name">
+                        <span ><b>turnsCols</b></span>
+                        <a href="#turnsCols"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    &#x27;شماره نوبت&#x27;,
+    &#x27;تسلسل نوبت&#x27;,
+    &#x27;تاریخ صدور&#x27;,
+    &#x27;زمان صدور&#x27;,
+    &#x27;راننده&#x27;,
+    &#x27;وضعیت نوبت&#x27;,
+    &#x27;شرح&#x27;,
+    &#x27;آخرین تغییرات&#x27;,
+    &#x27;صف نوبت&#x27;,
+    &#x27;کاربر&#x27;,
+    &#x27;ابطال نوبت&#x27;,
+    &#x27;احیا نوبت&#x27;,
+    &#x27;لیست تراکنش ها&#x27;,
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="smartCode"></a>
+                        <span class="name"><b>smartCode</b><a href="#smartCode"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>smartCode()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="208" class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:208</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="truckId"></a>
+                        <span class="name"><b>truckId</b><a href="#truckId"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>truckId()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="212" class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:212</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="licensePlate"></a>
+                        <span class="name"><b>licensePlate</b><a href="#licensePlate"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>licensePlate()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="216" class="link-to-prism">src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts:216</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject } from &#x27;@angular/core&#x27;;
+import { FormBuilder, FormControl } from &#x27;@angular/forms&#x27;;
+import { SearchInputComponent } from &#x27;app/components/shared/inputs/search-input/search-input.component&#x27;;
+import { TextInputComponent } from &#x27;app/components/shared/inputs/text-input/text-input.component&#x27;;
+import { ValidationSchema } from &#x27;app/constants/validation-schema&#x27;;
+import { Driver_TruckManagementService } from &#x27;app/services/driver-truck-management/driver-truck-management.service&#x27;;
+import { LoadingService } from &#x27;app/services/loading-service/loading-service.service&#x27;;
+import { ToastService } from &#x27;app/services/toast-service/toast.service&#x27;;
+import { checkAndToastError } from &#x27;app/utils/api-utils&#x27;;
+import { ButtonModule } from &#x27;primeng/button&#x27;;
+import { Subject, takeUntil } from &#x27;rxjs&#x27;;
+import { TableModule } from &#x27;primeng/table&#x27;;
+import { TurnAccounting } from &#x27;app/services/turn-management/model/turn-accounting.model&#x27;;
+import { Dialog } from &#x27;primeng/dialog&#x27;;
+import { Turn } from &#x27;app/services/turn-management/model/turn.model&#x27;;
+import { TurnManagementService } from &#x27;app/services/turn-management/turn-management.service&#x27;;
+import { ConfirmDialogModule } from &#x27;primeng/confirmdialog&#x27;;
+import { ConfirmationService } from &#x27;primeng/api&#x27;;
+
+@Component({
+  selector: &#x27;app-turns-list-form&#x27;,
+  imports: [
+    ButtonModule,
+    TextInputComponent,
+    SearchInputComponent,
+    TableModule,
+    Dialog,
+    ConfirmDialogModule,
+  ],
+  providers: [ConfirmationService],
+  templateUrl: &#x27;./turns-list-form.component.html&#x27;,
+  styleUrl: &#x27;./turns-list-form.component.scss&#x27;,
+})
+export class TurnsListFormComponent {
+  private fb &#x3D; inject(FormBuilder);
+  private toast &#x3D; inject(ToastService);
+  private truckManagerService &#x3D; inject(Driver_TruckManagementService);
+  private loadingService &#x3D; inject(LoadingService);
+  private destroy$ &#x3D; new Subject&lt;void&gt;();
+  private turnManagerService &#x3D; inject(TurnManagementService);
+  private confirmationService &#x3D; inject(ConfirmationService);
+
+  turnsCols &#x3D; [
+    &#x27;شماره نوبت&#x27;,
+    &#x27;تسلسل نوبت&#x27;,
+    &#x27;تاریخ صدور&#x27;,
+    &#x27;زمان صدور&#x27;,
+    &#x27;راننده&#x27;,
+    &#x27;وضعیت نوبت&#x27;,
+    &#x27;شرح&#x27;,
+    &#x27;آخرین تغییرات&#x27;,
+    &#x27;صف نوبت&#x27;,
+    &#x27;کاربر&#x27;,
+    &#x27;ابطال نوبت&#x27;,
+    &#x27;احیا نوبت&#x27;,
+    &#x27;لیست تراکنش ها&#x27;,
+  ];
+
+  accountingCols &#x3D; [
+    &#x27;شماره نوبت&#x27;,
+    &#x27;شماره صفوف نوبت دهی&#x27;,
+    &#x27;تاریخ&#x27;,
+    &#x27;زمان&#x27;,
+    &#x27;تراکنش&#x27;,
+    &#x27;کاربر&#x27;,
+  ];
+
+  loading &#x3D; false;
+  truckTurnsList: Turn[] &#x3D; [];
+  searchTrukForm &#x3D; this.fb.group({
+    smart: [&#x27;&#x27;, ValidationSchema.smartCard],
+    truckId: [&#x27;&#x27;, ValidationSchema.truckId],
+    licensePlate: [&#x27;&#x27;, ValidationSchema.licensePlateNumber],
+  });
+  dialogTurnAccounting: boolean &#x3D; false;
+  turnsAccounting: TurnAccounting[] &#x3D; [];
+  headerTitle: any;
+
+  // Lifecycle: on component init
+  ngOnInit(): void {
+    this.loadingService.loading$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) &#x3D;&gt; (this.loading &#x3D; val));
+  }
+
+  // Lifecycle: clean up on destroy
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  searchTruckInformation &#x3D; async (query: string) &#x3D;&gt; {
+    if (this.loading) return;
+    await this.loadTurnsList(query);
+  };
+
+  private async loadTurnsList(smartCode: string) {
+    if (this.smartCode.invalid) return;
+    try {
+      this.loadingService.setLoading(true);
+      const resTruckInfo &#x3D; await this.truckManagerService.GetTruckInfoFromAPI(
+        smartCode
+      );
+      if (!checkAndToastError(resTruckInfo, this.toast)) {
+        this.truckTurnsList &#x3D; [];
+        return;
+      }
+      this.populateSearchForm(
+        resTruckInfo.data.TruckId,
+        resTruckInfo.data.Pelak ?? &#x27;&#x27;
+      );
+
+      const resTurnsInfo &#x3D; await this.turnManagerService.GetLatestTurns(
+        resTruckInfo.data.TruckId
+      );
+      if (!checkAndToastError(resTurnsInfo, this.toast)) return;
+      this.truckTurnsList &#x3D; resTurnsInfo.data;
+    } finally {
+      this.loadingService.setLoading(false);
+    }
+  }
+
+  async activeTurn(row: Turn) {
+    try {
+      this.loadingService.setLoading(true);
+
+      const response &#x3D; await this.turnManagerService.ResuscitateTurn(
+        row.TurnId
+      );
+      if (!checkAndToastError(response, this.toast)) return;
+      await this.loadTurnsList(this.smartCode.value);
+      this.toast.success(&#x27;موفق&#x27;, response.data.Message);
+    } finally {
+      this.loadingService.setLoading(false);
+    }
+  }
+
+  async deActiveTurn(row: Turn) {
+    try {
+      this.loadingService.setLoading(true);
+      const response &#x3D; await this.turnManagerService.CancelTurn(row.TurnId);
+      if (!checkAndToastError(response, this.toast)) return;
+      await this.loadTurnsList(this.smartCode.value);
+      this.toast.success(&#x27;موفق&#x27;, response.data.Message);
+    } finally {
+      this.loadingService.setLoading(false);
+    }
+  }
+
+  async openTurnAccounting(row: Turn) {
+    try {
+      this.loadingService.setLoading(true);
+      const response &#x3D; await this.turnManagerService.GetTurnAccounting(
+        row.TurnId
+      );
+      if (!checkAndToastError(response, this.toast)) return;
+      this.turnsAccounting &#x3D; response.data;
+      this.headerTitle &#x3D; &#x60;لیست تراکنش های شماره نوبت ${row.TurnId}&#x60;;
+      this.dialogTurnAccounting &#x3D; true;
+    } finally {
+      this.loadingService.setLoading(false);
+    }
+  }
+
+  onCloseDialog() {
+    this.turnsAccounting &#x3D; [];
+  }
+
+  confirmActivation(rowData: any) {
+    this.confirmationService.confirm({
+      message: &#x60;آیا از احیا نوبت مطمئن هستید؟&#x60;,
+      accept: () &#x3D;&gt; {
+        this.activeTurn(rowData); // your actual logic
+      },
+      rejectButtonProps: {
+        severity: &#x27;secondary&#x27;,
+        outlined: false,
+      },
+      acceptButtonProps: {
+        severity: &#x27;info&#x27;,
+        outlined: false,
+      },
+    });
+  }
+
+  confirmDeactivation(rowData: any) {
+    this.confirmationService.confirm({
+      message: &#x60;آیا از ابطال نوبت مطمئن هستید؟&#x60;,
+      accept: () &#x3D;&gt; {
+        this.deActiveTurn(rowData); // your actual logic
+      },
+      rejectButtonProps: {
+        severity: &#x27;secondary&#x27;,
+        outlined: false,
+      },
+      acceptButtonProps: {
+        severity: &#x27;danger&#x27;,
+        outlined: false,
+      },
+    });
+  }
+
+  private populateSearchForm(truckId: number, licensePlateNumber: string) {
+    this.truckId.setValue(truckId);
+    this.licensePlate.setValue(licensePlateNumber);
+  }
+
+  get smartCode(): FormControl {
+    return this.searchTrukForm.get(&#x27;smart&#x27;) as FormControl;
+  }
+
+  get truckId(): FormControl {
+    return this.searchTrukForm.get(&#x27;truckId&#x27;) as FormControl;
+  }
+
+  get licensePlate(): FormControl {
+    return this.searchTrukForm.get(&#x27;licensePlate&#x27;) as FormControl;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;grid&quot;&gt;
+  &lt;app-search-input
+    class&#x3D;&quot;col-12&quot;
+    [onSearchQuery]&#x3D;&quot;searchTruckInformation&quot;
+    placeholder&#x3D;&quot;هوشمند ناوگان را وارد کنید.&quot;
+    searchButtonLabel&#x3D;&quot;استعلام&quot;
+    validationField&#x3D;&quot;smartCard&quot;
+    [control]&#x3D;&quot;smartCode&quot;
+    [disableSearchButton]&#x3D;&quot;smartCode.invalid&quot;
+  /&gt;
+
+  &lt;app-text-input
+    [control]&#x3D;&quot;truckId&quot;
+    label&#x3D;&quot;کدناوگان&quot;
+    placeholder&#x3D;&quot;کدناوگان&quot;
+    [disabled]&#x3D;&quot;true&quot;
+    [readOnly]&#x3D;&quot;true&quot;
+    class&#x3D;&quot;col-12 md:col-6&quot;
+    addonWidth&#x3D;&quot;6rem&quot;
+  /&gt;
+
+  &lt;app-text-input
+    [control]&#x3D;&quot;licensePlate&quot;
+    label&#x3D;&quot;شماره پلاک&quot;
+    placeholder&#x3D;&quot;شماره پلاک&quot;
+    [disabled]&#x3D;&quot;true&quot;
+    [readOnly]&#x3D;&quot;true&quot;
+    class&#x3D;&quot;col-12 md:col-6&quot;
+    addonWidth&#x3D;&quot;6rem&quot;
+  /&gt;
+&lt;/div&gt;
+
+&lt;p-table
+  class&#x3D;&quot;col-12&quot;
+  [columns]&#x3D;&quot;turnsCols&quot;
+  [paginator]&#x3D;&quot;true&quot;
+  [rows]&#x3D;&quot;10&quot;
+  [rowsPerPageOptions]&#x3D;&quot;[5, 10, 20, 50, 100]&quot;
+  [tableStyle]&#x3D;&quot;{ &#x27;min-width&#x27;: &#x27;50rem&#x27; }&quot;
+  [value]&#x3D;&quot;truckTurnsList&quot;
+    paginatorLocale&#x3D;&quot;fa&quot;
+
+&gt;
+  &lt;ng-template #header let-columns&gt;
+    &lt;tr&gt;
+      @for (col of columns; track $index) {
+      &lt;th&gt;{{ col }}&lt;/th&gt;
+      }
+    &lt;/tr&gt;
+  &lt;/ng-template&gt;
+
+  &lt;ng-template #body let-rowData&gt;
+    &lt;tr&gt;
+      &lt;td&gt;{{ rowData.TurnId }}&lt;/td&gt;
+      &lt;td&gt;{{ rowData.OtaghdarTurnNumber || &quot;-&quot; }}&lt;/td&gt;
+      &lt;td&gt;{{ rowData.TurnIssueDate || &quot;-&quot; }}&lt;/td&gt;
+      &lt;td&gt;{{ rowData.TurnIssueTime || &quot;-&quot; }}&lt;/td&gt;
+      &lt;td&gt;{{ rowData.TruckDriver || &quot;-&quot; }}&lt;/td&gt;
+      &lt;td&gt;{{ rowData.TurnStatusTitle || &quot;-&quot; }}&lt;/td&gt;
+      &lt;td&gt;{{ rowData.TurnStatusDescription || &quot;-&quot; }}&lt;/td&gt;
+      &lt;td&gt;{{ rowData.DateOfLastChanged || &quot;-&quot; }}&lt;/td&gt;
+      &lt;td&gt;{{ rowData.SequentialTurnTitle || &quot;-&quot; }}&lt;/td&gt;
+      &lt;td&gt;{{ rowData.SoftwareUserName || &quot;-&quot; }}&lt;/td&gt;
+      &lt;td&gt;
+        &lt;p-button
+          icon&#x3D;&quot;pi pi-times&quot;
+          severity&#x3D;&quot;danger&quot;
+          variant&#x3D;&quot;text&quot;
+          [disabled]&#x3D;&quot;loading&quot;
+          (onClick)&#x3D;&quot;confirmDeactivation(rowData)&quot;
+        &gt;&lt;/p-button&gt;
+      &lt;/td&gt;
+
+      &lt;td&gt;
+        &lt;p-button
+          icon&#x3D;&quot;pi pi-refresh&quot;
+          severity&#x3D;&quot;info&quot;
+          variant&#x3D;&quot;text&quot;
+          [disabled]&#x3D;&quot;loading&quot;
+          (onClick)&#x3D;&quot;confirmActivation(rowData)&quot;
+        &gt;&lt;/p-button&gt;
+      &lt;/td&gt;
+
+      &lt;td&gt;
+        &lt;p-button
+          icon&#x3D;&quot;pi pi-align-justify&quot;
+          severity&#x3D;&quot;primary&quot;
+          variant&#x3D;&quot;text&quot;
+          [disabled]&#x3D;&quot;loading&quot;
+          (onClick)&#x3D;&quot;openTurnAccounting(rowData)&quot;
+        &gt;&lt;/p-button&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/ng-template&gt;
+&lt;/p-table&gt;
+
+&lt;p-dialog
+  draggable&#x3D;&quot;false&quot;
+  [header]&#x3D;&quot;headerTitle&quot;
+  [modal]&#x3D;&quot;true&quot;
+  (onHide)&#x3D;&quot;onCloseDialog()&quot;
+  [(visible)]&#x3D;&quot;dialogTurnAccounting&quot;
+  maskStyleClass&#x3D;&quot;px-3 overflow-visible&quot;
+  [style]&#x3D;&quot;{ &#x27;max-width&#x27;: &#x27;90vw&#x27; }&quot;
+&gt;
+  &lt;p-table
+    [columns]&#x3D;&quot;accountingCols&quot;
+    [paginator]&#x3D;&quot;true&quot;
+    [rows]&#x3D;&quot;10&quot;
+    [rowsPerPageOptions]&#x3D;&quot;[5, 10, 20, 50, 100]&quot;
+    paginatorLocale&#x3D;&quot;fa&quot;
+    [value]&#x3D;&quot;turnsAccounting&quot;
+  &gt;
+    &lt;ng-template #header let-columns&gt;
+      &lt;tr&gt;
+        @for (col of columns; track $index) {
+        &lt;th&gt;{{ col }}&lt;/th&gt;
+        }
+      &lt;/tr&gt;
+    &lt;/ng-template&gt;
+
+    &lt;ng-template #body let-rowData&gt;
+      &lt;tr&gt;
+        &lt;td&gt;{{ rowData.TurnId || &quot;-&quot; }}&lt;/td&gt;
+        &lt;td&gt;{{ rowData.SequentialTurnId || &quot;-&quot; }}&lt;/td&gt;
+        &lt;td&gt;{{ rowData.DateShamsi || &quot;-&quot; }}&lt;/td&gt;
+        &lt;td&gt;{{ rowData.Time || &quot;-&quot; }}&lt;/td&gt;
+        &lt;td&gt;{{ rowData.AccountingTypeTitle || &quot;-&quot; }}&lt;/td&gt;
+        &lt;td&gt;{{ rowData.UserName || &quot;-&quot; }}&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/ng-template&gt;
+  &lt;/p-table&gt;
+&lt;/p-dialog&gt;
+
+&lt;p-confirmDialog
+  [style]&#x3D;&quot;{ width: &#x27;350px&#x27; }&quot;
+  maskStyleClass&#x3D;&quot;z-15&quot;
+  header&#x3D;&quot;تایید عملیات&quot;
+  icon&#x3D;&quot;pi pi-exclamation-triangle&quot;
+  acceptLabel&#x3D;&quot;تایید&quot;
+  rejectLabel&#x3D;&quot;انصراف&quot;
+  acceptButtonStyleClass&#x3D;&quot;px-5 py-1&quot;
+  rejectButtonStyleClass&#x3D;&quot;px-4 py-1&quot;
+&gt;
+&lt;/p-confirmDialog&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="grid">  <app-search-input    class="col-12"    [onSearchQuery]="searchTruckInformation"    placeholder="هوشمند ناوگان را وارد کنید."    searchButtonLabel="استعلام"    validationField="smartCard"    [control]="smartCode"    [disableSearchButton]="smartCode.invalid"  />  <app-text-input    [control]="truckId"    label="کدناوگان"    placeholder="کدناوگان"    [disabled]="true"    [readOnly]="true"    class="col-12 md:col-6"    addonWidth="6rem"  />  <app-text-input    [control]="licensePlate"    label="شماره پلاک"    placeholder="شماره پلاک"    [disabled]="true"    [readOnly]="true"    class="col-12 md:col-6"    addonWidth="6rem"  /></div><p-table  class="col-12"  [columns]="turnsCols"  [paginator]="true"  [rows]="10"  [rowsPerPageOptions]="[5, 10, 20, 50, 100]"  [tableStyle]="{ \'min-width\': \'50rem\' }"  [value]="truckTurnsList"    paginatorLocale="fa">  <ng-template #header let-columns>    <tr>      @for (col of columns; track $index) {      <th>{{ col }}</th>      }    </tr>  </ng-template>  <ng-template #body let-rowData>    <tr>      <td>{{ rowData.TurnId }}</td>      <td>{{ rowData.OtaghdarTurnNumber || "-" }}</td>      <td>{{ rowData.TurnIssueDate || "-" }}</td>      <td>{{ rowData.TurnIssueTime || "-" }}</td>      <td>{{ rowData.TruckDriver || "-" }}</td>      <td>{{ rowData.TurnStatusTitle || "-" }}</td>      <td>{{ rowData.TurnStatusDescription || "-" }}</td>      <td>{{ rowData.DateOfLastChanged || "-" }}</td>      <td>{{ rowData.SequentialTurnTitle || "-" }}</td>      <td>{{ rowData.SoftwareUserName || "-" }}</td>      <td>        <p-button          icon="pi pi-times"          severity="danger"          variant="text"          [disabled]="loading"          (onClick)="confirmDeactivation(rowData)"        ></p-button>      </td>      <td>        <p-button          icon="pi pi-refresh"          severity="info"          variant="text"          [disabled]="loading"          (onClick)="confirmActivation(rowData)"        ></p-button>      </td>      <td>        <p-button          icon="pi pi-align-justify"          severity="primary"          variant="text"          [disabled]="loading"          (onClick)="openTurnAccounting(rowData)"        ></p-button>      </td>    </tr>  </ng-template></p-table><p-dialog  draggable="false"  [header]="headerTitle"  [modal]="true"  (onHide)="onCloseDialog()"  [(visible)]="dialogTurnAccounting"  maskStyleClass="px-3 overflow-visible"  [style]="{ \'max-width\': \'90vw\' }">  <p-table    [columns]="accountingCols"    [paginator]="true"    [rows]="10"    [rowsPerPageOptions]="[5, 10, 20, 50, 100]"    paginatorLocale="fa"    [value]="turnsAccounting"  >    <ng-template #header let-columns>      <tr>        @for (col of columns; track $index) {        <th>{{ col }}</th>        }      </tr>    </ng-template>    <ng-template #body let-rowData>      <tr>        <td>{{ rowData.TurnId || "-" }}</td>        <td>{{ rowData.SequentialTurnId || "-" }}</td>        <td>{{ rowData.DateShamsi || "-" }}</td>        <td>{{ rowData.Time || "-" }}</td>        <td>{{ rowData.AccountingTypeTitle || "-" }}</td>        <td>{{ rowData.UserName || "-" }}</td>      </tr>    </ng-template>  </p-table></p-dialog><p-confirmDialog  [style]="{ width: \'350px\' }"  maskStyleClass="z-15"  header="تایید عملیات"  icon="pi pi-exclamation-triangle"  acceptLabel="تایید"  rejectLabel="انصراف"  acceptButtonStyleClass="px-5 py-1"  rejectButtonStyleClass="px-4 py-1"></p-confirmDialog></div>'
+    var COMPONENTS = [{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarMenuComponent', 'selector': 'app-sidebar-menu'},{'name': 'SubMenuComponent', 'selector': 'app-sub-menu'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TabBarComponent', 'selector': 'app-tab-bar'},{'name': 'TabViewComponent', 'selector': 'app-tab-view'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'TurnsListFormComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'TurnsListFormComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

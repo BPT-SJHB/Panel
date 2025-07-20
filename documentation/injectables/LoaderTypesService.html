@@ -162,7 +162,16 @@
                             <li>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
+                                <a href="#GetLoaderTypeInfoForSoftwareUser" >GetLoaderTypeInfoForSoftwareUser</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
                                 <a href="#GetLoaderTypesInfo" >GetLoaderTypesInfo</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#TrimLoaderType" >TrimLoaderType</a>
                             </li>
                         </ul>
                     </td>
@@ -205,8 +214,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="58"
-                                    class="link-to-prism">src/app/services/loader-types/loader-types.service.ts:58</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="91"
+                                    class="link-to-prism">src/app/services/loader-types/loader-types.service.ts:91</a></div>
                         </td>
                     </tr>
 
@@ -248,6 +257,46 @@
                             <div class="io-description">
                                 
                             </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetLoaderTypeInfoForSoftwareUser"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>GetLoaderTypeInfoForSoftwareUser</b></span>
+                        <a href="#GetLoaderTypeInfoForSoftwareUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>GetLoaderTypeInfoForSoftwareUser()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="51"
+                                    class="link-to-prism">src/app/services/loader-types/loader-types.service.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;LoaderType&gt;&gt;</code>
+
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -313,6 +362,75 @@
                             </div>
                         <div class="io-description">
                             <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;LoaderType[]&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TrimLoaderType"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>TrimLoaderType</b></span>
+                        <a href="#TrimLoaderType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>TrimLoaderType(loaderType: <a href="../interfaces/LoaderType.html" target="_self">LoaderType</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">src/app/services/loader-types/loader-types.service.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>loaderType</td>
+                                            <td>
+                                                            <code><a href="../interfaces/LoaderType.html" target="_self" >LoaderType</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/LoaderType.html" target="_self" >LoaderType</a></code>
 
                         </div>
                             <div class="io-description">
@@ -390,11 +508,11 @@
 import { UserAuthService } from &#x27;../user-auth-service/user-auth.service&#x27;;
 import { APICommunicationManagementService } from &#x27;../api-communication-management/apicommunication-management.service&#x27;;
 import { ApiResponse } from &#x27;app/data/model/api-Response.model&#x27;;
-import { LoaderType } from &#x27;app/data/model/loader-type.model&#x27;;
+import { LoaderType } from &#x27;app/services/loader-types/model/loader-type.model&#x27;;
 import { API_ROUTES } from &#x27;app/constants/api&#x27;;
-import { mockLoaderTypes } from &#x27;app/data/mock/loader-type.mock&#x27;;
 import { ShortResponse } from &#x27;app/data/model/short-response.model&#x27;;
 import { mockShortResponse } from &#x27;app/data/mock/short-response.mock&#x27;;
+import { mockLoaderTypes } from &#x27;./mock/loader-type.mock&#x27;;
 
 @Injectable({
   providedIn: &#x27;root&#x27;,
@@ -430,17 +548,50 @@ export class LoaderTypesService {
     //#region Return
     return {
       success: response.success,
-      data: response.data?.map((loaderType) &#x3D;&gt; ({
-        LoaderTypeId: loaderType.LoaderTypeId,
-        LoaderTypeTitle: loaderType.LoaderTypeTitle?.trim(),
-        LoaderTypeOrganizationId: loaderType.LoaderTypeOrganizationId,
-        LoaderTypeFixStatusId: loaderType.LoaderTypeFixStatusId,
-        LoaderTypeFixStatusTitle: loaderType.LoaderTypeFixStatusTitle?.trim(),
-        Active: loaderType.Active,
-      })),
+      data: response.data?.map((loaderType) &#x3D;&gt; this.TrimLoaderType(loaderType)),
       error: response.error,
     };
     //#endregion
+  }
+
+  public async GetLoaderTypeInfoForSoftwareUser(): Promise&lt;
+    ApiResponse&lt;LoaderType&gt;
+  &gt; {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl &#x3D;
+      API_ROUTES.TransportationAPI.LoaderTypes.GetLoaderTypeInfoForSoftwareUser;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request
+    const response &#x3D; await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      LoaderType
+    &gt;(apiUrl, bodyValue, mockLoaderTypes);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: this.TrimLoaderType(response.data!),
+      error: response.error,
+    };
+    //#endregion
+  }
+
+  private TrimLoaderType(loaderType: LoaderType): LoaderType {
+    return {
+      LoaderTypeId: loaderType.LoaderTypeId,
+      LoaderTypeTitle: loaderType.LoaderTypeTitle?.trim(),
+      LoaderTypeOrganizationId: loaderType.LoaderTypeOrganizationId,
+      LoaderTypeFixStatusId: loaderType.LoaderTypeFixStatusId,
+      LoaderTypeFixStatusTitle: loaderType.LoaderTypeFixStatusTitle?.trim(),
+      Active: loaderType.Active,
+    };
   }
 
   public async ChangeLoaderTypeStatus(

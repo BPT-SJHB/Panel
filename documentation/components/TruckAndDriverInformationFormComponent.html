@@ -1,0 +1,971 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bpt-sjhb-panel documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">bpt-sjhb-panel documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  TruckAndDriverInformationFormComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/forms/truck-and-driver-information-form/truck-and-driver-information-form.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-truck-and-driver-information-form</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CardModule</code>
+                            <code>SplitterModule</code>
+                                <code><a href="../components/FormCardComponent.html" target="_self" >FormCardComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./truck-and-driver-information-form.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./truck-and-driver-information-form.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#driver_truckManager" >driver_truckManager</a>
+                            </li>
+                            <li>
+                                <a href="#driverDataForHtml" >driverDataForHtml</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Optional</span>
+                                <a href="#DriverInfo" >DriverInfo</a>
+                            </li>
+                            <li>
+                                <a href="#loaderTypeDataForHtml" >loaderTypeDataForHtml</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Optional</span>
+                                <a href="#LoaderTypeInfo" >LoaderTypeInfo</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#loaderTypeManager" >loaderTypeManager</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#toast" >toast</a>
+                            </li>
+                            <li>
+                                <a href="#truckDataForHtml" >truckDataForHtml</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Optional</span>
+                                <a href="#TruckInfo" >TruckInfo</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#populateDataForHtml" >populateDataForHtml</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#insideTabType" >insideTabType</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="insideTabType"></a>
+                        <b>insideTabType</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/LoaderType.html" target="_self" >&quot;Truck&quot; | &quot;LoaderType&quot; | &quot;Driver&quot;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;Truck&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/components/forms/truck-and-driver-information-form/truck-and-driver-information-form.component.ts:25</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="38"
+                                    class="link-to-prism">src/app/components/forms/truck-and-driver-information-form/truck-and-driver-information-form.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="populateDataForHtml"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>populateDataForHtml</b></span>
+                        <a href="#populateDataForHtml"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>populateDataForHtml()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="71"
+                                    class="link-to-prism">src/app/components/forms/truck-and-driver-information-form/truck-and-driver-information-form.component.ts:71</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="driver_truckManager"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>driver_truckManager</b></span>
+                        <a href="#driver_truckManager"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Driver_TruckManagementService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/forms/truck-and-driver-information-form/truck-and-driver-information-form.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="driverDataForHtml"></a>
+                    <span class="name">
+                        <span ><b>driverDataForHtml</b></span>
+                        <a href="#driverDataForHtml"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/dataFormat.html" target="_self" >dataFormat[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/forms/truck-and-driver-information-form/truck-and-driver-information-form.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DriverInfo"></a>
+                    <span class="name">
+                            <span class="modifier">Optional</span>
+                        <span ><b>DriverInfo</b></span>
+                        <a href="#DriverInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/TruckDriverInfo.html" target="_self" >TruckDriverInfo</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/forms/truck-and-driver-information-form/truck-and-driver-information-form.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loaderTypeDataForHtml"></a>
+                    <span class="name">
+                        <span ><b>loaderTypeDataForHtml</b></span>
+                        <a href="#loaderTypeDataForHtml"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/dataFormat.html" target="_self" >dataFormat[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/forms/truck-and-driver-information-form/truck-and-driver-information-form.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="LoaderTypeInfo"></a>
+                    <span class="name">
+                            <span class="modifier">Optional</span>
+                        <span ><b>LoaderTypeInfo</b></span>
+                        <a href="#LoaderTypeInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/LoaderType.html" target="_self" >LoaderType</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/components/forms/truck-and-driver-information-form/truck-and-driver-information-form.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loaderTypeManager"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>loaderTypeManager</b></span>
+                        <a href="#loaderTypeManager"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(LoaderTypesService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/forms/truck-and-driver-information-form/truck-and-driver-information-form.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toast"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>toast</b></span>
+                        <a href="#toast"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/forms/truck-and-driver-information-form/truck-and-driver-information-form.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="truckDataForHtml"></a>
+                    <span class="name">
+                        <span ><b>truckDataForHtml</b></span>
+                        <a href="#truckDataForHtml"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/dataFormat.html" target="_self" >dataFormat[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/forms/truck-and-driver-information-form/truck-and-driver-information-form.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TruckInfo"></a>
+                    <span class="name">
+                            <span class="modifier">Optional</span>
+                        <span ><b>TruckInfo</b></span>
+                        <a href="#TruckInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/TruckInfo.html" target="_self" >TruckInfo</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/components/forms/truck-and-driver-information-form/truck-and-driver-information-form.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, Input, OnInit } from &#x27;@angular/core&#x27;;
+import { CardModule } from &#x27;primeng/card&#x27;;
+import { TruckInfo } from &#x27;app/services/driver-truck-management/model/truck-info.model&#x27;;
+import { Driver_TruckManagementService } from &#x27;app/services/driver-truck-management/driver-truck-management.service&#x27;;
+import { checkAndToastError } from &#x27;app/utils/api-utils&#x27;;
+import { ToastService } from &#x27;app/services/toast-service/toast.service&#x27;;
+import { LoaderTypesService } from &#x27;app/services/loader-types/loader-types.service&#x27;;
+import { LoaderType } from &#x27;app/services/loader-types/model/loader-type.model&#x27;;
+import { TruckDriverInfo } from &#x27;app/services/driver-truck-management/model/truck-driver-info.model&#x27;;
+import { SplitterModule } from &#x27;primeng/splitter&#x27;;
+import { FormCardComponent } from &quot;../../shared/form-card/form-card.component&quot;;
+
+interface dataFormat {
+  title: string;
+  value: any;
+}
+
+@Component({
+  selector: &#x27;app-truck-and-driver-information-form&#x27;,
+  imports: [CardModule, SplitterModule, FormCardComponent],
+  templateUrl: &#x27;./truck-and-driver-information-form.component.html&#x27;,
+  styleUrl: &#x27;./truck-and-driver-information-form.component.scss&#x27;,
+})
+export class TruckAndDriverInformationFormComponent implements OnInit {
+  @Input() insideTabType: &#x27;Truck&#x27; | &#x27;LoaderType&#x27; | &#x27;Driver&#x27; &#x3D; &#x27;Truck&#x27;;
+
+  TruckInfo?: TruckInfo;
+  LoaderTypeInfo?: LoaderType;
+  DriverInfo?: TruckDriverInfo;
+  truckDataForHtml: dataFormat[] &#x3D; [];
+  loaderTypeDataForHtml: dataFormat[] &#x3D; [];
+  driverDataForHtml: dataFormat[] &#x3D; [];
+
+  private driver_truckManager &#x3D; inject(Driver_TruckManagementService);
+  private loaderTypeManager &#x3D; inject(LoaderTypesService);
+  private toast &#x3D; inject(ToastService);
+
+  async ngOnInit(): Promise&lt;void&gt; {
+    //#region Set TruckInfo
+    if (this.insideTabType &#x3D;&#x3D;&#x3D; &#x27;Truck&#x27;) {
+      const truckResponse &#x3D;
+        await this.driver_truckManager.GetTruckInfoForSoftwareUser();
+      if (!checkAndToastError(truckResponse, this.toast)) return;
+      this.TruckInfo &#x3D; truckResponse.data;
+    }
+    //#endregion
+
+    //#region LoaderTypeInfo
+    if (this.insideTabType &#x3D;&#x3D;&#x3D; &#x27;LoaderType&#x27;) {
+      const loaderTypeResponse &#x3D;
+        await this.loaderTypeManager.GetLoaderTypeInfoForSoftwareUser();
+      if (!checkAndToastError(loaderTypeResponse, this.toast)) return;
+      this.LoaderTypeInfo &#x3D; loaderTypeResponse.data;
+    }
+    //#endregion
+
+    //#region DriverInfo
+    if (this.insideTabType &#x3D;&#x3D;&#x3D; &#x27;Driver&#x27;) {
+      const driverResponse &#x3D;
+        await this.driver_truckManager.GetDriverInfoForSoftwareUser();
+      if (!checkAndToastError(driverResponse, this.toast)) return;
+      this.DriverInfo &#x3D; driverResponse.data;
+    }
+    //#endregion
+
+    this.populateDataForHtml();
+
+    console.log(this.TruckInfo, this.LoaderTypeInfo, this.DriverInfo);
+  }
+
+  private populateDataForHtml() {
+    this.loaderTypeDataForHtml &#x3D; [
+      {
+        title: &#x27;کد بارگیر :&#x27;,
+        value: this.LoaderTypeInfo?.LoaderTypeId,
+      },
+      {
+        title: &#x27;شرح بارگیر :&#x27;,
+        value: this.LoaderTypeInfo?.LoaderTypeTitle,
+      },
+      {
+        title: &#x27;نوع بارگیر :&#x27;,
+        value: this.LoaderTypeInfo?.LoaderTypeFixStatusTitle,
+      },
+    ];
+
+    this.driverDataForHtml &#x3D; [
+      {
+        title: &#x27;کد راننده :&#x27;,
+        value: this.DriverInfo?.DriverId,
+      },
+      {
+        title: &#x27;نام و نام خانوادگی :&#x27;,
+        value: this.DriverInfo?.NameFamily,
+      },
+      {
+        title: &#x27;کد ملی :&#x27;,
+        value: this.DriverInfo?.NationalCode,
+      },
+      {
+        title: &#x27;شماره همراه :&#x27;,
+        value: this.DriverInfo?.MobileNumber,
+      },
+      {
+        title: &#x27;نام پدر :&#x27;,
+        value: this.DriverInfo?.FatherName,
+      },
+      {
+        title: &#x27;شماره گواهینامه :&#x27;,
+        value: this.DriverInfo?.DrivingLicenseNo,
+      },
+      {
+        title: &#x27;شماره هوشمند :&#x27;,
+        value: this.DriverInfo?.SmartCardNo,
+      },
+    ];
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">@if (insideTabType &#x3D;&#x3D;&#x3D; &quot;Truck&quot;) {
+&lt;div class&#x3D;&quot;flex align-items-center justify-content-center w-12&quot;&gt;
+  &lt;app-form-card class&#x3D;&quot;w-12 md:w-6&quot;&gt;
+    &lt;div class&#x3D;&quot;costumeText&quot;&gt;
+      &lt;label&gt;کد ناوگان :&lt;/label&gt;
+      &lt;span&gt;{{ TruckInfo?.TruckId || &quot;نامشخص&quot; }}&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;costumeText&quot;&gt;
+      &lt;label&gt;پلاک و سریال :&lt;/label&gt;
+      &lt;div class&#x3D;&quot;flex flex-row gap-3&quot;&gt;
+        @if (TruckInfo &#x3D;&#x3D; undefined) {
+        &lt;span&gt;نامشخص&lt;/span&gt;
+        }@else {
+        &lt;p-splitter
+          class&#x3D;&quot;w-9rem mt-2&quot;
+          [panelSizes]&#x3D;&quot;[50, 50]&quot;
+          [minSizes]&#x3D;&quot;[50, 50]&quot;
+        &gt;
+          &lt;ng-template #panel&gt;
+            &lt;p-splitter
+              layout&#x3D;&quot;vertical&quot;
+              [panelSizes]&#x3D;&quot;[50, 50]&quot;
+              [minSizes]&#x3D;&quot;[50, 50]&quot;
+            &gt;
+              &lt;ng-template #panel&gt;
+                &lt;span&gt;ایران&lt;/span&gt;
+              &lt;/ng-template&gt;
+              &lt;ng-template #panel&gt;
+                &lt;span&gt;{{ TruckInfo.Serial }}&lt;/span&gt;
+              &lt;/ng-template&gt;
+            &lt;/p-splitter&gt;
+          &lt;/ng-template&gt;
+          &lt;ng-template #panel&gt;
+            &lt;span
+              class&#x3D;&quot;flex flex-row align-self-center justify-content-center&quot;
+              &gt;{{ TruckInfo.Pelak }}&lt;/span
+            &gt;
+          &lt;/ng-template&gt;
+        &lt;/p-splitter&gt;
+        }
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/app-form-card&gt;
+&lt;/div&gt;
+
+} @if (insideTabType &#x3D;&#x3D;&#x3D; &quot;LoaderType&quot;) {
+&lt;div class&#x3D;&quot;flex align-items-center justify-content-center w-12&quot;&gt;
+  &lt;app-form-card class&#x3D;&quot;w-12 md:w-6&quot;&gt;
+    @for (item of loaderTypeDataForHtml; track $index) {
+    &lt;div class&#x3D;&quot;costumeText&quot;&gt;
+      &lt;label&gt;{{ item.title || &quot;نامشخص&quot; }}&lt;/label&gt;
+      &lt;span&gt;{{ item.value || &quot;نامشخص&quot; }}&lt;/span&gt;
+    &lt;/div&gt;
+    }
+  &lt;/app-form-card&gt;
+&lt;/div&gt;
+
+} @if (insideTabType &#x3D;&#x3D;&#x3D; &quot;Driver&quot;) {
+&lt;div class&#x3D;&quot;flex align-items-center justify-content-center w-12&quot;&gt;
+  &lt;app-form-card class&#x3D;&quot;w-12 md:w-6&quot;&gt;
+    @for (item of driverDataForHtml; track $index) {
+    &lt;div class&#x3D;&quot;costumeText&quot;&gt;
+      &lt;label&gt;{{ item.title || &quot;نامشخص&quot; }}&lt;/label&gt;
+      &lt;span&gt;{{ item.value || &quot;نامشخص&quot; }}&lt;/span&gt;
+    &lt;/div&gt;
+    }
+  &lt;/app-form-card&gt;
+&lt;/div&gt;
+}
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div>@if (insideTabType === "Truck") {<div class="flex align-items-center justify-content-center w-12">  <app-form-card class="w-12 md:w-6">    <div class="costumeText">      <label>کد ناوگان :</label>      <span>{{ TruckInfo?.TruckId || "نامشخص" }}</span>    </div>    <div class="costumeText">      <label>پلاک و سریال :</label>      <div class="flex flex-row gap-3">        @if (TruckInfo == undefined) {        <span>نامشخص</span>        }@else {        <p-splitter          class="w-9rem mt-2"          [panelSizes]="[50, 50]"          [minSizes]="[50, 50]"        >          <ng-template #panel>            <p-splitter              layout="vertical"              [panelSizes]="[50, 50]"              [minSizes]="[50, 50]"            >              <ng-template #panel>                <span>ایران</span>              </ng-template>              <ng-template #panel>                <span>{{ TruckInfo.Serial }}</span>              </ng-template>            </p-splitter>          </ng-template>          <ng-template #panel>            <span              class="flex flex-row align-self-center justify-content-center"              >{{ TruckInfo.Pelak }}</span            >          </ng-template>        </p-splitter>        }      </div>    </div>  </app-form-card></div>} @if (insideTabType === "LoaderType") {<div class="flex align-items-center justify-content-center w-12">  <app-form-card class="w-12 md:w-6">    @for (item of loaderTypeDataForHtml; track $index) {    <div class="costumeText">      <label>{{ item.title || "نامشخص" }}</label>      <span>{{ item.value || "نامشخص" }}</span>    </div>    }  </app-form-card></div>} @if (insideTabType === "Driver") {<div class="flex align-items-center justify-content-center w-12">  <app-form-card class="w-12 md:w-6">    @for (item of driverDataForHtml; track $index) {    <div class="costumeText">      <label>{{ item.title || "نامشخص" }}</label>      <span>{{ item.value || "نامشخص" }}</span>    </div>    }  </app-form-card></div>}</div>'
+    var COMPONENTS = [{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarMenuComponent', 'selector': 'app-sidebar-menu'},{'name': 'SubMenuComponent', 'selector': 'app-sub-menu'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TabBarComponent', 'selector': 'app-tab-bar'},{'name': 'TabViewComponent', 'selector': 'app-tab-view'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'TruckAndDriverInformationFormComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'TruckAndDriverInformationFormComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

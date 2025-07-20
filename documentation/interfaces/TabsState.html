@@ -252,9 +252,9 @@ const initialState: TabsState &#x3D; {
       closable: false,
       component: TabComponentKey.Main,
       active: true,
-    }
+    },
   ],
-  lastClosedTabId: null
+  lastClosedTabId: null,
 };
 
 let idCounter &#x3D; 1;
@@ -263,7 +263,6 @@ export const tabReducer &#x3D; createReducer(
   initialState,
 
   on(TabsActions.addTab, (state, { title, closable, component }) &#x3D;&gt; {
-    
     const newTab: TabItem &#x3D; {
       id: idCounter++,
       title,
@@ -275,46 +274,50 @@ export const tabReducer &#x3D; createReducer(
     // deactivate all other tabs and add new one
     return {
       ...state,
-      tabs: [
-        ...state.tabs.map(tab &#x3D;&gt; ({ ...tab, active: false })),
-        newTab,
-      ]
+      tabs: [...state.tabs.map((tab) &#x3D;&gt; ({ ...tab, active: false })), newTab],
     };
   }),
 
   on(TabsActions.closeTab, (state, { id }) &#x3D;&gt; {
-    const filtered &#x3D; state.tabs.filter(tab &#x3D;&gt; tab.id !&#x3D;&#x3D; id);
+    const filtered &#x3D; state.tabs.filter((tab) &#x3D;&gt; tab.id !&#x3D;&#x3D; id);
     if (filtered.length &#x3D;&#x3D;&#x3D; 0) {
       return state; // prevent empty tab list
     }
 
     // در صورت بدستن تب کناری انتخاب شود
-    const wasActive &#x3D; state.tabs.find(tab &#x3D;&gt; tab.id &#x3D;&#x3D;&#x3D; id)?.active;
+    const wasActive &#x3D; state.tabs.find((tab) &#x3D;&gt; tab.id &#x3D;&#x3D;&#x3D; id)?.active;
     if (wasActive) {
-      filtered[filtered.length - 1] &#x3D; {...filtered[filtered.length - 1],active:true};
+      filtered[filtered.length - 1] &#x3D; {
+        ...filtered[filtered.length - 1],
+        active: true,
+      };
     }
 
     return {
       ...state,
       tabs: filtered,
-      lastClosedTabId:id
+      lastClosedTabId: id,
     };
   }),
 
   on(TabsActions.closeAllTab, (state) &#x3D;&gt; {
-      return {
+    return {
       ...state,
-      tabs: [{...state.tabs[0]}]
+      tabs: [{ ...state.tabs[0] }],
     };
   }),
 
   on(TabsActions.activeTab, (state, { id }) &#x3D;&gt; {
+    window.scrollTo({
+      top: 0,
+      behavior: &#x27;auto&#x27;,
+    });
     return {
       ...state,
-      tabs: state.tabs.map(tab &#x3D;&gt; ({
+      tabs: state.tabs.map((tab) &#x3D;&gt; ({
         ...tab,
-        active: tab.id &#x3D;&#x3D;&#x3D; id
-      }))
+        active: tab.id &#x3D;&#x3D;&#x3D; id,
+      })),
     };
   })
 );

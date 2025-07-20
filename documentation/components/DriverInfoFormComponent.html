@@ -138,6 +138,12 @@
 
 
 
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                            <code>DialogService</code>
+                </td>
+            </tr>
 
 
             <tr>
@@ -153,6 +159,7 @@
                             <code>ReactiveFormsModule</code>
                             <code>DialogModule</code>
                                 <code><a href="../components/TextInputComponent.html" target="_self" >TextInputComponent</a></code>
+                                <code><a href="../components/SearchInputComponent.html" target="_self" >SearchInputComponent</a></code>
                 </td>
             </tr>
 
@@ -199,21 +206,22 @@
                                 <a href="#destroy$" >destroy$</a>
                             </li>
                             <li>
-                                <a href="#driverForm" >driverForm</a>
+                                    <span class="modifier">Private</span>
+                                <a href="#dialogService" >dialogService</a>
                             </li>
                             <li>
-                                <a href="#driverNewPasswordDialog" >driverNewPasswordDialog</a>
+                                <a href="#driverForm" >driverForm</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                 <a href="#driverTruckManager" >driverTruckManager</a>
                             </li>
                             <li>
-                                <a href="#driverUserNameDialog" >driverUserNameDialog</a>
-                            </li>
-                            <li>
                                     <span class="modifier">Private</span>
                                 <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <a href="#loadDriverInfoFromAPI" >loadDriverInfoFromAPI</a>
                             </li>
                             <li>
                                 <a href="#loading" >loading</a>
@@ -221,9 +229,6 @@
                             <li>
                                     <span class="modifier">Private</span>
                                 <a href="#loadingService" >loadingService</a>
-                            </li>
-                            <li>
-                                <a href="#passwordDialogVisible" >passwordDialogVisible</a>
                             </li>
                             <li>
                                 <a href="#searchForm" >searchForm</a>
@@ -256,19 +261,13 @@
                                 <a href="#isSuccessful" >isSuccessful</a>
                             </li>
                             <li>
-                                    <span class="modifier">Async</span>
-                                <a href="#loadDriverInfoFromAPI" >loadDriverInfoFromAPI</a>
-                            </li>
-                            <li>
                                 <a href="#ngOnDestroy" >ngOnDestroy</a>
                             </li>
                             <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
-                                <a href="#onCloseDialog" >onCloseDialog</a>
-                            </li>
-                            <li>
+                                    <span class="modifier">Private</span>
                                 <a href="#populateDriverForm" >populateDriverForm</a>
                             </li>
                             <li>
@@ -281,7 +280,7 @@
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#showDialog" >showDialog</a>
+                                <a href="#showNewPasswordDialog" >showNewPasswordDialog</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
@@ -387,14 +386,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="141"
-                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:141</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="155"
+                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:155</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Activate SMS system for the driver.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
@@ -424,14 +425,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="185"
-                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:185</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="209"
+                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:209</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Copy the given text to clipboard and show a toast.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -493,14 +496,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="208"
-                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:208</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="245"
+                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:245</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Check if the API response is successful and show error toast if not.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -536,45 +541,6 @@
                             <div class="io-description">
                                 
                             </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="loadDriverInfoFromAPI"></a>
-                    <span class="name">
-                            <span class="modifier">Async</span>
-                        <span ><b>loadDriverInfoFromAPI</b></span>
-                        <a href="#loadDriverInfoFromAPI"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>loadDriverInfoFromAPI()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="102"
-                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:102</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
-
-                        </div>
                 </td>
             </tr>
         </tbody>
@@ -657,45 +623,9 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="onCloseDialog"></a>
-                    <span class="name">
-                        <span ><b>onCloseDialog</b></span>
-                        <a href="#onCloseDialog"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>onCloseDialog()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="190"
-                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:190</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="populateDriverForm"></a>
                     <span class="name">
+                            <span class="modifier">Private</span>
                         <span ><b>populateDriverForm</b></span>
                         <a href="#populateDriverForm"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -703,21 +633,24 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>populateDriverForm(driverInfo: <a href="../interfaces/TruckDriverInfo.html" target="_self">TruckDriverInfo</a>)</code>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>populateDriverForm(driverInfo: <a href="../interfaces/TruckDriverInfo.html" target="_self">TruckDriverInfo</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="195"
-                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:195</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="229"
+                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:229</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Populate the driver form with the given driver info.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -779,14 +712,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="120"
-                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:120</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:130</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Reset the driver&#39;s password and show the new credentials in a dialog.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
@@ -818,14 +753,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="164"
-                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:164</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="183"
+                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:183</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Send website login link to the driver.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
@@ -839,32 +776,34 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="showDialog"></a>
+                    <a name="showNewPasswordDialog"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
-                        <span ><b>showDialog</b></span>
-                        <a href="#showDialog"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>showNewPasswordDialog</b></span>
+                        <a href="#showNewPasswordDialog"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>showDialog(username: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, password: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>showNewPasswordDialog(username: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, password: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="219"
-                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:219</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="217"
+                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:217</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Open dialog showing new username and password.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -938,14 +877,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="78"
-                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:78</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="81"
+                                    class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:81</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Update the driver&#39;s mobile number using the form values.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
@@ -985,7 +926,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:48</a></div>
                         </td>
                     </tr>
 
@@ -1011,7 +952,33 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dialogService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>dialogService</b></span>
+                        <a href="#dialogService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(DialogService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:43</a></div>
                         </td>
                     </tr>
 
@@ -1037,38 +1004,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:39</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="driverNewPasswordDialog"></a>
-                    <span class="name">
-                        <span ><b>driverNewPasswordDialog</b></span>
-                        <a href="#driverNewPasswordDialog"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>&#x27;&#x27;</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:47</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:44</a></div>
                         </td>
                     </tr>
 
@@ -1094,38 +1030,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:35</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="driverUserNameDialog"></a>
-                    <span class="name">
-                        <span ><b>driverUserNameDialog</b></span>
-                        <a href="#driverUserNameDialog"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>&#x27;&#x27;</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:40</a></div>
                         </td>
                     </tr>
 
@@ -1151,10 +1056,41 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:38</a></div>
                         </td>
                     </tr>
 
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadDriverInfoFromAPI"></a>
+                    <span class="name">
+                        <span ><b>loadDriverInfoFromAPI</b></span>
+                        <a href="#loadDriverInfoFromAPI"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:110</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Load driver info from API by national ID.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1176,7 +1112,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -1202,32 +1138,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:36</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="passwordDialogVisible"></a>
-                    <span class="name">
-                        <span ><b>passwordDialogVisible</b></span>
-                        <a href="#passwordDialogVisible"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>false</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:45</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -1253,7 +1164,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:45</a></div>
                         </td>
                     </tr>
 
@@ -1279,7 +1190,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:39</a></div>
                         </td>
                     </tr>
 
@@ -1308,9 +1219,20 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="226" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:226</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="258" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:258</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Get searchNationalId form control</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code>FormControl</code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -1330,9 +1252,20 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="230" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:230</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="263" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:263</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Get driverId form control</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code>FormControl</code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -1352,9 +1285,20 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="234" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:234</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="268" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:268</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Get nationalId form control</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code>FormControl</code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -1374,9 +1318,20 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="238" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:238</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="273" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:273</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Get fullName form control</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code>FormControl</code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -1396,9 +1351,20 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="242" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:242</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="278" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:278</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Get mobile form control</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code>FormControl</code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -1418,9 +1384,20 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="246" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:246</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="283" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:283</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Get fatherName form control</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code>FormControl</code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -1440,9 +1417,20 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="250" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:250</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="288" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:288</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Get licenseNumber form control</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code>FormControl</code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -1462,9 +1450,20 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="254" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:254</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="293" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:293</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Get smartCard form control</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code>FormControl</code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -1484,9 +1483,20 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="258" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:258</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="298" class="link-to-prism">src/app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component.ts:298</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Get address form control</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code>FormControl</code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -1510,10 +1520,13 @@ import { ToastService } from &#x27;app/services/toast-service/toast.service&#x27
 import { Driver_TruckManagementService } from &#x27;app/services/driver-truck-management/driver-truck-management.service&#x27;;
 
 import { ApiResponse } from &#x27;app/data/model/api-Response.model&#x27;;
-import { TruckDriverInfo } from &#x27;app/data/model/truck-driver-info.model&#x27;;
+import { TruckDriverInfo } from &#x27;app/services/driver-truck-management/model/truck-driver-info.model&#x27;;
 import { ValidationSchema } from &#x27;app/constants/validation-schema&#x27;;
 import { LoadingService } from &#x27;app/services/loading-service/loading-service.service&#x27;;
 import { Subject, takeUntil } from &#x27;rxjs&#x27;;
+import { SearchInputComponent } from &#x27;../../../shared/inputs/search-input/search-input.component&#x27;;
+import { DialogService } from &#x27;primeng/dynamicdialog&#x27;;
+import { NewPasswordDialogComponent } from &#x27;app/components/shared/dialog/new-password-dialog/new-password-dialog.component&#x27;;
 
 @Component({
   selector: &#x27;app-driver-info-form&#x27;,
@@ -1522,7 +1535,9 @@ import { Subject, takeUntil } from &#x27;rxjs&#x27;;
     ReactiveFormsModule,
     DialogModule,
     TextInputComponent,
+    SearchInputComponent,
   ],
+  providers: [DialogService],
   templateUrl: &#x27;./driver-info-form.component.html&#x27;,
   styleUrl: &#x27;./driver-info-form.component.scss&#x27;,
 })
@@ -1532,17 +1547,12 @@ export class DriverInfoFormComponent {
   private driverTruckManager &#x3D; inject(Driver_TruckManagementService);
   private loadingService &#x3D; inject(LoadingService);
   private destroy$ &#x3D; new Subject&lt;void&gt;();
-
+  private dialogService &#x3D; inject(DialogService);
   driverForm: FormGroup;
   searchForm: FormGroup;
 
   loading &#x3D; false;
   addonWidth &#x3D; &#x27;8rem&#x27;;
-
-  passwordDialogVisible &#x3D; false;
-  driverUserNameDialog &#x3D; &#x27;&#x27;;
-  driverNewPasswordDialog &#x3D; &#x27;&#x27;;
-  
 
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -1572,13 +1582,18 @@ export class DriverInfoFormComponent {
     });
   }
 
+  /**
+   * Update the driver&#x27;s mobile number using the form values.
+   */
   async updateDriverMobileNumber(): Promise&lt;void&gt; {
     if (this.driverForm.invalid || this.loading) return;
 
-    this.loadingService.setLoading(true)
+    this.loadingService.setLoading(true);
     try {
+      // Get values from form controls
       const driverId &#x3D; this.driverId.value;
       const mobile &#x3D; this.mobile.value;
+      // Call service to update mobile number
       const response &#x3D;
         await this.driverTruckManager.RegisterNew_EditDriverMobileNumber(
           driverId,
@@ -1592,34 +1607,41 @@ export class DriverInfoFormComponent {
         response.data?.Message ?? &#x27;شماره تلفن راننده تغییر یافت.&#x27;
       );
     } finally {
-     this.loadingService.setLoading(false)
+      this.loadingService.setLoading(false);
     }
   }
 
-  async loadDriverInfoFromAPI(): Promise&lt;void&gt; {
+  /**
+   * Load driver info from API by national ID.
+   */
+  loadDriverInfoFromAPI &#x3D; async (nationalId: string) &#x3D;&gt; {
     if (this.searchForm.invalid || this.loading) return;
 
-    this.loadingService.setLoading(true)
+    this.loadingService.setLoading(true);
     try {
-      const nationalId &#x3D; this.searchNationalId.value;
+      // Call service to get driver info
       const response &#x3D; await this.driverTruckManager.GetDriverInfoFromAPI(
         nationalId
       );
 
       if (!this.isSuccessful(response)) return;
-
-      this.populateDriverForm(response.data as TruckDriverInfo);
+      this.populateDriverForm(response.data!);
     } finally {
-      this.loadingService.setLoading(false)
+      this.loadingService.setLoading(false);
     }
-  }
+  };
 
+  /**
+   * Reset the driver&#x27;s password and show the new credentials in a dialog.
+   */
   async resetDriverPassword(): Promise&lt;void&gt; {
     if (this.driverForm.invalid || this.loading) return;
 
     this.loadingService.setLoading(true);
     try {
+      // Get driver ID from form
       const driverId &#x3D; this.driverId.value;
+      // Call service to reset password
       const response &#x3D; await this.driverTruckManager.ResetDriverPassword(
         driverId
       );
@@ -1627,20 +1649,24 @@ export class DriverInfoFormComponent {
       if (!this.isSuccessful(response)) return;
 
       const { Username, Password } &#x3D; response.data!;
-      this.showDialog(Username, Password);
-    } catch {
-      this.toast.error(&#x27;خطا&#x27;, &#x27;در بازنشانی رمز عبور مشکلی پیش آمد.&#x27;);
+      // Show new credentials in dialog
+      this.showNewPasswordDialog(Username, Password);
     } finally {
-      this.loadingService.setLoading(false)
+      this.loadingService.setLoading(false);
     }
   }
 
+  /**
+   * Activate SMS system for the driver.
+   */
   async activateDriverSms(): Promise&lt;void&gt; {
     if (this.driverForm.invalid || this.loading) return;
 
-    this.loadingService.setLoading(true)
+    this.loadingService.setLoading(true);
     try {
+      // Get driver ID from form
       const driverId &#x3D; this.driverId.value;
+      // Call service to activate SMS
       const response &#x3D; await this.driverTruckManager.ActivateDriverSMS(
         driverId
       );
@@ -1654,16 +1680,21 @@ export class DriverInfoFormComponent {
     } catch {
       this.toast.error(&#x27;خطا&#x27;, &#x27;در فعال‌سازی سیستم پیامک مشکلی پیش آمد.&#x27;);
     } finally {
-      this.loadingService.setLoading(false)
+      this.loadingService.setLoading(false);
     }
   }
 
+  /**
+   * Send website login link to the driver.
+   */
   async sendWebsiteLink(): Promise&lt;void&gt; {
     if (this.driverForm.invalid || this.loading) return;
 
-    this.loadingService.setLoading(true)
+    this.loadingService.setLoading(true);
     try {
+      // Get driver ID from form
       const driverId &#x3D; this.driverId.value;
+      // Call service to send website link
       const response &#x3D; await this.driverTruckManager.SendWebsiteLink(driverId);
 
       if (!this.isSuccessful(response)) return;
@@ -1675,21 +1706,34 @@ export class DriverInfoFormComponent {
     } catch {
       this.toast.error(&#x27;خطا&#x27;, &#x27;در ارسال لینک ورود مشکلی پیش آمد.&#x27;);
     } finally {
-      this.loadingService.setLoading(false)
+      this.loadingService.setLoading(false);
     }
   }
 
+  /**
+   * Copy the given text to clipboard and show a toast.
+   */
   copyToClipboard(text: string) {
     this.toast.success(&#x27;متن در کلیپبورد ذخیره شد&#x27;, &#x27;&#x27;);
     navigator.clipboard.writeText(text);
   }
 
-  onCloseDialog() {
-    this.driverUserNameDialog &#x3D; &#x27;&#x27;;
-    this.driverNewPasswordDialog &#x3D; &#x27;&#x27;;
+  /**
+   * Open dialog showing new username and password.
+   */
+  private showNewPasswordDialog(username: string, password: string): void {
+    this.dialogService.open(NewPasswordDialogComponent, {
+      header: &#x27;رمز عبور جدید&#x27;,
+      width: &#x27;20rem&#x27;,
+      modal: true,
+      inputValues: { username, password },
+    });
   }
 
-  populateDriverForm(driverInfo: TruckDriverInfo): void {
+  /**
+   * Populate the driver form with the given driver info.
+   */
+  private populateDriverForm(driverInfo: TruckDriverInfo): void {
     this.driverForm.patchValue({
       driverId: driverInfo.DriverId ?? &#x27;&#x27;,
       nationalId: driverInfo.NationalCode ?? &#x27;&#x27;,
@@ -1702,6 +1746,9 @@ export class DriverInfoFormComponent {
     });
   }
 
+  /**
+   * Check if the API response is successful and show error toast if not.
+   */
   private isSuccessful(response: ApiResponse&lt;any&gt;): boolean {
     if (!response.success || !response.data) {
       this.toast.error(
@@ -1713,45 +1760,48 @@ export class DriverInfoFormComponent {
     return true;
   }
 
-  private showDialog(username: string, password: string) {
-    this.driverNewPasswordDialog &#x3D; password;
-    this.driverUserNameDialog &#x3D; username;
-    this.passwordDialogVisible &#x3D; true;
-  }
-
   // Form control getters
+  /** Get searchNationalId form control */
   get searchNationalId(): FormControl {
     return this.searchForm.get(&#x27;searchNationalId&#x27;) as FormControl;
   }
 
+  /** Get driverId form control */
   get driverId(): FormControl {
     return this.driverForm.get(&#x27;driverId&#x27;) as FormControl;
   }
 
+  /** Get nationalId form control */
   get nationalId(): FormControl {
     return this.driverForm.get(&#x27;nationalId&#x27;) as FormControl;
   }
 
+  /** Get fullName form control */
   get fullName(): FormControl {
     return this.driverForm.get(&#x27;fullName&#x27;) as FormControl;
   }
 
+  /** Get mobile form control */
   get mobile(): FormControl {
     return this.driverForm.get(&#x27;mobile&#x27;) as FormControl;
   }
 
+  /** Get fatherName form control */
   get fatherName(): FormControl {
     return this.driverForm.get(&#x27;fatherName&#x27;) as FormControl;
   }
 
+  /** Get licenseNumber form control */
   get licenseNumber(): FormControl {
     return this.driverForm.get(&#x27;licenseNumber&#x27;) as FormControl;
   }
 
+  /** Get smartCard form control */
   get smartCard(): FormControl {
     return this.driverForm.get(&#x27;smartCard&#x27;) as FormControl;
   }
 
+  /** Get address form control */
   get address(): FormControl {
     return this.driverForm.get(&#x27;address&#x27;) as FormControl;
   }
@@ -1766,26 +1816,20 @@ export class DriverInfoFormComponent {
     [class.pointer-events-none]&#x3D;&quot;loading&quot;
     [class.opacity-60]&#x3D;&quot;loading&quot;
     [formGroup]&#x3D;&quot;searchForm&quot;
-    (ngSubmit)&#x3D;&quot;loadDriverInfoFromAPI()&quot;
-    &gt;
+  &gt;
     &lt;div class&#x3D;&quot;flex gap-2&quot;&gt;
-      &lt;app-text-input
+      &lt;app-search-input
         [control]&#x3D;&quot;searchNationalId&quot;
         validationField&#x3D;&quot;nationalId&quot;
         icon&#x3D;&quot;pi pi-id-card&quot;
         class&#x3D;&quot;flex-1&quot;
         placeholder&#x3D;&quot;جستجو براساس شماره ملی راننده&quot;
-      /&gt;
-      &lt;p-button
-        (click)&#x3D;&quot;loadDriverInfoFromAPI()&quot;
-        [disabled]&#x3D;&quot;this.searchForm.invalid&quot;
-        size&#x3D;&quot;small&quot;
-        severity&#x3D;&quot;info&quot;
-        label&#x3D;&quot;استعلام از سامانه&quot;
+        searchButtonLabel&#x3D;&quot;استعلام از سامانه&quot;
+        [disableSearchButton]&#x3D;&quot;this.searchForm.invalid&quot;
+        [onSearchQuery]&#x3D;&quot;loadDriverInfoFromAPI&quot;
       /&gt;
     &lt;/div&gt;
   &lt;/form&gt;
-
   &lt;div
     class&#x3D;&quot;p-fluid grid gap-4 relative px-4&quot;
     [class.pointer-events-none]&#x3D;&quot;loading&quot;
@@ -1920,42 +1964,6 @@ export class DriverInfoFormComponent {
       &gt;&lt;/p-button&gt;
     &lt;/div&gt;
   &lt;/div&gt;
-
-  &lt;div class&#x3D;&quot;card flex justify-center&quot;&gt;
-    &lt;p-dialog
-      header&#x3D;&quot;رمز عبور جدید&quot;
-      [modal]&#x3D;&quot;true&quot;
-      (onHide)&#x3D;&quot;onCloseDialog()&quot;
-      [(visible)]&#x3D;&quot;passwordDialogVisible&quot;
-      [style]&#x3D;&quot;{ width: &#x27;25rem&#x27; }&quot;
-    &gt;
-      &lt;div class&#x3D;&quot;flex gap-3 flex-column&quot;&gt;
-        &lt;div class&#x3D;&quot;flex align-items-center justify-content-between&quot;&gt;
-          &lt;span class&#x3D;&quot;w-8rem&quot;&gt; شناسه کابری: &lt;/span&gt;
-          &lt;p-button
-            (click)&#x3D;&quot;copyToClipboard(driverUserNameDialog)&quot;
-            size&#x3D;&quot;small&quot;
-            styleClass&#x3D;&quot;px-4 w-10rem&quot;
-            severity&#x3D;&quot;info&quot;
-          &gt;
-            {{ driverUserNameDialog }}
-          &lt;/p-button&gt;
-        &lt;/div&gt;
-
-        &lt;div class&#x3D;&quot;flex align-items-center justify-content-between&quot;&gt;
-          &lt;span class&#x3D;&quot;w-8rem&quot;&gt; رمز عبور جدید &lt;/span&gt;
-          &lt;p-button
-            (click)&#x3D;&quot;copyToClipboard(driverNewPasswordDialog)&quot;
-            size&#x3D;&quot;small&quot;
-            styleClass&#x3D;&quot;px-4 w-10rem&quot;
-            severity&#x3D;&quot;primary&quot;
-          &gt;
-            {{ driverNewPasswordDialog }}
-          &lt;/p-button&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/p-dialog&gt;
-  &lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
     </div>
@@ -1986,8 +1994,8 @@ export class DriverInfoFormComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="p-fluid grid gap-4 relative">  <form    class="col-12"    [class.pointer-events-none]="loading"    [class.opacity-60]="loading"    [formGroup]="searchForm"    (ngSubmit)="loadDriverInfoFromAPI()"    >    <div class="flex gap-2">      <app-text-input        [control]="searchNationalId"        validationField="nationalId"        icon="pi pi-id-card"        class="flex-1"        placeholder="جستجو براساس شماره ملی راننده"      />      <p-button        (click)="loadDriverInfoFromAPI()"        [disabled]="this.searchForm.invalid"        size="small"        severity="info"        label="استعلام از سامانه"      />    </div>  </form>  <div    class="p-fluid grid gap-4 relative px-4"    [class.pointer-events-none]="loading"    [class.opacity-60]="loading"  >    <div class="grid">      <div class="col-12 md:col-6">        <app-text-input          label="کد راننده"          class="flex-1"          placeholder="کد راننده"          [readOnly]="true"          [control]="driverId"          validationField="driverId"          [addonWidth]="addonWidth"        />      </div>      <div class="col-12 md:col-6">        <app-text-input          label="کدملی"          class="flex-1"          placeholder="کدملی راننده"          [control]="nationalId"          validationField="nationalId"          [readOnly]="true"          [addonWidth]="addonWidth"        />      </div>      <div class="col-12 md:col-6">        <app-text-input          label="نام راننده"          class="flex-1"          placeholder="نام راننده"          [control]="fullName"          validationField="fullName"          [readOnly]="true"          [addonWidth]="addonWidth"        />      </div>      <div class="col-12 md:col-6 relative">        <app-text-input          label="شماره  تلفن"          class="flex-1"          placeholder="شماره تلفن"          buttonIcon="pi pi-save"          [control]="mobile"          validationField="mobile"          [addonWidth]="addonWidth"          [buttonDisabled]="driverForm.invalid"          (clickButton)="updateDriverMobileNumber()"        />      </div>      <div class="col-12 md:col-6">        <app-text-input          label="نام پدر"          class="flex-1"          placeholder="نام پدر"          [control]="fatherName"          validationField="fatherName"          [readOnly]="true"          [addonWidth]="addonWidth"        />      </div>      <div class="col-12 md:col-6">        <app-text-input          label="شماره گواهینامه"          class="flex-1"          placeholder="شماره گواهینامه"          [control]="licenseNumber"          validationField="licenseNumber"          [readOnly]="true"          [addonWidth]="addonWidth"        />      </div>      <div class="col-12 md:col-6">        <app-text-input          label="شماره هوشمند"          class="flex-1"          placeholder="شماره هوشمند"          [control]="smartCard"          validationField="smartCard"          [readOnly]="true"          [addonWidth]="addonWidth"        />      </div>      <div class="col-12 md:col-6">        <app-text-input          label="آدرس"          class="flex-1"          placeholder="آدرس راننده"          [control]="address"          validationField="address"          [readOnly]="true"          [addonWidth]="addonWidth"        />      </div>    </div>    <!-- Action Buttons -->    <div      class="col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center"    >      <p-button        (click)="activateDriverSms()"        [disabled]="this.driverForm.invalid || loading"        severity="warn"        label="فعال سازی پیامک"        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"      ></p-button>      <p-button        (click)="sendWebsiteLink()"        [disabled]="this.driverForm.invalid || loading"        severity="warn"        label="ارسال لینک سامانه"        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"      ></p-button>      <p-button        (click)="resetDriverPassword()"        [disabled]="this.driverForm.invalid || loading"        severity="info"        label="ایجاد رمز عبور جدید"        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"      ></p-button>    </div>  </div>  <div class="card flex justify-center">    <p-dialog      header="رمز عبور جدید"      [modal]="true"      (onHide)="onCloseDialog()"      [(visible)]="passwordDialogVisible"      [style]="{ width: \'25rem\' }"    >      <div class="flex gap-3 flex-column">        <div class="flex align-items-center justify-content-between">          <span class="w-8rem"> شناسه کابری: </span>          <p-button            (click)="copyToClipboard(driverUserNameDialog)"            size="small"            styleClass="px-4 w-10rem"            severity="info"          >            {{ driverUserNameDialog }}          </p-button>        </div>        <div class="flex align-items-center justify-content-between">          <span class="w-8rem"> رمز عبور جدید </span>          <p-button            (click)="copyToClipboard(driverNewPasswordDialog)"            size="small"            styleClass="px-4 w-10rem"            severity="primary"          >            {{ driverNewPasswordDialog }}          </p-button>        </div>      </div>    </p-dialog>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarMenuComponent', 'selector': 'app-sidebar-menu'},{'name': 'SubMenuComponent', 'selector': 'app-sub-menu'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TabBarComponent', 'selector': 'app-tab-bar'},{'name': 'TabViewComponent', 'selector': 'app-tab-view'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'}];
+        var COMPONENT_TEMPLATE = '<div><div class="p-fluid grid gap-4 relative">  <form    class="col-12"    [class.pointer-events-none]="loading"    [class.opacity-60]="loading"    [formGroup]="searchForm"  >    <div class="flex gap-2">      <app-search-input        [control]="searchNationalId"        validationField="nationalId"        icon="pi pi-id-card"        class="flex-1"        placeholder="جستجو براساس شماره ملی راننده"        searchButtonLabel="استعلام از سامانه"        [disableSearchButton]="this.searchForm.invalid"        [onSearchQuery]="loadDriverInfoFromAPI"      />    </div>  </form>  <div    class="p-fluid grid gap-4 relative px-4"    [class.pointer-events-none]="loading"    [class.opacity-60]="loading"  >    <div class="grid">      <div class="col-12 md:col-6">        <app-text-input          label="کد راننده"          class="flex-1"          placeholder="کد راننده"          [readOnly]="true"          [control]="driverId"          validationField="driverId"          [addonWidth]="addonWidth"        />      </div>      <div class="col-12 md:col-6">        <app-text-input          label="کدملی"          class="flex-1"          placeholder="کدملی راننده"          [control]="nationalId"          validationField="nationalId"          [readOnly]="true"          [addonWidth]="addonWidth"        />      </div>      <div class="col-12 md:col-6">        <app-text-input          label="نام راننده"          class="flex-1"          placeholder="نام راننده"          [control]="fullName"          validationField="fullName"          [readOnly]="true"          [addonWidth]="addonWidth"        />      </div>      <div class="col-12 md:col-6 relative">        <app-text-input          label="شماره  تلفن"          class="flex-1"          placeholder="شماره تلفن"          buttonIcon="pi pi-save"          [control]="mobile"          validationField="mobile"          [addonWidth]="addonWidth"          [buttonDisabled]="driverForm.invalid"          (clickButton)="updateDriverMobileNumber()"        />      </div>      <div class="col-12 md:col-6">        <app-text-input          label="نام پدر"          class="flex-1"          placeholder="نام پدر"          [control]="fatherName"          validationField="fatherName"          [readOnly]="true"          [addonWidth]="addonWidth"        />      </div>      <div class="col-12 md:col-6">        <app-text-input          label="شماره گواهینامه"          class="flex-1"          placeholder="شماره گواهینامه"          [control]="licenseNumber"          validationField="licenseNumber"          [readOnly]="true"          [addonWidth]="addonWidth"        />      </div>      <div class="col-12 md:col-6">        <app-text-input          label="شماره هوشمند"          class="flex-1"          placeholder="شماره هوشمند"          [control]="smartCard"          validationField="smartCard"          [readOnly]="true"          [addonWidth]="addonWidth"        />      </div>      <div class="col-12 md:col-6">        <app-text-input          label="آدرس"          class="flex-1"          placeholder="آدرس راننده"          [control]="address"          validationField="address"          [readOnly]="true"          [addonWidth]="addonWidth"        />      </div>    </div>    <!-- Action Buttons -->    <div      class="col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center"    >      <p-button        (click)="activateDriverSms()"        [disabled]="this.driverForm.invalid || loading"        severity="warn"        label="فعال سازی پیامک"        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"      ></p-button>      <p-button        (click)="sendWebsiteLink()"        [disabled]="this.driverForm.invalid || loading"        severity="warn"        label="ارسال لینک سامانه"        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"      ></p-button>      <p-button        (click)="resetDriverPassword()"        [disabled]="this.driverForm.invalid || loading"        severity="info"        label="ایجاد رمز عبور جدید"        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"      ></p-button>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarMenuComponent', 'selector': 'app-sidebar-menu'},{'name': 'SubMenuComponent', 'selector': 'app-sub-menu'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TabBarComponent', 'selector': 'app-tab-bar'},{'name': 'TabViewComponent', 'selector': 'app-tab-view'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'DriverInfoFormComponent'};
 </script>

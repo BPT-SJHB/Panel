@@ -514,6 +514,10 @@ export const ValidationSchema &#x3D; {
     name: &#x27;عنوان&#x27;,
     validators: [Validators.required],
   },
+  keyword:{
+    name:&#x27;کلمه کلیدی&#x27;,
+    validators:[Validators.required]
+  },
   managerName: {
     name: &#x27;نام مدیر&#x27;,
     validators: [Validators.required, Validators.minLength(3)],
@@ -633,7 +637,7 @@ export const ValidationSchema &#x3D; {
     name: &#x27;گیرنده&#x27;,
     validators: [Validators.required],
   },
-  tarrif: {
+  tariff: {
     name: &#x27;تعرفه&#x27;,
     validators: [Validators.required, Validators.min(1)],
   },
@@ -641,6 +645,10 @@ export const ValidationSchema &#x3D; {
     name: &#x27;توضیحات&#x27;,
     validators: [Validators.required, Validators.minLength(5)],
   },
+  parentage:{
+    name:&#x27;درصد&#x27;,
+    validators:[Validators.required,Validators.min(0.1)]
+  }
 };
 
 export type ValidationField &#x3D; keyof typeof ValidationSchema;
