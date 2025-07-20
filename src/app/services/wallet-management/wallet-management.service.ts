@@ -143,6 +143,35 @@ export class WalletManagementService {
     });
     //#endregion
   }
+
+  public async GetUserChargingFunctions(
+    startDate: string,
+    endDate: string,
+    startTime: string,
+    endTime: string
+  ): Promise<ApiResponse<WalletUserChargingFunction[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.WalletAndTrafficApi.WalletInfo.GetUserChargingFunctions;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      StartDate: startDate,
+      EndDate: endDate,
+      startTime: startTime,
+      endTime: endTime,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      WalletUserChargingFunction[]
+    >(apiUrl, bodyValue, mockWalletUserChargingFunctions);
+    //#endregion
+  }
+
   public async GetWalletBalance(
     walletId: number
   ): Promise<ApiResponse<{ Balance: number }>> {
