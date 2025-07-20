@@ -291,17 +291,27 @@ const initialState: SidebarState &#x3D; {
 
 export const sidebarReducer &#x3D; createReducer(
   initialState,
-  on(SidebarActions.openSidebar, state &#x3D;&gt; ({ ...state, isOpen: true })),
-  on(SidebarActions.closeSidebar, state &#x3D;&gt; ({ ...state, isOpen: false })),
-  on(SidebarActions.toggleSidebar, state &#x3D;&gt; ({ ...state, isOpen: !state.isOpen })),
+  on(SidebarActions.openSidebar, (state) &#x3D;&gt; ({ ...state, isOpen: true })),
+  on(SidebarActions.closeSidebar, (state) &#x3D;&gt; ({ ...state, isOpen: false })),
+  on(SidebarActions.toggleSidebar, (state) &#x3D;&gt; ({
+    ...state,
+    isOpen: !state.isOpen,
+  })),
   on(SidebarActions.setPageGroups, (state, { groups }) &#x3D;&gt; {
-    const validId &#x3D; groups.find(g &#x3D;&gt; g.id &#x3D;&#x3D;&#x3D; state.selectedPageGroupId)?.id || groups[0]?.id || 0;
+    const validId &#x3D;
+      groups.find((g) &#x3D;&gt; g.id &#x3D;&#x3D;&#x3D; state.selectedPageGroupId)?.id ||
+      groups[0]?.id ||
+      0;
     return { ...state, pageGroups: groups, selectedPageGroupId: validId };
   }),
   on(SidebarActions.selectPageGroup, (state, { id }) &#x3D;&gt; {
-    const exists &#x3D; state.pageGroups.some(g &#x3D;&gt; g.id &#x3D;&#x3D;&#x3D; id);
+    window.scrollTo({
+      top: 0,
+      behavior: &#x27;auto&#x27;,
+    });    
+    const exists &#x3D; state.pageGroups.some((g) &#x3D;&gt; g.id &#x3D;&#x3D;&#x3D; id);
     return exists ? { ...state, selectedPageGroupId: id } : state;
-  }),
+  })
 );
 </code></pre>
     </div>

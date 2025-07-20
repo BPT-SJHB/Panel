@@ -294,6 +294,7 @@ import { TreeNode } from &#x27;primeng/api&#x27;;
 import { TreeTable, TreeTableModule } from &#x27;primeng/treetable&#x27;;
 import { SearchInputComponent } from &#x27;../../shared/inputs/search-input/search-input.component&#x27;;
 import { ButtonModule } from &#x27;primeng/button&#x27;;
+import { FormControl } from &#x27;@angular/forms&#x27;;
 
 interface SelectionKey {
   checked: boolean;
@@ -334,7 +335,7 @@ export class TreeTableCheckboxComponent implements OnInit, OnChanges {
   treeMap &#x3D; new Map&lt;string, TreeNode&gt;();
   selectionKeys: Record&lt;string, SelectionKey&gt; &#x3D; {};
   lastSelectionKeys: Record&lt;string, SelectionKey&gt; &#x3D; {};
-  searchTerm &#x3D; &quot;&quot;;
+  searchTerm &#x3D; new FormControl(&#x27;&#x27;);
 
   ngOnInit(): void {
     this.tree &#x3D; this.initializeTree();
@@ -440,8 +441,8 @@ export class TreeTableCheckboxComponent implements OnInit, OnChanges {
 
   onClickSearch() {
     if (!this.enabledAutoSearch) {
-      this.filters(this.searchTerm);
-      this.onSearch.emit(this.searchTerm);
+      this.filters(this.searchTerm.value ?? &#x27;&#x27;);
+      this.onSearch.emit(this.searchTerm.value ?? &#x27;&#x27;);
     }
   }
 

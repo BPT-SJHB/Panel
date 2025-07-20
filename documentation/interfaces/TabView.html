@@ -147,6 +147,13 @@
                                         </a>
                                 </li>
                                 <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#data" 
+>
+                                            data
+                                        </a>
+                                </li>
+                                <li>
                                         <a href="#title" 
 >
                                             title
@@ -190,6 +197,44 @@
                                         </td>
                                     </tr>
 
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="data"></a>
+                                        <span class="name "><b>data</b>
+                                            <a href="#data">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>data:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
 
 
 
@@ -245,29 +290,49 @@ import { LoadCapacitorFormComponent } from &#x27;app/components/forms/load-capac
 import { LoaderTypeFormComponent } from &#x27;app/components/forms/loader-type-form/loader-type-form.component&#x27;;
 import { ProvinceAndCityFormComponent } from &#x27;app/components/forms/province-and-city-form/province-and-city-form.component&#x27;;
 import { ProductFormComponent } from &#x27;app/components/forms/product-form/product-form.component&#x27;;
-import { MainViewComponent } from &#x27;app/components/shared/main-view/main-view.component&#x27;;
 import { LadPlacesFormComponent } from &#x27;app/components/forms/lad-places-form/lad-places-form.component&#x27;;
+import { TravelTimeFormComponent } from &#x27;app/components/forms/travel-time-form/travel-time-form.component&#x27;;
+import { TariffsFormComponent } from &#x27;app/components/forms/tariffs-manages-form/tariffs-form.component&#x27;;
+import { AnnouncementGroupFormComponent } from &#x27;app/components/forms/announcement-management-form/announcement-group-form/announcement-group-form.component&#x27;;
+import { AnnouncementSubGroupFormComponent } from &#x27;app/components/forms/announcement-management-form/announcement-sub-group-form/announcement-sub-group-form.component&#x27;;
+import { RelationOfAnnouncementGroupAndSubGroupComponent } from &#x27;app/components/forms/announcement-management-form/relation-of-announcement-group-and-sub-group/relation-of-announcement-group-and-sub-group.component&#x27;;
+import { SequentialTurnsFormComponent } from &#x27;app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component&#x27;;
+import { RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent } from &#x27;app/components/forms/sequential-turns-management-form/relation-of-sequential-turn-to-announcement-sub-groups/relation-of-sequential-turn-to-announcement-sub-groups-form.component&#x27;;
+import { MainViewComponent } from &#x27;app/components/shared/main-view/main-view.component&#x27;;
+import { RelationOfSequentialTurnToLoaderTypeFormComponent } from &#x27;app/components/forms/sequential-turns-management-form/relation-of-sequential-turn-to-loader-type-form/relation-of-sequential-turn-to-loader-type-form.component&#x27;;
+import { TruckAndDriverInformationFormComponent } from &#x27;app/components/forms/truck-and-driver-information-form/truck-and-driver-information-form.component&#x27;;
+import { TurnsListFormComponent } from &#x27;app/components/forms/turns-management-form/turns-list-form/turns-list-form.component&#x27;;
+import { RealTimeTurnsFormComponent } from &#x27;app/components/forms/turns-management-form/real-time-turns-form/real-time-turns-form.component&#x27;;
+import { EmergencyTurnsFormComponent } from &#x27;app/components/forms/turns-management-form/emergency-time-turns-form copy/emergency-turns-form.component&#x27;;
+import { ResuscitateTurnsFormComponent } from &#x27;app/components/forms/turns-management-form/resuscitate-time-turns-form/resuscitate-turns-form.component&#x27;;
 
 export enum TabComponentKey {
   Main &#x3D; -1,
   UserManagement &#x3D; 0,
   TruckDriverManagement &#x3D; 1,
+  SequentialTurnManagement &#x3D; 4,
   FactoriesAndFreightManagement &#x3D; 6,
+  AnnouncementManagement &#x3D; 11,
   LoaderTypeManagement &#x3D; 12,
   LADPlaceManagementService &#x3D; 7,
   ProvinceAndCityManagement &#x3D; 8,
   ProductTypesManagement &#x3D; 9,
-  LoaderManagemet &#x3D; 13,
+  LoaderManagement &#x3D; 13,
+  TravelTimeManagement &#x3D; 14,
+  TurnsManagement &#x3D; 19,
   LoadCapacitorManagement &#x3D; 35,
+  TariffsManagement &#x3D; 53,
+  Driver_TruckManagement &#x3D; 10,
 }
 export interface TabView {
   title: string;
   component: Type&lt;any&gt;;
+  data?: object;
 }
 
 export const TabComponentRegistry: Record&lt;TabComponentKey, TabView[]&gt; &#x3D; {
   [TabComponentKey.Main]: [
-    { title: &#x27;صفحه اصلی&#x27;, component: MainViewComponent },
+    { title: &#x27;صفحه اصلی&#x27;, component:MainViewComponent },
   ],
 
   [TabComponentKey.UserManagement]: [
@@ -307,7 +372,7 @@ export const TabComponentRegistry: Record&lt;TabComponentKey, TabView[]&gt; &#x3
       component: LoadCapacitorFormComponent,
     },
   ],
-  [TabComponentKey.LoaderManagemet]: [
+  [TabComponentKey.LoaderManagement]: [
     {
       title: &#x27;بارگیر&#x27;,
       component: LoaderTypeFormComponent,
@@ -331,10 +396,87 @@ export const TabComponentRegistry: Record&lt;TabComponentKey, TabView[]&gt; &#x3
       component: ProductFormComponent,
     },
   ],
-  [TabComponentKey.LADPlaceManagementService]: [{
-    title:&#x27;مبادی و مقاصد حمل بار&#x27;,
-    component:  LadPlacesFormComponent
-  }]
+  [TabComponentKey.LADPlaceManagementService]: [
+    {
+      title: &#x27;مبادی و مقاصد حمل بار&#x27;,
+      component: LadPlacesFormComponent,
+    },
+  ],
+  [TabComponentKey.TravelTimeManagement]: [
+    {
+      title: &#x27;مدت سفر&#x27;,
+      component: TravelTimeFormComponent,
+    },
+  ],
+  [TabComponentKey.TariffsManagement]: [
+    {
+      title: &#x27;تعرفه های حمل بار&#x27;,
+      component: TariffsFormComponent,
+    },
+  ],
+  [TabComponentKey.AnnouncementManagement]: [
+    { title: &#x27;گروه ها اعلام بار&#x27;, component: AnnouncementGroupFormComponent },
+    {
+      title: &#x27;زیر گروه ها اعلام بار&#x27;,
+      component: AnnouncementSubGroupFormComponent,
+    },
+    {
+      title: &#x27;گروه و زیرگروه اعلام بار&#x27;,
+      component: RelationOfAnnouncementGroupAndSubGroupComponent,
+    },
+  ],
+  [TabComponentKey.SequentialTurnManagement]: [
+    { title: &#x27;صفوف نوبت دهی&#x27;, component: SequentialTurnsFormComponent },
+    {
+      title: &#x27;صفوف نوبت دهی و بارگیرها&#x27;,
+      component: RelationOfSequentialTurnToLoaderTypeFormComponent,
+    },
+    {
+      title: &#x27;صفوف نوبت دهی - زیرگروه اعلام بار&#x27;,
+      component: RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent,
+    },
+  ],
+  [TabComponentKey.Driver_TruckManagement]: [
+    {
+      title: &#x27;ناوگان&#x27;,
+      component: TruckAndDriverInformationFormComponent,
+      data: {
+        insideTabType: &#x27;Truck&#x27;,
+      },
+    },
+    {
+      title: &#x27;بارگیر&#x27;,
+      component: TruckAndDriverInformationFormComponent,
+      data: {
+        insideTabType: &#x27;LoaderType&#x27;,
+      },
+    },
+    {
+      title: &#x27;راننده&#x27;,
+      component: TruckAndDriverInformationFormComponent,
+      data: {
+        insideTabType: &#x27;Driver&#x27;,
+      },
+    },
+  ],
+  [TabComponentKey.TurnsManagement]: [
+    {
+      title: &#x27;لیست نوبت ها&#x27;,
+      component: TurnsListFormComponent,
+    },
+    {
+      title: &#x27;نوبت دهی بلادرنگ&#x27;,
+      component: RealTimeTurnsFormComponent,
+    },
+    {
+      title: &#x27;نوبت دهی - نوبت اضطراری&#x27;,
+      component: EmergencyTurnsFormComponent,
+    },
+    {
+      title: &#x27;نوبت دهی - احیای نوبت رزور&#x27;,
+      component: ResuscitateTurnsFormComponent,
+    }
+  ],
 };
 </code></pre>
     </div>

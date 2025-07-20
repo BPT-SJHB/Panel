@@ -127,6 +127,7 @@
     </p>
     <p class="comment">
                 <code>OnInit</code>
+                <code>OnDestroy</code>
     </p>
 
 
@@ -144,6 +145,12 @@
 
 
 
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                            <code>DialogService</code>
+                </td>
+            </tr>
 
 
             <tr>
@@ -161,10 +168,11 @@
                 <td class="col-md-9">
                             <code>ReactiveFormsModule</code>
                             <code>ButtonModule</code>
+                            <code>DialogModule</code>
                                 <code><a href="../components/SelectInputComponent.html" target="_self" >SelectInputComponent</a></code>
                                 <code><a href="../components/BinaryRadioInputComponent.html" target="_self" >BinaryRadioInputComponent</a></code>
-                            <code>DialogModule</code>
                                 <code><a href="../components/TextInputComponent.html" target="_self" >TextInputComponent</a></code>
+                                <code><a href="../components/SearchInputComponent.html" target="_self" >SearchInputComponent</a></code>
                 </td>
             </tr>
 
@@ -209,7 +217,14 @@
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
+                                <a href="#dialogService" >dialogService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
                                 <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <a href="#fetchUserByPhone" >fetchUserByPhone</a>
                             </li>
                             <li>
                                 <a href="#loading" >loading</a>
@@ -217,12 +232,6 @@
                             <li>
                                     <span class="modifier">Private</span>
                                 <a href="#loadingService" >loadingService</a>
-                            </li>
-                            <li>
-                                <a href="#newUserPasswordDialog" >newUserPasswordDialog</a>
-                            </li>
-                            <li>
-                                <a href="#passwordDialogVisible" >passwordDialogVisible</a>
                             </li>
                             <li>
                                 <a href="#roles" >roles</a>
@@ -241,9 +250,6 @@
                                     <span class="modifier">Private</span>
                                 <a href="#userManager" >userManager</a>
                             </li>
-                            <li>
-                                <a href="#userNameDialog" >userNameDialog</a>
-                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -261,13 +267,6 @@
                                 <a href="#activateUserSms" >activateUserSms</a>
                             </li>
                             <li>
-                                <a href="#copyToClipboard" >copyToClipboard</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Async</span>
-                                <a href="#fetchUserByPhone" >fetchUserByPhone</a>
-                            </li>
-                            <li>
                                     <span class="modifier">Private</span>
                                 <a href="#getSoftwareUser" >getSoftwareUser</a>
                             </li>
@@ -276,6 +275,7 @@
                                 <a href="#isSuccessful" >isSuccessful</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
                                     <span class="modifier">Async</span>
                                 <a href="#loadUserTypes" >loadUserTypes</a>
                             </li>
@@ -286,9 +286,6 @@
                                 <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
-                                <a href="#onCloseDialog" >onCloseDialog</a>
-                            </li>
-                            <li>
                                     <span class="modifier">Private</span>
                                 <a href="#populateForm" >populateForm</a>
                             </li>
@@ -297,7 +294,7 @@
                                 <a href="#registerUser" >registerUser</a>
                             </li>
                             <li>
-                                <a href="#resetSearchFrom" >resetSearchFrom</a>
+                                <a href="#resetSearchForm" >resetSearchForm</a>
                             </li>
                             <li>
                                 <a href="#resetUserInfoForm" >resetUserInfoForm</a>
@@ -309,6 +306,10 @@
                             <li>
                                     <span class="modifier">Async</span>
                                 <a href="#sendWebsiteLink" >sendWebsiteLink</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#showNewPasswordDialog" >showNewPasswordDialog</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
@@ -373,7 +374,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:56</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:55</a></div>
                             </td>
                         </tr>
 
@@ -412,114 +413,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="103"
-                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:103</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="copyToClipboard"></a>
-                    <span class="name">
-                        <span ><b>copyToClipboard</b></span>
-                        <a href="#copyToClipboard"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>copyToClipboard(text: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="242"
-                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:242</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>text</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="fetchUserByPhone"></a>
-                    <span class="name">
-                            <span class="modifier">Async</span>
-                        <span ><b>fetchUserByPhone</b></span>
-                        <a href="#fetchUserByPhone"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>fetchUserByPhone()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="89"
-                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:89</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="120"
+                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:120</a></div>
                         </td>
                     </tr>
 
@@ -557,8 +452,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="205"
-                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:205</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="231"
+                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:231</a></div>
                         </td>
                     </tr>
 
@@ -589,15 +484,15 @@
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>isSuccessful(response: <a href="../interfaces/ApiResponse.html" target="_self">ApiResponse&lt;any&gt;</a>)</code>
+                    <code>isSuccessful(res: <a href="../interfaces/ApiResponse.html" target="_self">ApiResponse&lt;any&gt;</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="267"
-                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:267</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="263"
+                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:263</a></div>
                         </td>
                     </tr>
 
@@ -618,7 +513,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>response</td>
+                                                <td>res</td>
                                             <td>
                                                             <code><a href="../interfaces/ApiResponse.html" target="_self" >ApiResponse&lt;any&gt;</a></code>
                                             </td>
@@ -649,6 +544,7 @@
                 <td class="col-md-4">
                     <a name="loadUserTypes"></a>
                     <span class="name">
+                            <span class="modifier">Private</span>
                             <span class="modifier">Async</span>
                         <span ><b>loadUserTypes</b></span>
                         <a href="#loadUserTypes"><span class="icon ion-ios-link"></span></a>
@@ -665,8 +561,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="74"
-                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:74</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="89"
+                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:89</a></div>
                         </td>
                     </tr>
 
@@ -702,8 +598,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="37"
-                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:37</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="83"
+                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:83</a></div>
                         </td>
                     </tr>
 
@@ -739,45 +635,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="42"
-                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:42</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="onCloseDialog"></a>
-                    <span class="name">
-                        <span ><b>onCloseDialog</b></span>
-                        <a href="#onCloseDialog"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>onCloseDialog()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="247"
-                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:247</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:74</a></div>
                         </td>
                     </tr>
 
@@ -884,8 +743,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="139"
-                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:139</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="160"
+                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:160</a></div>
                         </td>
                     </tr>
 
@@ -905,24 +764,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="resetSearchFrom"></a>
+                    <a name="resetSearchForm"></a>
                     <span class="name">
-                        <span ><b>resetSearchFrom</b></span>
-                        <a href="#resetSearchFrom"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>resetSearchForm</b></span>
+                        <a href="#resetSearchForm"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>resetSearchFrom()</code>
+<code>resetSearchForm()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="236"
-                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:236</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="283"
+                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:283</a></div>
                         </td>
                     </tr>
 
@@ -958,8 +817,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="225"
-                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:225</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="272"
+                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:272</a></div>
                         </td>
                     </tr>
 
@@ -997,8 +856,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="117"
-                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:117</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="142"
+                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:142</a></div>
                         </td>
                     </tr>
 
@@ -1036,8 +895,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="186"
-                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:186</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="201"
+                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:201</a></div>
                         </td>
                     </tr>
 
@@ -1046,9 +905,90 @@
                 <td class="col-md-4">
 
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showNewPasswordDialog"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>showNewPasswordDialog</b></span>
+                        <a href="#showNewPasswordDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showNewPasswordDialog(username: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, password: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="243"
+                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:243</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>username</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>password</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -1075,8 +1015,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="217"
-                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:217</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="224"
+                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:224</a></div>
                         </td>
                     </tr>
 
@@ -1114,8 +1054,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="167"
-                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:167</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="186"
+                                    class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:186</a></div>
                         </td>
                     </tr>
 
@@ -1156,7 +1096,33 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dialogService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>dialogService</b></span>
+                        <a href="#dialogService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(DialogService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:49</a></div>
                         </td>
                     </tr>
 
@@ -1177,18 +1143,37 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>    <code>FormBuilder</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
                         <i>Default value : </i><code>inject(FormBuilder)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchUserByPhone"></a>
+                    <span class="name">
+                        <span ><b>fetchUserByPhone</b></span>
+                        <a href="#fetchUserByPhone"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:106</a></div>
                         </td>
                     </tr>
 
@@ -1213,7 +1198,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:51</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -1239,69 +1224,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:34</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="newUserPasswordDialog"></a>
-                    <span class="name">
-                        <span ><b>newUserPasswordDialog</b></span>
-                        <a href="#newUserPasswordDialog"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>&quot;&quot;</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:56</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="passwordDialogVisible"></a>
-                    <span class="name">
-                        <span ><b>passwordDialogVisible</b></span>
-                        <a href="#passwordDialogVisible"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>false</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:54</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:48</a></div>
                         </td>
                     </tr>
 
@@ -1332,7 +1255,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:54</a></div>
                         </td>
                     </tr>
 
@@ -1358,7 +1281,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:50</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:53</a></div>
                         </td>
                     </tr>
 
@@ -1379,18 +1302,12 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../injectables/ToastService.html" target="_self" >ToastService</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
                         <i>Default value : </i><code>inject(ToastService)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -1416,7 +1333,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:49</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:52</a></div>
                         </td>
                     </tr>
 
@@ -1437,49 +1354,12 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../injectables/UserManagementService.html" target="_self" >UserManagementService</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
                         <i>Default value : </i><code>inject(UserManagementService)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:32</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="userNameDialog"></a>
-                    <span class="name">
-                        <span ><b>userNameDialog</b></span>
-                        <a href="#userNameDialog"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>&quot;&quot;</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:55</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:46</a></div>
                         </td>
                     </tr>
 
@@ -1508,7 +1388,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="276" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:276</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="290" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:290</a></div>
                                 </td>
                             </tr>
 
@@ -1530,7 +1410,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="280" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:280</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="295" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:295</a></div>
                                 </td>
                             </tr>
 
@@ -1552,7 +1432,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="284" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:284</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="300" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:300</a></div>
                                 </td>
                             </tr>
 
@@ -1574,7 +1454,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="288" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:288</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="305" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:305</a></div>
                                 </td>
                             </tr>
 
@@ -1596,7 +1476,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="292" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:292</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="310" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:310</a></div>
                                 </td>
                             </tr>
 
@@ -1618,7 +1498,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="296" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:296</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="315" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:315</a></div>
                                 </td>
                             </tr>
 
@@ -1640,7 +1520,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="300" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:300</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="320" class="link-to-prism">src/app/components/forms/user-management-form/user-Info-form/user-info-form.component.ts:320</a></div>
                                 </td>
                             </tr>
 
@@ -1651,20 +1531,32 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, OnInit } from &#x27;@angular/core&#x27;;
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from &#x27;@angular/forms&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, OnInit, OnDestroy } from &#x27;@angular/core&#x27;;
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+} from &#x27;@angular/forms&#x27;;
+import { Subject, takeUntil } from &#x27;rxjs&#x27;;
+
 import { ButtonModule } from &#x27;primeng/button&#x27;;
+import { DialogModule } from &#x27;primeng/dialog&#x27;;
+import { DialogService } from &#x27;primeng/dynamicdialog&#x27;;
+
 import { SelectInputComponent } from &#x27;app/components/shared/inputs/select-input/select-input.component&#x27;;
 import { BinaryRadioInputComponent } from &#x27;app/components/shared/inputs/binary-radio-input/binary-radio-input.component&#x27;;
+import { TextInputComponent } from &#x27;app/components/shared/inputs/text-input/text-input.component&#x27;;
+import { SearchInputComponent } from &#x27;app/components/shared/inputs/search-input/search-input.component&#x27;;
+
 import { UserManagementService } from &#x27;app/services/user-management/user-management.service&#x27;;
 import { ToastService } from &#x27;app/services/toast-service/toast.service&#x27;;
+import { LoadingService } from &#x27;app/services/loading-service/loading-service.service&#x27;;
+
+import { NewPasswordDialogComponent } from &#x27;app/components/shared/dialog/new-password-dialog/new-password-dialog.component&#x27;;
 import { SoftwareUserInfo } from &#x27;app/data/model/software-user-info.model&#x27;;
 import { ApiResponse } from &#x27;app/data/model/api-Response.model&#x27;;
-import { DialogModule } from &#x27;primeng/dialog&#x27;;
 import { ValidationSchema } from &#x27;app/constants/validation-schema&#x27;;
-import { TextInputComponent } from &#x27;app/components/shared/inputs/text-input/text-input.component&#x27;;
-import { LoadingService } from &#x27;app/services/loading-service/loading-service.service&#x27;;
-import { Subject, takeUntil } from &#x27;rxjs&#x27;;
 
 @Component({
   selector: &#x27;app-user-info-form&#x27;,
@@ -1672,51 +1564,38 @@ import { Subject, takeUntil } from &#x27;rxjs&#x27;;
   imports: [
     ReactiveFormsModule,
     ButtonModule,
+    DialogModule,
     SelectInputComponent,
     BinaryRadioInputComponent,
-    DialogModule,
-    TextInputComponent
+    TextInputComponent,
+    SearchInputComponent,
   ],
+  providers: [DialogService],
   templateUrl: &#x27;./user-info-form.component.html&#x27;,
-  styleUrl: &#x27;./user-info-form.component.scss&#x27;
+  styleUrl: &#x27;./user-info-form.component.scss&#x27;,
 })
-export class UserInfoFormComponent implements OnInit {
-  private fb: FormBuilder &#x3D; inject(FormBuilder);
-  private userManager: UserManagementService &#x3D; inject(UserManagementService);
-  private toast: ToastService &#x3D; inject(ToastService);
+export class UserInfoFormComponent implements OnInit, OnDestroy {
+  private fb &#x3D; inject(FormBuilder);
+  private userManager &#x3D; inject(UserManagementService);
+  private toast &#x3D; inject(ToastService);
   private loadingService &#x3D; inject(LoadingService);
+  private dialogService &#x3D; inject(DialogService);
   private destroy$ &#x3D; new Subject&lt;void&gt;();
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
-  ngOnInit(): void {
-    this.loadingService.loading$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((value) &#x3D;&gt; (this.loading &#x3D; value));
-    this.loadUserTypes();
-  }
 
   userInfoForm: FormGroup;
   searchForm: FormGroup;
-  loading &#x3D; false;
   roles: { label: string; value: number }[] &#x3D; [];
-
-  passwordDialogVisible: boolean &#x3D; false;
-  userNameDialog &#x3D; &quot;&quot;;
-  newUserPasswordDialog &#x3D; &quot;&quot;;
-
+  loading &#x3D; false;
 
   constructor() {
+    // Initialize the search and user info forms
     this.searchForm &#x3D; this.fb.group({
-      searchPhone: [&#x27;&#x27;,ValidationSchema.mobile]
-    })
+      searchPhone: [&#x27;&#x27;, ValidationSchema.mobile],
+    });
 
     this.userInfoForm &#x3D; this.fb.group({
-      id: [&#x27;0&#x27;, ValidationSchema.id],
-      phone: [&#x27;&#x27;,ValidationSchema.mobile],
+      id: [0, ValidationSchema.id],
+      phone: [&#x27;&#x27;, ValidationSchema.mobile],
       name: [&#x27;&#x27;, ValidationSchema.fullName],
       userType: [0],
       smsActive: [false],
@@ -1724,140 +1603,167 @@ export class UserInfoFormComponent implements OnInit {
     });
   }
 
-  async loadUserTypes(): Promise&lt;void&gt; {
+  // Lifecycle: on component init
+  ngOnInit(): void {
+    this.loadingService.loading$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) &#x3D;&gt; (this.loading &#x3D; val));
+
+    this.loadUserTypes();
+  }
+
+  // Lifecycle: clean up on destroy
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  // Load user types from the backend and format them for dropdown
+  private async loadUserTypes(): Promise&lt;void&gt; {
     this.loadingService.setLoading(true);
     try {
-      const response &#x3D; await this.userManager.GetUserTypes();
-      if (!this.isSuccessful(response)) return;
+      const res &#x3D; await this.userManager.GetUserTypes();
+      if (!this.isSuccessful(res)) return;
 
-      this.roles &#x3D; response.data?.map(type &#x3D;&gt; ({
-        value: type.UTId,
-        label: type.UTTitle,
-      })) ?? [];
+      this.roles &#x3D;
+        res.data?.map((type) &#x3D;&gt; ({
+          value: type.UTId,
+          label: type.UTTitle,
+        })) ?? [];
     } finally {
       this.loadingService.setLoading(false);
     }
   }
 
-  async fetchUserByPhone(): Promise&lt;void&gt; {
+  // Fetch user info using phone number (called by search)
+  fetchUserByPhone &#x3D; async (phone: string) &#x3D;&gt; {
     if (this.searchForm.invalid || this.loading) return;
 
     this.loadingService.setLoading(true);
     try {
-      const response &#x3D; await this.userManager.GetSoftwareUserInfo(this.searchPhone.value);
-      if (!this.isSuccessful(response)) return;
-
-      this.populateForm(response.data!);
+      const res &#x3D; await this.userManager.GetSoftwareUserInfo(phone);
+      if (!this.isSuccessful(res)) return;
+      this.populateForm(res.data!);
     } finally {
       this.loadingService.setLoading(false);
     }
-  }
+  };
 
+  // Activate SMS access for a user
   async activateUserSms(): Promise&lt;void&gt; {
-    if (this.id.value &#x3D;&#x3D; &#x27;0&#x27; || this.smsActive.invalid || this.smsActive.value || this.loading) return;
+    if (
+      this.id.value &#x3D;&#x3D;&#x3D; 0 ||
+      this.smsActive.invalid ||
+      this.smsActive.value ||
+      this.loading
+    )
+      return;
 
     this.loadingService.setLoading(true);
     try {
-      const response &#x3D; await this.userManager.ActivateUserSMS(this.id.value);
-      if (!this.isSuccessful(response)) return;
+      const res &#x3D; await this.userManager.ActivateUserSMS(this.id.value);
+      if (!this.isSuccessful(res)) return;
+
       this.smsActive.setValue(true);
-      this.toast.success(&#x27;موفق&#x27;, response.data?.Message ?? &#x27;عملیات موفق آمیز بود.&#x27;);
+      this.toast.success(&#x27;موفق&#x27;, res.data?.Message ?? &#x27;عملیات موفق آمیز بود.&#x27;);
     } finally {
       this.loadingService.setLoading(false);
     }
   }
 
+  // Reset the user&#x27;s password and display in dialog
   async resetUserPassword(): Promise&lt;void&gt; {
-    if (this.id.value &#x3D;&#x3D; &#x27;0&#x27; || this.loading)
-      return;
+    if (this.id.value &#x3D;&#x3D;&#x3D; 0 || this.loading) return;
 
     this.loadingService.setLoading(true);
     try {
-      const response &#x3D; await this.userManager.ResetSoftwareUserPassword(this.id.value);
-      if (!this.isSuccessful(response)) return;
+      const res &#x3D; await this.userManager.ResetSoftwareUserPassword(
+        this.id.value
+      );
+      if (!this.isSuccessful(res)) return;
 
-      const { Username, Password } &#x3D; response.data!;
-      this.toast.success(&#x27;موفق&#x27;, &#x60;رمز عبور کاربر ${Username} تغییر یافت.&#x60;);
-
-      this.userNameDialog &#x3D; Username;
-      this.newUserPasswordDialog &#x3D; Password;
-      this.passwordDialogVisible &#x3D; true;
-
+      const { Username, Password } &#x3D; res.data!;
+      this.showNewPasswordDialog(Username, Password);
     } finally {
       this.loadingService.setLoading(false);
     }
-
   }
 
+  // Register a new user using form data
   async registerUser(): Promise&lt;void&gt; {
-    if (this.loading)
-      return;
-
-    this.id.setValue(&#x27;0&#x27;);
-    if (this.userInfoForm.invalid) {
-      this.id.setValue(&#x27;&#x27;);
-      return;
-    }
+    if (this.loading &amp;&amp; this.userInfoForm.invalid) return;
 
     this.loadingService.setLoading(true);
     try {
       const user &#x3D; this.getSoftwareUser();
-      const response &#x3D; await this.userManager.RegisterNewSoftwareUser({ ...user, UserId: this.id.value });
-      if (!this.isSuccessful(response)) return;
+      const res &#x3D; await this.userManager.RegisterNewSoftwareUser({
+        ...user,
+        UserId: 0,
+      });
+      if (!this.isSuccessful(res)) return;
 
       this.toast.success(&#x27;موفق&#x27;, &#x27;کاربر با موفقیت ثبت شد.&#x27;);
-      const softwareUser &#x3D; this.getSoftwareUser();
-
       this.resetUserInfoForm();
-      this.resetSearchFrom();
+      this.resetSearchForm();
 
-      this.populateForm({ ...softwareUser, UserId: response.data?.UserId ?? 0 });
+      this.populateForm({
+        ...user,
+        UserId: res.data?.UserId ?? 0,
+      });
     } finally {
       this.loadingService.setLoading(false);
     }
   }
 
+  // Update an existing user&#x27;s information
   async updateUserInfo(): Promise&lt;void&gt; {
     if (this.userInfoForm.invalid || this.loading) return;
 
-    const userInfo: SoftwareUserInfo &#x3D; this.getSoftwareUser();
-
-    this.loading &#x3D; true;
+    const user &#x3D; this.getSoftwareUser();
+    this.loadingService.setLoading(true);
     try {
-      const response &#x3D; await this.userManager.EditSoftwareUser(userInfo);
-      if (!response.success) {
-        this.toast.error(&#x27;خطا&#x27;, response.error?.message ?? &#x27;خطای غیرمنتظره‌ای رخ داد&#x27;);
-        return;
-      }
-
-      this.toast.success(&#x27;موفق&#x27;, &#x27;ویرایش کاربر با موفقیت انجام شد.&#x27;);
+      const res &#x3D; await this.userManager.EditSoftwareUser(user);
+      if (!this.isSuccessful(res)) return;
+      this.toast.success(&#x27;موفق&#x27;, res.data?.Message ?? &#x27;&#x27;);
     } finally {
-      this.loading &#x3D; false;
+      this.loadingService.setLoading(false);
     }
   }
 
-  async sendWebsiteLink() {
-    if (this.id.value &#x3D;&#x3D; &#x27;0&#x27;) {
-      return;
-    }
-    this.loading &#x3D; true;
+  // Send the web login link to the user&#x27;s phone
+  async sendWebsiteLink(): Promise&lt;void&gt; {
+    if (this.id.value &#x3D;&#x3D;&#x3D; 0) return;
+
+    this.loadingService.setLoading(true);
     try {
-      const response &#x3D; await this.userManager.SendWebsiteLink(this.id.value);
-      if (!response.success) {
-        this.toast.error(&#x27;خطا&#x27;, response.error?.message ?? &#x27;خطای غیرمنتظره‌ای رخ داد&#x27;);
+      const res &#x3D; await this.userManager.SendWebsiteLink(this.id.value);
+      if (!res.success) {
+        this.toast.error(
+          &#x27;خطا&#x27;,
+          res.error?.message ?? &#x27;خطای غیرمنتظره‌ای رخ داد&#x27;
+        );
         return;
       }
-
-      this.toast.success(&#x27;موفق&#x27;, response.data?.Message ?? &#x27;لینک سامانه با موفقیت ارسال گردید&#x27;);
+      this.toast.success(
+        &#x27;موفق&#x27;,
+        res.data?.Message ?? &#x27;لینک سامانه با موفقیت ارسال گردید&#x27;
+      );
     } finally {
-      this.loading &#x3D; false;
+      this.loadingService.setLoading(true);
     }
-
   }
 
+  // Decide whether to register or update based on user ID
+  async submitUserInfo(): Promise&lt;void&gt; {
+    this.id.value &#x3D;&#x3D;&#x3D; 0
+      ? await this.registerUser()
+      : await this.updateUserInfo();
+  }
+
+  // Extract user data from form into a SoftwareUserInfo object
   private getSoftwareUser(): SoftwareUserInfo {
     return {
-      UserId: parseInt(this.id.value, 10),
+      UserId: this.id.value,
       MobileNumber: this.phone.value,
       UserName: this.name.value,
       UserTypeId: this.userType.value,
@@ -1866,90 +1772,84 @@ export class UserInfoFormComponent implements OnInit {
     };
   }
 
-
-  async submitUserInfo(): Promise&lt;void&gt; {
-    if (this.id.value &#x3D;&#x3D; &#x27;0&#x27;) {
-      await this.registerUser();
-    } else {
-      await this.updateUserInfo();
-    }
+  // Open dialog showing new username and password
+  private showNewPasswordDialog(username: string, password: string): void {
+    this.dialogService.open(NewPasswordDialogComponent, {
+      header: &#x27;رمز عبور جدید&#x27;,
+      width: &#x27;20rem&#x27;,
+      modal: true,
+      inputValues: { username, password },
+    });
   }
 
-  resetUserInfoForm() {
-    this.userInfoForm.reset();
-    this.userInfoForm.markAsPristine();
-    this.userInfoForm.markAsUntouched();
-
-    this.userType.setValue(0);
-    this.id.setValue(&#x27;0&#x27;);
-    this.smsActive.setValue(false);
-    this.userActive.setValue(true);
-  }
-
-  resetSearchFrom() {
-    this.searchForm.reset();
-    this.searchForm.markAsPristine();
-    this.searchForm.markAsUntouched();
-  }
-
-  copyToClipboard(text: string) {
-    this.toast.success(&#x27;متن در کلیپبورد ذخیره شد&#x27;, &#x27;&#x27;);
-    navigator.clipboard.writeText(text);
-  }
-
-  onCloseDialog() {
-    this.userNameDialog &#x3D; &#x27;&#x27;;
-    this.newUserPasswordDialog &#x3D; &#x27;&#x27;;
-  }
-
-  // Utility methods
+  // Populate form fields with existing user data
   private populateForm(data: SoftwareUserInfo): void {
-    const {
-      UserId, MobileNumber, UserName,
-      UserTypeId, SMSOwnerActive, UserActive,
-    } &#x3D; data;
-
-    this.id.setValue(UserId);
-    this.phone.setValue(MobileNumber);
-    this.name.setValue(UserName);
-    this.userType.setValue(UserTypeId);
-    this.smsActive.setValue(SMSOwnerActive);
-    this.userActive.setValue(UserActive);
+    this.id.setValue(data.UserId);
+    this.phone.setValue(data.MobileNumber);
+    this.name.setValue(data.UserName);
+    this.userType.setValue(data.UserTypeId);
+    this.smsActive.setValue(data.SMSOwnerActive);
+    this.userActive.setValue(data.UserActive);
   }
 
-  private isSuccessful(response: ApiResponse&lt;any&gt;): boolean {
-    if (!response.success || !response.data) {
-      this.toast.error(&#x27;خطا&#x27;, response.error?.message ?? &#x27;خطای غیرمنتظره‌ای رخ داد&#x27;);
+  // Check if response is valid and successful
+  private isSuccessful(res: ApiResponse&lt;any&gt;): boolean {
+    if (!res.success || !res.data) {
+      this.toast.error(&#x27;خطا&#x27;, res.error?.message ?? &#x27;خطای غیرمنتظره‌ای رخ داد&#x27;);
       return false;
     }
     return true;
   }
 
-  // Form control getters
+  // Reset user form to default values
+  resetUserInfoForm(): void {
+    this.userInfoForm.reset();
+    this.userInfoForm.markAsPristine();
+    this.userInfoForm.markAsUntouched();
+    this.id.setValue(0);
+    this.userType.setValue(0);
+    this.smsActive.setValue(false);
+    this.userActive.setValue(true);
+  }
+
+  // Reset the phone search input form
+  resetSearchForm(): void {
+    this.searchForm.reset();
+    this.searchForm.markAsPristine();
+    this.searchForm.markAsUntouched();
+  }
+
+  // Getter for searchPhone control
   get searchPhone(): FormControl {
     return this.searchForm.get(&#x27;searchPhone&#x27;) as FormControl;
   }
 
+  // Getter for ID control
   get id(): FormControl {
     return this.userInfoForm.get(&#x27;id&#x27;) as FormControl;
   }
 
+  // Getter for phone control
   get phone(): FormControl {
     return this.userInfoForm.get(&#x27;phone&#x27;) as FormControl;
   }
 
+  // Getter for name control
   get name(): FormControl {
     return this.userInfoForm.get(&#x27;name&#x27;) as FormControl;
   }
 
+  // Getter for user type control
   get userType(): FormControl {
     return this.userInfoForm.get(&#x27;userType&#x27;) as FormControl;
   }
 
+  // Getter for SMS activation control
   get smsActive(): FormControl {
     return this.userInfoForm.get(&#x27;smsActive&#x27;) as FormControl;
   }
 
+  // Getter for user activation control
   get userActive(): FormControl {
     return this.userInfoForm.get(&#x27;userActive&#x27;) as FormControl;
   }
@@ -1961,25 +1861,20 @@ export class UserInfoFormComponent implements OnInit {
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;p-fluid grid gap-4 relative&quot;&gt;
   &lt;form
     class&#x3D;&quot;col-12&quot;
-    (ngSubmit)&#x3D;&quot;fetchUserByPhone()&quot;
     [class.pointer-events-none]&#x3D;&quot;loading&quot;
     [class.opacity-60]&#x3D;&quot;loading&quot;
     [formGroup]&#x3D;&quot;searchForm&quot;
   &gt;
     &lt;!-- Search Phone + Refresh --&gt;
     &lt;div class&#x3D;&quot;flex gap-2&quot;&gt;
-      &lt;app-text-input
-        label&#x3D;&quot;شماره تلفن&quot;
+      &lt;app-search-input
+        label&#x3D;&quot;شماره موبایل&quot;
         class&#x3D;&quot;flex-1&quot;
         placeholder&#x3D;&quot;جستجو کاربر&quot;
         [control]&#x3D;&quot;searchPhone&quot;
-      /&gt;
-      &lt;p-button
-        type&#x3D;&quot;submit&quot;
-        icon&#x3D;&quot;pi pi-search&quot;
-        styleClass&#x3D;&quot;mt-1 w-2rem h-2rem border-circle&quot;
-        (click)&#x3D;&quot;fetchUserByPhone()&quot;
-        [disabled]&#x3D;&quot;this.searchForm.invalid || loading&quot;
+        validationField&#x3D;&quot;mobile&quot;
+        [disableSearchButton]&#x3D;&quot;this.searchForm.invalid || loading&quot;
+        [onSearchQuery]&#x3D;&quot;fetchUserByPhone&quot;
       /&gt;
     &lt;/div&gt;
   &lt;/form&gt;
@@ -2037,7 +1932,11 @@ export class UserInfoFormComponent implements OnInit {
 
     &lt;!-- User Type --&gt;
     &lt;div class&#x3D;&quot;col-12 md:col-5&quot;&gt;
-      &lt;app-select-input icon&#x3D;&quot;pi pi-users&quot; [control]&#x3D;&quot;userType&quot; [options]&#x3D;&quot;roles&quot; /&gt;
+      &lt;app-select-input
+        icon&#x3D;&quot;pi pi-users&quot;
+        [control]&#x3D;&quot;userType&quot;
+        [options]&#x3D;&quot;roles&quot;
+      /&gt;
     &lt;/div&gt;
 
     &lt;!-- Radio: SMS System --&gt;
@@ -2095,42 +1994,6 @@ export class UserInfoFormComponent implements OnInit {
       &gt;&lt;/p-button&gt;
     &lt;/div&gt;
   &lt;/form&gt;
-
-  &lt;div class&#x3D;&quot;card flex justify-center&quot;&gt;
-    &lt;p-dialog
-      header&#x3D;&quot;رمز عبور جدید&quot;
-      [modal]&#x3D;&quot;true&quot;
-      (onHide)&#x3D;&quot;onCloseDialog()&quot;
-      [(visible)]&#x3D;&quot;passwordDialogVisible&quot;
-      [style]&#x3D;&quot;{ width: &#x27;25rem&#x27; }&quot;
-    &gt;
-      &lt;div class&#x3D;&quot;flex gap-3 flex-column&quot;&gt;
-        &lt;div class&#x3D;&quot;flex align-items-center justify-content-between&quot;&gt;
-          &lt;span class&#x3D;&quot;w-8rem&quot;&gt; شناسه کابری: &lt;/span&gt;
-          &lt;p-button
-            (click)&#x3D;&quot;copyToClipboard(userNameDialog)&quot;
-            size&#x3D;&quot;small&quot;
-            styleClass&#x3D;&quot;px-4 w-10rem&quot;
-            severity&#x3D;&quot;info&quot;
-          &gt;
-            {{ userNameDialog }}
-          &lt;/p-button&gt;
-        &lt;/div&gt;
-
-        &lt;div class&#x3D;&quot;flex align-items-center justify-content-between&quot;&gt;
-          &lt;span class&#x3D;&quot;w-8rem&quot;&gt; رمز عبور جدید &lt;/span&gt;
-          &lt;p-button
-            (click)&#x3D;&quot;copyToClipboard(newUserPasswordDialog)&quot;
-            size&#x3D;&quot;small&quot;
-            styleClass&#x3D;&quot;px-4 w-10rem&quot;
-            severity&#x3D;&quot;primary&quot;
-          &gt;
-            {{ newUserPasswordDialog }}
-          &lt;/p-button&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/p-dialog&gt;
-  &lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
     </div>
@@ -2161,8 +2024,8 @@ export class UserInfoFormComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="p-fluid grid gap-4 relative">  <form    class="col-12"    (ngSubmit)="fetchUserByPhone()"    [class.pointer-events-none]="loading"    [class.opacity-60]="loading"    [formGroup]="searchForm"  >    <!-- Search Phone + Refresh -->    <div class="flex gap-2">      <app-text-input        label="شماره تلفن"        class="flex-1"        placeholder="جستجو کاربر"        [control]="searchPhone"      />      <p-button        type="submit"        icon="pi pi-search"        styleClass="mt-1 w-2rem h-2rem border-circle"        (click)="fetchUserByPhone()"        [disabled]="this.searchForm.invalid || loading"      />    </div>  </form>  <form    class="p-fluid grid gap-4 relative"    [class.pointer-events-none]="loading"    [class.opacity-60]="loading"    [formGroup]="userInfoForm"  >    <!-- User ID (ReadOnly) -->    <div class="flex align-items-center gap-2 col-12 md:col-5">      <app-text-input        class="flex-1"        [readOnly]="true"        [disabled]="true"        [control]="id"        validationField="id"        placeholder="شناسه کاربر"        icon="pi pi-id-card"      />      <p-button        (click)="resetUserInfoForm()"        styleClass="border-circle w-2rem h-2rem"        [disabled]="id.value == \'0\'"        size="small"        severity="info"      >        <i class="pi pi-user-plus text-lg" iconPos="left"></i>      </p-button>    </div>    <!-- Full Name -->    <div class="col-12 md:col-5">      <app-text-input        validationField="fullName"        icon="pi pi-user"        placeholder="نام کاربر"        [control]="name"      />    </div>    <!-- Phone -->    <div class="col-12 md:col-5">      <div>        <app-text-input          label="شماره موبایل"          addonWidth="7rem"          class="flex-1"          placeholder="شماره موبایل کاربر"          [control]="phone"        />      </div>    </div>    <!-- User Type -->    <div class="col-12 md:col-5">      <app-select-input icon="pi pi-users" [control]="userType" [options]="roles" />    </div>    <!-- Radio: SMS System -->    <div class="col-12 md:col-5">      <app-binary-radio-input        [readonly]="true"        label="وضعیت پیامک"        [control]="smsActive"        radioName="sms-active"      />    </div>    <!-- Radio: User Active -->    <div class="col-12 md:col-6">      <app-binary-radio-input        label="کاربر"        [control]="userActive"        radioName="user-active"      />    </div>    <!-- Action Buttons -->    <div      class="col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center"    >      <p-button        (click)="submitUserInfo()"        [disabled]="userInfoForm.invalid || loading"        label="ثبت و ویرایش"        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"      ></p-button>      <p-button        (click)="activateUserSms()"        [disabled]="id.value == \'0\' || smsActive.value || loading"        severity="warn"        label="فعال سازی پیامک"        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"      ></p-button>      <p-button        (click)="sendWebsiteLink()"        [disabled]="id.value == \'0\' || loading"        severity="warn"        label="ارسال لینک سامانه"        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"      ></p-button>      <p-button        (click)="resetUserPassword()"        [disabled]="id.value == \'0\' || loading"        severity="info"        label="ایجاد رمز عبور جدید"        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"      ></p-button>    </div>  </form>  <div class="card flex justify-center">    <p-dialog      header="رمز عبور جدید"      [modal]="true"      (onHide)="onCloseDialog()"      [(visible)]="passwordDialogVisible"      [style]="{ width: \'25rem\' }"    >      <div class="flex gap-3 flex-column">        <div class="flex align-items-center justify-content-between">          <span class="w-8rem"> شناسه کابری: </span>          <p-button            (click)="copyToClipboard(userNameDialog)"            size="small"            styleClass="px-4 w-10rem"            severity="info"          >            {{ userNameDialog }}          </p-button>        </div>        <div class="flex align-items-center justify-content-between">          <span class="w-8rem"> رمز عبور جدید </span>          <p-button            (click)="copyToClipboard(newUserPasswordDialog)"            size="small"            styleClass="px-4 w-10rem"            severity="primary"          >            {{ newUserPasswordDialog }}          </p-button>        </div>      </div>    </p-dialog>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarMenuComponent', 'selector': 'app-sidebar-menu'},{'name': 'SubMenuComponent', 'selector': 'app-sub-menu'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TabBarComponent', 'selector': 'app-tab-bar'},{'name': 'TabViewComponent', 'selector': 'app-tab-view'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'}];
+        var COMPONENT_TEMPLATE = '<div><div class="p-fluid grid gap-4 relative">  <form    class="col-12"    [class.pointer-events-none]="loading"    [class.opacity-60]="loading"    [formGroup]="searchForm"  >    <!-- Search Phone + Refresh -->    <div class="flex gap-2">      <app-search-input        label="شماره موبایل"        class="flex-1"        placeholder="جستجو کاربر"        [control]="searchPhone"        validationField="mobile"        [disableSearchButton]="this.searchForm.invalid || loading"        [onSearchQuery]="fetchUserByPhone"      />    </div>  </form>  <form    class="p-fluid grid gap-4 relative"    [class.pointer-events-none]="loading"    [class.opacity-60]="loading"    [formGroup]="userInfoForm"  >    <!-- User ID (ReadOnly) -->    <div class="flex align-items-center gap-2 col-12 md:col-5">      <app-text-input        class="flex-1"        [readOnly]="true"        [disabled]="true"        [control]="id"        validationField="id"        placeholder="شناسه کاربر"        icon="pi pi-id-card"      />      <p-button        (click)="resetUserInfoForm()"        styleClass="border-circle w-2rem h-2rem"        [disabled]="id.value == \'0\'"        size="small"        severity="info"      >        <i class="pi pi-user-plus text-lg" iconPos="left"></i>      </p-button>    </div>    <!-- Full Name -->    <div class="col-12 md:col-5">      <app-text-input        validationField="fullName"        icon="pi pi-user"        placeholder="نام کاربر"        [control]="name"      />    </div>    <!-- Phone -->    <div class="col-12 md:col-5">      <div>        <app-text-input          label="شماره موبایل"          addonWidth="7rem"          class="flex-1"          placeholder="شماره موبایل کاربر"          [control]="phone"        />      </div>    </div>    <!-- User Type -->    <div class="col-12 md:col-5">      <app-select-input        icon="pi pi-users"        [control]="userType"        [options]="roles"      />    </div>    <!-- Radio: SMS System -->    <div class="col-12 md:col-5">      <app-binary-radio-input        [readonly]="true"        label="وضعیت پیامک"        [control]="smsActive"        radioName="sms-active"      />    </div>    <!-- Radio: User Active -->    <div class="col-12 md:col-6">      <app-binary-radio-input        label="کاربر"        [control]="userActive"        radioName="user-active"      />    </div>    <!-- Action Buttons -->    <div      class="col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center"    >      <p-button        (click)="submitUserInfo()"        [disabled]="userInfoForm.invalid || loading"        label="ثبت و ویرایش"        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"      ></p-button>      <p-button        (click)="activateUserSms()"        [disabled]="id.value == \'0\' || smsActive.value || loading"        severity="warn"        label="فعال سازی پیامک"        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"      ></p-button>      <p-button        (click)="sendWebsiteLink()"        [disabled]="id.value == \'0\' || loading"        severity="warn"        label="ارسال لینک سامانه"        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"      ></p-button>      <p-button        (click)="resetUserPassword()"        [disabled]="id.value == \'0\' || loading"        severity="info"        label="ایجاد رمز عبور جدید"        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"      ></p-button>    </div>  </form></div></div>'
+    var COMPONENTS = [{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarMenuComponent', 'selector': 'app-sidebar-menu'},{'name': 'SubMenuComponent', 'selector': 'app-sub-menu'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TabBarComponent', 'selector': 'app-tab-bar'},{'name': 'TabViewComponent', 'selector': 'app-tab-view'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'UserInfoFormComponent'};
 </script>
