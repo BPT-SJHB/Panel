@@ -57,6 +57,13 @@ export const API_ROUTES = {
       ResetFPCUserPassword: `${environment.apiUrl}:${transportationAPIPort}/api/ResetFPCUserPassword`,
       FPCChangeActiveStatus: `${environment.apiUrl}:${transportationAPIPort}/api/FPCChangeActiveStatus`,
     },
+    TransportCompanies: {
+      GetTransportCompanies: `${environment.apiUrl}:${transportationAPIPort}/api/GetTransportCompanies`,
+      EditTransportCompany: `${environment.apiUrl}:${transportationAPIPort}/api/EditTransportCompany`,
+      ActivateTransportCompanySmsService: `${environment.apiUrl}:${transportationAPIPort}/api/ActivateTransportCompanySMSOwner`,
+      ResetTransportCompanyPassword: `${environment.apiUrl}:${transportationAPIPort}/api/ResetTransportCompanyUserPassword`,
+      TransportCompanyChangeStatus: `${environment.apiUrl}:${transportationAPIPort}/api/TransportCompanyChangeActiveStatus`,
+    },
     LoadCapacitor: {
       GetLoad: `${environment.apiUrl}:${transportationAPIPort}/api/GetLoad`,
     },
