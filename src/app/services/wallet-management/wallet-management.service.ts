@@ -234,22 +234,11 @@ export class WalletManagementService {
     };
     //#endregion
 
-    //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       WalletDefaultAmount[]
     >(apiUrl, bodyValue, mockWalletDefaultAmounts);
-    //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: response.data?.map((data) => ({
-        AmountTitle: data.AmountTitle.trim(),
-        Amount: data.Amount,
-      })),
-      error: response.error,
-    };
     //#endregion
   }
 
@@ -291,28 +280,11 @@ export class WalletManagementService {
     };
     //#endregion
 
-    //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       WalletTransaction[]
     >(apiUrl, bodyValue, mockWalletTransactions);
-    //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: response.data?.map((data) => ({
-        TransactionTitle: data.TransactionTitle.trim(),
-        TransactionColor: data.TransactionColor.trim(),
-        ShamsiDate: data.ShamsiDate.trim(),
-        Time: data.Time.trim(),
-        CurrentBalance: data.CurrentBalance,
-        Amount: data.Amount,
-        Reminder: data.Reminder,
-        UserName: data.UserName.trim(),
-      })),
-      error: response.error,
-    };
     //#endregion
   }
 
@@ -333,24 +305,11 @@ export class WalletManagementService {
     };
     //#endregion
 
-    //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       WalletPaymentHistory[]
     >(apiUrl, bodyValue, mockWalletPaymentHistories);
-    //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: response.data?.map((data) => ({
-        ShamsiDate: data.ShamsiDate.trim(),
-        Time: data.Time.trim(),
-        Amount: data.Amount,
-        UserName: data.UserName.trim(),
-      })),
-      error: response.error,
-    };
     //#endregion
   }
 }

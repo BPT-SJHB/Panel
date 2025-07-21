@@ -40,24 +40,11 @@ export class SequentialTurnManagementService {
     };
     //#endregion
 
-    //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       SequentialTurn[]
     >(apiUrl, bodyValue, mockSequentialTurns);
-    //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: response.data?.map((data) => ({
-        SeqTurnId: data.SeqTurnId,
-        SeqTurnTitle: data.SeqTurnTitle?.trim(),
-        SeqTurnKeyWord: data.SeqTurnKeyWord,
-        Active: data.Active,
-      })),
-      error: response.error,
-    };
     //#endregion
   }
 
@@ -170,26 +157,11 @@ export class SequentialTurnManagementService {
     };
     //#endregion
 
-    //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       RelationOfSequentialTurnToLoaderType[]
     >(apiUrl, bodyValue, mockRelationOfSequentialTurnToLoaderTypes);
-    //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: response.data?.map((data) => ({
-        SeqTurnId: data.SeqTurnId,
-        SeqTurnTitle: data.SeqTurnTitle?.trim(),
-        LoaderTypes: data.LoaderTypes.map((subData) => ({
-          LoaderTypeId: subData.LoaderTypeId,
-          LoaderTypeTitle: subData.LoaderTypeTitle?.trim(),
-        })),
-      })),
-      error: response.error,
-    };
     //#endregion
   }
 
@@ -273,24 +245,11 @@ export class SequentialTurnManagementService {
     };
     //#endregion
 
-    //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       SequentialTurn[]
     >(apiUrl, bodyValue, mockSequentialTurns);
-    //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: response.data?.map((data) => ({
-        SeqTurnId: data.SeqTurnId,
-        SeqTurnTitle: data.SeqTurnTitle?.trim(),
-        SeqTurnKeyWord: data.SeqTurnKeyWord?.trim(),
-        Active: data.Active,
-      })),
-      error: response.error,
-    };
     //#endregion
   }
 
@@ -319,26 +278,11 @@ export class SequentialTurnManagementService {
     };
     //#endregion
 
-    //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       RelationOfSequentialTurnToAnnouncementSubGroup[]
     >(apiUrl, bodyValue, mockRelationOfSequentialTurnToAnnouncementSubGroups);
-    //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: response.data?.map((data) => ({
-        SeqTurnId: data.SeqTurnId,
-        SeqTurnTitle: data.SeqTurnTitle?.trim(),
-        AnnouncementSubGroups: data.AnnouncementSubGroups.map((subData) => ({
-          AnnouncementSGId: subData.AnnouncementSGId,
-          AnnouncementSGTitle: subData.AnnouncementSGTitle?.trim(),
-        })),
-      })),
-      error: response.error,
-    };
     //#endregion
   }
 
