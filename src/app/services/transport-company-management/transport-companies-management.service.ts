@@ -90,4 +90,30 @@ export class TransportCompaniesManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  public async ActiveTransportCompanySmsService(
+    transportCompanyId: number
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.TransportCompanies
+        .ActivateTransportCompanySmsService;
+    const transportCompanyInfo: TransportCompany = {
+      TCId: transportCompanyId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TransportCompanyId: transportCompanyInfo.TCId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
