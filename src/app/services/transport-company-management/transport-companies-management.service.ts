@@ -19,4 +19,30 @@ import { mockAPIUsernamePassword } from 'app/data/mock/username-password.mock';
 export class TransportCompaniesManagementService {
   private userAuth = inject(UserAuthService);
   private apiCommunicator = inject(APICommunicationManagementService);
+
+  public async GetTransportCompaniesInfo(
+    title: string
+  ): Promise<ApiResponse<TransportCompany[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.TransportCompanies.GetTransportCompanies;
+    const TransportCompaniesInfo: TransportCompany = {
+      TCId: 0,
+      TCTitle: title,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SearchString: TransportCompaniesInfo.TCTitle,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      TransportCompany[]
+    >(apiUrl, bodyValue, mockTransportCompaniesInfo);
+    //#endregion
+  }
 }
