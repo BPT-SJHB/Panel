@@ -68,12 +68,7 @@ export class Driver_TruckManagementService {
       >(outdoorApiUrl, bodyValue, mockTruckDriverInfo);
     }
 
-    return {
-      success: response.success,
-      data: this.TrimTruckDriver(response.data!),
-      error: response.error,
-    };
-    //#endregion
+    return response;
   }
 
   public async GetDriverInfoForSoftwareUser(): Promise<
@@ -89,33 +84,12 @@ export class Driver_TruckManagementService {
     };
     //#endregion
 
-    //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TruckDriverInfo
     >(apiUrl, bodyValue, mockTruckDriverInfo);
     //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: this.TrimTruckDriver(response.data!),
-      error: response.error,
-    };
-    //#endregion
-  }
-
-  private TrimTruckDriver(truckDriver: TruckDriverInfo): TruckDriverInfo {
-    return {
-      DriverId: truckDriver.DriverId,
-      NationalCode: truckDriver.NationalCode?.trim(),
-      NameFamily: truckDriver.NameFamily?.trim(),
-      MobileNumber: truckDriver.MobileNumber?.trim(),
-      FatherName: truckDriver.FatherName?.trim(),
-      DrivingLicenseNo: truckDriver.DrivingLicenseNo?.trim(),
-      Address: truckDriver.Address?.trim(),
-      SmartCardNo: truckDriver.SmartCardNo?.trim(),
-    };
   }
 
   public async RegisterNew_EditDriverMobileNumber(
@@ -352,19 +326,11 @@ export class Driver_TruckManagementService {
     };
     //#endregion
 
-    //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TruckComposedInfo
     >(apiUrl, bodyValue, mockTruckComposedInfo);
-    //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: this.TrimComposedTruckInfo(response.data!),
-      error: response.error,
-    };
     //#endregion
   }
 
@@ -386,47 +352,12 @@ export class Driver_TruckManagementService {
     };
     //#endregion
 
-    //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TruckComposedInfo
     >(apiUrl, bodyValue, mockTruckComposedInfo);
     //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: this.TrimComposedTruckInfo(response.data!),
-      error: response.error,
-    };
-    //#endregion
-  }
-
-  private TrimComposedTruckInfo(
-    response: TruckComposedInfo
-  ): TruckComposedInfo {
-    let turn = response.Turn;
-    if (turn) {
-      turn = {
-        TurnId: turn.TurnId,
-        TurnIssueDate: turn.TurnIssueDate?.trim(),
-        TurnIssueTime: turn.TurnIssueTime?.trim(),
-        TruckDriver: turn.TruckDriver?.trim(),
-        SoftwareUserName: turn.SoftwareUserName?.trim(),
-        BillOfLadingNumber: turn.BillOfLadingNumber?.trim(),
-        OtaghdarTurnNumber: turn.OtaghdarTurnNumber?.trim(),
-        TurnStatusTitle: turn.TurnStatusTitle?.trim(),
-        TurnStatusDescription: turn.TurnStatusDescription?.trim(),
-        DateOfLastChanged: turn.DateOfLastChanged?.trim(),
-        SequentialTurnTitle: turn.SequentialTurnTitle?.trim(),
-      };
-    }
-    return {
-      Truck: response.Truck,
-      TruckDriver: response?.TruckDriver,
-      MoneyWallet: response?.MoneyWallet,
-      Turn: turn,
-    };
   }
 
   public async SetComposedTruckInfo(

@@ -38,19 +38,11 @@ export class TurnManagementService {
     };
     //#endregion
 
-    //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       Turn[]
     >(apiUrl, bodyValue, mockTurns);
-    //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: response.data?.map((data) => this.TrimTurn(data)),
-      error: response.error,
-    };
     //#endregion
   }
 
@@ -83,22 +75,6 @@ export class TurnManagementService {
     //#endregion
   }
 
-  private TrimTurn(turn: Turn): Turn {
-    return {
-      TurnId: turn.TurnId,
-      TurnIssueDate: turn.TurnIssueDate?.trim(),
-      TurnIssueTime: turn.TurnIssueTime?.trim(),
-      TruckDriver: turn.TruckDriver?.trim(),
-      SoftwareUserName: turn.SoftwareUserName?.trim(),
-      BillOfLadingNumber: turn.BillOfLadingNumber?.trim(),
-      OtaghdarTurnNumber: turn.OtaghdarTurnNumber?.trim(),
-      TurnStatusTitle: turn.TurnStatusTitle?.trim(),
-      TurnStatusDescription: turn.TurnStatusDescription?.trim(),
-      DateOfLastChanged: turn.DateOfLastChanged?.trim(),
-      SequentialTurnTitle: turn.SequentialTurnTitle?.trim(),
-    };
-  }
-
   public async GetTurnAccounting(
     turnId: number
   ): Promise<ApiResponse<TurnAccounting[]>> {
@@ -115,26 +91,11 @@ export class TurnManagementService {
     };
     //#endregion
 
-    //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TurnAccounting[]
     >(apiUrl, bodyValue, mockTurnAccounting);
-    //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: response.data?.map((data) => ({
-        TurnId: data.TurnId,
-        SequentialTurnId: data.SequentialTurnId?.trim(),
-        DateShamsi: data.DateShamsi?.trim(),
-        Time: data.Time?.trim(),
-        AccountingTypeTitle: data.Time?.trim(),
-        UserName: data.UserName?.trim(),
-      })),
-      error: response.error,
-    };
     //#endregion
   }
 

@@ -39,23 +39,11 @@ export class AnnouncementGroupSubgroupManagementService {
     };
     //#endregion
 
-    //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       AnnouncementGroup[]
     >(apiUrl, bodyValue, mockAnnouncementGroups);
-    //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: response.data?.map((data) => ({
-        AnnouncementId: data.AnnouncementId,
-        AnnouncementTitle: data.AnnouncementTitle?.trim(),
-        Active: data.Active,
-      })),
-      error: response.error,
-    };
     //#endregion
   }
 
@@ -163,23 +151,11 @@ export class AnnouncementGroupSubgroupManagementService {
     };
     //#endregion
 
-    //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       AnnouncementSubGroup[]
     >(apiUrl, bodyValue, mockAnnouncementSubGroups);
-    //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: response.data?.map((data) => ({
-        AnnouncementSGId: data.AnnouncementSGId,
-        AnnouncementSGTitle: data.AnnouncementSGTitle?.trim(),
-        Active: data.Active,
-      })),
-      error: response.error,
-    };
     //#endregion
   }
 
@@ -292,26 +268,11 @@ export class AnnouncementGroupSubgroupManagementService {
     };
     //#endregion
 
-    //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       RelationOfAnnouncementGroupAndSubGroup[]
     >(apiUrl, bodyValue, mockRelationOfAnnouncementGroupAndSubGroups);
-    //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: response.data?.map((data) => ({
-        AnnouncementId: data.AnnouncementId,
-        AnnouncementTitle: data.AnnouncementTitle?.trim(),
-        AnnouncementSubGroups: data.AnnouncementSubGroups?.map((subData) => ({
-          AnnouncementSGId: subData.AnnouncementSGId,
-          AnnouncementSGTitle: subData.AnnouncementSGTitle?.trim(),
-        })),
-      })),
-      error: response.error,
-    };
     //#endregion
   }
 

@@ -51,7 +51,7 @@ export interface TabView {
 
 export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
   [TabComponentKey.Main]: [
-    { title: 'صفحه اصلی', component:MainViewComponent },
+    { title: 'صفحه اصلی', component: MainViewComponent },
   ],
 
   [TabComponentKey.UserManagement]: [
@@ -147,11 +147,11 @@ export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
   [TabComponentKey.SequentialTurnManagement]: [
     { title: 'صفوف نوبت دهی', component: SequentialTurnsFormComponent },
     {
-      title: 'صفوف نوبت دهی و بارگیرها',
+      title: 'بارگیرها',
       component: RelationOfSequentialTurnToLoaderTypeFormComponent,
     },
     {
-      title: 'صفوف نوبت دهی - زیرگروه اعلام بار',
+      title: 'زیرگروه اعلام بار',
       component: RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent,
     },
   ],
@@ -188,12 +188,12 @@ export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
       component: RealTimeTurnsFormComponent,
     },
     {
-      title: 'نوبت دهی - نوبت اضطراری',
+      title: 'نوبت اضطراری',
       component: EmergencyTurnsFormComponent,
     },
     {
-      title: 'نوبت دهی - احیای نوبت رزور',
+      title: 'احیای نوبت رزور',
       component: ResuscitateTurnsFormComponent,
-    }
+    },
   ],
 };
