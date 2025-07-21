@@ -45,4 +45,27 @@ export class TransportCompaniesManagementService {
     >(apiUrl, bodyValue, mockTransportCompaniesInfo);
     //#endregion
   }
+
+  public async GetTransportCompanyInfo(
+    transportCompanyId: number
+  ): Promise<ApiResponse<TransportCompany>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.TransportCompanies.GetTransportCompany;
+    const transportCompanyInfo: TransportCompany = { TCId: transportCompanyId };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TransportCompanyId: transportCompanyInfo.TCId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      TransportCompany
+    >(apiUrl, bodyValue, mockTransportCompaniesInfo[0]);
+    //#endregion
+  }
 }
