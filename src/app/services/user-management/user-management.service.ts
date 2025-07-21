@@ -160,19 +160,11 @@ export class UserManagementService {
     };
     //#endregion
 
-    //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       SoftwareUserInfo
     >(apiUrl, bodyValue, mockSoftwareUserInfo);
-    //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: this.TrimSoftwareUserInfo(response.data!),
-      error: response.error,
-    };
     //#endregion
   }
 
@@ -205,20 +197,6 @@ export class UserManagementService {
     //#endregion
   }
 
-  private TrimSoftwareUserInfo(
-    softwareUserInfo: SoftwareUserInfo
-  ): SoftwareUserInfo {
-    return {
-      UserId: softwareUserInfo.UserId,
-      UserName: softwareUserInfo.UserName?.trim(),
-      MobileNumber: softwareUserInfo.MobileNumber?.trim(),
-      UserTypeId: softwareUserInfo.UserTypeId,
-      UserActive: softwareUserInfo.UserActive,
-      SMSOwnerActive: softwareUserInfo.SMSOwnerActive,
-      UserTypeTitle: softwareUserInfo.UserTypeTitle?.trim(),
-    };
-  }
-
   public async GetUserTypes(): Promise<ApiResponse<UserType[]>> {
     //#region Consts
     const apiUrl = API_ROUTES.SoftwareUserAPI.UserManagement.GetUserTypes;
@@ -227,22 +205,11 @@ export class UserManagementService {
     };
     //#endregion
 
-    //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       UserType[]
     >(apiUrl, bodyValue, mockUserTypes);
-    //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: response.data?.map((x) => ({
-        UTId: x.UTId,
-        UTTitle: x.UTTitle.trim(),
-      })),
-      error: response.error,
-    };
     //#endregion
   }
 

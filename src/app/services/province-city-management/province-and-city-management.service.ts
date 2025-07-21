@@ -32,24 +32,11 @@ export class ProvinceAndCityManagementService {
     };
     //#endregion
 
-    //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       Province[]
     >(apiUrl, bodyValue, mockProvinceAndCities);
-    //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: response.data?.map((province) => ({
-        ProvinceId: province.ProvinceId,
-        ProvinceName: province.ProvinceName?.trim(),
-        ProvinceActive: province.ProvinceActive,
-        Cities: province.Cities,
-      })),
-      error: response.error,
-    };
     //#endregion
   }
 
@@ -73,7 +60,7 @@ export class ProvinceAndCityManagementService {
     };
     //#endregion
 
-    //#region Request
+    //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
@@ -101,7 +88,7 @@ export class ProvinceAndCityManagementService {
     };
     //#endregion
 
-    //#region Request
+    //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse

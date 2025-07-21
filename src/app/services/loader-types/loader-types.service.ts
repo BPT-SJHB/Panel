@@ -32,19 +32,11 @@ export class LoaderTypesService {
     };
     //#endregion
 
-    //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       LoaderType[]
     >(apiUrl, bodyValue, mockLoaderTypes);
-    //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: response.data?.map((loaderType) => this.TrimLoaderType(loaderType)),
-      error: response.error,
-    };
     //#endregion
   }
 
@@ -61,31 +53,12 @@ export class LoaderTypesService {
     };
     //#endregion
 
-    //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       LoaderType
     >(apiUrl, bodyValue, mockLoaderTypes);
     //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: this.TrimLoaderType(response.data!),
-      error: response.error,
-    };
-    //#endregion
-  }
-
-  private TrimLoaderType(loaderType: LoaderType): LoaderType {
-    return {
-      LoaderTypeId: loaderType.LoaderTypeId,
-      LoaderTypeTitle: loaderType.LoaderTypeTitle?.trim(),
-      LoaderTypeOrganizationId: loaderType.LoaderTypeOrganizationId,
-      LoaderTypeFixStatusId: loaderType.LoaderTypeFixStatusId,
-      LoaderTypeFixStatusTitle: loaderType.LoaderTypeFixStatusTitle?.trim(),
-      Active: loaderType.Active,
-    };
   }
 
   public async ChangeLoaderTypeStatus(
