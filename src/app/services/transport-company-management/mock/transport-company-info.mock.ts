@@ -1,0 +1,98 @@
+import { TransportCompany } from '../model/transport-company-info.model';
+
+export const mockTransportCompaniesInfo: TransportCompany[] = [
+  {
+    TCId: 21651,
+    TCTitle:
+      'پارسيان  نقش  جهان                                                                                                                                                                                      ',
+    TCOrganizationCode: '2100651   ',
+    TCCityTitle: 'اصفهان - مباركه',
+    TCTel: '                                                  ',
+    TCManagerMobileNumber: '           ',
+    TCManagerNameFamily:
+      '                                                                                                                                                                                                        ',
+    EmailAddress: 'morteza1466@gmail.com',
+    Active: false,
+  },
+  {
+    TCId: 21675,
+    TCTitle: 'جهان  آرا  بار',
+    TCOrganizationCode: '2100675',
+    TCCityTitle: 'اصفهان - خميني شهر',
+    TCTel: '03133642997',
+    TCManagerMobileNumber: '09133267926',
+    TCManagerNameFamily: 'سعيد توانايي مقدم',
+    EmailAddress: 'morteza1466@gmail.com',
+    Active: true,
+  },
+  {
+    TCId: 21053,
+    TCTitle:
+      'جهان  بخش                                                                                                                                                                                               ',
+    TCOrganizationCode: '2100053   ',
+    TCCityTitle: 'اصفهان - تيران',
+    TCTel: '03134721838',
+    TCManagerMobileNumber: '09132443148',
+    TCManagerNameFamily: '',
+    EmailAddress: 'morteza1466@gmail.com',
+    Active: true,
+  },
+  {
+    TCId: 21746,
+    TCTitle:
+      'جهان  گستر مبارکه                                                                                                                                                                                       ',
+    TCOrganizationCode: '2100746   ',
+    TCCityTitle: 'اصفهان - مباركه',
+    TCTel: '                                                  ',
+    TCManagerMobileNumber: '           ',
+    TCManagerNameFamily:
+      '                                                                                                                                                                                                        ',
+    EmailAddress: 'morteza1466@gmail.com',
+    Active: false,
+  },
+  {
+    TCId: 21047,
+    TCTitle:
+      'جهان بار                                                                                                                                                                                                ',
+    TCOrganizationCode: '2100047   ',
+    TCCityTitle: 'اصفهان - اصفهان  ',
+    TCTel: '                                                  ',
+    TCManagerMobileNumber: '09131117961',
+    TCManagerNameFamily: 'علی بیدادی',
+    EmailAddress: 'morteza1466@gmail.com',
+    Active: true,
+  },
+  {
+    TCId: 21611,
+    TCTitle: 'راد بار نصف جهان',
+    TCOrganizationCode: '2100611',
+    TCCityTitle: 'اصفهان - اصفهان  ',
+    TCTel: '03133879255',
+    TCManagerMobileNumber: '09133157674',
+    TCManagerNameFamily: 'سعيد آهني',
+    EmailAddress: 'morteza1466@gmail.com',
+    Active: true,
+  },
+  {
+    TCId: 21492,
+    TCTitle: 'ساعدبارجهان',
+    TCOrganizationCode: '2100492',
+    TCCityTitle: 'اصفهان - قهدريجان',
+    TCTel: '03137609145',
+    TCManagerMobileNumber: '09134018890',
+    TCManagerNameFamily: 'محسن رئيسي گارماسه',
+    EmailAddress: 'morteza1466@gmail.com',
+    Active: true,
+  },
+  {
+    TCId: 21708,
+    TCTitle: 'نقش جهان فشارک',
+    TCOrganizationCode: '2100708',
+    TCCityTitle: 'اصفهان - اصفهان  ',
+    TCTel: '03138782452',
+    TCManagerMobileNumber: '09131765540',
+    TCManagerNameFamily: 'عباسعلي غلامي فشارکي',
+    EmailAddress: 'morteza1466@gmail.com',
+    Active: true,
+  },
+];
