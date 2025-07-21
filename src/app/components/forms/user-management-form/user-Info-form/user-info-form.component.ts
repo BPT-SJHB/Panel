@@ -21,7 +21,7 @@ import { ToastService } from 'app/services/toast-service/toast.service';
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
 
 import { NewPasswordDialogComponent } from 'app/components/shared/dialog/new-password-dialog/new-password-dialog.component';
-import { SoftwareUserInfo } from 'app/data/model/software-user-info.model';
+import { SoftwareUserInfo } from 'app/services/user-management/model/software-user-info.model';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { ValidationSchema } from 'app/constants/validation-schema';
 

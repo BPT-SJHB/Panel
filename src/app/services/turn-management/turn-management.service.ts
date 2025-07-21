@@ -12,6 +12,8 @@ import { ShortResponse } from 'app/data/model/short-response.model';
 import { mockShortResponse } from 'app/data/mock/short-response.mock';
 import { SequentialTurn } from '../sequential-turn-management/model/sequential-turn.model';
 import { Turn } from './model/turn.model';
+import { TurnForSoftwareUser } from './model/turn-for-software-user.model';
+import { mockTurnsForSoftwareUser } from './mock/turn-for-software-user.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -52,7 +54,9 @@ export class TurnManagementService {
     //#endregion
   }
 
-  public async GetLatestTurnsForSoftwareUser(): Promise<ApiResponse<Turn>> {
+  public async GetLatestTurnsForSoftwareUser(): Promise<
+    ApiResponse<TurnForSoftwareUser[]>
+  > {
     this.userAuth.isLoggedIn();
 
     //#region Consts
@@ -66,14 +70,14 @@ export class TurnManagementService {
     //#region Request
     const response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      Turn
-    >(apiUrl, bodyValue, mockTurns[0]);
+      TurnForSoftwareUser[]
+    >(apiUrl, bodyValue, mockTurnsForSoftwareUser);
     //#endregion
 
     //#region Return
     return {
       success: response.success,
-      data: this.TrimTurn(response.data!),
+      data: response.data,
       error: response.error,
     };
     //#endregion

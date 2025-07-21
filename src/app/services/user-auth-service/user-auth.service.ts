@@ -6,9 +6,9 @@ import { UserSession } from 'app/data/model/user-session.model';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'environments/environment';
 import { mockUserSession } from 'app/data/mock/user-session.mock';
-import { SoftwareUserInfo } from 'app/data/model/software-user-info.model';
+import { SoftwareUserInfo } from 'app/services/user-management/model/software-user-info.model';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
-import { mockSoftwareUserInfo } from 'app/data/mock/software-user-info.mock';
+import { mockSoftwareUserInfo } from '../user-management/mock/software-user-info.mock';
 import { Router } from '@angular/router';
 import { APP_ROUTES } from 'app/constants/routes';
 
