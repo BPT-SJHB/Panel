@@ -17,4 +17,6 @@ import { mockAPIUsernamePassword } from 'app/data/mock/username-password.mock';
   providedIn: 'root',
 })
 export class TransportCompaniesManagementService {
+  private userAuth = inject(UserAuthService);
+  private apiCommunicator = inject(APICommunicationManagementService);
 }
