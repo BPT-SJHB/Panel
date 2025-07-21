@@ -68,4 +68,26 @@ export class TransportCompaniesManagementService {
     >(apiUrl, bodyValue, mockTransportCompaniesInfo[0]);
     //#endregion
   }
+
+  public async EditTransportCompany(
+    transportCompanyInfo: TransportCompany
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.TransportCompanies.EditTransportCompany;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      RawTransportCompany: transportCompanyInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
