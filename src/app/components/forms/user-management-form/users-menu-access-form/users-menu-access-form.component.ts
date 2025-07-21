@@ -4,7 +4,7 @@ import { TreeTableModule } from 'primeng/treetable';
 import { CommonModule } from '@angular/common';
 import { UserManagementService } from 'app/services/user-management/user-management.service';
 import { SearchInputComponent } from 'app/components/shared/inputs/search-input/search-input.component';
-import { SoftwareUserInfo } from 'app/data/model/software-user-info.model';
+import { SoftwareUserInfo } from 'app/services/user-management/model/software-user-info.model';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ButtonModule } from 'primeng/button';
 import {
@@ -18,7 +18,7 @@ import { ApiResponse } from 'app/data/model/api-Response.model';
 import { ShortResponse } from 'app/data/model/short-response.model';
 import { TextInputComponent } from '../../../shared/inputs/text-input/text-input.component';
 import { ValidationSchema } from 'app/constants/validation-schema';
-import {Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
 
 interface SelectedNodes {

@@ -3,7 +3,7 @@ import { API_ROUTES } from 'app/constants/api';
 import { UserAuthService } from '../user-auth-service/user-auth.service';
 import { UserType } from 'app/data/model/user-type.model';
 import { ApiResponse } from 'app/data/model/api-Response.model';
-import { SoftwareUserInfo } from 'app/data/model/software-user-info.model';
+import { SoftwareUserInfo } from 'app/services/user-management/model/software-user-info.model';
 import { ShortResponse } from 'app/data/model/short-response.model';
 import { ApiGroupProcess } from 'app/data/model/api-group-process.model';
 import { ApiProcess } from 'app/data/model/api-process.model';
@@ -13,10 +13,12 @@ import {
 } from 'app/data/model/username-password.model';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
 import { mockUserTypes } from 'app/data/mock/user-types.mock';
-import { mockSoftwareUserInfo } from 'app/data/mock/software-user-info.mock';
+import { mockSoftwareUserInfo } from './mock/software-user-info.mock';
 import { mockShortResponse } from 'app/data/mock/short-response.mock';
 import { mockAPIUsernamePassword } from 'app/data/mock/username-password.mock';
 import { mockApiGroupProcess } from 'app/data/mock/api-group-process.mock';
+import { SoftwareUserProfile } from './model/software-user-profile.model';
+import { mockSoftwareUserProfile } from './mock/software-user-profile.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -175,7 +177,7 @@ export class UserManagementService {
   }
 
   public async GetSoftwareUserProfile(): Promise<
-    ApiResponse<SoftwareUserInfo>
+    ApiResponse<SoftwareUserProfile>
   > {
     this.userAuth.isLoggedIn();
 
@@ -190,14 +192,14 @@ export class UserManagementService {
     //#region Request
     const response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      SoftwareUserInfo
-    >(apiUrl, bodyValue, mockSoftwareUserInfo);
+      SoftwareUserProfile
+    >(apiUrl, bodyValue, mockSoftwareUserProfile);
     //#endregion
 
     //#region Return
     return {
       success: response.success,
-      data: this.TrimSoftwareUserInfo(response.data!),
+      data: response.data,
       error: response.error,
     };
     //#endregion

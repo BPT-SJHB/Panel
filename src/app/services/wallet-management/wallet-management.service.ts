@@ -16,6 +16,7 @@ import { mockWalletPaymentRequest } from './mock/wallet-payment-request.mock';
 import { TruckInfo } from '../driver-truck-management/model/truck-info.model';
 import { WalletUserChargingFunction } from './model/wallet-user-charging-function.model';
 import { mockWalletUserChargingFunctions } from './mock/wallet-user-charging-function.mock';
+import { TransportCompany } from '../transport-company-management/model/transport-company-info.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -81,6 +82,29 @@ export class WalletManagementService {
       API_ROUTES.WalletAndTrafficApi.WalletInfo.GetTruckerAssociationWallet;
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      Wallet
+    >(apiUrl, bodyValue, mockWallet);
+    //#endregion
+  }
+
+  public async GetTransportCompanyWallet(
+    transportCompanyId: number
+  ): Promise<ApiResponse<Wallet>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.WalletAndTrafficApi.WalletInfo.GetTransportCompanyWallet;
+    const transportCompanyInfo: TransportCompany = { TCId: transportCompanyId };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TransportCompanyId: transportCompanyInfo.TCId,
     };
     //#endregion
 
