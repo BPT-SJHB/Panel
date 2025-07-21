@@ -116,4 +116,41 @@ export class TransportCompaniesManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  public async ResetTransportCompanyPassword(
+    transportCompanyId: number
+  ): Promise<ApiResponse<UsernamePassword>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.TransportCompanies
+        .ResetTransportCompanyPassword;
+    const transportCompanyInfo: TransportCompany = {
+      TCId: transportCompanyId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TransportCompanyId: transportCompanyInfo.TCId,
+    };
+    //#endregion
+
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      APIUsernamePassword
+    >(apiUrl, bodyValue, mockAPIUsernamePassword);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: {
+        Username: response.data?.UserShenaseh!,
+        Password: response.data?.UserPassword!,
+      },
+      error: response.error,
+    };
+    //#endregion
+  }
 }
