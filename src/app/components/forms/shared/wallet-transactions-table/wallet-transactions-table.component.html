@@ -1,0 +1,19 @@
+<p-table
+  [value]="transactions()"
+  [responsiveLayout]="'scroll'"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th *ngFor="let c of columns">
+        {{ c.label }}
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-row>
+    <tr [class]="getRowColor(row.TransactionColor)">
+      <td *ngFor="let c of columns" class="white-space-nowrap">
+        {{ row[c.key] }}
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

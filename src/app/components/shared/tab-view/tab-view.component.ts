@@ -1,15 +1,17 @@
 import {
   Component,
   Input,
-  Type,
   ViewChild,
   ViewContainerRef,
   ComponentRef,
   AfterViewInit,
+  OnDestroy,
+  WritableSignal,
+  signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TabsModule } from 'primeng/tabs';
-import { TabView } from 'app/constants/tab-component-registry';
+import { TabConfig } from 'app/constants/tab-component-registry';
 
 @Component({
   selector: 'app-tab-view',
@@ -18,49 +20,89 @@ import { TabView } from 'app/constants/tab-component-registry';
   templateUrl: './tab-view.component.html',
   styleUrl: './tab-view.component.scss',
 })
-export class TabViewComponent implements AfterViewInit {
-  @Input() views: TabView[] = [];
-  @ViewChild('singleContainer', { read: ViewContainerRef })
-  singleContainer?: ViewContainerRef;
-  @ViewChild('tabContainer', { read: ViewContainerRef })
-  tabContainer?: ViewContainerRef;
+export class TabViewComponent implements AfterViewInit, OnDestroy {
+  // Inputs
+  @Input() tabConfig?: TabConfig;
 
+  // View containers for dynamic components
+  @ViewChild('singleContainer', { read: ViewContainerRef }) singleContainer?: ViewContainerRef;
+  @ViewChild('tabContainer', { read: ViewContainerRef }) tabContainer?: ViewContainerRef;
+
+  // Cache for instantiated components to prevent re-creation
   private componentCache = new Map<number, ComponentRef<any>>();
 
+  // Optional shared signal memory (used between components)
+  private sharedMemory = signal<any>(null);
+
+  // Track active tab index
   activeIndex = 0;
-  componentRef?: ComponentRef<any>;
 
+  // Lifecycle hook: Called after view init
   ngAfterViewInit(): void {
-    if (this.views.length === 1 && this.singleContainer) {
-      this.singleContainer.createComponent(this.views[0].component);
-    } else {
-      this.loadComponent(this.activeIndex);
-    }
-  }
+    const views = this.tabConfig?.subTab || [];
 
-  onTabChange(index: number | string) {
-    if (typeof index == 'string') return;
-    this.loadComponent(index);
-  }
+    // Handle single-tab layout
+    if (views.length === 1 && this.singleContainer) {
+      const compRef = this.singleContainer.createComponent(views[0].component);
+      this.componentCache.set(0, compRef);
 
-  private loadComponent(index: number) {
-    if (!this.tabContainer || !this.views[index]) return;
-    if (this.tabContainer.length > 0) this.tabContainer.detach(0);
-
-    const cached = this.componentCache.get(index);
-
-    if (cached) {
-      this.tabContainer.insert(cached.hostView);
+      if (views[0].data) {
+        Object.assign(compRef.instance, views[0].data);
+      }
       return;
     }
 
-    const view = this.views[index];
-    const compRef = this.tabContainer.createComponent(view.component);
+    // Load default tab
+    this.loadComponent(this.activeIndex);
+  }
 
+  // Handle tab change event
+  onTabChange(index: number | string): void {
+    if (typeof index === 'number') {
+      this.loadComponent(index);
+    }
+  }
+
+  // Load a tab component dynamically by index
+  private loadComponent(index: number): void {
+    if (!this.tabContainer || !this.tabConfig?.subTab[index]) return;
+
+    // Clear previous content
+    if (this.tabContainer.length > 0) {
+      this.tabContainer.detach(0);
+    }
+
+    // Use cached component if available
+    const cached = this.componentCache.get(index);
+    if (cached) {
+      this.tabContainer.insert(cached.hostView);
+      (cached.instance as any).onViewActivated?.();
+      return;
+    }
+
+    // Create new component instance
+    const view = this.tabConfig.subTab[index];
+    const compRef = this.tabContainer.createComponent(view.component);
+    
+    // Pass static data
     if (view.data) {
       Object.assign(compRef.instance, view.data);
     }
+
+    // Provide shared signal if specified
+    if (this.tabConfig.shearedSignal) {
+      Object.assign(compRef.instance, { shearedSignal: this.sharedMemory });
+    }
+    
+    // Insert component view and cache it
+    (compRef.instance as any).onViewActivated?.();
     this.tabContainer.insert(compRef.hostView);
     this.componentCache.set(index, compRef);
+  }
+
+  // Cleanup on component destroy
+  ngOnDestroy(): void {
+    this.componentCache.forEach((comp) => comp.destroy());
+    this.componentCache.clear();
   }
 }

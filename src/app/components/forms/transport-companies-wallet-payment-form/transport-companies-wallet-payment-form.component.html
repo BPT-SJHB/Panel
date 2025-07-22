@@ -1,0 +1,20 @@
+<!-- 🔍 جستجوی شرکت حمل و نقل -->
+<div class="grid my-5">
+  <app-search-auto-complete
+    class="col-12"
+    placeholder="قسمتی از نام را وارد نمایید"
+    optionLabel="TCTitle"
+    optionValue="TCTitle"
+    [lazySearch]="searchTransportCompony"
+    [minLength]="3"
+    (selectSuggestion)="onTransportComponySelect($event)"
+  />
+</div>
+
+<!-- 💰 فرم پرداخت کیف پول برای شرکت حمل و نقل انتخاب‌شده -->
+<app-wallet-payment-form
+  [walletType]="walletType"
+  [transportComponyId]="transportComponyId"
+  [shearedSignal]="shearedSignal"
+/>
+
