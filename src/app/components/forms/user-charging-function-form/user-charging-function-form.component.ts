@@ -35,4 +35,6 @@ export class UserChargingFunctionFormComponent {
     endTime: ['00:00:00'],
     totalAmount: new FormControl<number | null>(null),
   });
+
+  userFunctions = signal<WalletUserChargingFunction[]>([]);
 }
