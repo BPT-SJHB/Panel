@@ -39,4 +39,32 @@ export class UserChargingFunctionFormComponent {
   userFunctions = signal<WalletUserChargingFunction[]>([]);
 
   cols = ['تاریخ', 'زمان', 'مبلغ', 'کد شناسایی کیف پول'];
+
+  async FetchData() {
+    //! loading start
+
+    const responseOfTable = await this.walletManager.GetUserChargingFunctions(
+      this.startDate.value,
+      this.endDate.value,
+      this.startTime.value,
+      this.endTime.value
+    );
+    if (!checkAndToastError(responseOfTable, this.toast)) return;
+
+    this.userFunctions.set(this.sortTable(responseOfTable.data));
+
+    const responseOfTotalFunctionsAmount =
+      await this.walletManager.GetTotalOfUserFunctions(
+        this.startDate.value,
+        this.endDate.value,
+        this.startTime.value,
+        this.endTime.value
+      );
+
+    if (!checkAndToastError(responseOfTotalFunctionsAmount, this.toast)) return;
+
+    this.totalAmount.setValue(responseOfTotalFunctionsAmount.data.Total);
+
+    //! loading ends
+  }
 }
