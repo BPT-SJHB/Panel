@@ -80,4 +80,20 @@ export class UserChargingFunctionFormComponent {
       return dateCompare;
     });
   }
+
+  get startDate(): FormControl {
+    return this.UserChargingFunctionsForm.get('startDate') as FormControl;
+  }
+  get endDate(): FormControl {
+    return this.UserChargingFunctionsForm.get('endDate') as FormControl;
+  }
+  get startTime(): FormControl {
+    return this.UserChargingFunctionsForm.get('startTime') as FormControl;
+  }
+  get endTime(): FormControl {
+    return this.UserChargingFunctionsForm.get('endTime') as FormControl;
+  }
+  get totalAmount(): FormControl {
+    return this.UserChargingFunctionsForm.get('totalAmount') as FormControl;
+  }
 }
