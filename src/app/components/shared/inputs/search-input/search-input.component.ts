@@ -8,7 +8,7 @@ import {
   SimpleChanges,
   OnChanges,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
@@ -22,14 +22,13 @@ import { TextInputComponent } from '../text-input/text-input.component';
   selector: 'app-search-input',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     InputGroupAddonModule,
     InputGroupModule,
     ButtonModule,
-    TextInputComponent,
-  ],
+    TextInputComponent
+],
   templateUrl: './search-input.component.html',
   styleUrl: './search-input.component.scss',
 })

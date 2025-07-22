@@ -8,7 +8,7 @@ import {
   ViewContainerRef,
   inject
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
@@ -40,14 +40,13 @@ import { TabViewComponent } from 'app/components/shared/tab-view/tab-view.compon
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    CommonModule,
     ButtonModule,
     HeaderComponent,
     SidebarComponent,
     SubMenuComponent,
     FooterComponent,
-    SupportButtonComponent,
-  ],
+    SupportButtonComponent
+],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })

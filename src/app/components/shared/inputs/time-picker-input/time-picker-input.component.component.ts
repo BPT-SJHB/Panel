@@ -7,7 +7,7 @@ import {
   OnDestroy,
   SimpleChanges,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -30,13 +30,12 @@ import {
   selector: 'app-time-picker-input',
   standalone: true,
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     InputGroupModule,
     InputGroupAddonModule,
     MessageModule,
-    ButtonModule,
-  ],
+    ButtonModule
+],
   templateUrl: './time-picker-input.component.html',
   styleUrl: './time-picker-input.component.scss',
 })

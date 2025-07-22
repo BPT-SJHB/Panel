@@ -1,6 +1,6 @@
 import { Component, effect, inject, Input, signal } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { CardModule } from 'primeng/card';
 import { Button } from 'primeng/button';
 
@@ -16,7 +16,7 @@ import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
 @Component({
   selector: 'app-wallet-payment-form',
   standalone: true,
-  imports: [CommonModule, CardModule, TextInputComponent, Button],
+  imports: [CardModule, TextInputComponent, Button],
   templateUrl: './wallet-payment-form.component.html',
   styleUrl: './wallet-payment-form.component.scss',
 })

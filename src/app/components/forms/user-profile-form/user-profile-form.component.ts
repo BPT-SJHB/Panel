@@ -1,7 +1,7 @@
 // 🔽 Angular & RxJS Imports
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { CommonModule } from '@angular/common';
+
 
 // 🔽 PrimeNG UI Modules
 import { AvatarModule } from 'primeng/avatar';
@@ -33,7 +33,7 @@ interface UserProfile {
 @Component({
   selector: 'app-user-profile-form',
   standalone: true,
-  imports: [CommonModule, AvatarModule, ButtonModule, ConfirmDialogModule],
+  imports: [AvatarModule, ButtonModule, ConfirmDialogModule],
   providers: [ConfirmationService,DialogService],
   templateUrl: './user-profile-form.component.html',
   styleUrl: './user-profile-form.component.scss',

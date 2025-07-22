@@ -1,8 +1,6 @@
-<ng-container *ngIf="!tabConfig || tabConfig.subTab.length === 1; else multiView">
+@if (!tabConfig || tabConfig.subTab.length === 1) {
   <ng-container #singleContainer></ng-container>
-</ng-container>
-
-<ng-template #multiView>
+} @else {
   <p-tabs [(value)]="activeIndex" (valueChange)="onTabChange($event)">
     <div class="w-full overflow-x-auto">
       <p-tablist>
@@ -12,9 +10,9 @@
       </p-tablist>
     </div>
   </p-tabs>
-
   <!-- Only one container rendered below the tabs -->
   <div class="mt-5">
     <ng-container #tabContainer></ng-container>
   </div>
-</ng-template>
+}
+

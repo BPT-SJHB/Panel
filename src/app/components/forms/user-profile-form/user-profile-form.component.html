@@ -6,28 +6,31 @@
     shape="circle"
     styleClass="shadow-2 w-5rem h-5rem"
     [style]="{ 'background-color': '#ece9fc', color: '#2a1261' }"
-  />
+    />
 </div>
 
 <div class="flex flex-column gap-3 px-2">
   <!-- Display columns dynamically -->
-  <div
-    *ngFor="let col of cols"
-    class="flex justify-between items-center text-sm text-gray-800 border-bottom-1 surface-border pb-2"
-  >
-    <span class="font-semibold text-right w-6rem min-w-6rem text-primary">
-      {{ col.col }}:
-    </span>
-    <span class="text-right text-sm text-900">
-      {{ userProfile()[col.field]  }}
-    </span>
-    <span *ngIf="col.field === 'balance'" class="mx-1">تومان</span>
-  </div>
+  @for (col of cols; track col) {
+    <div
+      class="flex justify-between items-center text-sm text-gray-800 border-bottom-1 surface-border pb-2"
+      >
+      <span class="font-semibold text-right w-6rem min-w-6rem text-primary">
+        {{ col.col }}:
+      </span>
+      <span class="text-right text-sm text-900">
+        {{ userProfile()[col.field]  }}
+      </span>
+      @if (col.field === 'balance') {
+        <span class="mx-1">تومان</span>
+      }
+    </div>
+  }
 </div>
 <!-- Action Buttons -->
 <div
   class="col-12 mt-5 md:mb-6 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center"
->
+  >
   <p-button
     (click)="activateUserSms()"
     [disabled]="loading() || isUserSmsActivated || !userProfile()"
@@ -52,4 +55,4 @@
   rejectLabel="انصراف"
   acceptButtonStyleClass="px-5 p-button-info py-2 text-sm"
   rejectButtonStyleClass="px-4 p-button-secondary py-2 text-sm"
-/>
+  />

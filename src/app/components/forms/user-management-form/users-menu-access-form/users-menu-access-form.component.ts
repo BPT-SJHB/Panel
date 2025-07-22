@@ -1,7 +1,7 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { TreeNode } from 'primeng/api';
 import { TreeTableModule } from 'primeng/treetable';
-import { CommonModule } from '@angular/common';
+
 import { UserManagementService } from 'app/services/user-management/user-management.service';
 import { SearchInputComponent } from 'app/components/shared/inputs/search-input/search-input.component';
 import { SoftwareUserInfo } from 'app/services/user-management/model/software-user-info.model';
@@ -29,13 +29,12 @@ interface SelectedNodes {
   selector: 'app-users-menu-access-form',
   imports: [
     TreeTableModule,
-    CommonModule,
     SearchInputComponent,
     ButtonModule,
     ProgressSpinnerModule,
     ReactiveFormsModule,
-    TextInputComponent,
-  ],
+    TextInputComponent
+],
   templateUrl: './users-menu-access-form.component.html',
   styleUrl: './users-menu-access-form.component.scss',
 })

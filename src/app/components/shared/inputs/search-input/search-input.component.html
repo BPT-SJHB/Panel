@@ -14,16 +14,17 @@
   ></app-text-input>
 
   <div class="flex items-center">
-    <p-button
-      *ngIf="!autoTriggerSearch"
-      (click)="onSearchButtonClick()"
-      [label]="searchButtonLabel"
-      [disabled]="disableSearchButton"
-      size="small"
-      styleClass="px-4 py-1"
-      severity="info"
-      class="h-full"
-      [style]="{ 'margin-bottom': '23px' }"
-    ></p-button>
+    @if (!autoTriggerSearch) {
+      <p-button
+        (click)="onSearchButtonClick()"
+        [label]="searchButtonLabel"
+        [disabled]="disableSearchButton"
+        size="small"
+        styleClass="px-4 py-1"
+        severity="info"
+        class="h-full"
+        [style]="{ 'margin-bottom': '23px' }"
+      ></p-button>
+    }
   </div>
 </div>

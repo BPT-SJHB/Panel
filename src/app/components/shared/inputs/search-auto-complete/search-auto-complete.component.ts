@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   Component,
   EventEmitter,
@@ -20,12 +20,11 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
   selector: 'app-search-auto-complete',
   standalone: true,
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     AutoCompleteModule,
     InputGroupAddonModule,
-    InputGroupModule,
-  ],
+    InputGroupModule
+],
   templateUrl: './search-auto-complete.component.html',
   styleUrl: './search-auto-complete.component.scss',
 })

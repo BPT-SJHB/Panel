@@ -1,21 +1,23 @@
 <div class="flex w-full">
   <p-input-group styleClass="h-2-5rem w-full">
     <!-- 🎨 Icon or 🏷️ Label Addon -->
-    <p-inputgroup-addon
-      *ngIf="label.trim() === ''"
-      class="bg-primary text-white flex items-center justify-center px-3 border-round-right"
-      [style.width]="addonWidth"
-    >
-      <i [class]="icon"></i>
-    </p-inputgroup-addon>
+    @if (label.trim() === '') {
+      <p-inputgroup-addon
+        class="bg-primary text-white flex items-center justify-center px-3 border-round-right"
+        [style.width]="addonWidth"
+        >
+        <i [class]="icon"></i>
+      </p-inputgroup-addon>
+    }
 
-    <p-inputgroup-addon
-      *ngIf="label.trim() !== ''"
-      class="bg-primary border-round-right flex align-items-center justify-content-center"
-      [style.width]="addonWidth"
-    >
-      <span class="text-sm whitespace-nowrap">{{ label }}</span>
-    </p-inputgroup-addon>
+    @if (label.trim() !== '') {
+      <p-inputgroup-addon
+        class="bg-primary border-round-right flex align-items-center justify-content-center"
+        [style.width]="addonWidth"
+        >
+        <span class="text-sm whitespace-nowrap">{{ label }}</span>
+      </p-inputgroup-addon>
+    }
 
     <!-- 📅 Persian Date Input -->
     <div class="w-full relative">
@@ -23,7 +25,7 @@
         [ngClass]="
           datePickerPosition === 'top' ? 'position-top' : 'position-bottom'
         "
-      >
+        >
         <div class="h-2-5rem">
           <input
             #inputRef
@@ -43,16 +45,18 @@
             class="border-round-left-md"
             (focus)="onFocusInput(inputRef)"
             (blur)="onBlurInput(inputRef)"
-          />
-        </div>
-      </ng-persian-datepicker>
-    </div>
-  </p-input-group>
-</div>
+            />
+          </div>
+        </ng-persian-datepicker>
+      </div>
+    </p-input-group>
+  </div>
 
-<!-- ⚠️ Validation Error Message -->
-<div *ngIf="control.touched && firstErrorMessage" class="px-3 mt-1">
-  <p-message severity="error" variant="simple" size="small">
-    {{ firstErrorMessage }}
-  </p-message>
-</div>
+  <!-- ⚠️ Validation Error Message -->
+  @if (control.touched && firstErrorMessage) {
+    <div class="px-3 mt-1">
+      <p-message severity="error" variant="simple" size="small">
+        {{ firstErrorMessage }}
+      </p-message>
+    </div>
+  }

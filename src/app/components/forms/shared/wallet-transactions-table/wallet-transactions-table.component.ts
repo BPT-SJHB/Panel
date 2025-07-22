@@ -1,5 +1,5 @@
 import { Component, effect, inject, Input, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { TableModule } from 'primeng/table';
 
 import { BaseLoading } from '../component-base/base-loading';
@@ -13,7 +13,7 @@ import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
 @Component({
   selector: 'app-wallet-transactions-table',
   standalone: true,
-  imports: [CommonModule, TableModule],
+  imports: [TableModule],
   templateUrl: './wallet-transactions-table.component.html',
   styleUrl: './wallet-transactions-table.component.scss',
 })

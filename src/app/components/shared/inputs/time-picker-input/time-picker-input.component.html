@@ -1,6 +1,6 @@
 <div
   class="flex flex-row-reverse justify-content-end flex-row align-items-center gap-2"
->
+  >
   <!-- Hours -->
   <div class="flex flex-column align-items-center">
     <button
@@ -21,97 +21,101 @@
       class="w-2rem h-2rem text-center"
       (blur)="onBlurInput(hour)"
       maxlength="2"
-    />
-    <button
-      pButton
-      icon="pi pi-chevron-down"
-      class="p-button-text p-button-sm"
-      (mousedown)="startContinuousChange(hour, 0, 23, 'decrement')"
-      (mouseup)="stopContinuousChange()"
-      (mouseleave)="stopContinuousChange()"
-      severity="secondary"
-      type="button"
-      tabindex="-1"
-    ></button>
-  </div>
+      />
+      <button
+        pButton
+        icon="pi pi-chevron-down"
+        class="p-button-text p-button-sm"
+        (mousedown)="startContinuousChange(hour, 0, 23, 'decrement')"
+        (mouseup)="stopContinuousChange()"
+        (mouseleave)="stopContinuousChange()"
+        severity="secondary"
+        type="button"
+        tabindex="-1"
+      ></button>
+    </div>
 
-  <span>:</span>
+    <span>:</span>
 
-  <!-- Minutes -->
-  <div class="flex flex-column align-items-center">
-    <button
-      pButton
-      icon="pi pi-chevron-up"
-      class="p-button-text p-button-sm"
-      (mousedown)="startContinuousChange(minutes, 0, 59, 'increment')"
-      (mouseup)="stopContinuousChange()"
-      (mouseleave)="stopContinuousChange()"
-      type="button"
-      severity="secondary"
-      tabindex="-1"
-    ></button>
-    <input
-      type="text"
-      inputmode="numeric"
-      [formControl]="minutes"
-      class="w-2rem h-2rem text-center"
-      (blur)="onBlurInput(minutes)"
-      maxlength="2"
-    />
-    <button
-      pButton
-      icon="pi pi-chevron-down"
-      class="p-button-text p-button-sm"
-      (mousedown)="startContinuousChange(minutes, 0, 59, 'decrement')"
-      (mouseup)="stopContinuousChange()"
-      (mouseleave)="stopContinuousChange()"
-      severity="secondary"
-      type="button"
-      tabindex="-1"
-    ></button>
-  </div>
+    <!-- Minutes -->
+    <div class="flex flex-column align-items-center">
+      <button
+        pButton
+        icon="pi pi-chevron-up"
+        class="p-button-text p-button-sm"
+        (mousedown)="startContinuousChange(minutes, 0, 59, 'increment')"
+        (mouseup)="stopContinuousChange()"
+        (mouseleave)="stopContinuousChange()"
+        type="button"
+        severity="secondary"
+        tabindex="-1"
+      ></button>
+      <input
+        type="text"
+        inputmode="numeric"
+        [formControl]="minutes"
+        class="w-2rem h-2rem text-center"
+        (blur)="onBlurInput(minutes)"
+        maxlength="2"
+        />
+        <button
+          pButton
+          icon="pi pi-chevron-down"
+          class="p-button-text p-button-sm"
+          (mousedown)="startContinuousChange(minutes, 0, 59, 'decrement')"
+          (mouseup)="stopContinuousChange()"
+          (mouseleave)="stopContinuousChange()"
+          severity="secondary"
+          type="button"
+          tabindex="-1"
+        ></button>
+      </div>
 
-  <span>:</span>
+      <span>:</span>
 
-  <!-- Seconds -->
-  <div class="flex flex-column align-items-center">
-    <button
-      pButton
-      icon="pi pi-chevron-up"
-      class="p-button-text p-button-sm"
-      (mousedown)="startContinuousChange(second, 0, 59, 'increment')"
-      (mouseup)="stopContinuousChange()"
-      (mouseleave)="stopContinuousChange()"
-      severity="secondary"
-      type="button"
-      tabindex="-1"
-    ></button>
-    <input
-      type="text"
-      inputmode="numeric"
-      [formControl]="second"
-      class="w-2rem h-2rem text-center"
-      (blur)="onBlurInput(second)"
-      maxlength="2"
-    />
-    <button
-      pButton
-      icon="pi pi-chevron-down"
-      class="p-button-text p-button-sm"
-      (mousedown)="startContinuousChange(second, 0, 59, 'decrement')"
-      (mouseup)="stopContinuousChange()"
-      (mouseleave)="stopContinuousChange()"
-      severity="secondary"
-      type="button"
-      tabindex="-1"
-    ></button>
-  </div>
-  <span class="ml-2" *ngIf="label">{{ label }}</span>
-</div>
+      <!-- Seconds -->
+      <div class="flex flex-column align-items-center">
+        <button
+          pButton
+          icon="pi pi-chevron-up"
+          class="p-button-text p-button-sm"
+          (mousedown)="startContinuousChange(second, 0, 59, 'increment')"
+          (mouseup)="stopContinuousChange()"
+          (mouseleave)="stopContinuousChange()"
+          severity="secondary"
+          type="button"
+          tabindex="-1"
+        ></button>
+        <input
+          type="text"
+          inputmode="numeric"
+          [formControl]="second"
+          class="w-2rem h-2rem text-center"
+          (blur)="onBlurInput(second)"
+          maxlength="2"
+          />
+          <button
+            pButton
+            icon="pi pi-chevron-down"
+            class="p-button-text p-button-sm"
+            (mousedown)="startContinuousChange(second, 0, 59, 'decrement')"
+            (mouseup)="stopContinuousChange()"
+            (mouseleave)="stopContinuousChange()"
+            severity="secondary"
+            type="button"
+            tabindex="-1"
+          ></button>
+        </div>
+        @if (label) {
+          <span class="ml-2">{{ label }}</span>
+        }
+      </div>
 
-<!-- ⚠️ Validation Error Message -->
-<div *ngIf="control.touched && firstErrorMessage" class="px-3 mt-1">
-  <p-message severity="error" variant="simple" size="small">
-    {{ firstErrorMessage }}
-  </p-message>
-</div>
+      <!-- ⚠️ Validation Error Message -->
+      @if (control.touched && firstErrorMessage) {
+        <div class="px-3 mt-1">
+          <p-message severity="error" variant="simple" size="small">
+            {{ firstErrorMessage }}
+          </p-message>
+        </div>
+      }

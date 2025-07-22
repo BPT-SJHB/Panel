@@ -4,7 +4,7 @@ import { AnimateOnScroll } from 'primeng/animateonscroll';
 import { TerminalCardComponent } from 'app/components/shared/terminal-card/terminal-card.component';
 import { ButtonModule } from 'primeng/button';
 import { SearchInputComponent } from '../../components/shared/inputs/search-input/search-input.component';
-import { CommonModule } from '@angular/common';
+
 import { PanelModule } from 'primeng/panel';
 import { appTitles } from 'app/constants/Titles';
 import { LoadAnnouncementPlacesService } from 'app/services/LoadAnnouncementPlaces/load-announcement-places.service';
@@ -12,13 +12,12 @@ import { LoadAnnouncementPlacesService } from 'app/services/LoadAnnouncementPlac
   selector: 'app-home',
   standalone: true,
   imports: [
-    CommonModule,
     ButtonModule,
     PanelModule,
     AnimateOnScroll,
     TerminalCardComponent,
-    SearchInputComponent,
-  ],
+    SearchInputComponent
+],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })

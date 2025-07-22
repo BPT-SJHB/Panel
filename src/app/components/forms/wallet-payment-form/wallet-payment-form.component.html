@@ -4,30 +4,34 @@
     <div
       class="border-bottom-1 border-gray-300 flex align-items-center justify-content-center"
       style="height: 60px"
-    >
+      >
       <span class="font-bold text-xl px-3">شارژ آنلاین کیف پول</span>
     </div>
   </ng-template>
 
   <!-- Wallet Info Display -->
-  <div class="flex flex-column align-items-center md:flex-row md:justify-content-around gap-3 mb-4 px-3 text-right" *ngIf="userWallet()">
-    <div class="flex gap-2">
-      <div class="font-semibold">شناسه کیف پول:</div>
-      <div>{{ userWallet()?.MoneyWalletId }}</div>
+  @if (userWallet()) {
+    <div class="flex flex-column align-items-center md:flex-row md:justify-content-around gap-3 mb-4 px-3 text-right">
+      <div class="flex gap-2">
+        <div class="font-semibold">شناسه کیف پول:</div>
+        <div>{{ userWallet()?.MoneyWalletId }}</div>
+      </div>
+      <div class="flex gap-2">
+        <div class="font-semibold">کد کیف پول:</div>
+        <div>{{ userWallet()?.MoneyWalletCode }}</div>
+      </div>
+      <div class="flex gap-2">
+        <div class="font-semibold">موجودی:</div>
+        <div>{{ userWallet()?.Balance?.toLocaleString() }} ریال</div>
+      </div>
     </div>
-    <div class="flex gap-2">
-      <div class="font-semibold">کد کیف پول:</div>
-      <div>{{ userWallet()?.MoneyWalletCode }}</div>
-    </div>
-    <div class="flex gap-2">
-      <div class="font-semibold">موجودی:</div>
-      <div>{{ userWallet()?.Balance?.toLocaleString() }} ریال</div>
-    </div>
-  </div>
+  }
 
-  <div *ngIf="!userWallet()" class="text-center text-red-500 font-bold mb-4">
-    اطلاعات کیف پول موجود نیست
-  </div>
+  @if (!userWallet()) {
+    <div class="text-center text-red-500 font-bold mb-4">
+      اطلاعات کیف پول موجود نیست
+    </div>
+  }
 
   <!-- Amount Input -->
   <app-text-input
@@ -36,21 +40,22 @@
     [control]="amount"
     addonWidth="8rem"
     [disabled]="!userWallet()"
-  />
+    />
 
   <!-- Preset Amount Buttons -->
   <div class="flex flex-wrap gap-4 mt-4 justify-content-center">
-    <p-button
-      severity="primary"
-      variant="outlined"
-      styleClass="w-10rem"
-      size="small"
-      *ngFor="let item of defaultAmounts()"
-      (click)="amount.setValue(item.Amount)"
-      [disabled]="!userWallet()"
-    >
-      {{ item.AmountTitle }} تومان
-    </p-button>
+    @for (item of defaultAmounts(); track item) {
+      <p-button
+        severity="primary"
+        variant="outlined"
+        styleClass="w-10rem"
+        size="small"
+        (click)="amount.setValue(item.Amount)"
+        [disabled]="!userWallet()"
+        >
+        {{ item.AmountTitle }} تومان
+      </p-button>
+    }
   </div>
 
   <div class="flex flex-column md:align-items-center mt-5 w-full">
@@ -60,7 +65,7 @@
       size="small"
       (click)="paymentMoney()"
       [disabled]="amount.invalid || !userWallet()"
-    >
+      >
       شارژ
     </p-button>
   </div>

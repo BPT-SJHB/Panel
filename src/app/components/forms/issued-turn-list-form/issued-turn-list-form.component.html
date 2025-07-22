@@ -1,38 +1,39 @@
 <!-- Loop through turns -->
-<div
-  *ngFor="let turn of turnsList()"
-  class="flex flex-column gap-4 p-4 mb-5 border-1 surface-border surface-card border-round-xl shadow-3"
-  style="max-width: 650px; margin: auto;"
->
-  <!-- Card content -->
-  <p-card styleClass="border-none shadow-none">
-    <div class="flex flex-column gap-3 px-2">
-      <!-- Display columns dynamically -->
-      <div
-        *ngFor="let col of cols"
-        class="flex justify-between items-center text-sm text-gray-800 border-bottom-1 surface-border pb-2"
-      >
-        <span class="font-semibold text-right w-6rem min-w-6rem text-primary">
-          {{ col.col }}:
-        </span>
-        <span class="text-right text-sm text-900">
-          {{ turn[col.field] }}
-        </span>
+@for (turn of turnsList(); track turn) {
+  <div
+    class="flex flex-column gap-4 p-4 mb-5 border-1 surface-border surface-card border-round-xl shadow-3"
+    style="max-width: 650px; margin: auto;"
+    >
+    <!-- Card content -->
+    <p-card styleClass="border-none shadow-none">
+      <div class="flex flex-column gap-3 px-2">
+        <!-- Display columns dynamically -->
+        @for (col of cols; track col) {
+          <div
+            class="flex justify-between items-center text-sm text-gray-800 border-bottom-1 surface-border pb-2"
+            >
+            <span class="font-semibold text-right w-6rem min-w-6rem text-primary">
+              {{ col.col }}:
+            </span>
+            <span class="text-right text-sm text-900">
+              {{ turn[col.field] }}
+            </span>
+          </div>
+        }
+        <!-- Cancel button -->
+        <div class="flex justify-content-center mt-3">
+          <p-button
+            icon="pi pi-times-circle"
+            styleClass="px-4 py-2 text-sm font-semibold"
+            severity="danger"
+            label="ابطال نوبت"
+            (click)="confirmCancelTurn(turn)"
+            />
+        </div>
       </div>
-
-      <!-- Cancel button -->
-      <div class="flex justify-content-center mt-3">
-        <p-button
-          icon="pi pi-times-circle"
-          styleClass="px-4 py-2 text-sm font-semibold"
-          severity="danger"
-          label="ابطال نوبت"
-          (click)="confirmCancelTurn(turn)"
-        />
-      </div>
-    </div>
-  </p-card>
-</div>
+    </p-card>
+  </div>
+}
 
 <!-- Confirm dialog -->
 <p-confirmDialog
@@ -40,4 +41,4 @@
   rejectLabel="انصراف"
   acceptButtonStyleClass="px-5 p-button-danger py-2 text-sm"
   rejectButtonStyleClass="px-4 p-button-secondary py-2 text-sm"
-/>
+  />

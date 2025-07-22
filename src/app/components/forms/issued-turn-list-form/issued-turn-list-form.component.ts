@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit, OnDestroy, inject, signal } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
@@ -27,7 +27,7 @@ interface CardTurnItem {
 @Component({
   selector: 'app-issued-turn-list-form',
   standalone: true,
-  imports: [CommonModule, CardModule, ButtonModule, ConfirmDialog],
+  imports: [CardModule, ButtonModule, ConfirmDialog],
   providers: [ConfirmationService],
   templateUrl: './issued-turn-list-form.component.html',
   styleUrl: './issued-turn-list-form.component.scss',

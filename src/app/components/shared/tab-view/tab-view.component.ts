@@ -9,14 +9,14 @@ import {
   WritableSignal,
   signal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { TabsModule } from 'primeng/tabs';
 import { TabConfig } from 'app/constants/tab-component-registry';
 
 @Component({
   selector: 'app-tab-view',
   standalone: true,
-  imports: [CommonModule, TabsModule],
+  imports: [TabsModule],
   templateUrl: './tab-view.component.html',
   styleUrl: './tab-view.component.scss',
 })

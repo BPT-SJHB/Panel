@@ -1,5 +1,5 @@
 import { Component, inject, Input, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { TableModule } from 'primeng/table';
 
 import { BaseLoading } from '../component-base/base-loading';
@@ -13,7 +13,7 @@ import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
 @Component({
   selector: 'app-payment-record-table',
   standalone: true,
-  imports: [CommonModule, TableModule],
+  imports: [TableModule],
   templateUrl: './wallet-payment-record-table.component.html',
   styleUrl: './wallet-payment-record-table.component.scss',
 })

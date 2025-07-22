@@ -4,15 +4,14 @@
     <p-inputgroup-addon
       class="bg-primary border-round-right flex items-center justify-center px-3 h-2-5rem"
       [style.width]="addonWidth"
-    >
-      <ng-container *ngIf="label.trim() === ''; else labelTemplate">
+      >
+      @if (label.trim() === '') {
         <i [class]="icon"></i>
-      </ng-container>
-      <ng-template #labelTemplate>
+      } @else {
         <span class="text-sm text-white" style="white-space: nowrap">
           {{ label }}
         </span>
-      </ng-template>
+      }
     </p-inputgroup-addon>
 
     <!-- AutoComplete Input -->
@@ -33,23 +32,25 @@
       (onBlur)="onBlurInput($event.target)"
       (input)="onValueChanged($event.target)"
       [completeOnFocus]="true"
-    />
+      />
 
     <!-- Optional Select Icon -->
-    <div
-      *ngIf="!loading && showIconOptionSelected"
-      class="absolute"
-      style="z-index: 3; left: 10px; top: 5px"
-    >
-      <i class="pi pi-check-circle text-lg text-green-600"></i>
-    </div>
+    @if (!loading && showIconOptionSelected) {
+      <div
+        class="absolute"
+        style="z-index: 3; left: 10px; top: 5px"
+        >
+        <i class="pi pi-check-circle text-lg text-green-600"></i>
+      </div>
+    }
 
-    <div
-      *ngIf="loading"
-      class="absolute"
-      style="z-index: 3; left: 10px; top: 5px"
-    >
-      <i class="pi pi-spin pi-spinner ml-2"></i>
-    </div>
+    @if (loading) {
+      <div
+        class="absolute"
+        style="z-index: 3; left: 10px; top: 5px"
+        >
+        <i class="pi pi-spin pi-spinner ml-2"></i>
+      </div>
+    }
   </p-input-group>
 </div>
