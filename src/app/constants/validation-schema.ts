@@ -37,6 +37,12 @@ export const ValidationSchema = {
       Validators.pattern(/09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}/),
     ],
   },
+  mobileOrEmpty: {
+    name: 'شماره موبایل',
+    validators: [
+      Validators.pattern(/09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}/),
+    ],
+  },
   nationalId: {
     name: 'کد ملی',
     validators: [Validators.required, Validators.pattern(/^\d{10}$/)],
@@ -45,9 +51,17 @@ export const ValidationSchema = {
     name: 'ایمیل',
     validators: [Validators.required, Validators.email],
   },
+   emailOrEmpty: {
+    name: 'ایمیل',
+    validators: [ Validators.email],
+  },
   fullName: {
     name: 'نام کاربر',
     validators: [Validators.required, Validators.minLength(3)],
+  },
+  fullNameOrEmpty: {
+    name: 'نام کاربر',
+    validators: [Validators.minLength(3)],
   },
   username:{
     name:'نام کابری',
@@ -77,6 +91,10 @@ export const ValidationSchema = {
   telephone: {
     name: 'شماره تلفن',
     validators: [Validators.required, Validators.pattern(/^0\d{10}$/)],
+  },
+  telephoneOrEmpty: {
+    name: 'شماره تلفن',
+    validators: [Validators.pattern(/^0\d{10}$/)],
   },
   address: {
     name: 'آدرس',
