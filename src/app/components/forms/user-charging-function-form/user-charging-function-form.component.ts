@@ -37,4 +37,6 @@ export class UserChargingFunctionFormComponent {
   });
 
   userFunctions = signal<WalletUserChargingFunction[]>([]);
+
+  cols = ['تاریخ', 'زمان', 'مبلغ', 'کد شناسایی کیف پول'];
 }
