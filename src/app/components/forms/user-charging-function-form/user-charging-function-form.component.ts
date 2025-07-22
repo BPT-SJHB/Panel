@@ -67,4 +67,17 @@ export class UserChargingFunctionFormComponent {
 
     //! loading ends
   }
+
+  private sortTable(
+    data: WalletUserChargingFunction[]
+  ): WalletUserChargingFunction[] {
+    return data.sort((a, b) => {
+      const dateCompare = a.ShamsiDate.localeCompare(b.ShamsiDate);
+
+      if (dateCompare === 0) {
+        return a.Time.localeCompare(b.Time);
+      }
+      return dateCompare;
+    });
+  }
 }
