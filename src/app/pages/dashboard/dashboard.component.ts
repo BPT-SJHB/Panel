@@ -144,8 +144,8 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     const compRef = this.container.createComponent(TabViewComponent);
-    const views = TabComponentRegistry[tab.component];
-    compRef.instance.views = views;
+    const tabConfig = TabComponentRegistry[tab.component];
+    compRef.instance.tabConfig = tabConfig;
 
     this.container.insert(compRef.hostView);
     this.componentCache.set(tab.id, compRef);

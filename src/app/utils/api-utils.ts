@@ -8,3 +8,24 @@ export function checkAndToastError<T>(res: ApiResponse<T>, toast: ToastService):
   }
   return true;
 }
+
+
+export function trimInDeep<T>(input: T): T {
+  if (typeof input === 'string') {
+    return input.trim() as T; 
+  }
+
+  if (Array.isArray(input)) {
+    return input.map(item => trimInDeep(item)) as T;
+  }
+
+  if (input !== null && typeof input === 'object') {
+    const result: any = {};
+    for (const [key, value] of Object.entries(input)) {
+      result[key] = trimInDeep(value);
+    }
+    return result;
+  }
+
+  return input;
+}

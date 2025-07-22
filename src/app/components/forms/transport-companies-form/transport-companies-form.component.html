@@ -1,0 +1,142 @@
+<!-- جستجوی شرکت حمل و نقل -->
+<app-search-auto-complete
+  placeholder="قسمتی از نام را وارد نمایید"
+  optionLabel="TCTitle"
+  optionValue="TCTitle"
+  [lazySearch]="searchTransportCompony"
+  [minLength]="3"
+  (selectSuggestion)="onTransportComponySelect($event)"
+/>
+
+<!-- فرم اطلاعات شرکت حمل و نقل -->
+<form [formGroup]="transportComponyForm" (ngSubmit)="editTransportCompony()" class="mt-5">
+  <div class="grid">
+    <!-- کد شرکت -->
+    <app-text-input
+      class="col-12 md:col-6"
+      label="کد شرکت"
+      placeholder="کد شرکت حمل و نقل"
+      [control]="TCId"
+      [disabled]="true"
+      [readOnly]="true"
+      [addonWidth]="addonWidth"
+    />
+
+    <!-- عنوان شرکت -->
+    <app-text-input
+      class="col-12 md:col-6"
+      placeholder="نام شرکت حمل و نقل"
+      label="عنوان"
+      [control]="TCTitle"
+      [disabled]="true"
+      [readOnly]="true"
+      [addonWidth]="addonWidth"
+    />
+
+    <!-- کد سازمانی -->
+    <app-text-input
+      class="col-12 md:col-6"
+      placeholder="کد سازمانی"
+      label="کد سازمانی"
+      [control]="TCOrganizationCode"
+      [disabled]="true"
+      [readOnly]="true"
+      [addonWidth]="addonWidth"
+    />
+
+    <!-- شهر استقرار -->
+    <app-text-input
+      class="col-12 md:col-6"
+      placeholder="محل شهر استقرار"
+      label="عنوان شهر"
+      [control]="TCCityTitle"
+      [disabled]="true"
+      [readOnly]="true"
+      [addonWidth]="addonWidth"
+    />
+
+    <!-- تلفن -->
+    <app-text-input
+      class="col-12 md:col-6"
+      placeholder="تلفن"
+      label="تلفن"
+      [control]="TCTel"
+      validationField="telephone"
+      [addonWidth]="addonWidth"
+    />
+
+    <!-- موبایل مدیر -->
+    <app-text-input
+      class="col-12 md:col-6"
+      label="موبایل مدیر"
+      placeholder="شماره موبایل مدیر"
+      validationField="mobile"
+      [control]="TCManagerMobileNumber"
+      [addonWidth]="addonWidth"
+    />
+
+    <!-- نام و نام خانوادگی مدیر -->
+    <app-text-input
+      class="col-12 md:col-6"
+      label="مدیر عامل"
+      placeholder="نام و نام خانوادگی مدیر"
+      validationField="fullName"
+      [control]="TCManagerNameFamily"
+      [addonWidth]="addonWidth"
+    />
+
+    <!-- ایمیل -->
+    <app-text-input
+      class="col-12 md:col-6"
+      placeholder="ایمیل"
+      label="آدرس ایمیل"
+      validationField="email"
+      [control]="EmailAddress"
+      [addonWidth]="addonWidth"
+    />
+
+    <!-- وضعیت -->
+    <app-binary-radio-input
+      class="col-12"
+      label="وضعیت"
+      [control]="Active"
+      [disabled]="true"
+      [readonly]="true"
+    />
+  </div>
+
+  <!-- دکمه‌های عملیات -->
+  <div class="col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center">
+    <p-button
+      (click)="editTransportCompony()"
+      [disabled]="transportComponyForm.invalid || loading()"
+      label="ویرایش اطلاعات"
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+    ></p-button>
+
+    <p-button
+      (click)="activateTransportComponySms()"
+      [disabled]="TCId.invalid || loading()"
+      severity="warn"
+      label="فعال سازی پیامک"
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+    ></p-button>
+
+    <p-button
+      (click)="confirmResetPassword()"
+      [disabled]="TCId.invalid || loading()"
+      severity="warn"
+      label="بروزرسانی رمزعبور"
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+    ></p-button>
+  </div>
+</form>
+
+<!-- دیالوگ تایید -->
+<p-confirmDialog
+  position="top"
+  acceptLabel="تایید"
+  rejectLabel="انصراف"
+  acceptButtonStyleClass="px-5 p-button-danger py-2 text-sm"
+  rejectButtonStyleClass="px-4 p-button-secondary py-2 text-sm"
+/>

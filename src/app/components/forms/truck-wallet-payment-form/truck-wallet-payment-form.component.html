@@ -1,0 +1,37 @@
+<div class="grid">
+  <app-search-input
+    class="col-12 md:col-6 xl:col-4"
+    placeholder="هوشمند را وارد کنید"
+    label="هوشمند"
+    validationField="smartCard"
+    [control]="Smart"
+    [onSearchQuery]="searchTruck"
+    [autoTriggerSearch]="false"
+    [disableSearchButton]="loading() || Smart.invalid"
+    addonWidth="8rem"
+  />
+  <app-text-input
+    class="col-12 md:col-6 xl:col-4"
+    placeholder="کد ناوگان"
+    label="کد ناوگان"
+    [control]="TruckId"
+    [readOnly]="true"
+    [disabled]="true"
+    addonWidth="8rem"
+  />
+  <app-text-input
+    class="col-12 md:col-6 xl:col-4"
+    placeholder="پلاک و سریال"
+    label="پلاک و سریال"
+    [control]="LicensePlate"
+    [readOnly]="true"
+    [disabled]="true"
+    addonWidth="8rem"
+  />
+</div>
+
+<app-wallet-payment-form
+  [walletType]="walletType"
+  [truckId]="truckId"
+  [shearedSignal]="shearedSignal"
+/>
