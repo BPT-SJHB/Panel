@@ -1,9 +1,10 @@
 import { definePreset } from '@primeng/themes';
 import Aura from '@primeng/themes/aura';
 import { ThemeType } from 'primeng/config';
-import { ThemePreset } from 'app/data/model/theme.model';
+import type { AuraBaseDesignTokens } from '@primeuix/themes/aura/base';
 
-const customPreset: ThemePreset = {
+
+const customPreset: AuraBaseDesignTokens = {
   semantic: {
     primary: {
       50: '{emerald.50}',
@@ -22,7 +23,7 @@ const customPreset: ThemePreset = {
 };
 
 export const customTheme: ThemeType = {
-  preset: definePreset(Aura, customPreset),
+  preset: definePreset(Aura, customPreset as Record<string, unknown>),
   options: {
     darkModeSelector: false,
   },

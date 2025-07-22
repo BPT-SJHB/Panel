@@ -4,7 +4,7 @@
   <p-tabs [(value)]="activeIndex" (valueChange)="onTabChange($event)">
     <div class="w-full overflow-x-auto">
       <p-tablist>
-        @for (view of tabConfig?.subTab; track $index) {
+        @for (view of tabConfig.subTab; track $index) {
           <p-tab class="text-sm" [value]="$index">{{ view.title }}</p-tab>
         }
       </p-tablist>
