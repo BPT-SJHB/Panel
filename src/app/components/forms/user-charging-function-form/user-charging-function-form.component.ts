@@ -27,4 +27,12 @@ export class UserChargingFunctionFormComponent {
   private toast = inject(ToastService);
   private fb = inject(FormBuilder);
   private walletManager = inject(WalletManagementService);
+
+  UserChargingFunctionsForm = this.fb.group({
+    startDate: [''],
+    endDate: [''],
+    startTime: ['00:00:00'],
+    endTime: ['00:00:00'],
+    totalAmount: new FormControl<number | null>(null),
+  });
 }
