@@ -1,4 +1,4 @@
-import { Type } from '@angular/core';
+import { signal, Type } from '@angular/core';
 import { UserInfoFormComponent } from 'app/components/forms/user-management-form/user-Info-form/user-info-form.component';
 import { TruckInfoFormComponent } from 'app/components/forms/truck-driver-manages-form/truck-info-form/truck-info-form.component';
 import { DriverInfoFormComponent } from 'app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component';
@@ -25,180 +25,345 @@ import { RealTimeTurnsFormComponent } from 'app/components/forms/turns-managemen
 import { EmergencyTurnsFormComponent } from 'app/components/forms/turns-management-form/emergency-time-turns-form copy/emergency-turns-form.component';
 import { ResuscitateTurnsFormComponent } from 'app/components/forms/turns-management-form/resuscitate-time-turns-form/resuscitate-turns-form.component';
 import { RegisterTurnFormComponent } from 'app/components/forms/register-turn-form/register-turn-form.component';
+import { WalletTransactionsTableComponent } from 'app/components/forms/shared/wallet-transactions-table/wallet-transactions-table.component';
+import { WalletPaymentRecordTableComponent } from 'app/components/forms/shared/wallet-payment-record-table/wallet-payment-record-table.component';
+import { WalletPaymentFormComponent } from 'app/components/forms/wallet-payment-form/wallet-payment-form.component';
+import { UserProfileFormComponent } from 'app/components/forms/user-profile-form/user-profile-form.component';
+import { IssuedTurnListFormComponent } from 'app/components/forms/issued-turn-list-form/issued-turn-list-form.component';
+import { TransportCompaniesFormComponent } from 'app/components/forms/transport-companies-form/transport-companies-form.component';
+import { TruckWalletPaymentFormComponent } from 'app/components/forms/truck-wallet-payment-form/truck-wallet-payment-form.component';
+import { TransportCompaniesWalletPaymentFormComponent } from 'app/components/forms/transport-companies-wallet-payment-form/transport-companies-wallet-payment-form.component';
 
 export enum TabComponentKey {
   Main = -1,
+
+  // 📋 User & Profile
   UserManagement = 0,
+  UserProfileManagement = 22,
+
+  // 🚚 Truck/Driver
   TruckDriverManagement = 1,
+  Driver_TruckManagement = 10,
+
+  // 💸 Wallets
+  SmsWalletManagement = 26,
+  UserWalletManagement = 27,
+  TruckWalletManagement = 29,
+  TransportCompaniesWalletManagement = 30,
+  TruckerAssociationWalletManagement = 31,
+
+  // 🔁 Sequential Turn
   SequentialTurnManagement = 4,
+
+  // 🏭 Factories & Production
+  TransportCompaniesManagement = 3,
   FactoriesAndFreightManagement = 6,
-  AnnouncementManagement = 11,
-  LoaderTypeManagement = 12,
+
+  // 📍 Geography
   LADPlaceManagementService = 7,
   ProvinceAndCityManagement = 8,
+
+  // 📦 Products & Load
   ProductTypesManagement = 9,
-  LoaderManagement = 13,
+  LoadCapacitorManagement = 35,
+
+  // 🏷️ Loader Types
+  LoaderTypeManagement = 12,
+
+  // 🛣️ Travel
   TravelTimeManagement = 14,
+
+  // 💰 Tariffs
+  TariffsManagement = 53,
+
+  // 📣 Announcement
+  AnnouncementManagement = 11,
+
+  // 🕓 Turns
   TurnsManagement = 19,
   TurnsRegisterManagement = 23,
-  LoadCapacitorManagement = 35,
-  TariffsManagement = 53,
-  Driver_TruckManagement = 10,
+  IssuedTurnManagement = 21,
 }
+
+export interface TabConfig {
+  shearedSignal: boolean;
+  subTab: TabView[];
+}
+
 export interface TabView {
   title: string;
   component: Type<any>;
   data?: object;
 }
 
-export const TabComponentRegistry: Record<TabComponentKey, TabView[]> = {
-  [TabComponentKey.Main]: [
-    { title: 'صفحه اصلی', component: MainViewComponent },
-  ],
+export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
+  [TabComponentKey.Main]: {
+    shearedSignal: true,
+    subTab: [
+      { title: 'صفحه اصلی', component: MainViewComponent},
+    ],
+  },
 
-  [TabComponentKey.UserManagement]: [
-    {
-      title: 'مدیریت کاربران',
-      component: UserInfoFormComponent,
-    },
-    {
-      title: 'مدریت دسترسی کابران',
-      component: UsersMenuAccessFormComponent,
-    },
-  ],
+  [TabComponentKey.UserManagement]: {
+    shearedSignal: false,
+    subTab: [
+      { title: 'مدیریت کاربران', component: UserInfoFormComponent },
+      { title: 'مدریت دسترسی کابران', component: UsersMenuAccessFormComponent },
+    ],
+  },
 
-  [TabComponentKey.TruckDriverManagement]: [
-    {
-      title: 'راننده',
-      component: DriverInfoFormComponent,
-    },
-    {
-      title: 'ناوگان',
-      component: TruckInfoFormComponent,
-    },
-    {
-      title: 'راننده ناوگان کیف پول',
-      component: DriverTruckWalletFormComponent,
-    },
-  ],
-  [TabComponentKey.FactoriesAndFreightManagement]: [
-    {
-      title: 'کارخانجات و مراکز تولید بار ',
-      component: FactoriesAndFreightFormComponent,
-    },
-  ],
-  [TabComponentKey.LoadCapacitorManagement]: [
-    {
-      title: 'مخزن بار',
-      component: LoadCapacitorFormComponent,
-    },
-  ],
-  [TabComponentKey.LoaderManagement]: [
-    {
-      title: 'بارگیر',
-      component: LoaderTypeFormComponent,
-    },
-  ],
-  [TabComponentKey.ProvinceAndCityManagement]: [
-    {
-      title: 'استان شهرها',
-      component: ProvinceAndCityFormComponent,
-    },
-  ],
-  [TabComponentKey.LoaderTypeManagement]: [
-    {
-      title: 'بارگیرها',
-      component: LoaderTypeFormComponent,
-    },
-  ],
-  [TabComponentKey.ProductTypesManagement]: [
-    {
-      title: 'کالاها',
-      component: ProductFormComponent,
-    },
-  ],
-  [TabComponentKey.LADPlaceManagementService]: [
-    {
-      title: 'مبادی و مقاصد حمل بار',
-      component: LadPlacesFormComponent,
-    },
-  ],
-  [TabComponentKey.TravelTimeManagement]: [
-    {
-      title: 'مدت سفر',
-      component: TravelTimeFormComponent,
-    },
-  ],
-  [TabComponentKey.TariffsManagement]: [
-    {
-      title: 'تعرفه های حمل بار',
-      component: TariffsFormComponent,
-    },
-  ],
-  [TabComponentKey.AnnouncementManagement]: [
-    { title: 'گروه ها اعلام بار', component: AnnouncementGroupFormComponent },
-    {
-      title: 'زیر گروه ها اعلام بار',
-      component: AnnouncementSubGroupFormComponent,
-    },
-    {
-      title: 'گروه و زیرگروه اعلام بار',
-      component: RelationOfAnnouncementGroupAndSubGroupComponent,
-    },
-  ],
-  [TabComponentKey.SequentialTurnManagement]: [
-    { title: 'صفوف نوبت دهی', component: SequentialTurnsFormComponent },
-    {
-      title: 'بارگیرها',
-      component: RelationOfSequentialTurnToLoaderTypeFormComponent,
-    },
-    {
-      title: 'زیرگروه اعلام بار',
-      component: RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent,
-    },
-  ],
-  [TabComponentKey.Driver_TruckManagement]: [
-    {
-      title: 'ناوگان',
-      component: TruckAndDriverInformationFormComponent,
-      data: {
-        insideTabType: 'Truck',
+  [TabComponentKey.TruckDriverManagement]: {
+    shearedSignal: false,
+    subTab: [
+      { title: 'راننده', component: DriverInfoFormComponent },
+      { title: 'ناوگان', component: TruckInfoFormComponent },
+      {
+        title: 'راننده ناوگان کیف پول',
+        component: DriverTruckWalletFormComponent,
       },
-    },
-    {
-      title: 'بارگیر',
-      component: TruckAndDriverInformationFormComponent,
-      data: {
-        insideTabType: 'LoaderType',
+    ],
+  },
+
+  [TabComponentKey.Driver_TruckManagement]: {
+    shearedSignal: false,
+    subTab: [
+      {
+        title: 'ناوگان',
+        component: TruckAndDriverInformationFormComponent,
+        data: { insideTabType: 'Truck' },
       },
-    },
-    {
-      title: 'راننده',
-      component: TruckAndDriverInformationFormComponent,
-      data: {
-        insideTabType: 'Driver',
+      {
+        title: 'بارگیر',
+        component: TruckAndDriverInformationFormComponent,
+        data: { insideTabType: 'LoaderType' },
       },
-    },
-  ],
-  [TabComponentKey.TurnsManagement]: [
-    {
-      title: 'لیست نوبت ها',
-      component: TurnsListFormComponent,
-    },
-    {
-      title: 'نوبت دهی بلادرنگ',
-      component: RealTimeTurnsFormComponent,
-    },
-    {
-      title: 'نوبت اضطراری',
-      component: EmergencyTurnsFormComponent,
-    },
-    {
-      title: 'احیای نوبت رزور',
-      component: ResuscitateTurnsFormComponent,
-    },
-  ],
-  [TabComponentKey.TurnsRegisterManagement]: [
-    { title: 'درخواست - صدورنوبت', component: RegisterTurnFormComponent },
-  ],
+      {
+        title: 'راننده',
+        component: TruckAndDriverInformationFormComponent,
+        data: { insideTabType: 'Driver' },
+      },
+    ],
+  },
+
+  [TabComponentKey.FactoriesAndFreightManagement]: {
+    shearedSignal: false,
+    subTab: [
+      {
+        title: 'کارخانجات و مراکز تولید بار ',
+        component: FactoriesAndFreightFormComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.LADPlaceManagementService]: {
+    shearedSignal: false,
+    subTab: [
+      { title: 'مبادی و مقاصد حمل بار', component: LadPlacesFormComponent },
+    ],
+  },
+
+  [TabComponentKey.ProvinceAndCityManagement]: {
+    shearedSignal: false,
+    subTab: [{ title: 'استان شهرها', component: ProvinceAndCityFormComponent }],
+  },
+
+  [TabComponentKey.ProductTypesManagement]: {
+    shearedSignal: false,
+    subTab: [{ title: 'کالاها', component: ProductFormComponent }],
+  },
+
+  [TabComponentKey.LoadCapacitorManagement]: {
+    shearedSignal: false,
+    subTab: [{ title: 'مخزن بار', component: LoadCapacitorFormComponent }],
+  },
+
+  [TabComponentKey.LoaderTypeManagement]: {
+    shearedSignal: false,
+    subTab: [{ title: 'بارگیرها', component: LoaderTypeFormComponent }],
+  },
+
+  [TabComponentKey.TravelTimeManagement]: {
+    shearedSignal: false,
+    subTab: [{ title: 'مدت سفر', component: TravelTimeFormComponent }],
+  },
+
+  [TabComponentKey.TariffsManagement]: {
+    shearedSignal: false,
+    subTab: [{ title: 'تعرفه های حمل بار', component: TariffsFormComponent }],
+  },
+
+  [TabComponentKey.AnnouncementManagement]: {
+    shearedSignal: false,
+    subTab: [
+      { title: 'گروه ها اعلام بار', component: AnnouncementGroupFormComponent },
+      {
+        title: 'زیر گروه ها اعلام بار',
+        component: AnnouncementSubGroupFormComponent,
+      },
+      {
+        title: 'گروه و زیرگروه اعلام بار',
+        component: RelationOfAnnouncementGroupAndSubGroupComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.SequentialTurnManagement]: {
+    shearedSignal: false,
+    subTab: [
+      { title: 'صفوف نوبت دهی', component: SequentialTurnsFormComponent },
+      {
+        title: 'صفوف نوبت دهی و بارگیرها',
+        component: RelationOfSequentialTurnToLoaderTypeFormComponent,
+      },
+      {
+        title: 'صفوف نوبت دهی - زیرگروه اعلام بار',
+        component: RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.TurnsManagement]: {
+    shearedSignal: false,
+    subTab: [
+      { title: 'لیست نوبت ها', component: TurnsListFormComponent },
+      { title: 'نوبت دهی بلادرنگ', component: RealTimeTurnsFormComponent },
+      {
+        title: 'نوبت دهی - نوبت اضطراری',
+        component: EmergencyTurnsFormComponent,
+      },
+      {
+        title: 'نوبت دهی - احیای نوبت رزور',
+        component: ResuscitateTurnsFormComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.TurnsRegisterManagement]: {
+    shearedSignal: false,
+    subTab: [
+      { title: 'درخواست - صدورنوبت', component: RegisterTurnFormComponent },
+    ],
+  },
+
+  [TabComponentKey.IssuedTurnManagement]: {
+    shearedSignal: false,
+    subTab: [
+      { title: 'لیست نوبت های صادر شده', component: IssuedTurnListFormComponent },
+    ],
+  },
+
+  [TabComponentKey.UserProfileManagement]: {
+    shearedSignal: false,
+    subTab: [
+      { title: 'مدیریت پروفایل کاربر', component: UserProfileFormComponent },
+    ],
+  },
+
+  [TabComponentKey.SmsWalletManagement]: {
+    shearedSignal: false,
+    subTab: [
+      {
+        title: 'کیف پول',
+        component: WalletPaymentFormComponent,
+        data: { walletType: signal('SMS') },
+      },
+      {
+        title: 'تراکنش ها',
+        component: WalletTransactionsTableComponent,
+        data: { walletType: signal('SMS') },
+      },
+      {
+        title: 'سوابق شارژ',
+        component: WalletPaymentRecordTableComponent,
+        data: { walletType: signal('SMS') },
+      },
+    ],
+  },
+
+  [TabComponentKey.UserWalletManagement]: {
+    shearedSignal: false,
+    subTab: [
+      {
+        title: 'شارژ',
+        component: WalletPaymentFormComponent,
+        data: { walletType: signal('User') },
+      },
+      {
+        title: 'تراکنش ها',
+        component: WalletTransactionsTableComponent,
+        data: { walletType: signal('User') },
+      },
+      {
+        title: 'سوابق شارژ',
+        component: WalletPaymentRecordTableComponent,
+        data: { walletType: signal('User') },
+      },
+    ],
+  },
+
+  [TabComponentKey.TruckWalletManagement]: {
+    shearedSignal: true,
+    subTab: [
+      { title: 'صفحه اصلی', component: MainViewComponent },
+      {
+        title: 'شارژ',
+        component: TruckWalletPaymentFormComponent,
+      },
+      {
+        title: 'تراکنش ها',
+        component: WalletTransactionsTableComponent,
+        data: { walletType: signal('Truck') },
+      },
+      {
+        title: 'سوابق شارژ',
+        component: WalletPaymentRecordTableComponent,
+        data: { walletType: signal('Truck') },
+      },
+    ],
+  },
+  [TabComponentKey.TransportCompaniesWalletManagement]: {
+    shearedSignal: true,
+    subTab: [
+      {
+        title: 'شارژ',
+        component: TransportCompaniesWalletPaymentFormComponent,
+      },
+      {
+        title: 'تراکنش ها',
+        component: WalletTransactionsTableComponent,
+        data: { walletType: signal('TransportCompony') },
+      },
+      {
+        title: 'سوابق شارژ',
+        component: WalletPaymentRecordTableComponent,
+        data: { walletType: signal('TransportCompony') },
+      },
+    ],
+  },
+  [TabComponentKey.TruckerAssociationWalletManagement]: {
+    shearedSignal: false,
+    subTab: [
+      {
+        title: 'شارژ',
+        component: WalletPaymentFormComponent,
+        data: { walletType: signal('TruckerAssociation') },
+      },
+      {
+        title: 'تراکنش ها',
+        component: WalletTransactionsTableComponent,
+        data: { walletType: signal('TruckerAssociation') },
+      },
+      {
+        title: 'سوابق شارژ',
+        component: WalletPaymentRecordTableComponent,
+        data: { walletType: signal('TruckerAssociation') },
+      },
+    ],
+  },
+  [TabComponentKey.TransportCompaniesManagement]: {
+    shearedSignal: false,
+    subTab: [
+      { title: 'شرکت ها حمل نقل', component: TransportCompaniesFormComponent },
+    ],
+  },
 };
