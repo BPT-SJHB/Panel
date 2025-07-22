@@ -33,6 +33,7 @@ import { IssuedTurnListFormComponent } from 'app/components/forms/issued-turn-li
 import { TransportCompaniesFormComponent } from 'app/components/forms/transport-companies-form/transport-companies-form.component';
 import { TruckWalletPaymentFormComponent } from 'app/components/forms/truck-wallet-payment-form/truck-wallet-payment-form.component';
 import { TransportCompaniesWalletPaymentFormComponent } from 'app/components/forms/transport-companies-wallet-payment-form/transport-companies-wallet-payment-form.component';
+import { UserChargingFunctionFormComponent } from 'app/components/forms/user-charging-function-form/user-charging-function-form.component';
 
 export enum TabComponentKey {
   Main = -1,
@@ -46,6 +47,7 @@ export enum TabComponentKey {
   Driver_TruckManagement = 10,
 
   // 💸 Wallets
+  UserChargingFunctions = 25,
   SmsWalletManagement = 26,
   UserWalletManagement = 27,
   TruckWalletManagement = 29,
@@ -99,9 +101,7 @@ export interface TabView {
 export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   [TabComponentKey.Main]: {
     shearedSignal: true,
-    subTab: [
-      { title: 'صفحه اصلی', component: MainViewComponent},
-    ],
+    subTab: [{ title: 'صفحه اصلی', component: MainViewComponent }],
   },
 
   [TabComponentKey.UserManagement]: {
@@ -248,7 +248,10 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   [TabComponentKey.IssuedTurnManagement]: {
     shearedSignal: false,
     subTab: [
-      { title: 'لیست نوبت های صادر شده', component: IssuedTurnListFormComponent },
+      {
+        title: 'لیست نوبت های صادر شده',
+        component: IssuedTurnListFormComponent,
+      },
     ],
   },
 
@@ -364,6 +367,15 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
     shearedSignal: false,
     subTab: [
       { title: 'شرکت ها حمل نقل', component: TransportCompaniesFormComponent },
+    ],
+  },
+  [TabComponentKey.UserChargingFunctions]: {
+    shearedSignal: false,
+    subTab: [
+      {
+        title: 'عملکرد شارژ کاربر',
+        component: UserChargingFunctionFormComponent,
+      },
     ],
   },
 };
