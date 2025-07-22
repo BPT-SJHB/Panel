@@ -24,4 +24,7 @@ import { checkAndToastError } from 'app/utils/api-utils';
   styleUrl: './user-charging-function-form.component.scss',
 })
 export class UserChargingFunctionFormComponent {
+  private toast = inject(ToastService);
+  private fb = inject(FormBuilder);
+  private walletManager = inject(WalletManagementService);
 }
