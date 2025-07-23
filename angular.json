@@ -31,8 +31,8 @@
             ],
             "styles": [
               "src/styles.scss",
+              "src/tailwind.css",
               "src/app/themes/theme.scss",
-              "node_modules/primeflex/primeflex.css",
               "node_modules/primeicons/primeicons.css"
             ],
             "scripts": []
