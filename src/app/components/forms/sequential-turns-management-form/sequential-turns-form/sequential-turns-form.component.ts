@@ -20,6 +20,7 @@ import { ToastService } from 'app/services/toast-service/toast.service';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { SequentialTurn } from 'app/services/sequential-turn-management/model/sequential-turn.model';
+import { TableConfig } from 'app/constants/ui/table.ui';
 
 enum FormMode {
   EDITABLE,
@@ -51,6 +52,7 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
   private readonly toast = inject(ToastService);
   private readonly confirmationService = inject(ConfirmationService);
   private readonly destroy$ = new Subject<void>();
+  readonly tableUi = TableConfig;
 
   sequentialTurnForm = this.fb.group({
     id: [-1, ValidationSchema.id],

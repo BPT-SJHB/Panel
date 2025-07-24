@@ -54,8 +54,8 @@ export class WalletTransactionsTableComponent
 
   // 🎨 Background color mapping for transaction rows
   readonly colorMap: ReadonlyMap<string, string> = new Map([
-    ['black', 'surface-300'],
-    ['white', 'surface-0'],
+    ['black', 'bg-surface-300 dark:bg-surface-500'],
+    ['white', 'bg-surface-0 dark:bg-surface-900'],
     ['red', 'bg-red-300'],
     ['green', 'bg-green-300'],
     ['yellow', 'bg-yellow-300'],
@@ -73,7 +73,7 @@ export class WalletTransactionsTableComponent
 
   // 🎨 Get color class based on transaction color
   getRowColor(color: string): string {
-    return this.colorMap.get(color.toLowerCase()) ?? 'surface-300';
+    return this.colorMap.get(color.toLowerCase()) ?? 'bg-surface-300 dark:bg-surface-500';
   }
 
   // 🔁 Called when component is activated (used in cached/dynamic views)

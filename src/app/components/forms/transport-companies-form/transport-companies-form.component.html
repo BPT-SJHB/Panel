@@ -9,11 +9,11 @@
 />
 
 <!-- فرم اطلاعات شرکت حمل و نقل -->
-<form [formGroup]="transportComponyForm" (ngSubmit)="editTransportCompony()" class="mt-5">
-  <div class="grid">
+<form [formGroup]="transportComponyForm" (ngSubmit)="editTransportCompony()" class="mt-8">
+  <div class="grid grid-cols-12 gap-4">
     <!-- کد شرکت -->
     <app-text-input
-      class="col-12 md:col-6"
+      class="col-span-12 md:col-span-6"
       label="کد شرکت"
       placeholder="کد شرکت حمل و نقل"
       [control]="TCId"
@@ -24,7 +24,7 @@
 
     <!-- عنوان شرکت -->
     <app-text-input
-      class="col-12 md:col-6"
+      class="col-span-12 md:col-span-6"
       placeholder="نام شرکت حمل و نقل"
       label="عنوان"
       [control]="TCTitle"
@@ -35,7 +35,7 @@
 
     <!-- کد سازمانی -->
     <app-text-input
-      class="col-12 md:col-6"
+      class="col-span-12 md:col-span-6"
       placeholder="کد سازمانی"
       label="کد سازمانی"
       [control]="TCOrganizationCode"
@@ -46,7 +46,7 @@
 
     <!-- شهر استقرار -->
     <app-text-input
-      class="col-12 md:col-6"
+      class="col-span-12 md:col-span-6"
       placeholder="محل شهر استقرار"
       label="عنوان شهر"
       [control]="TCCityTitle"
@@ -57,7 +57,7 @@
 
     <!-- تلفن -->
     <app-text-input
-      class="col-12 md:col-6"
+      class="col-span-12 md:col-span-6"
       placeholder="تلفن"
       label="تلفن"
       [control]="TCTel"
@@ -67,7 +67,7 @@
 
     <!-- موبایل مدیر -->
     <app-text-input
-      class="col-12 md:col-6"
+      class="col-span-12 md:col-span-6"
       label="موبایل مدیر"
       placeholder="شماره موبایل مدیر"
       validationField="mobile"
@@ -77,7 +77,7 @@
 
     <!-- نام و نام خانوادگی مدیر -->
     <app-text-input
-      class="col-12 md:col-6"
+      class="col-span-12 md:col-span-6"
       label="مدیر عامل"
       placeholder="نام و نام خانوادگی مدیر"
       validationField="fullName"
@@ -87,7 +87,7 @@
 
     <!-- ایمیل -->
     <app-text-input
-      class="col-12 md:col-6"
+      class="col-span-12 md:col-span-6"
       placeholder="ایمیل"
       label="آدرس ایمیل"
       validationField="email"
@@ -97,7 +97,7 @@
 
     <!-- وضعیت -->
     <app-binary-radio-input
-      class="col-12"
+      class="col-span-12 flex px-4"
       label="وضعیت"
       [control]="Active"
       [disabled]="true"
@@ -106,12 +106,12 @@
   </div>
 
   <!-- دکمه‌های عملیات -->
-  <div class="col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center">
+  <div class="col-span-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center">
     <p-button
       (click)="editTransportCompony()"
       [disabled]="transportComponyForm.invalid || loading()"
       label="ویرایش اطلاعات"
-      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
     ></p-button>
 
     <p-button
@@ -119,7 +119,7 @@
       [disabled]="TCId.invalid || loading()"
       severity="warn"
       label="فعال سازی پیامک"
-      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
     ></p-button>
 
     <p-button
@@ -127,7 +127,7 @@
       [disabled]="TCId.invalid || loading()"
       severity="warn"
       label="بروزرسانی رمزعبور"
-      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
     ></p-button>
   </div>
 </form>
@@ -137,6 +137,6 @@
   position="top"
   acceptLabel="تایید"
   rejectLabel="انصراف"
-  acceptButtonStyleClass="px-5 p-button-danger py-2 text-sm"
-  rejectButtonStyleClass="px-4 p-button-secondary py-2 text-sm"
+  acceptButtonStyleClass="px-8 p-button-danger py-2 text-sm"
+  rejectButtonStyleClass="px-6 p-button-secondary py-2 text-sm"
 />

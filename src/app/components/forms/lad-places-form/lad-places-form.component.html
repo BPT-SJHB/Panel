@@ -4,19 +4,28 @@
   placeholder="قسمتی از نام را کنید."
   [asyncSearchFn]="searchLADPlace"
   [itemMatchesQuery]="filterLADPlace"
-  (searchResult)="handelSearchLADPlaces($event)"  
+  (searchResult)="handelSearchLADPlaces($event)"
 />
 
 <p-table
-  class="col-12"
+  class="col-span-12"
   styleClass="overflow-x-auto"
   [columns]="cols"
   [value]="ladPlaces"
-  [tableStyle]="{ 'min-width': '40rem' }"
+  [tableStyle]="tableUi.tableStyle"
+  [paginator]="tableUi.paginator"
+  [paginatorLocale]="tableUi.paginatorLocale"
+  [rows]="tableUi.rows"
+  [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
 >
   <ng-template #caption>
     <div class="flex items-center justify-between">
-      <p-button (click)="onNew()" label="جدید" size="small"  styleClass="px-4 md:px-5 py-1" />
+      <p-button
+        (click)="onNew()"
+        label="جدید"
+        size="small"
+        styleClass="px-6 md:px-8 py-1"
+      />
     </div>
   </ng-template>
 
@@ -86,62 +95,66 @@
   [modal]="true"
   (onHide)="onCloseDialog()"
   [(visible)]="formDialogVisible"
-  maskStyleClass="px-3"
-  [style]="{ 'max-width': '30rem' }"
+  maskStyleClass="px-4"
+  [style]="{ width: '30rem', maxWidth: '100%' }"
 >
   <form
-    class="grid gap-3"
+    class="grid grid-cols-12 gap-4"
     (ngSubmit)="registerOrEdit()"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
     [formGroup]="ladPlacesForm"
   >
-    <div class="grid col-12 gap-3">
+    <div class="grid grid-cols-12 col-span-12 gap-4">
       <app-text-input
         [readOnly]="true"
         [disabled]="true"
         [control]="ladPlacesId"
-        icon="pi pi-card-id"
+        icon="pi pi-id-card"
         validationField="id"
-        class="col-12"
+        class="col-span-12"
+        [addonWidth]="addonWidth"
       />
       <app-text-input
         placeholder="عنوان"
         label="عنوان"
         validationField="title"
-        class="col-12"
+        class="col-span-12"
         [control]="ladPlacesTitle"
+        [addonWidth]="addonWidth"
       />
       <app-text-input
         [control]="ladPlacesTel"
         label="تلفن"
         placeholder="تلفن"
         validationField="telephone"
-        class="col-12"
+        class="col-span-12"
+        [addonWidth]="addonWidth"
       />
       <app-text-input
         label="آدرس"
-        class="col-12"
+        class="col-span-12"
         icon="pi pi-card-id"
         validationField="address"
         [control]="ladPlacesAddress"
+        [addonWidth]="addonWidth"
       />
-      <div class="grid col-12">
+      <div class="grid grid-cols-12 gap-4 col-span-12">
         <app-binary-radio-input
           label="وضعیت مبدا بارگیری"
           radioName="loadingActive"
           [control]="loadingActive"
-          class="col-12"
+          class="col-span-12 flex px-2"
         />
         <app-binary-radio-input
           label="وضعیت مقصد بارگیری"
           [control]="dischargingActive"
           radioName="dischargingActive"
-          class="col-12"
+          class="col-span-12 flex px-2"
         />
       </div>
     </div>
-    <div class="w-full flex justify-content-end">
+    <div class="col-span-12 flex justify-end">
       <p-button
         (click)="registerOrEdit()"
         label="ثبت و ویرایش اطلاعات"

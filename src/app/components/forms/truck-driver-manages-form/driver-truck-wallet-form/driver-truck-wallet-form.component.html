@@ -1,12 +1,12 @@
-<div class="flex flex-column gap-3">
+<div class="grid grid-cols-12">
   <!-- Search by SmartCard -->
   <form
-    class="col-12"
+    class="col-span-12"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
     [formGroup]="mainSearchForm"
   >
-    <div class="flex gap-3">
+    <div class="flex gap-4">
       <app-search-input
         [control]="searchSmartCard"
         validationField="smartCard"
@@ -21,18 +21,18 @@
   </form>
 
   <!-- Truck Info -->
-  <div class="grid px-4 mt-4">
-    <span class="text-lg font-bold mb-4">اطلاعات ناوگان</span>
+  <div class="grid grid-cols-12 col-span-12 gap-4 px-6 mt-6">
+    <span class="text-lg font-bold col-span-12">اطلاعات ناوگان</span>
 
-    <div class="grid">
+    <div class="grid grid-cols-12  col-span-12 gap-4">
       <form
-        class="grid col-12"
+        class="grid grid-cols-12 gap-4 col-span-12"
         [class.pointer-events-none]="loading"
         [class.opacity-60]="loading"
         [formGroup]="truckComposedInfoForm"
         (ngSubmit)="loadTruckInfo()"
       >
-        <div class="grid col-12">
+        <div class="grid grid-cols-12 gap-4 col-span-12">
           <app-text-input
             hidden
             label="کد ناوگان"
@@ -42,7 +42,7 @@
             [addonWidth]="addonWidth"
           />
 
-          <div class="flex gap-2 col-12 md:col-6">
+          <div class="flex gap-2 col-span-12 md:col-span-6">
             <app-text-input
               label="شماره هوشمند"
               class="flex-1"
@@ -58,13 +58,13 @@
               "
               size="small"
               severity="primary"
-              styleClass="mt-1 w-6rem h-2rem"
+              styleClass="mt-1 w-24 h-8"
               type="submit"
               label="استعلام"
             />
           </div>
 
-          <div class="col-12 md:col-6">
+          <div class="col-span-12 md:col-span-6">
             <app-text-input
               label="شماره پلاک"
               class="flex-1"
@@ -75,7 +75,7 @@
               [addonWidth]="addonWidth"
             />
           </div>
-          <div class="col-12 md:col-6">
+          <div class="col-span-12 md:col-span-6">
             <app-text-input
               label="شماره سریال"
               class="flex-1"
@@ -91,13 +91,13 @@
 
       <!-- Driver Info -->
       <form
-        class="grid col-12"
+        class="grid grid-cols-12 gap-4 col-span-12"
         [class.pointer-events-none]="loading"
         [class.opacity-60]="loading"
         [formGroup]="truckComposedInfoForm"
         (ngSubmit)="loadDriverInfo()"
       >
-        <div class="grid col-12">
+        <div class="grid grid-cols-12 gap-4 col-span-12">
           <app-text-input
             hidden
             label="کد راننده"
@@ -107,7 +107,7 @@
             [addonWidth]="addonWidth"
           />
 
-          <div class="flex gap-2 col-12 md:col-6">
+          <div class="flex gap-2 col-span-12 md:col-span-6">
             <app-text-input
               label="کدملی راننده"
               class="flex-1"
@@ -124,12 +124,12 @@
               size="small"
               severity="primary"
               type="submit"
-              styleClass="mt-1 w-6rem h-2rem "
+              styleClass="mt-1 w-24 h-8 "
               label="استعلام"
             />
           </div>
 
-          <div class="col-12 md:col-6">
+          <div class="col-span-12 md:col-span-6">
             <app-text-input
               label="نام راننده"
               class="flex-1"
@@ -145,11 +145,11 @@
 
       <!-- Wallet / Turn Info -->
       <form
-        class="grid col-12"
+        class="grid grid-cols-12 gap-4 col-span-12"
         [class.pointer-events-none]="loading"
         [class.opacity-60]="loading"
       >
-        <div class="grid col-12">
+        <div class="grid grid-cols-12 gap-4 col-span-12">
           <app-text-input
             hidden
             label="شناسه کیف پول"
@@ -168,7 +168,7 @@
             [addonWidth]="addonWidth"
           />
 
-          <div class="col-12 md:col-6">
+          <div class="col-span-12 md:col-span-6">
             <app-text-input
               label="نوبت"
               class="flex-1"
@@ -180,7 +180,7 @@
             />
           </div>
 
-          <div class="col-12 md:col-6">
+          <div class="col-span-12 md:col-span-6">
             <app-text-input
               label="کیف پول"
               class="flex-1"
@@ -197,14 +197,14 @@
 
     <!-- Action Buttons -->
     <div
-      class="px-3 col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center"
+      class="px-4 col-span-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center"
     >
       <p-button
         (click)="setComposedInformation()"
         [disabled]="this.truckComposedInfoForm.invalid || loading"
         label="ثبت و ویرایش"
         size="small"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
       ></p-button>
 
       <p-button
@@ -213,7 +213,7 @@
         severity="info"
         label="ساخت کیف پول جدید"
         size="small"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
       ></p-button>
     </div>
   </div>

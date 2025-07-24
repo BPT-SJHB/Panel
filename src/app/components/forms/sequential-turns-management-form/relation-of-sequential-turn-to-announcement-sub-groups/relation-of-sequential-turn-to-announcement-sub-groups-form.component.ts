@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { SearchAutoCompleteComponent } from 'app/components/shared/inputs/search-auto-complete/search-auto-complete.component';
+import { TableConfig } from 'app/constants/ui/table.ui';
 import { AnnouncementGroupSubgroupManagementService } from 'app/services/announcement_group_subgroup_management/announcement-group-subgroup-management.service';
 import { AnnouncementGroup } from 'app/services/announcement_group_subgroup_management/model/announcement-group.model';
 import { AnnouncementSubGroup } from 'app/services/announcement_group_subgroup_management/model/announcement-subgroup.model';
@@ -51,6 +52,9 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
   private announcementService = inject(
     AnnouncementGroupSubgroupManagementService
   );
+
+
+  readonly tableUi = TableConfig;
 
   // 📊 UI State
   loading = false;

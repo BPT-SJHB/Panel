@@ -1,6 +1,6 @@
-<div class="grid">
+<div class="grid grid-cols-12 gap-4 mb-8">
   <app-search-input
-    class="col-12"
+    class="col-span-12"
     [onSearchQuery]="searchTruckInformation"
     placeholder="هوشمند ناوگان را وارد کنید."
     searchButtonLabel="استعلام"
@@ -15,7 +15,7 @@
     placeholder="کدناوگان"
     [disabled]="true"
     [readOnly]="true"
-    class="col-12 md:col-6"
+    class="col-span-12 md:col-span-6"
     addonWidth="6rem"
   />
 
@@ -25,21 +25,20 @@
     placeholder="شماره پلاک"
     [disabled]="true"
     [readOnly]="true"
-    class="col-12 md:col-6"
+    class="col-span-12 md:col-span-6"
     addonWidth="6rem"
   />
 </div>
 
 <p-table
-  class="col-12"
+  class="col-span-12"
   [columns]="turnsCols"
-  [paginator]="true"
-  [rows]="10"
-  [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
-  [tableStyle]="{ 'min-width': '50rem' }"
   [value]="truckTurnsList"
-    paginatorLocale="fa"
-
+  [tableStyle]="tableUi.tableStyle"
+  [paginator]="tableUi.paginator"
+  [paginatorLocale]="tableUi.paginatorLocale"
+  [rows]="tableUi.rows"
+  [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
 >
   <ng-template #header let-columns>
     <tr>
@@ -100,16 +99,17 @@
   [modal]="true"
   (onHide)="onCloseDialog()"
   [(visible)]="dialogTurnAccounting"
-  maskStyleClass="px-3 overflow-visible"
+  maskStyleClass="px-4 overflow-visible"
   [style]="{ 'max-width': '90vw' }"
 >
   <p-table
     [columns]="accountingCols"
-    [paginator]="true"
-    [rows]="10"
-    [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
-    paginatorLocale="fa"
     [value]="turnsAccounting"
+    [tableStyle]="tableUi.tableStyle"
+    [paginator]="tableUi.paginator"
+    [paginatorLocale]="tableUi.paginatorLocale"
+    [rows]="tableUi.rows"
+    [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
   >
     <ng-template #header let-columns>
       <tr>
@@ -139,7 +139,7 @@
   icon="pi pi-exclamation-triangle"
   acceptLabel="تایید"
   rejectLabel="انصراف"
-  acceptButtonStyleClass="px-5 py-1"
-  rejectButtonStyleClass="px-4 py-1"
+  acceptButtonStyleClass="px-8 py-1"
+  rejectButtonStyleClass="px-6 py-1"
 >
 </p-confirmDialog>

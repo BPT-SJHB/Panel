@@ -1,5 +1,5 @@
 <p-panel
-  styleClass="shadow-0 border-none"
+  class="rounded-xs shadow-md"
   [toggleable]="true"
   [collapsed]="true"
   expandIcon="pi pi-search-minus"
@@ -11,7 +11,7 @@
     </span>
   </ng-template>
 
-  <div class="flex justify-center items-center p-3 w-full">
+  <div class="flex justify-center items-center p-4 w-full">
     <div class="w-full">
       <app-search-input
         class="w-full"
@@ -21,17 +21,18 @@
         [fallbackToAllWhenQueryShort]="true"
         [minSearchLength]="2"
         (searchResult)="handleSearch($event)"
+        placeholder="جستجو پایانه اعلام بار"
       />
     </div>
   </div>
 </p-panel>
 
 <div
-  class="min-h-90vh flex flex-wrap justify-content-around align-items-center gap-4 p-4"
+  class="min-h-90vh flex flex-wrap justify-around items-center gap-6 p-6"
 >
   @for (terminal of displayedLoadAnnouncementPlaces; track $index) {
   <div
-    class="w-10rem md:w-20rem"
+    class="w-40 md:w-80"
     pAnimateOnScroll
     enterClass="animate-enter fade-in-10 slide-in-from-t-20 animate-duration"
     leaveClass="animate-leave fade-out-0"

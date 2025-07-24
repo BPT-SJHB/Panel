@@ -3,7 +3,6 @@ import Aura from '@primeng/themes/aura';
 import { ThemeType } from 'primeng/config';
 import type { AuraBaseDesignTokens } from '@primeuix/themes/aura/base';
 
-
 const customPreset: AuraBaseDesignTokens = {
   semantic: {
     primary: {
@@ -18,13 +17,17 @@ const customPreset: AuraBaseDesignTokens = {
       800: '{emerald.800}',
       900: '{emerald.900}',
       950: '{emerald.950}',
-    }
-  }
+    },
+  },
 };
 
 export const customTheme: ThemeType = {
   preset: definePreset(Aura, customPreset as Record<string, unknown>),
   options: {
     darkModeSelector: false,
+    cssLayer: {
+      name: 'primeng',
+      order: 'theme, base, primeng',
+    },
   },
 };

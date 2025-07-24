@@ -4,14 +4,14 @@
 </ng-template>
 
 @if (isMobile) {
-<p-drawer styleClass="w-18rem"
+<p-drawer styleClass="w-72"
   (onHide)="onDrawerClose()"
   [visible]="(isOpen$ | async) ?? false"
   position="right">
   <app-sidebar-menu [items]="menuItems" />
 </p-drawer>
 
-<app-tab-bar class="fixed w-full z-5"/>
+<app-tab-bar class="fixed w-full z-50"/>
 <div>
   <ng-container [ngTemplateOutlet]="contentTemplate"></ng-container>
 </div>
@@ -19,13 +19,13 @@
 @else {
 <div class="flex">
   <!-- Sidebar -->
-  <div [style.width]="width" class="h-screen fixed top-1 shadow-6 overflow-auto px-2 border-noround">
+  <div [style.width]="width" class="h-screen fixed shadow-lg overflow-auto px-2 rounded-none bg-primary-contrast">
     <app-sidebar-menu [items]="menuItems" />
   </div>
 
   <!-- Main content -->
   <div class="flex-1 min-w-0" style="position: relative;" [style.marginRight]="width">
-    <app-tab-bar style="position: sticky; top: 60px; width: 100%;" class="z-5" />
+    <app-tab-bar style="position: sticky; top: 60px; width: 100%;" class="z-50" />
     <ng-container [ngTemplateOutlet]="contentTemplate"></ng-container>
   </div>
 </div>

@@ -20,6 +20,7 @@ import { AnnouncementGroupSubgroupManagementService } from 'app/services/announc
 
 import { AnnouncementSubGroup } from 'app/services/announcement_group_subgroup_management/model/announcement-subgroup.model';
 import { ValidationSchema } from 'app/constants/validation-schema';
+import { TableConfig } from 'app/constants/ui/table.ui';
 
 enum FormMode {
   EDITABLE,
@@ -51,8 +52,9 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
   private readonly loadingService = inject(LoadingService);
   private readonly confirmationService = inject(ConfirmationService);
   private readonly announcementService = inject(AnnouncementGroupSubgroupManagementService);
-
   private readonly destroy$ = new Subject<void>();
+  readonly tableUi = TableConfig;
+
 
   // 🌐 UI State
   loading = false;

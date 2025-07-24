@@ -1,11 +1,11 @@
 <form
-  class="flex flex-column gap-5"
+  class="flex flex-col gap-10"
   [formGroup]="loginForm"
   (ngSubmit)="onSubmit()"
 >
-  <h3 class="text-center mb-3" [innerHTML]="loginTitle"></h3>
+  <h3 class="text-center mb-4 text-xl leading-10  font-bold" [innerHTML]="loginTitle"></h3>
 
-  <div class="flex flex-column gap-5">
+  <div class="flex flex-col gap-8">
     <app-text-input
       [control]="username"
       icon="pi pi-user"
@@ -13,13 +13,14 @@
       placeholder="نام کابری"
     />
 
-    <div class="flex flex-column gap-2">
+    <div class="flex flex-col gap-2">
       <app-password-input
+        icon="pi pi-lock"
         [control]="password"
         placeholder="رمز عبور خود را وارد کنید."
       />
 
-      <div class="flex justify-content-end w-full mb-1">
+      <div class="flex justify-end w-full mb-1">
         <a [href]="hrefForgetPassword">
           <p-button
             styleClass="text-cyan-500 text-shadow-sm text-sm"
@@ -37,12 +38,12 @@
     [captchaInputControl]="captcha"
   />
 
-  <div class="flex flex-column gap-2 mb-5">
+  <div class="flex flex-col gap-2 mb-8">
     <app-checkbox-input label="مرا به خاطر بسپار" [control]="rememberMe" />
     <p-button
       [disabled]="loginForm.invalid"
       type="submit"
-      styleClass="px-5 h-2-5rem w-full"
+      styleClass="px-8 h-2-5rem w-full"
     >
       ورود
     </p-button>

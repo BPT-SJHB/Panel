@@ -26,6 +26,7 @@ import {
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { ShortResponse } from 'app/data/model/short-response.model';
 import { ErrorCodes } from 'app/constants/error-messages';
+import { TableConfig } from 'app/constants/ui/table.ui';
 
 @Component({
   selector: 'app-lad-places-form',
@@ -54,6 +55,10 @@ export class LadPlacesFormComponent implements OnInit, OnDestroy {
   private ladPlaceService = inject(LADPlaceManagementService);
   private confirmationService = inject(ConfirmationService);
   private fb = inject(FormBuilder);
+
+  readonly tableUi = TableConfig;
+  readonly addonWidth = "7rem";
+
 
   formDialogVisible = false;
   loading = false;

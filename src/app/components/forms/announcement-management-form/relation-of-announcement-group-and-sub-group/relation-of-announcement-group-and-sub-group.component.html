@@ -1,6 +1,6 @@
-<div class="grid">
+<div class="grid grid-cols-12 gap-4 mb-5">
   <app-search-auto-complete
-    class="col-12 sm:col-6"
+    class="col-span-12 sm:col-span-6"
     placeholder="گروه اعلام بار"
     label="گروه اعلام بار"
     [control]="announcementGroupTitle"
@@ -13,7 +13,7 @@
     [addonWidth]="addonWidth"
   />
   <app-search-auto-complete
-    class="col-12 sm:col-6"
+    class="col-span-12 sm:col-span-6"
     placeholder="زیرگروه اعلام بار"
     label="زیرگروه اعلام بار"
     [control]="announcementSubGroupTitle"
@@ -29,13 +29,14 @@
 </div>
 
 <p-table
-  class="col-12"
-  [columns]="cols"
-  [paginator]="true"
-  [rows]="10"
-  [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
-  [tableStyle]="{ 'min-width': '50rem' }"
+  class="col-span-12"
   [value]="relationsAnnouncement"
+  [columns]="cols"
+  [tableStyle]="tableUi.tableStyle"
+  [paginator]="tableUi.paginator"
+  [paginatorLocale]="tableUi.paginatorLocale"
+  [rows]="tableUi.rows"
+  [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
 >
   <ng-template #header let-columns>
     <tr>
@@ -61,14 +62,15 @@
   </ng-template>
 </p-table>
 
-<div class="w-full flex justify-content-end">
-  <p-button
+<div class="flex justify-end">
+  <button
+    pButton
     size="small"
     label="ثبت"
-    styleClass="px-5 py-1"
+    class="w-ful py-1 md:w-25"
     (click)="registerRelationAnnouncement()"
     [disabled]="loading || announcementGroupAndSubGroupForm.invalid"
-  />
+  ></button>
 </div>
 
 <p-confirm-dialog />

@@ -1,44 +1,49 @@
 <!-- Loop through turns -->
-@for (turn of turnsList(); track turn) {
+<div class="grid items-center justify-center grid-cols-12">
+  @for (turn of turnsList(); track turn) {
   <div
-    class="flex flex-column gap-4 p-4 mb-5 border-1 surface-border surface-card border-round-xl shadow-3"
-    style="max-width: 650px; margin: auto;"
-    >
-    <!-- Card content -->
-    <p-card styleClass="border-none shadow-none">
-      <div class="flex flex-column gap-3 px-2">
-        <!-- Display columns dynamically -->
-        @for (col of cols; track col) {
+    class="col-span-12 p-4 md:p-4 mb-4 rounded-xl max-w-[650px] w-full m-auto"
+  >
+    <div class="shadow-md rounded-xl">
+      <!-- Card content -->
+      <p-card styleClass="border-0 shadow-none">
+        <div class="flex flex-col gap-4 px-2">
+          <!-- Display columns dynamically -->
+          @for (col of cols; track col) {
           <div
-            class="flex justify-between items-center text-sm text-gray-800 border-bottom-1 surface-border pb-2"
-            >
-            <span class="font-semibold text-right w-6rem min-w-6rem text-primary">
+            class="flex items-center text-sm  border-b border-surface pb-2"
+          >
+            <span class="font-semibold text-right w-24 min-w-6rem text-primary">
               {{ col.col }}:
             </span>
-            <span class="text-right text-sm text-900">
+            <span
+              class="text-right text-sm"
+            >
               {{ turn[col.field] }}
             </span>
           </div>
-        }
-        <!-- Cancel button -->
-        <div class="flex justify-content-center mt-3">
-          <p-button
-            icon="pi pi-times-circle"
-            styleClass="px-4 py-2 text-sm font-semibold"
-            severity="danger"
-            label="ابطال نوبت"
-            (click)="confirmCancelTurn(turn)"
+          }
+          <!-- Cancel button -->
+          <div class="flex justify-center mt-4">
+            <p-button
+              icon="pi pi-times-circle"
+              styleClass="px-6 py-2 text-sm font-semibold"
+              severity="danger"
+              label="ابطال نوبت"
+              (click)="confirmCancelTurn(turn)"
             />
+          </div>
         </div>
-      </div>
-    </p-card>
+      </p-card>
+    </div>
   </div>
-}
+  }
+</div>
 
 <!-- Confirm dialog -->
 <p-confirmDialog
   acceptLabel="تایید"
   rejectLabel="انصراف"
-  acceptButtonStyleClass="px-5 p-button-danger py-2 text-sm"
-  rejectButtonStyleClass="px-4 p-button-secondary py-2 text-sm"
-  />
+  acceptButtonStyleClass="px-8 p-button-danger py-2 text-sm"
+  rejectButtonStyleClass="px-6 p-button-secondary py-2 text-sm"
+/>

@@ -1,5 +1,5 @@
 <p-button
-  class="fixed bottom-0 left-0 border-round font-bold mb-5 ml-3"
+  class="fixed bottom-0 left-0 rounded-border font-bold mb-8 ml-4"
   severity="info"
   [rounded]="true"
   icon="pi pi-phone"
@@ -13,9 +13,9 @@
   [(visible)]="visible"
 >
   <div
-    class="flex flex-c w-full align-content-center justify-content-center flex-wrap"
+    class="flex flex-c w-full content-center justify-center flex-wrap"
   >
-    <div class="m-2 align-items-center justify-content-center">
+    <div class="m-2 items-center justify-center">
       <p-button
         (click)="CallUsOnPhone.toggle($event)"
         icon="pi pi-phone"
@@ -23,8 +23,8 @@
         severity="info"
       />
       <p-popover #CallUsOnPhone>
-        <div class="flex justify-content-between align-content-center m-2">
-          <label class="flex align-items-center justify-content-center"
+        <div class="flex justify-between content-center m-2">
+          <label class="flex items-center justify-center"
             >انجمن رانندگان</label
           >
           <p-button
@@ -34,11 +34,11 @@
             [rounded]="true"
             label="03134721839"
             (onClick)="copyToClipboard()"
-            class="flex align-items-center justify-content-center mr-2"
+            class="flex items-center justify-center mr-2"
           />
         </div>
-        <div class="flex justify-content-between align-content-center m-2">
-          <label class="flex align-items-center justify-content-center"
+        <div class="flex justify-between content-center m-2">
+          <label class="flex items-center justify-center"
             >انجمن کامیونداران</label
           >
           <p-button
@@ -48,11 +48,11 @@
             [rounded]="true"
             label="03134721839"
             (onClick)="copyToClipboard()"
-            class="flex align-items-center justify-content-center mr-2"
+            class="flex items-center justify-center mr-2"
           />
         </div>
-        <div class="flex justify-content-between align-content-center m-2">
-          <label class="flex align-items-center justify-content-center"
+        <div class="flex justify-between content-center m-2">
+          <label class="flex items-center justify-center"
             >انجمن شرکت‌ها</label
           >
           <p-button
@@ -62,13 +62,13 @@
             [rounded]="true"
             label="03134721839"
             (onClick)="copyToClipboard()"
-            class="flex align-items-center justify-content-center mr-2"
+            class="flex items-center justify-center mr-2"
           />
         </div>
       </p-popover>
     </div>
 
-    <div class="m-2 align-items-center justify-content-center">
+    <div class="m-2 items-center justify-center">
       <p-button
         (click)="showTicketDialog()"
         label="ارتباط مستقیم با پشتیبانی"
@@ -85,7 +85,7 @@
   [modal]="true"
   [(visible)]="dialog"
 >
-  <span class="p-text-secondary block mb-5"
+  <span class="p-text-secondary block mb-8"
     >لطفا بعد از پر کردن اطلاعات، متن تیکت خود را وارد نمایید.<br /><br />همکاران
     ما در اسرع وقت پاسخگو خواهند بود.</span
   >

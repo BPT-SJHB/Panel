@@ -16,6 +16,7 @@ import { Turn } from 'app/services/turn-management/model/turn.model';
 import { TurnManagementService } from 'app/services/turn-management/turn-management.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { TableConfig } from 'app/constants/ui/table.ui';
 
 @Component({
   selector: 'app-turns-list-form',
@@ -39,6 +40,8 @@ export class TurnsListFormComponent {
   private destroy$ = new Subject<void>();
   private turnManagerService = inject(TurnManagementService);
   private confirmationService = inject(ConfirmationService);
+
+  readonly tableUi = TableConfig;
 
   turnsCols = [
     'شماره نوبت',

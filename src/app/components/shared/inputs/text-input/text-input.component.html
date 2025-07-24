@@ -1,96 +1,117 @@
 <div class="flex w-full">
   <p-input-group styleClass="h-2-5rem w-full">
     @if (label.trim() === '') {
-      <!-- Icon Addon -->
-      <p-inputgroup-addon
-        class="bg-primary text-white flex items-center justify-center px-3 border-round-right"
-          [style.width]="addonWidth"
-        >
-        <i [class]="icon"></i>
-      </p-inputgroup-addon>
-    } @else {
-      <!-- Label Addon -->
-      <p-inputgroup-addon
-        class="bg-primary border-round-right flex align-items-center justify-content-center"
-        [style.width]="addonWidth"
+    <!-- Icon Addon -->
+    <p-inputgroup-addon
+      [style.width]="addonWidth"
+      [style.padding]="0"
+      [style.margin]="0"
+      [style.border]="0"
+    >
+      <div
+        class="w-full h-full flex justify-center items-center bg-primary-emphasis rounded-r-md text-primary-contrast border-l-1"
       >
-        <span class="text-sm" style="white-space: nowrap">{{ label }}</span>
-      </p-inputgroup-addon>
-    }
-
-    @if (type != 'date') {
-      <!-- Text Input -->
-      <input
-        #inputRef
-        pInputText
-        [type]="type"
-        [formControl]="control"
-        [placeholder]="placeholder"
-        [readOnly]="readOnly"
-        [ngClass]="{
-          'border-red-500': control.touched && control.invalid,
-          border: true,
-          'border-round-left': buttonIcon === '',
-          'px-2': true,
-          'h-full': true,
-          'w-full': true,
-          
-          'bg-gray-100 text-700 pointer-events-none opacity-90 cursor-not-allowed':
-            control.disabled
-        }"
-        (focus)="onFocusInput(inputRef)"
-        (blur)="onBlurInput(inputRef)"
-      />
-    } @if (type === 'date') {
-      <!-- Date Input -->
-      <div class="w-full" style="position: relative;">
-        <ng-persian-datepicker
-        [ngClass]="datePickerPosition == 'top' ? 'position-top' : 'position-bottom'"
-        >
-          <div class="h-2-5rem">
-            <input
-              #inputRef
-              pInputText
-              [formControl]="control"
-              [placeholder]="placeholder"
-              [readOnly]="readOnly"
-              [ngClass]="{
-                'border-red-500': control.touched && control.invalid,
-                border: true,
-                'border-round-left': buttonIcon === '',
-                'px-2': true,
-                'h-full': true,
-                'w-full': true,
-                'bg-gray-100 text-gray-500 pointer-events-none opacity-60 cursor-not-allowed':
-                  control.disabled
-              }"
-              (focus)="onFocusInput(inputRef)"
-              (blur)="onBlurInput(inputRef)"
-              (input)="input.emit($event)"
-              (keydown)="onKeyDown($event)"
-            />
-          </div>
-        </ng-persian-datepicker>
+        <i [class]="icon"></i>
       </div>
+    </p-inputgroup-addon>
+    } @else {
+    <!-- Label Addon -->
+    <p-inputgroup-addon
+      [style.width]="addonWidth"
+      [style.padding]="0"
+      [style.margin]="0"
+      [style.border]="0"
+    >
+      <div
+        class="w-full h-full flex justify-center items-center bg-primary-emphasis rounded-r-md text-primary-contrast border-l-1"
+      >
+        <span
+          class="text-sm text-primary-contrast"
+          style="white-space: nowrap"
+          >{{ label }}</span
+        >
+      </div>
+    </p-inputgroup-addon>
+    } @if (type != 'date') {
+    <!-- Text Input -->
+    <input
+      #inputRef
+      pInputText
+      [type]="type"
+      [formControl]="control"
+      [placeholder]="placeholder"
+      [readOnly]="readOnly"
+      [style.background]="'var(--p-inputgroup-addon-background)'"
+      class="borde border-l-1 border-surface px-2 h-full w-full placeholder:text-gray-400 text-sm"
+      [ngClass]="{
+        'border-red-500': control.touched && control.invalid,
+        border: true,
+        'rounded-l': buttonIcon === '',
+        'bg-gray-100 text-surface-700 dark:text-surface-100 pointer-events-none opacity-90 cursor-not-allowed':
+          control.disabled
+      }"
+      (focus)="onFocusInput(inputRef)"
+      (blur)="onBlurInput(inputRef)"
+    />
+    } @if (type === 'date') {
+    <!-- Date Input -->
+    <div class="w-full" style="position: relative">
+      <ng-persian-datepicker
+        [ngClass]="
+          datePickerPosition == 'top' ? 'position-top' : 'position-bottom'
+        "
+      >
+        <div class="h-2-5rem">
+          <input
+            #inputRef
+            pInputText
+            [formControl]="control"
+            [placeholder]="placeholder"
+            [readOnly]="readOnly"
+            [style.background]="'var(--p-inputgroup-addon-background)'"
+            class="borde border-l-1 border-surface px-2 h-full w-full placeholder:text-gray-400 text-sm"
+            [ngClass]="{
+              'border-red-500': control.touched && control.invalid,
+              border: true,
+              'rounded-l': buttonIcon === '',
+              'px-2': true,
+              'h-full': true,
+              'w-full': true,
+              'bg-gray-100 text-gray-500 pointer-events-none opacity-60 cursor-not-allowed':
+                control.disabled
+            }"
+            (focus)="onFocusInput(inputRef)"
+            (blur)="onBlurInput(inputRef)"
+            (input)="input.emit($event)"
+            (keydown)="onKeyDown($event)"
+          />
+        </div>
+      </ng-persian-datepicker>
+    </div>
     }
   </p-input-group>
 
   @if (buttonIcon.trim() !== '') {
-    <!-- Button Addon -->
-    <p-inputgroup-addon class="flex h-2-5rem">
-      <p-button
-        [icon]="buttonIcon"
-        [disabled]="buttonDisabled"
-        (click)="handleClick()"
-      />
-    </p-inputgroup-addon>
+  <!-- Button Addon -->
+  <p-inputgroup-addon
+    [style.padding]="0"
+    [style.margin]="0"
+    [style.border]="0"
+    class="flex h-2-5rem"
+  >
+    <p-button
+      [icon]="buttonIcon"
+      [disabled]="buttonDisabled"
+      (click)="handleClick()"
+    />
+  </p-inputgroup-addon>
   }
 </div>
 
 @if (control.touched && firstErrorMessage) {
-  <div class="px-3 mt-1">
-    <p-message severity="error" variant="simple" size="small">
-      {{ firstErrorMessage }}
-    </p-message>
-  </div>
+<div class="px-4 mt-1">
+  <p-message severity="error" variant="simple" size="small">
+    {{ firstErrorMessage }}
+  </p-message>
+</div>
 }

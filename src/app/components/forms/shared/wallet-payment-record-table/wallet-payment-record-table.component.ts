@@ -9,6 +9,7 @@ import { checkAndToastError } from 'app/utils/api-utils';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { Wallet } from 'app/services/wallet-management/model/wallet.model';
 import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
+import { TableConfig } from 'app/constants/ui/table.ui';
 
 @Component({
   selector: 'app-payment-record-table',
@@ -30,6 +31,7 @@ export class WalletPaymentRecordTableComponent
 
   // 📄 List of payment records
   readonly paymentHistory = signal<WalletPaymentHistory[]>([]);
+  readonly tableUi = TableConfig;
 
   // 📊 Table column definitions
   readonly columns: ReadonlyArray<{ label: string; key: keyof WalletPaymentHistory }> = [

@@ -30,6 +30,7 @@ import { BinaryRadioInputComponent } from '../../shared/inputs/binary-radio-inpu
 import { SearchAutoCompleteComponent } from '../../shared/inputs/search-auto-complete/search-auto-complete.component';
 import { ShortResponse } from 'app/data/model/short-response.model';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { TableConfig } from 'app/constants/ui/table.ui';
 
 enum TravelTimeFormMode {
   EDITABLE,
@@ -67,6 +68,8 @@ export class TravelTimeFormComponent {
   // State & lifecycle helpers
   private destroy$ = new Subject<void>();
   private travelTimeFormMode = TravelTimeFormMode.REGISTER;
+
+  readonly tableUi = TableConfig;  
 
   // UI state
   headerTitle = '';

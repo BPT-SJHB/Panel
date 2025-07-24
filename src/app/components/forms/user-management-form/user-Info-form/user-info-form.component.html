@@ -1,6 +1,6 @@
-<div class="p-fluid grid gap-4 relative">
+<div class="p-fluid grid gap-2 relative">
   <form
-    class="col-12"
+    class="col-span-12"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
     [formGroup]="searchForm"
@@ -15,18 +15,19 @@
         validationField="mobile"
         [disableSearchButton]="this.searchForm.invalid || loading"
         [onSearchQuery]="fetchUserByPhone"
+        [addonWidth]="'8rem'"
       />
     </div>
   </form>
 
   <form
-    class="p-fluid grid gap-4 relative"
+    class="p-fluid grid col-span-12 gap-6 relative"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
     [formGroup]="userInfoForm"
   >
     <!-- User ID (ReadOnly) -->
-    <div class="flex align-items-center gap-2 col-12 md:col-5">
+    <div class="flex items-center gap-2 col-span-12 md:col-span-6">
       <app-text-input
         class="flex-1"
         [readOnly]="true"
@@ -38,7 +39,7 @@
       />
       <p-button
         (click)="resetUserInfoForm()"
-        styleClass="border-circle w-2rem h-2rem"
+        styleClass="rounded-full w-8 h-8"
         [disabled]="id.value == '0'"
         size="small"
         severity="info"
@@ -48,7 +49,7 @@
     </div>
 
     <!-- Full Name -->
-    <div class="col-12 md:col-5">
+    <div class="col-span-12 md:col-span-6">
       <app-text-input
         validationField="fullName"
         icon="pi pi-user"
@@ -58,7 +59,7 @@
     </div>
 
     <!-- Phone -->
-    <div class="col-12 md:col-5">
+    <div class="col-span-12 md:col-span-6">
       <div>
         <app-text-input
           label="شماره موبایل"
@@ -71,7 +72,7 @@
     </div>
 
     <!-- User Type -->
-    <div class="col-12 md:col-5">
+    <div class="col-span-12 md:col-span-6">
       <app-select-input
         icon="pi pi-users"
         [control]="userType"
@@ -80,9 +81,10 @@
     </div>
 
     <!-- Radio: SMS System -->
-    <div class="col-12 md:col-5">
+    <div class="col-span-12 md:col-span-6 flex px-2">
       <app-binary-radio-input
         [readonly]="true"
+        [disabled]="true"
         label="وضعیت پیامک"
         [control]="smsActive"
         radioName="sms-active"
@@ -90,7 +92,7 @@
     </div>
 
     <!-- Radio: User Active -->
-    <div class="col-12 md:col-6">
+    <div class="col-span-12 md:col-span-6 flex px-2">
       <app-binary-radio-input
         label="کاربر"
         [control]="userActive"
@@ -100,13 +102,13 @@
 
     <!-- Action Buttons -->
     <div
-      class="col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center"
+      class="col-span-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center"
     >
       <p-button
         (click)="submitUserInfo()"
         [disabled]="userInfoForm.invalid || loading"
         label="ثبت و ویرایش"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
       ></p-button>
 
       <p-button
@@ -114,7 +116,7 @@
         [disabled]="id.value == '0' || smsActive.value || loading"
         severity="warn"
         label="فعال سازی پیامک"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
       ></p-button>
 
       <p-button
@@ -122,7 +124,7 @@
         [disabled]="id.value == '0' || loading"
         severity="warn"
         label="ارسال لینک سامانه"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
       ></p-button>
 
       <p-button
@@ -130,7 +132,7 @@
         [disabled]="id.value == '0' || loading"
         severity="info"
         label="ایجاد رمز عبور جدید"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
       ></p-button>
     </div>
   </form>

@@ -1,24 +1,24 @@
-<div class="flex justify-content-center pb-4 mb-2 border-bottom-1">
+<div class="flex justify-center pb-6 mb-2 border-b">
   <p-avatar
     icon="pi pi-user"
     class="mr-2"
     size="xlarge"
     shape="circle"
-    styleClass="shadow-2 w-5rem h-5rem"
+    styleClass="shadow w-20 h-20"
     [style]="{ 'background-color': '#ece9fc', color: '#2a1261' }"
     />
 </div>
 
-<div class="flex flex-column gap-3 px-2">
+<div class="flex flex-col gap-4 px-2">
   <!-- Display columns dynamically -->
   @for (col of cols; track col) {
     <div
-      class="flex justify-between items-center text-sm text-gray-800 border-bottom-1 surface-border pb-2"
+      class="flex  items-center text-sm border-b border-surface pb-2"
       >
-      <span class="font-semibold text-right w-6rem min-w-6rem text-primary">
+      <span class="font-semibold text-right w-24 min-w-6rem text-primary">
         {{ col.col }}:
       </span>
-      <span class="text-right text-sm text-900">
+      <span class="text-right text-sm">
         {{ userProfile()[col.field]  }}
       </span>
       @if (col.field === 'balance') {
@@ -29,14 +29,14 @@
 </div>
 <!-- Action Buttons -->
 <div
-  class="col-12 mt-5 md:mb-6 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center"
+  class="col-span-12 mt-8 md:mb-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center"
   >
   <p-button
     (click)="activateUserSms()"
     [disabled]="loading() || isUserSmsActivated || !userProfile()"
     severity="warn"
     label="فعال سازی پیامک"
-    styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+    styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
   ></p-button>
 
   <p-button
@@ -44,7 +44,7 @@
     [disabled]="loading() || !userProfile()"
     severity="primary"
     label="ایجاد رمز عبور جدید"
-    styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
+    styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
   ></p-button>
 </div>
 
@@ -53,6 +53,6 @@
   position="top"
   acceptLabel="تایید"
   rejectLabel="انصراف"
-  acceptButtonStyleClass="px-5 p-button-info py-2 text-sm"
-  rejectButtonStyleClass="px-4 p-button-secondary py-2 text-sm"
+  acceptButtonStyleClass="px-8 p-button-info py-2 text-sm"
+  rejectButtonStyleClass="px-6 p-button-secondary py-2 text-sm"
   />

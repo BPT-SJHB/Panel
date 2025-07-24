@@ -1,8 +1,8 @@
-<div class="flex flex-column gap-2">
+<div class="flex flex-col gap-2">
   <!-- Loading Spinner -->
   @if (loading) {
   <div
-    class="h-full w-full z-5 flex align-items-center justify-content-center absolute"
+    class="h-full w-full z-50 flex items-center justify-center absolute"
   >
     <div class="h-full w-full" style="opacity: 0.2"></div>
     <i class="pi pi-spin pi-spinner primary" style="font-size: 5rem"></i>
@@ -11,13 +11,13 @@
 
   <!-- Search Form -->
   <form
-    class="col-12"
+    class="col-span-12"
     [formGroup]="searchForm"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
     (ngSubmit)="loadLoadersType()"
   >
-    <div class="flex gap-3">
+    <div class="flex gap-4">
       <app-text-input
         [control]="searchTitle"
         icon="pi pi-search"
@@ -30,7 +30,7 @@
         [disabled]="searchForm.invalid || loading"
         size="small"
         severity="info"
-        styleClass="w-8rem h-2-5rem"
+        styleClass="w-32 h-2-5rem"
         label="جستجو"
       />
     </div>

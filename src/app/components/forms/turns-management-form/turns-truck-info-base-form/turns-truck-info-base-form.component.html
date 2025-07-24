@@ -1,11 +1,11 @@
 <!-- 🔍 Search Form: Smart Card -->
 <form
   [formGroup]="searchTruckInfoForm"
-  class="grid"
+  class="grid grid-cols-12 gap-4"
   [class.pointer-events-none]="loading"
   [class.opacity-60]="loading"
 >
-  <div class="col-12">
+  <div class="col-span-12">
     <app-search-input
       class="w-full"
       placeholder="هوشمند ناوگان را وارد کنید."
@@ -23,17 +23,17 @@
 </form>
 
 <!-- 🚚 Truck Info Form -->
-<p-card [style]="{ 'box-shadow': '0 0 10px rgba(0, 0, 0, 0.3)' }">
+<p-card [style]="{ 'box-shadow': '0 0 10px rgba(0, 0, 0, 0.3)' }" class="mb-6">
   <form
     [formGroup]="truckInfoForm"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
-    class="grid gap-2"
+    class="grid grid-cols-12 gap-4"
   >
     <!-- 🧱 Truck Section -->
-    <div class="grid col-12">
-      <span class="w-full text-xl font-bold w-full px-2">ناوگان</span>
-      <div class="col-12 md:col-6 py-1 md:py-0">
+    <div class="grid grid-cols-12 gap-4 col-span-12">
+      <span class="w-full text-xl font-bold px-2 col-span-12">ناوگان</span>
+      <div class="col-span-12 md:col-span-6 py-1 md:py-0">
         <app-text-input
           label="کد ناوگان"
           placeholder="کد ناوگان"
@@ -45,7 +45,7 @@
         />
       </div>
 
-      <div class="col-12 md:col-6 py-1 md:py-0">
+      <div class="col-span-12 md:col-span-6 py-1 md:py-0">
         <app-text-input
           label="شماره پلاک"
           placeholder="شماره پلاک"
@@ -59,9 +59,9 @@
     </div>
 
     <!-- 👤 Driver Section -->
-    <div class="grid col-12">
-      <span class="w-full text-xl font-bold w-full px-2">راننده</span>
-      <div class="col-12 md:col-6 lg:col-4 py-1 md:py-0">
+    <div class="grid grid-cols-12 gap-4 col-span-12">
+      <span class="col-span-12 text-xl font-bold px-2">راننده</span>
+      <div class="col-span-12 md:col-span-6 lg:col-span-4 py-1 md:py-0">
         <app-text-input
           label="کد راننده"
           placeholder="کد راننده"
@@ -73,7 +73,7 @@
         />
       </div>
 
-      <div class="col-12 md:col-6 lg:col-4 py-1 md:py-0">
+      <div class="col-span-12 md:col-span-6 lg:col-span-4 py-1 md:py-0">
         <app-text-input
           label="کد ملی راننده"
           placeholder="کد ملی راننده"
@@ -85,7 +85,7 @@
         />
       </div>
 
-      <div class="col-12 md:col-6 lg:col-4 py-1 lg:py-0">
+      <div class="col-span-12 md:col-span-6 lg:col-span-4 py-1 lg:py-0">
         <app-text-input
           label="نام راننده"
           placeholder="نام و نام خانوادگی"
@@ -99,9 +99,9 @@
     </div>
 
     <!-- 🔁 Turn Status Section -->
-    <div class="grid col-12">
-      <span class="w-full text-xl font-bold w-full px-2">آخرین صف نوبت</span>
-      <div class="col-12 md:col-6 lg:col-4 xl:col-3 py-1 xl:py-0">
+    <div class="grid grid-cols-12 gap-4 col-span-12">
+      <span class="col-span-12 text-xl font-bold px-2">آخرین صف نوبت</span>
+      <div class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0">
         <app-text-input
           label="تسلسل نوبت"
           placeholder="تسلسل نوبت"
@@ -112,7 +112,7 @@
         />
       </div>
 
-      <div class="col-12 md:col-6 lg:col-4 xl:col-3 py-1 xl:py-0">
+      <div class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0">
         <app-text-input
           label="صف نوبت"
           placeholder="صف نوبت"
@@ -123,7 +123,7 @@
         />
       </div>
 
-      <div class="col-12 md:col-6 lg:col-4 xl:col-3 py-1 xl:py-0">
+      <div class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0">
         <app-text-input
           label="وضعیت"
           placeholder="وضعیت"
@@ -134,7 +134,7 @@
         />
       </div>
 
-      <div class="col-12 md:col-6 lg:col-4 xl:col-3 py-1 xl:py-0">
+      <div class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0">
         <app-text-input
           label="شرح"
           placeholder="شرح"
@@ -147,10 +147,10 @@
     </div>
 
     <!-- 💳 Wallet Section -->
-    <div class="grid col-12">
-      <span class="text-xl font-bold w-full px-2">کیف پول</span>
+    <div class="grid grid-cols-12 gap-4 col-span-12">
+      <span class="text-xl font-bold col-span-12 px-2">کیف پول</span>
 
-      <div class="col-12 md:col-6 py-1 md:py-0">
+      <div class="col-span-12 md:col-span-6 py-1 md:py-0">
         <app-text-input
           label=" کد کیف پول"
           placeholder="کد کیف پول"
@@ -161,7 +161,7 @@
         />
       </div>
 
-      <div class="col-12 md:col-6 py-1 md:py-0">
+      <div class="col-span-12 md:col-span-6 py-1 md:py-0">
         <app-text-input
           label="موجودی"
           placeholder="موجودی"
@@ -177,7 +177,7 @@
   </form>
 </p-card>
 <app-search-auto-complete
-  class="col-12 sm:col-6"
+  class="col-span-12 sm:col-span-6"
   placeholder="صف نوبت"
   label="صف نوبت"
   [control]="sequentialTurnTitle"

@@ -2,21 +2,19 @@
   <p-input-group styleClass="h-2-5rem w-full">
     <!-- 🎨 Icon or 🏷️ Label Addon -->
     @if (label.trim() === '') {
-      <p-inputgroup-addon
-        class="bg-primary text-white flex items-center justify-center px-3 border-round-right"
-        [style.width]="addonWidth"
-        >
-        <i [class]="icon"></i>
-      </p-inputgroup-addon>
-    }
-
-    @if (label.trim() !== '') {
-      <p-inputgroup-addon
-        class="bg-primary border-round-right flex align-items-center justify-content-center"
-        [style.width]="addonWidth"
-        >
-        <span class="text-sm whitespace-nowrap">{{ label }}</span>
-      </p-inputgroup-addon>
+    <p-inputgroup-addon
+      class="bg-primary text-primary-contrast flex items-center justify-center px-4 rounded-r"
+      [style.width]="addonWidth"
+    >
+      <i [class]="icon"></i>
+    </p-inputgroup-addon>
+    } @if (label.trim() !== '') {
+    <p-inputgroup-addon
+      class="bg-primary text-primary-contrast rounded-r flex items-center justify-center"
+      [style.width]="addonWidth"
+    >
+      <span class="text-sm whitespace-nowrap">{{ label }}</span>
+    </p-inputgroup-addon>
     }
 
     <!-- 📅 Persian Date Input -->
@@ -25,7 +23,7 @@
         [ngClass]="
           datePickerPosition === 'top' ? 'position-top' : 'position-bottom'
         "
-        >
+      >
         <div class="h-2-5rem">
           <input
             #inputRef
@@ -33,6 +31,8 @@
             [formControl]="control"
             [placeholder]="placeholder"
             [readOnly]="readOnly"
+            [style.background]="'var(--p-inputgroup-addon-background)'"
+            class="borde border-l-1 border-surface px-2 h-full w-full placeholder:text-gray-400 text-sm"
             [ngClass]="{
               'border-red-500': control.touched && control.invalid,
               border: true,
@@ -42,21 +42,21 @@
               'bg-gray-100 text-gray-500 pointer-events-none opacity-60 cursor-not-allowed':
                 control.disabled
             }"
-            class="border-round-left-md"
+            class="rounded-l-md"
             (focus)="onFocusInput(inputRef)"
             (blur)="onBlurInput(inputRef)"
-            />
-          </div>
-        </ng-persian-datepicker>
-      </div>
-    </p-input-group>
-  </div>
-
-  <!-- ⚠️ Validation Error Message -->
-  @if (control.touched && firstErrorMessage) {
-    <div class="px-3 mt-1">
-      <p-message severity="error" variant="simple" size="small">
-        {{ firstErrorMessage }}
-      </p-message>
+          />
+        </div>
+      </ng-persian-datepicker>
     </div>
-  }
+  </p-input-group>
+</div>
+
+<!-- ⚠️ Validation Error Message -->
+@if (control.touched && firstErrorMessage) {
+<div class="px-4 mt-1">
+  <p-message severity="error" variant="simple" size="small">
+    {{ firstErrorMessage }}
+  </p-message>
+</div>
+}

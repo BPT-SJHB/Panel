@@ -15,27 +15,22 @@
 
 <!-- 📋 Announcement Table -->
 <p-table
-  class="col-12 overflow-x-auto"
+  class="col-span-12 overflow-x-auto"
   [columns]="cols"
   [value]="displayAnnouncementsGroup"
   [tableStyle]="{ 'min-width': '40rem' }"
 >
   <!-- Table Header -->
   <ng-template #caption>
-    <div class="flex items-center justify-between">
-      <p-button
-        label="جدید"
-        size="small"
-        styleClass="px-4 md:px-5 py-1"
-        (click)="onNew()"
-      />
+    <div>
+      <button pButton label="جدید" size="small" class="w-20 md:w-30 py-1" (click)="onNew()"></button>
     </div>
   </ng-template>
 
   <ng-template #header let-columns>
     <tr>
       @for (col of columns; track $index) {
-        <th>{{ col }}</th>
+      <th>{{ col }}</th>
       }
     </tr>
   </ng-template>
@@ -83,24 +78,24 @@
 
 <!-- 📝 Form Dialog -->
 <p-dialog
+  [style]="{ width: '30rem', maxWidth: '100%' }"
   draggable="false"
   [header]="headerTitle"
   [modal]="true"
-  [style]="{ 'max-width': '30rem' }"
-  maskStyleClass="px-3"
+  maskStyleClass="px-4"
   [(visible)]="formDialogVisible"
   (onHide)="closeAnnouncementFormGroup()"
 >
   <form
-    class="grid gap-3"
+    class="grid grid-cols-12 gap-4"
     [formGroup]="announcementGroupForm"
     (ngSubmit)="registerOrEdit()"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
   >
-    <div class="grid col-12 gap-3">
+    <div class="grid col-span-12 grid-cols-12 gap-4">
       <app-text-input
-        class="col-12"
+        class="col-span-12"
         label="کد"
         validationField="id"
         addonWidth="5rem"
@@ -110,7 +105,7 @@
       />
 
       <app-text-input
-        class="col-12"
+        class="col-span-12"
         label="عنوان"
         placeholder="عنوان"
         validationField="title"
@@ -118,9 +113,8 @@
         [control]="AnnouncementTitle"
       />
 
-      <div class="grid col-12">
+      <div class="col-span-12 flex px-2">
         <app-binary-radio-input
-          class="col-12"
           label="وضعیت گروه:"
           radioName="AnnouncementActive"
           [control]="AnnouncementActive"
@@ -130,12 +124,13 @@
       </div>
     </div>
 
-    <div class="w-full flex justify-end">
-      <p-button
+    <div class="flex justify-end col-span-12">
+      <button
+        pButton
         label="ثبت و ویرایش اطلاعات"
         (click)="registerOrEdit()"
         [disabled]="announcementGroupForm.invalid || loading"
-      />
+      ></button>
     </div>
   </form>
 </p-dialog>

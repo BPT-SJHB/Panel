@@ -2,7 +2,7 @@
   <p-input-group styleClass="h-2-5rem w-full">
     <!-- Icon -->
     <p-inputgroup-addon
-      class="bg-primary text-white flex items-center justify-center px-3 border-round-right">
+      class="bg-primary text-primary-contrast text-white flex items-center justify-center px-4 rounded-r">
       <i [class]="icon"></i>
     </p-inputgroup-addon>
 
@@ -14,11 +14,11 @@
       optionValue="value"
       [ngClass]="{
         'border-red-500': control.touched && control.invalid,
-        'border-round-left': true,
+        'rounded-l': true,
         'w-full': true,
         'bg-gray-100 text-gray-500 opacity-60 cursor-not-allowed': disabled
       }"
-      styleClass="w-full border-none h-full px-2"
+      styleClass="w-full border-0 h-full px-2"
     ></p-select>
   </p-input-group>
 </div>

@@ -1,11 +1,11 @@
 <div class="card flex justify-center" style="margin-top: -.5rem;">
-  <div class="flex align-items-center gap-4 flex-wrap">
+  <div class="flex items-center gap-6 flex-wrap">
     <span class="font-medium whitespace-nowrap mt-2">{{ label }}</span>
 
-    <div class="flex gap-3">
+    <div class="flex gap-4">
       <!-- فعال -->
       <div
-        class="flex align-items-center gap-2"
+        class="flex items-center gap-2"
         [ngClass]="{ 'text-green-600': control.value === true }"
       >
         <p-radiobutton
@@ -21,7 +21,7 @@
 
       <!-- غیرفعال -->
       <div
-        class="flex align-items-center gap-2"
+        class="flex items-center gap-2"
         [ngClass]="{ 'text-red-500': control.value === false }"
       >
         <p-radiobutton

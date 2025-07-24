@@ -1,49 +1,49 @@
-
 <div>
-  <input hidden  [formControl]="sessionIdControl" readonly   />
+  <input hidden [formControl]="sessionIdControl" readonly />
 
   <p-inputgroup styleClass="h-2-5rem">
-    <p-inputgroup-addon
-    class="p-0 overflow-hidden border-round-right flex align-items-center justify-content-center"
-    >
-      <img [src]="imageData" alt="کپچا" class="w-full h-full object-cover" />
-  </p-inputgroup-addon>
-
-  <input
-  [formControl]="captchaInputControl"
-  pInputText
-  placeholder="عدد تصویر وارد کنید"
-  class="w-full border-round-left px-2 h-full"
-  [ngClass]="{
-    'border-red-500': captchaInputControl.touched && captchaInputControl.invalid,
-    'border': true,
-    'border-round-left': true,
-    'px-2': true,
-    'h-full': true,
-    'w-full': true
-  }"
-  />
-
-  <p-inputgroup-addon
-      (click)="onRefreshClick()"
-      class="bg-secondary border-round-left flex align-items-center justify-content-center px-3 cursor-pointer"
-    >
-      <i
-      [ngClass]="{ 'rotate': disableRefresh }"
-      class="pi pi-refresh"></i>
+    <p-inputgroup-addon [style.padding]="0" [style.border]="0">
+      <img
+        [src]="imageData"
+        alt="کپچا"
+        class="w-full h-full object-fill rounded-r-sm"
+      />
     </p-inputgroup-addon>
-</p-inputgroup>
 
-@if (captchaInputControl.touched && captchaInputControl.errors) {
-  @if (captchaInputControl.errors['required']) {
-    <p-message severity="error" variant="simple" size="small">
-      وارد کردن عدد تصویر الزامی است.
-    </p-message>
+    <input
+      [formControl]="captchaInputControl"
+      pInputText
+      placeholder="عدد تصویر وارد کنید"
+      [style.background]="'var(--p-inputgroup-addon-background)'"
+      class="borde border-l-1 border-surface px-2 h-full w-full placeholder:text-gray-400 text-sm"
+      [ngClass]="{
+        'border-red-500':
+          captchaInputControl.touched && captchaInputControl.invalid,
+        border: true,
+        'rounded-l': true,
+        'px-2': true,
+        'h-full': true,
+        'w-full': true
+      }"
+    />
+
+    <p-inputgroup-addon
+      (click)="onRefreshClick()"
+      class="bg-secondary rounded-l flex items-center justify-center px-4 cursor-pointer"
+    >
+      <i [ngClass]="{ rotate: disableRefresh }" class="pi pi-refresh"></i>
+    </p-inputgroup-addon>
+  </p-inputgroup>
+
+  @if (captchaInputControl.touched && captchaInputControl.errors) { @if
+  (captchaInputControl.errors['required']) {
+  <p-message severity="error" variant="simple" size="small">
+    وارد کردن عدد تصویر الزامی است.
+  </p-message>
   } @else if (captchaInputControl.errors['minlength']) {
-    <p-message severity="error" variant="simple" size="small">
-      کپچا باید حداقل {{ captchaInputControl.errors['minlength'].requiredLength }} کاراکتر باشد.
-    </p-message>
-  }
-
-}
+  <p-message severity="error" variant="simple" size="small">
+    کپچا باید حداقل
+    {{ captchaInputControl.errors["minlength"].requiredLength }} کاراکتر باشد.
+  </p-message>
+  } }
 </div>

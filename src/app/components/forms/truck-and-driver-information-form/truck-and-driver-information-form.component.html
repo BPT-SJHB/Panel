@@ -1,18 +1,18 @@
 @if (insideTabType === "Truck") {
-<div class="flex align-items-center justify-content-center w-12">
-  <app-form-card class="w-12 md:w-6">
+<div class="flex items-center justify-center w-full">
+  <app-form-card class="w-full md:w-6/12">
     <div class="costumeText">
       <label>کد ناوگان :</label>
       <span>{{ TruckInfo?.TruckId || "نامشخص" }}</span>
     </div>
     <div class="costumeText">
       <label>پلاک و سریال :</label>
-      <div class="flex flex-row gap-3">
+      <div class="flex flex-row gap-6">
         @if (TruckInfo == undefined) {
         <span>نامشخص</span>
         }@else {
         <p-splitter
-          class="w-9rem mt-2"
+          class="w-36 h-18 mt-2"
           [panelSizes]="[50, 50]"
           [minSizes]="[50, 50]"
         >
@@ -23,16 +23,20 @@
               [minSizes]="[50, 50]"
             >
               <ng-template #panel>
-                <span>ایران</span>
+                <div class="flex items-center justify-center h-full">
+                  <span>ایران</span>
+                </div>
               </ng-template>
               <ng-template #panel>
-                <span>{{ TruckInfo.Serial }}</span>
+                <div class="flex items-center justify-center h-full">
+                  <span >{{ TruckInfo.Serial }}</span>
+                </div>
               </ng-template>
             </p-splitter>
           </ng-template>
           <ng-template #panel>
             <span
-              class="flex flex-row align-self-center justify-content-center"
+              class="flex flex-row self-center m-auto"
               >{{ TruckInfo.Pelak }}</span
             >
           </ng-template>
@@ -44,8 +48,8 @@
 </div>
 
 } @if (insideTabType === "LoaderType") {
-<div class="flex align-items-center justify-content-center w-12">
-  <app-form-card class="w-12 md:w-6">
+<div class="flex items-center justify-center w-full">
+  <app-form-card class="w-full md:w-6/12">
     @for (item of loaderTypeDataForHtml; track $index) {
     <div class="costumeText">
       <label>{{ item.title || "نامشخص" }}</label>
@@ -56,8 +60,8 @@
 </div>
 
 } @if (insideTabType === "Driver") {
-<div class="flex align-items-center justify-content-center w-12">
-  <app-form-card class="w-12 md:w-6">
+<div class="flex items-center justify-center w-full">
+  <app-form-card class="w-full md:w-6/12">
     @for (item of driverDataForHtml; track $index) {
     <div class="costumeText">
       <label>{{ item.title || "نامشخص" }}</label>

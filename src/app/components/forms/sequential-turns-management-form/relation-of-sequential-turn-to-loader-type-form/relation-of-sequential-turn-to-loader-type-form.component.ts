@@ -23,6 +23,7 @@ import { RelationOfSequentialTurnToLoaderType } from 'app/services/sequential-tu
 import { checkAndToastError } from 'app/utils/api-utils';
 import { ERROR_MESSAGES, ErrorCodes } from 'app/constants/error-messages';
 import { LoaderType } from 'app/services/loader-types/model/loader-type.model';
+import { TableConfig } from 'app/constants/ui/table.ui';
 
 // =======================
 // 📄 Table Row Interface
@@ -62,6 +63,7 @@ export class RelationOfSequentialTurnToLoaderTypeFormComponent {
   private confirmationService = inject(ConfirmationService);
   private loaderTypeService = inject(LoaderTypesService);
   private sequentialTurnService = inject(SequentialTurnManagementService);
+  readonly tableUi= TableConfig;
 
   // =======================
   // 📊 Component State

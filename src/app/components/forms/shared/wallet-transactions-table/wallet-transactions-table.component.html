@@ -14,7 +14,7 @@
   <ng-template pTemplate="body" let-row>
     <tr [class]="getRowColor(row.TransactionColor)">
       @for (c of columns; track c) {
-        <td class="white-space-nowrap">
+        <td class="whitespace-nowrap">
           {{ row[c.key] }}
         </td>
       }
