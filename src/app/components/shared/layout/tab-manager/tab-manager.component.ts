@@ -66,7 +66,7 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
   ]);
 
   // Currently selected tab
-  selectTab = signal<DynamicTab | null>(
+  selectTab = signal<DynamicTab>(
     this.tabs.get('4b8ef55e-3cf3-41e2-ab9b-65b6bfc8e60b')!
   );
 
