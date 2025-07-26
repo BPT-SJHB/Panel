@@ -1,0 +1,48 @@
+<div class="overflow-hidden">
+  <div class="overflow-x-auto w-full">
+    <div class="flex flex-nowrap min-w-max border-b border-gray-300">
+      @for (tab of tabs.values(); track tab.id) {
+      <div class="relative flex items-center h-8">
+        <div>
+          <div
+            (click)="onClickTab(tab)"
+            class="flex gap-2 pl-10 pr-2 py-2 cursor-pointer transition-all duration-300"
+            [ngClass]="{
+              'bg-emphasis text-primary-emphasis shadow-md':
+                selectTab().id === tab.id,
+              'hover:bg-emphasis': selectTab().id !== tab.id
+            }"
+          >
+            <i class="pi" [class]="tab.icon"></i>
+            <span class="text-xs font-medium">{{ tab.title }}</span>
+          </div>
+        </div>
+
+        @if (tab.closeable) {
+        <button
+          (click)="closeTab(tab.id)"
+          class="absolute top-0.5 left-0.5 scale-80 text-red-400 hover:text-red-600 hover:scale-90 transition-transform duration-300"
+          [title]="`بستن تب ${tab.title}`"
+        >
+          <i class="pi pi-times"></i>
+        </button>
+        }
+      </div>
+      }
+    </div>
+  </div>
+</div>
+
+<p-tabs
+  [hidden]="selectTab().config.subTab.length < 2 || hiddenSubTab()"
+  [(value)]="selectTab().selectedSubTab"
+  (valueChange)="onSubTabChange($event)"
+>
+  <div class="w-full overflow-x-auto">
+    <p-tablist>
+      @for (view of selectTab().config.subTab; track $index) {
+      <p-tab class="text-sm" [value]="$index">{{ view.title }}</p-tab>
+      }
+    </p-tablist>
+  </div>
+</p-tabs>
