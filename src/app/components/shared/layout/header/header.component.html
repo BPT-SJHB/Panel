@@ -1,0 +1,9 @@
+<div class="relative w-full h-full bg-primary text-primary-contrast pr-4 py-2 z-15">
+  <p-button class="lg:hidden absolute top-0" (onClick)="openSidebar()">
+    <i class="pi pi-align-right text-xl"></i>
+  </p-button>
+  <div class="flex items-center justify-center lg:justify-start gap-4">
+    <i class="pi text-xl scale-120" [class]="headerData.icon"></i>
+    <span class="text-xl font-bold">{{ headerData.title }}</span>
+  </div>
+</div>
