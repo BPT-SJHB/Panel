@@ -1,0 +1,14 @@
+<div class="flex flex-col gap-1 h-full w-full">
+  @for (pageGroup of pageGroupItems; track $index) {
+    <div
+      (click)="onClickMenuItem(pageGroup)"
+      class="w-full flex items-center text-md gap-3 px-4 py-2 
+      h-12 rounded-md cursor-pointer hover:bg-highlight"
+      role="button"
+      tabindex="0"
+    >
+      <i [class]="`pi ${pageGroup.icon} text-primary-emphasis text-xl`"></i>
+      <span class="font-semibold text-muted-color-emphasis">{{ pageGroup.label }}</span>
+    </div>
+  }
+</div>
