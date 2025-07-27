@@ -1,0 +1,12 @@
+<button
+  pButton
+  class="{{ class() }}"
+  [disabled]="disabled"
+  (click)="handleClick()"
+  [type]="type"
+>
+  @if (icon) {
+  <i class="pi {{ icon }}"></i>
+  }
+  {{ label }}
+</button>
