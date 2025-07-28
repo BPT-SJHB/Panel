@@ -1,0 +1,21 @@
+<p-carousel
+  [value]="images"
+  [numVisible]="3"
+  [numScroll]="3"
+  [circular]="false"
+  [responsiveOptions]="customCarouselTokens().responsiveOptions"
+  [circular]="customCarouselTokens().circular"
+  [autoplayInterval]="customCarouselTokens().autoplayInterval"
+  [dt]="customCarouselTokens()"
+  class="w-full items-center"
+>
+  <ng-template #item let-product>
+    <div class="w-auto m-3 rounded-2xl shadow-[0_0_10px_rgba(0,0,0,1)]">
+      <img
+        class="w-full rounded-2xl border-black max-h-[15rem]"
+        [src]="product.imgLink"
+        [alt]="product.title"
+      />
+    </div>
+  </ng-template>
+</p-carousel>
