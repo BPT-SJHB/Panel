@@ -1,0 +1,13 @@
+<div class="relative w-full h-full bg-primary text-primary-contrast lg:pr-4 py-2 z-15 flex items-center lg:justify-between">
+  <p-button class="lg:hidden" (onClick)="openSidebar()">
+    <i class="pi pi-align-right text-xl"></i>
+  </p-button>
+  <div class="flex items-center justify-center gap-4 m-auto lg:m-0">
+    <i class="pi text-xl scale-120" [class]="headerData.icon"></i>
+    <span class="text-xl font-bold">{{ headerData.title }}</span>
+  </div>
+  <div class="hidden lg:flex lg:flex-row-reverse lg:items-center lg:justify-center lg:px- lg:gap-2 lg:px-2">
+    <app-user-profile [profile]="profile" />
+    <app-wallet-profile [wallet]="wallet" />
+  </div>
+</div>
