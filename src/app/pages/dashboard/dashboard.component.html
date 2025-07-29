@@ -7,19 +7,16 @@
   <!-- Main -->
   <main class="flex flex-1 overflow-hidden">
     <!-- Sidebar -->
-    <aside
-      [class]="layoutUi.sidebarWidth"
-      class="shrink-0 overflow-y-auto"
-    >
+    <aside [class]="layoutUi.sidebarWidth" class="shrink-0 overflow-y-auto">
       <app-sidebar [pageGroupItems]="pageGroups" />
     </aside>
 
     <!-- Content -->
     <section class="flex flex-col flex-1 overflow-hidden">
       <div class="shrink-0">
-        <app-tab-manager  />
+        <app-tab-manager />
       </div>
-      <div class="overflow-y-auto flex-1">
+      <div class="overflow-y-auto flex-1 mb-22 lg:m-4">
         <app-dashboard-content-manager />
       </div>
     </section>
@@ -27,9 +24,10 @@
 
   <!-- Footer -->
   <footer
-    [style.height]="layoutUi.footerHeight"
+    [class]="layoutUi.headerHeight"
     class="shrink-0 overflow-hidden"
   >
-    <app-footer class="w-full" />
+    <app-mobile-tab-bar class="lg:hidden" />
+    <app-footer class="w-full hidden lg:block" />
   </footer>
 </div>
