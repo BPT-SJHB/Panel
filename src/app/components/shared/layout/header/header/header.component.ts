@@ -19,9 +19,10 @@ import { checkAndToastError } from 'app/utils/api-utils';
 import { RawSoftwareUserForProfile } from 'app/services/user-management/model/software-user-profile.model';
 import { Wallet } from 'app/services/wallet-management/model/wallet.model';
 import { WalletProfileComponent } from "../wallet-profile/wallet-profile.component";
+import { ThemeManagementComponent } from "../theme-management/theme-management.component";
 @Component({
   selector: 'app-header',
-  imports: [ButtonModule, UserProfileComponent, WalletProfileComponent],
+  imports: [ButtonModule, UserProfileComponent, WalletProfileComponent, ThemeManagementComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
