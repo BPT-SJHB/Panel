@@ -14,6 +14,7 @@ import { SidebarComponent } from 'app/components/shared/layout/sidebar/sidebar/s
 import { FooterComponent } from 'app/components/shared/layout/footer/footer.component';
 import { TabManagerComponent } from 'app/components/shared/layout/tab-manager/tab-manager.component';
 import { DashboardContentManagerComponent } from 'app/components/shared/layout/dashboard-content-manager/dashboard-content-manager.component';
+import { SupportButtonComponent } from 'app/components/shared/support-button/support-button.component';
 
 // Services
 import { UserAuthService } from 'app/services/user-auth-service/user-auth.service';
@@ -35,7 +36,7 @@ import { PageGroupItem } from 'app/data/model/menu-item.model';
 
 // RxJS
 import { Subscription } from 'rxjs';
-import { MobileTabBarComponent } from "app/components/shared/layout/mobile-tab-bar/mobile-tab-bar.component";
+import { MobileTabBarComponent } from 'app/components/shared/layout/mobile-tab-bar/mobile-tab-bar.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -47,8 +48,9 @@ import { MobileTabBarComponent } from "app/components/shared/layout/mobile-tab-b
     FooterComponent,
     TabManagerComponent,
     DashboardContentManagerComponent,
-    MobileTabBarComponent
-],
+    MobileTabBarComponent,
+    SupportButtonComponent,
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
