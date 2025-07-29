@@ -1,6 +1,7 @@
 // sidebar.selectors.ts
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { SidebarState } from './sidebar.reducer';
+import { WebProcess } from 'app/data/model/web-process.model';
 
 // --- Feature Selector ---
 export const selectSidebarState = createFeatureSelector<SidebarState>('sidebar');
@@ -14,6 +15,13 @@ export const selectIsSidebarOpen = createSelector(
 export const selectPageGroups = createSelector(
   selectSidebarState,
   state => state.pageGroups
+);
+
+
+export const selectWebProcessesGroups = createSelector(
+  selectSidebarState,
+  (state: SidebarState): WebProcess[] =>
+    state.pageGroups.flatMap(group => group.processes)
 );
 
 export const selectSelectedPageGroupId = createSelector(
