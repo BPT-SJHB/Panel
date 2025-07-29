@@ -43,7 +43,7 @@ export class ButtonComponent implements OnInit {
 
   @Output() onClick = new EventEmitter<void>();
 
-  class = signal('rounded-[9999px] border-0 text-primary-contrast');
+  class = signal('rounded-[9999px] border-0 text-primary-contrast m-3');
   style: ButtonStyle = {
     colors: {
       green: {
