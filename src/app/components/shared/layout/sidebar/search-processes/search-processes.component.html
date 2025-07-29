@@ -1,0 +1,67 @@
+<div class="px-8 py-4 my-4 flex justify-center">
+  <app-text-input
+    class="w-full max-w-lg"
+    icon="pi pi-search"
+    (click)="isDialogVisible = true"
+    placeholder="جستجو فرایند"
+  />
+</div>
+
+<p-dialog
+  draggable="false"
+  [header]="headerTitle()"
+  [modal]="true"
+  maskStyleClass="backdrop-blur-sm"
+  [style]="{ width: '48rem', maxWidth: '95vw', height: '600px' }"
+  [(visible)]="isDialogVisible"
+  position="center"
+>
+  <div class="flex flex-col h-full">
+    <app-search-input
+      class="mb-4 mt-2"
+      icon="pi pi-search"
+      placeholder="جستجو فرایند"
+      [autoTriggerSearch]="true"
+      [control]="searchTerm"
+      [onSearchQuery]="searchProcess"
+      [minSearchLength]="0"
+    />
+
+    <div
+      *ngIf="processes().length; else noResults"
+      class="overflow-y-auto flex-1 space-y-3"
+    >
+      <div
+        *ngFor="let process of processes()"
+        class="p-4 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-primary-100 dark:hover:bg-primary-800 cursor-pointer transition"
+        (click)="onSelectProcess(process)"
+      >
+        <div class="flex flex-row gap-2">
+          <i
+            class="pi text-lg font-semibold text-primary-700 dark:text-primary-300" 
+            [class]="process.icon"
+          >           
+          </i>
+ 
+          <h3
+            class="text-lg font-semibold text-primary-700 dark:text-primary-300"
+          >
+            {{ process.title }}
+          </h3>
+
+       </div>
+        <p class="text-gray-600 dark:text-gray-400 mt-1 text-sm line-clamp-2">
+          {{ process.description }}
+        </p>
+      </div>
+    </div>
+
+    <ng-template #noResults>
+      <div
+        class="flex items-center justify-center h-full text-gray-500 dark:text-gray-400 italic"
+      >
+        فرایندی یافت نشد
+      </div>
+    </ng-template>
+  </div>
+</p-dialog>
