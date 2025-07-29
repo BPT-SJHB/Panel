@@ -12,6 +12,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { selectSelectedPageGroup } from 'app/store/sidebar/sidebar.selectors';
 import { selectContentState } from 'app/store/content-manager/content-manager.selectors';
+import { renderContent } from 'app/store/content-manager/content-manager.actions';
 
 @Component({
   selector: 'app-dashboard-content-manager',
@@ -43,6 +44,7 @@ export class DashboardContentManagerComponent implements AfterViewInit {
     if (cached) {
       this.tabContent?.insert(cached.hostView);
       (cached.instance as any).onViewActivated?.();
+      this.sendRenderContent(tab);
       return;
     }
 
@@ -66,6 +68,17 @@ export class DashboardContentManagerComponent implements AfterViewInit {
     // Insert component view and cache it
     (componentRef.instance as any).onViewActivated?.();
     cachedComponent.set(selectedSubTab, componentRef);
+    this.sendRenderContent(tab);
+  }
+
+  private sendRenderContent(tab: DynamicTab) {
+    this.store.dispatch(
+      renderContent({
+        context: 'tabContent',
+        icon: tab.icon,
+        title: tab.title,
+      })
+    );
   }
 
   ngAfterViewInit(): void {

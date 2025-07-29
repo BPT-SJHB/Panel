@@ -7,7 +7,6 @@ import {
   inject,
   effect,
   signal,
-  Signal,
 } from '@angular/core';
 import { NgClass } from '@angular/common';
 
@@ -30,6 +29,8 @@ import { DynamicTab } from 'app/data/model/tabs.model';
 // Child component
 import { DashboardContentManagerComponent } from '../dashboard-content-manager/dashboard-content-manager.component';
 import { Subscription } from 'rxjs';
+import { uuidV4 } from 'app/utils/uuid';
+import { DEFAULT_MAIN_TAB_ID, TabData } from 'app/store/tab/tab.reducer';
 
 @Component({
   selector: 'app-tab-manager',
@@ -52,9 +53,9 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
   // Tabs map: <id, DynamicTab>
   tabs = new Map<string, DynamicTab>([
     [
-      '4b8ef55e-3cf3-41e2-ab9b-65b6bfc8e60b',
+      DEFAULT_MAIN_TAB_ID,
       {
-        id: '4b8ef55e-3cf3-41e2-ab9b-65b6bfc8e60b',
+        id: DEFAULT_MAIN_TAB_ID,
         title: 'صفحه اصلی',
         icon: 'pi pi-home',
         config: TabComponentRegistry[TabComponentKey.Main],
@@ -66,9 +67,7 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
   ]);
 
   // Currently selected tab
-  selectTab = signal<DynamicTab>(
-    this.tabs.get('4b8ef55e-3cf3-41e2-ab9b-65b6bfc8e60b')!
-  );
+  selectTab = signal<DynamicTab>(this.tabs.get(DEFAULT_MAIN_TAB_ID)!);
 
   // NgRx store instance
   private store = inject(Store);
@@ -101,9 +100,11 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     // Subscribe to new tab creation
-    const sub1 = this.store.select(selectorNewTab).subscribe(({ title, icon, component, closeable }) => {
-      this.createTab({ title, icon, component, closeable });
-    });
+    const sub1 = this.store
+      .select(selectorNewTab)
+      .subscribe(({ id, title, icon, component, closeable }) => {
+        this.createTab({ id, title, icon, component, closeable });
+      });
 
     // Subscribe to content changes
     const sub2 = this.store.select(selectContent).subscribe((content) => {
@@ -130,14 +131,16 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // Handle main tab click
   onClickTab(tab: DynamicTab): void {
+    if (this.selectTab() === tab) {
+      this.store.dispatch(
+        renderContent({
+          title: tab.title,
+          icon: tab.icon,
+          context: 'tabContent',
+        })
+      );
+    }
     this.selectTab.set(tab);
-    this.store.dispatch(
-      renderContent({
-        title: tab.title,
-        icon: tab.icon,
-        context: 'tabContent',
-      })
-    );
   }
 
   // Handle sub-tab change
@@ -148,21 +151,22 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
     }));
   }
 
-  // Create a new tab dynamically
-  createTab(tabData: {
-    title: string;
-    icon: string;
-    component: TabComponentKey;
-    closeable: boolean;
-  }): void {
-    const { title, icon, component, closeable } = tabData;
-    if (component === TabComponentKey.Main) return;
+  createTab(tabData: TabData): void {
+    const { id, title, icon, component, closeable } = tabData;
 
-    const uuid = this.uuidV4();
+    // If an ID is provided, check if the tab already exists
+    if (id && this.tabs.has(id)) {
+      // Switch to the existing tab
+      this.selectTab.set(this.tabs.get(id)!);
+      return;
+    }
+
+    // If no ID or the tab does not exist, create a new tab
+    const uuid = uuidV4();
     const config = TabComponentRegistry[component];
 
     const tab: DynamicTab = {
-      id: uuid,
+      id: id || uuid, // Use the provided ID or generate a new one
       title,
       icon,
       config,
@@ -172,7 +176,7 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
       sharedSignal: config.shearedSignal ? signal(null) : undefined,
     };
 
-    this.tabs.set(uuid, tab);
+    this.tabs.set(tab.id, tab);
     this.selectTab.set(tab);
   }
 
@@ -197,15 +201,6 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
   /** ================================
    *  Private Helpers
    *  ================================ */
-
-  // UUID generator for tab IDs
-  private uuidV4(): string {
-    return '10000000-1000-4000-8000-100000000000'.replace(/[018]/g, (c) =>
-      (
-        +c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (+c / 4)))
-      ).toString(16)
-    );
-  }
 
   // Load content for selected tab
   private dispatchChangeTab(tab: DynamicTab): void {

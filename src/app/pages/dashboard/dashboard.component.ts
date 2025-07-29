@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
 import { ButtonModule } from 'primeng/button';
 
 // App shared layout components
-import { HeaderComponent } from 'app/components/shared/layout/header/header.component';
+import { HeaderComponent } from 'app/components/shared/layout/header/header/header.component';
 import { SidebarComponent } from 'app/components/shared/layout/sidebar/sidebar/sidebar.component';
 import { FooterComponent } from 'app/components/shared/layout/footer/footer.component';
 import { TabManagerComponent } from 'app/components/shared/layout/tab-manager/tab-manager.component';
@@ -35,7 +35,7 @@ import { PageGroupItem } from 'app/data/model/menu-item.model';
 
 // RxJS
 import { Subscription } from 'rxjs';
-import { SupportButtonComponent } from "app/components/shared/support-button/support-button.component";
+import { MobileTabBarComponent } from "app/components/shared/layout/mobile-tab-bar/mobile-tab-bar.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -47,7 +47,7 @@ import { SupportButtonComponent } from "app/components/shared/support-button/sup
     FooterComponent,
     TabManagerComponent,
     DashboardContentManagerComponent,
-    SupportButtonComponent
+    MobileTabBarComponent
 ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',

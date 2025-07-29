@@ -24,7 +24,7 @@ const customPreset: AuraBaseDesignTokens = {
 export const customTheme: ThemeType = {
   preset: definePreset(Aura, customPreset as Record<string, unknown>),
   options: {
-    darkModeSelector: false,
+    darkModeSelector: false || '.dark',
     cssLayer: {
       name: 'primeng',
       order: 'theme, base, primeng',
