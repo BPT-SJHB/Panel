@@ -12,10 +12,14 @@ export class CarouselComponent implements OnInit {
 
   customCarouselTokens = signal({
     indicator: {
-      height: '1rem',
-      width: '1rem',
+      height: '0.5rem',
+      width: '0.5rem',
       borderRadius: '9999px',
     },
+    indicatorList: {
+      padding: '0rem',
+    },
+    content: { gap: '0rem' },
     responsiveOptions: [
       {
         breakpoint: '645px',
