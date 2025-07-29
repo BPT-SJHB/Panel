@@ -35,6 +35,7 @@ import { PageGroupItem } from 'app/data/model/menu-item.model';
 
 // RxJS
 import { Subscription } from 'rxjs';
+import { SupportButtonComponent } from "app/components/shared/support-button/support-button.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -46,7 +47,8 @@ import { Subscription } from 'rxjs';
     FooterComponent,
     TabManagerComponent,
     DashboardContentManagerComponent,
-  ],
+    SupportButtonComponent
+],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
