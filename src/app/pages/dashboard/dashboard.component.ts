@@ -131,11 +131,23 @@ export class DashboardComponent implements AfterViewInit {
     this.store.dispatch(setPageGroups({ groups: res.data }));
 
     // Build menu items from page groups
-    this.pageGroups = res.data.map((pg) => ({
-      id: pg.id,
-      label: pg.title,
-      icon: pg.icon,
-      command: () => {}, // Command can be customized later
-    }));
+
+    this.pageGroups = [
+      {
+        id: -1,
+        icon: 'pi-home',
+        label: 'صفحه اصلی',
+        command: () => {},
+      },
+    ];
+
+    res.data.map((pg) =>
+      this.pageGroups.push({
+        id: pg.id,
+        label: pg.title,
+        icon: pg.icon,
+        command: () => {}, 
+      })
+    );
   }
 }

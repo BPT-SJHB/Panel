@@ -3,10 +3,11 @@ import { RouterOutlet } from '@angular/router';
 
 import {ToastModule} from "primeng/toast"
 import { LoadingComponent } from './components/shared/loading/loading.component';
+import { ThemeManagementComponent } from "./components/shared/layout/header/theme-management/theme-management.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ToastModule, LoadingComponent],
+  imports: [RouterOutlet, ToastModule, LoadingComponent, ThemeManagementComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

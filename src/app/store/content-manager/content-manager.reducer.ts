@@ -2,6 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import { renderContent } from './content-manager.actions';
 
 export interface ContextManagerState {
+  pageGroupId?: number;
   title: string;
   context: 'subMenu' | 'tabContent';
   icon: string;
@@ -15,7 +16,8 @@ const initialState: ContextManagerState = {
 
 export const contentManagerReducer = createReducer(
   initialState,
-  on(renderContent, (_, { title, context, icon }) => ({
+  on(renderContent, (_, { pageGroupId,title, context, icon }) => ({
+    pageGroupId,
     title,
     context,
     icon,

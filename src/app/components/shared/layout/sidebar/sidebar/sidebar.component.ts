@@ -19,8 +19,8 @@ import { SidebarPageGroupComponent } from '../sidebar-page-group/sidebar-page-gr
 // Models
 import { PageGroupItem } from 'app/data/model/menu-item.model';
 import { LogoComponent } from '../logo/logo.component';
-import { SearchInputComponent } from "app/components/shared/inputs/search-input/search-input.component";
-import { SearchProcessesComponent } from "../search-processes/search-processes.component";
+import { SearchProcessesComponent } from '../search-processes/search-processes.component';
+
 
 @Component({
   selector: 'app-sidebar',
@@ -30,9 +30,8 @@ import { SearchProcessesComponent } from "../search-processes/search-processes.c
     DrawerModule,
     SidebarPageGroupComponent,
     LogoComponent,
-    SearchInputComponent,
-    SearchProcessesComponent
-],
+    SearchProcessesComponent,
+  ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
@@ -48,6 +47,7 @@ export class SidebarComponent implements OnInit {
 
   // Observable for sidebar open/close state
   isOpen$!: Observable<boolean>;
+
 
   constructor(private store: Store) {}
 

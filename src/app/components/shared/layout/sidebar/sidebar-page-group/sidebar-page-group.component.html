@@ -1,14 +1,19 @@
-<div class="flex flex-col gap-1 h-full w-full">
+<div class="flex flex-col gap-1 h-full w-full pl-6">
   @for (pageGroup of pageGroupItems; track $index) {
     <div
       (click)="onClickMenuItem(pageGroup)"
-      class="w-full flex items-center text-md gap-3 px-4 py-2 
-      h-12 rounded-md cursor-pointer hover:bg-highlight"
+      class="w-full flex items-center gap-3 px-4 py-2 h-13 max-h-13 rounded-l-3xl cursor-pointer transition-colors duration-200 border-2"
       role="button"
       tabindex="0"
+      [ngClass]="{
+        'bg-highlight border-primary text-primary-emphasis font-semibold':
+          activePageGroupId() === pageGroup.id,
+        'border-transparent hover:bg-highlight text-muted-color-emphasis':
+          activePageGroupId() !== pageGroup.id
+      }"
     >
-      <i [class]="`pi ${pageGroup.icon} text-primary-emphasis text-xl`"></i>
-      <span class="font-semibold text-muted-color-emphasis">{{ pageGroup.label }}</span>
+      <i [class]="'pi ' + pageGroup.icon + ' text-xl'"></i>
+      <span>{{ pageGroup.label }}</span>
     </div>
   }
 </div>

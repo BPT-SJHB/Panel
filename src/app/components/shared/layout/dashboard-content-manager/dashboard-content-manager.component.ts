@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 import { selectSelectedPageGroup } from 'app/store/sidebar/sidebar.selectors';
 import { selectContentState } from 'app/store/content-manager/content-manager.selectors';
 import { renderContent } from 'app/store/content-manager/content-manager.actions';
+import { DEFAULT_MAIN_TAB_ID } from 'app/store/tab/tab.reducer';
 
 @Component({
   selector: 'app-dashboard-content-manager',
@@ -74,6 +75,7 @@ export class DashboardContentManagerComponent implements AfterViewInit {
   private sendRenderContent(tab: DynamicTab) {
     this.store.dispatch(
       renderContent({
+        pageGroupId: DEFAULT_MAIN_TAB_ID === tab.id ? -1 : undefined,
         context: 'tabContent',
         icon: tab.icon,
         title: tab.title,

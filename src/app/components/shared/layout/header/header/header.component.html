@@ -9,6 +9,9 @@
   <div class="lg:flex flex-row-reverse items-center justify-center gap-2 px-2">
     <app-user-profile [profile]="profile" class="hidden lg:block" />
     <app-wallet-profile [wallet]="wallet" class="hidden lg:block"/>
-    <app-theme-management />
+    <div class="flex gap-1">
+      <app-search-processes class="lg:hidden" />
+      <app-theme-management />
+    </div>
   </div>
 </div>

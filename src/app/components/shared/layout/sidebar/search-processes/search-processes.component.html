@@ -1,4 +1,4 @@
-<div class="px-8 py-4 my-4 flex justify-center">
+<div class="hidden lg:justify-center lg:flex lg:px-4 lg:py-4 lg:my-4 ">
   <app-text-input
     class="w-full max-w-lg"
     icon="pi pi-search"
@@ -6,6 +6,18 @@
     placeholder="جستجو فرایند"
   />
 </div>
+
+<p-button
+  (onClick)="isDialogVisible = true"
+  [icon]="'pi pi-search'"
+  styleClass="border-gray-900 text-black border-2"
+  size="small"
+  severity="info"
+  [rounded]="true"
+  aria-label="Toggle Theme"
+  class="lg:hidden" 
+></p-button>
+
 
 <p-dialog
   draggable="false"
@@ -33,18 +45,18 @@
     >
       <div
         *ngFor="let process of processes()"
-        class="p-4 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-primary-100 dark:hover:bg-primary-800 cursor-pointer transition"
+        class="p-4 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-highlight cursor-pointer transition"
         (click)="onSelectProcess(process)"
       >
         <div class="flex flex-row gap-2">
           <i
-            class="pi text-lg font-semibold text-primary-700 dark:text-primary-300" 
+            class="pi text-lg font-semibold text-primary" 
             [class]="process.icon"
           >           
           </i>
  
           <h3
-            class="text-lg font-semibold text-primary-700 dark:text-primary-300"
+            class="text-lg font-semibold text-primary"
           >
             {{ process.title }}
           </h3>

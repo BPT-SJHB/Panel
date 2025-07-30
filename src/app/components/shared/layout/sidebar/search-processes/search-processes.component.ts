@@ -14,14 +14,14 @@ import { Subscription } from 'rxjs';
 import { SearchInputComponent } from 'app/components/shared/inputs/search-input/search-input.component';
 import { FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { renderContent } from 'app/store/content-manager/content-manager.actions';
 import { createTab } from 'app/store/tab/tab.actions';
 import { TabComponentKey } from 'app/constants/tab-component-registry';
 import { DEFAULT_MAIN_TAB_ID } from 'app/store/tab/tab.reducer';
+import { Button } from "primeng/button";
 
 @Component({
   selector: 'app-search-processes',
-  imports: [TextInputComponent, Dialog, SearchInputComponent, CommonModule],
+  imports: [TextInputComponent, Dialog, SearchInputComponent, CommonModule, Button],
   templateUrl: './search-processes.component.html',
   styleUrls: ['./search-processes.component.scss'],
 })
