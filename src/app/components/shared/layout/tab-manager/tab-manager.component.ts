@@ -134,6 +134,7 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.selectTab() === tab) {
       this.store.dispatch(
         renderContent({
+          pageGroupId: DEFAULT_MAIN_TAB_ID === tab.id ? -1 : undefined,
           title: tab.title,
           icon: tab.icon,
           context: 'tabContent',

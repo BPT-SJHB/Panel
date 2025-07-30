@@ -20,9 +20,10 @@ import { RawSoftwareUserForProfile } from 'app/services/user-management/model/so
 import { Wallet } from 'app/services/wallet-management/model/wallet.model';
 import { WalletProfileComponent } from "../wallet-profile/wallet-profile.component";
 import { ThemeManagementComponent } from "../theme-management/theme-management.component";
+import { SearchProcessesComponent } from "../../sidebar/search-processes/search-processes.component";
 @Component({
   selector: 'app-header',
-  imports: [ButtonModule, UserProfileComponent, WalletProfileComponent, ThemeManagementComponent],
+  imports: [ButtonModule, UserProfileComponent, WalletProfileComponent, ThemeManagementComponent, SearchProcessesComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
