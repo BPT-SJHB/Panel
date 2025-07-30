@@ -7,7 +7,7 @@
   <!-- Main -->
   <main class="flex flex-1 overflow-hidden">
     <!-- Sidebar -->
-    <aside [class]="layoutUi.sidebarWidth" class="shrink-0 overflow-y-auto">
+    <aside [class]="layoutUi.sidebarWidth" class="shrink-0">
       <app-sidebar [pageGroupItems]="pageGroups" />
     </aside>
 
@@ -16,8 +16,8 @@
       <div class="shrink-0">
         <app-tab-manager />
       </div>
-      <div class="overflow-y-auto flex-1 mb-22 lg:m-4">
-        <app-dashboard-content-manager />
+      <div class="overflow-y-auto flex-1 mb-22 lg:mb-0" dir="ltr">
+        <app-dashboard-content-manager dir="rtl" />
       </div>
     </section>
   </main>
