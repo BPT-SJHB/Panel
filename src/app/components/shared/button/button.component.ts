@@ -3,9 +3,11 @@ import {
   EventEmitter,
   input,
   Input,
+  OnChanges,
   OnInit,
   Output,
   signal,
+  SimpleChanges,
 } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 
@@ -32,7 +34,7 @@ interface ButtonStyle {
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss',
 })
-export class ButtonComponent implements OnInit {
+export class ButtonComponent implements OnInit, OnChanges {
   @Input() severity: 'green' | 'info' | 'danger' | 'warn' = 'green';
   @Input() syncShadow: boolean = true;
   @Input() label: string = '';
@@ -40,6 +42,7 @@ export class ButtonComponent implements OnInit {
   @Input() size: 'small' | 'large' | 'normal' = 'normal';
   @Input() type?: 'button' | 'submit';
   @Input() icon?: string;
+  @Input() styleClass: string = '';
 
   @Output() onClick = new EventEmitter<void>();
 
@@ -83,7 +86,17 @@ export class ButtonComponent implements OnInit {
     },
   };
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['disabled']) {
+      this.styleHandler();
+    }
+  }
+
   ngOnInit(): void {
+    this.styleHandler();
+  }
+
+  private styleHandler() {
     this.class.set(
       `${this.class()} ${
         this.size === 'normal'

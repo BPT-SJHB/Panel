@@ -1,6 +1,6 @@
 <button
   pButton
-  class="{{ class() }}"
+  [class]="class() + ' ' + (styleClass || '')"
   [disabled]="disabled"
   (click)="handleClick()"
   [type]="type"
