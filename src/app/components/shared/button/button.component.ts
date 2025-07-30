@@ -50,31 +50,32 @@ export class ButtonComponent implements OnInit, OnChanges {
   style: ButtonStyle = {
     colors: {
       green: {
-        gradient: 'bg-gradient-to-b from-teal-500 to-emerald-700 to-75%',
+        gradient:
+          'bg-gradient-to-b dark:from-teal-200 dark:to-emerald-500 from-teal-500 to-emerald-700 to-75%',
         shadow: {
           normal: 'shadow-[0px_4px_8px_var(--p-surface-500)]',
-          sync: 'shadow-[0px_4px_8px_theme(colors.emerald.700)]',
+          sync: 'dark:shadow-[0px_4px_8px_theme(colors.emerald.500)] shadow-[0px_4px_8px_theme(colors.emerald.700)]',
         },
       },
       info: {
         gradient: 'bg-gradient-to-b from-blue-400 to-blue-700 to-75%',
         shadow: {
           normal: 'shadow-[0px_4px_8px_var(--p-surface-500)]',
-          sync: 'shadow-[0px_4px_8px_theme(colors.blue.700)]',
+          sync: 'dark:shadow-[0px_4px_8px_theme(colors.blue.500)] shadow-[0px_4px_8px_theme(colors.blue.700)]',
         },
       },
       danger: {
         gradient: 'bg-gradient-to-b from-red-400 to-red-700 to-75%',
         shadow: {
           normal: 'shadow-[0px_4px_8px_var(--p-surface-500)]',
-          sync: 'shadow-[0px_4px_8px_theme(colors.red.700)]',
+          sync: 'dark:shadow-[0px_4px_8px_theme(colors.red.500)] shadow-[0px_4px_8px_theme(colors.red.700)]',
         },
       },
       warn: {
         gradient: 'bg-gradient-to-b from-yellow-300 to-yellow-600 to-75%',
         shadow: {
           normal: 'shadow-[0px_4px_8px_var(--p-surface-500)]',
-          sync: 'shadow-[0px_4px_8px_theme(colors.yellow.600)]',
+          sync: 'dark:shadow-[0px_4px_8px_theme(colors.yellow.400)] shadow-[0px_4px_8px_theme(colors.yellow.600)]',
         },
       },
     },
