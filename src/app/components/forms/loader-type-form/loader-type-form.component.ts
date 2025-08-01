@@ -18,7 +18,6 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { TableModule } from 'primeng/table';
 import { Subject, takeUntil } from 'rxjs';
 import { ButtonComponent } from "app/components/shared/button/button.component";
-import { SearchInputComponent } from "app/components/shared/inputs/search-input/search-input.component";
 
 @Component({
   selector: 'app-loader-type-form',
@@ -30,7 +29,6 @@ import { SearchInputComponent } from "app/components/shared/inputs/search-input/
     CheckboxModule,
     TableModule,
     ButtonComponent,
-    SearchInputComponent
 ],
   templateUrl: './loader-type-form.component.html',
   styleUrls: ['./loader-type-form.component.scss'],

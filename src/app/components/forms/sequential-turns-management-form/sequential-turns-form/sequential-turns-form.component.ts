@@ -41,7 +41,7 @@ enum FormMode {
     ConfirmDialogModule,
     Dialog,
     TextInputComponent,
-    BinaryRadioInputComponent,
+    ToggleSwitchInputComponent,
     ReactiveFormsModule,
     ButtonComponent
 ],

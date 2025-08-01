@@ -15,12 +15,11 @@ import { Store } from '@ngrx/store';
 import { createTab } from 'app/store/tab/tab.actions';
 import { TabComponentKey } from 'app/constants/tab-component-registry';
 import { CommonModule } from '@angular/common';
-import { ButtonComponent } from "app/components/shared/button/button.component";
 
 @Component({
   selector: 'app-user-profile',
   standalone: true,
-  imports: [AvatarModule, SkeletonModule, Popover, ButtonModule, CommonModule, ButtonComponent],
+  imports: [AvatarModule, SkeletonModule, Popover, ButtonModule, CommonModule],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.scss',
 })

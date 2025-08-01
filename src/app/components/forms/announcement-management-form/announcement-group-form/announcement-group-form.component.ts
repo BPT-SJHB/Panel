@@ -38,7 +38,7 @@ enum FormMode {
     ReactiveFormsModule,
     SearchInputComponent,
     TextInputComponent,
-    BinaryRadioInputComponent,
+    ToggleSwitchInputComponent,
     ButtonComponent
 ],
   providers: [ConfirmationService],

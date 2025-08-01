@@ -5,9 +5,7 @@ import { ToastService } from 'app/services/toast-service/toast.service';
 import { DatePickerInput } from 'app/components/shared/inputs/date-picker-input/date-picker-input.component.component';
 import { TableModule } from 'primeng/table';
 import { WalletUserChargingFunction } from 'app/services/wallet-management/model/wallet-user-charging-function.model';
-import { Button } from 'primeng/button';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
-import { LoadingService } from 'app/services/loading-service/loading-service.service';
 import { WalletManagementService } from 'app/services/wallet-management/wallet-management.service';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { ButtonComponent } from "app/components/shared/button/button.component";
@@ -18,7 +16,6 @@ import { ButtonComponent } from "app/components/shared/button/button.component";
     TimePickerInput,
     DatePickerInput,
     TableModule,
-    Button,
     TextInputComponent,
     ButtonComponent
 ],
