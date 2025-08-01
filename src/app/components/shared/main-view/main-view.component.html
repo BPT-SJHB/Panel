@@ -1,17 +1,7 @@
 <div class="flex justify-center items-cente m-[-2rem]">
   <app-carousel [images]="images"></app-carousel>
-  <!-- <app-button
-  [severity]="'info'"
-  [syncShadow]="true"
-  label="hello"
-  (onClick)="print()"
-  [disabled]="false"
-  [size]="'large'"
-  [icon]="'pi-check'"
-  [type]="'submit'"
-></app-button> -->
 </div>
-<!-- <hr class="border-2 border-gray-300 rounded-full my-2" /> -->
+
 <div class="flex flex-col items-center mx-[-2rem]">
   <div
     class="flex justify-center mt-5 w-full rounded-t-2xl shadow-[0px_-8px_7px_1px_rgba(0,0,0,0.2)] dark:shadow-[0px_-8px_7px_1px_rgba(255,255,255,0.2)]"
@@ -21,7 +11,19 @@
   <div
     class="flex w-full justify-center gap-4 lg:gap-8 mt-5 flex-wrap px-[1rem] md:px-[5rem]"
   >
-    @for (item of processes(); track $index) {
+    @if (processes().length === 0) { @for (item of skeletonArray; track $index)
+    {
+    <div
+      class="flex flex-col justify-center items-center border-2 p-[1rem] border-gray-300 rounded-2xl gap-1 md:w-[12rem] lg:w-[18rem] w-[6rem] sm:h-[1rem] md:h-[6rem] lg:h-[10rem]"
+    >
+      <p-skeleton shape="circle" size="5rem" />
+      <p-skeleton
+        [style.min-width]="'5rem'"
+        [style.max-width]="'18rem'"
+        height="2rem"
+      ></p-skeleton>
+    </div>
+    } }@else { @for (item of processes(); track $index) {
     <p-card
       class="flex justify-center md:w-[12rem] lg:w-[18rem] w-[6rem] lg:h-[10rem] shadow-[0px_0px_7px_rgba(0,0,0,0.7)] bg-gray-100 dark:bg-gray-500 rounded-2xl transition-all duration-150 ease-in-out hover:scale-110"
     >
@@ -29,22 +31,22 @@
         class="flex flex-col text-center justify-center items-center mx-[-1rem] my-[-0.5rem]"
         (click)="OpenProcess(item)"
       >
-        @if ($index <1) {
+        @if ($index < 1) {
         <i
           class="pi text-orange-500 bg-yellow-100 lg:text-4xl text-2xl p-4 rounded-full"
           [class]="item.icon"
         ></i>
-        }@else if ($index <5) {
+        } @else if ($index < 5) {
         <i
           class="pi text-blue-700 bg-blue-200 lg:text-4xl text-2xl p-4 rounded-full"
           [class]="item.icon"
         ></i>
-        }@else if ($index <10) {
+        } @else if ($index < 10) {
         <i
           class="pi text-green-700 bg-green-200 lg:text-4xl text-2xl p-4 rounded-full"
           [class]="item.icon"
         ></i>
-        }@else {
+        } @else {
         <i
           class="pi text-red-700 bg-red-200 lg:text-4xl text-2xl p-4 rounded-full"
           [class]="item.icon"
@@ -53,6 +55,6 @@
         <span class="font-bold text-xs lg:text-xl">{{ item.title }}</span>
       </div>
     </p-card>
-    }
+    }}
   </div>
 </div>
