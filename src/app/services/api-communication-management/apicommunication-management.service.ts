@@ -5,6 +5,7 @@ import { handleHttpError } from 'app/utils/http-error-handler';
 import { environment } from 'environments/environment';
 import { firstValueFrom } from 'rxjs';
 import { ShortResponse } from 'app/data/model/short-response.model';
+import { trimInDeep } from 'app/utils/api-utils';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,7 @@ export class APICommunicationManagementService {
     if (!environment.production && environment.disableApi) {
       return {
         success: true,
-        data: mockValue,
+        data: trimInDeep(mockValue),
       };
     }
 
@@ -34,7 +35,7 @@ export class APICommunicationManagementService {
           ? ({ Message: response } as ShortResponse as TExpect)
           : (response as TExpect);
 
-      return { success: true, data: mappedResponse };
+      return { success: true, data: trimInDeep(mappedResponse) };
     } catch (error: unknown) {
       return handleHttpError<TExpect>(error);
     }
@@ -45,7 +46,7 @@ export class APICommunicationManagementService {
     mockValue?: any
   ): Promise<ApiResponse<TExpect>> {
     if (!environment.production && environment.disableApi) {
-      return { success: true, data: mockValue };
+      return { success: true, data: trimInDeep(mockValue) };
     }
 
     try {
@@ -53,7 +54,7 @@ export class APICommunicationManagementService {
 
       return {
         success: true,
-        data: response,
+        data: trimInDeep(response),
       };
     } catch (error: unknown) {
       return handleHttpError<TExpect>(error);
