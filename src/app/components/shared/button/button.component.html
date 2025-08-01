@@ -4,9 +4,12 @@
   [disabled]="disabled"
   (click)="handleClick()"
   [type]="type"
+  [rounded]="rounded"
+  [raised]="raised"
 >
   @if (icon) {
   <i class="pi {{ icon }}"></i>
   }
   {{ label }}
+  <ng-content></ng-content>
 </button>
