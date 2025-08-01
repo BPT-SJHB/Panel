@@ -31,6 +31,7 @@ import { SearchAutoCompleteComponent } from '../../shared/inputs/search-auto-com
 import { ShortResponse } from 'app/data/model/short-response.model';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TableConfig } from 'app/constants/ui/table.ui';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 enum TravelTimeFormMode {
   EDITABLE,
@@ -50,7 +51,8 @@ enum TravelTimeFormMode {
     BinaryRadioInputComponent,
     SearchAutoCompleteComponent,
     ConfirmDialogModule,
-  ],
+    ButtonComponent
+],
   templateUrl: './travel-time-form.component.html',
   styleUrl: './travel-time-form.component.scss',
   providers: [ConfirmationService],

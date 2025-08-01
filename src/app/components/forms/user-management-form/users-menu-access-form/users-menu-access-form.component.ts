@@ -6,7 +6,6 @@ import { UserManagementService } from 'app/services/user-management/user-managem
 import { SearchInputComponent } from 'app/components/shared/inputs/search-input/search-input.component';
 import { SoftwareUserInfo } from 'app/services/user-management/model/software-user-info.model';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { ButtonModule } from 'primeng/button';
 import {
   FormBuilder,
   FormControl,
@@ -20,6 +19,7 @@ import { TextInputComponent } from '../../../shared/inputs/text-input/text-input
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { Subject, takeUntil } from 'rxjs';
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 interface SelectedNodes {
   [key: string]: { checked: boolean; partialChecked?: boolean };
@@ -30,10 +30,10 @@ interface SelectedNodes {
   imports: [
     TreeTableModule,
     SearchInputComponent,
-    ButtonModule,
     ProgressSpinnerModule,
     ReactiveFormsModule,
-    TextInputComponent
+    TextInputComponent,
+    ButtonComponent
 ],
   templateUrl: './users-menu-access-form.component.html',
   styleUrl: './users-menu-access-form.component.scss',

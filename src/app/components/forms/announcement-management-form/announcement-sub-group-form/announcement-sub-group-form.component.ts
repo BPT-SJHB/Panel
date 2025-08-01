@@ -21,6 +21,7 @@ import { AnnouncementGroupSubgroupManagementService } from 'app/services/announc
 import { AnnouncementSubGroup } from 'app/services/announcement_group_subgroup_management/model/announcement-subgroup.model';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { TableConfig } from 'app/constants/ui/table.ui';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 enum FormMode {
   EDITABLE,
@@ -40,7 +41,8 @@ enum FormMode {
     SearchInputComponent,
     TextInputComponent,
     BinaryRadioInputComponent,
-  ],
+    ButtonComponent
+],
   providers: [ConfirmationService],
   templateUrl: './announcement-sub-group-form.component.html',
   styleUrl: './announcement-sub-group-form.component.scss',

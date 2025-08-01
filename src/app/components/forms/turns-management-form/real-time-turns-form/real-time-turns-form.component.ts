@@ -7,10 +7,11 @@ import { LoadingService } from 'app/services/loading-service/loading-service.ser
 import { TurnManagementService } from 'app/services/turn-management/turn-management.service';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { ToastService } from 'app/services/toast-service/toast.service';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 @Component({
   selector: 'app-real-time-turns-form',
-  imports: [ButtonModule, TurnsTruckInfoBaseFormComponent],
+  imports: [ButtonModule, TurnsTruckInfoBaseFormComponent, ButtonComponent],
   templateUrl: './real-time-turns-form.component.html',
   styleUrl: './real-time-turns-form.component.scss',
 })

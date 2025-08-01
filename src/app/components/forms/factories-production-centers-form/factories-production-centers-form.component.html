@@ -119,28 +119,28 @@
   <div
     class="col-span-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center"
   >
-    <p-button
+    <app-button
       (click)="registerOrEditFpc()"
       [disabled]="fpcForm.invalid || loading"
       label="ثبت و ویرایش"
       styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-    ></p-button>
+    ></app-button>
 
-    <p-button
+    <app-button
       (click)="activateFpcSms()"
       [disabled]="fpcId.value == '0' || loading"
       severity="warn"
       label="فعال سازی پیامک"
       styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-    ></p-button>
+    ></app-button>
 
-    <p-button
+    <app-button
       (click)="resetPasswordFpc()"
       [disabled]="fpcId.value == '0' || fpcId.invalid || loading"
       severity="info"
       label="رمز عبور جدید"
       styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-    ></p-button>
+    ></app-button>
   </div>
 
   <div class="card flex justify-center">
@@ -154,26 +154,26 @@
       <div class="flex gap-4 flex-col">
         <div class="flex items-center justify-between">
           <span class="w-32"> شناسه کابری: </span>
-          <p-button
+          <app-button
             (click)="copyToClipboard(userNameDialog)"
             size="small"
             styleClass="px-6 w-40"
             severity="info"
           >
             {{ userNameDialog }}
-          </p-button>
+          </app-button>
         </div>
 
         <div class="flex items-center justify-between">
           <span class="w-32"> رمز عبور جدید </span>
-          <p-button
+          <app-button
             (click)="copyToClipboard(newUserPasswordDialog)"
             size="small"
             styleClass="px-6 w-40"
-            severity="primary"
+            severity="green"
           >
             {{ newUserPasswordDialog }}
-          </p-button>
+          </app-button>
         </div>
       </div>
     </p-dialog>

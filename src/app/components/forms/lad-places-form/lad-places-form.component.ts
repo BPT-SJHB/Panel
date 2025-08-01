@@ -27,6 +27,7 @@ import { ValidationSchema } from 'app/constants/validation-schema';
 import { ShortResponse } from 'app/data/model/short-response.model';
 import { ErrorCodes } from 'app/constants/error-messages';
 import { TableConfig } from 'app/constants/ui/table.ui';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 @Component({
   selector: 'app-lad-places-form',
@@ -41,7 +42,8 @@ import { TableConfig } from 'app/constants/ui/table.ui';
     TextInputComponent,
     BinaryRadioInputComponent,
     ReactiveFormsModule,
-  ],
+    ButtonComponent
+],
   templateUrl: './lad-places-form.component.html',
   styleUrl: './lad-places-form.component.scss',
   providers: [ConfirmationService],

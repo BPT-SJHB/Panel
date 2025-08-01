@@ -20,7 +20,7 @@
 >
   <ng-template #caption>
     <div class="flex items-center justify-between">
-      <p-button
+      <app-button
         (click)="onNew()"
         label="جدید"
         size="small"
@@ -42,21 +42,21 @@
       <td>{{ rowData.LADPlaceId }}</td>
 
       <td (click)="onEdit(rowData)">
-        <p-button
+        <app-button
           [disabled]="loading"
           icon="pi pi-pencil"
           severity="info"
           variant="text"
-        ></p-button>
+        ></app-button>
       </td>
 
       <td (click)="onDelete(rowData)">
-        <p-button
+        <app-button
           icon="pi pi-trash"
           severity="danger"
           variant="text"
           [disabled]="loading"
-        ></p-button>
+        ></app-button>
       </td>
 
       <td>{{ rowData.LADPlaceTitle }}</td>
@@ -155,7 +155,7 @@
       </div>
     </div>
     <div class="col-span-12 flex justify-end">
-      <p-button
+      <app-button
         (click)="registerOrEdit()"
         label="ثبت و ویرایش اطلاعات"
         [disabled]="ladPlacesForm.invalid || loading"

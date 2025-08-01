@@ -61,33 +61,32 @@
       <td>{{ rowData.SequentialTurnTitle || "-" }}</td>
       <td>{{ rowData.SoftwareUserName || "-" }}</td>
       <td>
-        <p-button
+        <app-button
           icon="pi pi-times"
           severity="danger"
           variant="text"
           [disabled]="loading"
           (onClick)="confirmDeactivation(rowData)"
-        ></p-button>
+        ></app-button>
       </td>
 
       <td>
-        <p-button
+        <app-button
           icon="pi pi-refresh"
           severity="info"
           variant="text"
           [disabled]="loading"
           (onClick)="confirmActivation(rowData)"
-        ></p-button>
+        ></app-button>
       </td>
 
       <td>
-        <p-button
+        <app-button
           icon="pi pi-align-justify"
-          severity="primary"
           variant="text"
           [disabled]="loading"
           (onClick)="openTurnAccounting(rowData)"
-        ></p-button>
+        ></app-button>
       </td>
     </tr>
   </ng-template>

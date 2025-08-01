@@ -17,7 +17,7 @@
     [class.opacity-60]="loading"
     (ngSubmit)="loadLoadersType()"
   >
-    <div class="flex gap-4">
+    <div class="flex gap-2 items-center">
       <app-text-input
         [control]="searchTitle"
         icon="pi pi-search"
@@ -25,12 +25,12 @@
         placeholder="قسمتی از عنوان بارگیر را وارد نمایید."
         addonWidth="5rem"
       />
-      <p-button
+      <app-button
         (click)="loadLoadersType()"
         [disabled]="searchForm.invalid || loading"
         size="small"
         severity="info"
-        styleClass="w-32 h-2-5rem"
+        styleClass="px-6 py-2"
         label="جستجو"
       />
     </div>

@@ -51,13 +51,12 @@
               validationField="smartCard"
               addonWidth="10rem"
             />
-            <p-button
+            <app-button
               (click)="loadTruckInfo()"
               [disabled]="
                 this.truckId.invalid || this.smartCard.invalid || loading
               "
               size="small"
-              severity="primary"
               styleClass="mt-1 w-24 h-8"
               type="submit"
               label="استعلام"
@@ -116,13 +115,12 @@
               validationField="nationalId"
               addonWidth="10rem"
             />
-            <p-button
+            <app-button
               (click)="loadDriverInfo()"
               [disabled]="
                 this.driverId.invalid || this.nationalId.invalid || loading
               "
               size="small"
-              severity="primary"
               type="submit"
               styleClass="mt-1 w-24 h-8 "
               label="استعلام"
@@ -197,24 +195,22 @@
 
     <!-- Action Buttons -->
     <div
-      class="px-4 col-span-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center"
+      class="col-span-12 md:flex md:flex-row-reverse md:flex-wrap items-center mt-2"
     >
-      <p-button
+      <app-button
         (click)="setComposedInformation()"
         [disabled]="this.truckComposedInfoForm.invalid || loading"
         label="ثبت و ویرایش"
-        size="small"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-      ></p-button>
+        styleClass="md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+      ></app-button>
 
-      <p-button
+      <app-button
         (click)="createNewWallet()"
         [disabled]="this.truckComposedInfoForm.invalid || loading"
         severity="info"
         label="ساخت کیف پول جدید"
-        size="small"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-      ></p-button>
+        styleClass="md:my-0 text-xs md:text-sm lg:text-base w-full md:w-40 lg:w-50"
+      ></app-button>
     </div>
   </div>
 </div>

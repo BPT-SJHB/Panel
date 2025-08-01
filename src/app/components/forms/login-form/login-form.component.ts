@@ -17,6 +17,7 @@ import { appTitles } from 'app/constants/Titles';
 import { TextInputComponent } from '../../shared/inputs/text-input/text-input.component';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { CheckboxInputComponent } from '../../shared/inputs/checkbox-input/checkbox-input.component';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 @Component({
   selector: 'app-login-form',
@@ -28,7 +29,8 @@ import { CheckboxInputComponent } from '../../shared/inputs/checkbox-input/check
     TextInputComponent,
     PasswordInputComponent,
     CheckboxInputComponent,
-  ],
+    ButtonComponent
+],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',
 })

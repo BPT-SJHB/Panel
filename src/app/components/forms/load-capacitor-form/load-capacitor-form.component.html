@@ -25,7 +25,7 @@
         placeholder="کد بار"
         addonWidth="5rem"
       />
-      <p-button
+      <app-button
         (click)="loadCapacitorForm()"
         [disabled]="searchForm.invalid"
         size="small"
@@ -46,7 +46,7 @@
     (ngSubmit)="editOrRegister()"
   >
     <div class="grid grid-cols-12 gap-4 col-span-12 border-gray-400 border-b-2">
-      <app-text-input
+      <app-date-picker-input
         class="col-span-12 sm:col-span-6"
         [addonWidth]="addonWidth"
         label="تاریخ ثبت بار"
@@ -222,31 +222,31 @@
     <div
       class="px-4 col-span-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center"
     >
-      <p-button
+      <app-button
         (click)="editOrRegister()"
         [disabled]="capacitorForm.invalid || loading"
         label="ثبت و ویرایش"
         size="small"
         styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-      ></p-button>
+      ></app-button>
 
-      <p-button
+      <app-button
         (click)="editOrRegister()"
         [disabled]="capacitorForm.invalid || loading"
         label="حذف بار"
         size="small"
         severity="danger"
         styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-      ></p-button>
+      ></app-button>
 
-      <p-button
+      <app-button
         (click)="editOrRegister()"
         [disabled]="capacitorForm.invalid || loading"
         label="کنسلی بار"
         size="small"
         severity="info"
         styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-      ></p-button>
+      ></app-button>
     </div>
   </form>
 </div>

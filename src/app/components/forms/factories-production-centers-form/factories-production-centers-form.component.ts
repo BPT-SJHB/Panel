@@ -16,6 +16,7 @@ import { TextInputComponent } from 'app/components/shared/inputs/text-input/text
 import { SearchAutoCompleteComponent } from 'app/components/shared/inputs/search-auto-complete/search-auto-complete.component';
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
 import { Subject, takeUntil } from 'rxjs';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 @Component({
   selector: 'app-factories-and-freight-form',
@@ -29,7 +30,8 @@ import { Subject, takeUntil } from 'rxjs';
     TextInputComponent,
     BinaryRadioInputComponent,
     SearchAutoCompleteComponent,
-  ],
+    ButtonComponent
+],
 })
 export class FactoriesAndFreightFormComponent {
   private fb = inject(FormBuilder);

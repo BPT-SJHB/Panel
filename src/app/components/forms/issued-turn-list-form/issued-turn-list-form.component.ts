@@ -14,6 +14,7 @@ import { checkAndToastError } from 'app/utils/api-utils';
 
 // 📦 Models
 import { TurnForSoftwareUser } from 'app/services/turn-management/model/turn-for-software-user.model';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 interface CardTurnItem {
   TurnId: number;
@@ -27,7 +28,7 @@ interface CardTurnItem {
 @Component({
   selector: 'app-issued-turn-list-form',
   standalone: true,
-  imports: [CardModule, ButtonModule, ConfirmDialog],
+  imports: [CardModule, ButtonModule, ConfirmDialog, ButtonComponent],
   providers: [ConfirmationService],
   templateUrl: './issued-turn-list-form.component.html',
   styleUrl: './issued-turn-list-form.component.scss',

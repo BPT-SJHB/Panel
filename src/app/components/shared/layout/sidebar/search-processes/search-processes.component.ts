@@ -18,10 +18,11 @@ import { createTab } from 'app/store/tab/tab.actions';
 import { TabComponentKey } from 'app/constants/tab-component-registry';
 import { DEFAULT_MAIN_TAB_ID } from 'app/store/tab/tab.reducer';
 import { Button } from "primeng/button";
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 @Component({
   selector: 'app-search-processes',
-  imports: [TextInputComponent, Dialog, SearchInputComponent, CommonModule, Button],
+  imports: [TextInputComponent, Dialog, SearchInputComponent, CommonModule, Button, ButtonComponent],
   templateUrl: './search-processes.component.html',
   styleUrls: ['./search-processes.component.scss'],
 })

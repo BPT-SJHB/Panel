@@ -1,10 +1,11 @@
 import { Component, signal } from '@angular/core';
-import { Button } from 'primeng/button';
+import { Button, ButtonModule } from 'primeng/button';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 @Component({
   selector: 'app-theme-management',
   standalone: true,
-  imports: [Button],
+  imports: [ButtonModule, ButtonComponent],
   templateUrl: './theme-management.component.html',
   styleUrl: './theme-management.component.scss',
 })

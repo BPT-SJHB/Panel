@@ -17,6 +17,7 @@ import { ButtonModule } from 'primeng/button';
 import { SearchInputComponent } from '../../../shared/inputs/search-input/search-input.component';
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
 import { Subject, takeUntil } from 'rxjs';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 @Component({
   selector: 'app-driver-truck-wallet-form',
@@ -25,7 +26,8 @@ import { Subject, takeUntil } from 'rxjs';
     TextInputComponent,
     ReactiveFormsModule,
     SearchInputComponent,
-  ],
+    ButtonComponent
+],
   templateUrl: './driver-truck-wallet-form.component.html',
   styleUrl: './driver-truck-wallet-form.component.scss',
 })

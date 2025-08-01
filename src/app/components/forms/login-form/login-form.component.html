@@ -22,11 +22,9 @@
 
       <div class="flex justify-end w-full mb-1">
         <a [href]="hrefForgetPassword">
-          <p-button
-            styleClass="text-cyan-500 text-shadow-sm text-sm"
-            label="رمز عبورتان را فراموش کردید؟"
-            [link]="true"
-          />
+          <span
+            class="text-cyan-500 text-shadow-sm text-sm"
+          > رمز عبورتان را فراموش کردید؟</span>
         </a>
       </div>
     </div>
@@ -40,12 +38,12 @@
 
   <div class="flex flex-col gap-2 mb-8">
     <app-checkbox-input label="مرا به خاطر بسپار" [control]="rememberMe" />
-    <p-button
+    <app-button
       [disabled]="loginForm.invalid"
       type="submit"
       styleClass="px-8 h-2-5rem w-full"
     >
       ورود
-    </p-button>
+    </app-button>
   </div>
 </form>

@@ -53,12 +53,12 @@
   <ng-template #body let-rowData>
     <tr>
       <td (click)="onDelete(rowData)">
-        <p-button
+        <app-button
           icon="pi pi-trash"
           severity="danger"
           variant="text"
           [disabled]="loading"
-        ></p-button>
+        ></app-button>
       </td>
       <td>{{ rowData.SeqTurnTitle }}</td>
       <td>{{ rowData.LoaderTypeTitle }}</td>
@@ -67,7 +67,7 @@
 </p-table>
 
 <div class="w-full flex justify-end">
-  <p-button
+  <app-button
     size="small"
     label="ثبت"
     styleClass="px-8 py-1"

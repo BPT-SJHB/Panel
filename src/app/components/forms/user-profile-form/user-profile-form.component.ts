@@ -16,6 +16,7 @@ import { checkAndToastError } from 'app/utils/api-utils';
 import { NewPasswordDialogComponent } from 'app/components/shared/dialog/new-password-dialog/new-password-dialog.component';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 // 🔽 Interfaces
 interface UserProfile {
@@ -33,7 +34,7 @@ interface UserProfile {
 @Component({
   selector: 'app-user-profile-form',
   standalone: true,
-  imports: [AvatarModule, ButtonModule, ConfirmDialogModule],
+  imports: [AvatarModule, ButtonModule, ConfirmDialogModule, ButtonComponent],
   providers: [ConfirmationService,DialogService],
   templateUrl: './user-profile-form.component.html',
   styleUrl: './user-profile-form.component.scss',

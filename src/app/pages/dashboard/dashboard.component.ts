@@ -146,8 +146,8 @@ export class DashboardComponent implements AfterViewInit {
         id: pg.id,
         label: pg.title,
         icon: pg.icon,
-        command: () => {}, 
-      })
+        command: () => {},
+      }),
     );
   }
 }
