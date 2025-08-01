@@ -21,6 +21,7 @@ import {
   ValidationField,
   ValidationSchema,
 } from 'app/constants/validation-schema';
+import { ButtonComponent } from "../../button/button.component";
 
 @Component({
   selector: 'app-text-input',
@@ -33,7 +34,7 @@ import {
     InputGroupAddonModule,
     MessageModule,
     ButtonModule,
-  ],
+],
   templateUrl: './text-input.component.html',
   styleUrl: './text-input.component.scss',
 })
@@ -48,11 +49,12 @@ export class TextInputComponent implements OnInit, OnChanges {
   @Input() addonWidth: string | null = null;
   @Input() buttonIcon = '';
   @Input() buttonDisabled = false;
-  @Input() type: 'password' | 'text' | 'date' = 'text';
-  @Input() datePickerPosition: 'top' | 'bottom' = 'bottom';
+  @Input() type: 'password' | 'text'  = 'text';
 
   @Output() clickButton = new EventEmitter<void>();
   @Output() input = new EventEmitter<any>();
+  @Output() focus = new EventEmitter<HTMLInputElement>();
+  @Output() blur = new EventEmitter<HTMLInputElement>();
   @Output() keydown = new EventEmitter<KeyboardEvent>();
 
   get firstErrorMessage(): string | null {
@@ -89,18 +91,20 @@ export class TextInputComponent implements OnInit, OnChanges {
     if (this.disabled) {
       input.blur();
     }
+    this.focus.emit(input);
   }
 
-  onBlurInput(_: HTMLInputElement): void {
+  onBlurInput(input: HTMLInputElement): void {
     if (this.readOnly) {
       this.control.markAsUntouched();
     }
+    this.blur.emit(input);
   }
 
   onKeyDown(event: KeyboardEvent) {
     this.keydown.emit(event);
   }
-  
+
   handleClick(): void {
     this.clickButton.emit();
   }
