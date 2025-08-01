@@ -20,6 +20,7 @@ import { ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TableModule } from 'primeng/table';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 // 📦 Interface for displaying flat relation data in table
 interface RowRelationOfSequential {
@@ -37,7 +38,8 @@ interface RowRelationOfSequential {
     SearchAutoCompleteComponent,
     TableModule,
     ConfirmDialogModule,
-  ],
+    ButtonComponent
+],
   providers: [ConfirmationService],
   templateUrl: './relation-of-sequential-turn-to-announcement-sub-groups-form.component.html',
   styleUrl: './relation-of-sequential-turn-to-announcement-sub-groups-form.component.scss',

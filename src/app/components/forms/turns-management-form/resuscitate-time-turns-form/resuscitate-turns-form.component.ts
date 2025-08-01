@@ -9,6 +9,7 @@ import { checkAndToastError } from 'app/utils/api-utils';
 import { ToastService } from 'app/services/toast-service/toast.service';
 import { DatePickerInput } from 'app/components/shared/inputs/date-picker-input/date-picker-input.component.component';
 import { TimePickerInput } from 'app/components/shared/inputs/time-picker-input/time-picker-input.component.component';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 @Component({
   selector: 'app-real-time-turns-form',
@@ -17,7 +18,8 @@ import { TimePickerInput } from 'app/components/shared/inputs/time-picker-input/
     TurnsTruckInfoBaseFormComponent,
     DatePickerInput,
     TimePickerInput,
-  ],
+    ButtonComponent
+],
   templateUrl: './resuscitate-turns-form.component.html',
   styleUrl: './resuscitate-turns-form.component.scss',
 })

@@ -18,10 +18,12 @@ import { ToastService } from 'app/services/toast-service/toast.service';
 import { ButtonModule } from 'primeng/button';
 import { Checkbox } from 'primeng/checkbox';
 import { TableModule } from 'primeng/table';
+import { ButtonComponent } from "app/components/shared/button/button.component";
+import { DatePickerInput } from "app/components/shared/inputs/date-picker-input/date-picker-input.component.component";
 
 @Component({
   selector: 'app-load-capacitor-form',
-  imports: [ ReactiveFormsModule,CommonModule, TextInputComponent, ButtonModule, TableModule, Checkbox],
+  imports: [ReactiveFormsModule, CommonModule, TextInputComponent, ButtonModule, TableModule, Checkbox, ButtonComponent, DatePickerInput],
   templateUrl: './load-capacitor-form.component.html',
   styleUrl: './load-capacitor-form.component.scss',
 })

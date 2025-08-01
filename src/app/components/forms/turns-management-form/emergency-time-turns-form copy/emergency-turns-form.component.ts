@@ -9,10 +9,11 @@ import { checkAndToastError } from 'app/utils/api-utils';
 import { ToastService } from 'app/services/toast-service/toast.service';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { ValidationSchema } from 'app/constants/validation-schema';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 @Component({
   selector: 'app-real-time-turns-form',
-  imports: [ButtonModule, TurnsTruckInfoBaseFormComponent, TextInputComponent],
+  imports: [ButtonModule, TurnsTruckInfoBaseFormComponent, TextInputComponent, ButtonComponent],
   templateUrl: './emergency-turns-form.component.html',
   styleUrl: './emergency-turns-form.component.scss',
 })

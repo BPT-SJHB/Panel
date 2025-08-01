@@ -17,6 +17,7 @@ import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
 
 import { ValidationField } from 'app/constants/validation-schema';
 import { TextInputComponent } from '../text-input/text-input.component';
+import { ButtonComponent } from "../../button/button.component";
 
 @Component({
   selector: 'app-search-input',
@@ -27,7 +28,8 @@ import { TextInputComponent } from '../text-input/text-input.component';
     InputGroupAddonModule,
     InputGroupModule,
     ButtonModule,
-    TextInputComponent
+    TextInputComponent,
+    ButtonComponent
 ],
   templateUrl: './search-input.component.html',
   styleUrl: './search-input.component.scss',

@@ -21,6 +21,7 @@ import { checkAndToastError } from 'app/utils/api-utils';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { SequentialTurn } from 'app/services/sequential-turn-management/model/sequential-turn.model';
 import { TableConfig } from 'app/constants/ui/table.ui';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 enum FormMode {
   EDITABLE,
@@ -40,9 +41,10 @@ enum FormMode {
     ConfirmDialogModule,
     Dialog,
     TextInputComponent,
+    BinaryRadioInputComponent,
     ReactiveFormsModule,
-    ToggleSwitchInputComponent,
-  ],
+    ButtonComponent
+],
   providers: [ConfirmationService],
 })
 export class SequentialTurnsFormComponent implements OnInit, OnDestroy {

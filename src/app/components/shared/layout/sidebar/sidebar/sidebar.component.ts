@@ -21,7 +21,6 @@ import { PageGroupItem } from 'app/data/model/menu-item.model';
 import { LogoComponent } from '../logo/logo.component';
 import { SearchProcessesComponent } from '../search-processes/search-processes.component';
 
-
 @Component({
   selector: 'app-sidebar',
   standalone: true,
@@ -47,7 +46,6 @@ export class SidebarComponent implements OnInit {
 
   // Observable for sidebar open/close state
   isOpen$!: Observable<boolean>;
-
 
   constructor(private store: Store) {}
 

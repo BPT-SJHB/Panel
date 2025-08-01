@@ -10,6 +10,7 @@ import { TextInputComponent } from 'app/components/shared/inputs/text-input/text
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
 import { WalletManagementService } from 'app/services/wallet-management/wallet-management.service';
 import { checkAndToastError } from 'app/utils/api-utils';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 @Component({
   selector: 'app-user-charging-function-form',
@@ -19,7 +20,8 @@ import { checkAndToastError } from 'app/utils/api-utils';
     TableModule,
     Button,
     TextInputComponent,
-  ],
+    ButtonComponent
+],
   templateUrl: './user-charging-function-form.component.html',
   styleUrl: './user-charging-function-form.component.scss',
 })

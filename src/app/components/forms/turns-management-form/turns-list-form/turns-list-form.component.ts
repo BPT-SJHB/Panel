@@ -17,6 +17,7 @@ import { TurnManagementService } from 'app/services/turn-management/turn-managem
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { TableConfig } from 'app/constants/ui/table.ui';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 @Component({
   selector: 'app-turns-list-form',
@@ -27,7 +28,8 @@ import { TableConfig } from 'app/constants/ui/table.ui';
     TableModule,
     Dialog,
     ConfirmDialogModule,
-  ],
+    ButtonComponent
+],
   providers: [ConfirmationService],
   templateUrl: './turns-list-form.component.html',
   styleUrl: './turns-list-form.component.scss',

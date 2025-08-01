@@ -32,7 +32,8 @@
         >
       </div>
     </p-inputgroup-addon>
-    } @if (type != 'date') {
+    }
+
     <!-- Text Input -->
     <input
       #inputRef
@@ -53,42 +54,6 @@
       (focus)="onFocusInput(inputRef)"
       (blur)="onBlurInput(inputRef)"
     />
-    } @if (type === 'date') {
-    <!-- Date Input -->
-    <div class="w-full" style="position: relative">
-      <ng-persian-datepicker
-        [ngClass]="
-          datePickerPosition == 'top' ? 'position-top' : 'position-bottom'
-        "
-      >
-        <div class="h-2-5rem">
-          <input
-            #inputRef
-            pInputText
-            [formControl]="control"
-            [placeholder]="placeholder"
-            [readOnly]="readOnly"
-            [style.background]="'var(--p-inputgroup-addon-background)'"
-            class="borde border-l-1 border-surface px-2 h-full w-full placeholder:text-gray-400 text-sm"
-            [ngClass]="{
-              'border-red-500': control.touched && control.invalid,
-              border: true,
-              'rounded-l': buttonIcon === '',
-              'px-2': true,
-              'h-full': true,
-              'w-full': true,
-              'bg-gray-100 text-gray-500 pointer-events-none opacity-60 cursor-not-allowed':
-                control.disabled
-            }"
-            (focus)="onFocusInput(inputRef)"
-            (blur)="onBlurInput(inputRef)"
-            (input)="input.emit($event)"
-            (keydown)="onKeyDown($event)"
-          />
-        </div>
-      </ng-persian-datepicker>
-    </div>
-    }
   </p-input-group>
 
   @if (buttonIcon.trim() !== '') {

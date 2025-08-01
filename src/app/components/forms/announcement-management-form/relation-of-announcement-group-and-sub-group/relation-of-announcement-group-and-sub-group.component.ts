@@ -18,6 +18,7 @@ import { ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TableModule } from 'primeng/table';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 // 📦 Interface for displaying flat relation data in table
 interface RowRelationOfAnnouncement {
@@ -35,7 +36,8 @@ interface RowRelationOfAnnouncement {
     SearchAutoCompleteComponent,
     TableModule,
     ConfirmDialogModule,
-  ],
+    ButtonComponent
+],
   providers: [ConfirmationService],
   templateUrl: './relation-of-announcement-group-and-sub-group.component.html',
   styleUrl: './relation-of-announcement-group-and-sub-group.component.scss',

@@ -3,7 +3,6 @@
   <header [style.height]="layoutUi.headerHeight" class="shrink-0">
     <app-header />
   </header>
-
   <!-- Main -->
   <main class="flex flex-1 overflow-hidden">
     <!-- Sidebar -->
@@ -25,10 +24,7 @@
   <app-support-button></app-support-button>
 
   <!-- Footer -->
-  <footer
-    [class]="layoutUi.headerHeight"
-    class="shrink-0 overflow-hidden"
-  >
+  <footer [class]="layoutUi.headerHeight" class="shrink-0 overflow-hidden">
     <app-mobile-tab-bar class="lg:hidden" />
     <app-footer class="w-full hidden lg:block" />
   </footer>

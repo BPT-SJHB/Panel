@@ -27,7 +27,7 @@
   <!-- 🔘 Toolbar (New Button) -->
   <ng-template #caption>
     <div class="flex items-center justify-between">
-      <p-button
+      <app-button
         label="جدید"
         size="small"
         styleClass="px-6 md:px-8 py-1"
@@ -50,7 +50,7 @@
     <tr>
       <!-- ✏️ Edit -->
       <td>
-        <p-button
+        <app-button
           icon="pi pi-pencil"
           severity="info"
           variant="text"
@@ -61,7 +61,7 @@
 
       <!-- 🗑 Delete -->
       <td>
-        <p-button
+        <app-button
           icon="pi pi-trash"
           severity="danger"
           variant="text"
@@ -145,7 +145,7 @@
     />
 
     <div class="col-span-12 flex justify-end">
-      <p-button
+      <app-button
         (click)="registerOrEdit()"
         label="ثبت و ویرایش اطلاعات"
         [disabled]="sequentialTurnForm.invalid || loading"

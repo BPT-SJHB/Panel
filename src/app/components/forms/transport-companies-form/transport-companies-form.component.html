@@ -107,28 +107,28 @@
 
   <!-- دکمه‌های عملیات -->
   <div class="col-span-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center">
-    <p-button
+    <app-button
       (click)="editTransportCompony()"
       [disabled]="transportComponyForm.invalid || loading()"
       label="ویرایش اطلاعات"
       styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-    ></p-button>
+    ></app-button>
 
-    <p-button
+    <app-button
       (click)="activateTransportComponySms()"
       [disabled]="TCId.invalid || loading()"
       severity="warn"
       label="فعال سازی پیامک"
       styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-    ></p-button>
+    ></app-button>
 
-    <p-button
+    <app-button
       (click)="confirmResetPassword()"
       [disabled]="TCId.invalid || loading()"
       severity="warn"
       label="بروزرسانی رمزعبور"
       styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-    ></p-button>
+    ></app-button>
   </div>
 </form>
 
@@ -137,6 +137,6 @@
   position="top"
   acceptLabel="تایید"
   rejectLabel="انصراف"
-  acceptButtonStyleClass="px-8 p-button-danger py-2 text-sm"
-  rejectButtonStyleClass="px-6 p-button-secondary py-2 text-sm"
+  acceptButtonStyleClass="px-8 app-button-danger py-2 text-sm"
+  rejectButtonStyleClass="px-6 app-button-secondary py-2 text-sm"
 />

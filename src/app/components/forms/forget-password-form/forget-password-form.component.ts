@@ -10,10 +10,11 @@ import { ToastService } from 'app/services/toast-service/toast.service';
 import { appTitles } from 'app/constants/Titles';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { TextInputComponent } from "../../shared/inputs/text-input/text-input.component";
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 @Component({
   selector: 'app-forget-password-form',
-  imports: [ButtonModule,  ReactiveFormsModule, TextInputComponent],
+  imports: [ButtonModule, ReactiveFormsModule, TextInputComponent, ButtonComponent],
   templateUrl: './forget-password-form.component.html',
   styleUrl: './forget-password-form.component.scss',
 })

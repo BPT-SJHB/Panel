@@ -24,6 +24,7 @@ import { NewPasswordDialogComponent } from 'app/components/shared/dialog/new-pas
 import { SoftwareUserInfo } from 'app/services/user-management/model/software-user-info.model';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { ValidationSchema } from 'app/constants/validation-schema';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 @Component({
   selector: 'app-user-info-form',
@@ -36,7 +37,8 @@ import { ValidationSchema } from 'app/constants/validation-schema';
     ToggleSwitchInputComponent,
     TextInputComponent,
     SearchInputComponent,
-  ],
+    ButtonComponent
+],
   providers: [DialogService],
   templateUrl: './user-info-form.component.html',
   styleUrl: './user-info-form.component.scss',

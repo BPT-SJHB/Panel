@@ -49,12 +49,12 @@
   <ng-template #body let-rowData>
     <tr>
       <td (click)="onDelete(rowData)">
-        <p-button
+        <app-button
           icon="pi pi-trash"
           severity="danger"
           variant="text"
           [disabled]="loading"
-        ></p-button>
+        ></app-button>
       </td>
       <td>{{ rowData.AnnouncementTitle }}</td>
       <td>{{ rowData.AnnouncementSGTitle }}</td>

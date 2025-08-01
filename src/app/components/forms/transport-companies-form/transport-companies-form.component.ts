@@ -18,6 +18,7 @@ import { BinaryRadioInputComponent } from 'app/components/shared/inputs/binary-r
 // Services & models
 import { TransportCompaniesManagementService } from 'app/services/transport-company-management/transport-companies-management.service';
 import { TransportCompany } from 'app/services/transport-company-management/model/transport-company-info.model';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 @Component({
   selector: 'app-transport-companies-form',
@@ -27,8 +28,9 @@ import { TransportCompany } from 'app/services/transport-company-management/mode
     BinaryRadioInputComponent,
     ReactiveFormsModule,
     ButtonModule,
-    ConfirmDialogModule
-  ],
+    ConfirmDialogModule,
+    ButtonComponent
+],
   providers: [ConfirmationService, DialogService],
   templateUrl: './transport-companies-form.component.html',
   styleUrl: './transport-companies-form.component.scss',

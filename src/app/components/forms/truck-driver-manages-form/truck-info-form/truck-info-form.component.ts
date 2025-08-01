@@ -19,6 +19,8 @@ import { TextInputComponent } from 'app/components/shared/inputs/text-input/text
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
 import { Subject, takeUntil } from 'rxjs';
 import { SearchInputComponent } from '../../../shared/inputs/search-input/search-input.component';
+import { ButtonComponent } from "app/components/shared/button/button.component";
+import { DatePickerInput } from "app/components/shared/inputs/date-picker-input/date-picker-input.component.component";
 
 @Component({
   selector: 'app-truck-info-form',
@@ -30,7 +32,9 @@ import { SearchInputComponent } from '../../../shared/inputs/search-input/search
     ReactiveFormsModule,
     TextInputComponent,
     SearchInputComponent,
-  ],
+    ButtonComponent,
+    DatePickerInput
+],
 })
 export class TruckInfoFormComponent {
   private fb = inject(FormBuilder);

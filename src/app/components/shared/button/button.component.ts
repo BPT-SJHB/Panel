@@ -35,7 +35,7 @@ interface ButtonStyle {
   styleUrl: './button.component.scss',
 })
 export class ButtonComponent implements OnInit, OnChanges {
-  @Input() severity: 'green' | 'info' | 'danger' | 'warn' = 'green';
+  @Input() severity: 'green' | 'info' | 'danger' | 'secondary' |'warn' = 'green';
   @Input() syncShadow: boolean = true;
   @Input() label: string = '';
   @Input() disabled: boolean = false;
@@ -43,6 +43,8 @@ export class ButtonComponent implements OnInit, OnChanges {
   @Input() type?: 'button' | 'submit';
   @Input() icon?: string;
   @Input() styleClass: string = '';
+  @Input() rounded = false;
+  @Input() raised = false;
 
   @Output() onClick = new EventEmitter<void>();
 

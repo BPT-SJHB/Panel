@@ -34,6 +34,7 @@ import { ShortResponse } from 'app/data/model/short-response.model';
 import { City } from 'app/data/model/province-city.model';
 import { LoaderType } from 'app/services/loader-types/model/loader-type.model';
 import { Product } from 'app/data/model/product-type.model';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 enum TariffsFormMode {
   EDITABLE,
@@ -47,14 +48,14 @@ enum TariffsFormMode {
     CommonModule,
     ButtonModule,
     DialogModule,
-
     TableModule,
     ReactiveFormsModule,
     ConfirmDialogModule,
     TextInputComponent,
     ToggleSwitchInputComponent,
     SearchAutoCompleteComponent,
-  ],
+    ButtonComponent
+],
   templateUrl: './tariffs-form.component.html',
   styleUrl: './tariffs-form.component.scss',
 

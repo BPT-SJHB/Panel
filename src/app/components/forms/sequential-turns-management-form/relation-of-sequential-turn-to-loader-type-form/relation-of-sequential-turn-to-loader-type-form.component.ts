@@ -24,6 +24,7 @@ import { checkAndToastError } from 'app/utils/api-utils';
 import { ERROR_MESSAGES, ErrorCodes } from 'app/constants/error-messages';
 import { LoaderType } from 'app/services/loader-types/model/loader-type.model';
 import { TableConfig } from 'app/constants/ui/table.ui';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 // =======================
 // 📄 Table Row Interface
@@ -47,7 +48,8 @@ interface RowRelationOfSequentialToLoader {
     ConfirmDialogModule,
     TableModule,
     SearchAutoCompleteComponent,
-  ],
+    ButtonComponent
+],
   providers: [ConfirmationService],
   templateUrl:
     './relation-of-sequential-turn-to-loader-type-form.component.html',

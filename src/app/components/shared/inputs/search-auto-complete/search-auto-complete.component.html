@@ -1,55 +1,48 @@
-<div class="flex justify-center items-center w-full">
-  <p-input-group class="w-full relative">
-    <!-- Addon: Icon or Label -->
-    <p-inputgroup-addon
-      [style.width]="addonWidth"
-      [style.padding]="0"
-      [style.margin]="0"
-      [style.border]="0"
-    >
-      <div
-        class="text-primary-contrast bg-primary-emphasis w-full h-full flex items-center justify-center rounded-r-md border-l-1"
-      >
-        @if (label.trim() === '') {
-        <i [class]="icon"></i>
-        } @else {
-        <span
-          class="text-sm text-primary-contrast"
-          style="white-space: nowrap"
-          >{{ label }}</span
-        >
-        }
-      </div>
-    </p-inputgroup-addon>
-
-    <!-- AutoComplete Input -->
-    <p-autoComplete
+<div class="relative" #dropdownContainer>
+  <div class="relative w-full">
+    <div
+      class="absolute flex items-center justify-center left-0 w-8 rounded-l-md h-full border-surface border"
       [style.background]="'var(--p-inputgroup-addon-background)'"
-      class="w-full h-2-5rem placeholder:text-gray-400"
-      [formControl]="control"
-      [suggestions]="suggestions"
-      [optionLabel]="optionLabel"
-      [optionValue]="optionValue"
-      [placeholder]="placeholder"
-      [showEmptyMessage]="showEmptyMessage"
-      emptyMessage="موردی یافت نشد"
-      (completeMethod)="onSearch($event)"
-      (onSelect)="onSelectAutoComplete($event)"
-      (onFocus)="onFocusInput($event.target)"
-      (onBlur)="onBlurInput($event.target)"
-      (input)="onValueChanged($event.target)"
-      [completeOnFocus]="true"
-    />
 
-    <!-- Optional Select Icon -->
-    @if (!loading && showIconOptionSelected) {
-    <div class="absolute" style="z-index: 3; left: 10px; top: 10px">
-      <i class="pi pi-check-circle text-lg text-green-600"></i>
+      [hidden]="!showIconOptionSelected"
+    >
+      <i class="pi pi-check-circle text-xl text-green-400"></i>
     </div>
-    } @if (loading) {
-    <div class="absolute" style="z-index: 3; left: 10px; top: 5px">
-      <i class="pi pi-spin pi-spinner ml-2"></i>
+    <app-text-input
+      [icon]="icon"
+      [label]="label"
+      [disabled]="disabled"
+      [readOnly]="readOnly"
+      [addonWidth]="addonWidth"
+      [placeholder]="placeholder"
+      [control]="control"
+      (keydown)="onKeydown($event)"
+      (focus)="onFocusInput($event)"
+    />
+  </div>
+
+  <div
+    class="absolute top-11 left-0 bg-primary-contrast z-50 border-gray-300 dark:border-gray-400 shadow-md rounded-md transition-all duration-300 ease-out overflow-y-auto"
+    [style]="getDropDownStyle()"
+  >
+    @if (loading()) {
+    <div class="px-4 py-4 flex items-center gap-3">
+      <i class="pi pi-spin pi-spinner" aria-hidden="true"></i>
+      <span class="truncate">در حال بارگذاری اطلاعات...</span>
     </div>
-    }
-  </p-input-group>
+    } @else if (isResultEmpty()) {
+    <div class="px-4 py-4 flex items-center gap-3">
+      <span> موردی یافت نشد. </span>
+    </div>
+    }@else { @for (suggestion of suggestions(); track $index) {
+    <div
+      (click)="onSelectAutoComplete(suggestion)"
+      [id]="`${id}-${$index}`"
+      class="px-2 py-4 cursor-pointer hover:bg-emphasis"
+      [ngClass]="{ 'bg-emphasis': hoverIndex() === $index }"
+    >
+      {{ suggestion[optionLabel] }}
+    </div>
+    } }
+  </div>
 </div>

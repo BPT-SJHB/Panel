@@ -46,12 +46,12 @@
   />
 
   <div class="col-span-12 flex justify-end">
-    <p-button
+    <app-button
       label="جستجو"
       severity="info"
       size="small"
-      styleClass="px-6 py-1"
-      type="ngSubmit"
+      styleClass="px-6 py-2"
+      type="submit"
       [disabled]="!isSearchFormValid()"
     />
   </div>
@@ -70,7 +70,7 @@
 >
   <ng-template #caption>
     <div class="flex justify-between items-center">
-      <p-button
+      <app-button
         label="جدید"
         size="small"
         styleClass="px-6 md:px-8 py-1"
@@ -90,7 +90,7 @@
   <ng-template #body let-rowData>
     <tr>
       <td (click)="onEdit(rowData)">
-        <p-button
+        <app-button
           icon="pi pi-pencil"
           severity="info"
           variant="text"
@@ -99,7 +99,7 @@
       </td>
 
       <td (click)="onDelete(rowData)">
-        <p-button
+        <app-button
           icon="pi pi-trash"
           severity="danger"
           variant="text"
@@ -207,7 +207,7 @@
       </div>
 
       <div class="col-span-12 flex justify-end mt-6">
-        <p-button
+        <app-button
           label="ثبت و ویرایش اطلاعات"
           [disabled]="travelTimeForm.invalid || loading"
           (click)="registerOrEdit()"

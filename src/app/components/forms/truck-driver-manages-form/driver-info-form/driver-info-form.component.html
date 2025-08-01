@@ -127,29 +127,29 @@
     <div
       class="col-span-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center"
     >
-      <p-button
+      <app-button
         (click)="activateDriverSms()"
         [disabled]="this.driverForm.invalid || loading"
         severity="warn"
         label="فعال سازی پیامک"
         styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-      ></p-button>
+      ></app-button>
 
-      <p-button
+      <app-button
         (click)="sendWebsiteLink()"
         [disabled]="this.driverForm.invalid || loading"
         severity="warn"
         label="ارسال لینک سامانه"
         styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-      ></p-button>
+      ></app-button>
 
-      <p-button
+      <app-button
         (click)="resetDriverPassword()"
         [disabled]="this.driverForm.invalid || loading"
         severity="info"
         label="ایجاد رمز عبور جدید"
         styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-      ></p-button>
+      ></app-button>
     </div>
   </div>
 </div>

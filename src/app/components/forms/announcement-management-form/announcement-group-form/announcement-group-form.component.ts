@@ -19,6 +19,7 @@ import { LoadingService } from 'app/services/loading-service/loading-service.ser
 import { ToastService } from 'app/services/toast-service/toast.service';
 import { AnnouncementGroupSubgroupManagementService } from 'app/services/announcement_group_subgroup_management/announcement-group-subgroup-management.service';
 import { AnnouncementGroup } from 'app/services/announcement_group_subgroup_management/model/announcement-group.model';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 enum FormMode {
   EDITABLE,
@@ -37,8 +38,9 @@ enum FormMode {
     ReactiveFormsModule,
     SearchInputComponent,
     TextInputComponent,
-    ToggleSwitchInputComponent,
-  ],
+    BinaryRadioInputComponent,
+    ButtonComponent
+],
   providers: [ConfirmationService],
   templateUrl: './announcement-group-form.component.html',
   styleUrl: './announcement-group-form.component.scss',

@@ -1,7 +1,7 @@
 <div class="relative w-full h-full bg-primary text-primary-contrast lg:pr-4 py-2 z-15 flex items-center justify-between">
-  <p-button class="lg:hidden" (onClick)="openSidebar()">
+  <app-button class="lg:hidden" (onClick)="openSidebar()">
     <i class="pi pi-align-right text-xl"></i>
-  </p-button>
+  </app-button>
   <div class="flex items-center justify-center gap-4 m-auto lg:m-0">
     <i class="pi text-xl scale-120" [class]="headerData.icon"></i>
     <span class="text-md font-bold">{{ headerData.title }}</span>

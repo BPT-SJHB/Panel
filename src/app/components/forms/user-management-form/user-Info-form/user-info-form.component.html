@@ -37,7 +37,7 @@
         placeholder="شناسه کاربر"
         icon="pi pi-id-card"
       />
-      <p-button
+      <app-button
         (click)="resetUserInfoForm()"
         styleClass="rounded-full w-8 h-8"
         [disabled]="id.value == '0'"
@@ -45,7 +45,7 @@
         severity="info"
       >
         <i class="pi pi-user-plus text-lg" iconPos="left"></i>
-      </p-button>
+      </app-button>
     </div>
 
     <!-- Full Name -->
@@ -98,36 +98,36 @@
     <div
       class="col-span-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center"
     >
-      <p-button
+      <app-button
         (click)="submitUserInfo()"
         [disabled]="userInfoForm.invalid || loading"
         label="ثبت و ویرایش"
         styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-      ></p-button>
+      ></app-button>
 
-      <p-button
+      <app-button
         (click)="activateUserSms()"
         [disabled]="id.value == '0' || smsActive.value || loading"
         severity="warn"
         label="فعال سازی پیامک"
         styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-      ></p-button>
+      ></app-button>
 
-      <p-button
+      <app-button
         (click)="sendWebsiteLink()"
         [disabled]="id.value == '0' || loading"
         severity="warn"
         label="ارسال لینک سامانه"
         styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-      ></p-button>
+      ></app-button>
 
-      <p-button
+      <app-button
         (click)="resetUserPassword()"
         [disabled]="id.value == '0' || loading"
         severity="info"
         label="ایجاد رمز عبور جدید"
         styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-      ></p-button>
+      ></app-button>
     </div>
   </form>
 </div>

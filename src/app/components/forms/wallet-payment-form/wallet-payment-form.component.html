@@ -45,28 +45,27 @@
   <!-- Preset Amount Buttons -->
   <div class="flex flex-wrap gap-6 mt-6 justify-center">
     @for (item of defaultAmounts(); track item) {
-      <p-button
-        severity="primary"
+      <app-button
         variant="outlined"
-        styleClass="w-40"
+        styleClass="w-40 py-2"
         size="small"
         (click)="amount.setValue(item.Amount)"
         [disabled]="!userWallet()"
         >
         {{ item.AmountTitle }} تومان
-      </p-button>
+      </app-button>
     }
   </div>
 
   <div class="flex flex-col md:items-center mt-8 w-full">
-    <p-button
-      styleClass="md:w-40 w-full font-bold"
+    <app-button
+      styleClass="md:w-40 w-full font-bold py-2"
       severity="info"
       size="small"
       (click)="paymentMoney()"
       [disabled]="amount.invalid || !userWallet()"
       >
       شارژ
-    </p-button>
+    </app-button>
   </div>
 </p-card>

@@ -1,12 +1,14 @@
-
 import {
+  AfterViewInit,
   Component,
+  computed,
+  ElementRef,
   EventEmitter,
+  HostListener,
   Input,
-  OnChanges,
-  OnInit,
   Output,
-  SimpleChanges,
+  signal,
+  ViewChild,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -15,6 +17,9 @@ import {
 } from 'primeng/autocomplete';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { TextInputComponent } from '../text-input/text-input.component';
+import { NgClass } from '@angular/common';
+import { uuidV4 } from 'app/utils/uuid';
 
 @Component({
   selector: 'app-search-auto-complete',
@@ -22,232 +27,190 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
   imports: [
     ReactiveFormsModule,
     AutoCompleteModule,
+    TextInputComponent,
     InputGroupAddonModule,
-    InputGroupModule
-],
+    InputGroupModule,
+    NgClass,
+  ],
   templateUrl: './search-auto-complete.component.html',
   styleUrl: './search-auto-complete.component.scss',
 })
 export class SearchAutoCompleteComponent<T extends Record<string, any>>
-  implements OnInit, OnChanges
+  implements AfterViewInit
 {
-  // Cache for lazy search results to optimize repeated queries
+  @ViewChild('dropdownContainer', { static: true })
+  dropdownContainer!: ElementRef<HTMLElement>;
+
   private cachedResults: T[] = [];
+  private lastSearchKey = '---';
+  private width = signal('100%');
 
-  // Cache key to compare and avoid redundant searches (default to some fixed hash)
-  private lastSearchKey =
-    '7587ae60f0243cf7b6a15b4aa553d6d53c1ccf7401f6be1d5b8ad66ee7cf1d9d';
+  suggestions = signal<T[]>([]);
+  loading = signal<boolean>(false);
+  hoverIndex = signal(0);
+  isDropDownHidden = signal(true);
 
-  suggestions: T[] = [];             // Current suggestions shown in dropdown
-  showEmptyMessage = false;          // Show "No results found" message flag
-  loading = false;                   // Loading state for async search
+  isResultEmpty = computed(
+    () =>
+      this.suggestions().length === 0 &&
+      !this.loading() &&
+      (this.control.value?.length ?? 0) > this.minLength
+  );
 
-  focusedCached = false;             // Flag to manage caching behavior on focus
-
-  // ---------- INPUTS ----------
-
-  /** Placeholder text for the input box */
   @Input() placeholder = 'جستجو';
-
-  /** Whether input is readonly */
+  @Input() id = uuidV4();
   @Input() readOnly = false;
-
-  /** Whether input is disabled */
   @Input() disabled = false;
-
-  /** Icon CSS class to display in input */
   @Input() icon = 'pi pi-search';
-
-  /** Label text shown instead of icon (if provided) */
   @Input() label = '';
-
-  /** Caching strategy mode */
   @Input() cachingMode: 'CharacterPrefix' | 'Focus' = 'CharacterPrefix';
-
-  /** Width CSS value for addon (icon/label) */
   @Input() addonWidth = '';
-
-  /** Reactive FormControl bound to the input */
   @Input() control = new FormControl('');
-
-  /** Enable or disable caching */
   @Input() cachingEnabled = true;
-
-  /** Object property used for displaying suggestion labels */
   @Input() optionLabel = 'label';
-
-  /** Object property used as suggestion value */
   @Input() optionValue = 'value';
-
-  /** Minimum characters before triggering search */
   @Input() minLength = 3;
-
-  /** List of all options for client-side filtering */
   @Input() allOptions: T[] = [];
-
-  /** Whether to show icon inside input for selected option */
   @Input() showIconOptionSelected = false;
-
-  /**
-   * Optional asynchronous search function.
-   * Should return a promise resolving to filtered results based on query.
-   */
   @Input() lazySearch?: (query: string) => Promise<T[]>;
 
-  // ---------- OUTPUTS ----------
-
-  /** Emits current input string value */
   @Output() valueChange = new EventEmitter<string>();
-
-  /** Emits the selected suggestion item */
   @Output() selectSuggestion = new EventEmitter<T>();
 
-  // ---------- LIFECYCLE HOOKS ----------
-
-  /** Initialize the component, update control disabled state */
-  ngOnInit(): void {
-    this.setDisabledState();
+  ngAfterViewInit(): void {
+    this.control.valueChanges.subscribe((value) => {
+      this.hoverIndex.set(-1);
+      this.onSearch(value || '');
+      this.isDropDownHidden.set(false);
+      this.valueChange.emit(value || '');
+    });
   }
 
-  /**
-   * Detect changes on inputs such as disabled
-   * Update the FormControl state accordingly.
-   */
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['disabled']) {
-      this.setDisabledState();
+  onFocusInput(input: HTMLInputElement | null): void {
+    this.width.set(`${input?.clientWidth}px`)
+
+    if (this.cachingMode === 'Focus') {
+      this.onSearch(this.control.value ?? '');
+    }
+    this.isDropDownHidden.set(false);
+  }
+
+  private filterSuggestions(source: T[], query: string): T[] {
+    const q = query.toLowerCase();
+    return source.filter((item) =>
+      (item[this.optionLabel] as string).toLowerCase().includes(q)
+    );
+  }
+
+  private async fetchAndCacheSuggestions(query: string) {
+    const currentKey = query.substring(0, this.minLength);
+    const searchQuery = this.cachingEnabled ? currentKey : query;
+
+    try {
+      this.loading.set(true);
+      const result = await this.lazySearch!(searchQuery);
+      this.lastSearchKey = currentKey;
+      this.cachedResults = result;
+      this.suggestions.set(result);
+    } finally {
+      this.loading.set(false);
     }
   }
 
-  // ---------- PRIVATE HELPERS ----------
+  async onSearch(term: string) {
+    const query = term.trimStart();
 
-  /** Enable or disable the input control based on `disabled` input */
-  private setDisabledState(): void {
-    if (this.disabled) {
-      this.control.disable({ emitEvent: false });
-    } else {
-      this.control.enable({ emitEvent: false });
-    }
-  }
-
-  /**
-   * On input focus event handler
-   * Immediately blur if input is disabled to prevent interaction.
-   */
-  onFocusInput(input: EventTarget | null): void {
-    const inputElement = input as HTMLInputElement;
-    if (this.disabled) {
-      inputElement?.blur();
+    if (query.length < this.minLength) {
+      this.suggestions.set([]);
       return;
     }
-  }
 
-  /**
-   * On input blur event handler
-   * If readonly, mark control untouched to prevent validation.
-   * Reset focusedCached flag for caching logic.
-   */
-  onBlurInput(_: EventTarget | null): void {
-    if (this.readOnly) {
-      this.control.markAsUntouched();
+    if (!this.lazySearch) {
+      this.suggestions.set(this.filterSuggestions(this.allOptions, query));
       return;
     }
-    if (this.cachingMode === "Focus") {
-      this.focusedCached = false;
+
+    const currentKey = query.substring(0, this.minLength);
+    if (this.cachingEnabled && currentKey === this.lastSearchKey) {
+      this.suggestions.set(this.filterSuggestions(this.cachedResults, query));
+      return;
+    }
+
+    await this.fetchAndCacheSuggestions(query);
+  }
+
+  onSelectAutoComplete(value: T) {
+    this.control.setValue(value[this.optionLabel] || this.control.value);
+    this.selectSuggestion.emit(value);
+    this.isDropDownHidden.set(true);
+  }
+
+  clearCached(): void {
+    this.lastSearchKey = '---';
+    this.cachedResults = [];
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const inside = this.dropdownContainer.nativeElement.contains(
+      event.target as Node
+    );
+    if (!inside) {
+      this.isDropDownHidden.set(true);
       this.clearCached();
     }
   }
 
-  // ---------- SEARCH HANDLER ----------
+  onKeydown(event: KeyboardEvent) {
+    const len = this.suggestions().length;
+    if (len === 0) return;
 
-  /**
-   * Handles user input search events.
-   * Uses client-side filtering or lazy async search with caching.
-   */
-  async onSearch(event: { query: string }) {
-    const query = event.query.trimStart();
+    const code = event.code;
+    const current = this.hoverIndex();
 
-    // Clear suggestions if query is too short
-    if (query.length < this.minLength) {
-      this.suggestions = [];
-      this.showEmptyMessage = false;
-      return;
-    }
-
-    // Client-side filtering when no async lazy search function provided
-    if (!this.lazySearch) {
-      this.suggestions = this.allOptions.filter((item) =>
-        (item[this.optionLabel] as string)
-          .toLowerCase()
-          .includes(query.toLowerCase())
-      );
-      this.showEmptyMessage = this.suggestions.length === 0;
-      return;
-    }
-
-    // Lazy search mode with caching enabled
-    const currentKey = query.substring(0, this.minLength);
-
-    if (this.cachingEnabled) {
-      const isCharPrefixMatch =
-        this.cachingMode === 'CharacterPrefix' &&
-        currentKey === this.lastSearchKey;
-        
-      const isFocusMode = this.cachingMode === 'Focus' && this.focusedCached;
-      
-      if (isCharPrefixMatch || isFocusMode) {
-        if (currentKey === this.lastSearchKey) {
-          // Filter cached results to refine suggestions without calling lazySearch again
-          this.suggestions = this.cachedResults.filter((item) =>
-            (item[this.optionLabel] as string)
-          .toLowerCase()
-          .includes(query.toLowerCase())
-        );
-          this.showEmptyMessage = this.suggestions.length === 0;
-          return;
+    switch (code) {
+      case 'Enter': {
+        event.preventDefault();
+        const selected = this.suggestions()[current];
+        if (selected) {
+          this.onSelectAutoComplete(selected);
         }
+        break;
       }
-    }
-
-    // Fetch fresh results asynchronously from lazySearch
-    try {
-      this.loading = true;
-
-      // Use cached key or full query depending on cachingEnabled flag
-      const searchQuery = this.cachingEnabled ? currentKey : query;
-      const result = await this.lazySearch(searchQuery);
-
-      // Update cache and suggestions
-      this.lastSearchKey = currentKey;
-      this.cachedResults = result;
-      this.suggestions = result;
-      this.focusedCached = true;
-      this.showEmptyMessage = result.length === 0;
-    } finally {
-      this.loading = false;
+      case 'ArrowDown':
+      case 'ArrowUp': {
+        event.preventDefault();
+        const delta = code === 'ArrowDown' ? 1 : -1;
+        const next = (current + delta + len) % len;
+        this.hoverIndex.set(next);
+        this.scrollToIndex(next);
+        break;
+      }
+      default:
+        break;
     }
   }
 
-  /**
-   * Emits the selected suggestion when user picks an item.
-   */
-  onSelectAutoComplete(event: AutoCompleteSelectEvent) {
-    this.selectSuggestion.emit(event.value);
+  private scrollToIndex(index: number) {
+    requestAnimationFrame(() => {
+      const item = document.getElementById(`${this.id}-${index}`);
+      if (item) {
+        item.scrollIntoView({ block: 'nearest' });
+      }
+    });
   }
 
-  /**
-   * Emits the current input value on input changes.
-   */
-  onValueChanged(input: any) {
-    this.valueChange.emit(input.value);
-  }
-
-  /**
-   * Clears the cache to reset lazy search results.
-   */
-  clearCached(): void {
-    this.lastSearchKey =
-      '7587ae60f0243cf7b6a15b4aa553d6d53c1ccf7401f6be1d5b8ad66ee7cf1d9d';
-    this.cachedResults = [];
+  getDropDownStyle() {
+    const valueLen = this.control.value?.length ?? 0;
+    let count = this.suggestions().length - 1;
+    if (this.isDropDownHidden() || valueLen < this.minLength) {
+      return { height: '0px',width: this.width()};
+    }
+    
+    count = Math.max(count,1);
+    const itemHeight = 3.55; // px per item
+    const max = itemHeight * 4; // max px
+    const height = Math.min(itemHeight * count, max);
+    return { height: `${height}rem` , width: this.width()};
   }
 }
