@@ -1,22 +1,41 @@
-<div class="card flex justify-center gap-4">
-  <span class="font-medium whitespace-nowrap">{{ label }}</span>
+<div class="card flex justify-center" style="margin-top: -0.5rem">
+  <div class="flex items-center gap-6 flex-wrap">
+    <span class="font-medium whitespace-nowrap mt-2">{{ label }}</span>
 
-  <p-toggleswitch
-    [formControl]="control"
-    [disabled]="disabled || readonly"
-    (click)="preventIfReadonly($event)"
-    [dt]="customToggleSwitchTokens()"
-    >>
+    <div class="flex gap-4">
+      <!-- فعال -->
+      <div
+        class="flex items-center gap-2"
+        [ngClass]="{ 'text-green-600': control.value === true }"
+      >
+        <p-radiobutton
+          [name]="radioName"
+          [value]="true"
+          [formControl]="control"
+          inputId="sms-active-option"
+          [ngClass]="{ 'p-highlight': control.value === true }"
+          (click)="preventIfReadonly($event)"
+        />
+        <label for="sms-active-option" class="cursor-pointer mt-2">فعال</label>
+      </div>
 
-    <ng-template #handle let-checked="checked">
-      <i [ngClass]="['pi', checked ? 'pi-check' : 'pi-times']"></i>
-    </ng-template>
-  </p-toggleswitch>
-
-  <span
-    class="font-bold min-w-[60px] text-center"
-    [ngClass]="control.value ? 'text-emerald-600' : 'text-red-500'"
-  >
-    {{ control.value === true ? "فعال" : "غیرفعال" }}
-  </span>
+      <!-- غیرفعال -->
+      <div
+        class="flex items-center gap-2"
+        [ngClass]="{ 'text-red-500': control.value === false }"
+      >
+        <p-radiobutton
+          [name]="radioName"
+          [value]="false"
+          [formControl]="control"
+          inputId="disable-option"
+          [ngClass]="{ 'p-highlight': control.value === false }"
+          (click)="preventIfReadonly($event)"
+        />
+        <label for="sms-disable-option" class="cursor-pointer mt-2"
+          >غیرفعال</label
+        >
+      </div>
+    </div>
+  </div>
 </div>
