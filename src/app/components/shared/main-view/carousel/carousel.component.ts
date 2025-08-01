@@ -1,14 +1,19 @@
-import { Component, Input, OnInit, signal } from '@angular/core';
+import { Component, Input, OnInit, Signal, signal } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
+import { Skeleton } from 'primeng/skeleton';
 
 @Component({
   selector: 'app-carousel',
-  imports: [CarouselModule],
+  imports: [CarouselModule, Skeleton],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
 })
 export class CarouselComponent implements OnInit {
-  @Input() images: { title: string; imgLink: string }[] = [];
+  @Input() images = signal<{ title: string; imgLink: string }[]>([]);
+  @Input() enableSkeleton: boolean = false;
+
+  screenSize = signal(0);
+  skeletonNumber = signal(0);
 
   customCarouselTokens = signal({
     indicator: {
@@ -41,16 +46,57 @@ export class CarouselComponent implements OnInit {
         numVisible: 2,
         numScroll: 1,
       },
+      {
+        breakpoint: '1800px',
+        numVisible: 3,
+        numScroll: 1,
+      },
+      {
+        breakpoint: '2200px',
+        numVisible: 4,
+        numScroll: 1,
+      },
+      {
+        breakpoint: '2600px',
+        numVisible: 5,
+        numScroll: 1,
+      },
     ],
     autoplayInterval: 3000,
     circular: true,
   });
 
   ngOnInit(): void {
+    this.screenFounder();
     this.circularHandler();
+    this.skeletonHandler();
   }
 
   circularHandler() {
+    this.customCarouselTokens().responsiveOptions.forEach((element) => {
+      const breakpoint = parseInt(element.breakpoint, 10);
+      if (this.screenSize() === breakpoint) {
+        if (this.images.length <= element.numVisible) {
+          this.customCarouselTokens().circular = false;
+        } else {
+          this.customCarouselTokens().circular = true;
+        }
+      }
+    });
+  }
+
+  private skeletonHandler() {
+    this.customCarouselTokens().responsiveOptions.forEach((element) => {
+      const breakpoint = parseInt(element.breakpoint, 10);
+      console.log('creeen size: ' + this.screenSize());
+      if (this.screenSize() === breakpoint) {
+        this.skeletonNumber.set(element.numVisible);
+      }
+    });
+    console.log('skeleton number: ' + this.skeletonNumber());
+  }
+
+  private screenFounder() {
     let screenSize = innerWidth;
 
     for (
@@ -61,15 +107,19 @@ export class CarouselComponent implements OnInit {
       const currentElement = this.customCarouselTokens().responsiveOptions[i];
       const breakpoint = parseInt(currentElement.breakpoint, 10);
 
+      console.log(screenSize + '-' + breakpoint);
       if (screenSize <= breakpoint) {
-        if (this.images.length <= currentElement.numVisible) {
-          this.customCarouselTokens().circular = false;
-          break;
-        } else {
-          this.customCarouselTokens().circular = true;
-          break;
-        }
+        this.screenSize.set(breakpoint);
+        console.log('this.screenSize() ' + this.screenSize());
+        break;
       }
     }
+    // this.screenSize.set(1400);
+  }
+
+  get skeletonArrayNumber() {
+    let a = Array.from({ length: this.skeletonNumber() }, (_, i) => i);
+    console.log('SkeletonArrayNumber ' + a);
+    return a;
   }
 }

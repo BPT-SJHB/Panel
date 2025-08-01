@@ -1,5 +1,22 @@
+@if (images().length === 0) {
+<div class="flex w-screen justify-center gap-4 my-[1rem] px-[3rem] mb-10">
+  @for (item of skeletonArrayNumber; track $index) {
+  <p-skeleton
+    [style]="{
+      height: '12rem',
+      'min-height': '10rem',
+      'max-height': '20rem',
+      width: '100%',
+      'min-width': '10rem',
+      'max-width': '20rem'
+    }"
+    borderRadius="16px"
+  />
+  }
+</div>
+}@else {
 <p-carousel
-  [value]="images"
+  [value]="images()"
   [numVisible]="3"
   [numScroll]="3"
   [circular]="false"
@@ -19,3 +36,4 @@
     </div>
   </ng-template>
 </p-carousel>
+}
