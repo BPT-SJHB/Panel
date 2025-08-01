@@ -125,12 +125,10 @@
       />
 
       <div class="flex col-span-12 px-4">
-        <app-binary-radio-input
+        <app-toggle-switch-input
           label="وضعیت زیرگروه:"
-          radioName="AnnouncementActive"
           [control]="AnnouncementActive"
           [readonly]="!isFormEditable()"
-          [disabled]="!isFormEditable()"
         />
       </div>
     </div>

@@ -137,12 +137,11 @@
         addonWidth="8rem"
       />
     </div>
-    <app-binary-radio-input
+    <app-toggle-switch-input
       class="col-span-12 flex px-2"
       label="وضعیت"
-      radioName="status-option"
-      [disabled]="!isFormEditable()"
       [control]="sequentialTurnStatus"
+      [readonly]="!isFormEditable()"
     />
 
     <div class="col-span-12 flex justify-end">

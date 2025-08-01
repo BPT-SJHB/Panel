@@ -11,7 +11,7 @@ import { DialogModule } from 'primeng/dialog';
 
 import { SearchInputComponent } from '../../../shared/inputs/search-input/search-input.component';
 import { TextInputComponent } from '../../../shared/inputs/text-input/text-input.component';
-import { BinaryRadioInputComponent } from '../../../shared/inputs/binary-radio-input/binary-radio-input.component';
+import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-switch-input/toggle-switch-input.component';
 
 import { checkAndToastError } from 'app/utils/api-utils';
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
@@ -39,7 +39,7 @@ enum FormMode {
     ReactiveFormsModule,
     SearchInputComponent,
     TextInputComponent,
-    BinaryRadioInputComponent,
+    ToggleSwitchInputComponent,
   ],
   providers: [ConfirmationService],
   templateUrl: './announcement-sub-group-form.component.html',

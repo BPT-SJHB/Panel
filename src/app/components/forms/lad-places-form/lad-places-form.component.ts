@@ -16,7 +16,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SearchInputComponent } from '../../shared/inputs/search-input/search-input.component';
 import { TextInputComponent } from '../../shared/inputs/text-input/text-input.component';
-import { BinaryRadioInputComponent } from '../../shared/inputs/binary-radio-input/binary-radio-input.component';
+import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-switch-input/toggle-switch-input.component';
 import {
   FormBuilder,
   FormControl,
@@ -39,7 +39,7 @@ import { TableConfig } from 'app/constants/ui/table.ui';
     DialogModule,
     SearchInputComponent,
     TextInputComponent,
-    BinaryRadioInputComponent,
+    ToggleSwitchInputComponent,
     ReactiveFormsModule,
   ],
   templateUrl: './lad-places-form.component.html',

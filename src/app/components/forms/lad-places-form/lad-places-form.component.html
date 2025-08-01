@@ -140,16 +140,14 @@
         [addonWidth]="addonWidth"
       />
       <div class="grid grid-cols-12 gap-4 col-span-12">
-        <app-binary-radio-input
+        <app-toggle-switch-input
           label="وضعیت مبدا بارگیری"
-          radioName="loadingActive"
           [control]="loadingActive"
           class="col-span-12 flex px-2"
         />
-        <app-binary-radio-input
+        <app-toggle-switch-input
           label="وضعیت مقصد بارگیری"
           [control]="dischargingActive"
-          radioName="dischargingActive"
           class="col-span-12 flex px-2"
         />
       </div>

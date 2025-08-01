@@ -26,7 +26,7 @@ import { ConfirmationService } from 'primeng/api';
 import { TravelTimeManagementService } from 'app/services/travel-time-management/travel-time-management.service';
 
 import { TextInputComponent } from '../../shared/inputs/text-input/text-input.component';
-import { BinaryRadioInputComponent } from '../../shared/inputs/binary-radio-input/binary-radio-input.component';
+import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-switch-input/toggle-switch-input.component';
 import { SearchAutoCompleteComponent } from '../../shared/inputs/search-auto-complete/search-auto-complete.component';
 import { ShortResponse } from 'app/data/model/short-response.model';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -47,7 +47,7 @@ enum TravelTimeFormMode {
     ReactiveFormsModule,
     NgClass,
     TextInputComponent,
-    BinaryRadioInputComponent,
+    ToggleSwitchInputComponent,
     SearchAutoCompleteComponent,
     ConfirmDialogModule,
   ],

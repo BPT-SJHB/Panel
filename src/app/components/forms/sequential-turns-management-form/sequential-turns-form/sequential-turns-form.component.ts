@@ -11,7 +11,7 @@ import { ConfirmationService } from 'primeng/api';
 
 import { SearchInputComponent } from 'app/components/shared/inputs/search-input/search-input.component';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
-import { BinaryRadioInputComponent } from 'app/components/shared/inputs/binary-radio-input/binary-radio-input.component';
+import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-switch-input/toggle-switch-input.component';
 
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
 import { SequentialTurnManagementService } from 'app/services/sequential-turn-management/sequential-turn-management.service';
@@ -40,8 +40,8 @@ enum FormMode {
     ConfirmDialogModule,
     Dialog,
     TextInputComponent,
-    BinaryRadioInputComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToggleSwitchInputComponent,
   ],
   providers: [ConfirmationService],
 })

@@ -17,7 +17,7 @@ import { ConfirmationService } from 'primeng/api';
 
 // Shared Components
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
-import { BinaryRadioInputComponent } from 'app/components/shared/inputs/binary-radio-input/binary-radio-input.component';
+import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-switch-input/toggle-switch-input.component';
 import { SearchAutoCompleteComponent } from 'app/components/shared/inputs/search-auto-complete/search-auto-complete.component';
 
 // Services & Models
@@ -52,7 +52,7 @@ enum TariffsFormMode {
     ReactiveFormsModule,
     ConfirmDialogModule,
     TextInputComponent,
-    BinaryRadioInputComponent,
+    ToggleSwitchInputComponent,
     SearchAutoCompleteComponent,
   ],
   templateUrl: './tariffs-form.component.html',

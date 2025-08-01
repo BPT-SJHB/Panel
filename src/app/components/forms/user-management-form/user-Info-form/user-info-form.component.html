@@ -82,22 +82,16 @@
 
     <!-- Radio: SMS System -->
     <div class="col-span-12 md:col-span-6 flex px-2">
-      <app-binary-radio-input
+      <app-toggle-switch-input
         [readonly]="true"
-        [disabled]="true"
         label="وضعیت پیامک"
         [control]="smsActive"
-        radioName="sms-active"
       />
     </div>
 
     <!-- Radio: User Active -->
     <div class="col-span-12 md:col-span-6 flex px-2">
-      <app-binary-radio-input
-        label="کاربر"
-        [control]="userActive"
-        radioName="user-active"
-      />
+      <app-toggle-switch-input label="کاربر" [control]="userActive" />
     </div>
 
     <!-- Action Buttons -->

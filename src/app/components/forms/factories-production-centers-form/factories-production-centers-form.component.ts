@@ -11,7 +11,7 @@ import { FPCInfo } from 'app/data/model/fpc-info.model';
 import { FpcManagementService } from 'app/services/fpc-management/fpc-management.service';
 import { ToastService } from 'app/services/toast-service/toast.service';
 
-import { BinaryRadioInputComponent } from 'app/components/shared/inputs/binary-radio-input/binary-radio-input.component';
+import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-switch-input/toggle-switch-input.component';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { SearchAutoCompleteComponent } from 'app/components/shared/inputs/search-auto-complete/search-auto-complete.component';
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
@@ -27,7 +27,7 @@ import { Subject, takeUntil } from 'rxjs';
     DialogModule,
     ReactiveFormsModule,
     TextInputComponent,
-    BinaryRadioInputComponent,
+    ToggleSwitchInputComponent,
     SearchAutoCompleteComponent,
   ],
 })

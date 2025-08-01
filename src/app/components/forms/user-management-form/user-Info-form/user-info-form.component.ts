@@ -12,7 +12,7 @@ import { DialogModule } from 'primeng/dialog';
 import { DialogService } from 'primeng/dynamicdialog';
 
 import { SelectInputComponent } from 'app/components/shared/inputs/select-input/select-input.component';
-import { BinaryRadioInputComponent } from 'app/components/shared/inputs/binary-radio-input/binary-radio-input.component';
+import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-switch-input/toggle-switch-input.component';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { SearchInputComponent } from 'app/components/shared/inputs/search-input/search-input.component';
 
@@ -33,7 +33,7 @@ import { ValidationSchema } from 'app/constants/validation-schema';
     ButtonModule,
     DialogModule,
     SelectInputComponent,
-    BinaryRadioInputComponent,
+    ToggleSwitchInputComponent,
     TextInputComponent,
     SearchInputComponent,
   ],
