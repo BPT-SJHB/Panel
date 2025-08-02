@@ -34,7 +34,7 @@
       class="px-2 h-full w-full border-y-2 border-l-0 border-r-0 border-gray-400 placeholder:text-gray-400 text-sm focus:border-primary-emphasis transition-all duration-50 ease-in-out focus:outline-none"
       [ngClass]="{
         'focus:border-red-500': control.touched && control.invalid,
-        'bg-surface-200 text-surface-700 dark:text-surface-100 pointer-events-none opacity-90 cursor-not-allowed':
+        'bg-surface-200 text-surface-700 dark:bg-surface-800 dark:text-surface-200 pointer-events-none opacity-90 cursor-not-allowed':
           control.disabled,
         'rounded-l-full border-l-2': buttonIcon.trim() === ''
       }"
