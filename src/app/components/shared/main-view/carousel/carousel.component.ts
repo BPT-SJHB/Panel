@@ -1,10 +1,10 @@
-import { Component, Input, OnInit, Signal, signal } from '@angular/core';
+import { Component, Input, OnInit, signal } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
-import { Skeleton } from 'primeng/skeleton';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
   selector: 'app-carousel',
-  imports: [CarouselModule, Skeleton],
+  imports: [CarouselModule, SkeletonModule],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
 })
@@ -76,7 +76,7 @@ export class CarouselComponent implements OnInit {
     this.customCarouselTokens().responsiveOptions.forEach((element) => {
       const breakpoint = parseInt(element.breakpoint, 10);
       if (this.screenSize() === breakpoint) {
-        if (this.images.length <= element.numVisible) {
+        if (this.images().length <= element.numVisible) {
           this.customCarouselTokens().circular = false;
         } else {
           this.customCarouselTokens().circular = true;
@@ -88,38 +88,26 @@ export class CarouselComponent implements OnInit {
   private skeletonHandler() {
     this.customCarouselTokens().responsiveOptions.forEach((element) => {
       const breakpoint = parseInt(element.breakpoint, 10);
-      console.log('creeen size: ' + this.screenSize());
       if (this.screenSize() === breakpoint) {
         this.skeletonNumber.set(element.numVisible);
       }
     });
-    console.log('skeleton number: ' + this.skeletonNumber());
   }
 
   private screenFounder() {
-    let screenSize = innerWidth;
+    const screenSize = innerWidth;
 
-    for (
-      let i = 0;
-      i < this.customCarouselTokens().responsiveOptions.length;
-      i++
-    ) {
-      const currentElement = this.customCarouselTokens().responsiveOptions[i];
-      const breakpoint = parseInt(currentElement.breakpoint, 10);
+    for (const element of this.customCarouselTokens().responsiveOptions) {
+      const breakpoint = parseInt(element.breakpoint, 10);
 
-      console.log(screenSize + '-' + breakpoint);
       if (screenSize <= breakpoint) {
         this.screenSize.set(breakpoint);
-        console.log('this.screenSize() ' + this.screenSize());
         break;
       }
     }
-    // this.screenSize.set(1400);
   }
 
   get skeletonArrayNumber() {
-    let a = Array.from({ length: this.skeletonNumber() }, (_, i) => i);
-    console.log('SkeletonArrayNumber ' + a);
-    return a;
+    return Array.from({ length: this.skeletonNumber() }, (_, i) => i);
   }
 }
