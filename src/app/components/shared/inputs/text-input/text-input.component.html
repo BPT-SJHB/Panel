@@ -1,40 +1,29 @@
 <div class="flex w-full">
-  <p-input-group styleClass="h-2-5rem w-full">
-    @if (label.trim() === '') {
-    <!-- Icon Addon -->
+  <p-input-group styleClass="h-10 w-full">
     <p-inputgroup-addon
-      [style.width]="addonWidth"
-      [style.padding]="0"
-      [style.margin]="0"
-      [style.border]="0"
+      [style]="{
+        width: addonWidth,
+        padding: 0,
+        margin: 0,
+        border: 0
+      }"
+      class="rounded-full"
     >
       <div
-        class="w-full h-full flex justify-center items-center bg-primary-emphasis rounded-r-md text-primary-contrast border-l-1"
+        class="w-full h-full flex justify-center items-center py-4 px-6 bg-primary-emphasis z-1 rounded-r-full text-primary-contrast"
       >
+        @if (label.trim() === '') {
         <i [class]="icon"></i>
-      </div>
-    </p-inputgroup-addon>
-    } @else {
-    <!-- Label Addon -->
-    <p-inputgroup-addon
-      [style.width]="addonWidth"
-      [style.padding]="0"
-      [style.margin]="0"
-      [style.border]="0"
-    >
-      <div
-        class="w-full h-full flex justify-center items-center bg-primary-emphasis rounded-r-md text-primary-contrast border-l-1"
-      >
+        } @else {
         <span
           class="text-sm text-primary-contrast"
           style="white-space: nowrap"
           >{{ label }}</span
         >
+        }
       </div>
     </p-inputgroup-addon>
-    }
 
-    <!-- Text Input -->
     <input
       #inputRef
       pInputText
@@ -42,35 +31,34 @@
       [formControl]="control"
       [placeholder]="placeholder"
       [readOnly]="readOnly"
-      [style.background]="'var(--p-inputgroup-addon-background)'"
-      class="borde border-l-1 border-surface px-2 h-full w-full placeholder:text-gray-400 text-sm"
+      class="px-2 h-full w-full border-y-2 border-l-0 border-r-0 border-gray-400 placeholder:text-gray-400 text-sm focus:border-primary-emphasis transition-all duration-50 ease-in-out focus:outline-none"
       [ngClass]="{
-        'border-red-500': control.touched && control.invalid,
-        border: true,
-        'rounded-l': buttonIcon === '',
-        'bg-gray-100 text-surface-700 dark:text-surface-100 pointer-events-none opacity-90 cursor-not-allowed':
-          control.disabled
+        'focus:border-red-500': control.touched && control.invalid,
+        'bg-surface-200 text-surface-700 dark:text-surface-100 pointer-events-none opacity-90 cursor-not-allowed':
+          control.disabled,
+        'rounded-l-full border-l-2': buttonIcon.trim() === ''
       }"
       (focus)="onFocusInput(inputRef)"
       (blur)="onBlurInput(inputRef)"
     />
-  </p-input-group>
 
-  @if (buttonIcon.trim() !== '') {
-  <!-- Button Addon -->
-  <p-inputgroup-addon
-    [style.padding]="0"
-    [style.margin]="0"
-    [style.border]="0"
-    class="flex h-2-5rem"
-  >
-    <p-button
-      [icon]="buttonIcon"
-      [disabled]="buttonDisabled"
-      (click)="handleClick()"
-    />
-  </p-inputgroup-addon>
-  }
+    @if (buttonIcon.trim() !== '') {
+    <p-inputgroup-addon
+      [style]="{
+        padding: 0,
+        margin: 0,
+        border: 0
+      }"
+      class="flex h-10 rounded-l-full"
+    >
+      <p-button
+        [icon]="buttonIcon"
+        [disabled]="buttonDisabled"
+        (click)="handleClick()"
+      />
+    </p-inputgroup-addon>
+    }
+  </p-input-group>
 </div>
 
 @if (control.touched && firstErrorMessage) {
