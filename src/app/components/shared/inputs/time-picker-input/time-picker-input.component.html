@@ -6,7 +6,7 @@
     <button
       pButton
       icon="pi pi-chevron-up"
-      class="p-button-text p-button-sm"
+      [class]="buttonsClass()"
       (mousedown)="startContinuousChange(hour, 0, 23, 'increment')"
       (mouseup)="stopContinuousChange()"
       (mouseleave)="stopContinuousChange()"
@@ -18,14 +18,14 @@
       type="text"
       inputmode="numeric"
       [formControl]="hour"
-      class="w-8 h-8 text-center"
+      [class]="inputsClass()"
       (blur)="onBlurInput(hour)"
       maxlength="2"
       />
       <button
         pButton
         icon="pi pi-chevron-down"
-        class="p-button-text p-button-sm"
+        [class]="buttonsClass()"
         (mousedown)="startContinuousChange(hour, 0, 23, 'decrement')"
         (mouseup)="stopContinuousChange()"
         (mouseleave)="stopContinuousChange()"
@@ -42,7 +42,7 @@
       <button
         pButton
         icon="pi pi-chevron-up"
-        class="p-button-text p-button-sm"
+        [class]="buttonsClass()"
         (mousedown)="startContinuousChange(minutes, 0, 59, 'increment')"
         (mouseup)="stopContinuousChange()"
         (mouseleave)="stopContinuousChange()"
@@ -54,14 +54,14 @@
         type="text"
         inputmode="numeric"
         [formControl]="minutes"
-        class="w-8 h-8 text-center"
+        [class]="inputsClass()"
         (blur)="onBlurInput(minutes)"
         maxlength="2"
         />
         <button
           pButton
           icon="pi pi-chevron-down"
-          class="p-button-text p-button-sm"
+          [class]="buttonsClass()"
           (mousedown)="startContinuousChange(minutes, 0, 59, 'decrement')"
           (mouseup)="stopContinuousChange()"
           (mouseleave)="stopContinuousChange()"
@@ -78,7 +78,7 @@
         <button
           pButton
           icon="pi pi-chevron-up"
-          class="p-button-text p-button-sm"
+          [class]="buttonsClass()"
           (mousedown)="startContinuousChange(second, 0, 59, 'increment')"
           (mouseup)="stopContinuousChange()"
           (mouseleave)="stopContinuousChange()"
@@ -90,14 +90,14 @@
           type="text"
           inputmode="numeric"
           [formControl]="second"
-          class="w-8 h-8 text-center"
+          [class]="inputsClass()"
           (blur)="onBlurInput(second)"
           maxlength="2"
           />
           <button
             pButton
             icon="pi pi-chevron-down"
-            class="p-button-text p-button-sm"
+            [class]="buttonsClass()"
             (mousedown)="startContinuousChange(second, 0, 59, 'decrement')"
             (mouseup)="stopContinuousChange()"
             (mouseleave)="stopContinuousChange()"
