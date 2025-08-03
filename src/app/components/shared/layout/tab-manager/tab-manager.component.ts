@@ -7,6 +7,7 @@ import {
   inject,
   effect,
   signal,
+  HostListener,
 } from '@angular/core';
 import { NgClass } from '@angular/common';
 
@@ -25,12 +26,14 @@ import {
   TabComponentRegistry,
 } from 'app/constants/tab-component-registry';
 import { DynamicTab } from 'app/data/model/tabs.model';
-
-// Child component
-import { DashboardContentManagerComponent } from '../dashboard-content-manager/dashboard-content-manager.component';
-import { Subscription } from 'rxjs';
-import { uuidV4 } from 'app/utils/uuid';
 import { DEFAULT_MAIN_TAB_ID, TabData } from 'app/store/tab/tab.reducer';
+
+// Utilities
+import { uuidV4 } from 'app/utils/uuid';
+
+// RxJS
+import { Subject, takeUntil, auditTime, filter, tap } from 'rxjs';
+import { DashboardContentManagerComponent } from '../dashboard-content-manager/dashboard-content-manager.component';
 
 @Component({
   selector: 'app-tab-manager',
@@ -41,17 +44,19 @@ import { DEFAULT_MAIN_TAB_ID, TabData } from 'app/store/tab/tab.reducer';
 })
 export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
   /** ================================
-   *  Signals and State
+   *  Signals and State (public-ish)
    *  ================================ */
 
   // Holds reference to content manager
-  contentManager = signal<DashboardContentManagerComponent | null>(null);
+  readonly contentManager = signal<DashboardContentManagerComponent | null>(
+    null,
+  );
 
   // Controls visibility of sub-tabs
   readonly hiddenSubTab = signal<boolean>(false);
 
   // Tabs map: <id, DynamicTab>
-  tabs = new Map<string, DynamicTab>([
+  readonly tabs = new Map<string, DynamicTab>([
     [
       DEFAULT_MAIN_TAB_ID,
       {
@@ -67,22 +72,30 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
   ]);
 
   // Currently selected tab
-  selectTab = signal<DynamicTab>(this.tabs.get(DEFAULT_MAIN_TAB_ID)!);
+  readonly selectTab = signal<DynamicTab>(this.tabs.get(DEFAULT_MAIN_TAB_ID)!);
 
-  // NgRx store instance
-  private store = inject(Store);
+  /** ================================
+   *  Internal Subjects
+   *  ================================ */
 
-  // Subscriptions
-  private subscriptions: Subscription[] = [];
+  private readonly resize$ = new Subject<void>();
+  private readonly destroy$ = new Subject<void>();
+
+  /** ================================
+   *  Injected dependencies
+   *  ================================ */
+  private readonly store = inject(Store);
 
   constructor() {
-    // Auto-dispatch when selected tab changes
+    // Dispatch renderContent when selected tab changes
     effect(() => {
       const tab = this.selectTab();
-      if (tab) this.dispatchChangeTab(tab);
+      if (tab) {
+        this.dispatchRenderContentFor(tab);
+      }
     });
 
-    // Auto-load content on tab change
+    // Load content when both manager and selected tab are available
     effect(() => {
       const tab = this.selectTab();
       const manager = this.contentManager();
@@ -95,107 +108,128 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
   /** ================================
    *  Lifecycle Hooks
    *  ================================ */
+  ngOnInit(): void {
+    this.resize$
+      .pipe(
+        auditTime(150),
+        filter(() => {
+          const tab = this.selectTab();
+          return !!tab?.config?.subTab?.length && tab.config.subTab.length > 1;
+        }),
+        tap(() => {
+          const tab = this.selectTab();
+          const index = tab.selectedSubTab;
+          const last = (tab.config.subTab?.length ?? 1) - 1;
 
-  ngOnInit(): void {}
+          // Temporarily flip to force layout recalculation
+          tab.selectedSubTab = index < last ? index + 1 : index - 1;
+
+          requestAnimationFrame(() => {
+            tab.selectedSubTab = index;
+          });
+        }),
+        takeUntil(this.destroy$),
+      )
+      .subscribe();
+  }
 
   ngAfterViewInit(): void {
-    // Subscribe to new tab creation
-    const sub1 = this.store
+    // Subscribe to new tab creation requests
+    this.store
       .select(selectorNewTab)
+      .pipe(takeUntil(this.destroy$))
       .subscribe(({ id, title, icon, component, closeable }) => {
-        this.createTab({ id, title, icon, component, closeable });
+        this.createOrSelectTab({ id, title, icon, component, closeable });
       });
 
-    // Subscribe to content changes
-    const sub2 = this.store.select(selectContent).subscribe((content) => {
-      this.hiddenSubTab.set(content.context === 'subMenu');
-    });
-
-    this.subscriptions.push(sub1, sub2);
+    // Track content context to control sub-tab visibility
+    this.store
+      .select(selectContent)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((content) => {
+        this.hiddenSubTab.set(content.context === 'subMenu');
+      });
   }
 
   ngOnDestroy(): void {
-    // Destroy all cached component views
-    for (const tab of this.tabs.values()) {
-      tab.cachedComponent.forEach((comp) => comp.destroy());
-      tab.cachedComponent.clear();
-    }
-
-    // Unsubscribe from all subscriptions
-    this.subscriptions.forEach((sub) => sub.unsubscribe());
+    // Tear down all tab-related resources
+    this.tabs.forEach((tab) => this.destroyTabResources(tab));
+    this.destroy$.next();
+    this.destroy$.complete();
+    this.resize$.complete();
   }
 
   /** ================================
    *  Public Methods
    *  ================================ */
 
-  // Handle main tab click
   onClickTab(tab: DynamicTab): void {
+    // If same tab clicked, re-dispatch its content metadata
     if (this.selectTab() === tab) {
       this.store.dispatch(
         renderContent({
-          pageGroupId: DEFAULT_MAIN_TAB_ID === tab.id ? -1 : undefined,
+          pageGroupId: tab.id === DEFAULT_MAIN_TAB_ID ? -1 : undefined,
           title: tab.title,
           icon: tab.icon,
           context: 'tabContent',
-        })
+        }),
       );
     }
     this.selectTab.set(tab);
   }
 
-  // Handle sub-tab change
   onSubTabChange(index: string | number): void {
-    this.selectTab.update((tab) => ({
-      ...tab!,
-      selectedSubTab: Number(index),
-    }));
+    this.selectTab.update((tab) => {
+      if (!tab) return tab!;
+      return {
+        ...tab,
+        selectedSubTab: Number(index),
+      };
+    });
   }
 
-  createTab(tabData: TabData): void {
+  createOrSelectTab(tabData: TabData): void {
     const { id, title, icon, component, closeable } = tabData;
 
-    // If an ID is provided, check if the tab already exists
+    // If tab exists, simply select it
     if (id && this.tabs.has(id)) {
-      // Switch to the existing tab
       this.selectTab.set(this.tabs.get(id)!);
       return;
     }
 
-    // If no ID or the tab does not exist, create a new tab
+    // Build new tab
     const uuid = uuidV4();
     const config = TabComponentRegistry[component];
-
-    const tab: DynamicTab = {
-      id: id || uuid, // Use the provided ID or generate a new one
+    const newTab: DynamicTab = {
+      id: id || uuid,
       title,
       icon,
       config,
       closeable,
       cachedComponent: new Map(),
       selectedSubTab: 0,
+      // note: keeping original spelling in case registry uses `shearedSignal`
       sharedSignal: config.shearedSignal ? signal(null) : undefined,
     };
 
-    this.tabs.set(tab.id, tab);
-    this.selectTab.set(tab);
+    this.tabs.set(newTab.id, newTab);
+    this.selectTab.set(newTab);
   }
 
-  // Close a tab by its ID
   closeTab(id: string): void {
     const tab = this.tabs.get(id);
     if (!tab || !tab.closeable) return;
 
-    // If the closed tab is selected, switch to previous
+    // If closing the currently selected tab, pick a fallback
     if (this.selectTab()?.id === id) {
-      const tabsArray = Array.from(this.tabs.values());
-      const index = tabsArray.findIndex((t) => t.id === id);
-      const fallback = tabsArray[index - 1] ?? tabsArray[0] ?? null;
-      this.selectTab.set(fallback);
+      const fallback = this.getFallbackTab(id);
+      if (fallback) {
+        this.selectTab.set(fallback);
+      }
     }
 
-    // Destroy cached component views
-    tab.cachedComponent.forEach((comp) => comp.destroy());
+    // Clean up resources and remove
+    this.destroyTabResources(tab);
     this.tabs.delete(id);
   }
 
@@ -203,8 +237,39 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
    *  Private Helpers
    *  ================================ */
 
-  // Load content for selected tab
-  private dispatchChangeTab(tab: DynamicTab): void {
-    this.contentManager()?.loadTabContent(tab);
+  private dispatchRenderContentFor(tab: DynamicTab): void {
+    this.store.dispatch(
+      renderContent({
+        pageGroupId: tab.id === DEFAULT_MAIN_TAB_ID ? -1 : undefined,
+        title: tab.title,
+        icon: tab.icon,
+        context: 'tabContent',
+      }),
+    );
+  }
+
+  @HostListener('window:resize')
+  onWindowResized(): void {
+    this.resize$.next();
+  }
+
+  private getFallbackTab(closedTabId: string): DynamicTab | null {
+    const tabsArray = Array.from(this.tabs.values());
+    const index = tabsArray.findIndex((t) => t.id === closedTabId);
+    if (index === -1) return null;
+    return tabsArray[index - 1] ?? tabsArray[0] ?? null;
+  }
+
+  private destroyTabResources(tab: DynamicTab): void {
+    if (tab.cachedComponent) {
+      tab.cachedComponent.forEach((comp) => {
+        try {
+          comp.destroy();
+        } catch {
+          // swallow individual failures to ensure full cleanup
+        }
+      });
+      tab.cachedComponent.clear();
+    }
   }
 }

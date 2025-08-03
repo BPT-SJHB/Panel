@@ -18,9 +18,9 @@ import { NgClass } from '@angular/common';
   templateUrl: './select-input.component.html',
   styleUrl: './select-input.component.scss',
 })
-export class SelectInputComponent {
-  @Input() options: { label: string; value: any }[] = [];
-  @Input() control = new FormControl(null);
+export class SelectInputComponent<T> {
+  @Input() options: { label: string; value: T }[] = [];
+  @Input() control = new FormControl<T | null>(null);
   @Input() readOnly = false;
   @Input() placeholder = '';
   @Input() disabled = false;

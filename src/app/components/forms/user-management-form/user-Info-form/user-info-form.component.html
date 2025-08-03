@@ -1,8 +1,8 @@
 <div class="p-fluid grid gap-2 relative">
   <form
     class="col-span-12"
-    [class.pointer-events-none]="loading"
-    [class.opacity-60]="loading"
+    [class.pointer-events-none]="loading()"
+    [class.opacity-60]="loading()"
     [formGroup]="searchForm"
   >
     <!-- Search Phone + Refresh -->
@@ -13,7 +13,7 @@
         placeholder="جستجو کاربر"
         [control]="searchPhone"
         validationField="mobile"
-        [disableSearchButton]="this.searchForm.invalid || loading"
+        [disableSearchButton]="searchForm.invalid || loading()"
         [onSearchQuery]="fetchUserByPhone"
         [addonWidth]="'8rem'"
       />
@@ -22,8 +22,8 @@
 
   <form
     class="p-fluid grid col-span-12 gap-6 relative"
-    [class.pointer-events-none]="loading"
-    [class.opacity-60]="loading"
+    [class.pointer-events-none]="loading()"
+    [class.opacity-60]="loading()"
     [formGroup]="userInfoForm"
   >
     <!-- User ID (ReadOnly) -->
@@ -32,7 +32,7 @@
         class="flex-1"
         [readOnly]="true"
         [disabled]="true"
-        [control]="id"
+        [control]="getUserFormControl('id')"
         validationField="id"
         placeholder="شناسه کاربر"
         icon="pi pi-id-card"
@@ -40,7 +40,7 @@
       <app-button
         (click)="resetUserInfoForm()"
         styleClass="rounded-full w-8 h-8"
-        [disabled]="id.value == '0'"
+        [disabled]="getUserFormControl('id').invalid || loading()"
         size="small"
         severity="info"
       >
@@ -54,7 +54,7 @@
         validationField="fullName"
         icon="pi pi-user"
         placeholder="نام کاربر"
-        [control]="name"
+        [control]="getUserFormControl('name')"
       />
     </div>
 
@@ -66,7 +66,7 @@
           addonWidth="7rem"
           class="flex-1"
           placeholder="شماره موبایل کاربر"
-          [control]="phone"
+          [control]="getUserFormControl('phone')"
         />
       </div>
     </div>
@@ -75,7 +75,7 @@
     <div class="col-span-12 md:col-span-6">
       <app-select-input
         icon="pi pi-users"
-        [control]="userType"
+        [control]="getUserFormControl('userType')"
         [options]="roles"
       />
     </div>
@@ -85,13 +85,16 @@
       <app-toggle-switch-input
         [readonly]="true"
         label="وضعیت پیامک"
-        [control]="smsActive"
+        [control]="getUserFormControl('smsActive')"
       />
     </div>
 
     <!-- Radio: User Active -->
     <div class="col-span-12 md:col-span-6 flex px-2">
-      <app-toggle-switch-input label="کاربر" [control]="userActive" />
+      <app-toggle-switch-input
+        label="کاربر"
+        [control]="getUserFormControl('userActive')"
+      />
     </div>
 
     <!-- Action Buttons -->
@@ -100,14 +103,18 @@
     >
       <app-button
         (click)="submitUserInfo()"
-        [disabled]="userInfoForm.invalid || loading"
+        [disabled]="userInfoForm.invalid || loading()"
         label="ثبت و ویرایش"
         styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
       ></app-button>
 
       <app-button
         (click)="activateUserSms()"
-        [disabled]="id.value == '0' || smsActive.value || loading"
+        [disabled]="
+          getUserFormControl('id').invalid ||
+          getUserFormControl('smsActive').value ||
+          loading()
+        "
         severity="warn"
         label="فعال سازی پیامک"
         styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
@@ -115,7 +122,7 @@
 
       <app-button
         (click)="sendWebsiteLink()"
-        [disabled]="id.value == '0' || loading"
+        [disabled]="getUserFormControl('id').invalid || loading()"
         severity="warn"
         label="ارسال لینک سامانه"
         styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
@@ -123,7 +130,7 @@
 
       <app-button
         (click)="resetUserPassword()"
-        [disabled]="id.value == '0' || loading"
+        [disabled]="getUserFormControl('id').invalid || loading()"
         severity="info"
         label="ایجاد رمز عبور جدید"
         styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"

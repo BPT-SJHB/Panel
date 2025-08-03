@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -15,6 +15,7 @@ import { SelectInputComponent } from 'app/components/shared/inputs/select-input/
 import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-switch-input/toggle-switch-input.component';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { SearchInputComponent } from 'app/components/shared/inputs/search-input/search-input.component';
+import { ButtonComponent } from 'app/components/shared/button/button.component';
 
 import { UserManagementService } from 'app/services/user-management/user-management.service';
 import { ToastService } from 'app/services/toast-service/toast.service';
@@ -22,9 +23,18 @@ import { LoadingService } from 'app/services/loading-service/loading-service.ser
 
 import { NewPasswordDialogComponent } from 'app/components/shared/dialog/new-password-dialog/new-password-dialog.component';
 import { SoftwareUserInfo } from 'app/services/user-management/model/software-user-info.model';
-import { ApiResponse } from 'app/data/model/api-Response.model';
 import { ValidationSchema } from 'app/constants/validation-schema';
-import { ButtonComponent } from "app/components/shared/button/button.component";
+import { BaseLoading } from '../../shared/component-base/base-loading';
+import { checkAndToastError } from 'app/utils/api-utils';
+
+interface UserInfoForm {
+  id: number | null;
+  phone: string;
+  name: string;
+  userType: number;
+  smsActive: boolean;
+  userActive: boolean;
+}
 
 @Component({
   selector: 'app-user-info-form',
@@ -37,211 +47,185 @@ import { ButtonComponent } from "app/components/shared/button/button.component";
     ToggleSwitchInputComponent,
     TextInputComponent,
     SearchInputComponent,
-    ButtonComponent
-],
+    ButtonComponent,
+  ],
   providers: [DialogService],
   templateUrl: './user-info-form.component.html',
   styleUrl: './user-info-form.component.scss',
 })
-export class UserInfoFormComponent implements OnInit, OnDestroy {
-  private fb = inject(FormBuilder);
-  private userManager = inject(UserManagementService);
-  private toast = inject(ToastService);
-  private loadingService = inject(LoadingService);
-  private dialogService = inject(DialogService);
-  private destroy$ = new Subject<void>();
+export class UserInfoFormComponent extends BaseLoading implements OnInit {
+  private readonly fb = inject(FormBuilder);
+  private readonly userManager = inject(UserManagementService);
+  private readonly dialogService = inject(DialogService);
+  private readonly nonNullable = this.fb.nonNullable;
 
-  userInfoForm: FormGroup;
-  searchForm: FormGroup;
+  // forms
+  readonly userInfoForm = this.fb.group({
+    id: this.fb.control<number | null>(null, ValidationSchema.id), // nullable
+    phone: this.nonNullable.control('', ValidationSchema.mobile), // non-nullable
+    name: this.nonNullable.control('', ValidationSchema.fullName),
+    userType: this.nonNullable.control(0),
+    smsActive: this.nonNullable.control(false),
+    userActive: this.nonNullable.control(true),
+  });
+
+  readonly searchForm = this.fb.group({
+    searchPhone: this.nonNullable.control('', ValidationSchema.mobile),
+  });
+
   roles: { label: string; value: number }[] = [];
-  loading = false;
 
-  constructor() {
-    // Initialize the search and user info forms
-    this.searchForm = this.fb.group({
-      searchPhone: ['', ValidationSchema.mobile],
+  /** ================================
+   *  Life Cycle
+   *  ================================ */
+  override ngOnInit(): void {
+    this.withLoading(() => this.loadUserTypes());
+    super.ngOnInit();
+  }
+
+  /** ================================
+   *  Public actions
+   *  ================================ */
+
+  fetchUserByPhone: (phone: string) => Promise<void> = async (
+    phone: string,
+  ) => {
+    if (this.searchForm.invalid || this.loading()) return;
+
+    await this.withLoading(async () => {
+      const response = await this.userManager.GetSoftwareUserInfo(phone);
+      if (!checkAndToastError(response, this.toast)) return;
+      console.log(response.data);
+
+      this.populateForm(response.data);
     });
-
-    this.userInfoForm = this.fb.group({
-      id: [0, ValidationSchema.id],
-      phone: ['', ValidationSchema.mobile],
-      name: ['', ValidationSchema.fullName],
-      userType: [0],
-      smsActive: [false],
-      userActive: [true],
-    });
-  }
-
-  // Lifecycle: on component init
-  ngOnInit(): void {
-    this.loadingService.loading$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((val) => (this.loading = val));
-
-    this.loadUserTypes();
-  }
-
-  // Lifecycle: clean up on destroy
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
-  // Load user types from the backend and format them for dropdown
-  private async loadUserTypes(): Promise<void> {
-    this.loadingService.setLoading(true);
-    try {
-      const res = await this.userManager.GetUserTypes();
-      if (!this.isSuccessful(res)) return;
-
-      this.roles =
-        res.data?.map((type) => ({
-          value: type.UTId,
-          label: type.UTTitle,
-        })) ?? [];
-    } finally {
-      this.loadingService.setLoading(false);
-    }
-  }
-
-  // Fetch user info using phone number (called by search)
-  fetchUserByPhone = async (phone: string) => {
-    if (this.searchForm.invalid || this.loading) return;
-
-    this.loadingService.setLoading(true);
-    try {
-      const res = await this.userManager.GetSoftwareUserInfo(phone);
-      if (!this.isSuccessful(res)) return;
-      this.populateForm(res.data!);
-    } finally {
-      this.loadingService.setLoading(false);
-    }
   };
 
-  // Activate SMS access for a user
   async activateUserSms(): Promise<void> {
-    if (
-      this.id.value === 0 ||
-      this.smsActive.invalid ||
-      this.smsActive.value ||
-      this.loading
-    )
-      return;
+    const id = this.getUserFormControl('id');
+    const smsActive = this.getUserFormControl('smsActive');
 
-    this.loadingService.setLoading(true);
-    try {
-      const res = await this.userManager.ActivateUserSMS(this.id.value);
-      if (!this.isSuccessful(res)) return;
+    const canUserSendSms = id.invalid || smsActive.value;
 
-      this.smsActive.setValue(true);
-      this.toast.success('موفق', res.data?.Message ?? 'عملیات موفق آمیز بود.');
-    } finally {
-      this.loadingService.setLoading(false);
-    }
+    if (this.loading() || !canUserSendSms) return;
+
+    await this.withLoading(async () => {
+      const response = await this.userManager.ActivateUserSMS(id.value!);
+      if (!checkAndToastError(response, this.toast)) return;
+
+      smsActive.setValue(true);
+      this.toast.success('موفق', response.data.Message);
+    });
   }
 
-  // Reset the user's password and display in dialog
   async resetUserPassword(): Promise<void> {
-    if (this.id.value === 0 || this.loading) return;
+    const id = this.getUserFormControl('id');
+    if (id.invalid || this.loading()) return;
 
-    this.loadingService.setLoading(true);
-    try {
-      const res = await this.userManager.ResetSoftwareUserPassword(
-        this.id.value
+    await this.withLoading(async () => {
+      const response = await this.userManager.ResetSoftwareUserPassword(
+        id.value!,
       );
-      if (!this.isSuccessful(res)) return;
+      if (!checkAndToastError(response, this.toast)) return;
 
-      const { Username, Password } = res.data!;
+      const { Username, Password } = response.data;
       this.showNewPasswordDialog(Username, Password);
-    } finally {
-      this.loadingService.setLoading(false);
-    }
+    });
   }
 
-  // Register a new user using form data
   async registerUser(): Promise<void> {
-    if (this.loading && this.userInfoForm.invalid) return;
+    if (this.loading() && this.userInfoForm.invalid) return;
 
-    this.loadingService.setLoading(true);
-    try {
+    await this.withLoading(async () => {
       const user = this.getSoftwareUser();
-      const res = await this.userManager.RegisterNewSoftwareUser({
+      const response = await this.userManager.RegisterNewSoftwareUser({
         ...user,
         UserId: 0,
       });
-      if (!this.isSuccessful(res)) return;
+      if (!checkAndToastError(response, this.toast)) return;
 
-      this.toast.success('موفق', 'کاربر با موفقیت ثبت شد.');
+      this.toast.success('موفق', 'اطلاعات با موفقیت ثبت شد.');
       this.resetUserInfoForm();
       this.resetSearchForm();
 
       this.populateForm({
         ...user,
-        UserId: res.data?.UserId ?? 0,
+        UserId: response.data.UserId,
       });
-    } finally {
-      this.loadingService.setLoading(false);
-    }
+    });
   }
 
-  // Update an existing user's information
   async updateUserInfo(): Promise<void> {
-    if (this.userInfoForm.invalid || this.loading) return;
+    if (this.userInfoForm.invalid || this.loading()) return;
 
-    const user = this.getSoftwareUser();
-    this.loadingService.setLoading(true);
-    try {
-      const res = await this.userManager.EditSoftwareUser(user);
-      if (!this.isSuccessful(res)) return;
-      this.toast.success('موفق', res.data?.Message ?? '');
-    } finally {
-      this.loadingService.setLoading(false);
-    }
+    await this.withLoading(async () => {
+      const user = this.getSoftwareUser();
+      const response = await this.userManager.EditSoftwareUser(user);
+      if (!checkAndToastError(response, this.toast)) return;
+
+      this.toast.success('موفق', response.data.Message);
+    });
   }
 
-  // Send the web login link to the user's phone
   async sendWebsiteLink(): Promise<void> {
-    if (this.id.value === 0) return;
+    const id = this.getUserFormControl('id');
+    if (id.invalid || this.loading()) return;
 
-    this.loadingService.setLoading(true);
-    try {
-      const res = await this.userManager.SendWebsiteLink(this.id.value);
-      if (!res.success) {
-        this.toast.error(
-          'خطا',
-          res.error?.message ?? 'خطای غیرمنتظره‌ای رخ داد'
-        );
-        return;
-      }
-      this.toast.success(
-        'موفق',
-        res.data?.Message ?? 'لینک سامانه با موفقیت ارسال گردید'
-      );
-    } finally {
-      this.loadingService.setLoading(true);
+    await this.withLoading(async () => {
+      const response = await this.userManager.SendWebsiteLink(id.value!);
+      if (!checkAndToastError(response, this.toast)) return;
+      this.toast.success('موفق', response.data.Message);
+    });
+  }
+
+  async submitUserInfo(): Promise<void> {
+    const id = this.getUserFormControl('id');
+    if (id.invalid) {
+      await this.registerUser();
+    } else {
+      await this.updateUserInfo();
     }
   }
 
-  // Decide whether to register or update based on user ID
-  async submitUserInfo(): Promise<void> {
-    this.id.value === 0
-      ? await this.registerUser()
-      : await this.updateUserInfo();
+  resetUserInfoForm(): void {
+    this.userInfoForm.reset({
+      id: null,
+      phone: '',
+      name: '',
+      userType: 0,
+      smsActive: false,
+      userActive: true,
+    });
+    this.userInfoForm.markAsPristine();
+    this.userInfoForm.markAsUntouched();
   }
 
-  // Extract user data from form into a SoftwareUserInfo object
+  /** ================================
+   *  Private helpers
+   *  ================================ */
+
+  private async loadUserTypes(): Promise<void> {
+    const response = await this.userManager.GetUserTypes();
+    if (!checkAndToastError(response, this.toast)) return;
+
+    this.roles =
+      response.data?.map((type) => ({
+        value: type.UTId,
+        label: type.UTTitle,
+      })) ?? [];
+  }
+
   private getSoftwareUser(): SoftwareUserInfo {
     return {
-      UserId: this.id.value,
-      MobileNumber: this.phone.value,
-      UserName: this.name.value,
-      UserTypeId: this.userType.value,
-      SMSOwnerActive: this.smsActive.value,
-      UserActive: this.userActive.value,
+      UserId: this.getUserFormControl('id').value ?? 0,
+      MobileNumber: this.getUserFormControl('phone').value,
+      UserName: this.getUserFormControl('name').value,
+      UserTypeId: this.getUserFormControl('userType').value,
+      SMSOwnerActive: this.getUserFormControl('smsActive').value,
+      UserActive: this.getUserFormControl('userActive').value,
     };
   }
 
-  // Open dialog showing new username and password
   private showNewPasswordDialog(username: string, password: string): void {
     this.dialogService.open(NewPasswordDialogComponent, {
       header: 'رمز عبور جدید',
@@ -251,75 +235,37 @@ export class UserInfoFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  // Populate form fields with existing user data
   private populateForm(data: SoftwareUserInfo): void {
-    this.id.setValue(data.UserId);
-    this.phone.setValue(data.MobileNumber);
-    this.name.setValue(data.UserName);
-    this.userType.setValue(data.UserTypeId);
-    this.smsActive.setValue(data.SMSOwnerActive);
-    this.userActive.setValue(data.UserActive);
+    this.userInfoForm.setValue({
+      id: data.UserId,
+      phone: data.MobileNumber ?? '',
+      name: data.UserName ?? '',
+      userType: data.UserTypeId ?? 0,
+      smsActive: data.SMSOwnerActive ?? true,
+      userActive: data.UserActive ?? false,
+    });
   }
 
-  // Check if response is valid and successful
-  private isSuccessful(res: ApiResponse<any>): boolean {
-    if (!res.success || !res.data) {
-      this.toast.error('خطا', res.error?.message ?? 'خطای غیرمنتظره‌ای رخ داد');
-      return false;
-    }
-    return true;
-  }
-
-  // Reset user form to default values
-  resetUserInfoForm(): void {
-    this.userInfoForm.reset();
-    this.userInfoForm.markAsPristine();
-    this.userInfoForm.markAsUntouched();
-    this.id.setValue(0);
-    this.userType.setValue(0);
-    this.smsActive.setValue(false);
-    this.userActive.setValue(true);
-  }
-
-  // Reset the phone search input form
-  resetSearchForm(): void {
-    this.searchForm.reset();
+  private resetSearchForm(): void {
+    this.searchForm.reset({ searchPhone: '' });
     this.searchForm.markAsPristine();
     this.searchForm.markAsUntouched();
   }
 
-  // Getter for searchPhone control
-  get searchPhone(): FormControl {
-    return this.searchForm.get('searchPhone') as FormControl;
+  /** ================================
+   *  Form control getters (typed access)
+   *  ================================ */
+  getUserFormControl<K extends keyof UserInfoForm>(
+    name: K,
+  ): FormControl<UserInfoForm[K]> {
+    const control = this.userInfoForm.get(name as string);
+    if (!control) {
+      throw new Error(`Control "${String(name)}" not found on userInfoForm`);
+    }
+    return control as FormControl<UserInfoForm[K]>;
   }
 
-  // Getter for ID control
-  get id(): FormControl {
-    return this.userInfoForm.get('id') as FormControl;
-  }
-
-  // Getter for phone control
-  get phone(): FormControl {
-    return this.userInfoForm.get('phone') as FormControl;
-  }
-
-  // Getter for name control
-  get name(): FormControl {
-    return this.userInfoForm.get('name') as FormControl;
-  }
-
-  // Getter for user type control
-  get userType(): FormControl {
-    return this.userInfoForm.get('userType') as FormControl;
-  }
-
-  // Getter for SMS activation control
-  get smsActive(): FormControl {
-    return this.userInfoForm.get('smsActive') as FormControl;
-  }
-
-  // Getter for user activation control
-  get userActive(): FormControl {
-    return this.userInfoForm.get('userActive') as FormControl;
+  get searchPhone(): FormControl<string> {
+    return this.searchForm.controls.searchPhone as FormControl<string>;
   }
 }
