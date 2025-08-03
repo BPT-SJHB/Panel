@@ -94,9 +94,9 @@ export class TimePickerInput implements OnInit, OnChanges, OnDestroy {
     this.setInputsClass();
 
     // ✅ Enforce valid time ranges
-    this.enforceTimeRange(this.hour, 0, 23);     // Hours: 00–23
-    this.enforceTimeRange(this.minutes, 0, 59);  // Minutes: 00–59
-    this.enforceTimeRange(this.second, 0, 59);   // Seconds: 00–59
+    this.enforceTimeRange(this.hour, 0, 23); // Hours: 00–23
+    this.enforceTimeRange(this.minutes, 0, 59); // Minutes: 00–59
+    this.enforceTimeRange(this.second, 0, 59); // Seconds: 00–59
 
     // 🔄 Sync parent → internal controls
     this.control.valueChanges
