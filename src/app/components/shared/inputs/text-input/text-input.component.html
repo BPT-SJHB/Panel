@@ -7,10 +7,10 @@
         margin: 0,
         border: 0
       }"
-      class="rounded-full"
+      class="rounded-2xl"
     >
       <div
-        class="w-full h-full flex justify-center items-center py-4 px-6 bg-primary-emphasis z-1 rounded-r-full text-primary-contrast"
+        class="w-full h-full flex justify-center items-center py-4 px-6 bg-primary-emphasis z-1 rounded-r-2xl text-primary-contrast"
       >
         @if (label.trim() === '') {
         <i [class]="icon"></i>
@@ -36,7 +36,7 @@
         'focus:border-red-500': control.touched && control.invalid,
         'bg-surface-200 text-surface-700 dark:bg-surface-800 dark:text-surface-200 pointer-events-none opacity-90 cursor-not-allowed':
           control.disabled,
-        'rounded-l-full border-l-2': buttonIcon.trim() === ''
+        'rounded-l-2xl border-l-2': buttonIcon.trim() === ''
       }"
       (focus)="onFocusInput(inputRef)"
       (blur)="onBlurInput(inputRef)"
@@ -49,7 +49,7 @@
         margin: 0,
         border: 0
       }"
-      class="flex h-10 rounded-l-full"
+      class="flex h-10 rounded-l-2xl"
     >
       <p-button
         [icon]="buttonIcon"
