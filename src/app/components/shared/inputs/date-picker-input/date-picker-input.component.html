@@ -3,14 +3,14 @@
     <!-- 🎨 Icon or 🏷️ Label Addon -->
     @if (label.trim() === '') {
     <p-inputgroup-addon
-      class="bg-primary text-primary-contrast flex items-center justify-center px-4 rounded-r"
+      class="bg-primary-emphasis text-primary-contrast flex items-center justify-center px-4 rounded-l-2xl border-primary-emphasis"
       [style.width]="addonWidth"
     >
       <i [class]="icon"></i>
     </p-inputgroup-addon>
     } @if (label.trim() !== '') {
     <p-inputgroup-addon
-      class="bg-primary text-primary-contrast rounded-r flex items-center justify-center"
+      class="bg-primary-emphasis text-primary-contrast rounded-r-2xl border-primary-emphasis h-full flex items-center justify-center"
       [style.width]="addonWidth"
     >
       <span class="text-sm whitespace-nowrap">{{ label }}</span>
@@ -31,18 +31,12 @@
             [formControl]="control"
             [placeholder]="placeholder"
             [readOnly]="readOnly"
-            [style.background]="'var(--p-inputgroup-addon-background)'"
-            class="borde border-l-1 border-surface px-2 h-full w-full placeholder:text-gray-400 text-sm"
+            class="px-2 h-full w-full border-2 border-r-0 border-gray-400 rounded-l-2xl placeholder:text-gray-400 text-sm focus:border-primary-emphasis transition-all duration-50 ease-in-out focus:outline-none"
             [ngClass]="{
               'border-red-500': control.touched && control.invalid,
-              border: true,
-              'px-2': true,
-              'h-full': true,
-              'w-full': true,
               'bg-gray-100 text-gray-500 pointer-events-none opacity-60 cursor-not-allowed':
                 control.disabled
             }"
-            class="rounded-l-md"
             (focus)="onFocusInput(inputRef)"
             (blur)="onBlurInput(inputRef)"
           />
