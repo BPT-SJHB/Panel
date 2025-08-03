@@ -1,6 +1,6 @@
 <!-- Wallet Button -->
 <div
-  class="flex h-10 rounded-md border bg-button-secondary text-button-secondary hover:bg-button-secondary-hover cursor-pointer transition-all"
+  class="flex h-10 rounded-full bg-button-secondary text-button-secondary hover:bg-button-secondary-hover hover:scale-105 transition-all duration-50 active:translate-y-0.5 active:shadow-sm active:scale-100"
   (click)="walletPopover.toggle($event)"
 >
   <!-- Wallet Icon -->
@@ -8,9 +8,8 @@
     icon="pi pi-wallet"
     shape="square"
     size="normal"
-    class="w-10 h-full text-info"
+    class="w-10 h-full text-info rounded-r-full rounded-bl-full shadow-[-5px_0_5px_rgba(0,0,0,0.4)]"
   />
-  <div class="h-full w-0.5 bg-gray-600 ml-1"></div>
   <!-- Wallet Loading State -->
   <div
     class="flex flex-col justify-center items-center gap-1 pl-2"
@@ -22,9 +21,7 @@
 
   <!-- Wallet Info (When Loaded) -->
   <ng-template #walletContent>
-    <div
-      class="flex items-center gap-2 px-3 py-1 text-sm font-semibold shadow-sm"
-    >
+    <div class="flex items-center gap-2 px-3 py-1 text-sm font-semibold">
       <span>{{ wallet()?.Balance | number : "1.0-0" }} تومان</span>
       <i class="pi pi-angle-down text-xs text-muted-foreground"></i>
     </div>
@@ -32,12 +29,19 @@
 </div>
 
 <!-- Wallet Popover -->
-<p-popover #walletPopover>
+<p-popover
+  [dt]="{
+    root: {
+      borderRadius: '2rem',
+    }
+  }"
+  #walletPopover
+>
   <div
-    class="w-64 p-4 rounded-xl bg-background flex flex-col gap-4 font-medium"
+    class="w-64 p-2 rounded-xl bg-background flex flex-col gap-2 font-medium"
   >
     <!-- Wallet Summary -->
-    <div class="flex items-center justify-between text-sm border-b pb-3">
+    <div class="flex items-center justify-between text-sm pb-3">
       <span class="text-muted-foreground">موجودی کیف پول</span>
       <strong class="text-foreground">
         {{ wallet()?.Balance | number : "1.0-0" }} تومان
@@ -47,9 +51,9 @@
     <!-- Recharge Button -->
     <button
       (click)="openWallet(walletPopover)"
-      class="flex items-center w-full gap-3 px-3 py-2 rounded-lg hover:bg-emphasis transition-colors"
+      class="flex items-center h-[3rem] w-full gap-3 px-3 py-2 focus:outline-0 rounded-2xl bg-green-200 hover:bg-green-300 dark:bg-green-800 dark:hover:bg-green-700 transition-colors"
     >
-      <i class="pi pi-plus-circle text-green-500"></i>
+      <i class="pi pi-plus-circle text-emerald-600 dark:text-emerald-400"></i>
       <span>شارژ کیف پول</span>
     </button>
   </div>
