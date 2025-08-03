@@ -36,6 +36,7 @@ export class ToggleSwitchInputComponent
       borderWidth: '1px',
       borderStyle: 'solid',
       checkedHoverBackground: 'var(--p-emerald-500)',
+      checkedBackground: 'var(--p-emerald-600)'
     },
     handle: {
       size: '1.5rem',
