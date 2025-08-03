@@ -56,7 +56,7 @@ export class TimePickerInput implements OnInit, OnChanges, OnDestroy {
   buttonsClass = signal('');
 
   inputSetting = {
-    animation: 'transition-all duration-50 ease-in-out',
+    animation: 'transition-all duration-75 ease-in-out',
     style:
       'w-8 h-8 text-center focus:border-2 focus:border-primary-emphasis focus:rounded-md focus:outline-0',
   };
