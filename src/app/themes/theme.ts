@@ -17,7 +17,7 @@ const customPreset: AuraBaseDesignTokens = {
       800: '{emerald.800}',
       900: '{emerald.900}',
       950: '{emerald.950}',
-
+    },
     colorScheme: {
       dark: {
         primary: {
