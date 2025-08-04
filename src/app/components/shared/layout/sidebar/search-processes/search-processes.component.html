@@ -1,4 +1,4 @@
-<div class="hidden lg:justify-center lg:flex lg:px-4 lg:py-4 lg:my-4 ">
+<div class="hidden lg:justify-center lg:flex lg:px-4 lg:py-4 lg:my-4">
   <app-text-input
     class="w-full max-w-lg"
     icon="pi pi-search"
@@ -10,14 +10,12 @@
 <p-button
   (onClick)="isDialogVisible = true"
   [icon]="'pi pi-search'"
-  styleClass="border-gray-900 text-black border-2"
-  size="small"
+  styleClass="text-black"
   severity="info"
   [rounded]="true"
   aria-label="Toggle Theme"
-  class="lg:hidden" 
+  class="lg:hidden"
 ></p-button>
-
 
 <p-dialog
   draggable="false"
@@ -50,18 +48,15 @@
       >
         <div class="flex flex-row gap-2">
           <i
-            class="pi text-lg font-semibold text-primary" 
+            class="pi text-lg font-semibold text-primary"
             [class]="process.icon"
-          >           
-          </i>
- 
-          <h3
-            class="text-lg font-semibold text-primary"
           >
+          </i>
+
+          <h3 class="text-lg font-semibold text-primary">
             {{ process.title }}
           </h3>
-
-       </div>
+        </div>
         <p class="text-gray-600 dark:text-gray-400 mt-1 text-sm line-clamp-2">
           {{ process.description }}
         </p>
