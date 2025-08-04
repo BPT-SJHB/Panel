@@ -1,4 +1,8 @@
 ::ng-deep .p-drawer-content {
- direction: ltr;
- padding: 0;
+  direction: ltr;
+  padding: 0;
+}
+
+::ng-deep .p-drawer-right {
+  width: 18rem;
 }
