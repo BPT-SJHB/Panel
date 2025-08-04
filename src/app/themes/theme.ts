@@ -17,6 +17,22 @@ const customPreset: AuraBaseDesignTokens = {
       800: '{emerald.800}',
       900: '{emerald.900}',
       950: '{emerald.950}',
+
+    colorScheme: {
+      dark: {
+        primary: {
+          color: '{primary.500}',
+          activeColor: '{primary.500}',
+          hoverColor: '{primary.500}',
+        },
+      },
+      light: {
+        primary: {
+          color: '{primary.500}',
+          activeColor: '{primary.500}',
+          hoverColor: '{primary.500}',
+        },
+      },
     },
   },
 };
