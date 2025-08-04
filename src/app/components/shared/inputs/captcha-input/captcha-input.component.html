@@ -2,36 +2,47 @@
   <input hidden [formControl]="sessionIdControl" readonly />
 
   <p-inputgroup styleClass="h-2-5rem">
-    <p-inputgroup-addon [style.padding]="0" [style.border]="0">
+    <p-inputgroup-addon
+      class="rounded-2xl"
+      [style.padding]="0"
+      [style.border]="0"
+    >
       <img
         [src]="imageData"
         alt="کپچا"
-        class="w-full h-full object-fill rounded-r-sm"
+        class="w-full h-full object-fill z-10 border-2 border-primary-emphasis rounded-r-2xl"
       />
     </p-inputgroup-addon>
 
     <input
+      pInputText
       [formControl]="captchaInputControl"
       pInputText
       placeholder="عدد تصویر وارد کنید"
       [style.background]="'var(--p-inputgroup-addon-background)'"
-      class="borde border-l-1 border-surface px-2 h-full w-full placeholder:text-gray-400 text-sm"
+      class="border border-y-2 border-x-0 focus:outline-0 border-surface-400 focus:border-primary-emphasis px-2 h-full w-full placeholder:text-gray-400 text-sm"
       [ngClass]="{
-        'border-red-500':
+        'focus:border-red-500':
           captchaInputControl.touched && captchaInputControl.invalid,
-        border: true,
-        'rounded-l': true,
-        'px-2': true,
-        'h-full': true,
-        'w-full': true
       }"
     />
-
     <p-inputgroup-addon
-      (click)="onRefreshClick()"
-      class="bg-secondary rounded-l flex items-center justify-center px-4 cursor-pointer"
+      [style]="{
+        padding: 0,
+        margin: 0,
+        border: 0
+      }"
+      class="flex h-10 rounded-l-2xl"
     >
-      <i [ngClass]="{ rotate: disableRefresh }" class="pi pi-refresh"></i>
+      <p-button
+        icon="pi pi-refresh text-primary-emphasis"
+        (click)="onRefreshClick()"
+      >
+        <i
+          [ngClass]="{ rotate: disableRefresh }"
+          class="pi pi-refresh fixed text-primary-contrast"
+        ></i>
+      </p-button>
     </p-inputgroup-addon>
   </p-inputgroup>
 
