@@ -35,9 +35,15 @@ interface ButtonStyle {
   styleUrl: './button.component.scss',
 })
 export class ButtonComponent implements OnInit, OnChanges {
-  @Input() severity: 'green' | 'info' | 'danger' | 'secondary' | 'warn' =
-    'green';
+  @Input() severity:
+    | 'primary'
+    | 'green'
+    | 'info'
+    | 'danger'
+    | 'secondary'
+    | 'warn' = 'green';
   @Input() syncShadow: boolean = true;
+  @Input() shadow: boolean = true;
   @Input() label: string = '';
   @Input() disabled: boolean = false;
   @Input() size: 'small' | 'large' | 'normal' = 'normal';
@@ -52,6 +58,14 @@ export class ButtonComponent implements OnInit, OnChanges {
   class = signal('rounded-[9999px] border-0 text-primary-contrast');
   style: ButtonStyle = {
     colors: {
+      primary: {
+        gradient:
+          'bg-gradient-to-b dark:from-primary-400 dark:to-primary-800 from-primary-400 to-primary-800 to-75%',
+        shadow: {
+          normal: 'shadow-[0px_4px_8px_var(--p-surface-500)]',
+          sync: 'dark:shadow-[0px_4px_8px_theme(colors.primary.800)] shadow-[0px_4px_8px_theme(colors.primary.800)]',
+        },
+      },
       green: {
         gradient:
           'bg-gradient-to-b dark:from-teal-200 dark:to-emerald-500 from-teal-500 to-emerald-700 to-75%',
@@ -109,10 +123,12 @@ export class ButtonComponent implements OnInit, OnChanges {
             ? this.style.size?.large
             : this.style.size?.small
       } ${this.style.colors[this.severity].gradient} ${
-        this.syncShadow
-          ? this.style.colors[this.severity].shadow.sync
-          : this.style.colors[this.severity].shadow.normal
-      } ${!this.disabled ? this.style.animation : ''}`,
+        this.shadow
+          ? this.syncShadow
+            ? this.style.colors[this.severity].shadow.sync
+            : this.style.colors[this.severity].shadow.normal
+          : ''
+      } ${!this.disabled ? this.style.animation : ''}`
     );
   }
 
