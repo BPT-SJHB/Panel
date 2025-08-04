@@ -1,5 +1,11 @@
-<div class="relative w-full h-full bg-primary text-primary-contrast lg:pr-4 py-2 z-15 flex items-center justify-between">
-  <app-button class="lg:hidden" (onClick)="openSidebar()">
+<div
+  class="relative w-full h-full bg-primary text-primary-contrast lg:pr-4 lg:py-2 z-15 flex items-center justify-between"
+>
+  <app-button
+    severity="primary"
+    class="lg:hidden"
+    (onClick)="openSidebar()"
+  >
     <i class="pi pi-align-right text-xl"></i>
   </app-button>
   <div class="flex items-center justify-center gap-4 m-auto lg:m-0">
@@ -8,8 +14,8 @@
   </div>
   <div class="lg:flex flex-row-reverse items-center justify-center gap-2 px-2">
     <app-user-profile [profile]="profile" class="hidden lg:block" />
-    <app-wallet-profile [wallet]="wallet" class="hidden lg:block"/>
-    <div class="flex gap-1">
+    <app-wallet-profile [wallet]="wallet" class="hidden lg:block" />
+    <div class="flex justify-center items-center gap-2">
       <app-search-processes class="lg:hidden" />
       <app-theme-management />
     </div>
