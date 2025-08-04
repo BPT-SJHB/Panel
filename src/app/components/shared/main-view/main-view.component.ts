@@ -72,23 +72,38 @@ export class MainViewComponent implements AfterViewInit, OnDestroy {
     const imageArray = [
       {
         title: 'one',
-        imgLink: 'https://api.slingacademy.com/public/sample-photos/1.jpeg',
+        imgSrc:
+          'https://esfahan.rmto.ir/data/41/sis_advService/517/1753605065481cdcjntc48h2vk6afmhoqpa0l8m.jpg',
+        imgLink:
+          'https://esfahan.rmto.ir/fa/sis_advService/196040-%DA%86%D8%B4%D9%85-%D8%A8%D9%87-%D8%B1%D8%A7%D9%87%DB%8C%D9%85-%D8%A7%D8%B1%D8%A8%D8%B9%DB%8C%D9%86-1404.html',
       },
       {
         title: 'two',
-        imgLink: 'https://api.slingacademy.com/public/sample-photos/2.jpeg',
+        imgSrc:
+          'https://esfahan.rmto.ir/data/41/sis_advService/963/1718085378243c7f77qd6eccqon0osos1b3b0lg.jpg',
+        imgLink:
+          'https://esfahan.rmto.ir/fa/sis_advService/2181438-%DA%A9%D8%B3%D8%A8-%D8%B1%D8%AA%D8%A8%D9%87-%D8%A8%D8%B1%D8%AA%D8%B1-%D8%A7%D8%AF%D8%A7%D8%B1%D9%87-%DA%A9%D9%84-%D8%B1%D8%A7%D9%87%D8%AF%D8%A7%D8%B1%DB%8C-%D8%AD%D9%85%D9%84-%D9%86%D9%82%D9%84-%D8%AC%D8%A7%D8%AF%D9%87-%D8%A7%DB%8C-%D8%A7%D8%B3%D8%AA%D8%A7%D9%86-%D8%A7%D8%B5%D9%81%D9%87%D8%A7%D9%86.html',
       },
       {
         title: 'three',
-        imgLink: 'https://api.slingacademy.com/public/sample-photos/3.jpeg',
+        imgSrc:
+          'https://esfahan.rmto.ir/data/41/sis_advService/907/1734443397250g8qu2ai1br6ttc4mdnm5igel6f.jpg',
+        imgLink:
+          'https://esfahan.rmto.ir/fa/sis_advService/2023857-%D8%AC%D8%B4%D9%86%D9%88%D8%A7%D8%B1%D9%87-%D8%B4%D9%87%DB%8C%D8%AF-%D8%B1%D8%AC%D8%A7%D8%A6%DB%8C.html',
       },
       {
         title: 'four',
-        imgLink: 'https://api.slingacademy.com/public/sample-photos/4.jpeg',
+        imgSrc:
+          'https://img9.irna.ir/d/r2/2025/03/08/3/171731742.jpg?ts=1741437565342',
+        imgLink:
+          'https://www.irna.ir/news/85772544/%D8%B4%DB%8C%D8%B4-%D8%AF%D9%88%D9%86%DA%AF-%D8%A8%D8%B1%D8%A7%D9%86%DB%8C%D9%85-%D9%BE%D9%88%DB%8C%D8%B4%DB%8C-%D8%A8%D8%A7-%D9%87%D8%AF%D9%81-%DA%A9%D8%A7%D9%87%D8%B4-%DB%B3%DB%B0-%D8%AF%D8%B1%D8%B5%D8%AF%DB%8C-%D8%AA%D9%84%D9%81%D8%A7%D8%AA-%D8%AC%D8%A7%D8%AF%D9%87-%D8%A7%DB%8C',
       },
       {
         title: 'five',
-        imgLink: 'https://api.slingacademy.com/public/sample-photos/5.jpeg',
+        imgSrc:
+          'https://rmto.ir/data/0/sis_advService/1115/17537618294643ootbdl4sf70t8pecs7a0ed1v6.jpg',
+        imgLink:
+          'https://rmto.ir/fa/sis_advService/2996737-%DA%86%D8%B4%D9%85-%D8%A8%D8%B1%D8%A7%D9%87%DB%8C%D9%851.html',
       },
     ];
 
