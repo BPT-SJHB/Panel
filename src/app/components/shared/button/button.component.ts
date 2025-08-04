@@ -35,7 +35,8 @@ interface ButtonStyle {
   styleUrl: './button.component.scss',
 })
 export class ButtonComponent implements OnInit, OnChanges {
-  @Input() severity: 'green' | 'info' | 'danger' | 'secondary' |'warn' = 'green';
+  @Input() severity: 'green' | 'info' | 'danger' | 'secondary' | 'warn' =
+    'green';
   @Input() syncShadow: boolean = true;
   @Input() label: string = '';
   @Input() disabled: boolean = false;
@@ -48,7 +49,7 @@ export class ButtonComponent implements OnInit, OnChanges {
 
   @Output() onClick = new EventEmitter<void>();
 
-  class = signal('rounded-[9999px] border-0 text-primary-contrast m-3');
+  class = signal('rounded-[9999px] border-0 text-primary-contrast');
   style: ButtonStyle = {
     colors: {
       green: {
@@ -105,13 +106,13 @@ export class ButtonComponent implements OnInit, OnChanges {
         this.size === 'normal'
           ? ''
           : this.size === 'large'
-          ? this.style.size?.large
-          : this.style.size?.small
+            ? this.style.size?.large
+            : this.style.size?.small
       } ${this.style.colors[this.severity].gradient} ${
         this.syncShadow
           ? this.style.colors[this.severity].shadow.sync
           : this.style.colors[this.severity].shadow.normal
-      } ${!this.disabled ? this.style.animation : ''}`
+      } ${!this.disabled ? this.style.animation : ''}`,
     );
   }
 
