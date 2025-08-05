@@ -37,6 +37,7 @@ import { PageGroupItem } from 'app/data/model/menu-item.model';
 // RxJS
 import { Subscription } from 'rxjs';
 import { MobileTabBarComponent } from 'app/components/shared/layout/mobile-tab-bar/mobile-tab-bar.component';
+import { ExitConfirmationDialogComponent } from 'app/components/shared/exit-confirmation-dialog/exit-confirmation-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -50,6 +51,7 @@ import { MobileTabBarComponent } from 'app/components/shared/layout/mobile-tab-b
     DashboardContentManagerComponent,
     MobileTabBarComponent,
     SupportButtonComponent,
+    ExitConfirmationDialogComponent,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
