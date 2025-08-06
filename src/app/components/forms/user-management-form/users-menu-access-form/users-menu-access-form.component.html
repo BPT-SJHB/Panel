@@ -1,80 +1,36 @@
-@if (!isLoading) {
 <div>
-  <div class="grid grid-cols-12 card gap-5">
-    <form
+  <div class="grid grid-cols-12">
+    <div class="col-span-12">
+      <app-search-input
+        placeholder="شماره تلفن کاربر"
+        [onSearchQuery]="searchUser"
+        [control]="mobileControl"
+        [disableSearchButton]="mobileControl.invalid || loading()"
+        validationField="mobile"
+      />
+    </div>
+    <app-tree-table-checkbox
       class="col-span-12"
-      (ngSubmit)="getUserAccessMenu()"
-      [class.pointer-events-none]="isLoading"
-      [class.opacity-60]="isLoading"
-      [formGroup]="searchForm"
-    >
-      <!-- Search Phone + Refresh -->
-      <div class="flex gap-2">
-        <app-text-input
-          class="flex-1"
-          placeholder="جستجو کاربر"
-          addonWidth="7rem"
-          [control]="searchPhone"
-          validationField="mobile"
-          label="شماره موبایل"
-        />
-        <app-button
-          type="submit"
-          icon="pi pi-search"
-          styleClass="mt-1 w-8 h-8 rounded-full"
-          (click)="getUserAccessMenu()"
-          [disabled]="this.searchForm.invalid || isLoading"
-        />
-      </div>
-    </form>
-    <app-search-input
-      class="col-span-12"
-      (rawInput)="tt.filter($any($event), 'PGTitle', 'contains')"
-      [autoTriggerSearch]="true"
-    ></app-search-input>
-    <p-treetable
-      #tt
-      [value]="accessTable"
-      [columns]="cols"
-      selectionMode="checkbox"
-      [(selectionKeys)]="selectedNodes"
-      dataKey="key"
-      class="col-span-12"
-    >
-      <ng-template #header let-columns>
-        <tr>
-          @for (col of columns; track col) {
-          <th>
-            {{ col.header }}
-          </th>
-          }
-        </tr>
-      </ng-template>
-      <ng-template
-        #body
-        let-rowNode
-        let-rowData="rowData"
-        let-columns="columns"
-      >
-        <tr [ttRow]="rowNode" [ttSelectableRow]="rowNode">
-          @for (col of columns; track col; let i = $index) {
-          <td>
-            @if (i === 0) {
-            <p-treetable-toggler [rowNode]="rowNode" />
-            } @if (i === 0) {
-            <p-treetable-checkbox [value]="rowNode" />
-            }
-            {{ rowData[col.field] }}
-          </td>
-          }
-        </tr>
-      </ng-template>
-    </p-treetable>
+      searchPlaceholder="جستجو گروه و زیرگروه"
+      childField="PAccess"
+      parentField="PGAccess"
+      [tree]="tree()"
+      [cols]="cols"
+      [rows]="rows"
+      [searchFields]="searchFields"
+      [enabledSearch]="true"
+      [enabledAutoSearch]="true"
+      (onTableCheckBoxChange)="onTableCheckBoxChange($event)"
+    />
+  </div>
+
+  <div class="col-span-12 flex items-center justify-center mt-5 px-5">
     <app-button
-      class="flex flex-col m-2 col-span-12"
+      class="w-full"
+      styleClass="w-full"
       label="ثبت تغییرات"
-      (onClick)="SaveChanges()"
+      [disabled]="isSubmitButtonDisabled()"
+      (click)="updateAccesses()"
     />
   </div>
 </div>
-}
