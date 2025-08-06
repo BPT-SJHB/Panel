@@ -1,9 +1,24 @@
+<!-- top icon of login card (on mobile) -->
+<div
+  class="lg:hidden relative shadow-[0px_10px_0px_rgba(0,0,0,1)] flex justify-center rounded-2xl"
+>
+  <div class="absolute p-1 overflow-hidden w-[8rem] top-[-8rem] rounded-[1rem]">
+    <div class="absolute overlay bg-surface-0"></div>
+    <!-- light theme -->
+    <img class="dark:hidden w-full" src="assets/rmto-logo.webp" />
+    <!-- dark theme -->
+    <img class="hidden dark:block w-full" src="assets/rmto-logo-dark-noText.webp" />
+  </div>
+</div>
 <form
-  class="flex flex-col gap-10"
+  class="flex h-full flex-col gap-10"
   [formGroup]="loginForm"
   (ngSubmit)="onSubmit()"
 >
-  <h3 class="text-center mb-4 text-xl leading-10  font-bold" [innerHTML]="loginTitle"></h3>
+  <h3
+    class="text-center mb-4 text-xl leading-10 font-bold"
+    [innerHTML]="loginTitle"
+  ></h3>
 
   <div class="flex flex-col gap-8">
     <app-text-input
@@ -22,9 +37,9 @@
 
       <div class="flex justify-end w-full mb-1">
         <a [href]="hrefForgetPassword">
-          <span
-            class="text-cyan-500 text-shadow-sm text-sm"
-          > رمز عبورتان را فراموش کردید؟</span>
+          <span class="text-cyan-500 text-shadow-sm text-sm">
+            رمز عبورتان را فراموش کردید؟</span
+          >
         </a>
       </div>
     </div>
