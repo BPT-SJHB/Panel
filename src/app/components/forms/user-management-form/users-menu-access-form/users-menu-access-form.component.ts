@@ -1,259 +1,198 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TreeNode } from 'primeng/api';
 import { TreeTableModule } from 'primeng/treetable';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { UserManagementService } from 'app/services/user-management/user-management.service';
 import { SearchInputComponent } from 'app/components/shared/inputs/search-input/search-input.component';
-import { SoftwareUserInfo } from 'app/services/user-management/model/software-user-info.model';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import { ToastService } from 'app/services/toast-service/toast.service';
-import { ApiResponse } from 'app/data/model/api-Response.model';
-import { ShortResponse } from 'app/data/model/short-response.model';
-import { TextInputComponent } from '../../../shared/inputs/text-input/text-input.component';
-import { ValidationSchema } from 'app/constants/validation-schema';
-import { Subject, takeUntil } from 'rxjs';
-import { LoadingService } from 'app/services/loading-service/loading-service.service';
-import { ButtonComponent } from "app/components/shared/button/button.component";
+  TreeTableCheckboxComponent,
+  TreeTableChangedData,
+} from 'app/components/trees/tree-table-checkbox/tree-table-checkbox.component';
 
-interface SelectedNodes {
-  [key: string]: { checked: boolean; partialChecked?: boolean };
+import { BaseLoading } from '../../shared/component-base/base-loading';
+import { ApiGroupProcess } from 'app/data/model/api-group-process.model';
+import { SoftwareUserInfo } from 'app/services/user-management/model/software-user-info.model';
+import { ShortResponse } from 'app/data/model/short-response.model';
+import { ApiResponse } from 'app/data/model/api-Response.model';
+import { ValidationSchema } from 'app/constants/validation-schema';
+import { checkAndToastError } from 'app/utils/api-utils';
+import { ButtonComponent } from 'app/components/shared/button/button.component';
+
+interface PageGroup {
+  PGId: number;
+  PGTitle: string;
+  PGAccess: boolean;
+}
+
+interface Process {
+  PId: number;
+  PTitle: string;
+  PAccess: boolean;
 }
 
 @Component({
   selector: 'app-users-menu-access-form',
-  imports: [
-    TreeTableModule,
-    SearchInputComponent,
-    ProgressSpinnerModule,
-    ReactiveFormsModule,
-    TextInputComponent,
-    ButtonComponent
-],
+  standalone: true,
   templateUrl: './users-menu-access-form.component.html',
   styleUrl: './users-menu-access-form.component.scss',
+  imports: [
+    TreeTableModule,
+    ProgressSpinnerModule,
+    ReactiveFormsModule,
+    SearchInputComponent,
+    TreeTableCheckboxComponent,
+    ButtonComponent,
+  ],
 })
-export class UsersMenuAccessFormComponent implements OnInit, OnDestroy {
-  private userManager = inject(UserManagementService);
-  private toast = inject(ToastService);
-  private fb = inject(FormBuilder);
-  private loadingService = inject(LoadingService);
-  private destroy$ = new Subject<void>();
+export class UsersMenuAccessFormComponent extends BaseLoading {
+  private readonly userService = inject(UserManagementService);
 
-  isLoading: boolean = false;
-  accessTable?: TreeNode[] = [];
-  selectedNodes: SelectedNodes = {};
-  selectedNodesCopy: SelectedNodes = {};
-  userInfo: SoftwareUserInfo = { UserId: 0 };
+  readonly mobileControl = new FormControl('', ValidationSchema.mobile);
+  readonly tree = signal<TreeNode[]>([]);
+  readonly userInfo = signal<SoftwareUserInfo | null>(null);
 
-  searchForm: FormGroup = this.fb.group({
-    searchPhone: ['', ValidationSchema.mobile],
-  });
-  cols = [
-    { field: 'PGTitle', header: 'نام منو' },
-    { field: 'Description', header: 'توضیحات' },
-  ];
+  readonly rows = [['PGTitle', 'PTitle'], ['Description']];
+  readonly searchFields = ['PGTitle', 'PTitle'];
+  readonly cols = ['منو', 'توضیحات'];
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
+  private parentChanges = new Map<number, PageGroup>();
+  private childChanges = new Map<number, Process>();
 
-  ngOnInit(): void {
-    this.loadingService.loading$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((value) => (this.isLoading = value));
-  }
+  /**
+   * Search user by mobile number and load their menu access tree
+   */
+  searchUser = async (query: string): Promise<void> => {
+    if (this.mobileControl.invalid || this.loading()) return;
+    this.parentChanges.clear();
+    this.childChanges.clear();
 
-  async SaveChanges() {
-    if (this.isLoading) return;
-
-    this.loadingService.setLoading(true);
-
-    try {
-      // === Step 1: Disable old access (selectedNodesCopy, PAccess: false) ===
-      const disablePromises: Promise<ApiResponse<ShortResponse>>[] = [];
-
-      for (const key in this.selectedNodesCopy) {
-        if (
-          this.selectedNodesCopy[key].checked ||
-          this.selectedNodesCopy[key].partialChecked
-        ) {
-          if (key.includes('-')) {
-            disablePromises.push(
-              this.userManager.ChangeUserWebProcessAccess(
-                this.userInfo.UserId,
-                Number(key.split('-')[1]),
-                false
-              )
-            );
-          } else {
-            disablePromises.push(
-              this.userManager.ChangeUserWebProcessGroupAccess(
-                this.userInfo.UserId,
-                Number(key),
-                false
-              )
-            );
-          }
-        }
-      }
-
-      const disableResults = await Promise.allSettled(disablePromises);
-      const firstDisableError = disableResults.find(
-        (r) => r.status === 'rejected'
-      ) as PromiseRejectedResult | undefined;
-
-      if (firstDisableError) {
-        const error =
-          (firstDisableError.reason as any)?.error?.message ??
-          'خطای غیرمنتظره‌ای در حذف دسترسی رخ داد';
-        this.toast.error('خطا', error);
+    await this.withLoading(async () => {
+      const userLoaded = await this.loadUser(query);
+      if (!userLoaded) {
+        this.tree.set([]);
         return;
       }
 
-      // === Step 2: Enable new access (selectedNodes, PAccess: true) ===
-      const enablePromises: Promise<ApiResponse<ShortResponse>>[] = [];
-
-      for (const key in this.selectedNodes) {
-        if (
-          this.selectedNodes[key].checked ||
-          this.selectedNodes[key].partialChecked
-        ) {
-          if (key.includes('-')) {
-            enablePromises.push(
-              this.userManager.ChangeUserWebProcessAccess(
-                this.userInfo.UserId,
-                Number(key.split('-')[1]),
-                true
-              )
-            );
-          } else {
-            enablePromises.push(
-              this.userManager.ChangeUserWebProcessGroupAccess(
-                this.userInfo.UserId,
-                Number(key),
-                true
-              )
-            );
-          }
-        }
-      }
-
-      const enableResults = await Promise.allSettled(enablePromises);
-      const firstEnableError = enableResults.find(
-        (r) => r.status === 'rejected'
-      ) as PromiseRejectedResult | undefined;
-      const firstEnableSuccess = enableResults.find(
-        (r) => r.status === 'fulfilled'
-      ) as PromiseFulfilledResult<ApiResponse<ShortResponse>> | undefined;
-
-      if (firstEnableError) {
-        const error =
-          (firstEnableError.reason as any)?.error?.message ??
-          'خطای غیرمنتظره‌ای در اعمال دسترسی رخ داد';
-        this.toast.error('خطا', error);
-      } else {
-        const message =
-          firstEnableSuccess?.value?.data?.Message ??
-          'دسترسی با موفقیت اعمال شد';
-        this.toast.success('موفق', message);
-      }
-
-      // === Reload the table ===
-      await this.LoadWebProcessGroups_WebProcessesTable();
-    } catch (err) {
-      this.toast.error('خطا', 'خطای بحرانی در ذخیره‌سازی رخ داد');
-    } finally {
-      this.loadingService.setLoading(false);
-    }
-  }
-
-  private async LoadWebProcessGroups_WebProcessesTable(): Promise<void> {
-    const response = await this.userManager.GetWebProcessGroups_WebProcesses(
-      this.userInfo.MobileNumber!
-    );
-    if (!response.success || !response.data) {
-      this.toast.error(
-        'خطا',
-        response.error?.message ?? 'خطا در هنگام براگزاری اطلاعات'
+      const treeNodes = await this.getGroupProcesses(
+        this.userInfo()?.MobileNumber!,
       );
-      this.accessTable = [];
-      return;
-    }
-
-    const loadedTable = response.data;
-    this.accessTable =
-      loadedTable.map((x) => ({
-        key: x.PGId.toString(),
-        data: {
-          PGTitle: x.PGTitle,
-          Description: '',
-        },
-        checked: x.PGAccess === true,
-        children: x.WebProcesses?.map((y) => ({
-          key: x.PGId.toString() + '-' + y.PId.toString(),
-          data: {
-            PGTitle: y.PTitle,
-            Description: y.Description,
-          },
-          checked: y.PAccess === true,
-          children: [],
-        })),
-      })) ?? [];
-
-    this.accessTable.forEach((parentNode) => {
-      this.selectedNodes[parentNode.key!] = {
-        checked: parentNode.checked!,
-        partialChecked: parentNode.partialSelected,
-      };
-      parentNode.children?.forEach((childNode) => {
-        this.selectedNodes[childNode.key!] = {
-          checked: childNode.checked!,
-          partialChecked: childNode.partialSelected,
-        };
-      });
+      this.tree.set(treeNodes);
     });
+  };
 
-    this.selectedNodesCopy = structuredClone(this.selectedNodes);
+  /**
+   * Load user info by mobile number
+   */
+  private async loadUser(mobile: string): Promise<boolean> {
+    const response = await this.userService.GetSoftwareUserInfo(mobile);
+    if (!checkAndToastError(response, this.toast)) {
+      this.userInfo.set(null);
+      return false;
+    }
+    this.userInfo.set(response.data);
+    return true;
   }
 
-  async getUserAccessMenu() {
-    if (this.searchForm.invalid || this.isLoading) return;
+  /**
+   * Fetch process groups and convert to TreeNodes
+   */
+  private async getGroupProcesses(mobile: string): Promise<TreeNode[]> {
+    const response =
+      await this.userService.GetWebProcessGroups_WebProcesses(mobile);
+    if (!checkAndToastError(response, this.toast)) return [];
+    return this.convertToTreeNode(response.data);
+  }
 
-    this.loadingService.setLoading(true);
-    try {
-      const response = await this.userManager.GetSoftwareUserInfo(
-        this.searchPhone.value
-      );
-      if (!response.success || !response.data) {
-        this.toast.error(
-          'خطا',
-          response.error?.message ?? 'خطا در هنگام براگزاری اطلاعات'
-        );
-        this.accessTable = [];
-        return;
-      }
+  /**
+   * Convert API group processes to TreeNode structure
+   */
+  private convertToTreeNode(groups: ApiGroupProcess[]): TreeNode[] {
+    return groups.map((group) => ({
+      data: {
+        PGId: group.PGId,
+        PGTitle: group.PGTitle,
+        PGAccess: group.PGAccess,
+      },
+      children:
+        group.WebProcesses?.map((process) => ({
+          data: process,
+          children: [],
+        })) ?? [],
+      expanded: false,
+    }));
+  }
 
-      this.userInfo = {
-        UserId: response.data?.UserId,
-        MobileNumber: response.data?.MobileNumber,
-      };
-    } finally {
-      this.loadingService.setLoading(false);
+  /**
+   * Handle TreeTable checkbox changes and track modifications
+   */
+  onTableCheckBoxChange(changes: TreeTableChangedData): void {
+    if (changes.parent) {
+      const { PGId } = changes.parent;
+      this.parentChanges.has(PGId)
+        ? this.parentChanges.delete(PGId)
+        : this.parentChanges.set(PGId, changes.parent);
     }
 
-    this.loadingService.setLoading(true);
-    await this.LoadWebProcessGroups_WebProcessesTable();
-    this.loadingService.setLoading(false);
+    changes.children?.forEach((child) => {
+      const { PId } = child;
+      this.childChanges.has(PId)
+        ? this.childChanges.delete(PId)
+        : this.childChanges.set(PId, child);
+    });
   }
 
-  get searchPhone() {
-    return this.searchForm.get('searchPhone') as FormControl;
+  /**
+   * Apply all access changes for selected user
+   */
+  async updateAccesses(): Promise<void> {
+    if (this.loading() || !this.userInfo()) return;
+
+    await this.withLoading(async () => {
+      const userId = this.userInfo()!.UserId;
+      const requests: Promise<ApiResponse<ShortResponse>>[] = [];
+
+      this.parentChanges.forEach((parent) => {
+        requests.push(
+          this.userService.ChangeUserWebProcessGroupAccess(
+            userId,
+            parent.PGId,
+            parent.PGAccess,
+          ),
+        );
+      });
+
+      this.childChanges.forEach((child) => {
+        requests.push(
+          this.userService.ChangeUserWebProcessAccess(
+            userId,
+            child.PId,
+            child.PAccess,
+          ),
+        );
+      });
+
+      const responses = await Promise.all(requests);
+
+      for (const response of responses) {
+        if (!checkAndToastError(response, this.toast)) return;
+      }
+
+      const tree = await this.getGroupProcesses(this.userInfo()?.MobileNumber!);
+      this.tree.set(tree);
+      this.toast.success('موفق', responses[0].data!.Message);
+
+      this.parentChanges.clear();
+      this.childChanges.clear();
+    });
+  }
+
+  isSubmitButtonDisabled(): boolean {
+    return (
+      this.loading() ||
+      !this.userInfo() ||
+      (this.childChanges.size === 0 && this.parentChanges.size === 0)
+    );
   }
 }
