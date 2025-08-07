@@ -3,4 +3,6 @@ export interface LoadAnnouncementPlace {
   LAPIconName: string;
   LAPURL: string;
   Description: string;
+  ImageLink?:string;
+  Province?:string
 }
