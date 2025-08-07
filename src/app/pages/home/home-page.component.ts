@@ -16,6 +16,7 @@ import { appTitles } from 'app/constants/Titles';
 
 // Services
 import { LoadAnnouncementPlacesService } from 'app/services/LoadAnnouncementPlaces/load-announcement-places.service';
+import { MapSvgComponent } from "./map-svg/map-svg.component";
 
 @Component({
   selector: 'app-home',
@@ -25,8 +26,9 @@ import { LoadAnnouncementPlacesService } from 'app/services/LoadAnnouncementPlac
     PanelModule,
     AnimateOnScroll,
     TerminalCardComponent,
-    SearchInputComponent
-  ],
+    SearchInputComponent,
+    MapSvgComponent
+],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })

@@ -25,20 +25,20 @@
       />
     </div>
   </div>
+  <div class="min-h-90vh flex flex-wrap justify-around items-center gap-6 p-6">
+    @for (terminal of displayedLoadAnnouncementPlaces; track $index) {
+    <div
+      class="w-34 md:w-80 rounded-full"
+      pAnimateOnScroll
+      enterClass="animate-enter fade-in-9 slide-in-from-t-20 animate-duration"
+      leaveClass="animate-leave fade-out1"
+    >
+      <app-terminal-card [terminal]="terminal" />
+    </div>
+    }
+  </div>
 </p-panel>
 
-<div
-  class="min-h-90vh flex flex-wrap justify-around items-center gap-6 p-6"
->
-  @for (terminal of displayedLoadAnnouncementPlaces; track $index) {
-  <div
-    class="w-40 md:w-80"
-    pAnimateOnScroll
-    enterClass="animate-enter fade-in-10 slide-in-from-t-20 animate-duration"
-    leaveClass="animate-leave fade-out-0"
-  >
-    <app-terminal-card [terminal]="terminal" />
-  </div>
-  }
+<div class="flex w-full justify-center pt-5">
+  <app-map-svg></app-map-svg>
 </div>
-
