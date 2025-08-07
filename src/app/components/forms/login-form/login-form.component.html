@@ -5,9 +5,9 @@
   <div class="absolute p-1 overflow-hidden w-[8rem] top-[-8rem] rounded-[1rem]">
     <div class="absolute overlay bg-surface-0"></div>
     <!-- light theme -->
-    <img class="dark:hidden w-full" src="assets/rmto-logo.webp" />
+    <img class="dark:hidden w-full" src="assets/rmto-logo-noText.png" />
     <!-- dark theme -->
-    <img class="hidden dark:block w-full" src="assets/rmto-logo-dark-noText.webp" />
+    <img class="hidden dark:block w-full" src="assets/rmto-logo-dark-noText.png" />
   </div>
 </div>
 <form
@@ -57,6 +57,7 @@
       [disabled]="loginForm.invalid"
       type="submit"
       styleClass="px-8 h-2-5rem w-full"
+      severity="primary"
     >
       ورود
     </app-button>
