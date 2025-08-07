@@ -1,0 +1,37 @@
+svg path {
+  fill: var(--p-primary-500);
+  stroke: #ffffff;
+  stroke-width: 0.5;
+  transition: fill 0.3s ease;
+  cursor: pointer;
+}
+
+svg path:hover {
+  fill: var(--p-primary-800);
+}
+
+.map-label {
+  fill: white;
+  font-family: "Vazirmatn", "Arial", sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  text-anchor: middle;
+  pointer-events: none;
+  user-select: none;
+}
+
+.map-label-no-text-size {
+  fill: white;
+  font-family: "Vazirmatn", "Arial", sans-serif;
+  font-weight: bold;
+  text-anchor: middle;
+  pointer-events: none;
+  user-select: none;
+}
+
+svg {
+  max-width: 50rem;
+  width: 100vw;
+  padding-right: 10px;
+  padding-left: 10px;
+}
