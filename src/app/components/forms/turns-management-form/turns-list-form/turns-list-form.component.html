@@ -39,11 +39,12 @@
   [paginatorLocale]="tableUi.paginatorLocale"
   [rows]="tableUi.rows"
   [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
+  [stripedRows]="tableUi.stripedRows"
 >
   <ng-template #header let-columns>
     <tr>
       @for (col of columns; track $index) {
-      <th>{{ col }}</th>
+        <th>{{ col }}</th>
       }
     </tr>
   </ng-template>
@@ -109,11 +110,12 @@
     [paginatorLocale]="tableUi.paginatorLocale"
     [rows]="tableUi.rows"
     [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
+    [stripedRows]="tableUi.stripedRows"
   >
     <ng-template #header let-columns>
       <tr>
         @for (col of columns; track $index) {
-        <th>{{ col }}</th>
+          <th>{{ col }}</th>
         }
       </tr>
     </ng-template>

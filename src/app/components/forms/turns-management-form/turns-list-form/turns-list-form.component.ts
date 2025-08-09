@@ -17,7 +17,7 @@ import { TurnManagementService } from 'app/services/turn-management/turn-managem
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { TableConfig } from 'app/constants/ui/table.ui';
-import { ButtonComponent } from "app/components/shared/button/button.component";
+import { ButtonComponent } from 'app/components/shared/button/button.component';
 
 @Component({
   selector: 'app-turns-list-form',
@@ -28,8 +28,8 @@ import { ButtonComponent } from "app/components/shared/button/button.component";
     TableModule,
     Dialog,
     ConfirmDialogModule,
-    ButtonComponent
-],
+    ButtonComponent,
+  ],
   providers: [ConfirmationService],
   templateUrl: './turns-list-form.component.html',
   styleUrl: './turns-list-form.component.scss',
@@ -103,20 +103,19 @@ export class TurnsListFormComponent {
     if (this.smartCode.invalid) return;
     try {
       this.loadingService.setLoading(true);
-      const resTruckInfo = await this.truckManagerService.GetTruckInfoFromAPI(
-        smartCode
-      );
+      const resTruckInfo =
+        await this.truckManagerService.GetTruckInfoFromAPI(smartCode);
       if (!checkAndToastError(resTruckInfo, this.toast)) {
         this.truckTurnsList = [];
         return;
       }
       this.populateSearchForm(
         resTruckInfo.data.TruckId,
-        resTruckInfo.data.Pelak ?? ''
+        resTruckInfo.data.Pelak ?? '',
       );
 
       const resTurnsInfo = await this.turnManagerService.GetLatestTurns(
-        resTruckInfo.data.TruckId
+        resTruckInfo.data.TruckId,
       );
       if (!checkAndToastError(resTurnsInfo, this.toast)) return;
       this.truckTurnsList = resTurnsInfo.data;
@@ -130,7 +129,7 @@ export class TurnsListFormComponent {
       this.loadingService.setLoading(true);
 
       const response = await this.turnManagerService.ResuscitateTurn(
-        row.TurnId
+        row.TurnId,
       );
       if (!checkAndToastError(response, this.toast)) return;
       await this.loadTurnsList(this.smartCode.value);
@@ -156,7 +155,7 @@ export class TurnsListFormComponent {
     try {
       this.loadingService.setLoading(true);
       const response = await this.turnManagerService.GetTurnAccounting(
-        row.TurnId
+        row.TurnId,
       );
       if (!checkAndToastError(response, this.toast)) return;
       this.turnsAccounting = response.data;
