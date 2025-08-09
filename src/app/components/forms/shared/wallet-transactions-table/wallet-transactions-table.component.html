@@ -1,6 +1,12 @@
 <p-table
   [value]="transactions()"
   [responsiveLayout]="'scroll'"
+    [tableStyle]="tableUi.tableStyle"
+  [paginator]="tableUi.paginator"
+  [paginatorLocale]="tableUi.paginatorLocale"
+  [rows]="tableUi.rows"
+  [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
+  [stripedRows]="tableUi.stripedRows"
   >
   <ng-template pTemplate="header">
     <tr>
