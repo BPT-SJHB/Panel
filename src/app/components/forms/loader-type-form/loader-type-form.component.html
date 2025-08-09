@@ -11,7 +11,7 @@
 
   <!-- Search Form -->
   <form
-    class="col-span-12"
+    class="col-span-12 mb-5"
     [formGroup]="searchForm"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
@@ -43,9 +43,13 @@
   >
     <p-table
       [value]="this.loadersFormArray.controls"
-    styleClass="overflow-x-auto"
-    [tableStyle]="{'min-width':'50rem'}"
-      >
+    [tableStyle]="tableUi.tableStyle"
+  [paginator]="tableUi.paginator"
+  [paginatorLocale]="tableUi.paginatorLocale"
+  [rows]="tableUi.rows"
+  [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
+  [stripedRows]="tableUi.stripedRows"
+   >
       <ng-template #header>
         <tr>
           <th>فعال و غیر فعال</th>

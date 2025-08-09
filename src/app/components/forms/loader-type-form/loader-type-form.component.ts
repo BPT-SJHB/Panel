@@ -17,7 +17,8 @@ import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { TableModule } from 'primeng/table';
 import { Subject, takeUntil } from 'rxjs';
-import { ButtonComponent } from "app/components/shared/button/button.component";
+import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { TableConfig } from 'app/constants/ui/table.ui';
 
 @Component({
   selector: 'app-loader-type-form',
@@ -29,7 +30,7 @@ import { ButtonComponent } from "app/components/shared/button/button.component";
     CheckboxModule,
     TableModule,
     ButtonComponent,
-],
+  ],
   templateUrl: './loader-type-form.component.html',
   styleUrls: ['./loader-type-form.component.scss'],
 })
@@ -41,6 +42,7 @@ export class LoaderTypeFormComponent {
   private destroy$ = new Subject<void>();
 
   loading = false;
+  tableUi = TableConfig;
   loadersFormArray: FormArray = this.fb.array([]);
   searchForm = this.fb.group({
     title: ['', [Validators.required, Validators.minLength(2)]],
@@ -64,7 +66,7 @@ export class LoaderTypeFormComponent {
     }
     this.loadersFormArray.clear();
     response.data!.forEach((loader: any) =>
-      this.loadersFormArray.push(this.createLoaderGroup(loader))
+      this.loadersFormArray.push(this.createLoaderGroup(loader)),
     );
   }
 
@@ -105,7 +107,7 @@ export class LoaderTypeFormComponent {
     if (!response.success || !response.data) {
       this.toast.error(
         'خطا',
-        response.error?.message ?? 'خطای غیرمنتظره‌ای رخ داد'
+        response.error?.message ?? 'خطای غیرمنتظره‌ای رخ داد',
       );
       return false;
     }
