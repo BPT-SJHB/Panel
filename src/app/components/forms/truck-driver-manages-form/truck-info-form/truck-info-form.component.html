@@ -1,5 +1,5 @@
 <div class="p-fluid grid grid-cols-12 gap-6 relative">
- <!-- Search Form -->
+  <!-- Search Form -->
   <form
     class="col-span-12 mt-6"
     [class.pointer-events-none]="loading"
@@ -93,7 +93,7 @@
   </form>
 
   <form
-    class="p-fluid grid grid-cols-12 gap-4 gap-2 col-span-12"
+    class="p-fluid grid grid-cols-12 gap-4 col-span-12"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
     [formGroup]="truckNativenessForm"
@@ -135,6 +135,7 @@
       <app-button
         (click)="changeNativeness()"
         label="تغییر وضعیت بومی گری"
+        [disabled]="truckId.invalid || truckNativenessForm.invalid || loading"
         styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-48 lg:w-60"
       ></app-button>
     </div>

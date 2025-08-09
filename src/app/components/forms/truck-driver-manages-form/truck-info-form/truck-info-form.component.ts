@@ -19,8 +19,8 @@ import { TextInputComponent } from 'app/components/shared/inputs/text-input/text
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
 import { Subject, takeUntil } from 'rxjs';
 import { SearchInputComponent } from '../../../shared/inputs/search-input/search-input.component';
-import { ButtonComponent } from "app/components/shared/button/button.component";
-import { DatePickerInput } from "app/components/shared/inputs/date-picker-input/date-picker-input.component.component";
+import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { DatePickerInput } from 'app/components/shared/inputs/date-picker-input/date-picker-input.component.component';
 
 @Component({
   selector: 'app-truck-info-form',
@@ -33,8 +33,8 @@ import { DatePickerInput } from "app/components/shared/inputs/date-picker-input/
     TextInputComponent,
     SearchInputComponent,
     ButtonComponent,
-    DatePickerInput
-],
+    DatePickerInput,
+  ],
 })
 export class TruckInfoFormComponent {
   private fb = inject(FormBuilder);
@@ -102,7 +102,7 @@ export class TruckInfoFormComponent {
     try {
       this.loadingService.setLoading(true);
       const response = await this.truckService.GetTruckNativeness(
-        this.truckId.value
+        this.truckId.value,
       );
       if (!this.isSuccessful(response)) return;
 
@@ -116,7 +116,7 @@ export class TruckInfoFormComponent {
     if (!response.success || !response.data) {
       this.toast.error(
         'خطا',
-        response.error?.message ?? 'خطای غیرمنتظره‌ای رخ داد'
+        response.error?.message ?? 'خطای غیرمنتظره‌ای رخ داد',
       );
       return false;
     }
@@ -130,7 +130,7 @@ export class TruckInfoFormComponent {
       this.loadingService.setLoading(true);
       const response = await this.truckService.ChangeTruckNativeness(
         this.truckId.value,
-        this.truckNativenessExpiredDate.value
+        this.truckNativenessExpiredDate.value,
       );
 
       if (this.isSuccessful(response)) {
@@ -206,7 +206,7 @@ export class TruckInfoFormComponent {
 
   get truckNativenessExpiredDate(): FormControl {
     return this.truckNativenessForm.get(
-      'truckNativenessExpiredDate'
+      'truckNativenessExpiredDate',
     ) as FormControl;
   }
 }
