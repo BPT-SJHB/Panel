@@ -21,10 +21,10 @@
   </form>
 
   <!-- Truck Info -->
-  <div class="grid grid-cols-12 col-span-12 gap-4 px-6 mt-6">
+  <div class="grid grid-cols-12 col-span-12 gap-4 mt-6">
     <span class="text-lg font-bold col-span-12">اطلاعات ناوگان</span>
 
-    <div class="grid grid-cols-12  col-span-12 gap-4">
+    <div class="grid grid-cols-12 col-span-12 gap-4">
       <form
         class="grid grid-cols-12 gap-4 col-span-12"
         [class.pointer-events-none]="loading"
@@ -195,7 +195,7 @@
 
     <!-- Action Buttons -->
     <div
-      class="col-span-12 md:flex md:flex-row-reverse md:flex-wrap items-center mt-2"
+      class="col-span-12 gap-3 md:flex md:flex-row-reverse md:flex-wrap items-center mt-2"
     >
       <app-button
         (click)="setComposedInformation()"
