@@ -35,7 +35,7 @@
       [ngClass]="{
         'focus:border-red-500': control.touched && control.invalid,
         'bg-surface-200 text-surface-700 dark:bg-surface-800 dark:text-surface-200 pointer-events-none opacity-90 cursor-not-allowed':
-          control.disabled,
+          control.disabled || readOnly,
         'rounded-l-2xl border-l-2': buttonIcon.trim() === ''
       }"
       (focus)="onFocusInput(inputRef)"
