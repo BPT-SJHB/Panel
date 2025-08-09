@@ -1,11 +1,5 @@
 import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import { Subject, takeUntil } from 'rxjs';
+import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -18,8 +12,6 @@ import { SearchInputComponent } from 'app/components/shared/inputs/search-input/
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 
 import { UserManagementService } from 'app/services/user-management/user-management.service';
-import { ToastService } from 'app/services/toast-service/toast.service';
-import { LoadingService } from 'app/services/loading-service/loading-service.service';
 
 import { NewPasswordDialogComponent } from 'app/components/shared/dialog/new-password-dialog/new-password-dialog.component';
 import { SoftwareUserInfo } from 'app/services/user-management/model/software-user-info.model';
