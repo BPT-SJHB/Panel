@@ -54,7 +54,7 @@ export class SearchAutoCompleteComponent<T extends Record<string, any>>
     () =>
       this.suggestions().length === 0 &&
       !this.loading() &&
-      (this.control.value?.length ?? 0) > this.minLength
+      (this.control.value?.length ?? 0) >= this.minLength,
   );
 
   @Input() placeholder = 'جستجو';
@@ -87,7 +87,7 @@ export class SearchAutoCompleteComponent<T extends Record<string, any>>
   }
 
   onFocusInput(input: HTMLInputElement | null): void {
-    this.width.set(`${input?.clientWidth}px`)
+    this.width.set(`${input?.clientWidth}px`);
 
     if (this.cachingMode === 'Focus') {
       this.onSearch(this.control.value ?? '');
@@ -98,7 +98,7 @@ export class SearchAutoCompleteComponent<T extends Record<string, any>>
   private filterSuggestions(source: T[], query: string): T[] {
     const q = query.toLowerCase();
     return source.filter((item) =>
-      (item[this.optionLabel] as string).toLowerCase().includes(q)
+      (item[this.optionLabel] as string).toLowerCase().includes(q),
     );
   }
 
@@ -153,7 +153,7 @@ export class SearchAutoCompleteComponent<T extends Record<string, any>>
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     const inside = this.dropdownContainer.nativeElement.contains(
-      event.target as Node
+      event.target as Node,
     );
     if (!inside) {
       this.isDropDownHidden.set(true);
@@ -204,13 +204,13 @@ export class SearchAutoCompleteComponent<T extends Record<string, any>>
     const valueLen = this.control.value?.length ?? 0;
     let count = this.suggestions().length - 1;
     if (this.isDropDownHidden() || valueLen < this.minLength) {
-      return { height: '0px',width: this.width()};
+      return { height: '0px', width: this.width() };
     }
-    
-    count = Math.max(count,1);
+
+    count = Math.max(count, 1);
     const itemHeight = 3.55; // px per item
     const max = itemHeight * 4; // max px
     const height = Math.min(itemHeight * count, max);
-    return { height: `${height}rem` , width: this.width()};
+    return { height: `${height}rem`, width: this.width() };
   }
 }

@@ -34,6 +34,7 @@
     </div>
     }@else { @for (suggestion of suggestions(); track $index) {
     <div
+      (mouseover)="this.hoverIndex.set($index)"
       (click)="onSelectAutoComplete(suggestion)"
       [id]="`${id}-${$index}`"
       class="px-2 py-4 cursor-pointer hover:bg-emphasis"
