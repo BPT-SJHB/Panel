@@ -8,7 +8,8 @@ import { WalletUserChargingFunction } from 'app/services/wallet-management/model
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { WalletManagementService } from 'app/services/wallet-management/wallet-management.service';
 import { checkAndToastError } from 'app/utils/api-utils';
-import { ButtonComponent } from "app/components/shared/button/button.component";
+import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { TableConfig } from 'app/constants/ui/table.ui';
 
 @Component({
   selector: 'app-user-charging-function-form',
@@ -17,8 +18,8 @@ import { ButtonComponent } from "app/components/shared/button/button.component";
     DatePickerInput,
     TableModule,
     TextInputComponent,
-    ButtonComponent
-],
+    ButtonComponent,
+  ],
   templateUrl: './user-charging-function-form.component.html',
   styleUrl: './user-charging-function-form.component.scss',
 })
@@ -38,6 +39,7 @@ export class UserChargingFunctionFormComponent {
   userFunctions = signal<WalletUserChargingFunction[]>([]);
 
   cols = ['تاریخ', 'زمان', 'مبلغ', 'کد شناسایی کیف پول'];
+  tableUi = TableConfig;
 
   async FetchData() {
     //! loading start
@@ -46,7 +48,7 @@ export class UserChargingFunctionFormComponent {
       this.startDate.value,
       this.endDate.value,
       this.startTime.value,
-      this.endTime.value
+      this.endTime.value,
     );
     if (!checkAndToastError(responseOfTable, this.toast)) return;
 
@@ -57,7 +59,7 @@ export class UserChargingFunctionFormComponent {
         this.startDate.value,
         this.endDate.value,
         this.startTime.value,
-        this.endTime.value
+        this.endTime.value,
       );
 
     if (!checkAndToastError(responseOfTotalFunctionsAmount, this.toast)) return;
@@ -68,7 +70,7 @@ export class UserChargingFunctionFormComponent {
   }
 
   private sortTable(
-    data: WalletUserChargingFunction[]
+    data: WalletUserChargingFunction[],
   ): WalletUserChargingFunction[] {
     return data.sort((a, b) => {
       const dateCompare = a.ShamsiDate.localeCompare(b.ShamsiDate);

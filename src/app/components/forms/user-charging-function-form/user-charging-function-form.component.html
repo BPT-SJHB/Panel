@@ -1,6 +1,4 @@
-<div
-  class="flex flex-row flex-wrap gap-6 justify-around items-center"
->
+<div class="flex flex-row flex-wrap gap-6 justify-around items-center">
   <div class="flex flex-row items-center gap-4">
     <app-date-picker-input
       label="از تاریخ"
@@ -31,18 +29,24 @@
     ></app-time-picker-input>
   </div>
 </div>
-<div class="flex flex-row justify-center mt-8">
-  <app-button styleClass="w-[17rem]" label="دریافت اطلاعات" (onClick)="FetchData()">
+<div class="flex flex-row justify-center my-8">
+  <app-button
+    styleClass="w-[17rem]"
+    label="دریافت اطلاعات"
+    (onClick)="FetchData()"
+  >
   </app-button>
 </div>
 <p-table
   class="col-span-12 overflow-x-auto"
   [columns]="cols"
   [value]="userFunctions()"
-  [paginator]="true"
-  [rows]="10"
-  [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
-  [tableStyle]="{ minWidth: '40rem' }"
+  [tableStyle]="tableUi.tableStyle"
+  [paginator]="tableUi.paginator"
+  [paginatorLocale]="tableUi.paginatorLocale"
+  [rows]="tableUi.rows"
+  [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
+  [stripedRows]="tableUi.stripedRows"
 >
   <ng-template #caption>
     <div class="flex items-center justify-between">
@@ -57,7 +61,7 @@
   <ng-template #header let-columns>
     <tr>
       @for (col of columns; track $index) {
-      <th>{{ col }}</th>
+        <th>{{ col }}</th>
       }
     </tr>
   </ng-template>
