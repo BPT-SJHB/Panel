@@ -11,6 +11,14 @@ import {
 } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 
+export type ButtonSeverity =
+  | 'primary'
+  | 'green'
+  | 'info'
+  | 'danger'
+  | 'secondary'
+  | 'warn';
+
 interface ButtonStyle {
   colors: {
     [key: string]: {
@@ -35,13 +43,7 @@ interface ButtonStyle {
   styleUrl: './button.component.scss',
 })
 export class ButtonComponent implements OnInit, OnChanges {
-  @Input() severity:
-    | 'primary'
-    | 'green'
-    | 'info'
-    | 'danger'
-    | 'secondary'
-    | 'warn' = 'green';
+  @Input() severity: ButtonSeverity = 'green';
   @Input() syncShadow: boolean = true;
   @Input() shadow: boolean = true;
   @Input() label: string = '';
@@ -128,7 +130,7 @@ export class ButtonComponent implements OnInit, OnChanges {
             ? this.style.colors[this.severity].shadow.sync
             : this.style.colors[this.severity].shadow.normal
           : ''
-      } ${!this.disabled ? this.style.animation : ''}`
+      } ${!this.disabled ? this.style.animation : ''}`,
     );
   }
 
