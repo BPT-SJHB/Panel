@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, signal } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -34,12 +34,23 @@ import { ShortResponse } from 'app/data/model/short-response.model';
 import { City } from 'app/data/model/province-city.model';
 import { LoaderType } from 'app/services/loader-types/model/loader-type.model';
 import { Product } from 'app/data/model/product-type.model';
-import { ButtonComponent } from "app/components/shared/button/button.component";
+import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { Base } from 'primeng/base';
+import { BaseLoading } from '../shared/component-base/base-loading';
+import {
+  TableColumn,
+  TableColumnType,
+  TableComponent,
+} from 'app/components/shared/table/table.component';
+import { TariffsManagementService } from 'app/services/Tariffs-management/tariffs-management.service';
+import { checkAndToastError } from 'app/utils/api-utils';
 
 enum TariffsFormMode {
   EDITABLE,
   REGISTER,
 }
+
+type TariffTable = Tariff & { edit: any; delete: any };
 
 @Component({
   selector: 'app-tariffs-editor-form',
@@ -54,90 +65,142 @@ enum TariffsFormMode {
     TextInputComponent,
     ToggleSwitchInputComponent,
     SearchAutoCompleteComponent,
-    ButtonComponent
-],
+    ButtonComponent,
+    TableComponent,
+  ],
   templateUrl: './tariffs-form.component.html',
   styleUrl: './tariffs-form.component.scss',
-
   providers: [ConfirmationService],
 })
-export class TariffsFormComponent implements OnInit, OnDestroy {
+export class TariffsFormComponent extends BaseLoading {
   private readonly fb = inject(FormBuilder);
-  private readonly toast = inject(ToastService);
-  private readonly loadingService = inject(LoadingService);
+  private readonly tariffService = inject(TariffsManagementService);
   private readonly confirmationService = inject(ConfirmationService);
   private readonly loaderTypeService = inject(LoaderTypesService);
   private readonly provinceService = inject(ProvinceAndCityManagementService);
   private readonly productService = inject(ProductTypesService);
-  private readonly destroy$ = new Subject<void>();
+  private readonly nonNullable = this.fb.nonNullable;
 
-  formDialogVisible = false;
-  headerTitle = '';
-  loading = false;
-  widthAddon = '6rem';
-
+  readonly headerTitle = signal<string>('');
+  readonly addonWidth = '6rem';
   tariffsFormMode: TariffsFormMode = TariffsFormMode.REGISTER;
-  tariffs: Tariff[] = [];
+  formDialogVisible = false;
+
+  tariffs: TariffTable[] = [];
   tariffCached?: Tariff;
 
-  tariffSearchForm = this.fb.group({
-    searchLoaderTypeId: [0],
-    searchGoodsId: [0],
-    searchSourceCityId: [0],
-    searchTargetCityId: [0],
-    searchLoaderType: [''],
-    searchSourceCity: [''],
-    searchTargetCity: [''],
-    searchGoods: [''],
+  readonly tariffSearchForm = this.fb.group({
+    searchLoaderTypeId: this.nonNullable.control(-1, Validators.min(0)),
+    searchGoodsId: this.nonNullable.control(-1, Validators.min(0)),
+    searchSourceCityId: this.nonNullable.control(-1, Validators.min(0)),
+    searchTargetCityId: this.nonNullable.control(-1, Validators.min(0)),
+    searchLoaderType: this.nonNullable.control(''),
+    searchSourceCity: this.nonNullable.control(''),
+    searchTargetCity: this.nonNullable.control(''),
+    searchGoods: this.nonNullable.control(''),
   });
 
   tariffForm = this.fb.group({
-    SourceCityId: [0, Validators.min(1)],
-    TargetCityId: [0, Validators.min(1)],
-    LoaderTypeId: [0, Validators.min(1)],
-    GoodId: [0, Validators.min(1)],
-    SourceCityTitle: [''],
-    TargetCityTitle: [''],
-    LoaderTypeTitle: [''],
-    GoodTitle: [''],
-    Tariff: [0, Validators.min(1)],
-    BaseTonnag: [0, Validators.min(1)],
-    CalculationReference: [''],
-    Active: [true, Validators.required],
+    SourceCityId: this.nonNullable.control(-1, Validators.min(0)),
+    TargetCityId: this.nonNullable.control(-1, Validators.min(0)),
+    LoaderTypeId: this.nonNullable.control(-1, Validators.min(0)),
+    GoodId: this.nonNullable.control(-1, Validators.min(0)),
+    SourceCityTitle: this.nonNullable.control(''),
+    TargetCityTitle: this.nonNullable.control(''),
+    LoaderTypeTitle: this.nonNullable.control(''),
+    GoodTitle: this.nonNullable.control(''),
+    Tariff: this.nonNullable.control(0, Validators.min(1)),
+    BaseTonnag: this.nonNullable.control(-1, Validators.min(1)),
+    CalculationReference: this.nonNullable.control(''),
+    Active: this.nonNullable.control(true),
   });
 
-  readonly cols = [
-    'ویرایش',
-    'حذف',
-    'کد نوع بارگیر',
-    'نوع بارگیر',
-    'کد نوع بار',
-    'نوع بار',
-    'کد شهر مبدا',
-    'شهر مبدا',
-    'کد شهر مقصد',
-    'شهر مقصد',
-    'تعرفه',
-    'تناژ پایه',
-    'مبنای محاسبه',
-    'فعال/غیرفعال',
+  readonly columns: TableColumn<TariffTable>[] = [
+    {
+      field: 'edit',
+      header: 'ویرایش',
+      type: TableColumnType.BUTTON_ICON,
+      class: 'text-center',
+      onAction: async (row: TariffTable) => await this.onEdit(row),
+    },
+    {
+      field: 'delete',
+      header: 'حذف',
+      type: TableColumnType.BUTTON_ICON,
+      class: 'text-center',
+    },
+    {
+      field: 'LoaderTypeId',
+      header: 'کد نوع بارگیر',
+    },
+    {
+      field: 'LoaderTypeTitle',
+      header: 'نوع بارگیر',
+    },
+    {
+      field: 'GoodId',
+      header: 'کد نوع بار',
+    },
+    {
+      field: 'GoodTitle',
+      header: 'نوع بار',
+    },
+    {
+      field: 'SourceCityId',
+      header: 'کد شهر مبدا',
+    },
+    {
+      field: 'SourceCityTitle',
+      header: 'شهر مبدا',
+    },
+    {
+      field: 'TargetCityId',
+      header: 'کد شهر مقصد',
+    },
+    {
+      field: 'TargetCityTitle',
+      header: 'شهر مقصد',
+    },
+    {
+      field: 'Tariff',
+      header: 'تعرفه',
+    },
+    {
+      field: 'BaseTonnag',
+      header: 'تناژ پایه',
+    },
+    {
+      field: 'CalculationReference',
+      header: 'مبنای محاسبه',
+    },
+    {
+      field: 'Active',
+      header: 'فعال/غیرفعال',
+      type: TableColumnType.BOOLEAN,
+    },
   ];
 
-  ngOnInit(): void {
-    this.loadingService.loading$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((value) => (this.loading = value));
-  }
+  async searchTariffs(): Promise<void> {
+    const loaderTypeId = this.searchLoaderTypeId.value;
+    const sourceCityId = this.getValidValue(this.searchSourceCityId);
+    const targetCityId = this.getValidValue(this.searchTargetCityId);
+    const goodId = this.getValidValue(this.searchGoodsId);
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
+    await this.withLoading(async () => {
+      const response = await this.tariffService.GetTariffs(
+        loaderTypeId,
+        sourceCityId,
+        targetCityId,
+        goodId,
+      );
 
-  searchTariffs(): void {
-    if (this.isSearchFormValid()) {
-      this.tariffs = mockTariffs;
-    }
+      if (!checkAndToastError(response, this.toast)) return;
+      this.tariffs = response.data.map((t) => ({
+        ...t,
+        edit: 'pi pi-pencil',
+        delete: 'pi pi-trash',
+      }));
+    });
   }
 
   isSearchFormValid(): boolean {
@@ -147,6 +210,10 @@ export class TariffsFormComponent implements OnInit, OnDestroy {
         this.searchTargetCityId.value ||
         this.searchGoodsId.value)
     );
+  }
+
+  private getValidValue(control: FormControl): number | undefined {
+    return control.valid ? control.value : undefined;
   }
 
   private populateFormFromTariff(tariff: Tariff): void {
@@ -185,7 +252,7 @@ export class TariffsFormComponent implements OnInit, OnDestroy {
   closeDialogTariffForm(): void {
     this.formDialogVisible = false;
     this.resetTariffsForm();
-    this.headerTitle = '';
+    this.headerTitle.set('');
   }
 
   onDelete(row: Tariff): void {
@@ -209,27 +276,34 @@ export class TariffsFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  async onEdit(row: Tariff) {
-    if (this.loading) return;
-    try {
-      this.loadingService.setLoading(true);
-      const tariff = mockTariffs[0]; // TODO: Replace with real API call
+  async onEdit(row: Tariff): Promise<void> {
+    await this.withLoading(async () => {
+      const response = await this.tariffService.GetTariffs(
+        row.LoaderTypeId,
+        row.SourceCityId,
+        row.TargetCityId,
+        row.GoodId,
+      );
+
+      if (!checkAndToastError(response, this.toast)) return;
+
+      console.log('g');
+
+      const tariff = response.data[0];
       this.tariffsFormMode = TariffsFormMode.EDITABLE;
       this.tariffCached = tariff;
       this.populateFormFromTariff(tariff);
-      this.headerTitle = `ویرایش`;
+      this.headerTitle.set('ویرایش');
       this.formDialogVisible = true;
-    } finally {
-      this.loadingService.setLoading(false);
-    }
+    });
   }
 
   async onNew(): Promise<void> {
-    if (this.loading) return;
+    if (this.loading()) return;
     this.tariffCached = this.extractTariffFromForm();
     this.tariffsFormMode = TariffsFormMode.REGISTER;
     this.resetTariffsForm();
-    this.headerTitle = 'افزودن تعرفه';
+    this.headerTitle.set('افزودن تعرفه');
     this.formDialogVisible = true;
   }
 
