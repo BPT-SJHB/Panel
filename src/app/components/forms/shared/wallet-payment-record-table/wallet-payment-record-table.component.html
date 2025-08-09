@@ -1,13 +1,12 @@
 <p-table
   [value]="paymentHistory()"
-  [styleClass]="'p-datatable-sm p-datatable-striped'"
   [responsiveLayout]="'scroll'"
    [tableStyle]="tableUi.tableStyle"
   [paginator]="tableUi.paginator"
   [paginatorLocale]="tableUi.paginatorLocale"
   [rows]="tableUi.rows"
   [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
-
+  [stripedRows]="true"
   >
   <ng-template pTemplate="header">
     <tr>
