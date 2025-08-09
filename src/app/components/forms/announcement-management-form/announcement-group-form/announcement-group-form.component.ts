@@ -19,7 +19,8 @@ import { LoadingService } from 'app/services/loading-service/loading-service.ser
 import { ToastService } from 'app/services/toast-service/toast.service';
 import { AnnouncementGroupSubgroupManagementService } from 'app/services/announcement_group_subgroup_management/announcement-group-subgroup-management.service';
 import { AnnouncementGroup } from 'app/services/announcement_group_subgroup_management/model/announcement-group.model';
-import { ButtonComponent } from "app/components/shared/button/button.component";
+import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { TableConfig } from 'app/constants/ui/table.ui';
 
 enum FormMode {
   EDITABLE,
@@ -39,8 +40,8 @@ enum FormMode {
     SearchInputComponent,
     TextInputComponent,
     ToggleSwitchInputComponent,
-    ButtonComponent
-],
+    ButtonComponent,
+  ],
   providers: [ConfirmationService],
   templateUrl: './announcement-group-form.component.html',
   styleUrl: './announcement-group-form.component.scss',
@@ -51,7 +52,9 @@ export class AnnouncementGroupFormComponent implements OnInit, OnDestroy {
   private readonly toast = inject(ToastService);
   private readonly loadingService = inject(LoadingService);
   private readonly confirmationService = inject(ConfirmationService);
-  private readonly announcementService = inject(AnnouncementGroupSubgroupManagementService);
+  private readonly announcementService = inject(
+    AnnouncementGroupSubgroupManagementService,
+  );
 
   private readonly destroy$ = new Subject<void>();
 
@@ -60,6 +63,7 @@ export class AnnouncementGroupFormComponent implements OnInit, OnDestroy {
   formDialogVisible = false;
   headerTitle = '';
   announcementFormGroupMode = FormMode.REGISTER;
+  tableUi = TableConfig;
 
   announcementsGroup: AnnouncementGroup[] = [];
   displayAnnouncementsGroup: AnnouncementGroup[] = [];
@@ -93,8 +97,10 @@ export class AnnouncementGroupFormComponent implements OnInit, OnDestroy {
     this.displayAnnouncementsGroup = filtered;
   }
 
-  filterAnnouncementsGroup = (item: AnnouncementGroup, query: string): boolean =>
-    item.AnnouncementTitle?.includes(query) ?? false;
+  filterAnnouncementsGroup = (
+    item: AnnouncementGroup,
+    query: string,
+  ): boolean => item.AnnouncementTitle?.includes(query) ?? false;
 
   // ========== 🎯 Actions ==========
   onNew(): void {
@@ -122,6 +128,8 @@ export class AnnouncementGroupFormComponent implements OnInit, OnDestroy {
         severity: 'secondary',
         outlined: true,
       },
+      acceptLabel: 'تایید',
+      rejectLabel: 'لغو',
       acceptButtonProps: {
         label: 'تایید',
         severity: 'danger',
@@ -181,19 +189,21 @@ export class AnnouncementGroupFormComponent implements OnInit, OnDestroy {
 
   private async registerAnnouncementGroup(): Promise<void> {
     const { AnnouncementTitle } = this.extractAnnouncementGroup();
-    const response = await this.announcementService.RegisterNewAnnouncementGroup(
-      AnnouncementTitle ?? '',
-    );
+    const response =
+      await this.announcementService.RegisterNewAnnouncementGroup(
+        AnnouncementTitle ?? '',
+      );
     if (!checkAndToastError(response, this.toast)) return;
     this.toast.success('موفق', response.data.Message ?? '');
   }
 
   private async editAnnouncementGroup(): Promise<void> {
-    const { AnnouncementId, AnnouncementTitle, Active } = this.extractAnnouncementGroup();
+    const { AnnouncementId, AnnouncementTitle, Active } =
+      this.extractAnnouncementGroup();
     const response = await this.announcementService.EditAnnouncementGroup(
       AnnouncementId,
       AnnouncementTitle ?? '',
-      Active ?? true
+      Active ?? true,
     );
     if (!checkAndToastError(response, this.toast)) return;
     this.toast.success('موفق', response.data.Message ?? '');

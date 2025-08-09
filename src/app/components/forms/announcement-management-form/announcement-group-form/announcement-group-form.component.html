@@ -18,12 +18,17 @@
   class="col-span-12 overflow-x-auto"
   [columns]="cols"
   [value]="displayAnnouncementsGroup"
-  [tableStyle]="{ 'min-width': '40rem' }"
+  [tableStyle]="tableUi.tableStyle"
+  [paginator]="tableUi.paginator"
+  [paginatorLocale]="tableUi.paginatorLocale"
+  [rows]="tableUi.rows"
+  [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
+  [stripedRows]="tableUi.stripedRows"
 >
   <!-- Table Header -->
   <ng-template #caption>
     <div>
-      <button pButton label="جدید" size="small" class="w-20 md:w-30 py-1" (click)="onNew()"></button>
+      <app-button label="جدید" size="small" styleClass="w-20 md:w-30 py-2" (click)="onNew()"></app-button>
     </div>
   </ng-template>
 
@@ -123,12 +128,11 @@
     </div>
 
     <div class="flex justify-end col-span-12">
-      <button
-        pButton
+      <app-button
         label="ثبت و ویرایش اطلاعات"
         (click)="registerOrEdit()"
         [disabled]="announcementGroupForm.invalid || loading"
-      ></button>
+      ></app-button>
     </div>
   </form>
 </p-dialog>
