@@ -1,4 +1,4 @@
-<div class="grid grid-cols-12 gap-4">
+<div class="grid grid-cols-12 gap-4 mb-5">
   <app-search-auto-complete
     class="col-span-12 sm:col-span-6"
     placeholder="صفوف نوبت دهی"
@@ -59,11 +59,12 @@
   [paginatorLocale]="tableUi.paginatorLocale"
   [rows]="tableUi.rows"
   [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
+  [stripedRows]="tableUi.stripedRows"
 >
   <ng-template #header let-columns>
     <tr>
       @for (col of columns; track $index) {
-      <th>{{ col }}</th>
+        <th>{{ col }}</th>
       }
     </tr>
   </ng-template>
@@ -84,11 +85,11 @@
   </ng-template>
 </p-table>
 
-<div class="w-full flex justify-end">
+<div class="w-full flex justify-end mt-5">
   <app-button
     size="small"
     label="ثبت"
-    styleClass="px-8 py-1"
+    styleClass="px-10 py-2"
     (click)="registerRelationAnnouncement()"
     [disabled]="loading || sequentialTurnForm.invalid"
   />
