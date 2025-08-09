@@ -1,21 +1,27 @@
-<p-panel
-  class="rounded-xs shadow-md"
-  [toggleable]="true"
-  [collapsed]="true"
-  expandIcon="pi pi-search-minus"
-  collapseIcon="pi pi-search-plus"
->
-  <ng-template #header>
-    <span class="text-sm md:text-base lg:text-lg font-bold">
+<div class="min-h-screen min-w-screen flex flex-col">
+
+ <!-- Header -->
+  <div class="p-4 bg-emphasis shadow-md">
+    <span class="text-xs md:text-base lg:text-lg font-bold">
       {{ headerTitle }}
     </span>
-  </ng-template>
+  </div>
 
-  <div class="flex justify-center items-center p-4 w-full">
-    <div class="w-full">
+  <!-- Dialog -->
+  <p-dialog
+    draggable="false"
+    [header]="dialogTitle()"
+    [modal]="true"
+    maskStyleClass="backdrop-blur-sm"
+    [style]="{ width: '48rem', maxWidth: '95vw', height: '600px' }"
+    [(visible)]="isDialogVisible"
+    position="center"
+  >
+    <!-- Search Input -->
+    <div class="flex justify-center items-center p-4 w-full">
       <app-search-input
         class="w-full"
-        [staticData]="allLoadAnnouncementPlaces"
+        [staticData]="provincesAnnouncement().get(currentProvince()) ?? []"
         [itemMatchesQuery]="filterAnnouncementPlaces"
         [autoTriggerSearch]="true"
         [fallbackToAllWhenQueryShort]="true"
@@ -24,21 +30,29 @@
         placeholder="جستجو پایانه اعلام بار"
       />
     </div>
-  </div>
-  <div class="min-h-90vh flex flex-wrap justify-around items-center gap-6 p-6">
-    @for (terminal of displayedLoadAnnouncementPlaces; track $index) {
-    <div
-      class="w-34 md:w-80 rounded-full"
-      pAnimateOnScroll
-      enterClass="animate-enter fade-in-9 slide-in-from-t-20 animate-duration"
-      leaveClass="animate-leave fade-out1"
-    >
-      <app-terminal-card [terminal]="terminal" />
-    </div>
-    }
-  </div>
-</p-panel>
 
-<div class="flex w-full justify-center pt-5">
-  <app-map-svg></app-map-svg>
+    <!-- Terminals -->
+    <div class="min-h-90vh flex flex-wrap justify-around items-center gap-6 p-6">
+      @if (displayedLoadAnnouncementPlaces().length > 0) {
+        @for (terminal of displayedLoadAnnouncementPlaces(); track $index) {
+          <div class="w-34 md:w-80 rounded-full">
+            <app-terminal-card [terminal]="terminal" />
+          </div>
+        }
+      } @else {
+        <div class="flex items-center justify-center h-full text-gray-500 dark:text-gray-400 italic">
+          پایانه‌ای یافت نشد
+        </div>
+      }
+    </div>
+  </p-dialog>
+
+  <!-- Map -->
+  <div class="flex-1 flex justify-center items-center pt-5">
+    <app-map-svg (clickProvince)="clickProvince($event)"></app-map-svg>
+  </div>
+
 </div>
+
+
+<app-support-button />

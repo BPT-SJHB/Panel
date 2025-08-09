@@ -1,14 +1,19 @@
 // Angular
-import { Component, OnInit } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 
 // PrimeNG
 import { ButtonModule } from 'primeng/button';
 import { PanelModule } from 'primeng/panel';
-import { AnimateOnScroll } from 'primeng/animateonscroll';
+import { DialogModule } from 'primeng/dialog';
 
 // Components
 import { TerminalCardComponent } from 'app/components/shared/terminal-card/terminal-card.component';
-import { SearchInputComponent } from '../../components/shared/inputs/search-input/search-input.component';
+import { SearchInputComponent } from 'app/components/shared/inputs/search-input/search-input.component';
+import {
+  MapSvgComponent,
+  ProvinceCode,
+  ProvinceName,
+} from './map-svg/map-svg.component';
 
 // Models & Constants
 import { LoadAnnouncementPlace } from 'app/data/model/load-announcement-place.model';
@@ -16,7 +21,8 @@ import { appTitles } from 'app/constants/Titles';
 
 // Services
 import { LoadAnnouncementPlacesService } from 'app/services/LoadAnnouncementPlaces/load-announcement-places.service';
-import { MapSvgComponent } from "./map-svg/map-svg.component";
+import { BaseLoading } from 'app/components/forms/shared/component-base/base-loading';
+import { SupportButtonComponent } from 'app/components/shared/support-button/support-button.component';
 
 @Component({
   selector: 'app-home',
@@ -24,57 +30,92 @@ import { MapSvgComponent } from "./map-svg/map-svg.component";
   imports: [
     ButtonModule,
     PanelModule,
-    AnimateOnScroll,
     TerminalCardComponent,
     SearchInputComponent,
-    MapSvgComponent
-],
+    MapSvgComponent,
+    DialogModule,
+    SupportButtonComponent,
+  ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
-export class HomePageComponent implements OnInit {
-  // All announcement places fetched from API
-  allLoadAnnouncementPlaces: LoadAnnouncementPlace[] = [];
+export class HomePageComponent extends BaseLoading {
+  private readonly lap = inject(LoadAnnouncementPlacesService);
 
-  // Filtered announcement places for display
-  displayedLoadAnnouncementPlaces: LoadAnnouncementPlace[] = [];
+  readonly headerTitle = appTitles.appOnLineTitle;
+  readonly dialogTitle = signal('');
+  readonly currentProvince = signal<ProvinceCode>('IR-00');
+  readonly displayedLoadAnnouncementPlaces = signal<LoadAnnouncementPlace[]>(
+    [],
+  );
 
-  // Search term (not directly used here but could be used in view binding)
-  currentSearchTerm: string = '';
+  readonly provincesAnnouncement = signal(
+    new Map<ProvinceCode, LoadAnnouncementPlace[]>(),
+  );
 
-  // Header title for the page
-  headerTitle: string = appTitles.appOnLineTitle;
+  readonly UnknownProvince: ProvinceCode = 'IR-00';
+  readonly EsfahanProvince: ProvinceCode = 'IR-04';
 
-  constructor(private lap: LoadAnnouncementPlacesService) {}
-
-  // Lifecycle hook: initialize data on component load
-  async ngOnInit(): Promise<void> {
-    await this.initializeLoadAnnouncementPlaces();
-  }
-
-  /**
-   * Fetch all terminal data and initialize state
-   */
-  async initializeLoadAnnouncementPlaces(): Promise<void> {
-    const terminals = await this.lap.getLoadAnnouncementPlaces();
-    this.allLoadAnnouncementPlaces = terminals.data ?? [];
-    this.displayedLoadAnnouncementPlaces = [...this.allLoadAnnouncementPlaces];
-  }
+  isDialogVisible = false;
 
   /**
-   * Filter function used by the search input
+   * Search filter function
    */
   filterAnnouncementPlaces = (
     announcementPlace: LoadAnnouncementPlace,
-    query: string
+    query: string,
   ): boolean =>
     announcementPlace.LAPTitle.includes(query) ||
     announcementPlace.Description.includes(query);
 
   /**
-   * Handler for search result from SearchInputComponent
+   * Handle result from search input
    */
-  handleSearch(result: LoadAnnouncementPlace[]): void {
-    this.displayedLoadAnnouncementPlaces = result;
+  handleSearch(results: LoadAnnouncementPlace[]): void {
+    this.displayedLoadAnnouncementPlaces.set(results);
+  }
+
+  /**
+   * Handle province click from map
+   */
+  async clickProvince(event: {
+    provinceName: ProvinceName;
+    provinceCode: ProvinceCode;
+  }) {
+    const { provinceCode, provinceName } = event;
+
+    await this.withLoading(() =>
+      this.fetchLoadAnnouncementPlaces(provinceCode),
+    );
+
+    this.currentProvince.set(provinceCode);
+
+    const provinceMap = this.provincesAnnouncement();
+    this.displayedLoadAnnouncementPlaces.set([
+      ...(provinceMap.get(provinceCode) ?? []),
+    ]);
+
+    this.dialogTitle.set('پایانه های استان ' + provinceName);
+    this.isDialogVisible = true;
+  }
+
+  /**
+   * Fetch data if not already cached
+   */
+  async fetchLoadAnnouncementPlaces(provinceCode: ProvinceCode): Promise<void> {
+    if (provinceCode === this.UnknownProvince) return;
+
+    const cached = this.provincesAnnouncement().get(provinceCode);
+    if (cached?.length) return;
+
+    if (provinceCode !== this.EsfahanProvince) return; // TODO: support all provinces
+
+    const terminals = await this.lap.getLoadAnnouncementPlaces();
+    const data = terminals.data ?? [];
+
+    this.provincesAnnouncement.update((map) => {
+      map.set(provinceCode, data);
+      return map;
+    });
   }
 }
