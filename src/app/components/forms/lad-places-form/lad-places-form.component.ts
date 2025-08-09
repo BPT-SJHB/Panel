@@ -27,7 +27,7 @@ import { ValidationSchema } from 'app/constants/validation-schema';
 import { ShortResponse } from 'app/data/model/short-response.model';
 import { ErrorCodes } from 'app/constants/error-messages';
 import { TableConfig } from 'app/constants/ui/table.ui';
-import { ButtonComponent } from "app/components/shared/button/button.component";
+import { ButtonComponent } from 'app/components/shared/button/button.component';
 
 @Component({
   selector: 'app-lad-places-form',
@@ -42,8 +42,8 @@ import { ButtonComponent } from "app/components/shared/button/button.component";
     TextInputComponent,
     ToggleSwitchInputComponent,
     ReactiveFormsModule,
-    ButtonComponent
-],
+    ButtonComponent,
+  ],
   templateUrl: './lad-places-form.component.html',
   styleUrl: './lad-places-form.component.scss',
   providers: [ConfirmationService],
@@ -59,8 +59,7 @@ export class LadPlacesFormComponent implements OnInit, OnDestroy {
   private fb = inject(FormBuilder);
 
   readonly tableUi = TableConfig;
-  readonly addonWidth = "7rem";
-
+  readonly addonWidth = '7rem';
 
   formDialogVisible = false;
   loading = false;
@@ -101,7 +100,7 @@ export class LadPlacesFormComponent implements OnInit, OnDestroy {
   }
 
   searchLADPlace: (query: string) => Promise<LADPlace[]> = async (
-    query: string
+    query: string,
   ) => {
     const response = await this.ladPlaceService.GetLADPlaces(query);
     if (!this.handleResponse(response)) return [];
@@ -126,11 +125,15 @@ export class LadPlacesFormComponent implements OnInit, OnDestroy {
       icon: 'pi pi-info-circle',
       closable: true,
       closeOnEscape: true,
+
+      rejectLabel: 'لغو',
       rejectButtonProps: {
         label: 'لغو',
         severity: 'secondary',
         outlined: true,
       },
+
+      acceptLabel: 'تایید',
       acceptButtonProps: {
         label: 'تایید',
         severity: 'danger',
@@ -189,7 +192,7 @@ export class LadPlacesFormComponent implements OnInit, OnDestroy {
   }
 
   private async updateLoadingAndDischarging(
-    id: number
+    id: number,
   ): Promise<ApiResponse<ShortResponse>[]> {
     const responses: ApiResponse<ShortResponse>[] = [];
 
@@ -201,7 +204,7 @@ export class LadPlacesFormComponent implements OnInit, OnDestroy {
       this.cashedLadPlace?.DischargingActive !== this.dischargingActive.value
     ) {
       responses.push(
-        await this.ladPlaceService.ChangeDischargingPlaceStatus(id)
+        await this.ladPlaceService.ChangeDischargingPlaceStatus(id),
       );
     }
 
@@ -217,7 +220,7 @@ export class LadPlacesFormComponent implements OnInit, OnDestroy {
       if (!this.handleResponse(response)) return;
 
       const changes = await this.updateLoadingAndDischarging(
-        ladPlace.LADPlaceId
+        ladPlace.LADPlaceId,
       );
       const hasError = changes.some((res) => !this.handleResponse(res));
 
@@ -238,7 +241,7 @@ export class LadPlacesFormComponent implements OnInit, OnDestroy {
       if (!this.handleResponse(response)) return;
 
       const changes = await this.updateLoadingAndDischarging(
-        response.data!.LADPlaceId
+        response.data!.LADPlaceId,
       );
       const hasError = changes.some((res) => !this.handleResponse(res));
 
@@ -270,7 +273,7 @@ export class LadPlacesFormComponent implements OnInit, OnDestroy {
     if (!response.success || !response.data) {
       this.toast.error(
         'خطا',
-        response.error?.message ?? 'خطای غیرمنتظره‌ای رخ داد'
+        response.error?.message ?? 'خطای غیرمنتظره‌ای رخ داد',
       );
       if (response.error?.code === ErrorCodes.NoRecordFound) {
         return true;
