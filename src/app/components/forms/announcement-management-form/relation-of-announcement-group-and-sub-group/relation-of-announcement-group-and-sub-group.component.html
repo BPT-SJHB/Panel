@@ -27,9 +27,7 @@
     [disabled]="announcementGroupId.value === -1"
   />
 </div>
-
 <p-table
-  class="col-span-12"
   [value]="relationsAnnouncement"
   [columns]="cols"
   [tableStyle]="tableUi.tableStyle"
@@ -37,11 +35,12 @@
   [paginatorLocale]="tableUi.paginatorLocale"
   [rows]="tableUi.rows"
   [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
+  [stripedRows]="tableUi.stripedRows"
 >
   <ng-template #header let-columns>
     <tr>
       @for (col of columns; track $index) {
-      <th>{{ col }}</th>
+        <th>{{ col }}</th>
       }
     </tr>
   </ng-template>
@@ -62,15 +61,14 @@
   </ng-template>
 </p-table>
 
-<div class="flex justify-end">
-  <button
-    pButton
+<div class="flex justify-end mt-5">
+  <app-button
     size="small"
     label="ثبت"
-    class="w-ful py-1 md:w-25"
+    styleClass="w-ful py-2 md:w-25"
     (click)="registerRelationAnnouncement()"
     [disabled]="loading || announcementGroupAndSubGroupForm.invalid"
-  ></button>
+  ></app-button>
 </div>
 
 <p-confirm-dialog />
