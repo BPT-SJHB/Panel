@@ -13,8 +13,8 @@
   <!-- Form -->
   <form
     class="grid grid-cols-12 gap-4 col-span-12"
-    [class.pointer-events-none]="loading"
-    [class.opacity-60]="loading"
+    [class.pointer-events-none]="loading()"
+    [class.opacity-60]="loading()"
     [formGroup]="fpcForm"
   >
     <div class="grid grid-cols-12 gap-4 col-span-12">
@@ -22,8 +22,8 @@
       <div class="col-span-12 md:col-span-6">
         <app-text-input
           label="شناسه مرکز"
+          placeholder="شناسه مرکز"
           [readOnly]="true"
-          [disabled]="true"
           [control]="fpcId"
           validationField="id"
           [addonWidth]="addonWidth"
@@ -59,8 +59,8 @@
       <!-- Manager Mobile -->
       <div class="col-span-12 md:col-span-6">
         <app-text-input
-          label="شماره موبایل مدیر"
-          placeholder="شماره موبایل"
+          placeholder="شماره موبایل مدیر"
+          label="موبایل مدیر"
           class="flex-1"
           [control]="managerMobile"
           validationField="mobile"
@@ -117,14 +117,14 @@
   >
     <app-button
       (click)="registerOrEditFpc()"
-      [disabled]="fpcForm.invalid || loading"
+      [disabled]="fpcForm.invalid || loading()"
       label="ثبت و ویرایش"
       styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
     ></app-button>
 
     <app-button
       (click)="activateFpcSms()"
-      [disabled]="fpcId.value == '0' || loading"
+      [disabled]="fpcId.invalid || loading()"
       severity="warn"
       label="فعال سازی پیامک"
       styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
@@ -132,7 +132,7 @@
 
     <app-button
       (click)="resetPasswordFpc()"
-      [disabled]="fpcId.value == '0' || fpcId.invalid || loading"
+      [disabled]="fpcId.invalid || loading()"
       severity="info"
       label="رمز عبور جدید"
       styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
