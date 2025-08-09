@@ -67,6 +67,7 @@
   [paginatorLocale]="tableUi.paginatorLocale"
   [rows]="tableUi.rows"
   [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
+  [stripedRows]="tableUi.stripedRows"
 >
   <ng-template #caption>
     <div class="flex justify-between items-center">
@@ -82,7 +83,7 @@
   <ng-template #header let-columns>
     <tr>
       @for (col of columns; track $index) {
-      <th>{{ col }}</th>
+        <th>{{ col }}</th>
       }
     </tr>
   </ng-template>
@@ -133,7 +134,7 @@
   [modal]="true"
   draggable="false"
   [header]="headerTitle"
- [style]="{ width: '30rem', maxWidth: '100%' }"
+  [style]="{ width: '30rem', maxWidth: '100%' }"
   maskStyleClass="px-4"
   (onHide)="onCloseDialog()"
 >
@@ -203,7 +204,11 @@
       </div>
 
       <div class="col-span-12">
-        <app-toggle-switch-input label="وضعیت" class="flex px-2" [control]="travelTimeActive" />
+        <app-toggle-switch-input
+          label="وضعیت"
+          class="flex px-2"
+          [control]="travelTimeActive"
+        />
       </div>
 
       <div class="col-span-12 flex justify-end mt-6">
