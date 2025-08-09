@@ -9,7 +9,11 @@
 />
 
 <!-- فرم اطلاعات شرکت حمل و نقل -->
-<form [formGroup]="transportComponyForm" (ngSubmit)="editTransportCompony()" class="mt-8">
+<form
+  [formGroup]="transportComponyForm"
+  (ngSubmit)="editTransportCompony()"
+  class="mt-8"
+>
   <div class="grid grid-cols-12 gap-4">
     <!-- کد شرکت -->
     <app-text-input
@@ -17,7 +21,6 @@
       label="کد شرکت"
       placeholder="کد شرکت حمل و نقل"
       [control]="TCId"
-      [disabled]="true"
       [readOnly]="true"
       [addonWidth]="addonWidth"
     />
@@ -28,7 +31,6 @@
       placeholder="نام شرکت حمل و نقل"
       label="عنوان"
       [control]="TCTitle"
-      [disabled]="true"
       [readOnly]="true"
       [addonWidth]="addonWidth"
     />
@@ -39,7 +41,6 @@
       placeholder="کد سازمانی"
       label="کد سازمانی"
       [control]="TCOrganizationCode"
-      [disabled]="true"
       [readOnly]="true"
       [addonWidth]="addonWidth"
     />
@@ -50,7 +51,6 @@
       placeholder="محل شهر استقرار"
       label="عنوان شهر"
       [control]="TCCityTitle"
-      [disabled]="true"
       [readOnly]="true"
       [addonWidth]="addonWidth"
     />
@@ -106,7 +106,9 @@
   </div>
 
   <!-- دکمه‌های عملیات -->
-  <div class="col-span-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center">
+  <div
+    class="col-span-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center"
+  >
     <app-button
       (click)="editTransportCompony()"
       [disabled]="transportComponyForm.invalid || loading()"

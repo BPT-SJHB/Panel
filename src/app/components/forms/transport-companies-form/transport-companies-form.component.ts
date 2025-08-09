@@ -18,7 +18,7 @@ import { BinaryRadioInputComponent } from 'app/components/shared/inputs/binary-r
 // Services & models
 import { TransportCompaniesManagementService } from 'app/services/transport-company-management/transport-companies-management.service';
 import { TransportCompany } from 'app/services/transport-company-management/model/transport-company-info.model';
-import { ButtonComponent } from "app/components/shared/button/button.component";
+import { ButtonComponent } from 'app/components/shared/button/button.component';
 
 @Component({
   selector: 'app-transport-companies-form',
@@ -29,8 +29,8 @@ import { ButtonComponent } from "app/components/shared/button/button.component";
     ReactiveFormsModule,
     ButtonModule,
     ConfirmDialogModule,
-    ButtonComponent
-],
+    ButtonComponent,
+  ],
   providers: [ConfirmationService, DialogService],
   templateUrl: './transport-companies-form.component.html',
   styleUrl: './transport-companies-form.component.scss',
@@ -45,7 +45,7 @@ export class TransportCompaniesFormComponent extends BaseLoading {
   // === Form Setup ===
   readonly addonWidth = '8rem';
   readonly transportComponyForm = this.fb.group({
-    TCId: new FormControl<number | null>(null),
+    TCId: new FormControl<number | null>(null, ValidationSchema.id),
     TCTitle: [''],
     TCOrganizationCode: [''],
     TCCityTitle: [''],
@@ -58,7 +58,8 @@ export class TransportCompaniesFormComponent extends BaseLoading {
 
   // === Search + Select Handling ===
   searchTransportCompony = async (query: string) => {
-    const response = await this.transportComponyService.GetTransportCompaniesInfo(query);
+    const response =
+      await this.transportComponyService.GetTransportCompaniesInfo(query);
     if (!checkAndToastError(response, this.toast)) return [];
     return response.data;
   };
@@ -66,7 +67,8 @@ export class TransportCompaniesFormComponent extends BaseLoading {
   async onTransportComponySelect(tcInfo: TransportCompany) {
     try {
       this.loadingService.setLoading(true);
-      const response = await this.transportComponyService.GetTransportCompanyInfo(tcInfo.TCId);
+      const response =
+        await this.transportComponyService.GetTransportCompanyInfo(tcInfo.TCId);
       if (!checkAndToastError(response, this.toast)) return;
       this.populateTransportComponyForm(response.data);
     } finally {
@@ -79,7 +81,9 @@ export class TransportCompaniesFormComponent extends BaseLoading {
     if (this.loading() || this.transportComponyForm.invalid) return;
     try {
       this.loadingService.setLoading(true);
-      const response = await this.transportComponyService.EditTransportCompany(this.extractTransportComponyForm());
+      const response = await this.transportComponyService.EditTransportCompany(
+        this.extractTransportComponyForm(),
+      );
       if (!checkAndToastError(response, this.toast)) return;
       this.toast.success('موفق', response.data.Message);
     } finally {
@@ -91,7 +95,10 @@ export class TransportCompaniesFormComponent extends BaseLoading {
     if (this.loading() || this.TCId.invalid) return;
     try {
       this.loadingService.setLoading(true);
-      const response = await this.transportComponyService.ActiveTransportCompanySmsService(this.TCId.value!);
+      const response =
+        await this.transportComponyService.ActiveTransportCompanySmsService(
+          this.TCId.value!,
+        );
       if (!checkAndToastError(response, this.toast)) return;
       this.toast.success('موفق', response.data.Message);
     } finally {
@@ -120,7 +127,10 @@ export class TransportCompaniesFormComponent extends BaseLoading {
     if (this.loading() || this.TCId.invalid) return;
     try {
       this.loadingService.setLoading(true);
-      const response = await this.transportComponyService.ResetTransportCompanyPassword(this.TCId.value!);
+      const response =
+        await this.transportComponyService.ResetTransportCompanyPassword(
+          this.TCId.value!,
+        );
       if (!checkAndToastError(response, this.toast)) return;
       const { Username, Password } = response.data!;
       this.dialogService.open(NewPasswordDialogComponent, {
@@ -153,7 +163,9 @@ export class TransportCompaniesFormComponent extends BaseLoading {
   }
 
   get TCOrganizationCode() {
-    return this.transportComponyForm.get('TCOrganizationCode') as FormControl<string>;
+    return this.transportComponyForm.get(
+      'TCOrganizationCode',
+    ) as FormControl<string>;
   }
 
   get TCCityTitle() {
@@ -165,11 +177,15 @@ export class TransportCompaniesFormComponent extends BaseLoading {
   }
 
   get TCManagerMobileNumber() {
-    return this.transportComponyForm.get('TCManagerMobileNumber') as FormControl<string>;
+    return this.transportComponyForm.get(
+      'TCManagerMobileNumber',
+    ) as FormControl<string>;
   }
 
   get TCManagerNameFamily() {
-    return this.transportComponyForm.get('TCManagerNameFamily') as FormControl<string>;
+    return this.transportComponyForm.get(
+      'TCManagerNameFamily',
+    ) as FormControl<string>;
   }
 
   get EmailAddress() {
