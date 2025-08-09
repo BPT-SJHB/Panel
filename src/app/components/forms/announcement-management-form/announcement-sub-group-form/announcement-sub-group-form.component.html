@@ -23,18 +23,13 @@
   [paginatorLocale]="tableUi.paginatorLocale"
   [rows]="tableUi.rows"
   [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
+  [stripedRows]="tableUi.stripedRows"
 >
   <!-- Header with New Button -->
   <!-- Table Header -->
   <ng-template #caption>
     <div>
-      <button
-        pButton
-        label="جدید"
-        size="small"
-        class="w-20 md:w-30 py-1"
-        (click)="onNew()"
-      ></button>
+      <app-button label="جدید" size="small" styleClass="w-20 md:w-30 py-2" (click)="onNew()"></app-button>
     </div>
   </ng-template>
 
