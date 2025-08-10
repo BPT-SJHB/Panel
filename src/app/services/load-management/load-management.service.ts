@@ -147,4 +147,27 @@ export class LoadManagementService {
     >(apiUrl, bodyValue, mockTransportTariffParams);
     //#endregion
   }
+
+  public async RegisterNewLoad(
+    load: LoadRegister
+  ): Promise<ApiResponse<{ newLoadId: number }>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.LoadCapacitorAPI.RegisterLoad;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      Load: load,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      { newLoadId: number }
+    >(apiUrl, bodyValue, {
+      newLoadId: 15,
+    });
+    //#endregion
+  }
 }
