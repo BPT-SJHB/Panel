@@ -13,7 +13,7 @@
     (selectSuggestion)="onSelectSearchLoaderType($event)"
     (valueChange)="onAutoCompleteChange(searchLoaderTypeId)"
     [lazySearch]="onSearchLoaderType"
-    [showIconOptionSelected]="searchLoaderTypeId.value !== 0"
+    [showIconOptionSelected]="searchLoaderTypeId.valid"
     [addonWidth]="addonWidth"
   />
 
@@ -27,7 +27,7 @@
     (selectSuggestion)="onSelectSearchSourceCity($event)"
     (valueChange)="onAutoCompleteChange(searchSourceCityId)"
     [lazySearch]="onSearchCity"
-    [showIconOptionSelected]="searchSourceCityId.value !== 0"
+    [showIconOptionSelected]="searchSourceCityId.valid"
     [addonWidth]="addonWidth"
   />
 
@@ -41,7 +41,7 @@
     (selectSuggestion)="onSelectSearchTargetCity($event)"
     (valueChange)="onAutoCompleteChange(searchTargetCityId)"
     [lazySearch]="onSearchCity"
-    [showIconOptionSelected]="searchTargetCityId.value !== 0"
+    [showIconOptionSelected]="searchTargetCityId.valid"
     [addonWidth]="addonWidth"
   />
 
@@ -55,7 +55,7 @@
     (selectSuggestion)="onSelectSearchProduct($event)"
     (valueChange)="onAutoCompleteChange(searchGoodsId)"
     [lazySearch]="onSearchProduct"
-    [showIconOptionSelected]="searchGoodsId.value !== 0"
+    [showIconOptionSelected]="searchGoodsId.valid"
     [addonWidth]="addonWidth"
   />
 
@@ -73,26 +73,44 @@
 
 <app-table
   [columns]="columns"
-  [rows]="tariffs"
+  [rows]="tariffs()"
   [enableCaptionButton]="true"
-  (onClickCaptionButton)="onNew()"
+  (clickCaptionButton)="onNew()"
 />
 
 <!-- 📦 Actions -->
 <div class="flex w-full justify-end gap-4 mt-6">
-  <app-button label="بارگزاری فایل اکسل" severity="warn" />
   <app-button
-    [disabled]="tariffs.length === 0"
+    [disabled]="tariffs().length === 0"
     label="غیرفعال کردن تعرفه"
+    (click)="disableTariffs()"
     severity="danger"
   />
   <app-button
-    [disabled]="tariffs.length === 0"
+    [disabled]="tariffs().length === 0"
     label="افزایش تعرفه"
     severity="info"
   />
 </div>
 
+<div class="grid grid-cols-12 gap-4 mt-6">
+  <span class="text-xl font-bold col-span-12">بارگزاری فایل</span>
+  <p-fileUpload
+    #fu
+    class="col-span-12"
+    chooseLabel="انتخاب فایل اکسل"
+    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+    chooseIcon="pi pi-upload"
+    label="بارگزاری فایل اکسل"
+    severity="warn"
+    cancelLabel="لغو"
+    [maxFileSize]="1024 * 1024"
+    uploadLabel="بارگزاری فایل"
+    [auto]="false"
+    [customUpload]="true"
+    (uploadHandler)="onFileExcelUpload($event)"
+  />
+</div>
 <!-- 📝 Tariff Dialog Form -->
 <p-dialog
   [(visible)]="formDialogVisible"
@@ -118,7 +136,7 @@
       (selectSuggestion)="onSelectLoaderType($event)"
       (valueChange)="onAutoCompleteChange(LoaderTypeId)"
       [lazySearch]="onSearchLoaderType"
-      [showIconOptionSelected]="LoaderTypeId.value !== 0"
+      [showIconOptionSelected]="LoaderTypeId.valid"
       [readOnly]="isTariffsFormReadonly()"
       [disabled]="isTariffsFormReadonly()"
       [addonWidth]="addonWidth"
@@ -134,7 +152,7 @@
       (selectSuggestion)="onSelectSourceCity($event)"
       (valueChange)="onAutoCompleteChange(SourceCityId)"
       [lazySearch]="onSearchCity"
-      [showIconOptionSelected]="SourceCityId.value !== 0"
+      [showIconOptionSelected]="SourceCityId.valid"
       [readOnly]="isTariffsFormReadonly()"
       [disabled]="isTariffsFormReadonly()"
       [addonWidth]="addonWidth"
@@ -150,7 +168,7 @@
       (selectSuggestion)="onSelectTargetCity($event)"
       (valueChange)="onAutoCompleteChange(TargetCityId)"
       [lazySearch]="onSearchCity"
-      [showIconOptionSelected]="TargetCityId.value !== 0"
+      [showIconOptionSelected]="TargetCityId.valid"
       [readOnly]="isTariffsFormReadonly()"
       [disabled]="isTariffsFormReadonly()"
       [addonWidth]="addonWidth"
@@ -166,7 +184,7 @@
       (selectSuggestion)="onSelectProduct($event)"
       (valueChange)="onAutoCompleteChange(GoodId)"
       [lazySearch]="onSearchProduct"
-      [showIconOptionSelected]="GoodId.value !== 0"
+      [showIconOptionSelected]="GoodId.valid"
       [readOnly]="isTariffsFormReadonly()"
       [disabled]="isTariffsFormReadonly()"
       [addonWidth]="addonWidth"

@@ -1,17 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, OnDestroy, inject, signal } from '@angular/core';
+import { Component, inject, signal, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Subject, takeUntil } from 'rxjs';
 
 // PrimeNG UI Components
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
-import { TableModule } from 'primeng/table';
+import { FileUpload, FileUploadModule } from 'primeng/fileupload';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 
@@ -21,21 +20,15 @@ import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-
 import { SearchAutoCompleteComponent } from 'app/components/shared/inputs/search-auto-complete/search-auto-complete.component';
 
 // Services & Models
-import { LoadingService } from 'app/services/loading-service/loading-service.service';
-import { ToastService } from 'app/services/toast-service/toast.service';
 import { LoaderTypesService } from 'app/services/loader-types/loader-types.service';
 import { ProvinceAndCityManagementService } from 'app/services/province-city-management/province-and-city-management.service';
 import { ProductTypesService } from 'app/services/product-types/product-types.service';
 
-import { mockTariffs } from 'app/data/mock/tariff.mock';
 import { Tariff } from 'app/data/model/tariff.model';
-import { ApiResponse } from 'app/data/model/api-Response.model';
-import { ShortResponse } from 'app/data/model/short-response.model';
 import { City } from 'app/data/model/province-city.model';
 import { LoaderType } from 'app/services/loader-types/model/loader-type.model';
 import { Product } from 'app/data/model/product-type.model';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
-import { Base } from 'primeng/base';
 import { BaseLoading } from '../shared/component-base/base-loading';
 import {
   TableColumn,
@@ -50,7 +43,7 @@ enum TariffsFormMode {
   REGISTER,
 }
 
-type TariffTable = Tariff & { edit: any; delete: any };
+type TariffTable = Tariff & { edit: string; delete: string };
 
 @Component({
   selector: 'app-tariffs-editor-form',
@@ -59,7 +52,7 @@ type TariffTable = Tariff & { edit: any; delete: any };
     CommonModule,
     ButtonModule,
     DialogModule,
-    TableModule,
+    FileUploadModule,
     ReactiveFormsModule,
     ConfirmDialogModule,
     TextInputComponent,
@@ -73,6 +66,8 @@ type TariffTable = Tariff & { edit: any; delete: any };
   providers: [ConfirmationService],
 })
 export class TariffsFormComponent extends BaseLoading {
+  @ViewChild('fu') fu?: FileUpload;
+
   private readonly fb = inject(FormBuilder);
   private readonly tariffService = inject(TariffsManagementService);
   private readonly confirmationService = inject(ConfirmationService);
@@ -80,13 +75,12 @@ export class TariffsFormComponent extends BaseLoading {
   private readonly provinceService = inject(ProvinceAndCityManagementService);
   private readonly productService = inject(ProductTypesService);
   private readonly nonNullable = this.fb.nonNullable;
-
   readonly headerTitle = signal<string>('');
   readonly addonWidth = '6rem';
   tariffsFormMode: TariffsFormMode = TariffsFormMode.REGISTER;
   formDialogVisible = false;
 
-  tariffs: TariffTable[] = [];
+  readonly tariffs = signal<TariffTable[]>([]);
   tariffCached?: Tariff;
 
   readonly tariffSearchForm = this.fb.group({
@@ -100,7 +94,7 @@ export class TariffsFormComponent extends BaseLoading {
     searchGoods: this.nonNullable.control(''),
   });
 
-  tariffForm = this.fb.group({
+  readonly tariffForm = this.fb.group({
     SourceCityId: this.nonNullable.control(-1, Validators.min(0)),
     TargetCityId: this.nonNullable.control(-1, Validators.min(0)),
     LoaderTypeId: this.nonNullable.control(-1, Validators.min(0)),
@@ -121,12 +115,14 @@ export class TariffsFormComponent extends BaseLoading {
       header: 'ویرایش',
       type: TableColumnType.BUTTON_ICON,
       class: 'text-center',
+      buttonSeverity: 'info',
       onAction: async (row: TariffTable) => await this.onEdit(row),
     },
     {
       field: 'delete',
       header: 'حذف',
       type: TableColumnType.BUTTON_ICON,
+      buttonSeverity: 'danger',
       class: 'text-center',
     },
     {
@@ -180,6 +176,8 @@ export class TariffsFormComponent extends BaseLoading {
     },
   ];
 
+  excelFile = this.nonNullable.control([]);
+
   async searchTariffs(): Promise<void> {
     const loaderTypeId = this.searchLoaderTypeId.value;
     const sourceCityId = this.getValidValue(this.searchSourceCityId);
@@ -191,15 +189,17 @@ export class TariffsFormComponent extends BaseLoading {
         loaderTypeId,
         sourceCityId,
         targetCityId,
-        goodId,
+        goodId
       );
 
       if (!checkAndToastError(response, this.toast)) return;
-      this.tariffs = response.data.map((t) => ({
-        ...t,
-        edit: 'pi pi-pencil',
-        delete: 'pi pi-trash',
-      }));
+      this.tariffs.set(
+        response.data.map((t) => ({
+          ...t,
+          edit: 'pi pi-pencil',
+          delete: 'pi pi-trash',
+        }))
+      );
     });
   }
 
@@ -239,10 +239,10 @@ export class TariffsFormComponent extends BaseLoading {
 
   private resetTariffsForm(): void {
     this.tariffForm.reset({
-      SourceCityId: 0,
-      TargetCityId: 0,
-      LoaderTypeId: 0,
-      GoodId: 0,
+      SourceCityId: -1,
+      TargetCityId: -1,
+      LoaderTypeId: -1,
+      GoodId: -1,
       Tariff: 0,
       BaseTonnag: 0,
       Active: true,
@@ -262,17 +262,34 @@ export class TariffsFormComponent extends BaseLoading {
       icon: 'pi pi-info-circle',
       closable: true,
       closeOnEscape: true,
+      acceptLabel: 'تایید',
+      rejectLabel: 'لغو',
       rejectButtonProps: {
-        label: 'لغو',
         severity: 'secondary',
         outlined: true,
       },
-      acceptButtonProps: { label: 'حذف', severity: 'danger' },
+      acceptButtonProps: { severity: 'danger' },
       accept: async () => {
-        this.loadingService.setLoading(true);
-        await this.deleteTariff(row.LoaderTypeId ?? 0);
-        this.loadingService.setLoading(false);
+        await this.deleteTariffs([row]);
       },
+    });
+  }
+
+  onDisable(): void {
+    this.confirmationService.confirm({
+      message: `آیا می خواهید  تعداد ${this.tariffs().length} غیرفعال کنید.`,
+      header: `غیرفعال کردن تعرفه ها`,
+      icon: 'pi pi-info-circle',
+      closable: true,
+      closeOnEscape: true,
+      acceptLabel: 'تایید',
+      rejectLabel: 'لغو',
+      rejectButtonProps: {
+        severity: 'secondary',
+        outlined: true,
+      },
+      acceptButtonProps: { severity: 'danger' },
+      accept: async () => {},
     });
   }
 
@@ -282,13 +299,10 @@ export class TariffsFormComponent extends BaseLoading {
         row.LoaderTypeId,
         row.SourceCityId,
         row.TargetCityId,
-        row.GoodId,
+        row.GoodId
       );
 
       if (!checkAndToastError(response, this.toast)) return;
-
-      console.log('g');
-
       const tariff = response.data[0];
       this.tariffsFormMode = TariffsFormMode.EDITABLE;
       this.tariffCached = tariff;
@@ -307,35 +321,67 @@ export class TariffsFormComponent extends BaseLoading {
     this.formDialogVisible = true;
   }
 
-  registerTariffs(): void {
-    throw new Error('registerTariffs not implemented');
+  async registerTariffs(): Promise<void> {
+    if (this.tariffForm.invalid) return;
+
+    await this.withLoading(async () => {
+      const response = await this.tariffService.RegisterTariff(
+        this.extractTariffFromForm()
+      );
+      if (!checkAndToastError(response, this.toast)) return;
+      this.toast.success('موفق', response.data.Message);
+    }).finally(async () => {
+      this.formDialogVisible = false;
+    });
   }
 
-  editTariffForm(): void {
-    throw new Error('editTariffForm not implemented');
+  async editTariffForm(): Promise<void> {
+    if (this.tariffForm.invalid) return;
+
+    await this.withLoading(async () => {
+      const response = await this.tariffService.RegisterTariff(
+        this.extractTariffFromForm()
+      );
+      if (!checkAndToastError(response, this.toast)) return;
+      this.toast.success('موفق', response.data.Message);
+    }).finally(async () => {
+      await this.updateTable();
+      this.formDialogVisible = false;
+    });
+  }
+
+  async disableTariffs() {
+    await this.withLoading(async () => {
+      const response = await this.tariffService.ChangeTariffsStatus(
+        this.tariffs()
+      );
+      if (!checkAndToastError(response, this.toast)) return;
+      this.tariffs.update((ts) => ts.map((t) => ({ ...t, active: false })));
+      await this.updateTable();
+    });
   }
 
   onSearchCity = async (query: string): Promise<City[]> => {
     const res = await this.provinceService.GetProvincesAndCitiesInfo(query);
-    return this.isSuccessful(res)
+    return checkAndToastError(res, this.toast)
       ? res.data?.flatMap((p) => p?.Cities ?? []) || []
       : [];
   };
 
   onSearchProduct = async (query: string): Promise<Product[]> => {
     const res = await this.productService.GetProductsInfo(query);
-    return this.isSuccessful(res)
+    return checkAndToastError(res, this.toast)
       ? res.data?.flatMap((p) => p?.Products ?? []) || []
       : [];
   };
 
   onSearchLoaderType = async (query: string): Promise<LoaderType[]> => {
     const res = await this.loaderTypeService.GetLoaderTypesInfo(query);
-    return this.isSuccessful(res) ? res.data! : [];
+    return checkAndToastError(res, this.toast) ? res.data! : [];
   };
 
   onAutoCompleteChange(control: FormControl): void {
-    control.setValue(0);
+    control.setValue(-1);
   }
 
   isTariffsFormReadonly(): boolean {
@@ -374,27 +420,30 @@ export class TariffsFormComponent extends BaseLoading {
     this.GoodId.setValue(value.ProductId);
   }
 
-  async deleteTariff(id: number): Promise<void> {
-    // TODO: Replace mock response with API
-    const response: ApiResponse<ShortResponse> = {
-      success: true,
-      data: { Message: 'حذف موفق بود' },
-    };
-    this.toast.success('موفق', response.data?.Message ?? 'با موفقیت حذف شد');
-    this.updateTable();
+  async deleteTariffs(tariffs: Tariff[]): Promise<void> {
+    this.withLoading(async () => {
+      const response = await this.tariffService.DeleteTariffs(tariffs);
+      if (checkAndToastError(response, this.toast)) {
+        this.toast.success('موفق', response.data.Message);
+        await this.updateTable();
+      }
+    });
   }
 
-  private updateTable(): void {
-    // TODO: Reload tariffs from API
-    this.searchTariffs();
+  onFileExcelUpload(event: any) {
+    this.fu?.clear();
+    this.toast.success('موفق', 'فایل اکسل با موفقیت بارگذاری شد.');
   }
 
-  private isSuccessful(response: ApiResponse<any>): boolean {
-    if (!response.success || !response.data) {
-      this.toast.error('خطا', response.error?.message ?? 'خطای غیرمنتظره');
-      return false;
-    }
-    return true;
+  private async updateTable(): Promise<void> {
+    if (!this.isSearchFormValid()) return;
+    await this.searchTariffs();
+  }
+
+  async registerOrEdit() {
+    if (this.tariffsFormMode === TariffsFormMode.EDITABLE)
+      await this.editTariffForm();
+    else await this.registerOrEdit();
   }
 
   // Getters for FormControls
