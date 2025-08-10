@@ -122,4 +122,29 @@ export class LoadManagementService {
     >(apiUrl, bodyValue, mockLoadInfo);
     //#endregion
   }
+
+  public async GetTransportTariffParams(
+    tptParams: string
+  ): Promise<ApiResponse<TransportTariffParam[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.LoadCapacitorAPI.GetTransportTariffParams;
+    const loadInfo: LoadInfo = {
+      LoadId: 0,
+      TPTParams: tptParams,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TPTParams: loadInfo.TPTParams,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      TransportTariffParam[]
+    >(apiUrl, bodyValue, mockTransportTariffParams);
+    //#endregion
+  }
 }
