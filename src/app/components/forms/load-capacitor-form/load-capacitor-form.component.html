@@ -1,8 +1,8 @@
-<div class="flex flex-column gap-2">
+<div class="flex flex-col gap-2">
   <!-- Loading Spinner -->
   @if (loading) {
   <div
-    class="h-full w-full z-5 flex align-items-center justify-content-center absolute"
+    class="h-full w-full z-50 flex items-center justify-center absolute"
   >
     <div class="h-full w-full" style="opacity: 0.2"></div>
     <i class="pi pi-spin pi-spinner primary" style="font-size: 5rem"></i>
@@ -11,13 +11,13 @@
 
   <!-- Search Form -->
   <form
-    class="col-12"
+    class="col-span-12"
     [formGroup]="searchForm"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
     (ngSubmit)="loadCapacitorForm()"
   >
-    <div class="flex gap-3">
+    <div class="flex gap-4">
       <app-text-input
         [control]="barcode"
         icon="pi pi-barcode"
@@ -25,12 +25,12 @@
         placeholder="کد بار"
         addonWidth="5rem"
       />
-      <p-button
+      <app-button
         (click)="loadCapacitorForm()"
         [disabled]="searchForm.invalid"
         size="small"
         severity="info"
-        styleClass="w-8rem h-2-5rem"
+        styleClass="w-32 h-2-5rem"
         label="جستجو"
       />
     </div>
@@ -38,16 +38,16 @@
 
   <!-- Capacitor Form -->
   <form
-    class="grid col-12"
+    class="grid grid-cols-12 gap-4 col-span-12"
     [formGroup]="capacitorForm"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
     [formGroup]="capacitorForm"
     (ngSubmit)="editOrRegister()"
   >
-    <div class="grid col-12 border-gray-400 border-bottom-2">
-      <app-text-input
-        class="col-12 sm:col-6"
+    <div class="grid grid-cols-12 gap-4 col-span-12 border-gray-400 border-b-2">
+      <app-date-picker-input
+        class="col-span-12 sm:col-span-6"
         [addonWidth]="addonWidth"
         label="تاریخ ثبت بار"
         type="date"
@@ -57,7 +57,7 @@
 
       <app-text-input hidden [control]="loadStatusId" />
       <app-text-input
-        class="col-12 sm:col-6"
+        class="col-span-12 sm:col-span-6"
         [addonWidth]="addonWidth"
         label="وضعیت بار"
         [control]="loadStatusTitle"
@@ -65,11 +65,11 @@
       />
     </div>
 
-    <div class="grid col-12 mt-3 border-gray-400 border-bottom-2">
+    <div class="grid grid-cols-12 gap-4 col-span-12 mt-4 border-gray-400 border-b-2">
       <app-text-input hidden [control]="transportCompanyId" />
 
       <app-text-input
-        class="col-12 sm:col-6 md:col-4"
+        class="col-span-12 sm:col-span-6 md:col-span-4"
         [addonWidth]="addonWidth"
         label="شرکت حمل و نقل"
         [control]="transportCompanyTitle"
@@ -78,7 +78,7 @@
 
       <app-text-input hidden [control]="goodId" />
       <app-text-input
-        class="col-12 sm:col-6 md:col-4"
+        class="col-span-12 sm:col-span-6 md:col-span-4"
         [addonWidth]="addonWidth"
         label=" کالا"
         [control]="goodTitle"
@@ -87,7 +87,7 @@
 
       <app-text-input hidden [control]="loadAnnouncementGroupId" />
       <app-text-input
-        class="col-12 sm:col-6 md:col-4"
+        class="col-span-12 sm:col-span-6 md:col-span-4"
         [addonWidth]="addonWidth"
         label="گروه اعلام بار"
         [control]="loadAnnouncementGroupTitle"
@@ -96,7 +96,7 @@
 
       <app-text-input hidden [control]="loadAnnouncementSubGroupId" />
       <app-text-input
-        class="col-12 sm:col-6 md:col-4"
+        class="col-span-12 sm:col-span-6 md:col-span-4"
         [addonWidth]="addonWidth"
         label="زیرگروه اعلام بار"
         [control]="loadAnnouncementSubGroupTitle"
@@ -104,10 +104,10 @@
       />
     </div>
 
-    <div class="grid col-12 mt-3 border-gray-400 border-bottom-2">
+    <div class="grid grid-cols-12 gap-4 col-span-12 mt-4 border-gray-400 border-b-2">
       <app-text-input hidden [control]="sourceCityId" />
       <app-text-input
-        class="col-12 sm:col-6 md:col-4"
+        class="col-span-12 sm:col-span-6 md:col-span-4"
         [addonWidth]="addonWidth"
         label="شهر مبدا"
         [control]="sourceCityTitle"
@@ -116,7 +116,7 @@
 
       <app-text-input hidden [control]="targetCityId" />
       <app-text-input
-        class="col-12 sm:col-6 md:col-4"
+        class="col-span-12 sm:col-span-6 md:col-span-4"
         [addonWidth]="addonWidth"
         label="شهر مقصد"
         [control]="targetCityTitle"
@@ -125,7 +125,7 @@
 
       <app-text-input hidden [control]="loadingPlaceId" />
       <app-text-input
-        class="col-12 sm:col-6 md:col-4"
+        class="col-span-12 sm:col-span-6 md:col-span-4"
         [addonWidth]="addonWidth"
         label="مبدا بارگیری"
         [control]="loadingPlaceTitle"
@@ -134,7 +134,7 @@
 
       <app-text-input hidden [control]="dischargingPlaceId" />
       <app-text-input
-        class="col-12 sm:col-6 md:col-4"
+        class="col-span-12 sm:col-span-6 md:col-span-4"
         [addonWidth]="addonWidth"
         label="مقصد تخلیه"
         [control]="dischargingPlaceTitle"
@@ -142,30 +142,30 @@
       />
     </div>
 
-    <div class="grid col-12 mt-3 border-gray-400 border-bottom-2">
+    <div class="grid grid-cols-12 gap-4 col-span-12 mt-4 border-gray-400 border-b-2">
       <app-text-input
-        class="col-12 sm:col-6 md:col-4"
+        class="col-span-12 sm:col-span-6 md:col-span-4"
         [addonWidth]="addonWidth"
         label="تعداد کل"
         [control]="totalNumber"
         validationField="totalNumber"
       />
       <app-text-input
-        class="col-12 sm:col-6 md:col-4"
+        class="col-span-12 sm:col-span-6 md:col-span-4"
         [addonWidth]="addonWidth"
         label="تناژ"
         [control]="tonaj"
         validationField="tonaj"
       />
       <app-text-input
-        class="col-12 sm:col-6 md:col-4"
+        class="col-span-12 sm:col-span-6 md:col-span-4"
         [addonWidth]="addonWidth"
         label="گیرنده"
         [control]="recipient"
         validationField="recipient"
       />
       <app-text-input
-        class="col-12 sm:col-6 md:col-4"
+        class="col-span-12 sm:col-span-6 md:col-span-4"
         [addonWidth]="addonWidth"
         label="تعرفه"
         [control]="tarrif"
@@ -173,16 +173,16 @@
       />
     </div>
 
-    <div class="grid col-12 mt-3 border-gray-400 border-bottom-2">
+    <div class="grid grid-cols-12 gap-4 col-span-12 mt-4 border-gray-400 border-b-2">
       <app-text-input
-        class="col-12"
+        class="col-span-12"
         [addonWidth]="addonWidth"
         label="آدرس"
         [control]="address"
         validationField="address"
       />
       <app-text-input
-        class="col-12"
+        class="col-span-12"
         [addonWidth]="addonWidth"
         label="توضیحات"
         [control]="description"
@@ -192,7 +192,7 @@
 
     <span class="mt-2 font-bold text-xl">پارامترهای موثر</span>
     <p-table
-    class="col-12"
+    class="col-span-12"
     [value]="this.ptpFormArray.controls"
       styleClass="overflow-x-auto"
       [tableStyle]="{ 'min-width': '40rem' }"
@@ -201,7 +201,7 @@
         <tr>
           <td>
             <!-- Checkbox + ID -->
-            <div class="flex align-items-center gap-2" style="width: 5rem">
+            <div class="flex items-center gap-2" style="width: 5rem">
               <p-checkbox
                 [binary]="true"
                 class="mb-1"
@@ -220,33 +220,33 @@
 
     <!-- Action Buttons -->
     <div
-      class="px-3 col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center"
+      class="px-4 col-span-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center"
     >
-      <p-button
+      <app-button
         (click)="editOrRegister()"
         [disabled]="capacitorForm.invalid || loading"
         label="ثبت و ویرایش"
         size="small"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
-      ></p-button>
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+      ></app-button>
 
-      <p-button
+      <app-button
         (click)="editOrRegister()"
         [disabled]="capacitorForm.invalid || loading"
         label="حذف بار"
         size="small"
         severity="danger"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
-      ></p-button>
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+      ></app-button>
 
-      <p-button
+      <app-button
         (click)="editOrRegister()"
         [disabled]="capacitorForm.invalid || loading"
         label="کنسلی بار"
         size="small"
         severity="info"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
-      ></p-button>
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+      ></app-button>
     </div>
   </form>
 </div>

@@ -1,8 +1,8 @@
-<div class="flex flex-column gap-2">
+<div class="flex flex-col gap-2">
   <!-- Loading Spinner -->
   @if (loading) {
   <div
-    class="h-full w-full z-5 flex align-items-center justify-content-center absolute"
+    class="h-full w-full z-50 flex items-center justify-center absolute"
   >
     <div class="h-full w-full" style="opacity: 0.2"></div>
     <i class="pi pi-spin pi-spinner primary" style="font-size: 5rem"></i>
@@ -11,13 +11,13 @@
 
   <!-- Search Form -->
   <form
-    class="col-12"
+    class="col-span-12 mb-5"
     [formGroup]="searchForm"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
     (ngSubmit)="loadLoadersType()"
   >
-    <div class="flex gap-3">
+    <div class="flex gap-2 items-center">
       <app-text-input
         [control]="searchTitle"
         icon="pi pi-search"
@@ -25,12 +25,12 @@
         placeholder="قسمتی از عنوان بارگیر را وارد نمایید."
         addonWidth="5rem"
       />
-      <p-button
+      <app-button
         (click)="loadLoadersType()"
         [disabled]="searchForm.invalid || loading"
         size="small"
         severity="info"
-        styleClass="w-8rem h-2-5rem"
+        styleClass="px-6 py-2"
         label="جستجو"
       />
     </div>
@@ -43,9 +43,13 @@
   >
     <p-table
       [value]="this.loadersFormArray.controls"
-    styleClass="overflow-x-auto"
-    [tableStyle]="{'min-width':'50rem'}"
-      >
+    [tableStyle]="tableUi.tableStyle"
+  [paginator]="tableUi.paginator"
+  [paginatorLocale]="tableUi.paginatorLocale"
+  [rows]="tableUi.rows"
+  [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
+  [stripedRows]="tableUi.stripedRows"
+   >
       <ng-template #header>
         <tr>
           <th>فعال و غیر فعال</th>

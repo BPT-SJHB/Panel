@@ -1,19 +1,29 @@
 <p-table
   [value]="transactions()"
   [responsiveLayout]="'scroll'"
->
+    [tableStyle]="tableUi.tableStyle"
+  [paginator]="tableUi.paginator"
+  [paginatorLocale]="tableUi.paginatorLocale"
+  [rows]="tableUi.rows"
+  [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
+  [stripedRows]="tableUi.stripedRows"
+  >
   <ng-template pTemplate="header">
     <tr>
-      <th *ngFor="let c of columns">
-        {{ c.label }}
-      </th>
+      @for (c of columns; track c) {
+        <th>
+          {{ c.label }}
+        </th>
+      }
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-row>
     <tr [class]="getRowColor(row.TransactionColor)">
-      <td *ngFor="let c of columns" class="white-space-nowrap">
-        {{ row[c.key] }}
-      </td>
+      @for (c of columns; track c) {
+        <td class="whitespace-nowrap">
+          {{ row[c.key] }}
+        </td>
+      }
     </tr>
   </ng-template>
 </p-table>

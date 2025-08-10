@@ -26,10 +26,12 @@ import { ConfirmationService } from 'primeng/api';
 import { TravelTimeManagementService } from 'app/services/travel-time-management/travel-time-management.service';
 
 import { TextInputComponent } from '../../shared/inputs/text-input/text-input.component';
-import { BinaryRadioInputComponent } from '../../shared/inputs/binary-radio-input/binary-radio-input.component';
+import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-switch-input/toggle-switch-input.component';
 import { SearchAutoCompleteComponent } from '../../shared/inputs/search-auto-complete/search-auto-complete.component';
 import { ShortResponse } from 'app/data/model/short-response.model';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { TableConfig } from 'app/constants/ui/table.ui';
+import { ButtonComponent } from 'app/components/shared/button/button.component';
 
 enum TravelTimeFormMode {
   EDITABLE,
@@ -46,9 +48,10 @@ enum TravelTimeFormMode {
     ReactiveFormsModule,
     NgClass,
     TextInputComponent,
-    BinaryRadioInputComponent,
+    ToggleSwitchInputComponent,
     SearchAutoCompleteComponent,
     ConfirmDialogModule,
+    ButtonComponent,
   ],
   templateUrl: './travel-time-form.component.html',
   styleUrl: './travel-time-form.component.scss',
@@ -67,6 +70,8 @@ export class TravelTimeFormComponent {
   // State & lifecycle helpers
   private destroy$ = new Subject<void>();
   private travelTimeFormMode = TravelTimeFormMode.REGISTER;
+
+  readonly tableUi = TableConfig;
 
   // UI state
   headerTitle = '';
@@ -192,7 +197,7 @@ export class TravelTimeFormComponent {
   isSearchFormValid(): boolean {
     if (this.searchLoaderTypeId.value === 0) return false;
     return [this.searchSourceCityId.value, this.searchTargetCityId.value].some(
-      (v) => v && v !== 0
+      (v) => v && v !== 0,
     );
   }
 
@@ -215,7 +220,7 @@ export class TravelTimeFormComponent {
         this.loaderTypeId.value,
         this.sourceCityId.value,
         this.targetCityId.value,
-        this.travelTimeTake.value
+        this.travelTimeTake.value,
       ),
     ];
     tasks.push(this.updateTimeTravelActive());
@@ -224,7 +229,7 @@ export class TravelTimeFormComponent {
     if (results.some((res) => !this.isSuccessful(res))) return;
     this.toast.success(
       'موفق',
-      results[0].data?.Message ?? 'با موفقیت انجام شد'
+      results[0].data?.Message ?? 'با موفقیت انجام شد',
     );
     this.onCloseDialog();
   }
@@ -236,7 +241,7 @@ export class TravelTimeFormComponent {
         this.loaderTypeId.value,
         this.sourceCityId.value,
         this.targetCityId.value,
-        this.travelTimeTake.value
+        this.travelTimeTake.value,
       ),
     ];
     tasks.push(this.updateTimeTravelActive());
@@ -245,7 +250,7 @@ export class TravelTimeFormComponent {
     if (results.some((res) => !this.isSuccessful(res))) return;
     this.toast.success(
       'موفق',
-      results[0].data?.Message ?? 'با موفقیت انجام شد'
+      results[0].data?.Message ?? 'با موفقیت انجام شد',
     );
     await this.updateTable();
     this.onCloseDialog();
@@ -267,7 +272,7 @@ export class TravelTimeFormComponent {
       return this.travelTimeService.ChangeTravelTimeStatus(
         this.loaderTypeId.value,
         this.sourceCityId.value,
-        this.targetCityId.value
+        this.targetCityId.value,
       );
     }
     return { success: true, data: { Message: '' } };
@@ -328,7 +333,7 @@ export class TravelTimeFormComponent {
       const response = await this.travelTimeService.GetTravelTime(
         row.LoaderTypeId!,
         row.SourceCityId!,
-        row.TargetCityId!
+        row.TargetCityId!,
       );
       if (!this.isSuccessful(response)) {
         this.onCloseDialog();
@@ -370,6 +375,8 @@ export class TravelTimeFormComponent {
       icon: 'pi pi-info-circle',
       closable: true,
       closeOnEscape: true,
+      acceptLabel: 'تایید',
+      rejectLabel: 'لغو',
       rejectButtonProps: {
         label: 'لغو',
         severity: 'secondary',
@@ -394,7 +401,7 @@ export class TravelTimeFormComponent {
     const response = await this.travelTimeService.GetTravelTimes(
       this.searchLoaderTypeId.value || undefined,
       this.searchSourceCityId.value || undefined,
-      this.searchTargetCityId.value || undefined
+      this.searchTargetCityId.value || undefined,
     );
 
     if (!response.success) {
@@ -420,7 +427,7 @@ export class TravelTimeFormComponent {
     const response = await this.travelTimeService.DeleteTravelTime(
       rowData.LoaderTypeId,
       rowData.SourceCityId ?? 0,
-      rowData.TargetCityId ?? 0
+      rowData.TargetCityId ?? 0,
     );
     this.toast.success('موفق', response.data?.Message ?? 'با موفقیت حذف شد');
     await this.updateTable(false);

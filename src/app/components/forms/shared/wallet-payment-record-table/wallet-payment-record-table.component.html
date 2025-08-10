@@ -1,20 +1,29 @@
 <p-table
   [value]="paymentHistory()"
-  [styleClass]="'p-datatable-sm p-datatable-striped'"
   [responsiveLayout]="'scroll'"
->
+   [tableStyle]="tableUi.tableStyle"
+  [paginator]="tableUi.paginator"
+  [paginatorLocale]="tableUi.paginatorLocale"
+  [rows]="tableUi.rows"
+  [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
+  [stripedRows]="true"
+  >
   <ng-template pTemplate="header">
     <tr>
-      <th *ngFor="let c of columns">
-        {{ c.label }}
-      </th>
+      @for (c of columns; track c) {
+        <th>
+          {{ c.label }}
+        </th>
+      }
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-row>
     <tr>
-      <td *ngFor="let c of columns">
-        {{ row[c.key] }}
-      </td>
+      @for (c of columns; track c) {
+        <td>
+          {{ row[c.key] }}
+        </td>
+      }
     </tr>
   </ng-template>
 </p-table>

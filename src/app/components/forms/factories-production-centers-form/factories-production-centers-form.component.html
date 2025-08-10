@@ -1,6 +1,6 @@
-<div class="grid">
+<div class="grid grid-cols-12 gap-4">
   <!-- Search Input -->
-  <div class="col-12 w-full">
+  <div class="col-span-12 w-full">
     <app-search-auto-complete
       [lazySearch]="searchFPCs"
       class="w-full"
@@ -12,18 +12,18 @@
 
   <!-- Form -->
   <form
-    class="grid col-12"
-    [class.pointer-events-none]="loading"
-    [class.opacity-60]="loading"
+    class="grid grid-cols-12 gap-4 col-span-12"
+    [class.pointer-events-none]="loading()"
+    [class.opacity-60]="loading()"
     [formGroup]="fpcForm"
   >
-    <div class="grid col-12">
+    <div class="grid grid-cols-12 gap-4 col-span-12">
       <!-- Hidden FPC ID -->
-      <div class="col-12 md:col-6">
+      <div class="col-span-12 md:col-span-6">
         <app-text-input
           label="شناسه مرکز"
+          placeholder="شناسه مرکز"
           [readOnly]="true"
-          [disabled]="true"
           [control]="fpcId"
           validationField="id"
           [addonWidth]="addonWidth"
@@ -33,7 +33,7 @@
       </div>
 
       <!-- Title -->
-      <div class="col-12 md:col-6">
+      <div class="col-span-12 md:col-span-6">
         <app-text-input
           label="عنوان"
           placeholder="عنوان"
@@ -45,7 +45,7 @@
       </div>
 
       <!-- Manager Name -->
-      <div class="col-12 md:col-6">
+      <div class="col-span-12 md:col-span-6">
         <app-text-input
           label="نام مدیر"
           placeholder="نام مدیر"
@@ -57,10 +57,10 @@
       </div>
 
       <!-- Manager Mobile -->
-      <div class="col-12 md:col-6">
+      <div class="col-span-12 md:col-span-6">
         <app-text-input
-          label="شماره موبایل مدیر"
-          placeholder="شماره موبایل"
+          placeholder="شماره موبایل مدیر"
+          label="موبایل مدیر"
           class="flex-1"
           [control]="managerMobile"
           validationField="mobile"
@@ -69,7 +69,7 @@
       </div>
 
       <!-- Telephone -->
-      <div class="col-12 md:col-6">
+      <div class="col-span-12 md:col-span-6">
         <app-text-input
           label="تلفن"
           placeholder="شماره تلفن مثال 02123456789"
@@ -81,7 +81,7 @@
       </div>
 
       <!-- Address -->
-      <div class="col-12 md:col-6">
+      <div class="col-span-12 md:col-span-6">
         <app-text-input
           label="آدرس"
           placeholder="آدرس"
@@ -93,7 +93,7 @@
       </div>
 
       <!-- Email -->
-      <div class="col-12 md:col-6">
+      <div class="col-span-12 md:col-span-6">
         <app-text-input
           label="ایمیل"
           placeholder="ایمیل"
@@ -105,43 +105,38 @@
       </div>
 
       <!-- FPC Active -->
-      <div class="col-12 md:col-6">
-        <app-binary-radio-input
-          label="وضعیت مرکز"
-          radioName="fpc-active"
-          class="flex-1"
-          [control]="fpcActive"
-        />
+      <div class="col-span-12 md:col-span-6 flex px-2">
+        <app-toggle-switch-input label="وضعیت مرکز" [control]="fpcActive" />
       </div>
     </div>
   </form>
 
   <!-- Action Buttons -->
   <div
-    class="col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center"
+    class="col-span-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center"
   >
-    <p-button
+    <app-button
       (click)="registerOrEditFpc()"
-      [disabled]="fpcForm.invalid || loading"
+      [disabled]="fpcForm.invalid || loading()"
       label="ثبت و ویرایش"
-      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
-    ></p-button>
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+    ></app-button>
 
-    <p-button
+    <app-button
       (click)="activateFpcSms()"
-      [disabled]="fpcId.value == '0' || loading"
+      [disabled]="fpcId.invalid || loading()"
       severity="warn"
       label="فعال سازی پیامک"
-      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
-    ></p-button>
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+    ></app-button>
 
-    <p-button
+    <app-button
       (click)="resetPasswordFpc()"
-      [disabled]="fpcId.value == '0' || fpcId.invalid || loading"
+      [disabled]="fpcId.invalid || loading()"
       severity="info"
       label="رمز عبور جدید"
-      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
-    ></p-button>
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+    ></app-button>
   </div>
 
   <div class="card flex justify-center">
@@ -152,29 +147,29 @@
       [(visible)]="passwordDialogVisible"
       [style]="{ width: '25rem' }"
     >
-      <div class="flex gap-3 flex-column">
-        <div class="flex align-items-center justify-content-between">
-          <span class="w-8rem"> شناسه کابری: </span>
-          <p-button
+      <div class="flex gap-4 flex-col">
+        <div class="flex items-center justify-between">
+          <span class="w-32"> شناسه کابری: </span>
+          <app-button
             (click)="copyToClipboard(userNameDialog)"
             size="small"
-            styleClass="px-4 w-10rem"
+            styleClass="px-6 w-40"
             severity="info"
           >
             {{ userNameDialog }}
-          </p-button>
+          </app-button>
         </div>
 
-        <div class="flex align-items-center justify-content-between">
-          <span class="w-8rem"> رمز عبور جدید </span>
-          <p-button
+        <div class="flex items-center justify-between">
+          <span class="w-32"> رمز عبور جدید </span>
+          <app-button
             (click)="copyToClipboard(newUserPasswordDialog)"
             size="small"
-            styleClass="px-4 w-10rem"
-            severity="primary"
+            styleClass="px-6 w-40"
+            severity="green"
           >
             {{ newUserPasswordDialog }}
-          </p-button>
+          </app-button>
         </div>
       </div>
     </p-dialog>

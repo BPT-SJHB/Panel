@@ -2,11 +2,10 @@
 <form
   [formGroup]="travelTimeSearchForm"
   (ngSubmit)="searchTimeTravel()"
-  class="grid gap-3 sm:gap-0"
+  class="grid grid-cols-12 gap-4 mb-5"
 >
-
   <app-search-auto-complete
-    class="col-12 sm:col-6 lg:col-4"
+    class="col-span-12 sm:col-span-6 lg:col-span-4"
     placeholder="نوع بارگیر"
     label="نوع بارگیر"
     optionLabel="LoaderTypeTitle"
@@ -15,10 +14,11 @@
     (valueChange)="onAutoCompleteChange(searchLoaderTypeId)"
     [lazySearch]="onSearchLoaderType"
     [showIconOptionSelected]="searchLoaderTypeId.value !== 0"
+    addonWidth="8rem"
   />
 
   <app-search-auto-complete
-    class="col-12 sm:col-6 lg:col-4"
+    class="col-span-12 sm:col-span-6 lg:col-span-4"
     placeholder="شهر مبدا"
     label="شهر مبدا"
     [control]="searchSourceCity"
@@ -28,10 +28,11 @@
     (valueChange)="onAutoCompleteChange(searchSourceCityId)"
     [lazySearch]="onSearchCity"
     [showIconOptionSelected]="searchSourceCityId.value != 0"
+    addonWidth="8rem"
   />
 
   <app-search-auto-complete
-    class="col-12 sm:col-6 lg:col-4"
+    class="col-span-12 sm:col-span-6 lg:col-span-4"
     placeholder="شهر مقصد"
     label="شهر مقصد"
     [control]="searchTargetCity"
@@ -41,15 +42,16 @@
     (valueChange)="onAutoCompleteChange(searchSourceCityId)"
     [lazySearch]="onSearchCity"
     [showIconOptionSelected]="searchTargetCityId.value != 0"
+    addonWidth="8rem"
   />
 
-  <div class="col-12 flex justify-content-end">
-    <p-button
+  <div class="col-span-12 flex justify-end">
+    <app-button
       label="جستجو"
       severity="info"
       size="small"
-      styleClass="px-4 py-1"
-      type="ngSubmit"
+      styleClass="px-6 py-2"
+      type="submit"
       [disabled]="!isSearchFormValid()"
     />
   </div>
@@ -57,17 +59,22 @@
 
 <!-- Results Table -->
 <p-table
-  class="col-12 overflow-x-auto"
+  class="col-span-12 overflow-x-auto"
   [columns]="cols"
   [value]="travelTimes"
-  [tableStyle]="{ 'min-width': '40rem' }"
+  [tableStyle]="tableUi.tableStyle"
+  [paginator]="tableUi.paginator"
+  [paginatorLocale]="tableUi.paginatorLocale"
+  [rows]="tableUi.rows"
+  [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
+  [stripedRows]="tableUi.stripedRows"
 >
   <ng-template #caption>
     <div class="flex justify-between items-center">
-      <p-button
+      <app-button
         label="جدید"
         size="small"
-        styleClass="px-4 md:px-5 py-1"
+        styleClass="px-6 md:px-8 py-1"
         (click)="onNew()"
       />
     </div>
@@ -76,7 +83,7 @@
   <ng-template #header let-columns>
     <tr>
       @for (col of columns; track $index) {
-      <th>{{ col }}</th>
+        <th>{{ col }}</th>
       }
     </tr>
   </ng-template>
@@ -84,7 +91,7 @@
   <ng-template #body let-rowData>
     <tr>
       <td (click)="onEdit(rowData)">
-        <p-button
+        <app-button
           icon="pi pi-pencil"
           severity="info"
           variant="text"
@@ -93,7 +100,7 @@
       </td>
 
       <td (click)="onDelete(rowData)">
-        <p-button
+        <app-button
           icon="pi pi-trash"
           severity="danger"
           variant="text"
@@ -127,8 +134,8 @@
   [modal]="true"
   draggable="false"
   [header]="headerTitle"
-  [style]="{ 'max-width': '30rem' }"
-  maskStyleClass="px-3"
+  [style]="{ width: '30rem', maxWidth: '100%' }"
+  maskStyleClass="px-4"
   (onHide)="onCloseDialog()"
 >
   <form
@@ -137,10 +144,10 @@
     [class.opacity-60]="loading"
     (ngSubmit)="registerOrEdit()"
   >
-    <div class="grid gap-3">
-      <div class="grid col-12 gap-3">
+    <div class="grid grid-cols-12 gap-4">
+      <div class="grid grid-cols-12 gap-4 col-span-12">
         <app-search-auto-complete
-          class="col-12"
+          class="col-span-12"
           placeholder="نوع بارگیر"
           label="نوع بارگیر"
           optionLabel="LoaderTypeTitle"
@@ -156,7 +163,7 @@
         />
 
         <app-search-auto-complete
-          class="col-12"
+          class="col-span-12"
           placeholder="شهر مبدا"
           label="شهر مبدا"
           [control]="sourceCityName"
@@ -172,7 +179,7 @@
         />
 
         <app-search-auto-complete
-          class="col-12"
+          class="col-span-12"
           placeholder="شهر مقصد"
           label="شهر مقصد"
           [control]="targetCityName"
@@ -188,7 +195,7 @@
         />
 
         <app-text-input
-          class="col-12"
+          class="col-span-12"
           placeholder="زمان سفر"
           label="زمان سفر"
           [control]="travelTimeTake"
@@ -196,12 +203,16 @@
         />
       </div>
 
-      <div class="col-12">
-        <app-binary-radio-input label="وضعیت" [control]="travelTimeActive" />
+      <div class="col-span-12">
+        <app-toggle-switch-input
+          label="وضعیت"
+          class="flex px-2"
+          [control]="travelTimeActive"
+        />
       </div>
 
-      <div class="col-12 flex justify-content-end mt-4">
-        <p-button
+      <div class="col-span-12 flex justify-end mt-6">
+        <app-button
           label="ثبت و ویرایش اطلاعات"
           [disabled]="travelTimeForm.invalid || loading"
           (click)="registerOrEdit()"

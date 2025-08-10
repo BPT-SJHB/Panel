@@ -1,55 +1,36 @@
-<div *ngIf="!isLoading">
-  <div class="card">
-     <form class="col-12" (ngSubmit)="getUserAccessMenu()" [class.pointer-events-none]="isLoading"
-    [class.opacity-60]="isLoading" [formGroup]="searchForm">
-    <!-- Search Phone + Refresh -->
-    <div class="flex gap-2">
-      <app-text-input class="flex-1" placeholder="جستجو کاربر" addonWidth="7rem" [control]="searchPhone"  validationField="mobile" label="شماره موبایل"/>
-      <p-button type="submit" icon="pi pi-search" styleClass="mt-1 w-2rem h-2rem border-circle"
-        (click)="getUserAccessMenu()" [disabled]="this.searchForm.invalid || isLoading" />
+<div>
+  <div class="grid grid-cols-12">
+    <div class="col-span-12">
+      <app-search-input
+        placeholder="شماره تلفن کاربر"
+        [onSearchQuery]="searchUser"
+        [control]="mobileControl"
+        [disableSearchButton]="mobileControl.invalid || loading()"
+        validationField="mobile"
+      />
     </div>
-  </form>
-    <app-search-input
-      (rawInput)="tt.filter($any($event), 'PGTitle', 'contains')"
-      [autoTriggerSearch]="true"
-    ></app-search-input>
+    <app-tree-table-checkbox
+      class="col-span-12"
+      searchPlaceholder="جستجو گروه و زیرگروه"
+      childField="PAccess"
+      parentField="PGAccess"
+      [tree]="tree()"
+      [cols]="cols"
+      [rows]="rows"
+      [searchFields]="searchFields"
+      [enabledSearch]="true"
+      [enabledAutoSearch]="true"
+      (onTableCheckBoxChange)="onTableCheckBoxChange($event)"
+    />
+  </div>
 
-    <p-treetable
-      #tt
-      [value]="accessTable"
-      [columns]="cols"
-      selectionMode="checkbox"
-      [(selectionKeys)]="selectedNodes"
-      dataKey="key"
-    >
-      <ng-template #header let-columns>
-        <tr>
-          <th *ngFor="let col of columns">
-            {{ col.header }}
-          </th>
-        </tr>
-      </ng-template>
-
-      <ng-template
-        #body
-        let-rowNode
-        let-rowData="rowData"
-        let-columns="columns"
-      >
-        <tr [ttRow]="rowNode" [ttSelectableRow]="rowNode">
-          <td *ngFor="let col of columns; let i = index">
-            <p-treetable-toggler [rowNode]="rowNode" *ngIf="i === 0" />
-            <p-treetable-checkbox [value]="rowNode" *ngIf="i === 0" />
-            {{ rowData[col.field] }}
-          </td>
-        </tr>
-      </ng-template>
-    </p-treetable>
-
-    <p-button
-      class="flex flex-column m-2"
+  <div class="col-span-12 flex items-center justify-center mt-5 px-5">
+    <app-button
+      class="w-full"
+      styleClass="w-full"
       label="ثبت تغییرات"
-      (onClick)="SaveChanges()"
+      [disabled]="isSubmitButtonDisabled()"
+      (click)="updateAccesses()"
     />
   </div>
 </div>

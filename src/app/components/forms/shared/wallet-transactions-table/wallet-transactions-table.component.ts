@@ -1,5 +1,5 @@
 import { Component, effect, inject, Input, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { TableModule } from 'primeng/table';
 
 import { BaseLoading } from '../component-base/base-loading';
@@ -9,11 +9,12 @@ import { checkAndToastError } from 'app/utils/api-utils';
 import { Wallet } from 'app/services/wallet-management/model/wallet.model';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
+import { TableConfig } from 'app/constants/ui/table.ui';
 
 @Component({
   selector: 'app-wallet-transactions-table',
   standalone: true,
-  imports: [CommonModule, TableModule],
+  imports: [TableModule],
   templateUrl: './wallet-transactions-table.component.html',
   styleUrl: './wallet-transactions-table.component.scss',
 })
@@ -37,7 +38,7 @@ export class WalletTransactionsTableComponent
 
   // 🔁 Transaction list
   readonly transactions = signal<WalletTransaction[]>([]);
-
+  tableUi = TableConfig;
   // 📊 Table column definitions
   readonly columns: ReadonlyArray<{
     label: string;
@@ -53,27 +54,49 @@ export class WalletTransactionsTableComponent
   ];
 
   // 🎨 Background color mapping for transaction rows
+
   readonly colorMap: ReadonlyMap<string, string> = new Map([
-    ['black', 'surface-300'],
-    ['white', 'surface-0'],
-    ['red', 'bg-red-300'],
-    ['green', 'bg-green-300'],
-    ['yellow', 'bg-yellow-300'],
-    ['blue', 'bg-blue-300'],
-    ['orange', 'bg-orange-100'],
-    ['purple', 'bg-purple-100'],
-    ['pink', 'bg-pink-100'],
-    ['brown', 'bg--surface-200'],
-    ['gray', 'bg-surface-100'],
-    ['cyan', 'bg-cyan-100'],
-    ['lime', 'bg-lime-100'],
-    ['teal', 'bg-teal-100'],
-    ['indigo', 'bg-indigo-100'],
+    ['black', 'bg-black text-white'],
+    ['white', 'bg-white text-black'],
+    ['red', 'bg-red-100 dark:bg-red-700 text-red-800 dark:text-red-100'],
+    [
+      'green',
+      'bg-green-100 dark:bg-green-700 text-green-800 dark:text-green-100',
+    ],
+    [
+      'yellow',
+      'bg-yellow-100 dark:bg-yellow-600 text-yellow-800 dark:text-yellow-100',
+    ],
+    ['blue', 'bg-blue-100 dark:bg-blue-700 text-blue-800 dark:text-blue-100'],
+    [
+      'orange',
+      'bg-orange-100 dark:bg-orange-600 text-orange-800 dark:text-orange-100',
+    ],
+    [
+      'purple',
+      'bg-purple-100 dark:bg-purple-700 text-purple-800 dark:text-purple-100',
+    ],
+    ['pink', 'bg-pink-100 dark:bg-pink-600 text-pink-800 dark:text-pink-100'],
+    [
+      'brown',
+      'bg-amber-100 dark:bg-amber-700 text-amber-800 dark:text-amber-100',
+    ],
+    ['gray', 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100'],
+    ['cyan', 'bg-cyan-100 dark:bg-cyan-700 text-cyan-800 dark:text-cyan-100'],
+    ['lime', 'bg-lime-100 dark:bg-lime-700 text-lime-800 dark:text-lime-100'],
+    ['teal', 'bg-teal-100 dark:bg-teal-700 text-teal-800 dark:text-teal-100'],
+    [
+      'indigo',
+      'bg-indigo-100 dark:bg-indigo-700 text-indigo-800 dark:text-indigo-100',
+    ],
   ]);
 
   // 🎨 Get color class based on transaction color
   getRowColor(color: string): string {
-    return this.colorMap.get(color.toLowerCase()) ?? 'surface-300';
+    return (
+      this.colorMap.get(color.toLowerCase()) ??
+      'bg-surface-300 dark:bg-surface-500'
+    );
   }
 
   // 🔁 Called when component is activated (used in cached/dynamic views)
@@ -115,7 +138,7 @@ export class WalletTransactionsTableComponent
     try {
       this.loadingService.setLoading(true);
       const response = await this.walletService.GetWalletTransactions(
-        this.walletId()!
+        this.walletId()!,
       );
       if (!checkAndToastError(response, this.toast)) {
         this.transactions.set([]);

@@ -1,0 +1,6 @@
+<div class="px-8 py-8">
+  <app-sidebar-web-processes [hidden]="!subMenuVisible" [processes]="webProcesses" />
+  <div [hidden]="subMenuVisible">
+    <ng-container #tabContent></ng-container>
+  </div>
+</div>

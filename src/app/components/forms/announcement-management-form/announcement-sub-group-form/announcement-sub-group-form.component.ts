@@ -11,7 +11,7 @@ import { DialogModule } from 'primeng/dialog';
 
 import { SearchInputComponent } from '../../../shared/inputs/search-input/search-input.component';
 import { TextInputComponent } from '../../../shared/inputs/text-input/text-input.component';
-import { BinaryRadioInputComponent } from '../../../shared/inputs/binary-radio-input/binary-radio-input.component';
+import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-switch-input/toggle-switch-input.component';
 
 import { checkAndToastError } from 'app/utils/api-utils';
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
@@ -20,6 +20,8 @@ import { AnnouncementGroupSubgroupManagementService } from 'app/services/announc
 
 import { AnnouncementSubGroup } from 'app/services/announcement_group_subgroup_management/model/announcement-subgroup.model';
 import { ValidationSchema } from 'app/constants/validation-schema';
+import { TableConfig } from 'app/constants/ui/table.ui';
+import { ButtonComponent } from 'app/components/shared/button/button.component';
 
 enum FormMode {
   EDITABLE,
@@ -38,7 +40,8 @@ enum FormMode {
     ReactiveFormsModule,
     SearchInputComponent,
     TextInputComponent,
-    BinaryRadioInputComponent,
+    ToggleSwitchInputComponent,
+    ButtonComponent,
   ],
   providers: [ConfirmationService],
   templateUrl: './announcement-sub-group-form.component.html',
@@ -50,9 +53,11 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
   private readonly toast = inject(ToastService);
   private readonly loadingService = inject(LoadingService);
   private readonly confirmationService = inject(ConfirmationService);
-  private readonly announcementService = inject(AnnouncementGroupSubgroupManagementService);
-
+  private readonly announcementService = inject(
+    AnnouncementGroupSubgroupManagementService,
+  );
   private readonly destroy$ = new Subject<void>();
+  readonly tableUi = TableConfig;
 
   // 🌐 UI State
   loading = false;
@@ -91,8 +96,10 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
     this.displayAnnouncementsSubGroup = filtered;
   }
 
-  filterAnnouncementsSubGroup = (item: AnnouncementSubGroup, query: string): boolean =>
-    item.AnnouncementSGTitle?.includes(query) ?? false;
+  filterAnnouncementsSubGroup = (
+    item: AnnouncementSubGroup,
+    query: string,
+  ): boolean => item.AnnouncementSGTitle?.includes(query) ?? false;
 
   // 🎯 Actions
   onNew(): void {
@@ -123,6 +130,8 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
         severity: 'secondary',
         outlined: true,
       },
+      acceptLabel: 'تایید',
+      rejectLabel: 'لغو',
       acceptButtonProps: {
         label: 'تایید',
         severity: 'danger',
@@ -161,36 +170,41 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
   private async loadAnnouncementSubGroups(): Promise<void> {
     this.loadingService.setLoading(true);
     try {
-      const response = await this.announcementService.GetAnnouncementSupGroups('');
+      const response =
+        await this.announcementService.GetAnnouncementSupGroups('');
       if (!checkAndToastError(response, this.toast)) return;
-      this.announcementsSubGroup = this.displayAnnouncementsSubGroup = response.data;
+      this.announcementsSubGroup = this.displayAnnouncementsSubGroup =
+        response.data;
     } finally {
       this.loadingService.setLoading(false);
     }
   }
 
   private async deleteAnnouncementSubGroup(id: number): Promise<void> {
-    const response = await this.announcementService.DeleteAnnouncementSubGroup(id);
+    const response =
+      await this.announcementService.DeleteAnnouncementSubGroup(id);
     if (!checkAndToastError(response, this.toast)) return;
     this.toast.success('موفق', response.data.Message ?? '');
   }
 
   private async registerAnnouncementSubGroup(): Promise<void> {
     const { AnnouncementSGTitle, Active } = this.extractFormData();
-    const response = await this.announcementService.RegisterNewAnnouncementSubGroup(
-      AnnouncementSGTitle ?? '',
-      Active ?? true
-    );
+    const response =
+      await this.announcementService.RegisterNewAnnouncementSubGroup(
+        AnnouncementSGTitle ?? '',
+        Active ?? true,
+      );
     if (!checkAndToastError(response, this.toast)) return;
     this.toast.success('موفق', response.data.Message ?? '');
   }
 
   private async editAnnouncementSubGroup(): Promise<void> {
-    const { AnnouncementSGId, AnnouncementSGTitle, Active } = this.extractFormData();
+    const { AnnouncementSGId, AnnouncementSGTitle, Active } =
+      this.extractFormData();
     const response = await this.announcementService.EditAnnouncementSubGroup(
       AnnouncementSGId,
       AnnouncementSGTitle ?? '',
-      Active ?? true
+      Active ?? true,
     );
     if (!checkAndToastError(response, this.toast)) return;
     this.toast.success('موفق', response.data.Message ?? '');
@@ -223,7 +237,9 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
   }
 
   get AnnouncementSGTitle(): FormControl {
-    return this.announcementSubGroupForm.get('AnnouncementSGTitle') as FormControl;
+    return this.announcementSubGroupForm.get(
+      'AnnouncementSGTitle',
+    ) as FormControl;
   }
 
   get AnnouncementActive(): FormControl {

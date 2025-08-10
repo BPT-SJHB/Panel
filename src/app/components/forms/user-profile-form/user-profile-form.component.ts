@@ -1,7 +1,6 @@
 // 🔽 Angular & RxJS Imports
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { CommonModule } from '@angular/common';
 
 // 🔽 PrimeNG UI Modules
 import { AvatarModule } from 'primeng/avatar';
@@ -16,6 +15,8 @@ import { checkAndToastError } from 'app/utils/api-utils';
 import { NewPasswordDialogComponent } from 'app/components/shared/dialog/new-password-dialog/new-password-dialog.component';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { UserAuthService } from 'app/services/user-auth-service/user-auth.service';
 
 // 🔽 Interfaces
 interface UserProfile {
@@ -33,8 +34,8 @@ interface UserProfile {
 @Component({
   selector: 'app-user-profile-form',
   standalone: true,
-  imports: [CommonModule, AvatarModule, ButtonModule, ConfirmDialogModule],
-  providers: [ConfirmationService,DialogService],
+  imports: [AvatarModule, ButtonModule, ConfirmDialogModule, ButtonComponent],
+  providers: [ConfirmationService, DialogService],
   templateUrl: './user-profile-form.component.html',
   styleUrl: './user-profile-form.component.scss',
 })
@@ -45,6 +46,7 @@ export class UserProfileFormComponent implements OnInit {
   private readonly loadingService = inject(LoadingService);
   private readonly dialogService = inject(DialogService);
   private readonly confirmationService = inject(ConfirmationService);
+  private readonly userAuth = inject(UserAuthService);
 
   // 🔽 Signal to manage loading state
   readonly loading = signal(false);
@@ -70,7 +72,7 @@ export class UserProfileFormComponent implements OnInit {
     { field: 'UserId', col: 'کد کاربری' },
     { field: 'UserName', col: 'نام کاربری' },
     { field: 'UserTypeTitle', col: 'نوع کاربر' },
-    { field: 'MobileNumber', col: 'شماره همراه:' },
+    { field: 'MobileNumber', col: 'شماره همراه' },
     { field: 'UserActive', col: 'وضعیت کاربر' },
     { field: 'SMSOwnerActive', col: 'وضعیت پیامک' },
     { field: 'walletId', col: 'کد کیف پول' },
@@ -167,7 +169,6 @@ export class UserProfileFormComponent implements OnInit {
     const userId = this.userProfile().UserId;
     if (userId === -1) return;
 
-
     const res = await this.userService.ResetSoftwareUserPassword(userId);
     if (!checkAndToastError(res, this.toast)) return;
 
@@ -178,5 +179,9 @@ export class UserProfileFormComponent implements OnInit {
       modal: true,
       inputValues: { username: Username, password: Password },
     });
+  }
+
+  logout() {
+    this.userAuth.logout();
   }
 }

@@ -1,6 +1,6 @@
 import { Component, effect, inject, Input, signal } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { CardModule } from 'primeng/card';
 import { Button } from 'primeng/button';
 
@@ -12,11 +12,12 @@ import { Wallet } from 'app/services/wallet-management/model/wallet.model';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 @Component({
   selector: 'app-wallet-payment-form',
   standalone: true,
-  imports: [CommonModule, CardModule, TextInputComponent, Button],
+  imports: [CardModule, TextInputComponent, ButtonComponent],
   templateUrl: './wallet-payment-form.component.html',
   styleUrl: './wallet-payment-form.component.scss',
 })
@@ -47,6 +48,7 @@ export class WalletPaymentFormComponent
   // 📝 Form Controls
   readonly amount = new FormControl<number | null>(null, [
     Validators.required,
+    Validators.pattern(/^[0-9]+$/),
     Validators.min(1000),
     Validators.max(300000),
   ]);

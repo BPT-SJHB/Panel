@@ -1,6 +1,6 @@
-<div class="grid">
+<div class="grid grid-cols-12 gap-4 mb-5">
   <app-search-auto-complete
-    class="col-12 sm:col-6"
+    class="col-span-12 sm:col-span-6"
     placeholder="صفوف نوبت دهی"
     label="صفوف نوبت دهی"
     [control]="sequentialTurnTitle"
@@ -16,7 +16,7 @@
   />
 
   <app-search-auto-complete
-    class="col-12 sm:col-6"
+    class="col-span-12 sm:col-span-6"
     placeholder="گروه اعلام بار"
     label="گروه اعلام بار"
     [control]="announcementGroupTitle"
@@ -31,9 +31,9 @@
     [minLength]="0"
     cachingMode="Focus"
   />
-  
+
   <app-search-auto-complete
-    class="col-12 sm:col-6"
+    class="col-span-12 sm:col-span-6"
     placeholder="زیرگروه اعلام بار"
     label="زیرگروه اعلام بار"
     [control]="announcementSubGroupTitle"
@@ -51,18 +51,20 @@
 </div>
 
 <p-table
-  class="col-12"
+  class="col-span-12"
   [columns]="cols"
-  [paginator]="true"
-  [rows]="10"
-  [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
-  [tableStyle]="{ 'min-width': '50rem' }"
   [value]="relationsSequential"
+  [tableStyle]="tableUi.tableStyle"
+  [paginator]="tableUi.paginator"
+  [paginatorLocale]="tableUi.paginatorLocale"
+  [rows]="tableUi.rows"
+  [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
+  [stripedRows]="tableUi.stripedRows"
 >
   <ng-template #header let-columns>
     <tr>
       @for (col of columns; track $index) {
-      <th>{{ col }}</th>
+        <th>{{ col }}</th>
       }
     </tr>
   </ng-template>
@@ -70,12 +72,12 @@
   <ng-template #body let-rowData>
     <tr>
       <td (click)="onDelete(rowData)">
-        <p-button
+        <app-button
           icon="pi pi-trash"
           severity="danger"
           variant="text"
           [disabled]="loading"
-        ></p-button>
+        ></app-button>
       </td>
       <td>{{ rowData.SeqTurnTitle }}</td>
       <td>{{ rowData.AnnouncementSGTitle }}</td>
@@ -83,11 +85,11 @@
   </ng-template>
 </p-table>
 
-<div class="w-full flex justify-content-end">
-  <p-button
+<div class="w-full flex justify-end mt-5">
+  <app-button
     size="small"
     label="ثبت"
-    styleClass="px-5 py-1"
+    styleClass="px-10 py-2"
     (click)="registerRelationAnnouncement()"
     [disabled]="loading || sequentialTurnForm.invalid"
   />

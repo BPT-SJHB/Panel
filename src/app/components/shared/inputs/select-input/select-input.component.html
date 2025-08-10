@@ -1,9 +1,10 @@
 <div class="flex w-full">
-  <p-input-group styleClass="h-2-5rem w-full">
+  <p-input-group styleClass="h-10 w-full">
     <!-- Icon -->
     <p-inputgroup-addon
-      class="bg-primary text-white flex items-center justify-center px-3 border-round-right">
-      <i [class]="icon"></i>
+      class="flex justify-center items-center px-5 bg-primary-emphasis z-1 rounded-r-2xl text-primary-contrast border-y-2 border-r-2 border-primary-emphasis"
+    >
+      <i [class]="icon + ' text-xl'"></i>
     </p-inputgroup-addon>
 
     <p-select
@@ -12,13 +13,13 @@
       [placeholder]="placeholder"
       optionLabel="label"
       optionValue="value"
+      class="px-2 h-full w-full border-y-2 border-l-2 rounded-l-2xl dark:bg-transparent border-gray-400 placeholder:text-gray-400 text-sm"
       [ngClass]="{
         'border-red-500': control.touched && control.invalid,
-        'border-round-left': true,
-        'w-full': true,
-        'bg-gray-100 text-gray-500 opacity-60 cursor-not-allowed': disabled
+        'bg-gray-100 text-gray-500 opacity-60 cursor-not-allowed': disabled,
+        'border-emerald-500': control.valid
       }"
-      styleClass="w-full border-none h-full px-2"
+      styleClass="w-full border-0 h-full px-2"
     ></p-select>
   </p-input-group>
 </div>

@@ -6,7 +6,7 @@ export enum ErrorCodes {
   InternalServerError = 500,
   NotFoundInLocalAPI = 27,
   NotAuthenticated = 25,
-  NoRecordFound=28,
+  NoRecordFound = 28,
 }
 
 export const ERROR_MESSAGES: Record<ErrorCodes, string> = {
@@ -14,8 +14,9 @@ export const ERROR_MESSAGES: Record<ErrorCodes, string> = {
   [ErrorCodes.Unauthorized]: 'جلسه شما منقضی شده است. لطفاً دوباره وارد شوید.',
   [ErrorCodes.Forbidden]: 'شما اجازه انجام این عملیات را ندارید.',
   [ErrorCodes.NotFound]: 'منبع درخواستی یافت نشد.',
-  [ErrorCodes.InternalServerError]: 'خطای سرور داخلی رخ داده است. لطفاً بعداً تلاش کنید.',
+  [ErrorCodes.InternalServerError]:
+    'خطای سرور داخلی رخ داده است. لطفاً بعداً تلاش کنید.',
   [ErrorCodes.NotFoundInLocalAPI]: 'اطلاعات در سرور داخلی یافت نشد',
-  [ErrorCodes.NoRecordFound]: "رکورد پیدا مورد نظر یاقت نشد.",
-  [ErrorCodes.NotAuthenticated]: ""
+  [ErrorCodes.NoRecordFound]: 'رکورد پیدا مورد نظر یاقت نشد.',
+  [ErrorCodes.NotAuthenticated]: '',
 };

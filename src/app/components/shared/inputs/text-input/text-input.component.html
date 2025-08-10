@@ -1,98 +1,70 @@
 <div class="flex w-full">
-  <p-input-group styleClass="h-2-5rem w-full">
-    @if (label.trim() === '') {
-      <!-- Icon Addon -->
-      <p-inputgroup-addon
-        class="bg-primary text-white flex items-center justify-center px-3 border-round-right"
-          [style.width]="addonWidth"
-        >
-        <i [class]="icon"></i>
-      </p-inputgroup-addon>
-    } @else {
-      <!-- Label Addon -->
-      <p-inputgroup-addon
-        class="bg-primary border-round-right flex align-items-center justify-content-center"
-        [style.width]="addonWidth"
+  <p-input-group styleClass="h-10 w-full">
+    <p-inputgroup-addon
+      [style]="{
+        width: addonWidth,
+        padding: 0,
+        margin: 0,
+        border: 0
+      }"
+      class="rounded-2xl"
+    >
+      <div
+        class="w-full h-full flex justify-center items-center py-4 px-6 bg-primary-emphasis z-1 rounded-r-2xl text-primary-contrast"
       >
-        <span class="text-sm" style="white-space: nowrap">{{ label }}</span>
-      </p-inputgroup-addon>
-    }
-
-    @if (type != 'date') {
-      <!-- Text Input -->
-      <input
-        #inputRef
-        pInputText
-        [type]="type"
-        [formControl]="control"
-        [placeholder]="placeholder"
-        [readOnly]="readOnly"
-        [ngClass]="{
-          'border-red-500': control.touched && control.invalid,
-          border: true,
-          'border-round-left': buttonIcon === '',
-          'px-2': true,
-          'h-full': true,
-          'w-full': true,
-          
-          'bg-gray-100 text-700 pointer-events-none opacity-90 cursor-not-allowed':
-            control.disabled
-        }"
-        (focus)="onFocusInput(inputRef)"
-        (blur)="onBlurInput(inputRef)"
-      />
-    } @if (type === 'date') {
-      <!-- Date Input -->
-      <div class="w-full" style="position: relative;">
-        <ng-persian-datepicker
-        [ngClass]="datePickerPosition == 'top' ? 'position-top' : 'position-bottom'"
+        @if (label.trim() === '') {
+        <i [class]="icon"></i>
+        } @else {
+        <span
+          class="text-sm text-primary-contrast"
+          style="white-space: nowrap"
+          >{{ label }}</span
         >
-          <div class="h-2-5rem">
-            <input
-              #inputRef
-              pInputText
-              [formControl]="control"
-              [placeholder]="placeholder"
-              [readOnly]="readOnly"
-              [ngClass]="{
-                'border-red-500': control.touched && control.invalid,
-                border: true,
-                'border-round-left': buttonIcon === '',
-                'px-2': true,
-                'h-full': true,
-                'w-full': true,
-                'bg-gray-100 text-gray-500 pointer-events-none opacity-60 cursor-not-allowed':
-                  control.disabled
-              }"
-              (focus)="onFocusInput(inputRef)"
-              (blur)="onBlurInput(inputRef)"
-              (input)="input.emit($event)"
-              (keydown)="onKeyDown($event)"
-            />
-          </div>
-        </ng-persian-datepicker>
+        }
       </div>
-    }
-  </p-input-group>
+    </p-inputgroup-addon>
 
-  @if (buttonIcon.trim() !== '') {
-    <!-- Button Addon -->
-    <p-inputgroup-addon class="flex items-center justify-center">
+    <input
+      #inputRef
+      pInputText
+      [type]="type"
+      [formControl]="control"
+      [placeholder]="placeholder"
+      [readOnly]="readOnly"
+      class="px-2 h-full w-full border-y-2 border-l-0 border-r-0 border-gray-400 placeholder:text-gray-400 text-sm focus:border-primary-emphasis transition-all duration-50 ease-in-out focus:outline-none"
+      [ngClass]="{
+        'focus:border-red-500': control.touched && control.invalid,
+        'bg-surface-200 text-surface-700 dark:bg-surface-800 dark:text-surface-200 pointer-events-none opacity-90 cursor-not-allowed':
+          control.disabled || readOnly,
+        'rounded-l-2xl border-l-2': buttonIcon.trim() === ''
+      }"
+      (focus)="onFocusInput(inputRef)"
+      (blur)="onBlurInput(inputRef)"
+    />
+
+    @if (buttonIcon.trim() !== '') {
+    <p-inputgroup-addon
+      [style]="{
+        padding: 0,
+        margin: 0,
+        border: 0
+      }"
+      class="flex h-10 rounded-l-2xl"
+    >
       <p-button
         [icon]="buttonIcon"
         [disabled]="buttonDisabled"
         (click)="handleClick()"
-        styleClass="border-round-left h-full w-full"
-        class="w-full h-full"
       />
     </p-inputgroup-addon>
-  }
+    }
+  </p-input-group>
 </div>
 
 @if (control.touched && firstErrorMessage) {
-  <div class="px-3 mt-1">
-    <p-message severity="error" variant="simple" size="small">
-      {{ firstErrorMessage }}
-    </p-message>
-  </div>
+<div class="px-4 mt-1">
+  <p-message severity="error" variant="simple" size="small">
+    {{ firstErrorMessage }}
+  </p-message>
+</div>
 }

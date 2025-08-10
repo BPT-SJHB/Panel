@@ -1,6 +1,6 @@
-<div class="grid">
+<div class="grid grid-cols-12 gap-4 mb-8">
   <app-search-input
-    class="col-12"
+    class="col-span-12"
     [onSearchQuery]="searchTruckInformation"
     placeholder="هوشمند ناوگان را وارد کنید."
     searchButtonLabel="استعلام"
@@ -15,7 +15,7 @@
     placeholder="کدناوگان"
     [disabled]="true"
     [readOnly]="true"
-    class="col-12 md:col-6"
+    class="col-span-12 md:col-span-6"
     addonWidth="6rem"
   />
 
@@ -25,26 +25,26 @@
     placeholder="شماره پلاک"
     [disabled]="true"
     [readOnly]="true"
-    class="col-12 md:col-6"
+    class="col-span-12 md:col-span-6"
     addonWidth="6rem"
   />
 </div>
 
 <p-table
-  class="col-12"
+  class="col-span-12"
   [columns]="turnsCols"
-  [paginator]="true"
-  [rows]="10"
-  [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
-  [tableStyle]="{ 'min-width': '50rem' }"
   [value]="truckTurnsList"
-    paginatorLocale="fa"
-
+  [tableStyle]="tableUi.tableStyle"
+  [paginator]="tableUi.paginator"
+  [paginatorLocale]="tableUi.paginatorLocale"
+  [rows]="tableUi.rows"
+  [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
+  [stripedRows]="tableUi.stripedRows"
 >
   <ng-template #header let-columns>
     <tr>
       @for (col of columns; track $index) {
-      <th>{{ col }}</th>
+        <th>{{ col }}</th>
       }
     </tr>
   </ng-template>
@@ -62,33 +62,32 @@
       <td>{{ rowData.SequentialTurnTitle || "-" }}</td>
       <td>{{ rowData.SoftwareUserName || "-" }}</td>
       <td>
-        <p-button
+        <app-button
           icon="pi pi-times"
           severity="danger"
           variant="text"
           [disabled]="loading"
           (onClick)="confirmDeactivation(rowData)"
-        ></p-button>
+        ></app-button>
       </td>
 
       <td>
-        <p-button
+        <app-button
           icon="pi pi-refresh"
           severity="info"
           variant="text"
           [disabled]="loading"
           (onClick)="confirmActivation(rowData)"
-        ></p-button>
+        ></app-button>
       </td>
 
       <td>
-        <p-button
+        <app-button
           icon="pi pi-align-justify"
-          severity="primary"
           variant="text"
           [disabled]="loading"
           (onClick)="openTurnAccounting(rowData)"
-        ></p-button>
+        ></app-button>
       </td>
     </tr>
   </ng-template>
@@ -100,21 +99,23 @@
   [modal]="true"
   (onHide)="onCloseDialog()"
   [(visible)]="dialogTurnAccounting"
-  maskStyleClass="px-3 overflow-visible"
+  maskStyleClass="px-4 overflow-visible"
   [style]="{ 'max-width': '90vw' }"
 >
   <p-table
     [columns]="accountingCols"
-    [paginator]="true"
-    [rows]="10"
-    [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
-    paginatorLocale="fa"
     [value]="turnsAccounting"
+    [tableStyle]="tableUi.tableStyle"
+    [paginator]="tableUi.paginator"
+    [paginatorLocale]="tableUi.paginatorLocale"
+    [rows]="tableUi.rows"
+    [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
+    [stripedRows]="tableUi.stripedRows"
   >
     <ng-template #header let-columns>
       <tr>
         @for (col of columns; track $index) {
-        <th>{{ col }}</th>
+          <th>{{ col }}</th>
         }
       </tr>
     </ng-template>
@@ -139,7 +140,7 @@
   icon="pi pi-exclamation-triangle"
   acceptLabel="تایید"
   rejectLabel="انصراف"
-  acceptButtonStyleClass="px-5 py-1"
-  rejectButtonStyleClass="px-4 py-1"
+  acceptButtonStyleClass="px-8 py-1"
+  rejectButtonStyleClass="px-6 py-1"
 >
 </p-confirmDialog>

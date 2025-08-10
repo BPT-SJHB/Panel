@@ -20,6 +20,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { SearchInputComponent } from '../../../shared/inputs/search-input/search-input.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { NewPasswordDialogComponent } from 'app/components/shared/dialog/new-password-dialog/new-password-dialog.component';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 @Component({
   selector: 'app-driver-info-form',
@@ -29,7 +30,8 @@ import { NewPasswordDialogComponent } from 'app/components/shared/dialog/new-pas
     DialogModule,
     TextInputComponent,
     SearchInputComponent,
-  ],
+    ButtonComponent
+],
   providers: [DialogService],
   templateUrl: './driver-info-form.component.html',
   styleUrl: './driver-info-form.component.scss',

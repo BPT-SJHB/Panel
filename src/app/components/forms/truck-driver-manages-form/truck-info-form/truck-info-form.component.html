@@ -1,7 +1,7 @@
-<div class="p-fluid grid gap-4 relative">
- <!-- Search Form -->
+<div class="p-fluid grid grid-cols-12 gap-6 relative">
+  <!-- Search Form -->
   <form
-    class="col-12 mt-4"
+    class="col-span-12 mt-6"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
     [formGroup]="searchForm"
@@ -22,15 +22,15 @@
 
   <!-- Truck Info & Nativeness Form -->
   <form
-    class="p-fluid grid gap-2 col-12"
+    class="p-fluid grid grid-cols-12 gap-2 col-span-12"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
     [formGroup]="truckInfoForm"
   >
     <span class="text-lg font-bold">اطلاعات ناوگان</span>
-    <div class="p-fluid grid gap-4 col-12">
-      <div class="grid col-12">
-        <div class="col-12 md:col-6">
+    <div class="p-fluid grid grid-cols-12 gap-6 col-span-12">
+      <div class="grid grid-cols-12 gap-4 col-span-12">
+        <div class="col-span-12 md:col-span-6">
           <app-text-input
             label="کد ناوگان"
             class="flex-1"
@@ -42,7 +42,7 @@
           ></app-text-input>
         </div>
 
-        <div class="col-12 md:col-6">
+        <div class="col-span-12 md:col-span-6">
           <app-text-input
             label="سریال"
             class="flex-1"
@@ -54,7 +54,7 @@
           ></app-text-input>
         </div>
 
-        <div class="col-12 md:col-6">
+        <div class="col-span-12 md:col-span-6">
           <app-text-input
             label="شماره هوشمند"
             class="flex-1"
@@ -66,7 +66,7 @@
           ></app-text-input>
         </div>
 
-        <div class="col-12 md:col-6">
+        <div class="col-span-12 md:col-span-6">
           <app-text-input
             label="بارگیر"
             class="flex-1"
@@ -77,7 +77,7 @@
             [addonWidth]="addonWidth"
           ></app-text-input>
         </div>
-        <div class="col-12 md:col-6">
+        <div class="col-span-12 md:col-span-6">
           <app-text-input
             label="شماره پلاک"
             class="flex-1"
@@ -93,16 +93,16 @@
   </form>
 
   <form
-    class="p-fluid grid gap-2 col-12"
+    class="p-fluid grid grid-cols-12 gap-4 col-span-12"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
     [formGroup]="truckNativenessForm"
     (ngSubmit)="changeNativeness()"
   >
     <span class="text-lg font-bold">بومی گری</span>
-    <div class="p-fluid grid col-12">
-      <div class="grid col-12">
-        <div class="col-12 md:col-6">
+    <div class="p-fluid grid grid-cols-12 gap-4 col-span-12">
+      <div class="grid grid-cols-12 gap-4 col-span-12">
+        <div class="col-span-12 md:col-span-6">
           <app-text-input
             label="بومی"
             class="flex-1"
@@ -114,10 +114,9 @@
           ></app-text-input>
         </div>
 
-        <div class="col-12 md:col-6">
-          <app-text-input
+        <div class="col-span-12 md:col-span-6">
+          <app-date-picker-input
             class="flex-1"
-            type="date"
             label="تاریخ اتمام"
             placeholder="تاریخ اتمام"
             datePickerPosition="top"
@@ -125,19 +124,20 @@
             validationField="truckNativenessExpiredDate"
             [readOnly]="true"
             [addonWidth]="addonWidth"
-          ></app-text-input>
+          ></app-date-picker-input>
         </div>
       </div>
     </div>
     <!-- Action Buttons -->
     <div
-      class="col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center"
+      class="col-span-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center"
     >
-      <p-button
+      <app-button
         (click)="changeNativeness()"
         label="تغییر وضعیت بومی گری"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-12rem lg:w-15rem"
-      ></p-button>
+        [disabled]="truckId.invalid || truckNativenessForm.invalid || loading"
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-48 lg:w-60"
+      ></app-button>
     </div>
   </form>
 </div>

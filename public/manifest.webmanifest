@@ -1,6 +1,6 @@
 {
-  "name": "bpt-sjhb-panel",
-  "short_name": "bpt-sjhb",
+  "name": "سامانه جامع حمل و نقل کالا اداره کل راهداری و حمل و نقل جاده ای استان اصفهان",
+  "short_name": "سامانه جامع حمل و نقل کالا",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",

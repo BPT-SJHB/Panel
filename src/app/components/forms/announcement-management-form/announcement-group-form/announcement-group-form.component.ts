@@ -11,7 +11,7 @@ import { DialogModule } from 'primeng/dialog';
 
 import { SearchInputComponent } from 'app/components/shared/inputs/search-input/search-input.component';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
-import { BinaryRadioInputComponent } from 'app/components/shared/inputs/binary-radio-input/binary-radio-input.component';
+import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-switch-input/toggle-switch-input.component';
 
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { checkAndToastError } from 'app/utils/api-utils';
@@ -19,6 +19,8 @@ import { LoadingService } from 'app/services/loading-service/loading-service.ser
 import { ToastService } from 'app/services/toast-service/toast.service';
 import { AnnouncementGroupSubgroupManagementService } from 'app/services/announcement_group_subgroup_management/announcement-group-subgroup-management.service';
 import { AnnouncementGroup } from 'app/services/announcement_group_subgroup_management/model/announcement-group.model';
+import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { TableConfig } from 'app/constants/ui/table.ui';
 
 enum FormMode {
   EDITABLE,
@@ -37,7 +39,8 @@ enum FormMode {
     ReactiveFormsModule,
     SearchInputComponent,
     TextInputComponent,
-    BinaryRadioInputComponent,
+    ToggleSwitchInputComponent,
+    ButtonComponent,
   ],
   providers: [ConfirmationService],
   templateUrl: './announcement-group-form.component.html',
@@ -49,7 +52,9 @@ export class AnnouncementGroupFormComponent implements OnInit, OnDestroy {
   private readonly toast = inject(ToastService);
   private readonly loadingService = inject(LoadingService);
   private readonly confirmationService = inject(ConfirmationService);
-  private readonly announcementService = inject(AnnouncementGroupSubgroupManagementService);
+  private readonly announcementService = inject(
+    AnnouncementGroupSubgroupManagementService,
+  );
 
   private readonly destroy$ = new Subject<void>();
 
@@ -58,6 +63,7 @@ export class AnnouncementGroupFormComponent implements OnInit, OnDestroy {
   formDialogVisible = false;
   headerTitle = '';
   announcementFormGroupMode = FormMode.REGISTER;
+  tableUi = TableConfig;
 
   announcementsGroup: AnnouncementGroup[] = [];
   displayAnnouncementsGroup: AnnouncementGroup[] = [];
@@ -91,8 +97,10 @@ export class AnnouncementGroupFormComponent implements OnInit, OnDestroy {
     this.displayAnnouncementsGroup = filtered;
   }
 
-  filterAnnouncementsGroup = (item: AnnouncementGroup, query: string): boolean =>
-    item.AnnouncementTitle?.includes(query) ?? false;
+  filterAnnouncementsGroup = (
+    item: AnnouncementGroup,
+    query: string,
+  ): boolean => item.AnnouncementTitle?.includes(query) ?? false;
 
   // ========== 🎯 Actions ==========
   onNew(): void {
@@ -120,6 +128,8 @@ export class AnnouncementGroupFormComponent implements OnInit, OnDestroy {
         severity: 'secondary',
         outlined: true,
       },
+      acceptLabel: 'تایید',
+      rejectLabel: 'لغو',
       acceptButtonProps: {
         label: 'تایید',
         severity: 'danger',
@@ -179,19 +189,21 @@ export class AnnouncementGroupFormComponent implements OnInit, OnDestroy {
 
   private async registerAnnouncementGroup(): Promise<void> {
     const { AnnouncementTitle } = this.extractAnnouncementGroup();
-    const response = await this.announcementService.RegisterNewAnnouncementGroup(
-      AnnouncementTitle ?? '',
-    );
+    const response =
+      await this.announcementService.RegisterNewAnnouncementGroup(
+        AnnouncementTitle ?? '',
+      );
     if (!checkAndToastError(response, this.toast)) return;
     this.toast.success('موفق', response.data.Message ?? '');
   }
 
   private async editAnnouncementGroup(): Promise<void> {
-    const { AnnouncementId, AnnouncementTitle, Active } = this.extractAnnouncementGroup();
+    const { AnnouncementId, AnnouncementTitle, Active } =
+      this.extractAnnouncementGroup();
     const response = await this.announcementService.EditAnnouncementGroup(
       AnnouncementId,
       AnnouncementTitle ?? '',
-      Active ?? true
+      Active ?? true,
     );
     if (!checkAndToastError(response, this.toast)) return;
     this.toast.success('موفق', response.data.Message ?? '');

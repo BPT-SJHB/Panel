@@ -1,166 +1,155 @@
-import {
-  Component,
-  ComponentRef,
-  OnInit,
-  AfterViewInit,
-  OnDestroy,
-  ViewChild,
-  ViewContainerRef,
-  inject
-} from '@angular/core';
-import { CommonModule } from '@angular/common';
+// Angular core imports
+import { Component, AfterViewInit, ViewChild, inject } from '@angular/core';
 import { Router } from '@angular/router';
+
+// NgRx store
 import { Store } from '@ngrx/store';
 
+// PrimeNG modules
 import { ButtonModule } from 'primeng/button';
-import { HeaderComponent } from 'app/components/shared/header/header.component';
-import { SidebarComponent } from 'app/components/shared/sidebar/sidebar.component';
-import { SubMenuComponent } from 'app/components/shared/sub-menu/sub-menu.component';
-import { FooterComponent } from 'app/components/shared/footer/footer.component';
+
+// App shared layout components
+import { HeaderComponent } from 'app/components/shared/layout/header/header/header.component';
+import { SidebarComponent } from 'app/components/shared/layout/sidebar/sidebar/sidebar.component';
+import { FooterComponent } from 'app/components/shared/layout/footer/footer.component';
+import { TabManagerComponent } from 'app/components/shared/layout/tab-manager/tab-manager.component';
+import { DashboardContentManagerComponent } from 'app/components/shared/layout/dashboard-content-manager/dashboard-content-manager.component';
 import { SupportButtonComponent } from 'app/components/shared/support-button/support-button.component';
 
+// Services
 import { UserAuthService } from 'app/services/user-auth-service/user-auth.service';
 import { ApiProcessesService } from 'app/services/api-processes/api-processes.service';
 import { ToastService } from 'app/services/toast-service/toast.service';
 
+// Constants and utilities
 import { APP_ROUTES } from 'app/constants/routes';
-import { setPageGroups, selectPageGroup, closeSidebar } from 'app/store/sidebar/sidebar.actions';
+import { LayoutConfig } from 'app/constants/ui/layout.ui';
+import { checkAndToastError } from 'app/utils/api-utils';
+
+// NgRx actions and selectors
+import { setPageGroups } from 'app/store/sidebar/sidebar.actions';
 import { selectSelectedPageGroup } from 'app/store/sidebar/sidebar.selectors';
 
-import { HeaderData } from 'app/data/model/header-data.model';
+// Models
 import { WebProcess } from 'app/data/model/web-process.model';
-import { MenuItemData } from 'app/data/model/menu-item.model';
-import { selectActiveTab, selectLastClosedTabId } from 'app/store/tabs/tabs.selectors';
-import { TabComponentRegistry } from 'app/constants/tab-component-registry';
-import { TabItem } from 'app/data/model/tabs.model';
+import { PageGroupItem } from 'app/data/model/menu-item.model';
+
+// RxJS
 import { Subscription } from 'rxjs';
-import { TabViewComponent } from 'app/components/shared/tab-view/tab-view.component';
+import { MobileTabBarComponent } from 'app/components/shared/layout/mobile-tab-bar/mobile-tab-bar.component';
+import { ExitConfirmationDialogComponent } from 'app/components/shared/exit-confirmation-dialog/exit-confirmation-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    CommonModule,
     ButtonModule,
     HeaderComponent,
     SidebarComponent,
-    SubMenuComponent,
     FooterComponent,
+    TabManagerComponent,
+    DashboardContentManagerComponent,
+    MobileTabBarComponent,
     SupportButtonComponent,
+    ExitConfirmationDialogComponent,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
-export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('tabView', { read: ViewContainerRef }) container!: ViewContainerRef;
+export class DashboardComponent implements AfterViewInit {
+  // ViewChild references to content manager and tab manager
+  @ViewChild(DashboardContentManagerComponent)
+  contentManagerComponent!: DashboardContentManagerComponent;
 
+  @ViewChild(TabManagerComponent)
+  tabManagerComponent!: TabManagerComponent;
+
+  // Layout configuration reference
+  readonly layoutUi = LayoutConfig;
+
+  // Services
   private userAuth = inject(UserAuthService);
   private router = inject(Router);
   private toast = inject(ToastService);
   private store = inject(Store);
   private apiProcessesService = inject(ApiProcessesService);
 
-  private componentCache = new Map<number, ComponentRef<any>>();
-  private tabSub?: Subscription;
-  private closeTabSub?: Subscription;
+  // Subscription to selected page group
   private pageGroupSub?: Subscription;
 
-  headerData: HeaderData = { title: '', icon: '' };
+  // Component state
   webProcesses: WebProcess[] = [];
-  menuItems: MenuItemData[] = [];
-  subMenuVisible = false;
+  pageGroups: PageGroupItem[] = [];
 
+  /**
+   * OnInit lifecycle hook
+   */
   async ngOnInit(): Promise<void> {
     await this.setupDashboard();
   }
 
+  /**
+   * AfterViewInit lifecycle hook
+   */
   ngAfterViewInit(): void {
-    this.tabSub = this.store.select(selectActiveTab).subscribe(tab => {
-      this.subMenuVisible = false;
-      if (tab) this.renderComponent(tab);
-    });
+    // Link tab manager to content manager
+    this.tabManagerComponent.contentManager.set(this.contentManagerComponent);
 
-    this.closeTabSub = this.store.select(selectLastClosedTabId).subscribe(id => {
-      if (id !== null) this.removeComponent(id);
-    });
-
-    this.pageGroupSub = this.store.select(selectSelectedPageGroup).subscribe(page => {
-      if (!page) return;
-
-      if (this.headerData.title.trim())
-        this.subMenuVisible = true;
-
-      this.headerData = {
-        title: page.title,
-        icon: page.icon,
-      };
-      this.webProcesses = page.processes;
-    });
+    // Subscribe to selected page group and update web processes
+    this.pageGroupSub = this.store
+      .select(selectSelectedPageGroup)
+      .subscribe((page) => {
+        if (!page) return;
+        this.webProcesses = page.processes;
+      });
   }
 
+  /**
+   * OnDestroy lifecycle hook
+   */
   ngOnDestroy(): void {
-    this.tabSub?.unsubscribe();
-    this.closeTabSub?.unsubscribe();
     this.pageGroupSub?.unsubscribe();
   }
 
+  /**
+   * Setup the dashboard: check auth, load processes, update store and menu items
+   */
   private async setupDashboard(): Promise<void> {
     const auth = await this.userAuth.isLoggedIn();
+
+    // If not logged in or session expired, redirect to login
     if (!auth.success && !auth.data?.ISSessionLive) {
       this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
       return;
     }
 
+    // Load API processes
     const res = await this.apiProcessesService.getApiProcesses();
-    if (!res.success || !res.data) {
-      this.toast.error('خطا', res.error?.message ?? 'خطایی رخ داده است');
-      console.error('API error details:', res.error?.details);
-      return;
-    }
 
+    // Show error toast if needed
+    if (!checkAndToastError(res, this.toast)) return;
+
+    // Update NgRx store with loaded page groups
     this.store.dispatch(setPageGroups({ groups: res.data }));
 
-    this.menuItems = res.data.map(pg => ({
-      label: pg.title,
-      icon: pg.icon,
-      command: () => {
-        this.store.dispatch(selectPageGroup({ id: pg.id }));
-        this.subMenuVisible = true;
-        this.store.dispatch(closeSidebar());
+    // Build menu items from page groups
+
+    this.pageGroups = [
+      {
+        id: -1,
+        icon: 'pi-home',
+        label: 'صفحه اصلی',
+        command: () => {},
       },
-    }));
-  }
+    ];
 
-  renderComponent(tab: TabItem) {
-    const cached = this.componentCache.get(tab.id);
-
-    if (this.container.length > 0) {
-      this.container.detach(0);
-    }
-
-    if (cached && !cached.hostView.destroyed) {
-      this.container.insert(cached.hostView);
-      return;
-    }
-
-    const compRef = this.container.createComponent(TabViewComponent);
-    const tabConfig = TabComponentRegistry[tab.component];
-    compRef.instance.tabConfig = tabConfig;
-
-    this.container.insert(compRef.hostView);
-    this.componentCache.set(tab.id, compRef);
-  }
-
-  removeComponent(id: number) {
-    const compRef = this.componentCache.get(id);
-    if (!compRef) return;
-
-    const index = this.container.indexOf(compRef.hostView);
-    if (index !== -1) {
-      this.container.detach(index);
-    }
-
-    compRef.destroy();
-    this.componentCache.delete(id);
+    res.data.map((pg) =>
+      this.pageGroups.push({
+        id: pg.id,
+        label: pg.title,
+        icon: pg.icon,
+        command: () => {},
+      }),
+    );
   }
 }

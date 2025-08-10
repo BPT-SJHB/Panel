@@ -14,7 +14,6 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { MessageModule } from 'primeng/message';
 import { ButtonModule } from 'primeng/button';
 import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
-
 import {
   ErrorsValidation,
   getDefaultErrorMessage,
@@ -38,29 +37,30 @@ import {
   styleUrl: './text-input.component.scss',
 })
 export class TextInputComponent implements OnInit, OnChanges {
-  @Input() control = new FormControl<any>('');
+  @Input() control = new FormControl();
   @Input() validationField: ValidationField | null = null;
   @Input() placeholder = '';
   @Input() readOnly = false;
   @Input() disabled = false;
-  @Input() icon: string = 'pi pi-user';
+  @Input() icon = 'pi pi-user';
   @Input() label = '';
   @Input() addonWidth: string | null = null;
   @Input() buttonIcon = '';
   @Input() buttonDisabled = false;
-  @Input() type: 'password' | 'text' | 'date' = 'text';
-  @Input() datePickerPosition: 'top' | 'bottom' = 'bottom';
+  @Input() type: 'password' | 'text' = 'text';
 
   @Output() clickButton = new EventEmitter<void>();
-  @Output() input = new EventEmitter<any>();
+  @Output() input = new EventEmitter();
+  @Output() focus = new EventEmitter<HTMLInputElement>();
+  @Output() blur = new EventEmitter<HTMLInputElement>();
   @Output() keydown = new EventEmitter<KeyboardEvent>();
 
   get firstErrorMessage(): string | null {
-    const errors = this.control?.errors as ErrorsValidation;
-    if (!this.validationField || !errors) return null;
-
-    const rule = ValidationSchema[this.validationField];
-    return getDefaultErrorMessage(rule.name, errors);
+    if (!this.validationField || !this.control?.errors) return null;
+    return getDefaultErrorMessage(
+      ValidationSchema[this.validationField].name,
+      this.control.errors as ErrorsValidation
+    );
   }
 
   get isDisabled(): boolean {
@@ -78,29 +78,25 @@ export class TextInputComponent implements OnInit, OnChanges {
   }
 
   setDisabledState(): void {
-    if (this.disabled) {
-      this.control.disable({ emitEvent: false });
-    } else {
-      this.control.enable({ emitEvent: false });
-    }
+    this.disabled
+      ? this.control.disable({ emitEvent: false })
+      : this.control.enable({ emitEvent: false });
   }
 
   onFocusInput(input: HTMLInputElement): void {
-    if (this.disabled) {
-      input.blur();
-    }
+    if (this.disabled) input.blur();
+    this.focus.emit(input);
   }
 
-  onBlurInput(_: HTMLInputElement): void {
-    if (this.readOnly) {
-      this.control.markAsUntouched();
-    }
+  onBlurInput(input: HTMLInputElement): void {
+    if (this.readOnly) this.control.markAsUntouched();
+    this.blur.emit(input);
   }
 
-  onKeyDown(event: KeyboardEvent) {
+  onKeyDown(event: KeyboardEvent): void {
     this.keydown.emit(event);
   }
-  
+
   handleClick(): void {
     this.clickButton.emit();
   }

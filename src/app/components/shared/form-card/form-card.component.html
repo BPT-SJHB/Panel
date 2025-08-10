@@ -1,5 +1,4 @@
-<p-card styleClass="overflow-hidden relative bg-transparent px-2 sm:px-4 md:px-6 lg:px-7 py-4 shadow-4 border-1 border-round-2xl">
-<div class="overlay surface-card
-"></div>
- <ng-content></ng-content>
+<p-card [style.background]="'rgba(0,0,0,0)'" styleClass="relative px-2 sm:px-6 md:px-12 lg:px-16 py-6 shadow-2xl border rounded-2xl">
+<div class="overlay bg-surface-0 rounded-2xl" [style.background]="'var(--p-card-background)'" ></div>
+    <ng-content></ng-content>
 </p-card>

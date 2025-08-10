@@ -20,4 +20,16 @@ export abstract class BaseLoading implements OnDestroy, OnInit {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
+  /** ================================
+   *  Utility wrapper to centralize loading toggling
+   *  ================================ */
+  protected async withLoading<T>(fn: () => Promise<T>): Promise<T | undefined> {
+    this.loadingService.setLoading(true);
+    try {
+      return await fn();
+    } finally {
+      this.loadingService.setLoading(false);
+    }
+  }
 }

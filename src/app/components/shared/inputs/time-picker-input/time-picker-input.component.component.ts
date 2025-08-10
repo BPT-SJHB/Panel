@@ -6,8 +6,9 @@ import {
   OnChanges,
   OnDestroy,
   SimpleChanges,
+  signal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -30,7 +31,6 @@ import {
   selector: 'app-time-picker-input',
   standalone: true,
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     InputGroupModule,
     InputGroupAddonModule,
@@ -47,6 +47,20 @@ export class TimePickerInput implements OnInit, OnChanges, OnDestroy {
   @Input() readOnly = false;
   @Input() disabled = false;
   @Input() label: string | undefined;
+
+  buttonSettings = {
+    animation:
+      'transition-all duration-50 ease-in-out hover:scale-110 active:translate-y-0.5 active:shadow-sm active:scale-95',
+    style: 'p-button-text p-button-sm text-primary-emphasis',
+  };
+  buttonsClass = signal('');
+
+  inputSetting = {
+    animation: 'transition-all duration-75 ease-in-out',
+    style:
+      'w-8 h-8 text-center focus:border-2 focus:border-primary-emphasis focus:rounded-md focus:outline-0',
+  };
+  inputsClass = signal('');
 
   // 🕒 Internal time controls
   hour = new FormControl('00');
@@ -76,11 +90,13 @@ export class TimePickerInput implements OnInit, OnChanges, OnDestroy {
   // 🚀 On component init
   ngOnInit(): void {
     this.setDisabledState();
+    this.setButtonsClass();
+    this.setInputsClass();
 
     // ✅ Enforce valid time ranges
-    this.enforceTimeRange(this.hour, 0, 23);     // Hours: 00–23
-    this.enforceTimeRange(this.minutes, 0, 59);  // Minutes: 00–59
-    this.enforceTimeRange(this.second, 0, 59);   // Seconds: 00–59
+    this.enforceTimeRange(this.hour, 0, 23); // Hours: 00–23
+    this.enforceTimeRange(this.minutes, 0, 59); // Minutes: 00–59
+    this.enforceTimeRange(this.second, 0, 59); // Seconds: 00–59
 
     // 🔄 Sync parent → internal controls
     this.control.valueChanges
@@ -221,5 +237,17 @@ export class TimePickerInput implements OnInit, OnChanges, OnDestroy {
     this.isInternalUpdate = true;
     this.control.setValue(timeString, { emitEvent: false });
     this.isInternalUpdate = false;
+  }
+
+  setButtonsClass() {
+    this.buttonsClass.set(
+      this.buttonSettings.style + ' ' + this.buttonSettings.animation
+    );
+  }
+
+  setInputsClass() {
+    this.inputsClass.set(
+      this.inputSetting.style + ' ' + this.inputSetting.animation
+    );
   }
 }

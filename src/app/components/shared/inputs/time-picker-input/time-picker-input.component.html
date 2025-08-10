@@ -1,12 +1,10 @@
-<div
-  class="flex flex-row-reverse justify-content-end flex-row align-items-center gap-2"
->
+<div class="flex flex-row-reverse justify-end items-center gap-2">
   <!-- Hours -->
-  <div class="flex flex-column align-items-center">
+  <div class="flex flex-col items-center">
     <button
       pButton
       icon="pi pi-chevron-up"
-      class="p-button-text p-button-sm"
+      [class]="buttonsClass()"
       (mousedown)="startContinuousChange(hour, 0, 23, 'increment')"
       (mouseup)="stopContinuousChange()"
       (mouseleave)="stopContinuousChange()"
@@ -18,14 +16,14 @@
       type="text"
       inputmode="numeric"
       [formControl]="hour"
-      class="w-2rem h-2rem text-center"
+      [class]="inputsClass()"
       (blur)="onBlurInput(hour)"
       maxlength="2"
     />
     <button
       pButton
       icon="pi pi-chevron-down"
-      class="p-button-text p-button-sm"
+      [class]="buttonsClass()"
       (mousedown)="startContinuousChange(hour, 0, 23, 'decrement')"
       (mouseup)="stopContinuousChange()"
       (mouseleave)="stopContinuousChange()"
@@ -38,11 +36,11 @@
   <span>:</span>
 
   <!-- Minutes -->
-  <div class="flex flex-column align-items-center">
+  <div class="flex flex-col items-center">
     <button
       pButton
       icon="pi pi-chevron-up"
-      class="p-button-text p-button-sm"
+      [class]="buttonsClass()"
       (mousedown)="startContinuousChange(minutes, 0, 59, 'increment')"
       (mouseup)="stopContinuousChange()"
       (mouseleave)="stopContinuousChange()"
@@ -54,14 +52,14 @@
       type="text"
       inputmode="numeric"
       [formControl]="minutes"
-      class="w-2rem h-2rem text-center"
+      [class]="inputsClass()"
       (blur)="onBlurInput(minutes)"
       maxlength="2"
     />
     <button
       pButton
       icon="pi pi-chevron-down"
-      class="p-button-text p-button-sm"
+      [class]="buttonsClass()"
       (mousedown)="startContinuousChange(minutes, 0, 59, 'decrement')"
       (mouseup)="stopContinuousChange()"
       (mouseleave)="stopContinuousChange()"
@@ -74,11 +72,11 @@
   <span>:</span>
 
   <!-- Seconds -->
-  <div class="flex flex-column align-items-center">
+  <div class="flex flex-col items-center">
     <button
       pButton
       icon="pi pi-chevron-up"
-      class="p-button-text p-button-sm"
+      [class]="buttonsClass()"
       (mousedown)="startContinuousChange(second, 0, 59, 'increment')"
       (mouseup)="stopContinuousChange()"
       (mouseleave)="stopContinuousChange()"
@@ -90,14 +88,14 @@
       type="text"
       inputmode="numeric"
       [formControl]="second"
-      class="w-2rem h-2rem text-center"
+      [class]="inputsClass()"
       (blur)="onBlurInput(second)"
       maxlength="2"
     />
     <button
       pButton
       icon="pi pi-chevron-down"
-      class="p-button-text p-button-sm"
+      [class]="buttonsClass()"
       (mousedown)="startContinuousChange(second, 0, 59, 'decrement')"
       (mouseup)="stopContinuousChange()"
       (mouseleave)="stopContinuousChange()"
@@ -106,12 +104,16 @@
       tabindex="-1"
     ></button>
   </div>
-  <span class="ml-2" *ngIf="label">{{ label }}</span>
+  @if (label) {
+  <span class="ml-2">{{ label }}</span>
+  }
 </div>
 
 <!-- ⚠️ Validation Error Message -->
-<div *ngIf="control.touched && firstErrorMessage" class="px-3 mt-1">
+@if (control.touched && firstErrorMessage) {
+<div class="px-4 mt-1">
   <p-message severity="error" variant="simple" size="small">
     {{ firstErrorMessage }}
   </p-message>
 </div>
+}

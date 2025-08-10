@@ -1,15 +1,33 @@
-<app-header [headerData]="headerData" />
-<app-sidebar [menuItems]="menuItems">
-  <div class="my-6 lg:my-2 p-4">
-    <app-sub-menu [hidden]="!subMenuVisible" [processes]="webProcesses" />
-    <div [hidden]="subMenuVisible">
-      <ng-template #tabView></ng-template>
-    </div>
-  </div>
-</app-sidebar>
+<div class="h-screen flex flex-col">
+  <!-- Header -->
+  <header [style.height]="layoutUi.headerHeight" class="shrink-0">
+    <app-header />
+  </header>
+  <!-- Main -->
+  <main class="flex flex-1 overflow-hidden">
+    <!-- Sidebar -->
+    <aside [class]="layoutUi.sidebarWidth" class="shrink-0">
+      <app-sidebar [pageGroupItems]="pageGroups" />
+    </aside>
 
-<app-support-button></app-support-button>
+    <!-- Content -->
+    <section class="flex flex-col flex-1 overflow-hidden">
+      <div class="shrink-0">
+        <app-tab-manager />
+      </div>
+      <div class="overflow-y-auto flex-1 mb-22 lg:mb-0" dir="ltr">
+        <app-dashboard-content-manager dir="rtl" />
+      </div>
+    </section>
+  </main>
 
-<div class="fixed w-full bottom-0 z-10">
-  <app-footer />
+  <app-support-button></app-support-button>
+
+  <!-- Footer -->
+  <footer [class]="layoutUi.headerHeight" class="shrink-0 overflow-hidden">
+    <app-mobile-tab-bar class="lg:hidden" />
+    <app-footer class="w-full hidden lg:block" />
+  </footer>
+
+  <app-exit-confirmation-dialog />
 </div>

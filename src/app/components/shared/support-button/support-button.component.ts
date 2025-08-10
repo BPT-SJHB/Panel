@@ -9,6 +9,7 @@ import { APP_ROUTES } from 'app/constants/routes';
 import { CaptchaInputComponent } from '../inputs/captcha-input/captcha-input.component';
 import { TextAreaInputComponent } from '../inputs/text-area-input/text-area-input.component';
 import { DialogModule } from 'primeng/dialog';
+import { ButtonComponent } from "../button/button.component";
 
 @Component({
   selector: 'app-support-button',
@@ -19,7 +20,8 @@ import { DialogModule } from 'primeng/dialog';
     CaptchaInputComponent,
     TextAreaInputComponent,
     DialogModule,
-  ],
+    ButtonComponent
+],
   templateUrl: './support-button.component.html',
   styleUrl: './support-button.component.scss',
 })

@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@plugin "tailwindcss-primeui";
+/* @custom-variant dark (&:where(.my-app-dark, .my-app-dark *));  */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+}

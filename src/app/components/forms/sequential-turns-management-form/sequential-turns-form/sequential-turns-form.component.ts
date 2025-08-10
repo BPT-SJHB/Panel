@@ -1,6 +1,11 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { NgClass } from '@angular/common';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 
 import { ButtonModule } from 'primeng/button';
@@ -11,7 +16,7 @@ import { ConfirmationService } from 'primeng/api';
 
 import { SearchInputComponent } from 'app/components/shared/inputs/search-input/search-input.component';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
-import { BinaryRadioInputComponent } from 'app/components/shared/inputs/binary-radio-input/binary-radio-input.component';
+import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-switch-input/toggle-switch-input.component';
 
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
 import { SequentialTurnManagementService } from 'app/services/sequential-turn-management/sequential-turn-management.service';
@@ -20,6 +25,8 @@ import { ToastService } from 'app/services/toast-service/toast.service';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { SequentialTurn } from 'app/services/sequential-turn-management/model/sequential-turn.model';
+import { TableConfig } from 'app/constants/ui/table.ui';
+import { ButtonComponent } from 'app/components/shared/button/button.component';
 
 enum FormMode {
   EDITABLE,
@@ -39,18 +46,22 @@ enum FormMode {
     ConfirmDialogModule,
     Dialog,
     TextInputComponent,
-    BinaryRadioInputComponent,
-    ReactiveFormsModule
+    ToggleSwitchInputComponent,
+    ReactiveFormsModule,
+    ButtonComponent,
   ],
   providers: [ConfirmationService],
 })
 export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
   private readonly fb = inject(FormBuilder);
   private readonly loadingService = inject(LoadingService);
-  private readonly sequentialTurnsService = inject(SequentialTurnManagementService);
+  private readonly sequentialTurnsService = inject(
+    SequentialTurnManagementService,
+  );
   private readonly toast = inject(ToastService);
   private readonly confirmationService = inject(ConfirmationService);
   private readonly destroy$ = new Subject<void>();
+  readonly tableUi = TableConfig;
 
   sequentialTurnForm = this.fb.group({
     id: [-1, ValidationSchema.id],
@@ -73,7 +84,7 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadingService.loading$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(value => (this.loading = value));
+      .subscribe((value) => (this.loading = value));
 
     this.initialize();
   }
@@ -116,11 +127,13 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
       icon: 'pi pi-info-circle',
       closable: true,
       closeOnEscape: true,
+      rejectLabel: 'لغو',
       rejectButtonProps: {
         label: 'لغو',
         severity: 'secondary',
         outlined: true,
       },
+      acceptLabel: 'تایید',
       acceptButtonProps: {
         label: 'تایید',
         severity: 'danger',
@@ -137,7 +150,7 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
   }
 
   onEdit(row: SequentialTurn): void {
-    this.headerTitle = 'ویرایش رکورد نوبت صفوف'
+    this.headerTitle = 'ویرایش رکورد نوبت صفوف';
     this.populateSequentialForm(row);
     this.sequentialTurnFormMode = FormMode.EDITABLE;
     this.formDialogVisible = true;
@@ -154,7 +167,7 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
     this.formDialogVisible = false;
   }
 
-  isFormEditable():boolean {
+  isFormEditable(): boolean {
     return this.sequentialTurnFormMode === FormMode.EDITABLE;
   }
 
@@ -192,12 +205,13 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
 
   private async registerSequentialTurn(): Promise<void> {
     const turn = this.extractSequentialForm();
-    const response = await this.sequentialTurnsService.RegisterNewSequentialTurn(
-      turn.SeqTurnId,
-      turn.SeqTurnTitle ?? '',
-      turn.SeqTurnKeyWord ?? '',
-      turn.Active ?? true
-    );
+    const response =
+      await this.sequentialTurnsService.RegisterNewSequentialTurn(
+        turn.SeqTurnId,
+        turn.SeqTurnTitle ?? '',
+        turn.SeqTurnKeyWord ?? '',
+        turn.Active ?? true,
+      );
     if (!checkAndToastError(response, this.toast)) return;
     this.toast.success('موفق', response.data.Message);
     await this.loadSequentialTurns();
@@ -209,7 +223,7 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
       turn.SeqTurnId,
       turn.SeqTurnTitle ?? '',
       turn.SeqTurnKeyWord ?? '',
-      turn.Active ?? true
+      turn.Active ?? true,
     );
     if (!checkAndToastError(response, this.toast)) return;
     this.toast.success('موفق', response.data.Message);

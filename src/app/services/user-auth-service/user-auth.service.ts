@@ -62,6 +62,7 @@ export class UserAuthService {
 
   public async logout(): Promise<void> {
     this.cookieService.delete(this.sessionKey);
+    this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
     // سمت سرور اضافه شود در صورت نیاز
   }
 

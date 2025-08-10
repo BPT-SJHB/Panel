@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { SearchAutoCompleteComponent } from 'app/components/shared/inputs/search-auto-complete/search-auto-complete.component';
+import { TableConfig } from 'app/constants/ui/table.ui';
 import { AnnouncementGroupSubgroupManagementService } from 'app/services/announcement_group_subgroup_management/announcement-group-subgroup-management.service';
 import { AnnouncementGroup } from 'app/services/announcement_group_subgroup_management/model/announcement-group.model';
 import { AnnouncementSubGroup } from 'app/services/announcement_group_subgroup_management/model/announcement-subgroup.model';
@@ -19,6 +20,7 @@ import { ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TableModule } from 'primeng/table';
+import { ButtonComponent } from 'app/components/shared/button/button.component';
 
 // 📦 Interface for displaying flat relation data in table
 interface RowRelationOfSequential {
@@ -36,10 +38,13 @@ interface RowRelationOfSequential {
     SearchAutoCompleteComponent,
     TableModule,
     ConfirmDialogModule,
+    ButtonComponent,
   ],
   providers: [ConfirmationService],
-  templateUrl: './relation-of-sequential-turn-to-announcement-sub-groups-form.component.html',
-  styleUrl: './relation-of-sequential-turn-to-announcement-sub-groups-form.component.scss',
+  templateUrl:
+    './relation-of-sequential-turn-to-announcement-sub-groups-form.component.html',
+  styleUrl:
+    './relation-of-sequential-turn-to-announcement-sub-groups-form.component.scss',
 })
 export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
   // 💉 Dependency Injection
@@ -49,12 +54,14 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
   private confirmationService = inject(ConfirmationService);
   private sequentialTurnService = inject(SequentialTurnManagementService);
   private announcementService = inject(
-    AnnouncementGroupSubgroupManagementService
+    AnnouncementGroupSubgroupManagementService,
   );
+
+  readonly tableUi = TableConfig;
 
   // 📊 UI State
   loading = false;
-  addonWidth = '8rem';
+  addonWidth = '10rem';
   cols = ['حذف', 'صف نوبت دهی', 'زیر گروه اعلام بار'];
   relationsSequential: RowRelationOfSequential[] = [];
 
@@ -86,7 +93,7 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
 
     const res =
       await this.announcementService.GetRelationOfAnnouncementGroupAndSubGroup(
-        this.announcementGroupId.value
+        this.announcementGroupId.value,
       );
 
     if (!checkAndToastError(res, this.toast)) return [];
@@ -95,7 +102,7 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
       group.AnnouncementSubGroups.map((sub) => ({
         AnnouncementSGId: sub.AnnouncementSGId,
         AnnouncementSGTitle: sub.AnnouncementSGTitle,
-      }))
+      })),
     );
   };
 
@@ -122,7 +129,7 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
 
   get announcementSubGroupTitle(): FormControl {
     return this.sequentialTurnForm.get(
-      'announcementSubGroupTitle'
+      'announcementSubGroupTitle',
     ) as FormControl;
   }
 
@@ -160,7 +167,7 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
   private async loadRelationOfSequentialTurns(sequentialId: number) {
     const res =
       await this.sequentialTurnService.GetRelationOfSequentialTurnToAnnouncementSubGroups(
-        sequentialId
+        sequentialId,
       );
     if (!checkAndToastError(res, this.toast)) return;
     this.relationsSequential = this.flattenAnnouncementRelations(res.data!);
@@ -168,7 +175,7 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
 
   // 🔃 Convert nested relations to flat format for display
   private flattenAnnouncementRelations(
-    data: RelationOfSequentialTurnToAnnouncementSubGroup[]
+    data: RelationOfSequentialTurnToAnnouncementSubGroup[],
   ): RowRelationOfSequential[] {
     return data.flatMap((group) =>
       group.AnnouncementSubGroups.map((sub) => ({
@@ -176,7 +183,7 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
         SeqTurnTitle: group.SeqTurnTitle ?? '',
         AnnouncementSGId: sub.AnnouncementSGId,
         AnnouncementSGTitle: sub.AnnouncementSGTitle ?? '',
-      }))
+      })),
     );
   }
 
@@ -188,11 +195,13 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
       icon: 'pi pi-info-circle',
       closable: true,
       closeOnEscape: true,
+      rejectLabel: 'لغو',
       rejectButtonProps: {
         label: 'لغو',
         severity: 'secondary',
         outlined: true,
       },
+      acceptLabel: 'تایید',
       acceptButtonProps: {
         label: 'تایید',
         severity: 'danger',
@@ -213,7 +222,7 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
     const res =
       await this.sequentialTurnService.DeleteRelationOfSequentialTurnToAnnouncementSubGroup(
         row.SeqTurnId,
-        row.AnnouncementSGId
+        row.AnnouncementSGId,
       );
     if (!checkAndToastError(res, this.toast)) return;
     this.toast.success('موفق', res.data.Message);
@@ -228,7 +237,7 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
       const res =
         await this.sequentialTurnService.RegisterNewRelationOfSequentialTurnToAnnouncementSubGroup(
           this.sequentialTurnId.value,
-          this.announcementSubGroupId.value
+          this.announcementSubGroupId.value,
         );
       if (!checkAndToastError(res, this.toast)) return;
       this.toast.success('موفق', res.data.Message);

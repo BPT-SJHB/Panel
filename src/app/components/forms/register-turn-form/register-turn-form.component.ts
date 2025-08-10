@@ -9,12 +9,12 @@ import { Subject, takeUntil } from 'rxjs';
 import { SearchAutoCompleteComponent } from 'app/components/shared/inputs/search-auto-complete/search-auto-complete.component';
 import { FormControl, Validators } from '@angular/forms';
 import { SequentialTurn } from 'app/services/sequential-turn-management/model/sequential-turn.model';
-import { Button } from 'primeng/button';
 import { TruckInfo } from 'app/services/driver-truck-management/model/truck-info.model';
+import { ButtonComponent } from "app/components/shared/button/button.component";
 
 @Component({
   selector: 'app-register-turn-form',
-  imports: [SearchAutoCompleteComponent, Button],
+  imports: [SearchAutoCompleteComponent, ButtonComponent],
   templateUrl: './register-turn-form.component.html',
   styleUrl: './register-turn-form.component.scss',
 })
@@ -29,7 +29,7 @@ export class RegisterTurnFormComponent implements OnInit {
 
   loading = true;
   sequentialTurnTitle = new FormControl('', [Validators.required]);
-  sequentialTurnId = new FormControl(-1, [Validators.min(0)]);
+  sequentialTurnId = new FormControl(-1, [Validators.required,Validators.min(0)]);
 
   // Lifecycle: on component init
   ngOnInit(): void {
@@ -67,7 +67,7 @@ export class RegisterTurnFormComponent implements OnInit {
   }
 
   // ❌ Reset control value when input is cleared
-  onAutoCompleteChange(controller: FormControl<any>) {
+  onAutoCompleteChange(controller: FormControl<any>) {    
     controller.setValue('');
   }
 

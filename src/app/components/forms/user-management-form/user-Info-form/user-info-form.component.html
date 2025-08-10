@@ -1,8 +1,8 @@
-<div class="p-fluid grid gap-4 relative">
+<div class="p-fluid grid gap-2 relative">
   <form
-    class="col-12"
-    [class.pointer-events-none]="loading"
-    [class.opacity-60]="loading"
+    class="col-span-12"
+    [class.pointer-events-none]="loading()"
+    [class.opacity-60]="loading()"
     [formGroup]="searchForm"
   >
     <!-- Search Phone + Refresh -->
@@ -13,125 +13,127 @@
         placeholder="جستجو کاربر"
         [control]="searchPhone"
         validationField="mobile"
-        [disableSearchButton]="this.searchForm.invalid || loading"
+        [disableSearchButton]="searchForm.invalid || loading()"
         [onSearchQuery]="fetchUserByPhone"
+        [addonWidth]="'8rem'"
       />
     </div>
   </form>
 
   <form
-    class="p-fluid grid gap-4 relative"
-    [class.pointer-events-none]="loading"
-    [class.opacity-60]="loading"
+    class="p-fluid grid col-span-12 gap-6 relative"
+    [class.pointer-events-none]="loading()"
+    [class.opacity-60]="loading()"
     [formGroup]="userInfoForm"
   >
     <!-- User ID (ReadOnly) -->
-    <div class="flex align-items-center gap-2 col-12 md:col-5">
+    <div class="flex items-center gap-2 col-span-12 md:col-span-6">
       <app-text-input
         class="flex-1"
         [readOnly]="true"
-        [disabled]="true"
-        [control]="id"
+        [control]="getUserFormControl('id')"
         validationField="id"
         placeholder="شناسه کاربر"
         icon="pi pi-id-card"
       />
-      <p-button
+      <app-button
         (click)="resetUserInfoForm()"
-        styleClass="border-circle w-2rem h-2rem"
-        [disabled]="id.value == '0'"
+        styleClass="rounded-full w-8 h-8"
+        [disabled]="getUserFormControl('id').invalid || loading()"
         size="small"
         severity="info"
       >
         <i class="pi pi-user-plus text-lg" iconPos="left"></i>
-      </p-button>
+      </app-button>
     </div>
 
     <!-- Full Name -->
-    <div class="col-12 md:col-5">
+    <div class="col-span-12 md:col-span-6">
       <app-text-input
         validationField="fullName"
         icon="pi pi-user"
         placeholder="نام کاربر"
-        [control]="name"
+        [control]="getUserFormControl('name')"
       />
     </div>
 
     <!-- Phone -->
-    <div class="col-12 md:col-5">
+    <div class="col-span-12 md:col-span-6">
       <div>
         <app-text-input
           label="شماره موبایل"
           addonWidth="7rem"
           class="flex-1"
           placeholder="شماره موبایل کاربر"
-          [control]="phone"
+          [control]="getUserFormControl('phone')"
         />
       </div>
     </div>
 
     <!-- User Type -->
-    <div class="col-12 md:col-5">
+    <div class="col-span-12 md:col-span-6">
       <app-select-input
         icon="pi pi-users"
-        [control]="userType"
+        [control]="getUserFormControl('userType')"
         [options]="roles"
       />
     </div>
 
     <!-- Radio: SMS System -->
-    <div class="col-12 md:col-5">
-      <app-binary-radio-input
+    <div class="col-span-12 md:col-span-6 flex px-2">
+      <app-toggle-switch-input
         [readonly]="true"
         label="وضعیت پیامک"
-        [control]="smsActive"
-        radioName="sms-active"
+        [control]="getUserFormControl('smsActive')"
       />
     </div>
 
     <!-- Radio: User Active -->
-    <div class="col-12 md:col-6">
-      <app-binary-radio-input
+    <div class="col-span-12 md:col-span-6 flex px-2">
+      <app-toggle-switch-input
         label="کاربر"
-        [control]="userActive"
-        radioName="user-active"
+        [control]="getUserFormControl('userActive')"
       />
     </div>
 
     <!-- Action Buttons -->
     <div
-      class="col-12 md:flex md:flex-row-reverse md:flex-wrap gap-3 align-items-center"
+      class="col-span-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center"
     >
-      <p-button
+      <app-button
         (click)="submitUserInfo()"
-        [disabled]="userInfoForm.invalid || loading"
+        [disabled]="userInfoForm.invalid || loading()"
         label="ثبت و ویرایش"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
-      ></p-button>
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+      ></app-button>
 
-      <p-button
+      <app-button
         (click)="activateUserSms()"
-        [disabled]="id.value == '0' || smsActive.value || loading"
+        [disabled]="
+          getUserFormControl('id').invalid ||
+          getUserFormControl('smsActive').value ||
+          loading()
+        "
         severity="warn"
         label="فعال سازی پیامک"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
-      ></p-button>
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+      ></app-button>
 
-      <p-button
+      <app-button
         (click)="sendWebsiteLink()"
-        [disabled]="id.value == '0' || loading"
+        [disabled]="getUserFormControl('id').invalid || loading()"
         severity="warn"
         label="ارسال لینک سامانه"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
-      ></p-button>
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+      ></app-button>
 
-      <p-button
+      <app-button
         (click)="resetUserPassword()"
-        [disabled]="id.value == '0' || loading"
+        [disabled]="getUserFormControl('id').invalid || loading()"
         severity="info"
         label="ایجاد رمز عبور جدید"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-9rem lg:w-10rem"
-      ></p-button>
+        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+      ></app-button>
     </div>
   </form>
 </div>

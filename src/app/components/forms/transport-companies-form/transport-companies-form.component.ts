@@ -13,21 +13,23 @@ import { checkAndToastError } from 'app/utils/api-utils';
 import { NewPasswordDialogComponent } from 'app/components/shared/dialog/new-password-dialog/new-password-dialog.component';
 import { SearchAutoCompleteComponent } from 'app/components/shared/inputs/search-auto-complete/search-auto-complete.component';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
-import { BinaryRadioInputComponent } from 'app/components/shared/inputs/binary-radio-input/binary-radio-input.component';
 
 // Services & models
 import { TransportCompaniesManagementService } from 'app/services/transport-company-management/transport-companies-management.service';
 import { TransportCompany } from 'app/services/transport-company-management/model/transport-company-info.model';
+import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-switch-input/toggle-switch-input.component';
 
 @Component({
   selector: 'app-transport-companies-form',
   imports: [
     SearchAutoCompleteComponent,
     TextInputComponent,
-    BinaryRadioInputComponent,
     ReactiveFormsModule,
     ButtonModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ButtonComponent,
+    ToggleSwitchInputComponent,
   ],
   providers: [ConfirmationService, DialogService],
   templateUrl: './transport-companies-form.component.html',
@@ -43,7 +45,7 @@ export class TransportCompaniesFormComponent extends BaseLoading {
   // === Form Setup ===
   readonly addonWidth = '8rem';
   readonly transportComponyForm = this.fb.group({
-    TCId: new FormControl<number | null>(null),
+    TCId: new FormControl<number | null>(null, ValidationSchema.id),
     TCTitle: [''],
     TCOrganizationCode: [''],
     TCCityTitle: [''],
@@ -56,7 +58,8 @@ export class TransportCompaniesFormComponent extends BaseLoading {
 
   // === Search + Select Handling ===
   searchTransportCompony = async (query: string) => {
-    const response = await this.transportComponyService.GetTransportCompaniesInfo(query);
+    const response =
+      await this.transportComponyService.GetTransportCompaniesInfo(query);
     if (!checkAndToastError(response, this.toast)) return [];
     return response.data;
   };
@@ -64,7 +67,8 @@ export class TransportCompaniesFormComponent extends BaseLoading {
   async onTransportComponySelect(tcInfo: TransportCompany) {
     try {
       this.loadingService.setLoading(true);
-      const response = await this.transportComponyService.GetTransportCompanyInfo(tcInfo.TCId);
+      const response =
+        await this.transportComponyService.GetTransportCompanyInfo(tcInfo.TCId);
       if (!checkAndToastError(response, this.toast)) return;
       this.populateTransportComponyForm(response.data);
     } finally {
@@ -77,7 +81,16 @@ export class TransportCompaniesFormComponent extends BaseLoading {
     if (this.loading() || this.transportComponyForm.invalid) return;
     try {
       this.loadingService.setLoading(true);
-      const response = await this.transportComponyService.EditTransportCompany(this.extractTransportComponyForm());
+      let response = await this.transportComponyService.EditTransportCompany(
+        this.extractTransportComponyForm()
+      );
+      if (!checkAndToastError(response, this.toast)) return;
+
+      response =
+        await this.transportComponyService.ChangeTransportCompanyStatus(
+          this.extractTransportComponyForm().TCId,
+          this.extractTransportComponyForm().Active ?? false
+        );
       if (!checkAndToastError(response, this.toast)) return;
       this.toast.success('موفق', response.data.Message);
     } finally {
@@ -89,7 +102,10 @@ export class TransportCompaniesFormComponent extends BaseLoading {
     if (this.loading() || this.TCId.invalid) return;
     try {
       this.loadingService.setLoading(true);
-      const response = await this.transportComponyService.ActiveTransportCompanySmsService(this.TCId.value!);
+      const response =
+        await this.transportComponyService.ActiveTransportCompanySmsService(
+          this.TCId.value!
+        );
       if (!checkAndToastError(response, this.toast)) return;
       this.toast.success('موفق', response.data.Message);
     } finally {
@@ -118,7 +134,10 @@ export class TransportCompaniesFormComponent extends BaseLoading {
     if (this.loading() || this.TCId.invalid) return;
     try {
       this.loadingService.setLoading(true);
-      const response = await this.transportComponyService.ResetTransportCompanyPassword(this.TCId.value!);
+      const response =
+        await this.transportComponyService.ResetTransportCompanyPassword(
+          this.TCId.value!
+        );
       if (!checkAndToastError(response, this.toast)) return;
       const { Username, Password } = response.data!;
       this.dialogService.open(NewPasswordDialogComponent, {
@@ -151,7 +170,9 @@ export class TransportCompaniesFormComponent extends BaseLoading {
   }
 
   get TCOrganizationCode() {
-    return this.transportComponyForm.get('TCOrganizationCode') as FormControl<string>;
+    return this.transportComponyForm.get(
+      'TCOrganizationCode'
+    ) as FormControl<string>;
   }
 
   get TCCityTitle() {
@@ -163,11 +184,15 @@ export class TransportCompaniesFormComponent extends BaseLoading {
   }
 
   get TCManagerMobileNumber() {
-    return this.transportComponyForm.get('TCManagerMobileNumber') as FormControl<string>;
+    return this.transportComponyForm.get(
+      'TCManagerMobileNumber'
+    ) as FormControl<string>;
   }
 
   get TCManagerNameFamily() {
-    return this.transportComponyForm.get('TCManagerNameFamily') as FormControl<string>;
+    return this.transportComponyForm.get(
+      'TCManagerNameFamily'
+    ) as FormControl<string>;
   }
 
   get EmailAddress() {

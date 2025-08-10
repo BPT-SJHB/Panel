@@ -1,21 +1,25 @@
 import { Component, ViewChild, inject } from '@angular/core';
-import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { AutoCompleteSelectEvent } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 
 import { ValidationSchema } from 'app/constants/validation-schema';
-import { ApiResponse } from 'app/data/model/api-Response.model';
 import { FPCInfo } from 'app/data/model/fpc-info.model';
 
 import { FpcManagementService } from 'app/services/fpc-management/fpc-management.service';
-import { ToastService } from 'app/services/toast-service/toast.service';
 
-import { BinaryRadioInputComponent } from 'app/components/shared/inputs/binary-radio-input/binary-radio-input.component';
+import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-switch-input/toggle-switch-input.component';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { SearchAutoCompleteComponent } from 'app/components/shared/inputs/search-auto-complete/search-auto-complete.component';
-import { LoadingService } from 'app/services/loading-service/loading-service.service';
-import { Subject, takeUntil } from 'rxjs';
+import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { checkAndToastError } from 'app/utils/api-utils';
+import { BaseLoading } from '../shared/component-base/base-loading';
 
 @Component({
   selector: 'app-factories-and-freight-form',
@@ -27,31 +31,16 @@ import { Subject, takeUntil } from 'rxjs';
     DialogModule,
     ReactiveFormsModule,
     TextInputComponent,
-    BinaryRadioInputComponent,
+    ToggleSwitchInputComponent,
     SearchAutoCompleteComponent,
+    ButtonComponent,
   ],
 })
-export class FactoriesAndFreightFormComponent {
+export class FactoriesAndFreightFormComponent extends BaseLoading {
   private fb = inject(FormBuilder);
-  private toast = inject(ToastService);
   private fpcService = inject(FpcManagementService);
   private cachedFpc?: FPCInfo;
-  private loadingService = inject(LoadingService)
-  private destroy$ = new Subject<void>();
 
- ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
-  ngOnInit(): void {
-    this.loadingService.loading$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((value) => (this.loading = value));
-  }
-
-
-  loading = false;
   addonWidth = '9rem';
   passwordDialogVisible = false;
   userNameDialog = '';
@@ -59,7 +48,7 @@ export class FactoriesAndFreightFormComponent {
   searchTerm: FormControl = new FormControl('');
 
   fpcForm = this.fb.group({
-    fpcId: [0, ValidationSchema.id],
+    fpcId: this.fb.control<number | null>(null, ValidationSchema.id),
     title: ['', ValidationSchema.title],
     managerName: ['', ValidationSchema.managerName],
     managerMobile: [''],
@@ -71,7 +60,7 @@ export class FactoriesAndFreightFormComponent {
 
   searchFPCs = async (query: string): Promise<FPCInfo[]> => {
     const response = await this.fpcService.GetFPCsInfo(query);
-    if (!this.isSuccessful(response)) return [];
+    if (!checkAndToastError(response, this.toast)) return [];
     return response.data!;
   };
 
@@ -81,7 +70,7 @@ export class FactoriesAndFreightFormComponent {
 
   resetFpcForm(): void {
     this.fpcForm.reset();
-    this.fpcId.setValue(0);
+    this.fpcId.setValue(null);
     this.fpcActive.setValue(true);
     this.searchTerm.setValue('');
   }
@@ -97,52 +86,33 @@ export class FactoriesAndFreightFormComponent {
   }
 
   async activateFpcSms(): Promise<void> {
-    if (this.fpcId.invalid || this.fpcId.value === 0 || this.loading) return;
-
-    try {
-      this.loading = true;
+    if (this.fpcId.invalid || this.loading()) return;
+    this.withLoading(async () => {
       const response = await this.fpcService.ActivateFPCSms(this.fpcId.value);
-      if (!this.isSuccessful(response)) {
-        this.toast.error(
-          'خطا',
-          response.error?.message ?? 'عملیات ناموفقیت بود'
-        );
-      } else {
-        this.toast.success(
-          'موفق',
-          response.data?.Message ?? 'پیامک فعال سازی با موفقیت انجام شد.'
-        );
-      }
-    } finally {
-      this.loading = false;
-    }
+      if (!checkAndToastError(response, this.toast)) return;
+      this.toast.success('موفق', response.data.Message);
+    });
   }
 
   async resetPasswordFpc(): Promise<void> {
-    if (this.fpcId.invalid || this.fpcId.value === 0 || this.loading) return;
+    if (this.fpcId.invalid || this.loading()) return;
 
-    try {
-      this.loading = true;
+    this.withLoading(async () => {
       const response = await this.fpcService.ResetFPCUserPassword(
-        this.fpcId.value
+        this.fpcId.value,
       );
-      if (!this.isSuccessful(response)) return;
 
-      this.userNameDialog = response.data!.Username;
-      this.newUserPasswordDialog = response.data!.Password;
+      if (!checkAndToastError(response, this.toast)) return;
+      this.userNameDialog = response.data.Username;
+      this.newUserPasswordDialog = response.data.Password;
       this.passwordDialogVisible = true;
-    } finally {
-      this.loading = false;
-    }
+    });
   }
 
   async registerOrEditFpc(): Promise<void> {
-    if (this.fpcForm.invalid || this.loading) return;
-
-    try {
-      this.loading = true;
-
-      if (this.fpcId.value === 0) {
+    if (this.fpcForm.invalid || this.loading()) return;
+    this.withLoading(async () => {
+      if (this.fpcId.invalid) {
         await this.registerFpc();
       } else {
         await this.editFpc();
@@ -151,50 +121,41 @@ export class FactoriesAndFreightFormComponent {
       if (this.cachedFpc?.Active !== this.fpcActive.value) {
         await this.changeFpcActiveStatus();
       }
-    } finally {
-      this.loading = false;
-    }
+    });
   }
 
   private async registerFpc(): Promise<void> {
     const fpcInfo = this.buildFpcInfo();
     const response = await this.fpcService.FPCRegistering(fpcInfo);
-    if (this.isSuccessful(response)) {
-      this.toast.success(
-        'موفق',
-        response.data?.Message ?? 'اطلاعات با موفقیت ثبت شد.'
-      );
-    }
+    if (!checkAndToastError(response, this.toast)) return;
+    this.toast.success('موفق', response.data.Message);
     this.resetFpcForm();
   }
 
   private async editFpc(): Promise<void> {
     if (this.fpcId.invalid) return;
-
     const fpcInfo = this.buildFpcInfo();
     const response = await this.fpcService.EditFPC(fpcInfo);
-    if (this.isSuccessful(response)) {
-      this.toast.success(
-        'موفق',
-        response.data?.Message ?? 'اطلاعات با موفقیت تغییر یافت.'
-      );
-    }
+    if (!checkAndToastError(response, this.toast)) return;
+    this.toast.success('موفق', response.data.Message);
   }
 
   private async changeFpcActiveStatus(): Promise<void> {
-    if (this.fpcId.value === 0) return;
+    if (this.fpcId.invalid) return;
 
     const response = await this.fpcService.FPCChangeActiveStatus(
-      this.fpcId.value
+      this.fpcId.value,
     );
-    if (this.isSuccessful(response) && this.cachedFpc) {
+    if (!checkAndToastError(response, this.toast)) return;
+
+    if (this.cachedFpc) {
       this.cachedFpc.Active = !this.cachedFpc.Active;
     }
   }
 
   private async loadFpcDetails(fpcId: number): Promise<void> {
     const response = await this.fpcService.GetFPCInfo(fpcId);
-    if (!this.isSuccessful(response)) return;
+    if (!checkAndToastError(response, this.toast)) return;
 
     const data = response.data!;
     this.fpcForm.patchValue({
@@ -224,19 +185,10 @@ export class FactoriesAndFreightFormComponent {
     };
   }
 
-  private isSuccessful(response: ApiResponse<any>): boolean {
-    if (!response.success || !response.data) {
-      this.toast.error(
-        'خطا',
-        response.error?.message ?? 'خطای غیرمنتظره‌ای رخ داد'
-      );
-      return false;
-    }
-    return true;
-  }
-
   // Form Getters
   get fpcId(): FormControl {
+    const id = this.fpcForm.get('fpcId');
+    console.log(id?.invalid, id?.value, id?.errors);
     return this.fpcForm.get('fpcId') as FormControl;
   }
 

@@ -1,5 +1,5 @@
 <!-- 🔍 Search Input -->
-<div class="w-full mb-3">
+<div class="w-full mb-4">
   <app-search-input
     class="w-full"
     placeholder="بخشی از عنوان وارد کنید."
@@ -15,21 +15,23 @@
 
 <!-- 📋 Sequential Turn Table -->
 <p-table
-  class="col-12 overflow-x-auto"
+  class="col-span-12 overflow-x-auto"
   [columns]="cols"
   [value]="displaySequentialTurns"
-  [paginator]="true"
-  [rows]="10"
-  [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
-  [tableStyle]="{ minWidth: '40rem' }"
+  [tableStyle]="tableUi.tableStyle"
+  [paginator]="tableUi.paginator"
+  [paginatorLocale]="tableUi.paginatorLocale"
+  [rows]="tableUi.rows"
+  [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
+  [stripedRows]="tableUi.stripedRows"
 >
   <!-- 🔘 Toolbar (New Button) -->
   <ng-template #caption>
     <div class="flex items-center justify-between">
-      <p-button
+      <app-button
         label="جدید"
         size="small"
-        styleClass="px-4 md:px-5 py-1"
+        styleClass="px-6 md:px-8 py-1"
         (click)="onNew()"
       />
     </div>
@@ -49,7 +51,7 @@
     <tr>
       <!-- ✏️ Edit -->
       <td>
-        <p-button
+        <app-button
           icon="pi pi-pencil"
           severity="info"
           variant="text"
@@ -60,7 +62,7 @@
 
       <!-- 🗑 Delete -->
       <td>
-        <p-button
+        <app-button
           icon="pi pi-trash"
           severity="danger"
           variant="text"
@@ -95,22 +97,22 @@
   [modal]="true"
   [header]="headerTitle"
   draggable="false"
-  maskStyleClass="px-3 z-15"
-  [style]="{ 'max-width': '30rem' }"
+  maskStyleClass="px-4 z-15"
+  [style]="{ width: '30rem', maxWidth: '100%' }"
   (onHide)="onCloseDialog()"
 >
   <form
-    class="grid gap-4"
+    class="grid grid-cols-12 gap-6"
     (ngSubmit)="registerOrEdit()"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
     [formGroup]="sequentialTurnForm"
   >
-    <div class="grid col-12 gap-2">
+    <div class="grid grid-cols-12 col-span-12 gap-2">
       <app-text-input
         label="شناسه"
         placeholder="شناسه"
-        class="col-12"
+        class="col-span-12"
         [control]="sequentialTurnId"
         validationField="id"
         [disabled]="true"
@@ -121,7 +123,7 @@
       <app-text-input
         label="عنوان"
         placeholder="عنوان"
-        class="col-12"
+        class="col-span-12"
         [control]="sequentialTurnTitle"
         validationField="title"
         addonWidth="8rem"
@@ -130,22 +132,21 @@
       <app-text-input
         label="کلمه کلیدی"
         placeholder="کلمه کلیدی"
-        class="col-12"
+        class="col-span-12"
         [control]="sequentialTurnKeyword"
         validationField="keyword"
         addonWidth="8rem"
       />
     </div>
-    <app-binary-radio-input
-      class="px-3"
+    <app-toggle-switch-input
+      class="col-span-12 flex px-2"
       label="وضعیت"
-      radioName="status-option"
-      [disabled]="!isFormEditable()"
       [control]="sequentialTurnStatus"
+      [readonly]="!isFormEditable()"
     />
 
-    <div class="w-full flex justify-content-end">
-      <p-button
+    <div class="col-span-12 flex justify-end">
+      <app-button
         (click)="registerOrEdit()"
         label="ثبت و ویرایش اطلاعات"
         [disabled]="sequentialTurnForm.invalid || loading"

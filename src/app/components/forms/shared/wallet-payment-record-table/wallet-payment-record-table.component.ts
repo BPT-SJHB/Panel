@@ -1,5 +1,5 @@
 import { Component, inject, Input, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { TableModule } from 'primeng/table';
 
 import { BaseLoading } from '../component-base/base-loading';
@@ -9,11 +9,12 @@ import { checkAndToastError } from 'app/utils/api-utils';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { Wallet } from 'app/services/wallet-management/model/wallet.model';
 import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
+import { TableConfig } from 'app/constants/ui/table.ui';
 
 @Component({
   selector: 'app-payment-record-table',
   standalone: true,
-  imports: [CommonModule, TableModule],
+  imports: [TableModule],
   templateUrl: './wallet-payment-record-table.component.html',
   styleUrl: './wallet-payment-record-table.component.scss',
 })
@@ -30,6 +31,7 @@ export class WalletPaymentRecordTableComponent
 
   // 📄 List of payment records
   readonly paymentHistory = signal<WalletPaymentHistory[]>([]);
+  readonly tableUi = TableConfig;
 
   // 📊 Table column definitions
   readonly columns: ReadonlyArray<{ label: string; key: keyof WalletPaymentHistory }> = [
