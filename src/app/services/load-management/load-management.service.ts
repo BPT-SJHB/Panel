@@ -5,6 +5,16 @@ import { ApiResponse } from 'app/data/model/api-Response.model';
 import { LoadForTransportCompanies } from './model/load-info-for-transport-companies.model';
 import { API_ROUTES } from 'app/constants/api';
 import { mockLoadForTransportCompanies } from './mock/load-info-for-transport-companies.mock';
+import { LoadStatus } from './model/load-status.model';
+import { mockLoadStatuses } from './mock/load-status.mock';
+import { LoadInfo } from './model/load-info.model';
+import { mockLoadInfo } from './mock/load-info.mock';
+import { TransportTariffParam } from './model/transport-tariff-param.model';
+import { mockTransportTariffParams } from './mock/transport-tariff-param.mock';
+import { LoadRegister } from './model/load-register.model';
+import { LoadEdit } from './model/load-edit.model';
+import { ShortResponse } from 'app/data/model/short-response.model';
+import { mockShortResponse } from 'app/data/mock/short-response.mock';
 
 @Injectable({
   providedIn: 'root',
