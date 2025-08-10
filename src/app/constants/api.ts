@@ -62,6 +62,7 @@ export const API_ROUTES = {
     TransportCompanies: {
       GetTransportCompanies: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetTransportCompanies`,
       GetTransportCompany: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetTransportCompany`,
+      GetTransportCompanyBySoftwareUser: `${environment.apiUrl}:${transportationAPIPort}/api/GetTransportCompanyfromSoftwareUser`,
       EditTransportCompany: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}EditTransportCompany`,
       ActivateTransportCompanySmsService: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}ActivateTransportCompanySMSOwner`,
       ResetTransportCompanyPassword: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}ResetTransportCompanyUserPassword`,
