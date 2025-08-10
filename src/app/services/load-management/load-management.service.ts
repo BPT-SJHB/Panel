@@ -100,4 +100,26 @@ export class LoadManagementService {
     >(apiUrl, bodyValue, mockLoadStatuses);
     //#endregion
   }
+
+  public async GetLoadInfo(loadId: number): Promise<ApiResponse<LoadInfo>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.LoadCapacitorAPI.GetLoad;
+    const loadInfo: LoadInfo = {
+      LoadId: loadId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LoadId: loadInfo.LoadId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoadInfo
+    >(apiUrl, bodyValue, mockLoadInfo);
+    //#endregion
+  }
 }
