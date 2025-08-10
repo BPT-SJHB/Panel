@@ -39,7 +39,7 @@ export class TableComponent<T extends object> {
 
   @Input() enableCaptionButton = false;
   @Input() captionButtonLabel = 'جدید';
-  @Output() onClickCaptionButton = new EventEmitter<void>();
+  @Output() clickCaptionButton = new EventEmitter<void>();
 
   readonly ColumnType = TableColumnType;
   readonly defaultButtonSeverity: ButtonSeverity = 'green';
