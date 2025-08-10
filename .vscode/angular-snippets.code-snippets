@@ -78,4 +78,8 @@
     "prefix": "apiWalletAndTrafficRoute",
     "body": "${apiRouteName}: `${environment.apiUrl}:\\${walletAndTrafficPort}/api/${realNameFromAPI}`,$0"
   },
+  "add load capacitor api routes": {
+    "prefix": "apiLoadCapacitorRoute",
+    "body": "${apiRouteName}: `${environment.apiUrl}:\\${LoadCapacitorPort}/api/${realNameFromAPI}`,$0"
+  },
 }
