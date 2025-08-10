@@ -155,7 +155,8 @@ export class TransportCompaniesManagementService {
   }
 
   public async ChangeTransportCompanyStatus(
-    transportCompanyId: number
+    transportCompanyId: number,
+    status: boolean
   ): Promise<ApiResponse<ShortResponse>> {
     this.userAuth.isLoggedIn();
 
@@ -165,10 +166,12 @@ export class TransportCompaniesManagementService {
         .TransportCompanyChangeStatus;
     const transportCompanyInfo: TransportCompany = {
       TCId: transportCompanyId,
+      Active: status,
     };
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
       TransportCompanyId: transportCompanyInfo.TCId,
+      Active: transportCompanyInfo.Active,
     };
     //#endregion
 
