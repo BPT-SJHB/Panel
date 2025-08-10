@@ -1,0 +1,32 @@
+export interface LoadInfo {
+  LoadId: number;
+  AnnounceDate?: string;
+  AnnounceTime?: string;
+  TransportCompanyId?: number;
+  TransportCompanyTitle?: string;
+  GoodId?: number;
+  GoodTitle?: string;
+  AnnouncementGroupId?: number;
+  AnnouncementGroupTitle?: string;
+  AnnouncementSubGroupId?: number;
+  AnnouncementSubGroupTitle?: string;
+  SourceCityId?: number;
+  SourceCityTitle?: string;
+  TargetCityId?: number;
+  TargetCityTitle?: string;
+  LoadingPlaceId?: number;
+  LoadingPlaceTitle?: string;
+  DischargingPlaceId?: number;
+  DischargingPlaceTitle?: string;
+  TotalNumber?: number;
+  Tonaj?: number;
+  Tariff?: string;
+  Recipient?: string;
+  Address?: string;
+  Description?: string;
+  LoadStatusId?: number;
+  LoadStatusTitle?: string;
+  RegisteringUserName?: string;
+  TPTParams?: string;
+  TPTParamsJoint?: string;
+}
