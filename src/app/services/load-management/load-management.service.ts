@@ -82,4 +82,22 @@ export class LoadManagementService {
     >(apiUrl, bodyValue, mockLoadForTransportCompanies);
     //#endregion
   }
+
+  public async GetLoadStatuses(): Promise<ApiResponse<LoadStatus[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.LoadCapacitorAPI.GetLoadStatus;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoadStatus[]
+    >(apiUrl, bodyValue, mockLoadStatuses);
+    //#endregion
+  }
 }
