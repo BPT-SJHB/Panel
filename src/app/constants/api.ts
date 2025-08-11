@@ -3,6 +3,7 @@ const softwareUserAPIPort = 81;
 const transportationAPIPort = 82;
 const walletAndTrafficPort = 83;
 const LoadCapacitorPort = 84;
+const LoadAllocationPort = 85;
 const apiFixURLPart = '/api/';
 
 export const API_ROUTES = {
@@ -198,5 +199,8 @@ export const API_ROUTES = {
     CancelLoad: `${environment.apiUrl}:${LoadCapacitorPort}/api/LoadCancelling`,
     FreeLineLoad: `${environment.apiUrl}:${LoadCapacitorPort}/api/LoadFreeLining`,
     SedimentLoad: `${environment.apiUrl}:${LoadCapacitorPort}/api/LoadSedimenting`,
+  },
+  LoadAllocationAPI: {
+    RegistrationForTransportCompanies: `${environment.apiUrl}:${LoadAllocationPort}/api/LoadAllocationRegisteringforTransportCompany`,
   },
 };
