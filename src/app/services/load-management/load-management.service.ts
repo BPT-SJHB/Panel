@@ -287,4 +287,8 @@ export class LoadManagementService {
   }
 
   //#endregion
+
+  //#region LoadAllocation methods
+  //#endregion
+
 }
