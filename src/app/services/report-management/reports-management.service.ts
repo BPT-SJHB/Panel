@@ -13,4 +13,28 @@ import { ApiResponse } from 'app/data/model/api-Response.model';
 export class ReportsManagementService {
   private userAuth = inject(UserAuthService);
   private apiCommunicator = inject(APICommunicationManagementService);
+
+  public async GetLoadPermissions(
+    loadId: number
+  ): Promise<ApiResponse<LoadPermission[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.Reports.Load.GetLoadPermissions;
+    const loadInfo: LoadInfo = {
+      LoadId: loadId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LoadId: loadInfo.LoadId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoadPermission[]
+    >(apiUrl, bodyValue, mockLoadPermissions);
+    //#endregion
+  }
 }
