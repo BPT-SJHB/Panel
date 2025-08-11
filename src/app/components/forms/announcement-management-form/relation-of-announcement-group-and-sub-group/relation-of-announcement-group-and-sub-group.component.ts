@@ -7,10 +7,10 @@ import {
 } from '@angular/forms';
 import { SearchAutoCompleteComponent } from 'app/components/shared/inputs/search-auto-complete/search-auto-complete.component';
 import { TableConfig } from 'app/constants/ui/table.ui';
-import { AnnouncementGroupSubgroupManagementService } from 'app/services/announcement_group_subgroup_management/announcement-group-subgroup-management.service';
-import { AnnouncementGroup } from 'app/services/announcement_group_subgroup_management/model/announcement-group.model';
-import { AnnouncementSubGroup } from 'app/services/announcement_group_subgroup_management/model/announcement-subgroup.model';
-import { RelationOfAnnouncementGroupAndSubGroup } from 'app/services/announcement_group_subgroup_management/model/relation-of-announcement-group-subgroup.model';
+import { AnnouncementGroupSubgroupManagementService } from 'app/services/announcement-group-subgroup-management/announcement-group-subgroup-management.service';
+import { AnnouncementGroup } from 'app/services/announcement-group-subgroup-management/model/announcement-group.model';
+import { AnnouncementSubGroup } from 'app/services/announcement-group-subgroup-management/model/announcement-subgroup.model';
+import { RelationOfAnnouncementGroupAndSubGroup } from 'app/services/announcement-group-subgroup-management/model/relation-of-announcement-group-subgroup.model';
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
 import { ToastService } from 'app/services/toast-service/toast.service';
 import { checkAndToastError } from 'app/utils/api-utils';
