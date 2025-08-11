@@ -82,4 +82,12 @@
     "prefix": "apiLoadCapacitorRoute",
     "body": "${apiRouteName}: `${environment.apiUrl}:\\${LoadCapacitorPort}/api/${realNameFromAPI}`,$0"
   },
+  "add load allocation api routes": {
+    "prefix": "apiLoadAllocationRoute",
+    "body": "${apiRouteName}: `${environment.apiUrl}:\\${LoadAllocationPort}/api/${realNameFromAPI}`,$0"
+  },
+  "add reports api routes": {
+    "prefix": "apiReportsRoute",
+    "body": "${apiRouteName}: `${environment.apiUrl}:\\${ReportsPort}/api/${realNameFromAPI}`,$0"
+  },
 }
