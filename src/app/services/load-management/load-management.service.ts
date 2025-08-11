@@ -25,6 +25,8 @@ export class LoadManagementService {
   private userAuth = inject(UserAuthService);
   private apiCommunicator = inject(APICommunicationManagementService);
 
+  //#region Load methods
+
   public async GetLoadsForTransportCompanies(
     transportCompanyId: number,
     announcementGroupId?: number,
@@ -283,4 +285,6 @@ export class LoadManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  //#endregion
 }
