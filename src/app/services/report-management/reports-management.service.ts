@@ -8,8 +8,7 @@ import { mockLoadPermissions } from './mock/load/load-permission.mock';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ReportsManagementService {
-  
 }
