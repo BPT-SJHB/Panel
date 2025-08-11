@@ -4,6 +4,7 @@ const transportationAPIPort = 82;
 const walletAndTrafficPort = 83;
 const LoadCapacitorPort = 84;
 const LoadAllocationPort = 85;
+const ReportsPort = 86;
 const apiFixURLPart = '/api/';
 
 export const API_ROUTES = {
@@ -202,5 +203,9 @@ export const API_ROUTES = {
   },
   LoadAllocationAPI: {
     RegistrationForTransportCompanies: `${environment.apiUrl}:${LoadAllocationPort}/api/LoadAllocationRegisteringforTransportCompany`,
+  Reports: {
+    Load: {
+      GetLoadPermissions: `${environment.apiUrl}:${ReportsPort}/api/GetLoadPermissions`,
+    },
   },
 };
