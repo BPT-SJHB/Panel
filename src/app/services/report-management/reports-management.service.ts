@@ -11,4 +11,6 @@ import { ApiResponse } from 'app/data/model/api-Response.model';
   providedIn: 'root',
 })
 export class ReportsManagementService {
+  private userAuth = inject(UserAuthService);
+  private apiCommunicator = inject(APICommunicationManagementService);
 }
