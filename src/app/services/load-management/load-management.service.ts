@@ -15,6 +15,8 @@ import { LoadRegister } from './model/load-register.model';
 import { LoadEdit } from './model/load-edit.model';
 import { ShortResponse } from 'app/data/model/short-response.model';
 import { mockShortResponse } from 'app/data/mock/short-response.mock';
+import { TruckInfo } from '../driver-truck-management/model/truck-info.model';
+import { TruckDriverInfo } from '../driver-truck-management/model/truck-driver-info.model';
 
 @Injectable({
   providedIn: 'root',
