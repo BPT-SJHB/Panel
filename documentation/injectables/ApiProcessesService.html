@@ -201,7 +201,7 @@
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>convertApiGroupsToPageGroups(apiGroups: <a href="../interfaces/ApiGroupProcess.html" target="_self">ApiGroupProcess[]</a>)</code>
+                    <code>convertApiGroupsToPageGroups(apiGroups: ApiGroupProcess[])</code>
                 </td>
             </tr>
 
@@ -232,7 +232,7 @@
                                         <tr>
                                                 <td>apiGroups</td>
                                             <td>
-                                                            <code><a href="../interfaces/ApiGroupProcess.html" target="_self" >ApiGroupProcess[]</a></code>
+                                                        <code>ApiGroupProcess[]</code>
                                             </td>
 
                                             <td>
@@ -245,7 +245,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../interfaces/PageGroup.html" target="_self" >PageGroup[]</a></code>
+                            <b>Returns : </b>    <code>PageGroup[]</code>
 
                         </div>
                             <div class="io-description">
@@ -436,14 +436,14 @@ export class ApiProcessesService {
   ): PageGroup[] {
     return apiGroups.map((group) &#x3D;&gt; ({
       id: group.PGId,
-      title: group.PGTitle!.trim(),
-      icon: group.PGIconName!.trim(),
+      title: group.PGTitle!,
+      icon: group.PGIconName!,
       processes: group.WebProcesses!.map((proc) &#x3D;&gt; ({
         id: proc.PId,
-        title: proc.PTitle!.trim(),
-        name: proc.PName!.trim(),
-        description: proc.Description!.trim(),
-        icon: proc.PIconName!.trim(),
+        title: proc.PTitle!,
+        name: proc.PName!,
+        description: proc.Description!,
+        icon: proc.PIconName!,
       })),
     }));
   }

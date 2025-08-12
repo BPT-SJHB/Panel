@@ -1663,11 +1663,11 @@ export class TurnsTruckInfoBaseFormComponent {
         <pre class="line-numbers"><code class="language-html">&lt;!-- 🔍 Search Form: Smart Card --&gt;
 &lt;form
   [formGroup]&#x3D;&quot;searchTruckInfoForm&quot;
-  class&#x3D;&quot;grid&quot;
+  class&#x3D;&quot;grid grid-cols-12 gap-4&quot;
   [class.pointer-events-none]&#x3D;&quot;loading&quot;
   [class.opacity-60]&#x3D;&quot;loading&quot;
 &gt;
-  &lt;div class&#x3D;&quot;col-12&quot;&gt;
+  &lt;div class&#x3D;&quot;col-span-12&quot;&gt;
     &lt;app-search-input
       class&#x3D;&quot;w-full&quot;
       placeholder&#x3D;&quot;هوشمند ناوگان را وارد کنید.&quot;
@@ -1685,17 +1685,17 @@ export class TurnsTruckInfoBaseFormComponent {
 &lt;/form&gt;
 
 &lt;!-- 🚚 Truck Info Form --&gt;
-&lt;p-card [style]&#x3D;&quot;{ &#x27;box-shadow&#x27;: &#x27;0 0 10px rgba(0, 0, 0, 0.3)&#x27; }&quot;&gt;
+&lt;p-card [style]&#x3D;&quot;{ &#x27;box-shadow&#x27;: &#x27;0 0 10px rgba(0, 0, 0, 0.3)&#x27; }&quot; class&#x3D;&quot;mb-6&quot;&gt;
   &lt;form
     [formGroup]&#x3D;&quot;truckInfoForm&quot;
     [class.pointer-events-none]&#x3D;&quot;loading&quot;
     [class.opacity-60]&#x3D;&quot;loading&quot;
-    class&#x3D;&quot;grid gap-2&quot;
+    class&#x3D;&quot;grid grid-cols-12 gap-4&quot;
   &gt;
     &lt;!-- 🧱 Truck Section --&gt;
-    &lt;div class&#x3D;&quot;grid col-12&quot;&gt;
-      &lt;span class&#x3D;&quot;w-full text-xl font-bold w-full px-2&quot;&gt;ناوگان&lt;/span&gt;
-      &lt;div class&#x3D;&quot;col-12 md:col-6 py-1 md:py-0&quot;&gt;
+    &lt;div class&#x3D;&quot;grid grid-cols-12 gap-4 col-span-12&quot;&gt;
+      &lt;span class&#x3D;&quot;w-full text-xl font-bold px-2 col-span-12&quot;&gt;ناوگان&lt;/span&gt;
+      &lt;div class&#x3D;&quot;col-span-12 md:col-span-6 py-1 md:py-0&quot;&gt;
         &lt;app-text-input
           label&#x3D;&quot;کد ناوگان&quot;
           placeholder&#x3D;&quot;کد ناوگان&quot;
@@ -1707,7 +1707,7 @@ export class TurnsTruckInfoBaseFormComponent {
         /&gt;
       &lt;/div&gt;
 
-      &lt;div class&#x3D;&quot;col-12 md:col-6 py-1 md:py-0&quot;&gt;
+      &lt;div class&#x3D;&quot;col-span-12 md:col-span-6 py-1 md:py-0&quot;&gt;
         &lt;app-text-input
           label&#x3D;&quot;شماره پلاک&quot;
           placeholder&#x3D;&quot;شماره پلاک&quot;
@@ -1721,9 +1721,9 @@ export class TurnsTruckInfoBaseFormComponent {
     &lt;/div&gt;
 
     &lt;!-- 👤 Driver Section --&gt;
-    &lt;div class&#x3D;&quot;grid col-12&quot;&gt;
-      &lt;span class&#x3D;&quot;w-full text-xl font-bold w-full px-2&quot;&gt;راننده&lt;/span&gt;
-      &lt;div class&#x3D;&quot;col-12 md:col-6 lg:col-4 py-1 md:py-0&quot;&gt;
+    &lt;div class&#x3D;&quot;grid grid-cols-12 gap-4 col-span-12&quot;&gt;
+      &lt;span class&#x3D;&quot;col-span-12 text-xl font-bold px-2&quot;&gt;راننده&lt;/span&gt;
+      &lt;div class&#x3D;&quot;col-span-12 md:col-span-6 lg:col-span-4 py-1 md:py-0&quot;&gt;
         &lt;app-text-input
           label&#x3D;&quot;کد راننده&quot;
           placeholder&#x3D;&quot;کد راننده&quot;
@@ -1735,7 +1735,7 @@ export class TurnsTruckInfoBaseFormComponent {
         /&gt;
       &lt;/div&gt;
 
-      &lt;div class&#x3D;&quot;col-12 md:col-6 lg:col-4 py-1 md:py-0&quot;&gt;
+      &lt;div class&#x3D;&quot;col-span-12 md:col-span-6 lg:col-span-4 py-1 md:py-0&quot;&gt;
         &lt;app-text-input
           label&#x3D;&quot;کد ملی راننده&quot;
           placeholder&#x3D;&quot;کد ملی راننده&quot;
@@ -1747,7 +1747,7 @@ export class TurnsTruckInfoBaseFormComponent {
         /&gt;
       &lt;/div&gt;
 
-      &lt;div class&#x3D;&quot;col-12 md:col-6 lg:col-4 py-1 lg:py-0&quot;&gt;
+      &lt;div class&#x3D;&quot;col-span-12 md:col-span-6 lg:col-span-4 py-1 lg:py-0&quot;&gt;
         &lt;app-text-input
           label&#x3D;&quot;نام راننده&quot;
           placeholder&#x3D;&quot;نام و نام خانوادگی&quot;
@@ -1761,9 +1761,9 @@ export class TurnsTruckInfoBaseFormComponent {
     &lt;/div&gt;
 
     &lt;!-- 🔁 Turn Status Section --&gt;
-    &lt;div class&#x3D;&quot;grid col-12&quot;&gt;
-      &lt;span class&#x3D;&quot;w-full text-xl font-bold w-full px-2&quot;&gt;آخرین صف نوبت&lt;/span&gt;
-      &lt;div class&#x3D;&quot;col-12 md:col-6 lg:col-4 xl:col-3 py-1 xl:py-0&quot;&gt;
+    &lt;div class&#x3D;&quot;grid grid-cols-12 gap-4 col-span-12&quot;&gt;
+      &lt;span class&#x3D;&quot;col-span-12 text-xl font-bold px-2&quot;&gt;آخرین صف نوبت&lt;/span&gt;
+      &lt;div class&#x3D;&quot;col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0&quot;&gt;
         &lt;app-text-input
           label&#x3D;&quot;تسلسل نوبت&quot;
           placeholder&#x3D;&quot;تسلسل نوبت&quot;
@@ -1774,7 +1774,7 @@ export class TurnsTruckInfoBaseFormComponent {
         /&gt;
       &lt;/div&gt;
 
-      &lt;div class&#x3D;&quot;col-12 md:col-6 lg:col-4 xl:col-3 py-1 xl:py-0&quot;&gt;
+      &lt;div class&#x3D;&quot;col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0&quot;&gt;
         &lt;app-text-input
           label&#x3D;&quot;صف نوبت&quot;
           placeholder&#x3D;&quot;صف نوبت&quot;
@@ -1785,7 +1785,7 @@ export class TurnsTruckInfoBaseFormComponent {
         /&gt;
       &lt;/div&gt;
 
-      &lt;div class&#x3D;&quot;col-12 md:col-6 lg:col-4 xl:col-3 py-1 xl:py-0&quot;&gt;
+      &lt;div class&#x3D;&quot;col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0&quot;&gt;
         &lt;app-text-input
           label&#x3D;&quot;وضعیت&quot;
           placeholder&#x3D;&quot;وضعیت&quot;
@@ -1796,7 +1796,7 @@ export class TurnsTruckInfoBaseFormComponent {
         /&gt;
       &lt;/div&gt;
 
-      &lt;div class&#x3D;&quot;col-12 md:col-6 lg:col-4 xl:col-3 py-1 xl:py-0&quot;&gt;
+      &lt;div class&#x3D;&quot;col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0&quot;&gt;
         &lt;app-text-input
           label&#x3D;&quot;شرح&quot;
           placeholder&#x3D;&quot;شرح&quot;
@@ -1809,10 +1809,10 @@ export class TurnsTruckInfoBaseFormComponent {
     &lt;/div&gt;
 
     &lt;!-- 💳 Wallet Section --&gt;
-    &lt;div class&#x3D;&quot;grid col-12&quot;&gt;
-      &lt;span class&#x3D;&quot;text-xl font-bold w-full px-2&quot;&gt;کیف پول&lt;/span&gt;
+    &lt;div class&#x3D;&quot;grid grid-cols-12 gap-4 col-span-12&quot;&gt;
+      &lt;span class&#x3D;&quot;text-xl font-bold col-span-12 px-2&quot;&gt;کیف پول&lt;/span&gt;
 
-      &lt;div class&#x3D;&quot;col-12 md:col-6 py-1 md:py-0&quot;&gt;
+      &lt;div class&#x3D;&quot;col-span-12 md:col-span-6 py-1 md:py-0&quot;&gt;
         &lt;app-text-input
           label&#x3D;&quot; کد کیف پول&quot;
           placeholder&#x3D;&quot;کد کیف پول&quot;
@@ -1823,7 +1823,7 @@ export class TurnsTruckInfoBaseFormComponent {
         /&gt;
       &lt;/div&gt;
 
-      &lt;div class&#x3D;&quot;col-12 md:col-6 py-1 md:py-0&quot;&gt;
+      &lt;div class&#x3D;&quot;col-span-12 md:col-span-6 py-1 md:py-0&quot;&gt;
         &lt;app-text-input
           label&#x3D;&quot;موجودی&quot;
           placeholder&#x3D;&quot;موجودی&quot;
@@ -1839,7 +1839,7 @@ export class TurnsTruckInfoBaseFormComponent {
   &lt;/form&gt;
 &lt;/p-card&gt;
 &lt;app-search-auto-complete
-  class&#x3D;&quot;col-12 sm:col-6&quot;
+  class&#x3D;&quot;col-span-12 sm:col-span-6&quot;
   placeholder&#x3D;&quot;صف نوبت&quot;
   label&#x3D;&quot;صف نوبت&quot;
   [control]&#x3D;&quot;sequentialTurnTitle&quot;
@@ -1883,8 +1883,8 @@ export class TurnsTruckInfoBaseFormComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><!-- 🔍 Search Form: Smart Card --><form  [formGroup]="searchTruckInfoForm"  class="grid"  [class.pointer-events-none]="loading"  [class.opacity-60]="loading">  <div class="col-12">    <app-search-input      class="w-full"      placeholder="هوشمند ناوگان را وارد کنید."      searchButtonLabel="استعلام"      validationField="smartCard"      [control]="smart"      [autoTriggerSearch]="false"      [minSearchLength]="2"      [disableSearchButton]="loading || smart.invalid"      [onSearchQuery]="searchTruckDriverInfo"      label="هوشمند"      [addonWidth]="addonWidth"    />  </div></form><!-- 🚚 Truck Info Form --><p-card [style]="{ \'box-shadow\': \'0 0 10px rgba(0, 0, 0, 0.3)\' }">  <form    [formGroup]="truckInfoForm"    [class.pointer-events-none]="loading"    [class.opacity-60]="loading"    class="grid gap-2"  >    <!-- 🧱 Truck Section -->    <div class="grid col-12">      <span class="w-full text-xl font-bold w-full px-2">ناوگان</span>      <div class="col-12 md:col-span-6 py-1 md:py-0">        <app-text-input          label="کد ناوگان"          placeholder="کد ناوگان"          [control]="truckId"          validationField="truckId"          [readOnly]="true"          [disabled]="true"          [addonWidth]="addonWidth"        />      </div>      <div class="col-12 md:col-span-6 py-1 md:py-0">        <app-text-input          label="شماره پلاک"          placeholder="شماره پلاک"          [control]="licensePlate"          validationField="licensePlateNumber"          [readOnly]="true"          [disabled]="true"          [addonWidth]="addonWidth"        />      </div>    </div>    <!-- 👤 Driver Section -->    <div class="grid col-12">      <span class="w-full text-xl font-bold w-full px-2">راننده</span>      <div class="col-12 md:col-span-6 lg:col-span-4 py-1 md:py-0">        <app-text-input          label="کد راننده"          placeholder="کد راننده"          [control]="driverId"          validationField="driverId"          [addonWidth]="addonWidth"          [readOnly]="true"          [disabled]="true"        />      </div>      <div class="col-12 md:col-span-6 lg:col-span-4 py-1 md:py-0">        <app-text-input          label="کد ملی راننده"          placeholder="کد ملی راننده"          [control]="driverNationalId"          validationField="nationalId"          [addonWidth]="addonWidth"          [readOnly]="true"          [disabled]="true"        />      </div>      <div class="col-12 md:col-span-6 lg:col-span-4 py-1 lg:py-0">        <app-text-input          label="نام راننده"          placeholder="نام و نام خانوادگی"          [control]="driverName"          validationField="turnId"          [addonWidth]="addonWidth"          [readOnly]="true"          [disabled]="true"        />      </div>    </div>    <!-- 🔁 Turn Status Section -->    <div class="grid col-12">      <span class="w-full text-xl font-bold w-full px-2">آخرین صف نوبت</span>      <div class="col-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0">        <app-text-input          label="تسلسل نوبت"          placeholder="تسلسل نوبت"          [control]="otaghdarTurnNumber"          [addonWidth]="addonWidth"          [readOnly]="true"          [disabled]="true"        />      </div>      <div class="col-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0">        <app-text-input          label="صف نوبت"          placeholder="صف نوبت"          [control]="sequentialTurn"          [addonWidth]="addonWidth"          [readOnly]="true"          [disabled]="true"        />      </div>      <div class="col-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0">        <app-text-input          label="وضعیت"          placeholder="وضعیت"          [control]="turnStats"          [addonWidth]="addonWidth"          [readOnly]="true"          [disabled]="true"        />      </div>      <div class="col-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0">        <app-text-input          label="شرح"          placeholder="شرح"          [control]="turnDescription"          [addonWidth]="addonWidth"          [readOnly]="true"          [disabled]="true"        />      </div>    </div>    <!-- 💳 Wallet Section -->    <div class="grid col-12">      <span class="text-xl font-bold w-full px-2">کیف پول</span>      <div class="col-12 md:col-span-6 py-1 md:py-0">        <app-text-input          label=" کد کیف پول"          placeholder="کد کیف پول"          [control]="walletCode"          [readOnly]="true"          [addonWidth]="addonWidth"          [disabled]="true"        />      </div>      <div class="col-12 md:col-span-6 py-1 md:py-0">        <app-text-input          label="موجودی"          placeholder="موجودی"          [control]="walletBalance"          [readOnly]="true"          [addonWidth]="addonWidth"          [disabled]="true"        />      </div>    </div>    <!-- 🔍 Autocomplete: Sequential Turn -->  </form></p-card><app-search-auto-complete  class="col-12 sm:col-6"  placeholder="صف نوبت"  label="صف نوبت"  [control]="sequentialTurnTitle"  optionLabel="SeqTurnTitle"  optionValue="SeqTurnTitle"  (selectSuggestion)="onSelectSequentialTurn($event)"  (valueChange)="onAutoCompleteChange(sequentialTurnId)"  [lazySearch]="searchSequentialTurnWithLoaderType"  [showIconOptionSelected]="sequentialTurnId.valid"  addonWidth="6rem"  [minLength]="0"  cachingMode="Focus"  [disabled]="loading || loaderTypeId.invalid"/></div>'
-    var COMPONENTS = [{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarMenuComponent', 'selector': 'app-sidebar-menu'},{'name': 'SubMenuComponent', 'selector': 'app-sub-menu'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TabBarComponent', 'selector': 'app-tab-bar'},{'name': 'TabViewComponent', 'selector': 'app-tab-view'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'}];
+        var COMPONENT_TEMPLATE = '<div><!-- 🔍 Search Form: Smart Card --><form  [formGroup]="searchTruckInfoForm"  class="grid grid-cols-12 gap-4"  [class.pointer-events-none]="loading"  [class.opacity-60]="loading">  <div class="col-span-12">    <app-search-input      class="w-full"      placeholder="هوشمند ناوگان را وارد کنید."      searchButtonLabel="استعلام"      validationField="smartCard"      [control]="smart"      [autoTriggerSearch]="false"      [minSearchLength]="2"      [disableSearchButton]="loading || smart.invalid"      [onSearchQuery]="searchTruckDriverInfo"      label="هوشمند"      [addonWidth]="addonWidth"    />  </div></form><!-- 🚚 Truck Info Form --><p-card [style]="{ \'box-shadow\': \'0 0 10px rgba(0, 0, 0, 0.3)\' }" class="mb-6">  <form    [formGroup]="truckInfoForm"    [class.pointer-events-none]="loading"    [class.opacity-60]="loading"    class="grid grid-cols-12 gap-4"  >    <!-- 🧱 Truck Section -->    <div class="grid grid-cols-12 gap-4 col-span-12">      <span class="w-full text-xl font-bold px-2 col-span-12">ناوگان</span>      <div class="col-span-12 md:col-span-6 py-1 md:py-0">        <app-text-input          label="کد ناوگان"          placeholder="کد ناوگان"          [control]="truckId"          validationField="truckId"          [readOnly]="true"          [disabled]="true"          [addonWidth]="addonWidth"        />      </div>      <div class="col-span-12 md:col-span-6 py-1 md:py-0">        <app-text-input          label="شماره پلاک"          placeholder="شماره پلاک"          [control]="licensePlate"          validationField="licensePlateNumber"          [readOnly]="true"          [disabled]="true"          [addonWidth]="addonWidth"        />      </div>    </div>    <!-- 👤 Driver Section -->    <div class="grid grid-cols-12 gap-4 col-span-12">      <span class="col-span-12 text-xl font-bold px-2">راننده</span>      <div class="col-span-12 md:col-span-6 lg:col-span-4 py-1 md:py-0">        <app-text-input          label="کد راننده"          placeholder="کد راننده"          [control]="driverId"          validationField="driverId"          [addonWidth]="addonWidth"          [readOnly]="true"          [disabled]="true"        />      </div>      <div class="col-span-12 md:col-span-6 lg:col-span-4 py-1 md:py-0">        <app-text-input          label="کد ملی راننده"          placeholder="کد ملی راننده"          [control]="driverNationalId"          validationField="nationalId"          [addonWidth]="addonWidth"          [readOnly]="true"          [disabled]="true"        />      </div>      <div class="col-span-12 md:col-span-6 lg:col-span-4 py-1 lg:py-0">        <app-text-input          label="نام راننده"          placeholder="نام و نام خانوادگی"          [control]="driverName"          validationField="turnId"          [addonWidth]="addonWidth"          [readOnly]="true"          [disabled]="true"        />      </div>    </div>    <!-- 🔁 Turn Status Section -->    <div class="grid grid-cols-12 gap-4 col-span-12">      <span class="col-span-12 text-xl font-bold px-2">آخرین صف نوبت</span>      <div class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0">        <app-text-input          label="تسلسل نوبت"          placeholder="تسلسل نوبت"          [control]="otaghdarTurnNumber"          [addonWidth]="addonWidth"          [readOnly]="true"          [disabled]="true"        />      </div>      <div class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0">        <app-text-input          label="صف نوبت"          placeholder="صف نوبت"          [control]="sequentialTurn"          [addonWidth]="addonWidth"          [readOnly]="true"          [disabled]="true"        />      </div>      <div class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0">        <app-text-input          label="وضعیت"          placeholder="وضعیت"          [control]="turnStats"          [addonWidth]="addonWidth"          [readOnly]="true"          [disabled]="true"        />      </div>      <div class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0">        <app-text-input          label="شرح"          placeholder="شرح"          [control]="turnDescription"          [addonWidth]="addonWidth"          [readOnly]="true"          [disabled]="true"        />      </div>    </div>    <!-- 💳 Wallet Section -->    <div class="grid grid-cols-12 gap-4 col-span-12">      <span class="text-xl font-bold col-span-12 px-2">کیف پول</span>      <div class="col-span-12 md:col-span-6 py-1 md:py-0">        <app-text-input          label=" کد کیف پول"          placeholder="کد کیف پول"          [control]="walletCode"          [readOnly]="true"          [addonWidth]="addonWidth"          [disabled]="true"        />      </div>      <div class="col-span-12 md:col-span-6 py-1 md:py-0">        <app-text-input          label="موجودی"          placeholder="موجودی"          [control]="walletBalance"          [readOnly]="true"          [addonWidth]="addonWidth"          [disabled]="true"        />      </div>    </div>    <!-- 🔍 Autocomplete: Sequential Turn -->  </form></p-card><app-search-auto-complete  class="col-span-12 sm:col-span-6"  placeholder="صف نوبت"  label="صف نوبت"  [control]="sequentialTurnTitle"  optionLabel="SeqTurnTitle"  optionValue="SeqTurnTitle"  (selectSuggestion)="onSelectSequentialTurn($event)"  (valueChange)="onAutoCompleteChange(sequentialTurnId)"  [lazySearch]="searchSequentialTurnWithLoaderType"  [showIconOptionSelected]="sequentialTurnId.valid"  addonWidth="6rem"  [minLength]="0"  cachingMode="Focus"  [disabled]="loading || loaderTypeId.invalid"/></div>'
+    var COMPONENTS = [{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DashboardContentManagerComponent', 'selector': 'app-dashboard-content-manager'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'ExitConfirmationDialogComponent', 'selector': 'app-exit-confirmation-dialog'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'IssuedTurnListFormComponent', 'selector': 'app-issued-turn-list-form'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'LogoComponent', 'selector': 'app-logo'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'MapSvgComponent', 'selector': 'app-map-svg'},{'name': 'MobileTabBarComponent', 'selector': 'app-mobile-tab-bar'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RegisterTurnFormComponent', 'selector': 'app-register-turn-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SearchProcessesComponent', 'selector': 'app-search-processes'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarPageGroupComponent', 'selector': 'app-sidebar-page-group'},{'name': 'SidebarWebProcesses', 'selector': 'app-sidebar-web-processes'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabManagerComponent', 'selector': 'app-tab-manager'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'ThemeManagementComponent', 'selector': 'app-theme-management'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'ToggleSwitchInputComponent', 'selector': 'app-toggle-switch-input'},{'name': 'TransportCompaniesFormComponent', 'selector': 'app-transport-companies-form'},{'name': 'TransportCompaniesWalletPaymentFormComponent', 'selector': 'app-transport-companies-wallet-payment-form'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TruckWalletPaymentFormComponent', 'selector': 'app-truck-wallet-payment-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserChargingFunctionFormComponent', 'selector': 'app-user-charging-function-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UserProfileComponent', 'selector': 'app-user-profile'},{'name': 'UserProfileFormComponent', 'selector': 'app-user-profile-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'},{'name': 'WalletPaymentFormComponent', 'selector': 'app-wallet-payment-form'},{'name': 'WalletPaymentRecordTableComponent', 'selector': 'app-payment-record-table'},{'name': 'WalletProfileComponent', 'selector': 'app-wallet-profile'},{'name': 'WalletTransactionsTableComponent', 'selector': 'app-wallet-transactions-table'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'TurnsTruckInfoBaseFormComponent'};
 </script>

@@ -351,15 +351,34 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { TabComponentKey } from &quot;app/constants/tab-component-registry&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ComponentRef, WritableSignal } from &#x27;@angular/core&#x27;;
+import {
+  TabComponentKey,
+  TabConfig,
+} from &#x27;app/constants/tab-component-registry&#x27;;
 
 export interface TabItem {
-    id:number,
-    title:string,
-    closable:boolean
-    component:TabComponentKey,  
-    active:boolean
-}</code></pre>
+  id: number;
+  title: string;
+  closable: boolean;
+  component: TabComponentKey;
+  active: boolean;
+}
+
+/** &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+ *  Interfaces
+ *  &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; */
+export interface DynamicTab {
+  id: string;
+  title: string;
+  icon: string;
+  closeable: boolean;
+  sharedSignal?: WritableSignal&lt;any&gt;;
+  cachedComponent: Map&lt;number, ComponentRef&lt;any&gt;&gt;;
+  selectedSubTab: number;
+  config: TabConfig;
+}
+</code></pre>
     </div>
 </div>
 

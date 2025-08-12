@@ -201,8 +201,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="43"
-                                    class="link-to-prism">src/app/services/api-communication-management/apicommunication-management.service.ts:43</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="44"
+                                    class="link-to-prism">src/app/services/api-communication-management/apicommunication-management.service.ts:44</a></div>
                         </td>
                     </tr>
 
@@ -291,8 +291,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="15"
-                                    class="link-to-prism">src/app/services/api-communication-management/apicommunication-management.service.ts:15</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="16"
+                                    class="link-to-prism">src/app/services/api-communication-management/apicommunication-management.service.ts:16</a></div>
                         </td>
                     </tr>
 
@@ -396,7 +396,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/services/api-communication-management/apicommunication-management.service.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/services/api-communication-management/apicommunication-management.service.ts:14</a></div>
                         </td>
                     </tr>
 
@@ -416,6 +416,7 @@ import { handleHttpError } from &#x27;app/utils/http-error-handler&#x27;;
 import { environment } from &#x27;environments/environment&#x27;;
 import { firstValueFrom } from &#x27;rxjs&#x27;;
 import { ShortResponse } from &#x27;app/data/model/short-response.model&#x27;;
+import { trimInDeep } from &#x27;app/utils/api-utils&#x27;;
 
 @Injectable({
   providedIn: &#x27;root&#x27;,
@@ -431,7 +432,7 @@ export class APICommunicationManagementService {
     if (!environment.production &amp;&amp; environment.disableApi) {
       return {
         success: true,
-        data: mockValue,
+        data: trimInDeep(mockValue),
       };
     }
 
@@ -445,7 +446,7 @@ export class APICommunicationManagementService {
           ? ({ Message: response } as ShortResponse as TExpect)
           : (response as TExpect);
 
-      return { success: true, data: mappedResponse };
+      return { success: true, data: trimInDeep(mappedResponse) };
     } catch (error: unknown) {
       return handleHttpError&lt;TExpect&gt;(error);
     }
@@ -456,7 +457,7 @@ export class APICommunicationManagementService {
     mockValue?: any
   ): Promise&lt;ApiResponse&lt;TExpect&gt;&gt; {
     if (!environment.production &amp;&amp; environment.disableApi) {
-      return { success: true, data: mockValue };
+      return { success: true, data: trimInDeep(mockValue) };
     }
 
     try {
@@ -464,7 +465,7 @@ export class APICommunicationManagementService {
 
       return {
         success: true,
-        data: response,
+        data: trimInDeep(response),
       };
     } catch (error: unknown) {
       return handleHttpError&lt;TExpect&gt;(error);

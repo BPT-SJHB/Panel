@@ -151,6 +151,7 @@
                 <td class="col-md-9">
                             <code>CardModule</code>
                             <code>ButtonModule</code>
+                                <code><a href="../components/ButtonComponent.html" target="_self" >ButtonComponent</a></code>
                 </td>
             </tr>
 
@@ -238,7 +239,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/components/shared/terminal-card/terminal-card.component.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/components/shared/terminal-card/terminal-card.component.ts:15</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -272,8 +273,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="16"
-                                    class="link-to-prism">src/app/components/shared/terminal-card/terminal-card.component.ts:16</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="17"
+                                    class="link-to-prism">src/app/components/shared/terminal-card/terminal-card.component.ts:17</a></div>
                         </td>
                     </tr>
 
@@ -300,10 +301,11 @@ import { APP_ROUTES } from &#x27;app/constants/routes&#x27;;
 import { LoadAnnouncementPlace } from &#x27;app/data/model/load-announcement-place.model&#x27;;
 import { ButtonModule } from &#x27;primeng/button&#x27;;
 import { CardModule } from &#x27;primeng/card&#x27;;
+import { ButtonComponent } from &quot;../button/button.component&quot;;
 
 @Component({
   selector: &#x27;app-terminal-card&#x27;,
-  imports: [CardModule, ButtonModule],
+  imports: [CardModule, ButtonModule, ButtonComponent],
   templateUrl: &#x27;./terminal-card.component.html&#x27;,
   styleUrl: &#x27;./terminal-card.component.scss&#x27;,
 })
@@ -319,29 +321,32 @@ export class TerminalCardComponent {
 
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">@if (terminal) {
-&lt;p-card styleClass&#x3D;&quot;w-full shadow-8 border-round-lg px-4 h-10rem&quot;&gt;
-  &lt;ng-template #header&gt;
-    &lt;div class&#x3D;&quot;text-md md:text-lg font-bold text-primary mt-3&quot;&gt;
-      {{ terminal.LAPTitle }}
+&lt;a [href]&#x3D;&quot;getLoginLink()&quot;&gt;
+  &lt;p-card
+    class&#x3D;&quot;flex justify-center items-center text-center&quot;
+    styleClass&#x3D;&quot;w-full rounded-3xl shadow-[0px_4px_8px_var(--p-surface-500)] h-full&quot;
+  &gt;
+    &lt;ng-template #header&gt;
+      &lt;div class&#x3D;&quot;text-md md:text-lg px-2 md:px-6 font-bold text-primary pt-4&quot;&gt;
+        {{ terminal.LAPTitle }}
+      &lt;/div&gt;
+    &lt;/ng-template&gt;
+
+    @if (terminal.Description.trim() !&#x3D; &#x27;&#x27;) {
+    &lt;div class&#x3D;&quot;mb-6 px-2 md:px-6&quot;&gt;
+      {{ terminal.Description }}
     &lt;/div&gt;
-  &lt;/ng-template&gt;
+    }
 
-  @if (terminal.Description.trim() !&#x3D; &#x27;&#x27;) {
-  &lt;div class&#x3D;&quot;mb-4 text-gray-700&quot;&gt;
-    {{ terminal.Description }}
-  &lt;/div&gt;
-  }
-
-  &lt;div class&#x3D;&quot;flex justify-content-center&quot;&gt;
-    &lt;a [href]&#x3D;&quot;getLoginLink()&quot;&gt;
-      &lt;p-button
-        label&#x3D;&quot;ورود به صفحه&quot;
-        styleClass&#x3D;&quot;w-9rem  md:w-full md:px-6 text-sm md:text-base&quot;
-      /&gt;
-    &lt;/a&gt;
-  &lt;/div&gt;
-&lt;/p-card&gt;
-}</code></pre>
+    &lt;div&gt;
+      &lt;img [src]&#x3D;&quot;terminal.ImageLink&quot; [alt]&#x3D;&quot;terminal.LAPTitle&quot; /&gt;
+    &lt;/div&gt;
+  &lt;/p-card&gt;
+&lt;/a&gt;
+}
+&lt;!-- Skeleton --&gt;
+@else{ }
+</code></pre>
     </div>
 
 
@@ -370,8 +375,8 @@ export class TerminalCardComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div>@if (terminal) {<p-card styleClass="w-full shadow-2xl rounded-lg px-6 h-10rem">  <ng-template #header>    <div class="text-md md:text-lg font-bold text-primary mt-3">      {{ terminal.LAPTitle }}    </div>  </ng-template>  @if (terminal.Description.trim() != \'\') {  <div class="mb-4 text-gray-700">    {{ terminal.Description }}  </div>  }  <div class="flex justify-content-center">    <a [href]="getLoginLink()">      <p-button        label="ورود به صفحه"        styleClass="w-9rem  md:w-full md:px-12 text-sm md:text-base"      />    </a>  </div></p-card>}</div>'
-    var COMPONENTS = [{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarMenuComponent', 'selector': 'app-sidebar-menu'},{'name': 'SubMenuComponent', 'selector': 'app-sub-menu'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TabBarComponent', 'selector': 'app-tab-bar'},{'name': 'TabViewComponent', 'selector': 'app-tab-view'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'}];
+        var COMPONENT_TEMPLATE = '<div>@if (terminal) {<a [href]="getLoginLink()">  <p-card    class="flex justify-center items-center text-center"    styleClass="w-full rounded-3xl shadow-[0px_4px_8px_var(--p-surface-500)] h-full"  >    <ng-template #header>      <div class="text-md md:text-lg px-2 md:px-6 font-bold text-primary pt-4">        {{ terminal.LAPTitle }}      </div>    </ng-template>    @if (terminal.Description.trim() != \'\') {    <div class="mb-6 px-2 md:px-6">      {{ terminal.Description }}    </div>    }    <div>      <img [src]="terminal.ImageLink" [alt]="terminal.LAPTitle" />    </div>  </p-card></a>}<!-- Skeleton -->@else{ }</div>'
+    var COMPONENTS = [{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DashboardContentManagerComponent', 'selector': 'app-dashboard-content-manager'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'ExitConfirmationDialogComponent', 'selector': 'app-exit-confirmation-dialog'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'IssuedTurnListFormComponent', 'selector': 'app-issued-turn-list-form'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'LogoComponent', 'selector': 'app-logo'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'MapSvgComponent', 'selector': 'app-map-svg'},{'name': 'MobileTabBarComponent', 'selector': 'app-mobile-tab-bar'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RegisterTurnFormComponent', 'selector': 'app-register-turn-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SearchProcessesComponent', 'selector': 'app-search-processes'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarPageGroupComponent', 'selector': 'app-sidebar-page-group'},{'name': 'SidebarWebProcesses', 'selector': 'app-sidebar-web-processes'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabManagerComponent', 'selector': 'app-tab-manager'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'ThemeManagementComponent', 'selector': 'app-theme-management'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'ToggleSwitchInputComponent', 'selector': 'app-toggle-switch-input'},{'name': 'TransportCompaniesFormComponent', 'selector': 'app-transport-companies-form'},{'name': 'TransportCompaniesWalletPaymentFormComponent', 'selector': 'app-transport-companies-wallet-payment-form'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TruckWalletPaymentFormComponent', 'selector': 'app-truck-wallet-payment-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserChargingFunctionFormComponent', 'selector': 'app-user-charging-function-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UserProfileComponent', 'selector': 'app-user-profile'},{'name': 'UserProfileFormComponent', 'selector': 'app-user-profile-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'},{'name': 'WalletPaymentFormComponent', 'selector': 'app-wallet-payment-form'},{'name': 'WalletPaymentRecordTableComponent', 'selector': 'app-payment-record-table'},{'name': 'WalletProfileComponent', 'selector': 'app-wallet-profile'},{'name': 'WalletTransactionsTableComponent', 'selector': 'app-wallet-transactions-table'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'TerminalCardComponent'};
 </script>

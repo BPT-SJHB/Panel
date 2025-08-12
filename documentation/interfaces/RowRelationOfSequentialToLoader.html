@@ -334,6 +334,8 @@ import { RelationOfSequentialTurnToLoaderType } from &#x27;app/services/sequenti
 import { checkAndToastError } from &#x27;app/utils/api-utils&#x27;;
 import { ERROR_MESSAGES, ErrorCodes } from &#x27;app/constants/error-messages&#x27;;
 import { LoaderType } from &#x27;app/services/loader-types/model/loader-type.model&#x27;;
+import { TableConfig } from &#x27;app/constants/ui/table.ui&#x27;;
+import { ButtonComponent } from &#x27;app/components/shared/button/button.component&#x27;;
 
 // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
 // 📄 Table Row Interface
@@ -357,6 +359,7 @@ interface RowRelationOfSequentialToLoader {
     ConfirmDialogModule,
     TableModule,
     SearchAutoCompleteComponent,
+    ButtonComponent,
   ],
   providers: [ConfirmationService],
   templateUrl:
@@ -373,12 +376,13 @@ export class RelationOfSequentialTurnToLoaderTypeFormComponent {
   private confirmationService &#x3D; inject(ConfirmationService);
   private loaderTypeService &#x3D; inject(LoaderTypesService);
   private sequentialTurnService &#x3D; inject(SequentialTurnManagementService);
+  readonly tableUi &#x3D; TableConfig;
 
   // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
   // 📊 Component State
   // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
   loading &#x3D; false;
-  addonWidth &#x3D; &#x27;8rem&#x27;;
+  addonWidth &#x3D; &#x27;10rem&#x27;;
   cols &#x3D; [&#x27;حذف&#x27;, &#x27;صفوف نوبت دهی&#x27;, &#x27;بارگیرها&#x27;];
   relationsAnnouncement: RowRelationOfSequentialToLoader[] &#x3D; [];
 
@@ -397,25 +401,25 @@ export class RelationOfSequentialTurnToLoaderTypeFormComponent {
   // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
   get sequentialId() {
     return this.relationSequentialToLoaderForm.get(
-      &#x27;sequentialId&#x27;
+      &#x27;sequentialId&#x27;,
     ) as FormControl;
   }
 
   get sequentialTitle() {
     return this.relationSequentialToLoaderForm.get(
-      &#x27;sequentialTitle&#x27;
+      &#x27;sequentialTitle&#x27;,
     ) as FormControl;
   }
 
   get loaderTypeId() {
     return this.relationSequentialToLoaderForm.get(
-      &#x27;loaderTypeId&#x27;
+      &#x27;loaderTypeId&#x27;,
     ) as FormControl;
   }
 
   get loaderTypeTitle() {
     return this.relationSequentialToLoaderForm.get(
-      &#x27;loaderTypeTitle&#x27;
+      &#x27;loaderTypeTitle&#x27;,
     ) as FormControl;
   }
 
@@ -471,7 +475,7 @@ export class RelationOfSequentialTurnToLoaderTypeFormComponent {
   private async loadRelationOfSequentialToLoader(sequentialId: number) {
     const res &#x3D;
       await this.sequentialTurnService.GetRelationOfSequentialTurnToLoaderTypes(
-        sequentialId
+        sequentialId,
       );
     if (!checkAndToastError(res, this.toast)) {
       this.relationsAnnouncement &#x3D; [];
@@ -481,7 +485,7 @@ export class RelationOfSequentialTurnToLoaderTypeFormComponent {
 
   // Convert nested backend data to flat rows for table
   private flattenSequentialRelations(
-    data: RelationOfSequentialTurnToLoaderType[]
+    data: RelationOfSequentialTurnToLoaderType[],
   ): RowRelationOfSequentialToLoader[] {
     return data.flatMap((group) &#x3D;&gt;
       group.LoaderTypes.map((sub) &#x3D;&gt; ({
@@ -489,7 +493,7 @@ export class RelationOfSequentialTurnToLoaderTypeFormComponent {
         SeqTurnTitle: group.SeqTurnTitle ?? &#x27;&#x27;,
         LoaderTypeId: sub.LoaderTypeId,
         LoaderTypeTitle: sub.LoaderTypeTitle ?? &#x27;&#x27;,
-      }))
+      })),
     );
   }
 
@@ -503,11 +507,13 @@ export class RelationOfSequentialTurnToLoaderTypeFormComponent {
       icon: &#x27;pi pi-info-circle&#x27;,
       closable: true,
       closeOnEscape: true,
+      rejectLabel: &#x27;لغو&#x27;,
       rejectButtonProps: {
         label: &#x27;لغو&#x27;,
         severity: &#x27;secondary&#x27;,
         outlined: true,
       },
+      acceptLabel: &#x27;تایید&#x27;,
       acceptButtonProps: {
         label: &#x27;تایید&#x27;,
         severity: &#x27;danger&#x27;,
@@ -524,12 +530,12 @@ export class RelationOfSequentialTurnToLoaderTypeFormComponent {
   }
 
   private async deleteRelationSequentialToLoader(
-    row: RowRelationOfSequentialToLoader
+    row: RowRelationOfSequentialToLoader,
   ) {
     const res &#x3D;
       await this.sequentialTurnService.DeleteRelationOfSequentialTurnToLoaderType(
         row.SeqTurnId,
-        row.LoaderTypeId
+        row.LoaderTypeId,
       );
     if (!checkAndToastError(res, this.toast)) return;
     this.toast.success(&#x27;موفق&#x27;, res.data.Message);
@@ -547,7 +553,7 @@ export class RelationOfSequentialTurnToLoaderTypeFormComponent {
       const res &#x3D;
         await this.sequentialTurnService.RegisterNewRelationOfSequentialTurnToLoaderType(
           this.sequentialId.value,
-          this.loaderTypeId.value
+          this.loaderTypeId.value,
         );
       if (!checkAndToastError(res, this.toast)) return;
       this.toast.success(&#x27;موفق&#x27;, res.data?.Message ?? &#x27;&#x27;);
