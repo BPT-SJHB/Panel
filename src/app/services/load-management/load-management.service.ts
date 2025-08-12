@@ -358,7 +358,6 @@ export class LoadManagementService {
     //#endregion
   }
 
-  //#endregion
   public async RegisterNewLoadAllocationForDriver(
     loadId: number
   ): Promise<ApiResponse<any>> {
@@ -452,4 +451,6 @@ export class LoadManagementService {
     >(apiUrl, bodyValue, {});
     //#endregion
   }
+  
+  //#endregion
 }
