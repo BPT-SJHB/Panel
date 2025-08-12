@@ -17,6 +17,9 @@ import { ShortResponse } from 'app/data/model/short-response.model';
 import { mockShortResponse } from 'app/data/mock/short-response.mock';
 import { TruckInfo } from '../driver-truck-management/model/truck-info.model';
 import { TruckDriverInfo } from '../driver-truck-management/model/truck-driver-info.model';
+import { AnnouncementSubGroup } from '../announcement-group-subgroup-management/model/announcement-subgroup.model';
+import { LoadAllocationInfo } from './model/load-allocation-info.model';
+import { mockLoadAllocationInfos } from './mock/load-allocation-info.mock';
 
 @Injectable({
   providedIn: 'root',
