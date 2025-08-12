@@ -90,6 +90,36 @@ export class LoadManagementService {
     //#endregion
   }
 
+  public async GetLoadForDrivers(
+    announcementSubGroupId: number,
+    loadStatusId: number
+  ): Promise<ApiResponse<LoadStatus[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.LoadCapacitorAPI.GetLoadsForDriver;
+    const loadInfo: LoadInfo = {
+      LoadId: 0,
+      LoadStatusId: loadStatusId,
+    };
+    const announcementSubgroupInfo: AnnouncementSubGroup = {
+      AnnouncementSGId: announcementSubGroupId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      AnnouncementSGId: announcementSubgroupInfo.AnnouncementSGId,
+      LoadStatusId: loadInfo.LoadStatusId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoadStatus[]
+    >(apiUrl, bodyValue, mockLoadStatuses);
+    //#endregion
+  }
+
   public async GetLoadStatuses(): Promise<ApiResponse<LoadStatus[]>> {
     this.userAuth.isLoggedIn();
 
