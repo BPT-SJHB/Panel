@@ -202,7 +202,12 @@ export const API_ROUTES = {
     SedimentLoad: `${environment.apiUrl}:${LoadCapacitorPort}/api/LoadSedimenting`,
   },
   LoadAllocationAPI: {
+    RegistrationForDrivers: `${environment.apiUrl}:${LoadAllocationPort}/api/LoadAllocationRegisteringforTruckDriver`,
     RegistrationForTransportCompanies: `${environment.apiUrl}:${LoadAllocationPort}/api/LoadAllocationRegisteringforTransportCompany`,
+    GetLoadAllocationOfDriver: `${environment.apiUrl}:${LoadAllocationPort}/api/GetTruckDriverLoadAllocations`,
+    CancelLoadAllocation: `${environment.apiUrl}:${LoadAllocationPort}/api/LoadAllocationCancelling`,
+    GetTravelTimeOfLoadAllocation: `${environment.apiUrl}:${LoadAllocationPort}/api/GetTravelTimeforLoadAllocation`,
+  },
   Reports: {
     Load: {
       GetLoadPermissions: `${environment.apiUrl}:${ReportsPort}/api/GetLoadPermissions`,
