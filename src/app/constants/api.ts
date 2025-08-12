@@ -2,6 +2,9 @@ import { environment } from 'environments/environment';
 const softwareUserAPIPort = 81;
 const transportationAPIPort = 82;
 const walletAndTrafficPort = 83;
+const LoadCapacitorPort = 84;
+const LoadAllocationPort = 85;
+const ReportsPort = 86;
 const apiFixURLPart = '/api/';
 
 export const API_ROUTES = {
@@ -61,6 +64,7 @@ export const API_ROUTES = {
     TransportCompanies: {
       GetTransportCompanies: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetTransportCompanies`,
       GetTransportCompany: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetTransportCompany`,
+      GetTransportCompanyBySoftwareUser: `${environment.apiUrl}:${transportationAPIPort}/api/GetTransportCompanyfromSoftwareUser`,
       EditTransportCompany: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}EditTransportCompany`,
       ActivateTransportCompanySmsService: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}ActivateTransportCompanySMSOwner`,
       ResetTransportCompanyPassword: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}ResetTransportCompanyUserPassword`,
@@ -180,6 +184,35 @@ export const API_ROUTES = {
     WalletRequests: {
       PaymentRequest: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}PaymentRequest`,
       TransferWalletBalance: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}TransferMoneyWalletBalance`,
+    },
+  },
+  LoadCapacitorAPI: {
+    GetLoadStatus: `${environment.apiUrl}:${LoadCapacitorPort}/api/GetLoadStatusesForSoftwareUserType`,
+    GetLoad: `${environment.apiUrl}:${LoadCapacitorPort}/api/GetLoad`,
+    GetLoadsForDriver: `${environment.apiUrl}:${LoadCapacitorPort}/api/GetLoadsforTruckDriver`,
+    GetLoadsForTransportCompanies: `${environment.apiUrl}:${LoadCapacitorPort}/api/GetLoadsforTransportCompanies`,
+    GetLoadsForFactoriesAndProductionCenters: `${environment.apiUrl}:${LoadCapacitorPort}/api/GetLoadsforFactoriesAndProductionCenters`,
+    GetLoadsForAdmin: `${environment.apiUrl}:${LoadCapacitorPort}/api/GetLoadsforAdministrator`,
+    GetTransportTariffParams: `${environment.apiUrl}:${LoadCapacitorPort}/api/GetListofTransportTarrifsParams`,
+    RegisterLoad: `${environment.apiUrl}:${LoadCapacitorPort}/api/LoadRegistering`,
+    EditLoad: `${environment.apiUrl}:${LoadCapacitorPort}/api/LoadEditing`,
+    DeleteLoad: `${environment.apiUrl}:${LoadCapacitorPort}/api/LoadDeleting`,
+    CancelLoad: `${environment.apiUrl}:${LoadCapacitorPort}/api/LoadCancelling`,
+    FreeLineLoad: `${environment.apiUrl}:${LoadCapacitorPort}/api/LoadFreeLining`,
+    SedimentLoad: `${environment.apiUrl}:${LoadCapacitorPort}/api/LoadSedimenting`,
+  },
+  LoadAllocationAPI: {
+    RegistrationForDrivers: `${environment.apiUrl}:${LoadAllocationPort}/api/LoadAllocationRegisteringforTruckDriver`,
+    RegistrationForTransportCompanies: `${environment.apiUrl}:${LoadAllocationPort}/api/LoadAllocationRegisteringforTransportCompany`,
+    GetLoadAllocationOfDriver: `${environment.apiUrl}:${LoadAllocationPort}/api/GetTruckDriverLoadAllocations`,
+    CancelLoadAllocation: `${environment.apiUrl}:${LoadAllocationPort}/api/LoadAllocationCancelling`,
+    GetTravelTimeOfLoadAllocation: `${environment.apiUrl}:${LoadAllocationPort}/api/GetTravelTimeforLoadAllocation`,
+  },
+  Reports: {
+    Load: {
+      GetLoadPermissions: `${environment.apiUrl}:${ReportsPort}/api/GetLoadPermissions`,
+      GetLoadPermissionsForDriver: `${environment.apiUrl}:${ReportsPort}/api/GetLoadPermissionsforTruckDriver`,
+      GetLoadAccounting: `${environment.apiUrl}:${ReportsPort}/api/GetLoadAccountingRecords`,
     },
   },
 };

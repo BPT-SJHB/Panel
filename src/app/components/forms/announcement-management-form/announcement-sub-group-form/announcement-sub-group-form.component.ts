@@ -16,9 +16,9 @@ import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-
 import { checkAndToastError } from 'app/utils/api-utils';
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
 import { ToastService } from 'app/services/toast-service/toast.service';
-import { AnnouncementGroupSubgroupManagementService } from 'app/services/announcement_group_subgroup_management/announcement-group-subgroup-management.service';
+import { AnnouncementGroupSubgroupManagementService } from 'app/services/announcement-group-subgroup-management/announcement-group-subgroup-management.service';
 
-import { AnnouncementSubGroup } from 'app/services/announcement_group_subgroup_management/model/announcement-subgroup.model';
+import { AnnouncementSubGroup } from 'app/services/announcement-group-subgroup-management/model/announcement-subgroup.model';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { TableConfig } from 'app/constants/ui/table.ui';
 import { ButtonComponent } from 'app/components/shared/button/button.component';

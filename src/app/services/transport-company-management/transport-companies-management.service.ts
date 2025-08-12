@@ -69,6 +69,28 @@ export class TransportCompaniesManagementService {
     //#endregion
   }
 
+  public async GetTransportCompanyBySoftwareUser(): Promise<
+    ApiResponse<TransportCompany>
+  > {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.TransportCompanies
+        .GetTransportCompanyBySoftwareUser;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      TransportCompany
+    >(apiUrl, bodyValue, mockTransportCompaniesInfo);
+    //#endregion
+  }
+
   public async EditTransportCompany(
     transportCompanyInfo: TransportCompany
   ): Promise<ApiResponse<ShortResponse>> {
