@@ -402,4 +402,30 @@ export class LoadManagementService {
     >(apiUrl, bodyValue, mockLoadAllocationInfos);
     //#endregion
   }
+  public async CancelLoadAllocation(
+    laId: number,
+    loadId: number
+  ): Promise<ApiResponse<any>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.LoadAllocationAPI.CancelLoadAllocation;
+    const LoadAllocationInfo: LoadAllocationInfo = {
+      LAId: laId,
+      LoadId: loadId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LAId: LoadAllocationInfo.LAId,
+      LoadId: LoadAllocationInfo.LoadId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      any
+    >(apiUrl, bodyValue, {});
+    //#endregion
+  }
 }
