@@ -428,4 +428,28 @@ export class LoadManagementService {
     >(apiUrl, bodyValue, {});
     //#endregion
   }
+  public async GetTravelTimeOfLoadAllocation(
+    laId: number
+  ): Promise<ApiResponse<any>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.LoadAllocationAPI.GetTravelTimeOfLoadAllocation;
+    const LoadAllocationInfo: LoadAllocationInfo = {
+      LAId: laId,
+      LoadId: 0,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LAId: LoadAllocationInfo.LAId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      any
+    >(apiUrl, bodyValue, {});
+    //#endregion
+  }
 }
