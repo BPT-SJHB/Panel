@@ -6,6 +6,8 @@ import { API_ROUTES } from 'app/constants/api';
 import { LoadInfo } from '../load-management/model/load-info.model';
 import { mockLoadPermissions } from './mock/load/load-permission.mock';
 import { ApiResponse } from 'app/data/model/api-Response.model';
+import { LoadAccounting } from './model/load/load-accounting.model';
+import { mockLoadAccounting } from './mock/load/load-accounting.mock';
 
 @Injectable({
   providedIn: 'root',
