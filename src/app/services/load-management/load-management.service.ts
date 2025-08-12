@@ -359,5 +359,27 @@ export class LoadManagementService {
   }
 
   //#endregion
+  public async RegisterNewLoadAllocationForDriver(
+    loadId: number
+  ): Promise<ApiResponse<any>> {
+    this.userAuth.isLoggedIn();
 
+    //#region Consts
+    const apiUrl = API_ROUTES.LoadAllocationAPI.RegistrationForDrivers;
+    const loadInfo: LoadInfo = {
+      LoadId: loadId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LoadId: loadInfo.LoadId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      any
+    >(apiUrl, bodyValue, {});
+    //#endregion
+  }
 }
