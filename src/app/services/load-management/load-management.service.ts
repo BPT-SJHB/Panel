@@ -603,9 +603,12 @@ export class LoadManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
-  public async GetTravelTimeOfLoadAllocation(
-    laId: number
-  ): Promise<ApiResponse<any>> {
+
+  public async GetTravelTimeOfLoadAllocation(laId: number): Promise<
+    ApiResponse<{
+      TravelTime: number;
+    }>
+  > {
     this.userAuth.isLoggedIn();
 
     //#region Consts
@@ -623,8 +626,12 @@ export class LoadManagementService {
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      any
-    >(apiUrl, bodyValue, {});
+      {
+        TravelTime: number;
+      }
+    >(apiUrl, bodyValue, {
+      TravelTime: 73,
+    });
     //#endregion
   }
   
