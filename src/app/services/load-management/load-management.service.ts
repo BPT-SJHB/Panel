@@ -43,7 +43,7 @@ export class LoadManagementService {
     loadStatusId?: number,
     loadSourceCityId?: number,
     loadTargetCityId?: number
-  ): Promise<ApiResponse<LoadForTransportCompanies[]>> {
+  ): Promise<ApiResponse<LoadForTransportCompaniesAndFactoriesAndAdmin[]>> {
     this.userAuth.isLoggedIn();
 
     //#region Consts
@@ -87,8 +87,8 @@ export class LoadManagementService {
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      LoadForTransportCompanies[]
-    >(apiUrl, bodyValue, mockLoadForTransportCompanies);
+      LoadForTransportCompaniesAndFactoriesAndAdmin[]
+    >(apiUrl, bodyValue, mockLoadsForTransportCompaniesAndFactoriesAndAdmin);
     //#endregion
   }
 
