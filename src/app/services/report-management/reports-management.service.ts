@@ -8,6 +8,8 @@ import { mockLoadPermissions } from './mock/load/load-permission.mock';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { LoadAccounting } from './model/load/load-accounting.model';
 import { mockLoadAccounting } from './mock/load/load-accounting.mock';
+import { LoadPermissionForDriver } from './model/load/load-permission-for-driver.model';
+import { mockLoadPermissionsForDriver } from './mock/load/load-permission-for-driver.mock';
 
 @Injectable({
   providedIn: 'root',
