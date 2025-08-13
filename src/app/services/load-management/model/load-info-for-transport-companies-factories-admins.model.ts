@@ -1,10 +1,10 @@
-export interface LoadForTransportCompanies {
+export interface LoadForTransportCompaniesAndFactoriesAndAdmin {
   ProvinceName: string;
   ProvinceId: number;
-  myLoads: LoadInfoForTransportCompanies[];
+  myLoads: LoadInfoForTransportCompaniesAndFactoriesAndAdmin[];
 }
 
-export interface LoadInfoForTransportCompanies {
+export interface LoadInfoForTransportCompaniesAndFactoriesAndAdmin {
   LoadId: number;
   TCTitle: string;
   GoodTitle: string;
