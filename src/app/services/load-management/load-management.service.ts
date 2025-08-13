@@ -635,5 +635,32 @@ export class LoadManagementService {
     //#endregion
   }
   
+  public async CancelLoadPermission(
+    laId: number,
+    description: string,
+    TurnResuscitation: boolean,
+    LoadResuscitation: boolean
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.LoadPermissions.CancelLoadPermission;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LAId: laId,
+      Description: description,
+      TurnResuscitation: TurnResuscitation,
+      LoadResuscitation: LoadResuscitation,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
   //#endregion
 }
