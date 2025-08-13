@@ -48,7 +48,7 @@ export class LoadManagementService {
 
     //#region Consts
     const apiUrl = API_ROUTES.LoadCapacitorAPI.GetLoadsForTransportCompanies;
-    let bodyValue: {
+    const bodyValue: {
       SessionId: string;
       AnnouncementGroupId?: number;
       AnnouncementSubGroupId?: number;
@@ -245,6 +245,7 @@ export class LoadManagementService {
     >(apiUrl, bodyValue, mockLoadsForTransportCompaniesAndFactoriesAndAdmin);
     //#endregion
   }
+
   public async GetLoadStatuses(): Promise<ApiResponse<LoadStatus[]>> {
     this.userAuth.isLoggedIn();
 
