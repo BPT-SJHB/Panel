@@ -375,7 +375,6 @@ export class LoadsListFormComponent
     const filter = this.extractFilterFormData();
     await this.withLoading(async () => {
       const response = await this.loadsService.GetLoadsForTransportCompanies(
-        filter.transportCompanyId ?? 0,
         filter.announceGroupId,
         filter.announceSubgroupId,
         filter.inventory,

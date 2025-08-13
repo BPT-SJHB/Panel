@@ -87,7 +87,7 @@ export class TransportCompaniesManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TransportCompany
-    >(apiUrl, bodyValue, mockTransportCompaniesInfo);
+    >(apiUrl, bodyValue, mockTransportCompaniesInfo[0]);
     //#endregion
   }
 
