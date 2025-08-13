@@ -36,7 +36,6 @@ export class LoadManagementService {
   //#region Load methods
 
   public async GetLoadsForTransportCompanies(
-    transportCompanyId: number,
     announcementGroupId?: number,
     announcementSubGroupId?: number,
     inventory?: boolean,
@@ -51,7 +50,6 @@ export class LoadManagementService {
     const apiUrl = API_ROUTES.LoadCapacitorAPI.GetLoadsForTransportCompanies;
     let bodyValue: {
       SessionId: string;
-      TransportCompanyId: number;
       AnnouncementGroupId?: number;
       AnnouncementSubGroupId?: number;
       Inventory?: boolean;
@@ -61,7 +59,6 @@ export class LoadManagementService {
       LoadTargetCityId?: number;
     } = {
       SessionId: this.userAuth.getSessionId() ?? '',
-      TransportCompanyId: transportCompanyId,
     };
 
     if (announcementGroupId !== undefined) {
