@@ -580,7 +580,7 @@ export class LoadManagementService {
   public async CancelLoadAllocation(
     laId: number,
     loadId: number
-  ): Promise<ApiResponse<any>> {
+  ): Promise<ApiResponse<ShortResponse>> {
     this.userAuth.isLoggedIn();
 
     //#region Consts
@@ -599,8 +599,8 @@ export class LoadManagementService {
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      any
-    >(apiUrl, bodyValue, {});
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
   public async GetTravelTimeOfLoadAllocation(
