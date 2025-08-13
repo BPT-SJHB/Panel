@@ -125,6 +125,68 @@ export class LoadManagementService {
     //#endregion
   }
 
+  public async GetLoadsForFactoriesAndProductionCenters(
+    transportCompanyId: number,
+    announcementGroupId: number,
+    announcementSubGroupId: number,
+    inventory: boolean,
+    date: string,
+    loadStatusId: number,
+    loadSourceCityId: number,
+    loadTargetCityId: number
+  ): Promise<ApiResponse<LoadForTransportCompaniesAndFactoriesAndAdmin[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.LoadCapacitorAPI.GetLoadsForFactoriesAndProductionCenters;
+    const bodyValue: {
+      SessionId: string;
+      TransportCompanyId?: number;
+      AnnouncementGroupId?: number;
+      AnnouncementSubGroupId?: number;
+      Inventory?: boolean;
+      ShamsiDate?: string;
+      LoadStatusId?: number;
+      LoadSourceCityId?: number;
+      LoadTargetCityId?: number;
+    } = {
+      SessionId: this.userAuth.getSessionId() ?? '',
+    };
+    if (transportCompanyId !== undefined) {
+      bodyValue.TransportCompanyId = transportCompanyId;
+    }
+    if (announcementGroupId !== undefined) {
+      bodyValue.AnnouncementGroupId = announcementGroupId;
+    }
+    if (announcementSubGroupId !== undefined) {
+      bodyValue.AnnouncementSubGroupId = announcementSubGroupId;
+    }
+    if (inventory !== undefined) {
+      bodyValue.Inventory = inventory;
+    }
+    if (date !== undefined) {
+      bodyValue.ShamsiDate = date;
+    }
+    if (loadStatusId !== undefined) {
+      bodyValue.LoadStatusId = loadStatusId;
+    }
+    if (loadSourceCityId !== undefined) {
+      bodyValue.LoadSourceCityId = loadSourceCityId;
+    }
+    if (loadTargetCityId !== undefined) {
+      bodyValue.LoadTargetCityId = loadTargetCityId;
+    }
+
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoadForTransportCompaniesAndFactoriesAndAdmin[]
+    >(apiUrl, bodyValue, mockLoadsForTransportCompaniesAndFactoriesAndAdmin);
+    //#endregion
+  }
   public async GetLoadStatuses(): Promise<ApiResponse<LoadStatus[]>> {
     this.userAuth.isLoggedIn();
 
