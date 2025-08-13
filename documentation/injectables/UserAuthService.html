@@ -237,8 +237,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="95"
-                                    class="link-to-prism">src/app/services/user-auth-service/user-auth.service.ts:95</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="96"
+                                    class="link-to-prism">src/app/services/user-auth-service/user-auth.service.ts:96</a></div>
                         </td>
                     </tr>
 
@@ -277,8 +277,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="112"
-                                    class="link-to-prism">src/app/services/user-auth-service/user-auth.service.ts:112</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="113"
+                                    class="link-to-prism">src/app/services/user-auth-service/user-auth.service.ts:113</a></div>
                         </td>
                     </tr>
 
@@ -347,8 +347,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="68"
-                                    class="link-to-prism">src/app/services/user-auth-service/user-auth.service.ts:68</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">src/app/services/user-auth-service/user-auth.service.ts:69</a></div>
                         </td>
                     </tr>
 
@@ -497,8 +497,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="99"
-                                    class="link-to-prism">src/app/services/user-auth-service/user-auth.service.ts:99</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="100"
+                                    class="link-to-prism">src/app/services/user-auth-service/user-auth.service.ts:100</a></div>
                         </td>
                     </tr>
 
@@ -702,9 +702,9 @@ import { UserSession } from &#x27;app/data/model/user-session.model&#x27;;
 import { CookieService } from &#x27;ngx-cookie-service&#x27;;
 import { environment } from &#x27;environments/environment&#x27;;
 import { mockUserSession } from &#x27;app/data/mock/user-session.mock&#x27;;
-import { SoftwareUserInfo } from &#x27;app/data/model/software-user-info.model&#x27;;
+import { SoftwareUserInfo } from &#x27;app/services/user-management/model/software-user-info.model&#x27;;
 import { APICommunicationManagementService } from &#x27;../api-communication-management/apicommunication-management.service&#x27;;
-import { mockSoftwareUserInfo } from &#x27;app/data/mock/software-user-info.mock&#x27;;
+import { mockSoftwareUserInfo } from &#x27;../user-management/mock/software-user-info.mock&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 import { APP_ROUTES } from &#x27;app/constants/routes&#x27;;
 
@@ -758,6 +758,7 @@ export class UserAuthService {
 
   public async logout(): Promise&lt;void&gt; {
     this.cookieService.delete(this.sessionKey);
+    this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
     // سمت سرور اضافه شود در صورت نیاز
   }
 

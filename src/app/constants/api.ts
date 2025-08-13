@@ -165,6 +165,9 @@ export const API_ROUTES = {
         RegisterReserveTurn: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}ReserveTurnRegisterRequest`,
       },
     },
+    LoadPermissions: {
+      CancelLoadPermission: `${environment.apiUrl}:${transportationAPIPort}/api/LoadPermissionCancelling`,
+    },
   },
   WalletAndTrafficApi: {
     WalletInfo: {
@@ -193,7 +196,7 @@ export const API_ROUTES = {
     GetLoadsForTransportCompanies: `${environment.apiUrl}:${LoadCapacitorPort}/api/GetLoadsforTransportCompanies`,
     GetLoadsForFactoriesAndProductionCenters: `${environment.apiUrl}:${LoadCapacitorPort}/api/GetLoadsforFactoriesAndProductionCenters`,
     GetLoadsForAdmin: `${environment.apiUrl}:${LoadCapacitorPort}/api/GetLoadsforAdministrator`,
-    GetTransportTariffParams: `${environment.apiUrl}:${LoadCapacitorPort}/api/GetListofTransportTarrifsParams`,
+    GetTransportTariffParams: `${environment.apiUrl}:${LoadCapacitorPort}/api/GetListofTransportTariffsParams`,
     RegisterLoad: `${environment.apiUrl}:${LoadCapacitorPort}/api/LoadRegistering`,
     EditLoad: `${environment.apiUrl}:${LoadCapacitorPort}/api/LoadEditing`,
     DeleteLoad: `${environment.apiUrl}:${LoadCapacitorPort}/api/LoadDeleting`,
@@ -204,6 +207,8 @@ export const API_ROUTES = {
   LoadAllocationAPI: {
     RegistrationForDrivers: `${environment.apiUrl}:${LoadAllocationPort}/api/LoadAllocationRegisteringforTruckDriver`,
     RegistrationForTransportCompanies: `${environment.apiUrl}:${LoadAllocationPort}/api/LoadAllocationRegisteringforTransportCompany`,
+    RegistrationForAdmins: `${environment.apiUrl}:${LoadAllocationPort}/api/LoadAllocationRegisteringforAdministrator`,
+    AllocateLoadToNextTurn: `${environment.apiUrl}:${LoadAllocationPort}/api/LoadAllocateToOther`,
     GetLoadAllocationOfDriver: `${environment.apiUrl}:${LoadAllocationPort}/api/GetTruckDriverLoadAllocations`,
     CancelLoadAllocation: `${environment.apiUrl}:${LoadAllocationPort}/api/LoadAllocationCancelling`,
     GetTravelTimeOfLoadAllocation: `${environment.apiUrl}:${LoadAllocationPort}/api/GetTravelTimeforLoadAllocation`,

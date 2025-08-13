@@ -121,13 +121,13 @@
 
 
 
+    <p class="comment">
+        <h3>Extends</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="../injectables/BaseLoading.html" target="_self" >BaseLoading</a></code>
+    </p>
 
-    <p class="comment">
-        <h3>Implements</h3>
-    </p>
-    <p class="comment">
-                <code>OnInit</code>
-    </p>
 
 
 <section data-compodoc="block-metadata">
@@ -159,12 +159,13 @@
             <tr>
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
-                            <code>CommonModule</code>
                             <code>ButtonModule</code>
                             <code>PanelModule</code>
-                            <code>AnimateOnScroll</code>
                                 <code><a href="../components/TerminalCardComponent.html" target="_self" >TerminalCardComponent</a></code>
                                 <code><a href="../components/SearchInputComponent.html" target="_self" >SearchInputComponent</a></code>
+                                <code><a href="../components/MapSvgComponent.html" target="_self" >MapSvgComponent</a></code>
+                            <code>DialogModule</code>
+                                <code><a href="../components/SupportButtonComponent.html" target="_self" >SupportButtonComponent</a></code>
                 </td>
             </tr>
 
@@ -204,19 +205,59 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#allLoadAnnouncementPlaces" >allLoadAnnouncementPlaces</a>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#currentProvince" >currentProvince</a>
                             </li>
                             <li>
-                                <a href="#currentSearchTerm" >currentSearchTerm</a>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#dialogTitle" >dialogTitle</a>
                             </li>
                             <li>
+                                    <span class="modifier">Readonly</span>
                                 <a href="#displayedLoadAnnouncementPlaces" >displayedLoadAnnouncementPlaces</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#EsfahanProvince" >EsfahanProvince</a>
                             </li>
                             <li>
                                 <a href="#filterAnnouncementPlaces" >filterAnnouncementPlaces</a>
                             </li>
                             <li>
+                                    <span class="modifier">Readonly</span>
                                 <a href="#headerTitle" >headerTitle</a>
+                            </li>
+                            <li>
+                                <a href="#isDialogVisible" >isDialogVisible</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#lap" >lap</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#provincesAnnouncement" >provincesAnnouncement</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#UnknownProvince" >UnknownProvince</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#destroy$" >destroy$</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#loadingService" >loadingService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#toast" >toast</a>
                             </li>
                         </ul>
                     </td>
@@ -231,15 +272,26 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#clickProvince" >clickProvince</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#fetchLoadAnnouncementPlaces" >fetchLoadAnnouncementPlaces</a>
+                            </li>
+                            <li>
                                 <a href="#handleSearch" >handleSearch</a>
                             </li>
                             <li>
-                                    <span class="modifier">Async</span>
-                                <a href="#initializeLoadAnnouncementPlaces" >initializeLoadAnnouncementPlaces</a>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
                             </li>
                             <li>
-                                    <span class="modifier">Async</span>
                                 <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#withLoading" >withLoading</a>
                             </li>
                         </ul>
                     </td>
@@ -253,54 +305,6 @@
     </table>
 </section>
 
-    <section data-compodoc="block-constructor">
-    <h3 id="function Object() { [native code] }">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor(lap: <a href="../injectables/LoadAnnouncementPlacesService.html" target="_self">LoadAnnouncementPlacesService</a>)</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/pages/home/home-page.component.ts:30</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>lap</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/LoadAnnouncementPlacesService.html" target="_self" >LoadAnnouncementPlacesService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
 
 
 
@@ -315,30 +319,34 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="handleSearch"></a>
+                    <a name="clickProvince"></a>
                     <span class="name">
-                        <span ><b>handleSearch</b></span>
-                        <a href="#handleSearch"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Async</span>
+                        <span ><b>clickProvince</b></span>
+                        <a href="#clickProvince"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>handleSearch(result: <a href="../interfaces/LoadAnnouncementPlace.html" target="_self">LoadAnnouncementPlace[]</a>)</code>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>clickProvince(event: literal type)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="51"
-                                    class="link-to-prism">src/app/pages/home/home-page.component.ts:51</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="81"
+                                    class="link-to-prism">src/app/pages/home/home-page.component.ts:81</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Handle province click from map</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -353,7 +361,147 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>result</td>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchLoadAnnouncementPlaces"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>fetchLoadAnnouncementPlaces</b></span>
+                        <a href="#fetchLoadAnnouncementPlaces"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>fetchLoadAnnouncementPlaces(provinceCode: <a href="../undefineds/ProvinceCode.html" target="_self">ProvinceCode</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="105"
+                                    class="link-to-prism">src/app/pages/home/home-page.component.ts:105</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Fetch data if not already cached</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>provinceCode</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ProvinceCode" target="_self" >ProvinceCode</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleSearch"></a>
+                    <span class="name">
+                        <span ><b>handleSearch</b></span>
+                        <a href="#handleSearch"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleSearch(results: <a href="../interfaces/LoadAnnouncementPlace.html" target="_self">LoadAnnouncementPlace[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">src/app/pages/home/home-page.component.ts:74</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handle result from search input</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>results</td>
                                             <td>
                                                             <code><a href="../interfaces/LoadAnnouncementPlace.html" target="_self" >LoadAnnouncementPlace[]</a></code>
                                             </td>
@@ -382,26 +530,30 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="initializeLoadAnnouncementPlaces"></a>
+                    <a name="ngOnDestroy"></a>
                     <span class="name">
-                            <span class="modifier">Async</span>
-                        <span ><b>initializeLoadAnnouncementPlaces</b></span>
-                        <a href="#initializeLoadAnnouncementPlaces"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>initializeLoadAnnouncementPlaces()</code>
+<code>ngOnDestroy()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="38"
-                                    class="link-to-prism">src/app/pages/home/home-page.component.ts:38</a></div>
+                            <div class="io-line">Inherited from         <code><a href="../injectables/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../injectables/BaseLoading.html#source" target="_self" >BaseLoading:19</a></code>
+</div>
                         </td>
                     </tr>
 
@@ -410,7 +562,7 @@
                 <td class="col-md-4">
 
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
                 </td>
@@ -423,7 +575,6 @@
                 <td class="col-md-4">
                     <a name="ngOnInit"></a>
                     <span class="name">
-                            <span class="modifier">Async</span>
                         <span ><b>ngOnInit</b></span>
                         <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -431,16 +582,21 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>ngOnInit()</code>
+<code>ngOnInit()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="34"
-                                    class="link-to-prism">src/app/pages/home/home-page.component.ts:34</a></div>
+                            <div class="io-line">Inherited from         <code><a href="../injectables/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../injectables/BaseLoading.html#source" target="_self" >BaseLoading:13</a></code>
+</div>
                         </td>
                     </tr>
 
@@ -449,9 +605,96 @@
                 <td class="col-md-4">
 
                         <div class="io-description">
-                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="withLoading"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>withLoading</b></span>
+                        <a href="#withLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>withLoading(fn: () => void)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Inherited from         <code><a href="../injectables/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../injectables/BaseLoading.html#source" target="_self" >BaseLoading:27</a></code>
+</div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Type parameters :</b>
+                            <ul class="type-parameters">
+                                    <li>T</li>
+                            </ul>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><h1>================================
+ Utility wrapper to centralize loading toggling</h1>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>fn</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;T | undefined&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -466,27 +709,22 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="allLoadAnnouncementPlaces"></a>
+                    <a name="currentProvince"></a>
                     <span class="name">
-                        <span ><b>allLoadAnnouncementPlaces</b></span>
-                        <a href="#allLoadAnnouncementPlaces"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>currentProvince</b></span>
+                        <a href="#currentProvince"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/LoadAnnouncementPlace.html" target="_self" >LoadAnnouncementPlace[]</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>[]</code>
+                        <i>Default value : </i><code>signal&lt;ProvinceCode&gt;(&#x27;IR-00&#x27;)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/pages/home/home-page.component.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/pages/home/home-page.component.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -497,27 +735,22 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="currentSearchTerm"></a>
+                    <a name="dialogTitle"></a>
                     <span class="name">
-                        <span ><b>currentSearchTerm</b></span>
-                        <a href="#currentSearchTerm"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>dialogTitle</b></span>
+                        <a href="#dialogTitle"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                        <i>Default value : </i><code>signal(&#x27;&#x27;)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/pages/home/home-page.component.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/pages/home/home-page.component.ts:46</a></div>
                         </td>
                     </tr>
 
@@ -530,6 +763,7 @@
                 <td class="col-md-4">
                     <a name="displayedLoadAnnouncementPlaces"></a>
                     <span class="name">
+                            <span class="modifier">Readonly</span>
                         <span ><b>displayedLoadAnnouncementPlaces</b></span>
                         <a href="#displayedLoadAnnouncementPlaces"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -537,18 +771,46 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/LoadAnnouncementPlace.html" target="_self" >LoadAnnouncementPlace[]</a></code>
+                        <i>Default value : </i><code>signal&lt;LoadAnnouncementPlace[]&gt;(
+    [],
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/pages/home/home-page.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="EsfahanProvince"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>EsfahanProvince</b></span>
+                        <a href="#EsfahanProvince"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#ProvinceCode" target="_self" >ProvinceCode</a></code>
 
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>[]</code>
+                        <i>Default value : </i><code>&#x27;IR-04&#x27;</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/pages/home/home-page.component.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/pages/home/home-page.component.ts:57</a></div>
                         </td>
                     </tr>
 
@@ -573,7 +835,39 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/pages/home/home-page.component.ts:44</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/pages/home/home-page.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Search filter function</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="headerTitle"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>headerTitle</b></span>
+                        <a href="#headerTitle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>appTitles.appOnLineTitle</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/pages/home/home-page.component.ts:45</a></div>
                         </td>
                     </tr>
 
@@ -584,27 +878,240 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="headerTitle"></a>
+                    <a name="isDialogVisible"></a>
                     <span class="name">
-                        <span ><b>headerTitle</b></span>
-                        <a href="#headerTitle"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>isDialogVisible</b></span>
+                        <a href="#isDialogVisible"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/pages/home/home-page.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="lap"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>lap</b></span>
+                        <a href="#lap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(LoadAnnouncementPlacesService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/pages/home/home-page.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="provincesAnnouncement"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>provincesAnnouncement</b></span>
+                        <a href="#provincesAnnouncement"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(
+    new Map&lt;ProvinceCode, LoadAnnouncementPlace[]&gt;(),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/pages/home/home-page.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="UnknownProvince"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>UnknownProvince</b></span>
+                        <a href="#UnknownProvince"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#ProvinceCode" target="_self" >ProvinceCode</a></code>
 
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>appTitles.appOnLineTitle</code>
+                        <i>Default value : </i><code>&#x27;IR-00&#x27;</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/pages/home/home-page.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/pages/home/home-page.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroy$"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>destroy$</b></span>
+                        <a href="#destroy$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../injectables/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../injectables/BaseLoading.html#source" target="_self" >BaseLoading:8</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../injectables/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../injectables/BaseLoading.html#source" target="_self" >BaseLoading:12</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingService"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>loadingService</b></span>
+                        <a href="#loadingService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(LoadingService)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../injectables/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../injectables/BaseLoading.html#source" target="_self" >BaseLoading:9</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toast"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>toast</b></span>
+                        <a href="#toast"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../injectables/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../injectables/BaseLoading.html#source" target="_self" >BaseLoading:10</a></code>
+</div>
                         </td>
                     </tr>
 
@@ -617,106 +1124,188 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
-import { LoadAnnouncementPlace } from &#x27;app/data/model/load-announcement-place.model&#x27;;
-import { AnimateOnScroll } from &#x27;primeng/animateonscroll&#x27;;
-import { TerminalCardComponent } from &#x27;app/components/shared/terminal-card/terminal-card.component&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, computed, inject, signal } from &#x27;@angular/core&#x27;;
+
+// PrimeNG
 import { ButtonModule } from &#x27;primeng/button&#x27;;
-import { SearchInputComponent } from &#x27;../../components/shared/inputs/search-input/search-input.component&#x27;;
-import { CommonModule } from &#x27;@angular/common&#x27;;
 import { PanelModule } from &#x27;primeng/panel&#x27;;
+import { DialogModule } from &#x27;primeng/dialog&#x27;;
+
+// Components
+import { TerminalCardComponent } from &#x27;app/components/shared/terminal-card/terminal-card.component&#x27;;
+import { SearchInputComponent } from &#x27;app/components/shared/inputs/search-input/search-input.component&#x27;;
+import {
+  MapSvgComponent,
+  ProvinceCode,
+  ProvinceName,
+} from &#x27;./map-svg/map-svg.component&#x27;;
+
+// Models &amp; Constants
+import { LoadAnnouncementPlace } from &#x27;app/data/model/load-announcement-place.model&#x27;;
 import { appTitles } from &#x27;app/constants/Titles&#x27;;
+
+// Services
 import { LoadAnnouncementPlacesService } from &#x27;app/services/LoadAnnouncementPlaces/load-announcement-places.service&#x27;;
+import { BaseLoading } from &#x27;app/components/forms/shared/component-base/base-loading&#x27;;
+import { SupportButtonComponent } from &#x27;app/components/shared/support-button/support-button.component&#x27;;
+
 @Component({
   selector: &#x27;app-home&#x27;,
   standalone: true,
   imports: [
-    CommonModule,
     ButtonModule,
     PanelModule,
-    AnimateOnScroll,
     TerminalCardComponent,
     SearchInputComponent,
+    MapSvgComponent,
+    DialogModule,
+    SupportButtonComponent,
   ],
   templateUrl: &#x27;./home-page.component.html&#x27;,
   styleUrl: &#x27;./home-page.component.scss&#x27;,
 })
-export class HomePageComponent implements OnInit {
-  allLoadAnnouncementPlaces: LoadAnnouncementPlace[] &#x3D; [];
-  displayedLoadAnnouncementPlaces: LoadAnnouncementPlace[] &#x3D; [];
+export class HomePageComponent extends BaseLoading {
+  private readonly lap &#x3D; inject(LoadAnnouncementPlacesService);
 
-  currentSearchTerm: string &#x3D; &#x27;&#x27;;
-  headerTitle: string &#x3D; appTitles.appOnLineTitle;
+  readonly headerTitle &#x3D; appTitles.appOnLineTitle;
+  readonly dialogTitle &#x3D; signal(&#x27;&#x27;);
+  readonly currentProvince &#x3D; signal&lt;ProvinceCode&gt;(&#x27;IR-00&#x27;);
+  readonly displayedLoadAnnouncementPlaces &#x3D; signal&lt;LoadAnnouncementPlace[]&gt;(
+    [],
+  );
 
-  constructor(private lap: LoadAnnouncementPlacesService) {}
+  readonly provincesAnnouncement &#x3D; signal(
+    new Map&lt;ProvinceCode, LoadAnnouncementPlace[]&gt;(),
+  );
 
-  async ngOnInit(): Promise&lt;void&gt; {
-    await this.initializeLoadAnnouncementPlaces();
-  }
+  readonly UnknownProvince: ProvinceCode &#x3D; &#x27;IR-00&#x27;;
+  readonly EsfahanProvince: ProvinceCode &#x3D; &#x27;IR-04&#x27;;
 
-  async initializeLoadAnnouncementPlaces() {
-    const terminals &#x3D; await this.lap.getLoadAnnouncementPlaces();
-    this.allLoadAnnouncementPlaces &#x3D; terminals.data!;
-    this.displayedLoadAnnouncementPlaces &#x3D; this.allLoadAnnouncementPlaces;
-  }
+  isDialogVisible &#x3D; false;
 
+  /**
+   * Search filter function
+   */
   filterAnnouncementPlaces &#x3D; (
     announcementPlace: LoadAnnouncementPlace,
-    query: string
-  ) &#x3D;&gt;
+    query: string,
+  ): boolean &#x3D;&gt;
     announcementPlace.LAPTitle.includes(query) ||
     announcementPlace.Description.includes(query);
 
-  handleSearch(result: LoadAnnouncementPlace[]): void {
-    this.displayedLoadAnnouncementPlaces &#x3D; result;
+  /**
+   * Handle result from search input
+   */
+  handleSearch(results: LoadAnnouncementPlace[]): void {
+    this.displayedLoadAnnouncementPlaces.set(results);
+  }
+
+  /**
+   * Handle province click from map
+   */
+  async clickProvince(event: {
+    provinceName: ProvinceName;
+    provinceCode: ProvinceCode;
+  }) {
+    const { provinceCode, provinceName } &#x3D; event;
+
+    await this.withLoading(() &#x3D;&gt;
+      this.fetchLoadAnnouncementPlaces(provinceCode),
+    );
+
+    this.currentProvince.set(provinceCode);
+
+    const provinceMap &#x3D; this.provincesAnnouncement();
+    this.displayedLoadAnnouncementPlaces.set([
+      ...(provinceMap.get(provinceCode) ?? []),
+    ]);
+
+    this.dialogTitle.set(&#x27;پایانه های استان &#x27; + provinceName);
+    this.isDialogVisible &#x3D; true;
+  }
+
+  /**
+   * Fetch data if not already cached
+   */
+  async fetchLoadAnnouncementPlaces(provinceCode: ProvinceCode): Promise&lt;void&gt; {
+    if (provinceCode &#x3D;&#x3D;&#x3D; this.UnknownProvince) return;
+
+    const cached &#x3D; this.provincesAnnouncement().get(provinceCode);
+    if (cached?.length) return;
+
+    if (provinceCode !&#x3D;&#x3D; this.EsfahanProvince) return; // TODO: support all provinces
+
+    const terminals &#x3D; await this.lap.getLoadAnnouncementPlaces();
+    const data &#x3D; terminals.data ?? [];
+
+    this.provincesAnnouncement.update((map) &#x3D;&gt; {
+      map.set(provinceCode, data);
+      return map;
+    });
   }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;p-panel
-  styleClass&#x3D;&quot;shadow-0 border-none&quot;
-  [toggleable]&#x3D;&quot;true&quot;
-  [collapsed]&#x3D;&quot;true&quot;
-  expandIcon&#x3D;&quot;pi pi-search-minus&quot;
-  collapseIcon&#x3D;&quot;pi pi-search-plus&quot;
-&gt;
-  &lt;ng-template #header&gt;
-    &lt;span class&#x3D;&quot;text-sm md:text-base lg:text-lg font-bold&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;min-h-screen min-w-screen flex flex-col&quot;&gt;
+
+ &lt;!-- Header --&gt;
+  &lt;div class&#x3D;&quot;p-4 bg-emphasis shadow-md&quot;&gt;
+    &lt;span class&#x3D;&quot;text-xs md:text-base lg:text-lg font-bold&quot;&gt;
       {{ headerTitle }}
     &lt;/span&gt;
-  &lt;/ng-template&gt;
+  &lt;/div&gt;
 
-  &lt;div class&#x3D;&quot;flex justify-center items-center p-3 w-full&quot;&gt;
-    &lt;div class&#x3D;&quot;w-full&quot;&gt;
+  &lt;!-- Dialog --&gt;
+  &lt;p-dialog
+    draggable&#x3D;&quot;false&quot;
+    [header]&#x3D;&quot;dialogTitle()&quot;
+    [modal]&#x3D;&quot;true&quot;
+    maskStyleClass&#x3D;&quot;backdrop-blur-sm&quot;
+    [style]&#x3D;&quot;{ width: &#x27;48rem&#x27;, maxWidth: &#x27;95vw&#x27;, height: &#x27;600px&#x27; }&quot;
+    [(visible)]&#x3D;&quot;isDialogVisible&quot;
+    position&#x3D;&quot;center&quot;
+  &gt;
+    &lt;!-- Search Input --&gt;
+    &lt;div class&#x3D;&quot;flex justify-center items-center p-4 w-full&quot;&gt;
       &lt;app-search-input
         class&#x3D;&quot;w-full&quot;
-        [staticData]&#x3D;&quot;allLoadAnnouncementPlaces&quot;
+        [staticData]&#x3D;&quot;provincesAnnouncement().get(currentProvince()) ?? []&quot;
         [itemMatchesQuery]&#x3D;&quot;filterAnnouncementPlaces&quot;
         [autoTriggerSearch]&#x3D;&quot;true&quot;
         [fallbackToAllWhenQueryShort]&#x3D;&quot;true&quot;
         [minSearchLength]&#x3D;&quot;2&quot;
         (searchResult)&#x3D;&quot;handleSearch($event)&quot;
+        placeholder&#x3D;&quot;جستجو پایانه اعلام بار&quot;
       /&gt;
     &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/p-panel&gt;
 
-&lt;div
-  class&#x3D;&quot;min-h-90vh flex flex-wrap justify-content-around align-items-center gap-4 p-4&quot;
-&gt;
-  @for (terminal of displayedLoadAnnouncementPlaces; track $index) {
-  &lt;div
-    class&#x3D;&quot;w-10rem md:w-20rem&quot;
-    pAnimateOnScroll
-    enterClass&#x3D;&quot;animate-enter fade-in-10 slide-in-from-t-20 animate-duration&quot;
-    leaveClass&#x3D;&quot;animate-leave fade-out-0&quot;
-  &gt;
-    &lt;app-terminal-card [terminal]&#x3D;&quot;terminal&quot; /&gt;
+    &lt;!-- Terminals --&gt;
+    &lt;div class&#x3D;&quot;min-h-90vh flex flex-wrap justify-around items-center gap-6 p-6&quot;&gt;
+      @if (displayedLoadAnnouncementPlaces().length &gt; 0) {
+        @for (terminal of displayedLoadAnnouncementPlaces(); track $index) {
+          &lt;div class&#x3D;&quot;w-34 md:w-80 rounded-full&quot;&gt;
+            &lt;app-terminal-card [terminal]&#x3D;&quot;terminal&quot; /&gt;
+          &lt;/div&gt;
+        }
+      } @else {
+        &lt;div class&#x3D;&quot;flex items-center justify-center h-full text-gray-500 dark:text-gray-400 italic&quot;&gt;
+          پایانه‌ای یافت نشد
+        &lt;/div&gt;
+      }
+    &lt;/div&gt;
+  &lt;/p-dialog&gt;
+
+  &lt;!-- Map --&gt;
+  &lt;div class&#x3D;&quot;flex-1 flex justify-center items-center pt-5&quot;&gt;
+    &lt;app-map-svg (clickProvince)&#x3D;&quot;clickProvince($event)&quot;&gt;&lt;/app-map-svg&gt;
   &lt;/div&gt;
-  }
+
 &lt;/div&gt;
+
+
+&lt;app-support-button /&gt;
 </code></pre>
     </div>
 
@@ -746,8 +1335,8 @@ export class HomePageComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><p-panel  styleClass="shadow-0 border-none"  [toggleable]="true"  [collapsed]="true"  expandIcon="pi pi-search-minus"  collapseIcon="pi pi-search-plus">  <ng-template #header>    <span class="text-sm md:text-base lg:text-lg font-bold">      {{ headerTitle }}    </span>  </ng-template>  <div class="flex justify-center items-center p-4 w-full">    <div class="w-full">      <app-search-input        class="w-full"        [staticData]="allLoadAnnouncementPlaces"        [itemMatchesQuery]="filterAnnouncementPlaces"        [autoTriggerSearch]="true"        [fallbackToAllWhenQueryShort]="true"        [minSearchLength]="2"        (searchResult)="handleSearch($event)"      />    </div>  </div></p-panel><div  class="min-h-90vh flex flex-wrap justify-around items-center gap-6 p-4">  @for (terminal of displayedLoadAnnouncementPlaces; track $index) {  <div    class="w-10rem md:w-20rem"    pAnimateOnScroll    enterClass="animate-enter fade-in-10 slide-in-from-t-20 animate-duration"    leaveClass="animate-leave fade-out-0"  >    <app-terminal-card [terminal]="terminal" />  </div>  }</div></div>'
-    var COMPONENTS = [{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarMenuComponent', 'selector': 'app-sidebar-menu'},{'name': 'SubMenuComponent', 'selector': 'app-sub-menu'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TabBarComponent', 'selector': 'app-tab-bar'},{'name': 'TabViewComponent', 'selector': 'app-tab-view'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'}];
+        var COMPONENT_TEMPLATE = '<div><div class="min-h-screen min-w-screen flex flex-col"> <!-- Header -->  <div class="p-4 bg-emphasis shadow-md">    <span class="text-xs md:text-base lg:text-lg font-bold">      {{ headerTitle }}    </span>  </div>  <!-- Dialog -->  <p-dialog    draggable="false"    [header]="dialogTitle()"    [modal]="true"    maskStyleClass="backdrop-blur-sm"    [style]="{ width: \'48rem\', maxWidth: \'95vw\', height: \'600px\' }"    [(visible)]="isDialogVisible"    position="center"  >    <!-- Search Input -->    <div class="flex justify-center items-center p-4 w-full">      <app-search-input        class="w-full"        [staticData]="provincesAnnouncement().get(currentProvince()) ?? []"        [itemMatchesQuery]="filterAnnouncementPlaces"        [autoTriggerSearch]="true"        [fallbackToAllWhenQueryShort]="true"        [minSearchLength]="2"        (searchResult)="handleSearch($event)"        placeholder="جستجو پایانه اعلام بار"      />    </div>    <!-- Terminals -->    <div class="min-h-90vh flex flex-wrap justify-around items-center gap-6 p-6">      @if (displayedLoadAnnouncementPlaces().length > 0) {        @for (terminal of displayedLoadAnnouncementPlaces(); track $index) {          <div class="w-34 md:w-80 rounded-full">            <app-terminal-card [terminal]="terminal" />          </div>        }      } @else {        <div class="flex items-center justify-center h-full text-gray-500 dark:text-gray-400 italic">          پایانه‌ای یافت نشد        </div>      }    </div>  </p-dialog>  <!-- Map -->  <div class="flex-1 flex justify-center items-center pt-5">    <app-map-svg (clickProvince)="clickProvince($event)"></app-map-svg>  </div></div><app-support-button /></div>'
+    var COMPONENTS = [{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DashboardContentManagerComponent', 'selector': 'app-dashboard-content-manager'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'ExitConfirmationDialogComponent', 'selector': 'app-exit-confirmation-dialog'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'IssuedTurnListFormComponent', 'selector': 'app-issued-turn-list-form'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'LogoComponent', 'selector': 'app-logo'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'MapSvgComponent', 'selector': 'app-map-svg'},{'name': 'MobileTabBarComponent', 'selector': 'app-mobile-tab-bar'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RegisterTurnFormComponent', 'selector': 'app-register-turn-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SearchProcessesComponent', 'selector': 'app-search-processes'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarPageGroupComponent', 'selector': 'app-sidebar-page-group'},{'name': 'SidebarWebProcesses', 'selector': 'app-sidebar-web-processes'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabManagerComponent', 'selector': 'app-tab-manager'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'ThemeManagementComponent', 'selector': 'app-theme-management'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'ToggleSwitchInputComponent', 'selector': 'app-toggle-switch-input'},{'name': 'TransportCompaniesFormComponent', 'selector': 'app-transport-companies-form'},{'name': 'TransportCompaniesWalletPaymentFormComponent', 'selector': 'app-transport-companies-wallet-payment-form'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TruckWalletPaymentFormComponent', 'selector': 'app-truck-wallet-payment-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserChargingFunctionFormComponent', 'selector': 'app-user-charging-function-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UserProfileComponent', 'selector': 'app-user-profile'},{'name': 'UserProfileFormComponent', 'selector': 'app-user-profile-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'},{'name': 'WalletPaymentFormComponent', 'selector': 'app-wallet-payment-form'},{'name': 'WalletPaymentRecordTableComponent', 'selector': 'app-payment-record-table'},{'name': 'WalletProfileComponent', 'selector': 'app-wallet-profile'},{'name': 'WalletTransactionsTableComponent', 'selector': 'app-wallet-transactions-table'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'HomePageComponent'};
 </script>

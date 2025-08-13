@@ -320,10 +320,11 @@ import {
   Validators,
 } from &#x27;@angular/forms&#x27;;
 import { SearchAutoCompleteComponent } from &#x27;app/components/shared/inputs/search-auto-complete/search-auto-complete.component&#x27;;
-import { AnnouncementGroupSubgroupManagementService } from &#x27;app/services/announcement_group_subgroup_management/announcement-group-subgroup-management.service&#x27;;
-import { AnnouncementGroup } from &#x27;app/services/announcement_group_subgroup_management/model/announcement-group.model&#x27;;
-import { AnnouncementSubGroup } from &#x27;app/services/announcement_group_subgroup_management/model/announcement-subgroup.model&#x27;;
-import { RelationOfAnnouncementGroupAndSubGroup } from &#x27;app/services/announcement_group_subgroup_management/model/relation-of-announcement-group-subgroup.model&#x27;;
+import { TableConfig } from &#x27;app/constants/ui/table.ui&#x27;;
+import { AnnouncementGroupSubgroupManagementService } from &#x27;app/services/announcement-group-subgroup-management/announcement-group-subgroup-management.service&#x27;;
+import { AnnouncementGroup } from &#x27;app/services/announcement-group-subgroup-management/model/announcement-group.model&#x27;;
+import { AnnouncementSubGroup } from &#x27;app/services/announcement-group-subgroup-management/model/announcement-subgroup.model&#x27;;
+import { RelationOfAnnouncementGroupAndSubGroup } from &#x27;app/services/announcement-group-subgroup-management/model/relation-of-announcement-group-subgroup.model&#x27;;
 import { LoadingService } from &#x27;app/services/loading-service/loading-service.service&#x27;;
 import { ToastService } from &#x27;app/services/toast-service/toast.service&#x27;;
 import { checkAndToastError } from &#x27;app/utils/api-utils&#x27;;
@@ -331,6 +332,7 @@ import { ConfirmationService } from &#x27;primeng/api&#x27;;
 import { ButtonModule } from &#x27;primeng/button&#x27;;
 import { ConfirmDialogModule } from &#x27;primeng/confirmdialog&#x27;;
 import { TableModule } from &#x27;primeng/table&#x27;;
+import { ButtonComponent } from &#x27;app/components/shared/button/button.component&#x27;;
 
 // 📦 Interface for displaying flat relation data in table
 interface RowRelationOfAnnouncement {
@@ -348,6 +350,7 @@ interface RowRelationOfAnnouncement {
     SearchAutoCompleteComponent,
     TableModule,
     ConfirmDialogModule,
+    ButtonComponent,
   ],
   providers: [ConfirmationService],
   templateUrl: &#x27;./relation-of-announcement-group-and-sub-group.component.html&#x27;,
@@ -359,8 +362,11 @@ export class RelationOfAnnouncementGroupAndSubGroupComponent {
   private loadingService &#x3D; inject(LoadingService);
   private toast &#x3D; inject(ToastService);
   private confirmationService &#x3D; inject(ConfirmationService);
-  private announcementService &#x3D; inject(AnnouncementGroupSubgroupManagementService);
+  private announcementService &#x3D; inject(
+    AnnouncementGroupSubgroupManagementService,
+  );
 
+  readonly tableUi &#x3D; TableConfig;
   // 📊 UI State
   loading &#x3D; false;
   addonWidth &#x3D; &#x27;8rem&#x27;;
@@ -390,19 +396,27 @@ export class RelationOfAnnouncementGroupAndSubGroupComponent {
 
   // 📥 Form Getters
   get announcementGroupId(): FormControl {
-    return this.announcementGroupAndSubGroupForm.get(&#x27;announcementGroupId&#x27;) as FormControl;
+    return this.announcementGroupAndSubGroupForm.get(
+      &#x27;announcementGroupId&#x27;,
+    ) as FormControl;
   }
 
   get announcementGroupTitle(): FormControl {
-    return this.announcementGroupAndSubGroupForm.get(&#x27;announcementGroupTitle&#x27;) as FormControl;
+    return this.announcementGroupAndSubGroupForm.get(
+      &#x27;announcementGroupTitle&#x27;,
+    ) as FormControl;
   }
 
   get announcementSubGroupId(): FormControl {
-    return this.announcementGroupAndSubGroupForm.get(&#x27;announcementSubGroupId&#x27;) as FormControl;
+    return this.announcementGroupAndSubGroupForm.get(
+      &#x27;announcementSubGroupId&#x27;,
+    ) as FormControl;
   }
 
   get announcementSubGroupTitle(): FormControl {
-    return this.announcementGroupAndSubGroupForm.get(&#x27;announcementSubGroupTitle&#x27;) as FormControl;
+    return this.announcementGroupAndSubGroupForm.get(
+      &#x27;announcementSubGroupTitle&#x27;,
+    ) as FormControl;
   }
 
   // 🧹 Reset value when input is cleared
@@ -428,20 +442,25 @@ export class RelationOfAnnouncementGroupAndSubGroupComponent {
 
   // 📡 Fetch relation data from backend
   private async loadRelationOfAnnouncement(announcementId: number) {
-    const res &#x3D; await this.announcementService.GetRelationOfAnnouncementGroupAndSubGroup(announcementId);
+    const res &#x3D;
+      await this.announcementService.GetRelationOfAnnouncementGroupAndSubGroup(
+        announcementId,
+      );
     if (!checkAndToastError(res, this.toast)) return;
     this.relationsAnnouncement &#x3D; this.flattenAnnouncementRelations(res.data!);
   }
 
   // 🔃 Convert nested relations to flat format for display
-  private flattenAnnouncementRelations(data: RelationOfAnnouncementGroupAndSubGroup[]): RowRelationOfAnnouncement[] {
-    return data.flatMap(group &#x3D;&gt;
-      group.AnnouncementSubGroups.map(sub &#x3D;&gt; ({
+  private flattenAnnouncementRelations(
+    data: RelationOfAnnouncementGroupAndSubGroup[],
+  ): RowRelationOfAnnouncement[] {
+    return data.flatMap((group) &#x3D;&gt;
+      group.AnnouncementSubGroups.map((sub) &#x3D;&gt; ({
         AnnouncementId: group.AnnouncementId,
         AnnouncementTitle: group.AnnouncementTitle ?? &#x27;&#x27;,
         AnnouncementSGId: sub.AnnouncementSGId,
         AnnouncementSGTitle: sub.AnnouncementSGTitle ?? &#x27;&#x27;,
-      }))
+      })),
     );
   }
 
@@ -458,6 +477,8 @@ export class RelationOfAnnouncementGroupAndSubGroupComponent {
         severity: &#x27;secondary&#x27;,
         outlined: true,
       },
+      acceptLabel: &#x27;تایید&#x27;,
+      rejectLabel: &#x27;لغو&#x27;,
       acceptButtonProps: {
         label: &#x27;تایید&#x27;,
         severity: &#x27;danger&#x27;,
@@ -475,10 +496,11 @@ export class RelationOfAnnouncementGroupAndSubGroupComponent {
 
   // ❌ Delete relation from backend
   private async deleteRelationAnnouncement(row: RowRelationOfAnnouncement) {
-    const res &#x3D; await this.announcementService.DeleteRelationOfAnnouncementGroupAndSubGroup(
-      row.AnnouncementId,
-      row.AnnouncementSGId
-    );
+    const res &#x3D;
+      await this.announcementService.DeleteRelationOfAnnouncementGroupAndSubGroup(
+        row.AnnouncementId,
+        row.AnnouncementSGId,
+      );
     if (!checkAndToastError(res, this.toast)) return;
     this.toast.success(&#x27;موفق&#x27;, res.data.Message);
     await this.loadRelationOfAnnouncement(row.AnnouncementId);
@@ -489,10 +511,11 @@ export class RelationOfAnnouncementGroupAndSubGroupComponent {
     if (this.announcementGroupAndSubGroupForm.invalid || this.loading) return;
     try {
       this.loadingService.setLoading(true);
-      const res &#x3D; await this.announcementService.RegisterNewRelationOfAnnouncementGroupAndSubGroup(
-        this.announcementGroupId.value,
-        this.announcementSubGroupId.value
-      );
+      const res &#x3D;
+        await this.announcementService.RegisterNewRelationOfAnnouncementGroupAndSubGroup(
+          this.announcementGroupId.value,
+          this.announcementSubGroupId.value,
+        );
       if (!checkAndToastError(res, this.toast)) return;
       this.toast.success(&#x27;موفق&#x27;, res.data?.Message ?? &#x27;&#x27;);
       await this.loadRelationOfAnnouncement(this.announcementGroupId.value);
@@ -500,7 +523,8 @@ export class RelationOfAnnouncementGroupAndSubGroupComponent {
       this.loadingService.setLoading(false);
     }
   }
-}</code></pre>
+}
+</code></pre>
     </div>
 </div>
 

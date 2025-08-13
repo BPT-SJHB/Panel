@@ -160,6 +160,7 @@
                             <code>InputGroupModule</code>
                             <code>ReactiveFormsModule</code>
                             <code>NgClass</code>
+                            <code>ButtonModule</code>
                 </td>
             </tr>
 
@@ -257,7 +258,7 @@
 </section>
 
     <section data-compodoc="block-constructor">
-    <h3 id="function Object() { [native code] }">Constructor</h3>
+    <h3 id="constructor">Constructor</h3>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
@@ -439,8 +440,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="34"
-                                    class="link-to-prism">src/app/components/shared/inputs/captcha-input/captcha-input.component.ts:34</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="35"
+                                    class="link-to-prism">src/app/components/shared/inputs/captcha-input/captcha-input.component.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -478,8 +479,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="52"
-                                    class="link-to-prism">src/app/components/shared/inputs/captcha-input/captcha-input.component.ts:52</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="51"
+                                    class="link-to-prism">src/app/components/shared/inputs/captcha-input/captcha-input.component.ts:51</a></div>
                         </td>
                     </tr>
 
@@ -571,6 +572,7 @@ import { InputGroupAddonModule } from &#x27;primeng/inputgroupaddon&#x27;;
 import { MessageModule } from &#x27;primeng/message&#x27;;
 import { CaptchaService } from &#x27;app/services/captcha-service/captcha.service&#x27;;
 import { ToastService } from &#x27;app/services/toast-service/toast.service&#x27;;
+import { ButtonModule } from &#x27;primeng/button&#x27;;
 
 @Component({
   selector: &#x27;app-captcha-input&#x27;,
@@ -580,31 +582,30 @@ import { ToastService } from &#x27;app/services/toast-service/toast.service&#x27
     InputGroupModule,
     ReactiveFormsModule,
     NgClass,
+    ButtonModule,
   ],
   templateUrl: &#x27;./captcha-input.component.html&#x27;,
   styleUrl: &#x27;./captcha-input.component.scss&#x27;,
 })
-
-
 export class CaptchaInputComponent implements OnInit {
   @Input() sessionIdControl: FormControl &#x3D; new FormControl(&#x27;&#x27;);
   @Input() captchaInputControl: FormControl &#x3D; new FormControl(&#x27;&#x27;);
   imageData &#x3D; &#x27;&#x27;;
   disableRefresh &#x3D; false;
 
-  constructor(private captchaService: CaptchaService, private toast: ToastService) {
-
-  }
+  constructor(
+    private captchaService: CaptchaService,
+    private toast: ToastService
+  ) {}
 
   ngOnInit(): void {
     this.getCaptchaInformation();
   }
 
-
   async getCaptchaInformation() {
     const captcha &#x3D; await this.captchaService.getCaptcha();
     if (!captcha.success || !captcha.data) {
-      this.toast.error(&#x27;خطا&#x27;, captcha.error?.message ?? &quot;&quot;);
+      this.toast.error(&#x27;خطا&#x27;, captcha.error?.message ?? &#x27;&#x27;);
       console.log(captcha.error?.details);
       return;
     }
@@ -612,7 +613,6 @@ export class CaptchaInputComponent implements OnInit {
     this.imageData &#x3D; &#x27;data:image/png;base64,&#x27; + captcha.data.imageData;
     this.sessionIdControl.setValue(captcha.data.sessionId);
   }
-
 
   async onRefreshClick() {
     if (this.disableRefresh) return;
@@ -629,54 +629,65 @@ export class CaptchaInputComponent implements OnInit {
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">
-&lt;div&gt;
-  &lt;input hidden  [formControl]&#x3D;&quot;sessionIdControl&quot; readonly   /&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div&gt;
+  &lt;input hidden [formControl]&#x3D;&quot;sessionIdControl&quot; readonly /&gt;
 
   &lt;p-inputgroup styleClass&#x3D;&quot;h-2-5rem&quot;&gt;
     &lt;p-inputgroup-addon
-    class&#x3D;&quot;p-0 overflow-hidden border-round-right flex align-items-center justify-content-center&quot;
+      class&#x3D;&quot;rounded-2xl&quot;
+      [style.padding]&#x3D;&quot;0&quot;
+      [style.border]&#x3D;&quot;0&quot;
     &gt;
-      &lt;img [src]&#x3D;&quot;imageData&quot; alt&#x3D;&quot;کپچا&quot; class&#x3D;&quot;w-full h-full object-cover&quot; /&gt;
-  &lt;/p-inputgroup-addon&gt;
-
-  &lt;input
-  [formControl]&#x3D;&quot;captchaInputControl&quot;
-  pInputText
-  placeholder&#x3D;&quot;عدد تصویر وارد کنید&quot;
-  class&#x3D;&quot;w-full border-round-left px-2 h-full&quot;
-  [ngClass]&#x3D;&quot;{
-    &#x27;border-red-500&#x27;: captchaInputControl.touched &amp;&amp; captchaInputControl.invalid,
-    &#x27;border&#x27;: true,
-    &#x27;border-round-left&#x27;: true,
-    &#x27;px-2&#x27;: true,
-    &#x27;h-full&#x27;: true,
-    &#x27;w-full&#x27;: true
-  }&quot;
-  /&gt;
-
-  &lt;p-inputgroup-addon
-      (click)&#x3D;&quot;onRefreshClick()&quot;
-      class&#x3D;&quot;bg-secondary border-round-left flex align-items-center justify-content-center px-3 cursor-pointer&quot;
-    &gt;
-      &lt;i
-      [ngClass]&#x3D;&quot;{ &#x27;rotate&#x27;: disableRefresh }&quot;
-      class&#x3D;&quot;pi pi-refresh&quot;&gt;&lt;/i&gt;
+      &lt;img
+        [src]&#x3D;&quot;imageData&quot;
+        alt&#x3D;&quot;کپچا&quot;
+        class&#x3D;&quot;w-full h-full object-fill z-10 border-2 border-primary-emphasis rounded-r-2xl&quot;
+      /&gt;
     &lt;/p-inputgroup-addon&gt;
-&lt;/p-inputgroup&gt;
 
-@if (captchaInputControl.touched &amp;&amp; captchaInputControl.errors) {
-  @if (captchaInputControl.errors[&#x27;required&#x27;]) {
-    &lt;p-message severity&#x3D;&quot;error&quot; variant&#x3D;&quot;simple&quot; size&#x3D;&quot;small&quot;&gt;
-      وارد کردن عدد تصویر الزامی است.
-    &lt;/p-message&gt;
+    &lt;input
+      pInputText
+      [formControl]&#x3D;&quot;captchaInputControl&quot;
+      pInputText
+      placeholder&#x3D;&quot;عدد تصویر وارد کنید&quot;
+      [style.background]&#x3D;&quot;&#x27;var(--p-inputgroup-addon-background)&#x27;&quot;
+      class&#x3D;&quot;border border-y-2 border-x-0 focus:outline-0 border-surface-400 focus:border-primary-emphasis px-2 h-full w-full placeholder:text-gray-400 text-sm&quot;
+      [ngClass]&#x3D;&quot;{
+        &#x27;focus:border-red-500&#x27;:
+          captchaInputControl.touched &amp;&amp; captchaInputControl.invalid,
+      }&quot;
+    /&gt;
+    &lt;p-inputgroup-addon
+      [style]&#x3D;&quot;{
+        padding: 0,
+        margin: 0,
+        border: 0
+      }&quot;
+      class&#x3D;&quot;flex h-10 rounded-l-2xl&quot;
+    &gt;
+      &lt;p-button
+        icon&#x3D;&quot;pi pi-refresh text-primary-emphasis&quot;
+        (click)&#x3D;&quot;onRefreshClick()&quot;
+      &gt;
+        &lt;i
+          [ngClass]&#x3D;&quot;{ rotate: disableRefresh }&quot;
+          class&#x3D;&quot;pi pi-refresh fixed text-primary-contrast&quot;
+        &gt;&lt;/i&gt;
+      &lt;/p-button&gt;
+    &lt;/p-inputgroup-addon&gt;
+  &lt;/p-inputgroup&gt;
+
+  @if (captchaInputControl.touched &amp;&amp; captchaInputControl.errors) { @if
+  (captchaInputControl.errors[&#x27;required&#x27;]) {
+  &lt;p-message severity&#x3D;&quot;error&quot; variant&#x3D;&quot;simple&quot; size&#x3D;&quot;small&quot;&gt;
+    وارد کردن عدد تصویر الزامی است.
+  &lt;/p-message&gt;
   } @else if (captchaInputControl.errors[&#x27;minlength&#x27;]) {
-    &lt;p-message severity&#x3D;&quot;error&quot; variant&#x3D;&quot;simple&quot; size&#x3D;&quot;small&quot;&gt;
-      کپچا باید حداقل {{ captchaInputControl.errors[&#x27;minlength&#x27;].requiredLength }} کاراکتر باشد.
-    &lt;/p-message&gt;
-  }
-
-}
+  &lt;p-message severity&#x3D;&quot;error&quot; variant&#x3D;&quot;simple&quot; size&#x3D;&quot;small&quot;&gt;
+    کپچا باید حداقل
+    {{ captchaInputControl.errors[&quot;minlength&quot;].requiredLength }} کاراکتر باشد.
+  &lt;/p-message&gt;
+  } }
 &lt;/div&gt;
 </code></pre>
     </div>
@@ -707,8 +718,8 @@ export class CaptchaInputComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div>  <input hidden  [formControl]="sessionIdControl" readonly   />  <p-inputgroup styleClass="h-2-5rem">    <p-inputgroup-addon    class="p-0 overflow-hidden rounded-r flex items-center justify-content-center"    >      <img [src]="imageData" alt="کپچا" class="w-full h-full object-cover" />  </p-inputgroup-addon>  <input  [formControl]="captchaInputControl"  pInputText  placeholder="عدد تصویر وارد کنید"  class="w-full rounded-l px-2 h-full"  [ngClass]="{    \'border-red-500\': captchaInputControl.touched && captchaInputControl.invalid,    \'border\': true,    \'border-round-left\': true,    \'px-2\': true,    \'h-full\': true,    \'w-full\': true  }"  />  <p-inputgroup-addon      (click)="onRefreshClick()"      class="bg-secondary rounded-l flex items-center justify-center px-4 cursor-pointer"    >      <i      [ngClass]="{ \'rotate\': disableRefresh }"      class="pi pi-refresh"></i>    </p-inputgroup-addon></p-inputgroup>@if (captchaInputControl.touched && captchaInputControl.errors) {  @if (captchaInputControl.errors[\'required\']) {    <p-message severity="error" variant="simple" size="small">      وارد کردن عدد تصویر الزامی است.    </p-message>  } @else if (captchaInputControl.errors[\'minlength\']) {    <p-message severity="error" variant="simple" size="small">      کپچا باید حداقل {{ captchaInputControl.errors[\'minlength\'].requiredLength }} کاراکتر باشد.    </p-message>  }}</div></div>'
-    var COMPONENTS = [{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarMenuComponent', 'selector': 'app-sidebar-menu'},{'name': 'SubMenuComponent', 'selector': 'app-sub-menu'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TabBarComponent', 'selector': 'app-tab-bar'},{'name': 'TabViewComponent', 'selector': 'app-tab-view'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'}];
+        var COMPONENT_TEMPLATE = '<div><div>  <input hidden [formControl]="sessionIdControl" readonly />  <p-inputgroup styleClass="h-2-5rem">    <p-inputgroup-addon      class="rounded-2xl"      [style.padding]="0"      [style.border]="0"    >      <img        [src]="imageData"        alt="کپچا"        class="w-full h-full object-fill z-10 border-2 border-primary-emphasis rounded-r-2xl"      />    </p-inputgroup-addon>    <input      pInputText      [formControl]="captchaInputControl"      pInputText      placeholder="عدد تصویر وارد کنید"      [style.background]="\'var(--p-inputgroup-addon-background)\'"      class="border border-y-2 border-x-0 focus:outline-0 border-surface-400 focus:border-primary-emphasis px-2 h-full w-full placeholder:text-gray-400 text-sm"      [ngClass]="{        \'focus:border-red-500\':          captchaInputControl.touched && captchaInputControl.invalid,      }"    />    <p-inputgroup-addon      [style]="{        padding: 0,        margin: 0,        border: 0      }"      class="flex h-10 rounded-l-2xl"    >      <p-button        icon="pi pi-refresh text-primary-emphasis"        (click)="onRefreshClick()"      >        <i          [ngClass]="{ rotate: disableRefresh }"          class="pi pi-refresh fixed text-primary-contrast"        ></i>      </p-button>    </p-inputgroup-addon>  </p-inputgroup>  @if (captchaInputControl.touched && captchaInputControl.errors) { @if  (captchaInputControl.errors[\'required\']) {  <p-message severity="error" variant="simple" size="small">    وارد کردن عدد تصویر الزامی است.  </p-message>  } @else if (captchaInputControl.errors[\'minlength\']) {  <p-message severity="error" variant="simple" size="small">    کپچا باید حداقل    {{ captchaInputControl.errors["minlength"].requiredLength }} کاراکتر باشد.  </p-message>  } }</div></div>'
+    var COMPONENTS = [{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DashboardContentManagerComponent', 'selector': 'app-dashboard-content-manager'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'ExitConfirmationDialogComponent', 'selector': 'app-exit-confirmation-dialog'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'IssuedTurnListFormComponent', 'selector': 'app-issued-turn-list-form'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'LogoComponent', 'selector': 'app-logo'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'MapSvgComponent', 'selector': 'app-map-svg'},{'name': 'MobileTabBarComponent', 'selector': 'app-mobile-tab-bar'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RegisterTurnFormComponent', 'selector': 'app-register-turn-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SearchProcessesComponent', 'selector': 'app-search-processes'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarPageGroupComponent', 'selector': 'app-sidebar-page-group'},{'name': 'SidebarWebProcesses', 'selector': 'app-sidebar-web-processes'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabManagerComponent', 'selector': 'app-tab-manager'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'ThemeManagementComponent', 'selector': 'app-theme-management'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'ToggleSwitchInputComponent', 'selector': 'app-toggle-switch-input'},{'name': 'TransportCompaniesFormComponent', 'selector': 'app-transport-companies-form'},{'name': 'TransportCompaniesWalletPaymentFormComponent', 'selector': 'app-transport-companies-wallet-payment-form'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TruckWalletPaymentFormComponent', 'selector': 'app-truck-wallet-payment-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserChargingFunctionFormComponent', 'selector': 'app-user-charging-function-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UserProfileComponent', 'selector': 'app-user-profile'},{'name': 'UserProfileFormComponent', 'selector': 'app-user-profile-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'},{'name': 'WalletPaymentFormComponent', 'selector': 'app-wallet-payment-form'},{'name': 'WalletPaymentRecordTableComponent', 'selector': 'app-payment-record-table'},{'name': 'WalletProfileComponent', 'selector': 'app-wallet-profile'},{'name': 'WalletTransactionsTableComponent', 'selector': 'app-wallet-transactions-table'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'CaptchaInputComponent'};
 </script>

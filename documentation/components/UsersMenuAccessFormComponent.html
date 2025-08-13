@@ -121,14 +121,13 @@
 
 
 
+    <p class="comment">
+        <h3>Extends</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="../injectables/BaseLoading.html" target="_self" >BaseLoading</a></code>
+    </p>
 
-    <p class="comment">
-        <h3>Implements</h3>
-    </p>
-    <p class="comment">
-                <code>OnInit</code>
-                <code>OnDestroy</code>
-    </p>
 
 
 <section data-compodoc="block-metadata">
@@ -152,17 +151,20 @@
                 <td class="col-md-9"><code>app-users-menu-access-form</code></td>
             </tr>
 
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
 
             <tr>
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
                             <code>TreeTableModule</code>
-                            <code>CommonModule</code>
-                                <code><a href="../components/SearchInputComponent.html" target="_self" >SearchInputComponent</a></code>
-                            <code>ButtonModule</code>
                             <code>ProgressSpinnerModule</code>
                             <code>ReactiveFormsModule</code>
-                                <code><a href="../components/TextInputComponent.html" target="_self" >TextInputComponent</a></code>
+                                <code><a href="../components/SearchInputComponent.html" target="_self" >SearchInputComponent</a></code>
+                                <code><a href="../components/TreeTableCheckboxComponent.html" target="_self" >TreeTableCheckboxComponent</a></code>
+                                <code><a href="../components/ButtonComponent.html" target="_self" >ButtonComponent</a></code>
                 </td>
             </tr>
 
@@ -202,46 +204,60 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Optional</span>
-                                <a href="#accessTable" >accessTable</a>
+                                    <span class="modifier">Private</span>
+                                <a href="#childChanges" >childChanges</a>
                             </li>
                             <li>
+                                    <span class="modifier">Readonly</span>
                                 <a href="#cols" >cols</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#destroy$" >destroy$</a>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#mobileControl" >mobileControl</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#fb" >fb</a>
+                                <a href="#parentChanges" >parentChanges</a>
                             </li>
                             <li>
-                                <a href="#isLoading" >isLoading</a>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#rows" >rows</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#loadingService" >loadingService</a>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#searchFields" >searchFields</a>
                             </li>
                             <li>
-                                <a href="#searchForm" >searchForm</a>
+                                <a href="#searchUser" >searchUser</a>
                             </li>
                             <li>
-                                <a href="#selectedNodes" >selectedNodes</a>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#tree" >tree</a>
                             </li>
                             <li>
-                                <a href="#selectedNodesCopy" >selectedNodesCopy</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#toast" >toast</a>
-                            </li>
-                            <li>
+                                    <span class="modifier">Readonly</span>
                                 <a href="#userInfo" >userInfo</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#userManager" >userManager</a>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#userService" >userService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#destroy$" >destroy$</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#loadingService" >loadingService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#toast" >toast</a>
                             </li>
                         </ul>
                     </td>
@@ -256,13 +272,28 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Async</span>
-                                <a href="#getUserAccessMenu" >getUserAccessMenu</a>
+                                    <span class="modifier">Private</span>
+                                <a href="#convertToTreeNode" >convertToTreeNode</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Async</span>
-                                <a href="#LoadWebProcessGroups_WebProcessesTable" >LoadWebProcessGroups_WebProcessesTable</a>
+                                <a href="#getGroupProcesses" >getGroupProcesses</a>
+                            </li>
+                            <li>
+                                <a href="#isSubmitButtonDisabled" >isSubmitButtonDisabled</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#loadUser" >loadUser</a>
+                            </li>
+                            <li>
+                                <a href="#onTableCheckBoxChange" >onTableCheckBoxChange</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#updateAccesses" >updateAccesses</a>
                             </li>
                             <li>
                                 <a href="#ngOnDestroy" >ngOnDestroy</a>
@@ -271,8 +302,9 @@
                                 <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
+                                    <span class="modifier">Protected</span>
                                     <span class="modifier">Async</span>
-                                <a href="#SaveChanges" >SaveChanges</a>
+                                <a href="#withLoading" >withLoading</a>
                             </li>
                         </ul>
                     </td>
@@ -282,20 +314,6 @@
 
 
 
-                    <tr>
-                        <td class="col-md-4">
-                            <h6><b>Accessors</b></h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <ul class="index-list">
-                                <li>
-                                    <a href="#searchPhone" >searchPhone</a>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
         </tbody>
     </table>
 </section>
@@ -314,26 +332,167 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getUserAccessMenu"></a>
+                    <a name="convertToTreeNode"></a>
                     <span class="name">
-                            <span class="modifier">Async</span>
-                        <span ><b>getUserAccessMenu</b></span>
-                        <a href="#getUserAccessMenu"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Private</span>
+                        <span ><b>convertToTreeNode</b></span>
+                        <a href="#convertToTreeNode"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getUserAccessMenu()</code>
+                    <code>convertToTreeNode(groups: ApiGroupProcess[])</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="227"
-                                    class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:227</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="111"
+                                    class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:111</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Convert API group processes to TreeNode structure</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>groups</td>
+                                            <td>
+                                                        <code>ApiGroupProcess[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>TreeNode[]</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getGroupProcesses"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>getGroupProcesses</b></span>
+                        <a href="#getGroupProcesses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getGroupProcesses(mobile: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="101"
+                                    class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:101</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Fetch process groups and convert to TreeNodes</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>mobile</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;TreeNode[]&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSubmitButtonDisabled"></a>
+                    <span class="name">
+                        <span ><b>isSubmitButtonDisabled</b></span>
+                        <a href="#isSubmitButtonDisabled"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isSubmitButtonDisabled()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="191"
+                                    class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:191</a></div>
                         </td>
                     </tr>
 
@@ -342,7 +501,7 @@
                 <td class="col-md-4">
 
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                         </div>
                 </td>
@@ -353,33 +512,175 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="LoadWebProcessGroups_WebProcessesTable"></a>
+                    <a name="loadUser"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
                             <span class="modifier">Async</span>
-                        <span ><b>LoadWebProcessGroups_WebProcessesTable</b></span>
-                        <a href="#LoadWebProcessGroups_WebProcessesTable"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>loadUser</b></span>
+                        <a href="#loadUser"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>LoadWebProcessGroups_WebProcessesTable()</code>
+                    <code>loadUser(mobile: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="178"
-                                    class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:178</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="88"
+                                    class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:88</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Load user info by mobile number</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>mobile</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;boolean&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onTableCheckBoxChange"></a>
+                    <span class="name">
+                        <span ><b>onTableCheckBoxChange</b></span>
+                        <a href="#onTableCheckBoxChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onTableCheckBoxChange(changes: <a href="../interfaces/TreeTableChangedData.html" target="_self">TreeTableChangedData</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:130</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handle TreeTable checkbox changes and track modifications</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>changes</td>
+                                            <td>
+                                                            <code><a href="../interfaces/TreeTableChangedData.html" target="_self" >TreeTableChangedData</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateAccesses"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>updateAccesses</b></span>
+                        <a href="#updateAccesses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateAccesses()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="149"
+                                    class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:149</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Apply all access changes for selected user</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
@@ -409,8 +710,14 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="63"
-                                    class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:63</a></div>
+                            <div class="io-line">Inherited from         <code><a href="../injectables/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../injectables/BaseLoading.html#source" target="_self" >BaseLoading:19</a></code>
+</div>
                         </td>
                     </tr>
 
@@ -446,8 +753,14 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="68"
-                                    class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:68</a></div>
+                            <div class="io-line">Inherited from         <code><a href="../injectables/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../injectables/BaseLoading.html#source" target="_self" >BaseLoading:13</a></code>
+</div>
                         </td>
                     </tr>
 
@@ -467,37 +780,85 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="SaveChanges"></a>
+                    <a name="withLoading"></a>
                     <span class="name">
+                            <span class="modifier">Protected</span>
                             <span class="modifier">Async</span>
-                        <span ><b>SaveChanges</b></span>
-                        <a href="#SaveChanges"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>withLoading</b></span>
+                        <a href="#withLoading"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>SaveChanges()</code>
+                    <code>withLoading(fn: () => void)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="74"
-                                    class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:74</a></div>
+                            <div class="io-line">Inherited from         <code><a href="../injectables/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../injectables/BaseLoading.html#source" target="_self" >BaseLoading:27</a></code>
+</div>
                         </td>
                     </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Type parameters :</b>
+                            <ul class="type-parameters">
+                                    <li>T</li>
+                            </ul>
+                        </td>
+                    </tr>
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><h1>================================
+ Utility wrapper to centralize loading toggling</h1>
+</div>
 
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>fn</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                            <b>Returns : </b>    <code>Promise&lt;T | undefined&gt;</code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -512,28 +873,22 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="accessTable"></a>
+                    <a name="childChanges"></a>
                     <span class="name">
-                            <span class="modifier">Optional</span>
-                        <span ><b>accessTable</b></span>
-                        <a href="#accessTable"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Private</span>
+                        <span ><b>childChanges</b></span>
+                        <a href="#childChanges"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>    <code>TreeNode[]</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>[]</code>
+                        <i>Default value : </i><code>new Map&lt;number, Process&gt;()</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:50</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:61</a></div>
                         </td>
                     </tr>
 
@@ -546,6 +901,7 @@
                 <td class="col-md-4">
                     <a name="cols"></a>
                     <span class="name">
+                            <span class="modifier">Readonly</span>
                         <span ><b>cols</b></span>
                         <a href="#cols"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -559,10 +915,7 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>[
-    { field: &#x27;PGTitle&#x27;, header: &#x27;نام منو&#x27; },
-    { field: &#x27;Description&#x27;, header: &#x27;توضیحات&#x27; },
-  ]</code>
+                        <i>Default value : </i><code>[&#x27;منو&#x27;, &#x27;توضیحات&#x27;]</code>
                     </td>
                 </tr>
                     <tr>
@@ -578,195 +931,17 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="destroy$"></a>
+                    <a name="mobileControl"></a>
                     <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>destroy$</b></span>
-                        <a href="#destroy$"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>mobileControl</b></span>
+                        <a href="#mobileControl"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:47</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="fb"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>fb</b></span>
-                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>inject(FormBuilder)</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:45</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="isLoading"></a>
-                    <span class="name">
-                        <span ><b>isLoading</b></span>
-                        <a href="#isLoading"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>false</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:49</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="loadingService"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>loadingService</b></span>
-                        <a href="#loadingService"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>inject(LoadingService)</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:46</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="searchForm"></a>
-                    <span class="name">
-                        <span ><b>searchForm</b></span>
-                        <a href="#searchForm"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>FormGroup</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>this.fb.group({
-    searchPhone: [&#x27;&#x27;, ValidationSchema.mobile],
-  })</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:55</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="selectedNodes"></a>
-                    <span class="name">
-                        <span ><b>selectedNodes</b></span>
-                        <a href="#selectedNodes"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/SelectedNodes.html" target="_self" >SelectedNodes</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>{}</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:51</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="selectedNodesCopy"></a>
-                    <span class="name">
-                        <span ><b>selectedNodesCopy</b></span>
-                        <a href="#selectedNodesCopy"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/SelectedNodes.html" target="_self" >SelectedNodes</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>{}</code>
+                        <i>Default value : </i><code>new FormControl(&#x27;&#x27;, ValidationSchema.mobile)</code>
                     </td>
                 </tr>
                     <tr>
@@ -782,22 +957,22 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="toast"></a>
+                    <a name="parentChanges"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
-                        <span ><b>toast</b></span>
-                        <a href="#toast"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>parentChanges</b></span>
+                        <a href="#parentChanges"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>inject(ToastService)</code>
+                        <i>Default value : </i><code>new Map&lt;number, PageGroup&gt;()</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:44</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:60</a></div>
                         </td>
                     </tr>
 
@@ -808,22 +983,112 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="userInfo"></a>
+                    <a name="rows"></a>
                     <span class="name">
-                        <span ><b>userInfo</b></span>
-                        <a href="#userInfo"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>rows</b></span>
+                        <a href="#rows"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/SoftwareUserInfo.html" target="_self" >SoftwareUserInfo</a></code>
+                        <i>Type : </i>    <code>[]</code>
 
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>{ UserId: 0 }</code>
+                        <i>Default value : </i><code>[[&#x27;PGTitle&#x27;, &#x27;PTitle&#x27;], [&#x27;Description&#x27;]]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchFields"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>searchFields</b></span>
+                        <a href="#searchFields"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[&#x27;PGTitle&#x27;, &#x27;PTitle&#x27;]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchUser"></a>
+                    <span class="name">
+                        <span ><b>searchUser</b></span>
+                        <a href="#searchUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:66</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Search user by mobile number and load their menu access tree</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tree"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>tree</b></span>
+                        <a href="#tree"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;TreeNode[]&gt;([])</code>
                     </td>
                 </tr>
                     <tr>
@@ -839,11 +1104,38 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="userManager"></a>
+                    <a name="userInfo"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>userInfo</b></span>
+                        <a href="#userInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;SoftwareUserInfo | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userService"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
-                        <span ><b>userManager</b></span>
-                        <a href="#userManager"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>userService</b></span>
+                        <a href="#userService"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
@@ -854,7 +1146,139 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroy$"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>destroy$</b></span>
+                        <a href="#destroy$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../injectables/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../injectables/BaseLoading.html#source" target="_self" >BaseLoading:8</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../injectables/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../injectables/BaseLoading.html#source" target="_self" >BaseLoading:12</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingService"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>loadingService</b></span>
+                        <a href="#loadingService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(LoadingService)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../injectables/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../injectables/BaseLoading.html#source" target="_self" >BaseLoading:9</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toast"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>toast</b></span>
+                        <a href="#toast"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../injectables/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../injectables/BaseLoading.html#source" target="_self" >BaseLoading:10</a></code>
+</div>
                         </td>
                     </tr>
 
@@ -863,353 +1287,245 @@
     </table>
 </section>
 
-    <section data-compodoc="block-accessors">
-    <h3 id="accessors">
-        Accessors
-    </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="searchPhone"></a>
-                        <span class="name"><b>searchPhone</b><a href="#searchPhone"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>searchPhone()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="257" class="link-to-prism">src/app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component.ts:257</a></div>
-                                </td>
-                            </tr>
-
-            </tbody>
-        </table>
-</section>
 </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, signal } from &#x27;@angular/core&#x27;;
+import { FormControl, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
 import { TreeNode } from &#x27;primeng/api&#x27;;
 import { TreeTableModule } from &#x27;primeng/treetable&#x27;;
-import { CommonModule } from &#x27;@angular/common&#x27;;
+import { ProgressSpinnerModule } from &#x27;primeng/progressspinner&#x27;;
+
 import { UserManagementService } from &#x27;app/services/user-management/user-management.service&#x27;;
 import { SearchInputComponent } from &#x27;app/components/shared/inputs/search-input/search-input.component&#x27;;
-import { SoftwareUserInfo } from &#x27;app/data/model/software-user-info.model&#x27;;
-import { ProgressSpinnerModule } from &#x27;primeng/progressspinner&#x27;;
-import { ButtonModule } from &#x27;primeng/button&#x27;;
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-} from &#x27;@angular/forms&#x27;;
-import { ToastService } from &#x27;app/services/toast-service/toast.service&#x27;;
-import { ApiResponse } from &#x27;app/data/model/api-Response.model&#x27;;
-import { ShortResponse } from &#x27;app/data/model/short-response.model&#x27;;
-import { TextInputComponent } from &#x27;../../../shared/inputs/text-input/text-input.component&#x27;;
-import { ValidationSchema } from &#x27;app/constants/validation-schema&#x27;;
-import {Subject, takeUntil } from &#x27;rxjs&#x27;;
-import { LoadingService } from &#x27;app/services/loading-service/loading-service.service&#x27;;
+  TreeTableCheckboxComponent,
+  TreeTableChangedData,
+} from &#x27;app/components/trees/tree-table-checkbox/tree-table-checkbox.component&#x27;;
 
-interface SelectedNodes {
-  [key: string]: { checked: boolean; partialChecked?: boolean };
+import { BaseLoading } from &#x27;../../shared/component-base/base-loading&#x27;;
+import { ApiGroupProcess } from &#x27;app/data/model/api-group-process.model&#x27;;
+import { SoftwareUserInfo } from &#x27;app/services/user-management/model/software-user-info.model&#x27;;
+import { ShortResponse } from &#x27;app/data/model/short-response.model&#x27;;
+import { ApiResponse } from &#x27;app/data/model/api-Response.model&#x27;;
+import { ValidationSchema } from &#x27;app/constants/validation-schema&#x27;;
+import { checkAndToastError } from &#x27;app/utils/api-utils&#x27;;
+import { ButtonComponent } from &#x27;app/components/shared/button/button.component&#x27;;
+
+interface PageGroup {
+  PGId: number;
+  PGTitle: string;
+  PGAccess: boolean;
+}
+
+interface Process {
+  PId: number;
+  PTitle: string;
+  PAccess: boolean;
 }
 
 @Component({
   selector: &#x27;app-users-menu-access-form&#x27;,
-  imports: [
-    TreeTableModule,
-    CommonModule,
-    SearchInputComponent,
-    ButtonModule,
-    ProgressSpinnerModule,
-    ReactiveFormsModule,
-    TextInputComponent,
-  ],
+  standalone: true,
   templateUrl: &#x27;./users-menu-access-form.component.html&#x27;,
   styleUrl: &#x27;./users-menu-access-form.component.scss&#x27;,
+  imports: [
+    TreeTableModule,
+    ProgressSpinnerModule,
+    ReactiveFormsModule,
+    SearchInputComponent,
+    TreeTableCheckboxComponent,
+    ButtonComponent,
+  ],
 })
-export class UsersMenuAccessFormComponent implements OnInit, OnDestroy {
-  private userManager &#x3D; inject(UserManagementService);
-  private toast &#x3D; inject(ToastService);
-  private fb &#x3D; inject(FormBuilder);
-  private loadingService &#x3D; inject(LoadingService);
-  private destroy$ &#x3D; new Subject&lt;void&gt;();
+export class UsersMenuAccessFormComponent extends BaseLoading {
+  private readonly userService &#x3D; inject(UserManagementService);
 
-  isLoading: boolean &#x3D; false;
-  accessTable?: TreeNode[] &#x3D; [];
-  selectedNodes: SelectedNodes &#x3D; {};
-  selectedNodesCopy: SelectedNodes &#x3D; {};
-  userInfo: SoftwareUserInfo &#x3D; { UserId: 0 };
+  readonly mobileControl &#x3D; new FormControl(&#x27;&#x27;, ValidationSchema.mobile);
+  readonly tree &#x3D; signal&lt;TreeNode[]&gt;([]);
+  readonly userInfo &#x3D; signal&lt;SoftwareUserInfo | null&gt;(null);
 
-  searchForm: FormGroup &#x3D; this.fb.group({
-    searchPhone: [&#x27;&#x27;, ValidationSchema.mobile],
-  });
-  cols &#x3D; [
-    { field: &#x27;PGTitle&#x27;, header: &#x27;نام منو&#x27; },
-    { field: &#x27;Description&#x27;, header: &#x27;توضیحات&#x27; },
-  ];
+  readonly rows &#x3D; [[&#x27;PGTitle&#x27;, &#x27;PTitle&#x27;], [&#x27;Description&#x27;]];
+  readonly searchFields &#x3D; [&#x27;PGTitle&#x27;, &#x27;PTitle&#x27;];
+  readonly cols &#x3D; [&#x27;منو&#x27;, &#x27;توضیحات&#x27;];
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
+  private parentChanges &#x3D; new Map&lt;number, PageGroup&gt;();
+  private childChanges &#x3D; new Map&lt;number, Process&gt;();
 
-  ngOnInit(): void {
-    this.loadingService.loading$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((value) &#x3D;&gt; (this.isLoading &#x3D; value));
-  }
+  /**
+   * Search user by mobile number and load their menu access tree
+   */
+  searchUser &#x3D; async (query: string): Promise&lt;void&gt; &#x3D;&gt; {
+    if (this.mobileControl.invalid || this.loading()) return;
+    this.parentChanges.clear();
+    this.childChanges.clear();
 
-  async SaveChanges() {
-    if (this.isLoading) return;
-
-    this.loadingService.setLoading(true);
-
-    try {
-      // &#x3D;&#x3D;&#x3D; Step 1: Disable old access (selectedNodesCopy, PAccess: false) &#x3D;&#x3D;&#x3D;
-      const disablePromises: Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;[] &#x3D; [];
-
-      for (const key in this.selectedNodesCopy) {
-        if (
-          this.selectedNodesCopy[key].checked ||
-          this.selectedNodesCopy[key].partialChecked
-        ) {
-          if (key.includes(&#x27;-&#x27;)) {
-            disablePromises.push(
-              this.userManager.ChangeUserWebProcessAccess(
-                this.userInfo.UserId,
-                Number(key.split(&#x27;-&#x27;)[1]),
-                false
-              )
-            );
-          } else {
-            disablePromises.push(
-              this.userManager.ChangeUserWebProcessGroupAccess(
-                this.userInfo.UserId,
-                Number(key),
-                false
-              )
-            );
-          }
-        }
-      }
-
-      const disableResults &#x3D; await Promise.allSettled(disablePromises);
-      const firstDisableError &#x3D; disableResults.find(
-        (r) &#x3D;&gt; r.status &#x3D;&#x3D;&#x3D; &#x27;rejected&#x27;
-      ) as PromiseRejectedResult | undefined;
-
-      if (firstDisableError) {
-        const error &#x3D;
-          (firstDisableError.reason as any)?.error?.message ??
-          &#x27;خطای غیرمنتظره‌ای در حذف دسترسی رخ داد&#x27;;
-        this.toast.error(&#x27;خطا&#x27;, error);
+    await this.withLoading(async () &#x3D;&gt; {
+      const userLoaded &#x3D; await this.loadUser(query);
+      if (!userLoaded) {
+        this.tree.set([]);
         return;
       }
 
-      // &#x3D;&#x3D;&#x3D; Step 2: Enable new access (selectedNodes, PAccess: true) &#x3D;&#x3D;&#x3D;
-      const enablePromises: Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;[] &#x3D; [];
-
-      for (const key in this.selectedNodes) {
-        if (
-          this.selectedNodes[key].checked ||
-          this.selectedNodes[key].partialChecked
-        ) {
-          if (key.includes(&#x27;-&#x27;)) {
-            enablePromises.push(
-              this.userManager.ChangeUserWebProcessAccess(
-                this.userInfo.UserId,
-                Number(key.split(&#x27;-&#x27;)[1]),
-                true
-              )
-            );
-          } else {
-            enablePromises.push(
-              this.userManager.ChangeUserWebProcessGroupAccess(
-                this.userInfo.UserId,
-                Number(key),
-                true
-              )
-            );
-          }
-        }
-      }
-
-      const enableResults &#x3D; await Promise.allSettled(enablePromises);
-      const firstEnableError &#x3D; enableResults.find(
-        (r) &#x3D;&gt; r.status &#x3D;&#x3D;&#x3D; &#x27;rejected&#x27;
-      ) as PromiseRejectedResult | undefined;
-      const firstEnableSuccess &#x3D; enableResults.find(
-        (r) &#x3D;&gt; r.status &#x3D;&#x3D;&#x3D; &#x27;fulfilled&#x27;
-      ) as PromiseFulfilledResult&lt;ApiResponse&lt;ShortResponse&gt;&gt; | undefined;
-
-      if (firstEnableError) {
-        const error &#x3D;
-          (firstEnableError.reason as any)?.error?.message ??
-          &#x27;خطای غیرمنتظره‌ای در اعمال دسترسی رخ داد&#x27;;
-        this.toast.error(&#x27;خطا&#x27;, error);
-      } else {
-        const message &#x3D;
-          firstEnableSuccess?.value?.data?.Message ??
-          &#x27;دسترسی با موفقیت اعمال شد&#x27;;
-        this.toast.success(&#x27;موفق&#x27;, message);
-      }
-
-      // &#x3D;&#x3D;&#x3D; Reload the table &#x3D;&#x3D;&#x3D;
-      await this.LoadWebProcessGroups_WebProcessesTable();
-    } catch (err) {
-      this.toast.error(&#x27;خطا&#x27;, &#x27;خطای بحرانی در ذخیره‌سازی رخ داد&#x27;);
-    } finally {
-      this.loadingService.setLoading(false);
-    }
-  }
-
-  private async LoadWebProcessGroups_WebProcessesTable(): Promise&lt;void&gt; {
-    const response &#x3D; await this.userManager.GetWebProcessGroups_WebProcesses(
-      this.userInfo.MobileNumber!
-    );
-    if (!response.success || !response.data) {
-      this.toast.error(
-        &#x27;خطا&#x27;,
-        response.error?.message ?? &#x27;خطا در هنگام براگزاری اطلاعات&#x27;
+      const treeNodes &#x3D; await this.getGroupProcesses(
+        this.userInfo()?.MobileNumber!,
       );
-      this.accessTable &#x3D; [];
-      return;
-    }
-
-    const loadedTable &#x3D; response.data;
-    this.accessTable &#x3D;
-      loadedTable.map((x) &#x3D;&gt; ({
-        key: x.PGId.toString(),
-        data: {
-          PGTitle: x.PGTitle,
-          Description: &#x27;&#x27;,
-        },
-        checked: x.PGAccess &#x3D;&#x3D;&#x3D; true,
-        children: x.WebProcesses?.map((y) &#x3D;&gt; ({
-          key: x.PGId.toString() + &#x27;-&#x27; + y.PId.toString(),
-          data: {
-            PGTitle: y.PTitle,
-            Description: y.Description,
-          },
-          checked: y.PAccess &#x3D;&#x3D;&#x3D; true,
-          children: [],
-        })),
-      })) ?? [];
-
-    this.accessTable.forEach((parentNode) &#x3D;&gt; {
-      this.selectedNodes[parentNode.key!] &#x3D; {
-        checked: parentNode.checked!,
-        partialChecked: parentNode.partialSelected,
-      };
-      parentNode.children?.forEach((childNode) &#x3D;&gt; {
-        this.selectedNodes[childNode.key!] &#x3D; {
-          checked: childNode.checked!,
-          partialChecked: childNode.partialSelected,
-        };
-      });
+      this.tree.set(treeNodes);
     });
+  };
 
-    this.selectedNodesCopy &#x3D; structuredClone(this.selectedNodes);
+  /**
+   * Load user info by mobile number
+   */
+  private async loadUser(mobile: string): Promise&lt;boolean&gt; {
+    const response &#x3D; await this.userService.GetSoftwareUserInfo(mobile);
+    if (!checkAndToastError(response, this.toast)) {
+      this.userInfo.set(null);
+      return false;
+    }
+    this.userInfo.set(response.data);
+    return true;
   }
 
-  async getUserAccessMenu() {
-    if (this.searchForm.invalid || this.isLoading) return;
+  /**
+   * Fetch process groups and convert to TreeNodes
+   */
+  private async getGroupProcesses(mobile: string): Promise&lt;TreeNode[]&gt; {
+    const response &#x3D;
+      await this.userService.GetWebProcessGroups_WebProcesses(mobile);
+    if (!checkAndToastError(response, this.toast)) return [];
+    return this.convertToTreeNode(response.data);
+  }
 
-    this.loadingService.setLoading(true);
-    try {
-      const response &#x3D; await this.userManager.GetSoftwareUserInfo(
-        this.searchPhone.value
-      );
-      if (!response.success || !response.data) {
-        this.toast.error(
-          &#x27;خطا&#x27;,
-          response.error?.message ?? &#x27;خطا در هنگام براگزاری اطلاعات&#x27;
-        );
-        this.accessTable &#x3D; [];
-        return;
-      }
+  /**
+   * Convert API group processes to TreeNode structure
+   */
+  private convertToTreeNode(groups: ApiGroupProcess[]): TreeNode[] {
+    return groups.map((group) &#x3D;&gt; ({
+      data: {
+        PGId: group.PGId,
+        PGTitle: group.PGTitle,
+        PGAccess: group.PGAccess,
+      },
+      children:
+        group.WebProcesses?.map((process) &#x3D;&gt; ({
+          data: process,
+          children: [],
+        })) ?? [],
+      expanded: false,
+    }));
+  }
 
-      this.userInfo &#x3D; {
-        UserId: response.data?.UserId,
-        MobileNumber: response.data?.MobileNumber,
-      };
-    } finally {
-      this.loadingService.setLoading(false);
+  /**
+   * Handle TreeTable checkbox changes and track modifications
+   */
+  onTableCheckBoxChange(changes: TreeTableChangedData): void {
+    if (changes.parent) {
+      const { PGId } &#x3D; changes.parent;
+      this.parentChanges.has(PGId)
+        ? this.parentChanges.delete(PGId)
+        : this.parentChanges.set(PGId, changes.parent);
     }
 
-    this.loadingService.setLoading(true);
-    await this.LoadWebProcessGroups_WebProcessesTable();
-    this.loadingService.setLoading(false);
+    changes.children?.forEach((child) &#x3D;&gt; {
+      const { PId } &#x3D; child;
+      this.childChanges.has(PId)
+        ? this.childChanges.delete(PId)
+        : this.childChanges.set(PId, child);
+    });
   }
 
-  get searchPhone() {
-    return this.searchForm.get(&#x27;searchPhone&#x27;) as FormControl;
+  /**
+   * Apply all access changes for selected user
+   */
+  async updateAccesses(): Promise&lt;void&gt; {
+    if (this.loading() || !this.userInfo()) return;
+
+    await this.withLoading(async () &#x3D;&gt; {
+      const userId &#x3D; this.userInfo()!.UserId;
+      const requests: Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;[] &#x3D; [];
+
+      this.parentChanges.forEach((parent) &#x3D;&gt; {
+        requests.push(
+          this.userService.ChangeUserWebProcessGroupAccess(
+            userId,
+            parent.PGId,
+            parent.PGAccess,
+          ),
+        );
+      });
+
+      this.childChanges.forEach((child) &#x3D;&gt; {
+        requests.push(
+          this.userService.ChangeUserWebProcessAccess(
+            userId,
+            child.PId,
+            child.PAccess,
+          ),
+        );
+      });
+
+      const responses &#x3D; await Promise.all(requests);
+
+      for (const response of responses) {
+        if (!checkAndToastError(response, this.toast)) return;
+      }
+
+      const tree &#x3D; await this.getGroupProcesses(this.userInfo()?.MobileNumber!);
+      this.tree.set(tree);
+      this.toast.success(&#x27;موفق&#x27;, responses[0].data!.Message);
+
+      this.parentChanges.clear();
+      this.childChanges.clear();
+    });
+  }
+
+  isSubmitButtonDisabled(): boolean {
+    return (
+      this.loading() ||
+      !this.userInfo() ||
+      (this.childChanges.size &#x3D;&#x3D;&#x3D; 0 &amp;&amp; this.parentChanges.size &#x3D;&#x3D;&#x3D; 0)
+    );
   }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div *ngIf&#x3D;&quot;!isLoading&quot;&gt;
-  &lt;div class&#x3D;&quot;card&quot;&gt;
-     &lt;form class&#x3D;&quot;col-12&quot; (ngSubmit)&#x3D;&quot;getUserAccessMenu()&quot; [class.pointer-events-none]&#x3D;&quot;isLoading&quot;
-    [class.opacity-60]&#x3D;&quot;isLoading&quot; [formGroup]&#x3D;&quot;searchForm&quot;&gt;
-    &lt;!-- Search Phone + Refresh --&gt;
-    &lt;div class&#x3D;&quot;flex gap-2&quot;&gt;
-      &lt;app-text-input class&#x3D;&quot;flex-1&quot; placeholder&#x3D;&quot;جستجو کاربر&quot; addonWidth&#x3D;&quot;7rem&quot; [control]&#x3D;&quot;searchPhone&quot;  validationField&#x3D;&quot;mobile&quot; label&#x3D;&quot;شماره موبایل&quot;/&gt;
-      &lt;p-button type&#x3D;&quot;submit&quot; icon&#x3D;&quot;pi pi-search&quot; styleClass&#x3D;&quot;mt-1 w-2rem h-2rem border-circle&quot;
-        (click)&#x3D;&quot;getUserAccessMenu()&quot; [disabled]&#x3D;&quot;this.searchForm.invalid || isLoading&quot; /&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div&gt;
+  &lt;div class&#x3D;&quot;grid grid-cols-12&quot;&gt;
+    &lt;div class&#x3D;&quot;col-span-12&quot;&gt;
+      &lt;app-search-input
+        placeholder&#x3D;&quot;شماره تلفن کاربر&quot;
+        [onSearchQuery]&#x3D;&quot;searchUser&quot;
+        [control]&#x3D;&quot;mobileControl&quot;
+        [disableSearchButton]&#x3D;&quot;mobileControl.invalid || loading()&quot;
+        validationField&#x3D;&quot;mobile&quot;
+      /&gt;
     &lt;/div&gt;
-  &lt;/form&gt;
-    &lt;app-search-input
-      (rawInput)&#x3D;&quot;tt.filter($any($event), &#x27;PGTitle&#x27;, &#x27;contains&#x27;)&quot;
-      [autoTriggerSearch]&#x3D;&quot;true&quot;
-    &gt;&lt;/app-search-input&gt;
+    &lt;app-tree-table-checkbox
+      class&#x3D;&quot;col-span-12&quot;
+      searchPlaceholder&#x3D;&quot;جستجو گروه و زیرگروه&quot;
+      childField&#x3D;&quot;PAccess&quot;
+      parentField&#x3D;&quot;PGAccess&quot;
+      [tree]&#x3D;&quot;tree()&quot;
+      [cols]&#x3D;&quot;cols&quot;
+      [rows]&#x3D;&quot;rows&quot;
+      [searchFields]&#x3D;&quot;searchFields&quot;
+      [enabledSearch]&#x3D;&quot;true&quot;
+      [enabledAutoSearch]&#x3D;&quot;true&quot;
+      (onTableCheckBoxChange)&#x3D;&quot;onTableCheckBoxChange($event)&quot;
+    /&gt;
+  &lt;/div&gt;
 
-    &lt;p-treetable
-      #tt
-      [value]&#x3D;&quot;accessTable&quot;
-      [columns]&#x3D;&quot;cols&quot;
-      selectionMode&#x3D;&quot;checkbox&quot;
-      [(selectionKeys)]&#x3D;&quot;selectedNodes&quot;
-      dataKey&#x3D;&quot;key&quot;
-    &gt;
-      &lt;ng-template #header let-columns&gt;
-        &lt;tr&gt;
-          &lt;th *ngFor&#x3D;&quot;let col of columns&quot;&gt;
-            {{ col.header }}
-          &lt;/th&gt;
-        &lt;/tr&gt;
-      &lt;/ng-template&gt;
-
-      &lt;ng-template
-        #body
-        let-rowNode
-        let-rowData&#x3D;&quot;rowData&quot;
-        let-columns&#x3D;&quot;columns&quot;
-      &gt;
-        &lt;tr [ttRow]&#x3D;&quot;rowNode&quot; [ttSelectableRow]&#x3D;&quot;rowNode&quot;&gt;
-          &lt;td *ngFor&#x3D;&quot;let col of columns; let i &#x3D; index&quot;&gt;
-            &lt;p-treetable-toggler [rowNode]&#x3D;&quot;rowNode&quot; *ngIf&#x3D;&quot;i &#x3D;&#x3D;&#x3D; 0&quot; /&gt;
-            &lt;p-treetable-checkbox [value]&#x3D;&quot;rowNode&quot; *ngIf&#x3D;&quot;i &#x3D;&#x3D;&#x3D; 0&quot; /&gt;
-            {{ rowData[col.field] }}
-          &lt;/td&gt;
-        &lt;/tr&gt;
-      &lt;/ng-template&gt;
-    &lt;/p-treetable&gt;
-
-    &lt;p-button
-      class&#x3D;&quot;flex flex-column m-2&quot;
+  &lt;div class&#x3D;&quot;col-span-12 flex items-center justify-center mt-5 px-5&quot;&gt;
+    &lt;app-button
+      class&#x3D;&quot;w-full&quot;
+      styleClass&#x3D;&quot;w-full&quot;
       label&#x3D;&quot;ثبت تغییرات&quot;
-      (onClick)&#x3D;&quot;SaveChanges()&quot;
+      [disabled]&#x3D;&quot;isSubmitButtonDisabled()&quot;
+      (click)&#x3D;&quot;updateAccesses()&quot;
     /&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -1242,8 +1558,8 @@ export class UsersMenuAccessFormComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div *ngIf="!isLoading">  <div class="card">     <form class="col-12" (ngSubmit)="getUserAccessMenu()" [class.pointer-events-none]="isLoading"    [class.opacity-60]="isLoading" [formGroup]="searchForm">    <!-- Search Phone + Refresh -->    <div class="flex gap-2">      <app-text-input class="flex-1" placeholder="جستجو کاربر" addonWidth="7rem" [control]="searchPhone"  validationField="mobile" label="شماره موبایل"/>      <p-button type="submit" icon="pi pi-search" styleClass="mt-1 w-8 h-8 border-circle"        (click)="getUserAccessMenu()" [disabled]="this.searchForm.invalid || isLoading" />    </div>  </form>    <app-search-input      (rawInput)="tt.filter($any($event), \'PGTitle\', \'contains\')"      [autoTriggerSearch]="true"    ></app-search-input>    <p-treetable      #tt      [value]="accessTable"      [columns]="cols"      selectionMode="checkbox"      [(selectionKeys)]="selectedNodes"      dataKey="key"    >      <ng-template #header let-columns>        <tr>          <th *ngFor="let col of columns">            {{ col.header }}          </th>        </tr>      </ng-template>      <ng-template        #body        let-rowNode        let-rowData="rowData"        let-columns="columns"      >        <tr [ttRow]="rowNode" [ttSelectableRow]="rowNode">          <td *ngFor="let col of columns; let i = index">            <p-treetable-toggler [rowNode]="rowNode" *ngIf="i === 0" />            <p-treetable-checkbox [value]="rowNode" *ngIf="i === 0" />            {{ rowData[col.field] }}          </td>        </tr>      </ng-template>    </p-treetable>    <p-button      class="flex flex-col m-2"      label="ثبت تغییرات"      (onClick)="SaveChanges()"    />  </div></div></div>'
-    var COMPONENTS = [{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarMenuComponent', 'selector': 'app-sidebar-menu'},{'name': 'SubMenuComponent', 'selector': 'app-sub-menu'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TabBarComponent', 'selector': 'app-tab-bar'},{'name': 'TabViewComponent', 'selector': 'app-tab-view'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'}];
+        var COMPONENT_TEMPLATE = '<div><div>  <div class="grid grid-cols-12">    <div class="col-span-12">      <app-search-input        placeholder="شماره تلفن کاربر"        [onSearchQuery]="searchUser"        [control]="mobileControl"        [disableSearchButton]="mobileControl.invalid || loading()"        validationField="mobile"      />    </div>    <app-tree-table-checkbox      class="col-span-12"      searchPlaceholder="جستجو گروه و زیرگروه"      childField="PAccess"      parentField="PGAccess"      [tree]="tree()"      [cols]="cols"      [rows]="rows"      [searchFields]="searchFields"      [enabledSearch]="true"      [enabledAutoSearch]="true"      (onTableCheckBoxChange)="onTableCheckBoxChange($event)"    />  </div>  <div class="col-span-12 flex items-center justify-center mt-5 px-5">    <app-button      class="w-full"      styleClass="w-full"      label="ثبت تغییرات"      [disabled]="isSubmitButtonDisabled()"      (click)="updateAccesses()"    />  </div></div></div>'
+    var COMPONENTS = [{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DashboardContentManagerComponent', 'selector': 'app-dashboard-content-manager'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'ExitConfirmationDialogComponent', 'selector': 'app-exit-confirmation-dialog'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'IssuedTurnListFormComponent', 'selector': 'app-issued-turn-list-form'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'LogoComponent', 'selector': 'app-logo'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'MapSvgComponent', 'selector': 'app-map-svg'},{'name': 'MobileTabBarComponent', 'selector': 'app-mobile-tab-bar'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RegisterTurnFormComponent', 'selector': 'app-register-turn-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SearchProcessesComponent', 'selector': 'app-search-processes'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarPageGroupComponent', 'selector': 'app-sidebar-page-group'},{'name': 'SidebarWebProcesses', 'selector': 'app-sidebar-web-processes'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabManagerComponent', 'selector': 'app-tab-manager'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'ThemeManagementComponent', 'selector': 'app-theme-management'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'ToggleSwitchInputComponent', 'selector': 'app-toggle-switch-input'},{'name': 'TransportCompaniesFormComponent', 'selector': 'app-transport-companies-form'},{'name': 'TransportCompaniesWalletPaymentFormComponent', 'selector': 'app-transport-companies-wallet-payment-form'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TruckWalletPaymentFormComponent', 'selector': 'app-truck-wallet-payment-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserChargingFunctionFormComponent', 'selector': 'app-user-charging-function-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UserProfileComponent', 'selector': 'app-user-profile'},{'name': 'UserProfileFormComponent', 'selector': 'app-user-profile-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'},{'name': 'WalletPaymentFormComponent', 'selector': 'app-wallet-payment-form'},{'name': 'WalletPaymentRecordTableComponent', 'selector': 'app-payment-record-table'},{'name': 'WalletProfileComponent', 'selector': 'app-wallet-profile'},{'name': 'WalletTransactionsTableComponent', 'selector': 'app-wallet-transactions-table'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'UsersMenuAccessFormComponent'};
 </script>
