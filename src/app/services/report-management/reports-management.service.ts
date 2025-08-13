@@ -41,4 +41,28 @@ export class ReportsManagementService {
     >(apiUrl, bodyValue, mockLoadPermissions);
     //#endregion
   }
+
+  public async GetLoadAccounting(
+    loadId: number
+  ): Promise<ApiResponse<LoadAccounting[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.Reports.Load.GetLoadAccounting;
+    const loadInfo: LoadInfo = {
+      LoadId: loadId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LoadId: loadInfo.LoadId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoadAccounting[]
+    >(apiUrl, bodyValue, mockLoadAccounting);
+    //#endregion
+  }
 }
