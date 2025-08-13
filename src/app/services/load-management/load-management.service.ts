@@ -533,6 +533,31 @@ export class LoadManagementService {
     //#endregion
   }
 
+  public async AllocateLoadToNextTurn(
+    laId: number
+  ): Promise<ApiResponse<LoadAllocatedToNextTurn>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.LoadAllocationAPI.AllocateLoadToNextTurn;
+    const loadAllocationInfo: LoadAllocationInfo = {
+      LoadId: 0,
+      LAId: laId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LAId: loadAllocationInfo.LAId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoadAllocatedToNextTurn
+    >(apiUrl, bodyValue, mockLoadAllocatedToNextTurn);
+    //#endregion
+  }
+
   public async GetLoadAllocationOfDriver(): Promise<
     ApiResponse<LoadAllocationInfo[]>
   > {
