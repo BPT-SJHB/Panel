@@ -1,0 +1,939 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bpt-sjhb-panel documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">bpt-sjhb-panel documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  CarouselComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/shared/main-view/carousel/carousel.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-carousel</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CarouselModule</code>
+                            <code>SkeletonModule</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./carousel.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./carousel.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#customCarouselTokens" >customCarouselTokens</a>
+                            </li>
+                            <li>
+                                <a href="#screenSize" >screenSize</a>
+                            </li>
+                            <li>
+                                <a href="#skeletonNumber" >skeletonNumber</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#circularHandler" >circularHandler</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#screenFounder" >screenFounder</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#skeletonHandler" >skeletonHandler</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#enableSkeleton" >enableSkeleton</a>
+                            </li>
+                            <li>
+                                <a href="#images" >images</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#skeletonArrayNumber" >skeletonArrayNumber</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="enableSkeleton"></a>
+                        <b>enableSkeleton</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/components/shared/main-view/carousel/carousel.component.ts:13</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="images"></a>
+                        <b>images</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;{ title: string; imgLink: string }[]&gt;([])</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/components/shared/main-view/carousel/carousel.component.ts:12</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="circularHandler"></a>
+                    <span class="name">
+                        <span ><b>circularHandler</b></span>
+                        <a href="#circularHandler"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>circularHandler()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="75"
+                                    class="link-to-prism">src/app/components/shared/main-view/carousel/carousel.component.ts:75</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">src/app/components/shared/main-view/carousel/carousel.component.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="screenFounder"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>screenFounder</b></span>
+                        <a href="#screenFounder"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>screenFounder()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="97"
+                                    class="link-to-prism">src/app/components/shared/main-view/carousel/carousel.component.ts:97</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="skeletonHandler"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>skeletonHandler</b></span>
+                        <a href="#skeletonHandler"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>skeletonHandler()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="88"
+                                    class="link-to-prism">src/app/components/shared/main-view/carousel/carousel.component.ts:88</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="customCarouselTokens"></a>
+                    <span class="name">
+                        <span ><b>customCarouselTokens</b></span>
+                        <a href="#customCarouselTokens"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal({
+    indicator: {
+      height: &#x27;0.5rem&#x27;,
+      width: &#x27;0.5rem&#x27;,
+      borderRadius: &#x27;9999px&#x27;,
+    },
+    indicatorList: {
+      padding: &#x27;0rem&#x27;,
+    },
+    content: { gap: &#x27;0rem&#x27; },
+    responsiveOptions: [
+      {
+        breakpoint: &#x27;645px&#x27;,
+        numVisible: 1,
+        numScroll: 1,
+      },
+      {
+        breakpoint: &#x27;767px&#x27;,
+        numVisible: 2,
+        numScroll: 1,
+      },
+      {
+        breakpoint: &#x27;1024px&#x27;,
+        numVisible: 3,
+        numScroll: 1,
+      },
+      {
+        breakpoint: &#x27;1400px&#x27;,
+        numVisible: 2,
+        numScroll: 1,
+      },
+      {
+        breakpoint: &#x27;1800px&#x27;,
+        numVisible: 3,
+        numScroll: 1,
+      },
+      {
+        breakpoint: &#x27;2200px&#x27;,
+        numVisible: 4,
+        numScroll: 1,
+      },
+      {
+        breakpoint: &#x27;2600px&#x27;,
+        numVisible: 5,
+        numScroll: 1,
+      },
+    ],
+    autoplayInterval: 3000,
+    circular: true,
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/shared/main-view/carousel/carousel.component.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="screenSize"></a>
+                    <span class="name">
+                        <span ><b>screenSize</b></span>
+                        <a href="#screenSize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(0)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/components/shared/main-view/carousel/carousel.component.ts:15</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="skeletonNumber"></a>
+                    <span class="name">
+                        <span ><b>skeletonNumber</b></span>
+                        <a href="#skeletonNumber"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(0)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/shared/main-view/carousel/carousel.component.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="skeletonArrayNumber"></a>
+                        <span class="name"><b>skeletonArrayNumber</b><a href="#skeletonArrayNumber"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>skeletonArrayNumber()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/components/shared/main-view/carousel/carousel.component.ts:110</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, OnInit, signal } from &#x27;@angular/core&#x27;;
+import { CarouselModule } from &#x27;primeng/carousel&#x27;;
+import { SkeletonModule } from &#x27;primeng/skeleton&#x27;;
+
+@Component({
+  selector: &#x27;app-carousel&#x27;,
+  imports: [CarouselModule, SkeletonModule],
+  templateUrl: &#x27;./carousel.component.html&#x27;,
+  styleUrl: &#x27;./carousel.component.scss&#x27;,
+})
+export class CarouselComponent implements OnInit {
+  @Input() images &#x3D; signal&lt;{ title: string; imgLink: string }[]&gt;([]);
+  @Input() enableSkeleton: boolean &#x3D; false;
+
+  screenSize &#x3D; signal(0);
+  skeletonNumber &#x3D; signal(0);
+
+  customCarouselTokens &#x3D; signal({
+    indicator: {
+      height: &#x27;0.5rem&#x27;,
+      width: &#x27;0.5rem&#x27;,
+      borderRadius: &#x27;9999px&#x27;,
+    },
+    indicatorList: {
+      padding: &#x27;0rem&#x27;,
+    },
+    content: { gap: &#x27;0rem&#x27; },
+    responsiveOptions: [
+      {
+        breakpoint: &#x27;645px&#x27;,
+        numVisible: 1,
+        numScroll: 1,
+      },
+      {
+        breakpoint: &#x27;767px&#x27;,
+        numVisible: 2,
+        numScroll: 1,
+      },
+      {
+        breakpoint: &#x27;1024px&#x27;,
+        numVisible: 3,
+        numScroll: 1,
+      },
+      {
+        breakpoint: &#x27;1400px&#x27;,
+        numVisible: 2,
+        numScroll: 1,
+      },
+      {
+        breakpoint: &#x27;1800px&#x27;,
+        numVisible: 3,
+        numScroll: 1,
+      },
+      {
+        breakpoint: &#x27;2200px&#x27;,
+        numVisible: 4,
+        numScroll: 1,
+      },
+      {
+        breakpoint: &#x27;2600px&#x27;,
+        numVisible: 5,
+        numScroll: 1,
+      },
+    ],
+    autoplayInterval: 3000,
+    circular: true,
+  });
+
+  ngOnInit(): void {
+    this.screenFounder();
+    this.circularHandler();
+    this.skeletonHandler();
+  }
+
+  circularHandler() {
+    this.customCarouselTokens().responsiveOptions.forEach((element) &#x3D;&gt; {
+      const breakpoint &#x3D; parseInt(element.breakpoint, 10);
+      if (this.screenSize() &#x3D;&#x3D;&#x3D; breakpoint) {
+        if (this.images().length &lt;&#x3D; element.numVisible) {
+          this.customCarouselTokens().circular &#x3D; false;
+        } else {
+          this.customCarouselTokens().circular &#x3D; true;
+        }
+      }
+    });
+  }
+
+  private skeletonHandler() {
+    this.customCarouselTokens().responsiveOptions.forEach((element) &#x3D;&gt; {
+      const breakpoint &#x3D; parseInt(element.breakpoint, 10);
+      if (this.screenSize() &#x3D;&#x3D;&#x3D; breakpoint) {
+        this.skeletonNumber.set(element.numVisible);
+      }
+    });
+  }
+
+  private screenFounder() {
+    const screenSize &#x3D; innerWidth;
+
+    for (const element of this.customCarouselTokens().responsiveOptions) {
+      const breakpoint &#x3D; parseInt(element.breakpoint, 10);
+
+      if (screenSize &lt;&#x3D; breakpoint) {
+        this.screenSize.set(breakpoint);
+        break;
+      }
+    }
+  }
+
+  get skeletonArrayNumber() {
+    return Array.from({ length: this.skeletonNumber() }, (_, i) &#x3D;&gt; i);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;!-- Skeleton --&gt;
+@if (images().length &#x3D;&#x3D;&#x3D; 0) {
+&lt;div class&#x3D;&quot;flex w-screen justify-center gap-4 my-[1rem] px-[3rem] mb-10&quot;&gt;
+  @for (item of skeletonArrayNumber; track $index) {
+  &lt;p-skeleton
+    [style]&#x3D;&quot;{
+      height: &#x27;12rem&#x27;,
+      &#x27;min-height&#x27;: &#x27;10rem&#x27;,
+      &#x27;max-height&#x27;: &#x27;20rem&#x27;,
+      width: &#x27;100%&#x27;,
+      &#x27;min-width&#x27;: &#x27;10rem&#x27;,
+      &#x27;max-width&#x27;: &#x27;20rem&#x27;
+    }&quot;
+    borderRadius&#x3D;&quot;16px&quot;
+  /&gt;
+  }
+&lt;/div&gt;
+}@else {
+&lt;!-- Carousel --&gt;
+&lt;p-carousel
+  [value]&#x3D;&quot;images()&quot;
+  [numVisible]&#x3D;&quot;3&quot;
+  [numScroll]&#x3D;&quot;3&quot;
+  [circular]&#x3D;&quot;customCarouselTokens().circular&quot;
+  [responsiveOptions]&#x3D;&quot;customCarouselTokens().responsiveOptions&quot;
+  [autoplayInterval]&#x3D;&quot;customCarouselTokens().autoplayInterval&quot;
+  [dt]&#x3D;&quot;customCarouselTokens()&quot;
+  class&#x3D;&quot;w-full min-h-[10rem] max-h-[15rem] items-center mb-[2rem]&quot;
+&gt;
+  &lt;ng-template #item let-product&gt;
+    &lt;!-- Carousel cards --&gt;
+    &lt;div
+      class&#x3D;&quot;w-auto h-[13rem] m-3 rounded-2xl shadow-[0_0_10px_rgba(0,0,0,1)]&quot;
+    &gt;
+      &lt;a [href]&#x3D;&quot;product.imgLink&quot; target&#x3D;&quot;_blank&quot;&gt;
+        &lt;img
+          class&#x3D;&quot;w-full h-full rounded-2xl&quot;
+          [src]&#x3D;&quot;product.imgSrc&quot;
+          [alt]&#x3D;&quot;product.title&quot;
+        /&gt;
+      &lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/ng-template&gt;
+&lt;/p-carousel&gt;
+}
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!-- Skeleton -->@if (images().length === 0) {<div class="flex w-screen justify-center gap-4 my-[1rem] px-[3rem] mb-10">  @for (item of skeletonArrayNumber; track $index) {  <p-skeleton    [style]="{      height: \'12rem\',      \'min-height\': \'10rem\',      \'max-height\': \'20rem\',      width: \'100%\',      \'min-width\': \'10rem\',      \'max-width\': \'20rem\'    }"    borderRadius="16px"  />  }</div>}@else {<!-- Carousel --><p-carousel  [value]="images()"  [numVisible]="3"  [numScroll]="3"  [circular]="customCarouselTokens().circular"  [responsiveOptions]="customCarouselTokens().responsiveOptions"  [autoplayInterval]="customCarouselTokens().autoplayInterval"  [dt]="customCarouselTokens()"  class="w-full min-h-[10rem] max-h-[15rem] items-center mb-[2rem]">  <ng-template #item let-product>    <!-- Carousel cards -->    <div      class="w-auto h-[13rem] m-3 rounded-2xl shadow-[0_0_10px_rgba(0,0,0,1)]"    >      <a [href]="product.imgLink" target="_blank">        <img          class="w-full h-full rounded-2xl"          [src]="product.imgSrc"          [alt]="product.title"        />      </a>    </div>  </ng-template></p-carousel>}</div>'
+    var COMPONENTS = [{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DashboardContentManagerComponent', 'selector': 'app-dashboard-content-manager'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'ExitConfirmationDialogComponent', 'selector': 'app-exit-confirmation-dialog'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'IssuedTurnListFormComponent', 'selector': 'app-issued-turn-list-form'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'LogoComponent', 'selector': 'app-logo'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'MapSvgComponent', 'selector': 'app-map-svg'},{'name': 'MobileTabBarComponent', 'selector': 'app-mobile-tab-bar'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RegisterTurnFormComponent', 'selector': 'app-register-turn-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SearchProcessesComponent', 'selector': 'app-search-processes'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarPageGroupComponent', 'selector': 'app-sidebar-page-group'},{'name': 'SidebarWebProcesses', 'selector': 'app-sidebar-web-processes'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabManagerComponent', 'selector': 'app-tab-manager'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'ThemeManagementComponent', 'selector': 'app-theme-management'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'ToggleSwitchInputComponent', 'selector': 'app-toggle-switch-input'},{'name': 'TransportCompaniesFormComponent', 'selector': 'app-transport-companies-form'},{'name': 'TransportCompaniesWalletPaymentFormComponent', 'selector': 'app-transport-companies-wallet-payment-form'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TruckWalletPaymentFormComponent', 'selector': 'app-truck-wallet-payment-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserChargingFunctionFormComponent', 'selector': 'app-user-charging-function-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UserProfileComponent', 'selector': 'app-user-profile'},{'name': 'UserProfileFormComponent', 'selector': 'app-user-profile-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'},{'name': 'WalletPaymentFormComponent', 'selector': 'app-wallet-payment-form'},{'name': 'WalletPaymentRecordTableComponent', 'selector': 'app-payment-record-table'},{'name': 'WalletProfileComponent', 'selector': 'app-wallet-profile'},{'name': 'WalletTransactionsTableComponent', 'selector': 'app-wallet-transactions-table'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'CarouselComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'CarouselComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

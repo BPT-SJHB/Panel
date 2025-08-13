@@ -2,9 +2,12 @@ import { inject, Injectable } from '@angular/core';
 import { UserAuthService } from '../user-auth-service/user-auth.service';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
 import { ApiResponse } from 'app/data/model/api-Response.model';
-import { LoadForTransportCompanies } from './model/load-info-for-transport-companies.model';
+import {
+  LoadForTransportCompaniesAndFactoriesAndAdmin,
+  LoadInfoForTransportCompaniesAndFactoriesAndAdmin,
+} from './model/load-info-for-transport-companies-factories-admins.model';
 import { API_ROUTES } from 'app/constants/api';
-import { mockLoadForTransportCompanies } from './mock/load-info-for-transport-companies.mock';
+import { mockLoadsForTransportCompaniesAndFactoriesAndAdmin } from './mock/load-info-for-transport-companies-factories-admins.mock';
 import { LoadStatus } from './model/load-status.model';
 import { mockLoadStatuses } from './mock/load-status.mock';
 import { LoadInfo } from './model/load-info.model';
@@ -20,6 +23,8 @@ import { TruckDriverInfo } from '../driver-truck-management/model/truck-driver-i
 import { AnnouncementSubGroup } from '../announcement-group-subgroup-management/model/announcement-subgroup.model';
 import { LoadAllocationInfo } from './model/load-allocation-info.model';
 import { mockLoadAllocationInfos } from './mock/load-allocation-info.mock';
+import { LoadAllocatedToNextTurn } from './model/load-allocated-to-next-turn.model';
+import { mockLoadAllocatedToNextTurn } from './mock/load-allocated-to-next-turn.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +36,6 @@ export class LoadManagementService {
   //#region Load methods
 
   public async GetLoadsForTransportCompanies(
-    transportCompanyId: number,
     announcementGroupId?: number,
     announcementSubGroupId?: number,
     inventory?: boolean,
@@ -39,14 +43,13 @@ export class LoadManagementService {
     loadStatusId?: number,
     loadSourceCityId?: number,
     loadTargetCityId?: number
-  ): Promise<ApiResponse<LoadForTransportCompanies[]>> {
+  ): Promise<ApiResponse<LoadForTransportCompaniesAndFactoriesAndAdmin[]>> {
     this.userAuth.isLoggedIn();
 
     //#region Consts
     const apiUrl = API_ROUTES.LoadCapacitorAPI.GetLoadsForTransportCompanies;
-    let bodyValue: {
+    const bodyValue: {
       SessionId: string;
-      TransportCompanyId: number;
       AnnouncementGroupId?: number;
       AnnouncementSubGroupId?: number;
       Inventory?: boolean;
@@ -56,7 +59,6 @@ export class LoadManagementService {
       LoadTargetCityId?: number;
     } = {
       SessionId: this.userAuth.getSessionId() ?? '',
-      TransportCompanyId: transportCompanyId,
     };
 
     if (announcementGroupId !== undefined) {
@@ -85,8 +87,8 @@ export class LoadManagementService {
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      LoadForTransportCompanies[]
-    >(apiUrl, bodyValue, mockLoadForTransportCompanies);
+      LoadForTransportCompaniesAndFactoriesAndAdmin[]
+    >(apiUrl, bodyValue, mockLoadsForTransportCompaniesAndFactoriesAndAdmin);
     //#endregion
   }
 
@@ -117,6 +119,130 @@ export class LoadManagementService {
       typeof bodyValue,
       LoadStatus[]
     >(apiUrl, bodyValue, mockLoadStatuses);
+    //#endregion
+  }
+
+  public async GetLoadsForFactoriesAndProductionCenters(
+    transportCompanyId: number,
+    announcementGroupId: number,
+    announcementSubGroupId: number,
+    inventory: boolean,
+    date: string,
+    loadStatusId: number,
+    loadSourceCityId: number,
+    loadTargetCityId: number
+  ): Promise<ApiResponse<LoadForTransportCompaniesAndFactoriesAndAdmin[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.LoadCapacitorAPI.GetLoadsForFactoriesAndProductionCenters;
+    const bodyValue: {
+      SessionId: string;
+      TransportCompanyId?: number;
+      AnnouncementGroupId?: number;
+      AnnouncementSubGroupId?: number;
+      Inventory?: boolean;
+      ShamsiDate?: string;
+      LoadStatusId?: number;
+      LoadSourceCityId?: number;
+      LoadTargetCityId?: number;
+    } = {
+      SessionId: this.userAuth.getSessionId() ?? '',
+    };
+    if (transportCompanyId !== undefined) {
+      bodyValue.TransportCompanyId = transportCompanyId;
+    }
+    if (announcementGroupId !== undefined) {
+      bodyValue.AnnouncementGroupId = announcementGroupId;
+    }
+    if (announcementSubGroupId !== undefined) {
+      bodyValue.AnnouncementSubGroupId = announcementSubGroupId;
+    }
+    if (inventory !== undefined) {
+      bodyValue.Inventory = inventory;
+    }
+    if (date !== undefined) {
+      bodyValue.ShamsiDate = date;
+    }
+    if (loadStatusId !== undefined) {
+      bodyValue.LoadStatusId = loadStatusId;
+    }
+    if (loadSourceCityId !== undefined) {
+      bodyValue.LoadSourceCityId = loadSourceCityId;
+    }
+    if (loadTargetCityId !== undefined) {
+      bodyValue.LoadTargetCityId = loadTargetCityId;
+    }
+
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoadForTransportCompaniesAndFactoriesAndAdmin[]
+    >(apiUrl, bodyValue, mockLoadsForTransportCompaniesAndFactoriesAndAdmin);
+    //#endregion
+  }
+
+  public async GetLoadsForAdmin(
+    transportCompanyId: number,
+    announcementGroupId: number,
+    announcementSubGroupId: number,
+    inventory: boolean,
+    date: string,
+    loadStatusId: number,
+    loadSourceCityId: number,
+    loadTargetCityId: number
+  ): Promise<ApiResponse<LoadInfoForTransportCompaniesAndFactoriesAndAdmin[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.LoadCapacitorAPI.GetLoadsForAdmin;
+    const bodyValue: {
+      SessionId: string;
+      TransportCompanyId?: number;
+      AnnouncementGroupId?: number;
+      AnnouncementSubGroupId?: number;
+      Inventory?: boolean;
+      ShamsiDate?: string;
+      LoadStatusId?: number;
+      LoadSourceCityId?: number;
+      LoadTargetCityId?: number;
+    } = {
+      SessionId: this.userAuth.getSessionId() ?? '',
+    };
+    if (transportCompanyId !== undefined) {
+      bodyValue.TransportCompanyId = transportCompanyId;
+    }
+    if (announcementGroupId !== undefined) {
+      bodyValue.AnnouncementGroupId = announcementGroupId;
+    }
+    if (announcementSubGroupId !== undefined) {
+      bodyValue.AnnouncementSubGroupId = announcementSubGroupId;
+    }
+    if (inventory !== undefined) {
+      bodyValue.Inventory = inventory;
+    }
+    if (date !== undefined) {
+      bodyValue.ShamsiDate = date;
+    }
+    if (loadStatusId !== undefined) {
+      bodyValue.LoadStatusId = loadStatusId;
+    }
+    if (loadSourceCityId !== undefined) {
+      bodyValue.LoadSourceCityId = loadStatusId;
+    }
+    if (loadTargetCityId !== undefined) {
+      bodyValue.LoadTargetCityId = loadTargetCityId;
+    }
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoadInfoForTransportCompaniesAndFactoriesAndAdmin[]
+    >(apiUrl, bodyValue, mockLoadsForTransportCompaniesAndFactoriesAndAdmin);
     //#endregion
   }
 
@@ -358,9 +484,34 @@ export class LoadManagementService {
     //#endregion
   }
 
-  public async RegisterNewLoadAllocationForDriver(
+  public async RegisterNewLoadAllocationForAdmins(
+    truckId: number,
+    driverId: number,
     loadId: number
-  ): Promise<ApiResponse<any>> {
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.LoadAllocationAPI.RegistrationForAdmins;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TruckId: truckId,
+      TruckDriverId: driverId,
+      LoadId: loadId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async RegisterNewLoadAllocationForDrivers(
+    loadId: number
+  ): Promise<ApiResponse<ShortResponse>> {
     this.userAuth.isLoggedIn();
 
     //#region Consts
@@ -377,8 +528,33 @@ export class LoadManagementService {
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      any
-    >(apiUrl, bodyValue, {});
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async AllocateLoadToNextTurn(
+    laId: number
+  ): Promise<ApiResponse<LoadAllocatedToNextTurn>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.LoadAllocationAPI.AllocateLoadToNextTurn;
+    const loadAllocationInfo: LoadAllocationInfo = {
+      LoadId: 0,
+      LAId: laId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LAId: loadAllocationInfo.LAId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoadAllocatedToNextTurn
+    >(apiUrl, bodyValue, mockLoadAllocatedToNextTurn);
     //#endregion
   }
 
@@ -401,10 +577,11 @@ export class LoadManagementService {
     >(apiUrl, bodyValue, mockLoadAllocationInfos);
     //#endregion
   }
+
   public async CancelLoadAllocation(
     laId: number,
     loadId: number
-  ): Promise<ApiResponse<any>> {
+  ): Promise<ApiResponse<ShortResponse>> {
     this.userAuth.isLoggedIn();
 
     //#region Consts
@@ -423,13 +600,16 @@ export class LoadManagementService {
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      any
-    >(apiUrl, bodyValue, {});
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
-  public async GetTravelTimeOfLoadAllocation(
-    laId: number
-  ): Promise<ApiResponse<any>> {
+
+  public async GetTravelTimeOfLoadAllocation(laId: number): Promise<
+    ApiResponse<{
+      TravelTime: number;
+    }>
+  > {
     this.userAuth.isLoggedIn();
 
     //#region Consts
@@ -447,10 +627,44 @@ export class LoadManagementService {
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      any
-    >(apiUrl, bodyValue, {});
+      {
+        TravelTime: number;
+      }
+    >(apiUrl, bodyValue, {
+      TravelTime: 73,
+    });
     //#endregion
   }
-  
+
+  //#endregion
+
+  //#region LoadPermission methods
+  public async CancelLoadPermission(
+    laId: number,
+    description: string,
+    TurnResuscitation: boolean,
+    LoadResuscitation: boolean
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.LoadPermissions.CancelLoadPermission;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LAId: laId,
+      Description: description,
+      TurnResuscitation: TurnResuscitation,
+      LoadResuscitation: LoadResuscitation,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
   //#endregion
 }

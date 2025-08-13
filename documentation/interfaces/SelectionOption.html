@@ -244,7 +244,7 @@
 import { ButtonModule } from &#x27;primeng/button&#x27;;
 import { TreeTableModule } from &#x27;primeng/treetable&#x27;;
 import { TreeNode } from &#x27;primeng/api&#x27;;
-import { CommonModule } from &#x27;@angular/common&#x27;;
+
 import {
   TreeTableChangedData,
   TreeTableCheckboxComponent,
@@ -272,11 +272,10 @@ interface SelectionOption {
   selector: &#x27;app-product-form&#x27;,
   standalone: true,
   imports: [
-    CommonModule,
     ButtonModule,
     TreeTableModule,
-    TreeTableCheckboxComponent,
-  ],
+    TreeTableCheckboxComponent
+],
   templateUrl: &#x27;./product-form.component.html&#x27;,
   styleUrl: &#x27;./product-form.component.scss&#x27;,
 })

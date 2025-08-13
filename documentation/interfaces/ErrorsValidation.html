@@ -465,6 +465,12 @@ export const ValidationSchema &#x3D; {
       Validators.pattern(/09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}/),
     ],
   },
+  mobileOrEmpty: {
+    name: &#x27;شماره موبایل&#x27;,
+    validators: [
+      Validators.pattern(/09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}/),
+    ],
+  },
   nationalId: {
     name: &#x27;کد ملی&#x27;,
     validators: [Validators.required, Validators.pattern(/^\d{10}$/)],
@@ -473,9 +479,17 @@ export const ValidationSchema &#x3D; {
     name: &#x27;ایمیل&#x27;,
     validators: [Validators.required, Validators.email],
   },
+   emailOrEmpty: {
+    name: &#x27;ایمیل&#x27;,
+    validators: [ Validators.email],
+  },
   fullName: {
     name: &#x27;نام کاربر&#x27;,
     validators: [Validators.required, Validators.minLength(3)],
+  },
+  fullNameOrEmpty: {
+    name: &#x27;نام کاربر&#x27;,
+    validators: [Validators.minLength(3)],
   },
   username:{
     name:&#x27;نام کابری&#x27;,
@@ -505,6 +519,10 @@ export const ValidationSchema &#x3D; {
   telephone: {
     name: &#x27;شماره تلفن&#x27;,
     validators: [Validators.required, Validators.pattern(/^0\d{10}$/)],
+  },
+  telephoneOrEmpty: {
+    name: &#x27;شماره تلفن&#x27;,
+    validators: [Validators.pattern(/^0\d{10}$/)],
   },
   address: {
     name: &#x27;آدرس&#x27;,

@@ -126,8 +126,7 @@
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                <code>OnInit</code>
-                <code>OnChanges</code>
+                <code>AfterViewInit</code>
     </p>
 
 
@@ -160,11 +159,12 @@
             <tr>
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
-                            <code>CommonModule</code>
                             <code>ReactiveFormsModule</code>
                             <code>AutoCompleteModule</code>
+                                <code><a href="../components/TextInputComponent.html" target="_self" >TextInputComponent</a></code>
                             <code>InputGroupAddonModule</code>
                             <code>InputGroupModule</code>
+                            <code>NgClass</code>
                 </td>
             </tr>
 
@@ -208,7 +208,17 @@
                                 <a href="#cachedResults" >cachedResults</a>
                             </li>
                             <li>
-                                <a href="#focusedCached" >focusedCached</a>
+                                    <span class="modifier"></span>
+                                <a href="#dropdownContainer" >dropdownContainer</a>
+                            </li>
+                            <li>
+                                <a href="#hoverIndex" >hoverIndex</a>
+                            </li>
+                            <li>
+                                <a href="#isDropDownHidden" >isDropDownHidden</a>
+                            </li>
+                            <li>
+                                <a href="#isResultEmpty" >isResultEmpty</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
@@ -218,10 +228,11 @@
                                 <a href="#loading" >loading</a>
                             </li>
                             <li>
-                                <a href="#showEmptyMessage" >showEmptyMessage</a>
+                                <a href="#suggestions" >suggestions</a>
                             </li>
                             <li>
-                                <a href="#suggestions" >suggestions</a>
+                                    <span class="modifier">Private</span>
+                                <a href="#width" >width</a>
                             </li>
                         </ul>
                     </td>
@@ -239,16 +250,29 @@
                                 <a href="#clearCached" >clearCached</a>
                             </li>
                             <li>
-                                <a href="#ngOnChanges" >ngOnChanges</a>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#fetchAndCacheSuggestions" >fetchAndCacheSuggestions</a>
                             </li>
                             <li>
-                                <a href="#ngOnInit" >ngOnInit</a>
+                                    <span class="modifier">Private</span>
+                                <a href="#filterSuggestions" >filterSuggestions</a>
                             </li>
                             <li>
-                                <a href="#onBlurInput" >onBlurInput</a>
+                                <a href="#getDropDownStyle" >getDropDownStyle</a>
+                            </li>
+                            <li>
+                                <a href="#ngAfterViewInit" >ngAfterViewInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#onDocumentClick" >onDocumentClick</a>
                             </li>
                             <li>
                                 <a href="#onFocusInput" >onFocusInput</a>
+                            </li>
+                            <li>
+                                <a href="#onKeydown" >onKeydown</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
@@ -258,11 +282,8 @@
                                 <a href="#onSelectAutoComplete" >onSelectAutoComplete</a>
                             </li>
                             <li>
-                                <a href="#onValueChanged" >onValueChanged</a>
-                            </li>
-                            <li>
                                     <span class="modifier">Private</span>
-                                <a href="#setDisabledState" >setDisabledState</a>
+                                <a href="#scrollToIndex" >scrollToIndex</a>
                             </li>
                         </ul>
                     </td>
@@ -296,6 +317,9 @@
                             </li>
                             <li>
                                 <a href="#icon" >icon</a>
+                            </li>
+                            <li>
+                                <a href="#id" >id</a>
                             </li>
                             <li>
                                 <a href="#label" >label</a>
@@ -344,6 +368,20 @@
                 </tr>
 
 
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>HostListeners</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#document:click" >document:click</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
         </tbody>
     </table>
@@ -373,15 +411,9 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:69</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:67</a></div>
                             </td>
                         </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Width CSS value for addon (icon/label)</p>
-</div>
-                    </td>
-                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -405,15 +437,9 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:87</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:73</a></div>
                             </td>
                         </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>List of all options for client-side filtering</p>
-</div>
-                    </td>
-                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -437,15 +463,9 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:75</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:69</a></div>
                             </td>
                         </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Enable or disable caching</p>
-</div>
-                    </td>
-                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -472,12 +492,6 @@
                                     <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:66</a></div>
                             </td>
                         </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Caching strategy mode</p>
-</div>
-                    </td>
-                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -501,15 +515,9 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:72</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:68</a></div>
                             </td>
                         </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Reactive FormControl bound to the input</p>
-</div>
-                    </td>
-                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -533,15 +541,9 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:57</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:63</a></div>
                             </td>
                         </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Whether input is disabled</p>
-</div>
-                    </td>
-                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -565,15 +567,35 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:60</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:64</a></div>
                             </td>
                         </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Icon CSS class to display in input</p>
-</div>
+                        <a name="id"></a>
+                        <b>id</b>
                     </td>
                 </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>uuidV4()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:61</a></div>
+                            </td>
+                        </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -597,15 +619,9 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:63</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:65</a></div>
                             </td>
                         </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Label text shown instead of icon (if provided)</p>
-</div>
-                    </td>
-                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -624,16 +640,9 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:96</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:75</a></div>
                             </td>
                         </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Optional asynchronous search function.
-Should return a promise resolving to filtered results based on query.</p>
-</div>
-                    </td>
-                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -657,15 +666,9 @@ Should return a promise resolving to filtered results based on query.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:84</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:72</a></div>
                             </td>
                         </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Minimum characters before triggering search</p>
-</div>
-                    </td>
-                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -689,15 +692,9 @@ Should return a promise resolving to filtered results based on query.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:78</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:70</a></div>
                             </td>
                         </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Object property used for displaying suggestion labels</p>
-</div>
-                    </td>
-                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -721,15 +718,9 @@ Should return a promise resolving to filtered results based on query.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:81</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:71</a></div>
                             </td>
                         </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Object property used as suggestion value</p>
-</div>
-                    </td>
-                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -753,15 +744,9 @@ Should return a promise resolving to filtered results based on query.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:51</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:60</a></div>
                             </td>
                         </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Placeholder text for the input box</p>
-</div>
-                    </td>
-                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -785,15 +770,9 @@ Should return a promise resolving to filtered results based on query.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:54</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:62</a></div>
                             </td>
                         </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Whether input is readonly</p>
-</div>
-                    </td>
-                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -817,15 +796,9 @@ Should return a promise resolving to filtered results based on query.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:90</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:74</a></div>
                             </td>
                         </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Whether to show icon inside input for selected option</p>
-</div>
-                    </td>
-                </tr>
             </tbody>
         </table>
 </section>
@@ -847,15 +820,9 @@ Should return a promise resolving to filtered results based on query.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:104</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:78</a></div>
                             </td>
                         </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Emits the selected suggestion item</p>
-</div>
-                    </td>
-                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -874,20 +841,48 @@ Should return a promise resolving to filtered results based on query.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:101</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:77</a></div>
                             </td>
                         </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Emits current input string value</p>
-</div>
-                    </td>
-                </tr>
             </tbody>
         </table>
 </section>
 
+    <section data-compodoc="block-methods">
+    <h3>HostListeners</h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="document:click"></a>
+                    <span class="name">
+                        <span ><b>document:click</b></span>
+                        <a href="#document:click"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <i>Arguments : </i><code>'$event' </code>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>document:click(event: MouseEvent)</code>
+                </td>
+            </tr>
 
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="154"
+                                    class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:154</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
     <section data-compodoc="block-methods">
     
     <h3 id="methods">
@@ -913,16 +908,14 @@ Should return a promise resolving to filtered results based on query.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="249"
-                                    class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:249</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="148"
+                                    class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:148</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Clears the cache to reset lazy search results.</p>
-</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -936,33 +929,33 @@ Should return a promise resolving to filtered results based on query.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="ngOnChanges"></a>
+                    <a name="fetchAndCacheSuggestions"></a>
                     <span class="name">
-                        <span ><b>ngOnChanges</b></span>
-                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>fetchAndCacheSuggestions</b></span>
+                        <a href="#fetchAndCacheSuggestions"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>ngOnChanges(changes: SimpleChanges)</code>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>fetchAndCacheSuggestions(query: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="117"
-                                    class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:117</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="105"
+                                    class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:105</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Detect changes on inputs such as disabled
-Update the FormControl state accordingly.</p>
-</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -977,9 +970,9 @@ Update the FormControl state accordingly.</p>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>changes</td>
+                                                <td>query</td>
                                             <td>
-                                                        <code>SimpleChanges</code>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
 
                                             <td>
@@ -992,7 +985,7 @@ Update the FormControl state accordingly.</p>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
                             <div class="io-description">
@@ -1006,73 +999,32 @@ Update the FormControl state accordingly.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="ngOnInit"></a>
+                    <a name="filterSuggestions"></a>
                     <span class="name">
-                        <span ><b>ngOnInit</b></span>
-                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Private</span>
+                        <span ><b>filterSuggestions</b></span>
+                        <a href="#filterSuggestions"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>ngOnInit()</code>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>filterSuggestions(source: T[], query: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="109"
-                                    class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:109</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="98"
+                                    class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:98</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Initialize the component, update control disabled state</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="onBlurInput"></a>
-                    <span class="name">
-                        <span ><b>onBlurInput</b></span>
-                        <a href="#onBlurInput"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>onBlurInput(_: EventTarget | null)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="151"
-                                    class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:151</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>On input blur event handler
-If readonly, mark control untouched to prevent validation.
-Reset focusedCached flag for caching logic.</p>
-</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1087,9 +1039,171 @@ Reset focusedCached flag for caching logic.</p>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>_</td>
+                                                <td>source</td>
                                             <td>
-                                                        <code>EventTarget | null</code>
+                                                        <code>T[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>query</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>T[]</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getDropDownStyle"></a>
+                    <span class="name">
+                        <span ><b>getDropDownStyle</b></span>
+                        <a href="#getDropDownStyle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getDropDownStyle()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="203"
+                                    class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:203</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>{ height: string; width: any; }</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAfterViewInit"></a>
+                    <span class="name">
+                        <span ><b>ngAfterViewInit</b></span>
+                        <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngAfterViewInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDocumentClick"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>onDocumentClick</b></span>
+                        <a href="#onDocumentClick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onDocumentClick(event: MouseEvent)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@HostListener(&#x27;document:click&#x27;, [&#x27;$event&#x27;])<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="154"
+                                    class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:154</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>MouseEvent</code>
                                             </td>
 
                                             <td>
@@ -1125,24 +1239,21 @@ Reset focusedCached flag for caching logic.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>onFocusInput(input: EventTarget | null)</code>
+<code>onFocusInput(input: HTMLInputElement | null)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="138"
-                                    class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:138</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="89"
+                                    class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:89</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>On input focus event handler
-Immediately blur if input is disabled to prevent interaction.</p>
-</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1159,7 +1270,74 @@ Immediately blur if input is disabled to prevent interaction.</p>
                                         <tr>
                                                 <td>input</td>
                                             <td>
-                                                        <code>EventTarget | null</code>
+                                                        <code>HTMLInputElement | null</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onKeydown"></a>
+                    <span class="name">
+                        <span ><b>onKeydown</b></span>
+                        <a href="#onKeydown"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onKeydown(event: KeyboardEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="164"
+                                    class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:164</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>KeyboardEvent</code>
                                             </td>
 
                                             <td>
@@ -1197,24 +1375,21 @@ Immediately blur if input is disabled to prevent interaction.</p>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>onSearch(event: literal type)</code>
+                    <code>onSearch(term: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="168"
-                                    class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:168</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="120"
+                                    class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:120</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Handles user input search events.
-Uses client-side filtering or lazy async search with caching.</p>
-</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1229,9 +1404,9 @@ Uses client-side filtering or lazy async search with caching.</p>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>event</td>
+                                                <td>term</td>
                                             <td>
-                                                        <code>literal type</code>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
 
                                             <td>
@@ -1267,23 +1442,21 @@ Uses client-side filtering or lazy async search with caching.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>onSelectAutoComplete(event: AutoCompleteSelectEvent)</code>
+<code>onSelectAutoComplete(value: T)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="235"
-                                    class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:235</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="142"
+                                    class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:142</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Emits the selected suggestion when user picks an item.</p>
-</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1298,9 +1471,9 @@ Uses client-side filtering or lazy async search with caching.</p>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>event</td>
+                                                <td>value</td>
                                             <td>
-                                                        <code>AutoCompleteSelectEvent</code>
+                                                        <code>T</code>
                                             </td>
 
                                             <td>
@@ -1327,108 +1500,67 @@ Uses client-side filtering or lazy async search with caching.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="onValueChanged"></a>
-                    <span class="name">
-                        <span ><b>onValueChanged</b></span>
-                        <a href="#onValueChanged"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>onValueChanged(input: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="242"
-                                    class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:242</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Emits the current input value on input changes.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>input</td>
-                                            <td>
-                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="setDisabledState"></a>
+                    <a name="scrollToIndex"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
-                        <span ><b>setDisabledState</b></span>
-                        <a href="#setDisabledState"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>scrollToIndex</b></span>
+                        <a href="#scrollToIndex"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>setDisabledState()</code>
+                    <code>scrollToIndex(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="126"
-                                    class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:126</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="194"
+                                    class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:194</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Enable or disable the input control based on <code>disabled</code> input</p>
-</div>
 
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -1464,7 +1596,7 @@ Uses client-side filtering or lazy async search with caching.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:44</a></div>
                         </td>
                     </tr>
 
@@ -1475,21 +1607,112 @@ Uses client-side filtering or lazy async search with caching.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="focusedCached"></a>
+                    <a name="dropdownContainer"></a>
                     <span class="name">
-                        <span ><b>focusedCached</b></span>
-                        <a href="#focusedCached"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier"></span>
+                        <span ><b>dropdownContainer</b></span>
+                        <a href="#dropdownContainer"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>false</code>
+                        <i>Type : </i>    <code>ElementRef&lt;HTMLElement&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;dropdownContainer&#x27;, {static: true})<br />
+                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hoverIndex"></a>
+                    <span class="name">
+                        <span ><b>hoverIndex</b></span>
+                        <a href="#hoverIndex"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(0)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isDropDownHidden"></a>
+                    <span class="name">
+                        <span ><b>isDropDownHidden</b></span>
+                        <a href="#isDropDownHidden"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(true)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isResultEmpty"></a>
+                    <span class="name">
+                        <span ><b>isResultEmpty</b></span>
+                        <a href="#isResultEmpty"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(
+    () &#x3D;&gt;
+      this.suggestions().length &#x3D;&#x3D;&#x3D; 0 &amp;&amp;
+      !this.loading() &amp;&amp;
+      (this.control.value?.length ?? 0) &gt;&#x3D; this.minLength,
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:53</a></div>
                         </td>
                     </tr>
 
@@ -1516,12 +1739,12 @@ Uses client-side filtering or lazy async search with caching.</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>&#x27;7587ae60f0243cf7b6a15b4aa553d6d53c1ccf7401f6be1d5b8ad66ee7cf1d9d&#x27;</code>
+                        <i>Default value : </i><code>&#x27;---&#x27;</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:45</a></div>
                         </td>
                     </tr>
 
@@ -1541,37 +1764,12 @@ Uses client-side filtering or lazy async search with caching.</p>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>false</code>
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(false)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:44</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="showEmptyMessage"></a>
-                    <span class="name">
-                        <span ><b>showEmptyMessage</b></span>
-                        <a href="#showEmptyMessage"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>false</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:49</a></div>
                         </td>
                     </tr>
 
@@ -1591,18 +1789,38 @@ Uses client-side filtering or lazy async search with caching.</p>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>    <code>T[]</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>[]</code>
+                        <i>Default value : </i><code>signal&lt;T[]&gt;([])</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="width"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>width</b></span>
+                        <a href="#width"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(&#x27;100%&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/shared/inputs/search-auto-complete/search-auto-complete.component.ts:46</a></div>
                         </td>
                     </tr>
 
@@ -1615,15 +1833,17 @@ Uses client-side filtering or lazy async search with caching.</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
-import {
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  AfterViewInit,
   Component,
+  computed,
+  ElementRef,
   EventEmitter,
+  HostListener,
   Input,
-  OnChanges,
-  OnInit,
   Output,
-  SimpleChanges,
+  signal,
+  ViewChild,
 } from &#x27;@angular/core&#x27;;
 import { FormControl, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
 import {
@@ -1632,301 +1852,253 @@ import {
 } from &#x27;primeng/autocomplete&#x27;;
 import { InputGroupModule } from &#x27;primeng/inputgroup&#x27;;
 import { InputGroupAddonModule } from &#x27;primeng/inputgroupaddon&#x27;;
+import { TextInputComponent } from &#x27;../text-input/text-input.component&#x27;;
+import { NgClass } from &#x27;@angular/common&#x27;;
+import { uuidV4 } from &#x27;app/utils/uuid&#x27;;
 
 @Component({
   selector: &#x27;app-search-auto-complete&#x27;,
   standalone: true,
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     AutoCompleteModule,
+    TextInputComponent,
     InputGroupAddonModule,
     InputGroupModule,
+    NgClass,
   ],
   templateUrl: &#x27;./search-auto-complete.component.html&#x27;,
   styleUrl: &#x27;./search-auto-complete.component.scss&#x27;,
 })
 export class SearchAutoCompleteComponent&lt;T extends Record&lt;string, any&gt;&gt;
-  implements OnInit, OnChanges
+  implements AfterViewInit
 {
-  // Cache for lazy search results to optimize repeated queries
+  @ViewChild(&#x27;dropdownContainer&#x27;, { static: true })
+  dropdownContainer!: ElementRef&lt;HTMLElement&gt;;
+
   private cachedResults: T[] &#x3D; [];
+  private lastSearchKey &#x3D; &#x27;---&#x27;;
+  private width &#x3D; signal(&#x27;100%&#x27;);
 
-  // Cache key to compare and avoid redundant searches (default to some fixed hash)
-  private lastSearchKey &#x3D;
-    &#x27;7587ae60f0243cf7b6a15b4aa553d6d53c1ccf7401f6be1d5b8ad66ee7cf1d9d&#x27;;
+  suggestions &#x3D; signal&lt;T[]&gt;([]);
+  loading &#x3D; signal&lt;boolean&gt;(false);
+  hoverIndex &#x3D; signal(0);
+  isDropDownHidden &#x3D; signal(true);
 
-  suggestions: T[] &#x3D; [];             // Current suggestions shown in dropdown
-  showEmptyMessage &#x3D; false;          // Show &quot;No results found&quot; message flag
-  loading &#x3D; false;                   // Loading state for async search
+  isResultEmpty &#x3D; computed(
+    () &#x3D;&gt;
+      this.suggestions().length &#x3D;&#x3D;&#x3D; 0 &amp;&amp;
+      !this.loading() &amp;&amp;
+      (this.control.value?.length ?? 0) &gt;&#x3D; this.minLength,
+  );
 
-  focusedCached &#x3D; false;             // Flag to manage caching behavior on focus
-
-  // ---------- INPUTS ----------
-
-  /** Placeholder text for the input box */
   @Input() placeholder &#x3D; &#x27;جستجو&#x27;;
-
-  /** Whether input is readonly */
+  @Input() id &#x3D; uuidV4();
   @Input() readOnly &#x3D; false;
-
-  /** Whether input is disabled */
   @Input() disabled &#x3D; false;
-
-  /** Icon CSS class to display in input */
   @Input() icon &#x3D; &#x27;pi pi-search&#x27;;
-
-  /** Label text shown instead of icon (if provided) */
   @Input() label &#x3D; &#x27;&#x27;;
-
-  /** Caching strategy mode */
   @Input() cachingMode: &#x27;CharacterPrefix&#x27; | &#x27;Focus&#x27; &#x3D; &#x27;CharacterPrefix&#x27;;
-
-  /** Width CSS value for addon (icon/label) */
   @Input() addonWidth &#x3D; &#x27;&#x27;;
-
-  /** Reactive FormControl bound to the input */
   @Input() control &#x3D; new FormControl(&#x27;&#x27;);
-
-  /** Enable or disable caching */
   @Input() cachingEnabled &#x3D; true;
-
-  /** Object property used for displaying suggestion labels */
   @Input() optionLabel &#x3D; &#x27;label&#x27;;
-
-  /** Object property used as suggestion value */
   @Input() optionValue &#x3D; &#x27;value&#x27;;
-
-  /** Minimum characters before triggering search */
   @Input() minLength &#x3D; 3;
-
-  /** List of all options for client-side filtering */
   @Input() allOptions: T[] &#x3D; [];
-
-  /** Whether to show icon inside input for selected option */
   @Input() showIconOptionSelected &#x3D; false;
-
-  /**
-   * Optional asynchronous search function.
-   * Should return a promise resolving to filtered results based on query.
-   */
   @Input() lazySearch?: (query: string) &#x3D;&gt; Promise&lt;T[]&gt;;
 
-  // ---------- OUTPUTS ----------
-
-  /** Emits current input string value */
   @Output() valueChange &#x3D; new EventEmitter&lt;string&gt;();
-
-  /** Emits the selected suggestion item */
   @Output() selectSuggestion &#x3D; new EventEmitter&lt;T&gt;();
 
-  // ---------- LIFECYCLE HOOKS ----------
-
-  /** Initialize the component, update control disabled state */
-  ngOnInit(): void {
-    this.setDisabledState();
+  ngAfterViewInit(): void {
+    this.control.valueChanges.subscribe((value) &#x3D;&gt; {
+      this.hoverIndex.set(-1);
+      this.onSearch(value || &#x27;&#x27;);
+      this.isDropDownHidden.set(false);
+      this.valueChange.emit(value || &#x27;&#x27;);
+    });
   }
 
-  /**
-   * Detect changes on inputs such as disabled
-   * Update the FormControl state accordingly.
-   */
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes[&#x27;disabled&#x27;]) {
-      this.setDisabledState();
+  onFocusInput(input: HTMLInputElement | null): void {
+    this.width.set(&#x60;${input?.clientWidth}px&#x60;);
+
+    if (this.cachingMode &#x3D;&#x3D;&#x3D; &#x27;Focus&#x27;) {
+      this.onSearch(this.control.value ?? &#x27;&#x27;);
+    }
+    this.isDropDownHidden.set(false);
+  }
+
+  private filterSuggestions(source: T[], query: string): T[] {
+    const q &#x3D; query.toLowerCase();
+    return source.filter((item) &#x3D;&gt;
+      (item[this.optionLabel] as string).toLowerCase().includes(q),
+    );
+  }
+
+  private async fetchAndCacheSuggestions(query: string) {
+    const currentKey &#x3D; query.substring(0, this.minLength);
+    const searchQuery &#x3D; this.cachingEnabled ? currentKey : query;
+
+    try {
+      this.loading.set(true);
+      const result &#x3D; await this.lazySearch!(searchQuery);
+      this.lastSearchKey &#x3D; currentKey;
+      this.cachedResults &#x3D; result;
+      this.suggestions.set(result);
+    } finally {
+      this.loading.set(false);
     }
   }
 
-  // ---------- PRIVATE HELPERS ----------
+  async onSearch(term: string) {
+    const query &#x3D; term.trimStart();
 
-  /** Enable or disable the input control based on &#x60;disabled&#x60; input */
-  private setDisabledState(): void {
-    if (this.disabled) {
-      this.control.disable({ emitEvent: false });
-    } else {
-      this.control.enable({ emitEvent: false });
-    }
-  }
-
-  /**
-   * On input focus event handler
-   * Immediately blur if input is disabled to prevent interaction.
-   */
-  onFocusInput(input: EventTarget | null): void {
-    const inputElement &#x3D; input as HTMLInputElement;
-    if (this.disabled) {
-      inputElement?.blur();
+    if (query.length &lt; this.minLength) {
+      this.suggestions.set([]);
       return;
     }
-  }
 
-  /**
-   * On input blur event handler
-   * If readonly, mark control untouched to prevent validation.
-   * Reset focusedCached flag for caching logic.
-   */
-  onBlurInput(_: EventTarget | null): void {
-    if (this.readOnly) {
-      this.control.markAsUntouched();
+    if (!this.lazySearch) {
+      this.suggestions.set(this.filterSuggestions(this.allOptions, query));
       return;
     }
-    if (this.cachingMode &#x3D;&#x3D;&#x3D; &quot;Focus&quot;) {
-      this.focusedCached &#x3D; false;
+
+    const currentKey &#x3D; query.substring(0, this.minLength);
+    if (this.cachingEnabled &amp;&amp; currentKey &#x3D;&#x3D;&#x3D; this.lastSearchKey) {
+      this.suggestions.set(this.filterSuggestions(this.cachedResults, query));
+      return;
+    }
+
+    await this.fetchAndCacheSuggestions(query);
+  }
+
+  onSelectAutoComplete(value: T) {
+    this.control.setValue(value[this.optionLabel] || this.control.value);
+    this.selectSuggestion.emit(value);
+    this.isDropDownHidden.set(true);
+  }
+
+  clearCached(): void {
+    this.lastSearchKey &#x3D; &#x27;---&#x27;;
+    this.cachedResults &#x3D; [];
+  }
+
+  @HostListener(&#x27;document:click&#x27;, [&#x27;$event&#x27;])
+  onDocumentClick(event: MouseEvent) {
+    const inside &#x3D; this.dropdownContainer.nativeElement.contains(
+      event.target as Node,
+    );
+    if (!inside) {
+      this.isDropDownHidden.set(true);
       this.clearCached();
     }
   }
 
-  // ---------- SEARCH HANDLER ----------
+  onKeydown(event: KeyboardEvent) {
+    const len &#x3D; this.suggestions().length;
+    if (len &#x3D;&#x3D;&#x3D; 0) return;
 
-  /**
-   * Handles user input search events.
-   * Uses client-side filtering or lazy async search with caching.
-   */
-  async onSearch(event: { query: string }) {
-    const query &#x3D; event.query.trimStart();
+    const code &#x3D; event.code;
+    const current &#x3D; this.hoverIndex();
 
-    // Clear suggestions if query is too short
-    if (query.length &lt; this.minLength) {
-      this.suggestions &#x3D; [];
-      this.showEmptyMessage &#x3D; false;
-      return;
-    }
-
-    // Client-side filtering when no async lazy search function provided
-    if (!this.lazySearch) {
-      this.suggestions &#x3D; this.allOptions.filter((item) &#x3D;&gt;
-        (item[this.optionLabel] as string)
-          .toLowerCase()
-          .includes(query.toLowerCase())
-      );
-      this.showEmptyMessage &#x3D; this.suggestions.length &#x3D;&#x3D;&#x3D; 0;
-      return;
-    }
-
-    // Lazy search mode with caching enabled
-    const currentKey &#x3D; query.substring(0, this.minLength);
-
-    if (this.cachingEnabled) {
-      const isCharPrefixMatch &#x3D;
-        this.cachingMode &#x3D;&#x3D;&#x3D; &#x27;CharacterPrefix&#x27; &amp;&amp;
-        currentKey &#x3D;&#x3D;&#x3D; this.lastSearchKey;
-        
-      const isFocusMode &#x3D; this.cachingMode &#x3D;&#x3D;&#x3D; &#x27;Focus&#x27; &amp;&amp; this.focusedCached;
-      
-      if (isCharPrefixMatch || isFocusMode) {
-        if (currentKey &#x3D;&#x3D;&#x3D; this.lastSearchKey) {
-          // Filter cached results to refine suggestions without calling lazySearch again
-          this.suggestions &#x3D; this.cachedResults.filter((item) &#x3D;&gt;
-            (item[this.optionLabel] as string)
-          .toLowerCase()
-          .includes(query.toLowerCase())
-        );
-          this.showEmptyMessage &#x3D; this.suggestions.length &#x3D;&#x3D;&#x3D; 0;
-          return;
+    switch (code) {
+      case &#x27;Enter&#x27;: {
+        event.preventDefault();
+        const selected &#x3D; this.suggestions()[current];
+        if (selected) {
+          this.onSelectAutoComplete(selected);
         }
+        break;
       }
-    }
-
-    // Fetch fresh results asynchronously from lazySearch
-    try {
-      this.loading &#x3D; true;
-
-      // Use cached key or full query depending on cachingEnabled flag
-      const searchQuery &#x3D; this.cachingEnabled ? currentKey : query;
-      const result &#x3D; await this.lazySearch(searchQuery);
-
-      // Update cache and suggestions
-      this.lastSearchKey &#x3D; currentKey;
-      this.cachedResults &#x3D; result;
-      this.suggestions &#x3D; result;
-      this.focusedCached &#x3D; true;
-      this.showEmptyMessage &#x3D; result.length &#x3D;&#x3D;&#x3D; 0;
-    } finally {
-      this.loading &#x3D; false;
+      case &#x27;ArrowDown&#x27;:
+      case &#x27;ArrowUp&#x27;: {
+        event.preventDefault();
+        const delta &#x3D; code &#x3D;&#x3D;&#x3D; &#x27;ArrowDown&#x27; ? 1 : -1;
+        const next &#x3D; (current + delta + len) % len;
+        this.hoverIndex.set(next);
+        this.scrollToIndex(next);
+        break;
+      }
+      default:
+        break;
     }
   }
 
-  /**
-   * Emits the selected suggestion when user picks an item.
-   */
-  onSelectAutoComplete(event: AutoCompleteSelectEvent) {
-    this.selectSuggestion.emit(event.value);
+  private scrollToIndex(index: number) {
+    requestAnimationFrame(() &#x3D;&gt; {
+      const item &#x3D; document.getElementById(&#x60;${this.id}-${index}&#x60;);
+      if (item) {
+        item.scrollIntoView({ block: &#x27;nearest&#x27; });
+      }
+    });
   }
 
-  /**
-   * Emits the current input value on input changes.
-   */
-  onValueChanged(input: any) {
-    this.valueChange.emit(input.value);
-  }
+  getDropDownStyle() {
+    const valueLen &#x3D; this.control.value?.length ?? 0;
+    let count &#x3D; this.suggestions().length - 1;
+    if (this.isDropDownHidden() || valueLen &lt; this.minLength) {
+      return { height: &#x27;0px&#x27;, width: this.width() };
+    }
 
-  /**
-   * Clears the cache to reset lazy search results.
-   */
-  clearCached(): void {
-    this.lastSearchKey &#x3D;
-      &#x27;7587ae60f0243cf7b6a15b4aa553d6d53c1ccf7401f6be1d5b8ad66ee7cf1d9d&#x27;;
-    this.cachedResults &#x3D; [];
+    count &#x3D; Math.max(count, 1);
+    const itemHeight &#x3D; 3.55; // px per item
+    const max &#x3D; itemHeight * 4; // max px
+    const height &#x3D; Math.min(itemHeight * count, max);
+    return { height: &#x60;${height}rem&#x60;, width: this.width() };
   }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;flex justify-content-center align-items-center w-full&quot;&gt;
-  &lt;p-input-group class&#x3D;&quot;w-full relative&quot;&gt;
-    &lt;!-- Addon: Icon or Label --&gt;
-    &lt;p-inputgroup-addon
-      class&#x3D;&quot;bg-primary border-round-right flex items-center justify-center px-3 h-2-5rem&quot;
-      [style.width]&#x3D;&quot;addonWidth&quot;
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;relative&quot; #dropdownContainer&gt;
+  &lt;div class&#x3D;&quot;relative w-full&quot;&gt;
+    &lt;div
+      class&#x3D;&quot;absolute flex items-center justify-center left-0 w-10 rounded-l-2xl h-full&quot;
+      [hidden]&#x3D;&quot;!showIconOptionSelected&quot;
     &gt;
-      &lt;ng-container *ngIf&#x3D;&quot;label.trim() &#x3D;&#x3D;&#x3D; &#x27;&#x27;; else labelTemplate&quot;&gt;
-        &lt;i [class]&#x3D;&quot;icon&quot;&gt;&lt;/i&gt;
-      &lt;/ng-container&gt;
-      &lt;ng-template #labelTemplate&gt;
-        &lt;span class&#x3D;&quot;text-sm text-white&quot; style&#x3D;&quot;white-space: nowrap&quot;&gt;
-          {{ label }}
-        &lt;/span&gt;
-      &lt;/ng-template&gt;
-    &lt;/p-inputgroup-addon&gt;
-
-    &lt;!-- AutoComplete Input --&gt;
-    &lt;p-autoComplete
-      pInputText
-      class&#x3D;&quot;flex-grow-1 border-input&quot;
-      styleClass&#x3D;&quot;w-full h-2-5rem&quot;
-      [formControl]&#x3D;&quot;control&quot;
-      [suggestions]&#x3D;&quot;suggestions&quot;
-      [optionLabel]&#x3D;&quot;optionLabel&quot;
-      [optionValue]&#x3D;&quot;optionValue&quot;
+      &lt;i class&#x3D;&quot;pi pi-check-circle text-xl text-emerald-600&quot;&gt;&lt;/i&gt;
+    &lt;/div&gt;
+    &lt;app-text-input
+      [icon]&#x3D;&quot;icon&quot;
+      [label]&#x3D;&quot;label&quot;
+      [disabled]&#x3D;&quot;disabled&quot;
+      [readOnly]&#x3D;&quot;readOnly&quot;
+      [addonWidth]&#x3D;&quot;addonWidth&quot;
       [placeholder]&#x3D;&quot;placeholder&quot;
-      [showEmptyMessage]&#x3D;&quot;showEmptyMessage&quot;
-      emptyMessage&#x3D;&quot;موردی یافت نشد&quot;
-      (completeMethod)&#x3D;&quot;onSearch($event)&quot;
-      (onSelect)&#x3D;&quot;onSelectAutoComplete($event)&quot;
-      (onFocus)&#x3D;&quot;onFocusInput($event.target)&quot;
-      (onBlur)&#x3D;&quot;onBlurInput($event.target)&quot;
-      (input)&#x3D;&quot;onValueChanged($event.target)&quot;
-      [completeOnFocus]&#x3D;&quot;true&quot;
+      [control]&#x3D;&quot;control&quot;
+      (keydown)&#x3D;&quot;onKeydown($event)&quot;
+      (focus)&#x3D;&quot;onFocusInput($event)&quot;
     /&gt;
+  &lt;/div&gt;
 
-    &lt;!-- Optional Select Icon --&gt;
-    &lt;div
-      *ngIf&#x3D;&quot;!loading &amp;&amp; showIconOptionSelected&quot;
-      class&#x3D;&quot;absolute&quot;
-      style&#x3D;&quot;z-index: 3; left: 10px; top: 5px&quot;
-    &gt;
-      &lt;i class&#x3D;&quot;pi pi-check-circle text-lg text-green-600&quot;&gt;&lt;/i&gt;
+  &lt;div
+    class&#x3D;&quot;absolute top-11 left-0 bg-primary-contrast z-50 border-gray-300 dark:border-gray-400 shadow-md rounded-md transition-all duration-300 ease-out overflow-y-auto&quot;
+    [style]&#x3D;&quot;getDropDownStyle()&quot;
+  &gt;
+    @if (loading()) {
+    &lt;div class&#x3D;&quot;px-4 py-4 flex items-center gap-3&quot;&gt;
+      &lt;i class&#x3D;&quot;pi pi-spin pi-spinner&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt;
+      &lt;span class&#x3D;&quot;truncate&quot;&gt;در حال بارگذاری اطلاعات...&lt;/span&gt;
     &lt;/div&gt;
-
-    &lt;div
-      *ngIf&#x3D;&quot;loading&quot;
-      class&#x3D;&quot;absolute&quot;
-      style&#x3D;&quot;z-index: 3; left: 10px; top: 5px&quot;
-    &gt;
-      &lt;i class&#x3D;&quot;pi pi-spin pi-spinner ml-2&quot;&gt;&lt;/i&gt;
+    } @else if (isResultEmpty()) {
+    &lt;div class&#x3D;&quot;px-4 py-4 flex items-center gap-3&quot;&gt;
+      &lt;span&gt; موردی یافت نشد. &lt;/span&gt;
     &lt;/div&gt;
-  &lt;/p-input-group&gt;
+    }@else { @for (suggestion of suggestions(); track $index) {
+    &lt;div
+      (mouseover)&#x3D;&quot;this.hoverIndex.set($index)&quot;
+      (click)&#x3D;&quot;onSelectAutoComplete(suggestion)&quot;
+      [id]&#x3D;&quot;&#x60;${id}-${$index}&#x60;&quot;
+      class&#x3D;&quot;px-2 py-4 cursor-pointer hover:bg-emphasis&quot;
+      [ngClass]&#x3D;&quot;{ &#x27;bg-emphasis&#x27;: hoverIndex() &#x3D;&#x3D;&#x3D; $index }&quot;
+    &gt;
+      {{ suggestion[optionLabel] }}
+    &lt;/div&gt;
+    } }
+  &lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
     </div>
@@ -1957,8 +2129,8 @@ export class SearchAutoCompleteComponent&lt;T extends Record&lt;string, any&gt;&
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="flex justify-center items-center w-full">  <p-input-group class="w-full relative">    <!-- Addon: Icon or Label -->    <p-inputgroup-addon      class="bg-primary rounded-r flex items-center justify-center px-4 h-2-5rem"      [style.width]="addonWidth"    >      <ng-container *ngIf="label.trim() === \'\'; else labelTemplate">        <i [class]="icon"></i>      </ng-container>      <ng-template #labelTemplate>        <span class="text-sm text-white" style="white-space: nowrap">          {{ label }}        </span>      </ng-template>    </p-inputgroup-addon>    <!-- AutoComplete Input -->    <p-autoComplete      pInputText      class="flex-grow-1 border-input"      styleClass="w-full h-2-5rem"      [formControl]="control"      [suggestions]="suggestions"      [optionLabel]="optionLabel"      [optionValue]="optionValue"      [placeholder]="placeholder"      [showEmptyMessage]="showEmptyMessage"      emptyMessage="موردی یافت نشد"      (completeMethod)="onSearch($event)"      (onSelect)="onSelectAutoComplete($event)"      (onFocus)="onFocusInput($event.target)"      (onBlur)="onBlurInput($event.target)"      (input)="onValueChanged($event.target)"      [completeOnFocus]="true"    />    <!-- Optional Select Icon -->    <div      *ngIf="!loading && showIconOptionSelected"      class="absolute"      style="z-index: 3; left: 10px; top: 5px"    >      <i class="pi pi-check-circle text-lg text-green-600"></i>    </div>    <div      *ngIf="loading"      class="absolute"      style="z-index: 3; left: 10px; top: 5px"    >      <i class="pi pi-spin pi-spinner ml-2"></i>    </div>  </p-input-group></div></div>'
-    var COMPONENTS = [{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarMenuComponent', 'selector': 'app-sidebar-menu'},{'name': 'SubMenuComponent', 'selector': 'app-sub-menu'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TabBarComponent', 'selector': 'app-tab-bar'},{'name': 'TabViewComponent', 'selector': 'app-tab-view'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'}];
+        var COMPONENT_TEMPLATE = '<div><div class="relative" #dropdownContainer>  <div class="relative w-full">    <div      class="absolute flex items-center justify-center left-0 w-10 rounded-l-2xl h-full"      [hidden]="!showIconOptionSelected"    >      <i class="pi pi-check-circle text-xl text-emerald-600"></i>    </div>    <app-text-input      [icon]="icon"      [label]="label"      [disabled]="disabled"      [readOnly]="readOnly"      [addonWidth]="addonWidth"      [placeholder]="placeholder"      [control]="control"      (keydown)="onKeydown($event)"      (focus)="onFocusInput($event)"    />  </div>  <div    class="absolute top-11 left-0 bg-primary-contrast z-50 border-gray-300 dark:border-gray-400 shadow-md rounded-md transition-all duration-300 ease-out overflow-y-auto"    [style]="getDropDownStyle()"  >    @if (loading()) {    <div class="px-4 py-4 flex items-center gap-3">      <i class="pi pi-spin pi-spinner" aria-hidden="true"></i>      <span class="truncate">در حال بارگذاری اطلاعات...</span>    </div>    } @else if (isResultEmpty()) {    <div class="px-4 py-4 flex items-center gap-3">      <span> موردی یافت نشد. </span>    </div>    }@else { @for (suggestion of suggestions(); track $index) {    <div      (mouseover)="this.hoverIndex.set($index)"      (click)="onSelectAutoComplete(suggestion)"      [id]="`${id}-${$index}`"      class="px-2 py-4 cursor-pointer hover:bg-emphasis"      [ngClass]="{ \'bg-emphasis\': hoverIndex() === $index }"    >      {{ suggestion[optionLabel] }}    </div>    } }  </div></div></div>'
+    var COMPONENTS = [{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DashboardContentManagerComponent', 'selector': 'app-dashboard-content-manager'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'ExitConfirmationDialogComponent', 'selector': 'app-exit-confirmation-dialog'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'IssuedTurnListFormComponent', 'selector': 'app-issued-turn-list-form'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'LogoComponent', 'selector': 'app-logo'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'MapSvgComponent', 'selector': 'app-map-svg'},{'name': 'MobileTabBarComponent', 'selector': 'app-mobile-tab-bar'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RegisterTurnFormComponent', 'selector': 'app-register-turn-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SearchProcessesComponent', 'selector': 'app-search-processes'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarPageGroupComponent', 'selector': 'app-sidebar-page-group'},{'name': 'SidebarWebProcesses', 'selector': 'app-sidebar-web-processes'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabManagerComponent', 'selector': 'app-tab-manager'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'ThemeManagementComponent', 'selector': 'app-theme-management'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'ToggleSwitchInputComponent', 'selector': 'app-toggle-switch-input'},{'name': 'TransportCompaniesFormComponent', 'selector': 'app-transport-companies-form'},{'name': 'TransportCompaniesWalletPaymentFormComponent', 'selector': 'app-transport-companies-wallet-payment-form'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TruckWalletPaymentFormComponent', 'selector': 'app-truck-wallet-payment-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserChargingFunctionFormComponent', 'selector': 'app-user-charging-function-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UserProfileComponent', 'selector': 'app-user-profile'},{'name': 'UserProfileFormComponent', 'selector': 'app-user-profile-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'},{'name': 'WalletPaymentFormComponent', 'selector': 'app-wallet-payment-form'},{'name': 'WalletPaymentRecordTableComponent', 'selector': 'app-payment-record-table'},{'name': 'WalletProfileComponent', 'selector': 'app-wallet-profile'},{'name': 'WalletTransactionsTableComponent', 'selector': 'app-wallet-transactions-table'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SearchAutoCompleteComponent'};
 </script>

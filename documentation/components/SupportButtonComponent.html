@@ -155,6 +155,7 @@
                                 <code><a href="../components/CaptchaInputComponent.html" target="_self" >CaptchaInputComponent</a></code>
                                 <code><a href="../components/TextAreaInputComponent.html" target="_self" >TextAreaInputComponent</a></code>
                             <code>DialogModule</code>
+                                <code><a href="../components/ButtonComponent.html" target="_self" >ButtonComponent</a></code>
                 </td>
             </tr>
 
@@ -237,7 +238,7 @@
 </section>
 
     <section data-compodoc="block-constructor">
-    <h3 id="function Object() { [native code] }">Constructor</h3>
+    <h3 id="constructor">Constructor</h3>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
@@ -247,7 +248,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/components/shared/support-button/support-button.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/shared/support-button/support-button.component.ts:30</a></div>
                             </td>
                         </tr>
 
@@ -338,8 +339,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="49"
-                                    class="link-to-prism">src/app/components/shared/support-button/support-button.component.ts:49</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="51"
+                                    class="link-to-prism">src/app/components/shared/support-button/support-button.component.ts:51</a></div>
                         </td>
                     </tr>
 
@@ -377,8 +378,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/app/components/shared/support-button/support-button.component.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="37"
+                                    class="link-to-prism">src/app/components/shared/support-button/support-button.component.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -414,8 +415,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="39"
-                                    class="link-to-prism">src/app/components/shared/support-button/support-button.component.ts:39</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="41"
+                                    class="link-to-prism">src/app/components/shared/support-button/support-button.component.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -451,8 +452,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="44"
-                                    class="link-to-prism">src/app/components/shared/support-button/support-button.component.ts:44</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="46"
+                                    class="link-to-prism">src/app/components/shared/support-button/support-button.component.ts:46</a></div>
                         </td>
                     </tr>
 
@@ -498,7 +499,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/components/shared/support-button/support-button.component.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/shared/support-button/support-button.component.ts:29</a></div>
                         </td>
                     </tr>
 
@@ -529,7 +530,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/components/shared/support-button/support-button.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/shared/support-button/support-button.component.ts:30</a></div>
                         </td>
                     </tr>
 
@@ -553,6 +554,7 @@ import { APP_ROUTES } from &#x27;app/constants/routes&#x27;;
 import { CaptchaInputComponent } from &#x27;../inputs/captcha-input/captcha-input.component&#x27;;
 import { TextAreaInputComponent } from &#x27;../inputs/text-area-input/text-area-input.component&#x27;;
 import { DialogModule } from &#x27;primeng/dialog&#x27;;
+import { ButtonComponent } from &quot;../button/button.component&quot;;
 
 @Component({
   selector: &#x27;app-support-button&#x27;,
@@ -563,7 +565,8 @@ import { DialogModule } from &#x27;primeng/dialog&#x27;;
     CaptchaInputComponent,
     TextAreaInputComponent,
     DialogModule,
-  ],
+    ButtonComponent
+],
   templateUrl: &#x27;./support-button.component.html&#x27;,
   styleUrl: &#x27;./support-button.component.scss&#x27;,
 })
@@ -598,8 +601,8 @@ export class SupportButtonComponent {
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;p-button
-  class&#x3D;&quot;fixed bottom-0 left-0 border-round font-bold mb-5 ml-3&quot;
+        <pre class="line-numbers"><code class="language-html">&lt;app-button
+  styleClass&#x3D;&quot;fixed bottom-0 left-0 py-5 text-2xl font-bold mb-8 ml-4&quot;
   severity&#x3D;&quot;info&quot;
   [rounded]&#x3D;&quot;true&quot;
   icon&#x3D;&quot;pi pi-phone&quot;
@@ -613,63 +616,63 @@ export class SupportButtonComponent {
   [(visible)]&#x3D;&quot;visible&quot;
 &gt;
   &lt;div
-    class&#x3D;&quot;flex flex-c w-full align-content-center justify-content-center flex-wrap&quot;
+    class&#x3D;&quot;flex flex-c w-full content-center justify-center flex-wrap&quot;
   &gt;
-    &lt;div class&#x3D;&quot;m-2 align-items-center justify-content-center&quot;&gt;
-      &lt;p-button
+    &lt;div class&#x3D;&quot;m-2 items-center justify-center&quot;&gt;
+      &lt;app-button
         (click)&#x3D;&quot;CallUsOnPhone.toggle($event)&quot;
         icon&#x3D;&quot;pi pi-phone&quot;
         label&#x3D;&quot;شماره های تماس&quot;
         severity&#x3D;&quot;info&quot;
       /&gt;
       &lt;p-popover #CallUsOnPhone&gt;
-        &lt;div class&#x3D;&quot;flex justify-content-between align-content-center m-2&quot;&gt;
-          &lt;label class&#x3D;&quot;flex align-items-center justify-content-center&quot;
+        &lt;div class&#x3D;&quot;flex justify-between content-center m-2&quot;&gt;
+          &lt;label class&#x3D;&quot;flex items-center justify-center&quot;
             &gt;انجمن رانندگان&lt;/label
           &gt;
-          &lt;p-button
+          &lt;app-button
             severity&#x3D;&quot;info&quot;
             [raised]&#x3D;&quot;true&quot;
             icon&#x3D;&quot;pi pi-clipboard&quot;
             [rounded]&#x3D;&quot;true&quot;
             label&#x3D;&quot;03134721839&quot;
             (onClick)&#x3D;&quot;copyToClipboard()&quot;
-            class&#x3D;&quot;flex align-items-center justify-content-center mr-2&quot;
+            class&#x3D;&quot;flex items-center justify-center mr-2&quot;
           /&gt;
         &lt;/div&gt;
-        &lt;div class&#x3D;&quot;flex justify-content-between align-content-center m-2&quot;&gt;
-          &lt;label class&#x3D;&quot;flex align-items-center justify-content-center&quot;
+        &lt;div class&#x3D;&quot;flex justify-between content-center m-2&quot;&gt;
+          &lt;label class&#x3D;&quot;flex items-center justify-center&quot;
             &gt;انجمن کامیونداران&lt;/label
           &gt;
-          &lt;p-button
+          &lt;app-button
             severity&#x3D;&quot;info&quot;
             [raised]&#x3D;&quot;true&quot;
             icon&#x3D;&quot;pi pi-clipboard&quot;
             [rounded]&#x3D;&quot;true&quot;
             label&#x3D;&quot;03134721839&quot;
             (onClick)&#x3D;&quot;copyToClipboard()&quot;
-            class&#x3D;&quot;flex align-items-center justify-content-center mr-2&quot;
+            class&#x3D;&quot;flex items-center justify-center mr-2&quot;
           /&gt;
         &lt;/div&gt;
-        &lt;div class&#x3D;&quot;flex justify-content-between align-content-center m-2&quot;&gt;
-          &lt;label class&#x3D;&quot;flex align-items-center justify-content-center&quot;
+        &lt;div class&#x3D;&quot;flex justify-between content-center m-2&quot;&gt;
+          &lt;label class&#x3D;&quot;flex items-center justify-center&quot;
             &gt;انجمن شرکت‌ها&lt;/label
           &gt;
-          &lt;p-button
+          &lt;app-button
             severity&#x3D;&quot;info&quot;
             [raised]&#x3D;&quot;true&quot;
             icon&#x3D;&quot;pi pi-clipboard&quot;
             [rounded]&#x3D;&quot;true&quot;
             label&#x3D;&quot;03134721839&quot;
             (onClick)&#x3D;&quot;copyToClipboard()&quot;
-            class&#x3D;&quot;flex align-items-center justify-content-center mr-2&quot;
+            class&#x3D;&quot;flex items-center justify-center mr-2&quot;
           /&gt;
         &lt;/div&gt;
       &lt;/p-popover&gt;
     &lt;/div&gt;
 
-    &lt;div class&#x3D;&quot;m-2 align-items-center justify-content-center&quot;&gt;
-      &lt;p-button
+    &lt;div class&#x3D;&quot;m-2 items-center justify-center&quot;&gt;
+      &lt;app-button
         (click)&#x3D;&quot;showTicketDialog()&quot;
         label&#x3D;&quot;ارتباط مستقیم با پشتیبانی&quot;
         icon&#x3D;&quot;pi pi-headphones&quot;
@@ -685,7 +688,7 @@ export class SupportButtonComponent {
   [modal]&#x3D;&quot;true&quot;
   [(visible)]&#x3D;&quot;dialog&quot;
 &gt;
-  &lt;span class&#x3D;&quot;p-text-secondary block mb-5&quot;
+  &lt;span class&#x3D;&quot;p-text-secondary block mb-8&quot;
     &gt;لطفا بعد از پر کردن اطلاعات، متن تیکت خود را وارد نمایید.&lt;br /&gt;&lt;br /&gt;همکاران
     ما در اسرع وقت پاسخگو خواهند بود.&lt;/span
   &gt;
@@ -698,9 +701,9 @@ export class SupportButtonComponent {
   &lt;/div&gt;
 
   &lt;div class&#x3D;&quot;flex justify-end gap-2&quot;&gt;
-    &lt;p-button label&#x3D;&quot;ارسال&quot; (click)&#x3D;&quot;submitTicket()&quot; /&gt;
+    &lt;app-button label&#x3D;&quot;ارسال&quot; (click)&#x3D;&quot;submitTicket()&quot; /&gt;
 
-    &lt;p-button label&#x3D;&quot;انصراف&quot; severity&#x3D;&quot;secondary&quot; (click)&#x3D;&quot;dialog &#x3D; false&quot; /&gt;
+    &lt;app-button label&#x3D;&quot;انصراف&quot; severity&#x3D;&quot;secondary&quot; (click)&#x3D;&quot;dialog &#x3D; false&quot; /&gt;
   &lt;/div&gt;
 &lt;/p-dialog&gt;
 </code></pre>
@@ -732,8 +735,8 @@ export class SupportButtonComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><p-button  class="fixed bottom-0 left-0 rounded-border font-bold mb-8 ml-3"  severity="info"  [rounded]="true"  icon="pi pi-phone"  size="large"  (click)="showDialog()"/><p-dialog  header="روش های ارتباطی با سامانه"  [modal]="true"  [(visible)]="visible">  <div    class="flex flex-c w-full content-center justify-center flex-wrap"  >    <div class="m-2 items-center justify-content-center">      <p-button        (click)="CallUsOnPhone.toggle($event)"        icon="pi pi-phone"        label="شماره های تماس"        severity="info"      />      <p-popover #CallUsOnPhone>        <div class="flex justify-between content-center m-2">          <label class="flex items-center justify-content-center"            >انجمن رانندگان</label          >          <p-button            severity="info"            [raised]="true"            icon="pi pi-clipboard"            [rounded]="true"            label="03134721839"            (onClick)="copyToClipboard()"            class="flex items-center justify-center mr-2"          />        </div>        <div class="flex justify-between content-center m-2">          <label class="flex items-center justify-content-center"            >انجمن کامیونداران</label          >          <p-button            severity="info"            [raised]="true"            icon="pi pi-clipboard"            [rounded]="true"            label="03134721839"            (onClick)="copyToClipboard()"            class="flex items-center justify-center mr-2"          />        </div>        <div class="flex justify-between content-center m-2">          <label class="flex items-center justify-content-center"            >انجمن شرکت‌ها</label          >          <p-button            severity="info"            [raised]="true"            icon="pi pi-clipboard"            [rounded]="true"            label="03134721839"            (onClick)="copyToClipboard()"            class="flex items-center justify-center mr-2"          />        </div>      </p-popover>    </div>    <div class="m-2 items-center justify-content-center">      <p-button        (click)="showTicketDialog()"        label="ارتباط مستقیم با پشتیبانی"        icon="pi pi-headphones"        severity="info"      />    </div>  </div></p-dialog><p-dialog  draggable="false"  header="درخواست ارسال تیکت"  [modal]="true"  [(visible)]="dialog">  <span class="p-text-secondary block mb-5"    >لطفا بعد از پر کردن اطلاعات، متن تیکت خود را وارد نمایید.<br /><br />همکاران    ما در اسرع وقت پاسخگو خواهند بود.</span  >  <div class="m-2">    <app-captcha-input></app-captcha-input>  </div>  <div class="m-2">    <app-text-area-input></app-text-area-input>  </div>  <div class="flex justify-end gap-2">    <p-button label="ارسال" (click)="submitTicket()" />    <p-button label="انصراف" severity="secondary" (click)="dialog = false" />  </div></p-dialog></div>'
-    var COMPONENTS = [{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarMenuComponent', 'selector': 'app-sidebar-menu'},{'name': 'SubMenuComponent', 'selector': 'app-sub-menu'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TabBarComponent', 'selector': 'app-tab-bar'},{'name': 'TabViewComponent', 'selector': 'app-tab-view'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'}];
+        var COMPONENT_TEMPLATE = '<div><app-button  styleClass="fixed bottom-0 left-0 py-5 text-2xl font-bold mb-8 ml-4"  severity="info"  [rounded]="true"  icon="pi pi-phone"  size="large"  (click)="showDialog()"/><p-dialog  header="روش های ارتباطی با سامانه"  [modal]="true"  [(visible)]="visible">  <div    class="flex flex-c w-full content-center justify-center flex-wrap"  >    <div class="m-2 items-center justify-center">      <app-button        (click)="CallUsOnPhone.toggle($event)"        icon="pi pi-phone"        label="شماره های تماس"        severity="info"      />      <p-popover #CallUsOnPhone>        <div class="flex justify-between content-center m-2">          <label class="flex items-center justify-center"            >انجمن رانندگان</label          >          <app-button            severity="info"            [raised]="true"            icon="pi pi-clipboard"            [rounded]="true"            label="03134721839"            (onClick)="copyToClipboard()"            class="flex items-center justify-center mr-2"          />        </div>        <div class="flex justify-between content-center m-2">          <label class="flex items-center justify-center"            >انجمن کامیونداران</label          >          <app-button            severity="info"            [raised]="true"            icon="pi pi-clipboard"            [rounded]="true"            label="03134721839"            (onClick)="copyToClipboard()"            class="flex items-center justify-center mr-2"          />        </div>        <div class="flex justify-between content-center m-2">          <label class="flex items-center justify-center"            >انجمن شرکت‌ها</label          >          <app-button            severity="info"            [raised]="true"            icon="pi pi-clipboard"            [rounded]="true"            label="03134721839"            (onClick)="copyToClipboard()"            class="flex items-center justify-center mr-2"          />        </div>      </p-popover>    </div>    <div class="m-2 items-center justify-center">      <app-button        (click)="showTicketDialog()"        label="ارتباط مستقیم با پشتیبانی"        icon="pi pi-headphones"        severity="info"      />    </div>  </div></p-dialog><p-dialog  draggable="false"  header="درخواست ارسال تیکت"  [modal]="true"  [(visible)]="dialog">  <span class="p-text-secondary block mb-8"    >لطفا بعد از پر کردن اطلاعات، متن تیکت خود را وارد نمایید.<br /><br />همکاران    ما در اسرع وقت پاسخگو خواهند بود.</span  >  <div class="m-2">    <app-captcha-input></app-captcha-input>  </div>  <div class="m-2">    <app-text-area-input></app-text-area-input>  </div>  <div class="flex justify-end gap-2">    <app-button label="ارسال" (click)="submitTicket()" />    <app-button label="انصراف" severity="secondary" (click)="dialog = false" />  </div></p-dialog></div>'
+    var COMPONENTS = [{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DashboardContentManagerComponent', 'selector': 'app-dashboard-content-manager'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'ExitConfirmationDialogComponent', 'selector': 'app-exit-confirmation-dialog'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'IssuedTurnListFormComponent', 'selector': 'app-issued-turn-list-form'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'LogoComponent', 'selector': 'app-logo'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'MapSvgComponent', 'selector': 'app-map-svg'},{'name': 'MobileTabBarComponent', 'selector': 'app-mobile-tab-bar'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RegisterTurnFormComponent', 'selector': 'app-register-turn-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SearchProcessesComponent', 'selector': 'app-search-processes'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarPageGroupComponent', 'selector': 'app-sidebar-page-group'},{'name': 'SidebarWebProcesses', 'selector': 'app-sidebar-web-processes'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabManagerComponent', 'selector': 'app-tab-manager'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'ThemeManagementComponent', 'selector': 'app-theme-management'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'ToggleSwitchInputComponent', 'selector': 'app-toggle-switch-input'},{'name': 'TransportCompaniesFormComponent', 'selector': 'app-transport-companies-form'},{'name': 'TransportCompaniesWalletPaymentFormComponent', 'selector': 'app-transport-companies-wallet-payment-form'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TruckWalletPaymentFormComponent', 'selector': 'app-truck-wallet-payment-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserChargingFunctionFormComponent', 'selector': 'app-user-charging-function-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UserProfileComponent', 'selector': 'app-user-profile'},{'name': 'UserProfileFormComponent', 'selector': 'app-user-profile-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'},{'name': 'WalletPaymentFormComponent', 'selector': 'app-wallet-payment-form'},{'name': 'WalletPaymentRecordTableComponent', 'selector': 'app-payment-record-table'},{'name': 'WalletProfileComponent', 'selector': 'app-wallet-profile'},{'name': 'WalletTransactionsTableComponent', 'selector': 'app-wallet-transactions-table'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SupportButtonComponent'};
 </script>

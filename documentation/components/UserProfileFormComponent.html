@@ -1,0 +1,1294 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bpt-sjhb-panel documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">bpt-sjhb-panel documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  UserProfileFormComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/forms/user-profile-form/user-profile-form.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                            <code>ConfirmationService</code>
+                            <code>DialogService</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-user-profile-form</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>AvatarModule</code>
+                            <code>ButtonModule</code>
+                            <code>ConfirmDialogModule</code>
+                                <code><a href="../components/ButtonComponent.html" target="_self" >ButtonComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./user-profile-form.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./user-profile-form.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#cols" >cols</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#confirmationService" >confirmationService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#destroy$" >destroy$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#dialogService" >dialogService</a>
+                            </li>
+                            <li>
+                                <a href="#isUserSmsActivated" >isUserSmsActivated</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#loadingService" >loadingService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#toast" >toast</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#userAuth" >userAuth</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#userProfile" >userProfile</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#userService" >userService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#activateUserSms" >activateUserSms</a>
+                            </li>
+                            <li>
+                                <a href="#confirmResetPassword" >confirmResetPassword</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#loadUserInformation" >loadUserInformation</a>
+                            </li>
+                            <li>
+                                <a href="#logout" >logout</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#resetUserPassword" >resetUserPassword</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activateUserSms"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>activateUserSms</b></span>
+                        <a href="#activateUserSms"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>activateUserSms()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="147"
+                                    class="link-to-prism">src/app/components/forms/user-profile-form/user-profile-form.component.ts:147</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmResetPassword"></a>
+                    <span class="name">
+                        <span ><b>confirmResetPassword</b></span>
+                        <a href="#confirmResetPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>confirmResetPassword()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/app/components/forms/user-profile-form/user-profile-form.component.ts:130</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadUserInformation"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>loadUserInformation</b></span>
+                        <a href="#loadUserInformation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadUserInformation()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="103"
+                                    class="link-to-prism">src/app/components/forms/user-profile-form/user-profile-form.component.ts:103</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logout"></a>
+                    <span class="name">
+                        <span ><b>logout</b></span>
+                        <a href="#logout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>logout()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="184"
+                                    class="link-to-prism">src/app/components/forms/user-profile-form/user-profile-form.component.ts:184</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="97"
+                                    class="link-to-prism">src/app/components/forms/user-profile-form/user-profile-form.component.ts:97</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="87"
+                                    class="link-to-prism">src/app/components/forms/user-profile-form/user-profile-form.component.ts:87</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetUserPassword"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>resetUserPassword</b></span>
+                        <a href="#resetUserPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>resetUserPassword()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="168"
+                                    class="link-to-prism">src/app/components/forms/user-profile-form/user-profile-form.component.ts:168</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cols"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>cols</b></span>
+                        <a href="#cols"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ReadonlyArray&lt;literal type&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    { field: &#x27;UserId&#x27;, col: &#x27;کد کاربری&#x27; },
+    { field: &#x27;UserName&#x27;, col: &#x27;نام کاربری&#x27; },
+    { field: &#x27;UserTypeTitle&#x27;, col: &#x27;نوع کاربر&#x27; },
+    { field: &#x27;MobileNumber&#x27;, col: &#x27;شماره همراه&#x27; },
+    { field: &#x27;UserActive&#x27;, col: &#x27;وضعیت کاربر&#x27; },
+    { field: &#x27;SMSOwnerActive&#x27;, col: &#x27;وضعیت پیامک&#x27; },
+    { field: &#x27;walletId&#x27;, col: &#x27;کد کیف پول&#x27; },
+    { field: &#x27;walletCode&#x27;, col: &#x27;شرح کیف پول&#x27; },
+    { field: &#x27;balance&#x27;, col: &#x27;موجودی حساب&#x27; },
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/components/forms/user-profile-form/user-profile-form.component.ts:71</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmationService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>confirmationService</b></span>
+                        <a href="#confirmationService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ConfirmationService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/components/forms/user-profile-form/user-profile-form.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroy$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>destroy$</b></span>
+                        <a href="#destroy$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/components/forms/user-profile-form/user-profile-form.component.ts:84</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dialogService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>dialogService</b></span>
+                        <a href="#dialogService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(DialogService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/components/forms/user-profile-form/user-profile-form.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isUserSmsActivated"></a>
+                    <span class="name">
+                        <span ><b>isUserSmsActivated</b></span>
+                        <a href="#isUserSmsActivated"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/components/forms/user-profile-form/user-profile-form.component.ts:68</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/components/forms/user-profile-form/user-profile-form.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>loadingService</b></span>
+                        <a href="#loadingService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(LoadingService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/forms/user-profile-form/user-profile-form.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toast"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>toast</b></span>
+                        <a href="#toast"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/forms/user-profile-form/user-profile-form.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userAuth"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>userAuth</b></span>
+                        <a href="#userAuth"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(UserAuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/forms/user-profile-form/user-profile-form.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userProfile"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>userProfile</b></span>
+                        <a href="#userProfile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;UserProfile&gt;({
+    UserId: -1,
+    UserName: &#x27;&#x27;,
+    UserTypeTitle: &#x27;&#x27;,
+    MobileNumber: &#x27;&#x27;,
+    UserActive: &#x27;&#x27;,
+    SMSOwnerActive: &#x27;&#x27;,
+    walletId: -1,
+    walletCode: &#x27;&#x27;,
+    balance: 0,
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/components/forms/user-profile-form/user-profile-form.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>userService</b></span>
+                        <a href="#userService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(UserManagementService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/components/forms/user-profile-form/user-profile-form.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject, signal } from &#x27;@angular/core&#x27;;
+import { Subject, takeUntil } from &#x27;rxjs&#x27;;
+
+// 🔽 PrimeNG UI Modules
+import { AvatarModule } from &#x27;primeng/avatar&#x27;;
+import { ButtonModule } from &#x27;primeng/button&#x27;;
+import { DialogService } from &#x27;primeng/dynamicdialog&#x27;;
+
+// 🔽 App Services &amp; Utilities
+import { UserManagementService } from &#x27;app/services/user-management/user-management.service&#x27;;
+import { ToastService } from &#x27;app/services/toast-service/toast.service&#x27;;
+import { LoadingService } from &#x27;app/services/loading-service/loading-service.service&#x27;;
+import { checkAndToastError } from &#x27;app/utils/api-utils&#x27;;
+import { NewPasswordDialogComponent } from &#x27;app/components/shared/dialog/new-password-dialog/new-password-dialog.component&#x27;;
+import { ConfirmationService } from &#x27;primeng/api&#x27;;
+import { ConfirmDialogModule } from &#x27;primeng/confirmdialog&#x27;;
+import { ButtonComponent } from &#x27;app/components/shared/button/button.component&#x27;;
+import { UserAuthService } from &#x27;app/services/user-auth-service/user-auth.service&#x27;;
+
+// 🔽 Interfaces
+interface UserProfile {
+  UserId: number;
+  UserName: string;
+  UserTypeTitle: string;
+  MobileNumber: string;
+  UserActive: string;
+  SMSOwnerActive: string;
+  walletId: number;
+  walletCode: string;
+  balance: number;
+}
+
+@Component({
+  selector: &#x27;app-user-profile-form&#x27;,
+  standalone: true,
+  imports: [AvatarModule, ButtonModule, ConfirmDialogModule, ButtonComponent],
+  providers: [ConfirmationService, DialogService],
+  templateUrl: &#x27;./user-profile-form.component.html&#x27;,
+  styleUrl: &#x27;./user-profile-form.component.scss&#x27;,
+})
+export class UserProfileFormComponent implements OnInit {
+  // 🔽 Injected services
+  private readonly userService &#x3D; inject(UserManagementService);
+  private readonly toast &#x3D; inject(ToastService);
+  private readonly loadingService &#x3D; inject(LoadingService);
+  private readonly dialogService &#x3D; inject(DialogService);
+  private readonly confirmationService &#x3D; inject(ConfirmationService);
+  private readonly userAuth &#x3D; inject(UserAuthService);
+
+  // 🔽 Signal to manage loading state
+  readonly loading &#x3D; signal(false);
+
+  // 🔽 Signal to manage and track user profile state
+  readonly userProfile &#x3D; signal&lt;UserProfile&gt;({
+    UserId: -1,
+    UserName: &#x27;&#x27;,
+    UserTypeTitle: &#x27;&#x27;,
+    MobileNumber: &#x27;&#x27;,
+    UserActive: &#x27;&#x27;,
+    SMSOwnerActive: &#x27;&#x27;,
+    walletId: -1,
+    walletCode: &#x27;&#x27;,
+    balance: 0,
+  });
+
+  // 🔽 User&#x27;s SMS activation status (separate boolean flag)
+  isUserSmsActivated &#x3D; true;
+
+  // 🔽 Table column definitions for user profile view
+  readonly cols: ReadonlyArray&lt;{ field: keyof UserProfile; col: string }&gt; &#x3D; [
+    { field: &#x27;UserId&#x27;, col: &#x27;کد کاربری&#x27; },
+    { field: &#x27;UserName&#x27;, col: &#x27;نام کاربری&#x27; },
+    { field: &#x27;UserTypeTitle&#x27;, col: &#x27;نوع کاربر&#x27; },
+    { field: &#x27;MobileNumber&#x27;, col: &#x27;شماره همراه&#x27; },
+    { field: &#x27;UserActive&#x27;, col: &#x27;وضعیت کاربر&#x27; },
+    { field: &#x27;SMSOwnerActive&#x27;, col: &#x27;وضعیت پیامک&#x27; },
+    { field: &#x27;walletId&#x27;, col: &#x27;کد کیف پول&#x27; },
+    { field: &#x27;walletCode&#x27;, col: &#x27;شرح کیف پول&#x27; },
+    { field: &#x27;balance&#x27;, col: &#x27;موجودی حساب&#x27; },
+  ];
+
+  // 🔽 Subject to manage unsubscribe logic for observables
+  private readonly destroy$ &#x3D; new Subject&lt;void&gt;();
+
+  // 🔽 Lifecycle hook: on component initialization
+  ngOnInit(): void {
+    this.loadUserInformation();
+
+    // Listen to global loading changes
+    this.loadingService.loading$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((val) &#x3D;&gt; this.loading.set(val));
+  }
+
+  // 🔽 Lifecycle hook: clean up subscriptions
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  // 🔽 Load user profile info from backend
+  private async loadUserInformation(): Promise&lt;void&gt; {
+    this.loadingService.setLoading(true);
+    try {
+      const res &#x3D; await this.userService.GetSoftwareUserProfile();
+      if (!checkAndToastError(res, this.toast)) return;
+
+      const user &#x3D; res.data.RawSoftwareUser;
+      const wallet &#x3D; res.data.MoneyWallet;
+      this.userProfile.set({
+        UserId: user.UserId,
+        UserName: user.UserName ?? &#x27;-&#x27;,
+        UserTypeTitle: user.UserTypeTitle ?? &#x27;-&#x27;,
+        MobileNumber: user.MobileNumber ?? &#x27;-&#x27;,
+        UserActive: user.UserActive ? &#x27;فعال&#x27; : &#x27;غیرفعال&#x27;,
+        SMSOwnerActive: user.SMSOwnerActive ? &#x27;فعال&#x27; : &#x27;غیرفعال&#x27;,
+        walletId: wallet.MoneyWalletId,
+        walletCode: wallet.MoneyWalletCode ?? &#x27;-&#x27;,
+        balance: wallet.Balance ?? 0,
+      });
+
+      this.isUserSmsActivated &#x3D; !!user.SMSOwnerActive;
+    } finally {
+      this.loadingService.setLoading(false);
+    }
+  }
+
+  // ❗ Show confirmation dialog before reset password
+  confirmResetPassword(): void {
+    this.confirmationService.confirm({
+      message: &#x60;آیا مطمئن هستید که می‌خواهید رمز عبور خود را تغییر دهید؟&#x60;,
+      header: &#x27;تغییر رمز عبور&#x27;,
+      icon: &#x27;pi pi-exclamation-triangle&#x27;,
+      accept: async () &#x3D;&gt; {
+        try {
+          this.loadingService.setLoading(true);
+          await this.resetUserPassword();
+        } finally {
+          this.loadingService.setLoading(false);
+        }
+      },
+    });
+  }
+
+  // 🔽 Trigger SMS activation for user (if not already active)
+  async activateUserSms(): Promise&lt;void&gt; {
+    const userId &#x3D; this.userProfile().UserId;
+    if (this.loading() || this.isUserSmsActivated || userId &#x3D;&#x3D;&#x3D; -1) return;
+
+    this.loadingService.setLoading(true);
+    try {
+      const res &#x3D; await this.userService.ActivateUserSMS(userId);
+      if (!checkAndToastError(res, this.toast)) return;
+
+      this.toast.success(&#x27;موفق&#x27;, res.data.Message);
+      this.userProfile.update((profile) &#x3D;&gt; ({
+        ...profile,
+        SMSOwnerActive: &#x27;فعال&#x27;,
+      }));
+      this.isUserSmsActivated &#x3D; true;
+    } finally {
+      this.loadingService.setLoading(false);
+    }
+  }
+
+  // 🔽 Reset user password and open dialog with new credentials
+  async resetUserPassword(): Promise&lt;void&gt; {
+    const userId &#x3D; this.userProfile().UserId;
+    if (userId &#x3D;&#x3D;&#x3D; -1) return;
+
+    const res &#x3D; await this.userService.ResetSoftwareUserPassword(userId);
+    if (!checkAndToastError(res, this.toast)) return;
+
+    const { Username, Password } &#x3D; res.data!;
+    this.dialogService.open(NewPasswordDialogComponent, {
+      header: &#x27;رمز عبور جدید&#x27;,
+      width: &#x27;20rem&#x27;,
+      modal: true,
+      inputValues: { username: Username, password: Password },
+    });
+  }
+
+  logout() {
+    this.userAuth.logout();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;flex justify-center pb-6 mb-2 border-b&quot;&gt;
+  &lt;p-avatar
+    icon&#x3D;&quot;pi pi-user&quot;
+    class&#x3D;&quot;mr-2&quot;
+    size&#x3D;&quot;xlarge&quot;
+    shape&#x3D;&quot;circle&quot;
+    styleClass&#x3D;&quot;shadow w-20 h-20&quot;
+    [style]&#x3D;&quot;{ &#x27;background-color&#x27;: &#x27;#ece9fc&#x27;, color: &#x27;#2a1261&#x27; }&quot;
+    /&gt;
+&lt;/div&gt;
+
+&lt;div class&#x3D;&quot;flex flex-col gap-4 px-2&quot;&gt;
+  &lt;!-- Display columns dynamically --&gt;
+  @for (col of cols; track col) {
+    &lt;div
+      class&#x3D;&quot;flex  items-center text-sm border-b border-surface pb-2&quot;
+      &gt;
+      &lt;span class&#x3D;&quot;font-semibold text-right w-24 min-w-6rem text-primary&quot;&gt;
+        {{ col.col }}:
+      &lt;/span&gt;
+      &lt;span class&#x3D;&quot;text-right text-sm&quot;&gt;
+        {{ userProfile()[col.field]  }}
+      &lt;/span&gt;
+      @if (col.field &#x3D;&#x3D;&#x3D; &#x27;balance&#x27;) {
+        &lt;span class&#x3D;&quot;mx-1&quot;&gt;تومان&lt;/span&gt;
+      }
+    &lt;/div&gt;
+  }
+&lt;/div&gt;
+&lt;!-- Action Buttons --&gt;
+&lt;div
+  class&#x3D;&quot;col-span-12 mt-8 md:mb-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center&quot;
+  &gt;
+  &lt;app-button
+    (click)&#x3D;&quot;activateUserSms()&quot;
+    [disabled]&#x3D;&quot;loading() || isUserSmsActivated || !userProfile()&quot;
+    severity&#x3D;&quot;warn&quot;
+    label&#x3D;&quot;فعال سازی پیامک&quot;
+    styleClass&#x3D;&quot;my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40&quot;
+  &gt;&lt;/app-button&gt;
+
+  &lt;app-button
+    (click)&#x3D;&quot;confirmResetPassword()&quot;
+    [disabled]&#x3D;&quot;loading() || !userProfile()&quot;
+    label&#x3D;&quot;ایجاد رمز عبور جدید&quot;
+    styleClass&#x3D;&quot;my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40&quot;
+  &gt;&lt;/app-button&gt;
+
+  &lt;app-button
+    class&#x3D;&quot;block lg:hidden&quot;
+    (click)&#x3D;&quot;logout()&quot;
+    [disabled]&#x3D;&quot;loading() || !userProfile()&quot;
+    label&#x3D;&quot;خروج&quot;
+    severity&#x3D;&quot;danger&quot;
+    styleClass&#x3D;&quot;my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40&quot;
+  &gt;&lt;/app-button&gt;
+&lt;/div&gt;
+
+&lt;!-- Confirm dialog --&gt;
+&lt;p-confirmDialog
+  position&#x3D;&quot;top&quot;
+  acceptLabel&#x3D;&quot;تایید&quot;
+  rejectLabel&#x3D;&quot;انصراف&quot;
+  acceptButtonStyleClass&#x3D;&quot;px-8 app-button-info py-2 text-sm&quot;
+  rejectButtonStyleClass&#x3D;&quot;px-6 app-button-secondary py-2 text-sm&quot;
+  /&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="flex justify-center pb-6 mb-2 border-b">  <p-avatar    icon="pi pi-user"    class="mr-2"    size="xlarge"    shape="circle"    styleClass="shadow w-20 h-20"    [style]="{ \'background-color\': \'#ece9fc\', color: \'#2a1261\' }"    /></div><div class="flex flex-col gap-4 px-2">  <!-- Display columns dynamically -->  @for (col of cols; track col) {    <div      class="flex  items-center text-sm border-b border-surface pb-2"      >      <span class="font-semibold text-right w-24 min-w-6rem text-primary">        {{ col.col }}:      </span>      <span class="text-right text-sm">        {{ userProfile()[col.field]  }}      </span>      @if (col.field === \'balance\') {        <span class="mx-1">تومان</span>      }    </div>  }</div><!-- Action Buttons --><div  class="col-span-12 mt-8 md:mb-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center"  >  <app-button    (click)="activateUserSms()"    [disabled]="loading() || isUserSmsActivated || !userProfile()"    severity="warn"    label="فعال سازی پیامک"    styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"  ></app-button>  <app-button    (click)="confirmResetPassword()"    [disabled]="loading() || !userProfile()"    label="ایجاد رمز عبور جدید"    styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"  ></app-button>  <app-button    class="block lg:hidden"    (click)="logout()"    [disabled]="loading() || !userProfile()"    label="خروج"    severity="danger"    styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"  ></app-button></div><!-- Confirm dialog --><p-confirmDialog  position="top"  acceptLabel="تایید"  rejectLabel="انصراف"  acceptButtonStyleClass="px-8 app-button-info py-2 text-sm"  rejectButtonStyleClass="px-6 app-button-secondary py-2 text-sm"  /></div>'
+    var COMPONENTS = [{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DashboardContentManagerComponent', 'selector': 'app-dashboard-content-manager'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'ExitConfirmationDialogComponent', 'selector': 'app-exit-confirmation-dialog'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'IssuedTurnListFormComponent', 'selector': 'app-issued-turn-list-form'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'LogoComponent', 'selector': 'app-logo'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'MapSvgComponent', 'selector': 'app-map-svg'},{'name': 'MobileTabBarComponent', 'selector': 'app-mobile-tab-bar'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RegisterTurnFormComponent', 'selector': 'app-register-turn-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SearchProcessesComponent', 'selector': 'app-search-processes'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarPageGroupComponent', 'selector': 'app-sidebar-page-group'},{'name': 'SidebarWebProcesses', 'selector': 'app-sidebar-web-processes'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabManagerComponent', 'selector': 'app-tab-manager'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'ThemeManagementComponent', 'selector': 'app-theme-management'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'ToggleSwitchInputComponent', 'selector': 'app-toggle-switch-input'},{'name': 'TransportCompaniesFormComponent', 'selector': 'app-transport-companies-form'},{'name': 'TransportCompaniesWalletPaymentFormComponent', 'selector': 'app-transport-companies-wallet-payment-form'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TruckWalletPaymentFormComponent', 'selector': 'app-truck-wallet-payment-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserChargingFunctionFormComponent', 'selector': 'app-user-charging-function-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UserProfileComponent', 'selector': 'app-user-profile'},{'name': 'UserProfileFormComponent', 'selector': 'app-user-profile-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'},{'name': 'WalletPaymentFormComponent', 'selector': 'app-wallet-payment-form'},{'name': 'WalletPaymentRecordTableComponent', 'selector': 'app-payment-record-table'},{'name': 'WalletProfileComponent', 'selector': 'app-wallet-profile'},{'name': 'WalletTransactionsTableComponent', 'selector': 'app-wallet-transactions-table'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'UserProfileFormComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'UserProfileFormComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
