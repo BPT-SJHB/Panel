@@ -509,9 +509,9 @@ export class LoadManagementService {
     //#endregion
   }
 
-  public async RegisterNewLoadAllocationForDriver(
+  public async RegisterNewLoadAllocationForDrivers(
     loadId: number
-  ): Promise<ApiResponse<any>> {
+  ): Promise<ApiResponse<ShortResponse>> {
     this.userAuth.isLoggedIn();
 
     //#region Consts
@@ -528,8 +528,8 @@ export class LoadManagementService {
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      any
-    >(apiUrl, bodyValue, {});
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
 
