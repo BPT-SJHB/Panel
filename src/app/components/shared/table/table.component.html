@@ -6,7 +6,9 @@
   [rows]="config.rows"
   [rowsPerPageOptions]="config.rowsPerPageOptions"
   [stripedRows]="config.stripedRows"
-  [alwaysShowPaginator]="false"
+  [alwaysShowPaginator]="rows.length > 0"
+  [selectionMode]="selectionMode"
+  (onRowSelect)="rowTableSelect($event.data)"
 >
   <!-- Caption -->
   @if (enableCaptionButton) {
@@ -24,16 +26,21 @@
 
   <!-- Table Header -->
   <ng-template pTemplate="header">
-    <tr>
+    <tr class="text-nowrap">
       @for (column of columns; track column.field) {
-        <th>{{ column.header }}</th>
+        <th [pSortableColumn]="column.field.toString()">
+          <div class="flex items-center gap-2">
+            {{ column.header }}
+            <p-sortIcon [field]="column.field.toString()" />
+          </div>
+        </th>
       }
     </tr>
   </ng-template>
 
   <!-- Table Body -->
   <ng-template pTemplate="body" let-row>
-    <tr>
+    <tr class="text-nowrap" [pSelectableRow]="row">
       @for (column of columns; track column.field) {
         <td>
           @switch (getColumnType(column)) {
@@ -59,7 +66,7 @@
             @case (ColumnType.BOOLEAN) {
               <i
                 class="pi text-center w-full text-2xl"
-                [class]="getColumnClass(column,row)"
+                [class]="getColumnClass(column, row)"
                 (click)="column.onAction?.(row)"
                 [ngClass]="
                   row[column.field]
