@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   inject,
+  signal,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
@@ -63,6 +64,7 @@ export class DashboardContentManagerComponent implements AfterViewInit {
 
     // Provide shared signal if specified
     if (config.shearedSignal) {
+      if (!tab.sharedSignal) tab.sharedSignal = tab.sharedSignal = signal(null);
       Object.assign(componentRef.instance, { shearedSignal: tab.sharedSignal });
     }
 
