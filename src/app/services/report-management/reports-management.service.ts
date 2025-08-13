@@ -65,4 +65,27 @@ export class ReportsManagementService {
     >(apiUrl, bodyValue, mockLoadAccounting);
     //#endregion
   }
+
+  public async GetLoadPermissionsForDriver(
+    announcementGroupId: number,
+    announcementSubGroupId: number
+  ): Promise<ApiResponse<LoadPermissionForDriver[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.Reports.Load.GetLoadPermissionsForDriver;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      AnnouncementGroupId: announcementGroupId,
+      AnnouncementSubGroupId: announcementSubGroupId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoadPermissionForDriver[]
+    >(apiUrl, bodyValue, mockLoadPermissionsForDriver);
+    //#endregion
+  }
 }
