@@ -2,9 +2,12 @@ import { inject, Injectable } from '@angular/core';
 import { UserAuthService } from '../user-auth-service/user-auth.service';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
 import { ApiResponse } from 'app/data/model/api-Response.model';
-import { LoadForTransportCompanies } from './model/load-info-for-transport-companies.model';
+import {
+  LoadForTransportCompaniesAndFactoriesAndAdmin,
+  LoadInfoForTransportCompaniesAndFactoriesAndAdmin,
+} from './model/load-info-for-transport-companies-factories-admins.model';
 import { API_ROUTES } from 'app/constants/api';
-import { mockLoadForTransportCompanies } from './mock/load-info-for-transport-companies.mock';
+import { mockLoadsForTransportCompaniesAndFactoriesAndAdmin } from './mock/load-info-for-transport-companies-factories-admins.mock';
 import { LoadStatus } from './model/load-status.model';
 import { mockLoadStatuses } from './mock/load-status.mock';
 import { LoadInfo } from './model/load-info.model';
@@ -20,6 +23,8 @@ import { TruckDriverInfo } from '../driver-truck-management/model/truck-driver-i
 import { AnnouncementSubGroup } from '../announcement-group-subgroup-management/model/announcement-subgroup.model';
 import { LoadAllocationInfo } from './model/load-allocation-info.model';
 import { mockLoadAllocationInfos } from './mock/load-allocation-info.mock';
+import { LoadAllocatedToNextTurn } from './model/load-allocated-to-next-turn.model';
+import { mockLoadAllocatedToNextTurn } from './mock/load-allocated-to-next-turn.mock';
 
 @Injectable({
   providedIn: 'root',
