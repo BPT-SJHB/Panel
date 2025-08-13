@@ -635,6 +635,8 @@ export class LoadManagementService {
     //#endregion
   }
   
+  //#endregion
+  //#region LoadPermission methods
   public async CancelLoadPermission(
     laId: number,
     description: string,
