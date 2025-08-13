@@ -1,4 +1,4 @@
-import { Component, inject, Input, ViewChild } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { TurnsTruckInfoBaseFormComponent } from '../turns-truck-info-base-form/turns-truck-info-base-form.component';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
@@ -7,9 +7,9 @@ import { LoadingService } from 'app/services/loading-service/loading-service.ser
 import { TurnManagementService } from 'app/services/turn-management/turn-management.service';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { ToastService } from 'app/services/toast-service/toast.service';
-import { DatePickerInput } from 'app/components/shared/inputs/date-picker-input/date-picker-input.component.component';
+import { DatePickerInput } from 'app/components/shared/inputs/date-picker-input/date-picker-input.component';
 import { TimePickerInput } from 'app/components/shared/inputs/time-picker-input/time-picker-input.component.component';
-import { ButtonComponent } from "app/components/shared/button/button.component";
+import { ButtonComponent } from 'app/components/shared/button/button.component';
 
 @Component({
   selector: 'app-real-time-turns-form',
@@ -18,12 +18,12 @@ import { ButtonComponent } from "app/components/shared/button/button.component";
     TurnsTruckInfoBaseFormComponent,
     DatePickerInput,
     TimePickerInput,
-    ButtonComponent
-],
+    ButtonComponent,
+  ],
   templateUrl: './resuscitate-turns-form.component.html',
   styleUrl: './resuscitate-turns-form.component.scss',
 })
-export class ResuscitateTurnsFormComponent {
+export class ResuscitateTurnsFormComponent implements OnInit, OnDestroy {
   @ViewChild(TurnsTruckInfoBaseFormComponent)
   turnsBaseComponent!: TurnsTruckInfoBaseFormComponent;
 
@@ -55,7 +55,7 @@ export class ResuscitateTurnsFormComponent {
       .subscribe((value) => (this.loading = value));
   }
 
-  async submitResuscitateTurnForm() {    
+  async submitResuscitateTurnForm() {
     if (this.resuscitateTurnForm.invalid || this.loading) return;
     try {
       this.loadingService.setLoading(true);
