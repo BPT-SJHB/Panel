@@ -484,6 +484,31 @@ export class LoadManagementService {
     //#endregion
   }
 
+  public async RegisterNewLoadAllocationForAdmins(
+    truckId: number,
+    driverId: number,
+    loadId: number
+  ): Promise<ApiResponse<ShortResponse>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.LoadAllocationAPI.RegistrationForAdmins;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TruckId: truckId,
+      TruckDriverId: driverId,
+      LoadId: loadId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
   public async RegisterNewLoadAllocationForDriver(
     loadId: number
   ): Promise<ApiResponse<any>> {
