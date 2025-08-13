@@ -11,25 +11,34 @@ import {
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { ApiResponse } from 'app/data/model/api-Response.model';
-import { LoadInfo } from 'app/data/model/load-info.model';
+import { LoadInfo } from 'app/services/load-management/model/load-info.model';
 import { PTPInfo } from 'app/data/model/ptp-info-model';
-import { LoadCapacitorManagementService } from 'app/services/load-capacitor-management/load-capacitor-management.service';
 import { ToastService } from 'app/services/toast-service/toast.service';
 import { ButtonModule } from 'primeng/button';
 import { Checkbox } from 'primeng/checkbox';
 import { TableModule } from 'primeng/table';
-import { ButtonComponent } from "app/components/shared/button/button.component";
-import { DatePickerInput } from "app/components/shared/inputs/date-picker-input/date-picker-input.component.component";
+import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { DatePickerInput } from 'app/components/shared/inputs/date-picker-input/date-picker-input.component';
+import { LoadManagementService } from 'app/services/load-management/load-management.service';
 
 @Component({
   selector: 'app-load-capacitor-form',
-  imports: [ReactiveFormsModule, CommonModule, TextInputComponent, ButtonModule, TableModule, Checkbox, ButtonComponent, DatePickerInput],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    TextInputComponent,
+    ButtonModule,
+    TableModule,
+    Checkbox,
+    ButtonComponent,
+    DatePickerInput,
+  ],
   templateUrl: './load-capacitor-form.component.html',
   styleUrl: './load-capacitor-form.component.scss',
 })
 export class LoadCapacitorFormComponent {
   private fb = inject(FormBuilder);
-  private capacitorService = inject(LoadCapacitorManagementService);
+  private capacitorService = inject(LoadManagementService);
   private toast = inject(ToastService);
 
   addonWidth = '9rem';
@@ -40,111 +49,115 @@ export class LoadCapacitorFormComponent {
   ptpFormArray: FormArray = this.fb.array<PTPInfo>([]);
 
   capacitorForm = this.fb.group({
-    announceDate: ['',ValidationSchema.announceDate], // زمان ثبت بار
+    announceDate: ['', ValidationSchema.announceDate], // زمان ثبت بار
 
     // وضعیت نهایی بار
-    loadStatusId: [0,ValidationSchema.id],
+    loadStatusId: [0, ValidationSchema.id],
     loadStatusTitle: [''],
 
     // نوع بار
-    goodId: [0,ValidationSchema.id],
-    goodTitle: ['',ValidationSchema.good],
+    goodId: [0, ValidationSchema.id],
+    goodTitle: ['', ValidationSchema.good],
 
     // گروه اعلام بار
-    loadAnnouncementGroupId: [0,ValidationSchema.id],
-    loadAnnouncementGroupTitle: ['',ValidationSchema.loadAnnouncementGroup],
+    loadAnnouncementGroupId: [0, ValidationSchema.id],
+    loadAnnouncementGroupTitle: ['', ValidationSchema.loadAnnouncementGroup],
 
     // زیر گروه اعلام بار
     loadAnnouncementSubGroupId: [0],
-    loadAnnouncementSubGroupTitle: ['',ValidationSchema.loadAnnouncementSubGroup],
+    loadAnnouncementSubGroupTitle: [
+      '',
+      ValidationSchema.loadAnnouncementSubGroup,
+    ],
 
     // شهر مبدا
-    sourceCityId: [0,ValidationSchema.id],
-    sourceCityTitle: ['',ValidationSchema.sourceCity],
+    sourceCityId: [0, ValidationSchema.id],
+    sourceCityTitle: ['', ValidationSchema.sourceCity],
 
     // شهر مقصد
-    targetCityId: [0,ValidationSchema.id],
-    targetCityTitle: ['',ValidationSchema.targetCity],
+    targetCityId: [0, ValidationSchema.id],
+    targetCityTitle: ['', ValidationSchema.targetCity],
 
     // مبدا بارگیری,
-    loadingPlaceId: [0,ValidationSchema.id],
-    loadingPlaceTitle: ['',ValidationSchema.loadingPlace],
+    loadingPlaceId: [0, ValidationSchema.id],
+    loadingPlaceTitle: ['', ValidationSchema.loadingPlace],
 
     // مقصد تخلیه
-    dischargingPlaceId: [0,ValidationSchema.id],
-    dischargingPlaceTitle: ['',ValidationSchema.dischargingPlace],
+    dischargingPlaceId: [0, ValidationSchema.id],
+    dischargingPlaceTitle: ['', ValidationSchema.dischargingPlace],
 
     // شرکت اعلام کننده بار
-    transportCompanyId: [0,ValidationSchema.id],
-    transportCompanyTitle: ['',ValidationSchema.transportCompany],
+    transportCompanyId: [0, ValidationSchema.id],
+    transportCompanyTitle: ['', ValidationSchema.transportCompany],
 
     // تعداد، تناژ، گیرنده، تعرفه
-    totalNumber: [0,ValidationSchema.totalNumber],
-    tonaj: [0,ValidationSchema.tonaj],
-    recipient: ['',ValidationSchema.recipient],
-    tarrif: [0,ValidationSchema.tariff],
+    totalNumber: [0, ValidationSchema.totalNumber],
+    tonaj: [0, ValidationSchema.tonaj],
+    recipient: ['', ValidationSchema.recipient],
+    tarrif: [0, ValidationSchema.tariff],
 
     // آدرس و توضیحات
-    address: ['',ValidationSchema.address],
-    description: ['',ValidationSchema.description],
+    address: ['', ValidationSchema.address],
+    description: ['', ValidationSchema.description],
   });
-  loading: any;
+  loading = false;
 
   async loadCapacitorForm(): Promise<void> {
     if (this.searchForm.invalid) return;
-    const response = await this.capacitorService.GetLoad(this.barcode.value);
+    const response = await this.capacitorService.GetLoadInfo(
+      this.barcode.value
+    );
     if (!this.isSuccessful(response)) return;
     this.populateCapacitorForm(response.data!);
 
     this.ptpFormArray.clear();
-    response.data?.TPTParams.map((params) => {
-      this.ptpFormArray.push(this.createPTPGroup(params));
-    });
+    // response.data?.TPTParams.map((params) => {
+    //   this.ptpFormArray.push(this.createPTPGroup(params));
+    // });
   }
 
-
   editOrRegister() {
-    this.toast.info("اطلاعیه",'در دست توسعه');
+    this.toast.info('اطلاعیه', 'در دست توسعه');
   }
 
   private populateCapacitorForm(load: LoadInfo): void {
     this.capacitorForm.setValue({
-      announceDate: load.AnnounceDate,
+      announceDate: load.AnnounceDate ?? '',
 
-      loadStatusId: load.LoadStatusId,
-      loadStatusTitle: load.LoadStatusTitle,
+      loadStatusId: load.LoadStatusId ?? null,
+      loadStatusTitle: load.LoadStatusTitle ?? '',
 
-      goodId: load.GoodId,
-      goodTitle: load.GoodTitle,
+      goodId: load.GoodId ?? null,
+      goodTitle: load.GoodTitle ?? '',
 
-      loadAnnouncementGroupId: load.LoadAnnouncementGroupId,
-      loadAnnouncementGroupTitle: load.LoadAnnouncementGroupTitle,
+      loadAnnouncementGroupId: load.AnnouncementGroupId ?? null,
+      loadAnnouncementGroupTitle: load.AnnouncementGroupTitle ?? '',
 
-      loadAnnouncementSubGroupId: load.LoadAnnouncementSubGroupId,
-      loadAnnouncementSubGroupTitle: load.LoadAnnouncementSubGroupTitle,
+      loadAnnouncementSubGroupId: load.AnnouncementSubGroupId ?? null,
+      loadAnnouncementSubGroupTitle: load.AnnouncementSubGroupTitle ?? '',
 
-      sourceCityId: load.SourceCityId,
-      sourceCityTitle: load.SourceCityTitle,
+      sourceCityId: load.SourceCityId ?? null,
+      sourceCityTitle: load.SourceCityTitle ?? '',
 
-      targetCityId: load.TargetCityId,
-      targetCityTitle: load.TargetCityTitle,
+      targetCityId: load.TargetCityId ?? null,
+      targetCityTitle: load.TargetCityTitle ?? '',
 
-      loadingPlaceId: load.LoadingPlaceId,
-      loadingPlaceTitle: load.LoadingPlaceTitle,
+      loadingPlaceId: load.LoadingPlaceId ?? null,
+      loadingPlaceTitle: load.LoadingPlaceTitle ?? '',
 
-      dischargingPlaceId: load.DischargingPlaceId,
-      dischargingPlaceTitle: load.DischargingPlaceTitle,
+      dischargingPlaceId: load.DischargingPlaceId ?? null,
+      dischargingPlaceTitle: load.DischargingPlaceTitle ?? '',
 
-      transportCompanyId: load.TransportCompanyId,
-      transportCompanyTitle: load.TransportCompanyTitle,
+      transportCompanyId: load.TransportCompanyId ?? null,
+      transportCompanyTitle: load.TransportCompanyTitle ?? '',
 
-      totalNumber: load.TotalNumber,
-      tonaj: load.Tonaj,
-      recipient: load.Recipient,
-      tarrif: load.Tarrif,
+      totalNumber: load.TotalNumber ?? 0,
+      tonaj: load.Tonaj ?? 0,
+      recipient: load.Recipient ?? '',
+      tarrif: Number(load.Tariff),
 
-      address: load.Address,
-      description: load.Description,
+      address: load.Address ?? '',
+      description: load.Description ?? '',
     });
   }
 
@@ -157,8 +170,7 @@ export class LoadCapacitorFormComponent {
     });
   }
 
-
-  private isSuccessful(response: ApiResponse<any>): boolean {
+  private isSuccessful(response: ApiResponse<unknown>): boolean {
     if (!response.success || !response.data) {
       this.toast.error(
         'خطا',
