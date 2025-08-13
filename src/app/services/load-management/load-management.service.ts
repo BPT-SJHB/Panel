@@ -577,6 +577,7 @@ export class LoadManagementService {
     >(apiUrl, bodyValue, mockLoadAllocationInfos);
     //#endregion
   }
+
   public async CancelLoadAllocation(
     laId: number,
     loadId: number
@@ -634,8 +635,9 @@ export class LoadManagementService {
     });
     //#endregion
   }
-  
+
   //#endregion
+
   //#region LoadPermission methods
   public async CancelLoadPermission(
     laId: number,
