@@ -168,8 +168,8 @@ export class TransportCompaniesManagementService {
     return {
       success: response.success,
       data: {
-        Username: response.data?.UserShenaseh!,
-        Password: response.data?.UserPassword!,
+        Username: response.data?.UserShenaseh ?? '',
+        Password: response.data?.UserPassword ?? '',
       },
       error: response.error,
     };
