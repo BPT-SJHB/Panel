@@ -1,10 +1,10 @@
 export interface RelationOfAnnouncementGroupAndSubGroup {
   AnnouncementId: number;
   AnnouncementTitle?: string;
-  AnnouncementSubGroups: AnnouncementSubGroupInRelation[];
+  AnnouncementSubGroups: AnnouncementSubGroupInRelationOfAnnouncementGroup[];
 }
 
-export interface AnnouncementSubGroupInRelation {
+export interface AnnouncementSubGroupInRelationOfAnnouncementGroup {
   AnnouncementSGId: number;
   AnnouncementSGTitle?: string;
 }

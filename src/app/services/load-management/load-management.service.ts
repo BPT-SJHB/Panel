@@ -3,11 +3,11 @@ import { UserAuthService } from '../user-auth-service/user-auth.service';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import {
-  LoadForTransportCompaniesAndFactoriesAndAdmin,
-  LoadInfoForTransportCompaniesAndFactoriesAndAdmin,
-} from './model/load-info-for-transport-companies-factories-admins.model';
+  LoadForTransportCompanies_Factories_Admins_Drivers,
+  LoadInfoForTransportCompanies_Factories_Admins_Drivers,
+} from './model/load-info-for-transport-companies-factories-admins-drivers.model';
 import { API_ROUTES } from 'app/constants/api';
-import { mockLoadsForTransportCompaniesAndFactoriesAndAdmin } from './mock/load-info-for-transport-companies-factories-admins.mock';
+import { mockLoadsForTransportCompanies_Factories_Admins_Drivers } from './mock/load-info-for-transport-companies-factories-admins-drivers.mock';
 import { LoadStatus } from './model/load-status.model';
 import { mockLoadStatuses } from './mock/load-status.mock';
 import { LoadInfo } from './model/load-info.model';
@@ -43,7 +43,9 @@ export class LoadManagementService {
     loadStatusId?: number,
     loadSourceCityId?: number,
     loadTargetCityId?: number
-  ): Promise<ApiResponse<LoadForTransportCompaniesAndFactoriesAndAdmin[]>> {
+  ): Promise<
+    ApiResponse<LoadForTransportCompanies_Factories_Admins_Drivers[]>
+  > {
     this.userAuth.isLoggedIn();
 
     //#region Consts
@@ -87,15 +89,21 @@ export class LoadManagementService {
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      LoadForTransportCompaniesAndFactoriesAndAdmin[]
-    >(apiUrl, bodyValue, mockLoadsForTransportCompaniesAndFactoriesAndAdmin);
+      LoadForTransportCompanies_Factories_Admins_Drivers[]
+    >(
+      apiUrl,
+      bodyValue,
+      mockLoadsForTransportCompanies_Factories_Admins_Drivers
+    );
     //#endregion
   }
 
-  public async GetLoadForDrivers(
+  public async GetLoadsForDrivers(
     announcementSubGroupId: number,
     loadStatusId: number
-  ): Promise<ApiResponse<LoadStatus[]>> {
+  ): Promise<
+    ApiResponse<LoadForTransportCompanies_Factories_Admins_Drivers[]>
+  > {
     this.userAuth.isLoggedIn();
 
     //#region Consts
@@ -117,8 +125,12 @@ export class LoadManagementService {
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      LoadStatus[]
-    >(apiUrl, bodyValue, mockLoadStatuses);
+      LoadForTransportCompanies_Factories_Admins_Drivers[]
+    >(
+      apiUrl,
+      bodyValue,
+      mockLoadsForTransportCompanies_Factories_Admins_Drivers
+    );
     //#endregion
   }
 
@@ -131,7 +143,9 @@ export class LoadManagementService {
     loadStatusId: number,
     loadSourceCityId: number,
     loadTargetCityId: number
-  ): Promise<ApiResponse<LoadForTransportCompaniesAndFactoriesAndAdmin[]>> {
+  ): Promise<
+    ApiResponse<LoadForTransportCompanies_Factories_Admins_Drivers[]>
+  > {
     this.userAuth.isLoggedIn();
 
     //#region Consts
@@ -180,8 +194,12 @@ export class LoadManagementService {
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      LoadForTransportCompaniesAndFactoriesAndAdmin[]
-    >(apiUrl, bodyValue, mockLoadsForTransportCompaniesAndFactoriesAndAdmin);
+      LoadForTransportCompanies_Factories_Admins_Drivers[]
+    >(
+      apiUrl,
+      bodyValue,
+      mockLoadsForTransportCompanies_Factories_Admins_Drivers
+    );
     //#endregion
   }
 
@@ -194,7 +212,9 @@ export class LoadManagementService {
     loadStatusId: number,
     loadSourceCityId: number,
     loadTargetCityId: number
-  ): Promise<ApiResponse<LoadInfoForTransportCompaniesAndFactoriesAndAdmin[]>> {
+  ): Promise<
+    ApiResponse<LoadInfoForTransportCompanies_Factories_Admins_Drivers[]>
+  > {
     this.userAuth.isLoggedIn();
 
     //#region Consts
@@ -241,8 +261,12 @@ export class LoadManagementService {
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      LoadInfoForTransportCompaniesAndFactoriesAndAdmin[]
-    >(apiUrl, bodyValue, mockLoadsForTransportCompaniesAndFactoriesAndAdmin);
+      LoadInfoForTransportCompanies_Factories_Admins_Drivers[]
+    >(
+      apiUrl,
+      bodyValue,
+      mockLoadsForTransportCompanies_Factories_Admins_Drivers
+    );
     //#endregion
   }
 
