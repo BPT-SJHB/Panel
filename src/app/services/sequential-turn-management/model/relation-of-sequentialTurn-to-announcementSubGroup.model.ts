@@ -1,9 +1,9 @@
 export interface RelationOfSequentialTurnToAnnouncementSubGroup {
   SeqTurnId: number;
   SeqTurnTitle?: string;
-  AnnouncementSubGroups: announcementSubGroupInRelation[];
+  AnnouncementSubGroups: announcementSubGroupInRelationOfSequentialTurn[];
 }
-export interface announcementSubGroupInRelation {
+export interface announcementSubGroupInRelationOfSequentialTurn {
   AnnouncementSGId: number;
   AnnouncementSGTitle?: string;
 }

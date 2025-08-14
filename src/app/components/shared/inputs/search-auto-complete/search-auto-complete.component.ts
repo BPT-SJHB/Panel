@@ -11,10 +11,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import {
-  AutoCompleteModule,
-  AutoCompleteSelectEvent,
-} from 'primeng/autocomplete';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { TextInputComponent } from '../text-input/text-input.component';
@@ -35,7 +32,7 @@ import { uuidV4 } from 'app/utils/uuid';
   templateUrl: './search-auto-complete.component.html',
   styleUrl: './search-auto-complete.component.scss',
 })
-export class SearchAutoCompleteComponent<T extends Record<string, any>>
+export class SearchAutoCompleteComponent<T extends object>
   implements AfterViewInit
 {
   @ViewChild('dropdownContainer', { static: true })
@@ -54,7 +51,7 @@ export class SearchAutoCompleteComponent<T extends Record<string, any>>
     () =>
       this.suggestions().length === 0 &&
       !this.loading() &&
-      (this.control.value?.length ?? 0) >= this.minLength,
+      (this.control.value?.length ?? 0) >= this.minLength
   );
 
   @Input() placeholder = 'جستجو';
@@ -67,7 +64,7 @@ export class SearchAutoCompleteComponent<T extends Record<string, any>>
   @Input() addonWidth = '';
   @Input() control = new FormControl('');
   @Input() cachingEnabled = true;
-  @Input() optionLabel = 'label';
+  @Input() optionLabel?: keyof T;
   @Input() optionValue = 'value';
   @Input() minLength = 3;
   @Input() allOptions: T[] = [];
@@ -81,7 +78,7 @@ export class SearchAutoCompleteComponent<T extends Record<string, any>>
     this.control.valueChanges.subscribe((value) => {
       this.hoverIndex.set(-1);
       this.onSearch(value || '');
-      this.isDropDownHidden.set(false);
+      // this.isDropDownHidden.set(false);
       this.valueChange.emit(value || '');
     });
   }
@@ -96,9 +93,12 @@ export class SearchAutoCompleteComponent<T extends Record<string, any>>
   }
 
   private filterSuggestions(source: T[], query: string): T[] {
+    if (!this.optionLabel) return source;
+    const key = this.optionLabel as keyof T;
+
     const q = query.toLowerCase();
     return source.filter((item) =>
-      (item[this.optionLabel] as string).toLowerCase().includes(q),
+      (item[key] as string).toLowerCase().includes(q)
     );
   }
 
@@ -140,7 +140,10 @@ export class SearchAutoCompleteComponent<T extends Record<string, any>>
   }
 
   onSelectAutoComplete(value: T) {
-    this.control.setValue(value[this.optionLabel] || this.control.value);
+    if (this.optionLabel) {
+      const key = this.optionLabel as keyof T;
+      this.control.setValue((value[key] as string) || this.control.value);
+    }
     this.selectSuggestion.emit(value);
     this.isDropDownHidden.set(true);
   }
@@ -153,7 +156,7 @@ export class SearchAutoCompleteComponent<T extends Record<string, any>>
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     const inside = this.dropdownContainer.nativeElement.contains(
-      event.target as Node,
+      event.target as Node
     );
     if (!inside) {
       this.isDropDownHidden.set(true);
@@ -203,7 +206,12 @@ export class SearchAutoCompleteComponent<T extends Record<string, any>>
   getDropDownStyle() {
     const valueLen = this.control.value?.length ?? 0;
     let count = this.suggestions().length - 1;
-    if (this.isDropDownHidden() || valueLen < this.minLength) {
+    if (
+      this.isDropDownHidden() ||
+      valueLen < this.minLength ||
+      this.disabled ||
+      this.readOnly
+    ) {
       return { height: '0px', width: this.width() };
     }
 

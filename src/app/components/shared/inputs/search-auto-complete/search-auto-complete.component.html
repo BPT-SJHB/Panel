@@ -40,7 +40,9 @@
       class="px-2 py-4 cursor-pointer hover:bg-emphasis"
       [ngClass]="{ 'bg-emphasis': hoverIndex() === $index }"
     >
+    @if (optionLabel) {
       {{ suggestion[optionLabel] }}
+    }
     </div>
     } }
   </div>

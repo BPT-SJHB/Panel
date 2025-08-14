@@ -1,6 +1,6 @@
 import { WalletPaymentRequest } from '../model/wallet-payment-request.model';
 
 export const mockWalletPaymentRequest: WalletPaymentRequest = {
-  Authority: '687B4720BCF7AEARBV',
+  Authority: '689C8ED845DB4UJCPG',
   PaymentURI: 'https://panel.aqayepardakht.ir/startpay/',
 };

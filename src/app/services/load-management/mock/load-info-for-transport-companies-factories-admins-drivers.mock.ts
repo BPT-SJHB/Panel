@@ -1,6 +1,6 @@
-import { LoadForTransportCompaniesAndFactoriesAndAdmin } from '../model/load-info-for-transport-companies-factories-admins.model';
+import { LoadForTransportCompanies_Factories_Admins_Drivers } from '../model/load-info-for-transport-companies-factories-admins-drivers.model';
 
-export const mockLoadsForTransportCompaniesAndFactoriesAndAdmin: LoadForTransportCompaniesAndFactoriesAndAdmin[] =
+export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTransportCompanies_Factories_Admins_Drivers[] =
   [
     {
       ProvinceName:

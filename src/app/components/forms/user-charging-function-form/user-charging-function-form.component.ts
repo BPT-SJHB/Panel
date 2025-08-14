@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { TimePickerInput } from 'app/components/shared/inputs/time-picker-input/time-picker-input.component.component';
 import { ToastService } from 'app/services/toast-service/toast.service';
-import { DatePickerInput } from 'app/components/shared/inputs/date-picker-input/date-picker-input.component.component';
+import { DatePickerInput } from 'app/components/shared/inputs/date-picker-input/date-picker-input.component';
 import { TableModule } from 'primeng/table';
 import { WalletUserChargingFunction } from 'app/services/wallet-management/model/wallet-user-charging-function.model';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
@@ -48,7 +48,7 @@ export class UserChargingFunctionFormComponent {
       this.startDate.value,
       this.endDate.value,
       this.startTime.value,
-      this.endTime.value,
+      this.endTime.value
     );
     if (!checkAndToastError(responseOfTable, this.toast)) return;
 
@@ -59,7 +59,7 @@ export class UserChargingFunctionFormComponent {
         this.startDate.value,
         this.endDate.value,
         this.startTime.value,
-        this.endTime.value,
+        this.endTime.value
       );
 
     if (!checkAndToastError(responseOfTotalFunctionsAmount, this.toast)) return;
@@ -70,7 +70,7 @@ export class UserChargingFunctionFormComponent {
   }
 
   private sortTable(
-    data: WalletUserChargingFunction[],
+    data: WalletUserChargingFunction[]
   ): WalletUserChargingFunction[] {
     return data.sort((a, b) => {
       const dateCompare = a.ShamsiDate.localeCompare(b.ShamsiDate);

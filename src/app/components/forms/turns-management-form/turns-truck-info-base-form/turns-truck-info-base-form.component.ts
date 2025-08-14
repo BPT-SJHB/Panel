@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -30,7 +30,7 @@ import { SearchInputComponent } from 'app/components/shared/inputs/search-input/
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { SearchAutoCompleteComponent } from 'app/components/shared/inputs/search-auto-complete/search-auto-complete.component';
 import { Card } from 'primeng/card';
-``;
+
 @Component({
   selector: 'app-turns-truck-info-base-form',
   imports: [
@@ -43,7 +43,7 @@ import { Card } from 'primeng/card';
   templateUrl: './turns-truck-info-base-form.component.html',
   styleUrl: './turns-truck-info-base-form.component.scss',
 })
-export class TurnsTruckInfoBaseFormComponent {
+export class TurnsTruckInfoBaseFormComponent implements OnInit, OnDestroy {
   // 📦 Dependency Injection
   private fb = inject(FormBuilder);
   private truckDriverMangerService = inject(Driver_TruckManagementService);
@@ -163,7 +163,7 @@ export class TurnsTruckInfoBaseFormComponent {
   };
 
   // ❌ Reset control value when input is cleared
-  onAutoCompleteChange(controller: FormControl<any>) {
+  onAutoCompleteChange(controller: FormControl) {
     controller.setValue('');
   }
 

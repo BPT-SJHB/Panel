@@ -4,7 +4,6 @@ import {
   Input,
   OnInit,
   OnChanges,
-  Output,
   SimpleChanges,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -43,12 +42,12 @@ import {
 })
 export class DatePickerInput implements OnInit, OnChanges {
   // 📥 Inputs
-  @Input() control = new FormControl<any>('');
+  @Input() control = new FormControl<unknown>('');
   @Input() validationField: ValidationField | null = null;
   @Input() placeholder = '';
   @Input() readOnly = false;
   @Input() disabled = false;
-  @Input() icon: string = 'pi pi-calendar';
+  @Input() icon = 'pi pi-calendar';
   @Input() label = '';
   @Input() addonWidth: string | null = null;
   @Input() datePickerPosition: 'top' | 'bottom' = 'bottom';
