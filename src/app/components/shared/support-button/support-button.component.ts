@@ -1,15 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ScrollTopModule } from 'primeng/scrolltop';
 import { ButtonModule } from 'primeng/button';
 import { PopoverModule } from 'primeng/popover';
-import { UserAuthService } from 'app/services/user-auth-service/user-auth.service';
 import { ToastService } from 'app/services/toast-service/toast.service';
-import { Router } from '@angular/router';
-import { APP_ROUTES } from 'app/constants/routes';
 import { CaptchaInputComponent } from '../inputs/captcha-input/captcha-input.component';
 import { TextAreaInputComponent } from '../inputs/text-area-input/text-area-input.component';
 import { DialogModule } from 'primeng/dialog';
-import { ButtonComponent } from "../button/button.component";
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-support-button',
@@ -20,22 +17,33 @@ import { ButtonComponent } from "../button/button.component";
     CaptchaInputComponent,
     TextAreaInputComponent,
     DialogModule,
-    ButtonComponent
-],
+    ButtonComponent,
+  ],
   templateUrl: './support-button.component.html',
   styleUrl: './support-button.component.scss',
 })
 export class SupportButtonComponent {
-  dialog: boolean = false;
-  visible: boolean = false;
+  dialog = false;
+  visible = false;
 
-  constructor(
-    private auth: UserAuthService,
-    private toast: ToastService,
-    private router: Router
-  ) {}
+  private toast = inject(ToastService);
+
+  contactList: { title: string; numbers: string[] }[] = [
+    {
+      title: 'انجمن صنفی کـارفرمایی کـامیونداران',
+      numbers: ['03133869199', '09944433611'],
+    },
+    {
+      title: 'انجمن صنفی شرکت‌های حمل و نقل',
+      numbers: ['03134721839', '03133869114'],
+    },
+    {
+      title: 'انـجـمـن صـنـفـی کـارگـری رانـنـدگـان',
+      numbers: ['03133873858', '09134727572'],
+    },
+  ];
+
   async showDialog() {
-    await this.auth.isLoggedIn();
     this.visible = true;
   }
   showTicketDialog() {
@@ -48,7 +56,20 @@ export class SupportButtonComponent {
     this.dialog = false;
   }
 
-  copyToClipboard() {
-    this.toast.success('متن در کلیپبورد ذخیره شد', '');
+  async copyToClipboard(text: string) {
+    try {
+      // Normal browsers
+      await navigator.clipboard.writeText(text);
+      this.toast.success('متن در کلیپبورد ذخیره شد', '');
+    } catch (err) {
+      // Mobile browsers
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = text;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+      this.toast.success('متن در کلیپبورد ذخیره شد', '');
+    }
   }
 }
