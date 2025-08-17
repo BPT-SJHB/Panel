@@ -5,18 +5,18 @@
   <div class="absolute p-1 overflow-hidden w-[8rem] top-[-8rem] rounded-[1rem]">
     <div class="absolute overlay bg-surface-0"></div>
     <!-- light theme -->
-    <img class="dark:hidden w-full" src="assets/rmto-logo-noText.png" />
+    <img class="dark:hidden w-full" src="assets/rmto-logo-noText.png" alt="لوگو" />
     <!-- dark theme -->
-    <img class="hidden dark:block w-full" src="assets/rmto-logo-dark-noText.png" />
+    <img class="hidden dark:block w-full" src="assets/rmto-logo-dark-noText.png" alt="لوگو" />
   </div>
 </div>
 <form
-  class="flex h-full flex-col gap-10"
+  class="flex h-full mb-[-3rem] flex-nowrap flex-col gap-5 lg:gap-10"
   [formGroup]="loginForm"
   (ngSubmit)="onSubmit()"
 >
   <h3
-    class="text-center mb-4 text-xl leading-10 font-bold"
+    class="text-center mb-4 lg:mx-[-2rem] text-nowrap text-lg md:text-2xl leading-7 lg:leading-10 font-bold"
     [innerHTML]="loginTitle"
   ></h3>
 
@@ -25,7 +25,7 @@
       [control]="username"
       icon="pi pi-user"
       validationField="username"
-      placeholder="نام کابری"
+      placeholder="نام کاربری خود را وارد کنید"
     />
 
     <div class="flex flex-col gap-2">
@@ -38,7 +38,7 @@
       <div class="flex justify-end w-full mb-1">
         <a [href]="hrefForgetPassword">
           <span class="text-cyan-500 text-shadow-sm text-sm">
-            رمز عبورتان را فراموش کردید؟</span
+            رمز عبورتان را فراموش کرده‌اید؟</span
           >
         </a>
       </div>
