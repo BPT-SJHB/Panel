@@ -1,13 +1,9 @@
 <div
-  class="relative w-full h-full bg-primary text-primary-contrast lg:pr-4 py-2 z-15 flex items-center justify-between"
+  class="relative w-full rounded-bl-3xl h-full bg-primary text-primary-contrast lg:pr-4 py-2 z-15 flex items-center justify-between"
 >
-  <app-button
-    severity="primary"
-    class="lg:hidden"
-    (onClick)="openSidebar()"
-  >
+  <p-button severity="primary" class="lg:hidden" (onClick)="openSidebar()">
     <i class="pi pi-align-right text-xl"></i>
-  </app-button>
+  </p-button>
   <div class="flex items-center justify-center gap-4 m-auto lg:m-0">
     <i class="pi text-xl scale-120" [class]="headerData.icon"></i>
     <span class="text-md font-bold">{{ headerData.title }}</span>
@@ -15,9 +11,13 @@
   <div class="lg:flex flex-row-reverse items-center justify-center gap-2 px-2">
     <app-user-profile [profile]="profile" class="hidden lg:block" />
     <app-wallet-profile [wallet]="wallet" class="hidden lg:block" />
-    <div class="flex justify-center items-center gap-2">
-      <app-search-processes class="lg:hidden" />
-      <app-theme-management />
-    </div>
+
+    <app-theme-management class="hidden lg:block" />
+    <!-- Logo  -->
+    <img
+      class="h-10 w-10 ml-1 lg:hidden"
+      src="assets/rmto-logo-noText.png"
+      alt="Logo"
+    />
   </div>
 </div>
