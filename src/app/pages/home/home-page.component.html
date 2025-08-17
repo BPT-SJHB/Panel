@@ -1,10 +1,16 @@
 <div class="min-h-screen min-w-screen flex flex-col">
-
- <!-- Header -->
-  <div class="p-4 bg-emphasis shadow-md">
-    <span class="text-xs md:text-base lg:text-lg font-bold">
-      {{ headerTitle }}
+  <!-- Header -->
+  <div class="flex justify-between items-center p-2 bg-emphasis shadow-md">
+    <span
+      [innerHTML]="headerTitle"
+      class="text-sm md:text-base lg:text-lg font-bold"
+    >
     </span>
+    <img
+      class="justify-end w-15 h-15"
+      src="assets/rmto-logo-noText.png"
+      alt="لوگو"
+    />
   </div>
 
   <!-- Dialog -->
@@ -27,20 +33,24 @@
         [fallbackToAllWhenQueryShort]="true"
         [minSearchLength]="2"
         (searchResult)="handleSearch($event)"
-        placeholder="جستجو پایانه اعلام بار"
+        placeholder="جستجو سامانه اعلام بار"
       />
     </div>
 
     <!-- Terminals -->
-    <div class="min-h-90vh flex flex-wrap justify-around items-center gap-6 p-6">
+    <div
+      class="min-h-90vh flex flex-wrap justify-around items-center gap-3 md:gap-8"
+    >
       @if (displayedLoadAnnouncementPlaces().length > 0) {
         @for (terminal of displayedLoadAnnouncementPlaces(); track $index) {
-          <div class="w-34 md:w-80 rounded-full">
+          <div class="w-36 h-[11rem] md:h-full md:w-80 rounded-full">
             <app-terminal-card [terminal]="terminal" />
           </div>
         }
       } @else {
-        <div class="flex items-center justify-center h-full text-gray-500 dark:text-gray-400 italic">
+        <div
+          class="flex items-center justify-center h-full text-gray-500 dark:text-gray-400 italic"
+        >
           پایانه‌ای یافت نشد
         </div>
       }
@@ -51,8 +61,4 @@
   <div class="flex-1 flex justify-center items-center pt-5">
     <app-map-svg (clickProvince)="clickProvince($event)"></app-map-svg>
   </div>
-
 </div>
-
-
-<app-support-button />
