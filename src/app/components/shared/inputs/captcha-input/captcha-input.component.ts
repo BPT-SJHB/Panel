@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
@@ -22,15 +22,14 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './captcha-input.component.scss',
 })
 export class CaptchaInputComponent implements OnInit {
+  private captchaService = inject(CaptchaService);
+  private toast = inject(ToastService);
+
   @Input() sessionIdControl: FormControl = new FormControl('');
   @Input() captchaInputControl: FormControl = new FormControl('');
+
   imageData = '';
   disableRefresh = false;
-
-  constructor(
-    private captchaService: CaptchaService,
-    private toast: ToastService
-  ) {}
 
   ngOnInit(): void {
     this.getCaptchaInformation();
