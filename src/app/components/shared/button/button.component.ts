@@ -44,14 +44,14 @@ interface ButtonStyle {
 })
 export class ButtonComponent implements OnInit, OnChanges {
   @Input() severity: ButtonSeverity = 'green';
-  @Input() syncShadow: boolean = true;
-  @Input() shadow: boolean = true;
-  @Input() label: string = '';
-  @Input() disabled: boolean = false;
+  @Input() syncShadow = true;
+  @Input() shadow = true;
+  @Input() label = '';
+  @Input() disabled = false;
   @Input() size: 'small' | 'large' | 'normal' = 'normal';
   @Input() type?: 'button' | 'submit';
   @Input() icon?: string;
-  @Input() styleClass: string = '';
+  @Input() styleClass = '';
   @Input() rounded = false;
   @Input() raised = false;
 
