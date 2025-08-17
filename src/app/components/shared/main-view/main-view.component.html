@@ -4,7 +4,7 @@
 
 <div class="flex flex-col items-center mx-[-2rem]">
   <div
-    class="flex justify-center mt-5 w-full rounded-t-2xl shadow-[0px_-8px_7px_1px_rgba(0,0,0,0.2)] dark:shadow-[0px_-8px_7px_1px_rgba(255,255,255,0.2)]"
+    class="flex justify-center mt-5 w-full rounded-t-xl border-t-2 border-primary-emphasis shadow-[0px_-8px_7px_1px_rgba(0,0,0,0.2)] dark:shadow-[0px_-8px_7px_1px_rgba(255,255,255,0.2)]"
   >
     <span class="font-bold text-2xl mt-3">خدمات</span>
   </div>
@@ -25,7 +25,7 @@
     </div>
     } }@else { @for (item of processes(); track $index) {
     <p-card
-      class="flex justify-center md:w-[12rem] lg:w-[18rem] w-[6rem] lg:h-[10rem] shadow-[0px_0px_7px_rgba(0,0,0,0.7)] bg-gray-100 dark:bg-gray-500 rounded-2xl transition-all duration-150 ease-in-out hover:scale-110"
+      class="flex justify-center  md:w-[12rem] lg:w-[18rem] w-[6rem] lg:h-[10rem] border-2 shadow-[0px_0px_7px_rgba(0,0,0,0.7)]  border-primary-emphasis bg-gray-100 dark:bg-zinc-700 rounded-2xl transition-transform duration-150 ease-in-out hover:scale-110"
     >
       <div
         class="flex flex-col text-center justify-center items-center mx-[-1rem] my-[-0.5rem]"
@@ -52,7 +52,7 @@
           [class]="item.icon"
         ></i>
         }
-        <span class="font-bold text-xs lg:text-xl">{{ item.title }}</span>
+        <span class="font-bold mt-2 text-xs lg:text-xl">{{ item.title }}</span>
       </div>
     </p-card>
     }}
