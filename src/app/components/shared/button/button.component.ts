@@ -57,7 +57,9 @@ export class ButtonComponent implements OnInit, OnChanges {
 
   @Output() onClick = new EventEmitter<void>();
 
-  class = signal('rounded-[9999px] border-0 text-primary-contrast');
+  private readonly baseClass =
+    'rounded-[9999px] border-0 text-primary-contrast';
+  class = signal(this.baseClass);
   style: ButtonStyle = {
     colors: {
       primary: {
@@ -124,21 +126,39 @@ export class ButtonComponent implements OnInit, OnChanges {
   }
 
   private styleHandler() {
-    this.class.set(
-      `${this.class()} ${
-        this.size === 'normal'
-          ? ''
-          : this.size === 'large'
-            ? this.style.size?.large
-            : this.style.size?.small
-      } ${this.style.colors[this.severity].gradient} ${
-        this.shadow
-          ? this.syncShadow
-            ? this.style.colors[this.severity].shadow.sync
-            : this.style.colors[this.severity].shadow.normal
-          : ''
-      } ${!this.disabled ? this.style.animation : ''}`,
-    );
+    // Rebuild the class string from scratch
+    const classes: string[] = [this.baseClass];
+
+    // Add size classes
+    if (this.size !== 'normal' && this.style.size) {
+      classes.push(
+        this.size === 'large' ? this.style.size.large : this.style.size.small
+      );
+    }
+
+    // Determine and add gradient and shadow classes
+    const styleData = this.disabled
+      ? this.style.colors['disabled']
+      : this.style.colors[this.severity];
+    classes.push(styleData.gradient);
+
+    if (this.shadow || this.disabled) {
+      if (this.disabled) {
+        classes.push(styleData.shadow.normal);
+      } else {
+        classes.push(
+          this.syncShadow ? styleData.shadow.sync : styleData.shadow.normal
+        );
+      }
+    }
+
+    // Add animation class if not disabled
+    if (!this.disabled) {
+      classes.push(this.style.animation);
+    }
+
+    // Set the new, clean class string
+    this.class.set(classes.join(' '));
   }
 
   handleClick(): void {
