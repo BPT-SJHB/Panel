@@ -1,16 +1,16 @@
 @if (terminal) {
 <a [href]="getLoginLink()">
   <p-card
-    class="flex justify-center items-center text-center"
-    styleClass="w-full rounded-3xl shadow-[0px_4px_8px_var(--p-surface-500)] h-full"
+    class="flex justify-center items-center text-center shadow-[0px_0px_7px_rgba(0,0,0,0.7)] border-2 border-primary-emphasis"
+    styleClass="w-full rounded-3xl h-full"
   >
     <ng-template #header>
-      <div class="text-md md:text-lg px-2 md:px-6 font-bold text-primary pt-4">
+      <div class="text-md md:text-lg px-2 md:px-6 font-bold text-primary pt-7">
         {{ terminal.LAPTitle }}
       </div>
     </ng-template>
 
-    @if (terminal.Description.trim() != '') {
+    @if (terminal.Description.trim() !== '') {
     <div class="mb-6 px-2 md:px-6">
       {{ terminal.Description }}
     </div>
