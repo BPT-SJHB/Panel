@@ -97,6 +97,13 @@ export class ButtonComponent implements OnInit, OnChanges {
           sync: 'dark:shadow-[0px_4px_8px_theme(colors.yellow.400)] shadow-[0px_4px_8px_theme(colors.yellow.600)]',
         },
       },
+      disabled: {
+        gradient: 'bg-gradient-to-b from-gray-300 to-gray-600 to-75%',
+        shadow: {
+          normal: 'shadow-[0px_4px_8px_var(--p-surface-500)]',
+          sync: '',
+        },
+      },
     },
     animation:
       'transition-all duration-150 ease-in-out hover:scale-105 active:translate-y-0.5 active:shadow-sm active:scale-95',
