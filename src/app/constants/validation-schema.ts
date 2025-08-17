@@ -10,19 +10,19 @@ export interface ErrorsValidation {
 }
 
 export function getDefaultErrorMessage(name: string, e: ErrorsValidation): string | null {
-  if (e.required) return `${name} الزامی است.`;
-  if (e.email) return `فرمت ${name} نامعتبر است.`;
+  if (e.required) return `${name} الزامی است`;
+  if (e.email) return `فرمت ${name} نامعتبر است`;
 
   if (e.minlength?.requiredLength && e.maxlength?.requiredLength &&
     e.minlength.requiredLength === e.maxlength.requiredLength) {
-    return `${name} باید دقیقا ${e.minlength.requiredLength} رقم باشد.`;
+    return `${name} باید دقیقا ${e.minlength.requiredLength} رقم باشد`;
   }
 
-  if (e.minlength) return `${name} باید حداقل ${e.minlength.requiredLength} کاراکتر باشد.`;
-  if (e.maxlength) return `${name} باید حداکثر ${e.maxlength.requiredLength} کاراکتر باشد.`;
+  if (e.minlength) return `${name} باید حداقل ${e.minlength.requiredLength} کاراکتر باشد`;
+  if (e.maxlength) return `${name} باید حداکثر ${e.maxlength.requiredLength} کاراکتر باشد`;
 
-  if (e.pattern) return `فرمت ${name} معتبر نیست.`;
-  if (e.min) return `${name} نمی‌تواند کمتر از مقدار مجاز باشد.`;
+  if (e.pattern) return `فرمت ${name} معتبر نیست`;
+  if (e.min) return `${name} نمی‌تواند کمتر از مقدار مجاز باشد`;
 
   return null;
 }
@@ -64,7 +64,7 @@ export const ValidationSchema = {
     validators: [Validators.minLength(3)],
   },
   username:{
-    name:'نام کابری',
+    name:'نام کاربری',
     validators:[
       Validators.required,Validators.minLength(5)
     ]
