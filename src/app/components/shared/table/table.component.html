@@ -9,6 +9,7 @@
   [alwaysShowPaginator]="rows.length > 0"
   [selectionMode]="selectionMode"
   (onRowSelect)="rowTableSelect($event.data)"
+  (onRowUnselect)="rowTableUnSelect($event.data)"
 >
   <!-- Caption -->
   @if (enableCaptionButton) {
@@ -31,7 +32,7 @@
         <th [pSortableColumn]="column.field.toString()">
           <div class="flex items-center gap-2">
             {{ column.header }}
-            <p-sortIcon [field]="column.field.toString()" />
+            <p-sortIcon [field]="column.field.toString()" [hidden]="rows.length < 2" />
           </div>
         </th>
       }
