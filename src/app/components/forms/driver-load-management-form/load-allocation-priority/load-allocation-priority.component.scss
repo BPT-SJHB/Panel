@@ -1,0 +1,7 @@
+:host ::ng-deep .p-listbox-list-container {
+  max-height: none !important; /* remove restriction */
+  height: 100%;
+  overflow: scroll;
+  width: 100% !important; /* optional full width */
+  background-color: "red";
+}
