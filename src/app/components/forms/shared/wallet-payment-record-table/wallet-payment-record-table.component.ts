@@ -1,7 +1,5 @@
 import { Component, inject, Input, signal } from '@angular/core';
 
-import { TableModule } from 'primeng/table';
-
 import { BaseLoading } from '../component-base/base-loading';
 import { WalletManagementService } from 'app/services/wallet-management/wallet-management.service';
 import { WalletPaymentHistory } from 'app/services/wallet-management/model/wallet-payment-history.model';
@@ -10,11 +8,15 @@ import { ApiResponse } from 'app/data/model/api-Response.model';
 import { Wallet } from 'app/services/wallet-management/model/wallet.model';
 import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
 import { TableConfig } from 'app/constants/ui/table.ui';
+import {
+  TableColumn,
+  TableComponent,
+} from 'app/components/shared/table/table.component';
 
 @Component({
   selector: 'app-payment-record-table',
   standalone: true,
-  imports: [TableModule],
+  imports: [TableComponent],
   templateUrl: './wallet-payment-record-table.component.html',
   styleUrl: './wallet-payment-record-table.component.scss',
 })
@@ -23,7 +25,9 @@ export class WalletPaymentRecordTableComponent
   implements OnViewActivated
 {
   // 📥 Input signals for wallet type, wallet ID, and shared signal
-  @Input() walletType = signal<'User' | 'Truck' | 'TruckerAssociation' | 'SMS' | 'None'>('None');
+  @Input() walletType = signal<
+    'User' | 'Truck' | 'TruckerAssociation' | 'SMS' | 'None'
+  >('None');
   @Input() walletId = signal<number | null>(null);
   @Input() shearedSignal = signal<number | null>(null);
 
@@ -34,14 +38,26 @@ export class WalletPaymentRecordTableComponent
   readonly tableUi = TableConfig;
 
   // 📊 Table column definitions
-  readonly columns: ReadonlyArray<{ label: string; key: keyof WalletPaymentHistory }> = [
-    { label: 'تاریخ', key: 'ShamsiDate' },
-    { label: 'زمان', key: 'Time' },
-    { label: 'مبلغ', key: 'Amount' },
-    { label: 'کاربر', key: 'UserName' },
+  readonly columns: TableColumn<WalletPaymentHistory>[] = [
+    {
+      field: 'ShamsiDate',
+      header: 'تاریخ',
+    },
+    {
+      field: 'Time',
+      header: 'زمان',
+    },
+    {
+      field: 'Amount',
+      header: 'ملبغ',
+    },
+    {
+      field: 'UserName',
+      header: 'کاربر',
+    },
   ];
 
-   // 🚀 Called when the component is activated (useful for view caching systems)
+  // 🚀 Called when the component is activated (useful for view caching systems)
   onViewActivated(): void {
     // 🛠️ Set wallet ID from shared signal if available
     if (this.shearedSignal()) {
@@ -79,7 +95,9 @@ export class WalletPaymentRecordTableComponent
 
     try {
       this.loadingService.setLoading(true);
-      const response = await this.walletService.GetWalletTransactions(this.walletId()!);
+      const response = await this.walletService.GetWalletTransactions(
+        this.walletId()!
+      );
       if (!checkAndToastError(response, this.toast)) return;
       this.paymentHistory.set(response.data);
     } finally {

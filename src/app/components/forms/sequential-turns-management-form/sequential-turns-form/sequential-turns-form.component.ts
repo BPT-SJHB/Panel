@@ -88,7 +88,6 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
   formDialogVisible = false;
   loading = false;
 
-  cols = ['ویرایش', 'حذف', 'شناسه', 'عنوان نوبت', 'کلمه کلیدی', 'فعال'];
   readonly columns: TableColumn<SequentialTurnTableRow>[] = [
     {
       field: 'SeqTurnId',
