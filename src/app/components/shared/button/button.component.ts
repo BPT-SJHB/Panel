@@ -44,20 +44,22 @@ interface ButtonStyle {
 })
 export class ButtonComponent implements OnInit, OnChanges {
   @Input() severity: ButtonSeverity = 'green';
-  @Input() syncShadow: boolean = true;
-  @Input() shadow: boolean = true;
-  @Input() label: string = '';
-  @Input() disabled: boolean = false;
+  @Input() syncShadow = true;
+  @Input() shadow = true;
+  @Input() label = '';
+  @Input() disabled = false;
   @Input() size: 'small' | 'large' | 'normal' = 'normal';
   @Input() type?: 'button' | 'submit';
   @Input() icon?: string;
-  @Input() styleClass: string = '';
+  @Input() styleClass = '';
   @Input() rounded = false;
   @Input() raised = false;
 
   @Output() onClick = new EventEmitter<void>();
 
-  class = signal('rounded-[9999px] border-0 text-primary-contrast');
+  private readonly baseClass =
+    'rounded-[9999px] border-0 text-primary-contrast';
+  class = signal(this.baseClass);
   style: ButtonStyle = {
     colors: {
       primary: {
@@ -97,6 +99,13 @@ export class ButtonComponent implements OnInit, OnChanges {
           sync: 'dark:shadow-[0px_4px_8px_theme(colors.yellow.400)] shadow-[0px_4px_8px_theme(colors.yellow.600)]',
         },
       },
+      disabled: {
+        gradient: 'bg-gradient-to-b from-gray-300 to-gray-600 to-75%',
+        shadow: {
+          normal: 'shadow-[0px_4px_8px_var(--p-surface-500)]',
+          sync: '',
+        },
+      },
     },
     animation:
       'transition-all duration-150 ease-in-out hover:scale-105 active:translate-y-0.5 active:shadow-sm active:scale-95',
@@ -117,21 +126,39 @@ export class ButtonComponent implements OnInit, OnChanges {
   }
 
   private styleHandler() {
-    this.class.set(
-      `${this.class()} ${
-        this.size === 'normal'
-          ? ''
-          : this.size === 'large'
-            ? this.style.size?.large
-            : this.style.size?.small
-      } ${this.style.colors[this.severity].gradient} ${
-        this.shadow
-          ? this.syncShadow
-            ? this.style.colors[this.severity].shadow.sync
-            : this.style.colors[this.severity].shadow.normal
-          : ''
-      } ${!this.disabled ? this.style.animation : ''}`,
-    );
+    // Rebuild the class string from scratch
+    const classes: string[] = [this.baseClass];
+
+    // Add size classes
+    if (this.size !== 'normal' && this.style.size) {
+      classes.push(
+        this.size === 'large' ? this.style.size.large : this.style.size.small
+      );
+    }
+
+    // Determine and add gradient and shadow classes
+    const styleData = this.disabled
+      ? this.style.colors['disabled']
+      : this.style.colors[this.severity];
+    classes.push(styleData.gradient);
+
+    if (this.shadow || this.disabled) {
+      if (this.disabled) {
+        classes.push(styleData.shadow.normal);
+      } else {
+        classes.push(
+          this.syncShadow ? styleData.shadow.sync : styleData.shadow.normal
+        );
+      }
+    }
+
+    // Add animation class if not disabled
+    if (!this.disabled) {
+      classes.push(this.style.animation);
+    }
+
+    // Set the new, clean class string
+    this.class.set(classes.join(' '));
   }
 
   handleClick(): void {

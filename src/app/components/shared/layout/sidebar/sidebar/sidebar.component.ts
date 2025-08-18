@@ -20,6 +20,7 @@ import { SidebarPageGroupComponent } from '../sidebar-page-group/sidebar-page-gr
 import { PageGroupItem } from 'app/data/model/menu-item.model';
 import { LogoComponent } from '../logo/logo.component';
 import { SearchProcessesComponent } from '../search-processes/search-processes.component';
+import { ThemeManagementComponent } from "../../header/theme-management/theme-management.component";
 
 @Component({
   selector: 'app-sidebar',
@@ -30,7 +31,8 @@ import { SearchProcessesComponent } from '../search-processes/search-processes.c
     SidebarPageGroupComponent,
     LogoComponent,
     SearchProcessesComponent,
-  ],
+    ThemeManagementComponent
+],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })

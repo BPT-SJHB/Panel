@@ -17,11 +17,18 @@ import { CommonModule } from '@angular/common';
 import { createTab } from 'app/store/tab/tab.actions';
 import { TabComponentKey } from 'app/constants/tab-component-registry';
 import { DEFAULT_MAIN_TAB_ID } from 'app/store/tab/tab.reducer';
-import { Button } from "primeng/button";
+import { Button } from 'primeng/button';
+import { closeSidebar } from 'app/store/sidebar/sidebar.actions';
 
 @Component({
   selector: 'app-search-processes',
-  imports: [TextInputComponent, Dialog, SearchInputComponent, CommonModule, Button],
+  imports: [
+    TextInputComponent,
+    Dialog,
+    SearchInputComponent,
+    CommonModule,
+    Button,
+  ],
   templateUrl: './search-processes.component.html',
   styleUrls: ['./search-processes.component.scss'],
 })
@@ -88,5 +95,12 @@ export class SearchProcessesComponent implements AfterViewInit, OnDestroy {
 
     this.store.dispatch(createTab(tabPayload));
     this.isDialogVisible = false;
+  }
+
+  openSearchProcess() {
+    this.store.dispatch(closeSidebar());
+    this.isDialogVisible = true;
+    const child = document.getElementById('searchDialog');
+    document.body.appendChild(child!);
   }
 }

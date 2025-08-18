@@ -3,11 +3,10 @@ import { APP_ROUTES } from 'app/constants/routes';
 import { LoadAnnouncementPlace } from 'app/data/model/load-announcement-place.model';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
-import { ButtonComponent } from "../button/button.component";
 
 @Component({
   selector: 'app-terminal-card',
-  imports: [CardModule, ButtonModule, ButtonComponent],
+  imports: [CardModule, ButtonModule],
   templateUrl: './terminal-card.component.html',
   styleUrl: './terminal-card.component.scss',
 })

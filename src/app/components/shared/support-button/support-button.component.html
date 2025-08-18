@@ -11,61 +11,52 @@
   header="روش های ارتباطی با سامانه"
   [modal]="true"
   [(visible)]="visible"
+  draggable="false"
+  styleClass="rounded-4xl"
 >
-  <div
-    class="flex flex-c w-full content-center justify-center flex-wrap"
-  >
-    <div class="m-2 items-center justify-center">
-      <app-button
-        (click)="CallUsOnPhone.toggle($event)"
-        icon="pi pi-phone"
-        label="شماره های تماس"
-        severity="info"
-      />
-      <p-popover #CallUsOnPhone>
-        <div class="flex justify-between content-center m-2">
-          <label class="flex items-center justify-center"
-            >انجمن رانندگان</label
+  <div class="flex flex-col items-center gap-4">
+    <div class="flex flex-col items-center gap-2">
+      @for (item of contactList; track $index) {
+        <app-button
+          (click)="CallUsOnPhone.toggle($event)"
+          icon="pi pi-phone"
+          [label]="item.title"
+          severity="info"
+          styleClass="w-full"
+          class="w-full"
+        />
+        <p-popover
+          styleClass="rounded-4xl"
+          [dt]="{
+            arrowOffset: '35px',
+          }"
+          #CallUsOnPhone
+        >
+          <div
+            class="flex flex-col gap-4 justify-center items-center"
           >
-          <app-button
-            severity="info"
-            [raised]="true"
-            icon="pi pi-clipboard"
-            [rounded]="true"
-            label="03134721839"
-            (onClick)="copyToClipboard()"
-            class="flex items-center justify-center mr-2"
-          />
-        </div>
-        <div class="flex justify-between content-center m-2">
-          <label class="flex items-center justify-center"
-            >انجمن کامیونداران</label
-          >
-          <app-button
-            severity="info"
-            [raised]="true"
-            icon="pi pi-clipboard"
-            [rounded]="true"
-            label="03134721839"
-            (onClick)="copyToClipboard()"
-            class="flex items-center justify-center mr-2"
-          />
-        </div>
-        <div class="flex justify-between content-center m-2">
-          <label class="flex items-center justify-center"
-            >انجمن شرکت‌ها</label
-          >
-          <app-button
-            severity="info"
-            [raised]="true"
-            icon="pi pi-clipboard"
-            [rounded]="true"
-            label="03134721839"
-            (onClick)="copyToClipboard()"
-            class="flex items-center justify-center mr-2"
-          />
-        </div>
-      </p-popover>
+            @for (number of item.numbers; track $index) {
+              <div class="flex items-center w-full justify-end gap-3">
+                <span [textContent]="number"></span>
+                <p-button
+                  severity="info"
+                  [raised]="true"
+                  icon="pi pi-clipboard"
+                  (onClick)="copyToClipboard(number)"
+                  styleClass="rounded-full"
+                />
+                <a href="tel:{{ number }}">
+                  <p-button
+                    severity="info"
+                    [raised]="true"
+                    icon="pi pi-phone"
+                    styleClass="rounded-full"
+                /></a>
+              </div>
+            }
+          </div>
+        </p-popover>
+      }
     </div>
 
     <div class="m-2 items-center justify-center">
@@ -79,6 +70,7 @@
   </div>
 </p-dialog>
 
+<!-- Ticket -->
 <p-dialog
   draggable="false"
   header="درخواست ارسال تیکت"

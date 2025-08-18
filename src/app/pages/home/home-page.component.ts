@@ -22,7 +22,6 @@ import { appTitles } from 'app/constants/Titles';
 // Services
 import { LoadAnnouncementPlacesService } from 'app/services/LoadAnnouncementPlaces/load-announcement-places.service';
 import { BaseLoading } from 'app/components/forms/shared/component-base/base-loading';
-import { SupportButtonComponent } from 'app/components/shared/support-button/support-button.component';
 
 @Component({
   selector: 'app-home',
@@ -34,7 +33,6 @@ import { SupportButtonComponent } from 'app/components/shared/support-button/sup
     SearchInputComponent,
     MapSvgComponent,
     DialogModule,
-    SupportButtonComponent,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
@@ -42,7 +40,7 @@ import { SupportButtonComponent } from 'app/components/shared/support-button/sup
 export class HomePageComponent extends BaseLoading {
   private readonly lap = inject(LoadAnnouncementPlacesService);
 
-  readonly headerTitle = appTitles.appOnLineTitle;
+  readonly headerTitle = appTitles.appBrokenTitle;
   readonly dialogTitle = signal('');
   readonly currentProvince = signal<ProvinceCode>('IR-00');
   readonly displayedLoadAnnouncementPlaces = signal<LoadAnnouncementPlace[]>(
@@ -95,7 +93,7 @@ export class HomePageComponent extends BaseLoading {
       ...(provinceMap.get(provinceCode) ?? []),
     ]);
 
-    this.dialogTitle.set('پایانه های استان ' + provinceName);
+    this.dialogTitle.set('سامانه های اعلام بار استان ' + provinceName);
     this.isDialogVisible = true;
   }
 

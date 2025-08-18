@@ -18,7 +18,7 @@
       pInputText
       [formControl]="captchaInputControl"
       pInputText
-      placeholder="عدد تصویر وارد کنید"
+      placeholder="متن تصویر را وارد کنید"
       [style.background]="'var(--p-inputgroup-addon-background)'"
       class="border border-y-2 border-x-0 focus:outline-0 border-surface-400 focus:border-primary-emphasis px-2 h-full w-full placeholder:text-gray-400 text-sm"
       [ngClass]="{
@@ -40,7 +40,7 @@
       >
         <i
           [ngClass]="{ rotate: disableRefresh }"
-          class="pi pi-refresh fixed text-primary-contrast"
+          class="pi pi-refresh mr-4 text-primary-contrast"
         ></i>
       </p-button>
     </p-inputgroup-addon>
@@ -49,12 +49,12 @@
   @if (captchaInputControl.touched && captchaInputControl.errors) { @if
   (captchaInputControl.errors['required']) {
   <p-message severity="error" variant="simple" size="small">
-    وارد کردن عدد تصویر الزامی است.
+    وارد کردن متن تصویر الزامی است
   </p-message>
   } @else if (captchaInputControl.errors['minlength']) {
   <p-message severity="error" variant="simple" size="small">
     کپچا باید حداقل
-    {{ captchaInputControl.errors["minlength"].requiredLength }} کاراکتر باشد.
+    {{ captchaInputControl.errors["minlength"].requiredLength }} کاراکتر باشد
   </p-message>
   } }
 </div>
