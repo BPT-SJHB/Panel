@@ -64,7 +64,7 @@
       label="جستجو"
       severity="info"
       size="small"
-      styleClass="px-6 py-1"
+      styleClass="px-6 py-2"
       [disabled]="!isSearchFormValid()"
       type="submit"
     />
@@ -90,6 +90,7 @@
     [disabled]="tariffs().length === 0"
     label="افزایش تعرفه"
     severity="info"
+    (onClick)="onIncTariff()"
   />
 </div>
 
@@ -232,4 +233,30 @@
       />
     </div>
   </form>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="incDialogVisible"
+  [modal]="true"
+  [closable]="true"
+  [header]="headerTitle()"
+  [style]="{ width: '30rem', maxWidth: '100%' }"
+  (onHide)="closeDialogTariffForm()"
+  draggable="false"
+  maskStyleClass="px-2"
+>
+  <app-text-input
+    class="col-span-12"
+    placeholder="درصد افزایش تعرفه"
+    label="درصد افزایش"
+    [control]="prentageTariffInc"
+    validationField="parentage"
+  />
+  <div class="col-span-12 flex justify-end mt-5">
+    <app-button
+      label="ثبت تغییرات"
+      (click)="incremntTariff()"
+      [disabled]="prentageTariffInc.invalid || loading()"
+    />
+  </div>
 </p-dialog>

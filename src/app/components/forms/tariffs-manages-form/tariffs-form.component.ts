@@ -39,6 +39,7 @@ import {
 import { TariffsManagementService } from 'app/services/Tariffs-management/tariffs-management.service';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { AppConfirmService } from 'app/services/confirm/confirm.service';
+import { ValidationSchema } from 'app/constants/validation-schema';
 
 enum TariffsFormMode {
   EDITABLE,
@@ -79,6 +80,11 @@ export class TariffsFormComponent extends BaseLoading {
   readonly addonWidth = '6rem';
   tariffsFormMode: TariffsFormMode = TariffsFormMode.REGISTER;
   formDialogVisible = false;
+  incDialogVisible = false;
+  prentageTariffInc = this.fb.control<number | null>(
+    null,
+    ValidationSchema.parentage
+  );
 
   readonly tariffs = signal<TariffTable[]>([]);
   tariffCached?: Tariff;
@@ -200,10 +206,10 @@ export class TariffsFormComponent extends BaseLoading {
 
   isSearchFormValid(): boolean {
     return (
-      this.searchLoaderTypeId.value &&
-      (this.searchSourceCityId.value ||
-        this.searchTargetCityId.value ||
-        this.searchGoodsId.value)
+      this.searchLoaderTypeId.valid &&
+      (this.searchSourceCityId.valid ||
+        this.searchTargetCityId.valid ||
+        this.searchGoodsId.valid)
     );
   }
 
@@ -246,6 +252,7 @@ export class TariffsFormComponent extends BaseLoading {
 
   closeDialogTariffForm(): void {
     this.formDialogVisible = false;
+    this.incDialogVisible = false;
     this.resetTariffsForm();
     this.headerTitle.set('');
   }
@@ -417,6 +424,26 @@ export class TariffsFormComponent extends BaseLoading {
   onFileExcelUpload(event: any) {
     this.fu?.clear();
     this.toast.success('موفق', 'فایل اکسل با موفقیت بارگذاری شد.');
+  }
+
+  onIncTariff() {
+    this.headerTitle.set('افزایش تعرفه');
+    this.prentageTariffInc.reset(null);
+    this.incDialogVisible = true;
+  }
+
+  async incremntTariff() {
+    if (this.loading() || this.prentageTariffInc.invalid) return;
+    await this.withLoading(async () => {
+      const response = await this.tariffService.AddPercentageToTariffs(
+        this.tariffs(),
+        this.prentageTariffInc.value!
+      );
+      if (!checkAndToastError(response, this.toast)) return;
+      this.toast.success('موفق', response.data.Message);
+      await this.updateTable();
+      this.closeDialogTariffForm();
+    });
   }
 
   private async updateTable(): Promise<void> {
