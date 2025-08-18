@@ -39,6 +39,7 @@ export class LoadAllocationPriorityComponent
 
   onViewActivated(): void {
     this.withLoading(async () => {
+      this.selection.set([]);
       await this.loadLoadsAllocation();
     });
   }
