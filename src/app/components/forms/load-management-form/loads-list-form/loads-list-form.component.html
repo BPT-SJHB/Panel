@@ -1,0 +1,45 @@
+<!-- Filter Grid -->
+<div class="grid grid-cols-12 items-center gap-4 mb-5">
+  <!-- Auto-complete filters -->
+  @for (config of autoCompletions; track $index) {
+    <app-search-auto-complete-factory
+      class="col-span-12 sm:col-span-6 lg:col-span-4"
+      [config]="config" [addonWidth]="addonWidth"
+    />
+  }
+
+  <!-- Date picker -->
+  <app-date-picker-input
+    class="col-span-12 sm:col-span-6 lg:col-span-4"
+    label="تاریخ"
+    placeholder="تاریخ"
+    [control]="getLoadFilterControl('date')"
+    [addonWidth]="addonWidth"
+  />
+
+  <!-- Checkbox -->
+  <app-checkbox-input
+    class="col-span-12 sm:col-span-6 lg:col-span-4"
+    label="موجودی صفر"
+    [control]="getLoadFilterControl('inventory')"
+  />
+</div>
+
+<!-- Search Button -->
+<div class="flex justify-end w-full mb-8">
+  <app-button
+    label="جستجو"
+    styleClass="md:w-50"
+    [disabled]="isFilterInvalid()"
+    (click)="filterListLoad()"
+  />
+</div>
+
+<!-- Results Table -->
+<app-table
+  [rows]="rows()"
+  [columns]="columns"
+  selectionMode="single"
+  (rowSelect)="rowSelect($event)"
+  (rowUnSelect)="rowUnSelect($event)"
+/>
