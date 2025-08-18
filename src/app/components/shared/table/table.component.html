@@ -16,9 +16,10 @@
     <ng-template #caption>
       <div class="flex justify-between items-center">
         <app-button
+          class="flex justify-end w-full px-1"
           label="جدید"
           size="small"
-          styleClass="px-6 md:px-8 py-1"
+          styleClass="px-6 md:px-8 py-2"
           (click)="clickCaptionButton.emit()"
         />
       </div>
@@ -27,23 +28,27 @@
 
   <!-- Table Header -->
   <ng-template pTemplate="header">
-    <tr class="text-nowrap">
-      @for (column of columns; track column.field) {
-        <th [pSortableColumn]="column.field.toString()">
-          <div class="flex items-center gap-2">
-            {{ column.header }}
-            <p-sortIcon [field]="column.field.toString()" [hidden]="rows.length < 2" />
-          </div>
-        </th>
-      }
-    </tr>
+
+  <tr class="text-nowrap">
+    @for (column of columns; track column.field) {
+      <th [pSortableColumn]="hasSorting(column) ? column.field.toString() : undefined">
+        <div class="flex items-center justify-center gap-2">
+          {{ column.header }}
+          @if (hasSorting(column)) {
+            <p-sortIcon [field]="column.field.toString()" />
+          }
+        </div>
+      </th>
+    }
+  </tr>
+
   </ng-template>
 
   <!-- Table Body -->
   <ng-template pTemplate="body" let-row>
     <tr class="text-nowrap" [pSelectableRow]="row">
       @for (column of columns; track column.field) {
-        <td>
+        <td class="text-center">
           @switch (getColumnType(column)) {
             @case (ColumnType.TEXT) {
               <span
