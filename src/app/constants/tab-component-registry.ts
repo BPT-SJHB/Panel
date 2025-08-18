@@ -425,7 +425,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
     shearedSignal: true,
     subTab: [
       {
-        title: 'اعلام بارگیر',
+        title: 'اعلام بار',
         component: LoadsAnnouncementFormComponent,
         data: { loadType: LoadListType.TRANSPORT_COMPANY },
       },
