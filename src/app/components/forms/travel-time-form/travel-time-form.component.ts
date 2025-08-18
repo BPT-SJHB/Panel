@@ -21,7 +21,6 @@ import { ProvinceAndCityManagementService } from 'app/services/province-city-man
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
-import { ConfirmationService } from 'primeng/api';
 
 import { TravelTimeManagementService } from 'app/services/travel-time-management/travel-time-management.service';
 
@@ -32,11 +31,21 @@ import { ShortResponse } from 'app/data/model/short-response.model';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TableConfig } from 'app/constants/ui/table.ui';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
+import {
+  deleteCell,
+  editCell,
+  TableColumn,
+  TableColumnType,
+  TableComponent,
+} from 'app/components/shared/table/table.component';
+import { AppConfirmService } from 'app/services/confirm/confirm.service';
 
 enum TravelTimeFormMode {
   EDITABLE,
   REGISTER,
 }
+
+type TravelTimeTableRow = TravelTime & { edit: string; delete: string };
 
 @Component({
   selector: 'app-travel-time-form',
@@ -46,16 +55,15 @@ enum TravelTimeFormMode {
     ButtonModule,
     DialogModule,
     ReactiveFormsModule,
-    NgClass,
     TextInputComponent,
     ToggleSwitchInputComponent,
     SearchAutoCompleteComponent,
     ConfirmDialogModule,
     ButtonComponent,
+    TableComponent,
   ],
   templateUrl: './travel-time-form.component.html',
   styleUrl: './travel-time-form.component.scss',
-  providers: [ConfirmationService],
 })
 export class TravelTimeFormComponent {
   // Services (injected)
@@ -64,12 +72,32 @@ export class TravelTimeFormComponent {
   private loadingService = inject(LoadingService);
   private loaderTypeService = inject(LoaderTypesService);
   private provinceService = inject(ProvinceAndCityManagementService);
-  private confirmationService = inject(ConfirmationService);
+  private confirmService = inject(AppConfirmService);
   private travelTimeService = inject(TravelTimeManagementService);
 
   // State & lifecycle helpers
   private destroy$ = new Subject<void>();
   private travelTimeFormMode = TravelTimeFormMode.REGISTER;
+
+  readonly cloumns: TableColumn<TravelTimeTableRow>[] = [
+    { header: 'نوع بارگیر', field: 'LoaderTypeTitle' },
+    { header: 'کد شهر مبدا', field: 'SourceCityId' },
+    { header: 'شهر مبدا', field: 'SourceCityName' },
+    { header: 'کد شهر مقصد', field: 'TargetCityId' },
+    { header: 'شهر مقصد', field: 'TargetCityName' },
+    { header: 'مدت سفر', field: 'TravelTime' },
+    { header: 'فعال/غیرفعال', field: 'Active', type: TableColumnType.BOOLEAN },
+    {
+      ...editCell.config,
+      field: 'edit',
+      onAction: async (row: TravelTime) => await this.onEdit(row),
+    },
+    {
+      ...deleteCell.config,
+      field: 'delete',
+      onAction: async (row: TravelTime) => await this.onDelete(row),
+    },
+  ];
 
   readonly tableUi = TableConfig;
 
@@ -85,20 +113,8 @@ export class TravelTimeFormComponent {
   targetStartKey = '';
 
   // Data
-  travelTimes: TravelTime[] = [];
+  travelTimes: TravelTimeTableRow[] = [];
   travelTimeCached?: TravelTime;
-
-  readonly cols = [
-    'ویرایش',
-    'حذف',
-    'نوع بارگیر',
-    'کد شهر مبدا',
-    'شهر مبدا',
-    'کد شهر مقصد',
-    'شهر مقصد',
-    'مدت سفر',
-    'فعال/غیرفعال',
-  ];
 
   // Forms
   travelTimeSearchForm = this.fb.group({
@@ -197,7 +213,7 @@ export class TravelTimeFormComponent {
   isSearchFormValid(): boolean {
     if (this.searchLoaderTypeId.value === 0) return false;
     return [this.searchSourceCityId.value, this.searchTargetCityId.value].some(
-      (v) => v && v !== 0,
+      (v) => v && v !== 0
     );
   }
 
@@ -220,7 +236,7 @@ export class TravelTimeFormComponent {
         this.loaderTypeId.value,
         this.sourceCityId.value,
         this.targetCityId.value,
-        this.travelTimeTake.value,
+        this.travelTimeTake.value
       ),
     ];
     tasks.push(this.updateTimeTravelActive());
@@ -229,7 +245,7 @@ export class TravelTimeFormComponent {
     if (results.some((res) => !this.isSuccessful(res))) return;
     this.toast.success(
       'موفق',
-      results[0].data?.Message ?? 'با موفقیت انجام شد',
+      results[0].data?.Message ?? 'با موفقیت انجام شد'
     );
     this.onCloseDialog();
   }
@@ -241,7 +257,7 @@ export class TravelTimeFormComponent {
         this.loaderTypeId.value,
         this.sourceCityId.value,
         this.targetCityId.value,
-        this.travelTimeTake.value,
+        this.travelTimeTake.value
       ),
     ];
     tasks.push(this.updateTimeTravelActive());
@@ -250,7 +266,7 @@ export class TravelTimeFormComponent {
     if (results.some((res) => !this.isSuccessful(res))) return;
     this.toast.success(
       'موفق',
-      results[0].data?.Message ?? 'با موفقیت انجام شد',
+      results[0].data?.Message ?? 'با موفقیت انجام شد'
     );
     await this.updateTable();
     this.onCloseDialog();
@@ -272,7 +288,7 @@ export class TravelTimeFormComponent {
       return this.travelTimeService.ChangeTravelTimeStatus(
         this.loaderTypeId.value,
         this.sourceCityId.value,
-        this.targetCityId.value,
+        this.targetCityId.value
       );
     }
     return { success: true, data: { Message: '' } };
@@ -333,7 +349,7 @@ export class TravelTimeFormComponent {
       const response = await this.travelTimeService.GetTravelTime(
         row.LoaderTypeId!,
         row.SourceCityId!,
-        row.TargetCityId!,
+        row.TargetCityId!
       );
       if (!this.isSuccessful(response)) {
         this.onCloseDialog();
@@ -365,43 +381,25 @@ export class TravelTimeFormComponent {
     this.headerTitle = '';
   }
 
-  onDelete(row: TravelTime): void {
-    const title = `حذف رکورد ${row.LoaderTypeId}`;
-    const message = `آیا می‌خواهید با کد ${row.LoaderTypeId} حذف شود؟`;
-
-    this.confirmationService.confirm({
-      message,
-      header: title,
-      icon: 'pi pi-info-circle',
-      closable: true,
-      closeOnEscape: true,
-      acceptLabel: 'تایید',
-      rejectLabel: 'لغو',
-      rejectButtonProps: {
-        label: 'لغو',
-        severity: 'secondary',
-        outlined: true,
-      },
-      acceptButtonProps: {
-        label: 'تایید',
-        severity: 'danger',
-      },
-      accept: async () => {
+  async onDelete(row: TravelTime) {
+    this.confirmService.confirmDelete(
+      `${row.LoaderTypeTitle} - ${row.SourceCityName} به ${row.TargetCityName}`,
+      async () => {
         try {
           this.loadingService.setLoading(true);
           await this.deleteTravelTime(row);
         } finally {
           this.loadingService.setLoading(false);
         }
-      },
-    });
+      }
+    );
   }
 
-  private async updateTable(showErrorNotFound: boolean = false): Promise<void> {
+  private async updateTable(showErrorNotFound = false): Promise<void> {
     const response = await this.travelTimeService.GetTravelTimes(
       this.searchLoaderTypeId.value || undefined,
       this.searchSourceCityId.value || undefined,
-      this.searchTargetCityId.value || undefined,
+      this.searchTargetCityId.value || undefined
     );
 
     if (!response.success) {
@@ -412,7 +410,12 @@ export class TravelTimeFormComponent {
       if (this.isSuccessful(response)) return;
     }
 
-    this.travelTimes = response.data!;
+    this.travelTimes =
+      response.data?.map((t) => ({
+        ...t,
+        edit: editCell.value,
+        delete: deleteCell.value,
+      })) ?? [];
   }
 
   private resetTravelTimeForm() {
@@ -427,7 +430,7 @@ export class TravelTimeFormComponent {
     const response = await this.travelTimeService.DeleteTravelTime(
       rowData.LoaderTypeId,
       rowData.SourceCityId ?? 0,
-      rowData.TargetCityId ?? 0,
+      rowData.TargetCityId ?? 0
     );
     this.toast.success('موفق', response.data?.Message ?? 'با موفقیت حذف شد');
     await this.updateTable(false);
@@ -436,6 +439,7 @@ export class TravelTimeFormComponent {
   private populateTravelTimeForm(data: TravelTime) {
     this.travelTimeForm.patchValue({
       loaderTypeId: data.LoaderTypeId,
+      loaderType: data.LoaderTypeTitle,
       sourceCityId: data.SourceCityId,
       sourceCityName: data.SourceCityName,
       targetCityId: data.TargetCityId,
