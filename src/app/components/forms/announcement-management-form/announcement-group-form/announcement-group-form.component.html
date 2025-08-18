@@ -14,17 +14,7 @@
 </div>
 
 <!-- 📋 Announcement Table -->
-<p-table
-  class="col-span-12 overflow-x-auto"
-  [columns]="cols"
-  [value]="displayAnnouncementsGroup"
-  [tableStyle]="tableUi.tableStyle"
-  [paginator]="tableUi.paginator"
-  [paginatorLocale]="tableUi.paginatorLocale"
-  [rows]="tableUi.rows"
-  [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
-  [stripedRows]="tableUi.stripedRows"
->
+<app-table [columns]="columns" [rows]="displayAnnouncementsGroup" [enableCaptionButton]="true" (clickCaptionButton)="onNew()">
   <!-- Table Header -->
   <ng-template #caption>
     <div>
@@ -79,7 +69,7 @@
       </td>
     </tr>
   </ng-template>
-</p-table>
+</app-table>
 
 <!-- 📝 Form Dialog -->
 <p-dialog
@@ -137,5 +127,3 @@
   </form>
 </p-dialog>
 
-<!-- 🛑 Confirm Dialog -->
-<p-confirm-dialog />
