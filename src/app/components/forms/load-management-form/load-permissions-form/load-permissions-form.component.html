@@ -1,0 +1,14 @@
+@if (rows().length === 0) {
+  <div class="text-center font-bold text-red-500 text-lg">
+    لطفا یک بار از لیست بار ها انتخاب نمایید
+  </div>
+} @else {
+  <app-table [rows]="rows()" [columns]="columns" [config]="configTable" />
+  <app-button
+    class="flex w-full justify-center md:justify-end mt-5"
+    (onClick)="printPermissions()"
+    styleClass="w-full sm:w-32 md:w-40 lg:w-48"
+  >
+    چاپ
+  </app-button>
+}
