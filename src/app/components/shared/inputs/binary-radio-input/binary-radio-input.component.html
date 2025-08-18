@@ -6,7 +6,7 @@
       <!-- فعال -->
       <div
         class="flex items-center gap-2"
-        [ngClass]="{ 'text-green-600': control.value === true }"
+        [ngClass]="{ 'text-green-600': control.value && enableColor }"
       >
         <p-radiobutton
           [name]="radioName"
@@ -16,25 +16,27 @@
           [ngClass]="{ 'p-highlight': control.value === true }"
           (click)="preventIfReadonly($event)"
         />
-        <label for="sms-active-option" class="cursor-pointer mt-2">فعال</label>
+        <label for="sms-active-option" class="cursor-pointer mt-2">{{
+          activeLabel
+        }}</label>
       </div>
 
       <!-- غیرفعال -->
       <div
         class="flex items-center gap-2"
-        [ngClass]="{ 'text-red-500': control.value === false }"
+        [ngClass]="{ 'text-red-500': control.value && enableColor }"
       >
         <p-radiobutton
           [name]="radioName"
           [value]="false"
           [formControl]="control"
           inputId="disable-option"
-          [ngClass]="{ 'p-highlight': control.value === false }"
+          [ngClass]="{ 'p-highlight': control.value === false && enableColor }"
           (click)="preventIfReadonly($event)"
         />
-        <label for="sms-disable-option" class="cursor-pointer mt-2"
-          >غیرفعال</label
-        >
+        <label for="sms-disable-option" class="cursor-pointer mt-2">{{
+          disableLabel
+        }}</label>
       </div>
     </div>
   </div>
