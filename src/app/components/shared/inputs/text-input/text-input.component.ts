@@ -50,7 +50,7 @@ export class TextInputComponent implements OnInit, OnChanges {
   @Input() type: 'password' | 'text' = 'text';
 
   @Output() clickButton = new EventEmitter<void>();
-  @Output() input = new EventEmitter();
+  @Output() input = new EventEmitter<HTMLInputElement>();
   @Output() focus = new EventEmitter<HTMLInputElement>();
   @Output() blur = new EventEmitter<HTMLInputElement>();
   @Output() keydown = new EventEmitter<KeyboardEvent>();
@@ -99,5 +99,10 @@ export class TextInputComponent implements OnInit, OnChanges {
 
   handleClick(): void {
     this.clickButton.emit();
+  }
+
+  valueChange($event: Event) {
+    const target = $event.target as HTMLInputElement;
+    this.input.emit(target);
   }
 }
