@@ -1,0 +1,41 @@
+<div class="flex flex-row flex-wrap justify-around items-center gap-3">
+  <!-- Loop over allocations -->
+  @for (load of loadAllocations(); track $index) {
+    <p-card
+      class="w-[90%] min-w-[300px] max-w-[450px] mb-3 shadow-md rounded-2xl bg-emphasis"
+    >
+      <!-- Header: Good title + Priority -->
+      <div class="flex justify-between items-center mb-2">
+        <span class="font-bold text-lg">{{ load.GoodTitle || "---" }}</span>
+        <span class="text-sm px-2 py-0.5 rounded-full bg-highlight">
+          {{load.LAId}}
+        </span>
+      </div>
+
+      <!-- Body content -->
+      <div class="text-sm border-t pt-2 pb-1 space-y-1">
+        <div>
+          مبدا: {{ load.SourceCityTitle || "---" }} ← مقصد:
+          {{ load.TargetCityTitle || "---" }}
+        </div>
+        <div>تناژ: {{ load.Tonaj || "-" }}</div>
+        <div>شرکت: {{ load.TransportCompanyTitle || "-" }}</div>
+        <div>
+          بارگیری: {{ load.LoadingPlaceTitle || "-" }} | تخلیه:
+          {{ load.DischargingPlaceTitle || "-" }}
+        </div>
+        <div>گیرنده: {{ load.Recipient || "-" }}</div>
+        <div>توضیحات: {{ load.Description || "-" }}</div>
+        <div>آدرس: {{ load.Address || "-" }}</div>
+      </div>
+    </p-card>
+  }
+  <!-- Empty state -->
+  @empty {
+    <p-card class="w-full my-4 shadow-sm">
+      <div class="text-center text-sm flex items-center justify-center">
+        رکوردی برای نمایش وجود ندارد
+      </div>
+    </p-card>
+  }
+</div>
