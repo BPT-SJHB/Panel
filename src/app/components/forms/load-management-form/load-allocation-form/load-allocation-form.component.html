@@ -21,7 +21,6 @@
       />
       <app-text-input
         class="col-span-12 md:col-span-6"
-        placeholder="نام راننده"
         label="نام راننده"
         validationField="fullName"
         [control]="driverCtrl('NameFamily')"
@@ -33,7 +32,7 @@
     <div class="grid grid-cols-12 gap-5">
       <app-search-input
         class="col-span-6"
-        placeholder="کد ملی راننده وارد کنید"
+        placeholder="هوشمند ناوگان را وارد کنید."
         label="هوشمند"
         searchButtonLabel="استعلام"
         [control]="truckCtrl('SmartCardNo')"
@@ -44,7 +43,6 @@
       />
       <app-text-input
         class="col-span-6"
-        placeholder="پلاک"
         label="پلاک"
         [control]="truckCtrl('Pelak')"
         [addonWidth]="addonWidth"
@@ -55,7 +53,6 @@
     <div class="grid grid-cols-12 gap-5">
       <app-text-input
         class="col-span-6"
-        placeholder="کیف پول"
         label="کیف پول"
         [control]="truckComposeCtrl('MoneyWalletCode')"
         [addonWidth]="addonWidth"
@@ -63,7 +60,6 @@
       />
       <app-text-input
         class="col-span-6"
-        placeholder="نوبت"
         label="نوبت"
         [control]="truckComposeCtrl('TurnId')"
         [addonWidth]="addonWidth"
@@ -71,7 +67,6 @@
       />
       <app-text-input
         class="col-span-6"
-        placeholder="راننده"
         label="راننده"
         [control]="truckComposeCtrl('NameFamily')"
         [addonWidth]="addonWidth"
@@ -79,7 +74,6 @@
       />
       <app-text-input
         class="col-span-6"
-        placeholder="ناوگان"
         label="ناوگان"
         [control]="truckComposeCtrl('Pelak')"
         [addonWidth]="addonWidth"
