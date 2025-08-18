@@ -22,17 +22,29 @@ import { AnnouncementSubGroup } from 'app/services/announcement-group-subgroup-m
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { TableConfig } from 'app/constants/ui/table.ui';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { AppConfirmService } from 'app/services/confirm/confirm.service';
+import {
+  deleteCell,
+  editCell,
+  TableColumn,
+  TableColumnType,
+  TableComponent,
+} from 'app/components/shared/table/table.component';
 
 enum FormMode {
   EDITABLE,
   REGISTER,
 }
 
+type AnnouncementSubGroupTableRow = AnnouncementSubGroup & {
+  edit: string;
+  delete: string;
+};
+
 @Component({
   selector: 'app-announcement-sub-group-form',
   standalone: true,
   imports: [
-    TableModule,
     ButtonModule,
     NgClass,
     ConfirmDialogModule,
@@ -42,8 +54,8 @@ enum FormMode {
     TextInputComponent,
     ToggleSwitchInputComponent,
     ButtonComponent,
+    TableComponent,
   ],
-  providers: [ConfirmationService],
   templateUrl: './announcement-sub-group-form.component.html',
   styleUrl: './announcement-sub-group-form.component.scss',
 })
@@ -52,9 +64,10 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
   private readonly fb = inject(FormBuilder);
   private readonly toast = inject(ToastService);
   private readonly loadingService = inject(LoadingService);
-  private readonly confirmationService = inject(ConfirmationService);
+  private readonly confirmService = inject(AppConfirmService);
+
   private readonly announcementService = inject(
-    AnnouncementGroupSubgroupManagementService,
+    AnnouncementGroupSubgroupManagementService
   );
   private readonly destroy$ = new Subject<void>();
   readonly tableUi = TableConfig;
@@ -66,14 +79,39 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
   private announcementFormSubGroupMode = FormMode.REGISTER;
 
   // 📋 Data
-  announcementsSubGroup: AnnouncementSubGroup[] = [];
-  displayAnnouncementsSubGroup: AnnouncementSubGroup[] = [];
+  announcementsSubGroup: AnnouncementSubGroupTableRow[] = [];
+  displayAnnouncementsSubGroup: AnnouncementSubGroupTableRow[] = [];
   readonly cols = ['کد', 'ویرایش', 'حذف', 'عنوان', 'فعال/غیرفعال'];
+  readonly columns: TableColumn<AnnouncementSubGroupTableRow>[] = [
+    {
+      field: 'AnnouncementSGId',
+      header: 'شناسه',
+    },
+    {
+      field: 'AnnouncementSGTitle',
+      header: 'عنوان',
+    },
+    {
+      field: 'Active',
+      header: 'فعال/غیرفعال',
+      type: TableColumnType.BOOLEAN,
+    },
+    {
+      ...editCell.config,
+      field: 'edit',
+      onAction: (row: AnnouncementSubGroup) => this.onEdit(row),
+    },
+    {
+      ...deleteCell.config,
+      field: 'delete',
+      onAction: (row: AnnouncementSubGroup) => this.onDelete(row),
+    },
+  ];
 
   // 📝 Form
   searchControl = new FormControl('');
   announcementSubGroupForm = this.fb.group({
-    AnnouncementSGId: [-1, ValidationSchema.id],
+    AnnouncementSGId: this.fb.control<number | null>(null),
     AnnouncementSGTitle: ['', ValidationSchema.title],
     Active: [true],
   });
@@ -92,13 +130,13 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
   }
 
   // 🔍 Search
-  handleSearch(filtered: AnnouncementSubGroup[]): void {
+  handleSearch(filtered: AnnouncementSubGroupTableRow[]): void {
     this.displayAnnouncementsSubGroup = filtered;
   }
 
   filterAnnouncementsSubGroup = (
     item: AnnouncementSubGroup,
-    query: string,
+    query: string
   ): boolean => item.AnnouncementSGTitle?.includes(query) ?? false;
 
   // 🎯 Actions
@@ -116,27 +154,9 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
   }
 
   onDelete(row: AnnouncementSubGroup): void {
-    const title = `حذف رکورد ${row.AnnouncementSGId}`;
-    const message = `آیا می‌خواهید رکورد با عنوان ${row.AnnouncementSGTitle} و کد ${row.AnnouncementSGId} حذف شود؟`;
-
-    this.confirmationService.confirm({
-      header: title,
-      message,
-      icon: 'pi pi-info-circle',
-      closable: true,
-      closeOnEscape: true,
-      rejectButtonProps: {
-        label: 'لغو',
-        severity: 'secondary',
-        outlined: true,
-      },
-      acceptLabel: 'تایید',
-      rejectLabel: 'لغو',
-      acceptButtonProps: {
-        label: 'تایید',
-        severity: 'danger',
-      },
-      accept: async () => {
+    this.confirmService.confirmDelete(
+      `${row.AnnouncementSGTitle} با شناسه ${row.AnnouncementSGId}`,
+      async () => {
         this.loadingService.setLoading(true);
         try {
           await this.deleteAnnouncementSubGroup(row.AnnouncementSGId);
@@ -144,16 +164,18 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
         } finally {
           this.loadingService.setLoading(false);
         }
-      },
-    });
+      }
+    );
   }
 
   async registerOrEdit(): Promise<void> {
     this.loadingService.setLoading(true);
     try {
-      this.announcementFormSubGroupMode === FormMode.REGISTER
-        ? await this.registerAnnouncementSubGroup()
-        : await this.editAnnouncementSubGroup();
+      if (this.isFormEditable()) {
+        await this.editAnnouncementSubGroup();
+      } else {
+        await this.registerAnnouncementSubGroup();
+      }
 
       await this.loadAnnouncementSubGroups();
       this.closeForm();
@@ -173,8 +195,14 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
       const response =
         await this.announcementService.GetAnnouncementSupGroups('');
       if (!checkAndToastError(response, this.toast)) return;
-      this.announcementsSubGroup = this.displayAnnouncementsSubGroup =
-        response.data;
+
+      const rows: AnnouncementSubGroupTableRow[] = response.data.map((as) => ({
+        ...as,
+        edit: editCell.value,
+        delete: deleteCell.value,
+      }));
+
+      this.announcementsSubGroup = this.displayAnnouncementsSubGroup = rows;
     } finally {
       this.loadingService.setLoading(false);
     }
@@ -192,7 +220,7 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
     const response =
       await this.announcementService.RegisterNewAnnouncementSubGroup(
         AnnouncementSGTitle ?? '',
-        Active ?? true,
+        Active ?? true
       );
     if (!checkAndToastError(response, this.toast)) return;
     this.toast.success('موفق', response.data.Message ?? '');
@@ -204,7 +232,7 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
     const response = await this.announcementService.EditAnnouncementSubGroup(
       AnnouncementSGId,
       AnnouncementSGTitle ?? '',
-      Active ?? true,
+      Active ?? true
     );
     if (!checkAndToastError(response, this.toast)) return;
     this.toast.success('موفق', response.data.Message ?? '');
@@ -220,7 +248,7 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
 
   private resetForm(): void {
     this.announcementSubGroupForm.reset({
-      AnnouncementSGId: -1,
+      AnnouncementSGId: null,
       AnnouncementSGTitle: '',
       Active: true,
     });
@@ -238,7 +266,7 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
 
   get AnnouncementSGTitle(): FormControl {
     return this.announcementSubGroupForm.get(
-      'AnnouncementSGTitle',
+      'AnnouncementSGTitle'
     ) as FormControl;
   }
 
