@@ -407,7 +407,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
         component: LoadCapacitorFormComponent,
       },
       {
-        title: 'الویت بندی تخصیص بار',
+        title: 'اولویت بندی تخصیص بار',
         component: LoadAllocationPriorityComponent,
       },
       {
