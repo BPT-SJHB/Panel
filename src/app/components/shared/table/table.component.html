@@ -48,7 +48,7 @@
   <ng-template pTemplate="body" let-row>
     <tr class="text-nowrap" [pSelectableRow]="row">
       @for (column of columns; track column.field) {
-        <td class="text-center">
+        <td class="text-center" [class]="getTdClass(column,row)">
           @switch (getColumnType(column)) {
             @case (ColumnType.TEXT) {
               <span
