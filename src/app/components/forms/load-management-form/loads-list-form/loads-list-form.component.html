@@ -1,21 +1,10 @@
 <!-- Filter Grid -->
 <div class="grid grid-cols-12 items-center gap-4 mb-5">
   <!-- Auto-complete filters -->
-  @for (filter of autoCompletions; track $index) {
-    <app-search-auto-complete
+  @for (config of autoCompletions; track $index) {
+    <app-search-auto-complete-factory
       class="col-span-12 sm:col-span-6 lg:col-span-4"
-      [label]="filter.label"
-      [placeholder]="filter.placeholder"
-      [optionLabel]="$any(filter.optionLabel)"
-      [control]="filter.control"
-      [lazySearch]="$any(filter.lazySearch)"
-      [showIconOptionSelected]="filter.showIcon()"
-      [readOnly]="filter.readOnly?.() ?? false"
-      [minLength]="filter.minLength"
-      [cachingMode]="filter.cachingMode"
-      [addonWidth]="addonWidth"
-      (selectSuggestion)="filter.select($event)"
-      (valueChange)="filter.valueChange()"
+      [config]="config" [addonWidth]="addonWidth"
     />
   }
 
@@ -52,4 +41,5 @@
   [columns]="columns"
   selectionMode="single"
   (rowSelect)="rowSelect($event)"
+  (rowUnSelect)="rowUnSelect($event)"
 />

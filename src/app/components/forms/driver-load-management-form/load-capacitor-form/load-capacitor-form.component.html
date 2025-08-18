@@ -1,0 +1,133 @@
+<div class="grid grid-cols-12 gap-5">
+  <app-search-auto-complete-factory
+    class="col-span-12 md:col-span-6"
+    [config]="autoCompleteAnnouncementGroup"
+    [addonWidth]="addonWidth"
+  >
+  </app-search-auto-complete-factory>
+
+  <app-search-auto-complete-factory
+    class="col-span-12 md:col-span-6"
+    [config]="autoCompleteSubAnnouncementGroup"
+    [addonWidth]="addonWidth"
+  >
+  </app-search-auto-complete-factory>
+
+  <app-select-input
+    label="وضعیت بار"
+    placeholder="وضعیت بار را انتخاب نمایید."
+    class="col-span-12 md:col-span-6"
+    [options]="loadStatusOptions()"
+    [addonWidth]="addonWidth"
+    [control]="this.ctrl('loadStatusId')"
+  />
+
+  <app-button
+    class="col-span-12 mt-2 md:flex md:justify-end"
+    styleClass="w-full md:w-40 lg:w-48"
+    (onClick)="loadDriverLoads()"
+    [disabled]="this.searchLoadsForm.invalid"
+    severity="info"
+  >
+    مشاهد بار
+  </app-button>
+</div>
+
+<div class="flex flex-wrap flex-col items-center justify-center mt-20">
+  @for (province of driverLoads(); track $index) {
+    <p-panel
+      [header]="province.ProvinceName"
+      [toggleable]="true"
+      class="mb-4 w-full"
+      [collapsed]="true"
+    >
+      <div
+        class="flex flex-col justify-center items-center lg:flex-row lg:flex-wrap lg:justify-around"
+      >
+        @for (loads of province.myLoads; track $index) {
+          <p-card
+            [header]="'کد بار: ' + loads.LoadId"
+            class="w-[90%] min-w-[300px] max-w-[450px] mb-3 shadow-md rounded-2xl bg-emphasis"
+          >
+            <div class="flex flex-col gap-3 text-sm">
+              <!-- مسیر بار -->
+              <div class="flex flex-row justify-between">
+                <span>مبدا: {{ loads.SoureCityTitle }}</span>
+                <span>مقصد: {{ loads.TargetCityTitle }}</span>
+              </div>
+
+              <!-- جزئیات بار -->
+              <div class="flex flex-row justify-between">
+                <span>کالا: {{ loads.GoodTitle }}</span>
+                <span>تناژ: {{ loads.Tonaj }}</span>
+              </div>
+
+              <div class="flex flex-row justify-between">
+                <span>محل بارگیری: {{ loads.LoadingPlaceTitle }}</span>
+                <span>محل تخلیه: {{ loads.DischargingPlaceTitle }}</span>
+              </div>
+
+              <!-- زمان -->
+              <div class="flex flex-row justify-between">
+                <span
+                  >تاریخ اعلان: {{ loads.AnnounceDate }}
+                  {{ loads.AnnounceTime }}</span
+                >
+                <span>وضعیت: {{ loads.LoadStatusName }}</span>
+              </div>
+
+              <!-- شرکت و کاربر -->
+              <div class="flex flex-col">
+                <span>شرکت حمل‌ونقل: {{ loads.TCTitle }}</span>
+                <span>کاربر ثبت‌کننده: {{ loads.UserName }}</span>
+              </div>
+
+              <!-- اعلان -->
+              <div class="flex flex-col border-t pt-2">
+                <span>عنوان اعلان: {{ loads.AnnouncementTitle }}</span>
+                <span>گروه اعلان: {{ loads.AnnouncementSGTitle }}</span>
+              </div>
+
+              <!-- گیرنده -->
+              <div class="flex flex-col border-t pt-2">
+                <span>گیرنده: {{ loads.Recipient }}</span>
+                <span>آدرس: {{ loads.Address }}</span>
+              </div>
+
+              <!-- توضیحات -->
+              <div class="flex flex-col border-t pt-2">
+                <span>توضیحات: {{ loads.Description }}</span>
+              </div>
+
+              <!-- مالی -->
+              <div class="flex flex-row justify-between border-t pt-2">
+                <span>تعرفه: {{ loads.Tariff }}</span>
+                <span>مانده: {{ loads.Reminder }}</span>
+                <span>کل: {{ loads.Total }}</span>
+              </div>
+            </div>
+
+            <div class="flex justify-center mt-8">
+              <app-button
+                class="col-span-12 my-2"
+                styleClass="w-32 md:w-40 lg:w-48"
+                (onClick)="allocateLoad(loads.LoadId)"
+                [disabled]="this.searchLoadsForm.invalid"
+              >
+                تخصیص بار
+              </app-button>
+            </div>
+          </p-card>
+        }
+      </div>
+    </p-panel>
+  } @empty {
+    <p-card class="w-full my-4 shadow-sm">
+      <div
+        class="text-center text-color-emphasis text-sm flex items-center justify-center"
+      >
+        رکوردی برای نمایش وجود ندارد
+      </div>
+    </p-card>
+  }
+</div>

@@ -1,0 +1,16 @@
+@if (config()) {
+  <app-search-auto-complete
+    [label]="config()!.label"
+    [placeholder]="config()!.placeholder"
+    [optionLabel]="$any(config()!.optionLabel)"
+    [control]="config()!.control"
+    [lazySearch]="$any(config()!.lazySearch)"
+    [showIconOptionSelected]="config()!.showIcon()"
+    [readOnly]="config()!.readOnly?.() ?? false"
+    [minLength]="config()!.minLength"
+    [cachingMode]="config()!.cachingMode"
+    [addonWidth]="addonWidth()"
+    (selectSuggestion)="config()!.select($event)"
+    (valueChange)="config()!.valueChange()"
+  />
+}

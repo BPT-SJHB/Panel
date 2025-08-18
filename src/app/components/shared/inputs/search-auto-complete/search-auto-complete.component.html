@@ -16,7 +16,8 @@
       [control]="control"
       (keydown)="onKeydown($event)"
       (focus)="onFocusInput($event)"
-    />
+      (input)="valueInputChange($event)"
+ />
   </div>
 
   <div

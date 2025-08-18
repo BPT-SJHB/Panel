@@ -17,11 +17,14 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 })
 export class BinaryRadioInputComponent implements OnInit, OnChanges {
   private _control: FormControl = new FormControl(true);
-  @Input() readonly: boolean = false;
-  @Input() disabled: boolean = false;
+  @Input() readonly = false;
+  @Input() disabled = false;
 
-  @Input() radioName: string = 'radio-option';
-  @Input() label: string = '';
+  @Input() radioName = 'radio-option';
+  @Input() label = '';
+  @Input() activeLabel = 'فعال';
+  @Input() disableLabel = 'غیرفعال';
+  @Input() enableColor = true;
 
   preventIfReadonly(event: Event): void {
     if (this.readonly) {

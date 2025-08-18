@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   computed,
   ElementRef,
@@ -32,9 +31,7 @@ import { uuidV4 } from 'app/utils/uuid';
   templateUrl: './search-auto-complete.component.html',
   styleUrl: './search-auto-complete.component.scss',
 })
-export class SearchAutoCompleteComponent<T extends object>
-  implements AfterViewInit
-{
+export class SearchAutoCompleteComponent<T extends object> {
   @ViewChild('dropdownContainer', { static: true })
   dropdownContainer!: ElementRef<HTMLElement>;
 
@@ -74,15 +71,6 @@ export class SearchAutoCompleteComponent<T extends object>
   @Output() valueChange = new EventEmitter<string>();
   @Output() selectSuggestion = new EventEmitter<T>();
 
-  ngAfterViewInit(): void {
-    this.control.valueChanges.subscribe((value) => {
-      this.hoverIndex.set(-1);
-      this.onSearch(value || '');
-      // this.isDropDownHidden.set(false);
-      this.valueChange.emit(value || '');
-    });
-  }
-
   onFocusInput(input: HTMLInputElement | null): void {
     this.width.set(`${input?.clientWidth}px`);
 
@@ -90,6 +78,16 @@ export class SearchAutoCompleteComponent<T extends object>
       this.onSearch(this.control.value ?? '');
     }
     this.isDropDownHidden.set(false);
+  }
+
+  valueInputChange($event: HTMLInputElement) {
+    const value = $event.value;
+    if (value === undefined) return;
+
+    this.hoverIndex.set(-1);
+    this.onSearch($event.value || '');
+    this.isDropDownHidden.set(false);
+    this.valueChange.emit($event.value || '');
   }
 
   private filterSuggestions(source: T[], query: string): T[] {

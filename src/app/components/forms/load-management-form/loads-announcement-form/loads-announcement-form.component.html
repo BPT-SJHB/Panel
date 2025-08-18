@@ -1,0 +1,172 @@
+<div class="grid grid-cols-12 gap-4">
+  <div
+    class="col-span-12 flex flex-row-reverse justify-end flex-wrap gap-2 mb-2"
+  >
+    @for (button of actionButtons; track button.label) {
+      <div class="{{ button.widthClass }}" [hidden]="button.hidden()">
+        <app-button
+          [styleClass]="'w-full'"
+          [label]="button.label"
+          [severity]="button.severity"
+          [disabled]="button.disabled()"
+          (onClick)="button.action()"
+        ></app-button>
+      </div>
+    }
+  </div>
+
+  <!-- Load ID (Read-only) -->
+  <app-text-input
+    class="col-span-12 md:col-span-6 lg:col-span-4"
+    placeholder="کد مخزن"
+    label="کد مخزن"
+    [control]="ctrl('LoadId')"
+    [addonWidth]="addonWidth"
+    [readOnly]="true"
+  ></app-text-input>
+
+  <!-- Announcement Date (Read-only) -->
+  <app-date-picker-input
+    class="col-span-12 md:col-span-6 lg:col-span-4"
+    placeholder="تاریخ اعلان"
+    label="تاریخ اعلان"
+    [control]="ctrl('AnnounceDate')"
+    [addonWidth]="addonWidth"
+    [readOnly]="true"
+  ></app-date-picker-input>
+
+  <!-- Load Status Auto-complete -->
+  <app-search-auto-complete-factory
+    class="col-span-12 md:col-span-6 lg:col-span-4"
+    [config]="autoCompletions.loadStatus"
+    [addonWidth]="addonWidth"
+  ></app-search-auto-complete-factory>
+
+  <!-- Transport Company Auto-complete -->
+  <app-search-auto-complete-factory
+    class="col-span-12 md:col-span-6 lg:col-span-4"
+    [config]="autoCompletions.transportCompany"
+    [addonWidth]="addonWidth"
+  ></app-search-auto-complete-factory>
+
+  <!-- Binary Radio Input for Load Type -->
+  <app-binary-radio-input
+    class="col-span-12 md:col-span-6 lg:col-span-4 flex px-2"
+    label="بار"
+    activeLabel="آزاد"
+    disableLabel="نوبتی"
+    [enableColor]="false"
+  ></app-binary-radio-input>
+
+  <!-- Announcement Group Auto-complete -->
+  <app-search-auto-complete-factory
+    class="col-span-12 md:col-span-6 lg:col-span-4"
+    [config]="autoCompletions.announcementGroup"
+    [addonWidth]="addonWidth"
+  ></app-search-auto-complete-factory>
+
+  <!-- Goods Auto-complete -->
+  <app-search-auto-complete-factory
+    class="col-span-12 md:col-span-6 lg:col-span-4"
+    [config]="autoCompletions.goods"
+    [addonWidth]="addonWidth"
+  ></app-search-auto-complete-factory>
+
+  <!-- Source City Auto-complete -->
+  <app-search-auto-complete-factory
+    class="col-span-12 md:col-span-6 lg:col-span-4"
+    [config]="autoCompletions.sourceCity"
+    [addonWidth]="addonWidth"
+  ></app-search-auto-complete-factory>
+
+  <!-- Target City Auto-complete -->
+  <app-search-auto-complete-factory
+    class="col-span-12 md:col-span-6 lg:col-span-4"
+    [config]="autoCompletions.targetCity"
+    [addonWidth]="addonWidth"
+  ></app-search-auto-complete-factory>
+
+  <!-- Announcement SubGroup Auto-complete -->
+  <app-search-auto-complete-factory
+    class="col-span-12 md:col-span-6 lg:col-span-4"
+    [config]="autoCompletions.announcementSubGroup"
+    [addonWidth]="addonWidth"
+  ></app-search-auto-complete-factory>
+
+  <!-- Tariff (Read-only) -->
+  <app-text-input
+    class="col-span-12 md:col-span-6 lg:col-span-4"
+    placeholder="تعرفه"
+    label="تعرفه"
+    [control]="ctrl('Tariff')"
+    [addonWidth]="addonWidth"
+    [readOnly]="true"
+  ></app-text-input>
+
+  <!-- Loading Place Auto-complete -->
+  <app-search-auto-complete-factory
+    class="col-span-12 md:col-span-6 lg:col-span-4"
+    [config]="autoCompletions.loadingPlace"
+    [addonWidth]="addonWidth"
+  ></app-search-auto-complete-factory>
+
+  <!-- Discharging Place Auto-complete -->
+  <app-search-auto-complete-factory
+    class="col-span-12 md:col-span-6 lg:col-span-4"
+    [config]="autoCompletions.dischargingPlace"
+    [addonWidth]="addonWidth"
+  ></app-search-auto-complete-factory>
+
+  <!-- Total Number -->
+  <app-text-input
+    class="col-span-12 md:col-span-6 lg:col-span-4"
+    placeholder="تعداد"
+    label="تعداد"
+    [control]="ctrl('TotalNumber')"
+    [addonWidth]="addonWidth"
+  ></app-text-input>
+
+  <!-- Tonaj -->
+  <app-text-input
+    class="col-span-12 md:col-span-6 lg:col-span-4"
+    placeholder="تناژ"
+    label="تناژ"
+    [control]="ctrl('Tonaj')"
+    [addonWidth]="addonWidth"
+  ></app-text-input>
+
+  <!-- Recipient -->
+  <app-text-input
+    class="col-span-12 md:col-span-6 lg:col-span-4"
+    placeholder="گیرنده"
+    label="گیرنده"
+    [control]="ctrl('Recipient')"
+    [addonWidth]="addonWidth"
+  ></app-text-input>
+
+  <!-- Address -->
+  <app-text-input
+    class="col-span-12"
+    placeholder="آدرس"
+    label="آدرس"
+    [control]="ctrl('Address')"
+    [addonWidth]="addonWidth"
+  ></app-text-input>
+
+  <!-- Description -->
+  <app-text-input
+    class="col-span-12"
+    placeholder="توضیحات"
+    label="توضیحات"
+    [control]="ctrl('Description')"
+    [addonWidth]="addonWidth"
+  ></app-text-input>
+
+  <span class="text-lg font-bold mt-4 col-span-12">پارامتر های موثر</span>
+  <!-- Transport Tariff Table -->
+  <app-table
+    class="col-span-12"
+    [rows]="transportTariffParams()"
+    [columns]="cols"
+  ></app-table>
+</div>

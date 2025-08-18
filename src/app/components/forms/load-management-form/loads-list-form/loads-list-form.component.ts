@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
-import { SearchAutoCompleteComponent } from 'app/components/shared/inputs/search-auto-complete/search-auto-complete.component';
+import { SearchAutoCompleteFactoryComponent } from 'app/components/shared/inputs/search-auto-complete-factory/search-auto-complete-factory.component';
 import { DatePickerInput } from 'app/components/shared/inputs/date-picker-input/date-picker-input.component';
 import {
   TableColumn,
@@ -16,47 +16,19 @@ import {
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { CheckboxInputComponent } from 'app/components/shared/inputs/checkbox-input/checkbox-input.component';
 
-import { BaseLoading } from '../shared/component-base/base-loading';
-import { City } from 'app/data/model/province-city.model';
+import { BaseLoading } from 'app/components/forms/shared/component-base/base-loading';
 import { checkAndToastError } from 'app/utils/api-utils';
 
-import { ProvinceAndCityManagementService } from 'app/services/province-city-management/province-and-city-management.service';
-import { AnnouncementGroupSubgroupManagementService } from 'app/services/announcement-group-subgroup-management/announcement-group-subgroup-management.service';
 import { LoadManagementService } from 'app/services/load-management/load-management.service';
 import { TransportCompaniesManagementService } from 'app/services/transport-company-management/transport-companies-management.service';
 
 import { LoadInfo } from 'app/services/load-management/model/load-info.model';
-import { AnnouncementGroup } from 'app/services/announcement-group-subgroup-management/model/announcement-group.model';
-import { AnnouncementSubGroup } from 'app/services/announcement-group-subgroup-management/model/announcement-subgroup.model';
-import { LoadStatus } from 'app/services/load-management/model/load-status.model';
 import { takeUntil } from 'rxjs';
-import { TransportCompany } from 'app/services/transport-company-management/model/transport-company-info.model';
-
-interface LoadTransportCompaniesTable {
-  ProvinceId: number;
-  ProvinceName: string;
-  LoadId: number;
-  TCTitle: string;
-  GoodTitle: string;
-  Tonaj: number;
-  SoureCityTitle: string;
-  TargetCityTitle: string;
-  LoadingPlaceTitle: string;
-  DischargingPlaceTitle: string;
-  Total: number;
-  Reminder: number;
-  Tariff: string;
-  LoadStatusName: string;
-  AnnounceDate: string;
-  AnnounceTime: string;
-  AnnouncementTitle: string;
-  AnnouncementSGTitle: string;
-  Recipient: string;
-  Address: string;
-  Description: string;
-  UserName: string;
-  TPTParamsJoint: string;
-}
+import {
+  AutoCompleteConfigFactoryService,
+  AutoCompleteFilter,
+  AutoCompleteType,
+} from 'app/services/auto-complete-config-factory/auto-complete-config-factory.service';
 
 interface LoadFilter {
   announceGroupId: number | null;
@@ -114,63 +86,10 @@ interface LoadFilter {
   transportCompanyTitle: string;
 }
 
-interface BaseAutoCompleteFilter {
-  label: string;
-  placeholder: string;
-  minLength: number;
-  cachingMode: 'Focus' | 'CharacterPrefix';
-  control: FormControl<string>;
-  valueChange: () => void;
-  showIcon: () => boolean;
-  readOnly?: () => boolean;
-}
-
-interface AnnouncementGroupFilter extends BaseAutoCompleteFilter {
-  type: 'announcementGroup';
-  optionLabel: keyof AnnouncementGroup;
-  select: (e: AnnouncementGroup) => void;
-  lazySearch: (query: string) => Promise<AnnouncementGroup[]>;
-}
-
-interface AnnouncementSubGroupFilter extends BaseAutoCompleteFilter {
-  type: 'announcementSubGroup';
-  optionLabel: keyof AnnouncementSubGroup;
-  select: (e: AnnouncementSubGroup) => void;
-  lazySearch: (query: string) => Promise<AnnouncementSubGroup[]>;
-}
-
-interface LoadStatusFilter extends BaseAutoCompleteFilter {
-  type: 'loadStatus';
-  optionLabel: keyof LoadStatus;
-  select: (e: LoadStatus) => void;
-  lazySearch: (query: string) => Promise<LoadStatus[]>;
-}
-
-interface TransportCompanyFilter extends BaseAutoCompleteFilter {
-  type: 'transportCompany';
-  optionLabel: keyof TransportCompany;
-  select: (e: TransportCompany) => void;
-  lazySearch: (query: string) => Promise<TransportCompany[]>;
-}
-
-interface CityFilter extends BaseAutoCompleteFilter {
-  type: 'city';
-  optionLabel: keyof City;
-  select: (e: City) => void;
-  lazySearch: (query: string) => Promise<City[]>;
-}
-
-type AutoCompleteFilter =
-  | AnnouncementGroupFilter
-  | AnnouncementSubGroupFilter
-  | LoadStatusFilter
-  | TransportCompanyFilter
-  | CityFilter;
-
 @Component({
   selector: 'app-loads-list-form',
   imports: [
-    SearchAutoCompleteComponent,
+    SearchAutoCompleteFactoryComponent,
     DatePickerInput,
     TableComponent,
     ButtonComponent,
@@ -191,12 +110,11 @@ export class LoadsListFormComponent
 
   readonly fb = inject(FormBuilder);
   private readonly loadsService = inject(LoadManagementService);
-  private readonly provinceService = inject(ProvinceAndCityManagementService);
+  private readonly autoCompleteFactory = inject(
+    AutoCompleteConfigFactoryService
+  );
   private readonly transportCompanyService = inject(
     TransportCompaniesManagementService
-  );
-  private readonly announcementService = inject(
-    AnnouncementGroupSubgroupManagementService
   );
 
   ngAfterViewInit(): void {
@@ -241,26 +159,6 @@ export class LoadsListFormComponent
     { header: 'پارامترهای موثر', field: 'TPTParamsJoint' },
   ];
 
-  readonly searchAnnouncementGroup = async (query: string) =>
-    (await this.announcementService.GetAnnouncementGroups(query)).data ?? [];
-
-  readonly searchAnnouncementSubGroup = async (query: string) =>
-    (await this.announcementService.GetAnnouncementSupGroups(query)).data ?? [];
-
-  readonly searchLoadStatus = async () =>
-    (await this.loadsService.GetLoadStatuses()).data ?? [];
-
-  readonly searchTransportComponey = async (query: string) =>
-    (await this.transportCompanyService.GetTransportCompaniesInfo(query))
-      .data ?? [];
-
-  readonly onSearchCity = async (query: string): Promise<City[]> => {
-    const res = await this.provinceService.GetProvincesAndCitiesInfo(query);
-    return checkAndToastError(res, this.toast)
-      ? (res.data?.flatMap((p) => p?.Cities ?? []) ?? [])
-      : [];
-  };
-
   readonly loadFilterForm = this.fb.group({
     announceGroupId: this.fb.control<number | null>(null, Validators.required),
     announceSubgroupId: this.fb.control<number | null>(
@@ -281,92 +179,47 @@ export class LoadsListFormComponent
   });
 
   readonly autoCompletions: AutoCompleteFilter[] = [
-    {
-      type: 'announcementGroup',
-      label: 'گروه اعلام بار',
-      placeholder: 'گروه اعلام بار',
-      optionLabel: 'AnnouncementTitle',
-      control: this.fb.nonNullable.control(''),
-      select: (e: AnnouncementGroup) =>
-        this.onSelectAutoCompletion('announceGroupId', e.AnnouncementId),
-      valueChange: () => this.onAutoCompleteChange('announceGroupId'),
-      lazySearch: this.searchAnnouncementGroup,
-      showIcon: () => this.getLoadFilterControl('announceGroupId').valid,
-      minLength: 0,
-      cachingMode: 'Focus',
-    },
-    {
-      type: 'announcementSubGroup',
-      label: 'زیرگروه اعلام بار',
-      placeholder: 'زیرگروه اعلام بار',
-      optionLabel: 'AnnouncementSGTitle',
-      control: this.getLoadFilterControl('announceSubgroupTitle'),
-      select: (e: AnnouncementSubGroup) =>
-        this.onSelectAutoCompletion('announceSubgroupId', e.AnnouncementSGId),
-      valueChange: () => this.onAutoCompleteChange('announceSubgroupId'),
-      lazySearch: this.searchAnnouncementSubGroup,
-      showIcon: () => this.getLoadFilterControl('announceSubgroupId').valid,
-      readOnly: () => this.getLoadFilterControl('announceGroupId').invalid,
-      minLength: 0,
-      cachingMode: 'Focus',
-    },
-    {
-      type: 'loadStatus',
-      label: 'وضعیت بار',
-      placeholder: 'وضعیت بار',
-      optionLabel: 'LoadStatusTitle',
-      control: this.fb.nonNullable.control(''),
-      select: (e: LoadStatus) =>
-        this.onSelectAutoCompletion('loadsStatusId', e.LoadStatusId),
-      valueChange: () => this.onAutoCompleteChange('loadsStatusId'),
-      lazySearch: this.searchLoadStatus,
-      showIcon: () => this.getLoadFilterControl('loadsStatusId').valid,
-      minLength: 0,
-      cachingMode: 'Focus',
-    },
-    {
-      type: 'transportCompany',
-      label: 'شرکت حمل ونقل',
-      placeholder: 'شرکت حمل ونقل',
-      optionLabel: 'TCTitle',
-      control: this.getLoadFilterControl('transportCompanyTitle'),
-      select: (e: TransportCompany) =>
-        this.onSelectAutoCompletion('transportCompanyId', e.TCId),
-      valueChange: () => this.onAutoCompleteChange('transportCompanyId'),
-      lazySearch: this.searchTransportComponey,
-      readOnly: () => this.isTransportCompanyInputReadOnly(),
-      showIcon: () => this.getLoadFilterControl('transportCompanyId').valid,
-      minLength: 0,
-      cachingMode: 'Focus',
-    },
-    {
-      type: 'city',
-      label: 'شهر مبدا',
-      placeholder: 'شهر مبدا',
-      optionLabel: 'CityTitle',
-      control: this.fb.nonNullable.control(''),
-      select: (e: City) =>
-        this.onSelectAutoCompletion('sourceCityId', e.CityCode),
-      valueChange: () => this.onAutoCompleteChange('sourceCityId'),
-      lazySearch: this.onSearchCity,
-      showIcon: () => this.getLoadFilterControl('sourceCityId').valid,
-      minLength: 2,
-      cachingMode: 'CharacterPrefix',
-    },
-    {
-      type: 'city',
-      label: 'شهر مقصد',
-      placeholder: 'شهر مقصد',
-      optionLabel: 'CityTitle',
-      control: this.fb.nonNullable.control(''),
-      select: (e: City) =>
-        this.onSelectAutoCompletion('targetCityId', e.CityCode),
-      valueChange: () => this.onAutoCompleteChange('targetCityId'),
-      lazySearch: this.onSearchCity,
-      showIcon: () => this.getLoadFilterControl('targetCityId').valid,
-      minLength: 2,
-      cachingMode: 'CharacterPrefix',
-    },
+    this.autoCompleteFactory.create(
+      AutoCompleteType.AnnouncementGroup,
+      this.getLoadFilterControl('announceGroupId')
+    ),
+    this.autoCompleteFactory.create(
+      AutoCompleteType.RelationAnnouncementGroupAndSubGroup,
+      this.getLoadFilterControl('announceSubgroupId'),
+      {
+        control: this.getLoadFilterControl('announceSubgroupTitle'),
+        readOnly: () => this.getLoadFilterControl('announceGroupId').invalid,
+        groupControlId: this.getLoadFilterControl('announceGroupId'),
+      }
+    ),
+    this.autoCompleteFactory.create(
+      AutoCompleteType.LoadStatus,
+      this.getLoadFilterControl('loadsStatusId')
+    ),
+    this.autoCompleteFactory.create(
+      AutoCompleteType.TransportCompany,
+      this.getLoadFilterControl('transportCompanyId'),
+      {
+        readOnly: () => this.isTransportCompanyInputReadOnly(),
+        control: this.getLoadFilterControl('transportCompanyTitle'),
+      }
+    ),
+    this.autoCompleteFactory.create(
+      AutoCompleteType.City,
+      this.getLoadFilterControl('sourceCityId'),
+      {
+        label: 'شهر مبدا',
+        placeholder: 'شهر مبدا',
+      }
+    ),
+    this.autoCompleteFactory.create(
+      AutoCompleteType.City,
+      this.getLoadFilterControl('targetCityId'),
+      {
+        label: 'شهر مقصد',
+        placeholder: 'شهر مقصد',
+      }
+    ),
   ];
 
   async filterListLoad(): Promise<void> {
@@ -400,12 +253,8 @@ export class LoadsListFormComponent
     this.shearedSignal.set(row as LoadInfo);
   }
 
-  onSelectAutoCompletion(control: keyof LoadFilter, value: number): void {
-    this.getLoadFilterControl(control).setValue(value);
-  }
-
-  onAutoCompleteChange(control: keyof LoadFilter): void {
-    this.getLoadFilterControl(control).setValue(null);
+  rowUnSelect(_: LoadTransportCompaniesTable): void {
+    this.shearedSignal.set(null);
   }
 
   isFilterInvalid(): boolean {

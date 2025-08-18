@@ -5,7 +5,6 @@ import { DriverInfoFormComponent } from 'app/components/forms/truck-driver-manag
 import { UsersMenuAccessFormComponent } from 'app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component';
 import { DriverTruckWalletFormComponent } from 'app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component';
 import { FactoriesAndFreightFormComponent } from 'app/components/forms/factories-production-centers-form/factories-production-centers-form.component';
-import { LoadCapacitorFormComponent } from 'app/components/forms/load-capacitor-form/load-capacitor-form.component';
 import { LoaderTypeFormComponent } from 'app/components/forms/loader-type-form/loader-type-form.component';
 import { ProvinceAndCityFormComponent } from 'app/components/forms/province-and-city-form/province-and-city-form.component';
 import { ProductFormComponent } from 'app/components/forms/product-form/product-form.component';
@@ -34,6 +33,17 @@ import { TransportCompaniesFormComponent } from 'app/components/forms/transport-
 import { TruckWalletPaymentFormComponent } from 'app/components/forms/truck-wallet-payment-form/truck-wallet-payment-form.component';
 import { TransportCompaniesWalletPaymentFormComponent } from 'app/components/forms/transport-companies-wallet-payment-form/transport-companies-wallet-payment-form.component';
 import { UserChargingFunctionFormComponent } from 'app/components/forms/user-charging-function-form/user-charging-function-form.component';
+import {
+  LoadListType,
+  LoadsListFormComponent,
+} from 'app/components/forms/load-management-form/loads-list-form/loads-list-form.component';
+import { LoadsAnnouncementFormComponent } from 'app/components/forms/load-management-form/loads-announcement-form/loads-announcement-form.component';
+import { LoadAllocationFormComponent } from 'app/components/forms/load-management-form/load-allocation-form/load-allocation-form.component';
+import { LoadPermissionsFormComponent } from 'app/components/forms/load-management-form/load-permissions-form/load-permissions-form.component';
+import { LoadCapacitorFormComponent } from 'app/components/forms/driver-load-management-form/load-capacitor-form/load-capacitor-form.component';
+import { LoadAllocationPriorityComponent } from 'app/components/forms/driver-load-management-form/load-allocation-priority/load-allocation-priority.component';
+import { DriverLoadAllocationFormComponent } from 'app/components/forms/driver-load-management-form/driver-load-allocation-form/driver-load-allocation-form.component';
+import { DriverLoadPermissionsFormComponent } from 'app/components/forms/driver-load-management-form/driver-load-permissions-form/driver-load-permissions-form.component';
 
 export enum TabComponentKey {
   Main = -1,
@@ -85,6 +95,9 @@ export enum TabComponentKey {
   TurnsManagement = 19,
   TurnsRegisterManagement = 23,
   IssuedTurnManagement = 21,
+
+  DriverLoadManagement = 37,
+  TransportCompaniesLoadManagement = 32,
 }
 
 export interface TabConfig {
@@ -92,16 +105,22 @@ export interface TabConfig {
   subTab: TabView[];
 }
 
-export interface TabView {
+export interface TabView<T = object> {
   title: string;
-  component: Type<any>;
+  component: Type<T>;
   data?: object;
 }
 
 export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   [TabComponentKey.Main]: {
     shearedSignal: true,
-    subTab: [{ title: 'صفحه اصلی', component: MainViewComponent }],
+    subTab: [
+      {
+        title: 'صفحه اصلی',
+        component: MainViewComponent,
+        data: { loadType: LoadListType.TRANSPORT_COMPANY },
+      },
+    ],
   },
 
   [TabComponentKey.UserManagement]: {
@@ -369,12 +388,61 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       { title: 'شرکت ها حمل نقل', component: TransportCompaniesFormComponent },
     ],
   },
+
   [TabComponentKey.UserChargingFunctions]: {
     shearedSignal: false,
     subTab: [
       {
         title: 'عملکرد شارژ کاربر',
         component: UserChargingFunctionFormComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.DriverLoadManagement]: {
+    shearedSignal: false,
+    subTab: [
+      {
+        title: 'مخزن بار',
+        component: LoadCapacitorFormComponent,
+      },
+      {
+        title: 'الویت بندی تخصیص بار',
+        component: LoadAllocationPriorityComponent,
+      },
+      {
+        title: 'سوابق تخصیص بار',
+        component: DriverLoadAllocationFormComponent,
+      },
+      {
+        title: 'مجوز های صادر شده',
+        component: DriverLoadPermissionsFormComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.TransportCompaniesLoadManagement]: {
+    shearedSignal: true,
+    subTab: [
+      {
+        title: 'اعلام بارگیر',
+        component: LoadsAnnouncementFormComponent,
+        data: { loadType: LoadListType.TRANSPORT_COMPANY },
+      },
+      {
+        title: 'لیست بار',
+        component: LoadsListFormComponent,
+        data: { loadType: LoadListType.TRANSPORT_COMPANY },
+      },
+      {
+        title: 'تخصیص بار',
+        component: LoadAllocationFormComponent,
+        data: { loadType: LoadListType.TRANSPORT_COMPANY },
+      },
+      {
+        title: 'مجوز های صادر شده',
+        component: LoadPermissionsFormComponent,
+        data: { loadType: LoadListType.TRANSPORT_COMPANY },
       },
     ],
   },

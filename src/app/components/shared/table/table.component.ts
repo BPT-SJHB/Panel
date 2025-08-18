@@ -41,19 +41,23 @@ export class TableComponent<T extends object> {
   @Input() captionButtonLabel = 'جدید';
   @Output() clickCaptionButton = new EventEmitter<void>();
 
-  @Input() selectionMode: SelectionMode = 'single';
+  @Input() selectionMode?: SelectionMode;
 
   // Overload signatures — so parent gets correct type automatically
   @Output() rowSelect: EventEmitter<T>;
+  @Output() rowUnSelect: EventEmitter<T>;
+  @Output() rowUnSelectMultiple: EventEmitter<T[]>;
   @Output() rowSelectMultiple?: EventEmitter<T[]>;
 
   readonly ColumnType = TableColumnType;
   readonly defaultButtonSeverity: ButtonSeverity = 'green';
 
   constructor() {
-    // Initialize correct emitter based on mode
     this.rowSelect = new EventEmitter<T>();
     this.rowSelectMultiple = new EventEmitter<T[]>();
+
+    this.rowUnSelect = new EventEmitter<T>();
+    this.rowUnSelectMultiple = new EventEmitter<T[]>();
   }
 
   async onCheckboxChange(
@@ -82,6 +86,16 @@ export class TableComponent<T extends object> {
       this.rowSelectMultiple?.emit(data as T[]);
     } else {
       this.rowSelect.emit(data as unknown as T);
+    }
+  }
+
+  rowTableUnSelect<M>(data: M) {
+    if (!data) return;
+
+    if (Array.isArray(data)) {
+      this.rowUnSelectMultiple?.emit(data as T[]);
+    } else {
+      this.rowUnSelect.emit(data as unknown as T);
     }
   }
 }

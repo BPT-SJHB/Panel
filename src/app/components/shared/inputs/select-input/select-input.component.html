@@ -1,10 +1,27 @@
 <div class="flex w-full">
   <p-input-group styleClass="h-10 w-full">
-    <!-- Icon -->
     <p-inputgroup-addon
-      class="flex justify-center items-center px-5 bg-primary-emphasis z-1 rounded-r-2xl text-primary-contrast border-y-2 border-r-2 border-primary-emphasis"
+      [style]="{
+        width: addonWidth,
+        padding: 0,
+        margin: 0,
+        border: 0,
+      }"
+      class="rounded-2xl"
     >
-      <i [class]="icon + ' text-xl'"></i>
+      <div
+        class="w-full h-full flex justify-center items-center py-4 px-6 bg-primary-emphasis z-1 rounded-r-2xl text-primary-contrast"
+      >
+        @if (label.trim() === "") {
+          <i [class]="icon"></i>
+        } @else {
+          <span
+            class="text-sm text-primary-contrast"
+            style="white-space: nowrap"
+            >{{ label }}</span
+          >
+        }
+      </div>
     </p-inputgroup-addon>
 
     <p-select
@@ -17,7 +34,7 @@
       [ngClass]="{
         'border-red-500': control.touched && control.invalid,
         'bg-gray-100 text-gray-500 opacity-60 cursor-not-allowed': disabled,
-        'border-emerald-500': control.valid
+        'border-emerald-500': control.valid,
       }"
       styleClass="w-full border-0 h-full px-2"
     ></p-select>

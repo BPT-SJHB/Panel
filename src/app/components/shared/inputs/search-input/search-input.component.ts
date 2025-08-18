@@ -17,7 +17,7 @@ import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
 
 import { ValidationField } from 'app/constants/validation-schema';
 import { TextInputComponent } from '../text-input/text-input.component';
-import { ButtonComponent } from "../../button/button.component";
+import { ButtonComponent } from '../../button/button.component';
 
 @Component({
   selector: 'app-search-input',
@@ -29,18 +29,18 @@ import { ButtonComponent } from "../../button/button.component";
     InputGroupModule,
     ButtonModule,
     TextInputComponent,
-    ButtonComponent
-],
+    ButtonComponent,
+  ],
   templateUrl: './search-input.component.html',
   styleUrl: './search-input.component.scss',
 })
-export class SearchInputComponent<T> implements OnInit, OnDestroy,OnChanges {
+export class SearchInputComponent<T> implements OnInit, OnDestroy, OnChanges {
   private controlSubscription?: Subscription;
 
   // -------------------------
   // 🔧 Form & Validation
   // -------------------------
-  @Input() control = new FormControl('');
+  @Input() control = new FormControl<string | null | undefined>('');
   @Input() validationField: ValidationField | null = null;
 
   // -------------------------
@@ -172,8 +172,9 @@ export class SearchInputComponent<T> implements OnInit, OnDestroy,OnChanges {
   /**
    * Handle raw input value change — emits unprocessed string.
    */
-  onInputChanged(event: Event): void {
-    const rawValue = (event.target as HTMLInputElement).value;
+  onInputChanged(event: HTMLInputElement): void {
+    const rawValue = event.value;
+    if (rawValue === undefined) return;
     this.rawInput.emit(rawValue);
   }
 
