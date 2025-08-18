@@ -9,7 +9,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import { providePrimeNG } from 'primeng/config';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -47,5 +47,6 @@ export const appConfig: ApplicationConfig = {
     }),
     MessageService,
     CookieService,
+    ConfirmationService,
   ],
 };
