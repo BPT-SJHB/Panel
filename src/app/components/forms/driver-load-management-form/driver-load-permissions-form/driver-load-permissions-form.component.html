@@ -1,0 +1,59 @@
+<div class="grid grid-cols-12 gap-5">
+  <app-search-auto-complete-factory
+    class="col-span-12 md:col-span-6"
+    [config]="autoCompleteAnnouncementGroup"
+    [addonWidth]="addonWidth"
+  >
+  </app-search-auto-complete-factory>
+
+  <app-search-auto-complete-factory
+    class="col-span-12 md:col-span-6"
+    [config]="autoCompleteSubAnnouncementGroup"
+    [addonWidth]="addonWidth"
+  ></app-search-auto-complete-factory>
+
+  <app-button
+    class="col-span-12 mt-2 md:flex md:justify-end"
+    styleClass="w-full md:w-40 lg:w-48"
+    (onClick)="loadLoadPermissions()"
+    [disabled]="this.searchLoadPermissions.invalid"
+    severity="info"
+  >
+    مشاهد بار
+  </app-button>
+</div>
+
+<div class="flex flex-col items-center mt-20 gap-3">
+  @for (load of loadsPermissions(); track $index) {
+    <p-card
+      class="w-[90%] min-w-[300px] max-w-[450px] mb-3 shadow-md rounded-2xl bg-emphasis"
+    >
+      <!-- Header: Good title and priority -->
+      <div class="flex justify-between items-center mb-2">
+        <span class="font-bold text-lg">{{ load.GoodTitle || "---" }}</span>
+        <span class="text-sm px-2 py-0.5 rounded-full bg-highlight">
+          اولویت: {{ load.Priority }}
+        </span>
+      </div>
+
+      <!-- Body content -->
+      <div class="text-sm border-t pt-2 pb-1">
+        <div>
+          مبدا: {{ load.LoadSourceCity || "---" }} ← مقصد:
+          {{ load.LoadTargetCity || "---" }}
+        </div>
+        <div>تناژ: {{ load.Tonaj || "-" }}</div>
+        <div>نوبت: {{ load.SequentialTurn || "-" }}</div>
+        <div>
+          تاریخ: {{ load.ShamsiDate || "-" }} | ساعت: {{ load.Time || "-" }}
+        </div>
+      </div>
+    </p-card>
+  } @empty {
+    <p-card class="w-full my-4 shadow-sm">
+      <div class="text-center text-sm flex items-center justify-center">
+        رکوردی برای نمایش وجود ندارد
+      </div>
+    </p-card>
+  }
+</div>
