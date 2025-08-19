@@ -16,17 +16,9 @@
 </div>
 
 <!-- 📋 SubGroup Table -->
-<p-table
-  class="col-span-12 overflow-x-auto"
-  [columns]="cols"
-  [value]="displayAnnouncementsSubGroup"
-  [tableStyle]="tableUi.tableStyle"
-  [paginator]="tableUi.paginator"
-  [paginatorLocale]="tableUi.paginatorLocale"
-  [rows]="tableUi.rows"
-  [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
-  [stripedRows]="tableUi.stripedRows"
->
+<app-table
+    [enableCaptionButton]="true" (clickCaptionButton)="onNew()"
+    [columns]="columns" [rows]="displayAnnouncementsSubGroup">
   <!-- Header with New Button -->
   <!-- Table Header -->
   <ng-template #caption>
@@ -87,7 +79,7 @@
       </td>
     </tr>
   </ng-template>
-</p-table>
+</app-table>
 
 <!-- 📝 Dialog for Add/Edit -->
 <p-dialog
@@ -145,5 +137,3 @@
   </form>
 </p-dialog>
 
-<!-- 🛑 Confirmation Dialog -->
-<p-confirm-dialog />

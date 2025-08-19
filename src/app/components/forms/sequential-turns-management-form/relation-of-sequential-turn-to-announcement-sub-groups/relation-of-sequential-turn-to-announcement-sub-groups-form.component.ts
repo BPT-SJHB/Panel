@@ -21,7 +21,12 @@ import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TableModule } from 'primeng/table';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
-import { AppTitles } from 'app/constants/Titles';
+import { AppConfirmService } from 'app/services/confirm/confirm.service';
+import {
+  deleteCell,
+  TableColumn,
+  TableComponent,
+} from 'app/components/shared/table/table.component';
 
 // 📦 Interface for displaying flat relation data in table
 interface RowRelationOfSequential {
@@ -29,6 +34,7 @@ interface RowRelationOfSequential {
   SeqTurnTitle: string;
   AnnouncementSGId: number;
   AnnouncementSGTitle: string;
+  delete: string;
 }
 
 @Component({
@@ -40,8 +46,8 @@ interface RowRelationOfSequential {
     TableModule,
     ConfirmDialogModule,
     ButtonComponent,
+    TableComponent,
   ],
-  providers: [ConfirmationService],
   templateUrl:
     './relation-of-sequential-turn-to-announcement-sub-groups-form.component.html',
   styleUrl:
@@ -52,7 +58,7 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
   private fb = inject(FormBuilder);
   private loadingService = inject(LoadingService);
   private toast = inject(ToastService);
-  private confirmationService = inject(ConfirmationService);
+  private confirmService = inject(AppConfirmService);
   private sequentialTurnService = inject(SequentialTurnManagementService);
   private announcementService = inject(
     AnnouncementGroupSubgroupManagementService
@@ -63,9 +69,24 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
 
   // 📊 UI State
   loading = false;
-  addonWidth = '7rem';
-  cols = ['حذف', 'صف نوبت دهی', 'زیر گروه اعلام بار'];
+  addonWidth = '10rem';
   relationsSequential: RowRelationOfSequential[] = [];
+
+  readonly columns: TableColumn<RowRelationOfSequential>[] = [
+    {
+      field: 'SeqTurnId',
+      header: 'صف نوبت',
+    },
+    {
+      field: 'SeqTurnId',
+      header: 'زیر گروه',
+    },
+    {
+      ...deleteCell.config,
+      field: 'delete',
+      onAction: (row: RowRelationOfSequential) => this.onDelete(row),
+    },
+  ];
 
   // 📄 Form Definition
   sequentialTurnForm = this.fb.group({
@@ -185,38 +206,24 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
         SeqTurnTitle: group.SeqTurnTitle ?? '',
         AnnouncementSGId: sub.AnnouncementSGId,
         AnnouncementSGTitle: sub.AnnouncementSGTitle ?? '',
+        delete: deleteCell.value,
       }))
     );
   }
 
   // ❌ Delete confirmation dialog
   onDelete(row: RowRelationOfSequential) {
-    this.confirmationService.confirm({
-      message: `آیا می‌خواهید رکورد <b><u>${row.SeqTurnTitle} - ${row.AnnouncementSGTitle}</u></b> را حذف کنید؟`,
-      header: 'حذف رکورد',
-      icon: 'pi pi-info-circle',
-      closable: true,
-      closeOnEscape: true,
-      rejectLabel: 'لغو',
-      rejectButtonProps: {
-        label: 'لغو',
-        severity: 'secondary',
-        outlined: true,
-      },
-      acceptLabel: 'تایید',
-      acceptButtonProps: {
-        label: 'تایید',
-        severity: 'danger',
-      },
-      accept: async () => {
+    this.confirmService.confirmDelete(
+      `${row.SeqTurnTitle} - ${row.AnnouncementSGTitle}`,
+      async () => {
         try {
           this.loadingService.setLoading(true);
           await this.deleteRelationAnnouncement(row);
         } finally {
           this.loadingService.setLoading(false);
         }
-      },
-    });
+      }
+    );
   }
 
   // ❌ Delete relation from backend

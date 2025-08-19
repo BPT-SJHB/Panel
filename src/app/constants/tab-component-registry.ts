@@ -407,7 +407,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
         component: LoadCapacitorFormComponent,
       },
       {
-        title: 'الویت بندی تخصیص بار',
+        title: 'اولویت بندی تخصیص بار',
         component: LoadAllocationPriorityComponent,
       },
       {
@@ -425,7 +425,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
     shearedSignal: true,
     subTab: [
       {
-        title: 'اعلام بارگیر',
+        title: 'اعلام بار',
         component: LoadsAnnouncementFormComponent,
         data: { loadType: LoadListType.TRANSPORT_COMPANY },
       },

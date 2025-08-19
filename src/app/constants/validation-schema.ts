@@ -7,22 +7,32 @@ export interface ErrorsValidation {
   minlength?: any;
   maxlength?: any;
   min?: any;
+  max?: any;
 }
 
-export function getDefaultErrorMessage(name: string, e: ErrorsValidation): string | null {
+export function getDefaultErrorMessage(
+  name: string,
+  e: ErrorsValidation
+): string | null {
   if (e.required) return `${name} الزامی است`;
   if (e.email) return `فرمت ${name} نامعتبر است`;
 
-  if (e.minlength?.requiredLength && e.maxlength?.requiredLength &&
-    e.minlength.requiredLength === e.maxlength.requiredLength) {
+  if (
+    e.minlength?.requiredLength &&
+    e.maxlength?.requiredLength &&
+    e.minlength.requiredLength === e.maxlength.requiredLength
+  ) {
     return `${name} باید دقیقا ${e.minlength.requiredLength} رقم باشد`;
   }
 
-  if (e.minlength) return `${name} باید حداقل ${e.minlength.requiredLength} کاراکتر باشد`;
-  if (e.maxlength) return `${name} باید حداکثر ${e.maxlength.requiredLength} کاراکتر باشد`;
+  if (e.minlength)
+    return `${name} باید حداقل ${e.minlength.requiredLength} کاراکتر باشد`;
+  if (e.maxlength)
+    return `${name} باید حداکثر ${e.maxlength.requiredLength} کاراکتر باشد`;
 
   if (e.pattern) return `فرمت ${name} معتبر نیست`;
   if (e.min) return `${name} نمی‌تواند کمتر از مقدار مجاز باشد`;
+  if (e.max) return `${name} نمی‌توان بیشتر از مقدار مجاز باشد`;
 
   return null;
 }
@@ -51,9 +61,9 @@ export const ValidationSchema = {
     name: 'ایمیل',
     validators: [Validators.required, Validators.email],
   },
-   emailOrEmpty: {
+  emailOrEmpty: {
     name: 'ایمیل',
-    validators: [ Validators.email],
+    validators: [Validators.email],
   },
   fullName: {
     name: 'نام کاربر',
@@ -63,22 +73,17 @@ export const ValidationSchema = {
     name: 'نام کاربر',
     validators: [Validators.minLength(3)],
   },
-  username:{
-    name:'نام کاربری',
-    validators:[
-      Validators.required,Validators.minLength(5)
-    ]
+  username: {
+    name: 'نام کاربری',
+    validators: [Validators.required, Validators.minLength(5)],
   },
-  password:{
-    name:'رمز عبور',
-    validators:[
-      Validators.required,
-      Validators.minLength(1),
-    ]
+  password: {
+    name: 'رمز عبور',
+    validators: [Validators.required, Validators.minLength(1)],
   },
-  captcha:{
-    name:'کپچا',
-    validators:[Validators.required]
+  captcha: {
+    name: 'کپچا',
+    validators: [Validators.required],
   },
   id: {
     name: 'شناسه',
@@ -104,9 +109,9 @@ export const ValidationSchema = {
     name: 'عنوان',
     validators: [Validators.required],
   },
-  keyword:{
-    name:'کلمه کلیدی',
-    validators:[Validators.required]
+  keyword: {
+    name: 'کلمه کلیدی',
+    validators: [Validators.required],
   },
   managerName: {
     name: 'نام مدیر',
@@ -172,7 +177,9 @@ export const ValidationSchema = {
     name: 'تاریخ انقضای بومی‌گری',
     validators: [
       Validators.required,
-      Validators.pattern(/^(13|14)\d{2}\/(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])$/),
+      Validators.pattern(
+        /^(13|14)\d{2}\/(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])$/
+      ),
     ],
   },
   announceDate: {
@@ -235,10 +242,15 @@ export const ValidationSchema = {
     name: 'توضیحات',
     validators: [Validators.required, Validators.minLength(5)],
   },
-  parentage:{
-    name:'درصد',
-    validators:[Validators.required,Validators.min(0.1)]
-  }
+  parentage: {
+    name: 'درصد',
+    validators: [
+      Validators.required,
+      Validators.min(0.1),
+      Validators.max(100), // optional: to cap it at 100%
+      Validators.pattern(/^\d+(\.\d{1,2})?$/),
+    ],
+  },
 };
 
 export type ValidationField = keyof typeof ValidationSchema;

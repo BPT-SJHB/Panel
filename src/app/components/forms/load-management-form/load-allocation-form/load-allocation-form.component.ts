@@ -1,4 +1,10 @@
-import { Component, computed, inject, WritableSignal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { BaseLoading } from 'app/components/forms/shared/component-base/base-loading';
 import {
   FormBuilder,
@@ -21,6 +27,7 @@ import {
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { TableConfig } from 'app/constants/ui/table.ui';
+import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
 
 @Component({
   selector: 'app-load-allocation-form',
@@ -33,8 +40,12 @@ import { TableConfig } from 'app/constants/ui/table.ui';
   templateUrl: './load-allocation-form.component.html',
   styleUrl: './load-allocation-form.component.scss',
 })
-export class LoadAllocationFormComponent extends BaseLoading {
+export class LoadAllocationFormComponent
+  extends BaseLoading
+  implements OnViewActivated
+{
   readonly shearedSignal!: WritableSignal<LoadInfo | null>;
+  readonly rows = signal<LoadInfo[]>([]);
 
   private readonly fb = inject(FormBuilder);
   private readonly loadService = inject(LoadManagementService);
@@ -46,9 +57,16 @@ export class LoadAllocationFormComponent extends BaseLoading {
   };
   readonly addonWidth = '10rem';
 
-  readonly rows = computed(() =>
-    this.shearedSignal() ? [this.shearedSignal()!] : []
-  );
+  onViewActivated(): void {
+    if (!this.shearedSignal()) return;
+    this.withLoading(async () => {
+      const response = await this.loadService.GetLoadInfo(
+        this.shearedSignal()!.LoadId
+      );
+      if (!checkAndToastError(response, this.toast)) this.rows.set([]);
+      else this.rows.set([response.data]);
+    });
+  }
 
   readonly columns: TableColumn<LoadInfo>[] = [
     { header: 'شناسه بار', field: 'LoadId' },
@@ -84,8 +102,12 @@ export class LoadAllocationFormComponent extends BaseLoading {
   });
 
   readonly truckComposeForm = this.fb.group({
-    ...this.driverForm.controls,
-    ...this.truckForm.controls,
+    DriverId: this.fb.control<number | null>(null, Validators.required),
+    NameFamily: this.fb.nonNullable.control('', ValidationSchema.fullName),
+    NationalCode: this.fb.nonNullable.control('', ValidationSchema.nationalId),
+    TruckId: this.fb.control<number | null>(null, Validators.required),
+    SmartCardNo: this.fb.nonNullable.control('', ValidationSchema.smartCard),
+    Pelak: this.fb.nonNullable.control('', ValidationSchema.nationalId),
     TurnId: this.fb.control<number | null>(null),
     OtaghdarTurnNumber: this.fb.nonNullable.control(''),
     MoneyWalletId: this.fb.control<number | null>(null),

@@ -1,9 +1,9 @@
 <!-- No allocations message -->
 <div
-  class="text-center font-bold text-red-500 text-lg"
+  class="text-center font-bold text-lg md:text-xl bg-red-100 border border-red-300 rounded-lg py-3 my-4"
   [hidden]="loadsAllocations().length > 0"
 >
-  تخصیص بار برای نمایش وجود ندارد.
+  تخصیص باری برای نمایش وجود ندارد.
 </div>
 
 <!-- Allocations list -->
@@ -15,12 +15,11 @@
     [value]="loadsAllocations()"
     dataKey="LAId"
     [responsive]="true"
-    style="height: calc(100% - 50px)"
     [dragdrop]="true"
     breakpoint="0"
     [selection]="selection()"
     (selectionChange)="selectionChanged($event)"
-    dataKey="LAId"
+    style="height: calc(100% - 70px)"
   >
     <ng-template #item let-option let-i="index">
 
@@ -29,7 +28,7 @@
         #panel
         [toggleable]="true"
         [collapsed]="true"
-        class="flex flex-col rounded-lg border shadow-sm w-full transition-all duration-200"
+        class="flex flex-col rounded-2xl border shadow-sm w-full transition-all duration-200"
         [ngClass]="{
           'bg-emphasis': !isLoadSelected(option.LAId),
           'bg-highlight': isLoadSelected(option.LAId)
@@ -39,7 +38,7 @@
         <!-- Arrow toggle icon -->
         <ng-template pTemplate="headericons">
           <i
-            class="pi cursor-pointer text-sm"
+            class="pi cursor-pointer text-base md:text-lg"
             [ngClass]="panel.collapsed ? 'pi-chevron-down' : 'pi-chevron-up'"
             (click)="panel.toggle($event)"
           ></i>
@@ -47,10 +46,21 @@
 
         <!-- Panel header -->
         <ng-template pTemplate="header">
-          <div class="flex justify-between items-center w-full gap-2">
-            <div class="flex items-center gap-2">
-              <span class="font-bold text-sm">بار: {{ option.GoodTitle || '---' }}</span>
-              <span class="flex items-center justify-center py-0.5 px-2 text-xs rounded-full bg-highlight">
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center w-full gap-2 md:gap-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-3">
+              <span class="font-semibold text-sm md:text-base lg:text-lg">
+                <div>
+                  {{option.GoodTitle  || '---'}} -
+                  {{ option.SourceCityTitle || '---' }} به
+                  {{ option.TargetCityTitle || '---' }}
+                </div>
+                <div class="py-1">
+                   شرکت حمل‌ونقل {{ option.TransportCompanyTitle || '---' }}
+                </div>
+              </span>
+              <span
+                class="flex items-center justify-center px-3 py-1 text-xs md:text-sm rounded-full bg-highlight  border border-blue-300"
+              >
                 {{ 'اولویت ' + (i + 1) }}
               </span>
             </div>
@@ -58,63 +68,87 @@
         </ng-template>
 
         <!-- Panel body -->
-        <div class="text-sm border-t-2 py-2 pt-4">
-          مبدا: {{ option.SourceCityTitle || '---' }} &nbsp; ← &nbsp; مقصد: {{ option.TargetCityTitle || '---' }}
-        </div>
+        <div class="flex flex-col md:grid md:grid-cols-2 gap-2 text-sm md:text-base divide-y md:divide-y-0">
+          <div class="py-1">
+            شماره تخصیص بار: {{ option.LAId || '---' }}
+          </div>
 
-        <div class="flex justify-between text-xs border-t py-2">
-          <span>شرکت: {{ option.TransportCompanyTitle || '---' }}</span>
-          <span>تناژ: {{ option.Tonaj || '-' }}</span>
-        </div>
+          <div class="py-1">
+            مبدا: {{ option.SourceCityTitle || '---' }} &nbsp; ← &nbsp;
+            مقصد: {{ option.TargetCityTitle || '---' }}
+          </div>
 
-        <div class="text-xs border-t py-2">
-          بارگیری: {{ option.LoadingPlaceTitle || '-' }} | تخلیه: {{ option.DischargingPlaceTitle || '-' }}
-        </div>
+          <div class="py-1">
+            شرکت حمل‌ونقل: {{ option.TransportCompanyTitle || '---' }}
+          </div>
 
-        <div class="text-xs">گیرنده: {{ option.Recipient || '-' }}</div>
+          <div class="py-1">
+            تناژ: {{ option.Tonaj || '-' }}
+          </div>
 
-        <!-- Travel time with loader -->
-        <div class="flex items-center gap-2 mt-2 text-sm">
-          <span>مدت زمان سفر:</span>
+          <div class="py-1">
+            محل بارگیری: {{ option.LoadingPlaceTitle || '-' }}
+          </div>
+
+          <div class="py-1">
+            محل تخلیه: {{ option.DischargingPlaceTitle || '-' }}
+          </div>
+
+          <div class="py-1">
+            گیرنده: {{ option.Recipient || '-' }}
+          </div>
+
+          <div class="py-1 flex items-center gap-2">
+            مدت زمان سفر:
             <span
               (click)="showTravelTime(option.LAId)"
               [ngClass]="{ 'blur-[2px]': !getTimeTravel(option.LAId) }"
             >
-            @if (!loadingTimeTravels().has(option.LAId)) {
-                {{ getTimeTravel(option.LAId) || '=========' }}
-            }   @else {
-              <i class="pi pi-spin pi-spinner"></i>
-            }
-          </span>
+              @if (!loadingTimeTravels().has(option.LAId)) {
+                {{ getTimeTravel(option.LAId) || '==' }}
+              } @else {
+                <i class="pi pi-spin pi-spinner"></i>
+              }
+            </span>
+          </div>
+
+          <div class="py-1">
+            آدرس: {{ option.Address || '---' }}
+          </div>
+
+          <div class="py-1">
+            توضیحات: {{ option.Description || '---' }}
+          </div>
+
+          <div class="py-1">
+            پارامترهای موثر: {{ option.TPTParamsJoint || '---' }}
+          </div>
         </div>
 
-
         <!-- Cancel button -->
-        <app-button
-          class="flex justify-end mt-2"
-          styleClass="py-3 px-2 scale-80"
-          size="small"
-          (onClick)="cancelLoad(option)"
-          severity="danger"
-          [rounded]="true"
-          icon="pi pi-times"
-        >
-        </app-button>
-
+        <div class="flex justify-end mt-3">
+          <app-button
+            styleClass="py-2 px-3 scale-90"
+            size="small"
+            (onClick)="cancelLoad(option)"
+            severity="danger"
+            [rounded]="true"
+            icon="pi pi-times"
+          >
+          </app-button>
+        </div>
       </p-panel>
-
     </ng-template>
   </p-orderlist>
 
-<div class="h-[50px] py-3">
-<app-button
-    class="flex justify-end"
-    styleClass="py-2 px-2"
-    size="small"
-    (click)="savePriorities($event)"
-  >
-    ذخیره سازی اولویت‌ها
-  </app-button>
-</div>
-
+  <!-- Save priorities -->
+  <div class="h-[60px] py-3 flex justify-end items-center">
+    <app-button
+      styleClass="py-2 px-3"
+      size="small"
+      (click)="savePriorities($event)"
+    >
+      ذخیره‌سازی اولویت‌ها
+    </app-button>
+  </div>
 </div>

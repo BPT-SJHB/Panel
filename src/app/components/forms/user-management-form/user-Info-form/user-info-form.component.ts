@@ -90,7 +90,6 @@ export class UserInfoFormComponent extends BaseLoading implements OnInit {
     await this.withLoading(async () => {
       const response = await this.userManager.GetSoftwareUserInfo(phone);
       if (!checkAndToastError(response, this.toast)) return;
-      console.log(response.data);
 
       this.populateForm(response.data);
     });
@@ -174,11 +173,10 @@ export class UserInfoFormComponent extends BaseLoading implements OnInit {
   }
 
   async submitUserInfo(): Promise<void> {
-    const id = this.getUserFormControl('id');
-    if (id.invalid) {
-      await this.registerUser();
-    } else {
+    if (this.searchForm.valid) {
       await this.updateUserInfo();
+    } else if (this.isFormValidExcept('id')) {
+      await this.registerUser();
     }
   }
 
@@ -262,5 +260,11 @@ export class UserInfoFormComponent extends BaseLoading implements OnInit {
 
   get searchPhone(): FormControl<string> {
     return this.searchForm.controls.searchPhone as FormControl<string>;
+  }
+
+  isFormValidExcept(exceptControl: string): boolean {
+    return Object.keys(this.userInfoForm.controls)
+      .filter((key) => key !== exceptControl)
+      .every((key) => this.getUserFormControl(key as keyof UserInfoForm).valid);
   }
 }

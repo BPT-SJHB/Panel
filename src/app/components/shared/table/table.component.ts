@@ -19,11 +19,35 @@ export interface TableColumn<T extends object> {
   field: keyof T;
   type?: TableColumnType;
   class?: string | ((row: T) => string);
+  tdClass?: string | string | ((row: T) => string);
   buttonSeverity?: ButtonSeverity;
   onAction?: (row: T) => void | Promise<void>;
+  sorting?: boolean;
 }
 
 type SelectionMode = 'single' | 'multiple';
+
+export const editCell = {
+  config: {
+    header: 'ویرایش',
+    type: TableColumnType.BUTTON_ICON,
+    buttonSeverity: 'info' as ButtonSeverity,
+    class: 'py-3 scale-90',
+    sorting: false,
+  },
+  value: 'pi pi-pencil',
+};
+
+export const deleteCell = {
+  config: {
+    header: 'حذف',
+    type: TableColumnType.BUTTON_ICON,
+    buttonSeverity: 'danger' as ButtonSeverity,
+    class: 'py-3 scale-90',
+    sorting: false,
+  },
+  value: 'pi pi-trash',
+};
 
 @Component({
   selector: 'app-table',
@@ -75,6 +99,12 @@ export class TableComponent<T extends object> {
       : (column.class ?? '');
   }
 
+  getTdClass(column: TableColumn<T>, row: T): string {
+    return typeof column.tdClass === 'function'
+      ? column.tdClass(row)
+      : (column.tdClass ?? '');
+  }
+
   getColumnType(column: TableColumn<T>): TableColumnType {
     return column.type ?? TableColumnType.TEXT;
   }
@@ -97,5 +127,9 @@ export class TableComponent<T extends object> {
     } else {
       this.rowUnSelect.emit(data as unknown as T);
     }
+  }
+
+  hasSorting(column: TableColumn<T>): boolean {
+    return this.rows.length > 1 && (column.sorting ?? true);
   }
 }

@@ -75,11 +75,11 @@ export class AppConfirmService {
     });
   }
 
-  // کنسل کردن تخصیص بار
+  //کنسلی تخصیص بار
   confirmCancelAllocationLoad(itemName: string, accept: () => void) {
     this.confirmationService.confirm({
-      header: 'تأیید کنسل کردن تخصیص بار',
-      message: `آیا از کسنل کردن تخصیص <b><u>${itemName}</u></b> اطمینان دارید؟`,
+      header: 'تایید کنسلی بار',
+      message: `آیا کنسلی تخصیص <b><u>${itemName}</u></b> تایید می‌کنید؟`,
       icon: 'pi pi-times',
       acceptLabel: 'تایید',
       rejectLabel: 'انصراف',
