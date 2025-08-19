@@ -3,14 +3,12 @@
   [cols]="['فعال/غیرفعال']"
   [rows]="[['ProvinceName', 'CityTitle']]"
   [enabledSearch]="true"
-  [searchFields]="['ProvinceName','CityTitle']"
+  [searchFields]="['ProvinceName', 'CityTitle']"
   [paginator]="true"
   (onSearch)="searchProvinceAndCity($event)"
   (onTableCheckBoxChange)="onChangeProvinceAndCity($event)"
   parentField="ProvinceActive"
   childField="CityActive"
-  searchPlaceholder="بخشی از نام استان یا شهر را وارد نمایید."
+  [searchPlaceholder]="appTitle.getPlaceholder('provinceAndCitiesTitle')"
   paginatorLocale="fa-IR"
 />
-
-

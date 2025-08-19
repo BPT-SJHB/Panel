@@ -22,6 +22,7 @@ import { AnnouncementSubGroup } from 'app/services/announcement-group-subgroup-m
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { TableConfig } from 'app/constants/ui/table.ui';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { AppTitles } from 'app/constants/Titles';
 
 enum FormMode {
   EDITABLE,
@@ -54,10 +55,11 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
   private readonly loadingService = inject(LoadingService);
   private readonly confirmationService = inject(ConfirmationService);
   private readonly announcementService = inject(
-    AnnouncementGroupSubgroupManagementService,
+    AnnouncementGroupSubgroupManagementService
   );
   private readonly destroy$ = new Subject<void>();
   readonly tableUi = TableConfig;
+  readonly appTitle = AppTitles;
 
   // 🌐 UI State
   loading = false;
@@ -98,7 +100,7 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
 
   filterAnnouncementsSubGroup = (
     item: AnnouncementSubGroup,
-    query: string,
+    query: string
   ): boolean => item.AnnouncementSGTitle?.includes(query) ?? false;
 
   // 🎯 Actions
@@ -192,7 +194,7 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
     const response =
       await this.announcementService.RegisterNewAnnouncementSubGroup(
         AnnouncementSGTitle ?? '',
-        Active ?? true,
+        Active ?? true
       );
     if (!checkAndToastError(response, this.toast)) return;
     this.toast.success('موفق', response.data.Message ?? '');
@@ -204,7 +206,7 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
     const response = await this.announcementService.EditAnnouncementSubGroup(
       AnnouncementSGId,
       AnnouncementSGTitle ?? '',
-      Active ?? true,
+      Active ?? true
     );
     if (!checkAndToastError(response, this.toast)) return;
     this.toast.success('موفق', response.data.Message ?? '');
@@ -238,7 +240,7 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
 
   get AnnouncementSGTitle(): FormControl {
     return this.announcementSubGroupForm.get(
-      'AnnouncementSGTitle',
+      'AnnouncementSGTitle'
     ) as FormControl;
   }
 

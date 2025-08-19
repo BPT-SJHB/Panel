@@ -19,6 +19,7 @@ import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TableModule } from 'primeng/table';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { AppTitles } from 'app/constants/Titles';
 
 // 📦 Interface for displaying flat relation data in table
 interface RowRelationOfAnnouncement {
@@ -49,10 +50,12 @@ export class RelationOfAnnouncementGroupAndSubGroupComponent {
   private toast = inject(ToastService);
   private confirmationService = inject(ConfirmationService);
   private announcementService = inject(
-    AnnouncementGroupSubgroupManagementService,
+    AnnouncementGroupSubgroupManagementService
   );
 
   readonly tableUi = TableConfig;
+  readonly appTitle = AppTitles;
+
   // 📊 UI State
   loading = false;
   addonWidth = '8rem';
@@ -83,25 +86,25 @@ export class RelationOfAnnouncementGroupAndSubGroupComponent {
   // 📥 Form Getters
   get announcementGroupId(): FormControl {
     return this.announcementGroupAndSubGroupForm.get(
-      'announcementGroupId',
+      'announcementGroupId'
     ) as FormControl;
   }
 
   get announcementGroupTitle(): FormControl {
     return this.announcementGroupAndSubGroupForm.get(
-      'announcementGroupTitle',
+      'announcementGroupTitle'
     ) as FormControl;
   }
 
   get announcementSubGroupId(): FormControl {
     return this.announcementGroupAndSubGroupForm.get(
-      'announcementSubGroupId',
+      'announcementSubGroupId'
     ) as FormControl;
   }
 
   get announcementSubGroupTitle(): FormControl {
     return this.announcementGroupAndSubGroupForm.get(
-      'announcementSubGroupTitle',
+      'announcementSubGroupTitle'
     ) as FormControl;
   }
 
@@ -130,7 +133,7 @@ export class RelationOfAnnouncementGroupAndSubGroupComponent {
   private async loadRelationOfAnnouncement(announcementId: number) {
     const res =
       await this.announcementService.GetRelationOfAnnouncementGroupAndSubGroup(
-        announcementId,
+        announcementId
       );
     if (!checkAndToastError(res, this.toast)) return;
     this.relationsAnnouncement = this.flattenAnnouncementRelations(res.data!);
@@ -138,7 +141,7 @@ export class RelationOfAnnouncementGroupAndSubGroupComponent {
 
   // 🔃 Convert nested relations to flat format for display
   private flattenAnnouncementRelations(
-    data: RelationOfAnnouncementGroupAndSubGroup[],
+    data: RelationOfAnnouncementGroupAndSubGroup[]
   ): RowRelationOfAnnouncement[] {
     return data.flatMap((group) =>
       group.AnnouncementSubGroups.map((sub) => ({
@@ -146,7 +149,7 @@ export class RelationOfAnnouncementGroupAndSubGroupComponent {
         AnnouncementTitle: group.AnnouncementTitle ?? '',
         AnnouncementSGId: sub.AnnouncementSGId,
         AnnouncementSGTitle: sub.AnnouncementSGTitle ?? '',
-      })),
+      }))
     );
   }
 
@@ -185,7 +188,7 @@ export class RelationOfAnnouncementGroupAndSubGroupComponent {
     const res =
       await this.announcementService.DeleteRelationOfAnnouncementGroupAndSubGroup(
         row.AnnouncementId,
-        row.AnnouncementSGId,
+        row.AnnouncementSGId
       );
     if (!checkAndToastError(res, this.toast)) return;
     this.toast.success('موفق', res.data.Message);
@@ -200,7 +203,7 @@ export class RelationOfAnnouncementGroupAndSubGroupComponent {
       const res =
         await this.announcementService.RegisterNewRelationOfAnnouncementGroupAndSubGroup(
           this.announcementGroupId.value,
-          this.announcementSubGroupId.value,
+          this.announcementSubGroupId.value
         );
       if (!checkAndToastError(res, this.toast)) return;
       this.toast.success('موفق', res.data?.Message ?? '');

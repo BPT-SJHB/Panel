@@ -8,15 +8,15 @@
   <div class="col-span-12">
     <app-search-input
       class="w-full"
-      placeholder="هوشمند ناوگان را وارد کنید."
-      searchButtonLabel="استعلام"
+      [label]="appTitle.inputs.trucks.truckSmartCardNumber"
+      [placeholder]="appTitle.getPlaceholder('truckSmartCardNumberPlaceholder')"
+      [searchButtonLabel]="appTitle.buttons.retrieveFromOutdoorSystem"
       validationField="smartCard"
       [control]="smart"
       [autoTriggerSearch]="false"
       [minSearchLength]="2"
       [disableSearchButton]="loading || smart.invalid"
       [onSearchQuery]="searchTruckDriverInfo"
-      label="هوشمند"
       [addonWidth]="addonWidth"
     />
   </div>
@@ -32,11 +32,12 @@
   >
     <!-- 🧱 Truck Section -->
     <div class="grid grid-cols-12 gap-4 col-span-12">
-      <span class="w-full text-xl font-bold px-2 col-span-12">ناوگان</span>
+      <span class="w-full text-xl font-bold px-2 col-span-12">{{
+        appTitle.sectionTitles.truckInfo
+      }}</span>
       <div class="col-span-12 md:col-span-6 py-1 md:py-0">
         <app-text-input
-          label="کد ناوگان"
-          placeholder="کد ناوگان"
+          [label]="appTitle.inputs.trucks.truckId"
           [control]="truckId"
           validationField="truckId"
           [readOnly]="true"
@@ -47,8 +48,7 @@
 
       <div class="col-span-12 md:col-span-6 py-1 md:py-0">
         <app-text-input
-          label="شماره پلاک"
-          placeholder="شماره پلاک"
+          [label]="appTitle.inputs.trucks.licensePlateNumber"
           [control]="licensePlate"
           validationField="licensePlateNumber"
           [readOnly]="true"
@@ -60,11 +60,12 @@
 
     <!-- 👤 Driver Section -->
     <div class="grid grid-cols-12 gap-4 col-span-12">
-      <span class="col-span-12 text-xl font-bold px-2">راننده</span>
+      <span class="col-span-12 text-xl font-bold px-2">{{
+        appTitle.sectionTitles.driverInfo
+      }}</span>
       <div class="col-span-12 md:col-span-6 lg:col-span-4 py-1 md:py-0">
         <app-text-input
-          label="کد راننده"
-          placeholder="کد راننده"
+          [label]="appTitle.inputs.drivers.driverId"
           [control]="driverId"
           validationField="driverId"
           [addonWidth]="addonWidth"
@@ -75,8 +76,7 @@
 
       <div class="col-span-12 md:col-span-6 lg:col-span-4 py-1 md:py-0">
         <app-text-input
-          label="کد ملی راننده"
-          placeholder="کد ملی راننده"
+          [label]="appTitle.inputs.users.userNationalCodeTitle"
           [control]="driverNationalId"
           validationField="nationalId"
           [addonWidth]="addonWidth"
@@ -87,8 +87,7 @@
 
       <div class="col-span-12 md:col-span-6 lg:col-span-4 py-1 lg:py-0">
         <app-text-input
-          label="نام راننده"
-          placeholder="نام و نام خانوادگی"
+          [label]="appTitle.inputs.users.userNameAndLastName"
           [control]="driverName"
           validationField="turnId"
           [addonWidth]="addonWidth"
@@ -101,10 +100,11 @@
     <!-- 🔁 Turn Status Section -->
     <div class="grid grid-cols-12 gap-4 col-span-12">
       <span class="col-span-12 text-xl font-bold px-2">آخرین صف نوبت</span>
-      <div class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0">
+      <div
+        class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0"
+      >
         <app-text-input
           label="تسلسل نوبت"
-          placeholder="تسلسل نوبت"
           [control]="otaghdarTurnNumber"
           [addonWidth]="addonWidth"
           [readOnly]="true"
@@ -112,10 +112,11 @@
         />
       </div>
 
-      <div class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0">
+      <div
+        class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0"
+      >
         <app-text-input
           label="صف نوبت"
-          placeholder="صف نوبت"
           [control]="sequentialTurn"
           [addonWidth]="addonWidth"
           [readOnly]="true"
@@ -123,10 +124,11 @@
         />
       </div>
 
-      <div class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0">
+      <div
+        class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0"
+      >
         <app-text-input
-          label="وضعیت"
-          placeholder="وضعیت"
+          [label]="appTitle.inputs.loads.loadStatus"
           [control]="turnStats"
           [addonWidth]="addonWidth"
           [readOnly]="true"
@@ -134,10 +136,11 @@
         />
       </div>
 
-      <div class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0">
+      <div
+        class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0"
+      >
         <app-text-input
           label="شرح"
-          placeholder="شرح"
           [control]="turnDescription"
           [addonWidth]="addonWidth"
           [readOnly]="true"
@@ -152,8 +155,7 @@
 
       <div class="col-span-12 md:col-span-6 py-1 md:py-0">
         <app-text-input
-          label=" کد کیف پول"
-          placeholder="کد کیف پول"
+          label="شناسه کیف پول"
           [control]="walletCode"
           [readOnly]="true"
           [addonWidth]="addonWidth"
@@ -164,7 +166,6 @@
       <div class="col-span-12 md:col-span-6 py-1 md:py-0">
         <app-text-input
           label="موجودی"
-          placeholder="موجودی"
           [control]="walletBalance"
           [readOnly]="true"
           [addonWidth]="addonWidth"
@@ -178,8 +179,8 @@
 </p-card>
 <app-search-auto-complete
   class="col-span-12 sm:col-span-6"
-  placeholder="صف نوبت"
-  label="صف نوبت"
+  [label]="appTitle.inputs.sequentialTurns.sequentialTurnTitle"
+  [placeholder]="appTitle.getPlaceholder('sequentialTurnTitle')"
   [control]="sequentialTurnTitle"
   optionLabel="SeqTurnTitle"
   optionValue="SeqTurnTitle"
@@ -187,7 +188,7 @@
   (valueChange)="onAutoCompleteChange(sequentialTurnId)"
   [lazySearch]="searchSequentialTurnWithLoaderType"
   [showIconOptionSelected]="sequentialTurnId.valid"
-  addonWidth="6rem"
+  addonWidth="7rem"
   [minLength]="0"
   cachingMode="Focus"
   [disabled]="loading || loaderTypeId.invalid"

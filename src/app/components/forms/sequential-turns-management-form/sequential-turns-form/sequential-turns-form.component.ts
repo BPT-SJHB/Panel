@@ -27,6 +27,7 @@ import { ValidationSchema } from 'app/constants/validation-schema';
 import { SequentialTurn } from 'app/services/sequential-turn-management/model/sequential-turn.model';
 import { TableConfig } from 'app/constants/ui/table.ui';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { AppTitles } from 'app/constants/Titles';
 
 enum FormMode {
   EDITABLE,
@@ -56,12 +57,13 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
   private readonly fb = inject(FormBuilder);
   private readonly loadingService = inject(LoadingService);
   private readonly sequentialTurnsService = inject(
-    SequentialTurnManagementService,
+    SequentialTurnManagementService
   );
   private readonly toast = inject(ToastService);
   private readonly confirmationService = inject(ConfirmationService);
   private readonly destroy$ = new Subject<void>();
   readonly tableUi = TableConfig;
+  readonly appTitle = AppTitles;
 
   sequentialTurnForm = this.fb.group({
     id: [-1, ValidationSchema.id],
@@ -75,7 +77,7 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
   sequentialTurns: SequentialTurn[] = [];
   displaySequentialTurns: SequentialTurn[] = [];
 
-  headerTitle: string = '';
+  headerTitle = '';
   formDialogVisible = false;
   loading = false;
 
@@ -210,7 +212,7 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
         turn.SeqTurnId,
         turn.SeqTurnTitle ?? '',
         turn.SeqTurnKeyWord ?? '',
-        turn.Active ?? true,
+        turn.Active ?? true
       );
     if (!checkAndToastError(response, this.toast)) return;
     this.toast.success('موفق', response.data.Message);
@@ -223,7 +225,7 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
       turn.SeqTurnId,
       turn.SeqTurnTitle ?? '',
       turn.SeqTurnKeyWord ?? '',
-      turn.Active ?? true,
+      turn.Active ?? true
     );
     if (!checkAndToastError(response, this.toast)) return;
     this.toast.success('موفق', response.data.Message);

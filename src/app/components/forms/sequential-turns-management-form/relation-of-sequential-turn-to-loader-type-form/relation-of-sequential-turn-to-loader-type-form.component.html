@@ -1,8 +1,8 @@
 <div class="grid grid-cols-12 gap-4 mb-5">
   <app-search-auto-complete
     class="col-span-12 sm:col-span-6"
-    placeholder="صفوف نوبت دهی"
-    label="صفوف نوبت دهی"
+    [label]="appTitle.inputs.sequentialTurns.sequentialTurnTitle"
+    [placeholder]="appTitle.getPlaceholder('sequentialTurnTitle')"
     [control]="sequentialTitle"
     optionLabel="SeqTurnTitle"
     optionValue="SeqTurnTitle"
@@ -16,8 +16,8 @@
   />
   <app-search-auto-complete
     class="col-span-12 sm:col-span-6"
-    placeholder="بارگیرها"
-    label="بارگیرها"
+    [label]="appTitle.inputs.trucks.truckLoader"
+    [placeholder]="appTitle.getPlaceholder('truckLoader')"
     [control]="loaderTypeTitle"
     optionLabel="LoaderTypeTitle"
     optionValue="LoaderTypeTitle"
@@ -70,7 +70,7 @@
 <div class="w-full flex justify-end mt-5">
   <app-button
     size="small"
-    label="ثبت"
+    [label]="appTitle.buttons.saveAndEdit"
     styleClass="px-10 py-2"
     (click)="registerRelationSequentialToLoader()"
     [disabled]="loading || relationSequentialToLoaderForm.invalid"

@@ -1,4 +1,10 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  SimpleChanges,
+  OnInit,
+  OnChanges,
+} from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SelectModule } from 'primeng/select';
 import { InputGroup } from 'primeng/inputgroup';
@@ -18,13 +24,13 @@ import { NgClass } from '@angular/common';
   templateUrl: './select-input.component.html',
   styleUrl: './select-input.component.scss',
 })
-export class SelectInputComponent<T> {
+export class SelectInputComponent<T> implements OnInit, OnChanges {
   @Input() options: { label: string; value: T }[] = [];
   @Input() control = new FormControl<T | null>(null);
   @Input() readOnly = false;
   @Input() placeholder = '';
   @Input() disabled = false;
-  @Input() icon: string = 'pi pi-user';
+  @Input() icon = 'pi pi-user';
   @Input() label = '';
   @Input() addonWidth: string | null = null;
 

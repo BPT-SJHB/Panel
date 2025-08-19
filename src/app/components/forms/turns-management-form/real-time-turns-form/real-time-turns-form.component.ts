@@ -1,4 +1,11 @@
-import { Component, inject, Input, ViewChild } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  ViewChild,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { TurnsTruckInfoBaseFormComponent } from '../turns-truck-info-base-form/turns-truck-info-base-form.component';
 import { FormControl, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
@@ -7,7 +14,8 @@ import { LoadingService } from 'app/services/loading-service/loading-service.ser
 import { TurnManagementService } from 'app/services/turn-management/turn-management.service';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { ToastService } from 'app/services/toast-service/toast.service';
-import { ButtonComponent } from "app/components/shared/button/button.component";
+import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { AppTitles } from 'app/constants/Titles';
 
 @Component({
   selector: 'app-real-time-turns-form',
@@ -15,7 +23,7 @@ import { ButtonComponent } from "app/components/shared/button/button.component";
   templateUrl: './real-time-turns-form.component.html',
   styleUrl: './real-time-turns-form.component.scss',
 })
-export class RealTimeTurnsFormComponent {
+export class RealTimeTurnsFormComponent implements OnDestroy, OnInit {
   @ViewChild(TurnsTruckInfoBaseFormComponent)
   turnsBaseComponent!: TurnsTruckInfoBaseFormComponent;
 
@@ -23,6 +31,8 @@ export class RealTimeTurnsFormComponent {
   private turnManagementService = inject(TurnManagementService);
   private destroy$ = new Subject<void>();
   private toast = inject(ToastService);
+
+  readonly appTitle = AppTitles;
 
   sequentialTurnId = new FormControl('', [
     Validators.required,

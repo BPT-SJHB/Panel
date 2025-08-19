@@ -6,6 +6,9 @@
       class="w-full"
       optionLabel="FPCTitle"
       optionValue="FPCTitle"
+      [placeholder]="
+        appTitle.getPlaceholder('factoriesOrProductionCenterTitle')
+      "
       (selectSuggestion)="selectSearchItem($event)"
     />
   </div>
@@ -21,8 +24,10 @@
       <!-- Hidden FPC ID -->
       <div class="col-span-12 md:col-span-6">
         <app-text-input
-          label="شناسه مرکز"
-          placeholder="شناسه مرکز"
+          [label]="
+            appTitle.inputs.factoryAndProductionCenters
+              .factoriesOrProductionCenterId
+          "
           [readOnly]="true"
           [control]="fpcId"
           validationField="id"
@@ -35,8 +40,13 @@
       <!-- Title -->
       <div class="col-span-12 md:col-span-6">
         <app-text-input
-          label="عنوان"
-          placeholder="عنوان"
+          [label]="
+            appTitle.inputs.factoryAndProductionCenters
+              .factoriesOrProductionCenterName
+          "
+          [placeholder]="
+            appTitle.getPlaceholder('factoriesOrProductionCenterName')
+          "
           class="flex-1"
           [control]="title"
           validationField="title"
@@ -47,8 +57,13 @@
       <!-- Manager Name -->
       <div class="col-span-12 md:col-span-6">
         <app-text-input
-          label="نام مدیر"
-          placeholder="نام مدیر"
+          [label]="
+            appTitle.inputs.factoryAndProductionCenters
+              .factoriesOrProductionCenterOwnerName
+          "
+          [placeholder]="
+            appTitle.getPlaceholder('factoriesOrProductionCenterOwnerName')
+          "
           class="flex-1"
           [control]="managerName"
           validationField="managerName"
@@ -59,8 +74,15 @@
       <!-- Manager Mobile -->
       <div class="col-span-12 md:col-span-6">
         <app-text-input
-          placeholder="شماره موبایل مدیر"
-          label="موبایل مدیر"
+          [label]="
+            appTitle.inputs.factoryAndProductionCenters
+              .factoriesOrProductionCenterOwnerPhoneNumber
+          "
+          [placeholder]="
+            appTitle.getPlaceholder(
+              'factoriesOrProductionCenterOwnerPhoneNumber'
+            )
+          "
           class="flex-1"
           [control]="managerMobile"
           validationField="mobile"
@@ -71,8 +93,10 @@
       <!-- Telephone -->
       <div class="col-span-12 md:col-span-6">
         <app-text-input
-          label="تلفن"
-          placeholder="شماره تلفن مثال 02123456789"
+          [label]="appTitle.inputs.global.phoneNumber"
+          [placeholder]="
+            appTitle.getPlaceholder('globalPhoneNumberPlaceholder')
+          "
           class="flex-1"
           [control]="telephone"
           validationField="telephone"
@@ -83,8 +107,8 @@
       <!-- Address -->
       <div class="col-span-12 md:col-span-6">
         <app-text-input
-          label="آدرس"
-          placeholder="آدرس"
+          [label]="appTitle.inputs.global.address"
+          [placeholder]="appTitle.getPlaceholder('globalAddressPlaceholder')"
           class="flex-1"
           [control]="address"
           validationField="address"
@@ -95,8 +119,8 @@
       <!-- Email -->
       <div class="col-span-12 md:col-span-6">
         <app-text-input
-          label="ایمیل"
-          placeholder="ایمیل"
+          [label]="appTitle.inputs.global.email"
+          [placeholder]="appTitle.getPlaceholder('globalEmailPlaceholder')"
           class="flex-1"
           [control]="email"
           validationField="email"
@@ -106,7 +130,10 @@
 
       <!-- FPC Active -->
       <div class="col-span-12 md:col-span-6 flex px-2">
-        <app-toggle-switch-input label="وضعیت مرکز" [control]="fpcActive" />
+        <app-toggle-switch-input
+          [label]="appTitle.toggleSwitches.factoryOrProductionCenterStatus"
+          [control]="fpcActive"
+        />
       </div>
     </div>
   </form>
@@ -118,7 +145,7 @@
     <app-button
       (click)="registerOrEditFpc()"
       [disabled]="fpcForm.invalid || loading()"
-      label="ثبت و ویرایش"
+      [label]="appTitle.buttons.saveAndEdit"
       styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
     ></app-button>
 
@@ -126,7 +153,7 @@
       (click)="activateFpcSms()"
       [disabled]="fpcId.invalid || loading()"
       severity="warn"
-      label="فعال سازی پیامک"
+      [label]="appTitle.buttons.activateSMS"
       styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
     ></app-button>
 
@@ -134,7 +161,7 @@
       (click)="resetPasswordFpc()"
       [disabled]="fpcId.invalid || loading()"
       severity="info"
-      label="رمز عبور جدید"
+      [label]="appTitle.buttons.generateNewPassword"
       styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
     ></app-button>
   </div>

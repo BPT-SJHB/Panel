@@ -3,13 +3,12 @@
   [cols]="['فعال/غیرفعال']"
   [rows]="[['ProductTypeTitle', 'ProductTitle']]"
   [enabledSearch]="true"
-  [searchFields]="['ProductTitle','ProductTypeTitle']"
+  [searchFields]="['ProductTitle', 'ProductTypeTitle']"
   [paginator]="true"
   childField="ProductActive"
   parentField="ProductTypeActive"
-  searchPlaceholder="بخشی از نام کالا را وارد نمایید."
+  [searchPlaceholder]="appTitle.getPlaceholder('productsTitle')"
   paginatorLocale="fa-IR"
   (onSearch)="searchProduct($event)"
   (onTableCheckBoxChange)="onChangeProduct($event)"
 />
-

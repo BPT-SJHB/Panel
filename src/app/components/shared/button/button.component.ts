@@ -100,7 +100,7 @@ export class ButtonComponent implements OnInit, OnChanges {
         },
       },
       disabled: {
-        gradient: 'bg-gradient-to-b from-gray-300 to-gray-600 to-75%',
+        gradient: 'bg-gradient-to-b from-gray-300 to-gray-600 to-75% blur-[1px]',
         shadow: {
           normal: 'shadow-[0px_4px_8px_var(--p-surface-500)]',
           sync: '',

@@ -1,8 +1,8 @@
 <div class="grid grid-cols-12 gap-4 mb-5">
   <app-search-auto-complete
     class="col-span-12 sm:col-span-6"
-    placeholder="گروه اعلام بار"
-    label="گروه اعلام بار"
+    [label]="appTitle.inputs.loadAnnouncements.loadAnnouncementGroupTitle"
+    [placeholder]="appTitle.getPlaceholder('loadAnnouncementGroupTitle')"
     [control]="announcementGroupTitle"
     optionLabel="AnnouncementTitle"
     optionValue="AnnouncementTitle"
@@ -14,8 +14,8 @@
   />
   <app-search-auto-complete
     class="col-span-12 sm:col-span-6"
-    placeholder="زیرگروه اعلام بار"
-    label="زیرگروه اعلام بار"
+    [label]="appTitle.inputs.loadAnnouncements.loadAnnouncementSubGroupTitle"
+    [placeholder]="appTitle.getPlaceholder('loadAnnouncementSubGroupTitle')"
     [control]="announcementSubGroupTitle"
     optionLabel="AnnouncementSGTitle"
     optionValue="AnnouncementSGTitle"
@@ -64,8 +64,8 @@
 <div class="flex justify-end mt-5">
   <app-button
     size="small"
-    label="ثبت"
-    styleClass="w-ful py-2 md:w-25"
+    [label]="appTitle.buttons.saveAndEdit"
+    styleClass="w-full py-2"
     (click)="registerRelationAnnouncement()"
     [disabled]="loading || announcementGroupAndSubGroupForm.invalid"
   ></app-button>

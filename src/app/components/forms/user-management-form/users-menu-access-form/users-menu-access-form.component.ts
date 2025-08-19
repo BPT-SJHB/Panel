@@ -19,6 +19,7 @@ import { ApiResponse } from 'app/data/model/api-Response.model';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { AppTitles } from 'app/constants/Titles';
 
 interface PageGroup {
   PGId: number;
@@ -56,6 +57,7 @@ export class UsersMenuAccessFormComponent extends BaseLoading {
   readonly rows = [['PGTitle', 'PTitle'], ['Description']];
   readonly searchFields = ['PGTitle', 'PTitle'];
   readonly cols = ['منو', 'توضیحات'];
+  readonly appTitles = AppTitles;
 
   private parentChanges = new Map<number, PageGroup>();
   private childChanges = new Map<number, Process>();
@@ -76,7 +78,7 @@ export class UsersMenuAccessFormComponent extends BaseLoading {
       }
 
       const treeNodes = await this.getGroupProcesses(
-        this.userInfo()?.MobileNumber!,
+        this.userInfo()?.MobileNumber!
       );
       this.tree.set(treeNodes);
     });
@@ -158,8 +160,8 @@ export class UsersMenuAccessFormComponent extends BaseLoading {
           this.userService.ChangeUserWebProcessGroupAccess(
             userId,
             parent.PGId,
-            parent.PGAccess,
-          ),
+            parent.PGAccess
+          )
         );
       });
 
@@ -168,8 +170,8 @@ export class UsersMenuAccessFormComponent extends BaseLoading {
           this.userService.ChangeUserWebProcessAccess(
             userId,
             child.PId,
-            child.PAccess,
-          ),
+            child.PAccess
+          )
         );
       });
 

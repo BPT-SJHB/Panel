@@ -20,6 +20,7 @@ import { SearchAutoCompleteComponent } from 'app/components/shared/inputs/search
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { BaseLoading } from '../shared/component-base/base-loading';
+import { AppTitles } from 'app/constants/Titles';
 
 @Component({
   selector: 'app-factories-and-freight-form',
@@ -41,11 +42,13 @@ export class FactoriesAndFreightFormComponent extends BaseLoading {
   private fpcService = inject(FpcManagementService);
   private cachedFpc?: FPCInfo;
 
-  addonWidth = '9rem';
+  addonWidth = '6rem';
   passwordDialogVisible = false;
   userNameDialog = '';
   newUserPasswordDialog = '';
   searchTerm: FormControl = new FormControl('');
+
+  readonly appTitle = AppTitles;
 
   fpcForm = this.fb.group({
     fpcId: this.fb.control<number | null>(null, ValidationSchema.id),
@@ -99,7 +102,7 @@ export class FactoriesAndFreightFormComponent extends BaseLoading {
 
     this.withLoading(async () => {
       const response = await this.fpcService.ResetFPCUserPassword(
-        this.fpcId.value,
+        this.fpcId.value
       );
 
       if (!checkAndToastError(response, this.toast)) return;
@@ -144,7 +147,7 @@ export class FactoriesAndFreightFormComponent extends BaseLoading {
     if (this.fpcId.invalid) return;
 
     const response = await this.fpcService.FPCChangeActiveStatus(
-      this.fpcId.value,
+      this.fpcId.value
     );
     if (!checkAndToastError(response, this.toast)) return;
 

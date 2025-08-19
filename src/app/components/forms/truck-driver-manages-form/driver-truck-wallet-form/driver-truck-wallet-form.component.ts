@@ -18,6 +18,7 @@ import { SearchInputComponent } from '../../../shared/inputs/search-input/search
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ButtonComponent } from "app/components/shared/button/button.component";
+import { AppTitles } from 'app/constants/Titles';
 
 @Component({
   selector: 'app-driver-truck-wallet-form',
@@ -41,6 +42,7 @@ export class DriverTruckWalletFormComponent implements OnInit, OnDestroy {
   // feat: handle unsubscribe via destroy$
   private destroy$ = new Subject<void>();
   loading = false;
+  readonly appTitle = AppTitles;
 
   // feat: handle global loading state on init
   ngOnInit(): void {

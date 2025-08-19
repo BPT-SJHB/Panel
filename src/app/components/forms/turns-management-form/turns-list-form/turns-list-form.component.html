@@ -2,8 +2,8 @@
   <app-search-input
     class="col-span-12"
     [onSearchQuery]="searchTruckInformation"
-    placeholder="هوشمند ناوگان را وارد کنید."
-    searchButtonLabel="استعلام"
+    [placeholder]="appTitle.getPlaceholder('truckSmartCardNumberPlaceholder')"
+    [searchButtonLabel]="appTitle.buttons.search"
     validationField="smartCard"
     [control]="smartCode"
     [disableSearchButton]="smartCode.invalid"
@@ -11,8 +11,7 @@
 
   <app-text-input
     [control]="truckId"
-    label="کدناوگان"
-    placeholder="کدناوگان"
+    [label]="appTitle.inputs.trucks.truckId"
     [disabled]="true"
     [readOnly]="true"
     class="col-span-12 md:col-span-6"
@@ -21,8 +20,7 @@
 
   <app-text-input
     [control]="licensePlate"
-    label="شماره پلاک"
-    placeholder="شماره پلاک"
+    [label]="appTitle.inputs.trucks.licensePlateNumber"
     [disabled]="true"
     [readOnly]="true"
     class="col-span-12 md:col-span-6"

@@ -1,7 +1,9 @@
 <!-- 🔍 Search Input -->
 <div class="w-full">
   <app-search-input
-    placeholder="بخشی از عنوان گروه وارد کنید."
+    [placeholder]="
+      'عنوان ' + appTitle.getPlaceholder('loadAnnouncementGroupTitle')
+    "
     class="w-full"
     [staticData]="announcementsGroup"
     [itemMatchesQuery]="filterAnnouncementsGroup"
@@ -28,14 +30,19 @@
   <!-- Table Header -->
   <ng-template #caption>
     <div>
-      <app-button label="جدید" size="small" styleClass="w-20 md:w-30 py-2" (click)="onNew()"></app-button>
+      <app-button
+        [label]="appTitle.buttons.add.addRecord"
+        size="small"
+        styleClass="w-20 md:w-30 py-2"
+        (click)="onNew()"
+      ></app-button>
     </div>
   </ng-template>
 
   <ng-template #header let-columns>
     <tr>
       @for (col of columns; track $index) {
-      <th>{{ col }}</th>
+        <th>{{ col }}</th>
       }
     </tr>
   </ng-template>
@@ -101,7 +108,7 @@
     <div class="grid col-span-12 grid-cols-12 gap-4">
       <app-text-input
         class="col-span-12"
-        label="کد"
+        [label]="appTitle.inputs.global.id"
         validationField="id"
         addonWidth="5rem"
         [readOnly]="true"
@@ -111,8 +118,8 @@
 
       <app-text-input
         class="col-span-12"
-        label="عنوان"
-        placeholder="عنوان"
+        [label]="appTitle.inputs.global.title"
+        [placeholder]="appTitle.getPlaceholder('globalTitlePlaceholder')"
         validationField="title"
         addonWidth="5rem"
         [control]="AnnouncementTitle"
@@ -120,7 +127,7 @@
 
       <div class="col-span-12 flex px-2">
         <app-toggle-switch-input
-          label="وضعیت گروه:"
+          [label]="appTitle.toggleSwitches.status"
           [control]="AnnouncementActive"
           [readonly]="!isFormEditable()"
         />
@@ -129,7 +136,7 @@
 
     <div class="flex justify-end col-span-12">
       <app-button
-        label="ثبت و ویرایش اطلاعات"
+        [label]="appTitle.buttons.saveAndEdit"
         (click)="registerOrEdit()"
         [disabled]="announcementGroupForm.invalid || loading"
       ></app-button>

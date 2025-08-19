@@ -1,7 +1,7 @@
 <p-confirm-dialog />
 
 <app-search-input
-  placeholder="قسمتی از نام را کنید."
+  [placeholder]="appTitle.getPlaceholder('loadAnnouncementPlaceTitle')"
   [asyncSearchFn]="searchLADPlace"
   [itemMatchesQuery]="filterLADPlace"
   (searchResult)="handelSearchLADPlaces($event)"
@@ -17,13 +17,13 @@
   [paginatorLocale]="tableUi.paginatorLocale"
   [rows]="tableUi.rows"
   [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
-  [stripedRows] ="tableUi.stripedRows"
+  [stripedRows]="tableUi.stripedRows"
 >
   <ng-template #caption>
     <div class="flex items-center justify-between">
       <app-button
         (click)="onNew()"
-        label="جدید"
+        [label]="appTitle.buttons.add.addRecord"
         size="small"
         styleClass="px-6 md:px-8 py-1"
       />
@@ -33,7 +33,7 @@
   <ng-template #header let-columns>
     <tr>
       @for (col of columns; track $index) {
-      <th>{{ col }}</th>
+        <th>{{ col }}</th>
       }
     </tr>
   </ng-template>
@@ -111,14 +111,14 @@
         [readOnly]="true"
         [disabled]="true"
         [control]="ladPlacesId"
-        icon="pi pi-id-card"
+        [label]="appTitle.inputs.global.id"
         validationField="id"
         class="col-span-12"
         [addonWidth]="addonWidth"
       />
       <app-text-input
-        placeholder="عنوان"
-        label="عنوان"
+        [label]="appTitle.inputs.global.title"
+        [placeholder]="appTitle.getPlaceholder('globalTitlePlaceholder')"
         validationField="title"
         class="col-span-12"
         [control]="ladPlacesTitle"
@@ -126,14 +126,15 @@
       />
       <app-text-input
         [control]="ladPlacesTel"
-        label="تلفن"
-        placeholder="تلفن"
+        [label]="appTitle.inputs.global.phoneNumber"
+        [placeholder]="appTitle.getPlaceholder('globalPhoneNumberPlaceholder')"
         validationField="telephone"
         class="col-span-12"
         [addonWidth]="addonWidth"
       />
       <app-text-input
-        label="آدرس"
+        [label]="appTitle.inputs.global.address"
+        [placeholder]="appTitle.getPlaceholder('globalAddressPlaceholder')"
         class="col-span-12"
         icon="pi pi-card-id"
         validationField="address"
@@ -142,12 +143,12 @@
       />
       <div class="grid grid-cols-12 gap-4 col-span-12">
         <app-toggle-switch-input
-          label="وضعیت مبدا بارگیری"
+          [label]="appTitle.toggleSwitches.loadingStatus"
           [control]="loadingActive"
           class="col-span-12 flex px-2"
         />
         <app-toggle-switch-input
-          label="وضعیت مقصد بارگیری"
+          [label]="appTitle.toggleSwitches.dischargingStatus"
           [control]="dischargingActive"
           class="col-span-12 flex px-2"
         />
@@ -156,7 +157,7 @@
     <div class="col-span-12 flex justify-end">
       <app-button
         (click)="registerOrEdit()"
-        label="ثبت و ویرایش اطلاعات"
+        [label]="appTitle.buttons.saveAndEdit"
         [disabled]="ladPlacesForm.invalid || loading"
       />
     </div>

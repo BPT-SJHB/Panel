@@ -18,6 +18,7 @@ import { SoftwareUserInfo } from 'app/services/user-management/model/software-us
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { BaseLoading } from '../../shared/component-base/base-loading';
 import { checkAndToastError } from 'app/utils/api-utils';
+import { AppTitles } from 'app/constants/Titles';
 
 interface UserInfoForm {
   id: number | null;
@@ -65,6 +66,8 @@ export class UserInfoFormComponent extends BaseLoading implements OnInit {
     searchPhone: this.nonNullable.control('', ValidationSchema.mobile),
   });
 
+  readonly appTitles = AppTitles;
+
   roles: { label: string; value: number }[] = [];
 
   /** ================================
@@ -80,7 +83,7 @@ export class UserInfoFormComponent extends BaseLoading implements OnInit {
    *  ================================ */
 
   fetchUserByPhone: (phone: string) => Promise<void> = async (
-    phone: string,
+    phone: string
   ) => {
     if (this.searchForm.invalid || this.loading()) return;
 
@@ -116,7 +119,7 @@ export class UserInfoFormComponent extends BaseLoading implements OnInit {
 
     await this.withLoading(async () => {
       const response = await this.userManager.ResetSoftwareUserPassword(
-        id.value!,
+        id.value!
       );
       if (!checkAndToastError(response, this.toast)) return;
 
@@ -248,7 +251,7 @@ export class UserInfoFormComponent extends BaseLoading implements OnInit {
    *  Form control getters (typed access)
    *  ================================ */
   getUserFormControl<K extends keyof UserInfoForm>(
-    name: K,
+    name: K
   ): FormControl<UserInfoForm[K]> {
     const control = this.userInfoForm.get(name as string);
     if (!control) {

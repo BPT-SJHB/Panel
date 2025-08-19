@@ -21,6 +21,7 @@ import { AnnouncementGroupSubgroupManagementService } from 'app/services/announc
 import { AnnouncementGroup } from 'app/services/announcement-group-subgroup-management/model/announcement-group.model';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { TableConfig } from 'app/constants/ui/table.ui';
+import { AppTitles } from 'app/constants/Titles';
 
 enum FormMode {
   EDITABLE,
@@ -53,10 +54,11 @@ export class AnnouncementGroupFormComponent implements OnInit, OnDestroy {
   private readonly loadingService = inject(LoadingService);
   private readonly confirmationService = inject(ConfirmationService);
   private readonly announcementService = inject(
-    AnnouncementGroupSubgroupManagementService,
+    AnnouncementGroupSubgroupManagementService
   );
 
   private readonly destroy$ = new Subject<void>();
+  readonly appTitle = AppTitles;
 
   // ========== 🧠 State ==========
   loading = false;
@@ -99,7 +101,7 @@ export class AnnouncementGroupFormComponent implements OnInit, OnDestroy {
 
   filterAnnouncementsGroup = (
     item: AnnouncementGroup,
-    query: string,
+    query: string
   ): boolean => item.AnnouncementTitle?.includes(query) ?? false;
 
   // ========== 🎯 Actions ==========
@@ -191,7 +193,7 @@ export class AnnouncementGroupFormComponent implements OnInit, OnDestroy {
     const { AnnouncementTitle } = this.extractAnnouncementGroup();
     const response =
       await this.announcementService.RegisterNewAnnouncementGroup(
-        AnnouncementTitle ?? '',
+        AnnouncementTitle ?? ''
       );
     if (!checkAndToastError(response, this.toast)) return;
     this.toast.success('موفق', response.data.Message ?? '');
@@ -203,7 +205,7 @@ export class AnnouncementGroupFormComponent implements OnInit, OnDestroy {
     const response = await this.announcementService.EditAnnouncementGroup(
       AnnouncementId,
       AnnouncementTitle ?? '',
-      Active ?? true,
+      Active ?? true
     );
     if (!checkAndToastError(response, this.toast)) return;
     this.toast.success('موفق', response.data.Message ?? '');

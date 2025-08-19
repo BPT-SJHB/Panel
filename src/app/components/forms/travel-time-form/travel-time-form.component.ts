@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -32,6 +32,7 @@ import { ShortResponse } from 'app/data/model/short-response.model';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TableConfig } from 'app/constants/ui/table.ui';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { AppTitles } from 'app/constants/Titles';
 
 enum TravelTimeFormMode {
   EDITABLE,
@@ -57,7 +58,7 @@ enum TravelTimeFormMode {
   styleUrl: './travel-time-form.component.scss',
   providers: [ConfirmationService],
 })
-export class TravelTimeFormComponent {
+export class TravelTimeFormComponent implements OnInit, OnDestroy {
   // Services (injected)
   private fb = inject(FormBuilder);
   private toast = inject(ToastService);
@@ -72,6 +73,7 @@ export class TravelTimeFormComponent {
   private travelTimeFormMode = TravelTimeFormMode.REGISTER;
 
   readonly tableUi = TableConfig;
+  readonly appTitle = AppTitles
 
   // UI state
   headerTitle = '';

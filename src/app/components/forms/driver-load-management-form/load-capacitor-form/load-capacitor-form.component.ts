@@ -14,6 +14,7 @@ import { LoadForTransportCompanies_Factories_Admins_Drivers } from 'app/services
 import { Panel } from 'primeng/panel';
 import { CardModule } from 'primeng/card';
 import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
+import { AppTitles } from 'app/constants/Titles';
 
 interface SearchLoadsForm {
   announcementGroupId: number | null;
@@ -49,6 +50,7 @@ export class LoadCapacitorFormComponent
   );
 
   readonly addonWidth = '10rem';
+  readonly appTitle = AppTitles;
 
   // signals
   readonly loadStatusOptions = signal<{ label: string; value: number }[]>([]);

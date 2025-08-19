@@ -18,6 +18,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { TableConfig } from 'app/constants/ui/table.ui';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { AppTitles } from 'app/constants/Titles';
 
 @Component({
   selector: 'app-turns-list-form',
@@ -44,6 +45,7 @@ export class TurnsListFormComponent {
   private confirmationService = inject(ConfirmationService);
 
   readonly tableUi = TableConfig;
+  readonly appTitle = AppTitles;
 
   turnsCols = [
     'شماره نوبت',
@@ -111,11 +113,11 @@ export class TurnsListFormComponent {
       }
       this.populateSearchForm(
         resTruckInfo.data.TruckId,
-        resTruckInfo.data.Pelak ?? '',
+        resTruckInfo.data.Pelak ?? ''
       );
 
       const resTurnsInfo = await this.turnManagerService.GetLatestTurns(
-        resTruckInfo.data.TruckId,
+        resTruckInfo.data.TruckId
       );
       if (!checkAndToastError(resTurnsInfo, this.toast)) return;
       this.truckTurnsList = resTurnsInfo.data;
@@ -129,7 +131,7 @@ export class TurnsListFormComponent {
       this.loadingService.setLoading(true);
 
       const response = await this.turnManagerService.ResuscitateTurn(
-        row.TurnId,
+        row.TurnId
       );
       if (!checkAndToastError(response, this.toast)) return;
       await this.loadTurnsList(this.smartCode.value);
@@ -155,7 +157,7 @@ export class TurnsListFormComponent {
     try {
       this.loadingService.setLoading(true);
       const response = await this.turnManagerService.GetTurnAccounting(
-        row.TurnId,
+        row.TurnId
       );
       if (!checkAndToastError(response, this.toast)) return;
       this.turnsAccounting = response.data;

@@ -10,11 +10,13 @@
       <app-search-input
         [control]="searchSmartCard"
         validationField="smartCard"
-        icon="pi pi-id-card"
+        icon="pi pi-search"
         class="flex-1"
-        placeholder="جستجو براساس شماره هوشمند"
+        [placeholder]="
+          appTitle.getPlaceholder('truckSmartCardNumberPlaceholder')
+        "
         [disableSearchButton]="mainSearchForm.invalid"
-        searchButtonLabel="استعلام"
+        [searchButtonLabel]="appTitle.buttons.retrieveFromOutdoorSystem"
         [onSearchQuery]="loadComposedForm"
       />
     </div>
@@ -22,7 +24,9 @@
 
   <!-- Truck Info -->
   <div class="grid grid-cols-12 col-span-12 gap-4 mt-6">
-    <span class="text-lg font-bold col-span-12">اطلاعات ناوگان</span>
+    <span class="text-lg font-bold col-span-12">{{
+      appTitle.sectionTitles.truckInfo
+    }}</span>
 
     <div class="grid grid-cols-12 col-span-12 gap-4">
       <form
@@ -35,7 +39,7 @@
         <div class="grid grid-cols-12 gap-4 col-span-12">
           <app-text-input
             hidden
-            label="کد ناوگان"
+            [label]="appTitle.inputs.trucks.truckId"
             [readOnly]="true"
             [control]="truckId"
             validationField="truckId"
@@ -44,9 +48,11 @@
 
           <div class="flex gap-2 col-span-12 md:col-span-6">
             <app-text-input
-              label="شماره هوشمند"
+              [label]="appTitle.inputs.trucks.truckSmartCardNumber"
               class="flex-1"
-              placeholder="شماره هوشمند"
+              [placeholder]="
+                appTitle.getPlaceholder('truckSmartCardNumberPlaceholder')
+              "
               [control]="smartCard"
               validationField="smartCard"
               addonWidth="10rem"
@@ -59,15 +65,14 @@
               size="small"
               styleClass="mt-1 w-24 h-8"
               type="submit"
-              label="استعلام"
+              [label]="appTitle.buttons.retrieveFromOutdoorSystem"
             />
           </div>
 
           <div class="col-span-12 md:col-span-6">
             <app-text-input
-              label="شماره پلاک"
+              [label]="appTitle.inputs.trucks.licensePlateNumber"
               class="flex-1"
-              placeholder="شماره پلاک"
               [readOnly]="true"
               [control]="licensePlateNumber"
               validationField="licenseNumber"
@@ -76,9 +81,8 @@
           </div>
           <div class="col-span-12 md:col-span-6">
             <app-text-input
-              label="شماره سریال"
+              [label]="appTitle.inputs.trucks.licensePlateSerialNumber"
               class="flex-1"
-              placeholder="شماره سریال"
               [readOnly]="true"
               [control]="serialNumber"
               validationField="serialNumber"
@@ -99,7 +103,7 @@
         <div class="grid grid-cols-12 gap-4 col-span-12">
           <app-text-input
             hidden
-            label="کد راننده"
+            [label]="appTitle.inputs.drivers.driverId"
             [readOnly]="true"
             [control]="driverId"
             validationField="driverId"
@@ -108,9 +112,11 @@
 
           <div class="flex gap-2 col-span-12 md:col-span-6">
             <app-text-input
-              label="کدملی راننده"
+              [label]="appTitle.inputs.users.userNationalCodeTitle"
               class="flex-1"
-              placeholder="کدملی راننده"
+              [placeholder]="
+                appTitle.getPlaceholder('userNationalCodePlaceholder')
+              "
               [control]="nationalId"
               validationField="nationalId"
               addonWidth="10rem"
@@ -123,15 +129,14 @@
               size="small"
               type="submit"
               styleClass="mt-1 w-24 h-8 "
-              label="استعلام"
+              [label]="appTitle.buttons.retrieveFromOutdoorSystem"
             />
           </div>
 
           <div class="col-span-12 md:col-span-6">
             <app-text-input
-              label="نام راننده"
+              [label]="appTitle.inputs.users.userNameAndLastName"
               class="flex-1"
-              placeholder="نام راننده"
               [readOnly]="true"
               [control]="fullName"
               validationField="fullName"
@@ -150,7 +155,7 @@
         <div class="grid grid-cols-12 gap-4 col-span-12">
           <app-text-input
             hidden
-            label="شناسه کیف پول"
+            [label]="appTitle.inputs.wallet.walletId"
             [readOnly]="true"
             [control]="walletId"
             validationField="walletId"
@@ -159,7 +164,7 @@
 
           <app-text-input
             hidden
-            label="شناسه نوبت"
+            [label]="appTitle.inputs.turns.turnId"
             [readOnly]="true"
             [control]="turnId"
             validationField="turnId"
@@ -168,9 +173,8 @@
 
           <div class="col-span-12 md:col-span-6">
             <app-text-input
-              label="نوبت"
+              [label]="appTitle.inputs.turns.turnTitle"
               class="flex-1"
-              placeholder="نوبت"
               [readOnly]="true"
               [control]="turn"
               validationField="turn"
@@ -180,9 +184,8 @@
 
           <div class="col-span-12 md:col-span-6">
             <app-text-input
-              label="کیف پول"
+              [label]="appTitle.inputs.wallet.walletTitle"
               class="flex-1"
-              placeholder="کیف پول"
               [readOnly]="true"
               [control]="wallet"
               validationField="wallet"
@@ -200,7 +203,7 @@
       <app-button
         (click)="setComposedInformation()"
         [disabled]="this.truckComposedInfoForm.invalid || loading"
-        label="ثبت و ویرایش"
+        [label]="appTitle.buttons.saveAndEdit"
         styleClass="md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
       ></app-button>
 
@@ -208,7 +211,7 @@
         (click)="createNewWallet()"
         [disabled]="this.truckComposedInfoForm.invalid || loading"
         severity="info"
-        label="ساخت کیف پول جدید"
+        [label]="appTitle.buttons.createNewWallet"
         styleClass="md:my-0 text-xs md:text-sm lg:text-base w-full md:w-40 lg:w-50"
       ></app-button>
     </div>

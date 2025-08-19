@@ -37,6 +37,7 @@ import {
 } from 'app/components/shared/table/table.component';
 import { TariffsManagementService } from 'app/services/Tariffs-management/tariffs-management.service';
 import { checkAndToastError } from 'app/utils/api-utils';
+import { AppTitles } from 'app/constants/Titles';
 
 enum TariffsFormMode {
   EDITABLE,
@@ -77,6 +78,7 @@ export class TariffsFormComponent extends BaseLoading {
   private readonly nonNullable = this.fb.nonNullable;
   readonly headerTitle = signal<string>('');
   readonly addonWidth = '6rem';
+  readonly appTitle = AppTitles;
   tariffsFormMode: TariffsFormMode = TariffsFormMode.REGISTER;
   formDialogVisible = false;
 

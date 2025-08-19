@@ -1,12 +1,10 @@
 <div class="flex flex-col gap-2">
   <!-- Loading Spinner -->
   @if (loading) {
-  <div
-    class="h-full w-full z-50 flex items-center justify-center absolute"
-  >
-    <div class="h-full w-full" style="opacity: 0.2"></div>
-    <i class="pi pi-spin pi-spinner primary" style="font-size: 5rem"></i>
-  </div>
+    <div class="h-full w-full z-50 flex items-center justify-center absolute">
+      <div class="h-full w-full" style="opacity: 0.2"></div>
+      <i class="pi pi-spin pi-spinner primary" style="font-size: 5rem"></i>
+    </div>
   }
 
   <!-- Search Form -->
@@ -22,7 +20,7 @@
         [control]="searchTitle"
         icon="pi pi-search"
         class="flex-1"
-        placeholder="قسمتی از عنوان بارگیر را وارد نمایید."
+        [placeholder]="'عنوان ' + appTitle.getPlaceholder('truckLoader')"
         addonWidth="5rem"
       />
       <app-button
@@ -31,25 +29,22 @@
         size="small"
         severity="info"
         styleClass="px-6 py-2"
-        label="جستجو"
+        [label]="appTitle.buttons.search"
       />
     </div>
   </form>
 
   <!-- Loader Form -->
-  <div
-    [class.pointer-events-none]="loading"
-    [class.opacity-60]="loading"
-  >
+  <div [class.pointer-events-none]="loading" [class.opacity-60]="loading">
     <p-table
       [value]="this.loadersFormArray.controls"
-    [tableStyle]="tableUi.tableStyle"
-  [paginator]="tableUi.paginator"
-  [paginatorLocale]="tableUi.paginatorLocale"
-  [rows]="tableUi.rows"
-  [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
-  [stripedRows]="tableUi.stripedRows"
-   >
+      [tableStyle]="tableUi.tableStyle"
+      [paginator]="tableUi.paginator"
+      [paginatorLocale]="tableUi.paginatorLocale"
+      [rows]="tableUi.rows"
+      [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
+      [stripedRows]="tableUi.stripedRows"
+    >
       <ng-template #header>
         <tr>
           <th>فعال و غیر فعال</th>

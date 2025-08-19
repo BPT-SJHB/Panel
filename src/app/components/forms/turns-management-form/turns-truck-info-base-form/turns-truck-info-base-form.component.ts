@@ -30,6 +30,7 @@ import { SearchInputComponent } from 'app/components/shared/inputs/search-input/
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { SearchAutoCompleteComponent } from 'app/components/shared/inputs/search-auto-complete/search-auto-complete.component';
 import { Card } from 'primeng/card';
+import { AppTitles } from 'app/constants/Titles';
 
 @Component({
   selector: 'app-turns-truck-info-base-form',
@@ -53,6 +54,8 @@ export class TurnsTruckInfoBaseFormComponent implements OnInit, OnDestroy {
 
   // 📡 Destroy stream for unsubscribing
   private destroy$ = new Subject<void>();
+
+  readonly appTitle = AppTitles;
 
   // 📥 Inputs
   @Input() sequentialTurnId = new FormControl('', Validators.min(0));

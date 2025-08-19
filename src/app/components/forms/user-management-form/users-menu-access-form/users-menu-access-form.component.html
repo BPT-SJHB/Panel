@@ -2,16 +2,17 @@
   <div class="grid grid-cols-12">
     <div class="col-span-12">
       <app-search-input
-        placeholder="شماره تلفن کاربر"
+        [placeholder]="appTitles.getPlaceholder('userPhoneNumberPlaceholder')"
         [onSearchQuery]="searchUser"
         [control]="mobileControl"
         [disableSearchButton]="mobileControl.invalid || loading()"
         validationField="mobile"
+        icon="pi pi-search"
       />
     </div>
     <app-tree-table-checkbox
       class="col-span-12"
-      searchPlaceholder="جستجو گروه و زیرگروه"
+      [searchPlaceholder]="appTitles.getPlaceholder('webProcessesPlaceholder')"
       childField="PAccess"
       parentField="PGAccess"
       [tree]="tree()"
@@ -26,9 +27,9 @@
 
   <div class="col-span-12 flex items-center justify-center mt-5 px-5">
     <app-button
-      class="w-full"
+      class="w-full max-w-[40vh]"
       styleClass="w-full"
-      label="ثبت تغییرات"
+      [label]="appTitles.buttons.saveAndEdit"
       [disabled]="isSubmitButtonDisabled()"
       (click)="updateAccesses()"
     />

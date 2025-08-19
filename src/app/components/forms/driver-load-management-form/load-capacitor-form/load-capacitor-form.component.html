@@ -14,8 +14,8 @@
   </app-search-auto-complete-factory>
 
   <app-select-input
-    label="وضعیت بار"
-    placeholder="وضعیت بار را انتخاب نمایید."
+    [label]="appTitle.inputs.loads.loadStatus"
+    [placeholder]="appTitle.getPlaceholder('loadStatus')"
     class="col-span-12 md:col-span-6"
     [options]="loadStatusOptions()"
     [addonWidth]="addonWidth"
@@ -29,7 +29,7 @@
     [disabled]="this.searchLoadsForm.invalid"
     severity="info"
   >
-    مشاهد بار
+    {{ appTitle.buttons.seeLoads }}
   </app-button>
 </div>
 
@@ -114,7 +114,7 @@
                 (onClick)="allocateLoad(loads.LoadId)"
                 [disabled]="this.searchLoadsForm.invalid"
               >
-                تخصیص بار
+                {{ appTitle.buttons.allocateLoad }}
               </app-button>
             </div>
           </p-card>

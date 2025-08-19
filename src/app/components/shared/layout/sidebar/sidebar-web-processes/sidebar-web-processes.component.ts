@@ -13,7 +13,6 @@ import { TabComponentKey } from 'app/constants/tab-component-registry';
 
 // Store actions
 import { createTab } from 'app/store/tab/tab.actions';
-import { renderContent } from 'app/store/content-manager/content-manager.actions';
 import { DEFAULT_MAIN_TAB_ID } from 'app/store/tab/tab.reducer';
 
 @Component({
