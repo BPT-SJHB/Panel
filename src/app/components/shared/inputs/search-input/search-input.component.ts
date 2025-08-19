@@ -18,6 +18,7 @@ import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
 import { ValidationField } from 'app/constants/validation-schema';
 import { TextInputComponent } from '../text-input/text-input.component';
 import { ButtonComponent } from '../../button/button.component';
+import { uuidV4 } from 'app/utils/uuid';
 
 @Component({
   selector: 'app-search-input',
@@ -42,7 +43,7 @@ export class SearchInputComponent<T> implements OnInit, OnDestroy, OnChanges {
   // -------------------------
   @Input() control = new FormControl<string | null | undefined>('');
   @Input() validationField: ValidationField | null = null;
-
+  @Input() id = uuidV4();
   // -------------------------
   // 🎨 UI Customization
   // -------------------------

@@ -20,6 +20,7 @@ import {
   ValidationField,
   ValidationSchema,
 } from 'app/constants/validation-schema';
+import { uuidV4 } from 'app/utils/uuid';
 
 @Component({
   selector: 'app-text-input',
@@ -37,6 +38,8 @@ import {
   styleUrl: './text-input.component.scss',
 })
 export class TextInputComponent implements OnInit, OnChanges {
+
+  @Input() id = uuidV4();
   @Input() control = new FormControl();
   @Input() validationField: ValidationField | null = null;
   @Input() placeholder = '';
