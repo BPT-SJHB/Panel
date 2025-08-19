@@ -32,6 +32,7 @@ import {
   TableColumn,
   TableComponent,
 } from 'app/components/shared/table/table.component';
+import { AppTitles } from 'app/constants/Titles';
 
 enum FormMode {
   EDITABLE,

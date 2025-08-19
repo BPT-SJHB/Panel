@@ -40,6 +40,7 @@ import { TariffsManagementService } from 'app/services/Tariffs-management/tariff
 import { checkAndToastError } from 'app/utils/api-utils';
 import { AppConfirmService } from 'app/services/confirm/confirm.service';
 import { ValidationSchema } from 'app/constants/validation-schema';
+import { AppTitles } from 'app/constants/Titles';
 
 enum TariffsFormMode {
   EDITABLE,

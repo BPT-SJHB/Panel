@@ -104,7 +104,7 @@
       <app-button
         (click)="submitUserInfo()"
         [disabled]="!isFormValidExcept('id') || loading()"
-        label="ثبت و ویرایش"
+        [label]="appTitles.buttons.saveAndEdit"
         styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
       ></app-button>
 

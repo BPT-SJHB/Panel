@@ -27,6 +27,7 @@ import {
   TableColumn,
   TableComponent,
 } from 'app/components/shared/table/table.component';
+import { AppTitles } from 'app/constants/Titles';
 
 // 📦 Interface for displaying flat relation data in table
 interface RowRelationOfSequential {

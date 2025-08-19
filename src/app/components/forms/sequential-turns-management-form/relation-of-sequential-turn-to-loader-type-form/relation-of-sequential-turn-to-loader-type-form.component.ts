@@ -30,6 +30,7 @@ import {
   TableComponent,
 } from 'app/components/shared/table/table.component';
 import { AppConfirmService } from 'app/services/confirm/confirm.service';
+import { AppTitles } from 'app/constants/Titles';
 
 // =======================
 // 📄 Table Row Interface
