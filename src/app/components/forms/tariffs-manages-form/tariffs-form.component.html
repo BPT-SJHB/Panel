@@ -83,7 +83,7 @@
   <app-button
     [disabled]="tariffs().length === 0"
     label="غیرفعال کردن تعرفه"
-    (click)="disableTariffs()"
+    (click)="onDisable()"
     severity="danger"
   />
   <app-button

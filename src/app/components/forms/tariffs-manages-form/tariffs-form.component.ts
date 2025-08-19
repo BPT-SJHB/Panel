@@ -11,7 +11,6 @@ import {
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { FileUpload, FileUploadModule } from 'primeng/fileupload';
-import { ConfirmationService } from 'primeng/api';
 
 // Shared Components
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
@@ -268,22 +267,20 @@ export class TariffsFormComponent extends BaseLoading {
     );
   }
 
-  onDisable(): void {
-    // this.confirmationService.confirm({
-    //   message: `آیا می خواهید  تعداد ${this.tariffs().length} غیرفعال کنید.`,
-    //   header: `غیرفعال کردن تعرفه ها`,
-    //   icon: 'pi pi-info-circle',
-    //   closable: true,
-    //   closeOnEscape: true,
-    //   acceptLabel: 'تایید',
-    //   rejectLabel: 'لغو',
-    //   rejectButtonProps: {
-    //     severity: 'secondary',
-    //     outlined: true,
-    //   },
-    //   acceptButtonProps: { severity: 'danger' },
-    //   accept: async () => {},
-    // });
+  async onDisable(): Promise<void> {
+    this.confirmService.confirmDisableTarrifs(
+      ' تعداد ' + `${this.tariffs().length}` + ' تعرفه ',
+      async () => {
+        this.withLoading(async () => {
+          const response = await this.tariffService.ChangeTariffsStatus(
+            this.tariffs()
+          );
+          if (!checkAndToastError(response, this.toast)) return;
+          this.toast.success('موفق', response.data.Message);
+          await this.updateTable();
+        });
+      }
+    );
   }
 
   async onEdit(row: Tariff): Promise<void> {
