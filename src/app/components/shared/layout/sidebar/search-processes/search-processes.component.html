@@ -2,7 +2,7 @@
   <app-text-input
     class="w-full max-w-lg"
     icon="pi pi-search"
-    (click)="isDialogVisible = true"
+    (click)="openDesktopSearchProcess()"
     placeholder="جستجو فرایند"
   />
 </div>
@@ -35,6 +35,7 @@
       [autoTriggerSearch]="true"
       [control]="searchTerm"
       [onSearchQuery]="searchProcess"
+      [id]="inputSearchId"
       [minSearchLength]="0"
     />
 

@@ -17,7 +17,7 @@
         <div>{{ userWallet()?.MoneyWalletId }}</div>
       </div>
       <div class="flex gap-2">
-        <div class="font-semibold">کد کیف پول:</div>
+        <div class="font-semibold">کد شناسایی کیف پول:</div>
         <div>{{ userWallet()?.MoneyWalletCode }}</div>
       </div>
       <div class="flex gap-2">
@@ -40,6 +40,7 @@
     [control]="amount"
     addonWidth="12rem"
     [disabled]="!userWallet()"
+    validationField="price"
     />
 
   <!-- Preset Amount Buttons -->
@@ -49,7 +50,7 @@
         variant="outlined"
         styleClass="w-40 py-2"
         size="small"
-        (click)="amount.setValue(item.Amount)"
+        (click)="setAmountValue(item.Amount)"
         [disabled]="!userWallet()"
         >
         {{ item.AmountTitle }} تومان
