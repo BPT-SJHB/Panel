@@ -4,7 +4,6 @@ import { TimePickerInput } from 'app/components/shared/inputs/time-picker-input/
 import { ToastService } from 'app/services/toast-service/toast.service';
 import { DatePickerInput } from 'app/components/shared/inputs/date-picker-input/date-picker-input.component';
 import { WalletUserChargingFunction } from 'app/services/wallet-management/model/wallet-user-charging-function.model';
-import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { WalletManagementService } from 'app/services/wallet-management/wallet-management.service';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
@@ -18,7 +17,6 @@ import {
   imports: [
     TimePickerInput,
     DatePickerInput,
-    TextInputComponent,
     ButtonComponent,
     TableComponent,
   ],
