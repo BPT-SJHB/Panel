@@ -37,40 +37,4 @@
   >
   </app-button>
 </div>
-<p-table
-  class="col-span-12 overflow-x-auto"
-  [columns]="cols"
-  [value]="userFunctions()"
-  [tableStyle]="tableUi.tableStyle"
-  [paginator]="tableUi.paginator"
-  [paginatorLocale]="tableUi.paginatorLocale"
-  [rows]="tableUi.rows"
-  [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
-  [stripedRows]="tableUi.stripedRows"
->
-  <ng-template #caption>
-    <div class="flex items-center justify-between">
-      <app-text-input
-        [control]="totalAmount"
-        label="جمع کل"
-        addonWidth="5rem"
-        [disabled]="true"
-      ></app-text-input>
-    </div>
-  </ng-template>
-  <ng-template #header let-columns>
-    <tr>
-      @for (col of columns; track $index) {
-        <th>{{ col }}</th>
-      }
-    </tr>
-  </ng-template>
-  <ng-template #body let-rowData>
-    <tr>
-      <td>{{ rowData.ShamsiDate }}</td>
-      <td>{{ rowData.Time }}</td>
-      <td>{{ rowData.Amount }}</td>
-      <td>{{ rowData.CardNo }}</td>
-    </tr>
-  </ng-template>
-</p-table>
+<app-table [rows]="userFunctions()" [columns]="columns" />
