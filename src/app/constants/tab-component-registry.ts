@@ -118,7 +118,6 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       {
         title: 'صفحه اصلی',
         component: MainViewComponent,
-        data: { loadType: LoadListType.TRANSPORT_COMPANY },
       },
     ],
   },
@@ -137,7 +136,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       { title: 'راننده', component: DriverInfoFormComponent },
       { title: 'ناوگان', component: TruckInfoFormComponent },
       {
-        title: 'راننده ناوگان کیف پول',
+        title: 'راننده-ناوگان-کیف‌پول',
         component: DriverTruckWalletFormComponent,
       },
     ],
@@ -214,13 +213,16 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   [TabComponentKey.AnnouncementManagement]: {
     shearedSignal: false,
     subTab: [
-      { title: 'گروه ها اعلام بار', component: AnnouncementGroupFormComponent },
       {
-        title: 'زیر گروه ها اعلام بار',
+        title: 'گروه‌های اعلام بار',
+        component: AnnouncementGroupFormComponent,
+      },
+      {
+        title: 'زیر گروه‌های اعلام بار',
         component: AnnouncementSubGroupFormComponent,
       },
       {
-        title: 'گروه و زیرگروه اعلام بار',
+        title: 'گروه و زیرگروه‌های اعلام بار',
         component: RelationOfAnnouncementGroupAndSubGroupComponent,
       },
     ],
@@ -235,7 +237,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
         component: RelationOfSequentialTurnToLoaderTypeFormComponent,
       },
       {
-        title: 'صفوف نوبت دهی - زیرگروه اعلام بار',
+        title: 'صفوف نوبت دهی و زیرگروه‌ها اعلام بار',
         component: RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent,
       },
     ],
@@ -244,14 +246,14 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   [TabComponentKey.TurnsManagement]: {
     shearedSignal: false,
     subTab: [
-      { title: 'لیست نوبت ها', component: TurnsListFormComponent },
-      { title: 'نوبت دهی بلادرنگ', component: RealTimeTurnsFormComponent },
+      { title: 'لیست نوبت‌ها', component: TurnsListFormComponent },
+      { title: 'نوبت بلادرنگ', component: RealTimeTurnsFormComponent },
       {
-        title: 'نوبت دهی - نوبت اضطراری',
+        title: 'نوبت اضطراری',
         component: EmergencyTurnsFormComponent,
       },
       {
-        title: 'نوبت دهی - احیای نوبت رزور',
+        title: 'احیای نوبت رزور',
         component: ResuscitateTurnsFormComponent,
       },
     ],
@@ -326,7 +328,6 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   [TabComponentKey.TruckWalletManagement]: {
     shearedSignal: true,
     subTab: [
-      { title: 'صفحه اصلی', component: MainViewComponent },
       {
         title: 'شارژ',
         component: TruckWalletPaymentFormComponent,
