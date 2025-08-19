@@ -21,6 +21,13 @@ import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TableModule } from 'primeng/table';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { AppConfirmService } from 'app/services/confirm/confirm.service';
+import {
+  deleteCell,
+  TableColumn,
+  TableComponent,
+} from 'app/components/shared/table/table.component';
+import { AppTitles } from 'app/constants/Titles';
 
 // 📦 Interface for displaying flat relation data in table
 interface RowRelationOfSequential {
@@ -28,6 +35,7 @@ interface RowRelationOfSequential {
   SeqTurnTitle: string;
   AnnouncementSGId: number;
   AnnouncementSGTitle: string;
+  delete: string;
 }
 
 @Component({
@@ -39,8 +47,8 @@ interface RowRelationOfSequential {
     TableModule,
     ConfirmDialogModule,
     ButtonComponent,
+    TableComponent,
   ],
-  providers: [ConfirmationService],
   templateUrl:
     './relation-of-sequential-turn-to-announcement-sub-groups-form.component.html',
   styleUrl:
@@ -51,19 +59,35 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
   private fb = inject(FormBuilder);
   private loadingService = inject(LoadingService);
   private toast = inject(ToastService);
-  private confirmationService = inject(ConfirmationService);
+  private confirmService = inject(AppConfirmService);
   private sequentialTurnService = inject(SequentialTurnManagementService);
   private announcementService = inject(
-    AnnouncementGroupSubgroupManagementService,
+    AnnouncementGroupSubgroupManagementService
   );
 
   readonly tableUi = TableConfig;
+  readonly appTitle = AppTitles;
 
   // 📊 UI State
   loading = false;
   addonWidth = '10rem';
-  cols = ['حذف', 'صف نوبت دهی', 'زیر گروه اعلام بار'];
   relationsSequential: RowRelationOfSequential[] = [];
+
+  readonly columns: TableColumn<RowRelationOfSequential>[] = [
+    {
+      field: 'SeqTurnId',
+      header: 'صف نوبت',
+    },
+    {
+      field: 'SeqTurnId',
+      header: 'زیر گروه',
+    },
+    {
+      ...deleteCell.config,
+      field: 'delete',
+      onAction: (row: RowRelationOfSequential) => this.onDelete(row),
+    },
+  ];
 
   // 📄 Form Definition
   sequentialTurnForm = this.fb.group({
@@ -93,7 +117,7 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
 
     const res =
       await this.announcementService.GetRelationOfAnnouncementGroupAndSubGroup(
-        this.announcementGroupId.value,
+        this.announcementGroupId.value
       );
 
     if (!checkAndToastError(res, this.toast)) return [];
@@ -102,7 +126,7 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
       group.AnnouncementSubGroups.map((sub) => ({
         AnnouncementSGId: sub.AnnouncementSGId,
         AnnouncementSGTitle: sub.AnnouncementSGTitle,
-      })),
+      }))
     );
   };
 
@@ -129,7 +153,7 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
 
   get announcementSubGroupTitle(): FormControl {
     return this.sequentialTurnForm.get(
-      'announcementSubGroupTitle',
+      'announcementSubGroupTitle'
     ) as FormControl;
   }
 
@@ -167,7 +191,7 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
   private async loadRelationOfSequentialTurns(sequentialId: number) {
     const res =
       await this.sequentialTurnService.GetRelationOfSequentialTurnToAnnouncementSubGroups(
-        sequentialId,
+        sequentialId
       );
     if (!checkAndToastError(res, this.toast)) return;
     this.relationsSequential = this.flattenAnnouncementRelations(res.data!);
@@ -175,7 +199,7 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
 
   // 🔃 Convert nested relations to flat format for display
   private flattenAnnouncementRelations(
-    data: RelationOfSequentialTurnToAnnouncementSubGroup[],
+    data: RelationOfSequentialTurnToAnnouncementSubGroup[]
   ): RowRelationOfSequential[] {
     return data.flatMap((group) =>
       group.AnnouncementSubGroups.map((sub) => ({
@@ -183,38 +207,24 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
         SeqTurnTitle: group.SeqTurnTitle ?? '',
         AnnouncementSGId: sub.AnnouncementSGId,
         AnnouncementSGTitle: sub.AnnouncementSGTitle ?? '',
-      })),
+        delete: deleteCell.value,
+      }))
     );
   }
 
   // ❌ Delete confirmation dialog
   onDelete(row: RowRelationOfSequential) {
-    this.confirmationService.confirm({
-      message: `آیا می‌خواهید رکورد <b><u>${row.SeqTurnTitle} - ${row.AnnouncementSGTitle}</u></b> را حذف کنید؟`,
-      header: 'حذف رکورد',
-      icon: 'pi pi-info-circle',
-      closable: true,
-      closeOnEscape: true,
-      rejectLabel: 'لغو',
-      rejectButtonProps: {
-        label: 'لغو',
-        severity: 'secondary',
-        outlined: true,
-      },
-      acceptLabel: 'تایید',
-      acceptButtonProps: {
-        label: 'تایید',
-        severity: 'danger',
-      },
-      accept: async () => {
+    this.confirmService.confirmDelete(
+      `${row.SeqTurnTitle} - ${row.AnnouncementSGTitle}`,
+      async () => {
         try {
           this.loadingService.setLoading(true);
           await this.deleteRelationAnnouncement(row);
         } finally {
           this.loadingService.setLoading(false);
         }
-      },
-    });
+      }
+    );
   }
 
   // ❌ Delete relation from backend
@@ -222,7 +232,7 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
     const res =
       await this.sequentialTurnService.DeleteRelationOfSequentialTurnToAnnouncementSubGroup(
         row.SeqTurnId,
-        row.AnnouncementSGId,
+        row.AnnouncementSGId
       );
     if (!checkAndToastError(res, this.toast)) return;
     this.toast.success('موفق', res.data.Message);
@@ -237,7 +247,7 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
       const res =
         await this.sequentialTurnService.RegisterNewRelationOfSequentialTurnToAnnouncementSubGroup(
           this.sequentialTurnId.value,
-          this.announcementSubGroupId.value,
+          this.announcementSubGroupId.value
         );
       if (!checkAndToastError(res, this.toast)) return;
       this.toast.success('موفق', res.data.Message);

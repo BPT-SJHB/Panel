@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -19,6 +19,7 @@ import { TableModule } from 'primeng/table';
 import { Subject, takeUntil } from 'rxjs';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { TableConfig } from 'app/constants/ui/table.ui';
+import { AppTitles } from 'app/constants/Titles';
 
 @Component({
   selector: 'app-loader-type-form',
@@ -34,12 +35,14 @@ import { TableConfig } from 'app/constants/ui/table.ui';
   templateUrl: './loader-type-form.component.html',
   styleUrls: ['./loader-type-form.component.scss'],
 })
-export class LoaderTypeFormComponent {
+export class LoaderTypeFormComponent implements OnDestroy, OnInit {
   private fb = inject(FormBuilder);
   private toast = inject(ToastService);
   private loaderTypeService = inject(LoaderTypesService);
   private loadingService = inject(LoadingService);
   private destroy$ = new Subject<void>();
+
+  readonly appTitle = AppTitles
 
   loading = false;
   tableUi = TableConfig;
@@ -98,7 +101,7 @@ export class LoaderTypeFormComponent {
       id: [item.LoaderTypeId],
       code: [item.LoaderTypeOrganizationId],
       title: [item.LoaderTypeTitle],
-      type: [item.LoaderTypeTitle],
+      type: [item.LoaderTypeFixStatusTitle],
       status: [item.Active],
     });
   }

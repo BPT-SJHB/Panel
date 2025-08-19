@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -21,6 +21,7 @@ import { SearchInputComponent } from '../../../shared/inputs/search-input/search
 import { DialogService } from 'primeng/dynamicdialog';
 import { NewPasswordDialogComponent } from 'app/components/shared/dialog/new-password-dialog/new-password-dialog.component';
 import { ButtonComponent } from "app/components/shared/button/button.component";
+import { AppTitles } from 'app/constants/Titles';
 
 @Component({
   selector: 'app-driver-info-form',
@@ -36,7 +37,7 @@ import { ButtonComponent } from "app/components/shared/button/button.component";
   templateUrl: './driver-info-form.component.html',
   styleUrl: './driver-info-form.component.scss',
 })
-export class DriverInfoFormComponent {
+export class DriverInfoFormComponent implements OnDestroy, OnInit {
   private fb = inject(FormBuilder);
   private toast = inject(ToastService);
   private driverTruckManager = inject(Driver_TruckManagementService);
@@ -48,6 +49,7 @@ export class DriverInfoFormComponent {
 
   loading = false;
   addonWidth = '8rem';
+  readonly appTitle = AppTitles;
 
   ngOnDestroy(): void {
     this.destroy$.next();

@@ -11,8 +11,6 @@ import {
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { FileUpload, FileUploadModule } from 'primeng/fileupload';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
 
 // Shared Components
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
@@ -31,12 +29,17 @@ import { Product } from 'app/data/model/product-type.model';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { BaseLoading } from '../shared/component-base/base-loading';
 import {
+  deleteCell,
+  editCell,
   TableColumn,
   TableColumnType,
   TableComponent,
 } from 'app/components/shared/table/table.component';
 import { TariffsManagementService } from 'app/services/Tariffs-management/tariffs-management.service';
 import { checkAndToastError } from 'app/utils/api-utils';
+import { AppConfirmService } from 'app/services/confirm/confirm.service';
+import { ValidationSchema } from 'app/constants/validation-schema';
+import { AppTitles } from 'app/constants/Titles';
 
 enum TariffsFormMode {
   EDITABLE,
@@ -54,7 +57,6 @@ type TariffTable = Tariff & { edit: string; delete: string };
     DialogModule,
     FileUploadModule,
     ReactiveFormsModule,
-    ConfirmDialogModule,
     TextInputComponent,
     ToggleSwitchInputComponent,
     SearchAutoCompleteComponent,
@@ -63,22 +65,27 @@ type TariffTable = Tariff & { edit: string; delete: string };
   ],
   templateUrl: './tariffs-form.component.html',
   styleUrl: './tariffs-form.component.scss',
-  providers: [ConfirmationService],
 })
 export class TariffsFormComponent extends BaseLoading {
   @ViewChild('fu') fu?: FileUpload;
 
   private readonly fb = inject(FormBuilder);
   private readonly tariffService = inject(TariffsManagementService);
-  private readonly confirmationService = inject(ConfirmationService);
+  private readonly confirmService = inject(AppConfirmService);
   private readonly loaderTypeService = inject(LoaderTypesService);
   private readonly provinceService = inject(ProvinceAndCityManagementService);
   private readonly productService = inject(ProductTypesService);
   private readonly nonNullable = this.fb.nonNullable;
   readonly headerTitle = signal<string>('');
   readonly addonWidth = '6rem';
+  readonly appTitle = AppTitles;
   tariffsFormMode: TariffsFormMode = TariffsFormMode.REGISTER;
   formDialogVisible = false;
+  incDialogVisible = false;
+  prentageTariffInc = this.fb.control<number | null>(
+    null,
+    ValidationSchema.parentage
+  );
 
   readonly tariffs = signal<TariffTable[]>([]);
   tariffCached?: Tariff;
@@ -110,21 +117,6 @@ export class TariffsFormComponent extends BaseLoading {
   });
 
   readonly columns: TableColumn<TariffTable>[] = [
-    {
-      field: 'edit',
-      header: 'ویرایش',
-      type: TableColumnType.BUTTON_ICON,
-      class: 'text-center',
-      buttonSeverity: 'info',
-      onAction: async (row: TariffTable) => await this.onEdit(row),
-    },
-    {
-      field: 'delete',
-      header: 'حذف',
-      type: TableColumnType.BUTTON_ICON,
-      buttonSeverity: 'danger',
-      class: 'text-center',
-    },
     {
       field: 'LoaderTypeId',
       header: 'کد نوع بارگیر',
@@ -174,6 +166,16 @@ export class TariffsFormComponent extends BaseLoading {
       header: 'فعال/غیرفعال',
       type: TableColumnType.BOOLEAN,
     },
+    {
+      ...editCell.config,
+      field: 'edit',
+      onAction: async (row: Tariff) => await this.onEdit(row),
+    },
+    {
+      ...deleteCell.config,
+      field: 'delete',
+      onAction: async (row: Tariff) => await this.onDelete(row),
+    },
   ];
 
   excelFile = this.nonNullable.control([]);
@@ -196,8 +198,8 @@ export class TariffsFormComponent extends BaseLoading {
       this.tariffs.set(
         response.data.map((t) => ({
           ...t,
-          edit: 'pi pi-pencil',
-          delete: 'pi pi-trash',
+          edit: editCell.value,
+          delete: deleteCell.value,
         }))
       );
     });
@@ -205,10 +207,10 @@ export class TariffsFormComponent extends BaseLoading {
 
   isSearchFormValid(): boolean {
     return (
-      this.searchLoaderTypeId.value &&
-      (this.searchSourceCityId.value ||
-        this.searchTargetCityId.value ||
-        this.searchGoodsId.value)
+      this.searchLoaderTypeId.valid &&
+      (this.searchSourceCityId.valid ||
+        this.searchTargetCityId.valid ||
+        this.searchGoodsId.valid)
     );
   }
 
@@ -251,46 +253,34 @@ export class TariffsFormComponent extends BaseLoading {
 
   closeDialogTariffForm(): void {
     this.formDialogVisible = false;
+    this.incDialogVisible = false;
     this.resetTariffsForm();
     this.headerTitle.set('');
   }
 
-  onDelete(row: Tariff): void {
-    this.confirmationService.confirm({
-      message: `آیا می‌خواهید با کد ${row.LoaderTypeId} حذف شود؟`,
-      header: `حذف رکورد ${row.LoaderTypeId}`,
-      icon: 'pi pi-info-circle',
-      closable: true,
-      closeOnEscape: true,
-      acceptLabel: 'تایید',
-      rejectLabel: 'لغو',
-      rejectButtonProps: {
-        severity: 'secondary',
-        outlined: true,
-      },
-      acceptButtonProps: { severity: 'danger' },
-      accept: async () => {
+  async onDelete(row: Tariff) {
+    this.confirmService.confirmDelete(
+      `${row.LoaderTypeTitle} - ${row.GoodTitle} - ${row.SourceCityTitle} به ${row.TargetCityTitle}`,
+      async () => {
         await this.deleteTariffs([row]);
-      },
-    });
+      }
+    );
   }
 
-  onDisable(): void {
-    this.confirmationService.confirm({
-      message: `آیا می خواهید  تعداد ${this.tariffs().length} غیرفعال کنید.`,
-      header: `غیرفعال کردن تعرفه ها`,
-      icon: 'pi pi-info-circle',
-      closable: true,
-      closeOnEscape: true,
-      acceptLabel: 'تایید',
-      rejectLabel: 'لغو',
-      rejectButtonProps: {
-        severity: 'secondary',
-        outlined: true,
-      },
-      acceptButtonProps: { severity: 'danger' },
-      accept: async () => {},
-    });
+  async onDisable(): Promise<void> {
+    this.confirmService.confirmDisableTarrifs(
+      ' تعداد ' + `${this.tariffs().length}` + ' تعرفه ',
+      async () => {
+        this.withLoading(async () => {
+          const response = await this.tariffService.ChangeTariffsStatus(
+            this.tariffs()
+          );
+          if (!checkAndToastError(response, this.toast)) return;
+          this.toast.success('موفق', response.data.Message);
+          await this.updateTable();
+        });
+      }
+    );
   }
 
   async onEdit(row: Tariff): Promise<void> {
@@ -433,6 +423,26 @@ export class TariffsFormComponent extends BaseLoading {
   onFileExcelUpload(event: any) {
     this.fu?.clear();
     this.toast.success('موفق', 'فایل اکسل با موفقیت بارگذاری شد.');
+  }
+
+  onIncTariff() {
+    this.headerTitle.set('افزایش تعرفه');
+    this.prentageTariffInc.reset(null);
+    this.incDialogVisible = true;
+  }
+
+  async incremntTariff() {
+    if (this.loading() || this.prentageTariffInc.invalid) return;
+    await this.withLoading(async () => {
+      const response = await this.tariffService.AddPercentageToTariffs(
+        this.tariffs(),
+        this.prentageTariffInc.value!
+      );
+      if (!checkAndToastError(response, this.toast)) return;
+      this.toast.success('موفق', response.data.Message);
+      await this.updateTable();
+      this.closeDialogTariffForm();
+    });
   }
 
   private async updateTable(): Promise<void> {

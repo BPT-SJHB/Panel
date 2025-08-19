@@ -28,6 +28,7 @@ import { ShortResponse } from 'app/data/model/short-response.model';
 import { ErrorCodes } from 'app/constants/error-messages';
 import { TableConfig } from 'app/constants/ui/table.ui';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { AppTitles } from 'app/constants/Titles';
 
 @Component({
   selector: 'app-lad-places-form',
@@ -60,6 +61,7 @@ export class LadPlacesFormComponent implements OnInit, OnDestroy {
 
   readonly tableUi = TableConfig;
   readonly addonWidth = '7rem';
+  readonly appTitle = AppTitles
 
   formDialogVisible = false;
   loading = false;

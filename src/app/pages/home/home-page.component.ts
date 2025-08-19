@@ -17,11 +17,11 @@ import {
 
 // Models & Constants
 import { LoadAnnouncementPlace } from 'app/data/model/load-announcement-place.model';
-import { appTitles } from 'app/constants/Titles';
 
 // Services
 import { LoadAnnouncementPlacesService } from 'app/services/LoadAnnouncementPlaces/load-announcement-places.service';
 import { BaseLoading } from 'app/components/forms/shared/component-base/base-loading';
+import { AppTitles } from 'app/constants/Titles';
 
 @Component({
   selector: 'app-home',
@@ -40,15 +40,15 @@ import { BaseLoading } from 'app/components/forms/shared/component-base/base-loa
 export class HomePageComponent extends BaseLoading {
   private readonly lap = inject(LoadAnnouncementPlacesService);
 
-  readonly headerTitle = appTitles.appBrokenTitle;
+  readonly headerTitle = AppTitles.appBrokenTitle;
   readonly dialogTitle = signal('');
   readonly currentProvince = signal<ProvinceCode>('IR-00');
   readonly displayedLoadAnnouncementPlaces = signal<LoadAnnouncementPlace[]>(
-    [],
+    []
   );
 
   readonly provincesAnnouncement = signal(
-    new Map<ProvinceCode, LoadAnnouncementPlace[]>(),
+    new Map<ProvinceCode, LoadAnnouncementPlace[]>()
   );
 
   readonly UnknownProvince: ProvinceCode = 'IR-00';
@@ -61,7 +61,7 @@ export class HomePageComponent extends BaseLoading {
    */
   filterAnnouncementPlaces = (
     announcementPlace: LoadAnnouncementPlace,
-    query: string,
+    query: string
   ): boolean =>
     announcementPlace.LAPTitle.includes(query) ||
     announcementPlace.Description.includes(query);
@@ -83,7 +83,7 @@ export class HomePageComponent extends BaseLoading {
     const { provinceCode, provinceName } = event;
 
     await this.withLoading(() =>
-      this.fetchLoadAnnouncementPlaces(provinceCode),
+      this.fetchLoadAnnouncementPlaces(provinceCode)
     );
 
     this.currentProvince.set(provinceCode);

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -21,6 +21,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { SearchInputComponent } from '../../../shared/inputs/search-input/search-input.component';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { DatePickerInput } from 'app/components/shared/inputs/date-picker-input/date-picker-input.component';
+import { AppTitles } from 'app/constants/Titles';
 
 @Component({
   selector: 'app-truck-info-form',
@@ -36,7 +37,7 @@ import { DatePickerInput } from 'app/components/shared/inputs/date-picker-input/
     DatePickerInput,
   ],
 })
-export class TruckInfoFormComponent {
+export class TruckInfoFormComponent implements OnDestroy, OnInit {
   private fb = inject(FormBuilder);
   private truckService = inject(Driver_TruckManagementService);
   private toast = inject(ToastService);
@@ -45,7 +46,9 @@ export class TruckInfoFormComponent {
   private destroy$ = new Subject<void>();
 
   loading = false;
-  addonWidth = '8rem';
+  addonWidth = '9rem';
+  readonly appTitle = AppTitles
+
   searchForm: FormGroup = this.fb.group({
     searchSmartCard: ['', ValidationSchema.smartCard],
   });
@@ -147,7 +150,7 @@ export class TruckInfoFormComponent {
       licensePlateNumber: truck.Pelak ?? '',
       serialNumber: truck.Serial ?? '',
       smartCard: truck.SmartCardNo ?? '',
-      loaderType: truck.LoaderTypeId ?? '',
+      loaderType: truck.LoaderTypeId?? '',
     });
   }
 

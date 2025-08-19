@@ -6,8 +6,8 @@
 >
   <app-search-auto-complete
     class="col-span-12 sm:col-span-6 lg:col-span-4"
-    placeholder="نوع بارگیر"
-    label="نوع بارگیر"
+    [label]="appTitle.inputs.trucks.truckLoader"
+    [placeholder]="'نوع ' + appTitle.getPlaceholder('truckLoader')"
     optionLabel="LoaderTypeTitle"
     optionValue="LoaderTypeTitle"
     (selectSuggestion)="onSelectSearchLoaderType($event)"
@@ -19,8 +19,8 @@
 
   <app-search-auto-complete
     class="col-span-12 sm:col-span-6 lg:col-span-4"
-    placeholder="شهر مبدا"
-    label="شهر مبدا"
+    [label]="appTitle.inputs.provinceAndCities.startCity"
+    [placeholder]="appTitle.getPlaceholder('startCity')"
     [control]="searchSourceCity"
     optionLabel="CityTitle"
     optionValue="CityTitle"
@@ -33,8 +33,8 @@
 
   <app-search-auto-complete
     class="col-span-12 sm:col-span-6 lg:col-span-4"
-    placeholder="شهر مقصد"
-    label="شهر مقصد"
+    [label]="appTitle.inputs.provinceAndCities.endCity"
+    [placeholder]="appTitle.getPlaceholder('endCity')"
     [control]="searchTargetCity"
     optionLabel="CityTitle"
     optionValue="CityTitle"
@@ -47,8 +47,8 @@
 
   <app-search-auto-complete
     class="col-span-12 sm:col-span-6 lg:col-span-4"
-    placeholder="نوع بار"
-    label="نوع بار"
+    [label]="appTitle.inputs.loads.loadType"
+    [placeholder]="appTitle.getPlaceholder('loadType')"
     [control]="searchGoods"
     optionLabel="ProductTitle"
     optionValue="ProductTitle"
@@ -61,10 +61,10 @@
 
   <div class="col-span-12 flex justify-end">
     <app-button
-      label="جستجو"
+      [label]="appTitle.buttons.search"
       severity="info"
       size="small"
-      styleClass="px-6 py-1"
+      styleClass="px-6 py-2"
       [disabled]="!isSearchFormValid()"
       type="submit"
     />
@@ -83,13 +83,14 @@
   <app-button
     [disabled]="tariffs().length === 0"
     label="غیرفعال کردن تعرفه"
-    (click)="disableTariffs()"
+    (click)="onDisable()"
     severity="danger"
   />
   <app-button
     [disabled]="tariffs().length === 0"
     label="افزایش تعرفه"
     severity="info"
+    (onClick)="onIncTariff()"
   />
 </div>
 
@@ -129,10 +130,11 @@
   >
     <app-search-auto-complete
       class="col-span-12"
-      placeholder="نوع بارگیر"
-      label="نوع بارگیر"
+      [label]="appTitle.inputs.trucks.truckLoader"
+      [placeholder]="appTitle.getPlaceholder('truckLoader')"
       optionLabel="LoaderTypeTitle"
       optionValue="LoaderTypeTitle"
+      [control]="LoaderTypeTitle"
       (selectSuggestion)="onSelectLoaderType($event)"
       (valueChange)="onAutoCompleteChange(LoaderTypeId)"
       [lazySearch]="onSearchLoaderType"
@@ -144,8 +146,8 @@
 
     <app-search-auto-complete
       class="col-span-12"
-      placeholder="شهر مبدا"
-      label="شهر مبدا"
+      [label]="appTitle.inputs.provinceAndCities.startCity"
+      [placeholder]="appTitle.getPlaceholder('startCity')"
       [control]="SourceCityTitle"
       optionLabel="CityTitle"
       optionValue="CityTitle"
@@ -160,8 +162,8 @@
 
     <app-search-auto-complete
       class="col-span-12"
-      placeholder="شهر مقصد"
-      label="شهر مقصد"
+      [label]="appTitle.inputs.provinceAndCities.endCity"
+      [placeholder]="appTitle.getPlaceholder('endCity')"
       [control]="TargetCityTitle"
       optionLabel="CityTitle"
       optionValue="CityTitle"
@@ -176,8 +178,8 @@
 
     <app-search-auto-complete
       class="col-span-12"
-      placeholder="نوع بار"
-      label="نوع بار"
+      [label]="appTitle.inputs.loads.loadType"
+      [placeholder]="appTitle.getPlaceholder('loadType')"
       [control]="GoodTitle"
       optionLabel="ProductTitle"
       optionValue="ProductTitle"
@@ -217,7 +219,7 @@
 
     <app-toggle-switch-input
       class="col-span-12 flex px-3"
-      label="وضعیت"
+      [label]="appTitle.toggleSwitches.status"
       [control]="Active"
       [readonly]="true"
     />
@@ -225,7 +227,7 @@
     <!-- Submit -->
     <div class="col-span-12 flex justify-end mt-4">
       <app-button
-        label="ثبت تغییرات"
+        [label]="appTitle.buttons.saveAndEdit"
         type="submit"
         [disabled]="tariffForm.invalid || loading()"
       />
@@ -233,5 +235,28 @@
   </form>
 </p-dialog>
 
-<!-- Confirm Dialog -->
-<p-confirm-dialog />
+<p-dialog
+  [(visible)]="incDialogVisible"
+  [modal]="true"
+  [closable]="true"
+  [header]="headerTitle()"
+  [style]="{ width: '30rem', maxWidth: '100%' }"
+  (onHide)="closeDialogTariffForm()"
+  draggable="false"
+  maskStyleClass="px-2"
+>
+  <app-text-input
+    class="col-span-12"
+    placeholder="درصد افزایش تعرفه"
+    label="درصد افزایش"
+    [control]="prentageTariffInc"
+    validationField="parentage"
+  />
+  <div class="col-span-12 flex justify-end mt-5">
+    <app-button
+      label="ثبت تغییرات"
+      (click)="incremntTariff()"
+      [disabled]="prentageTariffInc.invalid || loading()"
+    />
+  </div>
+</p-dialog>

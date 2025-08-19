@@ -6,8 +6,8 @@
 >
   <app-search-auto-complete
     class="col-span-12 sm:col-span-6 lg:col-span-4"
-    placeholder="نوع بارگیر"
-    label="نوع بارگیر"
+    [label]="appTitle.inputs.trucks.truckLoader"
+    [placeholder]="appTitle.getPlaceholder('truckLoader')"
     optionLabel="LoaderTypeTitle"
     optionValue="LoaderTypeTitle"
     (selectSuggestion)="onSelectSearchLoaderType($event)"
@@ -19,35 +19,35 @@
 
   <app-search-auto-complete
     class="col-span-12 sm:col-span-6 lg:col-span-4"
-    placeholder="شهر مبدا"
-    label="شهر مبدا"
+    [label]="appTitle.inputs.provinceAndCities.startCity"
+    [placeholder]="appTitle.getPlaceholder('startCity')"
     [control]="searchSourceCity"
     optionLabel="CityTitle"
     optionValue="CityTitle"
     (selectSuggestion)="onSelectSearchSourceCity($event)"
     (valueChange)="onAutoCompleteChange(searchSourceCityId)"
     [lazySearch]="onSearchCity"
-    [showIconOptionSelected]="searchSourceCityId.value != 0"
+    [showIconOptionSelected]="searchSourceCityId.value !== 0"
     addonWidth="8rem"
   />
 
   <app-search-auto-complete
     class="col-span-12 sm:col-span-6 lg:col-span-4"
-    placeholder="شهر مقصد"
-    label="شهر مقصد"
+    [label]="appTitle.inputs.provinceAndCities.endCity"
+    [placeholder]="appTitle.getPlaceholder('endCity')"
     [control]="searchTargetCity"
     optionLabel="CityTitle"
     optionValue="CityTitle"
     (selectSuggestion)="onSelectSearchTargetCity($event)"
     (valueChange)="onAutoCompleteChange(searchSourceCityId)"
     [lazySearch]="onSearchCity"
-    [showIconOptionSelected]="searchTargetCityId.value != 0"
+    [showIconOptionSelected]="searchTargetCityId.value !== 0"
     addonWidth="8rem"
   />
 
   <div class="col-span-12 flex justify-end">
     <app-button
-      label="جستجو"
+      [label]="appTitle.buttons.search"
       severity="info"
       size="small"
       styleClass="px-6 py-2"
@@ -58,76 +58,7 @@
 </form>
 
 <!-- Results Table -->
-<p-table
-  class="col-span-12 overflow-x-auto"
-  [columns]="cols"
-  [value]="travelTimes"
-  [tableStyle]="tableUi.tableStyle"
-  [paginator]="tableUi.paginator"
-  [paginatorLocale]="tableUi.paginatorLocale"
-  [rows]="tableUi.rows"
-  [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
-  [stripedRows]="tableUi.stripedRows"
->
-  <ng-template #caption>
-    <div class="flex justify-between items-center">
-      <app-button
-        label="جدید"
-        size="small"
-        styleClass="px-6 md:px-8 py-1"
-        (click)="onNew()"
-      />
-    </div>
-  </ng-template>
-
-  <ng-template #header let-columns>
-    <tr>
-      @for (col of columns; track $index) {
-        <th>{{ col }}</th>
-      }
-    </tr>
-  </ng-template>
-
-  <ng-template #body let-rowData>
-    <tr>
-      <td (click)="onEdit(rowData)">
-        <app-button
-          icon="pi pi-pencil"
-          severity="info"
-          variant="text"
-          [disabled]="loading"
-        />
-      </td>
-
-      <td (click)="onDelete(rowData)">
-        <app-button
-          icon="pi pi-trash"
-          severity="danger"
-          variant="text"
-          [disabled]="loading"
-        />
-      </td>
-
-      <td>{{ rowData.LoaderTypeId }}</td>
-      <td>{{ rowData.SourceCityId }}</td>
-      <td>{{ rowData.SourceCityName }}</td>
-      <td>{{ rowData.TargetCityId }}</td>
-      <td>{{ rowData.TargetCityName }}</td>
-      <td>{{ rowData.TravelTime }}</td>
-      <td>
-        <i
-          class="pi"
-          [ngClass]="
-            rowData.Active
-              ? 'pi-check-circle text-green-500'
-              : 'pi-times-circle text-red-500'
-          "
-        ></i>
-      </td>
-    </tr>
-  </ng-template>
-</p-table>
-
+<app-table [rows]="travelTimes" [columns]="cloumns" />
 <!-- Dialog Form -->
 <p-dialog
   [(visible)]="formDialogVisible"
@@ -148,15 +79,15 @@
       <div class="grid grid-cols-12 gap-4 col-span-12">
         <app-search-auto-complete
           class="col-span-12"
-          placeholder="نوع بارگیر"
-          label="نوع بارگیر"
+          [label]="appTitle.inputs.trucks.truckLoader"
+          [placeholder]="appTitle.getPlaceholder('truckLoader')"
           optionLabel="LoaderTypeTitle"
           optionValue="LoaderTypeTitle"
           [control]="loaderType"
           (selectSuggestion)="onSelectLoaderType($event)"
           (valueChange)="onAutoCompleteChange(loaderTypeId)"
           [lazySearch]="onSearchLoaderType"
-          [showIconOptionSelected]="loaderTypeId.value != 0"
+          [showIconOptionSelected]="loaderTypeId.value !== 0"
           addonWidth="6rem"
           [readOnly]="isTravelTimeFormReadonly()"
           [disabled]="isTravelTimeFormReadonly()"
@@ -164,15 +95,15 @@
 
         <app-search-auto-complete
           class="col-span-12"
-          placeholder="شهر مبدا"
-          label="شهر مبدا"
+          [label]="appTitle.inputs.provinceAndCities.startCity"
+          [placeholder]="appTitle.getPlaceholder('startCity')"
           [control]="sourceCityName"
           optionLabel="CityTitle"
           optionValue="CityTitle"
           (selectSuggestion)="onSelectSourceCity($event)"
           (valueChange)="onAutoCompleteChange(sourceCityId)"
           [lazySearch]="onSearchCity"
-          [showIconOptionSelected]="sourceCityId.value != 0"
+          [showIconOptionSelected]="sourceCityId.value !== 0"
           addonWidth="6rem"
           [readOnly]="isTravelTimeFormReadonly()"
           [disabled]="isTravelTimeFormReadonly()"
@@ -180,15 +111,15 @@
 
         <app-search-auto-complete
           class="col-span-12"
-          placeholder="شهر مقصد"
-          label="شهر مقصد"
+          [label]="appTitle.inputs.provinceAndCities.endCity"
+          [placeholder]="appTitle.getPlaceholder('endCity')"
           [control]="targetCityName"
           optionLabel="CityTitle"
           optionValue="CityTitle"
           (selectSuggestion)="onSelectTargetCity($event)"
           (valueChange)="onAutoCompleteChange(targetCityId)"
           [lazySearch]="onSearchCity"
-          [showIconOptionSelected]="targetCityId.value != 0"
+          [showIconOptionSelected]="targetCityId.value !== 0"
           addonWidth="6rem"
           [readOnly]="isTravelTimeFormReadonly()"
           [disabled]="isTravelTimeFormReadonly()"
@@ -196,8 +127,8 @@
 
         <app-text-input
           class="col-span-12"
-          placeholder="زمان سفر"
-          label="زمان سفر"
+          [label]="appTitle.inputs.travelTime.travelTimeDurationTitle"
+          [placeholder]="appTitle.getPlaceholder('travelTimeDurationTitle')"
           [control]="travelTimeTake"
           addonWidth="8rem"
         />
@@ -205,7 +136,7 @@
 
       <div class="col-span-12">
         <app-toggle-switch-input
-          label="وضعیت"
+          [label]="appTitle.toggleSwitches.status"
           class="flex px-2"
           [control]="travelTimeActive"
         />
@@ -213,7 +144,7 @@
 
       <div class="col-span-12 flex justify-end mt-6">
         <app-button
-          label="ثبت و ویرایش اطلاعات"
+          [label]="appTitle.buttons.saveAndEdit"
           [disabled]="travelTimeForm.invalid || loading"
           (click)="registerOrEdit()"
         />
@@ -221,5 +152,3 @@
     </div>
   </form>
 </p-dialog>
-
-<p-confirm-dialog />

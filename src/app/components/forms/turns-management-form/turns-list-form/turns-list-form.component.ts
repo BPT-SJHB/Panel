@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { SearchInputComponent } from 'app/components/shared/inputs/search-input/search-input.component';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
@@ -18,6 +18,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { TableConfig } from 'app/constants/ui/table.ui';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { AppTitles } from 'app/constants/Titles';
 
 @Component({
   selector: 'app-turns-list-form',
@@ -34,7 +35,7 @@ import { ButtonComponent } from 'app/components/shared/button/button.component';
   templateUrl: './turns-list-form.component.html',
   styleUrl: './turns-list-form.component.scss',
 })
-export class TurnsListFormComponent {
+export class TurnsListFormComponent implements OnInit, OnDestroy {
   private fb = inject(FormBuilder);
   private toast = inject(ToastService);
   private truckManagerService = inject(Driver_TruckManagementService);
@@ -44,6 +45,7 @@ export class TurnsListFormComponent {
   private confirmationService = inject(ConfirmationService);
 
   readonly tableUi = TableConfig;
+  readonly appTitle = AppTitles;
 
   turnsCols = [
     'شماره نوبت',
@@ -63,7 +65,7 @@ export class TurnsListFormComponent {
 
   accountingCols = [
     'شماره نوبت',
-    'شماره صفوف نوبت دهی',
+    'تسلسل نوبت',
     'تاریخ',
     'زمان',
     'تراکنش',
@@ -77,7 +79,7 @@ export class TurnsListFormComponent {
     truckId: ['', ValidationSchema.truckId],
     licensePlate: ['', ValidationSchema.licensePlateNumber],
   });
-  dialogTurnAccounting: boolean = false;
+  dialogTurnAccounting = false;
   turnsAccounting: TurnAccounting[] = [];
   headerTitle: any;
 
@@ -111,11 +113,11 @@ export class TurnsListFormComponent {
       }
       this.populateSearchForm(
         resTruckInfo.data.TruckId,
-        resTruckInfo.data.Pelak ?? '',
+        resTruckInfo.data.Pelak ?? ''
       );
 
       const resTurnsInfo = await this.turnManagerService.GetLatestTurns(
-        resTruckInfo.data.TruckId,
+        resTruckInfo.data.TruckId
       );
       if (!checkAndToastError(resTurnsInfo, this.toast)) return;
       this.truckTurnsList = resTurnsInfo.data;
@@ -129,7 +131,7 @@ export class TurnsListFormComponent {
       this.loadingService.setLoading(true);
 
       const response = await this.turnManagerService.ResuscitateTurn(
-        row.TurnId,
+        row.TurnId
       );
       if (!checkAndToastError(response, this.toast)) return;
       await this.loadTurnsList(this.smartCode.value);
@@ -155,11 +157,11 @@ export class TurnsListFormComponent {
     try {
       this.loadingService.setLoading(true);
       const response = await this.turnManagerService.GetTurnAccounting(
-        row.TurnId,
+        row.TurnId
       );
       if (!checkAndToastError(response, this.toast)) return;
       this.turnsAccounting = response.data;
-      this.headerTitle = `لیست تراکنش های شماره نوبت ${row.TurnId}`;
+      this.headerTitle = `لیست تراکنش ها`;
       this.dialogTurnAccounting = true;
     } finally {
       this.loadingService.setLoading(false);

@@ -3,6 +3,8 @@ import { TravelTime } from '../model/travel-time.model';
 export const mockTravelTimes: TravelTime[] = [
   {
     LoaderTypeId: 505,
+    LoaderTypeTitle:
+      'کفی 18 چرخ                                                                                          ',
     SourceCityId: 21310000,
     SourceCityName: 'اصفهان - اصفهان  ',
     TargetCityId: 11320000,
@@ -12,6 +14,8 @@ export const mockTravelTimes: TravelTime[] = [
   },
   {
     LoaderTypeId: 505,
+    LoaderTypeTitle:
+      'کفی 18 چرخ                                                                                          ',
     SourceCityId: 21310000,
     SourceCityName: 'اصفهان - اصفهان  ',
     TargetCityId: 11321004,

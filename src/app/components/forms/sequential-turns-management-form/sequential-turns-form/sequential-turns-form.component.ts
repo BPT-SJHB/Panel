@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { NgClass } from '@angular/common';
 import {
   FormBuilder,
   FormControl,
@@ -9,7 +8,6 @@ import {
 import { Subject, takeUntil } from 'rxjs';
 
 import { ButtonModule } from 'primeng/button';
-import { TableModule } from 'primeng/table';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { Dialog } from 'primeng/dialog';
 import { ConfirmationService } from 'primeng/api';
@@ -27,11 +25,24 @@ import { ValidationSchema } from 'app/constants/validation-schema';
 import { SequentialTurn } from 'app/services/sequential-turn-management/model/sequential-turn.model';
 import { TableConfig } from 'app/constants/ui/table.ui';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { AppConfirmService } from 'app/services/confirm/confirm.service';
+import {
+  deleteCell,
+  editCell,
+  TableColumn,
+  TableComponent,
+} from 'app/components/shared/table/table.component';
+import { AppTitles } from 'app/constants/Titles';
 
 enum FormMode {
   EDITABLE,
   REGISTER,
 }
+
+export type SequentialTurnTableRow = SequentialTurn & {
+  edit: string;
+  delete: string;
+};
 
 @Component({
   selector: 'app-sequential-turns-form',
@@ -39,10 +50,9 @@ enum FormMode {
   styleUrl: './sequential-turns-form.component.scss',
   standalone: true,
   imports: [
-    TableModule,
     ButtonModule,
     SearchInputComponent,
-    NgClass,
+    TableComponent,
     ConfirmDialogModule,
     Dialog,
     TextInputComponent,
@@ -56,15 +66,16 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
   private readonly fb = inject(FormBuilder);
   private readonly loadingService = inject(LoadingService);
   private readonly sequentialTurnsService = inject(
-    SequentialTurnManagementService,
+    SequentialTurnManagementService
   );
   private readonly toast = inject(ToastService);
-  private readonly confirmationService = inject(ConfirmationService);
+  private readonly confirmService = inject(AppConfirmService);
   private readonly destroy$ = new Subject<void>();
   readonly tableUi = TableConfig;
+  readonly appTitle = AppTitles;
 
   sequentialTurnForm = this.fb.group({
-    id: [-1, ValidationSchema.id],
+    id: this.fb.control<number | null>(null),
     title: ['', ValidationSchema.title],
     keyword: ['', ValidationSchema.keyword],
     status: [true, Validators.required],
@@ -72,14 +83,38 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
 
   sequentialTurnFormMode = FormMode.REGISTER;
   searchSequentialTurn = new FormControl<string>('', Validators.required);
-  sequentialTurns: SequentialTurn[] = [];
-  displaySequentialTurns: SequentialTurn[] = [];
+  sequentialTurns: SequentialTurnTableRow[] = [];
+  displaySequentialTurns: SequentialTurnTableRow[] = [];
 
-  headerTitle: string = '';
+  headerTitle = '';
   formDialogVisible = false;
   loading = false;
 
-  cols = ['ویرایش', 'حذف', 'شناسه', 'عنوان نوبت', 'کلمه کلیدی', 'فعال'];
+  readonly columns: TableColumn<SequentialTurnTableRow>[] = [
+    {
+      field: 'SeqTurnId',
+      header: 'شناسه',
+    },
+    {
+      field: 'SeqTurnId',
+      header: 'عنوان نوبت',
+    },
+    {
+      field: 'SeqTurnKeyWord',
+      header: 'کلمه کلیدی',
+      class: 'font-bold',
+    },
+    {
+      ...editCell.config,
+      field: 'edit',
+      onAction: (row: SequentialTurn) => this.onEdit(row),
+    },
+    {
+      ...deleteCell.config,
+      field: 'delete',
+      onAction: (row: SequentialTurn) => this.onDelete(row),
+    },
+  ];
 
   ngOnInit(): void {
     this.loadingService.loading$
@@ -104,14 +139,19 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
       const response = await this.sequentialTurnsService.GetSequentialTurns('');
       if (!checkAndToastError(response, this.toast)) return;
 
-      this.sequentialTurns = response.data ?? [];
+      const rows = response.data.map((st) => ({
+        ...st,
+        edit: editCell.value,
+        delete: deleteCell.value,
+      }));
+      this.sequentialTurns = rows;
       this.displaySequentialTurns = [...this.sequentialTurns];
     } finally {
       this.loadingService.setLoading(false);
     }
   }
 
-  handleSearch(results: SequentialTurn[]): void {
+  handleSearch(results: SequentialTurnTableRow[]): void {
     this.displaySequentialTurns = results;
   }
 
@@ -119,34 +159,17 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
     turn.SeqTurnTitle?.includes(query) ?? false;
 
   onDelete(row: SequentialTurn): void {
-    const message = `آیا می‌خواهید رکورد با عنوان ${row.SeqTurnTitle} و کد ${row.SeqTurnId} حذف شود؟`;
-
-    this.confirmationService.confirm({
-      message,
-      header: 'حذف رکورد',
-      icon: 'pi pi-info-circle',
-      closable: true,
-      closeOnEscape: true,
-      rejectLabel: 'لغو',
-      rejectButtonProps: {
-        label: 'لغو',
-        severity: 'secondary',
-        outlined: true,
-      },
-      acceptLabel: 'تایید',
-      acceptButtonProps: {
-        label: 'تایید',
-        severity: 'danger',
-      },
-      accept: async () => {
+    this.confirmService.confirmDelete(
+      `${row.SeqTurnTitle} با شناسه ${row.SeqTurnId}`,
+      async () => {
         try {
           this.loadingService.setLoading(true);
           await this.deleteSequentialTurn(row.SeqTurnId);
         } finally {
           this.loadingService.setLoading(false);
         }
-      },
-    });
+      }
+    );
   }
 
   onEdit(row: SequentialTurn): void {
@@ -210,7 +233,7 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
         turn.SeqTurnId,
         turn.SeqTurnTitle ?? '',
         turn.SeqTurnKeyWord ?? '',
-        turn.Active ?? true,
+        turn.Active ?? true
       );
     if (!checkAndToastError(response, this.toast)) return;
     this.toast.success('موفق', response.data.Message);
@@ -223,7 +246,7 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
       turn.SeqTurnId,
       turn.SeqTurnTitle ?? '',
       turn.SeqTurnKeyWord ?? '',
-      turn.Active ?? true,
+      turn.Active ?? true
     );
     if (!checkAndToastError(response, this.toast)) return;
     this.toast.success('موفق', response.data.Message);
@@ -239,7 +262,7 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
 
   private resetSequentialTurnForm(): void {
     this.sequentialTurnForm.reset({
-      id: -1,
+      id: null,
       title: '',
       keyword: '',
       status: true,

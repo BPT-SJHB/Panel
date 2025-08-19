@@ -2,7 +2,6 @@ import { Component, effect, inject, Input, signal } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 import { CardModule } from 'primeng/card';
-import { Button } from 'primeng/button';
 
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { BaseLoading } from '../shared/component-base/base-loading';
@@ -12,7 +11,8 @@ import { Wallet } from 'app/services/wallet-management/model/wallet.model';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
-import { ButtonComponent } from "app/components/shared/button/button.component";
+import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { ValidationSchema } from 'app/constants/validation-schema';
 
 @Component({
   selector: 'app-wallet-payment-form',
@@ -46,12 +46,7 @@ export class WalletPaymentFormComponent
   private readonly walletService = inject(WalletManagementService);
 
   // 📝 Form Controls
-  readonly amount = new FormControl<number | null>(null, [
-    Validators.required,
-    Validators.pattern(/^[0-9]+$/),
-    Validators.min(1000),
-    Validators.max(300000),
-  ]);
+  readonly amount = new FormControl<number | null>(null,ValidationSchema.price );
 
   // 📊 Reactive State Signals
   readonly defaultAmounts = signal<WalletDefaultAmount[]>([]);
@@ -163,7 +158,7 @@ export class WalletPaymentFormComponent
 
       case 'TransportCompony':
         const transportComponyId = this.transportComponyId();
-        
+
         if (!transportComponyId) return Promise.resolve(null);
         return this.walletService.GetTransportCompanyWallet(transportComponyId);
 
@@ -181,5 +176,16 @@ export class WalletPaymentFormComponent
   // Wrapper to maintain naming clarity
   private fetchWalletInfo(): Promise<ApiResponse<Wallet> | null> {
     return this.getWalletMethod();
+  }
+
+  setAmountValue(newValue:number) {
+    const current = this.amount.value;
+    const currentNum = Number(current);
+    const newNum = Number(newValue);
+    if (!isNaN(currentNum) && !isNaN(newNum)) {
+      this.amount.setValue(currentNum + newNum);
+    } else {
+      this.amount.setValue(newValue);
+    }
   }
 }

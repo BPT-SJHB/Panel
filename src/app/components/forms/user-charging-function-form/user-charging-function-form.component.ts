@@ -3,22 +3,22 @@ import { FormBuilder, FormControl } from '@angular/forms';
 import { TimePickerInput } from 'app/components/shared/inputs/time-picker-input/time-picker-input.component.component';
 import { ToastService } from 'app/services/toast-service/toast.service';
 import { DatePickerInput } from 'app/components/shared/inputs/date-picker-input/date-picker-input.component';
-import { TableModule } from 'primeng/table';
 import { WalletUserChargingFunction } from 'app/services/wallet-management/model/wallet-user-charging-function.model';
-import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { WalletManagementService } from 'app/services/wallet-management/wallet-management.service';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
-import { TableConfig } from 'app/constants/ui/table.ui';
+import {
+  TableColumn,
+  TableComponent,
+} from 'app/components/shared/table/table.component';
 
 @Component({
   selector: 'app-user-charging-function-form',
   imports: [
     TimePickerInput,
     DatePickerInput,
-    TableModule,
-    TextInputComponent,
     ButtonComponent,
+    TableComponent,
   ],
   templateUrl: './user-charging-function-form.component.html',
   styleUrl: './user-charging-function-form.component.scss',
@@ -38,8 +38,24 @@ export class UserChargingFunctionFormComponent {
 
   userFunctions = signal<WalletUserChargingFunction[]>([]);
 
-  cols = ['تاریخ', 'زمان', 'مبلغ', 'کد شناسایی کیف پول'];
-  tableUi = TableConfig;
+  columns: TableColumn<WalletUserChargingFunction>[] = [
+    {
+      field: 'CardNo',
+      header: 'کد شناسایی کیف پول',
+    },
+    {
+      field: 'Amount',
+      header: 'مبلغ',
+    },
+    {
+      field: 'Time',
+      header: 'زمان',
+    },
+    {
+      field: 'ShamsiDate',
+      header: 'تاریخ',
+    },
+  ];
 
   async FetchData() {
     //! loading start

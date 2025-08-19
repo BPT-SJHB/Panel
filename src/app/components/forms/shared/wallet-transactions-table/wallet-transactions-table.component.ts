@@ -1,7 +1,4 @@
-import { Component, effect, inject, Input, signal } from '@angular/core';
-
-import { TableModule } from 'primeng/table';
-
+import { Component, inject, Input, signal } from '@angular/core';
 import { BaseLoading } from '../component-base/base-loading';
 import { WalletManagementService } from 'app/services/wallet-management/wallet-management.service';
 import { WalletTransaction } from 'app/services/wallet-management/model/wallet-transaction.model';
@@ -9,12 +6,15 @@ import { checkAndToastError } from 'app/utils/api-utils';
 import { Wallet } from 'app/services/wallet-management/model/wallet.model';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
-import { TableConfig } from 'app/constants/ui/table.ui';
+import {
+  TableColumn,
+  TableComponent,
+} from 'app/components/shared/table/table.component';
 
 @Component({
   selector: 'app-wallet-transactions-table',
   standalone: true,
-  imports: [TableModule],
+  imports: [TableComponent],
   templateUrl: './wallet-transactions-table.component.html',
   styleUrl: './wallet-transactions-table.component.scss',
 })
@@ -38,23 +38,53 @@ export class WalletTransactionsTableComponent
 
   // 🔁 Transaction list
   readonly transactions = signal<WalletTransaction[]>([]);
-  tableUi = TableConfig;
-  // 📊 Table column definitions
-  readonly columns: ReadonlyArray<{
-    label: string;
-    key: keyof WalletTransaction;
-  }> = [
-    { label: 'تراکنش', key: 'TransactionTitle' },
-    { label: 'تاریخ', key: 'ShamsiDate' },
-    { label: 'زمان', key: 'Time' },
-    { label: 'موجودی', key: 'CurrentBalance' },
-    { label: 'مبلغ', key: 'Amount' },
-    { label: 'باقیمانده', key: 'Reminder' },
-    { label: 'کاربر', key: 'UserName' },
+
+  readonly columns: TableColumn<WalletTransaction>[] = [
+    {
+      header: 'تراکنش',
+      field: 'TransactionTitle',
+      tdClass: (row: WalletTransaction) =>
+        this.getRowColor(row.TransactionColor),
+    },
+    {
+      header: 'تاریخ',
+      field: 'ShamsiDate',
+      tdClass: (row: WalletTransaction) =>
+        this.getRowColor(row.TransactionColor),
+    },
+    {
+      header: 'زمان',
+      field: 'Time',
+      tdClass: (row: WalletTransaction) =>
+        this.getRowColor(row.TransactionColor),
+    },
+    {
+      header: 'موجودی',
+      field: 'CurrentBalance',
+      tdClass: (row: WalletTransaction) =>
+        this.getRowColor(row.TransactionColor),
+    },
+    {
+      header: 'مبلغ',
+      field: 'Amount',
+      tdClass: (row: WalletTransaction) =>
+        this.getRowColor(row.TransactionColor),
+    },
+    {
+      header: 'باقیمانده',
+      field: 'Reminder',
+      tdClass: (row: WalletTransaction) =>
+        this.getRowColor(row.TransactionColor),
+    },
+    {
+      header: 'کاربر',
+      field: 'UserName',
+      tdClass: (row: WalletTransaction) =>
+        this.getRowColor(row.TransactionColor),
+    },
   ];
 
   // 🎨 Background color mapping for transaction rows
-
   readonly colorMap: ReadonlyMap<string, string> = new Map([
     ['black', 'bg-black text-white'],
     ['white', 'bg-white text-black'],
@@ -138,7 +168,7 @@ export class WalletTransactionsTableComponent
     try {
       this.loadingService.setLoading(true);
       const response = await this.walletService.GetWalletTransactions(
-        this.walletId()!,
+        this.walletId()!
       );
       if (!checkAndToastError(response, this.toast)) {
         this.transactions.set([]);

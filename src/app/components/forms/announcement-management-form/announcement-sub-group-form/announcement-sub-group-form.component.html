@@ -2,7 +2,9 @@
 <div class="w-full">
   <app-search-input
     class="w-full"
-    placeholder="بخشی از عنوان زیرگروه وارد کنید."
+    [placeholder]="
+      'عنوان ' + appTitle.getPlaceholder('loadAnnouncementSubGroupTitle')
+    "
     [staticData]="announcementsSubGroup"
     [itemMatchesQuery]="filterAnnouncementsSubGroup"
     [autoTriggerSearch]="true"
@@ -14,29 +16,26 @@
 </div>
 
 <!-- 📋 SubGroup Table -->
-<p-table
-  class="col-span-12 overflow-x-auto"
-  [columns]="cols"
-  [value]="displayAnnouncementsSubGroup"
-  [tableStyle]="tableUi.tableStyle"
-  [paginator]="tableUi.paginator"
-  [paginatorLocale]="tableUi.paginatorLocale"
-  [rows]="tableUi.rows"
-  [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
-  [stripedRows]="tableUi.stripedRows"
->
+<app-table
+    [enableCaptionButton]="true" (clickCaptionButton)="onNew()"
+    [columns]="columns" [rows]="displayAnnouncementsSubGroup">
   <!-- Header with New Button -->
   <!-- Table Header -->
   <ng-template #caption>
     <div>
-      <app-button label="جدید" size="small" styleClass="w-20 md:w-30 py-2" (click)="onNew()"></app-button>
+      <app-button
+        [label]="appTitle.buttons.add.addRecord"
+        size="small"
+        styleClass="w-20 md:w-30 py-2"
+        (click)="onNew()"
+      ></app-button>
     </div>
   </ng-template>
 
   <ng-template #header let-columns>
     <tr>
       @for (col of columns; track $index) {
-      <th>{{ col }}</th>
+        <th>{{ col }}</th>
       }
     </tr>
   </ng-template>
@@ -80,7 +79,7 @@
       </td>
     </tr>
   </ng-template>
-</p-table>
+</app-table>
 
 <!-- 📝 Dialog for Add/Edit -->
 <p-dialog
@@ -102,7 +101,7 @@
     <div class="grid grid-cols-12 col-span-12 gap-4">
       <app-text-input
         class="col-span-12"
-        label="کد"
+        [label]="appTitle.inputs.global.id"
         validationField="id"
         addonWidth="5rem"
         [readOnly]="true"
@@ -112,8 +111,8 @@
 
       <app-text-input
         class="col-span-12"
-        label="عنوان"
-        placeholder="عنوان"
+        [label]="appTitle.inputs.global.title"
+        [placeholder]="appTitle.getPlaceholder('globalTitlePlaceholder')"
         validationField="title"
         addonWidth="5rem"
         [control]="AnnouncementSGTitle"
@@ -121,7 +120,7 @@
 
       <div class="flex col-span-12 px-4">
         <app-toggle-switch-input
-          label="وضعیت زیرگروه:"
+          [label]="appTitle.toggleSwitches.status"
           [control]="AnnouncementActive"
           [readonly]="!isFormEditable()"
         />
@@ -130,7 +129,7 @@
 
     <div class="flex col-span-12 justify-end">
       <app-button
-        label="ثبت و ویرایش اطلاعات"
+        [label]="appTitle.buttons.saveAndEdit"
         [disabled]="announcementSubGroupForm.invalid || loading"
         (click)="registerOrEdit()"
       />
@@ -138,5 +137,3 @@
   </form>
 </p-dialog>
 
-<!-- 🛑 Confirmation Dialog -->
-<p-confirm-dialog />

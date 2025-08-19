@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import {  FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { AnnouncementGroup } from '../announcement-group-subgroup-management/model/announcement-group.model';
 import { AnnouncementSubGroup } from '../announcement-group-subgroup-management/model/announcement-subgroup.model';
 import { LoadStatus } from '../load-management/model/load-status.model';
@@ -15,6 +15,7 @@ import { Product, ProductType } from 'app/data/model/product-type.model';
 import { LADPlace } from 'app/data/model/lad-place.model';
 import { ProductTypesService } from '../product-types/product-types.service';
 import { LADPlaceManagementService } from '../lad-place-management/lad-place-management.service';
+import { AppTitles } from 'app/constants/Titles';
 
 export enum AutoCompleteType {
   AnnouncementGroup = 'AnnouncementGroup',
@@ -101,11 +102,13 @@ export class AutoCompleteConfigFactoryService {
   private readonly loadsService = inject(LoadManagementService);
   private readonly toast = inject(ToastService);
 
+  private readonly appTitle = AppTitles;
+
   private readonly defaultConfigs = {
     [AutoCompleteType.AnnouncementGroup]: {
       type: AutoCompleteType.AnnouncementGroup,
-      label: 'گروه اعلام بار',
-      placeholder: 'گروه اعلام بار',
+      label: this.appTitle.inputs.loadAnnouncements.loadAnnouncementGroupTitle,
+      placeholder: this.appTitle.getPlaceholder('loadAnnouncementGroupTitle'),
       optionLabel: 'AnnouncementTitle' as keyof AnnouncementGroup,
       optionValueKey: 'AnnouncementId' as keyof AnnouncementGroup,
       minLength: 0,
@@ -114,8 +117,11 @@ export class AutoCompleteConfigFactoryService {
 
     [AutoCompleteType.AnnouncementSubGroup]: {
       type: AutoCompleteType.AnnouncementSubGroup,
-      label: 'زیرگروه اعلام بار',
-      placeholder: 'زیرگروه اعلام بار',
+      label:
+        this.appTitle.inputs.loadAnnouncements.loadAnnouncementSubGroupTitle,
+      placeholder: this.appTitle.getPlaceholder(
+        'loadAnnouncementSubGroupTitle'
+      ),
       optionLabel: 'AnnouncementSGTitle' as keyof AnnouncementSubGroup,
       optionValueKey: 'AnnouncementSGTitle' as keyof AnnouncementSubGroup,
       minLength: 0,
@@ -124,8 +130,11 @@ export class AutoCompleteConfigFactoryService {
 
     [AutoCompleteType.RelationAnnouncementGroupAndSubGroup]: {
       type: AutoCompleteType.RelationAnnouncementGroupAndSubGroup,
-      label: 'زیرگروه اعلام بار',
-      placeholder: 'زیرگروه اعلام بار',
+      label:
+        this.appTitle.inputs.loadAnnouncements.loadAnnouncementSubGroupTitle,
+      placeholder: this.appTitle.getPlaceholder(
+        'loadAnnouncementSubGroupTitle'
+      ),
       optionLabel: 'AnnouncementSGTitle' as keyof AnnouncementSubGroup,
       optionValueKey: 'AnnouncementSGTitle' as keyof AnnouncementSubGroup,
       minLength: 0,
@@ -133,8 +142,8 @@ export class AutoCompleteConfigFactoryService {
     },
     [AutoCompleteType.LoadStatus]: {
       type: AutoCompleteType.LoadStatus,
-      label: 'وضعیت بار',
-      placeholder: 'وضعیت بار',
+      label: this.appTitle.inputs.loads.loadStatus,
+      placeholder: this.appTitle.getPlaceholder('loadStatus'),
       optionLabel: 'LoadStatusTitle' as keyof LoadStatus,
       optionValueKey: 'LoadStatusId' as keyof LoadStatus,
       minLength: 0,
@@ -143,8 +152,8 @@ export class AutoCompleteConfigFactoryService {
 
     [AutoCompleteType.TransportCompany]: {
       type: AutoCompleteType.TransportCompany,
-      label: 'شرکت حمل ونقل',
-      placeholder: 'شرکت حمل ونقل',
+      label: this.appTitle.inputs.transportCompanies.transportCompanyTitle,
+      placeholder: this.appTitle.getPlaceholder('transportCompanyTitle'),
       optionLabel: 'TCTitle' as keyof TransportCompany,
       optionValueKey: 'TCId' as keyof TransportCompany,
       minLength: 0,
@@ -173,8 +182,8 @@ export class AutoCompleteConfigFactoryService {
 
     [AutoCompleteType.Product]: {
       type: AutoCompleteType.Product,
-      label: 'کالا',
-      placeholder: 'کالا',
+      label: this.appTitle.inputs.products.productsTitle,
+      placeholder: this.appTitle.getPlaceholder('productsTitle'),
       optionLabel: 'ProductTitle' as keyof Product,
       optionValueKey: 'ProductId' as keyof Product,
       minLength: 2,

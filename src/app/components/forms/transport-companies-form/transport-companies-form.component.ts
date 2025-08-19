@@ -19,6 +19,7 @@ import { TransportCompaniesManagementService } from 'app/services/transport-comp
 import { TransportCompany } from 'app/services/transport-company-management/model/transport-company-info.model';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-switch-input/toggle-switch-input.component';
+import { AppTitles } from 'app/constants/Titles';
 
 @Component({
   selector: 'app-transport-companies-form',
@@ -43,7 +44,8 @@ export class TransportCompaniesFormComponent extends BaseLoading {
   private readonly confirmationService = inject(ConfirmationService);
 
   // === Form Setup ===
-  readonly addonWidth = '8rem';
+  readonly addonWidth = '9rem';
+  readonly appTitle = AppTitles;
   readonly transportComponyForm = this.fb.group({
     TCId: new FormControl<number | null>(null, ValidationSchema.id),
     TCTitle: [''],

@@ -10,11 +10,13 @@
       <app-search-input
         [control]="searchSmartCard"
         validationField="smartCard"
-        icon="pi pi-id-card"
+        icon="pi pi-search"
         class="flex-1"
-        placeholder="جستجو براساس شماره هوشمند"
+        [placeholder]="
+          appTitle.getPlaceholder('truckSmartCardNumberPlaceholder')
+        "
         [disableSearchButton]="searchForm.invalid || loading"
-        searchButtonLabel="استعلام از سیستم"
+        [searchButtonLabel]="appTitle.buttons.retrieveFromOutdoorSystem"
         [onSearchQuery]="loadFormsInformation"
       ></app-search-input>
     </div>
@@ -27,14 +29,15 @@
     [class.opacity-60]="loading"
     [formGroup]="truckInfoForm"
   >
-    <span class="text-lg font-bold">اطلاعات ناوگان</span>
+    <span class="text-lg w-[7rem] font-bold">{{
+      appTitle.sectionTitles.truckInfo
+    }}</span>
     <div class="p-fluid grid grid-cols-12 gap-6 col-span-12">
       <div class="grid grid-cols-12 gap-4 col-span-12">
         <div class="col-span-12 md:col-span-6">
           <app-text-input
-            label="کد ناوگان"
+            [label]="appTitle.inputs.trucks.truckId"
             class="flex-1"
-            placeholder="کد ناوگان"
             [readOnly]="true"
             [control]="truckId"
             validationField="truckId"
@@ -44,21 +47,8 @@
 
         <div class="col-span-12 md:col-span-6">
           <app-text-input
-            label="سریال"
+            [label]="appTitle.inputs.trucks.truckSmartCardNumber"
             class="flex-1"
-            placeholder="کدملی راننده"
-            [control]="serialNumber"
-            validationField="serialNumber"
-            [readOnly]="true"
-            [addonWidth]="addonWidth"
-          ></app-text-input>
-        </div>
-
-        <div class="col-span-12 md:col-span-6">
-          <app-text-input
-            label="شماره هوشمند"
-            class="flex-1"
-            placeholder="شماره هوشمند"
             [control]="smartCard"
             validationField="smartCard"
             [readOnly]="true"
@@ -68,25 +58,35 @@
 
         <div class="col-span-12 md:col-span-6">
           <app-text-input
-            label="بارگیر"
+            [label]="appTitle.inputs.trucks.licensePlateNumber"
             class="flex-1"
-            placeholder="نوع بارگیر"
-            [control]="loaderType"
-            validationField="loaderType"
-            [readOnly]="true"
-            [addonWidth]="addonWidth"
-          ></app-text-input>
-        </div>
-        <div class="col-span-12 md:col-span-6">
-          <app-text-input
-            label="شماره پلاک"
-            class="flex-1"
-            placeholder="شماره پلاک"
             [control]="licensePlateNumber"
             validationField="licenseNumber"
             [readOnly]="true"
             [addonWidth]="addonWidth"
           />
+        </div>
+
+        <div class="col-span-12 md:col-span-6">
+          <app-text-input
+            [label]="appTitle.inputs.trucks.licensePlateSerialNumber"
+            class="flex-1"
+            [control]="serialNumber"
+            validationField="serialNumber"
+            [readOnly]="true"
+            [addonWidth]="addonWidth"
+          ></app-text-input>
+        </div>
+
+        <div class="col-span-12 md:col-span-6">
+          <app-text-input
+            [label]="appTitle.inputs.trucks.truckLoader"
+            class="flex-1"
+            [control]="loaderType"
+            validationField="loaderType"
+            [readOnly]="true"
+            [addonWidth]="addonWidth"
+          ></app-text-input>
         </div>
       </div>
     </div>
@@ -99,14 +99,16 @@
     [formGroup]="truckNativenessForm"
     (ngSubmit)="changeNativeness()"
   >
-    <span class="text-lg font-bold">بومی گری</span>
+    <span class="text-lg w-[5rem] font-bold">{{
+      appTitle.sectionTitles.nativenessInfo
+    }}</span>
     <div class="p-fluid grid grid-cols-12 gap-4 col-span-12">
       <div class="grid grid-cols-12 gap-4 col-span-12">
         <div class="col-span-12 md:col-span-6">
           <app-text-input
-            label="بومی"
+            [label]="appTitle.inputs.nativenesses.nativenessStatus"
             class="flex-1"
-            placeholder="بومی / غیر بومی"
+            [placeholder]="appTitle.getPlaceholder('nativenessPlaceholder')"
             [control]="nativeness"
             validationField="nativeness"
             [readOnly]="true"
@@ -117,8 +119,7 @@
         <div class="col-span-12 md:col-span-6">
           <app-date-picker-input
             class="flex-1"
-            label="تاریخ اتمام"
-            placeholder="تاریخ اتمام"
+            [label]="appTitle.datePicker.endDate"
             datePickerPosition="top"
             [control]="truckNativenessExpiredDate"
             validationField="truckNativenessExpiredDate"
@@ -134,7 +135,7 @@
     >
       <app-button
         (click)="changeNativeness()"
-        label="تغییر وضعیت بومی گری"
+        [label]="appTitle.buttons.changeNativenessStatus"
         [disabled]="truckId.invalid || truckNativenessForm.invalid || loading"
         styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-48 lg:w-60"
       ></app-button>

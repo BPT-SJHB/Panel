@@ -13,11 +13,11 @@ import { ToastService } from 'app/services/toast-service/toast.service';
 import { CryptographyService } from 'app/services/cryptography-service/cryptography.service';
 import { UserAuthService } from 'app/services/user-auth-service/user-auth.service';
 import { APP_ROUTES } from 'app/constants/routes';
-import { appTitles } from 'app/constants/Titles';
 import { TextInputComponent } from '../../shared/inputs/text-input/text-input.component';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { CheckboxInputComponent } from '../../shared/inputs/checkbox-input/checkbox-input.component';
-import { ButtonComponent } from "app/components/shared/button/button.component";
+import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { AppTitles } from 'app/constants/Titles';
 
 @Component({
   selector: 'app-login-form',
@@ -29,8 +29,8 @@ import { ButtonComponent } from "app/components/shared/button/button.component";
     TextInputComponent,
     PasswordInputComponent,
     CheckboxInputComponent,
-    ButtonComponent
-],
+    ButtonComponent,
+  ],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',
 })
@@ -43,7 +43,7 @@ export class LoginFormComponent {
 
   @ViewChild('captchaRef') captchaComponent!: CaptchaInputComponent;
   hrefForgetPassword: string = APP_ROUTES.AUTH.FORGET_PASSWORD;
-  loginTitle: string = appTitles.appBrokenTitle;
+  loginTitle: string = AppTitles.appBrokenTitle;
   loginForm = this.fb.group({
     username: ['', ValidationSchema.username],
     password: ['', ValidationSchema.password],

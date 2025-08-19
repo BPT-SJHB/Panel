@@ -17,6 +17,7 @@ import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { UserAuthService } from 'app/services/user-auth-service/user-auth.service';
+import { AppTitles } from 'app/constants/Titles';
 
 // 🔽 Interfaces
 interface UserProfile {
@@ -63,6 +64,8 @@ export class UserProfileFormComponent implements OnInit {
     walletCode: '',
     balance: 0,
   });
+
+  readonly appTitle = AppTitles;
 
   // 🔽 User's SMS activation status (separate boolean flag)
   isUserSmsActivated = true;

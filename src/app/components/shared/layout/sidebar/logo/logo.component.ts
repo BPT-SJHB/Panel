@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { appTitles } from 'app/constants/Titles';
+import { AppTitles } from 'app/constants/Titles';
 
 @Component({
   selector: 'app-logo',
@@ -8,5 +8,5 @@ import { appTitles } from 'app/constants/Titles';
   styleUrl: './logo.component.scss',
 })
 export class LogoComponent {
-  readonly websiteTitle = appTitles.appBrokenTitle;
+  readonly websiteTitle = AppTitles.appBrokenTitle;
 }

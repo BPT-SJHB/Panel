@@ -7,10 +7,10 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { ToastService } from 'app/services/toast-service/toast.service';
-import { appTitles } from 'app/constants/Titles';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { TextInputComponent } from "../../shared/inputs/text-input/text-input.component";
 import { ButtonComponent } from "app/components/shared/button/button.component";
+import { AppTitles } from 'app/constants/Titles';
 
 @Component({
   selector: 'app-forget-password-form',
@@ -20,7 +20,7 @@ import { ButtonComponent } from "app/components/shared/button/button.component";
 })
 export class ForgetPasswordFormComponent {
   forgetPasswordForm: FormGroup;
-  forgetPasswordTitle: string = appTitles.appBrokenTitle;
+  forgetPasswordTitle: string = AppTitles.appBrokenTitle;
   onSubmit(): void {
     if (this.forgetPasswordForm.valid) {
       const isSuccess = Math.random() < 0.5;

@@ -1,8 +1,8 @@
 <div class="grid grid-cols-12 gap-4 mb-5">
   <app-search-auto-complete
     class="col-span-12 sm:col-span-6"
-    placeholder="گروه اعلام بار"
-    label="گروه اعلام بار"
+    [label]="appTitle.inputs.loadAnnouncements.loadAnnouncementGroupTitle"
+    [placeholder]="appTitle.getPlaceholder('loadAnnouncementGroupTitle')"
     [control]="announcementGroupTitle"
     optionLabel="AnnouncementTitle"
     optionValue="AnnouncementTitle"
@@ -14,8 +14,8 @@
   />
   <app-search-auto-complete
     class="col-span-12 sm:col-span-6"
-    placeholder="زیرگروه اعلام بار"
-    label="زیرگروه اعلام بار"
+    [label]="appTitle.inputs.loadAnnouncements.loadAnnouncementSubGroupTitle"
+    [placeholder]="appTitle.getPlaceholder('loadAnnouncementSubGroupTitle')"
     [control]="announcementSubGroupTitle"
     optionLabel="AnnouncementSGTitle"
     optionValue="AnnouncementSGTitle"
@@ -27,48 +27,19 @@
     [disabled]="announcementGroupId.value === -1"
   />
 </div>
-<p-table
-  [value]="relationsAnnouncement"
-  [columns]="cols"
-  [tableStyle]="tableUi.tableStyle"
-  [paginator]="tableUi.paginator"
-  [paginatorLocale]="tableUi.paginatorLocale"
-  [rows]="tableUi.rows"
-  [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
-  [stripedRows]="tableUi.stripedRows"
+<app-table
+  [columns]="columns"
+  [rows]="relationsAnnouncement"
 >
-  <ng-template #header let-columns>
-    <tr>
-      @for (col of columns; track $index) {
-        <th>{{ col }}</th>
-      }
-    </tr>
-  </ng-template>
-
-  <ng-template #body let-rowData>
-    <tr>
-      <td (click)="onDelete(rowData)">
-        <app-button
-          icon="pi pi-trash"
-          severity="danger"
-          variant="text"
-          [disabled]="loading"
-        ></app-button>
-      </td>
-      <td>{{ rowData.AnnouncementTitle }}</td>
-      <td>{{ rowData.AnnouncementSGTitle }}</td>
-    </tr>
-  </ng-template>
-</p-table>
+</app-table>
 
 <div class="flex justify-end mt-5">
   <app-button
     size="small"
-    label="ثبت"
-    styleClass="w-ful py-2 md:w-25"
+    [label]="appTitle.buttons.saveAndEdit"
+    styleClass="w-full py-2"
     (click)="registerRelationAnnouncement()"
     [disabled]="loading || announcementGroupAndSubGroupForm.invalid"
   ></app-button>
 </div>
 
-<p-confirm-dialog />

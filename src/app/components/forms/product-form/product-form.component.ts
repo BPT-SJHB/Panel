@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TreeTableModule } from 'primeng/treetable';
 import { TreeNode } from 'primeng/api';
@@ -14,6 +14,7 @@ import { ToastService } from 'app/services/toast-service/toast.service';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { Subject, takeUntil } from 'rxjs';
 import { ErrorCodes } from 'app/constants/error-messages';
+import { AppTitles } from 'app/constants/Titles';
 
 export interface ProductParent {
   ProductTypeId: number;
@@ -29,20 +30,18 @@ interface SelectionOption {
 @Component({
   selector: 'app-product-form',
   standalone: true,
-  imports: [
-    ButtonModule,
-    TreeTableModule,
-    TreeTableCheckboxComponent
-],
+  imports: [ButtonModule, TreeTableModule, TreeTableCheckboxComponent],
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.scss',
 })
-export class ProductFormComponent implements OnInit {
+export class ProductFormComponent implements OnInit, OnDestroy {
   private productTypeService = inject(ProductTypesService);
   private loadingService = inject(LoadingService);
   private toast = inject(ToastService);
   private destroy$ = new Subject<void>();
-  private loading: boolean = false;
+  private loading = false;
+
+  readonly appTitle = AppTitles;
 
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -58,9 +57,9 @@ export class ProductFormComponent implements OnInit {
   products: TreeNode[] = [];
   cachedProducts: TreeNode[] = [];
   selectionKey!: Record<string, SelectionOption>;
-  cacheKeyLength: number = 3;
-  cachingEnabled: boolean = true;
-  startKey: string = '';
+  cacheKeyLength = 3;
+  cachingEnabled = true;
+  startKey = '';
 
   async searchProduct(query: string): Promise<void> {
     if (query.length < this.cacheKeyLength) {
@@ -104,17 +103,18 @@ export class ProductFormComponent implements OnInit {
       this.loadingService.setLoading(true);
       const parent = change.parent;
       const children = change.children;
-     
-      if (!parent && children.length == 0)
-        return;  
-      
+
+      if (!parent && children.length == 0) return;
 
       // Handle only-child case
       if (!parent && children.length > 0) {
         const { ProductId, ProductActive } = children[0];
-        const response = await this.handleProductChange(ProductId, ProductActive);
+        const response = await this.handleProductChange(
+          ProductId,
+          ProductActive
+        );
         if (!this.isSuccessful(response)) return;
-        this.toast.success('موفق',response.data?.Message??'');
+        this.toast.success('موفق', response.data?.Message ?? '');
         return;
       }
 
@@ -152,7 +152,7 @@ export class ProductFormComponent implements OnInit {
       this.loadingService.setLoading(false);
     }
   }
-  
+
   private async handleProductTypeChange(
     productTypeId: number,
     active: boolean
@@ -164,7 +164,7 @@ export class ProductFormComponent implements OnInit {
     if (!this.isSuccessful(response)) {
       // await this.updateProductsInfo()
       return;
-    };
+    }
     this.toast.success('موفق', response.data?.Message ?? '');
   }
 
@@ -179,7 +179,7 @@ export class ProductFormComponent implements OnInit {
   private async updateProductsInfo() {
     if (this.startKey.length < this.cacheKeyLength) {
       return;
-    }  
+    }
     const productsResponse = await this.productTypeService.GetProductsInfo(
       this.startKey
     );
@@ -190,7 +190,6 @@ export class ProductFormComponent implements OnInit {
   }
 
   private isSuccessful(response: ApiResponse<any>): boolean {
-    
     if (!response.success || !response.data) {
       this.toast.error(
         'خطا',
@@ -198,7 +197,6 @@ export class ProductFormComponent implements OnInit {
       );
       console.log(response);
       if (response.error?.code == ErrorCodes.NoRecordFound) {
-        
         return true;
       }
       return false;

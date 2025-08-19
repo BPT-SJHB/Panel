@@ -17,8 +17,14 @@ import { checkAndToastError } from 'app/utils/api-utils';
 import { ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { TableModule } from 'primeng/table';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
+import {
+  deleteCell,
+  TableColumn,
+  TableComponent,
+} from 'app/components/shared/table/table.component';
+import { AppConfirmService } from 'app/services/confirm/confirm.service';
+import { AppTitles } from 'app/constants/Titles';
 
 // 📦 Interface for displaying flat relation data in table
 interface RowRelationOfAnnouncement {
@@ -28,17 +34,21 @@ interface RowRelationOfAnnouncement {
   AnnouncementSGTitle: string;
 }
 
+type RowRelationOfAnnouncementTableRow = RowRelationOfAnnouncement & {
+  delete: string;
+};
+
 @Component({
   selector: 'app-relation-of-announcement-group-and-sub-group',
   imports: [
     ReactiveFormsModule,
     ButtonModule,
     SearchAutoCompleteComponent,
-    TableModule,
     ConfirmDialogModule,
     ButtonComponent,
+    TableComponent,
   ],
-  providers: [ConfirmationService],
+  providers: [],
   templateUrl: './relation-of-announcement-group-and-sub-group.component.html',
   styleUrl: './relation-of-announcement-group-and-sub-group.component.scss',
 })
@@ -47,17 +57,33 @@ export class RelationOfAnnouncementGroupAndSubGroupComponent {
   private fb = inject(FormBuilder);
   private loadingService = inject(LoadingService);
   private toast = inject(ToastService);
-  private confirmationService = inject(ConfirmationService);
+  private confirmService = inject(AppConfirmService);
   private announcementService = inject(
-    AnnouncementGroupSubgroupManagementService,
+    AnnouncementGroupSubgroupManagementService
   );
 
   readonly tableUi = TableConfig;
+  readonly appTitle = AppTitles;
+
   // 📊 UI State
   loading = false;
   addonWidth = '8rem';
-  cols = ['حذف', 'گروه اعلام بار', 'زیر گروه اعلام بار'];
-  relationsAnnouncement: RowRelationOfAnnouncement[] = [];
+  relationsAnnouncement: RowRelationOfAnnouncementTableRow[] = [];
+  readonly columns: TableColumn<RowRelationOfAnnouncementTableRow>[] = [
+    {
+      field: 'AnnouncementTitle',
+      header: 'گروه اعلام بار',
+    },
+    {
+      field: 'AnnouncementSGTitle',
+      header: 'زیرگروه اعلام بار',
+    },
+    {
+      ...deleteCell.config,
+      field: 'delete',
+      onAction: (row: RowRelationOfAnnouncement) => this.onDelete(row),
+    },
+  ];
 
   // 📄 Form Definition
   announcementGroupAndSubGroupForm = this.fb.group({
@@ -83,30 +109,30 @@ export class RelationOfAnnouncementGroupAndSubGroupComponent {
   // 📥 Form Getters
   get announcementGroupId(): FormControl {
     return this.announcementGroupAndSubGroupForm.get(
-      'announcementGroupId',
+      'announcementGroupId'
     ) as FormControl;
   }
 
   get announcementGroupTitle(): FormControl {
     return this.announcementGroupAndSubGroupForm.get(
-      'announcementGroupTitle',
+      'announcementGroupTitle'
     ) as FormControl;
   }
 
   get announcementSubGroupId(): FormControl {
     return this.announcementGroupAndSubGroupForm.get(
-      'announcementSubGroupId',
+      'announcementSubGroupId'
     ) as FormControl;
   }
 
   get announcementSubGroupTitle(): FormControl {
     return this.announcementGroupAndSubGroupForm.get(
-      'announcementSubGroupTitle',
+      'announcementSubGroupTitle'
     ) as FormControl;
   }
 
   // 🧹 Reset value when input is cleared
-  onAutoCompleteChange(controller: FormControl<any>) {
+  onAutoCompleteChange(controller: FormControl<unknown>) {
     controller.setValue(-1);
   }
 
@@ -130,7 +156,7 @@ export class RelationOfAnnouncementGroupAndSubGroupComponent {
   private async loadRelationOfAnnouncement(announcementId: number) {
     const res =
       await this.announcementService.GetRelationOfAnnouncementGroupAndSubGroup(
-        announcementId,
+        announcementId
       );
     if (!checkAndToastError(res, this.toast)) return;
     this.relationsAnnouncement = this.flattenAnnouncementRelations(res.data!);
@@ -138,46 +164,32 @@ export class RelationOfAnnouncementGroupAndSubGroupComponent {
 
   // 🔃 Convert nested relations to flat format for display
   private flattenAnnouncementRelations(
-    data: RelationOfAnnouncementGroupAndSubGroup[],
-  ): RowRelationOfAnnouncement[] {
+    data: RelationOfAnnouncementGroupAndSubGroup[]
+  ): RowRelationOfAnnouncementTableRow[] {
     return data.flatMap((group) =>
       group.AnnouncementSubGroups.map((sub) => ({
         AnnouncementId: group.AnnouncementId,
         AnnouncementTitle: group.AnnouncementTitle ?? '',
         AnnouncementSGId: sub.AnnouncementSGId,
         AnnouncementSGTitle: sub.AnnouncementSGTitle ?? '',
-      })),
+        delete: deleteCell.value,
+      }))
     );
   }
 
   // ❌ Delete confirmation dialog
   onDelete(row: RowRelationOfAnnouncement) {
-    this.confirmationService.confirm({
-      message: `آیا می‌خواهید رکورد با کد گروه ${row.AnnouncementId} و کد زیرگروه ${row.AnnouncementSGId} را حذف کنید؟`,
-      header: 'حذف رکورد',
-      icon: 'pi pi-info-circle',
-      closable: true,
-      closeOnEscape: true,
-      rejectButtonProps: {
-        label: 'لغو',
-        severity: 'secondary',
-        outlined: true,
-      },
-      acceptLabel: 'تایید',
-      rejectLabel: 'لغو',
-      acceptButtonProps: {
-        label: 'تایید',
-        severity: 'danger',
-      },
-      accept: async () => {
+    this.confirmService.confirmDelete(
+      `${row.AnnouncementTitle} - ${row.AnnouncementSGTitle}`,
+      async () => {
         try {
           this.loadingService.setLoading(true);
           await this.deleteRelationAnnouncement(row);
         } finally {
           this.loadingService.setLoading(false);
         }
-      },
-    });
+      }
+    );
   }
 
   // ❌ Delete relation from backend
@@ -185,7 +197,7 @@ export class RelationOfAnnouncementGroupAndSubGroupComponent {
     const res =
       await this.announcementService.DeleteRelationOfAnnouncementGroupAndSubGroup(
         row.AnnouncementId,
-        row.AnnouncementSGId,
+        row.AnnouncementSGId
       );
     if (!checkAndToastError(res, this.toast)) return;
     this.toast.success('موفق', res.data.Message);
@@ -200,7 +212,7 @@ export class RelationOfAnnouncementGroupAndSubGroupComponent {
       const res =
         await this.announcementService.RegisterNewRelationOfAnnouncementGroupAndSubGroup(
           this.announcementGroupId.value,
-          this.announcementSubGroupId.value,
+          this.announcementSubGroupId.value
         );
       if (!checkAndToastError(res, this.toast)) return;
       this.toast.success('موفق', res.data?.Message ?? '');

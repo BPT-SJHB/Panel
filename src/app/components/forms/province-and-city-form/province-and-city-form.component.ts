@@ -4,6 +4,7 @@ import {
   TreeTableCheckboxComponent,
 } from 'app/components/trees/tree-table-checkbox/tree-table-checkbox.component';
 import { ErrorCodes } from 'app/constants/error-messages';
+import { AppTitles } from 'app/constants/Titles';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { Province } from 'app/data/model/province-city.model';
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
@@ -31,12 +32,14 @@ export class ProvinceAndCityFormComponent implements OnDestroy, OnInit {
   private loading = false;
   private destroy$ = new Subject<void>();
 
+  readonly appTitle = AppTitles
+
   provincesAndCites: TreeNode[] = [];
   cachedProvincesAndCites: TreeNode[] = [];
   selectionKey!: Record<string, SelectionOption>;
-  cacheKeyLength: number = 2;
-  cachingEnabled: boolean = true;
-  startKey: string = '';
+  cacheKeyLength = 2;
+  cachingEnabled = true;
+  startKey = '';
 
   ngOnDestroy(): void {
     this.destroy$.next();

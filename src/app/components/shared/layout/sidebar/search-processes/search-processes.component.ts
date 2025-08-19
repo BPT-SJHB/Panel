@@ -19,6 +19,7 @@ import { TabComponentKey } from 'app/constants/tab-component-registry';
 import { DEFAULT_MAIN_TAB_ID } from 'app/store/tab/tab.reducer';
 import { Button } from 'primeng/button';
 import { closeSidebar } from 'app/store/sidebar/sidebar.actions';
+import { InputText } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-search-processes',
@@ -38,6 +39,7 @@ export class SearchProcessesComponent implements AfterViewInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   private readonly minLengthSearch = 3;
   readonly searchTerm = new FormControl('');
+  readonly inputSearchId = 'search-process-input';
 
   processes = signal<WebProcess[]>([]);
   headerTitle = signal('جستجو');
@@ -97,10 +99,30 @@ export class SearchProcessesComponent implements AfterViewInit, OnDestroy {
     this.isDialogVisible = false;
   }
 
-  openSearchProcess() {
+  openSearchProcess(): void {
     this.store.dispatch(closeSidebar());
     this.isDialogVisible = true;
-    const child = document.getElementById('searchDialog');
-    document.body.appendChild(child!);
+
+    const dialog = document.getElementById('searchDialog');
+   if (dialog) {
+      document.body.appendChild(dialog);
+    }
+
+    setTimeout(() => {
+      const input = document.getElementById(
+        this.inputSearchId
+      ) as HTMLInputElement | null;
+      input?.focus();
+    }, 350);
+  }
+
+  openDesktopSearchProcess() {
+    this.isDialogVisible = true;
+    setTimeout(() => {
+      const input = document.getElementById(
+        this.inputSearchId
+      ) as HTMLInputElement | null;
+      input?.focus();
+    }, 350);
   }
 }
