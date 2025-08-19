@@ -88,4 +88,18 @@ export class AppConfirmService {
       accept,
     });
   }
+
+  // غیرفعال سازی تعرفه ها
+  confirmDisableTarrifs(itemName: string, accept: () => void) {
+    this.confirmationService.confirm({
+      header: 'تایید غیرفعال سازی تعرفه ها',
+      message: `آیا از غیر فعال‌سازی <b><u>${itemName}</u></b> اطمینان دارید؟`,
+      icon: 'pi pi-times',
+      acceptLabel: 'تایید',
+      rejectLabel: 'انصراف',
+      acceptButtonProps: { severity: 'danger' },
+      rejectButtonProps: { severity: 'secondary' },
+      accept,
+    });
+  }
 }
