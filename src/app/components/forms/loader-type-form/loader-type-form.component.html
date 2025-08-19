@@ -47,15 +47,19 @@
     >
       <ng-template #header>
         <tr>
-          <th>فعال و غیر فعال</th>
-          <th>کد</th>
-          <th>کد سازمانی</th>
+          <th>شناسه</th>
+          <th>شناسه سازمانی</th>
           <th>عنوان بارگیر</th>
-          <th>بارگیر ثابت و غیر ثابت</th>
+          <th>بارگیر ثابت/غیر ثابت</th>
+          <th>فعال/غیر فعال</th>
         </tr>
       </ng-template>
       <ng-template #body let-control>
         <tr>
+          <td>{{ control.get("id")?.value }}</td>
+          <td>{{ control.get("code")?.value }}</td>
+          <td>{{ control.get("title")?.value }}</td>
+          <td>{{ control.get("type")?.value }}</td>
           <td>
             <p-checkbox
               [binary]="true"
@@ -64,10 +68,6 @@
               [formControl]="control.get('status')"
             ></p-checkbox>
           </td>
-          <td>{{ control.get("id")?.value }}</td>
-          <td>{{ control.get("code")?.value }}</td>
-          <td>{{ control.get("title")?.value }}</td>
-          <td>{{ control.get("type")?.value }}</td>
         </tr>
       </ng-template>
     </p-table>

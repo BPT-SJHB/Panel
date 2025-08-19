@@ -101,7 +101,7 @@ export class LoaderTypeFormComponent implements OnDestroy, OnInit {
       id: [item.LoaderTypeId],
       code: [item.LoaderTypeOrganizationId],
       title: [item.LoaderTypeTitle],
-      type: [item.LoaderTypeTitle],
+      type: [item.LoaderTypeFixStatusTitle],
       status: [item.Active],
     });
   }
