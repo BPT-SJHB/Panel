@@ -117,7 +117,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
     subTab: [
       {
         title: 'صفحه اصلی',
-        component: TurnsListFormComponent ,
+        component: MainViewComponent,
       },
     ],
   },
@@ -213,7 +213,10 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   [TabComponentKey.AnnouncementManagement]: {
     shearedSignal: false,
     subTab: [
-      { title: 'گروه‌های اعلام بار', component: AnnouncementGroupFormComponent },
+      {
+        title: 'گروه‌های اعلام بار',
+        component: AnnouncementGroupFormComponent,
+      },
       {
         title: 'زیر گروه‌های اعلام بار',
         component: AnnouncementSubGroupFormComponent,
