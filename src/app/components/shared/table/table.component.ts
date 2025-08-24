@@ -19,7 +19,6 @@ export interface TableColumn<T extends object> {
   field: keyof T;
   type?: TableColumnType;
   class?: string | ((row: T) => string);
-  tdClass?: string | string | ((row: T) => string);
   buttonSeverity?: ButtonSeverity;
   onAction?: (row: T) => void | Promise<void>;
   sorting?: boolean;
@@ -60,7 +59,7 @@ export class TableComponent<T extends object> {
   @Input() rows: T[] = [];
   @Input() columns: TableColumn<T>[] = [];
   @Input() config = TableConfig;
-
+  @Input() rowClass: string | ((row: T) => string) = '';
   @Input() enableCaptionButton = false;
   @Input() captionButtonLabel = 'جدید';
   @Output() clickCaptionButton = new EventEmitter<void>();
@@ -99,10 +98,10 @@ export class TableComponent<T extends object> {
       : (column.class ?? '');
   }
 
-  getTdClass(column: TableColumn<T>, row: T): string {
-    return typeof column.tdClass === 'function'
-      ? column.tdClass(row)
-      : (column.tdClass ?? '');
+  getTdClass(row: T): string {
+    return typeof this.rowClass === 'function'
+      ? this.rowClass(row)
+      : this.rowClass;
   }
 
   getColumnType(column: TableColumn<T>): TableColumnType {
