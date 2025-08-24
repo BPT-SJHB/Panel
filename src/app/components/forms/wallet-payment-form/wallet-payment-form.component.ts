@@ -40,13 +40,16 @@ export class WalletPaymentFormComponent
   @Input() transportComponyId = signal<number | null>(null);
 
   // sharedWalletId
-  @Input() shearedSignal = signal<number | null>(null);
+  @Input() sharedSignal = signal<number | null>(null);
 
   // 🛠 Services
   private readonly walletService = inject(WalletManagementService);
 
   // 📝 Form Controls
-  readonly amount = new FormControl<number | null>(null,ValidationSchema.price );
+  readonly amount = new FormControl<number | null>(
+    null,
+    ValidationSchema.price
+  );
 
   // 📊 Reactive State Signals
   readonly defaultAmounts = signal<WalletDefaultAmount[]>([]);
@@ -54,7 +57,7 @@ export class WalletPaymentFormComponent
 
   constructor() {
     effect(() => {
-      this.shearedSignal.set(this.walletId());
+      this.sharedSignal.set(this.walletId());
       if (!this.truckId() && !this.transportComponyId()) return;
       this.onViewActivated();
     });
@@ -93,7 +96,7 @@ export class WalletPaymentFormComponent
       this.loadingService.setLoading(true);
       const response = await this.fetchWalletInfo();
       if (!response || !checkAndToastError(response, this.toast)) return;
-      this.shearedSignal.set(response.data.MoneyWalletId);
+      this.sharedSignal.set(response.data.MoneyWalletId);
       this.userWallet.set(response.data);
     } finally {
       this.loadingService.setLoading(false);
@@ -151,17 +154,17 @@ export class WalletPaymentFormComponent
       case 'User':
         return this.walletService.GetUserWalletInfo();
 
-      case 'Truck':
+      case 'Truck': {
         const truckId = this.truckId();
         if (!truckId) return Promise.resolve(null);
         return this.walletService.GetTruckWalletInfo(truckId);
-
-      case 'TransportCompony':
+      }
+      case 'TransportCompony': {
         const transportComponyId = this.transportComponyId();
 
         if (!transportComponyId) return Promise.resolve(null);
         return this.walletService.GetTransportCompanyWallet(transportComponyId);
-
+      }
       case 'TruckerAssociation':
         return this.walletService.GetTruckerAssociationWalletInfo();
 
@@ -178,7 +181,7 @@ export class WalletPaymentFormComponent
     return this.getWalletMethod();
   }
 
-  setAmountValue(newValue:number) {
+  setAmountValue(newValue: number) {
     const current = this.amount.value;
     const currentNum = Number(current);
     const newNum = Number(newValue);
