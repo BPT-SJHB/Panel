@@ -108,7 +108,7 @@ export class WalletTransactionsTableComponent
   ]);
 
   // 🎨 Get color class based on transaction color
-  getRowColor(row: WalletTransaction): string {
+  getRowColor = (row: WalletTransaction)=> {
     return (
       this.colorMap.get(row.TransactionColor.toLowerCase()) ??
       'bg-surface-300 dark:bg-surface-500'
