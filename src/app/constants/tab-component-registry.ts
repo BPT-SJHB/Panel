@@ -44,6 +44,8 @@ import { LoadCapacitorFormComponent } from 'app/components/forms/driver-load-man
 import { LoadAllocationPriorityComponent } from 'app/components/forms/driver-load-management-form/load-allocation-priority/load-allocation-priority.component';
 import { DriverLoadAllocationFormComponent } from 'app/components/forms/driver-load-management-form/driver-load-allocation-form/driver-load-allocation-form.component';
 import { DriverLoadPermissionsFormComponent } from 'app/components/forms/driver-load-management-form/driver-load-permissions-form/driver-load-permissions-form.component';
+import { LoadAccountingsFormComponent } from 'app/components/forms/load-accountings-form/load-accountings-form.component';
+import { AdminLoadPermissionsFormComponent } from 'app/components/forms/admin-load-permissions-form/admin-load-permissions-form.component';
 
 export enum TabComponentKey {
   Main = -1,
@@ -98,10 +100,12 @@ export enum TabComponentKey {
 
   DriverLoadManagement = 37,
   TransportCompaniesLoadManagement = 32,
+  FactoriesAndFreightLoadManagement = 33,
+  AdminLoadManagement = 39,
 }
 
 export interface TabConfig {
-  shearedSignal: boolean;
+  sharedSignal: boolean;
   subTab: TabView[];
 }
 
@@ -113,17 +117,17 @@ export interface TabView<T = object> {
 
 export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   [TabComponentKey.Main]: {
-    shearedSignal: true,
+    sharedSignal: false,
     subTab: [
       {
         title: 'صفحه اصلی',
-        component: TurnsListFormComponent ,
+        component: MainViewComponent ,
       },
     ],
   },
 
   [TabComponentKey.UserManagement]: {
-    shearedSignal: false,
+    sharedSignal: false,
     subTab: [
       { title: 'مدیریت کاربران', component: UserInfoFormComponent },
       { title: 'مدریت دسترسی کابران', component: UsersMenuAccessFormComponent },
@@ -131,7 +135,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   },
 
   [TabComponentKey.TruckDriverManagement]: {
-    shearedSignal: false,
+    sharedSignal: false,
     subTab: [
       { title: 'راننده', component: DriverInfoFormComponent },
       { title: 'ناوگان', component: TruckInfoFormComponent },
@@ -143,7 +147,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   },
 
   [TabComponentKey.Driver_TruckManagement]: {
-    shearedSignal: false,
+    sharedSignal: false,
     subTab: [
       {
         title: 'ناوگان',
@@ -164,7 +168,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   },
 
   [TabComponentKey.FactoriesAndFreightManagement]: {
-    shearedSignal: false,
+    sharedSignal: false,
     subTab: [
       {
         title: 'کارخانجات و مراکز تولید بار ',
@@ -174,44 +178,44 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   },
 
   [TabComponentKey.LADPlaceManagementService]: {
-    shearedSignal: false,
+    sharedSignal: false,
     subTab: [
       { title: 'مبادی و مقاصد حمل بار', component: LadPlacesFormComponent },
     ],
   },
 
   [TabComponentKey.ProvinceAndCityManagement]: {
-    shearedSignal: false,
+    sharedSignal: false,
     subTab: [{ title: 'استان شهرها', component: ProvinceAndCityFormComponent }],
   },
 
   [TabComponentKey.ProductTypesManagement]: {
-    shearedSignal: false,
+    sharedSignal: false,
     subTab: [{ title: 'کالاها', component: ProductFormComponent }],
   },
 
   [TabComponentKey.LoadCapacitorManagement]: {
-    shearedSignal: false,
+    sharedSignal: false,
     subTab: [{ title: 'مخزن بار', component: LoadCapacitorFormComponent }],
   },
 
   [TabComponentKey.LoaderTypeManagement]: {
-    shearedSignal: false,
+    sharedSignal: false,
     subTab: [{ title: 'بارگیرها', component: LoaderTypeFormComponent }],
   },
 
   [TabComponentKey.TravelTimeManagement]: {
-    shearedSignal: false,
+    sharedSignal: false,
     subTab: [{ title: 'مدت سفر', component: TravelTimeFormComponent }],
   },
 
   [TabComponentKey.TariffsManagement]: {
-    shearedSignal: false,
+    sharedSignal: false,
     subTab: [{ title: 'تعرفه های حمل بار', component: TariffsFormComponent }],
   },
 
   [TabComponentKey.AnnouncementManagement]: {
-    shearedSignal: false,
+    sharedSignal: false,
     subTab: [
       { title: 'گروه‌های اعلام بار', component: AnnouncementGroupFormComponent },
       {
@@ -226,7 +230,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   },
 
   [TabComponentKey.SequentialTurnManagement]: {
-    shearedSignal: false,
+    sharedSignal: false,
     subTab: [
       { title: 'صفوف نوبت دهی', component: SequentialTurnsFormComponent },
       {
@@ -241,7 +245,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   },
 
   [TabComponentKey.TurnsManagement]: {
-    shearedSignal: false,
+    sharedSignal: false,
     subTab: [
       { title: 'لیست نوبت‌ها', component: TurnsListFormComponent },
       { title: 'نوبت بلادرنگ', component: RealTimeTurnsFormComponent },
@@ -257,14 +261,14 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   },
 
   [TabComponentKey.TurnsRegisterManagement]: {
-    shearedSignal: false,
+    sharedSignal: false,
     subTab: [
       { title: 'درخواست - صدورنوبت', component: RegisterTurnFormComponent },
     ],
   },
 
   [TabComponentKey.IssuedTurnManagement]: {
-    shearedSignal: false,
+    sharedSignal: false,
     subTab: [
       {
         title: 'لیست نوبت های صادر شده',
@@ -274,14 +278,14 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   },
 
   [TabComponentKey.UserProfileManagement]: {
-    shearedSignal: false,
+    sharedSignal: false,
     subTab: [
       { title: 'مدیریت پروفایل کاربر', component: UserProfileFormComponent },
     ],
   },
 
   [TabComponentKey.SmsWalletManagement]: {
-    shearedSignal: false,
+    sharedSignal: false,
     subTab: [
       {
         title: 'کیف پول',
@@ -302,7 +306,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   },
 
   [TabComponentKey.UserWalletManagement]: {
-    shearedSignal: false,
+    sharedSignal: false,
     subTab: [
       {
         title: 'شارژ',
@@ -323,7 +327,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   },
 
   [TabComponentKey.TruckWalletManagement]: {
-    shearedSignal: true,
+    sharedSignal: true,
     subTab: [
       {
         title: 'شارژ',
@@ -342,7 +346,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
     ],
   },
   [TabComponentKey.TransportCompaniesWalletManagement]: {
-    shearedSignal: true,
+    sharedSignal: true,
     subTab: [
       {
         title: 'شارژ',
@@ -361,7 +365,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
     ],
   },
   [TabComponentKey.TruckerAssociationWalletManagement]: {
-    shearedSignal: false,
+    sharedSignal: false,
     subTab: [
       {
         title: 'شارژ',
@@ -381,14 +385,14 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
     ],
   },
   [TabComponentKey.TransportCompaniesManagement]: {
-    shearedSignal: false,
+    sharedSignal: false,
     subTab: [
       { title: 'شرکت ها حمل نقل', component: TransportCompaniesFormComponent },
     ],
   },
 
   [TabComponentKey.UserChargingFunctions]: {
-    shearedSignal: false,
+    sharedSignal: false,
     subTab: [
       {
         title: 'عملکرد شارژ کاربر',
@@ -398,7 +402,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   },
 
   [TabComponentKey.DriverLoadManagement]: {
-    shearedSignal: false,
+    sharedSignal: false,
     subTab: [
       {
         title: 'مخزن بار',
@@ -420,7 +424,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   },
 
   [TabComponentKey.TransportCompaniesLoadManagement]: {
-    shearedSignal: true,
+    sharedSignal: true,
     subTab: [
       {
         title: 'اعلام بار',
@@ -441,6 +445,56 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
         title: 'مجوز های صادر شده',
         component: LoadPermissionsFormComponent,
         data: { loadType: LoadListType.TRANSPORT_COMPANY },
+      },
+    ],
+  },
+
+  [TabComponentKey.FactoriesAndFreightLoadManagement]: {
+    sharedSignal: true,
+    subTab: [
+      {
+        title: 'اعلام بار',
+        component: LoadsAnnouncementFormComponent,
+        data: { loadType: LoadListType.FACTORIES_PRODUCTION_CENTERS },
+      },
+      {
+        title: 'لیست بار',
+        component: LoadsListFormComponent,
+        data: { loadType: LoadListType.FACTORIES_PRODUCTION_CENTERS },
+      },
+      {
+        title: 'مجوز های صادر شده',
+        component: LoadPermissionsFormComponent,
+        data: { loadType: LoadListType.FACTORIES_PRODUCTION_CENTERS },
+      },
+    ],
+  },
+  [TabComponentKey.AdminLoadManagement]: {
+    sharedSignal: true,
+    subTab: [
+      {
+        title: 'اعلام بار',
+        component: LoadsAnnouncementFormComponent,
+        data: { loadType: LoadListType.ADMIN },
+      },
+      {
+        title: 'لیست بار',
+        component: LoadsListFormComponent,
+        data: { loadType: LoadListType.ADMIN },
+      },
+      {
+        title: 'ترکنش های بار',
+        component: LoadAccountingsFormComponent,
+        data: { loadType: LoadListType.ADMIN },
+      },
+      {
+        title: 'تخصیص بار',
+        component: LoadAllocationFormComponent,
+        data: { loadType: LoadListType.ADMIN },
+      },
+      {
+        title: 'مجوز های صادر شده',
+        component: AdminLoadPermissionsFormComponent,
       },
     ],
   },
