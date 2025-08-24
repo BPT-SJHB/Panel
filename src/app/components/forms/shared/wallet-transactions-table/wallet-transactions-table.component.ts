@@ -32,7 +32,7 @@ export class WalletTransactionsTableComponent
     | 'None'
   >('None');
   @Input() walletId = signal<number | null>(null);
-  @Input() shearedSignal = signal<number | null>(null);
+  @Input() sharedSignal = signal<number | null>(null);
 
   private readonly walletService = inject(WalletManagementService);
 
@@ -43,44 +43,30 @@ export class WalletTransactionsTableComponent
     {
       header: 'تراکنش',
       field: 'TransactionTitle',
-      tdClass: (row: WalletTransaction) =>
-        this.getRowColor(row.TransactionColor),
     },
     {
       header: 'تاریخ',
       field: 'ShamsiDate',
-      tdClass: (row: WalletTransaction) =>
-        this.getRowColor(row.TransactionColor),
     },
     {
       header: 'زمان',
       field: 'Time',
-      tdClass: (row: WalletTransaction) =>
-        this.getRowColor(row.TransactionColor),
     },
     {
       header: 'موجودی',
       field: 'CurrentBalance',
-      tdClass: (row: WalletTransaction) =>
-        this.getRowColor(row.TransactionColor),
     },
     {
       header: 'مبلغ',
       field: 'Amount',
-      tdClass: (row: WalletTransaction) =>
-        this.getRowColor(row.TransactionColor),
     },
     {
       header: 'باقیمانده',
       field: 'Reminder',
-      tdClass: (row: WalletTransaction) =>
-        this.getRowColor(row.TransactionColor),
     },
     {
       header: 'کاربر',
       field: 'UserName',
-      tdClass: (row: WalletTransaction) =>
-        this.getRowColor(row.TransactionColor),
     },
   ];
 
@@ -122,9 +108,9 @@ export class WalletTransactionsTableComponent
   ]);
 
   // 🎨 Get color class based on transaction color
-  getRowColor(color: string): string {
+  getRowColor(row: WalletTransaction): string {
     return (
-      this.colorMap.get(color.toLowerCase()) ??
+      this.colorMap.get(row.TransactionColor.toLowerCase()) ??
       'bg-surface-300 dark:bg-surface-500'
     );
   }
@@ -132,8 +118,8 @@ export class WalletTransactionsTableComponent
   // 🔁 Called when component is activated (used in cached/dynamic views)
   onViewActivated() {
     // If there's a shared signal passed in, use that for wallet ID
-    if (this.shearedSignal()) {
-      this.walletId.set(this.shearedSignal());
+    if (this.sharedSignal()) {
+      this.walletId.set(this.sharedSignal());
     }
 
     this.initWalletAndTransactions();
