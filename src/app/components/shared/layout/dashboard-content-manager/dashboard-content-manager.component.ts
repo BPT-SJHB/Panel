@@ -56,7 +56,7 @@ export class DashboardContentManagerComponent
 
     this.clearPreviousContent();
 
-    const { selectedSubTab, cachedComponent, config } = tab;
+    const { selectedSubTab, cachedComponent } = tab;
     const cachedComponentRef = cachedComponent.get(selectedSubTab);
 
     if (cachedComponentRef) {
