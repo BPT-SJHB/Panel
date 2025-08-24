@@ -22,7 +22,7 @@ export class LoadPermissionsFormComponent
   extends BaseLoading
   implements OnViewActivated
 {
-  readonly shearedSignal!: WritableSignal<LoadInfo | null>;
+  readonly sharedSignal!: WritableSignal<LoadInfo | null>;
 
   private readonly reportService = inject(ReportsManagementService);
 
@@ -60,26 +60,21 @@ export class LoadPermissionsFormComponent
     { header: 'پارامترهای موثر', field: 'TPTParamsJoint' },
   ];
 
-  override ngOnInit(): void {
-    super.ngOnInit();
-    this.loadPermissions();
-  }
-
   onViewActivated(): void {
     this.loadPermissions();
   }
 
   private async loadPermissions() {
-    if (this.loading() || !this.shearedSignal()) return;
+    const loadinfo = this.sharedSignal();
+    if (this.loading() || !loadinfo) return;
     await this.withLoading(async () => {
       const response = await this.reportService.GetLoadPermissions(
-        this.shearedSignal()!.LoadId
+        loadinfo.LoadId
       );
       if (!checkAndToastError(response, this.toast)) {
         this.rows.set([]);
         return;
       }
-
       this.rows.set(response.data);
     });
   }
