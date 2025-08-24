@@ -1,0 +1,94 @@
+@if (loadPermissionsRows().length === 0) {
+  <div class="text-center font-bold text-red-500 text-lg">
+    لطفا یک بار از لیست بار ها انتخاب نمایید
+  </div>
+} @else {
+  <div class="grid grid-cols-12 gap-4 mt-2">
+    <!-- Table -->
+    <app-table
+      class="col-span-12"
+      [rows]="loadPermissionsRows()"
+      [columns]="columns"
+      [config]="tableConfig"
+    />
+
+    <!-- Cancellation Section -->
+    <span class="col-span-12 mt-2 text-lg font-bold border-t-1 pt-4">
+      کنسلی مجوز بارگیری
+    </span>
+
+    <div class="col-span-12 sm:col-span-6">
+      <app-text-input
+        label="شماره تخصیص"
+        [control]="ctrl('LAId')"
+        [readOnly]="true"
+        [addonWidth]="addonWidth"
+      />
+    </div>
+
+    <div class="col-span-12 sm:col-span-6">
+      <app-text-input
+        label="علت کنسلی مجوز"
+        placeholder="علت کنسلی مجوز"
+        [control]="ctrl('Description')"
+        [addonWidth]="addonWidth"
+        validationField="description"
+      />
+    </div>
+
+    <div class="col-span-12 flex gap-5">
+      <app-checkbox-input
+        [control]="ctrl('TurnResuscitation')"
+        label="احیا نوبت"
+      />
+      <app-checkbox-input
+        [control]="ctrl('LoadResuscitation')"
+        label="بازگردانی بار"
+      />
+    </div>
+
+    <div class="col-span-12 flex justify-center md:justify-end mt-5">
+      <app-button
+        (onClick)="cancelPermission()"
+        styleClass="w-full sm:w-32 md:w-40 lg:w-48"
+        [disabled]="form.invalid || loading()"
+      >
+        کنسلی مجوز بار
+      </app-button>
+    </div>
+
+    <!-- Driver Replacement Section -->
+    <span class="col-span-12 mt-2 text-lg font-bold  border-t-1 pt-4">
+      جاگیزینی راننده دیگر
+    </span>
+
+    <div class="col-span-12 sm:col-span-6">
+      <app-text-input
+        label="راننده"
+        placeholder="راننده"
+        [control]="ctrl('Driver')"
+        [addonWidth]="addonWidth"
+      />
+    </div>
+
+    <div class="col-span-12 sm:col-span-6">
+      <app-text-input
+        label="نوبت"
+        placeholder="نوبت"
+        [control]="ctrl('Turn')"
+        [addonWidth]="addonWidth"
+      />
+    </div>
+
+    <div class="col-span-12 flex justify-center md:justify-end mt-5">
+      <app-button
+        (onClick)="allocateDriver()"
+        styleClass="w-full sm:w-32 md:w-40 lg:w-48"
+        [disabled]="form.invalid || loading()"
+      >
+        تخصیص راننده دیگر
+      </app-button>
+    </div>
+  </div>
+}
+
