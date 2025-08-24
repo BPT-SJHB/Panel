@@ -135,14 +135,14 @@ export class LoadManagementService {
   }
 
   public async GetLoadsForFactoriesAndProductionCenters(
-    transportCompanyId: number,
-    announcementGroupId: number,
-    announcementSubGroupId: number,
-    inventory: boolean,
-    date: string,
-    loadStatusId: number,
-    loadSourceCityId: number,
-    loadTargetCityId: number
+    transportCompanyId?: number,
+    announcementGroupId?: number,
+    announcementSubGroupId?: number,
+    inventory?: boolean,
+    date?: string,
+    loadStatusId?: number,
+    loadSourceCityId?: number,
+    loadTargetCityId?: number
   ): Promise<
     ApiResponse<LoadForTransportCompanies_Factories_Admins_Drivers[]>
   > {
@@ -204,16 +204,16 @@ export class LoadManagementService {
   }
 
   public async GetLoadsForAdmin(
-    transportCompanyId: number,
-    announcementGroupId: number,
-    announcementSubGroupId: number,
-    inventory: boolean,
-    date: string,
-    loadStatusId: number,
-    loadSourceCityId: number,
-    loadTargetCityId: number
+    transportCompanyId?: number,
+    announcementGroupId?: number,
+    announcementSubGroupId?: number,
+    inventory?: boolean,
+    date?: string,
+    loadStatusId?: number,
+    loadSourceCityId?: number,
+    loadTargetCityId?: number
   ): Promise<
-    ApiResponse<LoadInfoForTransportCompanies_Factories_Admins_Drivers[]>
+    ApiResponse<LoadForTransportCompanies_Factories_Admins_Drivers[]>
   > {
     this.userAuth.isLoggedIn();
 
@@ -261,7 +261,7 @@ export class LoadManagementService {
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      LoadInfoForTransportCompanies_Factories_Admins_Drivers[]
+      LoadForTransportCompanies_Factories_Admins_Drivers[]
     >(
       apiUrl,
       bodyValue,
