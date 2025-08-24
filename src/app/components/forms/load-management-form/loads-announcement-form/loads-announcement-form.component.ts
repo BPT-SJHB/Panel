@@ -1,10 +1,12 @@
-import { Component, inject, signal, WritableSignal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
-// Interfaces and Models
+// Interfaces & Models
 import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
 import { LoadInfo } from 'app/services/load-management/model/load-info.model';
 import { TransportTariffParam } from 'app/services/load-management/model/transport-tariff-param.model';
+import { LoadRegister } from 'app/services/load-management/model/load-register.model';
+import { LoadEdit } from 'app/services/load-management/model/load-edit.model';
 
 // Services
 import { LoadManagementService } from 'app/services/load-management/load-management.service';
@@ -12,6 +14,8 @@ import {
   AutoCompleteConfigFactoryService,
   AutoCompleteType,
 } from 'app/services/auto-complete-config-factory/auto-complete-config-factory.service';
+import { AppConfirmService } from 'app/services/confirm/confirm.service';
+import { TransportCompaniesManagementService } from 'app/services/transport-company-management/transport-companies-management.service';
 
 // Components
 import { BaseLoading } from 'app/components/forms/shared/component-base/base-loading';
@@ -24,14 +28,14 @@ import { TextInputComponent } from 'app/components/shared/inputs/text-input/text
 import { BinaryRadioInputComponent } from 'app/components/shared/inputs/binary-radio-input/binary-radio-input.component';
 import { DatePickerInput } from 'app/components/shared/inputs/date-picker-input/date-picker-input.component';
 import { SearchAutoCompleteFactoryComponent } from 'app/components/shared/inputs/search-auto-complete-factory/search-auto-complete-factory.component';
+import {
+  ButtonComponent,
+  ButtonSeverity,
+} from 'app/components/shared/button/button.component';
+import { LoadListType } from '../loads-list-form/loads-list-form.component';
 
 // Utils
 import { checkAndToastError } from 'app/utils/api-utils';
-import { AppConfirmService } from 'app/services/confirm/confirm.service';
-import { LoadRegister } from 'app/services/load-management/model/load-register.model';
-import { LoadEdit } from 'app/services/load-management/model/load-edit.model';
-import { ButtonComponent } from 'app/components/shared/button/button.component';
-import { ButtonSeverity } from 'app/components/shared/button/button.component';
 
 @Component({
   selector: 'app-loads-announcement-form',
@@ -50,26 +54,39 @@ export class LoadsAnnouncementFormComponent
   extends BaseLoading
   implements OnViewActivated
 {
-  // Signals
-  readonly shearedSignal!: WritableSignal<LoadInfo | null>;
-  readonly transportTariffParams: WritableSignal<TransportTariffParam[]> =
-    signal([]);
+  // =====================================================
+  // 🔹 Constants
+  // =====================================================
+  readonly loadType: LoadListType = LoadListType.ADMIN;
+  readonly addonWidth = '10rem';
+  readonly baseWidthClass = 'w-24 sm:w-32 md:w-40 lg:w-48';
 
-  // Services
-  private readonly loadsService = inject(LoadManagementService);
+  // =====================================================
+  // 🔹 Signals & State
+  // =====================================================
+  readonly sharedSignal = signal<LoadInfo | null>(null);
+  readonly selectedLoadInfo = computed(() => this.sharedSignal());
+
+  readonly transportTariffParams = signal<TransportTariffParam[]>([]);
+
+  // =====================================================
+  // 🔹 Services
+  // =====================================================
+  private readonly loadService = inject(LoadManagementService);
   private readonly autoCompleteFactory = inject(
     AutoCompleteConfigFactoryService
   );
   private readonly fb = inject(FormBuilder);
-  private readonly confirm = inject(AppConfirmService);
+  private readonly confirmService = inject(AppConfirmService);
+  private readonly transportCompanyService = inject(
+    TransportCompaniesManagementService
+  );
 
-  // Constants
-  readonly addonWidth = '10rem';
-
-  // Form
+  // =====================================================
+  // 🔹 Form & Table
+  // =====================================================
   private readonly loadsForm = this.createForm();
 
-  // Table configuration
   readonly cols: TableColumn<TransportTariffParam>[] = [
     { field: 'Checked', header: 'وضعیت', type: TableColumnType.CHECKBOX },
     { field: 'TPTPDId', header: 'شناسه' },
@@ -77,41 +94,32 @@ export class LoadsAnnouncementFormComponent
     { field: 'Mblgh', header: 'مبلغ' },
   ];
 
-  // Auto-completions
+  // =====================================================
+  // 🔹 UI Configurations
+  // =====================================================
   readonly autoCompletions = this.createAutoCompletions();
-
-  readonly baseWidthClass = 'w-24 sm:w-32 md:w-40 lg:w-48';
-
   readonly actionButtons = this.createActionButtons();
 
-  // Lifecycle
+  // =====================================================
+  // 🔹 Lifecycle
+  // =====================================================
   onViewActivated(): void {
-    const signal = this.shearedSignal();
-    if (!signal) {
-      this.resetForm();
-      this.transportTariffParams.set([]);
-      return;
-    }
-    this.fetchLoadInfo(signal.LoadId);
+    this.resetForm();
+    this.transportTariffParams.set([]);
+    this.initialize();
   }
 
-  // Form helper
-  ctrl<K extends keyof LoadInfo>(name: K): FormControl<LoadInfo[K]> {
-    const control = this.loadsForm.get(name as string);
-    if (!control) {
-      throw new Error(`Control "${String(name)}" not found`);
-    }
-    return control as FormControl<LoadInfo[K]>;
-  }
+  // =====================================================
+  // 🔹 Button Actions
+  // =====================================================
 
-  // Button handlers with confirmation
   async clickFreeLine(): Promise<void> {
     const loadId = this.getValidLoadId();
     if (!loadId) return;
 
-    this.confirm.confirmFreeLine(`بار #${loadId}`, async () => {
+    this.confirmService.confirmFreeLine(`بار #${loadId}`, async () => {
       await this.withLoading(async () => {
-        const response = await this.loadsService.FreeLineLoad(loadId);
+        const response = await this.loadService.FreeLineLoad(loadId);
         if (checkAndToastError(response, this.toast)) {
           this.toast.success('موفق', response.data.Message);
           await this.fetchLoadInfo(loadId);
@@ -124,9 +132,9 @@ export class LoadsAnnouncementFormComponent
     const loadId = this.getValidLoadId();
     if (!loadId) return;
 
-    this.confirm.confirmSediment(`بار #${loadId}`, async () => {
+    this.confirmService.confirmSediment(`بار #${loadId}`, async () => {
       await this.withLoading(async () => {
-        const response = await this.loadsService.SedimentLoad(loadId);
+        const response = await this.loadService.SedimentLoad(loadId);
         if (checkAndToastError(response, this.toast)) {
           this.toast.success('موفق', response.data.Message);
           await this.fetchLoadInfo(loadId);
@@ -139,9 +147,9 @@ export class LoadsAnnouncementFormComponent
     const loadId = this.getValidLoadId();
     if (!loadId) return;
 
-    this.confirm.confirmCancel(`بار #${loadId}`, async () => {
+    this.confirmService.confirmCancel(`بار #${loadId}`, async () => {
       await this.withLoading(async () => {
-        const response = await this.loadsService.CancelLoad(loadId);
+        const response = await this.loadService.CancelLoad(loadId);
         if (checkAndToastError(response, this.toast)) {
           this.toast.success('موفق', response.data.Message);
           await this.fetchLoadInfo(loadId);
@@ -154,12 +162,13 @@ export class LoadsAnnouncementFormComponent
     const loadId = this.getValidLoadId();
     if (!loadId) return;
 
-    this.confirm.confirmDelete(`بار #${loadId}`, async () => {
+    this.confirmService.confirmDelete(`بار #${loadId}`, async () => {
       await this.withLoading(async () => {
-        const response = await this.loadsService.CancelLoad(loadId);
+        const response = await this.loadService.CancelLoad(loadId);
         if (checkAndToastError(response, this.toast)) {
           this.toast.success('موفق', response.data.Message);
           this.resetForm();
+          this.sharedSignal.set(null)
         }
       });
     });
@@ -169,12 +178,12 @@ export class LoadsAnnouncementFormComponent
     const loadId = this.getValidLoadId();
     if (!loadId) return;
 
-    this.confirm.confirmEdit(`بار #${loadId}`, async () => {
+    this.confirmService.confirmEdit(`بار #${loadId}`, async () => {
       if (this.loadsForm.invalid || this.loading()) return;
-      const loadsInfo = this.loadsForm.getRawValue() as LoadEdit;
+      const loadEdit = this.loadsForm.getRawValue() as LoadEdit;
 
       await this.withLoading(async () => {
-        const response = await this.loadsService.EditLoad(loadsInfo);
+        const response = await this.loadService.EditLoad(loadEdit);
         if (checkAndToastError(response, this.toast)) {
           this.toast.success('موفق', response.data.Message);
           await this.fetchLoadInfo(loadId);
@@ -184,17 +193,137 @@ export class LoadsAnnouncementFormComponent
   }
 
   async clickRegisterLoad(): Promise<void> {
-    if (!this.isFormValidExcept('LoadId')) return;
-    const loadsInfo = this.loadsForm.getRawValue() as LoadRegister;
-    await this.withLoading(async () => {
-      const response = await this.loadsService.RegisterNewLoad(loadsInfo);
-      if (checkAndToastError(response, this.toast)) {
-        this.resetForm();
+    if (!this.isLoadRegisterValid() || this.loading()) return;
+
+    const newLoad = this.loadsForm.getRawValue() as LoadRegister;
+
+    const response = await this.withLoading(() =>
+      this.loadService.RegisterNewLoad(newLoad)
+    );
+
+    if (!response || !checkAndToastError(response, this.toast)) return;
+
+    this.confirmService.ConfirmChoose(
+      'بار مورد نظر',
+      async () => {
+        const loadInfo = await this.fetchLoadInfo(response.data.newLoadId);
+        this.sharedSignal.set(loadInfo ?? null);
+      },
+      () => this.resetForm()
+    );
+  }
+
+  isLoadRegisterValid() {
+    return this.isFormValidExcept('LoadId', 'LoadStatusId', 'Tariff');
+  }
+
+  // =====================================================
+  // 🔹 Private Helpers
+  // =====================================================
+
+  /** Typed form control getter */
+  ctrl<K extends keyof LoadInfo>(name: K): FormControl<LoadInfo[K]> {
+    const control = this.loadsForm.get(name as string);
+    if (!control) throw new Error(`Control "${String(name)}" not found`);
+    return control as FormControl<LoadInfo[K]>;
+  }
+
+  /** Gets valid LoadId if possible */
+  private getValidLoadId(): number | null {
+    const loadIdControl = this.ctrl('LoadId');
+    return loadIdControl.invalid || this.loading() ? null : loadIdControl.value;
+  }
+
+  /** Fetches load info + tariff params */
+
+  private async fetchLoadInfo(loadId: number): Promise<LoadInfo | undefined> {
+    return await this.withLoading(async () => {
+      const responseLoad = await this.loadService.GetLoadInfo(loadId);
+      if (!checkAndToastError(responseLoad, this.toast)) {
+        this.transportTariffParams.set([]);
+        return undefined;
       }
+
+      const loadInfo = responseLoad.data;
+      this.populateForm(loadInfo);
+      this.sharedSignal.set(loadInfo);
+
+      const tptParams = loadInfo.TPTParams ?? '';
+      const responseParams =
+        await this.loadService.GetTransportTariffParams(tptParams);
+
+      const isValid = checkAndToastError(responseParams, this.toast);
+      this.transportTariffParams.set(isValid ? responseParams.data : []);
+
+      return responseLoad.data;
     });
   }
 
-  // Private methods
+  /** Populates form values */
+  private populateForm(loadInfo: LoadInfo): void {
+    this.loadsForm.patchValue({ ...loadInfo });
+  }
+
+  /** Reset form */
+  private resetForm(): void {
+    this.loadsForm.reset();
+  }
+
+  /** Shared disable condition */
+  private baseDisabled(): boolean {
+    return this.ctrl('LoadId').invalid || this.loading();
+  }
+
+  /** Validates form except one control */
+  private isFormValidExcept(
+    exceptControl: keyof LoadInfo,
+    ...controls: (keyof LoadInfo)[]
+  ): boolean {
+    const filterKey = [exceptControl, ...controls];
+    return Object.keys(this.loadsForm.controls)
+      .filter((key) => !filterKey.includes(key as keyof LoadInfo))
+      .every((key) => this.ctrl(key as keyof LoadInfo).valid);
+  }
+
+  /** Initialization based on load type */
+  private async initialize() {
+    switch (this.loadType) {
+      case LoadListType.TRANSPORT_COMPANY: {
+        await this.initializeTransportCompany();
+        break;
+      }
+
+      case LoadListType.ADMIN:
+      case LoadListType.FACTORIES_PRODUCTION_CENTERS: {
+        const loadinfo = this.selectedLoadInfo();
+        if (!loadinfo) return;
+        await this.fetchLoadInfo(loadinfo.LoadId);
+        break;
+      }
+
+      default:
+        break;
+    }
+  }
+
+  private async initializeTransportCompany() {
+    await this.withLoading(async () => {
+      const response =
+        await this.transportCompanyService.GetTransportCompanyBySoftwareUser();
+      if (!checkAndToastError(response, this.toast)) return;
+
+      this.loadsForm.patchValue({
+        TransportCompanyId: response.data.TCId,
+        TransportCompanyTitle: response.data.TCTitle,
+      });
+
+      const loadinfo = this.selectedLoadInfo();
+      if (!loadinfo) return;
+      await this.fetchLoadInfo(loadinfo.LoadId);
+    });
+  }
+
+  /** Creates form controls */
   private createForm() {
     return this.fb.group({
       LoadId: this.fb.control<number | null>(null, Validators.required),
@@ -242,6 +371,7 @@ export class LoadsAnnouncementFormComponent
     });
   }
 
+  /** Creates autocomplete configs */
   private createAutoCompletions() {
     return {
       loadStatus: this.autoCompleteFactory.create(
@@ -252,24 +382,19 @@ export class LoadsAnnouncementFormComponent
           readOnly: () => true,
         }
       ),
-
       transportCompany: this.autoCompleteFactory.create(
         AutoCompleteType.TransportCompany,
         this.ctrl('TransportCompanyId'),
         {
           control: this.ctrl('TransportCompanyTitle') as FormControl<string>,
-          readOnly: () => true,
+          readOnly: () => this.loadType === LoadListType.TRANSPORT_COMPANY,
         }
       ),
-
       goods: this.autoCompleteFactory.create(
         AutoCompleteType.Product,
         this.ctrl('GoodId'),
-        {
-          control: this.ctrl('GoodTitle') as FormControl<string>,
-        }
+        { control: this.ctrl('GoodTitle') as FormControl<string> }
       ),
-
       announcementGroup: this.autoCompleteFactory.create(
         AutoCompleteType.AnnouncementGroup,
         this.ctrl('AnnouncementGroupId'),
@@ -282,7 +407,6 @@ export class LoadsAnnouncementFormComponent
           },
         }
       ),
-
       announcementSubGroup: this.autoCompleteFactory.create(
         AutoCompleteType.RelationAnnouncementGroupAndSubGroup,
         this.ctrl('AnnouncementSubGroupId'),
@@ -294,7 +418,6 @@ export class LoadsAnnouncementFormComponent
           readOnly: () => this.ctrl('AnnouncementGroupId').invalid,
         }
       ),
-
       sourceCity: this.autoCompleteFactory.create(
         AutoCompleteType.City,
         this.ctrl('SourceCityId'),
@@ -304,7 +427,6 @@ export class LoadsAnnouncementFormComponent
           control: this.ctrl('SourceCityTitle') as FormControl<string>,
         }
       ),
-
       targetCity: this.autoCompleteFactory.create(
         AutoCompleteType.City,
         this.ctrl('TargetCityId'),
@@ -314,7 +436,6 @@ export class LoadsAnnouncementFormComponent
           control: this.ctrl('TargetCityTitle') as FormControl<string>,
         }
       ),
-
       loadingPlace: this.autoCompleteFactory.create(
         AutoCompleteType.LADPlaces,
         this.ctrl('LoadingPlaceId'),
@@ -324,7 +445,6 @@ export class LoadsAnnouncementFormComponent
           control: this.ctrl('LoadingPlaceTitle') as FormControl<string>,
         }
       ),
-
       dischargingPlace: this.autoCompleteFactory.create(
         AutoCompleteType.LADPlaces,
         this.ctrl('DischargingPlaceId'),
@@ -337,6 +457,7 @@ export class LoadsAnnouncementFormComponent
     };
   }
 
+  /** Creates action buttons config */
   private createActionButtons() {
     return [
       {
@@ -345,7 +466,7 @@ export class LoadsAnnouncementFormComponent
         action: () => this.clickRegisterLoad(),
         widthClass: this.baseWidthClass,
         hidden: () => this.ctrl('LoadId').valid,
-        disabled: () => this.loading() || !this.isFormValidExcept('LoadId'),
+        disabled: () => !this.isLoadRegisterValid() || this.loading(),
       },
       {
         label: 'ویرایش',
@@ -388,71 +509,5 @@ export class LoadsAnnouncementFormComponent
         disabled: () => this.baseDisabled(),
       },
     ];
-  }
-
-  private getValidLoadId(): number | null {
-    const loadIdControl = this.ctrl('LoadId');
-    if (loadIdControl.invalid || this.loading()) {
-      return null;
-    }
-    return loadIdControl.value;
-  }
-
-  private async fetchLoadInfo(loadId: number): Promise<void> {
-    await this.withLoading(async () => {
-      // Fetch load info
-      const responseLoad = await this.loadsService.GetLoadInfo(loadId);
-      if (!checkAndToastError(responseLoad, this.toast)) {
-        this.transportTariffParams.set([]);
-        return;
-      }
-
-      this.populateForm(responseLoad.data);
-
-      // Fetch transport tariff params
-      const tptParams = responseLoad.data.TPTParams ?? '';
-      const response =
-        await this.loadsService.GetTransportTariffParams(tptParams);
-
-      if (checkAndToastError(response, this.toast)) {
-        this.transportTariffParams.set(response.data);
-      } else {
-        this.transportTariffParams.set([]);
-      }
-    });
-  }
-
-  private populateForm(loadInfo: LoadInfo): void {
-    // Patch all values at once
-    this.loadsForm.patchValue({ ...loadInfo });
-
-    // Explicitly set ID fields to ensure proper type handling
-    const idFields = {
-      LoadStatusId: loadInfo.LoadStatusId,
-      AnnouncementGroupId: loadInfo.AnnouncementGroupId,
-      AnnouncementSubGroupId: loadInfo.AnnouncementSubGroupId,
-      LoadingPlaceId: loadInfo.LoadingPlaceId,
-      TransportCompanyId: loadInfo.TransportCompanyId,
-      DischargingPlaceId: loadInfo.DischargingPlaceId,
-      GoodId: loadInfo.GoodId,
-      SourceCityId: loadInfo.SourceCityId,
-      TargetCityId: loadInfo.TargetCityId,
-    };
-
-    this.loadsForm.patchValue(idFields);
-  }
-
-  private resetForm(): void {
-    this.loadsForm.reset();
-  }
-
-  private baseDisabled(): boolean {
-    return this.ctrl('LoadId').invalid || this.loading();
-  }
-
-  private isFormValidExcept(exceptControl: string): boolean {
-    return Object.keys(this.loadsForm.controls)
-      .filter((key) => key !== exceptControl)
-      .every((key) => this.ctrl(key as keyof LoadInfo).valid);
   }
 }
