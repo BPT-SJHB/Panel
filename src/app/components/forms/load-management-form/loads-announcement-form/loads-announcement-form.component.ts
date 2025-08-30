@@ -66,7 +66,9 @@ export class LoadsAnnouncementFormComponent
   // =====================================================
   readonly sharedSignal = signal<LoadInfo | null>(null);
   readonly selectedLoadInfo = computed(() => {
-    this.resetForm();
+    if (!this.sharedSignal()) {
+      this.resetForm();
+    }
     return this.sharedSignal();
   });
 
