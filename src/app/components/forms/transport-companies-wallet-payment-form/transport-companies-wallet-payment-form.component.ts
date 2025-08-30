@@ -1,6 +1,7 @@
 import {
   Component,
   Input,
+  WritableSignal,
   inject,
   signal,
 } from '@angular/core';
@@ -16,26 +17,24 @@ import { TransportCompany } from 'app/services/transport-company-management/mode
 @Component({
   selector: 'app-transport-companies-wallet-payment-form',
   standalone: true,
-  imports: [
-    WalletPaymentFormComponent,
-    SearchAutoCompleteComponent,
-  ],
+  imports: [WalletPaymentFormComponent, SearchAutoCompleteComponent],
   templateUrl: './transport-companies-wallet-payment-form.component.html',
   styleUrl: './transport-companies-wallet-payment-form.component.scss',
 })
 export class TransportCompaniesWalletPaymentFormComponent extends BaseLoading {
   // --- Inputs ---
-  @Input() readonly shearedSignal: any;
+  @Input() readonly sharedSignal!: WritableSignal<number | null>;
 
   // --- Services & Signals ---
   private transportComponyService = inject(TransportCompaniesManagementService);
-  readonly walletType = signal<"TransportCompony">("TransportCompony");
+  readonly walletType = signal<'TransportCompony'>('TransportCompony');
   readonly transportComponyId = signal<number | null>(null);
 
   // --- Methods ---
   // Search transport companies for autocomplete
   searchTransportCompony = async (query: string) => {
-    const response = await this.transportComponyService.GetTransportCompaniesInfo(query);
+    const response =
+      await this.transportComponyService.GetTransportCompaniesInfo(query);
     if (!checkAndToastError(response, this.toast)) return [];
     return response.data;
   };

@@ -102,4 +102,23 @@ export class AppConfirmService {
       accept,
     });
   }
+
+  // انتخاب
+  ConfirmChoose(
+    itemName: string,
+    accept: () => void,
+    reject?: () => void
+  ): void {
+    this.confirmationService.confirm({
+      header: 'تأیید انتخاب آیتم',
+      message: `آیا می‌خواهید <b><u>${itemName}</u></b> را انتخاب کنید؟`,
+      icon: 'pi pi-question-circle',
+      acceptLabel: 'بله',
+      rejectLabel: 'خیر',
+      acceptButtonProps: { severity: 'info' },
+      rejectButtonProps: { severity: 'secondary' },
+      accept,
+      reject,
+    });
+  }
 }

@@ -1,9 +1,7 @@
 import {
-  AfterViewInit,
   Component,
   Input,
-  OnInit,
-  ViewChild,
+  WritableSignal,
   inject,
   signal,
 } from '@angular/core';
@@ -14,7 +12,6 @@ import { ValidationSchema } from 'app/constants/validation-schema';
 
 // Services for truck and wallet data handling
 import { Driver_TruckManagementService } from 'app/services/driver-truck-management/driver-truck-management.service';
-import { WalletManagementService } from 'app/services/wallet-management/wallet-management.service';
 
 // Utilities
 import { checkAndToastError } from 'app/utils/api-utils';
@@ -42,7 +39,7 @@ import { TextInputComponent } from 'app/components/shared/inputs/text-input/text
   styleUrl: './truck-wallet-payment-form.component.scss',
 })
 export class TruckWalletPaymentFormComponent extends BaseLoading {
-  @Input() readonly shearedSignal: any;
+  @Input() readonly sharedSignal!: WritableSignal<number | null>;
   // Injected services and utilities
   private fb = inject(FormBuilder);
   private truckService = inject(Driver_TruckManagementService);
@@ -87,7 +84,6 @@ export class TruckWalletPaymentFormComponent extends BaseLoading {
       Smart: truck.SmartCardNo,
     });
   }
-
 
   // Reset wallet signal and form values
   private resetForms() {

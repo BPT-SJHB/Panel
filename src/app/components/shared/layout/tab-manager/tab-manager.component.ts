@@ -16,7 +16,6 @@ import { TabsModule } from 'primeng/tabs';
 
 // NgRx store
 import { Store } from '@ngrx/store';
-import { renderContent } from 'app/store/content-manager/content-manager.actions';
 import { selectorNewTab } from 'app/store/tab/tab.selectors';
 import { selectContent } from 'app/store/content-manager/content-manager.selectors';
 
@@ -49,7 +48,7 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // Holds reference to content manager
   readonly contentManager = signal<DashboardContentManagerComponent | null>(
-    null,
+    null
   );
 
   // Controls visibility of sub-tabs
@@ -87,19 +86,14 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly store = inject(Store);
 
   constructor() {
-    // Dispatch renderContent when selected tab changes
-    effect(() => {
-      const tab = this.selectTab();
-      if (tab) {
-        this.dispatchRenderContentFor(tab);
-      }
-    });
-
-    // Load content when both manager and selected tab are available
     effect(() => {
       const tab = this.selectTab();
       const manager = this.contentManager();
-      if (manager && tab) {
+
+      if (!tab) return;
+
+      // Only load content if manager is available
+      if (manager) {
         manager.loadTabContent(tab);
       }
     });
@@ -128,7 +122,7 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
             tab.selectedSubTab = index;
           });
         }),
-        takeUntil(this.destroy$),
+        takeUntil(this.destroy$)
       )
       .subscribe();
   }
@@ -164,17 +158,12 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
    *  ================================ */
 
   onClickTab(tab: DynamicTab): void {
-    // If same tab clicked, re-dispatch its content metadata
     if (this.selectTab() === tab) {
-      this.store.dispatch(
-        renderContent({
-          pageGroupId: tab.id === DEFAULT_MAIN_TAB_ID ? -1 : undefined,
-          title: tab.title,
-          icon: tab.icon,
-          context: 'tabContent',
-        }),
-      );
+      const manager = this.contentManager();
+      manager?.loadTabContent(tab);
+      return;
     }
+
     this.selectTab.set(tab);
   }
 
@@ -209,7 +198,7 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
       cachedComponent: new Map(),
       selectedSubTab: 0,
       // note: keeping original spelling in case registry uses `shearedSignal`
-      sharedSignal: config.shearedSignal ? signal(null) : undefined,
+      sharedSignal: config.sharedSignal ? signal(null) : undefined,
     };
 
     this.tabs.set(newTab.id, newTab);
@@ -231,21 +220,6 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
     // Clean up resources and remove
     this.destroyTabResources(tab);
     this.tabs.delete(id);
-  }
-
-  /** ================================
-   *  Private Helpers
-   *  ================================ */
-
-  private dispatchRenderContentFor(tab: DynamicTab): void {
-    this.store.dispatch(
-      renderContent({
-        pageGroupId: tab.id === DEFAULT_MAIN_TAB_ID ? -1 : undefined,
-        title: tab.title,
-        icon: tab.icon,
-        context: 'tabContent',
-      }),
-    );
   }
 
   @HostListener('window:resize')
