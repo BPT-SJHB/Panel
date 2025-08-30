@@ -136,7 +136,7 @@ export class AutoCompleteConfigFactoryService {
         'loadAnnouncementSubGroupTitle'
       ),
       optionLabel: 'AnnouncementSGTitle' as keyof AnnouncementSubGroup,
-      optionValueKey: 'AnnouncementSGTitle' as keyof AnnouncementSubGroup,
+      optionValueKey: 'AnnouncementSGId' as keyof AnnouncementSubGroup,
       minLength: 0,
       cachingMode: 'Focus' as const,
     },
