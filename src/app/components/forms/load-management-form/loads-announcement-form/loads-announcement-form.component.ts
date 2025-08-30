@@ -65,7 +65,10 @@ export class LoadsAnnouncementFormComponent
   // 🔹 Signals & State
   // =====================================================
   readonly sharedSignal = signal<LoadInfo | null>(null);
-  readonly selectedLoadInfo = computed(() => this.sharedSignal());
+  readonly selectedLoadInfo = computed(() => {
+    this.resetForm();
+    return this.sharedSignal();
+  });
 
   readonly transportTariffParams = signal<TransportTariffParam[]>([]);
 
@@ -104,7 +107,6 @@ export class LoadsAnnouncementFormComponent
   // 🔹 Lifecycle
   // =====================================================
   onViewActivated(): void {
-    this.resetForm();
     this.transportTariffParams.set([]);
     this.initialize();
   }
@@ -168,7 +170,7 @@ export class LoadsAnnouncementFormComponent
         if (checkAndToastError(response, this.toast)) {
           this.toast.success('موفق', response.data.Message);
           this.resetForm();
-          this.sharedSignal.set(null)
+          this.sharedSignal.set(null);
         }
       });
     });
