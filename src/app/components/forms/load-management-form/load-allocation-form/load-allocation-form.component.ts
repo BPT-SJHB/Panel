@@ -1,10 +1,4 @@
-import {
-  Component,
-  computed,
-  inject,
-  signal,
-  WritableSignal,
-} from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { BaseLoading } from 'app/components/forms/shared/component-base/base-loading';
 import {
   FormBuilder,
@@ -28,6 +22,7 @@ import { TextInputComponent } from 'app/components/shared/inputs/text-input/text
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { TableConfig } from 'app/constants/ui/table.ui';
 import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
+import { LoadListType } from '../loads-list-form/loads-list-form.component';
 
 @Component({
   selector: 'app-load-allocation-form',
@@ -44,12 +39,13 @@ export class LoadAllocationFormComponent
   extends BaseLoading
   implements OnViewActivated
 {
-  readonly shearedSignal!: WritableSignal<LoadInfo | null>;
+  readonly sharedSignal!: WritableSignal<LoadInfo | null>;
   readonly rows = signal<LoadInfo[]>([]);
 
   private readonly fb = inject(FormBuilder);
   private readonly loadService = inject(LoadManagementService);
   private readonly truckDriverService = inject(Driver_TruckManagementService);
+  private readonly loadType: LoadListType = LoadListType.TRANSPORT_COMPANY;
 
   readonly configTable: typeof TableConfig = {
     ...TableConfig,
@@ -58,10 +54,10 @@ export class LoadAllocationFormComponent
   readonly addonWidth = '10rem';
 
   onViewActivated(): void {
-    if (!this.shearedSignal()) return;
+    if (!this.sharedSignal()) return;
     this.withLoading(async () => {
       const response = await this.loadService.GetLoadInfo(
-        this.shearedSignal()!.LoadId
+        this.sharedSignal()!.LoadId
       );
       if (!checkAndToastError(response, this.toast)) this.rows.set([]);
       else this.rows.set([response.data]);
@@ -186,7 +182,7 @@ export class LoadAllocationFormComponent
     return (
       this.driverCtrl('DriverId').valid &&
       this.truckCtrl('TruckId').valid &&
-      this.shearedSignal()
+      this.sharedSignal()
     );
   }
 
@@ -194,14 +190,10 @@ export class LoadAllocationFormComponent
     if (!this.isRegisterLoadValid()) return;
 
     this.withLoading(async () => {
-      const res =
-        await this.loadService.RegisterNewLoadAllocationForTransportCompanies(
-          this.driverCtrl('DriverId').value,
-          this.truckCtrl('TruckId').value,
-          this.shearedSignal()!.LoadId
-        );
+      const res = await this.registerNewLoadFun();
       if (!checkAndToastError(res, this.toast)) return;
       this.toast.success('موفق', res.data.Message);
+      this.resetAllForms();
     });
   }
 
@@ -209,5 +201,30 @@ export class LoadAllocationFormComponent
     this.truckComposeForm.reset();
     this.driverForm.reset();
     this.truckForm.reset();
+  }
+
+  private registerNewLoadFun() {
+    const truckId = this.truckCtrl('TruckId').value;
+    const driverId = this.driverCtrl('DriverId').value;
+    const loadId = this.sharedSignal()!.LoadId;
+
+    switch (this.loadType) {
+      case LoadListType.TRANSPORT_COMPANY:
+        return this.loadService.RegisterNewLoadAllocationForTransportCompanies(
+          truckId,
+          driverId,
+          loadId
+        );
+
+      case LoadListType.ADMIN:
+        return this.loadService.RegisterNewLoadAllocationForAdmins(
+          truckId,
+          driverId,
+          loadId
+        );
+
+      default:
+        throw new Error(`Unknown load type: ${this.loadType}`);
+    }
   }
 }

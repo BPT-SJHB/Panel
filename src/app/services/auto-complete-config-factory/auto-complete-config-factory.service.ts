@@ -336,8 +336,8 @@ export class AutoCompleteConfigFactoryService {
     return res.data ?? [];
   }
 
-  private async getSearchLadPlace(query: string): Promise<ProductType[]> {
-    const res = await this.productService.GetProductsInfo(query);
+  private async getSearchLadPlace(query: string): Promise<LADPlace[]> {
+    const res = await this.ladPlacesService.GetLADPlaces(query);
     return res.data ?? [];
   }
 

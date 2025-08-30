@@ -100,7 +100,8 @@ export class ButtonComponent implements OnInit, OnChanges {
         },
       },
       disabled: {
-        gradient: 'bg-gradient-to-b from-gray-300 to-gray-600 to-75% blur-[1px]',
+        gradient:
+          'bg-gradient-to-b from-gray-300 to-gray-600 to-75% blur-[1px]',
         shadow: {
           normal: 'shadow-[0px_4px_8px_var(--p-surface-500)]',
           sync: '',
@@ -137,9 +138,11 @@ export class ButtonComponent implements OnInit, OnChanges {
     }
 
     // Determine and add gradient and shadow classes
-    const styleData = this.disabled
+    let styleData = this.disabled
       ? this.style.colors['disabled']
       : this.style.colors[this.severity];
+
+    if (!styleData) styleData = this.style.colors['primary'];
     classes.push(styleData.gradient);
 
     if (this.shadow || this.disabled) {

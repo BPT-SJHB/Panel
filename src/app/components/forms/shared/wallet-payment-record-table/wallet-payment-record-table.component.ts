@@ -29,7 +29,7 @@ export class WalletPaymentRecordTableComponent
     'User' | 'Truck' | 'TruckerAssociation' | 'SMS' | 'None'
   >('None');
   @Input() walletId = signal<number | null>(null);
-  @Input() shearedSignal = signal<number | null>(null);
+  @Input() sharedSignal = signal<number | null>(null);
 
   private readonly walletService = inject(WalletManagementService);
 
@@ -60,8 +60,8 @@ export class WalletPaymentRecordTableComponent
   // 🚀 Called when the component is activated (useful for view caching systems)
   onViewActivated(): void {
     // 🛠️ Set wallet ID from shared signal if available
-    if (this.shearedSignal()) {
-      this.walletId.set(this.shearedSignal());
+    if (this.sharedSignal()) {
+      this.walletId.set(this.sharedSignal());
     }
     this.initWalletAndData();
   }
