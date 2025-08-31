@@ -106,7 +106,7 @@ export class AppTitles {
       loadAnnouncementSubGroupTitle: 'زیرگروه اعلام بار',
     },
     loads: {
-      loadStatus: 'وضعیت بار',
+      loadStatus: 'وضعیت نهایی بار',
       loadType: 'نوع بار',
     },
     provinceAndCities: {
