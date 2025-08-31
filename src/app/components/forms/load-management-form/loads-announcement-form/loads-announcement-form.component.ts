@@ -58,7 +58,7 @@ export class LoadsAnnouncementFormComponent
   // 🔹 Constants
   // =====================================================
   readonly loadType: LoadListType = LoadListType.ADMIN;
-  readonly addonWidth = '10rem';
+  readonly addonWidth = '12rem';
   readonly baseWidthClass = 'w-24 sm:w-32 md:w-40 lg:w-48';
 
   // =====================================================
