@@ -94,7 +94,7 @@ export class LoadsAnnouncementFormComponent
     { field: 'Checked', header: 'وضعیت', type: TableColumnType.CHECKBOX },
     { field: 'TPTPDId', header: 'شناسه' },
     { field: 'TPTPTitle', header: 'عنوان' },
-    { field: 'Mblgh', header: 'مبلغ' },
+    { field: 'Cost', header: 'مبلغ' },
   ];
 
   // =====================================================
