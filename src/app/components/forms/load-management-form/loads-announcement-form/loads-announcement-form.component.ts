@@ -121,7 +121,7 @@ export class LoadsAnnouncementFormComponent
     const loadId = this.getValidLoadId();
     if (!loadId) return;
 
-    this.confirmService.confirmFreeLine(`بار #${loadId}`, async () => {
+    this.confirmService.confirmFreeLine(`بار با کد ${loadId}`, async () => {
       await this.withLoading(async () => {
         const response = await this.loadService.FreeLineLoad(loadId);
         if (checkAndToastError(response, this.toast)) {
@@ -136,7 +136,7 @@ export class LoadsAnnouncementFormComponent
     const loadId = this.getValidLoadId();
     if (!loadId) return;
 
-    this.confirmService.confirmSediment(`بار #${loadId}`, async () => {
+    this.confirmService.confirmSediment(`بار با  کد ${loadId}`, async () => {
       await this.withLoading(async () => {
         const response = await this.loadService.SedimentLoad(loadId);
         if (checkAndToastError(response, this.toast)) {
@@ -151,7 +151,7 @@ export class LoadsAnnouncementFormComponent
     const loadId = this.getValidLoadId();
     if (!loadId) return;
 
-    this.confirmService.confirmCancel(`بار #${loadId}`, async () => {
+    this.confirmService.confirmCancel(`بار با کد ${loadId}`, async () => {
       await this.withLoading(async () => {
         const response = await this.loadService.CancelLoad(loadId);
         if (checkAndToastError(response, this.toast)) {
@@ -166,7 +166,7 @@ export class LoadsAnnouncementFormComponent
     const loadId = this.getValidLoadId();
     if (!loadId) return;
 
-    this.confirmService.confirmDelete(`بار #${loadId}`, async () => {
+    this.confirmService.confirmDelete(`بار با کد ${loadId}`, async () => {
       await this.withLoading(async () => {
         const response = await this.loadService.CancelLoad(loadId);
         if (checkAndToastError(response, this.toast)) {
@@ -182,7 +182,7 @@ export class LoadsAnnouncementFormComponent
     const loadId = this.getValidLoadId();
     if (!loadId) return;
 
-    this.confirmService.confirmEdit(`بار #${loadId}`, async () => {
+    this.confirmService.confirmEdit(`بار با کد ${loadId}`, async () => {
       if (this.loadsForm.invalid || this.loading()) return;
       const loadEdit = this.loadsForm.getRawValue() as LoadEdit;
 
@@ -199,22 +199,25 @@ export class LoadsAnnouncementFormComponent
   async clickRegisterLoad(): Promise<void> {
     if (!this.isLoadRegisterValid() || this.loading()) return;
 
-    const newLoad = this.loadsForm.getRawValue() as LoadRegister;
+    this.confirmService.confirmSubmit('بار مورد نظر', async () => {
+      const newLoad = this.loadsForm.getRawValue() as LoadRegister;
 
-    const response = await this.withLoading(() =>
-      this.loadService.RegisterNewLoad(newLoad)
-    );
+      const response = await this.withLoading(() =>
+        this.loadService.RegisterNewLoad(newLoad)
+      );
 
-    if (!response || !checkAndToastError(response, this.toast)) return;
+      if (!response || !checkAndToastError(response, this.toast)) return;
+      this.toast.success('موفق', '');
 
-    this.confirmService.ConfirmChoose(
-      'بار مورد نظر',
-      async () => {
-        const loadInfo = await this.fetchLoadInfo(response.data.newLoadId);
-        this.sharedSignal.set(loadInfo ?? null);
-      },
-      () => this.resetForm()
-    );
+      this.confirmService.confirmChoose(
+        'بار مورد نظر را جهت ویرایش',
+        async () => {
+          const loadInfo = await this.fetchLoadInfo(response.data.newLoadId);
+          this.sharedSignal.set(loadInfo ?? null);
+        },
+        () => this.resetForm()
+      );
+    });
   }
 
   isLoadRegisterValid() {
