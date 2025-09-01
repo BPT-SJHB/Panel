@@ -359,6 +359,28 @@ export class LoadManagementService {
     //#endregion
   }
 
+  public async GetTransportTariffParamsByAnnouncementSubGroupId(
+    announcementSubGroupId: number
+  ): Promise<ApiResponse<TransportTariffParam[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.LoadCapacitorAPI.GetTransportTariffParamsByAnnouncementSGId;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      AnnouncementSGId: announcementSubGroupId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      TransportTariffParam[]
+    >(apiUrl, bodyValue, mockTransportTariffParams);
+    //#endregion
+  }
+
   public async RegisterNewLoad(
     load: LoadRegister
   ): Promise<ApiResponse<{ newLoadId: number }>> {
