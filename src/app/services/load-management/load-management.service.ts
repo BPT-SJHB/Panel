@@ -310,13 +310,13 @@ export class LoadManagementService {
     //#endregion
   }
 
-  public async GetTransportTariffParams(
+  public async GetTransportTariffParamsInArray(
     tptParams: string
   ): Promise<ApiResponse<TransportTariffParam[]>> {
     this.userAuth.isLoggedIn();
 
     //#region Consts
-    const apiUrl = API_ROUTES.LoadCapacitorAPI.GetTransportTariffParams;
+    const apiUrl = API_ROUTES.LoadCapacitorAPI.GetTransportTariffParamsInJson;
     const loadInfo: LoadInfo = {
       LoadId: 0,
       TPTParams: tptParams,
