@@ -310,13 +310,13 @@ export class LoadManagementService {
     //#endregion
   }
 
-  public async GetTransportTariffParams(
+  public async GetTransportTariffParamsInArray(
     tptParams: string
   ): Promise<ApiResponse<TransportTariffParam[]>> {
     this.userAuth.isLoggedIn();
 
     //#region Consts
-    const apiUrl = API_ROUTES.LoadCapacitorAPI.GetTransportTariffParams;
+    const apiUrl = API_ROUTES.LoadCapacitorAPI.GetTransportTariffParamsInJson;
     const loadInfo: LoadInfo = {
       LoadId: 0,
       TPTParams: tptParams,
@@ -324,6 +324,52 @@ export class LoadManagementService {
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
       TPTParams: loadInfo.TPTParams,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      TransportTariffParam[]
+    >(apiUrl, bodyValue, mockTransportTariffParams);
+    //#endregion
+  }
+
+  public async GetTransportTariffParamsInString(
+    transportTariffParam: TransportTariffParam[]
+  ): Promise<ApiResponse<{ TPTParams: string }>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl = API_ROUTES.LoadCapacitorAPI.GetTransportTariffParamsInString;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      ListofTransportTariffsParams: transportTariffParam,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      { TPTParams: string }
+    >(apiUrl, bodyValue, {
+      TPTParams:
+        '135:0;139:0;143:0;147:0;151:0;157:0;16:0;163:0;169:0;175:0;181:0;187:0;193:0;199:0;205:0;211:0;217:0;223:0;229:0;235:0',
+    });
+    //#endregion
+  }
+
+  public async GetTransportTariffParamsByAnnouncementSubGroupId(
+    announcementSubGroupId: number
+  ): Promise<ApiResponse<TransportTariffParam[]>> {
+    this.userAuth.isLoggedIn();
+
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.LoadCapacitorAPI.GetTransportTariffParamsByAnnouncementSGId;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      AnnouncementSGId: announcementSubGroupId,
     };
     //#endregion
 

@@ -96,7 +96,7 @@ export class LoadsAnnouncementFormComponent
     { field: 'Checked', header: 'وضعیت', type: TableColumnType.CHECKBOX },
     { field: 'TPTPDId', header: 'شناسه' },
     { field: 'TPTPTitle', header: 'عنوان' },
-    { field: 'Mblgh', header: 'مبلغ' },
+    { field: 'Cost', header: 'مبلغ' },
   ];
 
   // =====================================================
@@ -257,7 +257,7 @@ export class LoadsAnnouncementFormComponent
 
       const tptParams = loadInfo.TPTParams ?? '';
       const responseParams =
-        await this.loadService.GetTransportTariffParams(tptParams);
+        await this.loadService.GetTransportTariffParamsInArray(tptParams);
 
       const isValid = checkAndToastError(responseParams, this.toast);
       this.transportTariffParams.set(isValid ? responseParams.data : []);
