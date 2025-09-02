@@ -36,6 +36,7 @@ import { LoadListType } from '../loads-list-form/loads-list-form.component';
 
 // Utils
 import { checkAndToastError } from 'app/utils/api-utils';
+import { AnnouncementSubGroup } from 'app/services/announcement-group-subgroup-management/model/announcement-subgroup.model';
 
 @Component({
   selector: 'app-loads-announcement-form',
@@ -184,7 +185,12 @@ export class LoadsAnnouncementFormComponent
 
     this.confirmService.confirmEdit(`بار با کد ${loadId}`, async () => {
       if (this.loadsForm.invalid || this.loading()) return;
+
+      const tptParams = await this.getTransportTariffParamsAsString();
+      if (!tptParams) return;
+
       const loadEdit = this.loadsForm.getRawValue() as LoadEdit;
+      loadEdit.TPTParams = tptParams;
 
       await this.withLoading(async () => {
         const response = await this.loadService.EditLoad(loadEdit);
@@ -423,6 +429,15 @@ export class LoadsAnnouncementFormComponent
           ) as FormControl<string>,
           groupControlId: this.ctrl('AnnouncementGroupId'),
           readOnly: () => this.ctrl('AnnouncementGroupId').invalid,
+
+          select: (item: AnnouncementSubGroup) => {
+            this.withLoading(async () => {
+              this.loadTransportTariffParamsBySubGroup(item.AnnouncementSGId);
+              this.ctrl('AnnouncementSubGroupId').setValue(
+                item.AnnouncementSGId
+              );
+            });
+          },
         }
       ),
       sourceCity: this.autoCompleteFactory.create(
@@ -462,6 +477,38 @@ export class LoadsAnnouncementFormComponent
         }
       ),
     };
+  }
+
+  private async loadTransportTariffParamsBySubGroup(
+    announcementSubGroupId: number
+  ): Promise<void> {
+    const response =
+      await this.loadService.GetTransportTariffParamsByAnnouncementSubGroupId(
+        announcementSubGroupId
+      );
+
+    if (!checkAndToastError(response, this.toast)) {
+      return;
+    }
+
+    this.transportTariffParams.set(response.data);
+  }
+
+  private async getTransportTariffParamsAsString(): Promise<string | null> {
+    const paramsArray = this.transportTariffParams();
+
+    if (paramsArray.length === 0) {
+      return null;
+    }
+
+    const response =
+      await this.loadService.GetTransportTariffParamsInString(paramsArray);
+
+    if (!checkAndToastError(response, this.toast)) {
+      return null;
+    }
+
+    return response.data.TPTParams;
   }
 
   /** Creates action buttons config */
