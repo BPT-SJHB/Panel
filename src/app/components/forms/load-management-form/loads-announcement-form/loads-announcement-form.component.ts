@@ -429,7 +429,10 @@ export class LoadsAnnouncementFormComponent
           ) as FormControl<string>,
           groupControlId: this.ctrl('AnnouncementGroupId'),
           readOnly: () => this.ctrl('AnnouncementGroupId').invalid,
-
+          valueChange: () => {
+            this.ctrl('AnnouncementSubGroupId').reset();
+            this.transportTariffParams.set([]);
+          },
           select: (item: AnnouncementSubGroup) => {
             this.withLoading(async () => {
               this.loadTransportTariffParamsBySubGroup(item.AnnouncementSGId);
