@@ -2,6 +2,7 @@ import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TreeTableModule } from 'primeng/treetable';
 import { TreeNode } from 'primeng/api';
+import { Subject, takeUntil } from 'rxjs';
 
 import {
   TreeTableChangedData,
@@ -12,9 +13,10 @@ import { ProductTypesService } from 'app/services/product-types/product-types.se
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
 import { ToastService } from 'app/services/toast-service/toast.service';
 import { ApiResponse } from 'app/data/model/api-Response.model';
-import { Subject, takeUntil } from 'rxjs';
 import { ErrorCodes } from 'app/constants/error-messages';
 import { AppTitles } from 'app/constants/Titles';
+import { ShortResponse } from 'app/data/model/short-response.model';
+import { checkAndToastError } from 'app/utils/api-utils';
 
 export interface ProductParent {
   ProductTypeId: number;
@@ -32,21 +34,24 @@ interface SelectionOption {
   standalone: true,
   imports: [ButtonModule, TreeTableModule, TreeTableCheckboxComponent],
   templateUrl: './product-form.component.html',
-  styleUrl: './product-form.component.scss',
+  styleUrls: ['./product-form.component.scss'],
 })
 export class ProductFormComponent implements OnInit, OnDestroy {
   private productTypeService = inject(ProductTypesService);
   private loadingService = inject(LoadingService);
   private toast = inject(ToastService);
   private destroy$ = new Subject<void>();
+
+  products: TreeNode[] = [];
+  cachedProducts: TreeNode[] = [];
+  selectionKey!: Record<string, SelectionOption>;
+
   private loading = false;
+  private startKey = '';
+  private readonly cacheKeyLength = 3;
+  private readonly cachingEnabled = true;
 
   readonly appTitle = AppTitles;
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
 
   ngOnInit(): void {
     this.loadingService.loading$
@@ -54,12 +59,10 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       .subscribe((value) => (this.loading = value));
   }
 
-  products: TreeNode[] = [];
-  cachedProducts: TreeNode[] = [];
-  selectionKey!: Record<string, SelectionOption>;
-  cacheKeyLength = 3;
-  cachingEnabled = true;
-  startKey = '';
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   async searchProduct(query: string): Promise<void> {
     if (query.length < this.cacheKeyLength) {
@@ -70,7 +73,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     const newStartKey = query.substring(0, this.cacheKeyLength);
 
     if (this.cachingEnabled && newStartKey === this.startKey) {
-      if (this.products.length == 0) this.products = [...this.cachedProducts];
+      if (!this.products.length) this.products = [...this.cachedProducts];
       return;
     }
 
@@ -82,17 +85,14 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     this.cachedProducts = this.products;
   }
 
-  convertToTreeNode(productsType: ProductType[]): TreeNode[] {
-    return productsType.map((productType) => ({
+  convertToTreeNode(productTypes: ProductType[]): TreeNode[] {
+    return productTypes.map((pt) => ({
       data: {
-        ProductTypeId: productType.ProductTypeId,
-        ProductTypeTitle: productType.ProductTypeTitle,
-        ProductTypeActive: productType.ProductTypeActive,
+        ProductTypeId: pt.ProductTypeId,
+        ProductTypeTitle: pt.ProductTypeTitle,
+        ProductTypeActive: pt.ProductTypeActive,
       },
-      children:
-        productType.Products?.map((product) => ({
-          data: product,
-        })) ?? [],
+      children: pt.Products?.map((p) => ({ data: p })) ?? [],
     }));
   }
 
@@ -101,91 +101,48 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
     try {
       this.loadingService.setLoading(true);
-      const parent = change.parent;
-      const children = change.children;
+      const { parent, children } = change;
+      const promises: Promise<ApiResponse<ShortResponse>>[] = [];
 
-      if (!parent && children.length == 0) return;
-
-      // Handle only-child case
-      if (!parent && children.length > 0) {
-        const { ProductId, ProductActive } = children[0];
-        const response = await this.handleProductChange(
-          ProductId,
-          ProductActive
+      if (parent) {
+        promises.push(
+          this.productTypeService.ChangeProductTypeStatus(
+            parent.ProductTypeId,
+            parent.ProductTypeActive
+          )
         );
-        if (!this.isSuccessful(response)) return;
-        this.toast.success('موفق', response.data?.Message ?? '');
-        return;
       }
 
-      // Handle parent is inactive
-      if (!parent.ProductTypeActive) {
-        const { ProductTypeId, ProductTypeActive } = parent;
-        await this.handleProductTypeChange(ProductTypeId, ProductTypeActive);
-        return;
-      }
+      children.forEach(({ ProductId, ProductActive }) =>
+        promises.push(
+          this.productTypeService.ChangeProductStatus(ProductId, ProductActive)
+        )
+      );
 
-      // Handle parent is active
-      if (parent.ProductTypeActive) {
-        const requests = children.map(({ ProductId, ProductActive }) =>
-          this.handleProductChange(ProductId, ProductActive)
-        );
-        const results = await Promise.allSettled(requests);
+      const results = await Promise.all(promises);
+      let success = results.length > 0;
 
-        const firstError = results.find((r) => r.status === 'rejected') as
-          | PromiseRejectedResult
-          | undefined;
+      results.forEach((r) => {
+        if (!checkAndToastError(r, this.toast)) success = false;
+      });
 
-        if (firstError) {
-          const error =
-            (firstError.reason as any)?.error?.message ??
-            'خطای غیرمنتظره‌ای در حذف دسترسی رخ داد';
-          this.toast.error('خطا', error);
-          await this.updateProductsInfo();
-          return;
-        }
+      if (!success) return;
 
-        const { ProductTypeId, ProductTypeActive } = parent;
-        await this.handleProductTypeChange(ProductTypeId, ProductTypeActive);
-      }
+      this.toast.success('موفق', results[0].data?.Message ?? '');
+      await this.updateProductsInfo();
     } finally {
       this.loadingService.setLoading(false);
     }
   }
 
-  private async handleProductTypeChange(
-    productTypeId: number,
-    active: boolean
-  ) {
-    const response = await this.productTypeService.ChangeProductTypeStatus(
-      productTypeId,
-      active
-    );
-    if (!this.isSuccessful(response)) {
-      // await this.updateProductsInfo()
-      return;
-    }
-    this.toast.success('موفق', response.data?.Message ?? '');
-  }
-
-  private async handleProductChange(productId: number, active: boolean) {
-    const response = await this.productTypeService.ChangeProductStatus(
-      productId,
-      active
-    );
-    return response;
-  }
-
   private async updateProductsInfo() {
-    if (this.startKey.length < this.cacheKeyLength) {
-      return;
-    }
-    const productsResponse = await this.productTypeService.GetProductsInfo(
+    if (this.startKey.length < this.cacheKeyLength) return;
+
+    const response = await this.productTypeService.GetProductsInfo(
       this.startKey
     );
-
-    if (this.isSuccessful(productsResponse)) {
-      this.products = this.convertToTreeNode(productsResponse.data!);
+    if (this.isSuccessful(response)) {
+      this.products = this.convertToTreeNode(response.data!);
     }
   }
 
@@ -196,10 +153,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         response.error?.message ?? 'خطای غیرمنتظره‌ای رخ داد'
       );
       console.log(response);
-      if (response.error?.code == ErrorCodes.NoRecordFound) {
-        return true;
-      }
-      return false;
+
+      return response.error?.code === ErrorCodes.NoRecordFound;
     }
     return true;
   }

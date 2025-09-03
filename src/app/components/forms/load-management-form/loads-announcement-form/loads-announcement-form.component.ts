@@ -36,6 +36,7 @@ import { LoadListType } from '../loads-list-form/loads-list-form.component';
 
 // Utils
 import { checkAndToastError } from 'app/utils/api-utils';
+import { AnnouncementSubGroup } from 'app/services/announcement-group-subgroup-management/model/announcement-subgroup.model';
 
 @Component({
   selector: 'app-loads-announcement-form',
@@ -121,7 +122,7 @@ export class LoadsAnnouncementFormComponent
     const loadId = this.getValidLoadId();
     if (!loadId) return;
 
-    this.confirmService.confirmFreeLine(`بار #${loadId}`, async () => {
+    this.confirmService.confirmFreeLine(`بار با کد ${loadId}`, async () => {
       await this.withLoading(async () => {
         const response = await this.loadService.FreeLineLoad(loadId);
         if (checkAndToastError(response, this.toast)) {
@@ -136,7 +137,7 @@ export class LoadsAnnouncementFormComponent
     const loadId = this.getValidLoadId();
     if (!loadId) return;
 
-    this.confirmService.confirmSediment(`بار #${loadId}`, async () => {
+    this.confirmService.confirmSediment(`بار با  کد ${loadId}`, async () => {
       await this.withLoading(async () => {
         const response = await this.loadService.SedimentLoad(loadId);
         if (checkAndToastError(response, this.toast)) {
@@ -151,7 +152,7 @@ export class LoadsAnnouncementFormComponent
     const loadId = this.getValidLoadId();
     if (!loadId) return;
 
-    this.confirmService.confirmCancel(`بار #${loadId}`, async () => {
+    this.confirmService.confirmCancel(`بار با کد ${loadId}`, async () => {
       await this.withLoading(async () => {
         const response = await this.loadService.CancelLoad(loadId);
         if (checkAndToastError(response, this.toast)) {
@@ -166,7 +167,7 @@ export class LoadsAnnouncementFormComponent
     const loadId = this.getValidLoadId();
     if (!loadId) return;
 
-    this.confirmService.confirmDelete(`بار #${loadId}`, async () => {
+    this.confirmService.confirmDelete(`بار با کد ${loadId}`, async () => {
       await this.withLoading(async () => {
         const response = await this.loadService.CancelLoad(loadId);
         if (checkAndToastError(response, this.toast)) {
@@ -182,9 +183,14 @@ export class LoadsAnnouncementFormComponent
     const loadId = this.getValidLoadId();
     if (!loadId) return;
 
-    this.confirmService.confirmEdit(`بار #${loadId}`, async () => {
+    this.confirmService.confirmEdit(`بار با کد ${loadId}`, async () => {
       if (this.loadsForm.invalid || this.loading()) return;
+
+      const tptParams = await this.getTransportTariffParamsAsString();
+      if (!tptParams) return;
+
       const loadEdit = this.loadsForm.getRawValue() as LoadEdit;
+      loadEdit.TPTParams = tptParams;
 
       await this.withLoading(async () => {
         const response = await this.loadService.EditLoad(loadEdit);
@@ -199,22 +205,25 @@ export class LoadsAnnouncementFormComponent
   async clickRegisterLoad(): Promise<void> {
     if (!this.isLoadRegisterValid() || this.loading()) return;
 
-    const newLoad = this.loadsForm.getRawValue() as LoadRegister;
+    this.confirmService.confirmSubmit('بار مورد نظر', async () => {
+      const newLoad = this.loadsForm.getRawValue() as LoadRegister;
 
-    const response = await this.withLoading(() =>
-      this.loadService.RegisterNewLoad(newLoad)
-    );
+      const response = await this.withLoading(() =>
+        this.loadService.RegisterNewLoad(newLoad)
+      );
 
-    if (!response || !checkAndToastError(response, this.toast)) return;
+      if (!response || !checkAndToastError(response, this.toast)) return;
+      this.toast.success('موفق', '');
 
-    this.confirmService.ConfirmChoose(
-      'بار مورد نظر',
-      async () => {
-        const loadInfo = await this.fetchLoadInfo(response.data.newLoadId);
-        this.sharedSignal.set(loadInfo ?? null);
-      },
-      () => this.resetForm()
-    );
+      this.confirmService.confirmChoose(
+        'بار مورد نظر را جهت ویرایش',
+        async () => {
+          const loadInfo = await this.fetchLoadInfo(response.data.newLoadId);
+          this.sharedSignal.set(loadInfo ?? null);
+        },
+        () => this.resetForm()
+      );
+    });
   }
 
   isLoadRegisterValid() {
@@ -420,6 +429,18 @@ export class LoadsAnnouncementFormComponent
           ) as FormControl<string>,
           groupControlId: this.ctrl('AnnouncementGroupId'),
           readOnly: () => this.ctrl('AnnouncementGroupId').invalid,
+          valueChange: () => {
+            this.ctrl('AnnouncementSubGroupId').reset();
+            this.transportTariffParams.set([]);
+          },
+          select: (item: AnnouncementSubGroup) => {
+            this.withLoading(async () => {
+              this.loadTransportTariffParamsBySubGroup(item.AnnouncementSGId);
+              this.ctrl('AnnouncementSubGroupId').setValue(
+                item.AnnouncementSGId
+              );
+            });
+          },
         }
       ),
       sourceCity: this.autoCompleteFactory.create(
@@ -459,6 +480,38 @@ export class LoadsAnnouncementFormComponent
         }
       ),
     };
+  }
+
+  private async loadTransportTariffParamsBySubGroup(
+    announcementSubGroupId: number
+  ): Promise<void> {
+    const response =
+      await this.loadService.GetTransportTariffParamsByAnnouncementSubGroupId(
+        announcementSubGroupId
+      );
+
+    if (!checkAndToastError(response, this.toast)) {
+      return;
+    }
+
+    this.transportTariffParams.set(response.data);
+  }
+
+  private async getTransportTariffParamsAsString(): Promise<string | null> {
+    const paramsArray = this.transportTariffParams();
+
+    if (paramsArray.length === 0) {
+      return null;
+    }
+
+    const response =
+      await this.loadService.GetTransportTariffParamsInString(paramsArray);
+
+    if (!checkAndToastError(response, this.toast)) {
+      return null;
+    }
+
+    return response.data.TPTParams;
   }
 
   /** Creates action buttons config */

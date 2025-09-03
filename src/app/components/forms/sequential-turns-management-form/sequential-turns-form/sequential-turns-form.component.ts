@@ -16,9 +16,7 @@ import { SearchInputComponent } from 'app/components/shared/inputs/search-input/
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-switch-input/toggle-switch-input.component';
 
-import { LoadingService } from 'app/services/loading-service/loading-service.service';
 import { SequentialTurnManagementService } from 'app/services/sequential-turn-management/sequential-turn-management.service';
-import { ToastService } from 'app/services/toast-service/toast.service';
 
 import { checkAndToastError } from 'app/utils/api-utils';
 import { ValidationSchema } from 'app/constants/validation-schema';
@@ -33,6 +31,7 @@ import {
   TableComponent,
 } from 'app/components/shared/table/table.component';
 import { AppTitles } from 'app/constants/Titles';
+import { BaseLoading } from '../../shared/component-base/base-loading';
 
 enum FormMode {
   EDITABLE,
@@ -62,15 +61,12 @@ export type SequentialTurnTableRow = SequentialTurn & {
   ],
   providers: [ConfirmationService],
 })
-export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
+export class SequentialTurnsFormComponent extends BaseLoading {
   private readonly fb = inject(FormBuilder);
-  private readonly loadingService = inject(LoadingService);
   private readonly sequentialTurnsService = inject(
     SequentialTurnManagementService
   );
-  private readonly toast = inject(ToastService);
   private readonly confirmService = inject(AppConfirmService);
-  private readonly destroy$ = new Subject<void>();
   readonly tableUi = TableConfig;
   readonly appTitle = AppTitles;
 
@@ -88,7 +84,6 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
 
   headerTitle = '';
   formDialogVisible = false;
-  loading = false;
 
   readonly columns: TableColumn<SequentialTurnTableRow>[] = [
     {
@@ -116,26 +111,14 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
     },
   ];
 
-  ngOnInit(): void {
-    this.loadingService.loading$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((value) => (this.loading = value));
-
-    this.initialize();
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
   private async initialize(): Promise<void> {
     await this.loadSequentialTurns();
   }
 
   private async loadSequentialTurns(): Promise<void> {
-    try {
-      this.loadingService.setLoading(true);
+    if (this.loading()) return;
+
+    this.withLoading(async () => {
       const response = await this.sequentialTurnsService.GetSequentialTurns('');
       if (!checkAndToastError(response, this.toast)) return;
 
@@ -146,9 +129,7 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
       }));
       this.sequentialTurns = rows;
       this.displaySequentialTurns = [...this.sequentialTurns];
-    } finally {
-      this.loadingService.setLoading(false);
-    }
+    });
   }
 
   handleSearch(results: SequentialTurnTableRow[]): void {
@@ -159,15 +140,14 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
     turn.SeqTurnTitle?.includes(query) ?? false;
 
   onDelete(row: SequentialTurn): void {
+    if (this.loading()) return;
+
     this.confirmService.confirmDelete(
       `${row.SeqTurnTitle} با شناسه ${row.SeqTurnId}`,
       async () => {
-        try {
-          this.loadingService.setLoading(true);
+        await this.withLoading(async () => {
           await this.deleteSequentialTurn(row.SeqTurnId);
-        } finally {
-          this.loadingService.setLoading(false);
-        }
+        });
       }
     );
   }
@@ -195,17 +175,15 @@ export class SequentialTurnsFormComponent implements OnInit, OnDestroy {
   }
 
   async registerOrEdit(): Promise<void> {
-    try {
-      this.loadingService.setLoading(true);
+    if (this.loading()) return;
+    await this.withLoading(async () => {
       if (this.sequentialTurnFormMode === FormMode.REGISTER) {
         await this.registerSequentialTurn();
       } else {
         await this.editSequentialTurn();
       }
       this.onCloseDialog();
-    } finally {
-      this.loadingService.setLoading(false);
-    }
+    });
   }
 
   private populateSequentialForm(data: SequentialTurn): void {

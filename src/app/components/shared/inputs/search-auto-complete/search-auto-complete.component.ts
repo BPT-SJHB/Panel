@@ -152,6 +152,7 @@ export class SearchAutoCompleteComponent<T extends object> {
   }
 
   @HostListener('document:click', ['$event'])
+  @HostListener('document:focusin', ['$event'])
   onDocumentClick(event: MouseEvent) {
     const inside = this.dropdownContainer.nativeElement.contains(
       event.target as Node

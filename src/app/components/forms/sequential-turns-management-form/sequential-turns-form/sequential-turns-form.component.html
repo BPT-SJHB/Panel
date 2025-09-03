@@ -14,8 +14,12 @@
 </div>
 
 <!-- 📋 Sequential Turn Table -->
-<app-table [columns]="columns" [rows]="displaySequentialTurns"
-  (clickCaptionButton)="onNew()" [enableCaptionButton]="true">
+<app-table
+  [columns]="columns"
+  [rows]="displaySequentialTurns"
+  (clickCaptionButton)="onNew()"
+  [enableCaptionButton]="true"
+>
 </app-table>
 <!-- 🧾 Dialog -->
 <p-dialog
@@ -30,8 +34,8 @@
   <form
     class="grid grid-cols-12 gap-6"
     (ngSubmit)="registerOrEdit()"
-    [class.pointer-events-none]="loading"
-    [class.opacity-60]="loading"
+    [class.pointer-events-none]="loading()"
+    [class.opacity-60]="loading()"
     [formGroup]="sequentialTurnForm"
   >
     <div class="grid grid-cols-12 col-span-12 gap-2">
@@ -75,7 +79,7 @@
       <app-button
         (click)="registerOrEdit()"
         label="ثبت و ویرایش اطلاعات"
-        [disabled]="sequentialTurnForm.invalid || loading"
+        [disabled]="sequentialTurnForm.invalid || loading()"
       />
     </div>
   </form>

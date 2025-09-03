@@ -23,6 +23,7 @@
   <div
     class="absolute top-11 left-0 bg-primary-contrast z-50 border-gray-300 dark:border-gray-400 shadow-md rounded-md transition-all duration-300 ease-out overflow-y-auto"
     [style]="getDropDownStyle()"
+    [attr.tabindex]="'-1'"
   >
     @if (loading()) {
     <div class="px-4 py-4 flex items-center gap-3">
