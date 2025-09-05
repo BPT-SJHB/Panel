@@ -14,6 +14,7 @@ import { TabComponentKey } from 'app/constants/tab-component-registry';
 // Store actions
 import { createTab } from 'app/store/tab/tab.actions';
 import { DEFAULT_MAIN_TAB_ID } from 'app/store/tab/tab.reducer';
+import { ToastService } from 'app/services/toast-service/toast.service';
 
 @Component({
   selector: 'app-sidebar-web-processes',
@@ -25,7 +26,7 @@ import { DEFAULT_MAIN_TAB_ID } from 'app/store/tab/tab.reducer';
 export class SidebarWebProcesses {
   // Inject NgRx store
   private store = inject(Store);
-
+  private toast = inject(ToastService);
   // Input: list of processes to render as sub-menu items
   @Input() processes: WebProcess[] = [];
 
@@ -34,12 +35,17 @@ export class SidebarWebProcesses {
    * Dispatches actions to open a new tab and render content
    */
   onClickSubMenu(process: WebProcess): void {
-    const componentToLoad: TabComponentKey = 
-      Object.values(TabComponentKey).includes(process.id) 
-        ? (process.id as TabComponentKey) 
-        : TabComponentKey.Main;
+    const componentToLoad: TabComponentKey = Object.values(
+      TabComponentKey
+    ).includes(process.id)
+      ? (process.id as TabComponentKey)
+      : TabComponentKey.Main;
 
     const isMainPage = componentToLoad === TabComponentKey.Main;
+    if (isMainPage) {
+      this.toast.info('اطلاعیه', 'بخش مورد نظر در دست توسعه است.');
+      return;
+    }
 
     const tabPayload = {
       id: isMainPage ? DEFAULT_MAIN_TAB_ID : undefined,
