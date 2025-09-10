@@ -235,13 +235,13 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   [TabComponentKey.SequentialTurnManagement]: {
     sharedSignal: false,
     subTab: [
-      { title: 'صفوف نوبت دهی', component: SequentialTurnsFormComponent },
+      { title: 'صفوف نوبت', component: SequentialTurnsFormComponent },
       {
-        title: 'صفوف نوبت دهی و بارگیرها',
+        title: 'صفوف نوبت و بارگیرها',
         component: RelationOfSequentialTurnToLoaderTypeFormComponent,
       },
       {
-        title: 'صفوف نوبت دهی و زیرگروه‌ها اعلام بار',
+        title: 'صفوف نوبت و زیرگروه‌های اعلام بار',
         component: RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent,
       },
     ],
@@ -257,7 +257,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
         component: EmergencyTurnsFormComponent,
       },
       {
-        title: 'احیای نوبت رزور',
+        title: 'احیای نوبت رزرو',
         component: ResuscitateTurnsFormComponent,
       },
     ],
