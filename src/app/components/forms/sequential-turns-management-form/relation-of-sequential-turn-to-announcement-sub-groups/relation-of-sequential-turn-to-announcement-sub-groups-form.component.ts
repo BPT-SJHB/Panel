@@ -75,11 +75,11 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
 
   readonly columns: TableColumn<RowRelationOfSequential>[] = [
     {
-      field: 'SeqTurnId',
+      field: 'SeqTurnTitle',
       header: 'صف نوبت',
     },
     {
-      field: 'SeqTurnId',
+      field: 'AnnouncementSGTitle',
       header: 'زیر گروه',
     },
     {
