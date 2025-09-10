@@ -143,13 +143,13 @@ export class AnnouncementGroupFormComponent implements OnInit, OnDestroy {
 
   // ========== 🎯 Actions ==========
   onNew(): void {
-    this.headerTitle = 'افزودن گروه';
+    this.headerTitle = 'افزودن گروه اعلام بار';
     this.announcementFormGroupMode = FormMode.REGISTER;
     this.formDialogVisible = true;
   }
 
   onEdit(row: AnnouncementGroup): void {
-    this.headerTitle = 'ویرایش گروه';
+    this.headerTitle = 'ویرایش گروه اعلام بار';
     this.announcementFormGroupMode = FormMode.EDITABLE;
     this.populateFormAnnouncementGroup(row);
     this.formDialogVisible = true;

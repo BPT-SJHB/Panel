@@ -91,7 +91,13 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
       const manager = this.contentManager();
 
       if (!tab) return;
+      setTimeout(() => {
+        console.log("tab", tab)
+        const target = document.getElementById(tab.id)
+        console.log(target);
 
+        target?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" })
+      }, 1000)
       // Only load content if manager is available
       if (manager) {
         manager.loadTabContent(tab);
