@@ -76,7 +76,7 @@ export class AppTitles {
     trucks: {
       truckSmartCardNumber: 'شماره هوشمند',
       truckId: 'شناسه ناوگان',
-      licensePlateNumber: 'شماره پلاک',
+      licensePlateNumber: 'پلاک ناوگان',
       licensePlateSerialNumber: 'شماره سریال',
       truckLoader: 'بارگیر',
     },
@@ -86,6 +86,7 @@ export class AppTitles {
     turns: {
       turnId: 'شناسه نوبت',
       turnTitle: 'شماره نوبت',
+      turnStatus: 'وضعیت نوبت'
     },
     wallet: {
       walletId: 'شناسه کیف پول',
@@ -130,7 +131,7 @@ export class AppTitles {
       travelTimeDurationTitle: 'زمان سفر',
     },
     sequentialTurns: {
-      sequentialTurnTitle: 'صف نوبت‌دهی',
+      sequentialTurnTitle: 'صف نوبت',
     },
   };
 
@@ -158,7 +159,7 @@ export class AppTitles {
     userStatus: 'وضعیت کاربر',
     factoryOrProductionCenterStatus: 'وضعیت مرکز',
     loadingStatus: 'وضعیت مبدا بارگیری',
-    dischargingStatus: 'وضعیت مقصد بارگیری',
+    dischargingStatus: 'وضعیت مقصد تخلیه',
   };
 
   public static readonly sectionTitles = {
