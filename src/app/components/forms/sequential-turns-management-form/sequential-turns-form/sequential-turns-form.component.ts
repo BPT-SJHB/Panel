@@ -91,8 +91,8 @@ export class SequentialTurnsFormComponent extends BaseLoading {
       header: 'شناسه',
     },
     {
-      field: 'SeqTurnId',
-      header: 'عنوان نوبت',
+      field: 'SeqTurnTitle',
+      header: 'عنوان صف نوبت',
     },
     {
       field: 'SeqTurnKeyWord',
@@ -153,7 +153,7 @@ export class SequentialTurnsFormComponent extends BaseLoading {
   }
 
   onEdit(row: SequentialTurn): void {
-    this.headerTitle = 'ویرایش رکورد نوبت صفوف';
+    this.headerTitle = 'ویرایش صف نوبت';
     this.populateSequentialForm(row);
     this.sequentialTurnFormMode = FormMode.EDITABLE;
     this.formDialogVisible = true;
