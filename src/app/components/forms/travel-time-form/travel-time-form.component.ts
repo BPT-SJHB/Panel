@@ -361,7 +361,7 @@ export class TravelTimeFormComponent implements OnInit, OnDestroy {
       this.travelTimeFormMode = TravelTimeFormMode.EDITABLE;
       this.travelTimeCached = travelTime;
       this.populateTravelTimeForm(travelTime);
-      this.headerTitle = `ویرایش`;
+      this.headerTitle = 'ویرایش مدت سفر';
       this.formDialogVisible = true;
     } finally {
       this.loadingService.setLoading(false);
@@ -373,7 +373,7 @@ export class TravelTimeFormComponent implements OnInit, OnDestroy {
 
     this.travelTimeFormMode = TravelTimeFormMode.REGISTER;
     this.travelTimeCached = this.extractTravelTimeFormForm();
-    this.headerTitle = 'افزودن';
+    this.headerTitle = 'افزودن مدت سفر';
     this.formDialogVisible = true;
   }
 
