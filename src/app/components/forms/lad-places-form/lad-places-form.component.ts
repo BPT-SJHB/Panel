@@ -158,14 +158,14 @@ export class LadPlacesFormComponent implements OnInit, OnDestroy {
 
     this.cashedLadPlace = ladPlace;
     this.populateLadPlaceForm(ladPlace);
-    this.headerTitle = `ویرایش فرم کد ${ladPlace.LADPlaceId}`;
+    this.headerTitle = `ویرایش مبدا و مقصد حمل بار`;
     this.formDialogVisible = true;
   }
 
   async onNew() {
     if (this.loading) return;
     this.cashedLadPlace = this.extractLadPlaceFromForm();
-    this.headerTitle = 'افزودن';
+    this.headerTitle = 'افزودن مبدا و مقصد حمل بار';
     this.formDialogVisible = true;
   }
 
