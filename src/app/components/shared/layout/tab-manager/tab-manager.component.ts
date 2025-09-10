@@ -91,14 +91,6 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
       const manager = this.contentManager();
 
       if (!tab) return;
-      setTimeout(() => {
-        console.log("tab", tab)
-        const target = document.getElementById(tab.id)
-        console.log(target);
-
-        target?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" })
-      }, 1000)
-      // Only load content if manager is available
       if (manager) {
         manager.loadTabContent(tab);
       }
@@ -108,6 +100,20 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
   /** ================================
    *  Lifecycle Hooks
    *  ================================ */
+
+  private prvTabId = "-100"
+  ngAfterViewChecked(): void {
+    const currentId = this.selectTab().id
+    if (this.prvTabId === currentId) {
+      return
+    }
+
+    this.prvTabId = currentId
+
+    const target = document.getElementById(this.selectTab().id)
+    target?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" })
+  }
+
   ngOnInit(): void {
     this.resize$
       .pipe(
