@@ -5,16 +5,12 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { NgClass } from '@angular/common';
-import { Subject, takeUntil } from 'rxjs';
 
 import { TravelTime } from 'app/data/model/travel-time.model';
 import { LoaderType } from 'app/services/loader-types/model/loader-type.model';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { City } from 'app/data/model/province-city.model';
 
-import { LoadingService } from 'app/services/loading-service/loading-service.service';
-import { ToastService } from 'app/services/toast-service/toast.service';
 import { LoaderTypesService } from 'app/services/loader-types/loader-types.service';
 import { ProvinceAndCityManagementService } from 'app/services/province-city-management/province-and-city-management.service';
 
@@ -40,6 +36,8 @@ import {
 } from 'app/components/shared/table/table.component';
 import { AppConfirmService } from 'app/services/confirm/confirm.service';
 import { AppTitles } from 'app/constants/Titles';
+import { BaseLoading } from '../shared/component-base/base-loading';
+import { checkAndToastError } from 'app/utils/api-utils';
 
 enum TravelTimeFormMode {
   EDITABLE,
@@ -66,25 +64,26 @@ type TravelTimeTableRow = TravelTime & { edit: string; delete: string };
   templateUrl: './travel-time-form.component.html',
   styleUrl: './travel-time-form.component.scss',
 })
-export class TravelTimeFormComponent implements OnInit, OnDestroy {
+export class TravelTimeFormComponent
+  extends BaseLoading
+  implements OnInit, OnDestroy
+{
   // Services (injected)
   private fb = inject(FormBuilder);
-  private toast = inject(ToastService);
-  private loadingService = inject(LoadingService);
   private loaderTypeService = inject(LoaderTypesService);
   private provinceService = inject(ProvinceAndCityManagementService);
   private confirmService = inject(AppConfirmService);
   private travelTimeService = inject(TravelTimeManagementService);
 
   // State & lifecycle helpers
-  private destroy$ = new Subject<void>();
   private travelTimeFormMode = TravelTimeFormMode.REGISTER;
 
   readonly cloumns: TableColumn<TravelTimeTableRow>[] = [
+    { header: 'شناسه بارگیر', field: 'LoaderTypeId' },
     { header: 'نوع بارگیر', field: 'LoaderTypeTitle' },
-    { header: 'کد شهر مبدا', field: 'SourceCityId' },
+    { header: 'شناسه شهر مبدا', field: 'SourceCityId' },
     { header: 'شهر مبدا', field: 'SourceCityName' },
-    { header: 'کد شهر مقصد', field: 'TargetCityId' },
+    { header: 'شناسه شهر مقصد', field: 'TargetCityId' },
     { header: 'شهر مقصد', field: 'TargetCityName' },
     { header: 'مدت سفر', field: 'TravelTime' },
     { header: 'فعال/غیرفعال', field: 'Active', type: TableColumnType.BOOLEAN },
@@ -101,11 +100,10 @@ export class TravelTimeFormComponent implements OnInit, OnDestroy {
   ];
 
   readonly tableUi = TableConfig;
-  readonly appTitle = AppTitles
+  readonly appTitle = AppTitles;
 
   // UI state
   headerTitle = '';
-  loading = false;
   formDialogVisible = false;
 
   // Cache keys
@@ -139,18 +137,6 @@ export class TravelTimeFormComponent implements OnInit, OnDestroy {
     travelTime: [0, Validators.min(1)],
     travelTimeActive: [true, Validators.required],
   });
-
-  // Lifecycle hooks
-  ngOnInit(): void {
-    this.loadingService.loading$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((val) => (this.loading = val));
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
 
   // Form getters for better access
   get loaderTypeId() {
@@ -203,13 +189,10 @@ export class TravelTimeFormComponent implements OnInit, OnDestroy {
 
   // Actions
   async searchTimeTravel(): Promise<void> {
-    if (this.loading || !this.isSearchFormValid()) return;
-    this.loadingService.setLoading(true);
-    try {
+    if (this.loading() || !this.isSearchFormValid()) return;
+    await this.withLoading(async () => {
       await this.updateTable();
-    } finally {
-      this.loadingService.setLoading(false);
-    }
+    });
   }
 
   isSearchFormValid(): boolean {
@@ -220,16 +203,14 @@ export class TravelTimeFormComponent implements OnInit, OnDestroy {
   }
 
   async registerOrEdit() {
-    this.loadingService.setLoading(true);
-    try {
+    if (this.loading()) return;
+    await this.withLoading(async () => {
       if (this.travelTimeFormMode === TravelTimeFormMode.REGISTER) {
         await this.registerTravelTime();
       } else {
         await this.editTravelTime();
       }
-    } finally {
-      this.loadingService.setLoading(false);
-    }
+    });
   }
 
   async registerTravelTime() {
@@ -244,11 +225,8 @@ export class TravelTimeFormComponent implements OnInit, OnDestroy {
     tasks.push(this.updateTimeTravelActive());
 
     const results = await Promise.all(tasks);
-    if (results.some((res) => !this.isSuccessful(res))) return;
-    this.toast.success(
-      'موفق',
-      results[0].data?.Message ?? 'با موفقیت انجام شد'
-    );
+    if (results.some((res) => !checkAndToastError(res, this.toast))) return;
+    this.toast.success('موفق', results[0]?.data?.Message ?? '');
     this.onCloseDialog();
   }
 
@@ -265,7 +243,7 @@ export class TravelTimeFormComponent implements OnInit, OnDestroy {
     tasks.push(this.updateTimeTravelActive());
 
     const results = await Promise.all(tasks);
-    if (results.some((res) => !this.isSuccessful(res))) return;
+    if (results.some((res) => !checkAndToastError(res, this.toast))) return;
     this.toast.success(
       'موفق',
       results[0].data?.Message ?? 'با موفقیت انجام شد'
@@ -345,9 +323,8 @@ export class TravelTimeFormComponent implements OnInit, OnDestroy {
   }
 
   async onEdit(row: TravelTime) {
-    if (this.loading) return;
-    try {
-      this.loadingService.setLoading(true);
+    if (this.loading()) return;
+    await this.withLoading(async () => {
       const response = await this.travelTimeService.GetTravelTime(
         row.LoaderTypeId!,
         row.SourceCityId!,
@@ -363,13 +340,11 @@ export class TravelTimeFormComponent implements OnInit, OnDestroy {
       this.populateTravelTimeForm(travelTime);
       this.headerTitle = 'ویرایش مدت سفر';
       this.formDialogVisible = true;
-    } finally {
-      this.loadingService.setLoading(false);
-    }
+    });
   }
 
   async onNew() {
-    if (this.loading) return;
+    if (this.loading()) return;
 
     this.travelTimeFormMode = TravelTimeFormMode.REGISTER;
     this.travelTimeCached = this.extractTravelTimeFormForm();
@@ -387,12 +362,9 @@ export class TravelTimeFormComponent implements OnInit, OnDestroy {
     this.confirmService.confirmDelete(
       `${row.LoaderTypeTitle} - ${row.SourceCityName} به ${row.TargetCityName}`,
       async () => {
-        try {
-          this.loadingService.setLoading(true);
+        await this.withLoading(async () => {
           await this.deleteTravelTime(row);
-        } finally {
-          this.loadingService.setLoading(false);
-        }
+        });
       }
     );
   }
@@ -434,7 +406,8 @@ export class TravelTimeFormComponent implements OnInit, OnDestroy {
       rowData.SourceCityId ?? 0,
       rowData.TargetCityId ?? 0
     );
-    this.toast.success('موفق', response.data?.Message ?? 'با موفقیت حذف شد');
+    if (!checkAndToastError(response, this.toast)) return;
+    this.toast.success('موفق', response.data.Message);
     await this.updateTable(false);
   }
 

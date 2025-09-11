@@ -9,11 +9,7 @@
 />
 
 <!-- فرم اطلاعات شرکت حمل و نقل -->
-<form
-  [formGroup]="transportComponyForm"
-  (ngSubmit)="editTransportCompony()"
-  class="mt-8"
->
+<form [formGroup]="transportComponyForm" class="mt-8">
   <div class="grid grid-cols-12 gap-4">
     <!-- کد شرکت -->
     <app-text-input
@@ -61,6 +57,7 @@
       [control]="TCTel"
       validationField="telephone"
       [addonWidth]="addonWidth"
+      type="number"
     />
 
     <!-- موبایل مدیر -->
@@ -75,6 +72,7 @@
       validationField="mobile"
       [control]="TCManagerMobileNumber"
       [addonWidth]="addonWidth"
+      type="number"
     />
 
     <!-- نام و نام خانوادگی مدیر -->
@@ -95,6 +93,7 @@
       validationField="email"
       [control]="EmailAddress"
       [addonWidth]="addonWidth"
+      language="any"
     />
 
     <!-- وضعیت -->
