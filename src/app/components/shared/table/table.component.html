@@ -28,20 +28,22 @@
 
   <!-- Table Header -->
   <ng-template pTemplate="header">
-
-  <tr class="text-nowrap">
-    @for (column of columns; track column.field) {
-      <th [pSortableColumn]="hasSorting(column) ? column.field.toString() : undefined">
-        <div class="flex items-center justify-center gap-2">
-          {{ column.header }}
-          @if (hasSorting(column)) {
-            <p-sortIcon [field]="column.field.toString()" />
-          }
-        </div>
-      </th>
-    }
-  </tr>
-
+    <tr class="text-nowrap">
+      @for (column of columns; track column.field) {
+        <th
+          [pSortableColumn]="
+            hasSorting(column) ? column.field.toString() : undefined
+          "
+        >
+          <div class="flex items-center justify-center gap-2">
+            {{ column.header }}
+            @if (hasSorting(column)) {
+              <p-sortIcon [field]="column.field.toString()" />
+            }
+          </div>
+        </th>
+      }
+    </tr>
   </ng-template>
 
   <!-- Table Body -->
@@ -56,7 +58,7 @@
                 (click)="column.onAction?.(row)"
                 [class]="getColumnClass(column, row)"
               >
-                {{ row[column.field] }}
+                {{ applyFormat(column, row[column.field]) }}
               </span>
             }
 
@@ -103,7 +105,7 @@
             @case (ColumnType.CHECKBOX) {
               <p-checkbox
                 [binary]="true"
-                [value]="row[column.field]"
+                [(ngModel)]="row[column.field]"
                 (onChange)="onCheckboxChange($event, row, column)"
               ></p-checkbox>
             }

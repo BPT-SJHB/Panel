@@ -4,6 +4,7 @@ import { CheckboxChangeEvent, CheckboxModule } from 'primeng/checkbox';
 import { TableModule } from 'primeng/table';
 import { ButtonComponent, ButtonSeverity } from '../button/button.component';
 import { NgClass } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 export enum TableColumnType {
   TEXT,
@@ -22,6 +23,7 @@ export interface TableColumn<T extends object> {
   buttonSeverity?: ButtonSeverity;
   onAction?: (row: T) => void | Promise<void>;
   sorting?: boolean;
+  format?: 'currency';
 }
 
 type SelectionMode = 'single' | 'multiple';
@@ -51,7 +53,7 @@ export const deleteCell = {
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [TableModule, CheckboxModule, ButtonComponent, NgClass],
+  imports: [TableModule, CheckboxModule, ButtonComponent, NgClass, FormsModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
 })
@@ -130,5 +132,20 @@ export class TableComponent<T extends object> {
 
   hasSorting(column: TableColumn<T>): boolean {
     return this.rows.length > 1 && (column.sorting ?? true);
+  }
+
+  applyFormat(column: TableColumn<T>, value: string): string {
+    if (column?.format === 'currency') {
+      const num = Number(value);
+      if (isNaN(num)) {
+        return value;
+      }
+      return this.formatCurrency(value.toString());
+    }
+    return value;
+  }
+
+  private formatCurrency(value: string): string {
+    return value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 }
