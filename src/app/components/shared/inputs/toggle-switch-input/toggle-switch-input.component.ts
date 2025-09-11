@@ -24,6 +24,7 @@ export class ToggleSwitchInputComponent
   @Input() readonly: boolean = false;
 
   @Input() label: string = '';
+  @Input() labelWidth: string = '';
 
   private readonly destroy$ = new Subject<void>();
 
@@ -36,7 +37,7 @@ export class ToggleSwitchInputComponent
       borderWidth: '1px',
       borderStyle: 'solid',
       checkedHoverBackground: 'var(--p-emerald-500)',
-      checkedBackground: 'var(--p-emerald-600)'
+      checkedBackground: 'var(--p-emerald-600)',
     },
     handle: {
       size: '1.5rem',
