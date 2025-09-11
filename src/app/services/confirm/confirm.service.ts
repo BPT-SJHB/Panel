@@ -121,4 +121,38 @@ export class AppConfirmService {
       reject,
     });
   }
+
+  confirmTurnAction(
+    action: 'activate' | 'deactivate',
+    itemName: string,
+    accept: () => void
+  ) {
+    const config = {
+      activate: {
+        header: 'تأیید احیا نوبت',
+        message: `آیا از احیا نوبت <b><u>${itemName}</u></b> مطمئن هستید؟`,
+        icon: 'pi pi-refresh',
+        acceptLabel: 'احیا نوبت',
+        acceptSeverity: 'info' as const,
+      },
+      deactivate: {
+        header: 'تأیید ابطال نوبت',
+        message: `آیا از ابطال نوبت <b><u>${itemName}</u></b> مطمئن هستید؟`,
+        icon: 'pi pi-times',
+        acceptLabel: 'ابطال نوبت',
+        acceptSeverity: 'danger' as const,
+      },
+    }[action];
+
+    this.confirmationService.confirm({
+      header: config.header,
+      message: config.message,
+      icon: config.icon,
+      acceptLabel: config.acceptLabel,
+      rejectLabel: 'انصراف',
+      acceptButtonProps: { severity: config.acceptSeverity },
+      rejectButtonProps: { severity: 'secondary' },
+      accept,
+    });
+  }
 }
