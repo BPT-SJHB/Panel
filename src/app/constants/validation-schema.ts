@@ -242,14 +242,14 @@ export const ValidationSchema = {
     name: 'توضیحات',
     validators: [Validators.required, Validators.minLength(5)],
   },
-  price:{
-    name:'مبلغ شارژ',
-    validators:[
+  price: {
+    name: 'مبلغ شارژ',
+    validators: [
       Validators.required,
       Validators.pattern(/^[0-9]+$/),
       Validators.min(1000),
-      Validators.max(300000)
-    ]
+      // Validators.max(300000)
+    ],
   },
   parentage: {
     name: 'درصد',
