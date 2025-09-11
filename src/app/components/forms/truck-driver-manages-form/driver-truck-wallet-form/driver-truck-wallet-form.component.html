@@ -18,6 +18,7 @@
         [disableSearchButton]="mainSearchForm.invalid"
         [searchButtonLabel]="appTitle.buttons.retrieveFromOutdoorSystem"
         [onSearchQuery]="loadComposedForm"
+        type="number"
       />
     </div>
   </form>
@@ -56,6 +57,7 @@
               [control]="smartCard"
               validationField="smartCard"
               addonWidth="10rem"
+              type="number"
             />
             <app-button
               (click)="loadTruckInfo()"
@@ -77,6 +79,7 @@
               [control]="licensePlateNumber"
               validationField="licenseNumber"
               [addonWidth]="addonWidth"
+              format="carPlate"
             />
           </div>
           <div class="col-span-12 md:col-span-6">
@@ -120,6 +123,7 @@
               [control]="nationalId"
               validationField="nationalId"
               addonWidth="10rem"
+              type="number"
             />
             <app-button
               (click)="loadDriverInfo()"

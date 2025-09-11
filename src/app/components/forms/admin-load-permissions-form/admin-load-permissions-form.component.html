@@ -23,6 +23,7 @@
         [control]="ctrl('LAId')"
         [readOnly]="true"
         [addonWidth]="addonWidth"
+        language="en"
       />
     </div>
 
@@ -58,7 +59,7 @@
     </div>
 
     <!-- Driver Replacement Section -->
-    <span class="col-span-12 mt-2 text-lg font-bold  border-t-1 pt-4">
+    <span class="col-span-12 mt-2 text-lg font-bold border-t-1 pt-4">
       جاگیزینی راننده دیگر
     </span>
 
@@ -68,6 +69,7 @@
         placeholder="راننده"
         [control]="ctrl('Driver')"
         [addonWidth]="addonWidth"
+        [readOnly]="true"
       />
     </div>
 
@@ -77,6 +79,7 @@
         placeholder="نوبت"
         [control]="ctrl('Turn')"
         [addonWidth]="addonWidth"
+        [readOnly]="true"
       />
     </div>
 
@@ -91,4 +94,3 @@
     </div>
   </div>
 }
-

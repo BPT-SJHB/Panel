@@ -94,7 +94,7 @@ export class LoadAllocationFormComponent
   readonly truckForm = this.fb.group({
     TruckId: this.fb.control<number | null>(null, Validators.required),
     SmartCardNo: this.fb.nonNullable.control('', ValidationSchema.smartCard),
-    Pelak: this.fb.nonNullable.control('', ValidationSchema.nationalId),
+    Pelak: this.fb.nonNullable.control('', ValidationSchema.licensePlateNumber),
   });
 
   readonly truckComposeForm = this.fb.group({
@@ -103,7 +103,7 @@ export class LoadAllocationFormComponent
     NationalCode: this.fb.nonNullable.control('', ValidationSchema.nationalId),
     TruckId: this.fb.control<number | null>(null, Validators.required),
     SmartCardNo: this.fb.nonNullable.control('', ValidationSchema.smartCard),
-    Pelak: this.fb.nonNullable.control('', ValidationSchema.nationalId),
+    Pelak: this.fb.nonNullable.control('', ValidationSchema.licensePlateNumber),
     TurnId: this.fb.control<number | null>(null),
     OtaghdarTurnNumber: this.fb.nonNullable.control(''),
     MoneyWalletId: this.fb.control<number | null>(null),
@@ -154,6 +154,7 @@ export class LoadAllocationFormComponent
         this.truckForm.reset();
         return;
       }
+      res.data.Pelak = (res.data.Pelak ?? '') + (res.data.Serial ?? '');
       this.truckForm.patchValue(res.data);
       await this.loadComposeTruck(res.data.TruckId);
     });
@@ -170,6 +171,7 @@ export class LoadAllocationFormComponent
     }
 
     const { MoneyWallet, Turn, Truck, TruckDriver } = res.data;
+    Truck.Pelak = (Truck?.Pelak ?? '') + (Truck?.Serial ?? '');
     this.truckComposeForm.patchValue({
       ...TruckDriver,
       ...Truck,

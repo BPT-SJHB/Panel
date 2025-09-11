@@ -12,8 +12,9 @@
     [addonWidth]="addonWidth"
     (input)="onInputChanged($event)"
     (keydown.enter)="onSearchButtonClick()"
-
- ></app-text-input>
+    [type]="type"
+    [language]="language"
+  ></app-text-input>
 
   <div class="flex items-center">
     @if (!autoTriggerSearch) {

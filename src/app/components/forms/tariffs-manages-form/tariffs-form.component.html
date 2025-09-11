@@ -196,8 +196,8 @@
       class="col-span-12"
       label="مبنای محاسبه"
       [control]="CalculationReference"
-      [readOnly]="true"
       addonWidth="7rem"
+      language="en"
     />
 
     <!-- Editable Fields -->
@@ -207,6 +207,7 @@
       [control]="Tariff"
       inputType="number"
       addonWidth="7rem"
+      type="number"
     />
 
     <app-text-input
@@ -215,6 +216,7 @@
       [control]="BaseTonnag"
       inputType="number"
       addonWidth="7rem"
+      type="number"
     />
 
     <app-toggle-switch-input
@@ -250,6 +252,7 @@
     placeholder="درصد افزایش تعرفه"
     label="درصد افزایش"
     [control]="prentageTariffInc"
+    type="number"
     validationField="parentage"
   />
   <div class="col-span-12 flex justify-end mt-5">

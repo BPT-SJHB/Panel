@@ -47,7 +47,7 @@ export class TruckInfoFormComponent implements OnDestroy, OnInit {
 
   loading = false;
   addonWidth = '9rem';
-  readonly appTitle = AppTitles
+  readonly appTitle = AppTitles;
 
   searchForm: FormGroup = this.fb.group({
     searchSmartCard: ['', ValidationSchema.smartCard],
@@ -135,7 +135,6 @@ export class TruckInfoFormComponent implements OnDestroy, OnInit {
         this.truckId.value,
         this.truckNativenessExpiredDate.value
       );
-
       if (this.isSuccessful(response)) {
         this.populateTruckNativenessForm(response.data!);
       }
@@ -150,7 +149,7 @@ export class TruckInfoFormComponent implements OnDestroy, OnInit {
       licensePlateNumber: truck.Pelak ?? '',
       serialNumber: truck.Serial ?? '',
       smartCard: truck.SmartCardNo ?? '',
-      loaderType: truck.LoaderTypeId?? '',
+      loaderType: truck.LoaderTypeId ?? '',
     });
   }
 

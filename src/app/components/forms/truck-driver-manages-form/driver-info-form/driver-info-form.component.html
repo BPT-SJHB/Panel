@@ -15,6 +15,7 @@
         [searchButtonLabel]="appTitle.buttons.retrieveFromOutdoorSystem"
         [disableSearchButton]="this.searchForm.invalid"
         [onSearchQuery]="loadDriverInfoFromAPI"
+        type="number"
       />
     </div>
   </form>
@@ -43,6 +44,7 @@
           validationField="nationalId"
           [readOnly]="true"
           [addonWidth]="addonWidth"
+          type="number"
         />
       </div>
 
@@ -68,6 +70,7 @@
           [addonWidth]="addonWidth"
           [buttonDisabled]="driverForm.invalid"
           (clickButton)="updateDriverMobileNumber()"
+          type="number"
         />
       </div>
 

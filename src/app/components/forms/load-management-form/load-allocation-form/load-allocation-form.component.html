@@ -18,6 +18,7 @@
         [addonWidth]="addonWidth"
         [autoTriggerSearch]="false"
         [disableSearchButton]="driverCtrl('NationalCode').invalid"
+        type="number"
       />
       <app-text-input
         class="col-span-12 md:col-span-6"
@@ -40,6 +41,7 @@
         [addonWidth]="addonWidth"
         [autoTriggerSearch]="false"
         [disableSearchButton]="truckCtrl('SmartCardNo').invalid"
+        type="number"
       />
       <app-text-input
         class="col-span-6"
@@ -47,6 +49,7 @@
         [control]="truckCtrl('Pelak')"
         [addonWidth]="addonWidth"
         [readOnly]="true"
+        format="carPlate"
       />
     </div>
 
@@ -78,14 +81,23 @@
         [control]="truckComposeCtrl('Pelak')"
         [addonWidth]="addonWidth"
         [readOnly]="true"
+        format="carPlate"
       />
     </div>
 
     <div class="flex flex-wrap justify-end gap-4">
-      <app-button styleClass="w-full sm:w-32 md:w-40 lg:w-48" (onClick)="resetAllForms()" severity="info">
+      <app-button
+        styleClass="w-full sm:w-32 md:w-40 lg:w-48"
+        (onClick)="resetAllForms()"
+        severity="info"
+      >
         جدید
       </app-button>
-      <app-button styleClass="w-full sm:w-32 md:w-40 lg:w-48" (onClick)="registerNewLoad()" [disabled]="!isRegisterLoadValid()">
+      <app-button
+        styleClass="w-full sm:w-32 md:w-40 lg:w-48"
+        (onClick)="registerNewLoad()"
+        [disabled]="!isRegisterLoadValid()"
+      >
         تخصیص بار
       </app-button>
     </div>

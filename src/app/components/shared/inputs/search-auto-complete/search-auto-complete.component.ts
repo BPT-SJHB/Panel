@@ -67,6 +67,7 @@ export class SearchAutoCompleteComponent<T extends object> {
   @Input() allOptions: T[] = [];
   @Input() showIconOptionSelected = false;
   @Input() lazySearch?: (query: string) => Promise<T[]>;
+  @Input() language: 'fa' | 'en' = 'fa';
 
   @Output() valueChange = new EventEmitter<string>();
   @Output() selectSuggestion = new EventEmitter<T>();

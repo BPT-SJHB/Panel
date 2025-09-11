@@ -18,6 +18,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { UserAuthService } from 'app/services/user-auth-service/user-auth.service';
 import { AppTitles } from 'app/constants/Titles';
+import { CommonModule } from '@angular/common';
 
 // 🔽 Interfaces
 interface UserProfile {
@@ -35,7 +36,13 @@ interface UserProfile {
 @Component({
   selector: 'app-user-profile-form',
   standalone: true,
-  imports: [AvatarModule, ButtonModule, ConfirmDialogModule, ButtonComponent],
+  imports: [
+    AvatarModule,
+    ButtonModule,
+    ConfirmDialogModule,
+    ButtonComponent,
+    CommonModule,
+  ],
   providers: [ConfirmationService, DialogService],
   templateUrl: './user-profile-form.component.html',
   styleUrl: './user-profile-form.component.scss',

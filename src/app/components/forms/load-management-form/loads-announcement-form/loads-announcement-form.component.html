@@ -65,13 +65,12 @@
     [addonWidth]="addonWidth"
   ></app-search-auto-complete-factory>
 
-<!-- Announcement SubGroup Auto-complete -->
+  <!-- Announcement SubGroup Auto-complete -->
   <app-search-auto-complete-factory
     class="col-span-12 md:col-span-6 lg:col-span-4"
     [config]="autoCompletions.announcementSubGroup"
     [addonWidth]="addonWidth"
   ></app-search-auto-complete-factory>
-
 
   <!-- Goods Auto-complete -->
   <app-search-auto-complete-factory
@@ -102,6 +101,7 @@
     [control]="ctrl('Tariff')"
     [addonWidth]="addonWidth"
     [readOnly]="true"
+    language="en"
   ></app-text-input>
 
   <!-- Loading Place Auto-complete -->
@@ -125,6 +125,7 @@
     label="تعداد"
     [control]="ctrl('TotalNumber')"
     [addonWidth]="addonWidth"
+    type="number"
   ></app-text-input>
 
   <!-- Tonaj -->
@@ -134,6 +135,7 @@
     label="تناژ"
     [control]="ctrl('Tonaj')"
     [addonWidth]="addonWidth"
+    type="number"
   ></app-text-input>
 
   <!-- Recipient -->
