@@ -19,6 +19,7 @@
           class="flex justify-end w-full px-1"
           label="جدید"
           size="small"
+          [severity]="'info'"
           styleClass="px-6 md:px-8 py-2"
           (click)="clickCaptionButton.emit()"
         />
@@ -28,20 +29,22 @@
 
   <!-- Table Header -->
   <ng-template pTemplate="header">
-
-  <tr class="text-nowrap">
-    @for (column of columns; track column.field) {
-      <th [pSortableColumn]="hasSorting(column) ? column.field.toString() : undefined">
-        <div class="flex items-center justify-center gap-2">
-          {{ column.header }}
-          @if (hasSorting(column)) {
-            <p-sortIcon [field]="column.field.toString()" />
-          }
-        </div>
-      </th>
-    }
-  </tr>
-
+    <tr class="text-nowrap">
+      @for (column of columns; track column.field) {
+        <th
+          [pSortableColumn]="
+            hasSorting(column) ? column.field.toString() : undefined
+          "
+        >
+          <div class="flex items-center justify-center gap-2">
+            {{ column.header }}
+            @if (hasSorting(column)) {
+              <p-sortIcon [field]="column.field.toString()" />
+            }
+          </div>
+        </th>
+      }
+    </tr>
   </ng-template>
 
   <!-- Table Body -->
