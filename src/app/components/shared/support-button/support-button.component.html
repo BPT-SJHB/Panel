@@ -32,9 +32,7 @@
           }"
           #CallUsOnPhone
         >
-          <div
-            class="flex flex-col gap-4 justify-center items-center"
-          >
+          <div class="flex flex-col gap-4 justify-center items-center">
             @for (number of item.numbers; track $index) {
               <div class="flex items-center w-full justify-end gap-3">
                 <span [textContent]="number"></span>
@@ -81,10 +79,11 @@
     >لطفا بعد از پر کردن اطلاعات، متن تیکت خود را وارد نمایید.<br /><br />همکاران
     ما در اسرع وقت پاسخگو خواهند بود.</span
   >
-  <div class="m-2">
-    <app-captcha-input></app-captcha-input>
-  </div>
-
+  @if (dialog) {
+    <div class="m-2">
+      <app-captcha-input></app-captcha-input>
+    </div>
+  }
   <div class="m-2">
     <app-text-area-input></app-text-area-input>
   </div>
