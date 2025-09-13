@@ -132,9 +132,13 @@ export class UserProfileFormComponent implements OnInit {
   // ❗ Show confirmation dialog before reset password
   confirmResetPassword(): void {
     this.confirmationService.confirm({
-      message: `آیا مطمئن هستید که می‌خواهید رمز عبور خود را تغییر دهید؟`,
+      message: `آیا از تغییر رمز عبور اطمینان دارید؟`,
       header: 'تغییر رمز عبور',
       icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'تایید',
+      rejectLabel: 'انصراف',
+      acceptButtonProps: { severity: 'danger' },
+      rejectButtonProps: { severity: 'secondary', outlined: true },
       accept: async () => {
         try {
           this.loadingService.setLoading(true);
