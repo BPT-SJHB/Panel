@@ -36,7 +36,12 @@ export type PlaceholderKey =
   | 'transportCompanyOwnerPhoneNumber'
   | 'transportCompanyOwnerName'
   | 'sequentialTurnTitle'
-  | 'loadType';
+  | 'loadType'
+  | 'loadsLoadingPlace'
+  | 'loadsDischargingPlace'
+  | 'loadsRecipient'
+  | 'loadsDescription'
+  | 'sequentialTurnKeywork';
 
 export class AppTitles {
   public static readonly appOnLineTitle =
@@ -86,7 +91,7 @@ export class AppTitles {
     turns: {
       turnId: 'شناسه نوبت',
       turnTitle: 'شماره نوبت',
-      turnStatus: 'وضعیت نوبت'
+      turnStatus: 'وضعیت نوبت',
     },
     wallet: {
       walletId: 'شناسه کیف پول',
@@ -107,8 +112,20 @@ export class AppTitles {
       loadAnnouncementSubGroupTitle: 'زیرگروه اعلام بار',
     },
     loads: {
+      loadId: 'شناسه مخزن بار',
       loadStatus: 'وضعیت نهایی بار',
       loadType: 'نوع بار',
+      loadCost: 'تعرفه حمل',
+      loadingPlace: 'محل بارگیری',
+      dischargingPlace: 'محل تخلیه',
+      loadAmount: 'تعداد',
+      loadSize: 'تناژ',
+      loadRecipient: 'گیرنده',
+      loadDescription: 'توضیحات',
+      tptParamsJoint: ' پارامترهای موثر',
+    },
+    loadAnnouncementDetails: {
+      loadDateAndTime: 'زمان اعلام بار',
     },
     provinceAndCities: {
       provinceAndCitiesTitle: 'نام استان یا شهر',
@@ -132,6 +149,48 @@ export class AppTitles {
     },
     sequentialTurns: {
       sequentialTurnTitle: 'صف نوبت',
+      keyWord: 'کلمه کلیدی',
+    },
+  };
+
+  public static readonly tables = {
+    loads: {
+      loadProvince: 'استان',
+      loadId: this.inputs.loads.loadId,
+      product: 'کالا',
+      sourceCity: this.inputs.provinceAndCities.startCity,
+      targetCity: this.inputs.provinceAndCities.endCity,
+      announcementGroup:
+        this.inputs.loadAnnouncements.loadAnnouncementGroupTitle,
+      announcementSubGroup:
+        this.inputs.loadAnnouncements.loadAnnouncementSubGroupTitle,
+      transportCompany: this.inputs.transportCompanies.transportCompanyTitle,
+      recipient: this.inputs.loads.loadRecipient,
+      address: this.inputs.global.address,
+      description: this.inputs.loads.loadDescription,
+      loadRegisteringUser: 'کاربر ثبت بار',
+      loadAllocationUser: 'کاربر تخصیص بار',
+      loadAllocationId: 'شناسه تخصیص بار',
+      licensePlate: this.inputs.trucks.licensePlateNumber,
+      smartCardNo: this.inputs.trucks.truckSmartCardNumber,
+      truckDriver: 'راننده',
+      nationalCode: this.inputs.users.userNationalCodeTitle,
+      mobileNumber: this.inputs.phoneNumbers.inputTitle,
+      allocationDate: 'تاریخ تخصیص بار',
+      allocationTime: 'ساعت تخصیص بار',
+      sequentialTurn: 'تسلسل نوبت',
+      note: this.inputs.loads.loadDescription,
+      loadAllocationStatusTitle: 'وضعیت تخصیص بار',
+      tptParamsJoint: this.inputs.loads.tptParamsJoint,
+      loadSize: this.inputs.loads.loadSize,
+      loadTotalAmount: 'تعداد کل',
+      loadRemainedAmount: 'تعداد باقیمانده',
+      loadCost: this.inputs.loads.loadCost,
+      loadingPlace: this.inputs.loads.loadingPlace,
+      dischargingPlace: this.inputs.loads.dischargingPlace,
+      loadStatus: this.inputs.loads.loadStatus,
+      loadAnnouncementDate: 'تاریخ اعلام بار',
+      loadAnnouncementTime: 'ساعت اعلام بار',
     },
   };
 
@@ -139,14 +198,14 @@ export class AppTitles {
     search: 'جستجو',
     retrieveFromOutdoorSystem: 'استعلام',
     add: {
-      addUser: 'اضافه کردن کاربر جدید',
-      addRecord: 'رکورد جدید',
+      addUser: 'جدید',
+      addRecord: 'جدید',
     },
     saveAndEdit: 'ثبت و ویرایش',
     activateSMS: 'فعال‌سازی پیامک',
     sendSystemLink: 'ارسال لینک سامانه',
     generateNewPassword: 'ایجاد رمز‌عبور جدید',
-    changeNativenessStatus: 'تغییر وضعیت بومی‌گیری',
+    changeNativenessStatus: 'تغییر وضعیت بومی‌گری',
     createNewWallet: 'ساخت کیف پول جدید',
     seeLoads: 'مشاهده بار',
     allocateLoad: 'تخصیص بار',
@@ -165,7 +224,7 @@ export class AppTitles {
   public static readonly sectionTitles = {
     truckInfo: 'اطلاعات ناوگان',
     nativenessInfo: 'بومی گری',
-    driverInfo:'اطلاعات راننده'
+    driverInfo: 'اطلاعات راننده',
   };
 
   public static readonly datePicker = {
@@ -315,6 +374,26 @@ export class AppTitles {
 
       case 'loadType':
         placeholderValue = this.inputs.loads.loadType;
+        break;
+
+      case 'loadsLoadingPlace':
+        placeholderValue = this.inputs.loads.loadingPlace;
+        break;
+
+      case 'loadsDischargingPlace':
+        placeholderValue = this.inputs.loads.dischargingPlace;
+        break;
+
+      case 'loadsRecipient':
+        placeholderValue = this.inputs.loads.loadRecipient;
+        break;
+
+      case 'loadsDescription':
+        placeholderValue = this.inputs.loads.loadDescription;
+        break;
+
+      case 'sequentialTurnKeywork':
+        placeholderValue = this.inputs.sequentialTurns.keyWord;
         break;
 
       default:
