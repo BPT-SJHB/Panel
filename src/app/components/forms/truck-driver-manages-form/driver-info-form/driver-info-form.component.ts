@@ -20,7 +20,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { SearchInputComponent } from '../../../shared/inputs/search-input/search-input.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { NewPasswordDialogComponent } from 'app/components/shared/dialog/new-password-dialog/new-password-dialog.component';
-import { ButtonComponent } from "app/components/shared/button/button.component";
+import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { AppTitles } from 'app/constants/Titles';
 
 @Component({
@@ -31,8 +31,8 @@ import { AppTitles } from 'app/constants/Titles';
     DialogModule,
     TextInputComponent,
     SearchInputComponent,
-    ButtonComponent
-],
+    ButtonComponent,
+  ],
   providers: [DialogService],
   templateUrl: './driver-info-form.component.html',
   styleUrl: './driver-info-form.component.scss',
@@ -117,9 +117,8 @@ export class DriverInfoFormComponent implements OnDestroy, OnInit {
     this.loadingService.setLoading(true);
     try {
       // Call service to get driver info
-      const response = await this.driverTruckManager.GetDriverInfoFromAPI(
-        nationalId
-      );
+      const response =
+        await this.driverTruckManager.GetDriverInfoFromAPI(nationalId);
 
       if (!this.isSuccessful(response)) return;
       this.populateDriverForm(response.data!);
@@ -139,9 +138,8 @@ export class DriverInfoFormComponent implements OnDestroy, OnInit {
       // Get driver ID from form
       const driverId = this.driverId.value;
       // Call service to reset password
-      const response = await this.driverTruckManager.ResetDriverPassword(
-        driverId
-      );
+      const response =
+        await this.driverTruckManager.ResetDriverPassword(driverId);
 
       if (!this.isSuccessful(response)) return;
 
@@ -164,9 +162,8 @@ export class DriverInfoFormComponent implements OnDestroy, OnInit {
       // Get driver ID from form
       const driverId = this.driverId.value;
       // Call service to activate SMS
-      const response = await this.driverTruckManager.ActivateDriverSMS(
-        driverId
-      );
+      const response =
+        await this.driverTruckManager.ActivateDriverSMS(driverId);
 
       if (!this.isSuccessful(response)) return;
 
