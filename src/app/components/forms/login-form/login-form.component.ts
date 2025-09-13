@@ -18,6 +18,7 @@ import { ValidationSchema } from 'app/constants/validation-schema';
 import { CheckboxInputComponent } from '../../shared/inputs/checkbox-input/checkbox-input.component';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { AppTitles } from 'app/constants/Titles';
+import { BaseLoading } from '../shared/component-base/base-loading';
 
 @Component({
   selector: 'app-login-form',
@@ -34,9 +35,8 @@ import { AppTitles } from 'app/constants/Titles';
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',
 })
-export class LoginFormComponent {
+export class LoginFormComponent extends BaseLoading {
   private fb = inject(FormBuilder);
-  private toast = inject(ToastService);
   private userAuth = inject(UserAuthService);
   private cryptography = inject(CryptographyService);
   private router = inject(Router);
@@ -53,28 +53,30 @@ export class LoginFormComponent {
   });
 
   async onSubmit(): Promise<void> {
-    if (this.loginForm.invalid) {
+    if (this.loginForm.invalid || this.loading()) {
       this.loginForm.markAllAsTouched();
       return;
     }
 
-    const formValue = this.loginForm.value;
-    const loginResult = await this.userAuth.login({
-      username: this.cryptography.SHA256(formValue.username!),
-      password: this.cryptography.SHA256(formValue.password!),
-      rememberMe: formValue?.rememberMe!,
-      sessionId: formValue?.sessionId!,
-      captcha: formValue?.captcha!,
+    await this.withLoading(async () => {
+      const formValue = this.loginForm.value;
+      const loginResult = await this.userAuth.login({
+        username: this.cryptography.SHA256(formValue.username!),
+        password: this.cryptography.SHA256(formValue.password!),
+        rememberMe: formValue?.rememberMe ?? false,
+        sessionId: formValue?.sessionId ?? '',
+        captcha: formValue?.captcha ?? '',
+      });
+
+      if (loginResult.success || !loginResult.error) {
+        this.toast.success('موفق', 'ورود موفقیت آمیز بود.');
+        this.router.navigate([APP_ROUTES.DASHBOARD.HOME]);
+        return;
+      }
+
+      this.toast.error('خطا', loginResult.error?.message);
+      await this.resetLoginForm();
     });
-
-    if (loginResult.success || !loginResult.error) {
-      this.toast.success('موفق', 'ورود موفقیت آمیز بود.');
-      this.router.navigate([APP_ROUTES.DASHBOARD.HOME]);
-      return;
-    }
-
-    this.toast.error('خطا', loginResult.error?.message);
-    await this.resetLoginForm();
   }
 
   public async resetLoginForm(): Promise<void> {
