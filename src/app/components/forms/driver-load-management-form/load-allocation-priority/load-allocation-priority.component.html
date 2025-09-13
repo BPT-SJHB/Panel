@@ -8,7 +8,6 @@
 
 <!-- Allocations list -->
 <div class="flex flex-col h-full" [hidden]="loadsAllocations().length <= 0">
-
   <p-orderlist
     #orderlist
     id="orderlist"
@@ -22,7 +21,6 @@
     style="height: calc(100% - 70px)"
   >
     <ng-template #item let-option let-i="index">
-
       <!-- Single allocation panel -->
       <p-panel
         #panel
@@ -31,10 +29,9 @@
         class="flex flex-col rounded-2xl border shadow-sm w-full transition-all duration-200"
         [ngClass]="{
           'bg-emphasis': !isLoadSelected(option.LAId),
-          'bg-highlight': isLoadSelected(option.LAId)
+          'bg-highlight': isLoadSelected(option.LAId),
         }"
       >
-
         <!-- Arrow toggle icon -->
         <ng-template pTemplate="headericons">
           <i
@@ -46,57 +43,57 @@
 
         <!-- Panel header -->
         <ng-template pTemplate="header">
-          <div class="flex flex-col md:flex-row justify-between items-start md:items-center w-full gap-2 md:gap-4">
-            <div class="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-3">
+          <div
+            class="flex flex-col md:flex-row justify-between items-start md:items-center w-full gap-2 md:gap-4"
+          >
+            <div
+              class="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-3"
+            >
               <span class="font-semibold text-sm md:text-base lg:text-lg">
                 <div>
-                  {{option.GoodTitle  || '---'}} -
-                  {{ option.SourceCityTitle || '---' }} به
-                  {{ option.TargetCityTitle || '---' }}
+                  {{ option.GoodTitle || "---" }} |
+                  {{ option.SourceCityTitle || "---" }} به
+                  {{ option.TargetCityTitle || "---" }}
                 </div>
                 <div class="py-1">
-                   شرکت حمل‌ونقل {{ option.TransportCompanyTitle || '---' }}
+                  شرکت حمل‌ونقل {{ option.TransportCompanyTitle || "---" }}
                 </div>
               </span>
               <span
-                class="flex items-center justify-center px-3 py-1 text-xs md:text-sm rounded-full bg-highlight  border border-blue-300"
+                class="flex items-center justify-center px-3 py-1 text-xs md:text-sm rounded-full bg-highlight border border-blue-300"
               >
-                {{ 'اولویت ' + (i + 1) }}
+                {{ "اولویت " + (i + 1) }}
               </span>
             </div>
           </div>
         </ng-template>
 
         <!-- Panel body -->
-        <div class="flex flex-col md:grid md:grid-cols-2 gap-2 text-sm md:text-base divide-y md:divide-y-0">
+        <div
+          class="flex flex-col md:grid md:grid-cols-2 gap-2 text-sm md:text-base divide-y md:divide-y-0"
+        >
+          <div class="py-1">شماره تخصیص بار: {{ option.LAId || "---" }}</div>
+
           <div class="py-1">
-            شماره تخصیص بار: {{ option.LAId || '---' }}
+            مبدا: {{ option.SourceCityTitle || "---" }} &nbsp; ← &nbsp; مقصد:
+            {{ option.TargetCityTitle || "---" }}
           </div>
 
           <div class="py-1">
-            مبدا: {{ option.SourceCityTitle || '---' }} &nbsp; ← &nbsp;
-            مقصد: {{ option.TargetCityTitle || '---' }}
+            شرکت حمل‌ونقل: {{ option.TransportCompanyTitle || "---" }}
+          </div>
+
+          <div class="py-1">تناژ: {{ option.Tonaj || "-" }}</div>
+
+          <div class="py-1">
+            محل بارگیری: {{ option.LoadingPlaceTitle || "-" }}
           </div>
 
           <div class="py-1">
-            شرکت حمل‌ونقل: {{ option.TransportCompanyTitle || '---' }}
+            محل تخلیه: {{ option.DischargingPlaceTitle || "-" }}
           </div>
 
-          <div class="py-1">
-            تناژ: {{ option.Tonaj || '-' }}
-          </div>
-
-          <div class="py-1">
-            محل بارگیری: {{ option.LoadingPlaceTitle || '-' }}
-          </div>
-
-          <div class="py-1">
-            محل تخلیه: {{ option.DischargingPlaceTitle || '-' }}
-          </div>
-
-          <div class="py-1">
-            گیرنده: {{ option.Recipient || '-' }}
-          </div>
+          <div class="py-1">گیرنده: {{ option.Recipient || "-" }}</div>
 
           <div class="py-1 flex items-center gap-2">
             مدت زمان سفر:
@@ -105,23 +102,19 @@
               [ngClass]="{ 'blur-[2px]': !getTimeTravel(option.LAId) }"
             >
               @if (!loadingTimeTravels().has(option.LAId)) {
-                {{ getTimeTravel(option.LAId) || '==' }}
+                {{ getTimeTravel(option.LAId) || "==" }}
               } @else {
                 <i class="pi pi-spin pi-spinner"></i>
               }
             </span>
           </div>
 
-          <div class="py-1">
-            آدرس: {{ option.Address || '---' }}
-          </div>
+          <div class="py-1">آدرس: {{ option.Address || "---" }}</div>
+
+          <div class="py-1">توضیحات: {{ option.Description || "---" }}</div>
 
           <div class="py-1">
-            توضیحات: {{ option.Description || '---' }}
-          </div>
-
-          <div class="py-1">
-            پارامترهای موثر: {{ option.TPTParamsJoint || '---' }}
+            پارامترهای موثر: {{ option.TPTParamsJoint || "---" }}
           </div>
         </div>
 
