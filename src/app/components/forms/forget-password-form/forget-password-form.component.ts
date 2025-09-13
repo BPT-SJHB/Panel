@@ -7,14 +7,22 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { ToastService } from 'app/services/toast-service/toast.service';
-import { ValidationSchema } from 'app/constants/validation-schema';
-import { TextInputComponent } from "../../shared/inputs/text-input/text-input.component";
-import { ButtonComponent } from "app/components/shared/button/button.component";
+import {
+  getDefaultErrorMessage,
+  ValidationSchema,
+} from 'app/constants/validation-schema';
+import { TextInputComponent } from '../../shared/inputs/text-input/text-input.component';
+import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { AppTitles } from 'app/constants/Titles';
 
 @Component({
   selector: 'app-forget-password-form',
-  imports: [ButtonModule, ReactiveFormsModule, TextInputComponent, ButtonComponent],
+  imports: [
+    ButtonModule,
+    ReactiveFormsModule,
+    TextInputComponent,
+    ButtonComponent,
+  ],
   templateUrl: './forget-password-form.component.html',
   styleUrl: './forget-password-form.component.scss',
 })
@@ -35,9 +43,15 @@ export class ForgetPasswordFormComponent {
         this.forgetPasswordForm.reset();
       }
     }
+    else{
+      // getDefaultErrorMessage('شماره موبایل',this.forgetPasswordForm)
+    }
   }
 
-  constructor(private fb: FormBuilder, private toast: ToastService) {
+  constructor(
+    private fb: FormBuilder,
+    private toast: ToastService
+  ) {
     this.forgetPasswordForm = this.fb.group({
       phone: ['', ValidationSchema.mobile],
     });
