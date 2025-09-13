@@ -1,4 +1,9 @@
-import { Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 
 export interface ErrorsValidation {
   required?: any;
@@ -8,6 +13,7 @@ export interface ErrorsValidation {
   maxlength?: any;
   min?: any;
   max?: any;
+  exactLength?: any;
 }
 
 export function getDefaultErrorMessage(
@@ -17,12 +23,9 @@ export function getDefaultErrorMessage(
   if (e.required) return `${name} الزامی است`;
   if (e.email) return `فرمت ${name} نامعتبر است`;
 
-  if (
-    e.minlength?.requiredLength &&
-    e.maxlength?.requiredLength &&
-    e.minlength.requiredLength === e.maxlength.requiredLength
-  ) {
-    return `${name} باید دقیقا ${e.minlength.requiredLength} رقم باشد`;
+  if (e.exactLength) {
+    const ex = e.exactLength;
+    return `${name} باید دقیقا ${ex.requiredLength} کاراکتر باشد`;
   }
 
   if (e.minlength)
@@ -42,8 +45,7 @@ export const ValidationSchema = {
     name: 'شماره موبایل',
     validators: [
       Validators.required,
-      Validators.minLength(11),
-      Validators.maxLength(11),
+      exactLengthValidator(11),
       Validators.pattern(/09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}/),
     ],
   },
@@ -263,3 +265,21 @@ export const ValidationSchema = {
 };
 
 export type ValidationField = keyof typeof ValidationSchema;
+
+/**
+ * Exact length validator
+ * @param length required length
+ */
+export function exactLengthValidator(length: number): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    if (control.value == null || control.value === '') {
+      return null; // don’t validate empty — let Validators.required handle it
+    }
+
+    const valueLength = control.value.toString().length;
+
+    return valueLength === length
+      ? null
+      : { exactLength: { requiredLength: length, actualLength: valueLength } };
+  };
+}
