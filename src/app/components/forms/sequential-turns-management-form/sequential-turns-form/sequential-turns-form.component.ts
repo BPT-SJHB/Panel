@@ -160,7 +160,7 @@ export class SequentialTurnsFormComponent extends BaseLoading {
   }
 
   onNew(): void {
-    this.headerTitle = 'افزودن رکورد نوبت صفوف';
+    this.headerTitle = 'افزودن صفوف نوبت';
     this.resetSequentialTurnForm();
     this.sequentialTurnFormMode = FormMode.REGISTER;
     this.formDialogVisible = true;
