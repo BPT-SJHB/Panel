@@ -5,7 +5,7 @@
   (ngSubmit)="searchTariffs()"
 >
   <app-search-auto-complete
-    class="col-span-12 sm:col-span-6 lg:col-span-4"
+    class="col-span-12 sm:col-span-6 lg:col-span-6"
     [label]="appTitle.inputs.trucks.truckLoader"
     [placeholder]="'نوع ' + appTitle.getPlaceholder('truckLoader')"
     optionLabel="LoaderTypeTitle"
@@ -18,7 +18,7 @@
   />
 
   <app-search-auto-complete
-    class="col-span-12 sm:col-span-6 lg:col-span-4"
+    class="col-span-12 sm:col-span-6 lg:col-span-6"
     [label]="appTitle.inputs.provinceAndCities.startCity"
     [placeholder]="appTitle.getPlaceholder('startCity')"
     [control]="searchSourceCity"
@@ -32,7 +32,7 @@
   />
 
   <app-search-auto-complete
-    class="col-span-12 sm:col-span-6 lg:col-span-4"
+    class="col-span-12 sm:col-span-6 lg:col-span-6"
     [label]="appTitle.inputs.provinceAndCities.endCity"
     [placeholder]="appTitle.getPlaceholder('endCity')"
     [control]="searchTargetCity"
@@ -46,7 +46,7 @@
   />
 
   <app-search-auto-complete
-    class="col-span-12 sm:col-span-6 lg:col-span-4"
+    class="col-span-12 sm:col-span-6 lg:col-span-6"
     [label]="appTitle.inputs.loads.loadType"
     [placeholder]="appTitle.getPlaceholder('loadType')"
     [control]="searchGoods"
