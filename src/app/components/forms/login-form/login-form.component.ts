@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { PasswordInputComponent } from 'app/components/shared/inputs/password-input/password-input.component';
 import { CaptchaInputComponent } from 'app/components/shared/inputs/captcha-input/captcha-input.component';
-import { ToastService } from 'app/services/toast-service/toast.service';
 import { CryptographyService } from 'app/services/cryptography-service/cryptography.service';
 import { UserAuthService } from 'app/services/user-auth-service/user-auth.service';
 import { APP_ROUTES } from 'app/constants/routes';
