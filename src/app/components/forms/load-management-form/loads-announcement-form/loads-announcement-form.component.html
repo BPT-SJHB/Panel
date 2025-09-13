@@ -1,39 +1,36 @@
-<div class="grid grid-cols-12 gap-4">
-  <div
-    class="col-span-12 flex flex-row-reverse justify-end flex-wrap gap-2 mb-2"
-  >
-    @for (button of actionButtons; track button.label) {
-      <div class="{{ button.widthClass }}" [hidden]="button.hidden()">
-        <app-button
-          [styleClass]="'w-full'"
-          [label]="button.label"
-          [severity]="button.severity"
-          [disabled]="button.disabled()"
-          (onClick)="button.action()"
-        ></app-button>
-      </div>
-    }
-  </div>
+<!-- Binary Radio Input for Load Type -->
+<app-binary-radio-input
+  class="col-span-12 md:col-span-6 lg:col-span-4 flex pb-4 pr-1"
+  label="بار"
+  activeLabel="آزاد"
+  disableLabel="نوبتی"
+  [enableColor]="false"
+></app-binary-radio-input>
 
+<div class="grid grid-cols-12 gap-4">
   <!-- Load ID (Read-only) -->
   <app-text-input
     class="col-span-12 md:col-span-6 lg:col-span-4"
-    placeholder="شناسه مخزن"
-    label="شناسه مخزن"
+    [label]="appTitles.inputs.loads.loadId"
     [control]="ctrl('LoadId')"
     [addonWidth]="addonWidth"
     [readOnly]="true"
   ></app-text-input>
 
+  <!-- TODO: Didn't load the date on load of component -->
+  <!-- TODO: this should be disable -->
+
   <!-- Announcement Date (Read-only) -->
   <app-date-picker-input
     class="col-span-12 md:col-span-6 lg:col-span-4"
-    placeholder="تاریخ اعلان"
-    label="تاریخ اعلان"
+    [label]="appTitles.inputs.loadAnnouncementDetails.loadDateAndTime"
     [control]="ctrl('AnnounceDate')"
     [addonWidth]="addonWidth"
     [readOnly]="true"
   ></app-date-picker-input>
+
+  <!-- TODO: change the type of the element to a simple input (it's readonly) -->
+  <!-- TODO: Are they all factory component ?! -->
 
   <!-- Load Status Auto-complete -->
   <app-search-auto-complete-factory
@@ -49,15 +46,6 @@
     [addonWidth]="addonWidth"
   ></app-search-auto-complete-factory>
 
-  <!-- Binary Radio Input for Load Type -->
-  <app-binary-radio-input
-    class="col-span-12 md:col-span-6 lg:col-span-4 flex px-2"
-    label="بار"
-    activeLabel="آزاد"
-    disableLabel="نوبتی"
-    [enableColor]="false"
-  ></app-binary-radio-input>
-
   <!-- Announcement Group Auto-complete -->
   <app-search-auto-complete-factory
     class="col-span-12 md:col-span-6 lg:col-span-4"
@@ -65,13 +53,12 @@
     [addonWidth]="addonWidth"
   ></app-search-auto-complete-factory>
 
-<!-- Announcement SubGroup Auto-complete -->
+  <!-- Announcement SubGroup Auto-complete -->
   <app-search-auto-complete-factory
     class="col-span-12 md:col-span-6 lg:col-span-4"
     [config]="autoCompletions.announcementSubGroup"
     [addonWidth]="addonWidth"
   ></app-search-auto-complete-factory>
-
 
   <!-- Goods Auto-complete -->
   <app-search-auto-complete-factory
@@ -97,8 +84,7 @@
   <!-- Tariff (Read-only) -->
   <app-text-input
     class="col-span-12 md:col-span-6 lg:col-span-4"
-    placeholder="تعرفه"
-    label="تعرفه"
+    [label]="appTitles.inputs.loads.loadCost"
     [control]="ctrl('Tariff')"
     [addonWidth]="addonWidth"
     [readOnly]="true"
@@ -121,8 +107,7 @@
   <!-- Total Number -->
   <app-text-input
     class="col-span-12 md:col-span-6 lg:col-span-4"
-    placeholder="تعداد"
-    label="تعداد"
+    [label]="appTitles.inputs.loads.loadAmount"
     [control]="ctrl('TotalNumber')"
     [addonWidth]="addonWidth"
   ></app-text-input>
@@ -130,8 +115,7 @@
   <!-- Tonaj -->
   <app-text-input
     class="col-span-12 md:col-span-6 lg:col-span-4"
-    placeholder="تناژ"
-    label="تناژ"
+    [label]="appTitles.inputs.loads.loadSize"
     [control]="ctrl('Tonaj')"
     [addonWidth]="addonWidth"
   ></app-text-input>
@@ -139,8 +123,8 @@
   <!-- Recipient -->
   <app-text-input
     class="col-span-12 md:col-span-6 lg:col-span-4"
-    placeholder="گیرنده"
-    label="گیرنده"
+    [placeholder]="appTitles.getPlaceholder('loadsRecipient')"
+    [label]="appTitles.inputs.loads.loadRecipient"
     [control]="ctrl('Recipient')"
     [addonWidth]="addonWidth"
   ></app-text-input>
@@ -148,8 +132,8 @@
   <!-- Address -->
   <app-text-input
     class="col-span-12"
-    placeholder="آدرس"
-    label="آدرس"
+    [placeholder]="appTitles.getPlaceholder('globalAddressPlaceholder')"
+    [label]="appTitles.inputs.global.address"
     [control]="ctrl('Address')"
     [addonWidth]="addonWidth"
   ></app-text-input>
@@ -157,11 +141,27 @@
   <!-- Description -->
   <app-text-input
     class="col-span-12"
-    placeholder="توضیحات"
-    label="توضیحات"
+    [placeholder]="appTitles.getPlaceholder('loadsDescription')"
+    [label]="appTitles.inputs.loads.loadDescription"
     [control]="ctrl('Description')"
     [addonWidth]="addonWidth"
   ></app-text-input>
+
+  <div
+    class="col-span-12 flex flex-row-reverse justify-start flex-wrap gap-2 mb-2"
+  >
+    @for (button of actionButtons; track button.label) {
+      <div class="{{ button.widthClass }}" [hidden]="button.hidden()">
+        <app-button
+          [styleClass]="'w-full'"
+          [label]="button.label"
+          [severity]="button.severity"
+          [disabled]="button.disabled()"
+          (onClick)="button.action()"
+        ></app-button>
+      </div>
+    }
+  </div>
 
   <span class="text-lg font-bold mt-4 col-span-12">پارامتر های موثر</span>
   <!-- Transport Tariff Table -->
