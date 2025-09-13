@@ -348,6 +348,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       },
     ],
   },
+
   [TabComponentKey.TransportCompaniesWalletManagement]: {
     sharedSignal: true,
     subTab: [
@@ -367,6 +368,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       },
     ],
   },
+
   [TabComponentKey.TruckerAssociationWalletManagement]: {
     sharedSignal: false,
     subTab: [
@@ -387,6 +389,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       },
     ],
   },
+
   [TabComponentKey.TransportCompaniesManagement]: {
     sharedSignal: false,
     subTab: [
@@ -472,6 +475,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       },
     ],
   },
+
   [TabComponentKey.AdminLoadManagement]: {
     sharedSignal: true,
     subTab: [
