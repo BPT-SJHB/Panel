@@ -1,4 +1,4 @@
-<div class="p-fluid grid gap-2 relative">
+<div class="p-fluid grid gap-0 relative">
   <form
     class="col-span-12"
     [class.pointer-events-none]="loading()"
@@ -19,6 +19,17 @@
     </div>
   </form>
 
+  <div class="flex flex-row-reverse col-span-12 mb-5">
+    <app-button
+      [rounded]="true"
+      (click)="resetUserInfoForm()"
+      styleClass="px-7"
+      severity="info"
+    >
+      {{ appTitles.buttons.add.addUser }}
+    </app-button>
+  </div>
+
   <form
     class="p-fluid grid col-span-12 gap-6 relative"
     [class.pointer-events-none]="loading()"
@@ -36,15 +47,6 @@
         label="شناسه کاربری"
       />
     </div>
-
-    <app-button
-      (click)="resetUserInfoForm()"
-      styleClass="rounded-full h-10"
-      [disabled]="getUserFormControl('id').invalid || loading()"
-      severity="info"
-    >
-      {{ appTitles.buttons.add.addUser }}
-    </app-button>
 
     <!-- Full Name -->
     <div class="col-span-12 md:col-span-6">
