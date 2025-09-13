@@ -143,7 +143,7 @@ export class AutoCompleteConfigFactoryService {
     [AutoCompleteType.LoadStatus]: {
       type: AutoCompleteType.LoadStatus,
       label: this.appTitle.inputs.loads.loadStatus,
-      placeholder: this.appTitle.getPlaceholder('loadStatus'),
+      placeholder: '',
       optionLabel: 'LoadStatusTitle' as keyof LoadStatus,
       optionValueKey: 'LoadStatusId' as keyof LoadStatus,
       minLength: 0,
