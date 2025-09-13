@@ -1,20 +1,21 @@
 <div class="flex w-full">
   <p-input-group styleClass="h-2-5rem w-full">
     <!-- 🎨 Icon or 🏷️ Label Addon -->
-    @if (label.trim() === '') {
-    <p-inputgroup-addon
-      class="bg-primary-emphasis text-primary-contrast flex items-center justify-center px-4 rounded-l-2xl border-primary-emphasis"
-      [style.width]="addonWidth"
-    >
-      <i [class]="icon"></i>
-    </p-inputgroup-addon>
-    } @if (label.trim() !== '') {
-    <p-inputgroup-addon
-      class="bg-primary-emphasis text-primary-contrast rounded-r-2xl border-primary-emphasis h-full flex items-center justify-center"
-      [style.width]="addonWidth"
-    >
-      <span class="text-sm whitespace-nowrap">{{ label }}</span>
-    </p-inputgroup-addon>
+    @if (label.trim() === "") {
+      <p-inputgroup-addon
+        class="bg-primary-emphasis text-primary-contrast flex items-center justify-center px-4 rounded-l-2xl border-primary-emphasis"
+        [style.width]="addonWidth"
+      >
+        <i [class]="icon"></i>
+      </p-inputgroup-addon>
+    }
+    @if (label.trim() !== "") {
+      <p-inputgroup-addon
+        class="bg-primary-emphasis text-primary-contrast p-0 rounded-r-2xl border-primary-emphasis h-full flex items-center justify-center"
+        [style.width]="addonWidth"
+      >
+        <span class="text-sm whitespace-nowrap">{{ label }}</span>
+      </p-inputgroup-addon>
     }
 
     <!-- 📅 Persian Date Input -->
@@ -35,7 +36,7 @@
             [ngClass]="{
               'border-red-500': control.touched && control.invalid,
               'bg-gray-100 text-gray-500 pointer-events-none opacity-60 cursor-not-allowed':
-                control.disabled
+                control.disabled,
             }"
             (focus)="onFocusInput(inputRef)"
             (blur)="onBlurInput(inputRef)"
@@ -48,9 +49,9 @@
 
 <!-- ⚠️ Validation Error Message -->
 @if (control.touched && firstErrorMessage) {
-<div class="px-4 mt-1">
-  <p-message severity="error" variant="simple" size="small">
-    {{ firstErrorMessage }}
-  </p-message>
-</div>
+  <div class="px-4 mt-1">
+    <p-message severity="error" variant="simple" size="small">
+      {{ firstErrorMessage }}
+    </p-message>
+  </div>
 }
