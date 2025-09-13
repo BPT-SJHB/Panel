@@ -5,7 +5,7 @@
   class="grid grid-cols-12 gap-4 mb-5"
 >
   <app-search-auto-complete
-    class="col-span-12 sm:col-span-6 lg:col-span-4"
+    class="col-span-12 sm:col-span-4 lg:col-span-4"
     [label]="appTitle.inputs.trucks.truckLoader"
     [placeholder]="appTitle.getPlaceholder('truckLoader')"
     optionLabel="LoaderTypeTitle"
@@ -18,7 +18,7 @@
   />
 
   <app-search-auto-complete
-    class="col-span-12 sm:col-span-6 lg:col-span-4"
+    class="col-span-12 sm:col-span-4 lg:col-span-4"
     [label]="appTitle.inputs.provinceAndCities.startCity"
     [placeholder]="appTitle.getPlaceholder('startCity')"
     [control]="searchSourceCity"
@@ -32,7 +32,7 @@
   />
 
   <app-search-auto-complete
-    class="col-span-12 sm:col-span-6 lg:col-span-4"
+    class="col-span-12 sm:col-span-4 lg:col-span-4"
     [label]="appTitle.inputs.provinceAndCities.endCity"
     [placeholder]="appTitle.getPlaceholder('endCity')"
     [control]="searchTargetCity"
@@ -45,7 +45,7 @@
     addonWidth="8rem"
   />
 
-  <div class="col-span-12 flex justify-end">
+  <div class="col-span-12 flex flex-row-reverse">
     <app-button
       [label]="appTitle.buttons.search"
       severity="info"
