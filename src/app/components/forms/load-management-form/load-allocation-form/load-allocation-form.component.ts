@@ -23,6 +23,7 @@ import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { TableConfig } from 'app/constants/ui/table.ui';
 import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
 import { LoadListType } from '../loads-list-form/loads-list-form.component';
+import { AppTitles } from 'app/constants/Titles';
 
 @Component({
   selector: 'app-load-allocation-form',
@@ -52,7 +53,9 @@ export class LoadAllocationFormComponent
     paginator: false,
   };
   readonly addonWidth = '10rem';
+  readonly appTitle = AppTitles;
 
+  // TODO: does't change value base on selected load
   onViewActivated(): void {
     if (!this.sharedSignal()) return;
     this.withLoading(async () => {
@@ -65,24 +68,53 @@ export class LoadAllocationFormComponent
   }
 
   readonly columns: TableColumn<LoadInfo>[] = [
-    { header: 'شناسه بار', field: 'LoadId' },
-    { header: 'عنوان کالا', field: 'GoodTitle' },
-    { header: 'تناژ', field: 'Tonaj', class: 'font-bold' },
-    { header: 'شهر مبدا', field: 'SourceCityTitle' },
-    { header: 'شهر مقصد', field: 'TargetCityTitle' },
-    { header: 'مبدا بارگیری', field: 'LoadingPlaceTitle' },
-    { header: 'مقصد تخلیه', field: 'DischargingPlaceTitle' },
-    { header: 'تعداد', field: 'TotalNumber', class: 'text-right' },
-    { header: 'تعرفه', field: 'Tariff' },
-    { header: 'وضعیت بار', field: 'LoadStatusTitle' },
-    { header: 'تاریخ اعلام', field: 'AnnounceDate' },
-    { header: 'زمان اعلام', field: 'AnnounceTime' },
-    { header: 'گروه اعلام بار', field: 'AnnouncementGroupTitle' },
-    { header: 'زیرگروه اعلام بار', field: 'AnnouncementSubGroupTitle' },
-    { header: 'گیرنده', field: 'Recipient' },
-    { header: 'آدرس', field: 'Address' },
-    { header: 'توضیحات', field: 'Description' },
-    { header: 'پارامترهای موثر', field: 'TPTParamsJoint' },
+    { header: this.appTitle.tables.loads.loadId, field: 'LoadId' },
+    { header: this.appTitle.tables.loads.product, field: 'GoodTitle' },
+    {
+      header: this.appTitle.tables.loads.loadSize,
+      field: 'Tonaj',
+      class: 'font-bold',
+    },
+    { header: this.appTitle.tables.loads.sourceCity, field: 'SourceCityTitle' },
+    { header: this.appTitle.tables.loads.targetCity, field: 'TargetCityTitle' },
+    {
+      header: this.appTitle.tables.loads.loadingPlace,
+      field: 'LoadingPlaceTitle',
+    },
+    {
+      header: this.appTitle.tables.loads.dischargingPlace,
+      field: 'DischargingPlaceTitle',
+    },
+    {
+      header: this.appTitle.tables.loads.loadTotalAmount,
+      field: 'TotalNumber',
+      class: 'text-right',
+    },
+    { header: this.appTitle.tables.loads.loadCost, field: 'Tariff' },
+    { header: this.appTitle.tables.loads.loadStatus, field: 'LoadStatusTitle' },
+    {
+      header: this.appTitle.tables.loads.loadAnnouncementDate,
+      field: 'AnnounceDate',
+    },
+    {
+      header: this.appTitle.tables.loads.loadAnnouncementTime,
+      field: 'AnnounceTime',
+    },
+    {
+      header: this.appTitle.tables.loads.announcementGroup,
+      field: 'AnnouncementGroupTitle',
+    },
+    {
+      header: this.appTitle.tables.loads.announcementSubGroup,
+      field: 'AnnouncementSubGroupTitle',
+    },
+    { header: this.appTitle.tables.loads.recipient, field: 'Recipient' },
+    { header: this.appTitle.tables.loads.address, field: 'Address' },
+    { header: this.appTitle.tables.loads.description, field: 'Description' },
+    {
+      header: this.appTitle.tables.loads.tptParamsJoint,
+      field: 'TPTParamsJoint',
+    },
   ];
 
   readonly driverForm = this.fb.group({
