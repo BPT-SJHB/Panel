@@ -18,6 +18,7 @@
         [disableSearchButton]="searchForm.invalid || loading"
         [searchButtonLabel]="appTitle.buttons.retrieveFromOutdoorSystem"
         [onSearchQuery]="loadFormsInformation"
+        type="number"
       ></app-search-input>
     </div>
   </form>
@@ -64,6 +65,7 @@
             validationField="licenseNumber"
             [readOnly]="true"
             [addonWidth]="addonWidth"
+            format="carPlate"
           />
         </div>
 

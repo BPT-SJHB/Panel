@@ -18,6 +18,7 @@
         [addonWidth]="addonWidth"
         [autoTriggerSearch]="false"
         [disableSearchButton]="driverCtrl('NationalCode').invalid"
+        type="number"
       />
       <app-text-input
         class="col-span-12 md:col-span-6"
@@ -42,6 +43,7 @@
         [addonWidth]="addonWidth"
         [autoTriggerSearch]="false"
         [disableSearchButton]="truckCtrl('SmartCardNo').invalid"
+        type="number"
       />
       <app-text-input
         class="col-span-6"
@@ -49,6 +51,7 @@
         [control]="truckCtrl('Pelak')"
         [addonWidth]="addonWidth"
         [readOnly]="true"
+        format="carPlate"
       />
     </div>
 
@@ -80,6 +83,7 @@
         [control]="truckComposeCtrl('Pelak')"
         [addonWidth]="addonWidth"
         [readOnly]="true"
+        format="carPlate"
       />
     </div>
 

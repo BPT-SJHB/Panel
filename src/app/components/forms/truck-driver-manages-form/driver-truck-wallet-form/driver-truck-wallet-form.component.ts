@@ -17,7 +17,7 @@ import { ButtonModule } from 'primeng/button';
 import { SearchInputComponent } from '../../../shared/inputs/search-input/search-input.component';
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
 import { Subject, takeUntil } from 'rxjs';
-import { ButtonComponent } from "app/components/shared/button/button.component";
+import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { AppTitles } from 'app/constants/Titles';
 
 @Component({
@@ -27,8 +27,8 @@ import { AppTitles } from 'app/constants/Titles';
     TextInputComponent,
     ReactiveFormsModule,
     SearchInputComponent,
-    ButtonComponent
-],
+    ButtonComponent,
+  ],
   templateUrl: './driver-truck-wallet-form.component.html',
   styleUrl: './driver-truck-wallet-form.component.scss',
 })
@@ -174,9 +174,8 @@ export class DriverTruckWalletFormComponent implements OnInit, OnDestroy {
 
   // util: fetch truck info
   private async getTruckInfo(smartCard: string): Promise<TruckInfo | null> {
-    const response = await this.driverTruckManager.GetTruckInfoFromAPI(
-      smartCard
-    );
+    const response =
+      await this.driverTruckManager.GetTruckInfoFromAPI(smartCard);
     if (!this.isSuccessful(response)) return null;
     return response.data!;
   }
@@ -206,7 +205,7 @@ export class DriverTruckWalletFormComponent implements OnInit, OnDestroy {
   private populateTruckInfo(info: TruckInfo) {
     this.truckId.setValue(info.TruckId ?? -1);
     this.smartCard.setValue(info.SmartCardNo);
-    this.licensePlateNumber.setValue(info.Pelak);
+    this.licensePlateNumber.setValue((info.Pelak ?? '') + (info.Serial ?? ''));
     this.serialNumber.setValue(info.Serial);
   }
 

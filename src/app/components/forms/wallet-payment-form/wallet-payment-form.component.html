@@ -1,4 +1,6 @@
-<p-card>
+<div class="w-full flex items-center justify-center">
+<p-card class="max-w-[800px]">
+
   <!-- Header -->
   <ng-template #header>
     <div
@@ -41,6 +43,8 @@
     addonWidth="12rem"
     [disabled]="!userWallet()"
     validationField="price"
+    type="number"
+    format="currency"
     />
 
   <!-- Preset Amount Buttons -->
@@ -53,14 +57,14 @@
         (click)="setAmountValue(item.Amount)"
         [disabled]="!userWallet()"
         >
-        {{ item.AmountTitle }} تومان
+         {{item.AmountTitle}}
       </app-button>
     }
   </div>
 
-  <div class="flex flex-col md:items-center mt-8 w-full">
+  <div class="flex gap-4 flex-col md:justify-center md:flex-row items-center mt-8 w-full">
     <app-button
-      styleClass="md:w-40 w-full font-bold py-2"
+      styleClass="md:w-40 w-30 font-bold py-2"
       severity="info"
       size="small"
       (click)="paymentMoney()"
@@ -68,5 +72,17 @@
       >
       شارژ
     </app-button>
+
+    <app-button
+      styleClass="md:w-40 w-30 font-bold py-2"
+      severity="warn"
+      size="small"
+      (click)="amount.reset(0)"
+      [disabled]="!userWallet()  || amount.value === 0"
+      >
+   صفر کردن
+    </app-button>
+
   </div>
 </p-card>
+</div>

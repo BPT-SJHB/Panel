@@ -139,7 +139,7 @@ export class TurnsTruckInfoBaseFormComponent implements OnInit, OnDestroy {
     this.truckInfoForm.patchValue({
       truckId: truck.TruckId,
       loaderTypeId: truck.LoaderTypeId,
-      licensePlate: truck.Pelak,
+      licensePlate: (truck.Pelak ?? '') + (truck.Serial ?? ''),
       driverId: driver?.DriverId ?? '',
       driverNationalId: driver?.NationalCode ?? '',
       driverName: driver?.NameFamily ?? '',

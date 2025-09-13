@@ -59,7 +59,7 @@
                 (click)="column.onAction?.(row)"
                 [class]="getColumnClass(column, row)"
               >
-                {{ row[column.field] }}
+                {{ applyFormat(column, row[column.field]) }}
               </span>
             }
 
@@ -106,7 +106,7 @@
             @case (ColumnType.CHECKBOX) {
               <p-checkbox
                 [binary]="true"
-                [value]="row[column.field]"
+                [(ngModel)]="row[column.field]"
                 (onChange)="onCheckboxChange($event, row, column)"
               ></p-checkbox>
             }

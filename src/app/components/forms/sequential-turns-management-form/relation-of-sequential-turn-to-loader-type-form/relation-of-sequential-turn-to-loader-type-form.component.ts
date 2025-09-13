@@ -84,12 +84,20 @@ export class RelationOfSequentialTurnToLoaderTypeFormComponent {
 
   readonly columns: TableColumn<RowRelationOfSequentialToLoader>[] = [
     {
+      field: 'SeqTurnId',
+      header: 'شناسه صف نوبت',
+    },
+    {
       field: 'SeqTurnTitle',
       header: 'صف نوبت',
     },
     {
+      field: 'LoaderTypeId',
+      header: 'شناسه بارگیر',
+    },
+    {
       field: 'LoaderTypeTitle',
-      header: 'بارگیرها',
+      header: 'بارگیر',
     },
     {
       ...deleteCell.config,

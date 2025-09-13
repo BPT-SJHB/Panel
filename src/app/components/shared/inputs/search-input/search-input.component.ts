@@ -68,7 +68,8 @@ export class SearchInputComponent<T> implements OnInit, OnDestroy, OnChanges {
   @Input() enableCaching = true;
   @Input() debounceTimeMs = 300;
   @Input() fallbackToAllWhenQueryShort = false;
-
+  @Input() language: 'en' | 'fa' = 'fa';
+  @Input() type: 'text' | 'number' = 'text';
   // -------------------------
   // 📤 Output Events
   @Output() rawInput = new EventEmitter<string>(); // Emits raw user input

@@ -16,7 +16,6 @@ import { SequentialTurn } from 'app/services/sequential-turn-management/model/se
 import { SequentialTurnManagementService } from 'app/services/sequential-turn-management/sequential-turn-management.service';
 import { ToastService } from 'app/services/toast-service/toast.service';
 import { checkAndToastError } from 'app/utils/api-utils';
-import { ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TableModule } from 'primeng/table';
@@ -75,8 +74,16 @@ export class RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent {
 
   readonly columns: TableColumn<RowRelationOfSequential>[] = [
     {
+      field: 'SeqTurnId',
+      header: 'شناسه صف نوبت',
+    },
+    {
       field: 'SeqTurnTitle',
       header: 'صف نوبت',
+    },
+    {
+      field: 'AnnouncementSGId',
+      header: 'شناسه زیر گروه',
     },
     {
       field: 'AnnouncementSGTitle',

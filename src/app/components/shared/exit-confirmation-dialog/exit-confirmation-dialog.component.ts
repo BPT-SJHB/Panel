@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { environment } from 'environments/environment';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
@@ -16,6 +17,7 @@ export class ExitConfirmationDialogComponent implements OnInit, OnDestroy {
   formDirty = true;
 
   ngOnInit(): void {
+    if (!environment.production) return;
     history.pushState(null, '', window.location.href); // Trap back
     window.addEventListener('popstate', this.onPopState);
     window.addEventListener('beforeunload', this.onBeforeUnload);

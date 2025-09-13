@@ -15,6 +15,7 @@
         [disableSearchButton]="searchForm.invalid || loading()"
         [onSearchQuery]="fetchUserByPhone"
         [addonWidth]="'3rem'"
+        type="number"
       />
     </div>
   </form>
@@ -45,6 +46,7 @@
         validationField="id"
         icon="pi pi-id-card"
         label="شناسه کاربری"
+        language="en"
       />
     </div>
 
@@ -68,6 +70,7 @@
           class="flex-1"
           [placeholder]="appTitles.getPlaceholder('userPhoneNumberPlaceholder')"
           [control]="getUserFormControl('phone')"
+          type="number"
         />
       </div>
     </div>

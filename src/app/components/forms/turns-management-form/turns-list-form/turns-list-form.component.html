@@ -7,6 +7,7 @@
     validationField="smartCard"
     [control]="smartCode"
     [disableSearchButton]="smartCode.invalid"
+    type="number"
   />
 
   <app-text-input
@@ -25,120 +26,20 @@
     [readOnly]="true"
     class="col-span-12 md:col-span-6"
     addonWidth="6rem"
+    format="carPlate"
   />
 </div>
 
-<p-table
-  class="col-span-12"
-  [columns]="turnsCols"
-  [value]="truckTurnsList"
-  [tableStyle]="tableUi.tableStyle"
-  [paginator]="tableUi.paginator"
-  [paginatorLocale]="tableUi.paginatorLocale"
-  [rows]="tableUi.rows"
-  [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
-  [stripedRows]="tableUi.stripedRows"
->
-  <ng-template #header let-columns>
-    <tr>
-      @for (col of columns; track $index) {
-        <th>{{ col }}</th>
-      }
-    </tr>
-  </ng-template>
-
-  <ng-template #body let-rowData>
-    <tr>
-      <td>{{ rowData.TurnId }}</td>
-      <td>{{ rowData.OtaghdarTurnNumber || "-" }}</td>
-      <td>{{ rowData.TurnIssueDate || "-" }}</td>
-      <td>{{ rowData.TurnIssueTime || "-" }}</td>
-      <td>{{ rowData.TruckDriver || "-" }}</td>
-      <td>{{ rowData.TurnStatusTitle || "-" }}</td>
-      <td>{{ rowData.TurnStatusDescription || "-" }}</td>
-      <td>{{ rowData.DateOfLastChanged || "-" }}</td>
-      <td>{{ rowData.SequentialTurnTitle || "-" }}</td>
-      <td>{{ rowData.SoftwareUserName || "-" }}</td>
-      <td>
-        <app-button
-          icon="pi pi-times"
-          severity="danger"
-          variant="text"
-          [disabled]="loading"
-          (onClick)="confirmDeactivation(rowData)"
-        ></app-button>
-      </td>
-
-      <td>
-        <app-button
-          icon="pi pi-refresh"
-          severity="info"
-          variant="text"
-          [disabled]="loading"
-          (onClick)="confirmActivation(rowData)"
-        ></app-button>
-      </td>
-
-      <td>
-        <app-button
-          icon="pi pi-align-justify"
-          variant="text"
-          [disabled]="loading"
-          (onClick)="openTurnAccounting(rowData)"
-        ></app-button>
-      </td>
-    </tr>
-  </ng-template>
-</p-table>
+<app-table [columns]="turnsCols" [rows]="truckTurnsList()" />
 
 <p-dialog
   draggable="false"
-  [header]="headerTitle"
+  [header]="headerTitle()"
   [modal]="true"
   (onHide)="onCloseDialog()"
   [(visible)]="dialogTurnAccounting"
   maskStyleClass="px-4 overflow-visible"
   [style]="{ 'max-width': '90vw' }"
 >
-  <p-table
-    [columns]="accountingCols"
-    [value]="turnsAccounting"
-    [tableStyle]="tableUi.tableStyle"
-    [paginator]="tableUi.paginator"
-    [paginatorLocale]="tableUi.paginatorLocale"
-    [rows]="tableUi.rows"
-    [rowsPerPageOptions]="tableUi.rowsPerPageOptions"
-    [stripedRows]="tableUi.stripedRows"
-  >
-    <ng-template #header let-columns>
-      <tr>
-        @for (col of columns; track $index) {
-          <th>{{ col }}</th>
-        }
-      </tr>
-    </ng-template>
-
-    <ng-template #body let-rowData>
-      <tr>
-        <td>{{ rowData.TurnId || "-" }}</td>
-        <td>{{ rowData.SequentialTurnId || "-" }}</td>
-        <td>{{ rowData.DateShamsi || "-" }}</td>
-        <td>{{ rowData.Time || "-" }}</td>
-        <td>{{ rowData.AccountingTypeTitle || "-" }}</td>
-        <td>{{ rowData.UserName || "-" }}</td>
-      </tr>
-    </ng-template>
-  </p-table>
+  <app-table [columns]="accountingCols" [rows]="turnsAccounting()" />
 </p-dialog>
-
-<p-confirmDialog
-  [style]="{ width: '350px' }"
-  maskStyleClass="z-15"
-  header="تایید عملیات"
-  icon="pi pi-exclamation-triangle"
-  acceptLabel="تایید"
-  rejectLabel="انصراف"
-  acceptButtonStyleClass="px-8 py-1"
-  rejectButtonStyleClass="px-6 py-1"
->
-</p-confirmDialog>

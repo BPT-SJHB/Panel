@@ -53,16 +53,19 @@ export class WalletTransactionsTableComponent
       field: 'Time',
     },
     {
-      header: 'موجودی',
+      header: 'موجودی (ریال)',
       field: 'CurrentBalance',
+      format: 'currency',
     },
     {
-      header: 'مبلغ',
+      header: 'مبلغ (ریال)',
       field: 'Amount',
+      format: 'currency',
     },
     {
-      header: 'باقیمانده',
+      header: 'باقیمانده (ریال)',
       field: 'Reminder',
+      format: 'currency',
     },
     {
       header: 'کاربر',
@@ -108,12 +111,12 @@ export class WalletTransactionsTableComponent
   ]);
 
   // 🎨 Get color class based on transaction color
-  getRowColor = (row: WalletTransaction)=> {
+  getRowColor = (row: WalletTransaction) => {
     return (
       this.colorMap.get(row.TransactionColor.toLowerCase()) ??
       'bg-surface-300 dark:bg-surface-500'
     );
-  }
+  };
 
   // 🔁 Called when component is activated (used in cached/dynamic views)
   onViewActivated() {

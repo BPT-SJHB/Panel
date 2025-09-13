@@ -17,7 +17,8 @@
       (keydown)="onKeydown($event)"
       (focus)="onFocusInput($event)"
       (input)="valueInputChange($event)"
- />
+      [language]="language"
+    />
   </div>
 
   <div
@@ -26,26 +27,28 @@
     [attr.tabindex]="'-1'"
   >
     @if (loading()) {
-    <div class="px-4 py-4 flex items-center gap-3">
-      <i class="pi pi-spin pi-spinner" aria-hidden="true"></i>
-      <span class="truncate">در حال بارگذاری اطلاعات...</span>
-    </div>
+      <div class="px-4 py-4 flex items-center gap-3">
+        <i class="pi pi-spin pi-spinner" aria-hidden="true"></i>
+        <span class="truncate">در حال بارگذاری اطلاعات...</span>
+      </div>
     } @else if (isResultEmpty()) {
-    <div class="px-4 py-4 flex items-center gap-3">
-      <span> موردی یافت نشد. </span>
-    </div>
-    }@else { @for (suggestion of suggestions(); track $index) {
-    <div
-      (mouseover)="this.hoverIndex.set($index)"
-      (click)="onSelectAutoComplete(suggestion)"
-      [id]="`${id}-${$index}`"
-      class="px-2 py-4 cursor-pointer hover:bg-emphasis"
-      [ngClass]="{ 'bg-emphasis': hoverIndex() === $index }"
-    >
-    @if (optionLabel) {
-      {{ suggestion[optionLabel] }}
+      <div class="px-4 py-4 flex items-center gap-3">
+        <span> موردی یافت نشد. </span>
+      </div>
+    } @else {
+      @for (suggestion of suggestions(); track $index) {
+        <div
+          (mouseover)="this.hoverIndex.set($index)"
+          (click)="onSelectAutoComplete(suggestion)"
+          [id]="`${id}-${$index}`"
+          class="px-2 py-4 cursor-pointer hover:bg-emphasis"
+          [ngClass]="{ 'bg-emphasis': hoverIndex() === $index }"
+        >
+          @if (optionLabel) {
+            {{ suggestion[optionLabel] }}
+          }
+        </div>
+      }
     }
-    </div>
-    } }
   </div>
 </div>

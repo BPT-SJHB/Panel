@@ -33,7 +33,6 @@
 >
   <form
     class="grid grid-cols-12 gap-6"
-    (ngSubmit)="registerOrEdit()"
     [class.pointer-events-none]="loading()"
     [class.opacity-60]="loading()"
     [formGroup]="sequentialTurnForm"
@@ -65,6 +64,7 @@
         [control]="sequentialTurnKeyword"
         validationField="keyword"
         addonWidth="8rem"
+        language="en"
       />
     </div>
     <app-toggle-switch-input

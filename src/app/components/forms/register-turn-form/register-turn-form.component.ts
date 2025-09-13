@@ -1,103 +1,108 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+
+// ─── Services ──────────────────────────────────────────────
 import { Driver_TruckManagementService } from 'app/services/driver-truck-management/driver-truck-management.service';
-import { LoadingService } from 'app/services/loading-service/loading-service.service';
 import { SequentialTurnManagementService } from 'app/services/sequential-turn-management/sequential-turn-management.service';
-import { ToastService } from 'app/services/toast-service/toast.service';
 import { TurnManagementService } from 'app/services/turn-management/turn-management.service';
+
+// ─── Utils ─────────────────────────────────────────────────
 import { checkAndToastError } from 'app/utils/api-utils';
-import { Subject, takeUntil } from 'rxjs';
-import { SearchAutoCompleteComponent } from 'app/components/shared/inputs/search-auto-complete/search-auto-complete.component';
-import { FormControl, Validators } from '@angular/forms';
+
+// ─── Models ────────────────────────────────────────────────
 import { SequentialTurn } from 'app/services/sequential-turn-management/model/sequential-turn.model';
 import { TruckInfo } from 'app/services/driver-truck-management/model/truck-info.model';
-import { ButtonComponent } from "app/components/shared/button/button.component";
+
+// ─── Base / Interfaces ─────────────────────────────────────
+import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
+import { BaseLoading } from '../shared/component-base/base-loading';
+import { CardModule } from 'primeng/card';
+import { ButtonComponent } from 'app/components/shared/button/button.component';
 
 @Component({
   selector: 'app-register-turn-form',
-  imports: [SearchAutoCompleteComponent, ButtonComponent],
+  standalone: true,
+  imports: [CardModule, ButtonComponent],
   templateUrl: './register-turn-form.component.html',
-  styleUrl: './register-turn-form.component.scss',
+  styleUrls: ['./register-turn-form.component.scss'], // ✅ fixed styleUrl → styleUrls
 })
-export class RegisterTurnFormComponent implements OnInit {
-  private loadingService = inject(LoadingService);
-  private toast = inject(ToastService);
-  private destroy$ = new Subject<void>();
+export class RegisterTurnFormComponent
+  extends BaseLoading
+  implements OnViewActivated
+{
+  // ─── Injected Services ───────────────────────────────────
   private truckDriverManagerService = inject(Driver_TruckManagementService);
   private sequentialTurnService = inject(SequentialTurnManagementService);
   private turnManagementService = inject(TurnManagementService);
-  private truckInfo?: TruckInfo;
 
-  loading = true;
-  sequentialTurnTitle = new FormControl('', [Validators.required]);
-  sequentialTurnId = new FormControl(-1, [Validators.required,Validators.min(0)]);
+  // ─── State ───────────────────────────────────────────────
+  readonly truckInfo = signal<TruckInfo | null>(null);
+  readonly sequentialTurns = signal<SequentialTurn[]>([]);
 
-  // Lifecycle: on component init
-  ngOnInit(): void {
-    this.loadingService.loading$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((val) => (this.loading = val));
+  // ─── Lifecycle Hook ──────────────────────────────────────
+  onViewActivated(): void {
+    this.initialize();
   }
 
-  private async getUserLoaderTypeId(): Promise<TruckInfo | undefined> {
+  // ─── Private Methods ─────────────────────────────────────
+
+  /**
+   * Initializes the component by fetching user loader type and sequential turns.
+   */
+  private async initialize() {
+    if (this.loading()) return;
+
+    this.withLoading(async () => {
+      // Get current user truck info
+      this.truckInfo.set(await this.getUserLoaderTypeId());
+      const loaderTypeId = this.truckInfo()?.LoaderTypeId;
+
+      if (!loaderTypeId) {
+        this.sequentialTurns.set([]);
+        return;
+      }
+
+      // Fetch sequential turns
+      const res =
+        await this.sequentialTurnService.GetSequentialTurnWithLoaderType(
+          loaderTypeId
+        );
+
+      if (!checkAndToastError(res, this.toast)) {
+        this.sequentialTurns.set([]);
+        return;
+      }
+
+      this.sequentialTurns.set(res.data);
+    });
+  }
+
+  /**
+   * Retrieves truck info for the current software user.
+   */
+  private async getUserLoaderTypeId(): Promise<TruckInfo | null> {
     const resTruck =
       await this.truckDriverManagerService.GetTruckInfoForSoftwareUser();
-    if (!checkAndToastError(resTruck, this.toast)) return;
+
+    if (!checkAndToastError(resTruck, this.toast)) return null;
     return resTruck.data;
   }
 
-  // 🔍 Autocomplete for sequential turns
-  searchSequentialTurnWithLoaderType = async (_: string) => {
-    this.truckInfo = await this.getUserLoaderTypeId();
-    const loaderTypeId = this.truckInfo?.LoaderTypeId;
+  /**
+   * Submits a real-time turn registration for the selected sequential turn.
+   */
+  async submitRealTimeTurn(sequentialTurnId: number) {
+    const truckInfo = this.truckInfo();
+    if (this.loading() || !truckInfo) return;
 
-    if (!loaderTypeId) return [];
-
-    const res =
-      await this.sequentialTurnService.GetSequentialTurnWithLoaderType(
-        loaderTypeId
-      );
-    if (!checkAndToastError(res, this.toast)) return [];
-    return res.data!;
-  };
-
-  // Lifecycle: clean up on destroy
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
-  // ❌ Reset control value when input is cleared
-  onAutoCompleteChange(controller: FormControl<any>) {    
-    controller.setValue('');
-  }
-
-  // ✅ On sequential turn selection
-  async onSelectSequentialTurn(sequentialTurn: SequentialTurn) {
-    this.sequentialTurnId.setValue(sequentialTurn.SeqTurnId);
-  }
-
-  async submitRealTimeTurn() {
-    if (!this.truckInfo || this.sequentialTurnId.invalid || this.loading)
-      return;
-
-    try {
-      this.loadingService.setLoading(true);
+    this.withLoading(async () => {
       const response = await this.turnManagementService.RealTimeTurnRegister(
-        this.truckInfo.TruckId,
-        Number(this.sequentialTurnId.value)
+        truckInfo.TruckId,
+        sequentialTurnId
       );
 
       if (!checkAndToastError(response, this.toast)) return;
-      this.toast.success('موفق', response.data.Message);
-      this.resetForm();
-    } finally {
-      this.loadingService.setLoading(false);
-    }
-  }
 
-  private resetForm() {
-    this.sequentialTurnId.reset(-1);
-    this.sequentialTurnTitle.reset('');
-    this.truckInfo = undefined;
+      this.toast.success('موفق', response.data.Message);
+    });
   }
 }

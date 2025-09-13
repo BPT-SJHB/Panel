@@ -9,11 +9,12 @@
     [autoTriggerSearch]="false"
     [disableSearchButton]="loading() || Smart.invalid"
     addonWidth="8rem"
+    type="number"
   />
   <app-text-input
     class="col-span-12 md:col-span-6 xl:col-span-4"
-    placeholder="کد ناوگان"
-    label="کد ناوگان"
+    placeholder="شناسه ناوگان"
+    label="شناسه ناوگان"
     [control]="TruckId"
     [readOnly]="true"
     [disabled]="true"
@@ -21,10 +22,11 @@
   />
   <app-text-input
     class="col-span-12 md:col-span-6 xl:col-span-4"
-    placeholder="پلاک و سریال"
-    label="پلاک و سریال"
+    placeholder="پلاک ناوگان"
+    label="پلاک ناوگان"
     [control]="LicensePlate"
     [readOnly]="true"
+    format="carPlate"
     [disabled]="true"
     addonWidth="8rem"
   />

@@ -4,7 +4,8 @@
   @for (config of autoCompletions; track $index) {
     <app-search-auto-complete-factory
       class="col-span-12 sm:col-span-6 lg:col-span-4"
-      [config]="config" [addonWidth]="addonWidth"
+      [config]="config"
+      [addonWidth]="addonWidth"
     />
   }
 
@@ -32,6 +33,7 @@
     styleClass="md:w-50"
     [disabled]="isFilterInvalid()"
     (click)="filterListLoad()"
+    severity="info"
   />
 </div>
 

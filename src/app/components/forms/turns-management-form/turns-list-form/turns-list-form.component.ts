@@ -1,225 +1,221 @@
-import { Component, inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { SearchInputComponent } from 'app/components/shared/inputs/search-input/search-input.component';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { Driver_TruckManagementService } from 'app/services/driver-truck-management/driver-truck-management.service';
-import { LoadingService } from 'app/services/loading-service/loading-service.service';
-import { ToastService } from 'app/services/toast-service/toast.service';
-import { checkAndToastError } from 'app/utils/api-utils';
-import { ButtonModule } from 'primeng/button';
-import { Subject, takeUntil } from 'rxjs';
-import { TableModule } from 'primeng/table';
-import { TurnAccounting } from 'app/services/turn-management/model/turn-accounting.model';
-import { Dialog } from 'primeng/dialog';
-import { Turn } from 'app/services/turn-management/model/turn.model';
 import { TurnManagementService } from 'app/services/turn-management/turn-management.service';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
-import { TableConfig } from 'app/constants/ui/table.ui';
-import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { TableModule } from 'primeng/table';
+import { Dialog } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
 import { AppTitles } from 'app/constants/Titles';
+import { BaseLoading } from '../../shared/component-base/base-loading';
+import { checkAndToastError } from 'app/utils/api-utils';
+import {
+  deleteCell,
+  editCell,
+  TableColumn,
+  TableColumnType,
+  TableComponent,
+} from 'app/components/shared/table/table.component';
+import { Turn } from 'app/services/turn-management/model/turn.model';
+import { TurnAccounting } from 'app/services/turn-management/model/turn-accounting.model';
+import { AppConfirmService } from 'app/services/confirm/confirm.service';
+
+type TurnTableRow = Turn & {
+  activate: string;
+  deactivate: string;
+  accounting: string;
+};
 
 @Component({
   selector: 'app-turns-list-form',
+  standalone: true,
   imports: [
     ButtonModule,
     TextInputComponent,
     SearchInputComponent,
     TableModule,
     Dialog,
-    ConfirmDialogModule,
-    ButtonComponent,
+    TableComponent,
   ],
-  providers: [ConfirmationService],
   templateUrl: './turns-list-form.component.html',
   styleUrl: './turns-list-form.component.scss',
 })
-export class TurnsListFormComponent implements OnInit, OnDestroy {
-  private fb = inject(FormBuilder);
-  private toast = inject(ToastService);
-  private truckManagerService = inject(Driver_TruckManagementService);
-  private loadingService = inject(LoadingService);
-  private destroy$ = new Subject<void>();
-  private turnManagerService = inject(TurnManagementService);
-  private confirmationService = inject(ConfirmationService);
+export class TurnsListFormComponent extends BaseLoading {
+  private readonly fb = inject(FormBuilder);
+  private readonly truckManagerService = inject(Driver_TruckManagementService);
+  private readonly turnManagerService = inject(TurnManagementService);
+  private readonly confirmService = inject(AppConfirmService);
 
-  readonly tableUi = TableConfig;
   readonly appTitle = AppTitles;
 
-  turnsCols = [
-    'شماره نوبت',
-    'تسلسل نوبت',
-    'تاریخ صدور',
-    'زمان صدور',
-    'راننده',
-    'وضعیت نوبت',
-    'شرح',
-    'آخرین تغییرات',
-    'صف نوبت',
-    'کاربر',
-    'ابطال نوبت',
-    'احیا نوبت',
-    'لیست تراکنش ها',
-  ];
+  // Signals
+  readonly truckTurnsList = signal<TurnTableRow[]>([]);
+  readonly turnsAccounting = signal<TurnAccounting[]>([]);
+  readonly headerTitle = signal<string>('');
+  dialogTurnAccounting = false;
 
-  accountingCols = [
-    'شماره نوبت',
-    'تسلسل نوبت',
-    'تاریخ',
-    'زمان',
-    'تراکنش',
-    'کاربر',
-  ];
-
-  loading = false;
-  truckTurnsList: Turn[] = [];
   searchTrukForm = this.fb.group({
     smart: ['', ValidationSchema.smartCard],
     truckId: ['', ValidationSchema.truckId],
     licensePlate: ['', ValidationSchema.licensePlateNumber],
   });
-  dialogTurnAccounting = false;
-  turnsAccounting: TurnAccounting[] = [];
-  headerTitle: any;
 
-  // Lifecycle: on component init
-  ngOnInit(): void {
-    this.loadingService.loading$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((val) => (this.loading = val));
-  }
+  // Table Columns
+  readonly turnsCols: TableColumn<TurnTableRow>[] = [
+    { header: 'شماره نوبت', field: 'OtaghdarTurnNumber' },
+    { header: 'تسلسل نوبت', field: 'SequentialTurnTitle' },
+    { header: 'تاریخ صدور', field: 'TurnIssueDate' },
+    { header: 'زمان صدور', field: 'TurnIssueTime' },
+    { header: 'راننده', field: 'TruckDriver' },
+    { header: 'وضعیت نوبت', field: 'TurnStatusTitle' },
+    { header: 'شرح', field: 'TurnStatusDescription' },
+    { header: 'آخرین تغییرات', field: 'DateOfLastChanged' },
+    { header: 'صف نوبت', field: 'BillOfLadingNumber' },
+    { header: 'کاربر', field: 'SoftwareUserName' },
+    {
+      ...deleteCell.config,
+      field: 'deactivate',
+      header: 'ابطال نوبت',
+      onAction: (row: TurnTableRow) => this.confirmDeactivation(row),
+    },
+    {
+      ...editCell.config,
+      field: 'activate',
+      header: 'احیا نوبت',
+      onAction: (row: TurnTableRow) => this.confirmActivation(row),
+    },
+    {
+      type: TableColumnType.BUTTON_ICON,
+      class: 'py-3 scale-90',
+      header: 'لیست تراکنش ها',
+      field: 'accounting',
+      sorting: false,
+      onAction: (row: TurnTableRow) => this.openTurnAccounting(row),
+    },
+  ];
 
-  // Lifecycle: clean up on destroy
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
+  readonly accountingCols: TableColumn<TurnAccounting>[] = [
+    { header: 'شماره نوبت', field: 'TurnId' },
+    { header: 'تسلسل نوبت', field: 'SequentialTurnId' },
+    { header: 'تاریخ', field: 'DateShamsi' },
+    { header: 'زمان', field: 'Time' },
+    { header: 'تراکنش', field: 'AccountingTypeTitle' },
+    { header: 'کاربر', field: 'UserName' },
+  ];
 
+  // --- Search & Load ---
   searchTruckInformation = async (query: string) => {
-    if (this.loading) return;
-    await this.loadTurnsList(query);
+    if (this.loading()) return;
+    await this.withLoading(async () => {
+      await this.loadTurnsList(query);
+    });
   };
 
   private async loadTurnsList(smartCode: string) {
     if (this.smartCode.invalid) return;
-    try {
-      this.loadingService.setLoading(true);
-      const resTruckInfo =
-        await this.truckManagerService.GetTruckInfoFromAPI(smartCode);
-      if (!checkAndToastError(resTruckInfo, this.toast)) {
-        this.truckTurnsList = [];
-        return;
-      }
-      this.populateSearchForm(
-        resTruckInfo.data.TruckId,
-        resTruckInfo.data.Pelak ?? ''
-      );
 
-      const resTurnsInfo = await this.turnManagerService.GetLatestTurns(
-        resTruckInfo.data.TruckId
-      );
-      if (!checkAndToastError(resTurnsInfo, this.toast)) return;
-      this.truckTurnsList = resTurnsInfo.data;
-    } finally {
-      this.loadingService.setLoading(false);
+    const resTruckInfo =
+      await this.truckManagerService.GetTruckInfoFromAPI(smartCode);
+    if (!checkAndToastError(resTruckInfo, this.toast)) {
+      this.truckTurnsList.set([]);
+      return;
     }
+
+    this.populateSearchForm(
+      resTruckInfo.data.TruckId,
+      (resTruckInfo.data.Pelak ?? '') + (resTruckInfo.data.Serial ?? '')
+    );
+
+    const resTurnsInfo = await this.turnManagerService.GetLatestTurns(
+      resTruckInfo.data.TruckId
+    );
+    if (!checkAndToastError(resTurnsInfo, this.toast)) return;
+
+    const turns: TurnTableRow[] = resTurnsInfo.data.map((t) => ({
+      ...t,
+      deactivate: 'pi-times',
+      activate: 'pi-refresh',
+      accounting: 'pi-list',
+    }));
+
+    this.truckTurnsList.set(turns);
   }
 
-  async activeTurn(row: Turn) {
-    try {
-      this.loadingService.setLoading(true);
-
+  // --- Actions ---
+  async activeTurn(row: TurnTableRow) {
+    await this.withLoading(async () => {
       const response = await this.turnManagerService.ResuscitateTurn(
         row.TurnId
       );
       if (!checkAndToastError(response, this.toast)) return;
       await this.loadTurnsList(this.smartCode.value);
       this.toast.success('موفق', response.data.Message);
-    } finally {
-      this.loadingService.setLoading(false);
-    }
+    });
   }
 
-  async deActiveTurn(row: Turn) {
-    try {
-      this.loadingService.setLoading(true);
+  async deActiveTurn(row: TurnTableRow) {
+    await this.withLoading(async () => {
       const response = await this.turnManagerService.CancelTurn(row.TurnId);
       if (!checkAndToastError(response, this.toast)) return;
       await this.loadTurnsList(this.smartCode.value);
       this.toast.success('موفق', response.data.Message);
-    } finally {
-      this.loadingService.setLoading(false);
-    }
+    });
   }
 
-  async openTurnAccounting(row: Turn) {
-    try {
-      this.loadingService.setLoading(true);
+  async openTurnAccounting(row: TurnTableRow) {
+    await this.withLoading(async () => {
       const response = await this.turnManagerService.GetTurnAccounting(
         row.TurnId
       );
       if (!checkAndToastError(response, this.toast)) return;
-      this.turnsAccounting = response.data;
-      this.headerTitle = `لیست تراکنش ها`;
+      this.turnsAccounting.set(response.data);
+      this.headerTitle.set('لیست تراکنش ها');
       this.dialogTurnAccounting = true;
-    } finally {
-      this.loadingService.setLoading(false);
-    }
+    });
   }
 
   onCloseDialog() {
-    this.turnsAccounting = [];
+    this.turnsAccounting.set([]);
+    this.dialogTurnAccounting = false;
   }
 
-  confirmActivation(rowData: any) {
-    this.confirmationService.confirm({
-      message: `آیا از احیا نوبت مطمئن هستید؟`,
-      accept: () => {
-        this.activeTurn(rowData); // your actual logic
-      },
-      rejectButtonProps: {
-        severity: 'secondary',
-        outlined: false,
-      },
-      acceptButtonProps: {
-        severity: 'info',
-        outlined: false,
-      },
+  // --- Confirmations ---
+  confirmActivation(row: TurnTableRow) {
+    const message = `شناسه ${row.TurnId} - راننده ${row.TruckDriver}`;
+    this.confirmService.confirmTurnAction('activate', message, async () => {
+      if (this.loading()) return;
+      await this.withLoading(async () => {
+        await this.activeTurn(row);
+      });
     });
   }
 
-  confirmDeactivation(rowData: any) {
-    this.confirmationService.confirm({
-      message: `آیا از ابطال نوبت مطمئن هستید؟`,
-      accept: () => {
-        this.deActiveTurn(rowData); // your actual logic
-      },
-      rejectButtonProps: {
-        severity: 'secondary',
-        outlined: false,
-      },
-      acceptButtonProps: {
-        severity: 'danger',
-        outlined: false,
-      },
+  // For deactivation
+  confirmDeactivation(row: TurnTableRow) {
+    const message = `شناسه ${row.TurnId} - راننده ${row.TruckDriver}`;
+    this.confirmService.confirmTurnAction('deactivate', message, async () => {
+      if (this.loading()) return;
+      await this.withLoading(async () => {
+        await this.deActiveTurn(row);
+      });
     });
+  }
+
+  // --- Form Getters ---
+  get smartCode(): FormControl {
+    return this.searchTrukForm.get('smart') as FormControl;
+  }
+  get truckId(): FormControl {
+    return this.searchTrukForm.get('truckId') as FormControl;
+  }
+  get licensePlate(): FormControl {
+    return this.searchTrukForm.get('licensePlate') as FormControl;
   }
 
   private populateSearchForm(truckId: number, licensePlateNumber: string) {
     this.truckId.setValue(truckId);
     this.licensePlate.setValue(licensePlateNumber);
-  }
-
-  get smartCode(): FormControl {
-    return this.searchTrukForm.get('smart') as FormControl;
-  }
-
-  get truckId(): FormControl {
-    return this.searchTrukForm.get('truckId') as FormControl;
-  }
-
-  get licensePlate(): FormControl {
-    return this.searchTrukForm.get('licensePlate') as FormControl;
   }
 }
