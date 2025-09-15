@@ -55,7 +55,6 @@ export class LoadAllocationFormComponent
   readonly addonWidth = '10rem';
   readonly appTitle = AppTitles;
 
-  // TODO: does't change value base on selected load
   onViewActivated(): void {
     if (!this.sharedSignal()) return;
     this.withLoading(async () => {

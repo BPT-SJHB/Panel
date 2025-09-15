@@ -38,6 +38,7 @@ import { LoadListType } from '../loads-list-form/loads-list-form.component';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { AnnouncementSubGroup } from 'app/services/announcement-group-subgroup-management/model/announcement-subgroup.model';
 import { AppTitles } from 'app/constants/Titles';
+import { single } from 'rxjs';
 
 @Component({
   selector: 'app-loads-announcement-form',
@@ -54,7 +55,8 @@ import { AppTitles } from 'app/constants/Titles';
 })
 export class LoadsAnnouncementFormComponent
   extends BaseLoading
-  implements OnViewActivated {
+  implements OnViewActivated
+{
   // =====================================================
   // 🔹 Constants
   // =====================================================
@@ -67,10 +69,8 @@ export class LoadsAnnouncementFormComponent
   // 🔹 Signals & State
   // =====================================================
   readonly sharedSignal = signal<LoadInfo | null>(null);
+  private readonly prvLoadId = signal<number | null>(-1000);
   readonly selectedLoadInfo = computed(() => {
-    if (!this.sharedSignal()) {
-      this.resetForm();
-    }
     return this.sharedSignal();
   });
 
@@ -111,6 +111,10 @@ export class LoadsAnnouncementFormComponent
   // 🔹 Lifecycle
   // =====================================================
   onViewActivated(): void {
+    const currentId = this.selectedLoadInfo()?.LoadId ?? null;
+    if (this.prvLoadId() == currentId) return;
+    this.prvLoadId.set(currentId);
+    this.resetForm();
     this.transportTariffParams.set([]);
     this.initialize();
   }
