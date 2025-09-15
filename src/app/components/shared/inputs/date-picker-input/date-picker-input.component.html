@@ -34,9 +34,9 @@
             [readOnly]="readOnly"
             class="px-2 h-full w-full border-2 border-r-0 border-gray-400 rounded-l-2xl placeholder:text-gray-400 text-sm focus:border-primary-emphasis transition-all duration-50 ease-in-out focus:outline-none"
             [ngClass]="{
-              'border-red-500': control.touched && control.invalid,
-              'bg-gray-100 text-gray-500 pointer-events-none opacity-60 cursor-not-allowed':
-                control.disabled,
+              'focus:border-red-500': control.touched && control.invalid,
+              'bg-surface-200 text-surface-700 dark:bg-surface-800 dark:text-surface-200 pointer-events-none opacity-90 cursor-not-allowed':
+                control.disabled || readOnly,
             }"
             (focus)="onFocusInput(inputRef)"
             (blur)="onBlurInput(inputRef)"

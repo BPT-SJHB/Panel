@@ -63,7 +63,7 @@ export class DatePickerInput implements OnInit, OnChanges {
 
   // 🚫 Control disabled state
   get isDisabled(): boolean {
-    return this.control.disabled;
+    return this.control.disabled || this.readOnly;
   }
 
   // 🪄 Lifecycle: OnInit
