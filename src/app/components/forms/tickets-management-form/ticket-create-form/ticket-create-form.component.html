@@ -1,0 +1,113 @@
+<!-- فرم ایجاد تیکت -->
+
+<div class="grid grid-cols-3 gap-4 px-5 py-5">
+  <!-- نام کاربری (فقط خواندنی) -->
+  <app-text-input
+    [addonWidth]="addonWidth"
+    [control]="ctrl('username')"
+    [label]="appTitle.inputs.phoneNumbers.inputTitle"
+    validationField="mobile"
+    class="col-span-3 md:col-span-2 lg:col-span-1"
+    type="number"
+    [placeholder]="appTitle.inputs.phoneNumbers.inputTitle"
+  ></app-text-input>
+
+  <!-- نوع تیکت -->
+  <app-select-input
+    [addonWidth]="addonWidth"
+    [control]="ctrl('ticketTypeId')"
+    [options]="ticketTypes()"
+    label="نوع تیکت"
+    placeholder="نوع تیکت را انتخاب کنید"
+    class="col-span-3 md:col-span-2 lg:col-span-1"
+  ></app-select-input>
+
+  <!-- دپارتمان -->
+  <app-select-input
+    [addonWidth]="addonWidth"
+    [control]="ctrl('departmentId')"
+    [options]="departments()"
+    label="دپارتمان"
+    placeholder="دپارتمان را انتخاب کنید"
+    validationField="departmentId"
+    class="col-span-3 md:col-span-2 lg:col-span-1"
+  ></app-select-input>
+
+  <!-- عنوان تیکت -->
+  <app-text-input
+    [addonWidth]="addonWidth"
+    [control]="ctrl('title')"
+    label="عنوان تیکت"
+    placeholder="عنوان تیکت را وارد کنید"
+    validationField="title"
+    class="col-span-3"
+  ></app-text-input>
+
+  <!-- توضیحات تیکت -->
+  <textarea
+    [formControl]="ctrl('body')"
+    placeholder="توضیحات تیکت را وارد کنید"
+    class="col-span-3 p-5 border rounded-2xl h-60 placeholder:text-gray-400 resize-y"
+  ></textarea>
+
+  <!-- دکمه ارسال -->
+  <div class="col-span-3 flex justify-end px-3">
+    <app-button
+      styleClass="w-full sm:w-48 md:w-40"
+      (onClick)="createTicket()"
+      [disabled]="ticketForm.invalid || loading()"
+    >
+      ارسال تیکت
+    </app-button>
+  </div>
+</div>
+
+<p-dialog
+  header="تیکت شما با موفقیت ایجاد شد"
+  [modal]="true"
+  [(visible)]="ticketDialogVisible"
+  [style]="{ width: '25rem' }"
+>
+  <div class="flex flex-col gap-4 p-4">
+    <!-- Track code title -->
+    <span class="text-lg font-semibold">شماره پیگیری تیکت شما</span>
+
+    <!-- Small note -->
+    <span class="text-sm text-gray-500">
+      لطفاً این شماره را یادداشت کنید یا به خاطر بسپارید تا بتوانید تیکت خود را
+      پیگیری کنید.
+    </span>
+
+    <!-- Track code display -->
+    <div
+      class="flex items-center justify-between p-3 rounded-lg shadow bg-emphasis cursor-pointer hover:bg-primary-emphasis"
+      (click)="copyToClipboard()"
+    >
+      <span class="text-lg font-medium">{{ createdTrackCodeTicket() }}</span>
+      <button type="button" title="کپی کد راهگیری">
+        <i class="pi pi-copy text-xl"></i>
+      </button>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="flex justify-between mt-4">
+      <app-button
+        severity="warn"
+        styleClass="w-30"
+        (click)="ticketDialogVisible = false"
+      >
+        بازگشت
+      </app-button>
+
+      <app-button severity="primary" styleClass="w-30" (click)="trackTicket()">
+        پیگیری تیکت
+      </app-button>
+    </div>
+  </div>
+</p-dialog>
+
+<app-ticket-guard-captcha-form
+  [activeCaptcha]="activeCaptcha()"
+  (hiddenDialog)="activeCaptcha.set(false)"
+  [action]="createTicket"
+/>
