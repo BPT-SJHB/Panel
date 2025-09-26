@@ -17,6 +17,7 @@ export const mockTickets: Ticket[] = [
         senderId: 101,
         message: 'من نمی‌توانم وارد حساب کاربری خود شوم.',
         createdAt: new Date('2025-09-20T10:05:00Z').toISOString(),
+        updatedAt: new Date('2025-09-20T10:05:00Z').toISOString(),
         attachments: [],
       },
       {
@@ -24,6 +25,7 @@ export const mockTickets: Ticket[] = [
         senderId: 201, // support staff
         message: 'لطفاً بررسی کنید که رمز عبور صحیح است و دوباره تلاش کنید.',
         createdAt: new Date('2025-09-20T10:15:00Z').toISOString(),
+        updatedAt: new Date('2025-09-20T10:15:00Z').toISOString(),
         attachments: [],
       },
     ],
@@ -44,6 +46,7 @@ export const mockTickets: Ticket[] = [
         senderId: 102,
         message: 'می‌خواستم بدانم محصول X موجود است یا خیر.',
         createdAt: new Date('2025-09-18T08:32:00Z').toISOString(),
+        updatedAt: new Date('2025-09-18T08:32:00Z').toISOString(),
         attachments: [],
       },
       {
@@ -51,6 +54,7 @@ export const mockTickets: Ticket[] = [
         senderId: 202, // support staff
         message: 'بله، محصول در انبار موجود است و می‌توانید سفارش دهید.',
         createdAt: new Date('2025-09-18T08:45:00Z').toISOString(),
+        updatedAt: new Date('2025-09-18T08:45:00Z').toISOString(),
         attachments: [],
       },
     ],
@@ -71,6 +75,7 @@ export const mockTickets: Ticket[] = [
         senderId: 103,
         message: 'پرداخت فاکتور شماره 123 با خطا مواجه شد.',
         createdAt: new Date('2025-09-19T14:22:00Z').toISOString(),
+        updatedAt: new Date('2025-09-19T14:22:00Z').toISOString(),
         attachments: [],
       },
       {
@@ -78,6 +83,7 @@ export const mockTickets: Ticket[] = [
         senderId: 203, // support staff
         message: 'لطفاً مجدداً تلاش کنید یا روش پرداخت دیگری انتخاب کنید.',
         createdAt: new Date('2025-09-19T14:35:00Z').toISOString(),
+        updatedAt: new Date('2025-09-19T14:35:00Z').toISOString(),
         attachments: [],
       },
     ],

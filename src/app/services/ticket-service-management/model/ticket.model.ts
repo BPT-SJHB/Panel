@@ -3,6 +3,13 @@ export interface ChatMessage {
   senderId: number;
   message: string;
   createdAt: string;
+  updatedAt: string;
+  attachments: string[];
+}
+
+export interface CreateChatMessageRequest {
+  senderId: number;
+  message: string;
   attachments: string[];
 }
 
@@ -26,4 +33,16 @@ export interface Ticket {
   createdAt: string;
   updatedAt: string;
   chat: ChatMessage[];
+}
+
+export interface TicketQueryParams {
+  page?: number; // page number
+  page_size?: number; // items per page
+
+  status?: number; // optional filter
+  user_id?: number; // optional filter
+  departmentId?: number; // optional filter
+
+  order_by?: string; // field to order by
+  order_dir?: 'asc' | 'desc'; // asc or desc
 }
