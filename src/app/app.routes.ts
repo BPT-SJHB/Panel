@@ -30,4 +30,20 @@ export const routes: Routes = [
         (m) => m.DashboardComponent
       ),
   },
+
+  {
+    path: APP_ROUTES.TICKET.CREATE,
+    loadComponent: () =>
+      import(
+        'app/pages/tickets/ticket-create-page/ticket-create-page.component'
+      ).then((m) => m.TicketCreatePageComponent),
+  },
+
+  {
+    path: APP_ROUTES.TICKET.TRACK,
+    loadComponent: () =>
+      import(
+        'app/pages/tickets/ticket-tracker-page/ticket-tracker-page.component'
+      ).then((m) => m.TicketTrackerPageComponent),
+  },
 ];
