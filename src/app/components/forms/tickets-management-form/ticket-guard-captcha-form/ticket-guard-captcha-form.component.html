@@ -1,0 +1,42 @@
+<p-dialog
+  draggable="false"
+  header="تأیید امنیتی"
+  [modal]="true"
+  [visible]="dialogCaptchaVisible()"
+  [style]="{ width: '30rem' }"
+  (visibleChange)="dialogCaptchaVisible.set($event)"
+  (onHide)="onDialogHidden()"
+>
+  <!-- explanatory text -->
+  <p class="text-gray-600 dark:text-gray-400 mb-4">
+    برای ادامه فرایند، لطفاً کد امنیتی زیر را وارد کنید.
+  </p>
+
+  <!-- captcha input -->
+  @if (dialogCaptchaVisible()) {
+    <app-captcha-input
+      captchaServiceType="ticket"
+      [sessionIdControl]="captchaId"
+      [captchaInputControl]="captchaAnswer"
+    ></app-captcha-input>
+  }
+
+  <!-- buttons -->
+  <div class="flex justify-end gap-2 mt-4">
+    <app-button
+      type="button"
+      label="لغو"
+      severity="info"
+      styleClass="w-20"
+      (click)="dialogCaptchaVisible.set(false)"
+    ></app-button>
+    <app-button
+      type="button"
+      label="تأیید"
+      icon="pi pi-check"
+      (click)="verifyCaptcha()"
+      styleClass="w-30"
+      [disabled]="captchaId.invalid || captchaAnswer.invalid || loading()"
+    ></app-button>
+  </div>
+</p-dialog>
