@@ -1,0 +1,114 @@
+<!-- فرم پیگیری تیکت -->
+<div class="grid grid-cols-12 gap-4 px-5 py-5">
+  <!-- شماره موبایل -->
+  <app-text-input
+    [addonWidth]="addonWidth"
+    type="number"
+    [control]="ctrl('phone')"
+    label="شماره موبایل"
+    placeholder="شماره موبایل را وارد کنید"
+    validationField="mobile"
+    class="col-span-12 md:col-span-6 lg:col-span-4"
+  ></app-text-input>
+
+  <!-- کد پیگیری -->
+  <app-text-input
+    [addonWidth]="addonWidth"
+    [control]="ctrl('trackCode')"
+    label="کد پیگیری"
+    placeholder="مثال: ABCD1234"
+    validationField="ticketTrackCode"
+    class="col-span-12 md:col-span-6 lg:col-span-4"
+    language="en"
+  ></app-text-input>
+
+  <!-- دکمه پیگیری -->
+  <div class="col-span-12 flex justify-end px-3">
+    <app-button
+      styleClass="w-full sm:w-48 md:w-40"
+      (onClick)="searchTicket()"
+      severity="info"
+      [disabled]="searchForm.invalid || loading()"
+    >
+      <i class="pi pi-search mr-2"></i>
+      پیگیری تیکت
+    </app-button>
+  </div>
+</div>
+
+@if (currentTicket()) {
+  <div class="mt-6 px-5 max-w-[600px] mx-auto">
+    <p-card class="relative p-4 border rounded-xl shadow-md">
+      <!-- وضعیت badge (top right) -->
+
+      <div class="flex items-center justify-between border-b mb-4 pb-2">
+        <!-- Title -->
+        <h3 class="text-xl font-semibold text-start m-0">اطلاعات تیکت</h3>
+
+        <!-- Status badge -->
+        <div
+          class="px-3 py-2 flex items-center justify-center rounded-full bg-primary/10 text-primary text-sm font-medium"
+        >
+          {{ currentTicket()?.ticketStatus }}
+        </div>
+      </div>
+      <div class="space-y-5 text-base">
+        <div class="grid grid-cols-2">
+          <span class="block font-medium mb-1">شماره موبایل</span>
+          <span class="block">{{ currentTicket()?.username }}</span>
+        </div>
+
+        <div class="grid grid-cols-2">
+          <span class="block font-medium mb-1">عنوان</span>
+          <span class="block">{{ currentTicket()?.title }}</span>
+        </div>
+
+        <div class="grid grid-cols-2">
+          <span class="block font-medium mb-1">نوع تیکت</span>
+          <span class="block">{{ currentTicket()?.ticketType }}</span>
+        </div>
+
+        <div class="grid grid-cols-2">
+          <span class="block font-medium mb-1">بخش</span>
+          <span class="block">{{ currentTicket()?.department }}</span>
+        </div>
+
+        <div class="grid grid-cols-2">
+          <span class="block font-medium mb-1">کد پیگیری</span>
+          <span class="block text-lg">
+            {{ currentTicket()?.trackCode }}
+          </span>
+        </div>
+      </div>
+
+      <!-- دکمه نمایش گفتگو -->
+      <div class="mt-6 flex justify-end">
+        <app-button
+          styleClass="w-full sm:w-48 md:w-40"
+          severity="secondary"
+          (onClick)="showChat()"
+        >
+          <i class="pi pi-comments mr-2"></i>
+          نمایش گفتگو
+        </app-button>
+      </div>
+    </p-card>
+  </div>
+
+  <p-dialog
+    header="گفتگو"
+    [modal]="true"
+    [(visible)]="chatDialogVisible"
+    [style]="{ width: '40rem' }"
+  >
+    @if (chatDialogVisible) {
+      <app-ticket-chat-message-form [ticket]="currentTicket()" />
+    }
+  </p-dialog>
+}
+
+<app-ticket-guard-captcha-form
+  [activeCaptcha]="activeCaptcha()"
+  (hiddenDialog)="activeCaptcha.set(false)"
+  [action]="searchTicket"
+/>
