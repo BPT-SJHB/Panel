@@ -16,7 +16,7 @@
 >
   <div class="flex flex-col items-center gap-4">
     <div class="flex flex-col items-center gap-2">
-      @for (item of contactList; track $index) {
+      @for (item of contactList(); track $index) {
         <app-button
           (click)="CallUsOnPhone.toggle($event)"
           icon="pi pi-phone"
@@ -69,28 +69,62 @@
 </p-dialog>
 
 <!-- Ticket -->
+
 <p-dialog
   draggable="false"
-  header="درخواست ارسال تیکت"
+  header="ارتباط با پشتیبانی"
   [modal]="true"
   [(visible)]="dialog"
 >
-  <span class="p-text-secondary block mb-8"
-    >لطفا بعد از پر کردن اطلاعات، متن تیکت خود را وارد نمایید.<br /><br />همکاران
-    ما در اسرع وقت پاسخگو خواهند بود.</span
-  >
-  @if (dialog) {
-    <div class="m-2">
-      <app-captcha-input></app-captcha-input>
+  <!-- Info text -->
+
+  <div class="space-y-4 mb-6">
+    <!-- ثبت تیکت جدید -->
+    <div>
+      <div class="font-bold text-gray-800 dark:text-gray-200">
+        ثبت تیکت جدید
+      </div>
+      <div class="text-gray-600 dark:text-gray-400">
+        برای ارسال درخواست پشتیبانی و ارتباط با تیم ما، دکمه زیر را انتخاب کنید.
+      </div>
     </div>
-  }
-  <div class="m-2">
-    <app-text-area-input></app-text-area-input>
+
+    <!-- پیگیری تیکت -->
+    <div>
+      <div class="font-bold text-gray-800 dark:text-gray-200">پیگیری تیکت</div>
+      <div class="text-gray-600 dark:text-gray-400">
+        برای بررسی سریع و آسان وضعیت درخواست‌های قبلی، دکمه پیگیری را کلیک کنید.
+      </div>
+    </div>
   </div>
 
-  <div class="flex justify-end gap-2">
-    <app-button label="ارسال" (click)="submitTicket()" />
+  <!-- Centered buttons: Create / Track -->
+  <div class="flex justify-center gap-4 my-5 px-5">
+    <app-button
+      class="flex-1"
+      label="ایجاد تیکت"
+      severity="primary"
+      styleClass="w-full"
+      (click)="redirectUrl(APP_ROUTS.TICKET.CREATE)"
+    />
 
-    <app-button label="انصراف" severity="secondary" (click)="dialog = false" />
+    <app-button
+      class="flex-1"
+      label="پیگیری تیکت"
+      severity="info"
+      styleClass="w-full"
+      (click)="redirectUrl(APP_ROUTS.TICKET.TRACK)"
+    />
+  </div>
+
+  <!-- Cancel button on left bottom -->
+  <div class="flex justify-end mt-10">
+    <app-button label="انصراف" severity="warn" (click)="dialog = false" />
   </div>
 </p-dialog>
+
+<app-ticket-guard-captcha-form
+  (hiddenDialog)="activeCaptcha.set(false)"
+  [activeCaptcha]="activeCaptcha()"
+  [action]="captchaAction()"
+/>
