@@ -20,6 +20,7 @@ import { RawSoftwareUserForProfile } from 'app/services/user-management/model/so
 import { Wallet } from 'app/services/wallet-management/model/wallet.model';
 import { WalletProfileComponent } from '../wallet-profile/wallet-profile.component';
 import { ThemeManagementComponent } from '../theme-management/theme-management.component';
+import { FrameHeaderComponent } from '../frame-header/frame-header.component';
 @Component({
   selector: 'app-header',
   imports: [
@@ -27,6 +28,8 @@ import { ThemeManagementComponent } from '../theme-management/theme-management.c
     UserProfileComponent,
     WalletProfileComponent,
     ThemeManagementComponent,
+    FrameHeaderComponent,
+    FrameHeaderComponent,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
