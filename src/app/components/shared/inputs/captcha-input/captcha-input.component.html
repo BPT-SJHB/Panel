@@ -10,7 +10,7 @@
       <img
         [src]="imageData"
         alt="کپچا"
-        class="w-full h-full object-fill z-10 border-2 border-primary-emphasis rounded-r-2xl"
+        class="w-full h-full object-fill z-10 border-2 border-primary-emphasis rounded-r-2xl bg-primary-300"
       />
     </p-inputgroup-addon>
 
@@ -30,7 +30,7 @@
       [style]="{
         padding: 0,
         margin: 0,
-        border: 0
+        border: 0,
       }"
       class="flex h-10 rounded-l-2xl"
     >
@@ -46,15 +46,17 @@
     </p-inputgroup-addon>
   </p-inputgroup>
 
-  @if (captchaInputControl.touched && captchaInputControl.errors) { @if
-  (captchaInputControl.errors['required']) {
-  <p-message severity="error" variant="simple" size="small">
-    وارد کردن متن تصویر الزامی است
-  </p-message>
-  } @else if (captchaInputControl.errors['minlength']) {
-  <p-message severity="error" variant="simple" size="small">
-    کپچا باید حداقل
-    {{ captchaInputControl.errors["minlength"].requiredLength }} کاراکتر باشد
-  </p-message>
-  } }
+  @if (captchaInputControl.touched && captchaInputControl.errors) {
+    @if (captchaInputControl.errors["required"]) {
+      <p-message severity="error" variant="simple" size="small">
+        وارد کردن متن تصویر الزامی است
+      </p-message>
+    } @else if (captchaInputControl.errors["minlength"]) {
+      <p-message severity="error" variant="simple" size="small">
+        کپچا باید حداقل
+        {{ captchaInputControl.errors["minlength"].requiredLength }} کاراکتر
+        باشد
+      </p-message>
+    }
+  }
 </div>
