@@ -262,6 +262,14 @@ export const ValidationSchema = {
       Validators.pattern(/^\d+(\.\d{1,2})?$/),
     ],
   },
+
+  ticketTrackCode: {
+    name: 'شماره پیگیری',
+    validators: [
+      exactLengthValidator(8),
+      Validators.pattern(/^[A-Za-z0-9]{8}$/),
+    ],
+  },
 };
 
 export type ValidationField = keyof typeof ValidationSchema;
