@@ -67,6 +67,6 @@ export const mockTicketPaging: PagingResponse<Ticket> = {
   ],
   total: 10, // کل رکوردها
   page: 1, // صفحه فعلی
-  page_size: 5, // تعداد آیتم در هر صفحه
-  total_pages: 2, // تعداد کل صفحات
+  pageSize: 5, // تعداد آیتم در هر صفحه
+  totalPages: 2, // تعداد کل صفحات
 };
