@@ -31,7 +31,7 @@ export class LoadPermissionsFormComponent
     ...TableConfig,
     paginator: false,
   };
-  readonly addonWidth = '10rem';
+  readonly addonWidth = '8rem';
   readonly appTitle = AppTitles;
 
   readonly rows = signal<LoadPermission[]>([]);
