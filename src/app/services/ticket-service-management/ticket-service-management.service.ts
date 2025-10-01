@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
 import { ApiResponse } from 'app/data/model/api-Response.model';
+import { API_ROUTES } from 'app/constants/api';
 
 // Models
 import { TicketUser } from './model/ticket-user.model';
@@ -30,157 +31,155 @@ import { mockTicketPaging } from './mock/ticket-paging.mock';
   providedIn: 'root',
 })
 export class TicketServiceManagementService {
-  // Inject API communication service (for real API calls later)
-  private apiCommunicator = inject(APICommunicationManagementService);
+  private api = inject(APICommunicationManagementService);
 
-  /**
-   * Get ticket user by username
-   * (Currently returns mock data. Replace with API call if needed.)
-   */
-  public async GetTicketUserByUsername(
-    username: string
-  ): Promise<ApiResponse<TicketUser>> {
-    return Promise.resolve({
-      success: true,
-      data: mockTicketUser,
-    });
+  //#region Ticket User
+  LoginWithNoAuth(username: string): Promise<ApiResponse<TicketUser>> {
+    const apiUrl = API_ROUTES.TicketAPI.Auth.LoginWithNoAuth;
+    const body = { username, departmentId: 1 };
+    return this.api.CommunicateWithAPI_Post<typeof body, TicketUser>(
+      apiUrl,
+      body,
+      mockTicketUser
+    );
+  }
+  //#endregion
+
+  //#region Ticket Types / Departments / Statuses
+  GetTicketTypes(): Promise<ApiResponse<TicketType[]>> {
+    return this.api.CommunicateWithAPI_Get<TicketType[]>(
+      API_ROUTES.TicketAPI.Tickets.GetAllActiveTicketTypes,
+      mockTicketTypes
+    );
   }
 
-  /**
-   * Get all ticket types.
-   * (Mock implementation.)
-   */
-  public async GetTicketTypes(): Promise<ApiResponse<TicketType[]>> {
-    return Promise.resolve({
-      success: true,
-      data: mockTicketTypes,
-    });
+  GetDepartments(): Promise<ApiResponse<Department[]>> {
+    return this.api.CommunicateWithAPI_Get<Department[]>(
+      API_ROUTES.TicketAPI.Departments.GetAllActiveDepartments,
+      mockDepartments
+    );
   }
 
-  /**
-   * Get all departments.
-   * (Mock implementation.)
-   */
-  public async GetDepartments(): Promise<ApiResponse<Department[]>> {
-    return Promise.resolve({
-      success: true,
-      data: mockDepartments,
-    });
+  GetTicketStatuses(): Promise<ApiResponse<TicketStatus[]>> {
+    return this.api.CommunicateWithAPI_Get<TicketStatus[]>(
+      API_ROUTES.TicketAPI.Tickets.GetAllActiveTicketStatuses,
+      mockTicketStatuses
+    );
   }
+  //#endregion
 
-  /**
-   * Get all ticket statuses.
-   * (Mock implementation.)
-   */
-  public async GetTicketStatuses(): Promise<ApiResponse<TicketStatus[]>> {
-    return Promise.resolve({
-      success: true,
-      data: mockTicketStatuses,
-    });
-  }
-
-  /**
-   * Create a new ticket.
-   * (Currently uses mockTickets to generate a fake response.)
-   */
-  public async CreateTicket(
+  //#region Ticket CRUD
+  CreateTicket(
     ticket: TicketCreateRequest
   ): Promise<ApiResponse<{ id: string; trackCode: string }>> {
-    return Promise.resolve({
-      success: true,
-      data: {
-        id: mockTickets[0].id ?? crypto.randomUUID(),
-        trackCode:
-          mockTickets[0].trackCode ??
-          Math.random().toString(36).substring(2, 8),
-      },
-    });
+    const mockResponse = {
+      id: mockTickets[0]?.id ?? crypto.randomUUID(),
+      trackCode:
+        mockTickets[0]?.trackCode ?? Math.random().toString(36).substring(2, 8),
+    };
+
+    return this.api.CommunicateWithAPI_Post<
+      TicketCreateRequest,
+      { id: string; trackCode: string }
+    >(API_ROUTES.TicketAPI.Tickets.CreateTicket, ticket, mockResponse);
   }
 
-  /**
-   * Get a ticket by its track code.
-   */
-  public async GetTicketByTrackCode(
+  GetTicketByTrackCode(
     trackCode: string,
     username: string
   ): Promise<ApiResponse<Ticket>> {
-    const found = mockTickets.find((t) => t.trackCode === trackCode);
-
-    return Promise.resolve({
-      success: !!found,
-      data: found,
-      error: found
-        ? undefined
-        : { code: 404, message: 'Not found', details: 'Ticket not found' },
-    });
+    const body = { trackCode, username };
+    return this.api.CommunicateWithAPI_Post<typeof body, Ticket>(
+      API_ROUTES.TicketAPI.Tickets.GetTicketByTrackCode,
+      body,
+      mockTickets[0]
+    );
   }
 
-  /**
-   * Get a ticket by its ID.
-   */
-  public async GetTicketById(id: string): Promise<ApiResponse<Ticket>> {
-    const found = mockTickets.find((t) => t.id === id);
+  GetTicketById(id: string): Promise<ApiResponse<Ticket>> {
+    const body = { id };
+    return this.api.CommunicateWithAPI_Post<typeof body, Ticket>(
+      API_ROUTES.TicketAPI.Tickets.GetTicketByID,
+      body,
+      mockTickets.find((t) => t.id === id)
+    );
+  }
+  //#endregion
 
-    return Promise.resolve({
-      success: !!found,
-      data: found,
-      error: found
-        ? undefined
-        : { code: 404, message: 'Not found', details: 'Ticket not found' },
-    });
+  //#region Captcha
+  GetCaptcha(): Promise<ApiResponse<TicketCaptcha>> {
+    return this.api.CommunicateWithAPI_Get<TicketCaptcha>(
+      API_ROUTES.TicketAPI.Captcha.GetCaptcha,
+      mockTicketCaptcha
+    );
   }
 
-  /**
-   * Get CAPTCHA for ticket creation.
-   */
-  public async GetCaptcha(): Promise<ApiResponse<TicketCaptcha>> {
-    return Promise.resolve({
-      success: true,
-      data: mockTicketCaptcha,
-    });
+  VerifyCaptcha(id: string, answer: string): Promise<ApiResponse<null>> {
+    const body = { id, captcha: answer };
+    return this.api.CommunicateWithAPI_Post<typeof body, null>(
+      API_ROUTES.TicketAPI.Captcha.VerifyCaptcha,
+      body,
+      null
+    );
   }
+  //#endregion
 
-  /**
-   * Verify CAPTCHA answer.
-   */
-  public async VerifyCaptcha(
-    id: string,
-    answer: string
-  ): Promise<ApiResponse<null>> {
-    return Promise.resolve({
-      success: true,
-      data: null,
-    });
-  }
-
-  /**
-   * Create a chat message on a ticket.
-   */
-  public async CreateChat(
+  //#region Chat
+  CreateChat(
     ticketId: string,
     chat: CreateChatMessageRequest
   ): Promise<ApiResponse<ChatMessage>> {
-    return Promise.resolve({
-      success: true,
-      data: {
-        ...chat,
-        id: crypto.randomUUID(),
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
-    });
-  }
+    const mockResponse: ChatMessage = {
+      ...chat,
+      id: crypto.randomUUID(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
 
-  /**
-   * Get tickets with paging support.
-   * (Currently returns mockTicketPaging.)
-   */
-  public async GetTickets(
+    return this.api.CommunicateWithAPI_Post<
+      CreateChatMessageRequest,
+      ChatMessage
+    >(API_ROUTES.TicketAPI.Tickets.CreateChat(ticketId), chat, mockResponse);
+  }
+  //#endregion
+
+  //#region Paging
+  GetTickets(
     query: TicketQueryParams
   ): Promise<ApiResponse<PagingResponse<Ticket>>> {
-    return Promise.resolve({
-      success: true,
-      data: mockTicketPaging,
-    });
+    return this.api.CommunicateWithAPI_Post<
+      TicketQueryParams,
+      PagingResponse<Ticket>
+    >(API_ROUTES.TicketAPI.Tickets.GetTicketsList, query, mockTicketPaging);
   }
+  //#endregion
+
+  //#region Users
+  GetUserById(id: number): Promise<ApiResponse<TicketUser>> {
+    const body = { id };
+    return this.api.CommunicateWithAPI_Post<typeof body, TicketUser>(
+      API_ROUTES.TicketAPI.Users.GetUserByID,
+      body,
+      mockTicketUser
+    );
+  }
+
+  GetUserByUsername(username: string): Promise<ApiResponse<TicketUser>> {
+    const body = { username };
+    return this.api.CommunicateWithAPI_Post<typeof body, TicketUser>(
+      API_ROUTES.TicketAPI.Users.GetUserByUsername,
+      body,
+      mockTicketUser
+    );
+  }
+
+  GetUsersByIds(ids: number[]): Promise<ApiResponse<TicketUser[]>> {
+    const body = { ids };
+    return this.api.CommunicateWithAPI_Post<typeof body, TicketUser[]>(
+      API_ROUTES.TicketAPI.Users.GetUsersIDs,
+      body,
+      [mockTicketUser]
+    );
+  }
+  //#endregion
 }
