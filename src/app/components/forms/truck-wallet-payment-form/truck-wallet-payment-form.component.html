@@ -1,6 +1,6 @@
-<div class="grid grid-cols-12 gap-4">
+<div class="grid grid-cols-12 gap-4 mb-10">
   <app-search-input
-    class="col-span-12 md:col-span-6 xl:col-span-4"
+    class="col-span-12"
     placeholder="هوشمند را وارد کنید"
     label="هوشمند"
     validationField="smartCard"
@@ -8,27 +8,27 @@
     [onSearchQuery]="searchTruck"
     [autoTriggerSearch]="false"
     [disableSearchButton]="loading() || Smart.invalid"
-    addonWidth="8rem"
+    addonWidth="6rem"
     type="number"
   />
   <app-text-input
-    class="col-span-12 md:col-span-6 xl:col-span-4"
+    class="col-span-12 md:col-span-6"
     placeholder="شناسه ناوگان"
     label="شناسه ناوگان"
     [control]="TruckId"
     [readOnly]="true"
     [disabled]="true"
-    addonWidth="8rem"
+    addonWidth="6rem"
   />
   <app-text-input
-    class="col-span-12 md:col-span-6 xl:col-span-4"
+    class="col-span-12 md:col-span-6"
     placeholder="پلاک ناوگان"
     label="پلاک ناوگان"
     [control]="LicensePlate"
     [readOnly]="true"
     format="carPlate"
     [disabled]="true"
-    addonWidth="8rem"
+    addonWidth="6rem"
   />
 </div>
 
