@@ -1,4 +1,11 @@
-import { Component, effect, inject, input, signal } from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  effect,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { BaseLoading } from '../../shared/component-base/base-loading';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { ValidationSchema } from 'app/constants/validation-schema';
@@ -14,6 +21,7 @@ import { Card } from 'primeng/card';
 import { Dialog } from 'primeng/dialog';
 import { TicketChatMessageFormComponent } from '../ticket-chat-message-form/ticket-chat-message-form.component';
 import { TicketGuardCaptchaFormComponent } from '../ticket-guard-captcha-form/ticket-guard-captcha-form.component';
+import { TicketErrorCodes } from 'app/constants/error-messages';
 
 type DetailTicket = Ticket & {
   username: string;
@@ -34,7 +42,10 @@ type DetailTicket = Ticket & {
   templateUrl: './ticket-track-form.component.html',
   styleUrl: './ticket-track-form.component.scss',
 })
-export class TicketTrackFormComponent extends BaseLoading {
+export class TicketTrackFormComponent
+  extends BaseLoading
+  implements AfterContentInit
+{
   readonly phone = input('');
   readonly trackCode = input('');
 
@@ -56,17 +67,18 @@ export class TicketTrackFormComponent extends BaseLoading {
   });
 
   chatDialogVisible = false;
-  runOnceGuard = false;
   constructor() {
     effect(() => {
       this.ctrl('phone').setValue(this.phone());
       this.ctrl('trackCode').setValue(this.trackCode());
-      if (this.runOnceGuard || this.searchForm.invalid) return;
-      this.runOnceGuard = true;
-      this.searchTicket();
     });
 
     super();
+  }
+
+  ngAfterContentInit(): void {
+    if (this.searchForm.invalid) return;
+    this.searchTicket();
   }
 
   override ngOnInit(): void {
@@ -89,8 +101,7 @@ export class TicketTrackFormComponent extends BaseLoading {
       );
 
       if (!checkAndToastError(response, this.toast)) {
-        // TODO: replace with real incorrect capthca
-        if (response.error?.code === 3) {
+        if (response.error?.code === TicketErrorCodes.Unauthorized) {
           this.activeCaptcha.set(true);
         }
         return;
