@@ -1,9 +1,11 @@
 @font-face {
   font-family: "Yekan";
-  src: url("/fonts/yekan-regular.eot") format("eot"),
+  src:
+    url("/fonts/yekan-regular.eot") format("eot"),
     url("/fonts/yekan-regular.ttf") format("ttf"),
     url("/fonts/yekan-regular.woff") format("woff"),
-    url("/fonts/Yekan.eot") format("eot"), url("/fonts/Yekan.svg") format("svg"),
+    url("/fonts/Yekan.eot") format("eot"),
+    url("/fonts/Yekan.svg") format("svg"),
     url("/fonts/Yekan.ttf") format("ttf"),
     url("/fonts/Yekan.woff") format("woff");
   font-weight: normal;
@@ -82,6 +84,16 @@
   font-weight: 900;
   font-style: normal;
   font-display: swap;
+}
+
+@keyframes slide-to-left {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    /* Moves the content half of its duplicated width for a seamless loop */
+    transform: translate3d(50%, 0, 0);
+  }
 }
 
 html,
