@@ -48,7 +48,7 @@ export class TicketChatMessageFormComponent extends BaseLoading {
 
   readonly ticket = input<Ticket | null>(null);
   readonly sender = input<'user' | 'admin'>('user');
-
+  readonly userId = input<number>(0);
   readonly chatForm = this.fb.nonNullable.group({
     ticketId: this.fb.nonNullable.control<string>('', ValidationSchema.id),
     message: this.fb.nonNullable.control<string>(
@@ -151,7 +151,7 @@ export class TicketChatMessageFormComponent extends BaseLoading {
 
     const newChat: CreateChatMessageRequest = {
       message: msg,
-      senderId: this.ticket()?.userId ?? 0,
+      senderId: this.userId(),
       attachments: this.ctrl<string[]>('attachments').value ?? [],
     };
 
@@ -165,6 +165,8 @@ export class TicketChatMessageFormComponent extends BaseLoading {
       );
 
       if (!checkAndToastError(res, this.toast)) return;
+
+      console.log(res.data);
 
       // Add chat to grouped UI
       this.addChatMessage(res.data);

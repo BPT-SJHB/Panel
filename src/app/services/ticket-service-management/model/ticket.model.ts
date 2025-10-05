@@ -37,12 +37,12 @@ export interface Ticket {
 
 export interface TicketQueryParams {
   page?: number; // page number
-  page_size?: number; // items per page
+  pageSize?: number; // items per page
 
   status?: number; // optional filter
-  user_id?: number; // optional filter
+  userId?: number; // optional filter
   departmentId?: number; // optional filter
 
-  order_by?: string; // field to order by
-  order_dir?: 'asc' | 'desc'; // asc or desc
+  orderBy?: string; // field to order by
+  orderDir?: 'asc' | 'desc'; // asc or desc
 }

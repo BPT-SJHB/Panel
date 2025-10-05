@@ -15,6 +15,7 @@ import { APP_ROUTES } from 'app/constants/routes';
 import { AppTitles } from 'app/constants/Titles';
 import { mockTickets } from 'app/services/ticket-service-management/mock/ticket.mock';
 import { TicketGuardCaptchaFormComponent } from '../ticket-guard-captcha-form/ticket-guard-captcha-form.component';
+import { TicketErrorCodes } from 'app/constants/error-messages';
 
 interface SelectOption {
   label: string;
@@ -112,10 +113,15 @@ export class TicketCreateFormComponent extends BaseLoading {
       let userId = this.ctrl<number | null>('userId').value;
 
       if (userId === null) {
-        const response = await this.ticketService.GetTicketUserByUsername(
+        const response = await this.ticketService.LoginWithNoAuth(
           this.ctrl<string>('username').value
         );
-        if (!checkAndToastError(response, this.toast)) return;
+        if (!checkAndToastError(response, this.toast)) {
+          if (response.error?.code === TicketErrorCodes.Unauthorized) {
+            this.activeCaptcha.set(true);
+          }
+          return;
+        }
 
         userId = response.data.id;
         this.ctrl('userId').setValue(userId);
@@ -132,8 +138,7 @@ export class TicketCreateFormComponent extends BaseLoading {
 
       const result = await this.ticketService.CreateTicket(ticket);
       if (!checkAndToastError(result, this.toast)) {
-        // TODO: replace with ticket code error captcha needed
-        if (result.error?.code === 3) {
+        if (result.error?.code === TicketErrorCodes.Unauthorized) {
           this.activeCaptcha.set(true);
         }
         return;

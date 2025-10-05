@@ -52,6 +52,8 @@ export class UserInfoFormComponent extends BaseLoading implements OnInit {
   private readonly dialogService = inject(DialogService);
   private readonly nonNullable = this.fb.nonNullable;
 
+  readonly addonWidth = '100px';
+
   // forms
   readonly userInfoForm = this.fb.group({
     id: this.fb.control<number | null>(null, ValidationSchema.id), // nullable

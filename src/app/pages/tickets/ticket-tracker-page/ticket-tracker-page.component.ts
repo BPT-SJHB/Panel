@@ -22,7 +22,7 @@ import { LayoutConfig } from 'app/constants/ui/layout.ui';
   ],
 })
 export class TicketTrackerPageComponent implements OnInit {
-  private route = inject(ActivatedRoute); // Angular 16 inject() way
+  private route = inject(ActivatedRoute);
   trackingCode = signal<string>('');
   phoneNumber = signal<string>('');
   readonly layoutUi = LayoutConfig;

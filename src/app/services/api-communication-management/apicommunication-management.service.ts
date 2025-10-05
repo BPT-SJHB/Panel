@@ -27,7 +27,7 @@ export class APICommunicationManagementService {
 
     try {
       const response = await firstValueFrom(
-        this.http.post<TExpect>(url, bodyValue)
+        this.http.post<TExpect>(url, bodyValue, { withCredentials: true })
       );
 
       const mappedResponse =
@@ -50,7 +50,9 @@ export class APICommunicationManagementService {
     }
 
     try {
-      const response = await firstValueFrom(this.http.get<TExpect>(url));
+      const response = await firstValueFrom(
+        this.http.get<TExpect>(url, { withCredentials: true })
+      );
 
       return {
         success: true,

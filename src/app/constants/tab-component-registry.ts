@@ -46,6 +46,7 @@ import { DriverLoadAllocationFormComponent } from 'app/components/forms/driver-l
 import { DriverLoadPermissionsFormComponent } from 'app/components/forms/driver-load-management-form/driver-load-permissions-form/driver-load-permissions-form.component';
 import { LoadAccountingsFormComponent } from 'app/components/forms/load-accountings-form/load-accountings-form.component';
 import { AdminLoadPermissionsFormComponent } from 'app/components/forms/admin-load-permissions-form/admin-load-permissions-form.component';
+import { TicketListsFormComponent } from 'app/components/forms/tickets-management-form/tickest-lists-form/ticket-lists-form.component';
 
 export enum TabComponentKey {
   Main = -1,
@@ -102,6 +103,8 @@ export enum TabComponentKey {
   TransportCompaniesLoadManagement = 32,
   FactoriesAndFreightLoadManagement = 33,
   AdminLoadManagement = 39,
+
+  TicketManagement = 71,
 }
 
 export interface TabConfig {
@@ -502,6 +505,16 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       {
         title: 'مجوز های صادر شده',
         component: AdminLoadPermissionsFormComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.TicketManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: 'تیکت',
+        component: TicketListsFormComponent,
       },
     ],
   },

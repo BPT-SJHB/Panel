@@ -1,0 +1,68 @@
+<!-- Filters Grid -->
+<div class="p-5">
+  <div
+    dir="rtl"
+    class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-4"
+  >
+    <!-- Row 1 -->
+    <app-text-input
+      type="number"
+      [control]="ctrl('username')"
+      label="شماره تلفن"
+      placeholder="جستجو شماره تلفن"
+    ></app-text-input>
+
+    <app-select-input
+      [options]="ticketStatuses()"
+      [control]="ctrl('ticketStatusId')"
+      label="وضعیت تیکت"
+      placeholder="انتخاب وضعیت"
+    ></app-select-input>
+
+    <app-select-input
+      [options]="ticketTypes()"
+      [control]="ctrl('ticketTypeId')"
+      label="نوع تیکت"
+      placeholder="انتخاب نوع"
+    ></app-select-input>
+
+    <!-- Row 2 -->
+    <app-select-input
+      [options]="departments()"
+      [control]="ctrl('departmentId')"
+      label="بخش"
+      placeholder="انتخاب بخش"
+    ></app-select-input>
+
+    <app-button label="اعمال فیلتر" (click)="applyFilter()"></app-button>
+  </div>
+
+  <!-- Table always full width -->
+  <app-table
+    dir="rtl"
+    [loading]="loading()"
+    [config]="config"
+    [columns]="columns"
+    [rows]="data()"
+    (sortFunction)="customSort($event)"
+    [customSort]="true"
+    (pageChange)="pageChanged($event)"
+    class="w-full"
+  />
+
+  <p-dialog
+    dir="rtl"
+    header="گفتگو"
+    [modal]="true"
+    [visible]="chatDialogVisible()"
+    (visibleChange)="chatDialogVisible.set(false)"
+    [style]="{ width: '40rem' }"
+  >
+    @if (chatDialogVisible()) {
+      <app-ticket-chat-message-form
+        [ticket]="selectedTicket()"
+        sender="admin"
+      />
+    }
+  </p-dialog>
+</div>

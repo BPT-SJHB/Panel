@@ -14,7 +14,7 @@
         validationField="mobile"
         [disableSearchButton]="searchForm.invalid || loading()"
         [onSearchQuery]="fetchUserByPhone"
-        [addonWidth]="'3rem'"
+        [addonWidth]="addonWidth"
         type="number"
       />
     </div>
@@ -46,6 +46,7 @@
         validationField="id"
         icon="pi pi-id-card"
         label="شناسه کاربری"
+        [addonWidth]="addonWidth"
         language="en"
       />
     </div>
@@ -57,6 +58,7 @@
         icon="pi pi-user"
         [placeholder]="appTitles.getPlaceholder('userNamePlaceholder')"
         [control]="getUserFormControl('name')"
+        [addonWidth]="addonWidth"
         [label]="appTitles.inputs.users.userNameTitle"
       />
     </div>
@@ -70,6 +72,7 @@
           class="flex-1"
           [placeholder]="appTitles.getPlaceholder('userPhoneNumberPlaceholder')"
           [control]="getUserFormControl('phone')"
+          [addonWidth]="addonWidth"
           type="number"
         />
       </div>
@@ -80,6 +83,7 @@
       <app-select-input
         [control]="getUserFormControl('userType')"
         [options]="roles"
+        [addonWidth]="addonWidth"
         icon=""
         [label]="appTitles.inputs.users.userTypesTitle"
       />

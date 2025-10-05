@@ -101,8 +101,11 @@
     [(visible)]="chatDialogVisible"
     [style]="{ width: '40rem' }"
   >
-    @if (chatDialogVisible) {
-      <app-ticket-chat-message-form [ticket]="currentTicket()" />
+    @if (chatDialogVisible && currentTicket()) {
+      <app-ticket-chat-message-form
+        [ticket]="currentTicket()"
+        [userId]="currentTicket()?.userId ?? 0"
+      />
     }
   </p-dialog>
 }

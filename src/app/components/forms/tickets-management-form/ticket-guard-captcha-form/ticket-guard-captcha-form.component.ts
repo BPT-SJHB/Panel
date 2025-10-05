@@ -5,6 +5,7 @@ import {
   input,
   output,
   signal,
+  ViewChild,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { BaseLoading } from '../../shared/component-base/base-loading';
@@ -14,6 +15,7 @@ import { DialogModule } from 'primeng/dialog';
 import { TicketServiceManagementService } from 'app/services/ticket-service-management/ticket-service-management.service';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { TicketErrorCodes } from 'app/constants/error-messages';
 
 @Component({
   selector: 'app-ticket-guard-captcha-form',
@@ -23,6 +25,8 @@ import { ButtonComponent } from 'app/components/shared/button/button.component';
   styleUrls: ['./ticket-guard-captcha-form.component.scss'],
 })
 export class TicketGuardCaptchaFormComponent extends BaseLoading {
+  @ViewChild(CaptchaInputComponent) captchaInput?: CaptchaInputComponent;
+
   // Inputs
   readonly action = input<(() => void) | (() => Promise<void>)>(
     () => undefined
@@ -67,7 +71,18 @@ export class TicketGuardCaptchaFormComponent extends BaseLoading {
       );
 
       // Show toast if error occurred
-      if (!checkAndToastError(response, this.toast)) return;
+      if (!checkAndToastError(response, this.toast)) {
+        if (
+          response.error?.code === TicketErrorCodes.CaptchaIncorrect ||
+          response.error?.code === TicketErrorCodes.CaptchaExpired
+        ) {
+          this.captchaId.reset();
+          this.captchaAnswer.reset();
+          await this.captchaInput?.onRefreshClick();
+        }
+
+        return;
+      }
 
       // Trigger passed action
       const actionFn = this.action();
