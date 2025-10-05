@@ -1,18 +1,4 @@
-<div class="min-h-screen min-w-screen flex flex-col">
-  <!-- Header -->
-  <div class="flex justify-between items-center p-2 bg-emphasis shadow-md">
-    <span
-      [innerHTML]="headerTitle"
-      class="text-sm md:text-base lg:text-lg font-bold"
-    >
-    </span>
-    <img
-      class="justify-end w-15 h-15"
-      src="assets/rmto-logo-noText.png"
-      alt="لوگو"
-    />
-  </div>
-
+<div class="min-h-screen min-w-screen text-white flex flex-col bg-zinc-800">
   <!-- Dialog -->
   <p-dialog
     draggable="false"
@@ -57,8 +43,172 @@
     </div>
   </p-dialog>
 
-  <!-- Map -->
-  <div class="flex-1 flex justify-center items-center pt-5">
-    <app-map-svg (clickProvince)="clickProvince($event)"></app-map-svg>
+  <div
+    class="w-full h-screen flex items-center blur-[4px] justify-center relative mask-y-from-80% mask-radial-farthest-side mask-radial-from-30% mask-radial-at-[40%_100%] bg-cover bg-center"
+    style="background-image: url(assets/hero.png)"
+  ></div>
+
+  <div class="absolute w-full h-screen overflow-hidden">
+    <div
+      class="flex flex-col w-full h-screen flex-wrap text-nowrap justify-center md:justify-start gap-10 items-start"
+    >
+      <div
+        class="flex justify-center lg:justify-start px-10 pt-10 items-start w-full"
+      >
+        <img
+          class="justify-start w-[15rem] h-[15rem] md:w-[20rem] md:h-[20rem]"
+          src="assets/rmto-logo-noText.png"
+          alt="لوگو"
+        />
+      </div>
+
+      <div class="flex flex-col w-full justify-center items-center gap-10">
+        <h1
+          class="text-2xl md:text-5xl text-center leading-[3rem] md:leading-[5rem] font-extrabold"
+          [innerHTML]="appTitle.appBrokenTitle"
+        ></h1>
+        <!-- <h2 -->
+        <!--   class="font-semibold mx-5 text-wrap text-center text-xl md:text-3xl" -->
+        <!-- > -->
+        <!--   سامانه کشوری برای اعلام و تخصیص بار در سراسر کشور -->
+        <!-- </h2> -->
+      </div>
+    </div>
   </div>
+
+  <div
+    class="w-full bg-emerald-100 mask-x-from-70% mask-y-from-90% overflow-hidden"
+  >
+    <div
+      class="flex flex-row"
+      style="animation: slide-to-left 25s linear infinite"
+      aria-hidden="true"
+    >
+      @for (i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track i) {
+        @for (item of marqueeList; track item) {
+          <div class="py-2 px-6 shrink-0 mr-10">
+            <div class="h-[3rem]">
+              <img
+                [src]="item.imgLink"
+                class="h-full grayscale hover:grayscale-0 hover:scale-110 transition duration-500 ease-in-out"
+                [alt]="item.name"
+              />
+            </div>
+          </div>
+        }
+      }
+    </div>
+  </div>
+
+  <om-starry-sky
+    [shootingStarsConfig]="{ minDelay: 500, maxDelay: 3000 }"
+    [starsBackgroundConfig]="{ starDensity: 0.0015 }"
+    styleClass="flex flex-col justify-center items-center overflow-hidden w-full relative z-0"
+    skyColor="#27272a"
+  >
+    <om-vortex
+      class="w-full z-0 mask-y-from-90% mask-y-to-100%"
+      [firstGradientColors]="wave1Colors"
+      [secondGradientColors]="wave2Colors"
+    >
+      <div
+        class="w-full md:h-[7rem] pb-4 grid-cols-1 md:flex md:flex-row md:flex-wrap justify-around items-center z-10 relative overflow-hidden"
+      >
+        @for (item of countList; track item) {
+          <om-fade
+            [direction]="item.direction"
+            class="z-20"
+            [animateOnlyOnce]="true"
+          >
+            <div class="flex flex-col mt-5 md:mt-0 justify-center items-center">
+              <om-number-ticker
+                class="text-6xl font-bold"
+                [countDuration]="item.duration"
+                [countTo]="item.count"
+              />
+              <span class="" [textContent]="item.text"></span>
+            </div>
+          </om-fade>
+        }
+      </div>
+    </om-vortex>
+
+    <!-- Map -->
+    <div class="flex-1 flex justify-center items-center pt-5 z-10">
+      <app-map-svg (clickProvince)="clickProvince($event)"></app-map-svg>
+    </div>
+
+    <!-- Footer  -->
+    <div
+      class="w-full flex flex-row z-0 justify-around flex-wrap p-4 items-start bg-emerald-950/40 mask-t-from-95% mask-t-to-100%"
+    >
+      <!-- Links -->
+      <div
+        class="w-[80vh] flex flex-col justify-center items-center mt-5 md:mt-0 gap-3"
+      >
+        <span class="font-bold text-xl">پیوند های مرتبط</span>
+        <div class="w-full border-2 rounded-4xl"></div>
+
+        <div class="h-full w-full grid grid-cols-1 md:grid-cols-2 gap-y-5">
+          @for (item of linksList; track item) {
+            <a
+              class="hover:font-bold hover:text-blue-400 transition-all duration-300 ease-in-out"
+              [href]="item.linkAddress"
+              target="_blank"
+              [text]="item.linkName"
+            ></a>
+          }
+        </div>
+      </div>
+
+      <div
+        class="flex flex-row flex-wrap justify-center md:justify-between mt-10 lg:mt-0 lg:justify-center items-center gap-10"
+      >
+        <!-- Map -->
+        <div class="flex flex-col justify-center items-center gap-3">
+          <span class="font-bold text-xl">مراکز فعال سامانه</span>
+          <div class="w-full border-2 rounded-4xl"></div>
+          <app-map
+            height="h-[200px]"
+            width="w-[200px]"
+            class="rounded-4xl overflow-hidden"
+          ></app-map>
+        </div>
+        <!-- Logo -->
+        <img
+          class="w-[12rem] h-[15rem]"
+          src="assets/rmto-logo-dark-full-text.png"
+          alt="لوگو"
+        />
+      </div>
+    </div>
+
+    <div
+      class="w-full z-0 flex text-sm text-center px-5 justify-between items-center bg-primary text-primary-contrast py-1 flex-wrap flex-col md:flex-row"
+    >
+      <span
+        >کلیه حقوق این وبسایت متعلق به سازمان‌ راهداری و حمل و نقل جاده ای
+        میباشد</span
+      >
+      <div class="flex flex-row justify-center items-center gap-2">
+        <span>طراحی و پیاده‌سازی توسط شرکت برسام پژوهش</span>
+        <img
+          class="w-[2rem] h-[2rem]"
+          src="assets/HomePage/BPT_No_Background.png"
+          alt="برسام پژوهش"
+        />
+      </div>
+    </div>
+  </om-starry-sky>
 </div>
+
+<!-- Header -->
+<!-- <div -->
+<!--   class="flex fixed w-full opacity-80 justify-between items-center p-2 bg-emphasis shadow-md" -->
+<!-- > -->
+<!--   <span -->
+<!--     [innerHTML]="headerTitle" -->
+<!--     class="text-sm md:text-base lg:text-lg font-bold" -->
+<!--   > -->
+<!--   </span> -->
+<!-- </div> -->
