@@ -73,6 +73,20 @@
         <!--   سامانه کشوری برای اعلام و تخصیص بار در سراسر کشور -->
         <!-- </h2> -->
       </div>
+
+      <div
+        class="w-full flex justify-center absolute bottom-10 transition-all duration-1000 ease-in-out"
+        [ngClass]="{
+          'opacity-0': isScrolled(),
+          'opacity-100': !isScrolled(),
+        }"
+      >
+        <img
+          class="w-[7rem] h-[7rem] animate-pulse"
+          src="assets/HomePage/downArrow.png"
+          alt="پیکان رو به پایین"
+        />
+      </div>
     </div>
   </div>
 
@@ -106,32 +120,26 @@
     styleClass="flex flex-col justify-center items-center overflow-hidden w-full relative z-0"
     skyColor="#27272a"
   >
-    <om-vortex
-      class="w-full z-0 mask-y-from-90% mask-y-to-100%"
-      [firstGradientColors]="wave1Colors"
-      [secondGradientColors]="wave2Colors"
+    <div
+      class="w-full md:h-[7rem] pb-4 grid-cols-1 md:flex md:flex-row md:flex-wrap justify-around items-center z-10 relative overflow-hidden"
     >
-      <div
-        class="w-full md:h-[7rem] pb-4 grid-cols-1 md:flex md:flex-row md:flex-wrap justify-around items-center z-10 relative overflow-hidden"
-      >
-        @for (item of countList; track item) {
-          <om-fade
-            [direction]="item.direction"
-            class="z-20"
-            [animateOnlyOnce]="true"
-          >
-            <div class="flex flex-col mt-5 md:mt-0 justify-center items-center">
-              <om-number-ticker
-                class="text-6xl font-bold"
-                [countDuration]="item.duration"
-                [countTo]="item.count"
-              />
-              <span class="" [textContent]="item.text"></span>
-            </div>
-          </om-fade>
-        }
-      </div>
-    </om-vortex>
+      @for (item of countList; track item) {
+        <om-fade
+          [direction]="item.direction"
+          class="z-20"
+          [animateOnlyOnce]="true"
+        >
+          <div class="flex flex-col mt-5 md:mt-0 justify-center items-center">
+            <om-number-ticker
+              class="text-6xl font-bold"
+              [countDuration]="item.duration"
+              [countTo]="item.count"
+            />
+            <span [textContent]="item.text"></span>
+          </div>
+        </om-fade>
+      }
+    </div>
 
     <!-- Map -->
     <div class="flex-1 flex justify-center items-center pt-5 z-10">

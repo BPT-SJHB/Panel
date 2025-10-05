@@ -1,5 +1,6 @@
 // Angular
-import { Component, inject, signal } from '@angular/core';
+import { Component, HostListener, inject, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 // PrimeNG
 import { ButtonModule } from 'primeng/button';
@@ -19,8 +20,6 @@ import {
 import { NgxNumberTickerComponent } from '@omnedia/ngx-number-ticker';
 import { NgxFadeComponent } from '@omnedia/ngx-fade';
 import { NgxStarrySkyComponent } from '@omnedia/ngx-starry-sky';
-import { NgxVortexComponent } from '@omnedia/ngx-vortex';
-import { NgxShinyTextComponent } from '@omnedia/ngx-shiny-text';
 
 // Models & Constants
 import { LoadAnnouncementPlace } from 'app/data/model/load-announcement-place.model';
@@ -31,7 +30,6 @@ import { BaseLoading } from 'app/components/forms/shared/component-base/base-loa
 import { AppTitles } from 'app/constants/Titles';
 import { TableModule } from 'primeng/table';
 import { MapComponent } from './map/map.component';
-import { FooterComponent } from 'app/components/shared/layout/footer/footer.component';
 
 type Direction = 'left' | 'right' | 'down' | 'up' | undefined;
 
@@ -56,10 +54,8 @@ interface CountItem {
     NgxNumberTickerComponent,
     NgxFadeComponent,
     NgxStarrySkyComponent,
-    NgxVortexComponent,
     MapComponent,
-    FooterComponent,
-    NgxShinyTextComponent,
+    CommonModule,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
@@ -180,6 +176,18 @@ export class HomePageComponent extends BaseLoading {
    */
   handleSearch(results: LoadAnnouncementPlace[]): void {
     this.displayedLoadAnnouncementPlaces.set(results);
+  }
+
+  isScrolled = signal(false);
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    // Check if the vertical scroll position is greater than 100 pixels
+    if (window.scrollY > 100) {
+      this.isScrolled.set(true);
+    } else {
+      this.isScrolled.set(false);
+    }
   }
 
   /**
