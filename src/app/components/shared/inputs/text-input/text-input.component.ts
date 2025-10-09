@@ -172,9 +172,14 @@ export class TextInputComponent implements OnInit, OnChanges, OnDestroy {
 
     // --- language enforcement (text only) ---
     if (this.language === 'fa') {
-      const persianRegex = /^[\u0600-\u06FF\s]*$/;
+      // Allow Persian letters, Persian digits, spaces, and common symbols
+      const persianRegex =
+        /^[\u0600-\u06FF\u06F0-\u06F9\s.,!?(){}[\]<>;:'"@#$%^&*_+=|\\/-]*$/;
       if (!persianRegex.test(input.value)) {
-        input.value = input.value.replace(/[^\u0600-\u06FF\s]/g, '');
+        input.value = input.value.replace(
+          /[^\u0600-\u06FF\u06F0-\u06F9\s.,!?(){}[\]<>;:'"@#$%^&*_+=|\\/-]/g,
+          ''
+        );
         this.control.setValue(input.value, { emitEvent: false });
 
         if (canShowToast) {
@@ -185,9 +190,13 @@ export class TextInputComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     if (this.language === 'en') {
-      const englishRegex = /^[A-Za-z0-9\s()[\]{}<>.,!?_-]*$/;
+      // Allow English letters, English digits, spaces, and common symbols
+      const englishRegex = /^[A-Za-z0-9\s.,!?(){}[\]<>;:'"@#$%^&*_+=|\\/-]*$/;
       if (!englishRegex.test(input.value)) {
-        input.value = input.value.replace(/[^A-Za-z0-9\s()[\]{}<>.,!?_-]/g, '');
+        input.value = input.value.replace(
+          /[^A-Za-z0-9\s.,!?(){}[\]<>;:'"@#$%^&*_+=|\\/-]/g,
+          ''
+        );
         this.control.setValue(input.value, { emitEvent: false });
 
         if (canShowToast) {
