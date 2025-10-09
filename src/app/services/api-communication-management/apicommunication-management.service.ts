@@ -16,7 +16,8 @@ export class APICommunicationManagementService {
   public async CommunicateWithAPI_Post<TBody, TExpect>(
     url: string,
     bodyValue: TBody,
-    mockValue?: any
+    mockValue?: any,
+    withCredentials = false
   ): Promise<ApiResponse<TExpect>> {
     if (!environment.production && environment.disableApi) {
       return {
@@ -27,7 +28,9 @@ export class APICommunicationManagementService {
 
     try {
       const response = await firstValueFrom(
-        this.http.post<TExpect>(url, bodyValue, { withCredentials: true })
+        this.http.post<TExpect>(url, bodyValue, {
+          withCredentials: withCredentials,
+        })
       );
 
       const mappedResponse =
@@ -43,7 +46,8 @@ export class APICommunicationManagementService {
 
   public async CommunicateWithAPI_Get<TExpect>(
     url: string,
-    mockValue?: any
+    mockValue?: any,
+    withCredentials = false
   ): Promise<ApiResponse<TExpect>> {
     if (!environment.production && environment.disableApi) {
       return { success: true, data: trimInDeep(mockValue) };
@@ -51,7 +55,7 @@ export class APICommunicationManagementService {
 
     try {
       const response = await firstValueFrom(
-        this.http.get<TExpect>(url, { withCredentials: true })
+        this.http.get<TExpect>(url, { withCredentials: withCredentials })
       );
 
       return {

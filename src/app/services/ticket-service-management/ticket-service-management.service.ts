@@ -40,7 +40,8 @@ export class TicketServiceManagementService {
     return this.api.CommunicateWithAPI_Post<typeof body, TicketUser>(
       apiUrl,
       body,
-      mockTicketUser
+      mockTicketUser,
+      true
     );
   }
   //#endregion
@@ -49,21 +50,24 @@ export class TicketServiceManagementService {
   GetTicketTypes(): Promise<ApiResponse<TicketType[]>> {
     return this.api.CommunicateWithAPI_Get<TicketType[]>(
       API_ROUTES.TicketAPI.Tickets.GetAllActiveTicketTypes,
-      mockTicketTypes
+      mockTicketTypes,
+      true
     );
   }
 
   GetDepartments(): Promise<ApiResponse<Department[]>> {
     return this.api.CommunicateWithAPI_Get<Department[]>(
       API_ROUTES.TicketAPI.Departments.GetAllActiveDepartments,
-      mockDepartments
+      mockDepartments,
+      true
     );
   }
 
   GetTicketStatuses(): Promise<ApiResponse<TicketStatus[]>> {
     return this.api.CommunicateWithAPI_Get<TicketStatus[]>(
       API_ROUTES.TicketAPI.Tickets.GetAllActiveTicketStatuses,
-      mockTicketStatuses
+      mockTicketStatuses,
+      true
     );
   }
   //#endregion
@@ -81,7 +85,7 @@ export class TicketServiceManagementService {
     return this.api.CommunicateWithAPI_Post<
       TicketCreateRequest,
       { id: string; trackCode: string }
-    >(API_ROUTES.TicketAPI.Tickets.CreateTicket, ticket, mockResponse);
+    >(API_ROUTES.TicketAPI.Tickets.CreateTicket, ticket, mockResponse, true);
   }
 
   GetTicketByTrackCode(
@@ -92,7 +96,8 @@ export class TicketServiceManagementService {
     return this.api.CommunicateWithAPI_Post<typeof body, Ticket>(
       API_ROUTES.TicketAPI.Tickets.GetTicketByTrackCode,
       body,
-      mockTickets[0]
+      mockTickets[0],
+      true
     );
   }
 
@@ -110,7 +115,8 @@ export class TicketServiceManagementService {
   GetCaptcha(): Promise<ApiResponse<TicketCaptcha>> {
     return this.api.CommunicateWithAPI_Get<TicketCaptcha>(
       API_ROUTES.TicketAPI.Captcha.GetCaptcha,
-      mockTicketCaptcha
+      mockTicketCaptcha,
+      true
     );
   }
 
@@ -119,7 +125,8 @@ export class TicketServiceManagementService {
     return this.api.CommunicateWithAPI_Post<typeof body, null>(
       API_ROUTES.TicketAPI.Captcha.VerifyCaptcha,
       body,
-      null
+      null,
+      true
     );
   }
   //#endregion
@@ -139,7 +146,12 @@ export class TicketServiceManagementService {
     return this.api.CommunicateWithAPI_Post<
       CreateChatMessageRequest,
       ChatMessage
-    >(API_ROUTES.TicketAPI.Tickets.CreateChat(ticketId), chat, mockResponse);
+    >(
+      API_ROUTES.TicketAPI.Tickets.CreateChat(ticketId),
+      chat,
+      mockResponse,
+      true
+    );
   }
   //#endregion
 
@@ -150,7 +162,12 @@ export class TicketServiceManagementService {
     return this.api.CommunicateWithAPI_Post<
       TicketQueryParams,
       PagingResponse<Ticket>
-    >(API_ROUTES.TicketAPI.Tickets.GetTicketsList, query, mockTicketPaging);
+    >(
+      API_ROUTES.TicketAPI.Tickets.GetTicketsList,
+      query,
+      mockTicketPaging,
+      true
+    );
   }
   //#endregion
 
@@ -160,7 +177,8 @@ export class TicketServiceManagementService {
     return this.api.CommunicateWithAPI_Post<typeof body, TicketUser>(
       API_ROUTES.TicketAPI.Users.GetUserByID,
       body,
-      mockTicketUser
+      mockTicketUser,
+      true
     );
   }
 
@@ -169,7 +187,8 @@ export class TicketServiceManagementService {
     return this.api.CommunicateWithAPI_Post<typeof body, TicketUser>(
       API_ROUTES.TicketAPI.Users.GetUserByUsername,
       body,
-      mockTicketUser
+      mockTicketUser,
+      true
     );
   }
 
@@ -178,7 +197,8 @@ export class TicketServiceManagementService {
     return this.api.CommunicateWithAPI_Post<typeof body, TicketUser[]>(
       API_ROUTES.TicketAPI.Users.GetUsersIDs,
       body,
-      [mockTicketUser]
+      [mockTicketUser],
+      true
     );
   }
   //#endregion
