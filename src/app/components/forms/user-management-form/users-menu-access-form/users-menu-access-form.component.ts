@@ -155,25 +155,31 @@ export class UsersMenuAccessFormComponent extends BaseLoading {
       const userId = this.userInfo()!.UserId;
       const requests: Promise<ApiResponse<ShortResponse>>[] = [];
 
-      this.parentChanges.forEach((parent) => {
-        requests.push(
-          this.userService.ChangeUserWebProcessGroupAccess(
-            userId,
-            parent.PGId,
-            parent.PGAccess
-          )
-        );
-      });
+      // collect all change functions
+      const allChanges = [
+        ...Array.from(this.parentChanges.values()).map(
+          (parent) => () =>
+            this.userService.ChangeUserWebProcessGroupAccess(
+              userId,
+              parent.PGId,
+              parent.PGAccess
+            )
+        ),
+        ...Array.from(this.childChanges.values()).map(
+          (child) => () =>
+            this.userService.ChangeUserWebProcessAccess(
+              userId,
+              child.PId,
+              child.PAccess
+            )
+        ),
+      ];
 
-      this.childChanges.forEach((child) => {
-        requests.push(
-          this.userService.ChangeUserWebProcessAccess(
-            userId,
-            child.PId,
-            child.PAccess
-          )
-        );
-      });
+      const delay = 100; // delay ms
+      for (const makeRequest of allChanges) {
+        requests.push(makeRequest());
+        await new Promise((r) => setTimeout(r, delay));
+      }
 
       const responses = await Promise.all(requests);
 
@@ -181,7 +187,9 @@ export class UsersMenuAccessFormComponent extends BaseLoading {
         if (!checkAndToastError(response, this.toast)) return;
       }
 
-      const tree = await this.getGroupProcesses(this.userInfo()?.MobileNumber!);
+      const tree = await this.getGroupProcesses(
+        this.userInfo()?.MobileNumber ?? ''
+      );
       this.tree.set(tree);
       this.toast.success('موفق', responses[0].data!.Message);
 
