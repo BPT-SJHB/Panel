@@ -15,6 +15,7 @@ export const routes: Routes = [
       import('app/pages/auth/login-page/login-page.component').then(
         (m) => m.LoginPageComponent
       ),
+    data: { preload: true },
   },
   {
     path: APP_ROUTES.AUTH.FORGET_PASSWORD,
@@ -45,5 +46,6 @@ export const routes: Routes = [
       import(
         'app/pages/tickets/ticket-tracker-page/ticket-tracker-page.component'
       ).then((m) => m.TicketTrackerPageComponent),
+    data: { preload: true },
   },
 ];
