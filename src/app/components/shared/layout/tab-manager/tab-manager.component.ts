@@ -42,19 +42,14 @@ import { DashboardContentManagerComponent } from '../dashboard-content-manager/d
   imports: [NgClass, TabsModule],
 })
 export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
-  /** ================================
-   *  Signals and State (public-ish)
-   *  ================================ */
-
-  // Holds reference to content manager
+  // ================================
+  // Signals & State
+  // ================================
   readonly contentManager = signal<DashboardContentManagerComponent | null>(
     null
   );
-
-  // Controls visibility of sub-tabs
   readonly hiddenSubTab = signal<boolean>(false);
 
-  // Tabs map: <id, DynamicTab>
   readonly tabs = new Map<string, DynamicTab>([
     [
       DEFAULT_MAIN_TAB_ID,
@@ -69,51 +64,42 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
       },
     ],
   ]);
-
-  // Currently selected tab
   readonly selectTab = signal<DynamicTab>(this.tabs.get(DEFAULT_MAIN_TAB_ID)!);
 
-  /** ================================
-   *  Internal Subjects
-   *  ================================ */
-
+  // ================================
+  // Internal Subjects
+  // ================================
   private readonly resize$ = new Subject<void>();
   private readonly destroy$ = new Subject<void>();
 
-  /** ================================
-   *  Injected dependencies
-   *  ================================ */
+  // ================================
+  // Dependencies
+  // ================================
   private readonly store = inject(Store);
 
+  private prvTabId = '-100';
+
+  private tabsCached = true;
   constructor() {
+    // Effect to load tab content whenever the selected tab changes
     effect(() => {
       const tab = this.selectTab();
       const manager = this.contentManager();
+      if (!tab || !manager) return;
 
-      if (!tab) return;
-      if (manager) {
-        manager.loadTabContent(tab);
+      if (this.tabsCached) {
+        this.resetTabs();
+        this.tabsCached = false;
+        return;
       }
+
+      manager.loadTabContent(tab);
     });
   }
 
-  /** ================================
-   *  Lifecycle Hooks
-   *  ================================ */
-
-  private prvTabId = "-100"
-  ngAfterViewChecked(): void {
-    const currentId = this.selectTab().id
-    if (this.prvTabId === currentId) {
-      return
-    }
-
-    this.prvTabId = currentId
-
-    const target = document.getElementById(this.selectTab().id)
-    target?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" })
-  }
-
+  // ================================
+  // Lifecycle Hooks
+  // ================================
   ngOnInit(): void {
     this.resize$
       .pipe(
@@ -127,12 +113,8 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
           const index = tab.selectedSubTab;
           const last = (tab.config.subTab?.length ?? 1) - 1;
 
-          // Temporarily flip to force layout recalculation
           tab.selectedSubTab = index < last ? index + 1 : index - 1;
-
-          requestAnimationFrame(() => {
-            tab.selectedSubTab = index;
-          });
+          requestAnimationFrame(() => (tab.selectedSubTab = index));
         }),
         takeUntil(this.destroy$)
       )
@@ -140,65 +122,66 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    // Subscribe to new tab creation requests
+    // Subscribe to new tab creation
     this.store
       .select(selectorNewTab)
       .pipe(takeUntil(this.destroy$))
-      .subscribe(({ id, title, icon, component, closeable }) => {
-        this.createOrSelectTab({ id, title, icon, component, closeable });
-      });
+      .subscribe((tabData) => this.createOrSelectTab(tabData));
 
-    // Track content context to control sub-tab visibility
+    // Control sub-tab visibility based on content context
     this.store
       .select(selectContent)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((content) => {
-        this.hiddenSubTab.set(content.context === 'subMenu');
-      });
+      .subscribe((content) =>
+        this.hiddenSubTab.set(content.context === 'subMenu')
+      );
+  }
+
+  ngAfterViewChecked(): void {
+    const currentId = this.selectTab().id;
+    if (this.prvTabId === currentId) return;
+
+    this.prvTabId = currentId;
+    const target = document.getElementById(currentId);
+    target?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center',
+    });
   }
 
   ngOnDestroy(): void {
-    // Tear down all tab-related resources
     this.tabs.forEach((tab) => this.destroyTabResources(tab));
     this.destroy$.next();
     this.destroy$.complete();
     this.resize$.complete();
   }
 
-  /** ================================
-   *  Public Methods
-   *  ================================ */
-
+  // ================================
+  // Public Methods
+  // ================================
   onClickTab(tab: DynamicTab): void {
     if (this.selectTab() === tab) {
-      const manager = this.contentManager();
-      manager?.loadTabContent(tab);
+      this.contentManager()?.loadTabContent(tab);
       return;
     }
-
     this.selectTab.set(tab);
   }
 
   onSubTabChange(index: string | number): void {
-    this.selectTab.update((tab) => {
-      if (!tab) return tab!;
-      return {
-        ...tab,
-        selectedSubTab: Number(index),
-      };
-    });
+    this.selectTab.update((tab) =>
+      tab ? { ...tab, selectedSubTab: Number(index) } : tab!
+    );
   }
 
   createOrSelectTab(tabData: TabData): void {
     const { id, title, icon, component, closeable } = tabData;
 
-    // If tab exists, simply select it
     if (id && this.tabs.has(id)) {
       this.selectTab.set(this.tabs.get(id)!);
       return;
     }
 
-    // Build new tab
     const uuid = uuidV4();
     const config = TabComponentRegistry[component];
     const newTab: DynamicTab = {
@@ -209,7 +192,6 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
       closeable,
       cachedComponent: new Map(),
       selectedSubTab: 0,
-      // note: keeping original spelling in case registry uses `shearedSignal`
       sharedSignal: config.sharedSignal ? signal(null) : undefined,
     };
 
@@ -221,15 +203,11 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
     const tab = this.tabs.get(id);
     if (!tab || !tab.closeable) return;
 
-    // If closing the currently selected tab, pick a fallback
     if (this.selectTab()?.id === id) {
       const fallback = this.getFallbackTab(id);
-      if (fallback) {
-        this.selectTab.set(fallback);
-      }
+      if (fallback) this.selectTab.set(fallback);
     }
 
-    // Clean up resources and remove
     this.destroyTabResources(tab);
     this.tabs.delete(id);
   }
@@ -239,6 +217,9 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
     this.resize$.next();
   }
 
+  // ================================
+  // Private Helpers
+  // ================================
   private getFallbackTab(closedTabId: string): DynamicTab | null {
     const tabsArray = Array.from(this.tabs.values());
     const index = tabsArray.findIndex((t) => t.id === closedTabId);
@@ -247,15 +228,27 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private destroyTabResources(tab: DynamicTab): void {
-    if (tab.cachedComponent) {
-      tab.cachedComponent.forEach((comp) => {
-        try {
-          comp.destroy();
-        } catch {
-          // swallow individual failures to ensure full cleanup
-        }
-      });
-      tab.cachedComponent.clear();
-    }
+    tab.cachedComponent?.forEach((comp) => {
+      try {
+        comp.destroy();
+      } catch {
+        //
+      }
+    });
+    tab.cachedComponent?.clear();
+  }
+
+  private resetTabs(): void {
+    this.tabs.clear();
+    this.tabs.set(DEFAULT_MAIN_TAB_ID, {
+      id: DEFAULT_MAIN_TAB_ID,
+      title: 'صفحه اصلی',
+      icon: 'pi pi-home',
+      config: TabComponentRegistry[TabComponentKey.Main],
+      closeable: false,
+      selectedSubTab: 0,
+      cachedComponent: new Map(),
+    });
+    this.selectTab.set(this.tabs.get(DEFAULT_MAIN_TAB_ID)!);
   }
 }
