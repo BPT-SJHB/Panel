@@ -5,7 +5,7 @@
   (ngSubmit)="searchTariffs()"
 >
   <app-search-auto-complete
-    class="col-span-12 sm:col-span-6 lg:col-span-4"
+    class="col-span-12 sm:col-span-6 lg:col-span-6"
     [label]="appTitle.inputs.trucks.truckLoader"
     [placeholder]="'نوع ' + appTitle.getPlaceholder('truckLoader')"
     optionLabel="LoaderTypeTitle"
@@ -18,7 +18,7 @@
   />
 
   <app-search-auto-complete
-    class="col-span-12 sm:col-span-6 lg:col-span-4"
+    class="col-span-12 sm:col-span-6 lg:col-span-6"
     [label]="appTitle.inputs.provinceAndCities.startCity"
     [placeholder]="appTitle.getPlaceholder('startCity')"
     [control]="searchSourceCity"
@@ -32,7 +32,7 @@
   />
 
   <app-search-auto-complete
-    class="col-span-12 sm:col-span-6 lg:col-span-4"
+    class="col-span-12 sm:col-span-6 lg:col-span-6"
     [label]="appTitle.inputs.provinceAndCities.endCity"
     [placeholder]="appTitle.getPlaceholder('endCity')"
     [control]="searchTargetCity"
@@ -46,7 +46,7 @@
   />
 
   <app-search-auto-complete
-    class="col-span-12 sm:col-span-6 lg:col-span-4"
+    class="col-span-12 sm:col-span-6 lg:col-span-6"
     [label]="appTitle.inputs.loads.loadType"
     [placeholder]="appTitle.getPlaceholder('loadType')"
     [control]="searchGoods"
@@ -196,8 +196,8 @@
       class="col-span-12"
       label="مبنای محاسبه"
       [control]="CalculationReference"
-      [readOnly]="true"
       addonWidth="7rem"
+      language="en"
     />
 
     <!-- Editable Fields -->
@@ -207,6 +207,7 @@
       [control]="Tariff"
       inputType="number"
       addonWidth="7rem"
+      type="number"
     />
 
     <app-text-input
@@ -215,6 +216,7 @@
       [control]="BaseTonnag"
       inputType="number"
       addonWidth="7rem"
+      type="number"
     />
 
     <app-toggle-switch-input
@@ -250,6 +252,7 @@
     placeholder="درصد افزایش تعرفه"
     label="درصد افزایش"
     [control]="prentageTariffInc"
+    type="number"
     validationField="parentage"
   />
   <div class="col-span-12 flex justify-end mt-5">

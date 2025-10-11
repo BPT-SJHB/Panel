@@ -9,19 +9,20 @@
     <div class="grid grid-cols-12 mt-5 gap-5">
       <app-search-input
         class="col-span-12 md:col-span-6"
-        placeholder="کد ملی راننده وارد کنید"
-        label="کدملی راننده"
-        searchButtonLabel="استعلام"
+        [placeholder]="appTitle.getPlaceholder('userNationalCodePlaceholder')"
+        [label]="appTitle.inputs.users.userNationalCodeTitle"
+        [searchButtonLabel]="appTitle.buttons.retrieveFromOutdoorSystem"
         validationField="nationalId"
         [control]="driverCtrl('NationalCode')"
         [onSearchQuery]="searchDriver"
         [addonWidth]="addonWidth"
         [autoTriggerSearch]="false"
         [disableSearchButton]="driverCtrl('NationalCode').invalid"
+        type="number"
       />
       <app-text-input
         class="col-span-12 md:col-span-6"
-        label="نام راننده"
+        [label]="appTitle.inputs.users.userNameAndLastName"
         validationField="fullName"
         [control]="driverCtrl('NameFamily')"
         [addonWidth]="addonWidth"
@@ -32,60 +33,73 @@
     <div class="grid grid-cols-12 gap-5">
       <app-search-input
         class="col-span-6"
-        placeholder="هوشمند ناوگان را وارد کنید."
-        label="هوشمند"
-        searchButtonLabel="استعلام"
+        [placeholder]="
+          appTitle.getPlaceholder('truckSmartCardNumberPlaceholder')
+        "
+        [label]="appTitle.inputs.trucks.truckSmartCardNumber"
+        [searchButtonLabel]="appTitle.buttons.retrieveFromOutdoorSystem"
         [control]="truckCtrl('SmartCardNo')"
         [onSearchQuery]="searchTruck"
         [addonWidth]="addonWidth"
         [autoTriggerSearch]="false"
         [disableSearchButton]="truckCtrl('SmartCardNo').invalid"
+        type="number"
       />
       <app-text-input
         class="col-span-6"
-        label="پلاک"
+        [label]="appTitle.inputs.trucks.licensePlateNumber"
         [control]="truckCtrl('Pelak')"
         [addonWidth]="addonWidth"
         [readOnly]="true"
+        format="carPlate"
       />
     </div>
 
     <div class="grid grid-cols-12 gap-5">
       <app-text-input
         class="col-span-6"
-        label="کیف پول"
+        [label]="appTitle.inputs.wallet.walletTitle"
         [control]="truckComposeCtrl('MoneyWalletCode')"
         [addonWidth]="addonWidth"
         [readOnly]="true"
       />
       <app-text-input
         class="col-span-6"
-        label="نوبت"
+        [label]="appTitle.inputs.turns.turnTitle"
         [control]="truckComposeCtrl('TurnId')"
         [addonWidth]="addonWidth"
         [readOnly]="true"
       />
       <app-text-input
         class="col-span-6"
-        label="راننده"
+        [label]="appTitle.inputs.users.userNameAndLastName"
         [control]="truckComposeCtrl('NameFamily')"
         [addonWidth]="addonWidth"
         [readOnly]="true"
       />
       <app-text-input
         class="col-span-6"
-        label="ناوگان"
+        [label]="appTitle.inputs.trucks.licensePlateNumber"
         [control]="truckComposeCtrl('Pelak')"
         [addonWidth]="addonWidth"
         [readOnly]="true"
+        format="carPlate"
       />
     </div>
 
     <div class="flex flex-wrap justify-end gap-4">
-      <app-button styleClass="w-full sm:w-32 md:w-40 lg:w-48" (onClick)="resetAllForms()" severity="info">
+      <app-button
+        styleClass="w-full sm:w-32 md:w-40 lg:w-48"
+        (onClick)="resetAllForms()"
+        severity="info"
+      >
         جدید
       </app-button>
-      <app-button styleClass="w-full sm:w-32 md:w-40 lg:w-48" (onClick)="registerNewLoad()" [disabled]="!isRegisterLoadValid()">
+      <app-button
+        styleClass="w-full sm:w-32 md:w-40 lg:w-48"
+        (onClick)="registerNewLoad()"
+        [disabled]="!isRegisterLoadValid()"
+      >
         تخصیص بار
       </app-button>
     </div>

@@ -20,3 +20,17 @@ export const ERROR_MESSAGES: Record<ErrorCodes, string> = {
   [ErrorCodes.NoRecordFound]: 'رکورد پیدا مورد نظر یاقت نشد.',
   [ErrorCodes.NotAuthenticated]: '',
 };
+
+export enum TicketErrorCodes {
+  BadRequest = 400,
+  Unauthorized = 2,
+  Forbidden = 403,
+  NotFound = 404,
+  InternalServerError = 500,
+  TicketNotFound = 1001,
+  TicketAlreadyExists = 1002,
+  InvalidTicketInput = 1003,
+  TooManyRequests = 1004,
+  CaptchaIncorrect = 12,
+  CaptchaExpired = 13,
+}

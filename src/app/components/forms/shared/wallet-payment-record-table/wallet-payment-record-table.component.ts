@@ -49,7 +49,8 @@ export class WalletPaymentRecordTableComponent
     },
     {
       field: 'Amount',
-      header: 'ملبغ',
+      header: 'ملبغ(ریال)',
+      format: 'currency',
     },
     {
       field: 'UserName',

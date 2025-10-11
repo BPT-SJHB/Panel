@@ -46,6 +46,7 @@ import { DriverLoadAllocationFormComponent } from 'app/components/forms/driver-l
 import { DriverLoadPermissionsFormComponent } from 'app/components/forms/driver-load-management-form/driver-load-permissions-form/driver-load-permissions-form.component';
 import { LoadAccountingsFormComponent } from 'app/components/forms/load-accountings-form/load-accountings-form.component';
 import { AdminLoadPermissionsFormComponent } from 'app/components/forms/admin-load-permissions-form/admin-load-permissions-form.component';
+import { TicketListsFormComponent } from 'app/components/forms/tickets-management-form/tickest-lists-form/ticket-lists-form.component';
 
 export enum TabComponentKey {
   Main = -1,
@@ -102,6 +103,8 @@ export enum TabComponentKey {
   TransportCompaniesLoadManagement = 32,
   FactoriesAndFreightLoadManagement = 33,
   AdminLoadManagement = 39,
+
+  TicketManagement = 71,
 }
 
 export interface TabConfig {
@@ -235,13 +238,13 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   [TabComponentKey.SequentialTurnManagement]: {
     sharedSignal: false,
     subTab: [
-      { title: 'صفوف نوبت دهی', component: SequentialTurnsFormComponent },
+      { title: 'صفوف نوبت', component: SequentialTurnsFormComponent },
       {
-        title: 'صفوف نوبت دهی و بارگیرها',
+        title: 'صفوف نوبت و بارگیرها',
         component: RelationOfSequentialTurnToLoaderTypeFormComponent,
       },
       {
-        title: 'صفوف نوبت دهی و زیرگروه‌ها اعلام بار',
+        title: 'صفوف نوبت و زیرگروه‌های اعلام بار',
         component: RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent,
       },
     ],
@@ -257,7 +260,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
         component: EmergencyTurnsFormComponent,
       },
       {
-        title: 'احیای نوبت رزور',
+        title: 'احیای نوبت رزرو',
         component: ResuscitateTurnsFormComponent,
       },
     ],
@@ -348,6 +351,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       },
     ],
   },
+
   [TabComponentKey.TransportCompaniesWalletManagement]: {
     sharedSignal: true,
     subTab: [
@@ -367,6 +371,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       },
     ],
   },
+
   [TabComponentKey.TruckerAssociationWalletManagement]: {
     sharedSignal: false,
     subTab: [
@@ -387,6 +392,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       },
     ],
   },
+
   [TabComponentKey.TransportCompaniesManagement]: {
     sharedSignal: false,
     subTab: [
@@ -472,6 +478,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       },
     ],
   },
+
   [TabComponentKey.AdminLoadManagement]: {
     sharedSignal: true,
     subTab: [
@@ -498,6 +505,16 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       {
         title: 'مجوز های صادر شده',
         component: AdminLoadPermissionsFormComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.TicketManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: 'تیکت',
+        component: TicketListsFormComponent,
       },
     ],
   },

@@ -1,25 +1,25 @@
-<div class="flex w-full">
-  <p-input-group styleClass="h-10 w-full">
+<div class="flex w-full h-10">
+  <p-input-group>
     <p-inputgroup-addon
       [style]="{
-        width: addonWidth,
+        flex: '0 0 ' + addonWidth,
         padding: 0,
         margin: 0,
-        border: 0
+        border: 0,
       }"
       class="rounded-2xl"
     >
       <div
         class="w-full h-full flex justify-center items-center py-4 px-6 bg-primary-emphasis z-1 rounded-r-2xl text-primary-contrast"
       >
-        @if (label.trim() === '') {
-        <i [class]="icon"></i>
+        @if (label.trim() === "") {
+          <i [class]="icon"></i>
         } @else {
-        <span
-          class="text-sm text-primary-contrast"
-          style="white-space: nowrap"
-          >{{ label }}</span
-        >
+          <span
+            class="text-sm text-primary-contrast"
+            style="white-space: nowrap"
+            >{{ label }}</span
+          >
         }
       </div>
     </p-inputgroup-addon>
@@ -27,46 +27,47 @@
     <input
       #inputRef
       pInputText
+      [tabIndex]="control.disabled || readOnly ? -1 : 0"
       [id]="id"
-      [type]="type"
+      [type]="getType()"
       [formControl]="control"
       [placeholder]="placeholder"
       [readOnly]="readOnly"
       class="px-2 h-full w-full border-y-2 border-l-0 border-r-0 border-gray-400 placeholder:text-gray-400 text-sm focus:border-primary-emphasis transition-all duration-50 ease-in-out focus:outline-none"
       [ngClass]="{
         'focus:border-red-500': control.touched && control.invalid,
-        'bg-surface-200 text-surface-700 dark:bg-surface-800 dark:text-surface-200 pointer-events-none opacity-90 cursor-not-allowed':
+        'bg-surface-200 text-surface-700 dark:bg-surface-800 dark:text-surface-200 pointer-events-none opacity-60 cursor-not-allowed':
           control.disabled || readOnly,
-        'rounded-l-2xl border-l-2': buttonIcon.trim() === ''
+        'rounded-l-2xl border-l-2': buttonIcon.trim() === '',
       }"
       (focus)="onFocusInput(inputRef)"
       (blur)="onBlurInput(inputRef)"
       (input)="valueChange($event)"
     />
 
-    @if (buttonIcon.trim() !== '') {
-    <p-inputgroup-addon
-      [style]="{
-        padding: 0,
-        margin: 0,
-        border: 0
-      }"
-      class="flex h-10 rounded-l-2xl"
-    >
-      <p-button
-        [icon]="buttonIcon"
-        [disabled]="buttonDisabled"
-        (click)="handleClick()"
-      />
-    </p-inputgroup-addon>
+    @if (buttonIcon.trim() !== "") {
+      <p-inputgroup-addon
+        [style]="{
+          padding: 0,
+          margin: 0,
+          border: 0,
+        }"
+        class="flex h-10 rounded-l-2xl"
+      >
+        <p-button
+          [icon]="buttonIcon"
+          [disabled]="buttonDisabled"
+          (click)="handleClick()"
+        />
+      </p-inputgroup-addon>
     }
   </p-input-group>
 </div>
 
 @if (control.touched && firstErrorMessage) {
-<div class="px-4 mt-1">
-  <p-message severity="error" variant="simple" size="small">
-    {{ firstErrorMessage }}
-  </p-message>
-</div>
+  <div class="px-4 mt-1">
+    <p-message severity="error" variant="simple" size="small">
+      {{ firstErrorMessage }}
+    </p-message>
+  </div>
 }

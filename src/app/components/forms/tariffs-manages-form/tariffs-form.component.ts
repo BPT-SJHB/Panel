@@ -194,7 +194,10 @@ export class TariffsFormComponent extends BaseLoading {
         goodId
       );
 
-      if (!checkAndToastError(response, this.toast)) return;
+      if (!checkAndToastError(response, this.toast)) {
+        this.tariffs.set([]);
+        return;
+      }
       this.tariffs.set(
         response.data.map((t) => ({
           ...t,
@@ -297,7 +300,7 @@ export class TariffsFormComponent extends BaseLoading {
       this.tariffsFormMode = TariffsFormMode.EDITABLE;
       this.tariffCached = tariff;
       this.populateFormFromTariff(tariff);
-      this.headerTitle.set('ویرایش');
+      this.headerTitle.set('ویرایش تعرفه حمل بار');
       this.formDialogVisible = true;
     });
   }
@@ -307,7 +310,7 @@ export class TariffsFormComponent extends BaseLoading {
     this.tariffCached = this.extractTariffFromForm();
     this.tariffsFormMode = TariffsFormMode.REGISTER;
     this.resetTariffsForm();
-    this.headerTitle.set('افزودن تعرفه');
+    this.headerTitle.set('افزودن تعرفه حمل بار');
     this.formDialogVisible = true;
   }
 
@@ -329,7 +332,7 @@ export class TariffsFormComponent extends BaseLoading {
     if (this.tariffForm.invalid) return;
 
     await this.withLoading(async () => {
-      const response = await this.tariffService.RegisterTariff(
+      const response = await this.tariffService.EditTariffs(
         this.extractTariffFromForm()
       );
       if (!checkAndToastError(response, this.toast)) return;
@@ -420,9 +423,10 @@ export class TariffsFormComponent extends BaseLoading {
     });
   }
 
-  onFileExcelUpload(event: any) {
+  onFileExcelUpload(_: any) {
     this.fu?.clear();
-    this.toast.success('موفق', 'فایل اکسل با موفقیت بارگذاری شد.');
+    // this.toast.success('موفق', 'فایل اکسل با موفقیت بارگذاری شد.');
+    this.toast.error('خطا', 'فرمت  فایل اکسل نامعتبر می باشد.');
   }
 
   onIncTariff() {

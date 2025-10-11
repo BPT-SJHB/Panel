@@ -12,8 +12,9 @@
     [addonWidth]="addonWidth"
     (input)="onInputChanged($event)"
     (keydown.enter)="onSearchButtonClick()"
-
- ></app-text-input>
+    [type]="type"
+    [language]="language"
+  ></app-text-input>
 
   <div class="flex items-center">
     @if (!autoTriggerSearch) {
@@ -21,7 +22,6 @@
         (click)="onSearchButtonClick()"
         [label]="searchButtonLabel"
         [disabled]="disableSearchButton"
-        size="small"
         styleClass="px-6 py-2"
         severity="info"
         class="h-full"

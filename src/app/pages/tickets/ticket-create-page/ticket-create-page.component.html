@@ -1,0 +1,43 @@
+<div class="flex flex-col" [style.height]="'100dvh'">
+  <!-- Header -->
+  <header [style.height]="layoutUi.headerHeight" class="shrink-0">
+    <app-frame-header>
+      <div class="flex items-center justify-between">
+        <!-- Header title & icon -->
+        <div class="flex items-center justify-center gap-4 mx-2">
+          <i class="pi pi-ticket text-xl scale-120"></i>
+          <span class="text-md font-bold">ساخت تیکت</span>
+        </div>
+
+        <div class="flex flex-row items-center justify-center gap-2 px-2">
+          <app-theme-management></app-theme-management>
+
+          <!-- Logo (Mobile) -->
+          <img
+            src="assets/rmto-logo-noText.png"
+            alt="Logo"
+            class="h-10 w-10 ml-1"
+          />
+        </div>
+      </div>
+    </app-frame-header>
+  </header>
+
+  <!-- Main -->
+  <main class="flex flex-1 overflow-hidden">
+    <section class="flex flex-col flex-1 overflow-hidden">
+      <div class="overflow-y-auto flex-1 lg:mb-0" dir="ltr">
+        <app-ticket-create-form dir="rtl"> </app-ticket-create-form>
+      </div>
+    </section>
+  </main>
+
+  <app-support-button class="hidden lg:block"></app-support-button>
+
+  <!-- Footer -->
+  <footer [class]="layoutUi.headerHeight" class="shrink-0">
+    <app-footer class="w-full hidden lg:block" />
+  </footer>
+</div>
+
+<app-exit-confirmation-dialog />

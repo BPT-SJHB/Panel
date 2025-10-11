@@ -123,6 +123,7 @@ export class WalletPaymentFormComponent
   // 💰 Trigger a payment request and open the payment URI
   async paymentMoney(): Promise<void> {
     if (this.amount.invalid) return;
+    console.log(this.amount.value);
 
     try {
       this.loadingService.setLoading(true);

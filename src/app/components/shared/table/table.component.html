@@ -10,6 +10,9 @@
   [selectionMode]="selectionMode"
   (onRowSelect)="rowTableSelect($event.data)"
   (onRowUnselect)="rowTableUnSelect($event.data)"
+  (sortFunction)="onCustomSort($event)"
+  [customSort]="customSort"
+  (onPage)="onPageChange($event)"
 >
   <!-- Caption -->
   @if (enableCaptionButton) {
@@ -19,6 +22,7 @@
           class="flex justify-end w-full px-1"
           label="جدید"
           size="small"
+          [severity]="'info'"
           styleClass="px-6 md:px-8 py-2"
           (click)="clickCaptionButton.emit()"
         />
@@ -28,93 +32,106 @@
 
   <!-- Table Header -->
   <ng-template pTemplate="header">
-
-  <tr class="text-nowrap">
-    @for (column of columns; track column.field) {
-      <th [pSortableColumn]="hasSorting(column) ? column.field.toString() : undefined">
-        <div class="flex items-center justify-center gap-2">
-          {{ column.header }}
-          @if (hasSorting(column)) {
-            <p-sortIcon [field]="column.field.toString()" />
-          }
-        </div>
-      </th>
-    }
-  </tr>
-
+    <tr class="text-nowrap">
+      @for (column of columns; track column.field) {
+        <th
+          [pSortableColumn]="
+            hasSorting(column) ? column.field.toString() : undefined
+          "
+        >
+          <div class="flex items-center justify-center gap-2">
+            {{ column.header }}
+            @if (hasSorting(column)) {
+              <p-sortIcon [field]="column.field.toString()" />
+            }
+          </div>
+        </th>
+      }
+    </tr>
   </ng-template>
 
   <!-- Table Body -->
-  <ng-template pTemplate="body" let-row>
-    <tr class="text-nowrap" [pSelectableRow]="row">
-      @for (column of columns; track column.field) {
-        <td class="text-center" [class]="getTdClass(row)">
-          @switch (getColumnType(column)) {
-            @case (ColumnType.TEXT) {
-              <span
-                [class.cursor-pointer]="!!column.onAction"
-                (click)="column.onAction?.(row)"
-                [class]="getColumnClass(column, row)"
-              >
-                {{ row[column.field] }}
-              </span>
-            }
+  <ng-template pTemplate="body" let-row let-i="rowIndex">
+    @if (!loading) {
+      <tr class="text-nowrap" [pSelectableRow]="row">
+        @for (column of columns; track column.field) {
+          <td class="text-center" [class]="getTdClass(row)">
+            @switch (getColumnType(column)) {
+              @case (ColumnType.TEXT) {
+                <span
+                  [class.cursor-pointer]="!!column.onAction"
+                  (click)="column.onAction?.(row)"
+                  [class]="getColumnClass(column, row)"
+                >
+                  {{ applyFormat(column, row[column.field]) }}
+                </span>
+              }
 
-            @case (ColumnType.ICON) {
-              <i
-                class="pi"
-                [class]="row[column.field] + ' ' + getColumnClass(column, row)"
-                [class.cursor-pointer]="!!column.onAction"
-                (click)="column.onAction?.(row)"
-              ></i>
-            }
+              @case (ColumnType.ICON) {
+                <i
+                  class="pi"
+                  [class]="
+                    row[column.field] + ' ' + getColumnClass(column, row)
+                  "
+                  [class.cursor-pointer]="!!column.onAction"
+                  (click)="column.onAction?.(row)"
+                ></i>
+              }
 
-            @case (ColumnType.BOOLEAN) {
-              <i
-                class="pi text-center w-full text-2xl"
-                [class]="getColumnClass(column, row)"
-                (click)="column.onAction?.(row)"
-                [ngClass]="
-                  row[column.field]
-                    ? 'pi-check-circle text-green-500'
-                    : 'pi-times-circle text-red-500'
-                "
-              ></i>
-            }
+              @case (ColumnType.BOOLEAN) {
+                <i
+                  class="pi text-center w-full text-2xl"
+                  [class]="getColumnClass(column, row)"
+                  (click)="column.onAction?.(row)"
+                  [ngClass]="
+                    row[column.field]
+                      ? 'pi-check-circle text-green-500'
+                      : 'pi-times-circle text-red-500'
+                  "
+                ></i>
+              }
 
-            @case (ColumnType.BUTTON) {
-              <app-button
-                [label]="row[column.field]"
-                (click)="column.onAction?.(row)"
-                [severity]="column.buttonSeverity ?? defaultButtonSeverity"
-                [styleClass]="getColumnClass(column, row)"
-              />
-            }
+              @case (ColumnType.BUTTON) {
+                <app-button
+                  [label]="row[column.field]"
+                  (click)="column.onAction?.(row)"
+                  [severity]="column.buttonSeverity ?? defaultButtonSeverity"
+                  [styleClass]="getColumnClass(column, row)"
+                />
+              }
 
-            @case (ColumnType.BUTTON_ICON) {
-              <app-button
-                [icon]="row[column.field]"
-                (click)="column.onAction?.(row)"
-                [severity]="column.buttonSeverity ?? defaultButtonSeverity"
-                [styleClass]="getColumnClass(column, row)"
-              />
-            }
+              @case (ColumnType.BUTTON_ICON) {
+                <app-button
+                  [icon]="row[column.field]"
+                  (click)="column.onAction?.(row)"
+                  [severity]="column.buttonSeverity ?? defaultButtonSeverity"
+                  [styleClass]="getColumnClass(column, row)"
+                />
+              }
 
-            @case (ColumnType.CHECKBOX) {
-              <p-checkbox
-                [binary]="true"
-                [value]="row[column.field]"
-                (onChange)="onCheckboxChange($event, row, column)"
-              ></p-checkbox>
-            }
+              @case (ColumnType.CHECKBOX) {
+                <p-checkbox
+                  [binary]="true"
+                  [(ngModel)]="row[column.field]"
+                  (onChange)="onCheckboxChange($event, row, column)"
+                ></p-checkbox>
+              }
 
-            @default {
-              <span>—</span>
+              @default {
+                <span>—</span>
+              }
             }
-          }
-        </td>
+          </td>
+        }
+      </tr>
+    } @else {
+      @if (isFirstRowPage(i)) {
+        <div class="px-4 py-4 flex items-center gap-3">
+          <i class="pi pi-spin pi-spinner" aria-hidden="true"></i>
+          <span class="truncate">در حال بارگذاری اطلاعات...</span>
+        </div>
       }
-    </tr>
+    }
   </ng-template>
 </p-table>
 @if (rows.length === 0) {

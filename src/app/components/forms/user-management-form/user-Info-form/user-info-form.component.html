@@ -1,4 +1,4 @@
-<div class="p-fluid grid gap-2 relative">
+<div class="p-fluid grid gap-0 relative">
   <form
     class="col-span-12"
     [class.pointer-events-none]="loading()"
@@ -14,10 +14,21 @@
         validationField="mobile"
         [disableSearchButton]="searchForm.invalid || loading()"
         [onSearchQuery]="fetchUserByPhone"
-        [addonWidth]="'3rem'"
+        type="number"
       />
     </div>
   </form>
+
+  <div class="flex flex-row-reverse col-span-12 mb-5">
+    <app-button
+      [rounded]="true"
+      (click)="resetUserInfoForm()"
+      styleClass="px-7"
+      severity="info"
+    >
+      {{ appTitles.buttons.add.addUser }}
+    </app-button>
+  </div>
 
   <form
     class="p-fluid grid col-span-12 gap-6 relative"
@@ -34,17 +45,10 @@
         validationField="id"
         icon="pi pi-id-card"
         label="شناسه کاربری"
+        [addonWidth]="addonWidth"
+        language="en"
       />
     </div>
-
-    <app-button
-      (click)="resetUserInfoForm()"
-      styleClass="rounded-full h-10"
-      [disabled]="getUserFormControl('id').invalid || loading()"
-      severity="info"
-    >
-      {{ appTitles.buttons.add.addUser }}
-    </app-button>
 
     <!-- Full Name -->
     <div class="col-span-12 md:col-span-6">
@@ -53,6 +57,7 @@
         icon="pi pi-user"
         [placeholder]="appTitles.getPlaceholder('userNamePlaceholder')"
         [control]="getUserFormControl('name')"
+        [addonWidth]="addonWidth"
         [label]="appTitles.inputs.users.userNameTitle"
       />
     </div>
@@ -66,6 +71,8 @@
           class="flex-1"
           [placeholder]="appTitles.getPlaceholder('userPhoneNumberPlaceholder')"
           [control]="getUserFormControl('phone')"
+          [addonWidth]="addonWidth"
+          type="number"
         />
       </div>
     </div>
@@ -75,6 +82,7 @@
       <app-select-input
         [control]="getUserFormControl('userType')"
         [options]="roles"
+        [addonWidth]="addonWidth"
         icon=""
         [label]="appTitles.inputs.users.userTypesTitle"
       />

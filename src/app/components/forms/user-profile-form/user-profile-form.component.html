@@ -12,21 +12,23 @@
 <div class="flex flex-col gap-4 px-2">
   <!-- Display columns dynamically -->
   @for (col of cols; track col) {
-    <div
-      class="flex  items-center text-sm border-b border-surface pb-2"
-      >
-      <span class="font-semibold text-right w-24 min-w-6rem text-primary">
+    <div class="flex items-center text-sm border-b border-surface pb-2">
+      <span class="w-24 min-w-6rem font-semibold text-right text-primary">
         {{ col.col }}:
       </span>
+
       <span class="text-right text-sm">
-        {{ userProfile()[col.field]  }}
+        @if (col.field === 'balance') {
+          {{ userProfile()[col.field] | number:'1.0-0' }}
+          <span class="mx-1">ریال</span>
+        } @else {
+          {{ userProfile()[col.field] }}
+        }
       </span>
-      @if (col.field === 'balance') {
-        <span class="mx-1">تومان</span>
-      }
     </div>
   }
 </div>
+
 <!-- Action Buttons -->
 <div
   class="col-span-12 mt-8 md:mb-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center"

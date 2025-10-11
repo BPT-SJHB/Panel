@@ -1,11 +1,5 @@
-import { Component, ViewChild, inject } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { AutoCompleteSelectEvent } from 'primeng/autocomplete';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 
@@ -190,8 +184,6 @@ export class FactoriesAndFreightFormComponent extends BaseLoading {
 
   // Form Getters
   get fpcId(): FormControl {
-    const id = this.fpcForm.get('fpcId');
-    console.log(id?.invalid, id?.value, id?.errors);
     return this.fpcForm.get('fpcId') as FormControl;
   }
 

@@ -1,15 +1,17 @@
-import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
-import { NgClass } from '@angular/common';
-import { Subject, takeUntil } from 'rxjs';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject,
+  signal,
+} from '@angular/core';
 
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { LADPlace } from 'app/data/model/lad-place.model';
 
 import { LADPlaceManagementService } from 'app/services/lad-place-management/lad-place-management.service';
-import { LoadingService } from 'app/services/loading-service/loading-service.service';
-import { ToastService } from 'app/services/toast-service/toast.service';
 
-import { ConfirmationService } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -25,18 +27,32 @@ import {
 } from '@angular/forms';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { ShortResponse } from 'app/data/model/short-response.model';
-import { ErrorCodes } from 'app/constants/error-messages';
 import { TableConfig } from 'app/constants/ui/table.ui';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { AppTitles } from 'app/constants/Titles';
+import { BaseLoading } from '../shared/component-base/base-loading';
+import {
+  deleteCell,
+  editCell,
+  TableColumn,
+  TableColumnType,
+  TableComponent,
+} from 'app/components/shared/table/table.component';
+import { checkAndToastError } from 'app/utils/api-utils';
+import { AppConfirmService } from 'app/services/confirm/confirm.service';
 
+enum LADPlaceFormMode {
+  EDITABLE,
+  REGISTER,
+}
+
+type LADPlaceTableRow = LADPlace & { edit: string; delete: string };
 @Component({
   selector: 'app-lad-places-form',
   standalone: true,
   imports: [
     TableModule,
     ButtonModule,
-    NgClass,
     ConfirmDialogModule,
     DialogModule,
     SearchInputComponent,
@@ -44,128 +60,121 @@ import { AppTitles } from 'app/constants/Titles';
     ToggleSwitchInputComponent,
     ReactiveFormsModule,
     ButtonComponent,
+    TableComponent,
   ],
   templateUrl: './lad-places-form.component.html',
   styleUrl: './lad-places-form.component.scss',
-  providers: [ConfirmationService],
 })
-export class LadPlacesFormComponent implements OnInit, OnDestroy {
+export class LadPlacesFormComponent
+  extends BaseLoading
+  implements OnInit, OnDestroy
+{
   @ViewChild(SearchInputComponent) searchInput!: SearchInputComponent<LADPlace>;
 
-  private destroy$ = new Subject<void>();
-  private loadingService = inject(LoadingService);
-  private toast = inject(ToastService);
-  private ladPlaceService = inject(LADPlaceManagementService);
-  private confirmationService = inject(ConfirmationService);
-  private fb = inject(FormBuilder);
+  private readonly ladPlaceService = inject(LADPlaceManagementService);
+  private readonly confirmationService = inject(AppConfirmService);
+  private readonly fb = inject(FormBuilder);
 
   readonly tableUi = TableConfig;
   readonly addonWidth = '7rem';
-  readonly appTitle = AppTitles
+  readonly appTitle = AppTitles;
 
+  readonly cloumns: TableColumn<LADPlaceTableRow>[] = [
+    { header: 'شناسه', field: 'LADPlaceId' },
+    { header: 'عنوان', field: 'LADPlaceTitle' },
+    {
+      header: ' وضعیت محل بارگیری',
+      field: 'LoadingActive',
+      type: TableColumnType.BOOLEAN,
+    },
+    {
+      header: ' وضعیت محل تخلیه',
+      field: 'DischargingActive',
+      type: TableColumnType.BOOLEAN,
+    },
+    { header: 'شماره تماس', field: 'LADPlaceTel' },
+    { header: 'آدرس', field: 'LADPlaceAddress' },
+    {
+      ...editCell.config,
+      field: 'edit',
+      onAction: async (row: LADPlace) => await this.onEdit(row),
+    },
+    {
+      ...deleteCell.config,
+      field: 'delete',
+      onAction: async (row: LADPlace) => await this.onDelete(row),
+    },
+  ];
+  readonly ladPlaces = signal<LADPlaceTableRow[]>([]);
+
+  formMode = signal<LADPlaceFormMode>(LADPlaceFormMode.REGISTER);
   formDialogVisible = false;
-  loading = false;
-  ladPlaces: LADPlace[] = [];
-  ladPlacesCached: LADPlace[] = [];
   headerTitle = '';
   cashedLadPlace?: LADPlace;
 
-  readonly cols = [
-    'کد',
-    'ویرایش',
-    'حذف',
-    'عنوان',
-    'محل بارگیری',
-    'محل تخلیه',
-    'شماره تماس',
-    'آدرس',
-  ];
-
   ladPlacesForm = this.fb.group({
-    ladPlacesId: [0, ValidationSchema.id],
-    ladPlacesTitle: ['', ValidationSchema.title],
-    ladPlacesTel: ['', Validators.pattern(/^0\d{10}$/)],
-    ladPlacesAddress: [''],
-    loadingActive: [true],
-    dischargingActive: [true],
+    ladPlacesId: this.fb.control<number | null>(null, Validators.required),
+    ladPlacesTitle: this.fb.nonNullable.control<string>(
+      '',
+      ValidationSchema.title
+    ),
+    ladPlacesTel: this.fb.nonNullable.control<string>(
+      '',
+      ValidationSchema.telephone
+    ),
+    ladPlacesAddress: this.fb.nonNullable.control<string>(''),
+    loadingActive: this.fb.nonNullable.control(true),
+    dischargingActive: this.fb.nonNullable.control(true),
   });
 
-  ngOnInit(): void {
-    this.loadingService.loading$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((value) => (this.loading = value));
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
-  searchLADPlace: (query: string) => Promise<LADPlace[]> = async (
-    query: string,
+  searchLADPlace: (query: string) => Promise<LADPlaceTableRow[]> = async (
+    query: string
   ) => {
     const response = await this.ladPlaceService.GetLADPlaces(query);
-    if (!this.handleResponse(response)) return [];
-    return response.data!;
+    if (!checkAndToastError(response, this.toast)) return [];
+    return (
+      response.data?.map((lad) => ({
+        ...lad,
+        edit: editCell.value,
+        delete: deleteCell.value,
+      })) ?? []
+    );
   };
 
-  filterLADPlace = (ladPlace: LADPlace, query: string) => {
+  filterLADPlace = (ladPlace: LADPlaceTableRow, query: string) => {
     return ladPlace.LADPlaceTitle.includes(query);
   };
 
-  handelSearchLADPlaces(ladPlaces: LADPlace[]) {
-    this.ladPlaces = ladPlaces;
+  handelSearchLADPlaces(ladPlaces: LADPlaceTableRow[]) {
+    this.ladPlaces.set(ladPlaces);
   }
 
   onDelete(row: LADPlace): void {
-    const title = `حذف رکورد ${row.LADPlaceId}`;
-    const message = `آیا می‌خواهید رکورد با عنوان ${row.LADPlaceTitle} و کد ${row.LADPlaceId} حذف شود؟`;
-
-    this.confirmationService.confirm({
-      message,
-      header: title,
-      icon: 'pi pi-info-circle',
-      closable: true,
-      closeOnEscape: true,
-
-      rejectLabel: 'لغو',
-      rejectButtonProps: {
-        label: 'لغو',
-        severity: 'secondary',
-        outlined: true,
-      },
-
-      acceptLabel: 'تایید',
-      acceptButtonProps: {
-        label: 'تایید',
-        severity: 'danger',
-      },
-      accept: async () => {
-        try {
-          this.loadingService.setLoading(true);
-          await this.deleteLadPlaces(row.LADPlaceId);
-        } finally {
-          this.loadingService.setLoading(false);
-        }
-      },
+    const message = `شناسه ${row.LADPlaceId} - عنوان ${row.LADPlaceTitle}`;
+    this.confirmationService.confirmDelete(message, async () => {
+      await this.withLoading(async () => {
+        await this.deleteLadPlaces(row.LADPlaceId);
+      });
     });
   }
 
   async onEdit(row: LADPlace) {
-    if (this.loading) return;
+    if (this.loading()) return;
+    this.formMode.set(LADPlaceFormMode.EDITABLE);
     const ladPlace = await this.getLadPlace(row.LADPlaceId);
     if (!ladPlace) return;
 
     this.cashedLadPlace = ladPlace;
     this.populateLadPlaceForm(ladPlace);
-    this.headerTitle = `ویرایش فرم کد ${ladPlace.LADPlaceId}`;
+    this.headerTitle = `ویرایش مبدا و مقصد حمل بار`;
     this.formDialogVisible = true;
   }
 
   async onNew() {
-    if (this.loading) return;
+    if (this.loading()) return;
+    this.formMode.set(LADPlaceFormMode.EDITABLE);
     this.cashedLadPlace = this.extractLadPlaceFromForm();
-    this.headerTitle = 'افزودن';
+    this.headerTitle = 'افزودن مبدا و مقصد حمل بار';
     this.formDialogVisible = true;
   }
 
@@ -175,26 +184,40 @@ export class LadPlacesFormComponent implements OnInit, OnDestroy {
   }
 
   async registerOrEdit() {
-    try {
-      this.loadingService.setLoading(true);
-      const id = this.ladPlacesId.value;
-      id === 0 ? await this.registerLadPlace() : await this.editLadPlace();
-    } finally {
-      this.loadingService.setLoading(false);
+    if (this.loading()) return;
+    this.withLoading(async () => {
+      if (this.formMode() === LADPlaceFormMode.REGISTER) {
+        await this.registerLadPlace();
+      } else {
+        await this.editLadPlace();
+      }
+    });
+  }
+
+  isFormValidExcept(
+    exceptControl: keyof typeof this.ladPlacesForm.controls
+  ): boolean {
+    const controls = this.ladPlacesForm.controls;
+
+    // iterate over all keys
+    for (const key of Object.keys(controls)) {
+      if (key === exceptControl) continue;
+      if (controls[key as keyof typeof controls].invalid) return false;
     }
+    return true;
   }
 
   private resetLadPlacesForm() {
     this.ladPlacesForm.reset();
     this.ladPlacesForm.markAsUntouched();
-    this.ladPlacesId.setValue(0);
+    this.ladPlacesId.setValue(null);
     this.loadingActive.setValue(true);
     this.dischargingActive.setValue(true);
     this.cashedLadPlace = undefined;
   }
 
   private async updateLoadingAndDischarging(
-    id: number,
+    id: number
   ): Promise<ApiResponse<ShortResponse>[]> {
     const responses: ApiResponse<ShortResponse>[] = [];
 
@@ -206,7 +229,7 @@ export class LadPlacesFormComponent implements OnInit, OnDestroy {
       this.cashedLadPlace?.DischargingActive !== this.dischargingActive.value
     ) {
       responses.push(
-        await this.ladPlaceService.ChangeDischargingPlaceStatus(id),
+        await this.ladPlaceService.ChangeDischargingPlaceStatus(id)
       );
     }
 
@@ -214,80 +237,58 @@ export class LadPlacesFormComponent implements OnInit, OnDestroy {
   }
 
   private async editLadPlace() {
-    if (this.ladPlacesForm.invalid || this.ladPlacesId.value === 0) return;
+    if (this.ladPlacesForm.invalid) return;
 
-    try {
-      const ladPlace = this.extractLadPlaceFromForm();
-      const response = await this.ladPlaceService.UpdateLADPlace(ladPlace);
-      if (!this.handleResponse(response)) return;
+    const ladPlace = this.extractLadPlaceFromForm();
+    const response = await this.ladPlaceService.UpdateLADPlace(ladPlace);
+    if (!checkAndToastError(response, this.toast)) return;
 
-      const changes = await this.updateLoadingAndDischarging(
-        ladPlace.LADPlaceId,
-      );
-      const hasError = changes.some((res) => !this.handleResponse(res));
+    const changes = await this.updateLoadingAndDischarging(ladPlace.LADPlaceId);
+    const hasError = changes.some(
+      (res) => !checkAndToastError(res, this.toast)
+    );
 
-      if (hasError) return;
-      this.toast.success('موفق', response.data?.Message ?? '');
-    } finally {
-      this.updateTable();
-      this.closeDialog();
-    }
+    if (hasError) return;
+    this.toast.success('موفق', response.data.Message);
+    await this.updateTable();
+    this.closeDialog();
   }
 
   private async registerLadPlace() {
-    if (this.ladPlacesForm.invalid || this.ladPlacesId.value !== 0) return;
-    try {
-      const ladPlace = this.extractLadPlaceFromForm();
-      const response = await this.ladPlaceService.RegisterNewLADPlace(ladPlace);
+    if (!this.isFormValidExcept('ladPlacesId')) return;
+    const ladPlace = this.extractLadPlaceFromForm();
+    const response = await this.ladPlaceService.RegisterNewLADPlace(ladPlace);
 
-      if (!this.handleResponse(response)) return;
+    if (!checkAndToastError(response, this.toast)) return;
 
-      const changes = await this.updateLoadingAndDischarging(
-        response.data!.LADPlaceId,
-      );
-      const hasError = changes.some((res) => !this.handleResponse(res));
+    const changes = await this.updateLoadingAndDischarging(
+      response.data.LADPlaceId
+    );
+    const hasError = changes.some(
+      (res) => !checkAndToastError(res, this.toast)
+    );
 
-      if (hasError) return;
-
-      this.populateLadPlaceForm({
-        ...ladPlace,
-        LADPlaceId: response.data?.LADPlaceId ?? 0,
-      });
-    } finally {
-      this.updateTable();
-      this.closeDialog();
-    }
+    if (hasError) return;
+    await this.updateTable();
+    this.closeDialog();
   }
 
   private async deleteLadPlaces(id: number) {
     const response = await this.ladPlaceService.DeleteLADPlace(id);
-    if (!this.handleResponse(response)) return;
-    this.toast.success('موفق', response.data?.Message ?? '');
+    if (!checkAndToastError(response, this.toast)) return;
+    this.toast.success('موفق', response.data.Message);
     this.updateTable();
   }
+
   private closeDialog() {
     this.formDialogVisible = false;
     this.ladPlacesForm.reset();
     this.headerTitle = '';
   }
 
-  private handleResponse(response: ApiResponse<any>): boolean {
-    if (!response.success || !response.data) {
-      this.toast.error(
-        'خطا',
-        response.error?.message ?? 'خطای غیرمنتظره‌ای رخ داد',
-      );
-      if (response.error?.code === ErrorCodes.NoRecordFound) {
-        return true;
-      }
-      return false;
-    }
-    return true;
-  }
-
   private async getLadPlace(id: number): Promise<LADPlace | undefined> {
     const response = await this.ladPlaceService.GetLADPlace(id);
-    return this.handleResponse(response) ? response.data! : undefined;
+    return checkAndToastError(response, this.toast) ? response.data : undefined;
   }
 
   private extractLadPlaceFromForm(): LADPlace {

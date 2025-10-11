@@ -5,7 +5,7 @@
   class="grid grid-cols-12 gap-4 mb-5"
 >
   <app-search-auto-complete
-    class="col-span-12 sm:col-span-6 lg:col-span-4"
+    class="col-span-12 sm:col-span-4 lg:col-span-4"
     [label]="appTitle.inputs.trucks.truckLoader"
     [placeholder]="appTitle.getPlaceholder('truckLoader')"
     optionLabel="LoaderTypeTitle"
@@ -18,7 +18,7 @@
   />
 
   <app-search-auto-complete
-    class="col-span-12 sm:col-span-6 lg:col-span-4"
+    class="col-span-12 sm:col-span-4 lg:col-span-4"
     [label]="appTitle.inputs.provinceAndCities.startCity"
     [placeholder]="appTitle.getPlaceholder('startCity')"
     [control]="searchSourceCity"
@@ -32,7 +32,7 @@
   />
 
   <app-search-auto-complete
-    class="col-span-12 sm:col-span-6 lg:col-span-4"
+    class="col-span-12 sm:col-span-4 lg:col-span-4"
     [label]="appTitle.inputs.provinceAndCities.endCity"
     [placeholder]="appTitle.getPlaceholder('endCity')"
     [control]="searchTargetCity"
@@ -45,7 +45,7 @@
     addonWidth="8rem"
   />
 
-  <div class="col-span-12 flex justify-end">
+  <div class="col-span-12 flex flex-row-reverse">
     <app-button
       [label]="appTitle.buttons.search"
       severity="info"
@@ -58,7 +58,12 @@
 </form>
 
 <!-- Results Table -->
-<app-table [rows]="travelTimes" [columns]="cloumns" />
+<app-table
+  [rows]="travelTimes"
+  [columns]="cloumns"
+  [enableCaptionButton]="true"
+  (clickCaptionButton)="onNew()"
+/>
 <!-- Dialog Form -->
 <p-dialog
   [(visible)]="formDialogVisible"
@@ -71,9 +76,8 @@
 >
   <form
     [formGroup]="travelTimeForm"
-    [class.pointer-events-none]="loading"
-    [class.opacity-60]="loading"
-    (ngSubmit)="registerOrEdit()"
+    [class.pointer-events-none]="loading()"
+    [class.opacity-60]="loading()"
   >
     <div class="grid grid-cols-12 gap-4">
       <div class="grid grid-cols-12 gap-4 col-span-12">
@@ -130,6 +134,7 @@
           [label]="appTitle.inputs.travelTime.travelTimeDurationTitle"
           [placeholder]="appTitle.getPlaceholder('travelTimeDurationTitle')"
           [control]="travelTimeTake"
+          type="number"
           addonWidth="8rem"
         />
       </div>
@@ -145,7 +150,7 @@
       <div class="col-span-12 flex justify-end mt-6">
         <app-button
           [label]="appTitle.buttons.saveAndEdit"
-          [disabled]="travelTimeForm.invalid || loading"
+          [disabled]="travelTimeForm.invalid || loading()"
           (click)="registerOrEdit()"
         />
       </div>

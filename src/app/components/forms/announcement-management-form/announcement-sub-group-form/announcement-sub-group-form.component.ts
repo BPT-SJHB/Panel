@@ -143,13 +143,13 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
 
   // 🎯 Actions
   onNew(): void {
-    this.headerTitle = 'افزودن زیرگروه';
+    this.headerTitle = 'افزودن زیرگروه اعلام بار';
     this.announcementFormSubGroupMode = FormMode.REGISTER;
     this.formDialogVisible = true;
   }
 
   onEdit(row: AnnouncementSubGroup): void {
-    this.headerTitle = 'ویرایش زیرگروه';
+    this.headerTitle = 'ویرایش زیرگروه اعلام بار';
     this.announcementFormSubGroupMode = FormMode.EDITABLE;
     this.populateForm(row);
     this.formDialogVisible = true;

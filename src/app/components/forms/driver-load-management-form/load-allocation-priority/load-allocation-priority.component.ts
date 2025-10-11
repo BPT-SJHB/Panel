@@ -120,7 +120,7 @@ export class LoadAllocationPriorityComponent
   }
 
   async cancelLoad(load: LoadAllocationInfo) {
-    this.confirmDialog.confirmCancel(
+    this.confirmDialog.confirmLoadAllocationCancel(
       `بار ${load.GoodTitle} - ${load.LAId}`,
       async () => {
         await this.withLoading(async () => {

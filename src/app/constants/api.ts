@@ -5,6 +5,8 @@ const walletAndTrafficPort = 83;
 const LoadCapacitorPort = 84;
 const LoadAllocationPort = 85;
 const ReportsPort = 86;
+const ticketPort = 8080;
+const ticketUrl = 'http://localhost';
 const apiFixURLPart = '/api/';
 
 export const API_ROUTES = {
@@ -220,6 +222,41 @@ export const API_ROUTES = {
       GetLoadPermissions: `${environment.apiUrl}:${ReportsPort}/api/GetLoadPermissions`,
       GetLoadPermissionsForDriver: `${environment.apiUrl}:${ReportsPort}/api/GetLoadPermissionsforTruckDriver`,
       GetLoadAccounting: `${environment.apiUrl}:${ReportsPort}/api/GetLoadAccountingRecords`,
+    },
+  },
+
+  TicketAPI: {
+    Auth: {
+      SignUp: `${ticketUrl}:${ticketPort}/api/v1/auth/SignUp/`,
+      Login: `${ticketUrl}:${ticketPort}/api/v1/auth/Login/`,
+      LoginWithNoAuth: `${ticketUrl}:${ticketPort}/api/v1/auth/LoginWithNoAuth/`,
+      LoginWithSingleUseToken: `${ticketUrl}:${ticketPort}/api/v1/auth/LoginWithSingleUseToken/`,
+      GetSingleUseToken: `${ticketUrl}:${ticketPort}/api/v1/auth/GetSingleUseToken/`,
+    },
+    Captcha: {
+      GetCaptcha: `${ticketUrl}:${ticketPort}/api/v1/captcha/GetCaptcha/`,
+      VerifyCaptcha: `${ticketUrl}:${ticketPort}/api/v1/captcha/VerifyCaptcha/`,
+    },
+    Version: {
+      GetCurrentVersion: `${ticketUrl}:${ticketPort}/api/v1/`,
+    },
+    Tickets: {
+      CreateTicket: `${ticketUrl}:${ticketPort}/api/v1/tickets/CreateTicket/`,
+      GetTicketByTrackCode: `${ticketUrl}:${ticketPort}/api/v1/tickets/GetTicketByTrackCode/`,
+      GetTicketByID: `${ticketUrl}:${ticketPort}/api/v1/tickets/GetTicketByID/`,
+      CreateChat: (id: string) =>
+        `${ticketUrl}:${ticketPort}/api/v1/tickets/${id}/CreateChat/`,
+      GetTicketsList: `${ticketUrl}:${ticketPort}/api/v1/tickets/GetTicketsList/`,
+      GetAllActiveTicketTypes: `${ticketUrl}:${ticketPort}/api/v1/tickets/GetAllActiveTicketTypes/`,
+      GetAllActiveTicketStatuses: `${ticketUrl}:${ticketPort}/api/v1/tickets/GetAllActiveTicketStatuses/`,
+    },
+    Departments: {
+      GetAllActiveDepartments: `${ticketUrl}:${ticketPort}/api/v1/departments/GetAllActiveDepartments/`,
+    },
+    Users: {
+      GetUserByID: `${ticketUrl}:${ticketPort}/api/v1/users/GetUserByID/`,
+      GetUserByUsername: `${ticketUrl}:${ticketPort}/api/v1/users/GetUserByUsername/`,
+      GetUsersIDs: `${ticketUrl}:${ticketPort}/api/v1/users/GetUsersByIDs/`,
     },
   },
 };

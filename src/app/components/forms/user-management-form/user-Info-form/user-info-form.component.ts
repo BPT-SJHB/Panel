@@ -52,6 +52,8 @@ export class UserInfoFormComponent extends BaseLoading implements OnInit {
   private readonly dialogService = inject(DialogService);
   private readonly nonNullable = this.fb.nonNullable;
 
+  readonly addonWidth = '100px';
+
   // forms
   readonly userInfoForm = this.fb.group({
     id: this.fb.control<number | null>(null, ValidationSchema.id), // nullable
@@ -99,7 +101,7 @@ export class UserInfoFormComponent extends BaseLoading implements OnInit {
     const id = this.getUserFormControl('id');
     const smsActive = this.getUserFormControl('smsActive');
 
-    const canUserSendSms = id.invalid || smsActive.value;
+    const canUserSendSms = id.valid && !smsActive.value;
 
     if (this.loading() || !canUserSendSms) return;
 

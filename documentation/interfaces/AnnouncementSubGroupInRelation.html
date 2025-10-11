@@ -98,7 +98,7 @@
   <li class="breadcrumb-item">Interfaces</li>
   <li class="breadcrumb-item"
   >
-  AnnouncementSubGroupInRelation</li>
+  announcementSubGroupInRelation</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -122,7 +122,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/services/announcement-group-subgroup-management/model/relation-of-announcement-group-subgroup.model.ts</code>
+            <code>src/app/services/sequential-turn-management/model/relation-of-sequentialTurn-to-announcementSubGroup.model.ts</code>
         </p>
 
 
@@ -240,13 +240,12 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface RelationOfAnnouncementGroupAndSubGroup {
-  AnnouncementId: number;
-  AnnouncementTitle?: string;
-  AnnouncementSubGroups: AnnouncementSubGroupInRelation[];
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface RelationOfSequentialTurnToAnnouncementSubGroup {
+  SeqTurnId: number;
+  SeqTurnTitle?: string;
+  AnnouncementSubGroups: announcementSubGroupInRelation[];
 }
-
-export interface AnnouncementSubGroupInRelation {
+export interface announcementSubGroupInRelation {
   AnnouncementSGId: number;
   AnnouncementSGTitle?: string;
 }
@@ -287,7 +286,7 @@ export interface AnnouncementSubGroupInRelation {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'AnnouncementSubGroupInRelation.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'announcementSubGroupInRelation.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

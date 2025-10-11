@@ -37,6 +37,8 @@ import { LoadListType } from '../loads-list-form/loads-list-form.component';
 // Utils
 import { checkAndToastError } from 'app/utils/api-utils';
 import { AnnouncementSubGroup } from 'app/services/announcement-group-subgroup-management/model/announcement-subgroup.model';
+import { AppTitles } from 'app/constants/Titles';
+import { single } from 'rxjs';
 
 @Component({
   selector: 'app-loads-announcement-form',
@@ -59,17 +61,16 @@ export class LoadsAnnouncementFormComponent
   // 🔹 Constants
   // =====================================================
   readonly loadType: LoadListType = LoadListType.ADMIN;
-  readonly addonWidth = '12rem';
+  readonly addonWidth = '8rem';
   readonly baseWidthClass = 'w-24 sm:w-32 md:w-40 lg:w-48';
+  readonly appTitles = AppTitles;
 
   // =====================================================
   // 🔹 Signals & State
   // =====================================================
   readonly sharedSignal = signal<LoadInfo | null>(null);
+  private readonly prvLoadId = signal<number | null>(-1000);
   readonly selectedLoadInfo = computed(() => {
-    if (!this.sharedSignal()) {
-      this.resetForm();
-    }
     return this.sharedSignal();
   });
 
@@ -97,7 +98,7 @@ export class LoadsAnnouncementFormComponent
     { field: 'Checked', header: 'وضعیت', type: TableColumnType.CHECKBOX },
     { field: 'TPTPDId', header: 'شناسه' },
     { field: 'TPTPTitle', header: 'عنوان' },
-    { field: 'Cost', header: 'مبلغ' },
+    { field: 'Cost', header: 'مبلغ(ریال)' },
   ];
 
   // =====================================================
@@ -110,6 +111,10 @@ export class LoadsAnnouncementFormComponent
   // 🔹 Lifecycle
   // =====================================================
   onViewActivated(): void {
+    const currentId = this.selectedLoadInfo()?.LoadId ?? null;
+    if (this.prvLoadId() == currentId) return;
+    this.prvLoadId.set(currentId);
+    this.resetForm();
     this.transportTariffParams.set([]);
     this.initialize();
   }
@@ -152,7 +157,7 @@ export class LoadsAnnouncementFormComponent
     const loadId = this.getValidLoadId();
     if (!loadId) return;
 
-    this.confirmService.confirmCancel(`بار با کد ${loadId}`, async () => {
+    this.confirmService.confirmLoadCancel(`بار با کد ${loadId}`, async () => {
       await this.withLoading(async () => {
         const response = await this.loadService.CancelLoad(loadId);
         if (checkAndToastError(response, this.toast)) {
@@ -447,8 +452,8 @@ export class LoadsAnnouncementFormComponent
         AutoCompleteType.City,
         this.ctrl('SourceCityId'),
         {
-          placeholder: 'شهر مبدا',
-          label: 'شهر مبدا',
+          placeholder: this.appTitles.getPlaceholder('startCity'),
+          label: this.appTitles.inputs.provinceAndCities.startCity,
           control: this.ctrl('SourceCityTitle') as FormControl<string>,
         }
       ),
@@ -456,8 +461,8 @@ export class LoadsAnnouncementFormComponent
         AutoCompleteType.City,
         this.ctrl('TargetCityId'),
         {
-          placeholder: 'شهر مقصد',
-          label: 'شهر مقصد',
+          placeholder: this.appTitles.getPlaceholder('endCity'),
+          label: this.appTitles.inputs.provinceAndCities.endCity,
           control: this.ctrl('TargetCityTitle') as FormControl<string>,
         }
       ),
@@ -465,8 +470,8 @@ export class LoadsAnnouncementFormComponent
         AutoCompleteType.LADPlaces,
         this.ctrl('LoadingPlaceId'),
         {
-          placeholder: 'محل بارگیری',
-          label: 'محل بارگیری',
+          placeholder: this.appTitles.getPlaceholder('loadsLoadingPlace'),
+          label: this.appTitles.inputs.loads.loadingPlace,
           control: this.ctrl('LoadingPlaceTitle') as FormControl<string>,
         }
       ),
@@ -474,8 +479,8 @@ export class LoadsAnnouncementFormComponent
         AutoCompleteType.LADPlaces,
         this.ctrl('DischargingPlaceId'),
         {
-          placeholder: 'محل تخلیه',
-          label: 'محل تخلیه',
+          placeholder: this.appTitles.getPlaceholder('loadsDischargingPlace'),
+          label: this.appTitles.inputs.loads.dischargingPlace,
           control: this.ctrl('DischargingPlaceTitle') as FormControl<string>,
         }
       ),

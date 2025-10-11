@@ -1,8 +1,8 @@
-<div class="flex w-full">
-  <p-input-group styleClass="h-10 w-full">
+<div class="flex w-full h-10">
+  <p-input-group>
     <p-inputgroup-addon
       [style]="{
-        width: addonWidth,
+        flex: '0 0 ' + addonWidth,
         padding: 0,
         margin: 0,
         border: 0,
@@ -15,28 +15,24 @@
         @if (label.trim() === "") {
           <i [class]="icon"></i>
         } @else {
-          <span
-            class="text-sm text-primary-contrast"
-            style="white-space: nowrap"
-            >{{ label }}</span
-          >
+          <span class="text-sm text-primary-contrast whitespace-nowrap">{{
+            label
+          }}</span>
         }
       </div>
     </p-inputgroup-addon>
-
     <p-select
       [options]="options"
       [formControl]="control"
       [placeholder]="placeholder"
       optionLabel="label"
       optionValue="value"
-      class="px-2 h-full w-full border-y-2 border-l-2 rounded-l-2xl dark:bg-transparent border-gray-400 placeholder:text-gray-400 text-sm"
+      class="h-full w-full border-y-2 border-l-2 rounded-l-2xl dark:bg-transparent border-gray-400 placeholder:text-gray-400 text-sm"
       [ngClass]="{
         'border-red-500': control.touched && control.invalid,
         'bg-gray-100 text-gray-500 opacity-60 cursor-not-allowed': disabled,
         'border-emerald-500': control.valid,
       }"
-      styleClass="w-full border-0 h-full px-2"
     ></p-select>
   </p-input-group>
 </div>

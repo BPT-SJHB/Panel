@@ -1,21 +1,28 @@
-<div class="flex w-full">
-  <p-input-group styleClass="h-2-5rem w-full">
-    <!-- 🎨 Icon or 🏷️ Label Addon -->
-    @if (label.trim() === '') {
+<div class="flex w-full h-10">
+  <p-input-group>
     <p-inputgroup-addon
-      class="bg-primary-emphasis text-primary-contrast flex items-center justify-center px-4 rounded-l-2xl border-primary-emphasis"
-      [style.width]="addonWidth"
+      [style]="{
+        flex: '0 0 ' + addonWidth,
+        padding: 0,
+        margin: 0,
+        border: 0,
+      }"
+      class="rounded-2xl"
     >
-      <i [class]="icon"></i>
+      <div
+        class="w-full h-full flex justify-center items-center py-4 px-6 bg-primary-emphasis z-1 rounded-r-2xl text-primary-contrast"
+      >
+        @if (label.trim() === "") {
+          <i [class]="icon"></i>
+        } @else {
+          <span
+            class="text-sm text-primary-contrast"
+            style="white-space: nowrap"
+            >{{ label }}</span
+          >
+        }
+      </div>
     </p-inputgroup-addon>
-    } @if (label.trim() !== '') {
-    <p-inputgroup-addon
-      class="bg-primary-emphasis text-primary-contrast rounded-r-2xl border-primary-emphasis h-full flex items-center justify-center"
-      [style.width]="addonWidth"
-    >
-      <span class="text-sm whitespace-nowrap">{{ label }}</span>
-    </p-inputgroup-addon>
-    }
 
     <!-- 📅 Persian Date Input -->
     <div class="w-full relative">
@@ -28,14 +35,15 @@
           <input
             #inputRef
             pInputText
+            [tabIndex]="control.disabled || readOnly ? -1 : 0"
             [formControl]="control"
             [placeholder]="placeholder"
             [readOnly]="readOnly"
             class="px-2 h-full w-full border-2 border-r-0 border-gray-400 rounded-l-2xl placeholder:text-gray-400 text-sm focus:border-primary-emphasis transition-all duration-50 ease-in-out focus:outline-none"
             [ngClass]="{
-              'border-red-500': control.touched && control.invalid,
-              'bg-gray-100 text-gray-500 pointer-events-none opacity-60 cursor-not-allowed':
-                control.disabled
+              'focus:border-red-500': control.touched && control.invalid,
+              'bg-surface-200 text-surface-700 dark:bg-surface-800 dark:text-surface-200 pointer-events-none opacity-90 cursor-not-allowed':
+                control.disabled || readOnly,
             }"
             (focus)="onFocusInput(inputRef)"
             (blur)="onBlurInput(inputRef)"
@@ -48,9 +56,9 @@
 
 <!-- ⚠️ Validation Error Message -->
 @if (control.touched && firstErrorMessage) {
-<div class="px-4 mt-1">
-  <p-message severity="error" variant="simple" size="small">
-    {{ firstErrorMessage }}
-  </p-message>
-</div>
+  <div class="px-4 mt-1">
+    <p-message severity="error" variant="simple" size="small">
+      {{ firstErrorMessage }}
+    </p-message>
+  </div>
 }

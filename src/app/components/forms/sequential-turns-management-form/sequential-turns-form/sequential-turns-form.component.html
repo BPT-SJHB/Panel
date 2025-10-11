@@ -33,15 +33,13 @@
 >
   <form
     class="grid grid-cols-12 gap-6"
-    (ngSubmit)="registerOrEdit()"
     [class.pointer-events-none]="loading()"
     [class.opacity-60]="loading()"
     [formGroup]="sequentialTurnForm"
   >
     <div class="grid grid-cols-12 col-span-12 gap-2">
       <app-text-input
-        label="شناسه"
-        placeholder="شناسه"
+        [label]="this.appTitle.inputs.global.id"
         class="col-span-12"
         [control]="sequentialTurnId"
         validationField="id"
@@ -51,8 +49,8 @@
       />
 
       <app-text-input
-        label="عنوان"
-        placeholder="عنوان"
+        [label]="appTitle.inputs.global.title"
+        [placeholder]="appTitle.getPlaceholder('globalTitlePlaceholder')"
         class="col-span-12"
         [control]="sequentialTurnTitle"
         validationField="title"
@@ -60,17 +58,18 @@
       />
 
       <app-text-input
-        label="کلمه کلیدی"
-        placeholder="کلمه کلیدی"
+        [label]="appTitle.inputs.sequentialTurns.keyWord"
+        [placeholder]="appTitle.getPlaceholder('sequentialTurnKeywork')"
         class="col-span-12"
         [control]="sequentialTurnKeyword"
         validationField="keyword"
         addonWidth="8rem"
+        language="en"
       />
     </div>
     <app-toggle-switch-input
       class="col-span-12 flex px-2"
-      label="وضعیت"
+      [label]="appTitle.toggleSwitches.status"
       [control]="sequentialTurnStatus"
       [readonly]="!isFormEditable()"
     />
@@ -78,7 +77,7 @@
     <div class="col-span-12 flex justify-end">
       <app-button
         (click)="registerOrEdit()"
-        label="ثبت و ویرایش اطلاعات"
+        [label]="appTitle.buttons.saveAndEdit"
         [disabled]="sequentialTurnForm.invalid || loading()"
       />
     </div>

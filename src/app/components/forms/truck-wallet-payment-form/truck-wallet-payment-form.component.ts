@@ -80,7 +80,7 @@ export class TruckWalletPaymentFormComponent extends BaseLoading {
   private populateTruckForm(truck: TruckInfo) {
     this.searchTruckForm.patchValue({
       TruckId: truck.TruckId,
-      LicensePlate: truck.Pelak,
+      LicensePlate: (truck.Pelak ?? '') + (truck.Serial ?? ''),
       Smart: truck.SmartCardNo,
     });
   }

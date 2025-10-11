@@ -13,6 +13,17 @@
     />
   </div>
 
+  <div class="flex flex-row-reverse col-span-12 mt-3">
+    <app-button
+      [rounded]="true"
+      (click)="resetFpcForm()"
+      styleClass="px-7"
+      severity="info"
+    >
+      {{ appTitle.buttons.add.addUser }}
+    </app-button>
+  </div>
+
   <!-- Form -->
   <form
     class="grid grid-cols-12 gap-4 col-span-12"
@@ -32,8 +43,6 @@
           [control]="fpcId"
           validationField="id"
           [addonWidth]="addonWidth"
-          buttonIcon="pi pi-user-plus"
-          (clickButton)="resetFpcForm()"
         />
       </div>
 
@@ -87,6 +96,7 @@
           [control]="managerMobile"
           validationField="mobile"
           [addonWidth]="addonWidth"
+          type="number"
         />
       </div>
 
@@ -101,6 +111,7 @@
           [control]="telephone"
           validationField="telephone"
           [addonWidth]="addonWidth"
+          type="number"
         />
       </div>
 
@@ -125,6 +136,7 @@
           [control]="email"
           validationField="email"
           [addonWidth]="addonWidth"
+          language="any"
         />
       </div>
 

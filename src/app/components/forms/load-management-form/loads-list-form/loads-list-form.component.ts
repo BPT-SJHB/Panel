@@ -26,6 +26,7 @@ import {
   LoadForTransportCompanies_Factories_Admins_Drivers,
   LoadInfoForTransportCompanies_Factories_Admins_Drivers,
 } from 'app/services/load-management/model/load-info-for-transport-companies-factories-admins-drivers.model';
+import { AppTitles } from 'app/constants/Titles';
 
 interface LoadFilter {
   announceGroupId: number | null;
@@ -94,6 +95,7 @@ export class LoadsListFormComponent
 {
   readonly loadType: LoadListType = LoadListType.TRANSPORT_COMPANY;
   readonly addonWidth = '10rem';
+  readonly appTitle = AppTitles;
 
   sharedSignal!: WritableSignal<null | LoadInfo>;
   rows = signal<LoadTransportCompaniesTable[]>([]);
@@ -127,28 +129,61 @@ export class LoadsListFormComponent
   });
 
   readonly columns: TableColumn<LoadTransportCompaniesTable>[] = [
-    { header: 'استان', field: 'ProvinceName' },
-    { header: 'شناسه بار', field: 'LoadId' },
-    { header: 'عنوان شرکت حمل و نقل', field: 'TCTitle' },
-    { header: 'عنوان کالا', field: 'GoodTitle' },
-    { header: 'تناژ', field: 'Tonaj', class: 'font-bold' },
-    { header: 'شهر مبدا', field: 'SoureCityTitle' },
-    { header: 'شهر مقصد', field: 'TargetCityTitle' },
-    { header: 'مبدا بارگیری', field: 'LoadingPlaceTitle' },
-    { header: 'مقصد تخلیه', field: 'DischargingPlaceTitle' },
-    { header: 'کل', field: 'Total', class: 'text-right' },
-    { header: 'باقی مانده', field: 'Reminder', class: 'text-right' },
-    { header: 'تعرفه', field: 'Tariff' },
-    { header: 'وضعیت بار', field: 'LoadStatusName' },
-    { header: 'تاریخ اعلام', field: 'AnnounceDate' },
-    { header: 'زمان اعلام', field: 'AnnounceTime' },
-    { header: 'گروه اعلام بار', field: 'AnnouncementTitle' },
-    { header: 'زیرگروه اعلام بار', field: 'AnnouncementSGTitle' },
-    { header: 'گیرنده', field: 'Recipient' },
-    { header: 'آدرس', field: 'Address' },
-    { header: 'توضیحات', field: 'Description' },
+    { header: this.appTitle.tables.loads.loadProvince, field: 'ProvinceName' },
+    { header: this.appTitle.tables.loads.loadId, field: 'LoadId' },
+    { header: this.appTitle.tables.loads.transportCompany, field: 'TCTitle' },
+    { header: this.appTitle.tables.loads.product, field: 'GoodTitle' },
+    {
+      header: this.appTitle.tables.loads.loadSize,
+      field: 'Tonaj',
+      class: 'font-bold',
+    },
+    { header: this.appTitle.tables.loads.sourceCity, field: 'SoureCityTitle' },
+    { header: this.appTitle.tables.loads.targetCity, field: 'TargetCityTitle' },
+    {
+      header: this.appTitle.tables.loads.loadingPlace,
+      field: 'LoadingPlaceTitle',
+    },
+    {
+      header: this.appTitle.tables.loads.dischargingPlace,
+      field: 'DischargingPlaceTitle',
+    },
+    {
+      header: this.appTitle.tables.loads.loadTotalAmount,
+      field: 'Total',
+      class: 'text-right',
+    },
+    {
+      header: this.appTitle.tables.loads.loadRemainedAmount,
+      field: 'Reminder',
+      class: 'text-right',
+    },
+    { header: this.appTitle.tables.loads.loadCost, field: 'Tariff' },
+    { header: this.appTitle.tables.loads.loadStatus, field: 'LoadStatusName' },
+    {
+      header: this.appTitle.tables.loads.loadAnnouncementDate,
+      field: 'AnnounceDate',
+    },
+    {
+      header: this.appTitle.tables.loads.loadAnnouncementTime,
+      field: 'AnnounceTime',
+    },
+    {
+      header: this.appTitle.tables.loads.announcementGroup,
+      field: 'AnnouncementTitle',
+    },
+    {
+      header: this.appTitle.tables.loads.announcementSubGroup,
+      field: 'AnnouncementSGTitle',
+    },
+    { header: this.appTitle.tables.loads.recipient, field: 'Recipient' },
+    { header: this.appTitle.tables.loads.address, field: 'Address' },
+    { header: this.appTitle.tables.loads.description, field: 'Description' },
     { header: 'نام کاربر', field: 'UserName' },
-    { header: 'پارامترهای موثر', field: 'TPTParamsJoint' },
+    {
+      header: this.appTitle.tables.loads.tptParamsJoint,
+      field: 'TPTParamsJoint',
+    },
   ];
 
   readonly autoCompletions: AutoCompleteFilter[] = [

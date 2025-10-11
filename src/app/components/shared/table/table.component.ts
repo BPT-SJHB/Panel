@@ -1,9 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 import { TableConfig } from 'app/constants/ui/table.ui';
 import { CheckboxChangeEvent, CheckboxModule } from 'primeng/checkbox';
-import { TableModule } from 'primeng/table';
+import { TableModule, TablePageEvent } from 'primeng/table';
 import { ButtonComponent, ButtonSeverity } from '../button/button.component';
 import { NgClass } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { SortEvent } from 'primeng/api';
 
 export enum TableColumnType {
   TEXT,
@@ -22,6 +24,7 @@ export interface TableColumn<T extends object> {
   buttonSeverity?: ButtonSeverity;
   onAction?: (row: T) => void | Promise<void>;
   sorting?: boolean;
+  format?: 'currency';
 }
 
 type SelectionMode = 'single' | 'multiple';
@@ -48,22 +51,30 @@ export const deleteCell = {
   value: 'pi pi-trash',
 };
 
+export interface TablePage {
+  page: number;
+  pageSize: number;
+}
+
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [TableModule, CheckboxModule, ButtonComponent, NgClass],
+  imports: [TableModule, CheckboxModule, ButtonComponent, NgClass, FormsModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
 })
 export class TableComponent<T extends object> {
-  @Input() rows: T[] = [];
+  @Input() rows: (T | null)[] = [];
   @Input() columns: TableColumn<T>[] = [];
   @Input() config = TableConfig;
   @Input() rowClass: string | ((row: T) => string) = '';
   @Input() enableCaptionButton = false;
   @Input() captionButtonLabel = 'جدید';
+  @Input() loading = false;
+  @Input() customSort = false;
   @Output() clickCaptionButton = new EventEmitter<void>();
-
+  @Output() pageChange = new EventEmitter<TablePage>();
+  @Output() sortFunction = new EventEmitter<SortEvent>();
   @Input() selectionMode?: SelectionMode;
 
   // Overload signatures — so parent gets correct type automatically
@@ -74,6 +85,10 @@ export class TableComponent<T extends object> {
 
   readonly ColumnType = TableColumnType;
   readonly defaultButtonSeverity: ButtonSeverity = 'green';
+  private readonly tablePage = signal<TablePage>({
+    pageSize: this.config.rows,
+    page: 1,
+  });
 
   constructor() {
     this.rowSelect = new EventEmitter<T>();
@@ -130,5 +145,39 @@ export class TableComponent<T extends object> {
 
   hasSorting(column: TableColumn<T>): boolean {
     return this.rows.length > 1 && (column.sorting ?? true);
+  }
+
+  applyFormat(column: TableColumn<T>, value: string): string {
+    if (column?.format === 'currency') {
+      const num = Number(value);
+      if (isNaN(num)) {
+        return value;
+      }
+      return this.formatCurrency(value.toString());
+    }
+    return value;
+  }
+
+  onPageChange(event: TablePageEvent) {
+    const page = event.first / event.rows + 1;
+    const pageSize = event.rows;
+    this.pageChange.emit({ page, pageSize });
+  }
+
+  onCustomSort(event: SortEvent) {
+    this.sortFunction.emit(event);
+  }
+
+  isFirstRowPage(i: number): boolean {
+    let base = this.tablePage().page - 1;
+    base *= this.tablePage().pageSize;
+    if (i === base) {
+      return true;
+    }
+    return false;
+  }
+
+  private formatCurrency(value: string): string {
+    return value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 }

@@ -16,7 +16,12 @@
 </div>
 
 <!-- 📋 Announcement Table -->
-<app-table [columns]="columns" [rows]="displayAnnouncementsGroup" [enableCaptionButton]="true" (clickCaptionButton)="onNew()">
+<app-table
+  [columns]="columns"
+  [rows]="displayAnnouncementsGroup"
+  [enableCaptionButton]="true"
+  (clickCaptionButton)="onNew()"
+>
   <!-- Table Header -->
   <ng-template #caption>
     <div>
@@ -104,6 +109,7 @@
         [readOnly]="true"
         [disabled]="true"
         [control]="AnnouncementId"
+        language="en"
       />
 
       <app-text-input
@@ -133,4 +139,3 @@
     </div>
   </form>
 </p-dialog>
-

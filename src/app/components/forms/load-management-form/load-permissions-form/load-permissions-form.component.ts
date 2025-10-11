@@ -11,6 +11,7 @@ import { ReportsManagementService } from 'app/services/report-management/reports
 import { checkAndToastError } from 'app/utils/api-utils';
 import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { AppTitles } from 'app/constants/Titles';
 
 @Component({
   selector: 'app-load-permissions-form',
@@ -30,34 +31,63 @@ export class LoadPermissionsFormComponent
     ...TableConfig,
     paginator: false,
   };
-  readonly addonWidth = '10rem';
+  readonly addonWidth = '8rem';
+  readonly appTitle = AppTitles;
 
   readonly rows = signal<LoadPermission[]>([]);
 
   readonly columns: TableColumn<LoadPermission>[] = [
-    { header: 'شناسه بار', field: 'LoadId' },
-    { header: 'عنوان کالا', field: 'GoodTitle' },
-    { header: 'شهر مبدا', field: 'LoadSourceCity' },
-    { header: 'شهر مقصد', field: 'LoadTargetCity' },
-    { header: 'گروه اعلام بار', field: 'AnnouncementTitle' },
-    { header: 'زیرگروه اعلام بار', field: 'AnnouncementSGTitle' },
-    { header: 'شرکت حمل ونقل', field: 'TransportCompany' },
-    { header: 'گیرنده', field: 'Recipient' },
-    { header: 'آدرس', field: 'Address' },
-    { header: 'توضیحات', field: 'Description' },
-    { header: 'کاربر تخصیص بار', field: 'LoadAllocationUser' },
-    { header: 'شناسه تخصیص بار', field: 'LoadAllocationId' },
-    { header: 'پلاک خودرو', field: 'LicensePlate' },
-    { header: 'شماره کارت هوشمند', field: 'SmartCardNo' },
-    { header: 'راننده', field: 'TruckDriver' },
-    { header: 'کد ملی راننده', field: 'NationalCode' },
-    { header: 'شماره موبایل', field: 'MobileNumber' },
-    { header: 'تاریخ تخصیص بار', field: 'ShamsiDate' },
-    { header: 'زمان تخصیص بار', field: 'Time' },
-    { header: 'تسلسل نوبت', field: 'SequentialTurn' },
-    { header: 'یادداشت', field: 'Note' },
-    { header: 'وضعیت تخصیص بار', field: 'LoadAllocationStatusTitle' },
-    { header: 'پارامترهای موثر', field: 'TPTParamsJoint' },
+    { header: this.appTitle.tables.loads.loadId, field: 'LoadId' },
+    { header: this.appTitle.tables.loads.product, field: 'GoodTitle' },
+    { header: this.appTitle.tables.loads.sourceCity, field: 'LoadSourceCity' },
+    { header: this.appTitle.tables.loads.targetCity, field: 'LoadTargetCity' },
+    {
+      header: this.appTitle.tables.loads.announcementGroup,
+      field: 'AnnouncementTitle',
+    },
+    {
+      header: this.appTitle.tables.loads.announcementSubGroup,
+      field: 'AnnouncementSGTitle',
+    },
+    {
+      header: this.appTitle.tables.loads.transportCompany,
+      field: 'TransportCompany',
+    },
+    { header: this.appTitle.tables.loads.recipient, field: 'Recipient' },
+    { header: this.appTitle.tables.loads.address, field: 'Address' },
+    { header: this.appTitle.tables.loads.description, field: 'Description' },
+    {
+      header: this.appTitle.tables.loads.loadRegisteringUser,
+      field: 'LoadRegisteringUser',
+    },
+    {
+      header: this.appTitle.tables.loads.loadAllocationUser,
+      field: 'LoadAllocationUser',
+    },
+    {
+      header: this.appTitle.tables.loads.loadAllocationId,
+      field: 'LoadAllocationId',
+    },
+    { header: this.appTitle.tables.loads.licensePlate, field: 'LicensePlate' },
+    { header: this.appTitle.tables.loads.smartCardNo, field: 'SmartCardNo' },
+    { header: this.appTitle.tables.loads.truckDriver, field: 'TruckDriver' },
+    { header: this.appTitle.tables.loads.nationalCode, field: 'NationalCode' },
+    { header: this.appTitle.tables.loads.mobileNumber, field: 'MobileNumber' },
+    { header: this.appTitle.tables.loads.allocationDate, field: 'ShamsiDate' },
+    { header: this.appTitle.tables.loads.allocationTime, field: 'Time' },
+    {
+      header: this.appTitle.tables.loads.sequentialTurn,
+      field: 'SequentialTurn',
+    },
+    { header: this.appTitle.tables.loads.note, field: 'Note' },
+    {
+      header: this.appTitle.tables.loads.loadAllocationStatusTitle,
+      field: 'LoadAllocationStatusTitle',
+    },
+    {
+      header: this.appTitle.tables.loads.tptParamsJoint,
+      field: 'TPTParamsJoint',
+    },
   ];
 
   onViewActivated(): void {

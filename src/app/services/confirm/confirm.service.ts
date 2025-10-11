@@ -8,10 +8,10 @@ export class AppConfirmService {
   // حذف
   confirmDelete(itemName: string, accept: () => void) {
     this.confirmationService.confirm({
-      header: 'تأیید حذف',
-      message: `آیا می‌خواهید <b><u>${itemName}</u></b> را حذف کنید؟`,
+      header: 'تأیید حذف بار',
+      message: `آیا از حذف بار اطمینان دارید؟`,
       icon: 'pi pi-exclamation-triangle',
-      acceptLabel: 'حذف',
+      acceptLabel: 'تایید',
       rejectLabel: 'انصراف',
       acceptButtonProps: { severity: 'danger' },
       rejectButtonProps: { severity: 'secondary' },
@@ -36,12 +36,12 @@ export class AppConfirmService {
   // ویرایش
   confirmEdit(itemName: string, accept: () => void) {
     this.confirmationService.confirm({
-      header: 'تأیید ویرایش',
-      message: `آیا می‌خواهید <b><u>${itemName}</u></b> را ویرایش کنید؟`,
+      header: 'تأیید ویرایش بار',
+      message: `آیا از ویرایش بار اطمینان دارید؟`,
       icon: 'pi pi-pencil',
-      acceptLabel: 'ویرایش',
+      acceptLabel: 'تایید',
       rejectLabel: 'انصراف',
-      acceptButtonProps: { severity: 'warning' },
+      acceptButtonProps: { severity: 'info' },
       rejectButtonProps: { severity: 'secondary' },
       accept,
     });
@@ -51,11 +51,11 @@ export class AppConfirmService {
   confirmFreeLine(itemName: string, accept: () => void) {
     this.confirmationService.confirm({
       header: 'تایید خط آزاد بار',
-      message: `آیا می‌خواهید <b><u>${itemName}</u></b> را آزاد کنید`,
+      message: `آیا از خط آزاد کردن بار اطمینان دارید؟`,
       icon: 'pi pi-exclamation-triangle',
-      acceptLabel: 'آزاد کردن',
+      acceptLabel: 'تایید',
       rejectLabel: 'انصراف',
-      acceptButtonProps: { severity: 'warning' },
+      acceptButtonProps: { severity: 'warn' },
       rejectButtonProps: { severity: 'secondary' },
       accept,
     });
@@ -65,23 +65,37 @@ export class AppConfirmService {
   confirmSediment(itemName: string, accept: () => void) {
     this.confirmationService.confirm({
       header: 'تایید رسوب بار',
-      message: `آیا می‌خواهید <b><u>${itemName}</u></b> را رسوب کنید؟`,
+      message: `آیا از رسوب بار اطمینان دارید؟`,
       icon: 'pi pi-box',
-      acceptLabel: 'رسوب کردن',
+      acceptLabel: 'تایید',
       rejectLabel: 'انصراف',
-      acceptButtonProps: { severity: 'info' },
+      acceptButtonProps: { severity: 'warn' },
       rejectButtonProps: { severity: 'secondary' },
       accept,
     });
   }
 
-  // لغو
-  confirmCancel(itemName: string, accept: () => void) {
+  // کنسل کردن بار
+  confirmLoadCancel(itemName: string, accept: () => void) {
     this.confirmationService.confirm({
       header: 'تأیید کنسلی بار',
-      message: `آیا می‌خواهید <b><u>${itemName}</u></b> را کنسل کنید؟`,
+      message: `آیا از کنسلی بار اطمینان دارید؟`,
       icon: 'pi pi-times',
-      acceptLabel: 'کنسل',
+      acceptLabel: 'تایید',
+      rejectLabel: 'انصراف',
+      acceptButtonProps: { severity: 'warn' },
+      rejectButtonProps: { severity: 'secondary' },
+      accept,
+    });
+  }
+
+  // کنسل کردن تخصیص بار
+  confirmLoadAllocationCancel(itemName: string, accept: () => void) {
+    this.confirmationService.confirm({
+      header: 'تأیید کنسلی تخصیص بار',
+      message: `آیا از کنسلی تخصیص <b><u>${itemName}</u></b> اطمینان دارید؟`,
+      icon: 'pi pi-times',
+      acceptLabel: 'تایید',
       rejectLabel: 'انصراف',
       acceptButtonProps: { severity: 'danger' },
       rejectButtonProps: { severity: 'secondary' },
@@ -119,6 +133,40 @@ export class AppConfirmService {
       rejectButtonProps: { severity: 'secondary' },
       accept,
       reject,
+    });
+  }
+
+  confirmTurnAction(
+    action: 'activate' | 'deactivate',
+    itemName: string,
+    accept: () => void
+  ) {
+    const config = {
+      activate: {
+        header: 'تأیید احیا نوبت',
+        message: `آیا از احیا نوبت <b><u>${itemName}</u></b> مطمئن هستید؟`,
+        icon: 'pi pi-refresh',
+        acceptLabel: 'احیا نوبت',
+        acceptSeverity: 'info' as const,
+      },
+      deactivate: {
+        header: 'تأیید ابطال نوبت',
+        message: `آیا از ابطال نوبت <b><u>${itemName}</u></b> مطمئن هستید؟`,
+        icon: 'pi pi-times',
+        acceptLabel: 'ابطال نوبت',
+        acceptSeverity: 'danger' as const,
+      },
+    }[action];
+
+    this.confirmationService.confirm({
+      header: config.header,
+      message: config.message,
+      icon: config.icon,
+      acceptLabel: config.acceptLabel,
+      rejectLabel: 'انصراف',
+      acceptButtonProps: { severity: config.acceptSeverity },
+      rejectButtonProps: { severity: 'secondary' },
+      accept,
     });
   }
 }

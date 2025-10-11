@@ -18,165 +18,156 @@
       [disableSearchButton]="loading || smart.invalid"
       [onSearchQuery]="searchTruckDriverInfo"
       [addonWidth]="addonWidth"
+      type="number"
     />
   </div>
 </form>
 
-<!-- 🚚 Truck Info Form -->
+<!-- 🚚 Truck Info Card -->
 <p-card [style]="{ 'box-shadow': '0 0 10px rgba(0, 0, 0, 0.3)' }" class="mb-6">
-  <form
-    [formGroup]="truckInfoForm"
-    [class.pointer-events-none]="loading"
-    [class.opacity-60]="loading"
-    class="grid grid-cols-12 gap-4"
-  >
-    <!-- 🧱 Truck Section -->
-    <div class="grid grid-cols-12 gap-4 col-span-12">
-      <span class="w-full text-xl font-bold px-2 col-span-12">{{
-        appTitle.sectionTitles.truckInfo
-      }}</span>
-      <div class="col-span-12 md:col-span-6 py-1 md:py-0">
-        <app-text-input
-          [label]="appTitle.inputs.trucks.truckId"
-          [control]="truckId"
-          validationField="truckId"
-          [readOnly]="true"
-          [disabled]="true"
-          [addonWidth]="addonWidth"
-        />
-      </div>
-
-      <div class="col-span-12 md:col-span-6 py-1 md:py-0">
-        <app-text-input
-          [label]="appTitle.inputs.trucks.licensePlateNumber"
-          [control]="licensePlate"
-          validationField="licensePlateNumber"
-          [readOnly]="true"
-          [disabled]="true"
-          [addonWidth]="addonWidth"
-        />
-      </div>
+  <span class="w-full text-xl font-bold px-2 mb-4 block">
+    {{ appTitle.sectionTitles.truckInfo }}
+  </span>
+  <div class="grid grid-cols-12 gap-4">
+    <div class="col-span-12 md:col-span-6 py-1 md:py-0">
+      <app-text-input
+        [label]="appTitle.inputs.trucks.truckId"
+        [control]="truckId"
+        validationField="truckId"
+        [readOnly]="true"
+        [disabled]="true"
+        [addonWidth]="addonWidth"
+      />
     </div>
-
-    <!-- 👤 Driver Section -->
-    <div class="grid grid-cols-12 gap-4 col-span-12">
-      <span class="col-span-12 text-xl font-bold px-2">{{
-        appTitle.sectionTitles.driverInfo
-      }}</span>
-      <div class="col-span-12 md:col-span-6 lg:col-span-4 py-1 md:py-0">
-        <app-text-input
-          [label]="appTitle.inputs.drivers.driverId"
-          [control]="driverId"
-          validationField="driverId"
-          [addonWidth]="addonWidth"
-          [readOnly]="true"
-          [disabled]="true"
-        />
-      </div>
-
-      <div class="col-span-12 md:col-span-6 lg:col-span-4 py-1 md:py-0">
-        <app-text-input
-          [label]="appTitle.inputs.users.userNationalCodeTitle"
-          [control]="driverNationalId"
-          validationField="nationalId"
-          [addonWidth]="addonWidth"
-          [readOnly]="true"
-          [disabled]="true"
-        />
-      </div>
-
-      <div class="col-span-12 md:col-span-6 lg:col-span-4 py-1 lg:py-0">
-        <app-text-input
-          [label]="appTitle.inputs.users.userNameAndLastName"
-          [control]="driverName"
-          validationField="turnId"
-          [addonWidth]="addonWidth"
-          [readOnly]="true"
-          [disabled]="true"
-        />
-      </div>
+    <div class="col-span-12 md:col-span-6 py-1 md:py-0">
+      <app-text-input
+        [label]="appTitle.inputs.trucks.licensePlateNumber"
+        [control]="licensePlate"
+        validationField="licensePlateNumber"
+        [readOnly]="true"
+        [disabled]="true"
+        [addonWidth]="addonWidth"
+        format="carPlate"
+      />
     </div>
-
-    <!-- 🔁 Turn Status Section -->
-    <div class="grid grid-cols-12 gap-4 col-span-12">
-      <span class="col-span-12 text-xl font-bold px-2">آخرین صف نوبت</span>
-      <div
-        class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0"
-      >
-        <app-text-input
-          label="تسلسل نوبت"
-          [control]="otaghdarTurnNumber"
-          [addonWidth]="addonWidth"
-          [readOnly]="true"
-          [disabled]="true"
-        />
-      </div>
-
-      <div
-        class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0"
-      >
-        <app-text-input
-          label="صف نوبت"
-          [control]="sequentialTurn"
-          [addonWidth]="addonWidth"
-          [readOnly]="true"
-          [disabled]="true"
-        />
-      </div>
-
-      <div
-        class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0"
-      >
-        <app-text-input
-          [label]="appTitle.inputs.loads.loadStatus"
-          [control]="turnStats"
-          [addonWidth]="addonWidth"
-          [readOnly]="true"
-          [disabled]="true"
-        />
-      </div>
-
-      <div
-        class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0"
-      >
-        <app-text-input
-          label="شرح"
-          [control]="turnDescription"
-          [addonWidth]="addonWidth"
-          [readOnly]="true"
-          [disabled]="true"
-        />
-      </div>
-    </div>
-
-    <!-- 💳 Wallet Section -->
-    <div class="grid grid-cols-12 gap-4 col-span-12">
-      <span class="text-xl font-bold col-span-12 px-2">کیف پول</span>
-
-      <div class="col-span-12 md:col-span-6 py-1 md:py-0">
-        <app-text-input
-          label="شناسه کیف پول"
-          [control]="walletCode"
-          [readOnly]="true"
-          [addonWidth]="addonWidth"
-          [disabled]="true"
-        />
-      </div>
-
-      <div class="col-span-12 md:col-span-6 py-1 md:py-0">
-        <app-text-input
-          label="موجودی"
-          [control]="walletBalance"
-          [readOnly]="true"
-          [addonWidth]="addonWidth"
-          [disabled]="true"
-        />
-      </div>
-    </div>
-
-    <!-- 🔍 Autocomplete: Sequential Turn -->
-  </form>
+  </div>
 </p-card>
+
+<!-- 👤 Driver Info Card -->
+<p-card [style]="{ 'box-shadow': '0 0 10px rgba(0, 0, 0, 0.3)' }" class="mb-6">
+  <span class="w-full text-xl font-bold px-2 mb-4 block">
+    {{ appTitle.sectionTitles.driverInfo }}
+  </span>
+  <div class="grid grid-cols-12 gap-4">
+    <div class="col-span-12 md:col-span-6 lg:col-span-4 py-1 md:py-0">
+      <app-text-input
+        [label]="appTitle.inputs.drivers.driverId"
+        [control]="driverId"
+        validationField="driverId"
+        [addonWidth]="addonWidth"
+        [readOnly]="true"
+        [disabled]="true"
+      />
+    </div>
+    <div class="col-span-12 md:col-span-6 lg:col-span-4 py-1 md:py-0">
+      <app-text-input
+        [label]="appTitle.inputs.users.userNationalCodeTitle"
+        [control]="driverNationalId"
+        validationField="nationalId"
+        [addonWidth]="addonWidth"
+        [readOnly]="true"
+        [disabled]="true"
+      />
+    </div>
+    <div class="col-span-12 md:col-span-6 lg:col-span-4 py-1 lg:py-0">
+      <app-text-input
+        [label]="appTitle.inputs.users.userNameAndLastName"
+        [control]="driverName"
+        validationField="turnId"
+        [addonWidth]="addonWidth"
+        [readOnly]="true"
+        [disabled]="true"
+      />
+    </div>
+  </div>
+</p-card>
+
+<!-- 🔁 Turn Status Card -->
+<p-card [style]="{ 'box-shadow': '0 0 10px rgba(0, 0, 0, 0.3)' }" class="mb-6">
+  <span class="w-full text-xl font-bold px-2 mb-4 block">آخرین نوبت</span>
+  <div class="grid grid-cols-12 gap-4">
+    <div
+      class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0"
+    >
+      <app-text-input
+        label="تسلسل نوبت"
+        [control]="otaghdarTurnNumber"
+        [addonWidth]="addonWidth"
+        [readOnly]="true"
+        [disabled]="true"
+      />
+    </div>
+    <div
+      class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0"
+    >
+      <app-text-input
+        label="صف نوبت"
+        [control]="sequentialTurn"
+        [addonWidth]="addonWidth"
+        [readOnly]="true"
+        [disabled]="true"
+      />
+    </div>
+    <div
+      class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0"
+    >
+      <app-text-input
+        [label]="appTitle.inputs.turns.turnStatus"
+        [control]="turnStats"
+        [addonWidth]="addonWidth"
+        [readOnly]="true"
+        [disabled]="true"
+      />
+    </div>
+    <div
+      class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0"
+    >
+      <app-text-input
+        label="شرح"
+        [control]="turnDescription"
+        [addonWidth]="addonWidth"
+        [readOnly]="true"
+        [disabled]="true"
+      />
+    </div>
+  </div>
+</p-card>
+
+<!-- 💳 Wallet Info Card -->
+<p-card [style]="{ 'box-shadow': '0 0 10px rgba(0, 0, 0, 0.3)' }" class="mb-6">
+  <span class="w-full text-xl font-bold px-2 mb-4 block">کیف پول</span>
+  <div class="grid grid-cols-12 gap-4">
+    <div class="col-span-12 md:col-span-6 py-1 md:py-0">
+      <app-text-input
+        label="شناسه کیف پول"
+        [control]="walletCode"
+        [addonWidth]="addonWidth"
+        [readOnly]="true"
+        [disabled]="true"
+      />
+    </div>
+    <div class="col-span-12 md:col-span-6 py-1 md:py-0">
+      <app-text-input
+        label="موجودی"
+        [control]="walletBalance"
+        [addonWidth]="addonWidth"
+        [readOnly]="true"
+        [disabled]="true"
+      />
+    </div>
+  </div>
+</p-card>
+<!-- 🔍 Autocomplete: Sequential Turn -->
 <app-search-auto-complete
   class="col-span-12 sm:col-span-6"
   [label]="appTitle.inputs.sequentialTurns.sequentialTurnTitle"

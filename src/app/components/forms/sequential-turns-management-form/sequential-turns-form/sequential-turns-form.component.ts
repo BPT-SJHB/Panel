@@ -1,11 +1,10 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Subject, takeUntil } from 'rxjs';
 
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -91,8 +90,8 @@ export class SequentialTurnsFormComponent extends BaseLoading {
       header: 'شناسه',
     },
     {
-      field: 'SeqTurnId',
-      header: 'عنوان نوبت',
+      field: 'SeqTurnTitle',
+      header: 'صف نوبت',
     },
     {
       field: 'SeqTurnKeyWord',
@@ -111,6 +110,10 @@ export class SequentialTurnsFormComponent extends BaseLoading {
     },
   ];
 
+  override ngOnInit(): void {
+    super.ngOnInit();
+    this.initialize();
+  }
   private async initialize(): Promise<void> {
     await this.loadSequentialTurns();
   }
@@ -153,14 +156,14 @@ export class SequentialTurnsFormComponent extends BaseLoading {
   }
 
   onEdit(row: SequentialTurn): void {
-    this.headerTitle = 'ویرایش رکورد نوبت صفوف';
+    this.headerTitle = 'ویرایش صف نوبت';
     this.populateSequentialForm(row);
     this.sequentialTurnFormMode = FormMode.EDITABLE;
     this.formDialogVisible = true;
   }
 
   onNew(): void {
-    this.headerTitle = 'افزودن رکورد نوبت صفوف';
+    this.headerTitle = 'افزودن  صف نوبت';
     this.resetSequentialTurnForm();
     this.sequentialTurnFormMode = FormMode.REGISTER;
     this.formDialogVisible = true;
