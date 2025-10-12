@@ -48,7 +48,7 @@ export class DriverInfoFormComponent implements OnDestroy, OnInit {
   searchForm: FormGroup;
 
   loading = false;
-  addonWidth = '8rem';
+  addonWidth = '7rem';
   readonly appTitle = AppTitles;
 
   ngOnDestroy(): void {
