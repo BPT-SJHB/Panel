@@ -3,7 +3,7 @@ import { API_ROUTES } from 'app/constants/api';
 import { LoginFormData } from 'app/data/model/login-form-data.model';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { UserSession } from 'app/data/model/user-session.model';
-import { CookieService } from 'ngx-cookie-service';
+import { CookieOptions, CookieService } from 'ngx-cookie-service';
 import { environment } from 'environments/environment';
 import { mockUserSession } from 'app/data/mock/user-session.mock';
 import { SoftwareUserInfo } from 'app/services/user-management/model/software-user-info.model';
@@ -28,7 +28,7 @@ export class UserAuthService {
   ): Promise<ApiResponse<UserSession>> {
     //#region Mock Handling
     if (!environment.production && environment.disableApi) {
-      await this.setSessionId(mockUserSession.sessionId);
+      await this.setSessionId(mockUserSession.sessionId, true);
       return {
         success: true,
         data: mockUserSession,
@@ -36,7 +36,8 @@ export class UserAuthService {
     }
     //#endregion
 
-    const { sessionId, username, password, captcha } = loginFormData;
+    const { sessionId, username, password, captcha, rememberMe } =
+      loginFormData;
     const bodyValue = {
       SessionId: sessionId,
       UserShenaseh: username,
@@ -49,32 +50,45 @@ export class UserAuthService {
       { SessionId: string }
     >(this.apiUrl, bodyValue);
 
-    await this.setSessionId(result.data?.SessionId!);
+    if (result.data?.SessionId)
+      await this.setSessionId(result.data.SessionId, rememberMe);
 
     return {
       success: result.success,
       data: {
-        sessionId: result.data?.SessionId!,
+        sessionId: result.data?.SessionId ?? '',
       },
       error: result.error,
     };
   }
 
   public async logout(): Promise<void> {
-    this.cookieService.delete(this.sessionKey);
-    this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
+    this.cookieService.delete(this.sessionKey, '/');
+    await this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
     // سمت سرور اضافه شود در صورت نیاز
   }
 
-  public async isLoggedIn(): Promise<ApiResponse<{ ISSessionLive: boolean }>> {
+  // TODO : I add boolean value to bypass redirect for now
+  public async isLoggedIn(
+    bypassRedirect = false
+  ): Promise<ApiResponse<{ ISSessionLive: boolean }>> {
     const sessionId = this.getSessionId();
 
+    // TODO: Investigate why the user is being redirected here.
+    //       The backend should return an error if the user is not logged in,
+    //       and that error should be handled on the frontend instead of redirecting.
     const apiUrl = API_ROUTES.SoftwareUserAPI.SessionChecker;
-    if (sessionId == null) {
+    if (sessionId === null && !bypassRedirect) {
       this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
       await this.logout();
       return new Promise(function (resolve, _) {
         resolve({ success: false });
+      });
+    }
+
+    if (bypassRedirect && sessionId === null) {
+      return new Promise(function (resolve) {
+        resolve({ success: true, data: { ISSessionLive: false } });
       });
     }
 
@@ -97,17 +111,25 @@ export class UserAuthService {
     return this.cookieService.get(this.sessionKey) || null;
   }
 
-  public async setSessionId(sessionId: string): Promise<void> {
+  public async setSessionId(
+    sessionId: string,
+    rememberMe = false
+  ): Promise<void> {
     if (await this.isLoggedIn()) {
       await this.logout();
     }
 
-    this.cookieService.set(this.sessionKey, sessionId, {
+    const cookieOptions: CookieOptions = {
       path: '/',
       secure: environment.production,
       sameSite: environment.production ? 'None' : 'Lax',
-      // expires: new Date(Date.now() + 1000 * 60 * 30), // 30 minutes
-    });
+    };
+
+    if (rememberMe) {
+      cookieOptions.expires = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7);
+    }
+
+    this.cookieService.set(this.sessionKey, sessionId, cookieOptions);
   }
 
   public async GetUserOfSession(
