@@ -1,6 +1,5 @@
 // Angular core imports
 import { Component, AfterViewInit, ViewChild, inject } from '@angular/core';
-import { Router } from '@angular/router';
 
 // NgRx store
 import { Store } from '@ngrx/store';
@@ -17,12 +16,10 @@ import { DashboardContentManagerComponent } from 'app/components/shared/layout/d
 import { SupportButtonComponent } from 'app/components/shared/support-button/support-button.component';
 
 // Services
-import { UserAuthService } from 'app/services/user-auth-service/user-auth.service';
 import { ApiProcessesService } from 'app/services/api-processes/api-processes.service';
 import { ToastService } from 'app/services/toast-service/toast.service';
 
 // Constants and utilities
-import { APP_ROUTES } from 'app/constants/routes';
 import { LayoutConfig } from 'app/constants/ui/layout.ui';
 import { checkAndToastError } from 'app/utils/api-utils';
 
@@ -68,8 +65,6 @@ export class DashboardComponent implements AfterViewInit {
   readonly layoutUi = LayoutConfig;
 
   // Services
-  private userAuth = inject(UserAuthService);
-  private router = inject(Router);
   private toast = inject(ToastService);
   private store = inject(Store);
   private apiProcessesService = inject(ApiProcessesService);
@@ -115,14 +110,6 @@ export class DashboardComponent implements AfterViewInit {
    * Setup the dashboard: check auth, load processes, update store and menu items
    */
   private async setupDashboard(): Promise<void> {
-    const auth = await this.userAuth.isLoggedIn();
-
-    // If not logged in or session expired, redirect to login
-    if (!auth.success && !auth.data?.ISSessionLive) {
-      this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
-      return;
-    }
-
     // Load API processes
     const res = await this.apiProcessesService.getApiProcesses();
 
@@ -149,7 +136,7 @@ export class DashboardComponent implements AfterViewInit {
         label: pg.title,
         icon: pg.icon,
         command: () => {},
-      }),
+      })
     );
   }
 }
