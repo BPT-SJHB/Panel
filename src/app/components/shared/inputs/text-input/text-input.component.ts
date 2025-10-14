@@ -171,24 +171,31 @@ export class TextInputComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     // --- language enforcement (text only) ---
+
     if (this.language === 'fa') {
-      // Allow Persian letters, Persian digits, spaces, and common symbols
-      const persianRegex =
-        /^[\u0600-\u06FF\u06F0-\u06F9\s.,!?(){}[\]<>;:'"@#$%^&*_+=|\\/-]*$/;
-      if (!persianRegex.test(input.value)) {
+      // Allow Persian letters, Persian and English digits, spaces, and common symbols
+      const allowedPattern =
+        /^[\u0600-\u06FF\u06F0-\u06F9 0-9\s.,!?()[\]{}<>'"@#$%^&*_+=|\\/-]*$/;
+      const isTextPersian = allowedPattern.test(input.value);
+
+      if (!isTextPersian) {
+        // Remove all disallowed characters
         input.value = input.value.replace(
-          /[^\u0600-\u06FF\u06F0-\u06F9\s.,!?(){}[\]<>;:'"@#$%^&*_+=|\\/-]/g,
+          /[^\u0600-\u06FF\u06F0-\u06F9 0-9\s.,!?()[\]{}<>'"@#$%^&*_+=|\\/-]/g,
           ''
         );
-        this.control.setValue(input.value, { emitEvent: false });
+      }
 
-        if (canShowToast) {
-          this.tost.warn('تغییر زبان', 'زبان کیبورد خود را فارسی کنید.');
-          this.lastToastTime = now;
-        }
+      // 🔢 Convert English digits (0–9) → Persian digits (۰–۹)
+      input.value = input.value.replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[Number(d)]);
+
+      this.control.setValue(input.value, { emitEvent: false });
+
+      if (canShowToast && !isTextPersian) {
+        this.tost.warn('تغییر زبان', 'زبان کیبورد خود را فارسی کنید.');
+        this.lastToastTime = now;
       }
     }
-
     if (this.language === 'en') {
       // Allow English letters, English digits, spaces, and common symbols
       const englishRegex = /^[A-Za-z0-9\s.,!?(){}[\]<>;:'"@#$%^&*_+=|\\/-]*$/;
