@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import { APP_ROUTES } from 'app/constants/routes';
+import { dashboardGuard } from './guard/dashboard-guard/dashboard-guard.guard';
+import { loginAuthGuard } from './guard/login-guard/login-guard.guard';
 
 export const routes: Routes = [
   {
@@ -16,6 +18,7 @@ export const routes: Routes = [
         (m) => m.LoginPageComponent
       ),
     data: { preload: true },
+    canActivate: [loginAuthGuard],
   },
   {
     path: APP_ROUTES.AUTH.FORGET_PASSWORD,
@@ -23,6 +26,7 @@ export const routes: Routes = [
       import(
         'app/pages/auth/forget-password-page/forget-password-page.component'
       ).then((m) => m.ForgetPasswordPageComponent),
+    canActivate: [loginAuthGuard],
   },
   {
     path: APP_ROUTES.DASHBOARD.HOME,
@@ -30,6 +34,7 @@ export const routes: Routes = [
       import('app/pages/dashboard/dashboard.component').then(
         (m) => m.DashboardComponent
       ),
+    canActivate: [dashboardGuard],
   },
 
   {

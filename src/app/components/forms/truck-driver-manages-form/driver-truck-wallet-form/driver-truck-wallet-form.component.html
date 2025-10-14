@@ -56,14 +56,12 @@
               "
               [control]="smartCard"
               validationField="smartCard"
-              addonWidth="10rem"
+              [addonWidth]="addonWidth"
               type="number"
             />
             <app-button
               (click)="loadTruckInfo()"
-              [disabled]="
-                this.truckId.invalid || this.smartCard.invalid || loading
-              "
+              [disabled]="this.smartCard.invalid || loading"
               size="small"
               styleClass="mt-1 w-24 h-8"
               type="submit"
@@ -122,14 +120,12 @@
               "
               [control]="nationalId"
               validationField="nationalId"
-              addonWidth="10rem"
+              [addonWidth]="addonWidth"
               type="number"
             />
             <app-button
               (click)="loadDriverInfo()"
-              [disabled]="
-                this.driverId.invalid || this.nationalId.invalid || loading
-              "
+              [disabled]="this.nationalId.invalid || loading"
               size="small"
               type="submit"
               styleClass="mt-1 w-24 h-8 "
