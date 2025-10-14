@@ -46,7 +46,7 @@ export class TruckInfoFormComponent implements OnDestroy, OnInit {
   private destroy$ = new Subject<void>();
 
   loading = false;
-  addonWidth = '9rem';
+  addonWidth = '7rem';
   readonly appTitle = AppTitles;
 
   searchForm: FormGroup = this.fb.group({

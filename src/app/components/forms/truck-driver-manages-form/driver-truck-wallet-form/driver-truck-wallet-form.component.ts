@@ -58,7 +58,7 @@ export class DriverTruckWalletFormComponent implements OnInit, OnDestroy {
   }
 
   // ui: style config
-  addonWidth = '8rem';
+  addonWidth = '7rem';
 
   // feat: composed truck search form
   mainSearchForm = this.fb.group({

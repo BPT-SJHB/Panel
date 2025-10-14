@@ -61,7 +61,7 @@ export class Driver_TruckManagementService {
       TruckDriverInfo
     >(localApiUrl, bodyValue, mockTruckDriverInfo);
 
-    if (response.error?.code == ErrorCodes.NotFoundInLocalAPI) {
+    if (!response.success) {
       response = await this.apiCommunicator.CommunicateWithAPI_Post<
         typeof bodyValue,
         TruckDriverInfo
