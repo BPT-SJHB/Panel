@@ -8,7 +8,7 @@ const config: Config = {
   title: 'سامانه جامع حمل بار',
   tagline:
     'سامانه ای جامع برای نیازهای سازمان راهداری و حمل و نقل جاده‌ای (استان اصفهان) شامل بخش هایی مانند اعلام‌بار مجازی، نوبت‌دهی مجازی، مدیریت کیف پول کاربران، پارکینگ و همه قابلیت های مورد نیاز این سازمان است.',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/rmto-logo-noText.png',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -56,8 +56,7 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl: 'https://github.com/BPT-SJHB/Panel/tree/main/documentation',
         },
         blog: {
           showReadingTime: true,
@@ -66,9 +65,8 @@ const config: Config = {
             xslt: true,
           },
           // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          // Remove this to remove the "" links.
+          editUrl: 'https://github.com/BPT-SJHB/Panel/tree/main/documentation',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -83,7 +81,7 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/rmto-logo-dark-noText.png',
     colorMode: {
       respectPrefersColorScheme: true,
     },
