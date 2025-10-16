@@ -28,16 +28,28 @@ const sidebars: SidebarsConfig = {
       items: [
         {
           type: 'category',
-          label: 'مسیر APIها',
+          label: 'پایانه‌های API',
           link: {
             type: 'doc',
             id: 'services/api_routes/index',
           },
           items: [
             {
-              type: 'doc',
+              type: 'category',
               label: 'Software User API',
-              id: 'services/api_routes/software_user_api/index',
+              link: {
+                // Added a link property to point to the main index file
+                type: 'doc',
+                id: 'services/api_routes/software_user_api/index',
+              },
+              items: [
+                // Added sub-items array
+                {
+                  type: 'doc',
+                  label: 'CAPTCHA',
+                  id: 'services/api_routes/software_user_api/captcha/index',
+                },
+              ],
             },
             {
               type: 'doc',
