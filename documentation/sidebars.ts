@@ -27,61 +27,6 @@ const sidebars: SidebarsConfig = {
       },
       items: [
         {
-          type: 'category',
-          label: 'پایانه‌های API',
-          link: {
-            type: 'doc',
-            id: 'services/api_routes/index',
-          },
-          items: [
-            {
-              type: 'category',
-              label: 'Software User API',
-              link: {
-                // Added a link property to point to the main index file
-                type: 'doc',
-                id: 'services/api_routes/software_user_api/index',
-              },
-              items: [
-                // Added sub-items array
-                {
-                  type: 'doc',
-                  label: 'CAPTCHA',
-                  id: 'services/api_routes/software_user_api/captcha/index',
-                },
-              ],
-            },
-            {
-              type: 'doc',
-              label: 'Load Allocation API',
-              id: 'services/api_routes/load_allocation_api/index',
-            },
-            {
-              type: 'doc',
-              label: 'Load Capacitor API',
-              id: 'services/api_routes/load_capacitor_api/index',
-            },
-            {
-              type: 'doc',
-              label: 'Reports API',
-              id: 'services/api_routes/reports_api/index',
-            },
-            {
-              type: 'doc',
-              label: 'Ticket API',
-              id: 'services/api_routes/ticket_api/index',
-            },
-            {
-              type: 'doc',
-              label: 'Transportation API',
-              id: 'services/api_routes/transportation_api/index',
-            },
-            {
-              type: 'doc',
-              label: 'Wallet and Traffic API',
-              id: 'services/api_routes/wallet_and_traffic_api/index',
-            },
-          ],
         },
       ],
     },
