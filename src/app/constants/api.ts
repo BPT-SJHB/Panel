@@ -259,5 +259,10 @@ export const API_ROUTES = {
       GetUserByUsername: `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}users/GetUserByUsername/`,
       GetUsersIDs: `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}users/GetUsersByIDs/`,
     },
+    File: {
+      UploadTicketFile: `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}files/UploadTicketFile/`,
+      DownloadTicketFile: (id: string) =>
+        `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}files/GetDownloadLinkTicketFile/${id}`,
+    },
   },
 };
