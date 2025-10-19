@@ -78,7 +78,7 @@ export class LADPlaceManagementService {
     const response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       LADPlace
-    >(apiUrl, bodyValue, mockLADPlaces[0].LADPlaceId);
+    >(apiUrl, bodyValue, mockLADPlaces[0]);
     //#endregion
 
     //#region Return

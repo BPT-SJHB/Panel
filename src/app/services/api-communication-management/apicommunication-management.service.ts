@@ -16,7 +16,7 @@ export class APICommunicationManagementService {
   public async CommunicateWithAPI_Post<TBody, TExpect>(
     url: string,
     bodyValue: TBody,
-    mockValue?: any,
+    mockValue?: TExpect,
     withCredentials = false
   ): Promise<ApiResponse<TExpect>> {
     if (!environment.production && environment.disableApi) {
@@ -46,7 +46,7 @@ export class APICommunicationManagementService {
 
   public async CommunicateWithAPI_Get<TExpect>(
     url: string,
-    mockValue?: any,
+    mockValue?: TExpect,
     withCredentials = false
   ): Promise<ApiResponse<TExpect>> {
     if (!environment.production && environment.disableApi) {
