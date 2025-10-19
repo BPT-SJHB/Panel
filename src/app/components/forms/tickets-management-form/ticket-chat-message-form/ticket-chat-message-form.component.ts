@@ -19,6 +19,9 @@ import {
 } from 'app/services/ticket-service-management/model/ticket.model';
 import { TicketServiceManagementService } from 'app/services/ticket-service-management/ticket-service-management.service';
 import { checkAndToastError } from 'app/utils/api-utils';
+import { ChatBoxInputComponent } from 'app/components/shared/inputs/chat-box-input/chat-box-input.component';
+import { DialogModule } from 'primeng/dialog';
+import { TicketFilesUploadComponent } from '../ticket-files-upload/ticket-files-upload.component';
 
 interface ChatGroupedByDate {
   date: string;
@@ -27,7 +30,7 @@ interface ChatGroupedByDate {
     senderId: number;
     message: string;
     time: string;
-    attachments: string[];
+    attachments?: string[];
   }[];
 }
 
@@ -35,7 +38,13 @@ interface ChatGroupedByDate {
 @Component({
   selector: 'app-ticket-chat-message-form',
   standalone: true,
-  imports: [NgClass, ButtonComponent, ReactiveFormsModule],
+  imports: [
+    NgClass,
+    DialogModule,
+    ReactiveFormsModule,
+    ChatBoxInputComponent,
+    TicketFilesUploadComponent,
+  ],
   templateUrl: './ticket-chat-message-form.component.html',
   styleUrls: ['./ticket-chat-message-form.component.scss'],
 })
@@ -56,9 +65,12 @@ export class TicketChatMessageFormComponent extends BaseLoading {
       ValidationSchema.description
     ),
     attachments: this.fb.nonNullable.control<string[]>([]),
+    attachmentMessage: this.fb.nonNullable.control<string>(''),
   });
 
   readonly groupChats = signal<ChatGroupedByDate[]>([]);
+
+  uploadFileVisible = false;
 
   constructor() {
     super();
@@ -145,8 +157,13 @@ export class TicketChatMessageFormComponent extends BaseLoading {
   }
 
   /** Send a new chat message */
-  async sendMessage() {
-    const msg = this.ctrl<string>('message').value.trim();
+  async sendMessage(hasFile: boolean) {
+    let msg = '';
+    if (hasFile) {
+      msg = this.ctrl<string>('attachmentMessage').value.trim();
+    } else {
+      msg = this.ctrl<string>('message').value.trim();
+    }
     if (!msg) return;
 
     const newChat: CreateChatMessageRequest = {
@@ -155,9 +172,8 @@ export class TicketChatMessageFormComponent extends BaseLoading {
       attachments: this.ctrl<string[]>('attachments').value ?? [],
     };
 
-    this.ctrl('message').setValue('');
-    this.chatInput.nativeElement.style.height = 'auto';
-
+    this.chatForm.reset();
+    this.uploadFileVisible = false;
     await this.withLoading(async () => {
       const res = await this.ticketService.CreateChat(
         this.ticket()?.id ?? '',
@@ -166,10 +182,29 @@ export class TicketChatMessageFormComponent extends BaseLoading {
 
       if (!checkAndToastError(res, this.toast)) return;
 
-      console.log(res.data);
-
       // Add chat to grouped UI
       this.addChatMessage(res.data);
     });
+  }
+
+  downloadTicketFile(fileId: string) {
+    this.withLoading(async () => {
+      const ticketId = this.ticket()?.id;
+      if (!ticketId) return;
+
+      const response = await this.ticketService.DownloadTicketFile(
+        ticketId,
+        fileId
+      );
+      if (!checkAndToastError(response, this.toast)) return;
+    });
+  }
+
+  isSendFileDisabled(): boolean {
+    const messageCtrl = this.ctrl('attachmentMessage');
+    const attachmentsCtrl = this.ctrl<string[]>('attachments');
+    const hasAttachments = attachmentsCtrl.value.length > 0;
+
+    return messageCtrl.invalid || !hasAttachments;
   }
 }
