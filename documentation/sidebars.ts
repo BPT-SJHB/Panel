@@ -27,6 +27,28 @@ const sidebars: SidebarsConfig = {
       },
       items: [
         {
+          type: 'doc',
+          label: 'CaptchaService',
+          id: 'services/captcha-service/index',
+        },
+        {
+          type: 'doc',
+          label: 'APICommunicationManagementService',
+          id: 'services/api-communication-management/index',
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'مدل ها',
+      link: {
+        type: 'generated-index',
+      },
+      items: [
+        {
+          type: 'doc',
+          label: 'ApiResponse',
+          id: 'models/api-response/index',
         },
       ],
     },
