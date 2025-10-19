@@ -16,6 +16,7 @@ import { AppTitles } from 'app/constants/Titles';
 import { mockTickets } from 'app/services/ticket-service-management/mock/ticket.mock';
 import { TicketGuardCaptchaFormComponent } from '../ticket-guard-captcha-form/ticket-guard-captcha-form.component';
 import { TicketErrorCodes } from 'app/constants/error-messages';
+import { TicketFilesUploadComponent } from '../ticket-files-upload/ticket-files-upload.component';
 
 interface SelectOption {
   label: string;
@@ -32,6 +33,7 @@ interface SelectOption {
     ButtonComponent,
     Dialog,
     TicketGuardCaptchaFormComponent,
+    TicketFilesUploadComponent,
   ],
   templateUrl: './ticket-create-form.component.html',
   styleUrls: ['./ticket-create-form.component.scss'],
