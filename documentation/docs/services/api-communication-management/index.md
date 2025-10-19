@@ -31,7 +31,7 @@ POST
 
 - **url**: string
 - **bodyValue**: TBody
-- **mockValue?**: any
+- **mockValue?**: TExpect
 - **withCredentials**: boolean | false
 
 ### ساختار خروجی
@@ -77,7 +77,7 @@ GET
 ### ساختار ورودی
 
 - **url**: string
-- **mockValue?**: any
+- **mockValue?**: TExpect
 - **withCredentials**: boolean | false
 
 ### ساختار خروجی
