@@ -27,8 +27,8 @@ export class CaptchaService {
     return {
       success: response.success,
       data: {
-        sessionId: response.data?.SessionId!,
-        imageData: response.data?.Captcha!,
+        sessionId: response.data?.SessionId ?? '',
+        imageData: response.data?.Captcha ?? '',
       },
       error: response.error,
     };

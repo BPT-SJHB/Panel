@@ -57,7 +57,7 @@ export class LoaderTypesService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       LoaderType
-    >(apiUrl, bodyValue, mockLoaderTypes);
+    >(apiUrl, bodyValue, mockLoaderTypes[0]);
     //#endregion
   }
 
