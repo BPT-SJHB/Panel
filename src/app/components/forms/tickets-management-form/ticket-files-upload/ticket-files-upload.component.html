@@ -1,0 +1,7 @@
+<app-files-upload-input
+  [uploadFn]="onUploadFile"
+  [fileLimit]="3"
+  [maxFileSize]="1024 * 1024"
+  (removeUploadFile)="removeUploadFile($event)"
+  accept="image/png,image/jpg,image/jepg"
+/>

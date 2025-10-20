@@ -96,16 +96,20 @@
   </div>
 
   <p-dialog
+    id="chat-message-dialog"
     header="گفتگو"
     [modal]="true"
     [(visible)]="chatDialogVisible"
-    [style]="{ width: '40rem' }"
+    [style]="{ width: '40rem', maxWidth: '100%' }"
+    [maskStyle]="{ padding: '1rem' }"
   >
     @if (chatDialogVisible && currentTicket()) {
-      <app-ticket-chat-message-form
-        [ticket]="currentTicket()"
-        [userId]="currentTicket()?.userId ?? 0"
-      />
+      <div class="border-t-1">
+        <app-ticket-chat-message-form
+          [ticket]="currentTicket()"
+          [userId]="currentTicket()?.userId ?? 0"
+        />
+      </div>
     }
   </p-dialog>
 }

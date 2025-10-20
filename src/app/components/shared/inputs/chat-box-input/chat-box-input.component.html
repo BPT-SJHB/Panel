@@ -1,0 +1,37 @@
+<div
+  class="flex gap-2 border rounded-3xl px-4 py-2 dark:focus-within:border-cyan-300 focus-within:border-cyan-600"
+>
+  <!-- textarea -->
+  <textarea
+    #messageBox
+    [formControl]="control()"
+    pInputTextarea
+    rows="1"
+    [placeholder]="placeholder()"
+    class="flex-1 resize-none placeholder:text-muted-color-emphasis focus:outline-none py-1"
+  ></textarea>
+
+  <!-- buttons container -->
+  <div class="flex items-center gap-2">
+    <!-- add file button -->
+    @if (enableSendFile()) {
+      <p-button
+        severity="help"
+        rounded="true"
+        outlined="true"
+        size="small"
+        icon="pi pi-paperclip"
+        (click)="clickFile.emit()"
+      ></p-button>
+    }
+    <!-- send message button -->
+    <p-button
+      icon="pi pi-send"
+      severity="info"
+      rounded="true"
+      size="small"
+      [disabled]="disableSend()"
+      (click)="clickSend.emit()"
+    ></p-button>
+  </div>
+</div>

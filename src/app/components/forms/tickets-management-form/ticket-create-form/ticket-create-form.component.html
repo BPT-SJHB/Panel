@@ -1,13 +1,13 @@
 <!-- فرم ایجاد تیکت -->
 
-<div class="grid grid-cols-3 gap-4 px-5 py-5">
+<div class="grid grid-cols-6 gap-4 px-5 py-5">
   <!-- نام کاربری (فقط خواندنی) -->
   <app-text-input
     [addonWidth]="addonWidth"
     [control]="ctrl('username')"
     [label]="appTitle.inputs.phoneNumbers.inputTitle"
     validationField="mobile"
-    class="col-span-3 md:col-span-2 lg:col-span-1"
+    class="col-span-6 md:col-span-3 lg:col-span-2"
     type="number"
     [placeholder]="appTitle.inputs.phoneNumbers.inputTitle"
   ></app-text-input>
@@ -19,7 +19,7 @@
     [options]="ticketTypes()"
     label="نوع تیکت"
     placeholder="نوع تیکت را انتخاب کنید"
-    class="col-span-3 md:col-span-2 lg:col-span-1"
+    class="col-span-6 md:col-span-3 lg:col-span-2"
   ></app-select-input>
 
   <!-- دپارتمان -->
@@ -30,7 +30,7 @@
     label="دپارتمان"
     placeholder="دپارتمان را انتخاب کنید"
     validationField="departmentId"
-    class="col-span-3 md:col-span-2 lg:col-span-1"
+    class="col-span-6 md:col-span-3 lg:col-span-2"
   ></app-select-input>
 
   <!-- عنوان تیکت -->
@@ -40,18 +40,33 @@
     label="عنوان تیکت"
     placeholder="عنوان تیکت را وارد کنید"
     validationField="title"
-    class="col-span-3"
+    class="col-span-6"
   ></app-text-input>
 
   <!-- توضیحات تیکت -->
   <textarea
     [formControl]="ctrl('body')"
     placeholder="توضیحات تیکت را وارد کنید"
-    class="col-span-3 p-5 border rounded-2xl h-60 placeholder:text-gray-400 resize-y"
+    class="col-span-6 p-5 border rounded-2xl h-60 placeholder:text-gray-400 resize-y"
   ></textarea>
 
+  <div
+    class="flex flex-col col-span-6 gap-3 px-6 py-4 rounded-2xl border bg-surface-50 border-surface-200 dark:bg-surface-800 dark:border-surface-700 transition-colors duration-300"
+  >
+    <div class="flex items-center justify-between w-full">
+      <h2 class="text-base font-semibold text-gray-700 dark:text-gray-100">
+        فایل‌های ضمیمه
+      </h2>
+      <span class="text-xs text-gray-500 dark:text-gray-400">
+        حداکثر ۳ فایل
+      </span>
+    </div>
+
+    <app-ticket-files-upload [control]="ctrl('attachment')" class="mt-2" />
+  </div>
+
   <!-- دکمه ارسال -->
-  <div class="col-span-3 flex justify-end px-3">
+  <div class="col-span-6 flex justify-end px-3">
     <app-button
       styleClass="w-full sm:w-48 md:w-40"
       (onClick)="createTicket()"

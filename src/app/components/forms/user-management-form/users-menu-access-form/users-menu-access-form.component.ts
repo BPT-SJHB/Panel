@@ -148,51 +148,47 @@ export class UsersMenuAccessFormComponent extends BaseLoading {
   /**
    * Apply all access changes for selected user
    */
+
   async updateAccesses(): Promise<void> {
     if (this.loading() || !this.userInfo()) return;
 
     await this.withLoading(async () => {
       const userId = this.userInfo()!.UserId;
-      const requests: Promise<ApiResponse<ShortResponse>>[] = [];
 
       // collect all change functions
-      const allChanges = [
-        ...Array.from(this.parentChanges.values()).map(
-          (parent) => () =>
-            this.userService.ChangeUserWebProcessGroupAccess(
-              userId,
-              parent.PGId,
-              parent.PGAccess
-            )
+      const changeRequests = [
+        ...Array.from(this.parentChanges.values()).map((parent) =>
+          this.userService.ChangeUserWebProcessGroupAccess(
+            userId,
+            parent.PGId,
+            parent.PGAccess
+          )
         ),
-        ...Array.from(this.childChanges.values()).map(
-          (child) => () =>
-            this.userService.ChangeUserWebProcessAccess(
-              userId,
-              child.PId,
-              child.PAccess
-            )
+        ...Array.from(this.childChanges.values()).map((child) =>
+          this.userService.ChangeUserWebProcessAccess(
+            userId,
+            child.PId,
+            child.PAccess
+          )
         ),
       ];
 
-      const delay = 100; // delay ms
-      for (const makeRequest of allChanges) {
-        requests.push(makeRequest());
-        await new Promise((r) => setTimeout(r, delay));
-      }
+      // execute all requests in parallel
+      const responses = await Promise.all(changeRequests);
 
-      const responses = await Promise.all(requests);
-
+      // check for errors
       for (const response of responses) {
         if (!checkAndToastError(response, this.toast)) return;
       }
 
-      const tree = await this.getGroupProcesses(
-        this.userInfo()?.MobileNumber ?? ''
-      );
-      this.tree.set(tree);
-      this.toast.success('موفق', responses[0].data!.Message);
+      // refresh tree
+      const mobileNumber = this.userInfo()?.MobileNumber ?? '';
+      const updatedTree = await this.getGroupProcesses(mobileNumber);
+      this.tree.set(updatedTree);
 
+      this.toast.success('موفق', responses[0].data?.Message ?? '');
+
+      // clear pending changes
       this.parentChanges.clear();
       this.childChanges.clear();
     });

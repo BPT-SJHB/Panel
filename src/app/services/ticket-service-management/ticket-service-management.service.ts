@@ -26,6 +26,7 @@ import { mockDepartments } from './mock/department.mock';
 import { mockTicketCaptcha } from './mock/ticket-captcha.mock';
 import { mockTicketStatuses } from './mock/ticket-status.mock';
 import { mockTicketPaging } from './mock/ticket-paging.mock';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -202,4 +203,36 @@ export class TicketServiceManagementService {
     );
   }
   //#endregion
+
+  DownloadTicketFile(
+    ticketId: string,
+    fileId: string
+  ): Promise<ApiResponse<null>> {
+    return this.api
+      .CommunicateWithAPI_Post<
+        { id: string },
+        { url: string }
+      >(API_ROUTES.TicketAPI.File.DownloadTicketFile(fileId), { id: ticketId }, null, true)
+      .then((response) => {
+        if (!response.success || !response.data?.url) {
+          // Safely return the same structure (cast to correct type)
+          return response as unknown as ApiResponse<null>;
+        }
+
+        // Second request to actually download file using the presigned URL
+        window.open(response.data.url, '_blank');
+        return response as unknown as ApiResponse<null>;
+      });
+  }
+
+  UploadTicketFile(
+    file: File
+  ): Observable<ApiResponse<{ id: string }> | number> {
+    const body = new FormData();
+    body.append('file', file);
+    const mock = { id: `uuidV4().${file.type}` };
+    return this.api.CommunicateWithAPI_Post_FromData_With_Progress<{
+      id: string;
+    }>(API_ROUTES.TicketAPI.File.UploadTicketFile, body, mock, true);
+  }
 }
