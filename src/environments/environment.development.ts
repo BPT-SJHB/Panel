@@ -6,5 +6,5 @@ export const environment = {
   apiUrl: `${apiBaseUrl}`,
   // این قسمت برای من هست که دسترسی به api ندارم
   // اکه فعال کنی از api استفاده نمی کنه
-  disableApi: true,
+  disableApi: false,
 };

@@ -15,7 +15,11 @@ import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
 const sidebars: SidebarsConfig = {
   tutorialSidebar: [
     // The 'intro.md' file at the root
-    'intro',
+    {
+      type: 'doc',
+      label: 'مقدمه',
+      id: 'intro',
+    },
 
     // The 'services' category
     {
@@ -53,32 +57,54 @@ const sidebars: SidebarsConfig = {
       ],
     },
 
-    // The 'tutorial-basics' category
-    {
+  {
       type: 'category',
-      label: 'Tutorial - Basics',
-      // Docusaurus will look at _category_.json for label and position if 'link' is not specified
-      // and autogenerate the index page if there is no index.md inside.
+      label: 'کامپوننت های ورودی',
+      link: {
+        type: 'generated-index',
+        description: 'کامپوننت های ورودی برای دریافت داده از کاربر.',
+      },
       items: [
-        'tutorial-basics/create-a-document',
-        'tutorial-basics/create-a-page',
-        'tutorial-basics/create-a-blog-post',
-        'tutorial-basics/markdown-features',
-        'tutorial-basics/deploy-your-site',
-        'tutorial-basics/congratulations',
+        'inputs/text-input-component',
+        'inputs/search-input-component',
+        'inputs/search-auto-complete-component',
+        'inputs/search-auto-complete-factory',
+        'inputs/password-input-component',
+        'inputs/checkbox-input-component',
+        'inputs/binary-radio-input-component',
+        'inputs/toggle-switch-input-component',
+        'inputs/date-picker-input-component',
+        'inputs/time-picker-input-component',
+        'inputs/captcha-input-component',
       ],
     },
 
-    // The 'tutorial-extras' category
-    {
-      type: 'category',
-      label: 'Tutorial - Extras',
-      // Docusaurus will autogenerate the index page if there is no index.md inside.
-      items: [
-        'tutorial-extras/manage-docs-versions',
-        'tutorial-extras/translate-your-site',
-      ],
-    },
+    // The 'tutorial-basics' category
+    // {
+    //   type: 'category',
+    //   label: 'Tutorial - Basics',
+    //   // Docusaurus will look at _category_.json for label and position if 'link' is not specified
+    //   // and autogenerate the index page if there is no index.md inside.
+    //   items: [
+    //     'tutorial-basics/create-a-document',
+    //     'tutorial-basics/create-a-page',
+    //     'tutorial-basics/create-a-blog-post',
+    //     'tutorial-basics/markdown-features',
+    //     'tutorial-basics/deploy-your-site',
+    //     'tutorial-basics/congratulations',
+    //   ],
+    // },
+    //
+    // // The 'tutorial-extras' category
+    // {
+    //   type: 'category',
+    //   label: 'Tutorial - Extras',
+    //   // Docusaurus will autogenerate the index page if there is no index.md inside.
+    //   items: [
+    //     'tutorial-extras/manage-docs-versions',
+    //     'tutorial-extras/translate-your-site',
+    //   ],
+    // },
   ],
 };
 
