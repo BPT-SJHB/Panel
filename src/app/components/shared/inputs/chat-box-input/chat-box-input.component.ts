@@ -5,7 +5,6 @@ import {
   OnInit,
   OnDestroy,
   AfterViewInit,
-  inject,
   input,
   output,
 } from '@angular/core';
