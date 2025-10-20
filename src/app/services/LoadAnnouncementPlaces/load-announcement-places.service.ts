@@ -20,7 +20,7 @@ export class LoadAnnouncementPlacesService {
 
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Get<
-      [LoadAnnouncementPlace]
+      LoadAnnouncementPlace[]
     >(apiUrl, mockCargoTerminals);
     //#endregion
   }
