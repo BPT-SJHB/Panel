@@ -32,7 +32,7 @@ POST
 - **url**: string
 - **bodyValue**: TBody
 - **mockValue?**: TExpect
-- **withCredentials**: boolean | false
+- **withCredentials**: boolean | false => برای فعال کردن امکان ارسال کوکی باید `true` باشد.
 
 ### ساختار خروجی
 
@@ -78,7 +78,7 @@ GET
 
 - **url**: string
 - **mockValue?**: TExpect
-- **withCredentials**: boolean | false
+- **withCredentials**: boolean | false => برای فعال کردن امکان ارسال کوکی باید `true` باشد.
 
 ### ساختار خروجی
 
