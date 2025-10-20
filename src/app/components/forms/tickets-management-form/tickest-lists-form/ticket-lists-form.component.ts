@@ -27,6 +27,8 @@ import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { SelectInputComponent } from 'app/components/shared/inputs/select-input/select-input.component';
 import { TicketChatMessageFormComponent } from '../ticket-chat-message-form/ticket-chat-message-form.component';
 import { Dialog } from 'primeng/dialog';
+import { TicketErrorCodes } from 'app/constants/error-messages';
+import { UserManagementService } from 'app/services/user-management/user-management.service';
 
 type DetailTicket = Ticket & {
   username: string;
@@ -60,6 +62,7 @@ export class TicketListsFormComponent implements OnInit {
   private readonly ticketService = inject(TicketServiceManagementService);
   private readonly toast = inject(ToastService);
   private readonly fb = inject(FormBuilder);
+  private readonly userService = inject(UserManagementService);
 
   readonly selectedTicket = signal<Ticket | null>(null);
   readonly ticketTypes = signal<SelectOption[]>([]);
@@ -111,40 +114,99 @@ export class TicketListsFormComponent implements OnInit {
 
   async searchTickets(): Promise<void> {
     this.loading.set(true);
+    const maxTry = 3;
+    let userLoginTry = 0;
+
     try {
-      const response = await this.ticketService.GetTickets(this.paramsQuery());
-      if (!checkAndToastError(response, this.toast)) return;
+      while (userLoginTry < maxTry) {
+        const response = await this.ticketService.GetTickets(
+          this.paramsQuery()
+        );
 
-      const total = response.data.total;
-      const tickets: (DetailTicket | null)[] = Array(total).fill(null);
+        if (!checkAndToastError(response, this.toast)) {
+          await new Promise((resolve) => setTimeout(resolve, 500));
+          if (response.error?.code === TicketErrorCodes.Unauthorized) {
+            // Unauthorized → ask password and login
+            const isLoggedIn = await this.loginUser();
 
-      const { page = 1, pageSize = 5 } = this.paramsQuery();
-      const baseIndex = (page - 1) * pageSize;
+            if (isLoggedIn) {
+              // Retry fetching tickets after successful login
+              continue;
+            }
 
-      // collect userIds first
-      const userIds = response.data.items.map((item) => item.userId);
-      await this.updateUsersMap(userIds);
+            // Login failed → increment retry counter
+            userLoginTry++;
+            if (userLoginTry >= maxTry) {
+              this.data.set([]);
 
-      response.data.items.forEach((item, index) => {
-        const targetIndex = baseIndex + index;
-        if (targetIndex >= total) return;
+              await new Promise((resolve) => setTimeout(resolve, 500));
+              break;
+            }
+            continue;
+          }
+        }
+        if (!response.data) return;
 
-        tickets[targetIndex] = {
-          ...item,
-          username: this.users().get(item.userId) ?? '',
-          department: this.findDepartment(item.departmentId),
-          ticketType: this.findTicketType(item.ticketTypeId),
-          ticketStatus: this.findTicketStatuses(item.ticketStatusId),
-          createdAt: this.formatJalaliDate(item.createdAt),
-          updatedAt: this.formatJalaliDate(item.updatedAt),
-          chatIcon: 'pi pi-comments',
-        };
-      });
+        // Success → populate tickets
+        const total = response.data.total ?? 0;
+        const tickets: (DetailTicket | null)[] = Array(total).fill(null);
 
-      this.data.set(tickets);
+        const { page = 1, pageSize = 5 } = this.paramsQuery();
+        const baseIndex = (page - 1) * pageSize;
+
+        // Fetch users info
+        const userIds = response.data.items.map((item) => item.userId);
+        await this.updateUsersMap(userIds);
+
+        response.data.items.forEach((item, index) => {
+          const targetIndex = baseIndex + index;
+          if (targetIndex >= total) return;
+
+          tickets[targetIndex] = {
+            ...item,
+            username: this.users().get(item.userId) ?? '',
+            department: this.findDepartment(item.departmentId),
+            ticketType: this.findTicketType(item.ticketTypeId),
+            ticketStatus: this.findTicketStatuses(item.ticketStatusId),
+            createdAt: this.formatJalaliDate(item.createdAt),
+            updatedAt: this.formatJalaliDate(item.updatedAt),
+            chatIcon: 'pi pi-comments',
+          };
+        });
+
+        this.data.set(tickets);
+        break; // exit loop after success
+      }
     } finally {
       this.loading.set(false);
     }
+  }
+
+  // Separate login function
+  private async loginUser(): Promise<boolean> {
+    const password = prompt('Enter password:');
+    if (!password) {
+      this.data.set([]);
+      return false;
+    }
+
+    const profile = await this.userService.GetSoftwareUserProfile();
+    if (!checkAndToastError(profile, this.toast)) {
+      this.data.set([]);
+      return false;
+    }
+
+    const username = profile.data.RawSoftwareUser.MobileNumber ?? '';
+    const login = await this.ticketService.LoginTicketWithPassword(
+      username,
+      password
+    );
+    if (!checkAndToastError(login, this.toast)) {
+      this.data.set([]);
+      return false;
+    }
+
+    return true; // login successful
   }
 
   async customSort(event: SortEvent): Promise<void> {
