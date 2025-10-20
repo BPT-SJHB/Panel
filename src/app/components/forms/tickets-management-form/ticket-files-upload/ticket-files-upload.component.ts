@@ -1,4 +1,4 @@
-import { Component, inject, input, ViewChild } from '@angular/core';
+import { Component, inject, input, signal, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {
   FilesUploadInputComponent,
@@ -9,10 +9,12 @@ import { Subscription, takeUntil } from 'rxjs';
 import { BaseLoading } from '../../shared/component-base/base-loading';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { ApiResponse } from 'app/data/model/api-Response.model';
+import { TicketErrorCodes } from 'app/constants/error-messages';
+import { TicketGuardCaptchaFormComponent } from '../ticket-guard-captcha-form/ticket-guard-captcha-form.component';
 
 @Component({
   selector: 'app-ticket-files-upload',
-  imports: [FilesUploadInputComponent],
+  imports: [FilesUploadInputComponent, TicketGuardCaptchaFormComponent],
   templateUrl: './ticket-files-upload.component.html',
   styleUrl: './ticket-files-upload.component.scss',
 })
@@ -21,11 +23,13 @@ export class TicketFilesUploadComponent extends BaseLoading {
   // inputs
   //
   readonly control = input(new FormControl<string[]>([]));
+  readonly guardType = input<'captcha' | 'auth'>('captcha');
 
   // Dependencies
   private readonly ticketService = inject(TicketServiceManagementService);
   private uploadingFiles = new Map<string, Subscription>();
   private uploadedFiles = new Map<string, string>();
+  readonly captchaGuardVisible = signal(false);
 
   override ngOnInit(): void {
     super.ngOnInit();
@@ -67,6 +71,12 @@ export class TicketFilesUploadComponent extends BaseLoading {
             this.uploadingFiles.delete(file.id);
             const handled = checkAndToastError(err, this.toast);
             if (!handled) {
+              if (
+                err.error?.code === TicketErrorCodes.CaptchaIncorrect ||
+                err.error?.code === TicketErrorCodes.CaptchaExpired
+              ) {
+                this.captchaGuardVisible.set(true);
+              }
               reject(new Error(`Upload failed for file: ${file.raw.name}`));
             }
             resolve();

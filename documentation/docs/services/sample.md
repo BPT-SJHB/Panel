@@ -34,7 +34,7 @@ HTTP TYPE
 
 :::tip ApiResponse
 
-[ساختار ApiResponse چیست؟](../../models/api-response/index.md)
+[ساختار ApiResponse چیست؟](../models/api-response.md)
 
 :::
 
@@ -64,7 +64,7 @@ HTTP TYPE
 
 :::tip
 
-چرا از سرویس (APICommunicationManagementService)[] استفاده شده است؟
+چرا از سرویس [APICommunicationManagementService](./api-communication-management.md) استفاده شده است؟
 
 همه درخواست ها در سرویس ها از طریق این سرویس به API ارسال میشوند.
 :::

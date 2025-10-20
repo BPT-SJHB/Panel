@@ -21,10 +21,10 @@ export class ToggleSwitchInputComponent
   implements OnInit, AfterViewInit, OnDestroy
 {
   @Input() control: FormControl = new FormControl(true);
-  @Input() readonly: boolean = false;
+  @Input() readonly = false;
 
-  @Input() label: string = '';
-  @Input() labelWidth: string = '';
+  @Input() label = '';
+  @Input() labelWidth = '';
 
   private readonly destroy$ = new Subject<void>();
 

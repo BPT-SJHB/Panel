@@ -107,7 +107,8 @@ export class TicketServiceManagementService {
     return this.api.CommunicateWithAPI_Post<typeof body, Ticket>(
       API_ROUTES.TicketAPI.Tickets.GetTicketByID,
       body,
-      mockTickets.find((t) => t.id === id)
+      mockTickets.find((t) => t.id === id),
+      true
     );
   }
   //#endregion
@@ -204,25 +205,26 @@ export class TicketServiceManagementService {
   }
   //#endregion
 
-  DownloadTicketFile(
+  async DownloadTicketFile(
     ticketId: string,
     fileId: string
   ): Promise<ApiResponse<null>> {
-    return this.api
-      .CommunicateWithAPI_Post<
-        { id: string },
-        { url: string }
-      >(API_ROUTES.TicketAPI.File.DownloadTicketFile(fileId), { id: ticketId }, null, true)
-      .then((response) => {
-        if (!response.success || !response.data?.url) {
-          // Safely return the same structure (cast to correct type)
-          return response as unknown as ApiResponse<null>;
-        }
-
-        // Second request to actually download file using the presigned URL
-        window.open(response.data.url, '_blank');
-        return response as unknown as ApiResponse<null>;
-      });
+    const response = await this.api.CommunicateWithAPI_Post<
+      { id: string },
+      { url: string }
+    >(
+      API_ROUTES.TicketAPI.File.DownloadTicketFile(fileId),
+      { id: ticketId },
+      null,
+      true
+    );
+    if (!response.success || !response.data?.url) {
+      // Safely return the same structure (cast to correct type)
+      return response as unknown as ApiResponse<null>;
+    }
+    // Second request to actually download file using the presigned URL
+    window.open(response.data.url, '_blank');
+    return response as unknown as ApiResponse<null>;
   }
 
   UploadTicketFile(
@@ -234,5 +236,17 @@ export class TicketServiceManagementService {
     return this.api.CommunicateWithAPI_Post_FromData_With_Progress<{
       id: string;
     }>(API_ROUTES.TicketAPI.File.UploadTicketFile, body, mock, true);
+  }
+
+  LoginTicketWithPassword(
+    username: string,
+    password: string
+  ): Promise<ApiResponse<null>> {
+    return this.api.CommunicateWithAPI_Post(
+      API_ROUTES.TicketAPI.Auth.Login,
+      { username, password },
+      null,
+      true
+    );
   }
 }

@@ -1,5 +1,6 @@
 import {
   Component,
+  computed,
   effect,
   ElementRef,
   inject,
@@ -9,7 +10,6 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
-import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { BaseLoading } from '../../shared/component-base/base-loading';
 import {
@@ -22,6 +22,8 @@ import { checkAndToastError } from 'app/utils/api-utils';
 import { ChatBoxInputComponent } from 'app/components/shared/inputs/chat-box-input/chat-box-input.component';
 import { DialogModule } from 'primeng/dialog';
 import { TicketFilesUploadComponent } from '../ticket-files-upload/ticket-files-upload.component';
+import { TicketGuardCaptchaFormComponent } from '../ticket-guard-captcha-form/ticket-guard-captcha-form.component';
+import { TicketErrorCodes } from 'app/constants/error-messages';
 
 interface ChatGroupedByDate {
   date: string;
@@ -44,6 +46,7 @@ interface ChatGroupedByDate {
     ReactiveFormsModule,
     ChatBoxInputComponent,
     TicketFilesUploadComponent,
+    TicketGuardCaptchaFormComponent,
   ],
   templateUrl: './ticket-chat-message-form.component.html',
   styleUrls: ['./ticket-chat-message-form.component.scss'],
@@ -54,10 +57,16 @@ export class TicketChatMessageFormComponent extends BaseLoading {
 
   private readonly fb = inject(FormBuilder);
   private readonly ticketService = inject(TicketServiceManagementService);
+  readonly guardType = computed(() =>
+    this.sender() === 'admin' ? 'auth' : 'captcha'
+  );
 
+  readonly captchaGuardVisible = signal(false);
   readonly ticket = input<Ticket | null>(null);
   readonly sender = input<'user' | 'admin'>('user');
   readonly userId = input<number>(0);
+  readonly captchaAction = () => this.sendMessage();
+
   readonly chatForm = this.fb.nonNullable.group({
     ticketId: this.fb.nonNullable.control<string>('', ValidationSchema.id),
     message: this.fb.nonNullable.control<string>(
@@ -157,13 +166,8 @@ export class TicketChatMessageFormComponent extends BaseLoading {
   }
 
   /** Send a new chat message */
-  async sendMessage(hasFile: boolean) {
-    let msg = '';
-    if (hasFile) {
-      msg = this.ctrl<string>('attachmentMessage').value.trim();
-    } else {
-      msg = this.ctrl<string>('message').value.trim();
-    }
+  async sendMessage() {
+    const msg = this.ctrl<string>('message').value.trim();
     if (!msg) return;
 
     const newChat: CreateChatMessageRequest = {
@@ -180,9 +184,18 @@ export class TicketChatMessageFormComponent extends BaseLoading {
         newChat
       );
 
-      if (!checkAndToastError(res, this.toast)) return;
+      if (!checkAndToastError(res, this.toast)) {
+        if (
+          TicketErrorCodes.CaptchaExpired === res.error?.code ||
+          TicketErrorCodes.CaptchaIncorrect === res.error?.code
+        ) {
+          this.captchaGuardVisible.set(true);
+          return;
+        }
+      }
 
       // Add chat to grouped UI
+      if (!res.data) return;
       this.addChatMessage(res.data);
     });
   }
@@ -198,13 +211,5 @@ export class TicketChatMessageFormComponent extends BaseLoading {
       );
       if (!checkAndToastError(response, this.toast)) return;
     });
-  }
-
-  isSendFileDisabled(): boolean {
-    const messageCtrl = this.ctrl('attachmentMessage');
-    const attachmentsCtrl = this.ctrl<string[]>('attachments');
-    const hasAttachments = attachmentsCtrl.value.length > 0;
-
-    return messageCtrl.invalid || !hasAttachments;
   }
 }

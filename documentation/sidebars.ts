@@ -30,16 +30,8 @@ const sidebars: SidebarsConfig = {
         description: 'سرویس ها برای ارتباط با APIها مورد استفاده قرار میگیرند.',
       },
       items: [
-        {
-          type: 'doc',
-          label: 'CaptchaService',
-          id: 'services/captcha-service/index',
-        },
-        {
-          type: 'doc',
-          label: 'APICommunicationManagementService',
-          id: 'services/api-communication-management/index',
-        },
+        'services/captcha-service',
+        'services/api-communication-management',
       ],
     },
     {
@@ -48,16 +40,10 @@ const sidebars: SidebarsConfig = {
       link: {
         type: 'generated-index',
       },
-      items: [
-        {
-          type: 'doc',
-          label: 'ApiResponse',
-          id: 'models/api-response/index',
-        },
-      ],
+      items: ['models/api-response'],
     },
 
-  {
+    {
       type: 'category',
       label: 'کامپوننت های ورودی',
       link: {

@@ -62,7 +62,13 @@
               </div>
 
               <!-- Time (auto width = bubble width) -->
-              <span class="text-xs text-end opacity-60 mt-1">
+              <span
+                class="text-xs opacity-60 mt-1"
+                [ngClass]="{
+                  'text-end': isSender(chat.senderId),
+                  'text-start': !isSender(chat.senderId),
+                }"
+              >
                 {{ chat.time }}
               </span>
             </div>
@@ -75,7 +81,7 @@
   <!-- Chat Input -->
   <div class="w-full border-t-1 px-4 py-4">
     <app-chat-box-input
-      (clickSend)="sendMessage(false)"
+      (clickSend)="sendMessage()"
       (clickFile)="uploadFileVisible = true"
       [control]="this.ctrl('message')"
       [disableSend]="this.ctrl('message').invalid"
@@ -92,16 +98,18 @@
 >
   <div class="flex gap-5 flex-col max-h-[500px] overflow-hidden">
     <div class="flex-1 overflow-y-auto">
-      <app-ticket-files-upload [control]="this.ctrl('attachments')" />
-    </div>
-    <div class="flex-1">
-      <app-chat-box-input
-        (clickSend)="sendMessage(true)"
-        [control]="this.ctrl('attachmentMessage')"
-        placeholder="توضیحات فایل ضمیمه"
-        [enableSendFile]="false"
-        [disableSend]="isSendFileDisabled()"
+      <app-ticket-files-upload
+        [guardType]="guardType()"
+        [control]="this.ctrl('attachments')"
       />
     </div>
   </div>
 </p-dialog>
+
+@if (captchaGuardVisible() && guardType() === "captcha") {
+  <app-ticket-guard-captcha-form
+    [action]="captchaAction"
+    [activeCaptcha]="captchaGuardVisible()"
+    (hiddenDialog)="captchaGuardVisible.set(false)"
+  />
+}
