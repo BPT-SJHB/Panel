@@ -36,6 +36,7 @@ export class UserAuthService {
     }
     //#endregion
 
+    //#region Const
     const { sessionId, username, password, captcha, rememberMe } =
       loginFormData;
     const bodyValue = {
@@ -44,7 +45,9 @@ export class UserAuthService {
       Userpassword: password,
       Captcha: captcha,
     };
+    //#endregion
 
+    //#region Request + Return
     const result = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       { SessionId: string }
@@ -60,6 +63,7 @@ export class UserAuthService {
       },
       error: result.error,
     };
+    //#endregion
   }
 
   public async logout(): Promise<void> {
