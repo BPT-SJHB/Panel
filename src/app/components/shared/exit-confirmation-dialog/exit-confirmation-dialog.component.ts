@@ -28,7 +28,7 @@ export class ExitConfirmationDialogComponent implements OnInit, OnDestroy {
     window.removeEventListener('beforeunload', this.onBeforeUnload);
   }
 
-  private onPopState = (event: PopStateEvent) => {
+  private onPopState = (_: PopStateEvent) => {
     if (!this.formDirty) {
       window.removeEventListener('popstate', this.onPopState);
       history.back();
