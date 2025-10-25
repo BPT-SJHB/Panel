@@ -43,6 +43,15 @@ const sidebars: SidebarsConfig = {
       items: ['models/api-response'],
     },
 
+      {
+      type: 'category',
+      label: 'تمپلیت ها',
+      link: {
+        type: 'generated-index',
+      },
+      items: ['template/form-component-template'],
+    },
+
     // 🆕 New: The 'shared' category
     {
       type: 'category',
