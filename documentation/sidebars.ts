@@ -46,6 +46,9 @@ const sidebars: SidebarsConfig = {
         'models/api-response',
         'models/short-response',
         'models/traffic-card-type',
+        'models/raw-traffic-cost',
+        'models/traffic-card-type-cost',
+        'models/traffic-card-temp-type',
       ],
     },
 
