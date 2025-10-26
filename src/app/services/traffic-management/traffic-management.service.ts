@@ -20,6 +20,24 @@ export class TrafficManagementService {
   private apiCommunicator = inject(APICommunicationManagementService);
   private userAuth = inject(UserAuthService);
 
+  public async RegisterTrafficCardType(
+    trafficCardTypeName: string
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.TrafficAPI.RegisterTrafficCardType;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TrafficCardTypeTitle: trafficCardTypeName,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
   public async GetTrafficCardTypes(): Promise<ApiResponse<TrafficCardType[]>> {
     //#region Consts
     const apiUrl = API_ROUTES.TrafficAPI.GetTrafficCardTypes;
