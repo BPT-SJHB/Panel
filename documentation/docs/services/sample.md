@@ -18,7 +18,7 @@ sidebar_position: 1
 
 ---
 
-## `method name` 🇫
+## `method name`🇫
 
 >
 
