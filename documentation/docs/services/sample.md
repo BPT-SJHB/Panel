@@ -4,27 +4,29 @@ sidebar_position: 1
 
 # name
 
-## توابع
+## 🛠 توابع (Methods Overview)
 
-| نام تابع | وظیفه |
-| :------: | :---: |
-|    ?     |   ?   |
+| (Method Name) نام تابع | (Description) وظیفه |
+| :--------------------: | :-----------------: |
+|          `?`           |          ?          |
 
-## method name
+---
+
+## `method name` 🇫
 
 >
 
-### نوع درخواست
+### نوع درخواست (Request Type)
 
-HTTP TYPE
+`HTTP Type`
 
-### ساختار ورودی
+### 📥 ساختار ورودی (Request Body Structure)
 
 ```JSON
 {}
 ```
 
-### ساختار خروجی
+### 📤 ساختار خروجی (Expected Response Type)
 
 `<ApiResponse<ResponseModel`
 
@@ -38,25 +40,25 @@ HTTP TYPE
 
 :::
 
-### آدرس پایانه مورد استفاده
+### 🌐 آدرس پایانه مورد استفاده (API Endpoint URL)
 
 ```txt title="API_ROUTES.[URL Key]"
 [API URL]:?/api/?
 ```
 
-### ساختار درخواست (API Request)
+### 📬 ساختار درخواست (API Request)
 
 ```JSON
 
 ```
 
-### ساختار پاسخ (API Response)
+### ✅ ساختار پاسخ (API Response)
 
 ```json title="API Response"
 {}
 ```
 
-### نمونه داده پاسخ (Mock data)
+### 🧪 نمونه داده پاسخ (Mock data)
 
 ```JSON title="Mock Name"
 {}
@@ -71,7 +73,7 @@ HTTP TYPE
 
 ---
 
-## موارد مرتبط
+## 📚 موارد مرتبط (Related Documentation)
 
 import DocCardList from '@theme/DocCardList';
 

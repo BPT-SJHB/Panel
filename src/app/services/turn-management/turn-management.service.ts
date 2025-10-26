@@ -25,8 +25,6 @@ export class TurnManagementService {
   //#region Turn main methods
 
   public async GetLatestTurns(truckId: number): Promise<ApiResponse<Turn[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.Turns.GetLatestTurns;
     const truckInfo: TruckInfo = {
@@ -49,8 +47,6 @@ export class TurnManagementService {
   public async GetLatestTurnsForSoftwareUser(): Promise<
     ApiResponse<TurnForSoftwareUser[]>
   > {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Turns.GetLatestTurnsForSoftwareUser;
@@ -78,8 +74,6 @@ export class TurnManagementService {
   public async GetTurnAccounting(
     turnId: number
   ): Promise<ApiResponse<TurnAccounting[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.Turns.GetAccounting;
     const turnInfo: Turn = {
@@ -102,8 +96,6 @@ export class TurnManagementService {
   public async ResuscitateTurn(
     turnId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.Turns.ResuscitateTurn;
     const turnInfo: Turn = {
@@ -124,8 +116,6 @@ export class TurnManagementService {
   }
 
   public async CancelTurn(turnId: number): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.Turns.CancelTurn;
     const turnInfo: Turn = {
@@ -153,8 +143,6 @@ export class TurnManagementService {
     truckId: number,
     sequentialTurnId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Turns.TurnRegisterRequests
@@ -185,8 +173,6 @@ export class TurnManagementService {
     sequentialTurnId: number,
     description: string
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Turns.TurnRegisterRequests
@@ -223,8 +209,6 @@ export class TurnManagementService {
     date: string,
     time: string
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Turns.ReserveTurnRequests
@@ -253,8 +237,6 @@ export class TurnManagementService {
   }
 
   public async ReserveTurnRegister(): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Turns.ReserveTurnRequests

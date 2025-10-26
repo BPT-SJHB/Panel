@@ -11,7 +11,7 @@ export const loginAuthGuard: CanActivateFn = async () => {
   const toast = inject(ToastService);
 
   try {
-    const response = await auth.isLoggedIn(true);
+    const response = await auth.isLoggedIn();
 
     if (!checkAndToastError(response, toast) || !response.data?.ISSessionLive) {
       return true;

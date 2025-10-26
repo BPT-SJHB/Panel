@@ -16,8 +16,6 @@ export class LADPlaceManagementService {
   private apiCommunicator = inject(APICommunicationManagementService);
 
   public async GetLADPlaces(title: string): Promise<ApiResponse<LADPlace[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.LADPlaces.GetLADPlaces;
     const ladPlaceInfo: LADPlace = {
@@ -39,8 +37,6 @@ export class LADPlaceManagementService {
   }
 
   public async GetLADPlace(id: number): Promise<ApiResponse<LADPlace>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.LADPlaces.GetLADPlace;
     const ladPlaceInfo: LADPlace = {
@@ -64,8 +60,6 @@ export class LADPlaceManagementService {
   public async RegisterNewLADPlace(
     ladPlaceInfo: LADPlace
   ): Promise<ApiResponse<LADPlace>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.LADPlaces.RegisterLADPlace;
     const bodyValue = {
@@ -96,8 +90,6 @@ export class LADPlaceManagementService {
   public async UpdateLADPlace(
     ladPlaceInfo: LADPlace
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.LADPlaces.UpdateLADPlace;
     const bodyValue = {
@@ -117,8 +109,6 @@ export class LADPlaceManagementService {
   public async DeleteLADPlace(
     ladPlaceId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.LADPlaces.DeleteLADPlace;
     const ladPlaceInfo: LADPlace = {
@@ -142,8 +132,6 @@ export class LADPlaceManagementService {
   public async ChangeLoadingPlaceStatus(
     ladPlaceId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.LADPlaces.ChangeLoadingPlaceStatus;
@@ -168,8 +156,6 @@ export class LADPlaceManagementService {
   public async ChangeDischargingPlaceStatus(
     ladPlaceId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.LADPlaces.ChangeDischargingPlaceStatus;

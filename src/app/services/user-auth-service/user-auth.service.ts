@@ -36,6 +36,7 @@ export class UserAuthService {
     }
     //#endregion
 
+    //#region Const
     const { sessionId, username, password, captcha, rememberMe } =
       loginFormData;
     const bodyValue = {
@@ -44,7 +45,9 @@ export class UserAuthService {
       Userpassword: password,
       Captcha: captcha,
     };
+    //#endregion
 
+    //#region Request + Return
     const result = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       { SessionId: string }
@@ -60,6 +63,7 @@ export class UserAuthService {
       },
       error: result.error,
     };
+    //#endregion
   }
 
   public async logout(): Promise<void> {
@@ -68,35 +72,19 @@ export class UserAuthService {
     // سمت سرور اضافه شود در صورت نیاز
   }
 
-  // TODO : I add boolean value to bypass redirect for now
-  public async isLoggedIn(
-    bypassRedirect = false
-  ): Promise<ApiResponse<{ ISSessionLive: boolean }>> {
-    const sessionId = this.getSessionId();
-
-    // TODO: Investigate why the user is being redirected here.
-    //       The backend should return an error if the user is not logged in,
-    //       and that error should be handled on the frontend instead of redirecting.
-    const apiUrl = API_ROUTES.SoftwareUserAPI.SessionChecker;
-    if (sessionId === null && !bypassRedirect) {
-      this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
-      await this.logout();
-      return new Promise(function (resolve, _) {
-        resolve({ success: false });
-      });
-    }
-
-    if (bypassRedirect && sessionId === null) {
-      return new Promise(function (resolve) {
-        resolve({ success: true, data: { ISSessionLive: false } });
-      });
-    }
-
+  public async isLoggedIn(): Promise<ApiResponse<{ ISSessionLive: boolean }>> {
     //#region Mock Handling
     if (!environment.production && environment.disableApi) {
       return { success: true, data: { ISSessionLive: true } };
     }
     //#endregion
+
+    const sessionId = this.getSessionId();
+    if (sessionId === null) {
+      return { success: true, data: { ISSessionLive: false } };
+    }
+
+    const apiUrl = API_ROUTES.SoftwareUserAPI.SessionChecker;
 
     const bodyValue = { sessionId: this.getSessionId() };
 

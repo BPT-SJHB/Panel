@@ -21,8 +21,6 @@ export class ReportsManagementService {
   public async GetLoadPermissions(
     loadId: number
   ): Promise<ApiResponse<LoadPermission[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.Reports.Load.GetLoadPermissions;
     const loadInfo: LoadInfo = {
@@ -45,8 +43,6 @@ export class ReportsManagementService {
   public async GetLoadAccounting(
     loadId: number
   ): Promise<ApiResponse<LoadAccounting[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.Reports.Load.GetLoadAccounting;
     const loadInfo: LoadInfo = {
@@ -70,8 +66,6 @@ export class ReportsManagementService {
     announcementGroupId: number,
     announcementSubGroupId: number
   ): Promise<ApiResponse<LoadPermissionForDriver[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.Reports.Load.GetLoadPermissionsForDriver;
     const bodyValue = {

@@ -23,8 +23,6 @@ export class TransportCompaniesManagementService {
   public async GetTransportCompaniesInfo(
     title: string
   ): Promise<ApiResponse<TransportCompany[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.TransportCompanies.GetTransportCompanies;
@@ -49,8 +47,6 @@ export class TransportCompaniesManagementService {
   public async GetTransportCompanyInfo(
     transportCompanyId: number
   ): Promise<ApiResponse<TransportCompany>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.TransportCompanies.GetTransportCompany;
@@ -72,8 +68,6 @@ export class TransportCompaniesManagementService {
   public async GetTransportCompanyBySoftwareUser(): Promise<
     ApiResponse<TransportCompany>
   > {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.TransportCompanies
@@ -94,8 +88,6 @@ export class TransportCompaniesManagementService {
   public async EditTransportCompany(
     transportCompanyInfo: TransportCompany
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.TransportCompanies.EditTransportCompany;
@@ -116,8 +108,6 @@ export class TransportCompaniesManagementService {
   public async ActiveTransportCompanySmsService(
     transportCompanyId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.TransportCompanies
@@ -142,8 +132,6 @@ export class TransportCompaniesManagementService {
   public async ResetTransportCompanyPassword(
     transportCompanyId: number
   ): Promise<ApiResponse<UsernamePassword>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.TransportCompanies
@@ -180,8 +168,6 @@ export class TransportCompaniesManagementService {
     transportCompanyId: number,
     status: boolean
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.TransportCompanies

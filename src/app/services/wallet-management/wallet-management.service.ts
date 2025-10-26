@@ -25,8 +25,6 @@ export class WalletManagementService {
   private apiCommunicator = inject(APICommunicationManagementService);
 
   public async GetUserWalletInfo(): Promise<ApiResponse<Wallet>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.WalletAndTrafficApi.WalletInfo.GetUserWallet;
     const bodyValue = {
@@ -53,8 +51,6 @@ export class WalletManagementService {
   public async GetTruckWalletInfo(
     truckId: number
   ): Promise<ApiResponse<Wallet>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.WalletAndTrafficApi.WalletInfo.GetTruckWallet;
     const truckInfo: TruckInfo = {
@@ -75,8 +71,6 @@ export class WalletManagementService {
   }
 
   public async GetTruckerAssociationWalletInfo(): Promise<ApiResponse<Wallet>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.WalletAndTrafficApi.WalletInfo.GetTruckerAssociationWallet;
@@ -96,8 +90,6 @@ export class WalletManagementService {
   public async GetTransportCompanyWallet(
     transportCompanyId: number
   ): Promise<ApiResponse<Wallet>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.WalletAndTrafficApi.WalletInfo.GetTransportCompanyWallet;
@@ -117,8 +109,6 @@ export class WalletManagementService {
   }
 
   public async GetSmsWalletInfo(): Promise<ApiResponse<Wallet>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.WalletAndTrafficApi.WalletInfo.GetSmsWallet;
     const bodyValue = {
@@ -144,8 +134,6 @@ export class WalletManagementService {
       Total: number;
     }>
   > {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.WalletAndTrafficApi.WalletInfo.GetTotalOfUserFunctions;
@@ -174,8 +162,6 @@ export class WalletManagementService {
     startTime: string,
     endTime: string
   ): Promise<ApiResponse<WalletUserChargingFunction[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.WalletAndTrafficApi.WalletInfo.GetUserChargingFunctions;
@@ -199,8 +185,6 @@ export class WalletManagementService {
   public async GetWalletBalance(
     walletId: number
   ): Promise<ApiResponse<{ Balance: number }>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.WalletAndTrafficApi.WalletInfo.GetWalletBalance;
     const walletInfo: Wallet = {
@@ -225,8 +209,6 @@ export class WalletManagementService {
   public async GetWalletDefaultAmounts(): Promise<
     ApiResponse<WalletDefaultAmount[]>
   > {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.WalletAndTrafficApi.WalletInfo.GetDefaultAmounts;
     const bodyValue = {
@@ -245,8 +227,6 @@ export class WalletManagementService {
   public async SendPaymentRequest(
     amount: number
   ): Promise<ApiResponse<WalletPaymentRequest>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.WalletAndTrafficApi.WalletRequests.PaymentRequest;
     const bodyValue = {
@@ -266,8 +246,6 @@ export class WalletManagementService {
   public async GetWalletTransactions(
     walletId: number
   ): Promise<ApiResponse<WalletTransaction[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.WalletAndTrafficApi.WalletInfo.GetWalletTransactions;
@@ -291,8 +269,6 @@ export class WalletManagementService {
   public async GetWalletPaymentRecords(
     walletId: number
   ): Promise<ApiResponse<WalletPaymentHistory[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.WalletAndTrafficApi.WalletInfo.GetWalletPaymentRecords;

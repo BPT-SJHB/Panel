@@ -1,28 +1,30 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 # CaptchaService
 
-## توابع
+## 🛠 توابع (Methods Overview)
 
-|         نام تابع          |       وظیفه        |
-| :-----------------------: | :----------------: |
-| [getCaptcha](#getcaptcha) | درخواست تصویر کپچا |
+|   (Method Name) نام تابع    | (Description) وظیفه |
+| :-------------------------: | :-----------------: |
+| [`getCaptcha`](#getcaptcha) | درخواست تصویر کپچا  |
 
-## getCaptcha
+---
+
+## `getCaptcha` 🇫
 
 > دریافت تصویر کپچا برای اعتبارسنجی
 
-### نوع درخواست
+### نوع درخواست (Request Type)
 
-GET
+`Get`
 
-### ساختار ورودی
+### 📥 ساختار ورودی (Request Body Structure)
 
 هیچ ورودی مورد نیاز نیست.
 
-### ساختار خروجی
+### 📤 ساختار خروجی (Expected Response Type)
 
 `<ApiResponse<CaptchaChallenge`
 
@@ -39,17 +41,17 @@ GET
 
 :::
 
-### آدرس پایانه مورد استفاده
+### 🌐 آدرس پایانه مورد استفاده (API Endpoint URL)
 
 ```txt title="API_ROUTES.SoftwareUserAPI.CAPTCHA"
 [API URL]:81/api/GetCaptcha
 ```
 
-### ساختار درخواست (API Request)
+### 📬 ساختار درخواست (API Request)
 
 بدون بدنه درخواست (GET)
 
-### ساختار پاسخ (API Response)
+### ✅ ساختار پاسخ (API Response)
 
 ```json title="API Response"
 {
@@ -58,7 +60,7 @@ GET
 }
 ```
 
-### نمونه داده پاسخ (Mock data)
+### 🧪 نمونه داده پاسخ (Mock data)
 
 ```JSON title="mockCaptcha"
 {
@@ -77,7 +79,7 @@ GET
 
 ---
 
-## موارد مرتبط
+## 📚 موارد مرتبط (Related Documentation)
 
 import DocCardList from '@theme/DocCardList';
 

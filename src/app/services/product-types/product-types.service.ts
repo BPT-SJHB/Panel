@@ -18,8 +18,6 @@ export class ProductTypesService {
   public async GetProductsInfo(
     productTypeTitle: string
   ): Promise<ApiResponse<ProductType[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.ProductTypes.GetProducts;
     const productTypeInfo: ProductType = {
@@ -44,8 +42,6 @@ export class ProductTypesService {
     productTypeId: number,
     status: boolean
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.ProductTypes.ChangeProductTypeStatus;
@@ -72,8 +68,6 @@ export class ProductTypesService {
     productId: number,
     status: boolean
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.ProductTypes.ChangeProductStatus;

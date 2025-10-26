@@ -38,8 +38,6 @@ export class Driver_TruckManagementService {
   public async GetDriverInfoFromAPI(
     nationalCode: string
   ): Promise<ApiResponse<TruckDriverInfo>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const outdoorApiUrl =
       API_ROUTES.TransportationAPI.Driver.GetTruckDriverInfoFromOutdoorAPI;
@@ -74,8 +72,6 @@ export class Driver_TruckManagementService {
   public async GetDriverInfoForSoftwareUser(): Promise<
     ApiResponse<TruckDriverInfo>
   > {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Driver.GetTruckDriverInfoForSoftwareUser;
@@ -96,8 +92,6 @@ export class Driver_TruckManagementService {
     driverId: number,
     mobileNumber: string
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Driver.TruckDriverRegisteringMobileNumber;
@@ -123,8 +117,6 @@ export class Driver_TruckManagementService {
   public async ActivateDriverSMS(
     driverId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Driver.ActivateTruckDriverSMSOwner;
@@ -146,8 +138,6 @@ export class Driver_TruckManagementService {
   public async ResetDriverPassword(
     driverId: number
   ): Promise<ApiResponse<UsernamePassword>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Driver.ResetTruckDriverUserPassword;
@@ -180,8 +170,6 @@ export class Driver_TruckManagementService {
   public async SendWebsiteLink(
     driverId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.Driver.SendWebsiteLink;
     const truckDriverInfo: TruckDriverInfo = { DriverId: driverId };
@@ -206,7 +194,6 @@ export class Driver_TruckManagementService {
   public async GetTruckInfoFromAPI(
     smartCardNo: string
   ): Promise<ApiResponse<TruckInfo>> {
-    this.userAuth.isLoggedIn();
     //#region Consts
     const truckInfo: TruckInfo = {
       TruckId: 0,
@@ -240,8 +227,6 @@ export class Driver_TruckManagementService {
   }
 
   public async GetTruckInfoForSoftwareUser(): Promise<ApiResponse<TruckInfo>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Truck.GetTruckInfoForSoftwareUser;
@@ -261,8 +246,6 @@ export class Driver_TruckManagementService {
   public async GetTruckNativeness(
     truckId: number
   ): Promise<ApiResponse<TruckNativenessInfo>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.Truck.GetTruckNativeness;
     const truckInfo: TruckInfo = { TruckId: truckId };
@@ -284,8 +267,6 @@ export class Driver_TruckManagementService {
     truckId: number,
     truckNativenessExpireDate: string
   ): Promise<ApiResponse<TruckNativenessInfo>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.Truck.ChangeTruckNativeness;
     const truckInfo: TruckInfo = { TruckId: truckId };
@@ -314,8 +295,6 @@ export class Driver_TruckManagementService {
   public async GetComposedTruckInfoWithLastActiveTurn(
     truckId: number
   ): Promise<ApiResponse<TruckComposedInfo>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Truck.ComposedInfos.GetComposedTruckInfo;
@@ -337,8 +316,6 @@ export class Driver_TruckManagementService {
   public async GetComposedTruckInfoWithLastTurn(
     truckId: number
   ): Promise<ApiResponse<TruckComposedInfo>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Truck.ComposedInfos
@@ -366,8 +343,6 @@ export class Driver_TruckManagementService {
     turnId: number,
     moneyWalletId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Truck.ComposedInfos.SetComposedTruckInfo;
@@ -395,8 +370,6 @@ export class Driver_TruckManagementService {
   }
 
   public async GetVirtualWallet(): Promise<ApiResponse<Wallet>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.SoftwareUserAPI.GetVirtualWallet;
     const bodyValue = {

@@ -24,8 +24,6 @@ export class AnnouncementGroupSubgroupManagementService {
   public async GetAnnouncementGroups(
     title: string
   ): Promise<ApiResponse<AnnouncementGroup[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Announcements.Groups.GetAnnouncementGroups;
@@ -50,8 +48,6 @@ export class AnnouncementGroupSubgroupManagementService {
   public async RegisterNewAnnouncementGroup(
     title: string
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Announcements.Groups
@@ -79,8 +75,6 @@ export class AnnouncementGroupSubgroupManagementService {
     title: string,
     status: boolean
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Announcements.Groups.EditAnnouncementGroup;
@@ -106,8 +100,6 @@ export class AnnouncementGroupSubgroupManagementService {
   public async DeleteAnnouncementGroup(
     id: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Announcements.Groups.DeleteAnnouncementGroup;
@@ -135,8 +127,6 @@ export class AnnouncementGroupSubgroupManagementService {
   public async GetAnnouncementSupGroups(
     title: string
   ): Promise<ApiResponse<AnnouncementSubGroup[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Announcements.SubGroups
@@ -163,8 +153,6 @@ export class AnnouncementGroupSubgroupManagementService {
     title: string,
     status: boolean
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Announcements.SubGroups
@@ -193,8 +181,6 @@ export class AnnouncementGroupSubgroupManagementService {
     title: string,
     status: boolean
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Announcements.SubGroups
@@ -221,8 +207,6 @@ export class AnnouncementGroupSubgroupManagementService {
   public async DeleteAnnouncementSubGroup(
     id: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Announcements.SubGroups
@@ -251,8 +235,6 @@ export class AnnouncementGroupSubgroupManagementService {
   public async GetRelationOfAnnouncementGroupAndSubGroup(
     id: number
   ): Promise<ApiResponse<RelationOfAnnouncementGroupAndSubGroup[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Announcements
@@ -280,8 +262,6 @@ export class AnnouncementGroupSubgroupManagementService {
     announcementGroupId: number,
     announcementSubGroupId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Announcements
@@ -312,8 +292,6 @@ export class AnnouncementGroupSubgroupManagementService {
     announcementGroupId: number,
     announcementSubGroupId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.Announcements

@@ -18,8 +18,6 @@ export class ProvinceAndCityManagementService {
   public async GetProvincesAndCitiesInfo(
     provinceAndCityName: string
   ): Promise<ApiResponse<Province[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.ProvinceAndCities.GetCities;
     const provinceAndCities: Province = {
@@ -44,8 +42,6 @@ export class ProvinceAndCityManagementService {
     provinceId: number,
     status: boolean
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.ProvinceAndCities.ChangeProvinceStatus;
@@ -72,8 +68,6 @@ export class ProvinceAndCityManagementService {
     cityCode: number,
     status: boolean
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.ProvinceAndCities.ChangeCityStatus;
