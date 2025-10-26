@@ -149,4 +149,23 @@ export class TrafficManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  public async GetTrafficRecords(
+    trafficCardId: number
+  ): Promise<ApiResponse<TrafficReportInfo[]>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.TrafficAPI.GetTrafficRecords;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TrafficCardId: trafficCardId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      TrafficReportInfo[]
+    >(apiUrl, bodyValue, mockTrafficReportInfos);
+    //#endregion
+  }
 }
