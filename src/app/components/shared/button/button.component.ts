@@ -1,11 +1,9 @@
 import {
   Component,
-  EventEmitter,
   input,
-  Input,
   OnChanges,
   OnInit,
-  Output,
+  output,
   signal,
   SimpleChanges,
 } from '@angular/core';
@@ -17,23 +15,28 @@ export type ButtonSeverity =
   | 'info'
   | 'danger'
   | 'secondary'
-  | 'warn';
+  | 'warn'
+  | 'disabled';
+
+interface ButtonShadow {
+  normal: string;
+  sync: string;
+}
+
+interface ButtonColor {
+  gradient: string;
+  shadow: ButtonShadow;
+}
+
+interface ButtonSize {
+  small: string;
+  large: string;
+}
 
 interface ButtonStyle {
-  colors: {
-    [key: string]: {
-      gradient: string;
-      shadow: {
-        normal: string;
-        sync: string;
-      };
-    };
-  };
+  colors: Record<ButtonSeverity, ButtonColor>;
   animation: string;
-  size?: {
-    small: string;
-    large: string;
-  };
+  size?: ButtonSize;
 }
 
 @Component({
@@ -43,19 +46,19 @@ interface ButtonStyle {
   styleUrl: './button.component.scss',
 })
 export class ButtonComponent implements OnInit, OnChanges {
-  @Input() severity: ButtonSeverity = 'green';
-  @Input() syncShadow = true;
-  @Input() shadow = true;
-  @Input() label = '';
-  @Input() disabled = false;
-  @Input() size: 'small' | 'large' | 'normal' = 'normal';
-  @Input() type?: 'button' | 'submit';
-  @Input() icon?: string;
-  @Input() styleClass = '';
-  @Input() rounded = false;
-  @Input() raised = false;
+  readonly severity = input<ButtonSeverity>('green');
+  readonly syncShadow = input(true);
+  readonly shadow = input(true);
+  readonly label = input('');
+  readonly disabled = input(false);
+  readonly size = input<'small' | 'large' | 'normal'>('normal');
+  readonly type = input<'button' | 'submit'>();
+  readonly icon = input<string>();
+  readonly styleClass = input('');
+  readonly rounded = input(false);
+  readonly raised = input(false);
 
-  @Output() onClick = new EventEmitter<void>();
+  readonly onClick = output<void>();
 
   private readonly baseClass =
     'rounded-[9999px] border-0 text-primary-contrast';
@@ -107,6 +110,14 @@ export class ButtonComponent implements OnInit, OnChanges {
           sync: '',
         },
       },
+      secondary: {
+        gradient:
+          'bg-gradient-to-b dark:from-primary-400 dark:to-primary-800 from-primary-400 to-primary-800 to-75%',
+        shadow: {
+          normal: 'shadow-[0px_4px_8px_var(--p-surface-500)]',
+          sync: 'dark:shadow-[0px_4px_8px_theme(colors.primary.800)] shadow-[0px_4px_8px_theme(colors.primary.800)]',
+        },
+      },
     },
     animation:
       'transition-all duration-150 ease-in-out hover:scale-105 active:translate-y-0.5 active:shadow-sm active:scale-95',
@@ -131,32 +142,32 @@ export class ButtonComponent implements OnInit, OnChanges {
     const classes: string[] = [this.baseClass];
 
     // Add size classes
-    if (this.size !== 'normal' && this.style.size) {
+    if (this.size() !== 'normal' && this.style.size) {
       classes.push(
-        this.size === 'large' ? this.style.size.large : this.style.size.small
+        this.size() === 'large' ? this.style.size.large : this.style.size.small
       );
     }
 
     // Determine and add gradient and shadow classes
-    let styleData = this.disabled
+    let styleData = this.disabled()
       ? this.style.colors['disabled']
-      : this.style.colors[this.severity];
+      : this.style.colors[this.severity()];
 
     if (!styleData) styleData = this.style.colors['primary'];
     classes.push(styleData.gradient);
 
-    if (this.shadow || this.disabled) {
-      if (this.disabled) {
+    if (this.shadow() || this.disabled()) {
+      if (this.disabled()) {
         classes.push(styleData.shadow.normal);
       } else {
         classes.push(
-          this.syncShadow ? styleData.shadow.sync : styleData.shadow.normal
+          this.syncShadow() ? styleData.shadow.sync : styleData.shadow.normal
         );
       }
     }
 
     // Add animation class if not disabled
-    if (!this.disabled) {
+    if (!this.disabled()) {
       classes.push(this.style.animation);
     }
 
@@ -165,7 +176,7 @@ export class ButtonComponent implements OnInit, OnChanges {
   }
 
   handleClick(): void {
-    if (!this.disabled) {
+    if (!this.disabled()) {
       this.onClick.emit();
     }
   }

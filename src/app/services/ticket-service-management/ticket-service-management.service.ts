@@ -27,6 +27,7 @@ import { mockTicketCaptcha } from './mock/ticket-captcha.mock';
 import { mockTicketStatuses } from './mock/ticket-status.mock';
 import { mockTicketPaging } from './mock/ticket-paging.mock';
 import { Observable } from 'rxjs';
+import { uuidV4 } from 'app/utils/uuid';
 
 @Injectable({
   providedIn: 'root',

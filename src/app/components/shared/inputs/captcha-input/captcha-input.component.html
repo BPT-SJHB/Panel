@@ -1,62 +1,15 @@
-<div>
-  <input hidden [formControl]="sessionIdControl" readonly />
-
-  <p-inputgroup styleClass="h-2-5rem">
-    <p-inputgroup-addon
-      class="rounded-2xl"
-      [style.padding]="0"
-      [style.border]="0"
-    >
-      <img
-        [src]="imageData"
-        alt="کپچا"
-        class="w-full h-full object-fill z-10 border-2 border-primary-emphasis rounded-r-2xl bg-primary-300"
-      />
-    </p-inputgroup-addon>
-
-    <input
-      pInputText
-      [formControl]="captchaInputControl"
-      pInputText
-      placeholder="متن تصویر را وارد کنید"
-      [style.background]="'var(--p-inputgroup-addon-background)'"
-      class="border border-y-2 border-x-0 focus:outline-0 border-surface-400 focus:border-primary-emphasis px-2 h-full w-full placeholder:text-gray-400 text-sm"
-      [ngClass]="{
-        'focus:border-red-500':
-          captchaInputControl.touched && captchaInputControl.invalid,
-      }"
-    />
-    <p-inputgroup-addon
-      [style]="{
-        padding: 0,
-        margin: 0,
-        border: 0,
-      }"
-      class="flex h-10 rounded-l-2xl"
-    >
-      <p-button
-        icon="pi pi-refresh text-primary-emphasis"
-        (click)="onRefreshClick()"
-      >
-        <i
-          [ngClass]="{ rotate: disableRefresh }"
-          class="pi pi-refresh mr-4 text-primary-contrast"
-        ></i>
-      </p-button>
-    </p-inputgroup-addon>
-  </p-inputgroup>
-
-  @if (captchaInputControl.touched && captchaInputControl.errors) {
-    @if (captchaInputControl.errors["required"]) {
-      <p-message severity="error" variant="simple" size="small">
-        وارد کردن متن تصویر الزامی است
-      </p-message>
-    } @else if (captchaInputControl.errors["minlength"]) {
-      <p-message severity="error" variant="simple" size="small">
-        کپچا باید حداقل
-        {{ captchaInputControl.errors["minlength"].requiredLength }} کاراکتر
-        باشد
-      </p-message>
-    }
-  }
+<input [formControl]="sessionIdControl()" hidden readonly />
+<div [id]="captchaDivId">
+  <app-text-input
+    [imageAddon]="imageAddon()"
+    placeholder="کد امنیتی را وارد کنید."
+    type="number"
+    buttonIcon="pi pi-refresh"
+    validationField="captcha"
+    addonWidth="110px"
+    (clickButton)="onRefreshClick()"
+    [control]="captchaInputControl()"
+    [icon]="icon()"
+    [buttonDisabled]="disableRefresh()"
+  />
 </div>
