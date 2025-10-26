@@ -92,13 +92,13 @@ export class TrafficManagementService {
     //#endregion
   }
 
-  public async RegisterTrafficCardType(
+  public async RegisterTrafficCard(
     trafficCardNumber: string,
     trafficCardTypeId: number,
     trafficCardTempTypeId: number
   ): Promise<ApiResponse<ShortResponse>> {
     //#region Consts
-    const apiUrl = API_ROUTES.TrafficAPI.RegisterTrafficCardType;
+    const apiUrl = API_ROUTES.TrafficAPI.RegisterTrafficCard;
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
       TrafficCardNo: trafficCardNumber,
