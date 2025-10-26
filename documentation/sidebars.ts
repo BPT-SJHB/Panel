@@ -32,6 +32,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'services/captcha-service',
         'services/api-communication-management',
+        'services/user-auth-service',
       ],
     },
     {
