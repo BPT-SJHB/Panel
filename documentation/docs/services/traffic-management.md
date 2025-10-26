@@ -40,7 +40,11 @@ trafficCardTypeName: string
 
 ### 📤 ساختار خروجی تابع(Method Output)
 
-`<`[`ApiResponse`](../models/api-response.md)`<`[`ShortResponse`](../models/short-response.md)``>`
+<div dir="ltr"> 
+
+`<`[`ApiResponse`](../models/api-response.md)`<`[`ShortResponse`](../models/short-response.md)`>`
+
+</div>
 
 ### 🌐 آدرس پایانه مورد استفاده (API Endpoint URL)
 
@@ -82,12 +86,16 @@ trafficCardTypeInfo: TrafficCardType
 ```
 
 :::tip
-ساختار [TrafficCardType](/documentation/docs/models/traffic-card-type#ساختار-model) چیست؟
+ساختار [TrafficCardType](../models/traffic-card-type#ساختار-model) چیست؟
 :::
 
 ### 📤 ساختار خروجی تابع(Method Output)
 
-`<`[`ApiResponse`](../models/api-response.md)`<`[`ShortResponse`](../models/short-response.md)``>`
+<div dir="ltr">
+
+`<`[`ApiResponse`](../models/api-response.md)`<`[`ShortResponse`](../models/short-response.md)`>`
+
+</div>
 
 ### 🌐 آدرس پایانه مورد استفاده (API Endpoint URL)
 
@@ -105,8 +113,9 @@ trafficCardTypeInfo: TrafficCardType
 ```
 
 :::tip
-ساختار [TrafficCardType](/documentation/docs/models/traffic-card-type#ساختار-model) چیست؟
+ساختار [TrafficCardType](../models/traffic-card-type#ساختار-model) چیست؟
 :::
+
 ### ✅ ساختار پاسخ (API Response)
 
 [`ShortResponse`](../models/short-response.md#ساختار-model)
@@ -123,13 +132,15 @@ trafficCardTypeInfo: TrafficCardType
 
 ### 📥 ساختار ورودی تابع (Method Input)
 
-```TypeScript
-{}
-```
+❌
 
 ### 📤 ساختار خروجی تابع(Method Output)
 
-`<`[`ApiResponse`](../models/api-response.md)`<`[`TrafficCardType`](../models/traffic-card-type.md)`[]>``>`
+<div dir="ltr"> 
+
+`<`[`ApiResponse`](../models/api-response.md)`<`[`TrafficCardType`](../models/traffic-card-type.md)`[]>>`
+
+</div>
 
 ### 🌐 آدرس پایانه مورد استفاده (API Endpoint URL)
 
@@ -151,7 +162,7 @@ trafficCardTypeInfo: TrafficCardType
 
 ### 🧪 نمونه داده پاسخ (Mock data)
 
-[`mockTrafficCardTypes`](../services/traffic-management/mock/traffic-card-type.mock.ts)
+[`mockTrafficCardTypes`](../models/traffic-card-type.md)
 
 ---
 
@@ -165,13 +176,15 @@ trafficCardTypeInfo: TrafficCardType
 
 ### 📥 ساختار ورودی تابع (Method Input)
 
-```TypeScript
-{}
-```
+❌
 
 ### 📤 ساختار خروجی تابع(Method Output)
 
-`<`[`ApiResponse`](../models/api-response.md)`<`[`TrafficCardTempType`](../models/traffic-card-temp-type.md)`[]>``>`
+<div dir="ltr"> 
+
+`<`[`ApiResponse`](../models/api-response.md)`<`[`TrafficCardTempType`](../models/traffic-card-temp-type.md)`[]>` `>`
+
+</div>
 
 ### 🌐 آدرس پایانه مورد استفاده (API Endpoint URL)
 
@@ -193,7 +206,7 @@ trafficCardTypeInfo: TrafficCardType
 
 ### 🧪 نمونه داده پاسخ (Mock data)
 
-[`mockTrafficCardTempTypes`](../services/traffic-management/mock/traffic-card-temp-type.mock.ts)
+[`mockTrafficCardTempTypes`](../models/traffic-card-temp-type.md)
 
 ---
 
@@ -215,7 +228,9 @@ trafficCardTempTypeId: number
 
 ### 📤 ساختار خروجی تابع(Method Output)
 
-`<`[`ApiResponse`](../models/api-response.md)`<`[`ShortResponse`](../models/short-response.md)``>`
+<div dir="ltr"> 
+`<`[`ApiResponse`](../models/api-response.md)`<`[`ShortResponse`](../models/short-response.md)`>`
+</div>
 
 ### 🌐 آدرس پایانه مورد استفاده (API Endpoint URL)
 
@@ -256,12 +271,16 @@ trafficCardTempTypeId: number
 ### 📥 ساختار ورودی تابع (Method Input)
 
 ```TypeScript
-{}
+❌
 ```
 
 ### 📤 ساختار خروجی تابع(Method Output)
 
-`<`[`ApiResponse`](../models/api-response.md)`<`[`TrafficCardTypeCost`](../models/traffic-card-type-cost.md)`[]>``>`
+<div dir="ltr"> 
+
+`<`[`ApiResponse`](../models/api-response.md)`<`[`TrafficCardTypeCost`](../models/traffic-card-type-cost.md)`[]>>`
+
+</div>
 
 ### 🌐 آدرس پایانه مورد استفاده (API Endpoint URL)
 
@@ -283,7 +302,7 @@ trafficCardTempTypeId: number
 
 ### 🧪 نمونه داده پاسخ (Mock data)
 
-[`mockTrafficCardTypeCosts`](../services/traffic-management/mock/traffic-card-type-cost.mock.ts)
+[`mockTrafficCardTypeCosts`](../models/traffic-card-type-cost.md)
 
 ---
 
@@ -303,7 +322,12 @@ trafficCost: RawTrafficCost
 
 ### 📤 ساختار خروجی تابع(Method Output)
 
-`<`[`ApiResponse`](../models/api-response.md)`<`[`ShortResponse`](../models/short-response.md)``>`
+
+<div dir="ltr"> 
+
+`<`[`ApiResponse`](../models/api-response.md)`<`[`ShortResponse`](../models/short-response.md)`>`
+
+</div>
 
 ### 🌐 آدرس پایانه مورد استفاده (API Endpoint URL)
 
@@ -316,7 +340,14 @@ trafficCost: RawTrafficCost
 ```JSON
 {
   SessionId: string,
-  ...RawTrafficCost
+  RawTrafficCost : {
+    TrafficCardTypeId: number,
+    EntryBaseCost: number,
+    NoCostStoppageDuration: number,
+    ExcessStoppageDuration: number,
+    ExcessStoppageCost: number,
+    Active: boolean,
+  }
 }
 ```
 
