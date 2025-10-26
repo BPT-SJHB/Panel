@@ -6,7 +6,7 @@ sidebar_position: 4
 
 ## ساختار (Model)
 
-```JSON title="TrafficCardTempType"
+```TypeScript title="TrafficCardTempType"
 {
   TrafficCardTempTypeId: number;
   TrafficCardTempTypeTitle: string;
@@ -35,3 +35,4 @@ sidebar_position: 4
 import DocCardList from '@theme/DocCardList';
 
 <DocCardList/>
+

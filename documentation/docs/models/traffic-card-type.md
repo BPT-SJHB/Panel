@@ -6,7 +6,7 @@ sidebar_position: 3
 
 ## ساختار (Model)
 
-```JSON title="TrafficCardType
+```TypeScript title="TrafficCardType
 {
   TrafficCardTypeId: number;
   TrafficCardTypeTitle: string;

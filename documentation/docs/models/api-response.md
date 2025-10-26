@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # ApiResponse
 
-```JSON title="ApiResponse"
+```TypeScript title="ApiResponse"
 {
   success: boolean;
   data?: T;

@@ -6,7 +6,7 @@ sidebar_position: 5
 
 ## ساختار (Model)
 
-```JSON title="TrafficCardTypeCost" 
+```TypeScript title="TrafficCardTypeCost"
 {
   TrafficCardTypeId: number;
   EntryBaseCost: number;
@@ -44,3 +44,4 @@ sidebar_position: 5
 import DocCardList from '@theme/DocCardList';
 
 <DocCardList/>
+

@@ -2,11 +2,11 @@
 sidebar_position: 6
 ---
 
-#  RawTrafficCost 
+# RawTrafficCost
 
 ## ساختار (Model)
 
-```JSON title=" RawTrafficCost"
+```TypeScript title=" RawTrafficCost"
 {
   TrafficCardTypeId: number;
   EntryBaseCost: number;
@@ -22,3 +22,4 @@ sidebar_position: 6
 import DocCardList from '@theme/DocCardList';
 
 <DocCardList/>
+

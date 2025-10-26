@@ -6,7 +6,7 @@ sidebar_position: 2
 
 ## ساختار (Model)
 
-```JSON title="ShortResponse"
+```TypeScript title="ShortResponse"
 {
   Message: string;
 }
