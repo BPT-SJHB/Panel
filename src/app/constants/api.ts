@@ -5,6 +5,7 @@ const walletAndTrafficPort = 83;
 const LoadCapacitorPort = 84;
 const LoadAllocationPort = 85;
 const ReportsPort = 86;
+const TrafficPort = 91;
 const ticketPort = 8080;
 const ticketUrl = 'http://localhost';
 const apiFixURLPart = '/api/';
@@ -225,7 +226,6 @@ export const API_ROUTES = {
       GetLoadAccounting: `${environment.apiUrl}:${ReportsPort}${apiFixURLPart}GetLoadAccountingRecords`,
     },
   },
-
   TicketAPI: {
     Auth: {
       SignUp: `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}auth/SignUp/`,
@@ -264,5 +264,8 @@ export const API_ROUTES = {
       DownloadTicketFile: (id: string) =>
         `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}files/GetDownloadLinkTicketFile/${id}`,
     },
+  },
+  TrafficAPI: {
+    apiRouteName: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}realNameFromAPI`,
   },
 };
