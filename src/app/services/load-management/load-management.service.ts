@@ -46,8 +46,6 @@ export class LoadManagementService {
   ): Promise<
     ApiResponse<LoadForTransportCompanies_Factories_Admins_Drivers[]>
   > {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.LoadCapacitorAPI.GetLoadsForTransportCompanies;
     const bodyValue: {
@@ -104,8 +102,6 @@ export class LoadManagementService {
   ): Promise<
     ApiResponse<LoadForTransportCompanies_Factories_Admins_Drivers[]>
   > {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.LoadCapacitorAPI.GetLoadsForDriver;
     const loadInfo: LoadInfo = {
@@ -146,8 +142,6 @@ export class LoadManagementService {
   ): Promise<
     ApiResponse<LoadForTransportCompanies_Factories_Admins_Drivers[]>
   > {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.LoadCapacitorAPI.GetLoadsForFactoriesAndProductionCenters;
@@ -215,8 +209,6 @@ export class LoadManagementService {
   ): Promise<
     ApiResponse<LoadForTransportCompanies_Factories_Admins_Drivers[]>
   > {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.LoadCapacitorAPI.GetLoadsForAdmin;
     const bodyValue: {
@@ -271,8 +263,6 @@ export class LoadManagementService {
   }
 
   public async GetLoadStatuses(): Promise<ApiResponse<LoadStatus[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.LoadCapacitorAPI.GetLoadStatus;
     const bodyValue = {
@@ -289,8 +279,6 @@ export class LoadManagementService {
   }
 
   public async GetLoadInfo(loadId: number): Promise<ApiResponse<LoadInfo>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.LoadCapacitorAPI.GetLoad;
     const loadInfo: LoadInfo = {
@@ -313,8 +301,6 @@ export class LoadManagementService {
   public async GetTransportTariffParamsInArray(
     tptParams: string
   ): Promise<ApiResponse<TransportTariffParam[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.LoadCapacitorAPI.GetTransportTariffParamsInJson;
     const loadInfo: LoadInfo = {
@@ -338,8 +324,6 @@ export class LoadManagementService {
   public async GetTransportTariffParamsInString(
     transportTariffParam: TransportTariffParam[]
   ): Promise<ApiResponse<{ TPTParams: string }>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.LoadCapacitorAPI.GetTransportTariffParamsInString;
     const bodyValue = {
@@ -362,8 +346,6 @@ export class LoadManagementService {
   public async GetTransportTariffParamsByAnnouncementSubGroupId(
     announcementSubGroupId: number
   ): Promise<ApiResponse<TransportTariffParam[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.LoadCapacitorAPI.GetTransportTariffParamsByAnnouncementSGId;
@@ -384,8 +366,6 @@ export class LoadManagementService {
   public async RegisterNewLoad(
     load: LoadRegister
   ): Promise<ApiResponse<{ newLoadId: number }>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.LoadCapacitorAPI.RegisterLoad;
     const bodyValue = {
@@ -405,8 +385,6 @@ export class LoadManagementService {
   }
 
   public async EditLoad(load: LoadEdit): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.LoadCapacitorAPI.EditLoad;
     const bodyValue = {
@@ -424,8 +402,6 @@ export class LoadManagementService {
   }
 
   public async DeleteLoad(loadId: number): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.LoadCapacitorAPI.DeleteLoad;
     const loadInfo: LoadInfo = {
@@ -446,8 +422,6 @@ export class LoadManagementService {
   }
 
   public async CancelLoad(loadId: number): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.LoadCapacitorAPI.CancelLoad;
     const loadInfo: LoadInfo = {
@@ -470,8 +444,6 @@ export class LoadManagementService {
   public async FreeLineLoad(
     loadId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.LoadCapacitorAPI.FreeLineLoad;
     const loadInfo: LoadInfo = {
@@ -494,8 +466,6 @@ export class LoadManagementService {
   public async SedimentLoad(
     loadId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.LoadCapacitorAPI.SedimentLoad;
     const loadInfo: LoadInfo = {
@@ -524,8 +494,6 @@ export class LoadManagementService {
     driverId: number,
     loadId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.LoadAllocationAPI.RegistrationForTransportCompanies;
@@ -559,8 +527,6 @@ export class LoadManagementService {
     driverId: number,
     loadId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.LoadAllocationAPI.RegistrationForAdmins;
     const bodyValue = {
@@ -582,8 +548,6 @@ export class LoadManagementService {
   public async RegisterNewLoadAllocationForDrivers(
     loadId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.LoadAllocationAPI.RegistrationForDrivers;
     const loadInfo: LoadInfo = {
@@ -606,8 +570,6 @@ export class LoadManagementService {
   public async AllocateLoadToNextTurn(
     laId: number
   ): Promise<ApiResponse<LoadAllocatedToNextTurn>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.LoadAllocationAPI.AllocateLoadToNextTurn;
     const loadAllocationInfo: LoadAllocationInfo = {
@@ -631,8 +593,6 @@ export class LoadManagementService {
   public async GetLoadAllocationOfDriver(): Promise<
     ApiResponse<LoadAllocationInfo[]>
   > {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.LoadAllocationAPI.GetLoadAllocationOfDriver;
     const bodyValue = {
@@ -652,8 +612,6 @@ export class LoadManagementService {
     laId: number,
     loadId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.LoadAllocationAPI.CancelLoadAllocation;
     const LoadAllocationInfo: LoadAllocationInfo = {
@@ -680,8 +638,6 @@ export class LoadManagementService {
       TravelTime: number;
     }>
   > {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.LoadAllocationAPI.GetTravelTimeOfLoadAllocation;
     const LoadAllocationInfo: LoadAllocationInfo = {
@@ -715,8 +671,6 @@ export class LoadManagementService {
     TurnResuscitation: boolean,
     LoadResuscitation: boolean
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.LoadPermissions.CancelLoadPermission;

@@ -17,8 +17,6 @@ export class ApiProcessesService {
   private apiCommunicator = inject(APICommunicationManagementService);
 
   public async getApiProcesses(): Promise<ApiResponse<PageGroup[]>> {
-    await this.userAuth.isLoggedIn();
-
     //#region Consts
     const bodyValue = {
       sessionId: this.userAuth.getSessionId(),

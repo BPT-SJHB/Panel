@@ -215,7 +215,7 @@ export class TicketServiceManagementService {
     >(
       API_ROUTES.TicketAPI.File.DownloadTicketFile(fileId),
       { id: ticketId },
-      null,
+      { url: '' },
       true
     );
     if (!response.success || !response.data?.url) {

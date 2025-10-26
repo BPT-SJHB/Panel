@@ -20,8 +20,6 @@ export class TravelTimeManagementService {
     sourceCityId?: number | undefined,
     targetCityId?: number | undefined
   ): Promise<ApiResponse<TravelTime[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.TravelTime.GetTravelTimes;
     const travelTimeInfo: TravelTime = {
@@ -66,8 +64,6 @@ export class TravelTimeManagementService {
     sourceCityId: number,
     targetCityId: number
   ): Promise<ApiResponse<TravelTime>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.TravelTime.GetTravelTime;
     const travelTimeInfo: TravelTime = {
@@ -97,8 +93,6 @@ export class TravelTimeManagementService {
     targetCityId: number,
     time: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.TravelTime.RegisterTravelTime;
     const travelTimeInfo: TravelTime = {
@@ -127,8 +121,6 @@ export class TravelTimeManagementService {
     targetCityId: number,
     time: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.TravelTime.EditTravelTime;
     const travelTimeInfo: TravelTime = {
@@ -156,8 +148,6 @@ export class TravelTimeManagementService {
     sourceCityId: number,
     targetCityId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.TravelTime.DeleteTravelTime;
     const travelTimeInfo: TravelTime = {
@@ -184,8 +174,6 @@ export class TravelTimeManagementService {
     sourceCityId: number,
     targetCityId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.TravelTime.ChangeTravelTimeStatus;

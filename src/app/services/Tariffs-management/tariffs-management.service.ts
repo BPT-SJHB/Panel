@@ -21,8 +21,6 @@ export class TariffsManagementService {
     targetCityId: number | undefined,
     productId: number | undefined
   ): Promise<ApiResponse<Tariff[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.Tariffs.GetTariffs;
     const tariffsInfo: Tariff = {
@@ -73,8 +71,6 @@ export class TariffsManagementService {
     tariffs: Tariff[],
     percentage: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.Tariffs.ChangeTariffsPercentage;
     const bodyValue = {
@@ -95,8 +91,6 @@ export class TariffsManagementService {
   public async DeleteTariffs(
     tariffs: Tariff[]
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.Tariffs.DeleteTariffs;
     const bodyValue = {
@@ -116,8 +110,6 @@ export class TariffsManagementService {
   public async EditTariffs(
     tariff: Tariff
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.Tariffs.EditTariffs;
     const bodyValue = {
@@ -137,8 +129,6 @@ export class TariffsManagementService {
   public async ChangeTariffsStatus(
     tariffs: Tariff[]
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.Tariffs.ChangeTariffsStatus;
     const bodyValue = {
@@ -158,8 +148,6 @@ export class TariffsManagementService {
   public async RegisterTariff(
     tariff: Tariff
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.Tariffs.RegisterTariff;
     const bodyValue = {

@@ -25,8 +25,6 @@ export class SequentialTurnManagementService {
   public async GetSequentialTurns(
     title: string
   ): Promise<ApiResponse<SequentialTurn[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.SequentialTurns.GetSequentialTurns;
@@ -54,8 +52,6 @@ export class SequentialTurnManagementService {
     keyWord: string,
     status: boolean
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.SequentialTurns.RegisterSequentialTurn;
@@ -85,8 +81,6 @@ export class SequentialTurnManagementService {
     keyWord: string,
     status: boolean
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.SequentialTurns.EditSequentialTurn;
@@ -113,8 +107,6 @@ export class SequentialTurnManagementService {
   public async DeleteSequentialTurn(
     id: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.SequentialTurns.DeleteSequentialTurn;
@@ -140,8 +132,6 @@ export class SequentialTurnManagementService {
   public async GetRelationOfSequentialTurnToLoaderTypes(
     id: number
   ): Promise<ApiResponse<RelationOfSequentialTurnToLoaderType[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.SequentialTurns.RelationToLoaderTypes
@@ -169,8 +159,6 @@ export class SequentialTurnManagementService {
     sequentialTurnId: number,
     loaderTypeId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.SequentialTurns.RelationToLoaderTypes
@@ -200,8 +188,6 @@ export class SequentialTurnManagementService {
     sequentialTurnId: number,
     loaderTypeId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.SequentialTurns.RelationToLoaderTypes
@@ -230,8 +216,6 @@ export class SequentialTurnManagementService {
   public async GetSequentialTurnWithLoaderType(
     loaderTypeId: number
   ): Promise<ApiResponse<SequentialTurn[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.SequentialTurns.RelationToLoaderTypes
@@ -260,8 +244,6 @@ export class SequentialTurnManagementService {
   public async GetRelationOfSequentialTurnToAnnouncementSubGroups(
     id: number
   ): Promise<ApiResponse<RelationOfSequentialTurnToAnnouncementSubGroup[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.SequentialTurns
@@ -290,8 +272,6 @@ export class SequentialTurnManagementService {
     sequentialTurnId: number,
     announcementSubGroupId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.SequentialTurns
@@ -323,8 +303,6 @@ export class SequentialTurnManagementService {
     sequentialTurnId: number,
     announcementSubGroupId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.SequentialTurns

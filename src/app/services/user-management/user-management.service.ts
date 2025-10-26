@@ -171,9 +171,7 @@ export class UserManagementService {
   public async GetSoftwareUserProfile(): Promise<
     ApiResponse<SoftwareUserProfile>
   > {
-    this.userAuth.isLoggedIn();
-
-    //#region Consts
+    // #region Consts
     const apiUrl =
       API_ROUTES.SoftwareUserAPI.UserManagement.GetSoftwareUserProfile;
     const bodyValue = {

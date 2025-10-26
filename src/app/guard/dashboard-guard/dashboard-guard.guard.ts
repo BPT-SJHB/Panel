@@ -11,7 +11,7 @@ export const dashboardGuard: CanActivateFn = async () => {
   const toast = inject(ToastService);
 
   try {
-    const response = await auth.isLoggedIn(true);
+    const response = await auth.isLoggedIn();
 
     // Check for API errors and show toast
     if (!checkAndToastError(response, toast)) {

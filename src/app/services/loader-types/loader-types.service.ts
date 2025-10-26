@@ -18,8 +18,6 @@ export class LoaderTypesService {
   public async GetLoaderTypesInfo(
     searchString: string
   ): Promise<ApiResponse<LoaderType[]>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.LoaderTypes.GetLoaderTypes;
     const loaderTypesInfo: LoaderType = {
@@ -43,8 +41,6 @@ export class LoaderTypesService {
   public async GetLoaderTypeInfoForSoftwareUser(): Promise<
     ApiResponse<LoaderType>
   > {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.LoaderTypes.GetLoaderTypeInfoForSoftwareUser;
@@ -64,8 +60,6 @@ export class LoaderTypesService {
   public async ChangeLoaderTypeStatus(
     loaderTypeId: number
   ): Promise<ApiResponse<ShortResponse>> {
-    this.userAuth.isLoggedIn();
-
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.LoaderTypes.ChangeLoaderTypeStatus;
