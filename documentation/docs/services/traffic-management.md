@@ -62,7 +62,66 @@ trafficCardTypeName: string
 
 ### 🧪 نمونه داده پاسخ (Mock data)
 
-[`ShortResponse`](../models/short-response.md#نمونه-داده-mock-data)
+[`mockShortResponse`](../models/short-response.md#نمونه-داده-mock-data)
+
+:::tip
+چرا از سرویس [APICommunicationManagementService](./api-communication-management.md) استفاده شده است؟
+
+همه درخواست ها در سرویس ها از طریق این سرویس به API ارسال میشوند.
+:::
+
+---
+
+## `EditTrafficCardType`🇫
+
+>
+
+### نوع درخواست (HTTP Request Type)
+
+`POST`
+
+### 📥 ساختار ورودی تابع (Method Input)
+
+```TypeScript
+trafficCardTypeInfo: TrafficCardType
+```
+
+:::tip
+ساختار [TrafficCardType](/documentation/docs/models/traffic-card-type.md#ساختار-model) چیست؟
+:::
+
+### 📤 ساختار خروجی تابع(Method Output)
+
+`<`[`ApiResponse`](../models/short-response.md)`<`[`ShortResponse`](../models/short-response.md)
+
+### 🌐 آدرس پایانه مورد استفاده (API Endpoint URL)
+
+```txt title="API_ROUTES.TrafficAPI.RegisterTrafficCardType"
+[API URL]:91/api/RegisteringTrafficCardType
+```
+
+### 📬 ساختار درخواست (API Request)
+
+```JSON
+{
+  SessionId: string,
+  RawTrafficCardType: TrafficCardType,
+}
+```
+
+:::tip
+ساختار [TrafficCardType](/documentation/docs/models/traffic-card-type.md#ساختار-model) چیست؟
+:::
+
+### ✅ ساختار پاسخ (API Response)
+
+[`ShortResponse`](/documentation/docs/models/short-response.md#ساختار-model)
+
+### 🧪 نمونه داده پاسخ (Mock data)
+
+[`mockShortResponse`](../models/short-response.md#نمونه-داده-mock-data)
+
+:::tip
 
 چرا از سرویس [APICommunicationManagementService](./api-communication-management.md) استفاده شده است؟
 
