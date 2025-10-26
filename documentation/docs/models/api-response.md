@@ -22,3 +22,11 @@ sidebar_position: 1
   - **code**: number - کد خطا
   - **message**: string - پیام خطا
   - **details**: string - جزئیات خطا
+
+---
+
+## 📚 موارد مرتبط (Related Documentation)
+
+import DocCardList from '@theme/DocCardList';
+
+<DocCardList/>

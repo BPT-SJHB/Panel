@@ -4,6 +4,12 @@ sidebar_position: 1
 
 # name
 
+## شماره پورت
+
+`?`
+
+---
+
 ## 🛠 توابع (Methods Overview)
 
 | (Method Name) نام تابع | (Description) وظیفه |
@@ -16,29 +22,23 @@ sidebar_position: 1
 
 >
 
-### نوع درخواست (Request Type)
+### نوع درخواست (HTTP Request Type)
 
 `HTTP Type`
 
-### 📥 ساختار ورودی (Request Body Structure)
+### 📥 ساختار ورودی تابع (Method Input)
 
 ```JSON
 {}
 ```
 
-### 📤 ساختار خروجی (Expected Response Type)
+### 📤 ساختار خروجی تابع(Method Output)
 
-`<ApiResponse<ResponseModel`
+`<`[`ApiResponse`](../models/api-response.md)`<`[`ResponseModel`]()
 
 ```JSON title="ResponseModel"
 {}
 ```
-
-:::tip ApiResponse
-
-[ساختار ApiResponse چیست؟](../models/api-response.md)
-
-:::
 
 ### 🌐 آدرس پایانه مورد استفاده (API Endpoint URL)
 
@@ -49,7 +49,7 @@ sidebar_position: 1
 ### 📬 ساختار درخواست (API Request)
 
 ```JSON
-
+{}
 ```
 
 ### ✅ ساختار پاسخ (API Response)
