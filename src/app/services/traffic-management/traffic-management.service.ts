@@ -168,4 +168,27 @@ export class TrafficManagementService {
     >(apiUrl, bodyValue, mockTrafficReportInfos);
     //#endregion
   }
+
+  public async RegisterTraffic(
+    trafficGateId: number,
+    trafficCardNumber: string,
+    trafficPicture: string
+  ): Promise<ApiResponse<TrafficInfo>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.TrafficAPI.RegisterTraffic;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TrafficGateId: trafficGateId,
+      TrafficCardNo: trafficCardNumber,
+      TrafficPicture: trafficPicture,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      TrafficInfo
+    >(apiUrl, bodyValue, mockTrafficInfo);
+    //#endregion
+  }
 }
