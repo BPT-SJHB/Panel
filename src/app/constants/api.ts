@@ -267,5 +267,11 @@ export const API_ROUTES = {
   },
   TrafficAPI: {
     apiRouteName: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}realNameFromAPI`,
+
+    GetTrafficCardTypes: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}GetTrafficCardTypes`,
+    GetTrafficCardTempTypes: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}GetTrafficCardTempTypes`,
+    RegisterTrafficCardType: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}RegisteringTrafficCardType`,
+    GetTrafficCosts: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}GetTrafficCosts`,
+    RegisterTrafficCost: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}/RegisteringTrafficCost`
   },
 };
