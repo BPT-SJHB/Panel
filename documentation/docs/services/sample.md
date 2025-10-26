@@ -34,7 +34,11 @@ sidebar_position: 1
 
 ### 📤 ساختار خروجی تابع(Method Output)
 
-`<`[`ApiResponse`](../models/api-response.md)`<`[`ResponseModel`]()
+<div dir="ltr">
+
+`<`[`ApiResponse`](../models/api-response.md)`<`[`ShortResponse`](../models/short-response.md)`>`
+
+</div>
 
 ```JSON title="ResponseModel"
 {}
@@ -54,15 +58,11 @@ sidebar_position: 1
 
 ### ✅ ساختار پاسخ (API Response)
 
-```json title="API Response"
-{}
-```
+[`ShortResponse`](../models/short-response.md#ساختار-model)
 
 ### 🧪 نمونه داده پاسخ (Mock data)
 
-```JSON title="Mock Name"
-{}
-```
+[`ShortResponse`](../models/short-response.md#ساختار-model)
 
 :::tip
 
