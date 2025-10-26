@@ -266,12 +266,12 @@ export const API_ROUTES = {
     },
   },
   TrafficAPI: {
-    apiRouteName: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}realNameFromAPI`,
-
+    RegisterTrafficCardType: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}RegisteringTrafficCardType`,
+    RegisterTrafficCard: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}RegisteringTrafficCard`,
+    RegisterTrafficCost: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}/RegisteringTrafficCost`,
+    EditTrafficCardType: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}EditingTrafficCardType`,
     GetTrafficCardTypes: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}GetTrafficCardTypes`,
     GetTrafficCardTempTypes: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}GetTrafficCardTempTypes`,
-    RegisterTrafficCardType: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}RegisteringTrafficCardType`,
     GetTrafficCosts: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}GetTrafficCosts`,
-    RegisterTrafficCost: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}/RegisteringTrafficCost`
   },
 };
