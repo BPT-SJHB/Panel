@@ -29,31 +29,7 @@ sidebar_position: 3
     TrafficCardTypeTitle:
       'سواری                                                                                               ',
     Active: true,
-  },
-  {
-    TrafficCardTypeId: 2,
-    TrafficCardTypeTitle:
-      'تریلی                                                                                               ',
-    Active: true,
-  },
-  {
-    TrafficCardTypeId: 3,
-    TrafficCardTypeTitle:
-      'ده چرخ                                                                                              ',
-    Active: true,
-  },
-  {
-    TrafficCardTypeId: 4,
-    TrafficCardTypeTitle:
-      'شش چرخ                                                                                              ',
-    Active: true,
-  },
-  {
-    TrafficCardTypeId: 5,
-    TrafficCardTypeTitle:
-      'جفت                                                                                                 ',
-    Active: false,
-  },
+  }
 ]
 ```
 
