@@ -32,7 +32,8 @@ const sidebars: SidebarsConfig = {
       items: [
         'services/captcha-service',
         'services/api-communication-management',
-        'services/user-auth-service',
+        'services/traffic-management',
+        // 'services/user-auth-service',
       ],
     },
     {
@@ -41,10 +42,10 @@ const sidebars: SidebarsConfig = {
       link: {
         type: 'generated-index',
       },
-      items: ['models/api-response'],
+      items: ['models/api-response', 'models/short-response'],
     },
 
-      {
+    {
       type: 'category',
       label: 'تمپلیت ها',
       link: {
