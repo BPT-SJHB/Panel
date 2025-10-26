@@ -21,6 +21,7 @@ sidebar_position: 4
 |     [`RegisterTrafficCard`](#registertrafficcard)     |        برای ثبت کارت تردد جدید استفاده میشود.         |
 |         [`GetTrafficCosts`](#gettrafficcosts)         |  برای دریافت لیست هزینه‌های کارت تردد استفاده میشود.  |
 |     [`RegisterTrafficCost`](#registertrafficcost)     |     برای ثبت هزینه جدید کارت تردد استفاده میشود.      |
+|       [`GetTrafficRecords`](#gettrafficrecords)       |   برای گزارش گرفتن از فرایند های تردد یک کارت است.    |
 
 ---
 
@@ -40,7 +41,7 @@ trafficCardTypeName: string
 
 ### 📤 ساختار خروجی تابع(Method Output)
 
-<div dir="ltr"> 
+<div dir="ltr">
 
 `<`[`ApiResponse`](../models/api-response.md)`<`[`ShortResponse`](../models/short-response.md)`>`
 
@@ -136,7 +137,7 @@ trafficCardTypeInfo: TrafficCardType
 
 ### 📤 ساختار خروجی تابع(Method Output)
 
-<div dir="ltr"> 
+<div dir="ltr">
 
 `<`[`ApiResponse`](../models/api-response.md)`<`[`TrafficCardType`](../models/traffic-card-type.md)`[]>>`
 
@@ -180,7 +181,7 @@ trafficCardTypeInfo: TrafficCardType
 
 ### 📤 ساختار خروجی تابع(Method Output)
 
-<div dir="ltr"> 
+<div dir="ltr">
 
 `<`[`ApiResponse`](../models/api-response.md)`<`[`TrafficCardTempType`](../models/traffic-card-temp-type.md)`[]>` `>`
 
@@ -228,7 +229,7 @@ trafficCardTempTypeId: number
 
 ### 📤 ساختار خروجی تابع(Method Output)
 
-<div dir="ltr"> 
+<div dir="ltr">
 `<`[`ApiResponse`](../models/api-response.md)`<`[`ShortResponse`](../models/short-response.md)`>`
 </div>
 
@@ -276,7 +277,7 @@ trafficCardTempTypeId: number
 
 ### 📤 ساختار خروجی تابع(Method Output)
 
-<div dir="ltr"> 
+<div dir="ltr">
 
 `<`[`ApiResponse`](../models/api-response.md)`<`[`TrafficCardTypeCost`](../models/traffic-card-type-cost.md)`[]>>`
 
@@ -322,8 +323,7 @@ trafficCost: RawTrafficCost
 
 ### 📤 ساختار خروجی تابع(Method Output)
 
-
-<div dir="ltr"> 
+<div dir="ltr">
 
 `<`[`ApiResponse`](../models/api-response.md)`<`[`ShortResponse`](../models/short-response.md)`>`
 
@@ -361,7 +361,173 @@ trafficCost: RawTrafficCost
 
 ---
 
-## 📚 موارد مرتبط (Related Documentation)
+## `GetTrafficRecords`🇫
+
+> این متود برای گرفتن گزارش از تردد کارت تردد مورد استفاده قرار میگیرد.
+
+### نوع درخواست (HTTP Request Type)
+
+`POST`
+
+### 📥 ساختار ورودی تابع (Method Input)
+
+```TypeScript
+trafficCardId: number
+```
+
+### 📤 ساختار خروجی تابع(Method Output)
+
+<div dir="ltr">
+
+`<`[`ApiResponse`](../models/api-response.md)`<`[`TrafficReportInfo`](../models/traffic-report-info.md)`>`
+
+</div>
+
+### 🌐 آدرس پایانه مورد استفاده (API Endpoint URL)
+
+```txt title="API_ROUTES.TrafficAPI.GetTrafficRecords"
+[API URL]:91/api/GetTrafficRecords
+```
+
+### 📬 ساختار درخواست (API Request)
+
+```TypeScript
+{
+  SessionId: string,
+  TrafficCardId: number,
+}
+```
+
+### ✅ ساختار پاسخ (API Response)
+
+[`TrafficReportInfo[]`](../models/traffic-report-info.md#ساختار-model)
+
+### 🧪 نمونه داده پاسخ (Mock data)
+
+[`mockTrafficReportInfos`](../models/traffic-report-info.md#نمونه-داده-Mock-data)
+
+:::tip
+
+چرا از سرویس [APICommunicationManagementService](./api-communication-management.md) استفاده شده است؟
+
+همه درخواست ها در سرویس ها از طریق این سرویس به API ارسال میشوند.
+:::
+
+---
+
+## `GetTrafficRecords`🇫
+
+> این متود برای گرفتن گزارش از تردد کارت تردد مورد استفاده قرار میگیرد.
+
+### نوع درخواست (HTTP Request Type)
+
+`POST`
+
+### 📥 ساختار ورودی تابع (Method Input)
+
+```TypeScript
+trafficCardId: number
+```
+
+### 📤 ساختار خروجی تابع(Method Output)
+
+<div dir="ltr">
+
+`<`[`ApiResponse`](../models/api-response.md)`<`[`TrafficReportInfo`](../models/traffic-report-info.md)`>`
+
+</div>
+
+### 🌐 آدرس پایانه مورد استفاده (API Endpoint URL)
+
+```txt title="API_ROUTES.TrafficAPI.GetTrafficRecords"
+[API URL]:91/api/GetTrafficRecords
+```
+
+### 📬 ساختار درخواست (API Request)
+
+```TypeScript
+{
+  SessionId: string,
+  TrafficCardId: number,
+}
+```
+
+### ✅ ساختار پاسخ (API Response)
+
+[`TrafficReportInfo[]`](../models/traffic-report-info.md#ساختار-model)
+
+### 🧪 نمونه داده پاسخ (Mock data)
+
+[`mockTrafficReportInfos`](../models/traffic-report-info.md#نمونه-داده-Mock-data)
+
+:::tip
+
+چرا از سرویس [APICommunicationManagementService](./api-communication-management.md) استفاده شده است؟
+
+همه درخواست ها در سرویس ها از طریق این سرویس به API ارسال میشوند.
+:::
+
+---
+
+## `RegisterTraffic`🇫
+
+> این متود برای ثبت یک رکورد از تردد (ورود یا خروج) استفاده میشود.
+
+### نوع درخواست (HTTP Request Type)
+
+`POST`
+
+### 📥 ساختار ورودی تابع (Method Input)
+
+```TypeScript
+trafficGateId: number,
+trafficCardNumber: string,
+trafficPicture: string
+```
+
+### 📤 ساختار خروجی تابع(Method Output)
+
+<div dir="ltr">
+
+`<`[`ApiResponse`](../models/api-response.md)`<`[`TrafficInfo`](../models/traffic-info.md)`>`
+
+</div>
+
+### 🌐 آدرس پایانه مورد استفاده (API Endpoint URL)
+
+```txt title="API_ROUTES.TrafficAPI.RegisterTraffic"
+[API URL]:91/api/RegisteringTraffic
+```
+
+### 📬 ساختار درخواست (API Request)
+
+```TypeScript
+{
+  SessionId: string,
+  TrafficGateId: number,
+  TrafficCardNo: string,
+  TrafficPicture: string,
+}
+```
+
+### ✅ ساختار پاسخ (API Response)
+
+[`TrafficInfo`](../models/traffic-info.md#ساختار-model)
+
+### 🧪 نمونه داده پاسخ (Mock data)
+
+[`mockTrafficInfo`](../models/traffic-info.md#نمونه-داده-Mock-data)
+
+:::tip
+
+چرا از سرویس [APICommunicationManagementService](./api-communication-management.md) استفاده شده است؟
+
+همه درخواست ها در سرویس ها از طریق این سرویس به API ارسال میشوند.
+:::
+
+---
+
+# 📚 موارد مرتبط (Related Documentation)
 
 import DocCardList from '@theme/DocCardList';
 
