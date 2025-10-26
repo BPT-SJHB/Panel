@@ -12,6 +12,10 @@ import { mockTrafficCardTempTypes } from './mock/traffic-card-temp-type.mock';
 import { TrafficCardTypeCost } from './model/traffic-card-type-cost.model';
 import { mockTrafficCardTypeCosts } from './mock/traffic-card-type-cost.mock';
 import { RawTrafficCost } from './model/raw-traffic-cost.model';
+import { TrafficReportInfo } from './model/traffic-report-info.model';
+import { mockTrafficReportInfos } from './mock/traffic-report-info.mock';
+import { TrafficInfo } from './model/traffic-info.model';
+import { mockTrafficInfo } from './mock/traffic-info.mock';
 
 @Injectable({
   providedIn: 'root',
