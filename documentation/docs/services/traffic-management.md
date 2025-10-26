@@ -87,7 +87,7 @@ trafficCardTypeInfo: TrafficCardType
 ```
 
 :::tip
-ساختار [TrafficCardType](/documentation/docs/models/traffic-card-type.md#ساختار-model) چیست؟
+ساختار [TrafficCardType](/documentation/docs/models/traffic-card-type#ساختار-model) چیست؟
 :::
 
 ### 📤 ساختار خروجی تابع(Method Output)
@@ -110,12 +110,12 @@ trafficCardTypeInfo: TrafficCardType
 ```
 
 :::tip
-ساختار [TrafficCardType](/documentation/docs/models/traffic-card-type.md#ساختار-model) چیست؟
+ساختار [TrafficCardType](/documentation/docs/models/traffic-card-type#ساختار-model) چیست؟
 :::
 
 ### ✅ ساختار پاسخ (API Response)
 
-[`ShortResponse`](/documentation/docs/models/short-response.md#ساختار-model)
+[`ShortResponse`](/documentation/docs/models/short-response#ساختار-model)
 
 ### 🧪 نمونه داده پاسخ (Mock data)
 
