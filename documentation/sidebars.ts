@@ -42,7 +42,11 @@ const sidebars: SidebarsConfig = {
       link: {
         type: 'generated-index',
       },
-      items: ['models/api-response', 'models/short-response'],
+      items: [
+        'models/api-response',
+        'models/short-response',
+        'models/traffic-card-type',
+      ],
     },
 
     {
