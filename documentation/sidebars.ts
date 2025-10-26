@@ -43,25 +43,75 @@ const sidebars: SidebarsConfig = {
       items: ['models/api-response'],
     },
 
-    {
+      {
       type: 'category',
-      label: 'کامپوننت های ورودی',
+      label: 'تمپلیت ها',
       link: {
         type: 'generated-index',
-        description: 'کامپوننت های ورودی برای دریافت داده از کاربر.',
+      },
+      items: ['template/form-component-template'],
+    },
+
+    // 🆕 New: The 'shared' category
+    {
+      type: 'category',
+      label: 'کامپوننت های مشترک',
+      link: {
+        type: 'generated-index',
+        description: 'کامپوننت های مشترک UI و ابزارها.',
       },
       items: [
-        'inputs/text-input-component',
-        'inputs/search-input-component',
-        'inputs/search-auto-complete-component',
-        'inputs/search-auto-complete-factory',
-        'inputs/password-input-component',
-        'inputs/checkbox-input-component',
-        'inputs/binary-radio-input-component',
-        'inputs/toggle-switch-input-component',
-        'inputs/date-picker-input-component',
-        'inputs/time-picker-input-component',
-        'inputs/captcha-input-component',
+        // 🔄 Existing Input Components Category
+        {
+          type: 'category',
+          label: 'کامپوننت های ورودی',
+          link: {
+            type: 'generated-index',
+            description: 'کامپوننت های ورودی برای دریافت داده از کاربر.',
+          },
+          items: [
+            'shared/inputs/text-input-component',
+            'shared/inputs/search-input-component',
+            'shared/inputs/search-auto-complete-component',
+            'shared/inputs/search-auto-complete-factory',
+            'shared/inputs/password-input-component',
+            'shared/inputs/checkbox-input-component',
+            'shared/inputs/binary-radio-input-component',
+            'shared/inputs/toggle-switch-input-component',
+            'shared/inputs/date-picker-input-component',
+            'shared/inputs/time-picker-input-component',
+            'shared/inputs/captcha-input-component',
+            'shared/inputs/select-input-component', // Added
+          ],
+        },
+
+        // 🆕 New: Layout Components Category
+        {
+          type: 'category',
+          label: 'کامپوننت های ساختار (Layout)',
+          link: {
+            type: 'generated-index',
+            description: 'بخش‌های اصلی ساختار داشبورد (Header, Sidebar, Tabs).',
+          },
+          items: [
+            'shared/layout/header',
+            'shared/layout/sidebar',
+            'shared/layout/mobile-side-bar',
+            'shared/layout/tab-manager',
+            'shared/layout/dashboard-content-manager',
+            'shared/layout/footer',
+          ],
+        },
+
+        // 🔄 Main Shared Components
+        'shared/button-component',
+        'shared/table-component',
+        'shared/tree-table-checkbox',
+        'shared/user-profile',
+        'shared/wallet-profile',
+        'shared/theme-managament',
+        'shared/exit-confirmation-dialog-component',
+        'shared/support-button-component',
       ],
     },
 

@@ -1,5 +1,4 @@
-import { NgClass } from '@angular/common';
-import { Component, inject, input, Input, OnInit } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
@@ -9,6 +8,11 @@ import { ToastService } from 'app/services/toast-service/toast.service';
 import { ButtonModule } from 'primeng/button';
 import { TicketServiceManagementService } from 'app/services/ticket-service-management/ticket-service-management.service';
 import { checkAndToastError } from 'app/utils/api-utils';
+import {
+  ImageAddon,
+  TextInputComponent,
+} from '../text-input/text-input.component';
+import { uuidV4 } from 'app/utils/uuid';
 
 @Component({
   selector: 'app-captcha-input',
@@ -17,8 +21,8 @@ import { checkAndToastError } from 'app/utils/api-utils';
     MessageModule,
     InputGroupModule,
     ReactiveFormsModule,
-    NgClass,
     ButtonModule,
+    TextInputComponent,
   ],
   templateUrl: './captcha-input.component.html',
   styleUrl: './captcha-input.component.scss',
@@ -28,12 +32,14 @@ export class CaptchaInputComponent implements OnInit {
   private toast = inject(ToastService);
   private ticketService = inject(TicketServiceManagementService);
 
+  readonly captchaDivId = uuidV4();
   readonly captchaServiceType = input<'default' | 'ticket'>('default');
-  @Input() sessionIdControl: FormControl = new FormControl('');
-  @Input() captchaInputControl: FormControl = new FormControl('');
+  readonly sessionIdControl = input(new FormControl(''));
+  readonly captchaInputControl = input(new FormControl(''));
+  readonly imageAddon = signal<ImageAddon | null>(null);
 
-  imageData = '';
-  disableRefresh = false;
+  readonly disableRefresh = signal<boolean>(false);
+  readonly icon = signal<string>('pi pi-spinner');
 
   ngOnInit(): void {
     this.getCaptchaInformation();
@@ -54,28 +60,66 @@ export class CaptchaInputComponent implements OnInit {
 
   async getCaptchaTicketService() {
     const response = await this.ticketService.GetCaptcha();
-    if (!checkAndToastError(response, this.toast)) return;
+    if (!checkAndToastError(response, this.toast)) {
+      this.icon.set('pi pi-file-excel');
+      return;
+    }
 
-    this.imageData = 'data:image/png;base64,' + response.data.image;
-    this.sessionIdControl.setValue(response.data.id);
+    this.imageAddon.set({
+      alt: 'کد امنیتی',
+      src: 'data:image/png;base64,' + response.data.image,
+    });
+
+    this.sessionIdControl().setValue(response.data.id);
   }
 
   async getDefaultCaptchaService() {
     const captcha = await this.captchaService.getCaptcha();
-    if (!checkAndToastError(captcha, this.toast)) return;
+    if (!checkAndToastError(captcha, this.toast)) {
+      this.icon.set('pi pi-file-excel');
+      return;
+    }
 
-    this.imageData = 'data:image/png;base64,' + captcha.data.imageData;
-    this.sessionIdControl.setValue(captcha.data.sessionId);
+    this.imageAddon.set({
+      alt: 'کد امنیتی',
+      src: 'data:image/png;base64,' + captcha.data.imageData,
+    });
+
+    this.sessionIdControl().setValue(captcha.data.sessionId);
   }
 
   async onRefreshClick() {
-    if (this.disableRefresh) return;
+    if (this.disableRefresh()) return;
 
-    this.disableRefresh = true;
+    // add rotation class
+    this.rotateRefreshIcon();
+    this.disableRefresh.set(true);
+    this.icon.set('pi pi-spinner');
+    this.imageAddon.set(null);
+
+    // remove rotation class after animation
     await this.getCaptchaInformation();
-
     setTimeout(() => {
-      this.disableRefresh = false;
-    }, 1000);
+      this.disableRefresh.set(false);
+    }, 600);
+  }
+
+  rotateRefreshIcon(duration = 600): void {
+    const container = document.getElementById(this.captchaDivId);
+    if (!container) return;
+
+    const refreshSpan =
+      container.querySelector<HTMLSpanElement>('span.pi-refresh');
+    if (!refreshSpan) return;
+
+    const classes = ['rotate-360', 'transition-transform', 'duration-600'];
+
+    // Add classes
+    refreshSpan.classList.add(...classes);
+
+    // Remove classes after duration
+    setTimeout(() => {
+      refreshSpan.classList.remove(...classes);
+    }, duration);
   }
 }

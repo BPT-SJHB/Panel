@@ -1,62 +1,64 @@
 <div class="flex w-full h-10">
-  <p-input-group>
+  <p-input-group class="w-full h-full">
+    <!-- Addon -->
     <p-inputgroup-addon
-      [style]="{
-        flex: '0 0 ' + addonWidth,
-        padding: 0,
-        margin: 0,
-        border: 0,
-      }"
-      class="rounded-2xl"
+      [style.flex]="'0 0 ' + addonWidth()"
+      class="rounded-2xl p-0 m-0 border-0"
     >
       <div
-        class="w-full h-full flex justify-center items-center py-4 px-6 bg-primary-emphasis z-1 rounded-r-2xl text-primary-contrast"
+        class="w-full h-full flex justify-center items-center bg-primary-emphasis z-1 rounded-r-2xl text-primary-contrast"
+        [class.px-6]="!imageAddon()"
+        [class.py-4]="!imageAddon()"
       >
-        @if (label.trim() === "") {
-          <i [class]="icon"></i>
+        @if (imageAddon()) {
+          <img
+            [src]="imageAddon()?.src"
+            [alt]="imageAddon()?.alt"
+            class="w-full h-full text-center object-fill z-10 border-2 border-primary-emphasis rounded-r-2xl bg-primary-300"
+          />
+        } @else if (!label().trim()) {
+          <i [class]="icon()"></i>
         } @else {
-          <span
-            class="text-sm text-primary-contrast"
-            style="white-space: nowrap"
-            >{{ label }}</span
-          >
+          <span class="text-sm text-primary-contrast whitespace-nowrap">
+            {{ label() }}
+          </span>
         }
       </div>
     </p-inputgroup-addon>
 
+    <!-- Input -->
     <input
       #inputRef
       pInputText
-      [tabIndex]="control.disabled || readOnly ? -1 : 0"
-      [id]="id"
+      [tabIndex]="control().disabled || readOnly() ? -1 : 0"
+      [id]="id()"
       [type]="getType()"
-      [formControl]="control"
-      [placeholder]="placeholder"
-      [readOnly]="readOnly"
+      [formControl]="control()"
+      [placeholder]="placeholder()"
+      [readOnly]="readOnly()"
       class="px-2 h-full w-full border-y-2 border-l-0 border-r-0 border-gray-400 placeholder:text-gray-400 text-sm focus:border-primary-emphasis transition-all duration-50 ease-in-out focus:outline-none"
-      [ngClass]="{
-        'focus:border-red-500': control.touched && control.invalid,
-        'bg-surface-200 text-surface-700 dark:bg-surface-800 dark:text-surface-200 pointer-events-none opacity-60 cursor-not-allowed':
-          control.disabled || readOnly,
-        'rounded-l-2xl border-l-2': buttonIcon.trim() === '',
-      }"
+      [class.focus:border-red-500]="control().touched && control().invalid"
+      [class.bg-surface-200]="control().disabled || readOnly()"
+      [class.text-surface-700]="control().disabled || readOnly()"
+      [class.dark:bg-surface-800]="control().disabled || readOnly()"
+      [class.dark:text-surface-200]="control().disabled || readOnly()"
+      [class.pointer-events-none]="control().disabled || readOnly()"
+      [class.opacity-60]="control().disabled || readOnly()"
+      [class.cursor-not-allowed]="control().disabled || readOnly()"
+      [class.rounded-l-2xl]="buttonIcon().trim() === ''"
+      [class.border-l-2]="buttonIcon().trim() === ''"
       (focus)="onFocusInput(inputRef)"
       (blur)="onBlurInput(inputRef)"
       (input)="valueChange($event)"
     />
 
-    @if (buttonIcon.trim() !== "") {
-      <p-inputgroup-addon
-        [style]="{
-          padding: 0,
-          margin: 0,
-          border: 0,
-        }"
-        class="flex h-10 rounded-l-2xl"
-      >
+    <!-- Button Addon -->
+    @if (buttonIcon().trim()) {
+      <p-inputgroup-addon class="flex h-10 rounded-l-2xl p-0 m-0 border-0">
         <p-button
-          [icon]="buttonIcon"
-          [disabled]="buttonDisabled"
+          [class]="buttonClass()"
+          [icon]="buttonIcon()"
+          [disabled]="buttonDisabled()"
           (click)="handleClick()"
         />
       </p-inputgroup-addon>
@@ -64,7 +66,8 @@
   </p-input-group>
 </div>
 
-@if (control.touched && firstErrorMessage) {
+<!-- Error Message -->
+@if (control().touched && firstErrorMessage) {
   <div class="px-4 mt-1">
     <p-message severity="error" variant="simple" size="small">
       {{ firstErrorMessage }}

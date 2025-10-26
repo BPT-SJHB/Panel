@@ -1,15 +1,15 @@
 <button
   pButton
-  [class]="class() + ' ' + (styleClass || '')"
-  [disabled]="disabled"
+  [class]="class() + ' ' + (styleClass() || '')"
+  [disabled]="disabled()"
   (click)="handleClick()"
-  [type]="type"
-  [rounded]="rounded"
-  [raised]="raised"
+  [type]="type()"
+  [rounded]="rounded()"
+  [raised]="raised()"
 >
-  @if (icon) {
-    <i class="pi {{ icon }}"></i>
+  @if (icon()) {
+    <i class="pi {{ icon() }}"></i>
   }
-  {{ label }}
+  {{ label() }}
   <ng-content></ng-content>
 </button>

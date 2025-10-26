@@ -1,8 +1,9 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { ToastService } from 'app/services/toast-service/toast.service';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
-import { ButtonComponent } from "../../button/button.component";
+import { ButtonComponent } from '../../button/button.component';
+import { copyTextAndToast } from 'app/utils/copy-text';
 
 @Component({
   selector: 'app-reset-password-dialog',
@@ -12,11 +13,10 @@ import { ButtonComponent } from "../../button/button.component";
 })
 export class NewPasswordDialogComponent {
   private toast = inject(ToastService);
-  @Input() username: string = '';
-  @Input() password: string = '';
+  readonly username = input('');
+  readonly password = input('');
 
   copyToClipboard(text: string) {
-    this.toast.success('متن در کلیپبورد ذخیره شد', '');
-    navigator.clipboard.writeText(text);
+    copyTextAndToast(text, this.toast);
   }
 }

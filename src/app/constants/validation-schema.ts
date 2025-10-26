@@ -84,7 +84,7 @@ export const ValidationSchema = {
     validators: [Validators.required, Validators.minLength(1)],
   },
   captcha: {
-    name: 'کپچا',
+    name: 'کد امنیتی',
     validators: [Validators.required],
   },
   id: {
