@@ -282,8 +282,10 @@ export class TravelTimeFormComponent
 
   onSearchLoaderType = async (query: string): Promise<LoaderType[]> => {
     const response = await this.loaderTypeService.GetLoaderTypesInfo(query);
-    if (!this.isSuccessful(response)) return [];
-    return response.data!;
+    if (!this.isSuccessful(response)) {
+      return [];
+    }
+    return Array.isArray(response.data) ? response.data : [];
   };
 
   private extractTravelTimeFormForm(): TravelTime {

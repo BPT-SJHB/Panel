@@ -49,6 +49,7 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
     null
   );
   readonly hiddenSubTab = signal<boolean>(false);
+  readonly hoverTabId = signal<string>('');
 
   readonly tabs = new Map<string, DynamicTab>([
     [
@@ -250,5 +251,11 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
       cachedComponent: new Map(),
     });
     this.selectTab.set(this.tabs.get(DEFAULT_MAIN_TAB_ID)!);
+  }
+
+  mouseLeaveOnTabHover(tabId: string) {
+    if (this.hoverTabId() === tabId) {
+      this.hoverTabId.set('');
+    }
   }
 }

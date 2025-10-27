@@ -32,7 +32,8 @@ const sidebars: SidebarsConfig = {
       items: [
         'services/captcha-service',
         'services/api-communication-management',
-        'services/user-auth-service',
+        'services/traffic-management',
+        // 'services/user-auth-service',
       ],
     },
     {
@@ -41,10 +42,17 @@ const sidebars: SidebarsConfig = {
       link: {
         type: 'generated-index',
       },
-      items: ['models/api-response'],
+      items: [
+        'models/api-response',
+        'models/short-response',
+        'models/traffic-card-type',
+        'models/raw-traffic-cost',
+        'models/traffic-card-type-cost',
+        'models/traffic-card-temp-type',
+      ],
     },
 
-      {
+    {
       type: 'category',
       label: 'تمپلیت ها',
       link: {
