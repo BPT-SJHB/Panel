@@ -270,6 +270,28 @@ export const ValidationSchema = {
       Validators.pattern(/^[A-Za-z0-9]{8}$/),
     ],
   },
+
+  trafficCard: {
+    name: 'شناسه کارت تردد',
+    validators: [Validators.required],
+  },
+
+  EntryBaseCost: {
+    name: 'هزینه پایه ورود',
+    validators: [Validators.required, Validators.min(1)],
+  },
+  NoCostStoppageDuration: {
+    name: 'مدت زمان توقف بدون هزینه',
+    validators: [Validators.required, Validators.min(1)],
+  },
+  ExcessStoppageDuration: {
+    name: 'مدت زمان توقف اضافی',
+    validators: [Validators.required, Validators.min(1)],
+  },
+  ExcessStoppageCost: {
+    name: 'هزینه توقف اضافی',
+    validators: [Validators.required, Validators.min(1)],
+  },
 };
 
 export type ValidationField = keyof typeof ValidationSchema;
