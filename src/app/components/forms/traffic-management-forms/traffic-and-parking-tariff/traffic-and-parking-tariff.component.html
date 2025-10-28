@@ -1,0 +1,79 @@
+<div>
+  <!-- Toolbar -->
+  <div class="flex justify-end mb-4">
+    <app-button
+      label="جدید"
+      (click)="resetForm()"
+      severity="info"
+      styleClass="w-28 md:w-36"
+    />
+  </div>
+
+  <!-- Form Grid -->
+  <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+    <!-- Traffic Card Type -->
+    <app-select-input
+      label="نوع کارت"
+      placeholder="نوع کارت "
+      [options]="trafficCardTypeSelection()"
+      [control]="ctrl('TrafficCardTypeId')"
+      [addonWidth]="addonWidth"
+    />
+
+    <!-- Entry Base Cost -->
+    <app-text-input
+      label="هزینه پایه"
+      [control]="ctrl('EntryBaseCost')"
+      type="number"
+      format="currency"
+      placeholder="مبلغ پایه به ریال"
+      [addonWidth]="addonWidth"
+    />
+
+    <!-- Free Stop Duration (hour) -->
+    <app-text-input
+      label="توقف رایگان"
+      [control]="ctrl('NoCostStoppageDuration')"
+      type="number"
+      placeholder="مدت زمان رایگان به ساعت"
+      [addonWidth]="addonWidth"
+    />
+
+    <!-- Excess Stop Duration (hour) -->
+    <app-text-input
+      label="توقف مازاد"
+      [control]="ctrl('ExcessStoppageDuration')"
+      type="number"
+      placeholder="مدت زمان اضافه به ساعت"
+      [addonWidth]="addonWidth"
+    />
+
+    <!-- Excess Stop Cost -->
+    <app-text-input
+      label="هزینه مازاد"
+      [control]="ctrl('ExcessStoppageCost')"
+      type="number"
+      format="currency"
+      placeholder="هزینه اضافه به ریال"
+      [addonWidth]="addonWidth"
+    />
+
+    <!-- Active Status -->
+    <app-toggle-switch-input
+      class="px-5"
+      label="وضعیت"
+      [control]="ctrl('Active')"
+    />
+  </div>
+
+  <!-- Actions -->
+  <div class="flex gap-3 justify-end mt-6">
+    <app-button
+      label="تأیید"
+      (click)="registerTariffCost()"
+      severity="primary"
+      styleClass="w-28 md:w-36"
+      [disabled]="tariffForm.invalid || loading()"
+    />
+  </div>
+</div>
