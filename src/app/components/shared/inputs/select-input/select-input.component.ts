@@ -11,6 +11,11 @@ import { InputGroup } from 'primeng/inputgroup';
 import { InputGroupAddon } from 'primeng/inputgroupaddon';
 import { NgClass } from '@angular/common';
 
+export interface SelectOption<T> {
+  value: T;
+  label: string;
+}
+
 @Component({
   selector: 'app-select-input',
   standalone: true,
@@ -25,7 +30,7 @@ import { NgClass } from '@angular/common';
   styleUrl: './select-input.component.scss',
 })
 export class SelectInputComponent<T> implements OnInit, OnChanges {
-  @Input() options: { label: string; value: T }[] = [];
+  @Input() options: SelectOption<T>[] = [];
   @Input() control = new FormControl<T | null>(null);
   @Input() readOnly = false;
   @Input() placeholder = '';
