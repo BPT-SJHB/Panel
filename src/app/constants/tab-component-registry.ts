@@ -47,6 +47,9 @@ import { DriverLoadPermissionsFormComponent } from 'app/components/forms/driver-
 import { LoadAccountingsFormComponent } from 'app/components/forms/load-accountings-form/load-accountings-form.component';
 import { AdminLoadPermissionsFormComponent } from 'app/components/forms/admin-load-permissions-form/admin-load-permissions-form.component';
 import { TicketListsFormComponent } from 'app/components/forms/tickets-management-form/tickest-lists-form/ticket-lists-form.component';
+import { TrafficInitialRegistrationFormComponent } from 'app/components/forms/traffic-management-forms/traffic-initial-registration-form-component/traffic-initial-registration-form.component';
+import { TrafficAndParkingTariffComponent } from 'app/components/forms/traffic-management-forms/traffic-and-parking-tariff/traffic-and-parking-tariff.component';
+import { ParkingTrafficRecordsComponent } from 'app/components/forms/traffic-management-forms/parking-traffic-records/parking-traffic-records.component';
 
 export enum TabComponentKey {
   Main = -1,
@@ -103,6 +106,11 @@ export enum TabComponentKey {
   TransportCompaniesLoadManagement = 32,
   FactoriesAndFreightLoadManagement = 33,
   AdminLoadManagement = 39,
+
+  // Parking And Traffics
+  RegisterAndRecordTrafficsManagement = 15,
+  TrafficsAndParkingTariffManagement = 18,
+  TrafficInitialRegistrationManagement = 34,
 
   TicketManagement = 71,
 }
@@ -515,6 +523,37 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       {
         title: 'تیکت',
         component: TicketListsFormComponent,
+      },
+    ],
+  },
+  [TabComponentKey.RegisterAndRecordTrafficsManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: 'ثبت تردد',
+        component: ParkingTrafficRecordsComponent,
+      },
+      {
+        title: 'سوابق تردد',
+        component: ParkingTrafficRecordsComponent,
+      },
+    ],
+  },
+  [TabComponentKey.TrafficsAndParkingTariffManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: 'هزینه‌های تردد و توقف پارکینگ',
+        component: TrafficAndParkingTariffComponent,
+      },
+    ],
+  },
+  [TabComponentKey.TrafficInitialRegistrationManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: 'ثبت و ویرایش انواع کارت تردد',
+        component: TrafficInitialRegistrationFormComponent,
       },
     ],
   },
