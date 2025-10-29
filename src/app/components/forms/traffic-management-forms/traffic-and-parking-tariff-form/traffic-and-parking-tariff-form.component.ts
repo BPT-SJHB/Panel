@@ -28,10 +28,10 @@ import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-
     ButtonComponent,
     ToggleSwitchInputComponent,
   ],
-  templateUrl: './traffic-and-parking-tariff.component.html',
-  styleUrls: ['./traffic-and-parking-tariff.component.scss'],
+  templateUrl: './traffic-and-parking-tariff-form.component.html',
+  styleUrls: ['./traffic-and-parking-tariff-form.component.scss'],
 })
-export class TrafficAndParkingTariffComponent extends BaseLoading {
+export class TrafficAndParkingTariffFormComponent extends BaseLoading {
   private readonly fb = inject(FormBuilder);
   private readonly trafficService = inject(TrafficManagementService);
 

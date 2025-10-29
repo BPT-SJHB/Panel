@@ -14,10 +14,10 @@ import { TrafficReportInfo } from 'app/services/traffic-management/model/traffic
   selector: 'app-parking-traffic-records',
   standalone: true,
   imports: [TableComponent],
-  templateUrl: './parking-traffic-records.component.html',
-  styleUrl: './parking-traffic-records.component.scss',
+  templateUrl: './parking-traffic-records-form.component.html',
+  styleUrl: './parking-traffic-records-form.component.scss',
 })
-export class ParkingTrafficRecordsComponent
+export class ParkingTrafficRecordsFormComponent
   extends BaseLoading
   implements OnInit
 {

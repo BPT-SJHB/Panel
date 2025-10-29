@@ -11,12 +11,12 @@ import {
 } from 'app/components/shared/table/table.component';
 
 @Component({
-  selector: 'app-load-accountings-form',
+  selector: 'app-load-accounting-form',
   imports: [TableComponent],
-  templateUrl: './load-accountings-form.component.html',
-  styleUrl: './load-accountings-form.component.scss',
+  templateUrl: './load-accounting-form.component.html',
+  styleUrl: './load-accounting-form.component.scss',
 })
-export class LoadAccountingsFormComponent
+export class LoadAccountingFormComponent
   extends BaseLoading
   implements OnViewActivated
 {
