@@ -44,12 +44,13 @@ import { LoadCapacitorFormComponent } from 'app/components/forms/driver-load-man
 import { LoadAllocationPriorityComponent } from 'app/components/forms/driver-load-management-form/load-allocation-priority/load-allocation-priority.component';
 import { DriverLoadAllocationFormComponent } from 'app/components/forms/driver-load-management-form/driver-load-allocation-form/driver-load-allocation-form.component';
 import { DriverLoadPermissionsFormComponent } from 'app/components/forms/driver-load-management-form/driver-load-permissions-form/driver-load-permissions-form.component';
-import { LoadAccountingsFormComponent } from 'app/components/forms/load-accountings-form/load-accountings-form.component';
+import { LoadAccountingFormComponent } from 'app/components/forms/load-accounting-form/load-accounting-form.component';
 import { AdminLoadPermissionsFormComponent } from 'app/components/forms/admin-load-permissions-form/admin-load-permissions-form.component';
-import { TicketListsFormComponent } from 'app/components/forms/tickets-management-form/tickest-lists-form/ticket-lists-form.component';
-import { TrafficInitialRegistrationFormComponent } from 'app/components/forms/traffic-management-forms/traffic-initial-registration-form-component/traffic-initial-registration-form.component';
-import { TrafficAndParkingTariffComponent } from 'app/components/forms/traffic-management-forms/traffic-and-parking-tariff/traffic-and-parking-tariff.component';
-import { ParkingTrafficRecordsComponent } from 'app/components/forms/traffic-management-forms/parking-traffic-records/parking-traffic-records.component';
+import { TicketListsFormComponent } from 'app/components/forms/tickets-management-form/ticket-lists-form/ticket-lists-form.component';
+import { TrafficInitialRegistrationFormComponent } from 'app/components/forms/traffic-management-forms/traffic-initial-registration-form/traffic-initial-registration-form.component';
+import { TrafficAndParkingTariffFormComponent } from 'app/components/forms/traffic-management-forms/traffic-and-parking-tariff-form/traffic-and-parking-tariff-form.component';
+import { ParkingTrafficRecordsFormComponent } from 'app/components/forms/traffic-management-forms/parking-traffic-records-form/parking-traffic-records-form.component';
+import { TrafficCardTypeFormComponent } from 'app/components/forms/traffic-management-forms/traffic-card-type-form/traffic-card-type-form.component';
 
 export enum TabComponentKey {
   Main = -1,
@@ -109,6 +110,7 @@ export enum TabComponentKey {
 
   // Parking And Traffics
   RegisterAndRecordTrafficsManagement = 15,
+  RegisterAndEditTrafficsCardManagement = 16,
   TrafficsAndParkingTariffManagement = 18,
   TrafficInitialRegistrationManagement = 34,
 
@@ -502,7 +504,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       },
       {
         title: 'ترکنش های بار',
-        component: LoadAccountingsFormComponent,
+        component: LoadAccountingFormComponent,
         data: { loadType: LoadListType.ADMIN },
       },
       {
@@ -531,29 +533,41 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
     subTab: [
       {
         title: 'ثبت تردد',
-        component: ParkingTrafficRecordsComponent,
+        component: ParkingTrafficRecordsFormComponent,
       },
       {
         title: 'سوابق تردد',
-        component: ParkingTrafficRecordsComponent,
+        component: ParkingTrafficRecordsFormComponent,
       },
     ],
   },
+
   [TabComponentKey.TrafficsAndParkingTariffManagement]: {
     sharedSignal: false,
     subTab: [
       {
         title: 'هزینه‌های تردد و توقف پارکینگ',
-        component: TrafficAndParkingTariffComponent,
+        component: TrafficAndParkingTariffFormComponent,
       },
     ],
   },
+
   [TabComponentKey.TrafficInitialRegistrationManagement]: {
     sharedSignal: false,
     subTab: [
       {
         title: 'ثبت و ویرایش انواع کارت تردد',
         component: TrafficInitialRegistrationFormComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.RegisterAndEditTrafficsCardManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: 'ثبت و ویرایش انواع کارت تردد',
+        component: TrafficCardTypeFormComponent,
       },
     ],
   },
