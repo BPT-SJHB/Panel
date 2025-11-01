@@ -17,26 +17,34 @@ import { ButtonComponent } from 'app/components/shared/button/button.component';
 })
 export class TrafficEntriesFormComponent extends BaseLoading {
   trafficService = inject(TrafficManagementService);
-  readonly trafficInfo = signal<TrafficInfo>(mockTrafficInfo);
+  readonly trafficInfo = signal<TrafficInfo | null>(null);
 
-  async watchEntryGate() {
-    const trafficGateId = 1;
-    const trafficCardNo = 'ABcDEf0';
-    const trafficPic = mockTrafficInfo.TrafficPicture ?? '';
-    const response = await this.trafficService.RegisterTraffic(
-      trafficGateId,
-      trafficCardNo,
-      trafficPic
-    );
-
-    if (!checkAndToastError(response, this.toast)) return;
-    if (this.trafficInfo().EntryExit === 'Entry') {
-      response.data.EntryExit = 'Exit';
-      response.data.EntryExitColor = 'Red';
-    }
-    this.trafficInfo.set(response.data);
+  override ngOnInit(): void {
+    super.ngOnInit();
+    this.watchEntryGate();
   }
 
+  async watchEntryGate() {
+    if (this.loading()) return;
+
+    this.withLoading(async () => {
+      const trafficGateId = 1;
+      const trafficCardNo = 'ABcDEf0';
+      const trafficPic = mockTrafficInfo.TrafficPicture ?? '';
+      const response = await this.trafficService.RegisterTraffic(
+        trafficGateId,
+        trafficCardNo,
+        trafficPic
+      );
+
+      if (!checkAndToastError(response, this.toast)) return;
+      if (this.trafficInfo()?.EntryExit === 'Entry') {
+        response.data.EntryExit = 'Exit';
+        response.data.EntryExitColor = 'Red';
+      }
+      this.trafficInfo.set(response.data);
+    });
+  }
   getColor(color: string): string {
     return (
       colorMap.get(color.toLowerCase()) ?? 'bg-surface-300 dark:bg-surface-500'

@@ -20,14 +20,17 @@
         <app-theme-management />
       </div>
       <app-sidebar-page-group [pageGroupItems]="pageGroupItems" />
-      <div class="flex flex-col items-center">
+      <div class="my-5">
         <app-logo />
       </div>
     </div>
   </p-drawer>
 } @else {
   <!-- Sidebar -->
-  <div class="h-full w-full rounded-l-xl shadow-[0px_0px_5px_rgba(0,0,0,0.5)]" dir="ltr">
+  <div
+    class="h-full w-full rounded-l-xl shadow-[0px_0px_5px_rgba(0,0,0,0.5)]"
+    dir="ltr"
+  >
     <div
       dir="ltr"
       class="flex flex-col justify-between w-full h-full overflow-auto rounded-l-xl dark:bg-zinc-800"
