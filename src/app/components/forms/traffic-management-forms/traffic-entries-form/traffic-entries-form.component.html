@@ -1,83 +1,95 @@
-<h3
-  class="text-2xl font-bold tracking-tight text-center border-b-1 py-3 mb-4 rounded-2xl"
-  [class]="getColor(trafficInfo().EntryExitColor)"
->
-  {{ trafficInfo().EntryExit === "Entry" ? "ورود" : "خروج" }}
-</h3>
-<div class="flex flex-col lg:flex-row gap-4">
-  <!-- Left Column -->
-  <div
-    class="flex flex-col flex-1 w-full lg:flex-none lg:w-[400px] lg:h-full gap-4"
+@if (!trafficInfo()) {
+  <h3
+    class="text-2xl font-bold tracking-tight text-center border-b-1 py-3 mb-4 rounded-2xl"
+    [class]="getColor(trafficInfo()?.EntryExitColor ?? '')"
   >
-    <!-- Wallet Panel -->
-    <p-panel header="کیف پول" [toggleable]="true">
-      <div class="flex flex-col w-full gap-4 border-t border-gray-300 py-4">
-        <!-- Wallet Code -->
-        <div class="flex justify-between">
-          <span>کد شناسایی</span>
-          <span>{{ trafficInfo().MoneyWallet.MoneyWalletCode || "---" }}</span>
-        </div>
+    {{ trafficInfo()?.EntryExit === "Entry" ? "ورود" : "خروج" }}
+  </h3>
+  <div class="flex flex-col lg:flex-row gap-4">
+    <!-- Left Column -->
+    <div
+      class="flex flex-col flex-1 w-full lg:flex-none lg:w-[400px] lg:h-full gap-4"
+    >
+      <!-- Wallet Panel -->
+      <p-panel header="کیف پول" [toggleable]="true">
+        <div class="flex flex-col w-full gap-4 border-t border-gray-300 py-4">
+          <!-- Wallet Code -->
+          <div class="flex justify-between">
+            <span>کد شناسایی</span>
+            <span>{{
+              trafficInfo()?.MoneyWallet?.MoneyWalletCode || "---"
+            }}</span>
+          </div>
 
-        <!-- Wallet Balance -->
-        <div class="flex justify-between">
-          <span>موجودی</span>
-          <span>
-            {{ trafficInfo().MoneyWallet.Balance | number: "1.0-0" }} تومان
-          </span>
-        </div>
+          <!-- Wallet Balance -->
+          <div class="flex justify-between">
+            <span>موجودی</span>
+            <span>
+              {{ trafficInfo()?.MoneyWallet?.Balance | number: "1.0-0" }} تومان
+            </span>
+          </div>
 
-        <!-- Traffic Stoppage Cost -->
-        <div class="flex justify-between">
-          <span>هزینه توقف</span>
-          <span>
-            {{ trafficInfo().TrafficStoppageCost | number: "1.0-0" }} تومان
-          </span>
-        </div>
+          <!-- Traffic Stoppage Cost -->
+          <div class="flex justify-between">
+            <span>هزینه توقف</span>
+            <span>
+              {{ trafficInfo()?.TrafficStoppageCost | number: "1.0-0" }} تومان
+            </span>
+          </div>
 
-        <!-- Payable -->
-        <div class="flex justify-between">
-          <span>مبلغ قابل پرداخت</span>
-          <span class="font-semibold text-emerald-600">
-            {{ trafficInfo().Payable | number: "1.0-0" }} تومان
-          </span>
+          <!-- Payable -->
+          <div class="flex justify-between">
+            <span>مبلغ قابل پرداخت</span>
+            <span class="font-semibold text-emerald-600">
+              {{ trafficInfo()?.Payable | number: "1.0-0" }} تومان
+            </span>
+          </div>
         </div>
+      </p-panel>
+
+      <!-- Vehicle & Driver Panel -->
+      <p-panel header="خودرو و راننده" [toggleable]="true">
+        <div class="flex flex-col w-full gap-4 border-t border-gray-300 py-4">
+          <div class="flex justify-between">
+            <span>خودرو</span>
+            <span>{{ "---" }}</span>
+          </div>
+
+          <div class="flex justify-between">
+            <span>راننده</span>
+            <span>{{ "---" }}</span>
+          </div>
+        </div>
+      </p-panel>
+
+      <div class="w-full flex justify-center">
+        <app-button styleClass="w-40" label="تست" (click)="watchEntryGate()" />
       </div>
-    </p-panel>
+    </div>
 
-    <!-- Vehicle & Driver Panel -->
-    <p-panel header="خودرو و راننده" [toggleable]="true">
-      <div class="flex flex-col w-full gap-4 border-t border-gray-300 py-4">
-        <div class="flex justify-between">
-          <span>خودرو</span>
-          <span>{{ "---" }}</span>
-        </div>
-
-        <div class="flex justify-between">
-          <span>راننده</span>
-          <span>{{ "---" }}</span>
-        </div>
-      </div>
-    </p-panel>
-
-    <div class="w-full flex justify-center">
-      <app-button styleClass="w-40" label="تست" (click)="watchEntryGate()" />
+    <!-- Right Column: Traffic Image -->
+    <div
+      class="flex-1 flex items-center justify-center rounded-lg border-1 p-4 overflow-hidden"
+    >
+      @if (trafficInfo()?.TrafficPicture) {
+        <img
+          src="{{ 'data:image/png;base64,' + trafficInfo()?.TrafficPicture }}"
+          alt="تصویر تردد"
+          class="object-fill max-h-[400px] rounded-lg"
+        />
+      } @else {
+        <span class="text-lg text-red-500 dark:text-red-300">
+          تصویر در دسترس نیست
+        </span>
+      }
     </div>
   </div>
-
-  <!-- Right Column: Traffic Image -->
-  <div
-    class="flex-1 flex items-center justify-center rounded-lg border-1 p-4 overflow-hidden"
-  >
-    @if (trafficInfo().TrafficPicture) {
-      <img
-        src="{{ 'data:image/png;base64,' + trafficInfo().TrafficPicture }}"
-        alt="تصویر تردد"
-        class="object-fill max-h-[400px] rounded-lg"
-      />
-    } @else {
-      <span class="text-lg text-red-500 dark:text-red-300">
-        تصویر در دسترس نیست
-      </span>
-    }
+} @else {
+  <div class="flex items-center justify-center min-h-full">
+    <p
+      class="text-xl font-medium text-blue-500 dark:text-blue-300 text-center animate-duration-2000 animate-pulse"
+    >
+      در انتظار دریافت کارت...
+    </p>
   </div>
-</div>
+}
