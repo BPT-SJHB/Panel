@@ -20,12 +20,12 @@ export class TrafficEntriesFormComponent extends BaseLoading {
   readonly trafficInfo = signal<TrafficInfo>(mockTrafficInfo);
 
   async watchEntryGate() {
-    const trafficGateId = -1;
-    const trafficCardId = mockTrafficInfo.EntryExitColor;
+    const trafficGateId = 1;
+    const trafficCardNo = 'ABcDEf0';
     const trafficPic = mockTrafficInfo.TrafficPicture ?? '';
     const response = await this.trafficService.RegisterTraffic(
       trafficGateId,
-      trafficCardId,
+      trafficCardNo,
       trafficPic
     );
 
