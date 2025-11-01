@@ -51,6 +51,8 @@ import { TrafficInitialRegistrationFormComponent } from 'app/components/forms/tr
 import { TrafficAndParkingTariffFormComponent } from 'app/components/forms/traffic-management-forms/traffic-and-parking-tariff-form/traffic-and-parking-tariff-form.component';
 import { ParkingTrafficRecordsFormComponent } from 'app/components/forms/traffic-management-forms/parking-traffic-records-form/parking-traffic-records-form.component';
 import { TrafficCardTypeFormComponent } from 'app/components/forms/traffic-management-forms/traffic-card-type-form/traffic-card-type-form.component';
+import { TrafficEntriesFormComponent } from 'app/components/forms/traffic-management-forms/traffic-entries-form/traffic-entries-form.component';
+import { TrafficManagementService } from 'app/services/traffic-management/traffic-management.service';
 
 export enum TabComponentKey {
   Main = -1,
@@ -533,7 +535,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
     subTab: [
       {
         title: 'ثبت تردد',
-        component: ParkingTrafficRecordsFormComponent,
+        component: TrafficEntriesFormComponent,
       },
       {
         title: 'سوابق تردد',
