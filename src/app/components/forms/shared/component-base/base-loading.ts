@@ -1,9 +1,9 @@
-import { inject, Injectable, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
 import { ToastService } from 'app/services/toast-service/toast.service';
 import { Subject, takeUntil } from 'rxjs';
 
-@Injectable()
+@Component({ template: '' })
 export abstract class BaseLoading implements OnDestroy, OnInit {
   protected readonly destroy$ = new Subject<void>();
   protected loadingService = inject(LoadingService);

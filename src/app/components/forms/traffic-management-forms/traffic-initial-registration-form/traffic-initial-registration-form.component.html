@@ -1,0 +1,45 @@
+<div class="grid gap-4 grid-cols-1 md:grid-cols-2 2xl:grid-cols-3">
+  <!-- Card Number (Read-only field) -->
+  <app-text-input
+    label="شماره کارت تردد"
+    [readOnly]="true"
+    [control]="ctrl('cardNumber')"
+    [addonWidth]="addonWith"
+  />
+
+  <!-- Card Type Selection -->
+  <app-select-input
+    label="نوع کارت تردد"
+    placeholder="نوع کارت تردد خود را انتخاب کنید"
+    [options]="trafficCardTypeOptions()"
+    [control]="ctrl('trafficCardTypeId')"
+    [addonWidth]="addonWith"
+  />
+
+  <!-- Temporary Card Type Selection -->
+  <app-select-input
+    label="نوع کارت موقت"
+    placeholder="نوع کارت موقت خود را انتخاب کنید"
+    [options]="trafficCardTempTypeOptions()"
+    [control]="ctrl('trafficCardTempTypeId')"
+    [addonWidth]="addonWith"
+  />
+
+  <!-- Action Buttons (spanning all columns) -->
+  <div class="flex gap-5 justify-end col-span-full mt-2">
+    <app-button
+      label="جدید"
+      (click)="resetForm()"
+      severity="info"
+      styleClass="w-30 md:w-40"
+    />
+
+    <app-button
+      label="تایید"
+      (click)="registerCard()"
+      severity="primary"
+      styleClass="w-30 md:w-40"
+      [disabled]="registerForm.invalid || loading()"
+    />
+  </div>
+</div>
