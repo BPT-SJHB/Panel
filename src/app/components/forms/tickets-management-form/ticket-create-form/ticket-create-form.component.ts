@@ -173,4 +173,8 @@ export class TicketCreateFormComponent extends BaseLoading {
       copyTextAndToast(trackCode, this.toast);
     }
   }
+
+  redirectLogin() {
+    this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
+  }
 }
