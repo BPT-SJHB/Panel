@@ -128,7 +128,7 @@ export class ProvinceAndCityFormComponent implements OnInit, OnDestroy {
       this.startKey
     );
     if (this.isSuccessful(response)) {
-      this.provinces = this.convertToTreeNode(response.data!);
+      this.updateProvincesTree(response.data!);
       this.cachedProvinces = [...this.provinces];
     }
   }
@@ -153,5 +153,43 @@ export class ProvinceAndCityFormComponent implements OnInit, OnDestroy {
       },
       children: province.Cities?.map((city: City) => ({ data: city })) ?? [],
     }));
+  }
+
+  private updateProvincesTree(newProvinces: Province[]) {
+    const newTree = this.convertToTreeNode(newProvinces);
+
+    for (const newNode of newTree) {
+      const existingNode = this.provinces.find(
+        (p) => p.data.ProvinceId === newNode.data.ProvinceId
+      );
+
+      if (existingNode) {
+        // update existing province fields
+        existingNode.data.ProvinceName = newNode.data.ProvinceName;
+        existingNode.data.ProvinceActive = newNode.data.ProvinceActive;
+
+        // update or add cities
+        for (const newCityNode of newNode.children ?? []) {
+          const existingCityNode = existingNode.children?.find(
+            (c) => c.data.CityId === newCityNode.data.CityId
+          );
+
+          if (existingCityNode) {
+            // update city data
+            existingCityNode.data.CityName = newCityNode.data.CityName;
+            existingCityNode.data.CityActive = newCityNode.data.CityActive;
+          } else {
+            // add new city if not exist
+            existingNode.children = [
+              ...(existingNode.children ?? []),
+              newCityNode,
+            ];
+          }
+        }
+      } else {
+        // add new province if not exist
+        this.provinces.push(newNode);
+      }
+    }
   }
 }
