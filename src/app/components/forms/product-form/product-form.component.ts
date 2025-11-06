@@ -142,7 +142,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       this.startKey
     );
     if (this.isSuccessful(response)) {
-      this.products = this.convertToTreeNode(response.data!);
+      this.updateProductTree(response.data!);
     }
   }
 
@@ -157,5 +157,53 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       return response.error?.code === ErrorCodes.NoRecordFound;
     }
     return true;
+  }
+
+  private updateProductTree(products: ProductType[]) {
+    const newNodes = this.convertToTreeNode(products);
+
+    for (const newNode of newNodes) {
+      const existingNode = this.products.find(
+        (p) => p.data.ProductTypeId === newNode.data.ProductTypeId
+      );
+
+      if (existingNode) {
+        // update title & active flag
+        existingNode.data.ProductTypeTitle = newNode.data.ProductTypeTitle;
+        existingNode.data.ProductTypeActive = newNode.data.ProductTypeActive;
+
+        if (!newNode.children) return;
+
+        // update or add children
+        for (const newChild of newNode.children) {
+          if (!existingNode.children) existingNode.children = [];
+
+          const existingChild = existingNode.children.find(
+            (c) => c.data.ProductId === newChild.data.ProductId
+          );
+
+          if (existingChild) {
+            // update existing child
+            Object.assign(existingChild.data, newChild.data);
+          } else {
+            // add new child
+            existingNode.children.push(newChild);
+          }
+        }
+
+        //remove children that no longer exist
+        if (!existingNode.children) return;
+        if (existingNode.children.length === newNode.children.length) return;
+
+        existingNode.children = existingNode.children.filter((child) =>
+          newNode.children?.some(
+            (nChild) => nChild.data.ProductId === child.data.ProductId
+          )
+        );
+      } else {
+        // 🔵 add new product type
+        this.products.push(newNode);
+      }
+    }
   }
 }
