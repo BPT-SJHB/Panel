@@ -96,7 +96,7 @@ export class WalletPaymentRecordTableComponent
 
     try {
       this.loadingService.setLoading(true);
-      const response = await this.walletService.GetWalletTransactions(
+      const response = await this.walletService.GetWalletPaymentRecords(
         this.walletId()!
       );
       if (!checkAndToastError(response, this.toast)) return;
