@@ -44,8 +44,8 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   readonly wallet = signal<Wallet | null>(null);
 
   headerData: HeaderData = {
-    title: 'عنوان صفحه',
-    icon: 'pi-user',
+    title: 'صفحه اصلی',
+    icon: 'pi pi-home',
   };
 
   ngAfterViewInit(): void {
