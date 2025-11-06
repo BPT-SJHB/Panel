@@ -67,22 +67,22 @@ export class UserAuthService {
   }
 
   public async logout(): Promise<void> {
-    this.cookieService.delete(this.sessionKey, '/');
+    this.cookieService.delete(this.sessionKey);
     await this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
     // سمت سرور اضافه شود در صورت نیاز
   }
 
   public async isLoggedIn(): Promise<ApiResponse<{ ISSessionLive: boolean }>> {
+    const sessionId = this.getSessionId();
+    if (sessionId === null) {
+      return { success: true, data: { ISSessionLive: false } };
+    }
+
     //#region Mock Handling
     if (!environment.production && environment.disableApi) {
       return { success: true, data: { ISSessionLive: true } };
     }
     //#endregion
-
-    const sessionId = this.getSessionId();
-    if (sessionId === null) {
-      return { success: true, data: { ISSessionLive: false } };
-    }
 
     const apiUrl = API_ROUTES.SoftwareUserAPI.SessionChecker;
 
