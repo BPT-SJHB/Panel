@@ -174,7 +174,7 @@ export class LoadsAnnouncementFormComponent
 
     this.confirmService.confirmDelete(`بار با کد ${loadId}`, async () => {
       await this.withLoading(async () => {
-        const response = await this.loadService.CancelLoad(loadId);
+        const response = await this.loadService.DeleteLoad(loadId);
         if (checkAndToastError(response, this.toast)) {
           this.toast.success('موفق', response.data.Message);
           this.resetForm();
@@ -219,15 +219,16 @@ export class LoadsAnnouncementFormComponent
 
       if (!response || !checkAndToastError(response, this.toast)) return;
       this.toast.success('موفق', '');
+      this.resetForm();
 
-      this.confirmService.confirmChoose(
-        'بار مورد نظر را جهت ویرایش',
-        async () => {
-          const loadInfo = await this.fetchLoadInfo(response.data.newLoadId);
-          this.sharedSignal.set(loadInfo ?? null);
-        },
-        () => this.resetForm()
-      );
+      // this.confirmService.confirmChoose(
+      //   'بار مورد نظر را جهت ویرایش',
+      //   async () => {
+      //     const loadInfo = await this.fetchLoadInfo(response.data.newLoadId);
+      //     this.sharedSignal.set(loadInfo ?? null);
+      //   },
+      //   () => this.resetForm()
+      // );
     });
   }
 
