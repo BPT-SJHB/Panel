@@ -22,7 +22,7 @@
   <!-- Wallet Info (When Loaded) -->
   <ng-template #walletContent>
     <div class="flex items-center gap-2 px-3 py-1 text-sm font-semibold">
-      <span>{{ wallet()?.Balance | number : "1.0-0" }} تومان</span>
+      <span>{{ wallet()?.Balance | number: "1.0-0" }} ریال</span>
       <i class="pi pi-angle-down text-xs text-muted-foreground"></i>
     </div>
   </ng-template>
@@ -33,7 +33,7 @@
   [dt]="{
     root: {
       borderRadius: '2rem',
-    }
+    },
   }"
   #walletPopover
 >
@@ -44,7 +44,7 @@
     <div class="flex items-center justify-between text-sm pb-3">
       <span class="text-muted-foreground">موجودی کیف پول</span>
       <strong class="text-foreground">
-        {{ wallet()?.Balance | number : "1.0-0" }} تومان
+        {{ wallet()?.Balance | number: "1.0-0" }} تومان
       </strong>
     </div>
 
