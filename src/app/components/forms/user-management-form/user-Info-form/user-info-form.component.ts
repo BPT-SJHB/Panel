@@ -226,6 +226,7 @@ export class UserInfoFormComponent extends BaseLoading implements OnInit {
       header: 'رمز عبور جدید',
       width: '20rem',
       modal: true,
+      closable: true,
       inputValues: { username, password },
     });
   }

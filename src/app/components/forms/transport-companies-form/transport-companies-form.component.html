@@ -98,6 +98,7 @@
 
     <!-- وضعیت -->
     <app-toggle-switch-input
+      [readonly]="this.TCId.invalid"
       class="col-span-12 flex px-4"
       [label]="appTitle.toggleSwitches.status"
       [control]="Active"

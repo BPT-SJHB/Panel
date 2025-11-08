@@ -20,6 +20,7 @@ import { TransportCompany } from 'app/services/transport-company-management/mode
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-switch-input/toggle-switch-input.component';
 import { AppTitles } from 'app/constants/Titles';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-transport-companies-form',
@@ -44,7 +45,7 @@ export class TransportCompaniesFormComponent extends BaseLoading {
   private readonly confirmationService = inject(ConfirmationService);
 
   // === Form Setup ===
-  readonly addonWidth = '9rem';
+  readonly addonWidth = '7rem';
   readonly appTitle = AppTitles;
   readonly transportComponyForm = this.fb.group({
     TCId: new FormControl<number | null>(null, ValidationSchema.id),
@@ -58,6 +59,14 @@ export class TransportCompaniesFormComponent extends BaseLoading {
     Active: [true],
   });
 
+  override ngOnInit(): void {
+    this.Active.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => {
+        if (value === null) return;
+        this.changeStatusTransportCompony(value);
+      });
+  }
   // === Search + Select Handling ===
   searchTransportCompony = async (query: string) => {
     const response =
@@ -81,23 +90,13 @@ export class TransportCompaniesFormComponent extends BaseLoading {
   // === Form Submit Handlers ===
   async editTransportCompony() {
     if (this.loading() || this.transportComponyForm.invalid) return;
-    try {
-      this.loadingService.setLoading(true);
-      let response = await this.transportComponyService.EditTransportCompany(
+    await this.withLoading(async () => {
+      const response = await this.transportComponyService.EditTransportCompany(
         this.extractTransportComponyForm()
       );
       if (!checkAndToastError(response, this.toast)) return;
-
-      response =
-        await this.transportComponyService.ChangeTransportCompanyStatus(
-          this.extractTransportComponyForm().TCId,
-          this.extractTransportComponyForm().Active ?? false
-        );
-      if (!checkAndToastError(response, this.toast)) return;
       this.toast.success('موفق', response.data.Message);
-    } finally {
-      this.loadingService.setLoading(false);
-    }
+    });
   }
 
   async activateTransportComponySms() {
@@ -146,11 +145,27 @@ export class TransportCompaniesFormComponent extends BaseLoading {
         header: 'رمز عبور جدید',
         width: '20rem',
         modal: true,
+        closable: true,
         inputValues: { username: Username, password: Password },
       });
     } finally {
       this.loadingService.setLoading(false);
     }
+  }
+
+  private async changeStatusTransportCompony(value: boolean) {
+    if (this.loading() || this.TCId.invalid) return;
+    this.withLoading(async () => {
+      const response =
+        await this.transportComponyService.ChangeTransportCompanyStatus(
+          this.extractTransportComponyForm().TCId,
+          value
+        );
+
+      if (!checkAndToastError(response, this.toast)) return;
+
+      this.toast.success('موفق', response.data.Message);
+    });
   }
 
   // === Utility Methods ===

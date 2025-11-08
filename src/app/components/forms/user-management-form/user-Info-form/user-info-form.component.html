@@ -89,12 +89,18 @@
     </div>
 
     <!-- Radio: SMS System -->
-    <div class="col-span-12 md:col-span-6 flex px-2">
-      <app-toggle-switch-input
-        [readonly]="true"
-        [label]="appTitles.toggleSwitches.smsStatus"
-        [control]="getUserFormControl('smsActive')"
-      />
+    <div class="col-span-12 md:col-span-6 gap-2 flex px-2 items-center">
+      <span class="font-medium">{{ appTitles.toggleSwitches.smsStatus }}</span>
+      <span
+        class="ms-2 font-semibold"
+        [class]="
+          getUserFormControl('smsActive').value
+            ? 'text-green-600'
+            : 'text-red-600'
+        "
+      >
+        {{ getUserFormControl("smsActive").value ? "فعال" : "غیرفعال" }}
+      </span>
     </div>
 
     <!-- Radio: User Active -->
