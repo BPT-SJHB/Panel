@@ -5,6 +5,7 @@ const walletAndTrafficPort = 83;
 const LoadCapacitorPort = 84;
 const LoadAllocationPort = 85;
 const ReportsPort = 86;
+const CarouselsPort = 90;
 const TrafficPort = 91;
 const ticketPort = 8080;
 const ticketUrl = 'http://localhost';
@@ -218,6 +219,7 @@ export const API_ROUTES = {
     GetLoadAllocationOfDriver: `${environment.apiUrl}:${LoadAllocationPort}${apiFixURLPart}GetTruckDriverLoadAllocations`,
     CancelLoadAllocation: `${environment.apiUrl}:${LoadAllocationPort}${apiFixURLPart}LoadAllocationCancelling`,
     GetTravelTimeOfLoadAllocation: `${environment.apiUrl}:${LoadAllocationPort}${apiFixURLPart}GetTravelTimeforLoadAllocation`,
+    GetRecordsOfLoadAllocation: `${environment.apiUrl}:${LoadAllocationPort}${apiFixURLPart}GetTruckDriverLoadAllocationsRecords`,
   },
   Reports: {
     Load: {
@@ -268,12 +270,21 @@ export const API_ROUTES = {
   TrafficAPI: {
     RegisterTrafficCardType: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}RegisteringTrafficCardType`,
     RegisterTrafficCard: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}RegisteringTrafficCard`,
-    RegisterTrafficCost: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}/RegisteringTrafficCost`,
+    RegisterTrafficCost: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}RegisteringTrafficCost`,
     EditTrafficCardType: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}EditingTrafficCardType`,
     GetTrafficCardTypes: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}GetTrafficCardTypes`,
     GetTrafficCardTempTypes: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}GetTrafficCardTempTypes`,
     GetTrafficCosts: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}GetTrafficCosts`,
     GetTrafficRecords: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}GetTrafficRecords`,
     RegisterTraffic: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}RegisteringTraffic`,
+  },
+  CarouselAPI: {
+    GetCarousels: `${environment.apiUrl}:${CarouselsPort}${apiFixURLPart}GetCarousels`,
+    GetCarouselPic: `${environment.apiUrl}:${CarouselsPort}${apiFixURLPart}GetCarouselPicture`,
+    RegisterCarousel: `${environment.apiUrl}:${CarouselsPort}${apiFixURLPart}CarouselRegistering`,
+    EditCarousel: `${environment.apiUrl}:${CarouselsPort}${apiFixURLPart}CarouselEditing`,
+    DeleteCarousel: `${environment.apiUrl}:${CarouselsPort}${apiFixURLPart}CarouselDeleting`,
+    ChangeCarouselStatus: `${environment.apiUrl}:${CarouselsPort}${apiFixURLPart}CarouselChangeActiveStatus`,
+    GetCarouselsForView: `${environment.apiUrl}:${CarouselsPort}${apiFixURLPart}GetCarouselsForViewing`,
   },
 };
