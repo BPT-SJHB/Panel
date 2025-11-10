@@ -85,6 +85,7 @@ export class TableComponent<T extends object> {
 
   readonly ColumnType = TableColumnType;
   readonly defaultButtonSeverity: ButtonSeverity = 'green';
+  selectedItems: T[] = [];
   private readonly tablePage = signal<TablePage>({
     pageSize: this.config.rows,
     page: 1,
@@ -177,6 +178,9 @@ export class TableComponent<T extends object> {
     return false;
   }
 
+  clearSelections() {
+    this.selectedItems = [];
+  }
   private formatCurrency(value: string): string {
     return value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
