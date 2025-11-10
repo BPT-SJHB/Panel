@@ -5,6 +5,7 @@ import {
   Input,
   OnDestroy,
   OnInit,
+  output,
   signal,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -26,6 +27,7 @@ export class ToggleSwitchInputComponent
   @Input() label = '';
   @Input() labelWidth = '';
 
+  valueChagne = output<boolean>();
   private readonly destroy$ = new Subject<void>();
 
   private baseStyles = {
@@ -79,5 +81,9 @@ export class ToggleSwitchInputComponent
         shadow: status ? this.shadowColors.active : this.shadowColors.inactive,
       },
     }));
+  }
+
+  onValueChange(_: Event) {
+    this.valueChagne.emit(this.control.value);
   }
 }
