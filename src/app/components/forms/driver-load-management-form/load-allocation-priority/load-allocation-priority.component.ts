@@ -161,7 +161,7 @@ export class LoadAllocationPriorityComponent
 
   savePriorities($event: MouseEvent) {
     this.withLoading(async () => {
-      // this.loadsService.AllocateLoadToNextTurn
+      // this.loadsService.AllocateLoadToNextTurn()
       this.toast.success('موفق', 'اولویت‌ها با موفقیت ذخیره شد');
     });
   }
