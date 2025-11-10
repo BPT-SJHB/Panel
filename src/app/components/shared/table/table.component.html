@@ -13,6 +13,7 @@
   (sortFunction)="onCustomSort($event)"
   [customSort]="customSort"
   (onPage)="onPageChange($event)"
+  [(selection)]="selectedItems"
 >
   <!-- Caption -->
   @if (enableCaptionButton) {
