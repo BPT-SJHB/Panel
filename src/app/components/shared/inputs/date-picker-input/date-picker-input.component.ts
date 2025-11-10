@@ -14,7 +14,10 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { MessageModule } from 'primeng/message';
 import { ButtonModule } from 'primeng/button';
-import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
+import {
+  IDatepickerTheme,
+  NgPersianDatepickerModule,
+} from 'ng-persian-datepicker';
 
 // 📐 Validation Utilities
 import {
@@ -23,6 +26,52 @@ import {
   ValidationField,
   ValidationSchema,
 } from 'app/constants/validation-schema';
+
+const darkTheme: IDatepickerTheme = {
+  border: '#393939',
+  timeBorder: '#393939',
+
+  background: '#222222',
+  text: '#FFFFFF',
+
+  hoverBackground: '#393939',
+  hoverText: '#FFFFFF',
+
+  disabledBackground: '#393939',
+  disabledText: '#CCCCCC',
+
+  selectedBackground: '#D68E3A',
+  selectedText: '#FFFFFF',
+
+  todayBackground: '#FFFFFF',
+  todayText: '#2D2D2D',
+
+  otherMonthBackground: 'rgba(0, 0, 0, 0)',
+  otherMonthText: '#CCCCCC',
+};
+
+const lightTheme: IDatepickerTheme = {
+  border: '#E0E0E0',
+  timeBorder: '#E0E0E0',
+
+  background: '#FFFFFF',
+  text: '#000000',
+
+  hoverBackground: '#F2F2F2',
+  hoverText: '#000000',
+
+  disabledBackground: '#F9F9F9',
+  disabledText: '#AAAAAA',
+
+  selectedBackground: '#D68E3A',
+  selectedText: '#FFFFFF',
+
+  todayBackground: '#2D2D2D',
+  todayText: '#FFFFFF',
+
+  otherMonthBackground: 'rgba(0, 0, 0, 0)',
+  otherMonthText: '#AAAAAA',
+};
 
 @Component({
   selector: 'app-date-picker-input',
@@ -99,5 +148,10 @@ export class DatePickerInput implements OnInit, OnChanges {
     if (this.readOnly) {
       this.control.markAsUntouched();
     }
+  }
+
+  getDarkThemeIfEnabled(): IDatepickerTheme {
+    const html = document.documentElement;
+    return html.classList.contains('dark') ? darkTheme : lightTheme;
   }
 }
