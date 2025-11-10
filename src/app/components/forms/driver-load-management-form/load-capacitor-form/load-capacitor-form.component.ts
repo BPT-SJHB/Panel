@@ -49,7 +49,7 @@ export class LoadCapacitorFormComponent
     AutoCompleteConfigFactoryService
   );
 
-  readonly addonWidth = '10rem';
+  readonly addonWidth = '7rem';
   readonly appTitle = AppTitles;
 
   // signals
@@ -173,7 +173,6 @@ export class LoadCapacitorFormComponent
       const response =
         await this.loadService.RegisterNewLoadAllocationForDrivers(loadId);
       if (!checkAndToastError(response, this.toast)) {
-        this.driverLoads.set([]);
         return;
       }
       this.toast.success('موفق', response.data.Message);
