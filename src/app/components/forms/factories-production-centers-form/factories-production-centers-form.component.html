@@ -145,6 +145,8 @@
         <app-toggle-switch-input
           [label]="appTitle.toggleSwitches.factoryOrProductionCenterStatus"
           [control]="fpcActive"
+          [readonly]="fpcId.invalid"
+          (valueChagne)="changeFpcActiveStatus($event)"
         />
       </div>
     </div>
@@ -156,7 +158,7 @@
   >
     <app-button
       (click)="registerOrEditFpc()"
-      [disabled]="fpcForm.invalid || loading()"
+      [disabled]="!isFormValidExcept('fpcId') || loading()"
       [label]="appTitle.buttons.saveAndEdit"
       styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
     ></app-button>
