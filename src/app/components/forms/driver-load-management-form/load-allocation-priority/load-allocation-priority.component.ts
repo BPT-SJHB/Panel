@@ -16,6 +16,7 @@ import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { NgClass } from '@angular/common';
 import { PanelModule } from 'primeng/panel';
 import { AppConfirmService } from 'app/services/confirm/confirm.service';
+import { LoadAllocationPriority } from 'app/services/load-management/model/load-allocation-priority';
 
 @Component({
   selector: 'app-load-allocation-priority',
@@ -159,10 +160,17 @@ export class LoadAllocationPriorityComponent
     return this.selection().length > 0 && this.selection()[0].LAId === ladId;
   }
 
-  savePriorities($event: MouseEvent) {
-    this.withLoading(async () => {
-      // this.loadsService.AllocateLoadToNextTurn()
-      this.toast.success('موفق', 'اولویت‌ها با موفقیت ذخیره شد');
+  async savePriorities($event: MouseEvent) {
+    await this.withLoading(async () => {
+      const priorites: LoadAllocationPriority[] = this.loadsAllocations().map(
+        (item, index) => ({ LAId: item.LAId, Priority: index + 1 })
+      );
+      const response =
+        await this.loadsService.ChangePriorityLoadAllocations(priorites);
+      if (!checkAndToastError(response, this.toast)) return;
+      this.toast.success('موفق', response.data.Message);
     });
+
+    await this.loadLoadsAllocation();
   }
 }
