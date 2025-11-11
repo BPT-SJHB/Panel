@@ -25,6 +25,7 @@ export interface TableColumn<T extends object> {
   onAction?: (row: T) => void | Promise<void>;
   sorting?: boolean;
   format?: 'currency';
+  dir?: 'rtl' | 'ltr';
 }
 
 type SelectionMode = 'single' | 'multiple';
@@ -181,6 +182,7 @@ export class TableComponent<T extends object> {
   clearSelections() {
     this.selectedItems = [];
   }
+
   private formatCurrency(value: string): string {
     return value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
