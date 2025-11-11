@@ -5,7 +5,7 @@ export const mockWalletUserChargingFunctions: WalletUserChargingFunction[] = [
     ShamsiDate: '1404/04/01',
     Time: '11:19:14  ',
     Amount: 46200,
-    CardNo: '0000001xsY',
+    CardNo: '0000002^!u',
   },
   {
     ShamsiDate: '1404/04/01',
