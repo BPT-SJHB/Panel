@@ -56,7 +56,11 @@
     @if (!loading) {
       <tr class="text-nowrap" [pSelectableRow]="row">
         @for (column of columns; track column.field) {
-          <td class="text-center" [class]="getTdClass(row)">
+          <td
+            class="text-center"
+            [class]="getTdClass(row)"
+            [dir]="column.dir ?? 'rtl'"
+          >
             @switch (getColumnType(column)) {
               @case (ColumnType.TEXT) {
                 <span
