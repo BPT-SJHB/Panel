@@ -66,7 +66,7 @@ export class TurnsTruckInfoBaseFormComponent implements OnInit, OnDestroy {
   loading = false;
 
   // 🧩 UI config
-  addonWidth = '10rem';
+  addonWidth = '7rem';
 
   // 📋 Search form for smart card input
   searchTruckInfoForm = this.fb.group({
