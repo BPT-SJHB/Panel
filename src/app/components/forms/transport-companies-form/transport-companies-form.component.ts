@@ -108,7 +108,7 @@ export class TransportCompaniesFormComponent extends BaseLoading {
   // === Password Reset Handling ===
   confirmResetPassword(): void {
     this.confirmationService.confirm({
-      message: `آیا مطمئن هستید که می‌خواهید رمز عبور خود را تغییر دهید؟`,
+      message: `آیا می‌خواهید رمز عبور را تغییر دهید؟`,
       header: 'تغییر رمز عبور',
       icon: 'pi pi-exclamation-triangle',
       accept: async () => {
@@ -123,7 +123,7 @@ export class TransportCompaniesFormComponent extends BaseLoading {
   }
 
   private async resetTransportComponyPassword() {
-    if (this.loading() || this.TCId.invalid) return;
+    if (this.TCId.invalid) return;
     try {
       this.loadingService.setLoading(true);
       const response =
