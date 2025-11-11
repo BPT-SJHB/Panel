@@ -220,6 +220,7 @@ export const API_ROUTES = {
     CancelLoadAllocation: `${environment.apiUrl}:${LoadAllocationPort}${apiFixURLPart}LoadAllocationCancelling`,
     GetTravelTimeOfLoadAllocation: `${environment.apiUrl}:${LoadAllocationPort}${apiFixURLPart}GetTravelTimeforLoadAllocation`,
     GetRecordsOfLoadAllocation: `${environment.apiUrl}:${LoadAllocationPort}${apiFixURLPart}GetTruckDriverLoadAllocationsRecords`,
+    ChangeLoadAllocationsPriority: `${environment.apiUrl}:${LoadAllocationPort}${apiFixURLPart}LoadAllocationsChangePriority`,
   },
   Reports: {
     Load: {
