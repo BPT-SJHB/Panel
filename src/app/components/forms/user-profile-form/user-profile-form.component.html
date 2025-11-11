@@ -6,7 +6,7 @@
     shape="circle"
     styleClass="shadow w-20 h-20"
     [style]="{ 'background-color': '#ece9fc', color: '#2a1261' }"
-    />
+  />
 </div>
 
 <div class="flex flex-col gap-4 px-2">
@@ -18,9 +18,11 @@
       </span>
 
       <span class="text-right text-sm">
-        @if (col.field === 'balance') {
-          {{ userProfile()[col.field] | number:'1.0-0' }}
+        @if (col.field === "balance") {
+          {{ userProfile()[col.field] | number: "1.0-0" }}
           <span class="mx-1">ریال</span>
+        } @else if (col.field === "walletCode") {
+          <span dir="ltr">{{ userProfile()[col.field] }}</span>
         } @else {
           {{ userProfile()[col.field] }}
         }
@@ -32,7 +34,7 @@
 <!-- Action Buttons -->
 <div
   class="col-span-12 mt-8 md:mb-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center"
-  >
+>
   <app-button
     (click)="activateUserSms()"
     [disabled]="loading() || isUserSmsActivated || !userProfile()"
@@ -65,4 +67,4 @@
   rejectLabel="انصراف"
   acceptButtonStyleClass="px-8 app-button-info py-2 text-sm"
   rejectButtonStyleClass="px-6 app-button-secondary py-2 text-sm"
-  />
+/>
