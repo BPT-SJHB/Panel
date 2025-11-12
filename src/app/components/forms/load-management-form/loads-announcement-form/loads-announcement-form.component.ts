@@ -5,7 +5,6 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
 import { LoadInfo } from 'app/services/load-management/model/load-info.model';
 import { TransportTariffParam } from 'app/services/load-management/model/transport-tariff-param.model';
-import { LoadRegister } from 'app/services/load-management/model/load-register.model';
 import { LoadEdit } from 'app/services/load-management/model/load-edit.model';
 
 // Services
@@ -26,7 +25,6 @@ import {
 } from 'app/components/shared/table/table.component';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { BinaryRadioInputComponent } from 'app/components/shared/inputs/binary-radio-input/binary-radio-input.component';
-import { DatePickerInput } from 'app/components/shared/inputs/date-picker-input/date-picker-input.component';
 import { SearchAutoCompleteFactoryComponent } from 'app/components/shared/inputs/search-auto-complete-factory/search-auto-complete-factory.component';
 import {
   ButtonComponent,
@@ -38,7 +36,8 @@ import { LoadListType } from '../loads-list-form/loads-list-form.component';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { AnnouncementSubGroup } from 'app/services/announcement-group-subgroup-management/model/announcement-subgroup.model';
 import { AppTitles } from 'app/constants/Titles';
-import { single } from 'rxjs';
+import { interval, Subscription, takeUntil } from 'rxjs';
+import { LoadRegister } from 'app/services/load-management/model/load-register.model';
 
 @Component({
   selector: 'app-loads-announcement-form',
@@ -47,7 +46,6 @@ import { single } from 'rxjs';
     TextInputComponent,
     SearchAutoCompleteFactoryComponent,
     BinaryRadioInputComponent,
-    DatePickerInput,
     ButtonComponent,
   ],
   templateUrl: './loads-announcement-form.component.html',
@@ -75,6 +73,7 @@ export class LoadsAnnouncementFormComponent
   });
 
   readonly transportTariffParams = signal<TransportTariffParam[]>([]);
+  private timerSub?: Subscription;
 
   // =====================================================
   // 🔹 Services
@@ -106,15 +105,26 @@ export class LoadsAnnouncementFormComponent
   // =====================================================
   readonly autoCompletions = this.createAutoCompletions();
   readonly actionButtons = this.createActionButtons();
-
   // =====================================================
   // 🔹 Lifecycle
   // =====================================================
+  override ngOnInit(): void {
+    this.timerSub = interval(1000)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        if (this.selectedLoadInfo()) return;
+        this.ctrl('AnnounceDate').setValue(this.getToday());
+      });
+    super.ngOnInit();
+  }
+
   onViewActivated(): void {
     const currentId = this.selectedLoadInfo()?.LoadId ?? null;
+
     if (this.prvLoadId() == currentId) return;
     this.prvLoadId.set(currentId);
     this.resetForm();
+
     this.transportTariffParams.set([]);
     this.initialize();
   }
@@ -177,7 +187,7 @@ export class LoadsAnnouncementFormComponent
         const response = await this.loadService.DeleteLoad(loadId);
         if (checkAndToastError(response, this.toast)) {
           this.toast.success('موفق', response.data.Message);
-          this.resetForm();
+          this.reloadForm();
           this.sharedSignal.set(null);
         }
       });
@@ -211,7 +221,11 @@ export class LoadsAnnouncementFormComponent
     if (!this.isLoadRegisterValid() || this.loading()) return;
 
     this.confirmService.confirmSubmit('بار مورد نظر', async () => {
+      const tptParams = await this.getTransportTariffParamsAsString();
+      if (!tptParams) return;
+
       const newLoad = this.loadsForm.getRawValue() as LoadRegister;
+      newLoad.TPTParams = tptParams;
 
       const response = await this.withLoading(() =>
         this.loadService.RegisterNewLoad(newLoad)
@@ -219,16 +233,7 @@ export class LoadsAnnouncementFormComponent
 
       if (!response || !checkAndToastError(response, this.toast)) return;
       this.toast.success('موفق', '');
-      this.resetForm();
-
-      // this.confirmService.confirmChoose(
-      //   'بار مورد نظر را جهت ویرایش',
-      //   async () => {
-      //     const loadInfo = await this.fetchLoadInfo(response.data.newLoadId);
-      //     this.sharedSignal.set(loadInfo ?? null);
-      //   },
-      //   () => this.resetForm()
-      // );
+      this.reloadForm();
     });
   }
 
@@ -264,6 +269,8 @@ export class LoadsAnnouncementFormComponent
       }
 
       const loadInfo = responseLoad.data;
+      loadInfo.AnnounceDate =
+        loadInfo.AnnounceTime + ' - ' + loadInfo.AnnounceDate;
       this.populateForm(loadInfo);
       this.sharedSignal.set(loadInfo);
 
@@ -346,7 +353,7 @@ export class LoadsAnnouncementFormComponent
   private createForm() {
     return this.fb.group({
       LoadId: this.fb.control<number | null>(null, Validators.required),
-      AnnounceDate: this.fb.nonNullable.control(''),
+      AnnounceDate: this.fb.nonNullable.control(this.getToday()),
       AnnounceTime: this.fb.nonNullable.control(''),
       LoadStatusId: this.fb.control<number | null>(null, Validators.required),
       LoadStatusTitle: this.fb.nonNullable.control(''),
@@ -572,5 +579,59 @@ export class LoadsAnnouncementFormComponent
         disabled: () => this.baseDisabled(),
       },
     ];
+  }
+
+  reloadForm(): void {
+    this.sharedSignal.set(null);
+    let keep: (keyof LoadInfo)[] = [];
+
+    switch (this.loadType) {
+      case LoadListType.TRANSPORT_COMPANY:
+        keep = ['TransportCompanyId', 'TransportCompanyTitle'];
+        break;
+    }
+
+    const valuesToKeep = {} as Partial<LoadInfo>;
+
+    keep.forEach((k) => {
+      const control = this.loadsForm.get(k);
+      if (control) {
+        const value = control.value as LoadInfo[typeof k];
+        Object.assign(valuesToKeep, { [k]: value });
+      }
+    });
+
+    this.loadsForm.reset({ AnnounceDate: this.getToday() });
+    this.loadsForm.patchValue(valuesToKeep);
+    this.transportTariffParams.set([]);
+  }
+
+  private getToday() {
+    const today = new Date();
+
+    const dateFormatter = new Intl.DateTimeFormat('en-u-ca-persian', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    });
+
+    const timeFormatter = new Intl.DateTimeFormat('en', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    });
+
+    const dateParts = dateFormatter.formatToParts(today);
+    const y = dateParts.find((p) => p.type === 'year')?.value;
+    const m = dateParts.find((p) => p.type === 'month')?.value;
+    const d = dateParts.find((p) => p.type === 'day')?.value;
+
+    const timeParts = timeFormatter.formatToParts(today);
+    const hh = timeParts.find((p) => p.type === 'hour')?.value;
+    const mm = timeParts.find((p) => p.type === 'minute')?.value;
+    const ss = timeParts.find((p) => p.type === 'second')?.value;
+
+    return `${hh}:${mm}:${ss} - ${y}/${m}/${d}`;
   }
 }

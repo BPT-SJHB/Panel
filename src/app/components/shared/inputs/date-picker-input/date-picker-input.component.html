@@ -27,6 +27,7 @@
     <!-- 📅 Persian Date Input -->
     <div class="w-full relative">
       <ng-persian-datepicker
+        [uiTheme]="getDarkThemeIfEnabled()"
         [ngClass]="
           datePickerPosition === 'top' ? 'position-top' : 'position-bottom'
         "

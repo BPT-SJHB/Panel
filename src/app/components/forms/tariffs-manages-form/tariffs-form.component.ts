@@ -457,7 +457,7 @@ export class TariffsFormComponent extends BaseLoading {
   async registerOrEdit() {
     if (this.tariffsFormMode === TariffsFormMode.EDITABLE)
       await this.editTariffForm();
-    else await this.registerOrEdit();
+    else await this.registerTariffs();
   }
 
   // Getters for FormControls

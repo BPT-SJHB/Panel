@@ -115,24 +115,22 @@ export class SequentialTurnsFormComponent extends BaseLoading {
     this.initialize();
   }
   private async initialize(): Promise<void> {
-    await this.loadSequentialTurns();
+    this.withLoading(async () => {
+      await this.loadSequentialTurns();
+    });
   }
 
   private async loadSequentialTurns(): Promise<void> {
-    if (this.loading()) return;
+    const response = await this.sequentialTurnsService.GetSequentialTurns('');
+    if (!checkAndToastError(response, this.toast)) return;
 
-    this.withLoading(async () => {
-      const response = await this.sequentialTurnsService.GetSequentialTurns('');
-      if (!checkAndToastError(response, this.toast)) return;
-
-      const rows = response.data.map((st) => ({
-        ...st,
-        edit: editCell.value,
-        delete: deleteCell.value,
-      }));
-      this.sequentialTurns = rows;
-      this.displaySequentialTurns = [...this.sequentialTurns];
-    });
+    const rows = response.data.map((st) => ({
+      ...st,
+      edit: editCell.value,
+      delete: deleteCell.value,
+    }));
+    this.sequentialTurns = rows;
+    this.displaySequentialTurns = [...this.sequentialTurns];
   }
 
   handleSearch(results: SequentialTurnTableRow[]): void {

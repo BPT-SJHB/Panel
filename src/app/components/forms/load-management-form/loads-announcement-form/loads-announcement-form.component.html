@@ -1,3 +1,14 @@
+<div class="flex justify-between items-center mb-5">
+  <app-button
+    class="flex justify-end w-full px-1"
+    label="جدید"
+    size="small"
+    [severity]="'info'"
+    styleClass="px-6 md:px-8 py-2"
+    (click)="reloadForm()"
+  />
+</div>
+
 <!-- Binary Radio Input for Load Type -->
 <app-binary-radio-input
   class="col-span-12 md:col-span-6 lg:col-span-4 flex pb-4 pr-1"
@@ -17,19 +28,14 @@
     [readOnly]="true"
   ></app-text-input>
 
-  <!-- TODO: Didn't load the date on load of component -->
-
   <!-- Announcement Date (Read-only) -->
-  <app-date-picker-input
+  <app-text-input
     class="col-span-12 md:col-span-6 lg:col-span-4"
     [label]="appTitles.inputs.loadAnnouncementDetails.loadDateAndTime"
     [control]="ctrl('AnnounceDate')"
     [addonWidth]="addonWidth"
     [readOnly]="true"
-  ></app-date-picker-input>
-
-  <!-- TODO: change the type of the element to a simple input (it's readonly) -->
-  <!-- TODO: Are they all factory component ?! -->
+  ></app-text-input>
 
   <!-- Load Status Auto-complete -->
   <app-search-auto-complete-factory

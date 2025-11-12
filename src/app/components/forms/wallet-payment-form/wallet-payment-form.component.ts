@@ -1,5 +1,5 @@
 import { Component, effect, inject, Input, signal } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 import { CardModule } from 'primeng/card';
 
@@ -125,6 +125,10 @@ export class WalletPaymentFormComponent
     if (this.amount.invalid) return;
 
     try {
+      if (this.walletType() !== 'User' && this.walletType() !== 'SMS') {
+        this.toast.warn('اخطار', 'شارژ فقط از طریق دستگاه پوز انجام می‌شود.');
+        return;
+      }
       this.loadingService.setLoading(true);
       const response = await this.walletService.SendPaymentRequest(
         this.amount.value!

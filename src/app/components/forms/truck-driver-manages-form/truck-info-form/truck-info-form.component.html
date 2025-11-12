@@ -30,7 +30,7 @@
     [class.opacity-60]="loading"
     [formGroup]="truckInfoForm"
   >
-    <span class="text-lg w-[7rem] font-bold">{{
+    <span class="text-lg w-28 font-bold">{{
       appTitle.sectionTitles.truckInfo
     }}</span>
     <div class="p-fluid grid grid-cols-12 gap-6 col-span-12">
@@ -101,7 +101,7 @@
     [formGroup]="truckNativenessForm"
     (ngSubmit)="changeNativeness()"
   >
-    <span class="text-lg w-[5rem] font-bold">{{
+    <span class="text-lg w-20 font-bold">{{
       appTitle.sectionTitles.nativenessInfo
     }}</span>
     <div class="p-fluid grid grid-cols-12 gap-4 col-span-12">
@@ -125,7 +125,7 @@
             datePickerPosition="top"
             [control]="truckNativenessExpiredDate"
             validationField="truckNativenessExpiredDate"
-            [readOnly]="true"
+            [readOnly]="truckId.invalid"
             [addonWidth]="addonWidth"
           ></app-date-picker-input>
         </div>

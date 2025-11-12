@@ -1,10 +1,15 @@
 <div class="flex items-center gap-3">
-  <span class="whitespace-nowrap" [style.width]="labelWidth ? labelWidth: 'auto'">{{ label }}</span>
+  <span
+    class="whitespace-nowrap"
+    [style.width]="labelWidth ? labelWidth : 'auto'"
+    >{{ label }}</span
+  >
 
   <p-toggleswitch
     [formControl]="control"
     [readonly]="readonly"
     [dt]="customToggleSwitchTokens()"
+    (input)="onValueChange($event)"
   >
     <ng-template #handle let-checked="checked">
       <i
@@ -13,10 +18,10 @@
           checked === true && !control.disabled
             ? 'pi-check text-green-700 dark:text-emerald-600'
             : checked === true && control.disabled
-            ? 'pi-check text-gray-700 '
-            : checked === false && !control.disabled
-            ? 'pi-times text-red-700 dark:text-red-600'
-            : 'pi-times text-gray-700 '
+              ? 'pi-check text-gray-700 '
+              : checked === false && !control.disabled
+                ? 'pi-times text-red-700 dark:text-red-600'
+                : 'pi-times text-gray-700 ',
         ]"
       ></i>
     </ng-template>

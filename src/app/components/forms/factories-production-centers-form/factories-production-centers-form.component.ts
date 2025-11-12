@@ -34,7 +34,6 @@ import { AppTitles } from 'app/constants/Titles';
 export class FactoriesAndFreightFormComponent extends BaseLoading {
   private fb = inject(FormBuilder);
   private fpcService = inject(FpcManagementService);
-  private cachedFpc?: FPCInfo;
 
   addonWidth = '6rem';
   passwordDialogVisible = false;
@@ -49,7 +48,7 @@ export class FactoriesAndFreightFormComponent extends BaseLoading {
     title: ['', ValidationSchema.title],
     managerName: ['', ValidationSchema.managerName],
     managerMobile: [''],
-    telephone: [''],
+    telephone: ['', ValidationSchema.telephone],
     address: ['', ValidationSchema.address],
     email: [''],
     fpcActive: [true, ValidationSchema.smsActive],
@@ -107,16 +106,12 @@ export class FactoriesAndFreightFormComponent extends BaseLoading {
   }
 
   async registerOrEditFpc(): Promise<void> {
-    if (this.fpcForm.invalid || this.loading()) return;
+    if (!this.isFormValidExcept('fpcId') || this.loading()) return;
     this.withLoading(async () => {
       if (this.fpcId.invalid) {
         await this.registerFpc();
       } else {
         await this.editFpc();
-      }
-
-      if (this.cachedFpc?.Active !== this.fpcActive.value) {
-        await this.changeFpcActiveStatus();
       }
     });
   }
@@ -137,17 +132,15 @@ export class FactoriesAndFreightFormComponent extends BaseLoading {
     this.toast.success('موفق', response.data.Message);
   }
 
-  private async changeFpcActiveStatus(): Promise<void> {
-    if (this.fpcId.invalid) return;
-
-    const response = await this.fpcService.FPCChangeActiveStatus(
-      this.fpcId.value
-    );
-    if (!checkAndToastError(response, this.toast)) return;
-
-    if (this.cachedFpc) {
-      this.cachedFpc.Active = !this.cachedFpc.Active;
-    }
+  async changeFpcActiveStatus(_: boolean): Promise<void> {
+    if (this.loading() || this.fpcId.invalid) return;
+    await this.withLoading(async () => {
+      const response = await this.fpcService.FPCChangeActiveStatus(
+        this.fpcId.value
+      );
+      if (!checkAndToastError(response, this.toast)) return;
+      this.toast.success('موفق', response.data.Message);
+    });
   }
 
   private async loadFpcDetails(fpcId: number): Promise<void> {
@@ -165,8 +158,6 @@ export class FactoriesAndFreightFormComponent extends BaseLoading {
       email: data.EmailAddress,
       fpcActive: data.Active,
     });
-
-    this.cachedFpc = data;
   }
 
   private buildFpcInfo(): FPCInfo {
@@ -213,5 +204,13 @@ export class FactoriesAndFreightFormComponent extends BaseLoading {
 
   get fpcActive(): FormControl {
     return this.fpcForm.get('fpcActive') as FormControl;
+  }
+
+  isFormValidExcept<K extends keyof typeof this.fpcForm.controls>(
+    exceptControl: K
+  ): boolean {
+    return Object.keys(this.fpcForm.controls)
+      .filter((key) => key !== exceptControl)
+      .every((key) => this.fpcForm.get(key)?.valid);
   }
 }

@@ -20,7 +20,6 @@ import { TransportCompany } from 'app/services/transport-company-management/mode
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-switch-input/toggle-switch-input.component';
 import { AppTitles } from 'app/constants/Titles';
-import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-transport-companies-form',
@@ -59,14 +58,6 @@ export class TransportCompaniesFormComponent extends BaseLoading {
     Active: [true],
   });
 
-  override ngOnInit(): void {
-    this.Active.valueChanges
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((value) => {
-        if (value === null) return;
-        this.changeStatusTransportCompony(value);
-      });
-  }
   // === Search + Select Handling ===
   searchTransportCompony = async (query: string) => {
     const response =
@@ -117,7 +108,7 @@ export class TransportCompaniesFormComponent extends BaseLoading {
   // === Password Reset Handling ===
   confirmResetPassword(): void {
     this.confirmationService.confirm({
-      message: `آیا مطمئن هستید که می‌خواهید رمز عبور خود را تغییر دهید؟`,
+      message: `آیا می‌خواهید رمز عبور را تغییر دهید؟`,
       header: 'تغییر رمز عبور',
       icon: 'pi pi-exclamation-triangle',
       accept: async () => {
@@ -132,7 +123,7 @@ export class TransportCompaniesFormComponent extends BaseLoading {
   }
 
   private async resetTransportComponyPassword() {
-    if (this.loading() || this.TCId.invalid) return;
+    if (this.TCId.invalid) return;
     try {
       this.loadingService.setLoading(true);
       const response =
@@ -153,7 +144,7 @@ export class TransportCompaniesFormComponent extends BaseLoading {
     }
   }
 
-  private async changeStatusTransportCompony(value: boolean) {
+  async changeStatusTransportCompony(value: boolean) {
     if (this.loading() || this.TCId.invalid) return;
     this.withLoading(async () => {
       const response =

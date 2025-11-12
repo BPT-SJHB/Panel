@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ViewChild, viewChild } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { SearchInputComponent } from 'app/components/shared/inputs/search-input/search-input.component';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
@@ -21,6 +21,7 @@ import {
 import { Turn } from 'app/services/turn-management/model/turn.model';
 import { TurnAccounting } from 'app/services/turn-management/model/turn-accounting.model';
 import { AppConfirmService } from 'app/services/confirm/confirm.service';
+import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
 
 type TurnTableRow = Turn & {
   activate: string;
@@ -42,7 +43,12 @@ type TurnTableRow = Turn & {
   templateUrl: './turns-list-form.component.html',
   styleUrl: './turns-list-form.component.scss',
 })
-export class TurnsListFormComponent extends BaseLoading {
+export class TurnsListFormComponent
+  extends BaseLoading
+  implements OnViewActivated
+{
+  @ViewChild(SearchInputComponent) searchInput?: SearchInputComponent<void>;
+
   private readonly fb = inject(FormBuilder);
   private readonly truckManagerService = inject(Driver_TruckManagementService);
   private readonly turnManagerService = inject(TurnManagementService);
@@ -65,15 +71,14 @@ export class TurnsListFormComponent extends BaseLoading {
   // Table Columns
   readonly turnsCols: TableColumn<TurnTableRow>[] = [
     { header: 'شماره نوبت', field: 'OtaghdarTurnNumber' },
-    { header: 'تسلسل نوبت', field: 'SequentialTurnTitle' },
+    { header: 'صف نوبت', field: 'SequentialTurnTitle' },
     { header: 'تاریخ صدور', field: 'TurnIssueDate' },
     { header: 'زمان صدور', field: 'TurnIssueTime' },
     { header: 'راننده', field: 'TruckDriver' },
     { header: 'وضعیت نوبت', field: 'TurnStatusTitle' },
     { header: 'شرح', field: 'TurnStatusDescription' },
     { header: 'آخرین تغییرات', field: 'DateOfLastChanged' },
-    { header: 'صف نوبت', field: 'BillOfLadingNumber' },
-    { header: 'کاربر', field: 'SoftwareUserName' },
+    { header: 'بارنامه', field: 'BillOfLadingNumber' },
     {
       ...deleteCell.config,
       field: 'deactivate',
@@ -104,6 +109,15 @@ export class TurnsListFormComponent extends BaseLoading {
     { header: 'تراکنش', field: 'AccountingTypeTitle' },
     { header: 'کاربر', field: 'UserName' },
   ];
+
+  // --- life cycle ---
+  onViewActivated(): void {
+    if (this.smartCode.invalid) {
+      this.truckTurnsList.set([]);
+      return;
+    }
+    this.searchInput?.refreshSearch();
+  }
 
   // --- Search & Load ---
   searchTruckInformation = async (query: string) => {
