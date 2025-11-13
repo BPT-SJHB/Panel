@@ -26,6 +26,7 @@ import { mockLoadAllocationInfos } from './mock/load-allocation-info.mock';
 import { LoadAllocatedToNextTurn } from './model/load-allocated-to-next-turn.model';
 import { mockLoadAllocatedToNextTurn } from './mock/load-allocated-to-next-turn.mock';
 import { LoadAllocationPriority } from './model/load-allocation-priority';
+import { mockLoadAllocationRecords } from './mock/load-allocation-records';
 
 @Injectable({
   providedIn: 'root',
@@ -607,6 +608,24 @@ export class LoadManagementService {
       typeof bodyValue,
       LoadAllocatedToNextTurn
     >(apiUrl, bodyValue, mockLoadAllocatedToNextTurn);
+    //#endregion
+  }
+
+  public async GetRecordsOfLoadAllocation(): Promise<
+    ApiResponse<LoadAllocationInfo[]>
+  > {
+    //#region Consts
+    const apiUrl = API_ROUTES.LoadAllocationAPI.GetRecordsOfLoadAllocation;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoadAllocationInfo[]
+    >(apiUrl, bodyValue, mockLoadAllocationRecords);
     //#endregion
   }
 
