@@ -60,9 +60,8 @@ export class DriverLoadAllocationFormComponent
   /** Load allocations from the service */
   private async fetchLoadAllocations() {
     if (this.loading()) return;
-
     await this.withLoading(async () => {
-      const response = await this.loadService.GetLoadAllocationOfDriver();
+      const response = await this.loadService.GetRecordsOfLoadAllocation();
       if (!checkAndToastError(response, this.toast)) return;
 
       this.loadAllocations.set(response.data);
