@@ -196,6 +196,8 @@ export class CarouselFormComponent extends BaseLoading {
           this.toast.success('موفق', res.data.Message);
         }
       });
+
+      await this.refreshList();
     });
   }
 
