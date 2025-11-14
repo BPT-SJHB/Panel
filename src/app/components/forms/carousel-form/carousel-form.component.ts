@@ -280,7 +280,7 @@ export class CarouselFormComponent extends BaseLoading {
         await this.editCarousel();
       else await this.registerCarousel();
     });
-
+    this.isMainFormVisible = false;
     await this.refreshList();
   }
 
