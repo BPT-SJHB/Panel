@@ -1,4 +1,5 @@
 import { CarouselInfo } from '../model/carousel-info.model';
+import { mockCarouselPic } from './carousel-pic.mock';
 
 export const mockAllCarouselInfos: CarouselInfo[] = [
   {
@@ -10,6 +11,7 @@ export const mockAllCarouselInfos: CarouselInfo[] = [
     ShamsiDate: '1404/05/21',
     Time: '00:00:00',
     Active: true,
+    Picture: mockCarouselPic.Picture,
   },
   {
     CId: 2,
@@ -20,6 +22,7 @@ export const mockAllCarouselInfos: CarouselInfo[] = [
     ShamsiDate: '1404/05/21',
     Time: '00:00:00',
     Active: true,
+    Picture: mockCarouselPic.Picture,
   },
   {
     CId: 3,
@@ -30,6 +33,7 @@ export const mockAllCarouselInfos: CarouselInfo[] = [
     ShamsiDate: '1404/05/21',
     Time: '00:00:00',
     Active: true,
+    Picture: mockCarouselPic.Picture,
   },
   {
     CId: 4,
@@ -70,6 +74,7 @@ export const mockAllCarouselInfos: CarouselInfo[] = [
     ShamsiDate: '1404/05/22',
     Time: '20:47:00',
     Active: false,
+    Picture: mockCarouselPic.Picture,
   },
   {
     CId: 10006,
@@ -90,6 +95,7 @@ export const mockAllCarouselInfos: CarouselInfo[] = [
     ShamsiDate: '1404/07/15',
     Time: '08:52:37',
     Active: true,
+    Picture: mockCarouselPic.Picture,
   },
 ];
 
