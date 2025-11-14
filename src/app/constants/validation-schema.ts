@@ -294,6 +294,15 @@ export const ValidationSchema = {
     name: 'هزینه توقف اضافی',
     validators: [Validators.required, Validators.min(1)],
   },
+  URL: {
+    name: 'آدرس (URL)',
+    validators: [
+      Validators.required,
+      Validators.pattern(
+        /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/\S*)?$/
+      ),
+    ],
+  },
 };
 
 export type ValidationField = keyof typeof ValidationSchema;
