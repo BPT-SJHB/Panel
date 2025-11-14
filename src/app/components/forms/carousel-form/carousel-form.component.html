@@ -1,0 +1,91 @@
+<app-binary-radio-input
+  [control]="carouselRadio"
+  [enableColor]="false"
+  activeLabel="کاروسل‌های فعال"
+  disableLabel="همه کاروسل‌ها"
+></app-binary-radio-input>
+
+<h1 class="text-xl font-bold py-2 px-4">لیست کاروسل</h1>
+
+<app-table
+  (clickCaptionButton)="onNew()"
+  [enableCaptionButton]="true"
+  [columns]="columns"
+  [rows]="carousels()"
+></app-table>
+
+<!-- Picture Dialog -->
+<p-dialog
+  [(visible)]="isPicVisible"
+  header="تصویر کاروسل"
+  [modal]="true"
+  [style]="{ width: '40rem', maxWidth: '100%' }"
+  [maskStyle]="{ padding: '1rem' }"
+>
+  <div class="w-full h-full overflow-hidden">
+    <img
+      [src]="selectedPic()"
+      alt="تصویر کاروسل"
+      class="w-full h-full object-contain"
+    />
+  </div>
+</p-dialog>
+
+<!-- Main Form Dialog -->
+<p-dialog
+  [(visible)]="isMainFormVisible"
+  [modal]="true"
+  [header]="dialogTitle()"
+  [style]="{ width: '40rem', maxWidth: '100%' }"
+  [maskStyle]="{ padding: '1rem' }"
+>
+  <div class="grid grid-cols-1 gap-3">
+    <app-text-input
+      label="شناسه"
+      validationField="id"
+      [control]="ctrl('carouselId')"
+      [readOnly]="true"
+      [addonWidth]="addonWidth"
+    ></app-text-input>
+
+    <app-text-input
+      label="عنوان"
+      placeholder="عنوان"
+      validationField="title"
+      [control]="ctrl('title')"
+      [addonWidth]="addonWidth"
+    ></app-text-input>
+
+    <app-text-input
+      label="آدرس (URL)"
+      placeholder="آدرس (URL)"
+      validationField="URL"
+      [control]="ctrl('url')"
+      [addonWidth]="addonWidth"
+    ></app-text-input>
+
+    <app-text-input
+      label="توضیحات"
+      placeholder="توضیحات"
+      validationField="description"
+      [control]="ctrl('description')"
+      [addonWidth]="addonWidth"
+    ></app-text-input>
+
+    <app-files-upload-input
+      [fileLimit]="1"
+      accept="image/*"
+      [maxFileSize]="1024 * 1024"
+      [uploadFn]="uploadImage"
+      (removeUploadFile)="ctrl('picture').reset()"
+    ></app-files-upload-input>
+
+    <app-button
+      class="w-full flex justify-end px-5 py-2"
+      styleClass="w-32"
+      [label]="dialogFormType() === DialogFormType.REGISTER ? 'ثبت' : 'ویرایش'"
+      (click)="registerOrEdit()"
+      [disabled]="loading() || carouselForm.invalid"
+    />
+  </div>
+</p-dialog>
