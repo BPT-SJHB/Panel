@@ -18,6 +18,8 @@ export const API_ROUTES = {
     AuthUser: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}AuthUser`,
     SessionChecker: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}IsSessionLive`,
     GetWebProcesses: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}GetWebProcesses`,
+    GetTaskBarWebProcesses: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}GetTaskBarWebProcesses`,
+    GetVeyUsefulWebProcesses: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}GetVeyUsefulWebProcesses`,
     GetUserOfSession: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}GetSessionSoftwareUser`,
     GetVirtualWallet: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}GetVirtualMoneyWallet`,
     UserManagement: {
