@@ -35,6 +35,7 @@ import {
   fileToBase64Raw,
 } from 'app/utils/image.utils';
 import { uuidV4 } from 'app/utils/uuid';
+import { ProgressSpinner } from 'primeng/progressspinner';
 
 // ---------------------
 // Types
@@ -50,6 +51,12 @@ enum DialogFormType {
   EDIT,
 }
 
+interface SelectedImage {
+  src: string;
+  alt: string;
+  loaded: boolean;
+  hasError: boolean;
+}
 // ---------------------
 // Component
 // ---------------------
@@ -63,6 +70,7 @@ enum DialogFormType {
     BinaryRadioInputComponent,
     FilesUploadInputComponent,
     ButtonComponent,
+    ProgressSpinner,
   ],
   templateUrl: './carousel-form.component.html',
   styleUrls: ['./carousel-form.component.scss'],
@@ -84,7 +92,7 @@ export class CarouselFormComponent extends BaseLoading {
   // Signals & State
   // ---------------------
   readonly carousels = signal<CarouselInfoRow[]>([]);
-  readonly selectedPic = signal<string>('');
+  readonly selectedPic = signal<SelectedImage | null>(null);
   readonly carouselRadio = new FormControl(true);
   readonly dialogFormType = signal<DialogFormType>(DialogFormType.REGISTER);
   readonly dialogTitle = signal<string>('ثبت کاروسل');
@@ -114,7 +122,7 @@ export class CarouselFormComponent extends BaseLoading {
       field: 'picIcon',
       type: TableColumnType.BUTTON_ICON,
       class: editCell.config.class,
-      onAction: (row) => this.showPicture(row.Picture),
+      onAction: (row) => this.showPicture(row),
     },
     {
       ...editCell.config,
@@ -134,9 +142,9 @@ export class CarouselFormComponent extends BaseLoading {
   readonly carouselForm = this.fb.group({
     carouselId: this.fb.control<number | null>(null),
     title: this.fb.nonNullable.control('', ValidationSchema.title),
-    url: this.fb.nonNullable.control('', ValidationSchema.URL),
+    url: this.fb.nonNullable.control('', ValidationSchema.URL.validators[1]),
     description: this.fb.nonNullable.control('', ValidationSchema.description),
-    picture: this.fb.nonNullable.control('', Validators.required),
+    picture: this.fb.nonNullable.control(''),
   });
 
   // ---------------------
@@ -201,14 +209,26 @@ export class CarouselFormComponent extends BaseLoading {
     });
   }
 
-  showPicture(picture?: string): void {
-    if (!picture) {
-      this.toast.warn('خطا', 'تصویر در دسترس نمی‌باشد.');
+  showPicture(row: CarouselInfo): void {
+    let src = row.URL;
+
+    if (row.Picture) {
+      src = `data:${detectImageMime(row.Picture)};base64,${row.Picture}`;
+      this.isPicVisible = true;
+    }
+
+    if (src) {
+      this.selectedPic.set({
+        src: src,
+        alt: row.CTitle,
+        hasError: false,
+        loaded: false,
+      });
+      this.isPicVisible = true;
       return;
     }
 
-    this.selectedPic.set(`data:${detectImageMime(picture)};base64,${picture}`);
-    this.isPicVisible = true;
+    this.toast.warn('خطا', 'تصویر در دسترس نمی‌باشد.');
   }
 
   onNew(): void {
@@ -273,13 +293,14 @@ export class CarouselFormComponent extends BaseLoading {
   }
 
   async registerOrEdit() {
-    if (this.loading() || this.carouselForm.invalid) return;
+    if (this.loading() || this.isFormInvalid()) return;
 
     await this.withLoading(async () => {
       if (this.dialogFormType() === DialogFormType.EDIT)
         await this.editCarousel();
       else await this.registerCarousel();
     });
+
     this.isMainFormVisible = false;
     await this.refreshList();
   }
@@ -324,5 +345,42 @@ export class CarouselFormComponent extends BaseLoading {
   private async refreshList() {
     if (this.carouselRadio.value) await this.loadActiveCarousels();
     else await this.loadAllCarousels();
+  }
+
+  isFormInvalid() {
+    if (this.carouselForm.invalid) return true;
+
+    const isUrlInvalid =
+      this.ctrl('url').invalid || this.ctrl('url').value?.trim() === '';
+    const isPictureInvalid =
+      this.ctrl('picture').invalid || !this.ctrl('picture').value;
+
+    return isUrlInvalid && isPictureInvalid;
+  }
+
+  onImgError(event: Event) {
+    const img = event.target as HTMLImageElement;
+    this.toast.error('خطا', 'تصویر مورد نظر در دسترس نمی باشد.');
+
+    const selectedPic = this.selectedPic();
+    if (!selectedPic) return;
+
+    this.selectedPic.update((_) => ({
+      ...selectedPic,
+      loaded: true,
+      hasError: true,
+    }));
+
+    img.onerror = null;
+  }
+
+  onImageLoad() {
+    const selectedPic = this.selectedPic();
+    if (!selectedPic) return;
+
+    this.selectedPic.update((_) => ({
+      ...selectedPic,
+      loaded: true,
+    }));
   }
 }
