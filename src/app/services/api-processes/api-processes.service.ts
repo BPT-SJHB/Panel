@@ -54,7 +54,61 @@ export class ApiProcessesService {
         name: proc.PName!,
         description: proc.Description!,
         icon: proc.PIconName!,
+        foreColor: proc.ForeColor ?? 'green',
+        backColor: proc.BackColor ?? 'green',
       })),
     }));
+  }
+
+  public async getTaskBarWebProcesses(): Promise<ApiResponse<PageGroup[]>> {
+    const api = API_ROUTES.SoftwareUserAPI.GetTaskBarWebProcesses;
+    //#region Consts
+    const bodyValue = {
+      sessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ApiGroupProcess[]
+    >(api, bodyValue, mockApiGroupProcesses);
+    //#endregion
+
+    //#region Return
+    const pageGroups = this.convertApiGroupsToPageGroups(response.data ?? []);
+
+    return {
+      success: response.success,
+      data: pageGroups ?? [],
+      error: response.error,
+    };
+    //#endregion
+  }
+
+  public async getVeyUsefulWebProcesses(): Promise<ApiResponse<PageGroup[]>> {
+    const api = API_ROUTES.SoftwareUserAPI.GetVeyUsefulWebProcesses;
+    //#region Consts
+    const bodyValue = {
+      sessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ApiGroupProcess[]
+    >(api, bodyValue, mockApiGroupProcesses);
+    //#endregion
+
+    //#region Return
+    const pageGroups = this.convertApiGroupsToPageGroups(response.data ?? []);
+
+    return {
+      success: response.success,
+      data: pageGroups ?? [],
+      error: response.error,
+    };
+    //#endregion
   }
 }
