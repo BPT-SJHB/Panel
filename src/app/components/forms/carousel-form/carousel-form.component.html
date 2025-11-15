@@ -8,10 +8,10 @@
 <h1 class="text-xl font-bold py-2 px-4">لیست کاروسل</h1>
 
 <app-table
-  (clickCaptionButton)="onNew()"
-  [enableCaptionButton]="true"
   [columns]="columns"
   [rows]="carousels()"
+  [enableCaptionButton]="true"
+  (clickCaptionButton)="onNew()"
 ></app-table>
 
 <!-- Picture Dialog -->
@@ -22,13 +22,29 @@
   [style]="{ width: '40rem', maxWidth: '100%' }"
   [maskStyle]="{ padding: '1rem' }"
 >
-  <div class="w-full h-full overflow-hidden">
-    <img
-      [src]="selectedPic()"
-      alt="تصویر کاروسل"
-      class="w-full h-full object-contain"
-    />
-  </div>
+  @if (isPicVisible && selectedPic()) {
+    <div class="w-full h-full overflow-hidden">
+      @if (!selectedPic()?.loaded && !selectedPic()?.hasError) {
+        <div class="w-full h-30 flex items-center justify-center">
+          <p-progressSpinner strokeWidth="4" animationDuration=".8s" />
+        </div>
+      }
+
+      @if (!selectedPic()?.hasError) {
+        <img
+          [src]="selectedPic()?.src"
+          [alt]="selectedPic()?.alt"
+          class="w-full h-full object-contain"
+          (error)="onImgError($event)"
+          (load)="onImageLoad()"
+        />
+      }
+
+      @if (selectedPic()?.hasError) {
+        <div class="text-red-400 text-center py-3">خطا در بارگزاری تصویر</div>
+      }
+    </div>
+  }
 </p-dialog>
 
 <!-- Main Form Dialog -->
@@ -43,11 +59,11 @@
     <app-text-input
       label="شناسه"
       validationField="id"
+      type="number"
       [control]="ctrl('carouselId')"
       [readOnly]="true"
-      type="number"
       [addonWidth]="addonWidth"
-    ></app-text-input>
+    />
 
     <app-text-input
       label="عنوان"
@@ -55,7 +71,7 @@
       validationField="title"
       [control]="ctrl('title')"
       [addonWidth]="addonWidth"
-    ></app-text-input>
+    />
 
     <app-text-input
       label="آدرس (URL)"
@@ -64,7 +80,7 @@
       [control]="ctrl('url')"
       language="en"
       [addonWidth]="addonWidth"
-    ></app-text-input>
+    />
 
     <app-text-input
       label="توضیحات"
@@ -72,7 +88,7 @@
       validationField="description"
       [control]="ctrl('description')"
       [addonWidth]="addonWidth"
-    ></app-text-input>
+    />
 
     <app-files-upload-input
       [fileLimit]="1"
@@ -80,14 +96,14 @@
       [maxFileSize]="1024 * 1024"
       [uploadFn]="uploadImage"
       (removeUploadFile)="ctrl('picture').reset()"
-    ></app-files-upload-input>
+    />
 
     <app-button
       class="w-full flex justify-end px-5 py-2"
       styleClass="w-32"
       [label]="dialogFormType() === DialogFormType.REGISTER ? 'ثبت' : 'ویرایش'"
+      [disabled]="loading() || isFormInvalid()"
       (click)="registerOrEdit()"
-      [disabled]="loading() || carouselForm.invalid"
-    />
+    ></app-button>
   </div>
 </p-dialog>
