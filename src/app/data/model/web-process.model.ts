@@ -1,7 +1,9 @@
 export interface WebProcess {
-  id:number;
+  id: number;
   title: string;
   name: string;
   description: string;
   icon: string;
+  backColor: string;
+  foreColor: string;
 }
