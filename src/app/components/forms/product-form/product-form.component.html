@@ -1,7 +1,10 @@
 <app-tree-table-checkbox
   [tree]="products"
-  [cols]="['فعال/غیرفعال']"
-  [rows]="[['ProductTypeTitle', 'ProductTitle']]"
+  [cols]="['فعال/غیرفعال', 'شناسه']"
+  [rows]="[
+    ['ProductTypeTitle', 'ProductTitle'],
+    ['ProductTypeId', 'ProductId'],
+  ]"
   [enabledSearch]="true"
   [searchFields]="['ProductTitle', 'ProductTypeTitle']"
   [paginator]="true"
