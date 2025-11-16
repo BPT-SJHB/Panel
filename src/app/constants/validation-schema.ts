@@ -298,7 +298,10 @@ export const ValidationSchema = {
     name: 'آدرس (URL)',
     validators: [
       Validators.required,
-      Validators.pattern(/^(https?:\/\/)?([a-z0-9-]+\.)+[a-z]{2,}(\/\S*)?$/i),
+
+      Validators.pattern(
+        /^(https?:\/\/)?((([a-z0-9-]+\.)+[a-z]{2,})|(\d{1,3}(\.\d{1,3}){3}))(:\d{1,5})?(\/\S*)?$/i
+      ),
     ],
   },
 };
