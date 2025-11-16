@@ -89,10 +89,13 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     return productTypes.map((pt) => ({
       data: {
         ProductTypeId: pt.ProductTypeId,
-        ProductTypeTitle: pt.ProductTypeTitle,
+        ProductTypeTitle: `${pt.ProductTypeTitle}-${pt.ProductTypeId}`,
         ProductTypeActive: pt.ProductTypeActive,
       },
-      children: pt.Products?.map((p) => ({ data: p })) ?? [],
+      children:
+        pt.Products?.map((p) => ({
+          data: { ...p, ProductTitle: `${p.ProductTitle}-${p.ProductId}` },
+        })) ?? [],
     }));
   }
 
