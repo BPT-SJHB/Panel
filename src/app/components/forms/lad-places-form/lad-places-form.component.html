@@ -4,6 +4,7 @@
   [itemMatchesQuery]="filterLADPlace"
   (searchResult)="handelSearchLADPlaces($event)"
   [minSearchLength]="2"
+  [enableCaching]="false"
   [control]="searchFiledControl"
   [disableSearchButton]="searchFiledControl.invalid"
 />
