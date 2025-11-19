@@ -9,7 +9,6 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { Card } from 'primeng/card';
 import { WebProcess } from 'app/data/model/web-process.model';
 import { Store } from '@ngrx/store';
-import { delay, from } from 'rxjs';
 import { TabComponentKey } from 'app/constants/tab-component-registry';
 import { createTab } from 'app/store/tab/tab.actions';
 import { SkeletonModule } from 'primeng/skeleton';
@@ -19,7 +18,6 @@ import { checkAndToastError } from 'app/utils/api-utils';
 import { BackColor, ForeColor } from 'app/constants/ui/color.ui';
 import { CarouselManagementService } from 'app/services/carousel-management/carousel-management.service';
 import { detectImageMime } from 'app/utils/image.utils';
-import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-main-tab',
