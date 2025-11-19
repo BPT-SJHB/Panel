@@ -16,6 +16,7 @@
 
 <!-- Picture Dialog -->
 <p-dialog
+  id="carouselPicDialog"
   [(visible)]="isPicVisible"
   header="تصویر کاروسل"
   [modal]="true"
@@ -35,7 +36,6 @@
           [src]="selectedPic()?.src"
           [alt]="selectedPic()?.alt"
           class="w-full h-full object-contain"
-          (error)="onImgError($event)"
           (load)="onImageLoad()"
         />
       }
