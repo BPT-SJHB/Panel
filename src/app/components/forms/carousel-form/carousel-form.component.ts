@@ -36,6 +36,7 @@ import {
 } from 'app/utils/image.utils';
 import { uuidV4 } from 'app/utils/uuid';
 import { ProgressSpinner } from 'primeng/progressspinner';
+import { CheckIcon } from 'primeng/icons';
 
 // ---------------------
 // Types
@@ -209,26 +210,37 @@ export class CarouselFormComponent extends BaseLoading {
     });
   }
 
-  showPicture(row: CarouselInfo): void {
-    let src = row.URL;
+  async showPicture(row: CarouselInfo) {
+    const selectedPic = {
+      src: '',
+      loaded: false,
+      alt: '',
+      hasError: false,
+    };
 
-    if (row.Picture) {
-      src = `data:${detectImageMime(row.Picture)};base64,${row.Picture}`;
-      this.isPicVisible = true;
-    }
+    this.selectedPic.set(selectedPic);
 
-    if (src) {
+    this.isPicVisible = true;
+    const response = await this.carouselService.GetCarouselPic(row.CId);
+
+    if (!checkAndToastError(response, this.toast)) {
       this.selectedPic.set({
-        src: src,
+        ...selectedPic,
+        loaded: true,
+        hasError: true,
         alt: row.CTitle,
-        hasError: false,
-        loaded: false,
       });
-      this.isPicVisible = true;
       return;
     }
 
-    this.toast.warn('خطا', 'تصویر در دسترس نمی‌باشد.');
+    const pic = response.data.Picture;
+    this.selectedPic.set({
+      ...selectedPic,
+      loaded: true,
+      hasError: false,
+      alt: row.CTitle,
+      src: `data:${detectImageMime(pic)};base64,${pic}`,
+    });
   }
 
   onNew(): void {
@@ -356,22 +368,6 @@ export class CarouselFormComponent extends BaseLoading {
       this.ctrl('picture').invalid || !this.ctrl('picture').value;
 
     return isUrlInvalid && isPictureInvalid;
-  }
-
-  onImgError(event: Event) {
-    const img = event.target as HTMLImageElement;
-    this.toast.error('خطا', 'تصویر مورد نظر در دسترس نمی باشد.');
-
-    const selectedPic = this.selectedPic();
-    if (!selectedPic) return;
-
-    this.selectedPic.update((_) => ({
-      ...selectedPic,
-      loaded: true,
-      hasError: true,
-    }));
-
-    img.onerror = null;
   }
 
   onImageLoad() {
