@@ -158,9 +158,11 @@ export class SearchInputComponent<T> implements OnInit, OnDestroy, OnChanges {
   /**
    * Exposed method to manually force refresh search results.
    */
-  refreshSearch(): Promise<T[]> {
+  async refreshSearch(): Promise<T[]> {
     const query = this.control.value ?? '';
-    return this.performSearch(query, true);
+    const results = await this.performSearch(query, true);
+    this.searchResult.emit(results);
+    return results;
   }
 
   /**

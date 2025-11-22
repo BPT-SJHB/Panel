@@ -175,7 +175,7 @@ export class LadPlacesFormComponent
 
   async onNew() {
     if (this.loading()) return;
-    this.formMode.set(LADPlaceFormMode.EDITABLE);
+    this.formMode.set(LADPlaceFormMode.REGISTER);
     this.cashedLadPlace = this.extractLadPlaceFromForm();
     this.headerTitle = 'افزودن مبدا و مقصد حمل بار';
     this.formDialogVisible = true;

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, signal } from '@angular/core';
+import { Component, input, Input, OnInit, signal } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
 import { SkeletonModule } from 'primeng/skeleton';
 
@@ -9,8 +9,8 @@ import { SkeletonModule } from 'primeng/skeleton';
   styleUrl: './carousel.component.scss',
 })
 export class CarouselComponent implements OnInit {
-  @Input() images = signal<{ title: string; imgLink: string }[]>([]);
-  @Input() enableSkeleton: boolean = false;
+  readonly images = input<{ title: string; src: string }[]>([]);
+  @Input() enableSkeleton = false;
 
   screenSize = signal(0);
   skeletonNumber = signal(0);

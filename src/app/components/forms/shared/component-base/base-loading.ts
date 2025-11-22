@@ -15,8 +15,8 @@ export abstract class BaseLoading implements OnDestroy, OnInit {
   ngOnInit(): void {
     this.loadingService.loading$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((value) => {
-        this.loading.set(value);
+      .subscribe((_) => {
+        // this.loading.set(value);
       });
   }
 
@@ -43,12 +43,15 @@ export abstract class BaseLoading implements OnDestroy, OnInit {
     if (this.activeRequests === 1) {
       this.loadingService.setLoading(true);
     }
+
+    this.loading.set(true);
   }
 
   private endLoading() {
     this.activeRequests = Math.max(0, this.activeRequests - 1);
     if (this.activeRequests === 0) {
       this.loadingService.setLoading(false);
+      this.loading.set(false);
     }
   }
 }

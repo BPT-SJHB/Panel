@@ -8,7 +8,7 @@ export class AppConfirmService {
   // حذف
   confirmDelete(itemName: string, accept: () => void) {
     this.confirmationService.confirm({
-      header: 'تأیید حذف بار',
+      header: 'تأیید حذف',
       message: `آیا از حذف ${itemName} اطمینان دارید؟`,
       icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'تایید',
@@ -165,6 +165,37 @@ export class AppConfirmService {
       acceptLabel: config.acceptLabel,
       rejectLabel: 'انصراف',
       acceptButtonProps: { severity: config.acceptSeverity },
+      rejectButtonProps: { severity: 'secondary' },
+      accept,
+    });
+  }
+
+  confirmStatusChange(
+    action: 'activate' | 'deactivate',
+    itemName: string,
+    accept: () => void
+  ) {
+    const isActivate = action === 'activate';
+
+    const header = isActivate ? 'تأیید فعال‌سازی' : 'تأیید غیرفعال‌سازی';
+
+    const message = `آیا از ${
+      isActivate ? 'فعال‌سازی' : 'غیرفعال‌سازی'
+    } <b><u>${itemName}</u></b> مطمئن هستید؟`;
+
+    const icon = isActivate ? 'pi pi-check-circle' : 'pi pi-ban';
+
+    const acceptLabel = isActivate ? 'فعال‌سازی' : 'غیرفعال‌سازی';
+
+    const acceptSeverity = isActivate ? ('info' as const) : ('danger' as const);
+
+    this.confirmationService.confirm({
+      header,
+      message,
+      icon,
+      acceptLabel,
+      rejectLabel: 'انصراف',
+      acceptButtonProps: { severity: acceptSeverity },
       rejectButtonProps: { severity: 'secondary' },
       accept,
     });

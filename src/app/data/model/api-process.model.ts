@@ -5,4 +5,6 @@ export interface ApiProcess {
   PName?: string;
   Description?: string;
   PAccess?: boolean;
+  BackColor?: string;
+  ForeColor?: string;
 }

@@ -15,7 +15,7 @@
       <div class="shrink-0">
         <app-tab-manager />
       </div>
-      <div class="overflow-y-auto flex-1 mb-22 lg:mb-0" dir="ltr">
+      <div class="overflow-y-auto flex-1 mb-20 lg:mb-0" dir="ltr">
         <app-dashboard-content-manager dir="rtl" />
       </div>
     </section>
@@ -24,8 +24,8 @@
   <app-support-button class="hidden lg:block"></app-support-button>
 
   <!-- Footer -->
-  <footer [class]="layoutUi.headerHeight" class="shrink-0">
-    <app-mobile-tab-bar class="lg:hidden" />
+  <footer [class]="layoutUi.headerHeight + ' bg-transparent'" class="shrink-0">
+    <app-mobile-tab-bar class="lg:hidden bg-transparent" />
     <app-footer class="w-full hidden lg:block" />
   </footer>
 

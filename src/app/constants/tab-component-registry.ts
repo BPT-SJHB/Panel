@@ -52,7 +52,7 @@ import { TrafficAndParkingTariffFormComponent } from 'app/components/forms/traff
 import { ParkingTrafficRecordsFormComponent } from 'app/components/forms/traffic-management-forms/parking-traffic-records-form/parking-traffic-records-form.component';
 import { TrafficCardTypeFormComponent } from 'app/components/forms/traffic-management-forms/traffic-card-type-form/traffic-card-type-form.component';
 import { TrafficEntriesFormComponent } from 'app/components/forms/traffic-management-forms/traffic-entries-form/traffic-entries-form.component';
-import { TrafficManagementService } from 'app/services/traffic-management/traffic-management.service';
+import { CarouselFormComponent } from 'app/components/forms/carousel-form/carousel-form.component';
 
 export enum TabComponentKey {
   Main = -1,
@@ -60,6 +60,9 @@ export enum TabComponentKey {
   // 📋 User & Profile
   UserManagement = 0,
   UserProfileManagement = 22,
+
+  // Carousel
+  CarouselManagement = 2,
 
   // 🚚 Truck/Driver
   TruckDriverManagement = 1,
@@ -137,6 +140,16 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       {
         title: 'صفحه اصلی',
         component: MainViewComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.CarouselManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: 'کاروسل',
+        component: CarouselFormComponent,
       },
     ],
   },

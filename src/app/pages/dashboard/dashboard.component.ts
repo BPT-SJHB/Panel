@@ -17,7 +17,6 @@ import { SupportButtonComponent } from 'app/components/shared/support-button/sup
 
 // Services
 import { ApiProcessesService } from 'app/services/api-processes/api-processes.service';
-import { ToastService } from 'app/services/toast-service/toast.service';
 
 // Constants and utilities
 import { LayoutConfig } from 'app/constants/ui/layout.ui';
@@ -32,9 +31,10 @@ import { WebProcess } from 'app/data/model/web-process.model';
 import { PageGroupItem } from 'app/data/model/menu-item.model';
 
 // RxJS
-import { Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs';
 import { MobileTabBarComponent } from 'app/components/shared/layout/mobile-tab-bar/mobile-tab-bar.component';
 import { ExitConfirmationDialogComponent } from 'app/components/shared/exit-confirmation-dialog/exit-confirmation-dialog.component';
+import { BaseLoading } from 'app/components/forms/shared/component-base/base-loading';
 
 @Component({
   selector: 'app-dashboard',
@@ -53,7 +53,7 @@ import { ExitConfirmationDialogComponent } from 'app/components/shared/exit-conf
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
-export class DashboardComponent implements AfterViewInit {
+export class DashboardComponent extends BaseLoading implements AfterViewInit {
   // ViewChild references to content manager and tab manager
   @ViewChild(DashboardContentManagerComponent)
   contentManagerComponent!: DashboardContentManagerComponent;
@@ -65,12 +65,8 @@ export class DashboardComponent implements AfterViewInit {
   readonly layoutUi = LayoutConfig;
 
   // Services
-  private toast = inject(ToastService);
   private store = inject(Store);
   private apiProcessesService = inject(ApiProcessesService);
-
-  // Subscription to selected page group
-  private pageGroupSub?: Subscription;
 
   // Component state
   webProcesses: WebProcess[] = [];
@@ -79,7 +75,8 @@ export class DashboardComponent implements AfterViewInit {
   /**
    * OnInit lifecycle hook
    */
-  async ngOnInit(): Promise<void> {
+  override async ngOnInit(): Promise<void> {
+    super.ngOnInit();
     await this.setupDashboard();
   }
 
@@ -91,8 +88,9 @@ export class DashboardComponent implements AfterViewInit {
     this.tabManagerComponent.contentManager.set(this.contentManagerComponent);
 
     // Subscribe to selected page group and update web processes
-    this.pageGroupSub = this.store
+    this.store
       .select(selectSelectedPageGroup)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((page) => {
         if (!page) return;
         this.webProcesses = page.processes;
@@ -100,43 +98,38 @@ export class DashboardComponent implements AfterViewInit {
   }
 
   /**
-   * OnDestroy lifecycle hook
-   */
-  ngOnDestroy(): void {
-    this.pageGroupSub?.unsubscribe();
-  }
-
-  /**
    * Setup the dashboard: check auth, load processes, update store and menu items
    */
   private async setupDashboard(): Promise<void> {
-    // Load API processes
-    const res = await this.apiProcessesService.getApiProcesses();
+    await this.withLoading(async () => {
+      // Load API processes
+      const res = await this.apiProcessesService.getApiProcesses();
 
-    // Show error toast if needed
-    if (!checkAndToastError(res, this.toast)) return;
+      // Show error toast if needed
+      if (!checkAndToastError(res, this.toast)) return;
 
-    // Update NgRx store with loaded page groups
-    this.store.dispatch(setPageGroups({ groups: res.data }));
+      // Update NgRx store with loaded page groups
+      this.store.dispatch(setPageGroups({ groups: res.data }));
 
-    // Build menu items from page groups
+      // Build menu items from page groups
 
-    this.pageGroups = [
-      {
-        id: -1,
-        icon: 'pi-home',
-        label: 'صفحه اصلی',
-        command: () => {},
-      },
-    ];
+      this.pageGroups = [
+        {
+          id: -1,
+          icon: 'pi-home',
+          label: 'صفحه اصلی',
+          command: () => {},
+        },
+      ];
 
-    res.data.map((pg) =>
-      this.pageGroups.push({
-        id: pg.id,
-        label: pg.title,
-        icon: pg.icon,
-        command: () => {},
-      })
-    );
+      res.data.map((pg) =>
+        this.pageGroups.push({
+          id: pg.id,
+          label: pg.title,
+          icon: pg.icon,
+          command: () => {},
+        })
+      );
+    });
   }
 }
