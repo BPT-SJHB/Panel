@@ -5,6 +5,7 @@ const walletAndTrafficPort = 83;
 const LoadCapacitorPort = 84;
 const LoadAllocationPort = 85;
 const ReportsPort = 86;
+const KernelTasksPort = 88;
 const TrafficPort = 91;
 const ticketPort = 8080;
 const ticketUrl = 'http://localhost';
@@ -275,5 +276,11 @@ export const API_ROUTES = {
     GetTrafficCosts: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}GetTrafficCosts`,
     GetTrafficRecords: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}GetTrafficRecords`,
     RegisterTraffic: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}RegisteringTraffic`,
+  },
+  KernelTasksAPI: {
+    GetAllOfLoadAnnouncementConfig: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}GetAllConfigurationOfLoadAnnouncement`,
+    DeleteLoadAnnouncementConfig: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}ConfigurationOfLoadAnnouncementDeleting`,
+    RegisterLoadAnnouncementConfig: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}ConfigurationOfLoadAnnouncementRegistering`,
+    EditLoadAnnouncementConfig: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}ConfigurationOfLoadAnnouncementEditing`,
   },
 };
