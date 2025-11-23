@@ -57,4 +57,23 @@ export class ConfigManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  public async RegisterLoadAnnouncementConfig(
+    configInfo: LoadAnnouncementConfig
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.KernelTasksAPI.RegisterLoadAnnouncementConfig;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      RawConfigurationOfLoadAnnouncement: configInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
