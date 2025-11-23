@@ -35,4 +35,26 @@ export class ConfigManagementService {
     >(apiUrl, bodyValue, mockLoadAnnouncementConfigs);
     //#endregion
   }
+
+  public async DeleteLoadAnnouncementConfig(
+    deleteInfo: DeleteInfoOfLoadAnnouncementConfig
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.KernelTasksAPI.DeleteLoadAnnouncementConfig;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      COLAId: deleteInfo.COLAId,
+      COLAIndex: deleteInfo.COLAIndex,
+      AnnouncementId: deleteInfo.AnnouncementId,
+      AnnouncementSGId: deleteInfo.AnnouncementSGId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
 }
