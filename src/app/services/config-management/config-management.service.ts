@@ -17,4 +17,22 @@ import { mockShortResponse } from 'app/data/mock/short-response.mock';
 export class ConfigManagementService {
   private userAuth = inject(UserAuthService);
   private apiCommunicator = inject(APICommunicationManagementService);
+
+  public async GetAllOfLoadAnnouncementConfig(): Promise<
+    ApiResponse<LoadAnnouncementConfig[]>
+  > {
+    //#region Consts
+    const apiUrl = API_ROUTES.KernelTasksAPI.GetAllOfLoadAnnouncementConfig;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoadAnnouncementConfig[]
+    >(apiUrl, bodyValue, mockLoadAnnouncementConfigs);
+    //#endregion
+  }
 }
