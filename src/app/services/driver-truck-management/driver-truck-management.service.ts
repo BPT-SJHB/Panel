@@ -14,7 +14,6 @@ import {
 } from 'app/services/driver-truck-management/model/truck-info.model';
 import { TruckNativenessInfo } from 'app/services/driver-truck-management/model/truck-nativeness-info.model';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
-import { ErrorCodes } from 'app/constants/error-messages';
 import { mockTruckDriverInfo } from 'app/services/driver-truck-management/mock/truck-driver-info.model';
 import { mockShortResponse } from 'app/data/mock/short-response.mock';
 import { mockAPIUsernamePassword } from 'app/data/mock/username-password.mock';
@@ -54,7 +53,7 @@ export class Driver_TruckManagementService {
     //#endregion
 
     //#region Request + Return
-    var response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    let response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TruckDriverInfo
     >(localApiUrl, bodyValue, mockTruckDriverInfo);
@@ -149,7 +148,7 @@ export class Driver_TruckManagementService {
     //#endregion
 
     //#region Request
-    var response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       APIUsernamePassword
     >(apiUrl, bodyValue, mockAPIUsernamePassword);
@@ -159,8 +158,8 @@ export class Driver_TruckManagementService {
     return {
       success: response.success,
       data: {
-        Username: response.data?.UserShenaseh!,
-        Password: response.data?.UserPassword!,
+        Username: response.data?.UserShenaseh ?? '',
+        Password: response.data?.UserPassword ?? '',
       },
       error: response.error,
     };
@@ -210,7 +209,7 @@ export class Driver_TruckManagementService {
     //#endregion
 
     //#region Request + Return
-    var response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    let response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TruckInfo
     >(localApiUrl, bodyValue, mockTruckInfo);
