@@ -92,7 +92,10 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         ProductTypeTitle: pt.ProductTypeTitle,
         ProductTypeActive: pt.ProductTypeActive,
       },
-      children: pt.Products?.map((p) => ({ data: p })) ?? [],
+      children:
+        pt.Products?.map((p) => ({
+          data: p,
+        })) ?? [],
     }));
   }
 

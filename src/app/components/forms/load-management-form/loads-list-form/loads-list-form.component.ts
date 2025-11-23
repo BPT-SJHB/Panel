@@ -1,4 +1,11 @@
-import { Component, inject, signal, WritableSignal } from '@angular/core';
+import {
+  Component,
+  effect,
+  inject,
+  signal,
+  ViewChild,
+  WritableSignal,
+} from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 import { SearchAutoCompleteFactoryComponent } from 'app/components/shared/inputs/search-auto-complete-factory/search-auto-complete-factory.component';
@@ -22,10 +29,6 @@ import {
   AutoCompleteType,
 } from 'app/services/auto-complete-config-factory/auto-complete-config-factory.service';
 import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
-import {
-  LoadForTransportCompanies_Factories_Admins_Drivers,
-  LoadInfoForTransportCompanies_Factories_Admins_Drivers,
-} from 'app/services/load-management/model/load-info-for-transport-companies-factories-admins-drivers.model';
 import { AppTitles } from 'app/constants/Titles';
 
 interface LoadFilter {
@@ -73,10 +76,6 @@ export enum LoadListType {
   FACTORIES_PRODUCTION_CENTERS = 'FACTORIES_PRODUCTION_CENTERS',
 }
 
-type LoadList =
-  | LoadInfoForTransportCompanies_Factories_Admins_Drivers
-  | LoadForTransportCompanies_Factories_Admins_Drivers;
-
 @Component({
   selector: 'app-loads-list-form',
   imports: [
@@ -93,8 +92,10 @@ export class LoadsListFormComponent
   extends BaseLoading
   implements OnViewActivated
 {
+  @ViewChild(TableComponent) table?: TableComponent<LoadInfo>;
+
   readonly loadType: LoadListType = LoadListType.TRANSPORT_COMPANY;
-  readonly addonWidth = '10rem';
+  readonly addonWidth = '8rem';
   readonly appTitle = AppTitles;
 
   sharedSignal!: WritableSignal<null | LoadInfo>;
@@ -224,6 +225,14 @@ export class LoadsListFormComponent
     ),
   ];
 
+  constructor() {
+    super();
+    effect(() => {
+      if (this.sharedSignal() === null) {
+        this.table?.clearSelections();
+      }
+    });
+  }
   async onViewActivated(): Promise<void> {
     await this.initializeLoads();
     this.getLoadFilterControl('date').setValue(null);

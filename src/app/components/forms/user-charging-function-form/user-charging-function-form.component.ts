@@ -11,6 +11,7 @@ import {
   TableColumn,
   TableComponent,
 } from 'app/components/shared/table/table.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-user-charging-function-form',
@@ -19,6 +20,7 @@ import {
     DatePickerInput,
     ButtonComponent,
     TableComponent,
+    CommonModule,
   ],
   templateUrl: './user-charging-function-form.component.html',
   styleUrl: './user-charging-function-form.component.scss',
@@ -42,10 +44,12 @@ export class UserChargingFunctionFormComponent {
     {
       field: 'CardNo',
       header: 'کد شناسایی کیف پول',
+      dir: 'ltr',
     },
     {
       field: 'Amount',
-      header: 'مبلغ',
+      header: 'مبلغ (ریال)',
+      format: 'currency',
     },
     {
       field: 'Time',

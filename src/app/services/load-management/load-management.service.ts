@@ -25,6 +25,8 @@ import { LoadAllocationInfo } from './model/load-allocation-info.model';
 import { mockLoadAllocationInfos } from './mock/load-allocation-info.mock';
 import { LoadAllocatedToNextTurn } from './model/load-allocated-to-next-turn.model';
 import { mockLoadAllocatedToNextTurn } from './mock/load-allocated-to-next-turn.mock';
+import { LoadAllocationPriority } from './model/load-allocation-priority';
+import { mockLoadAllocationRecords } from './mock/load-allocation-records';
 
 @Injectable({
   providedIn: 'root',
@@ -127,6 +129,25 @@ export class LoadManagementService {
       bodyValue,
       mockLoadsForTransportCompanies_Factories_Admins_Drivers
     );
+    //#endregion
+  }
+
+  public async ChangePriorityLoadAllocations(
+    prioritys: LoadAllocationPriority[]
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.LoadAllocationAPI.ChangeLoadAllocationsPriority;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LAIdPrioritys: prioritys,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
 
@@ -587,6 +608,24 @@ export class LoadManagementService {
       typeof bodyValue,
       LoadAllocatedToNextTurn
     >(apiUrl, bodyValue, mockLoadAllocatedToNextTurn);
+    //#endregion
+  }
+
+  public async GetRecordsOfLoadAllocation(): Promise<
+    ApiResponse<LoadAllocationInfo[]>
+  > {
+    //#region Consts
+    const apiUrl = API_ROUTES.LoadAllocationAPI.GetRecordsOfLoadAllocation;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoadAllocationInfo[]
+    >(apiUrl, bodyValue, mockLoadAllocationRecords);
     //#endregion
   }
 

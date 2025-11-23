@@ -1,5 +1,5 @@
 <div
-  class="z-10 fixed flex justify-center items-center -translate-x-1/2 left-1/2 bottom-0 w-full h-22"
+  class="z-10 fixed flex justify-center items-center -translate-x-1/2 left-1/2 bottom-0 w-full h-20"
 >
   <div
     class="w-full h-full flex justify-around items-center bg-primary-emphasis text-primary-contrast rounded-t-3xl"
@@ -7,11 +7,12 @@
     @for (tab of tabs(); track $index) {
       <div
         (click)="onClickTab(tab)"
-        class="flex flex-col items-center transition-all duration-500 ease-in-out pt-2"
+        class="flex-1 flex flex-col max-w-[300px] w-[20%] items-center transition-all duration-500 ease-in-out pt-2"
         [ngClass]="{
           'gap-5 -translate-y-2': isTabActive(tab),
           'gap-2': !isTabActive(tab),
         }"
+        style="cursor: pointer"
       >
         <button
           pButton
@@ -20,14 +21,17 @@
           [severity]="isTabActive(tab) ? 'info' : 'secondary'"
           class="transition-transform duration-500 ease-in-out"
           [ngClass]="{
-            'scale-170 sm:scale-180 bg-primary-400 border-2 border-primary-emphasis':
+            'scale-[1.5] sm:scale-[1.6] bg-primary-400 border-primary-emphasis border-2':
               isTabActive(tab),
-            'scale-120 sm:scale-130 bg-secondary': !isTabActive(tab),
+            'scale-[1.2] sm:scale-[1.3] bg-secondary': !isTabActive(tab),
           }"
         ></button>
+
         <span
-          class="text-sm transition-colors duration-300 ease-in-out"
-          [ngClass]="{ 'font-bold text-2xl': isTabActive(tab) }"
+          class="truncate w-full text-center px-2 text-sm transition-colors duration-300 ease-in-out"
+          [ngClass]="{
+            'font-bold text-lg': isTabActive(tab),
+          }"
         >
           {{ tab.title }}
         </span>

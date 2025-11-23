@@ -41,7 +41,7 @@ export class LoadAccountingFormComponent
     },
     {
       field: 'Amount',
-      header: 'مبلغ',
+      header: 'تعداد',
     },
     {
       field: 'ShamsiDate',

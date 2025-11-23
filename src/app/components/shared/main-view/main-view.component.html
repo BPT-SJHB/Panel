@@ -1,60 +1,58 @@
-<div class="flex justify-center items-cente m-[-2rem]">
-  <app-carousel [images]="images"></app-carousel>
+<!-- Carousel Section -->
+<div class="flex justify-center items-center -m-8">
+  <app-carousel [images]="images()"></app-carousel>
 </div>
 
-<div class="flex flex-col items-center mx-[-2rem]">
+<!-- Services Section -->
+<div class="flex flex-col items-center -mx-8">
+  <!-- Header -->
   <div
     class="flex justify-center mt-5 w-full rounded-t-xl border-t-2 border-primary-emphasis shadow-[0px_-8px_7px_1px_rgba(0,0,0,0.2)] dark:shadow-[0px_-8px_7px_1px_rgba(255,255,255,0.2)]"
   >
     <span class="font-bold text-2xl mt-3">خدمات</span>
   </div>
+
+  <!-- Cards Container -->
   <div
-    class="flex w-full justify-center gap-4 lg:gap-8 mt-5 flex-wrap px-[1rem] md:px-[5rem]"
+    class="flex w-full justify-center gap-4 lg:gap-8 mt-5 flex-wrap px-4 md:px-20"
   >
-    @if (processes().length === 0) { @for (item of skeletonArray; track $index)
-    {
-    <div
-      class="flex flex-col justify-center items-center border-2 p-[1rem] border-gray-300 rounded-2xl gap-1 md:w-[12rem] lg:w-[18rem] w-[6rem] sm:h-[1rem] md:h-[6rem] lg:h-[10rem]"
-    >
-      <p-skeleton shape="circle" size="5rem" />
-      <p-skeleton
-        [style.min-width]="'5rem'"
-        [style.max-width]="'18rem'"
-        height="2rem"
-      ></p-skeleton>
-    </div>
-    } }@else { @for (item of processes(); track $index) {
-    <p-card
-      class="flex justify-center  md:w-[12rem] lg:w-[18rem] w-[6rem] lg:h-[10rem] border-2 shadow-[0px_0px_7px_rgba(0,0,0,0.7)]  border-primary-emphasis bg-gray-100 dark:bg-zinc-700 rounded-2xl transition-transform duration-150 ease-in-out hover:scale-110"
-    >
-      <div
-        class="flex flex-col text-center justify-center items-center mx-[-1rem] my-[-0.5rem]"
-        (click)="OpenProcess(item)"
-      >
-        @if ($index < 1) {
-        <i
-          class="pi text-orange-500 bg-yellow-100 lg:text-4xl text-2xl p-4 rounded-full"
-          [class]="item.icon"
-        ></i>
-        } @else if ($index < 5) {
-        <i
-          class="pi text-blue-700 bg-blue-200 lg:text-4xl text-2xl p-4 rounded-full"
-          [class]="item.icon"
-        ></i>
-        } @else if ($index < 10) {
-        <i
-          class="pi text-green-700 bg-green-200 lg:text-4xl text-2xl p-4 rounded-full"
-          [class]="item.icon"
-        ></i>
-        } @else {
-        <i
-          class="pi text-red-700 bg-red-200 lg:text-4xl text-2xl p-4 rounded-full"
-          [class]="item.icon"
-        ></i>
-        }
-        <span class="font-bold mt-2 text-xs lg:text-xl">{{ item.title }}</span>
-      </div>
-    </p-card>
-    }}
+    <!-- Skeleton Loader -->
+    @if (processes().length === 0) {
+      @for (item of skeletonArray; track $index) {
+        <div
+          class="flex flex-col justify-center items-center border-2 p-4 border-gray-300 rounded-2xl gap-1 md:w-48 lg:w-72 w-24 sm:h-4 md:h-24 lg:h-40"
+        >
+          <p-skeleton shape="circle" size="5rem" />
+          <p-skeleton
+            [style.min-width]="'5rem'"
+            [style.max-width]="'18rem'"
+            height="2rem"
+          ></p-skeleton>
+        </div>
+      }
+    }
+    <!-- Process Cards -->
+    @else {
+      @for (item of processes(); track $index) {
+        <p-card
+          class="flex justify-center md:w-48 lg:w-72 w-24 lg:h-40 border-2 border-primary-emphasis bg-gray-100 dark:bg-zinc-700 rounded-2xl shadow-[0px_0px_7px_rgba(0,0,0,0.7)] transition-transform duration-150 ease-in-out hover:scale-110"
+        >
+          <div
+            class="flex flex-col text-center justify-center items-center -mx-4 -my-2"
+            (click)="OpenProcess(item)"
+          >
+            <!-- Dynamic Icon Colors -->
+            <i
+              class="pi lg:text-4xl text-2xl p-4 rounded-full"
+              [class]="`${item.icon} ${getColor(item)}`"
+            ></i>
+
+            <span class="font-bold mt-2 text-xs lg:text-xl"
+              >{{ item.title }}
+            </span>
+          </div>
+        </p-card>
+      }
+    }
   </div>
 </div>

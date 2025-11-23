@@ -1,40 +1,51 @@
-<div class="flex flex-row flex-wrap gap-6 justify-around items-center">
-  <div class="flex flex-row items-center gap-4">
+<div class="flex flex-wrap justify-around items-center gap-6">
+  <!-- From Date & Time -->
+  <div class="flex items-center gap-4">
     <app-date-picker-input
       label="از تاریخ"
       [control]="startDate"
       addonWidth="5rem"
       datePickerPosition="bottom"
-      placeholder="تاریخ رزو نوبت"
-      class=""
+      placeholder="تاریخ رزرو نوبت"
     />
-    <app-time-picker-input
-      [control]="startTime"
-      label="زمان"
-    ></app-time-picker-input>
+    <app-time-picker-input [control]="startTime" label="زمان" />
   </div>
 
-  <div class="flex flex-row items-center gap-4">
+  <!-- To Date & Time -->
+  <div class="flex items-center gap-4">
     <app-date-picker-input
       label="تا تاریخ"
       [control]="endDate"
       addonWidth="5rem"
       datePickerPosition="bottom"
-      placeholder="تاریخ رزو نوبت"
-      class=""
+      placeholder="تاریخ رزرو نوبت"
     />
-    <app-time-picker-input
-      [control]="endTime"
-      label="زمان"
-    ></app-time-picker-input>
+    <app-time-picker-input [control]="endTime" label="زمان" />
   </div>
 </div>
-<div class="flex flex-row justify-center my-8">
+
+<!-- Fetch Button -->
+<div class="flex justify-center my-8">
   <app-button
     styleClass="w-[17rem]"
     label="دریافت اطلاعات"
     (onClick)="FetchData()"
-  >
-  </app-button>
+  />
 </div>
+
+<!-- Total Summary -->
+@if (totalAmount.value) {
+  <div class="flex justify-end mb-4 px-4">
+    <div
+      class="text-lg font-semibold bg-gray-100 dark:bg-gray-800 rounded-lg px-6 py-3 shadow-sm"
+    >
+      مجموع کل:
+      <span class="text-primary-600 dark:text-primary-400">
+        {{ totalAmount.value | number: "1.0-0" }} ریال
+      </span>
+    </div>
+  </div>
+}
+
+<!-- Data Table -->
 <app-table [rows]="userFunctions()" [columns]="columns" />

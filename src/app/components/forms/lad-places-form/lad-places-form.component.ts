@@ -111,7 +111,10 @@ export class LadPlacesFormComponent
   formDialogVisible = false;
   headerTitle = '';
   cashedLadPlace?: LADPlace;
-
+  searchFiledControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(2),
+  ]);
   ladPlacesForm = this.fb.group({
     ladPlacesId: this.fb.control<number | null>(null, Validators.required),
     ladPlacesTitle: this.fb.nonNullable.control<string>(
@@ -172,7 +175,7 @@ export class LadPlacesFormComponent
 
   async onNew() {
     if (this.loading()) return;
-    this.formMode.set(LADPlaceFormMode.EDITABLE);
+    this.formMode.set(LADPlaceFormMode.REGISTER);
     this.cashedLadPlace = this.extractLadPlaceFromForm();
     this.headerTitle = 'افزودن مبدا و مقصد حمل بار';
     this.formDialogVisible = true;

@@ -7,9 +7,8 @@ import { CardModule } from 'primeng/card';
 import { BadgeModule } from 'primeng/badge';
 import { uuidV4 } from 'app/utils/uuid';
 import { ToastService } from 'app/services/toast-service/toast.service';
-import { Subject } from 'rxjs';
 
-enum UploadFileStatus {
+export enum UploadFileStatus {
   Success,
   Uploading,
   Failed,
@@ -37,7 +36,6 @@ export interface UploadFile {
 export class FilesUploadInputComponent {
   private readonly config = inject(PrimeNG);
   private toast = inject(ToastService);
-  private readonly $destroy = new Subject<void>();
   readonly files = signal<UploadFile[]>([]);
 
   readonly cancelLabel = input('انصراف');
@@ -189,5 +187,10 @@ export class FilesUploadInputComponent {
     this.onClearTemplatingUpload(() => {
       // empty function
     });
+  }
+
+  // can call by parent
+  SetUploadFiles(uploadFiles: UploadFile[]) {
+    this.files.set(uploadFiles);
   }
 }

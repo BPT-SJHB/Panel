@@ -59,7 +59,7 @@
     {{ appTitle.sectionTitles.driverInfo }}
   </span>
   <div class="grid grid-cols-12 gap-4">
-    <div class="col-span-12 md:col-span-6 lg:col-span-4 py-1 md:py-0">
+    <div class="col-span-12 md:col-span-6 xl:col-span-4 py-1 md:py-0">
       <app-text-input
         [label]="appTitle.inputs.drivers.driverId"
         [control]="driverId"
@@ -69,7 +69,7 @@
         [disabled]="true"
       />
     </div>
-    <div class="col-span-12 md:col-span-6 lg:col-span-4 py-1 md:py-0">
+    <div class="col-span-12 md:col-span-6 xl:col-span-4 py-1 md:py-0">
       <app-text-input
         [label]="appTitle.inputs.users.userNationalCodeTitle"
         [control]="driverNationalId"
@@ -79,7 +79,7 @@
         [disabled]="true"
       />
     </div>
-    <div class="col-span-12 md:col-span-6 lg:col-span-4 py-1 lg:py-0">
+    <div class="col-span-12 md:col-span-6 xl:col-span-4 py-1 lg:py-0">
       <app-text-input
         [label]="appTitle.inputs.users.userNameAndLastName"
         [control]="driverName"
@@ -96,9 +96,7 @@
 <p-card [style]="{ 'box-shadow': '0 0 10px rgba(0, 0, 0, 0.3)' }" class="mb-6">
   <span class="w-full text-xl font-bold px-2 mb-4 block">آخرین نوبت</span>
   <div class="grid grid-cols-12 gap-4">
-    <div
-      class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0"
-    >
+    <div class="col-span-12 md:col-span-6 xl:col-span-4 py-1 xl:py-0">
       <app-text-input
         label="تسلسل نوبت"
         [control]="otaghdarTurnNumber"
@@ -107,9 +105,7 @@
         [disabled]="true"
       />
     </div>
-    <div
-      class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0"
-    >
+    <div class="col-span-12 md:col-span-6 xl:col-span-4 py-1 xl:py-0">
       <app-text-input
         label="صف نوبت"
         [control]="sequentialTurn"
@@ -118,9 +114,7 @@
         [disabled]="true"
       />
     </div>
-    <div
-      class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0"
-    >
+    <div class="col-span-12 md:col-span-6 xl:col-span-4 py-1 xl:py-0">
       <app-text-input
         [label]="appTitle.inputs.turns.turnStatus"
         [control]="turnStats"
@@ -129,9 +123,7 @@
         [disabled]="true"
       />
     </div>
-    <div
-      class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 py-1 xl:py-0"
-    >
+    <div class="col-span-12 md:col-span-6 xl:col-span-4 py-1 xl:py-0">
       <app-text-input
         label="شرح"
         [control]="turnDescription"

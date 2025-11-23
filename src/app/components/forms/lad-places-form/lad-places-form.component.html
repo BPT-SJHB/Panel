@@ -1,11 +1,12 @@
-<p-confirm-dialog />
-
 <app-search-input
   [placeholder]="appTitle.getPlaceholder('loadAnnouncementPlaceTitle')"
   [asyncSearchFn]="searchLADPlace"
   [itemMatchesQuery]="filterLADPlace"
   (searchResult)="handelSearchLADPlaces($event)"
   [minSearchLength]="2"
+  [enableCaching]="false"
+  [control]="searchFiledControl"
+  [disableSearchButton]="searchFiledControl.invalid"
 />
 <app-table
   [columns]="cloumns"
@@ -27,6 +28,7 @@
     class="grid grid-cols-12 gap-4"
     [class.pointer-events-none]="loading()"
     [class.opacity-60]="loading()"
+    [formGroup]="ladPlacesForm"
   >
     <div class="grid grid-cols-12 col-span-12 gap-4">
       <app-text-input

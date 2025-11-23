@@ -17,8 +17,11 @@
 
 <!-- 📋 SubGroup Table -->
 <app-table
-    [enableCaptionButton]="true" (clickCaptionButton)="onNew()"
-    [columns]="columns" [rows]="displayAnnouncementsSubGroup">
+  [enableCaptionButton]="true"
+  (clickCaptionButton)="onNew()"
+  [columns]="columns"
+  [rows]="displayAnnouncementsSubGroup"
+>
   <!-- Header with New Button -->
   <!-- Table Header -->
   <ng-template #caption>
@@ -94,7 +97,6 @@
   <form
     class="grid grid-cols-12 gap-4"
     [formGroup]="announcementSubGroupForm"
-    (ngSubmit)="registerOrEdit()"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
   >
@@ -136,4 +138,3 @@
     </div>
   </form>
 </p-dialog>
-

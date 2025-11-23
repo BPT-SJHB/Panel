@@ -25,6 +25,7 @@ export interface TableColumn<T extends object> {
   onAction?: (row: T) => void | Promise<void>;
   sorting?: boolean;
   format?: 'currency';
+  dir?: 'rtl' | 'ltr';
 }
 
 type SelectionMode = 'single' | 'multiple';
@@ -85,6 +86,7 @@ export class TableComponent<T extends object> {
 
   readonly ColumnType = TableColumnType;
   readonly defaultButtonSeverity: ButtonSeverity = 'green';
+  selectedItems: T[] = [];
   private readonly tablePage = signal<TablePage>({
     pageSize: this.config.rows,
     page: 1,
@@ -175,6 +177,10 @@ export class TableComponent<T extends object> {
       return true;
     }
     return false;
+  }
+
+  clearSelections() {
+    this.selectedItems = [];
   }
 
   private formatCurrency(value: string): string {

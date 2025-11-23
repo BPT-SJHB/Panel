@@ -46,7 +46,9 @@ export const ValidationSchema = {
     validators: [
       Validators.required,
       exactLengthValidator(11),
-      Validators.pattern(/09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}/),
+      Validators.pattern(
+        /^09(1[0-9]|2[0-9]|3[0-9]|9[0-9])-?[0-9]{3}-?[0-9]{4}$/
+      ),
     ],
   },
   mobileOrEmpty: {
@@ -291,6 +293,16 @@ export const ValidationSchema = {
   ExcessStoppageCost: {
     name: 'هزینه توقف اضافی',
     validators: [Validators.required, Validators.min(1)],
+  },
+  URL: {
+    name: 'آدرس (URL)',
+    validators: [
+      Validators.required,
+
+      Validators.pattern(
+        /^(https?:\/\/)?((([a-z0-9-]+\.)+[a-z]{2,})|(\d{1,3}(\.\d{1,3}){3}))(:\d{1,5})?(\/\S*)?$/i
+      ),
+    ],
   },
 };
 

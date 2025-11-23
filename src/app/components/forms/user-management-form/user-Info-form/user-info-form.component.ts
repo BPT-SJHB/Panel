@@ -142,7 +142,6 @@ export class UserInfoFormComponent extends BaseLoading implements OnInit {
 
       this.toast.success('موفق', 'اطلاعات با موفقیت ثبت شد.');
       this.resetUserInfoForm();
-      this.resetSearchForm();
 
       this.populateForm({
         ...user,
@@ -175,7 +174,7 @@ export class UserInfoFormComponent extends BaseLoading implements OnInit {
   }
 
   async submitUserInfo(): Promise<void> {
-    if (this.searchForm.valid) {
+    if (this.userInfoForm.valid) {
       await this.updateUserInfo();
     } else if (this.isFormValidExcept('id')) {
       await this.registerUser();

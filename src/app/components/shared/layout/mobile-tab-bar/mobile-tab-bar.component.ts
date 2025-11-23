@@ -6,6 +6,10 @@ import { ButtonModule } from 'primeng/button';
 import { TabComponentKey } from 'app/constants/tab-component-registry';
 import { createTab } from 'app/store/tab/tab.actions';
 import { DEFAULT_MAIN_TAB_ID, TabData } from 'app/store/tab/tab.reducer';
+import { BaseLoading } from 'app/components/forms/shared/component-base/base-loading';
+import { ApiProcessesService } from 'app/services/api-processes/api-processes.service';
+import { checkAndToastError } from 'app/utils/api-utils';
+import { uuidV4 } from 'app/utils/uuid';
 
 @Component({
   selector: 'app-mobile-tab-bar',
@@ -14,11 +18,20 @@ import { DEFAULT_MAIN_TAB_ID, TabData } from 'app/store/tab/tab.reducer';
   standalone: true,
   imports: [ButtonModule, NgClass],
 })
-export class MobileTabBarComponent {
+export class MobileTabBarComponent extends BaseLoading {
   selectedTab: TabComponentKey = TabComponentKey.Main;
   private store = inject(Store);
+  private processesService = inject(ApiProcessesService);
 
-  tabs = signal<TabData[]>([
+  private readonly mainTab: TabData = {
+    id: DEFAULT_MAIN_TAB_ID,
+    title: 'صفحه اصلی',
+    icon: 'pi pi-home',
+    component: TabComponentKey.Main,
+    closeable: false,
+  };
+
+  readonly tabs = signal<TabData[]>([
     {
       id: '00000000-0000-0000-0000-000000000001',
       title: 'پروفایل',
@@ -34,11 +47,7 @@ export class MobileTabBarComponent {
       closeable: true,
     },
     {
-      id: DEFAULT_MAIN_TAB_ID,
-      title: 'صفحه اصلی',
-      icon: 'pi pi-home',
-      component: TabComponentKey.Main,
-      closeable: true,
+      ...this.mainTab,
     },
     {
       id: '00000000-0000-0000-0000-000000000003',
@@ -55,6 +64,35 @@ export class MobileTabBarComponent {
       closeable: true,
     },
   ]);
+
+  override ngOnInit(): void {
+    this.loadTabs();
+    super.ngOnInit();
+  }
+
+  private async loadTabs() {
+    await this.withLoading(async () => {
+      const response = await this.processesService.getTaskBarWebProcesses();
+      if (!checkAndToastError(response, this.toast)) return;
+
+      let tabData: TabData[] = response.data.flatMap((pg) =>
+        pg.processes.map((p) => ({
+          id: uuidV4(),
+          title: p.title,
+          icon: p.icon,
+          component: p.id as TabComponentKey,
+          closeable: true,
+        }))
+      );
+
+      if (tabData.length > 4) tabData = tabData.slice(0, 4);
+      // Insert main tab at the center
+      const middle = Math.floor(tabData.length / 2);
+      tabData.splice(middle, 0, this.mainTab);
+
+      this.tabs.set(tabData);
+    });
+  }
 
   onClickTab(tab: TabData): void {
     this.selectedTab = tab.component;

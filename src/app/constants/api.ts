@@ -6,6 +6,7 @@ const LoadCapacitorPort = 84;
 const LoadAllocationPort = 85;
 const ReportsPort = 86;
 const KernelTasksPort = 88;
+const CarouselsPort = 90;
 const TrafficPort = 91;
 const ticketPort = 8080;
 const ticketUrl = 'http://localhost';
@@ -18,6 +19,8 @@ export const API_ROUTES = {
     AuthUser: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}AuthUser`,
     SessionChecker: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}IsSessionLive`,
     GetWebProcesses: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}GetWebProcesses`,
+    GetTaskBarWebProcesses: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}GetTaskBarWebProcesses`,
+    GetVeyUsefulWebProcesses: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}GetVeyUsefulWebProcesses`,
     GetUserOfSession: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}GetSessionSoftwareUser`,
     GetVirtualWallet: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}GetVirtualMoneyWallet`,
     UserManagement: {
@@ -219,6 +222,8 @@ export const API_ROUTES = {
     GetLoadAllocationOfDriver: `${environment.apiUrl}:${LoadAllocationPort}${apiFixURLPart}GetTruckDriverLoadAllocations`,
     CancelLoadAllocation: `${environment.apiUrl}:${LoadAllocationPort}${apiFixURLPart}LoadAllocationCancelling`,
     GetTravelTimeOfLoadAllocation: `${environment.apiUrl}:${LoadAllocationPort}${apiFixURLPart}GetTravelTimeforLoadAllocation`,
+    GetRecordsOfLoadAllocation: `${environment.apiUrl}:${LoadAllocationPort}${apiFixURLPart}GetTruckDriverLoadAllocationsRecords`,
+    ChangeLoadAllocationsPriority: `${environment.apiUrl}:${LoadAllocationPort}${apiFixURLPart}LoadAllocationsChangePriority`,
   },
   Reports: {
     Load: {
@@ -269,7 +274,7 @@ export const API_ROUTES = {
   TrafficAPI: {
     RegisterTrafficCardType: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}RegisteringTrafficCardType`,
     RegisterTrafficCard: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}RegisteringTrafficCard`,
-    RegisterTrafficCost: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}/RegisteringTrafficCost`,
+    RegisterTrafficCost: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}RegisteringTrafficCost`,
     EditTrafficCardType: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}EditingTrafficCardType`,
     GetTrafficCardTypes: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}GetTrafficCardTypes`,
     GetTrafficCardTempTypes: `${environment.apiUrl}:${TrafficPort}${apiFixURLPart}GetTrafficCardTempTypes`,
@@ -282,5 +287,14 @@ export const API_ROUTES = {
     DeleteLoadAnnouncementConfig: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}ConfigurationOfLoadAnnouncementDeleting`,
     RegisterLoadAnnouncementConfig: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}ConfigurationOfLoadAnnouncementRegistering`,
     EditLoadAnnouncementConfig: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}ConfigurationOfLoadAnnouncementEditing`,
+  },
+  CarouselAPI: {
+    GetCarousels: `${environment.apiUrl}:${CarouselsPort}${apiFixURLPart}GetCarousels`,
+    GetCarouselPic: `${environment.apiUrl}:${CarouselsPort}${apiFixURLPart}GetCarouselPicture`,
+    RegisterCarousel: `${environment.apiUrl}:${CarouselsPort}${apiFixURLPart}CarouselRegistering`,
+    EditCarousel: `${environment.apiUrl}:${CarouselsPort}${apiFixURLPart}CarouselEditing`,
+    DeleteCarousel: `${environment.apiUrl}:${CarouselsPort}${apiFixURLPart}CarouselDeleting`,
+    ChangeCarouselStatus: `${environment.apiUrl}:${CarouselsPort}${apiFixURLPart}CarouselChangeActiveStatus`,
+    GetCarouselsForView: `${environment.apiUrl}:${CarouselsPort}${apiFixURLPart}GetCarouselsForViewing`,
   },
 };
