@@ -11,7 +11,6 @@
     "prefix": "serviceNormalMethod",
     "body": [
       "public async ${methodName}(${params}): Promise<ApiResponse<${returnModel}>> {",
-      "this.userAuth.isLoggedIn();",
       "",
       "//#region Consts",
       "const apiUrl = API_ROUTES.${selectRoute}",
@@ -30,64 +29,5 @@
       "//#endregion",
       "}"
     ]
-  },
-  "add mapped method to services": {
-    "prefix": "serviceMappedMethod",
-    "body": [
-      "public async ${methodName}(${params}): Promise<ApiResponse<${returnModel}>> {",
-      "this.userAuth.isLoggedIn();",
-      "",
-      "//#region Consts",
-      "const apiUrl = API_ROUTES.${selectRoute}",
-      "const ${modelName}Info : ${ModelName} = {${addModelKeys}};",
-      "const bodyValue = {",
-      "SessionId: this.userAuth.getSessionId(),",
-      "${sendKeyName}",
-      "};",
-      "//#endregion",
-      "",
-      "//#region Request",
-      "const response = await this.apiCommunicator.CommunicateWithAPI_Post<",
-      "typeof bodyValue,",
-      "${returnType}",
-      ">(apiUrl, bodyValue, ${mock});",
-      "//#endregion",
-      "",
-      "//#region Return",
-      "return {",
-      "success: response.success,",
-      "data: response.data?.map((data) => ({",
-      "${modelKeys}",
-      "})),",
-      "error: response.error,",
-      "};",
-      "//#endregion",
-      "}",
-      "$0"
-    ]
-  },
-  "add softwareUser api routes": {
-    "prefix": "apiSoftwareUserRoute",
-    "body": "${apiRouteName}: `${environment.apiUrl}:\\${softwareUserAPIPort}/api/${realNameFromAPI}`,$0"
-  },
-  "add transportaion api routes": {
-    "prefix": "apiTransportaionRoute",
-    "body": "${apiRouteName}: `${environment.apiUrl}:\\${transportationAPIPort}/api/${realNameFromAPI}`,$0"
-  },
-  "add wallet and traffic api routes": {
-    "prefix": "apiWalletAndTrafficRoute",
-    "body": "${apiRouteName}: `${environment.apiUrl}:\\${walletAndTrafficPort}/api/${realNameFromAPI}`,$0"
-  },
-  "add load capacitor api routes": {
-    "prefix": "apiLoadCapacitorRoute",
-    "body": "${apiRouteName}: `${environment.apiUrl}:\\${LoadCapacitorPort}/api/${realNameFromAPI}`,$0"
-  },
-  "add load allocation api routes": {
-    "prefix": "apiLoadAllocationRoute",
-    "body": "${apiRouteName}: `${environment.apiUrl}:\\${LoadAllocationPort}/api/${realNameFromAPI}`,$0"
-  },
-  "add reports api routes": {
-    "prefix": "apiReportsRoute",
-    "body": "${apiRouteName}: `${environment.apiUrl}:\\${ReportsPort}/api/${realNameFromAPI}`,$0"
   },
 }
