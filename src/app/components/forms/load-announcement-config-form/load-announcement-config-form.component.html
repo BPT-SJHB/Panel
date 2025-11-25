@@ -1,0 +1,67 @@
+<app-table [rows]="loadsConfig()" [columns]="columns" />
+
+<p-dialog
+  [(visible)]="isDialogVisible"
+  [header]="dialogTitle()"
+  [modal]="true"
+  [style]="{
+    width: '60rem',
+    maxWidth: '100%',
+  }"
+  [maskStyle]="{ padding: '1rem' }"
+  [draggable]="false"
+>
+  <div class="grid grid-cols-1 gap-5">
+    <div class="gap-2 grid grid-cols-1 md:grid-cols-3">
+      <app-text-input
+        label="شناسه"
+        [control]="this.ctrl('COLAId')"
+        [readOnly]="true"
+        [addonWidth]="addonWidth"
+      />
+
+      <app-text-input
+        label="عنوان اصلی"
+        [control]="this.ctrl('COLATitle')"
+        [readOnly]="true"
+        [addonWidth]="addonWidth"
+      />
+
+      <app-text-input
+        label="عنوان فرعی"
+        [control]="this.ctrl('COLAIndexTitle')"
+        [readOnly]="true"
+        [addonWidth]="addonWidth"
+      />
+    </div>
+
+    <div class="grid grid-cols-1 gap-5">
+      <app-search-auto-complete-factory
+        [config]="announcementInput"
+        [addonWidth]="addonWidth"
+      />
+
+      <app-search-auto-complete-factory
+        [config]="subAnnouncementInput"
+        [addonWidth]="addonWidth"
+      />
+
+      <app-text-input
+        language="en"
+        label="مقدار"
+        [control]="this.ctrl('COLAValue')"
+        placeholder="مقدار"
+        [addonWidth]="addonWidth"
+      />
+    </div>
+
+    <div class="flex w-full justify-end px-3 py-3 pt-6">
+      <app-button
+        label="ثبت"
+        (click)="save()"
+        [disabled]="this.form.invalid || loading()"
+        styleClass="w-40"
+      />
+    </div>
+  </div>
+</p-dialog>

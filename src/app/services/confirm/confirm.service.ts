@@ -9,7 +9,7 @@ export class AppConfirmService {
   confirmDelete(itemName: string, accept: () => void) {
     this.confirmationService.confirm({
       header: 'تأیید حذف',
-      message: `آیا از حذف ${itemName} اطمینان دارید؟`,
+      message: `آیا از حذف <b><u>${itemName}</u></b> اطمینان دارید؟`,
       icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'تایید',
       rejectLabel: 'انصراف',

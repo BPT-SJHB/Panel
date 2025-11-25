@@ -53,6 +53,7 @@ import { ParkingTrafficRecordsFormComponent } from 'app/components/forms/traffic
 import { TrafficCardTypeFormComponent } from 'app/components/forms/traffic-management-forms/traffic-card-type-form/traffic-card-type-form.component';
 import { TrafficEntriesFormComponent } from 'app/components/forms/traffic-management-forms/traffic-entries-form/traffic-entries-form.component';
 import { CarouselFormComponent } from 'app/components/forms/carousel-form/carousel-form.component';
+import { LoadAnnouncementConfigFormComponent } from 'app/components/forms/load-announcement-config-form/load-announcement-config-form.component';
 
 export enum TabComponentKey {
   Main = -1,
@@ -118,6 +119,8 @@ export enum TabComponentKey {
   RegisterAndEditTrafficsCardManagement = 16,
   TrafficsAndParkingTariffManagement = 18,
   TrafficInitialRegistrationManagement = 34,
+
+  LoadAnnouncementConfigManagement = 46,
 
   TicketManagement = 71,
 }
@@ -583,6 +586,15 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       {
         title: 'ثبت و ویرایش انواع کارت تردد',
         component: TrafficCardTypeFormComponent,
+      },
+    ],
+  },
+  [TabComponentKey.LoadAnnouncementConfigManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: 'پیکربندی اعلام بار',
+        component: LoadAnnouncementConfigFormComponent,
       },
     ],
   },

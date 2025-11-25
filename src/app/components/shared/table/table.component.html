@@ -102,6 +102,7 @@
                   (click)="column.onAction?.(row)"
                   [severity]="column.buttonSeverity ?? defaultButtonSeverity"
                   [styleClass]="getColumnClass(column, row)"
+                  [disabled]="isDisable(column, row)"
                 />
               }
 
@@ -111,6 +112,7 @@
                   (click)="column.onAction?.(row)"
                   [severity]="column.buttonSeverity ?? defaultButtonSeverity"
                   [styleClass]="getColumnClass(column, row)"
+                  [disabled]="isDisable(column, row)"
                 />
               }
 

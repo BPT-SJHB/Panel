@@ -26,6 +26,7 @@ export interface TableColumn<T extends object> {
   sorting?: boolean;
   format?: 'currency';
   dir?: 'rtl' | 'ltr';
+  disable?: boolean | ((row: T) => boolean);
 }
 
 type SelectionMode = 'single' | 'multiple';
@@ -177,6 +178,12 @@ export class TableComponent<T extends object> {
       return true;
     }
     return false;
+  }
+
+  isDisable(column: TableColumn<T>, row: T): boolean {
+    if (!column.disable) return false;
+    if (typeof column.disable === 'boolean') return column.disable;
+    return column.disable(row);
   }
 
   clearSelections() {
