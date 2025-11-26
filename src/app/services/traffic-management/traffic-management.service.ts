@@ -142,7 +142,9 @@ export class TrafficManagementService {
     const apiUrl = API_ROUTES.TrafficAPI.RegisterTrafficCost;
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
-      ...trafficCost,
+      RowTrafficCost: {
+        ...trafficCost,
+      },
     };
     //#endregion
 
