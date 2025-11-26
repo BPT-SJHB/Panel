@@ -1,6 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { takeUntil } from 'rxjs';
 
 import { BaseLoading } from '../../shared/component-base/base-loading';
 import { TrafficManagementService } from 'app/services/traffic-management/traffic-management.service';
@@ -43,7 +42,7 @@ export class TrafficCardTypeFormComponent extends BaseLoading {
    * -------------------------------------------------------------------------- */
   readonly trafficCardTypeSelection = signal<SelectOption<number>[]>([]);
   isFormVisible = false;
-  addonWidth = '6rem';
+  addonWidth = '5rem';
   /* --------------------------------------------------------------------------
    * Forms
    * -------------------------------------------------------------------------- */
@@ -53,7 +52,6 @@ export class TrafficCardTypeFormComponent extends BaseLoading {
   );
 
   readonly cardTypeForm = this.fb.group({
-    TrafficSelectedCardTypeId: this.fb.control<number | null>(null),
     TrafficCardTypeId: this.fb.control<number | null>(
       null,
       ValidationSchema.id
@@ -71,12 +69,6 @@ export class TrafficCardTypeFormComponent extends BaseLoading {
   override ngOnInit(): void {
     super.ngOnInit();
     this.loadTrafficCardTypes();
-
-    this.ctrl('TrafficSelectedCardTypeId')
-      .valueChanges.pipe(takeUntil(this.destroy$))
-      .subscribe((id) => {
-        this.ctrl('TrafficCardTypeId').setValue(id);
-      });
   }
 
   /* --------------------------------------------------------------------------
