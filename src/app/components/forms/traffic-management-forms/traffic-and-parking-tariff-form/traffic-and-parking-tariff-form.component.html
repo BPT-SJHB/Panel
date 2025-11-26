@@ -1,5 +1,7 @@
 <div>
-  <!-- Toolbar -->
+  <!-- -----------------------------------------------------------------------
+       Toolbar
+  ------------------------------------------------------------------------ -->
   <div class="flex justify-end mb-4">
     <app-button
       label="جدید"
@@ -9,12 +11,14 @@
     />
   </div>
 
-  <!-- Form Grid -->
+  <!-- -----------------------------------------------------------------------
+       Form Grid
+  ------------------------------------------------------------------------ -->
   <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
     <!-- Traffic Card Type -->
     <app-select-input
       label="نوع کارت"
-      placeholder="نوع کارت "
+      placeholder="نوع کارت"
       [options]="trafficCardTypeSelection()"
       [control]="ctrl('TrafficCardTypeId')"
       [addonWidth]="addonWidth"
@@ -30,7 +34,7 @@
       [addonWidth]="addonWidth"
     />
 
-    <!-- Free Stop Duration (hour) -->
+    <!-- Free Stop Duration -->
     <app-text-input
       label="توقف رایگان"
       [control]="ctrl('NoCostStoppageDuration')"
@@ -39,7 +43,7 @@
       [addonWidth]="addonWidth"
     />
 
-    <!-- Excess Stop Duration (hour) -->
+    <!-- Excess Stop Duration -->
     <app-text-input
       label="توقف مازاد"
       [control]="ctrl('ExcessStoppageDuration')"
@@ -66,7 +70,9 @@
     />
   </div>
 
-  <!-- Actions -->
+  <!-- -----------------------------------------------------------------------
+       Actions
+  ------------------------------------------------------------------------ -->
   <div class="flex gap-3 justify-end mt-6">
     <app-button
       label="ثبت"
