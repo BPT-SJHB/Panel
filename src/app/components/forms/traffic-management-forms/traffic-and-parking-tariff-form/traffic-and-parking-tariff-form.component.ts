@@ -75,6 +75,7 @@ export class TrafficAndParkingTariffFormComponent extends BaseLoading {
       .valueChanges.pipe(takeUntil(this.destroy$))
       .subscribe((value) => {
         if (!value) return;
+        this.resetForm();
         const cost = this.trafficsCosts().get(value);
         if (cost) {
           const { TrafficCardTypeId: _, ...tariffData } = cost;
