@@ -31,7 +31,11 @@ export class TrafficManagementService {
     const apiUrl = API_ROUTES.TrafficAPI.RegisterTrafficCardType;
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
-      TrafficCardTypeTitle: trafficCardTypeName,
+      RawTrafficCardType: {
+        TrafficCardTypeId: 0,
+        TrafficCardTypeTitle: trafficCardTypeName,
+        Active: true,
+      },
     };
     //#endregion
 
