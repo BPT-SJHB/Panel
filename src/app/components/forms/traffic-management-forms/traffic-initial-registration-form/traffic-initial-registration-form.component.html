@@ -1,3 +1,11 @@
+<div class="flex flex-row justify-end pb-5 pt-2">
+  <app-button
+    label="جدید"
+    (click)="resetForm()"
+    severity="info"
+    styleClass="w-30 md:w-40"
+  />
+</div>
 <div class="grid gap-4 grid-cols-1 md:grid-cols-2 2xl:grid-cols-3">
   <!-- Card Number (Read-only field) -->
   <app-text-input
@@ -28,14 +36,7 @@
   <!-- Action Buttons (spanning all columns) -->
   <div class="flex gap-5 justify-end col-span-full mt-2">
     <app-button
-      label="جدید"
-      (click)="resetForm()"
-      severity="info"
-      styleClass="w-30 md:w-40"
-    />
-
-    <app-button
-      label="تایید"
+      label="ثبت"
       (click)="registerCard()"
       severity="primary"
       styleClass="w-30 md:w-40"
