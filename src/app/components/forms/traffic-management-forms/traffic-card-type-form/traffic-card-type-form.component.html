@@ -14,13 +14,13 @@
   <!-- ------------------------------------------------------------------
        Main Form Grid
   ------------------------------------------------------------------- -->
-  <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+  <div class="grid gap-4 grid-cols-1 lg:grid-cols-2">
     <!-- Traffic Card Type Selection -->
     <app-select-input
       label="نوع کارت"
       placeholder="انتخاب نوع کارت"
       [options]="trafficCardTypeSelection()"
-      [control]="ctrl('TrafficSelectedCardTypeId')"
+      [control]="ctrl('TrafficCardTypeId')"
       [addonWidth]="addonWidth"
     />
 
@@ -47,7 +47,7 @@
     <!-- Active Status -->
     <app-toggle-switch-input
       class="px-5"
-      label="وضعیت فعال"
+      label="وضعیت"
       [control]="ctrl('Active')"
     />
   </div>
