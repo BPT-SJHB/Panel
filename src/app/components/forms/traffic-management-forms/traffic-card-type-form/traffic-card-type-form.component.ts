@@ -17,6 +17,7 @@ import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { Dialog } from 'primeng/dialog';
 import { TrafficCardType } from 'app/services/traffic-management/model/traffic-card-type.model';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-traffic-card-type-form-component',
@@ -40,7 +41,11 @@ export class TrafficCardTypeFormComponent extends BaseLoading {
   /* --------------------------------------------------------------------------
    * State & Signals
    * -------------------------------------------------------------------------- */
+  private readonly trafficsCardsTypes = signal<Map<number, TrafficCardType>>(
+    new Map()
+  );
   readonly trafficCardTypeSelection = signal<SelectOption<number>[]>([]);
+
   isFormVisible = false;
   addonWidth = '5rem';
   /* --------------------------------------------------------------------------
@@ -68,6 +73,29 @@ export class TrafficCardTypeFormComponent extends BaseLoading {
    * -------------------------------------------------------------------------- */
   override ngOnInit(): void {
     super.ngOnInit();
+
+    this.ctrl('TrafficCardTypeId')
+      .valueChanges.pipe(takeUntil(this.destroy$))
+      .subscribe((value) => {
+        if (typeof value !== 'number') {
+          this.resetForm();
+          return;
+        }
+
+        const type = this.trafficsCardsTypes().get(value);
+
+        if (type) {
+          const { TrafficCardTypeId: _, ...rest } = type;
+          this.cardTypeForm.patchValue(rest);
+          return;
+        }
+
+        this.cardTypeForm.reset(
+          { TrafficCardTypeId: value },
+          { emitEvent: false }
+        );
+      });
+
     this.loadTrafficCardTypes();
   }
 
@@ -132,6 +160,10 @@ export class TrafficCardTypeFormComponent extends BaseLoading {
         value: tc.TrafficCardTypeId,
       }))
     );
+
+    const map = new Map<number, TrafficCardType>();
+    response.data.forEach((card) => map.set(card.TrafficCardTypeId, card));
+    this.trafficsCardsTypes.set(map);
   }
 
   /* --------------------------------------------------------------------------
