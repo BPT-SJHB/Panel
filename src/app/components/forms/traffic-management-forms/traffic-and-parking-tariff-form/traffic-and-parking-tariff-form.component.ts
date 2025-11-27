@@ -96,7 +96,12 @@ export class TrafficAndParkingTariffFormComponent extends BaseLoading {
           const { TrafficCardTypeId: _, ...rest } = cost;
           this.tariffForm.patchValue(rest);
         } else {
-          this.resetForm();
+          this.tariffForm.reset(
+            {
+              TrafficCardTypeId: value,
+            },
+            { emitEvent: false }
+          );
         }
       });
   }
