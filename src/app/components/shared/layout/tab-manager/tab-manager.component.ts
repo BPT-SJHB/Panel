@@ -8,6 +8,7 @@ import {
   effect,
   signal,
   HostListener,
+  AfterViewChecked,
 } from '@angular/core';
 import { NgClass } from '@angular/common';
 
@@ -41,7 +42,9 @@ import { DashboardContentManagerComponent } from '../dashboard-content-manager/d
   styleUrl: './tab-manager.component.scss',
   imports: [NgClass, TabsModule],
 })
-export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
+export class TabManagerComponent
+  implements OnInit, AfterViewInit, OnDestroy, AfterViewChecked
+{
   // ================================
   // Signals & State
   // ================================
