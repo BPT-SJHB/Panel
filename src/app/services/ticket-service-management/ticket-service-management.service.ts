@@ -108,7 +108,7 @@ export class TicketServiceManagementService {
     return this.api.CommunicateWithAPI_Post<typeof body, Ticket>(
       API_ROUTES.TicketAPI.Tickets.GetTicketByID,
       body,
-      mockTickets.find((t) => t.id === id),
+      mockTickets[Math.floor(Math.random() * mockTickets.length)],
       true
     );
   }
