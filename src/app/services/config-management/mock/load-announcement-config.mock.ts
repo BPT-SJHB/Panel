@@ -3,11 +3,12 @@ import { LoadAnnouncementConfig } from '../model/load-announcement-config.model'
 export const mockLoadAnnouncementConfigs: LoadAnnouncementConfig[] = [
   {
     COLAId: 1,
-    COLAName:
-      'LoadAnnounceTimeCycle                                                                               ',
+    COLAName: 'LoadAnnounceTimeCycle',
     COLATitle: 'زمانبندی اعلام بار',
     AnnouncementId: 0,
+    AnnouncementTitle: 'نامعلوم',
     AnnouncementSGId: 0,
+    AnnouncementSGTitle: 'نامعلوم',
     COLAIndex: 0,
     COLAIndexTitle: 'ساعات',
     Description: 'سیکل های زمانبندی اعلام بار که با نشانه دش از هم جدا شده اند',
@@ -15,11 +16,25 @@ export const mockLoadAnnouncementConfigs: LoadAnnouncementConfig[] = [
   },
   {
     COLAId: 1,
-    COLAName:
-      'LoadAnnounceTimeCycle                                                                               ',
+    COLAName: 'LoadAnnounceTimeCycle',
+    COLATitle: 'زمانبندي اعلام بار',
+    AnnouncementId: 2,
+    AnnouncementTitle: 'تريلي برون شهري ذوب و سبا',
+    AnnouncementSGId: 7,
+    AnnouncementSGTitle: 'برون شهری آهن آلات ذوبی',
+    COLAIndex: 0,
+    COLAIndexTitle: 'ساعات',
+    Description: 'سيکل هاي زمانبندي اعلام بار که با نشانه دش از هم جدا شده اند',
+    COLAValue: '10:00:00-23:00:00',
+  },
+  {
+    COLAId: 1,
+    COLAName: 'LoadAnnounceTimeCycle',
     COLATitle: 'زمانبندی اعلام بار',
     AnnouncementId: 3,
+    AnnouncementTitle: 'برسام',
     AnnouncementSGId: 14,
+    AnnouncementSGTitle: 'برون شهری آهن آلات انباری',
     COLAIndex: 0,
     COLAIndexTitle: 'ساعات',
     Description: 'اعلام بار انباری برون شهری',
