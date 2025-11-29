@@ -198,8 +198,9 @@ export class LoadAnnouncementConfigFormComponent extends BaseLoading {
         if (this.loading()) return;
 
         await this.withLoading(async () => {
-          const res =
-            await this.configService.DeleteLoadAnnouncementConfig(row);
+          const res = await this.configService.DeleteLoadAnnouncementConfig(
+            this.serializeLoadAnnouncementConfig(row)
+          );
           if (!checkAndToastError(res, this.toast)) return;
           this.toast.success('موفق', res.data.Message);
         });
@@ -257,8 +258,9 @@ export class LoadAnnouncementConfigFormComponent extends BaseLoading {
       ...this.form.getRawValue(),
     } as LoadAnnouncementConfig;
 
-    const res =
-      await this.configService.RegisterLoadAnnouncementConfig(payload);
+    const res = await this.configService.RegisterLoadAnnouncementConfig(
+      this.serializeLoadAnnouncementConfig(payload)
+    );
     if (!checkAndToastError(res, this.toast)) return;
 
     this.toast.success('موفق', res.data.Message);
@@ -273,9 +275,29 @@ export class LoadAnnouncementConfigFormComponent extends BaseLoading {
       ...this.form.getRawValue(),
     } as LoadAnnouncementConfig;
 
-    const res = await this.configService.EditLoadAnnouncementConfig(payload);
+    const res = await this.configService.EditLoadAnnouncementConfig(
+      this.serializeLoadAnnouncementConfig(payload)
+    );
     if (!checkAndToastError(res, this.toast)) return;
 
     this.toast.success('موفق', res.data.Message);
+  }
+
+  serializeLoadAnnouncementConfig(
+    raw: LoadAnnouncementConfig
+  ): LoadAnnouncementConfig {
+    return {
+      COLAId: Number(raw.COLAId),
+      COLAName: raw.COLAName ?? '',
+      COLATitle: raw.COLATitle ?? '',
+      AnnouncementId: Number(raw.AnnouncementId),
+      AnnouncementSGId: Number(raw.AnnouncementSGId),
+      AnnouncementTitle: raw.AnnouncementTitle ?? '',
+      AnnouncementSGTitle: raw.AnnouncementSGTitle ?? '',
+      COLAIndex: Number(raw.COLAIndex),
+      COLAIndexTitle: raw.COLAIndexTitle ?? '',
+      Description: raw.Description ?? '',
+      COLAValue: raw.COLAValue ?? '',
+    };
   }
 }
