@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, signal, ViewChild } from '@angular/core';
 import {
   FormBuilder,
@@ -52,7 +52,6 @@ type TariffTable = Tariff & { edit: string; delete: string };
   selector: 'app-tariffs-editor-form',
   standalone: true,
   imports: [
-    CommonModule,
     ButtonModule,
     DialogModule,
     FileUploadModule,
@@ -61,8 +60,8 @@ type TariffTable = Tariff & { edit: string; delete: string };
     ToggleSwitchInputComponent,
     SearchAutoCompleteComponent,
     ButtonComponent,
-    TableComponent,
-  ],
+    TableComponent
+],
   templateUrl: './tariffs-form.component.html',
   styleUrl: './tariffs-form.component.scss',
 })

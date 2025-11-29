@@ -47,7 +47,6 @@ export class TrafficInitialRegistrationFormComponent extends BaseLoading {
 
   override ngOnInit(): void {
     super.ngOnInit();
-    // you could preload data here if needed:
     this.loadCardSelections();
   }
 

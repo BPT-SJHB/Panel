@@ -4,6 +4,8 @@ export interface LoadAnnouncementConfig {
   COLATitle: string;
   AnnouncementId: number; //
   AnnouncementSGId: number; //
+  AnnouncementTitle: string;
+  AnnouncementSGTitle: string;
   COLAIndex: number; ////
   COLAIndexTitle: string;
   Description: string;

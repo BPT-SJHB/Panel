@@ -1,66 +1,61 @@
 <div>
-  <!-- Toolbar -->
+  <!-- ------------------------------------------------------------------
+       Toolbar
+  ------------------------------------------------------------------- -->
   <div class="flex justify-end mb-4">
     <app-button
       label="جدید"
-      (click)="resetForm()"
+      (click)="onNew()"
       severity="info"
       styleClass="w-28 md:w-36"
     />
   </div>
 
-  <!-- Form Grid -->
-  <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+  <!-- ------------------------------------------------------------------
+       Main Form Grid
+  ------------------------------------------------------------------- -->
+  <div class="grid gap-4 grid-cols-1 lg:grid-cols-2">
     <!-- Traffic Card Type Selection -->
     <app-select-input
       label="نوع کارت"
       placeholder="انتخاب نوع کارت"
       [options]="trafficCardTypeSelection()"
-      [control]="ctrl('TrafficSelectedCardTypeId')"
+      [control]="ctrl('TrafficCardTypeId')"
       [addonWidth]="addonWidth"
     />
 
-    <!-- Traffic Card Type ID (readonly) -->
+    <!-- Traffic Card Type ID (hidden/readonly) -->
     <app-text-input
       label="شناسه"
+      placeholder="شناسه کارت"
+      type="number"
       [control]="ctrl('TrafficCardTypeId')"
       [readOnly]="true"
-      type="number"
-      placeholder="شناسه کارت"
       [addonWidth]="addonWidth"
+      hidden
     />
 
     <!-- Traffic Card Title -->
     <app-text-input
       label="عنوان"
-      [control]="ctrl('TrafficCardTypeTitle')"
       placeholder="عنوان کارت"
+      [control]="ctrl('TrafficCardTypeTitle')"
       [addonWidth]="addonWidth"
       validationField="title"
     />
 
-    <!-- Active Status Toggle -->
+    <!-- Active Status -->
     <app-toggle-switch-input
       class="px-5"
-      label="وضعیت فعال"
+      label="وضعیت"
       [control]="ctrl('Active')"
     />
   </div>
 
-  <!-- Actions -->
+  <!-- ------------------------------------------------------------------
+       Actions
+  ------------------------------------------------------------------- -->
   <div class="flex gap-3 justify-end mt-6">
-    <app-button
-      label="ثبت"
-      (click)="registerTrafficCardType()"
-      severity="primary"
-      styleClass="w-28 md:w-36"
-      [disabled]="
-        isFormInvalidExcept('TrafficCardTypeId') ||
-        ctrl('TrafficCardTypeId').valid ||
-        loading()
-      "
-    />
-
     <app-button
       label="ویرایش"
       (click)="editTrafficCardType()"
@@ -70,3 +65,36 @@
     />
   </div>
 </div>
+
+<!-- --------------------------------------------------------------------
+     Register Dialog
+--------------------------------------------------------------------- -->
+<p-dialog
+  [(visible)]="isFormVisible"
+  header="نوع کارت تردد"
+  [modal]="true"
+  [style]="{ width: '40rem', maxWidth: '100%' }"
+  [maskStyle]="{ padding: '1rem' }"
+>
+  <div class="grid grid-cols-1">
+    <!-- Traffic Card Title (new) -->
+    <app-text-input
+      label="عنوان"
+      placeholder="عنوان کارت"
+      [control]="editTitleTrafficForm"
+      [addonWidth]="addonWidth"
+      validationField="title"
+    />
+
+    <!-- Dialog Actions -->
+    <div class="flex gap-3 justify-end mt-6">
+      <app-button
+        label="ثبت"
+        (click)="registerTrafficCardType()"
+        severity="primary"
+        styleClass="w-28 md:w-36"
+        [disabled]="editTitleTrafficForm.invalid || loading()"
+      />
+    </div>
+  </div>
+</p-dialog>

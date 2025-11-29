@@ -24,7 +24,7 @@
             <div class="inline-flex flex-col max-w-[75%]">
               <!-- Chat Bubble -->
               <div
-                class="relative px-4 py-3 rounded-2xl border border-primary shadow-sm break-words flex flex-col gap-3"
+                class="relative px-4 py-3 rounded-2xl border border-primary shadow-sm wrap-break-word flex flex-col gap-3"
                 [ngClass]="{
                   'bg-primary-contrast': !isSender(chat.senderId),
                   'bg-highlight-emphasis': isSender(chat.senderId),
@@ -79,7 +79,7 @@
   </div>
 
   <!-- Chat Input -->
-  <div class="w-full border-t-1 px-4 py-4">
+  <div class="w-full border-t px-4 py-4">
     <app-chat-box-input
       (clickSend)="sendMessage()"
       (clickFile)="uploadFileVisible = true"

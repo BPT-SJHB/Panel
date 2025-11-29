@@ -104,7 +104,7 @@
     [maskStyle]="{ padding: '1rem' }"
   >
     @if (chatDialogVisible && currentTicket()) {
-      <div class="border-t-1">
+      <div class="border-t">
         <app-ticket-chat-message-form
           [ticket]="currentTicket()"
           [userId]="currentTicket()?.userId ?? 0"

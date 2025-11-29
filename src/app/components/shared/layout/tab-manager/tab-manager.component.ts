@@ -8,6 +8,7 @@ import {
   effect,
   signal,
   HostListener,
+  AfterViewChecked,
 } from '@angular/core';
 import { NgClass } from '@angular/common';
 
@@ -41,7 +42,9 @@ import { DashboardContentManagerComponent } from '../dashboard-content-manager/d
   styleUrl: './tab-manager.component.scss',
   imports: [NgClass, TabsModule],
 })
-export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
+export class TabManagerComponent
+  implements OnInit, AfterViewInit, OnDestroy, AfterViewChecked
+{
   // ================================
   // Signals & State
   // ================================
@@ -169,7 +172,9 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
     this.selectTab.set(tab);
   }
 
-  onSubTabChange(index: string | number): void {
+  onSubTabChange(index?: string | number): void {
+    if (index) return;
+
     this.selectTab.update((tab) =>
       tab ? { ...tab, selectedSubTab: Number(index) } : tab!
     );

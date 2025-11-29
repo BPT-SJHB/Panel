@@ -13,7 +13,7 @@ import { Dialog } from 'primeng/dialog';
 import { Subscription } from 'rxjs';
 import { SearchInputComponent } from 'app/components/shared/inputs/search-input/search-input.component';
 import { FormControl } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { createTab } from 'app/store/tab/tab.actions';
 import { TabComponentKey } from 'app/constants/tab-component-registry';
 import { DEFAULT_MAIN_TAB_ID } from 'app/store/tab/tab.reducer';
@@ -27,9 +27,8 @@ import { InputText } from 'primeng/inputtext';
     TextInputComponent,
     Dialog,
     SearchInputComponent,
-    CommonModule,
-    Button,
-  ],
+    Button
+],
   templateUrl: './search-processes.component.html',
   styleUrls: ['./search-processes.component.scss'],
 })

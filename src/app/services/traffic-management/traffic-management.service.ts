@@ -47,11 +47,12 @@ export class TrafficManagementService {
     trafficCardTypeInfo: TrafficCardType
   ): Promise<ApiResponse<ShortResponse>> {
     //#region Consts
-    const apiUrl = API_ROUTES.TrafficAPI.RegisterTrafficCardType;
+    const apiUrl = API_ROUTES.TrafficAPI.EditTrafficCardType;
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
       RawTrafficCardType: trafficCardTypeInfo,
     };
+
     //#endregion
 
     //#region Request + Return
@@ -142,7 +143,9 @@ export class TrafficManagementService {
     const apiUrl = API_ROUTES.TrafficAPI.RegisterTrafficCost;
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
-      ...trafficCost,
+      RawTrafficCost: {
+        ...trafficCost,
+      },
     };
     //#endregion
 
