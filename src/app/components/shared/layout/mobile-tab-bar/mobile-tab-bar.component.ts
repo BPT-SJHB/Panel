@@ -90,7 +90,9 @@ export class MobileTabBarComponent extends BaseLoading {
       const middle = Math.floor(tabData.length / 2);
       tabData.splice(middle, 0, this.mainTab);
 
-      this.tabs.set(tabData);
+      console.log(tabData);
+
+      this.tabs.set([...tabData]);
     });
   }
 
