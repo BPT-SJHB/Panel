@@ -169,7 +169,9 @@ export class TabManagerComponent implements OnInit, AfterViewInit, OnDestroy {
     this.selectTab.set(tab);
   }
 
-  onSubTabChange(index: string | number): void {
+  onSubTabChange(index?: string | number): void {
+    if (index) return;
+
     this.selectTab.update((tab) =>
       tab ? { ...tab, selectedSubTab: Number(index) } : tab!
     );
