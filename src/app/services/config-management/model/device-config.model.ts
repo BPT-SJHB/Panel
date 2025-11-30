@@ -1,4 +1,4 @@
-export interface Device {
+export interface DeviceInfo {
   DeviceId: number;
   DeviceTitle: string;
   DeviceLocation: string;
@@ -6,7 +6,7 @@ export interface Device {
 }
 
 export type RegisterInfoOfDevice = Pick<
-  Device,
+  DeviceInfo,
   'DeviceTitle' | 'DeviceLocation' | 'Active'
 >;
-export type DeleteInfoOfDevice = Pick<Device, 'DeviceId'>;
+export type DeleteInfoOfDevice = Pick<DeviceInfo, 'DeviceId'>;
