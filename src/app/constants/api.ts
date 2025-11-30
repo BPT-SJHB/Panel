@@ -290,6 +290,11 @@ export const API_ROUTES = {
 
     GetAllOfGeneralConfig: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}GetAllOfConfigurations`,
     EditGeneralConfig: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}GeneralConfigurationEditing`,
+
+    GetAllOfDevices: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}GetAllDevices`,
+    RegisterDevice: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}DeviceRegistering`,
+    EditDevice: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}DeviceEditing`,
+    DeleteDevice: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}DeviceDeleting`,
   },
   CarouselAPI: {
     GetCarousels: `${environment.apiUrl}:${CarouselsPort}${apiFixURLPart}GetCarousels`,
