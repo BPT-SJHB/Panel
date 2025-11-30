@@ -54,6 +54,8 @@ import { TrafficCardTypeFormComponent } from 'app/components/forms/traffic-manag
 import { TrafficEntriesFormComponent } from 'app/components/forms/traffic-management-forms/traffic-entries-form/traffic-entries-form.component';
 import { CarouselFormComponent } from 'app/components/forms/carousel-form/carousel-form.component';
 import { LoadAnnouncementConfigFormComponent } from 'app/components/forms/load-announcement-config-form/load-announcement-config-form.component';
+import { GeneralConfigurationFormComponent } from 'app/components/forms/general-configuration-form/general-configuration-form.component';
+import { share } from 'rxjs';
 
 export enum TabComponentKey {
   Main = -1,
@@ -120,6 +122,7 @@ export enum TabComponentKey {
   TrafficsAndParkingTariffManagement = 18,
   TrafficInitialRegistrationManagement = 34,
 
+  GeneralConfigurationManagement = 45,
   LoadAnnouncementConfigManagement = 46,
 
   TicketManagement = 71,
@@ -595,6 +598,15 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       {
         title: 'پیکربندی اعلام بار',
         component: LoadAnnouncementConfigFormComponent,
+      },
+    ],
+  },
+  [TabComponentKey.GeneralConfigurationManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: 'پیکربندی عمومی سیستم',
+        component: GeneralConfigurationFormComponent,
       },
     ],
   },
