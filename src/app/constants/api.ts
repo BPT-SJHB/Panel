@@ -287,6 +287,9 @@ export const API_ROUTES = {
     DeleteLoadAnnouncementConfig: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}ConfigurationOfLoadAnnouncementDeleting`,
     RegisterLoadAnnouncementConfig: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}ConfigurationOfLoadAnnouncementRegistering`,
     EditLoadAnnouncementConfig: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}ConfigurationOfLoadAnnouncementEditing`,
+
+    GetAllOfGeneralConfig: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}GetAllOfConfigurations`,
+    EditGeneralConfig: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}GeneralConfigurationEditing`,
   },
   CarouselAPI: {
     GetCarousels: `${environment.apiUrl}:${CarouselsPort}${apiFixURLPart}GetCarousels`,
