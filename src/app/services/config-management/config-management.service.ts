@@ -10,6 +10,11 @@ import { mockLoadAnnouncementConfigs } from './mock/load-announcement-config.moc
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { ShortResponse } from 'app/data/model/short-response.model';
 import { mockShortResponse } from 'app/data/mock/short-response.mock';
+import {
+  EditInfoOfGeneralConfig,
+  GeneralConfig,
+} from './model/general-config.model';
+import { mockGeneralConfigs } from './mock/general-config.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +22,8 @@ import { mockShortResponse } from 'app/data/mock/short-response.mock';
 export class ConfigManagementService {
   private userAuth = inject(UserAuthService);
   private apiCommunicator = inject(APICommunicationManagementService);
+
+  //#region LoadAnnouncementConfig
 
   public async GetAllOfLoadAnnouncementConfig(): Promise<
     ApiResponse<LoadAnnouncementConfig[]>
@@ -95,4 +102,45 @@ export class ConfigManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  //#endregion
+
+  //#region GeneralConfig
+
+  public async GetAllOfGeneralConfig(): Promise<ApiResponse<GeneralConfig[]>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.KernelTasksAPI.GetAllOfGeneralConfig;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      GeneralConfig[]
+    >(apiUrl, bodyValue, mockGeneralConfigs);
+    //#endregion
+  }
+
+  public async EditGeneralConfig(
+    generalInfo: EditInfoOfGeneralConfig
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.KernelTasksAPI.EditGeneralConfig;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      RawGeneralConfiguration: generalInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  //#endregion
 }
