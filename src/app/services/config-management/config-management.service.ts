@@ -15,6 +15,12 @@ import {
   GeneralConfig,
 } from './model/general-config.model';
 import { mockGeneralConfigs } from './mock/general-config.mock';
+import { mockDeviceInfos } from './mock/device-config.mock';
+import {
+  DeleteInfoOfDevice,
+  DeviceInfo,
+  RegisterInfoOfDevice,
+} from './model/device-config.model';
 
 @Injectable({
   providedIn: 'root',
@@ -142,5 +148,81 @@ export class ConfigManagementService {
     //#endregion
   }
 
+  //#endregion
+
+  //#region Devices
+
+  public async GetAllOfDevices(): Promise<ApiResponse<DeviceInfo[]>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.KernelTasksAPI.GetAllOfDevices;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      DeviceInfo[]
+    >(apiUrl, bodyValue, mockDeviceInfos);
+    //#endregion
+  }
+
+  public async RegisterDevice(
+    deviceInfo: RegisterInfoOfDevice
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.KernelTasksAPI.RegisterDevice;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      RawDevice: deviceInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async EditDevice(
+    deviceInfo: DeviceInfo
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.KernelTasksAPI.EditDevice;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      RawDevice: deviceInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async DeleteDevice(
+    deviceInfo: DeleteInfoOfDevice
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.KernelTasksAPI.DeleteDevice;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      DeviceId: deviceInfo.DeviceId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
   //#endregion
 }

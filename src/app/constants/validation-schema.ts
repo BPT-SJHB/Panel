@@ -244,7 +244,7 @@ export const ValidationSchema = {
   },
   description: {
     name: 'توضیحات',
-    validators: [Validators.required, Validators.minLength(5)],
+    validators: [Validators.required, Validators.minLength(3)],
   },
   price: {
     name: 'مبلغ شارژ',

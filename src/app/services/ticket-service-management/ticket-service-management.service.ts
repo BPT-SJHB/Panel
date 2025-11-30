@@ -141,7 +141,7 @@ export class TicketServiceManagementService {
   ): Promise<ApiResponse<ChatMessage>> {
     const mockResponse: ChatMessage = {
       ...chat,
-      id: crypto.randomUUID(),
+      id: '',
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
