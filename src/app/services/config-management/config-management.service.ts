@@ -18,7 +18,7 @@ import { mockGeneralConfigs } from './mock/general-config.mock';
 import { mockDevices } from './mock/device-config.mock';
 import {
   DeleteInfoOfDevice,
-  Device,
+  DeviceInfo,
   RegisterInfoOfDevice,
 } from './model/device-config.model';
 
@@ -152,7 +152,7 @@ export class ConfigManagementService {
 
   //#region Devices
 
-  public async GetAllOfDevices(): Promise<ApiResponse<Device[]>> {
+  public async GetAllOfDevices(): Promise<ApiResponse<DeviceInfo[]>> {
     //#region Consts
     const apiUrl = API_ROUTES.KernelTasksAPI.GetAllOfDevices;
     const bodyValue = {
@@ -163,7 +163,7 @@ export class ConfigManagementService {
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      Device[]
+      DeviceInfo[]
     >(apiUrl, bodyValue, mockDevices);
     //#endregion
   }
@@ -188,7 +188,7 @@ export class ConfigManagementService {
   }
 
   public async EditDevice(
-    deviceInfo: Device
+    deviceInfo: DeviceInfo
   ): Promise<ApiResponse<ShortResponse>> {
     //#region Consts
     const apiUrl = API_ROUTES.KernelTasksAPI.EditDevice;

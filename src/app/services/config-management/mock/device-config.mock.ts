@@ -1,6 +1,6 @@
-import { Device } from '../model/device-config.model';
+import { DeviceInfo } from '../model/device-config.model';
 
-export const mockDevices: Device[] = [
+export const mockDevices: DeviceInfo[] = [
   {
     DeviceId: 1,
     DeviceTitle: 'ورودي تريلي',
