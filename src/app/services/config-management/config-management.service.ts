@@ -15,7 +15,7 @@ import {
   GeneralConfig,
 } from './model/general-config.model';
 import { mockGeneralConfigs } from './mock/general-config.mock';
-import { mockDeviceInfos } from './mock/device-config.mock';
+import { mockDevicesInfo } from './mock/device-config.mock';
 import {
   DeleteInfoOfDevice,
   DeviceInfo,
@@ -164,7 +164,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       DeviceInfo[]
-    >(apiUrl, bodyValue, mockDeviceInfos);
+    >(apiUrl, bodyValue, mockDevicesInfo);
     //#endregion
   }
 
