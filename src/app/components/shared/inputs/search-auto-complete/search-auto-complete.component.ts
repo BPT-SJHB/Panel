@@ -110,7 +110,8 @@ export class SearchAutoCompleteComponent<T extends object> {
       const result = await this.lazySearch!(searchQuery);
       this.lastSearchKey = currentKey;
       this.cachedResults = result;
-      this.suggestions.set(result);
+
+      this.suggestions.set(this.filterSuggestions(this.cachedResults, query));
     } finally {
       this.loading.set(false);
     }
@@ -205,7 +206,7 @@ export class SearchAutoCompleteComponent<T extends object> {
 
   getDropDownStyle() {
     const valueLen = this.control.value?.length ?? 0;
-    let count = this.suggestions().length - 1;
+    let count = this.suggestions().length;
     if (
       this.isDropDownHidden() ||
       valueLen < this.minLength ||
@@ -219,6 +220,7 @@ export class SearchAutoCompleteComponent<T extends object> {
     const itemHeight = 3.55; // px per item
     const max = itemHeight * 4; // max px
     const height = Math.min(itemHeight * count, max);
+
     return { height: `${height}rem`, width: this.width() };
   }
 }
