@@ -16,6 +16,10 @@ import { LADPlace } from 'app/data/model/lad-place.model';
 import { ProductTypesService } from '../product-types/product-types.service';
 import { LADPlaceManagementService } from '../lad-place-management/lad-place-management.service';
 import { AppTitles } from 'app/constants/Titles';
+import { DeviceInfo } from '../config-management/model/device-info.model';
+import { ConfigManagementService } from '../config-management/config-management.service';
+import { LoaderType } from '../loader-types/model/loader-type.model';
+import { LoaderTypesService } from '../loader-types/loader-types.service';
 
 export enum AutoCompleteType {
   AnnouncementGroup = 'AnnouncementGroup',
@@ -26,6 +30,8 @@ export enum AutoCompleteType {
   TransportCompany = 'TransportCompany',
   Product = 'Product',
   LADPlaces = 'LADPlaces',
+  Devices = 'Devices',
+  LoaderType = 'LoaderType',
 }
 
 type CachingMode = 'Focus' | 'CharacterPrefix';
@@ -40,6 +46,8 @@ interface AutoCompleteTypeMap {
   [AutoCompleteType.City]: City;
   [AutoCompleteType.Product]: ProductType;
   [AutoCompleteType.LADPlaces]: LADPlace;
+  [AutoCompleteType.Devices]: DeviceInfo;
+  [AutoCompleteType.LoaderType]: LoaderType;
 }
 
 // Base filter type bound to a specific AutoCompleteType
@@ -76,6 +84,9 @@ export type RelationAnnouncementGroupAndSubGroupFilter =
 export type LADPlacesFilter =
   BaseAutoCompleteFilter<AutoCompleteType.LADPlaces>;
 export type ProductFilter = BaseAutoCompleteFilter<AutoCompleteType.Product>;
+export type LoaderTypeFilter =
+  BaseAutoCompleteFilter<AutoCompleteType.LoaderType>;
+export type DeviceFilter = BaseAutoCompleteFilter<AutoCompleteType.Devices>;
 
 // Union of all filters
 export type AutoCompleteFilter =
@@ -83,7 +94,9 @@ export type AutoCompleteFilter =
   | AnnouncementSubGroupFilter
   | LoadStatusFilter
   | TransportCompanyFilter
-  | CityFilter;
+  | CityFilter
+  | LoaderTypeFilter
+  | DeviceFilter;
 
 @Injectable({
   providedIn: 'root',
@@ -93,6 +106,7 @@ export class AutoCompleteConfigFactoryService {
   private readonly provinceService = inject(ProvinceAndCityManagementService);
   private readonly productService = inject(ProductTypesService);
   private readonly ladPlacesService = inject(LADPlaceManagementService);
+  private readonly configService = inject(ConfigManagementService);
   private readonly transportCompanyService = inject(
     TransportCompaniesManagementService
   );
@@ -100,6 +114,7 @@ export class AutoCompleteConfigFactoryService {
     AnnouncementGroupSubgroupManagementService
   );
   private readonly loadsService = inject(LoadManagementService);
+  private readonly loadTypeService = inject(LoaderTypesService);
   private readonly toast = inject(ToastService);
 
   private readonly appTitle = AppTitles;
@@ -147,6 +162,26 @@ export class AutoCompleteConfigFactoryService {
       optionLabel: 'LoadStatusTitle' as keyof LoadStatus,
       optionValueKey: 'LoadStatusId' as keyof LoadStatus,
       minLength: 0,
+      cachingMode: 'Focus' as const,
+    },
+
+    [AutoCompleteType.Devices]: {
+      type: AutoCompleteType.Devices,
+      label: 'دیوایس',
+      placeholder: 'دیوایس',
+      optionLabel: 'DeviceTitle' as keyof DeviceInfo,
+      optionValueKey: 'DeviceId' as keyof DeviceInfo,
+      minLength: 0,
+      cachingMode: 'Focus' as const,
+    },
+
+    [AutoCompleteType.LoaderType]: {
+      type: AutoCompleteType.LoaderType,
+      label: this.appTitle.inputs.loads.loadType,
+      placeholder: this.appTitle.inputs.loads.loadType,
+      optionLabel: 'LoaderTypeTitle' as keyof LoaderType,
+      optionValueKey: 'LoaderTypeId' as keyof LoaderType,
+      minLength: 2,
       cachingMode: 'Focus' as const,
     },
 
@@ -248,6 +283,13 @@ export class AutoCompleteConfigFactoryService {
             item[config.optionValueKey as keyof LoadStatus]
           );
 
+      case AutoCompleteType.LoaderType:
+        return (item: LoaderType) =>
+          this.onSelectAutoCompletion(
+            controlId,
+            item[config.optionValueKey as keyof LoaderType]
+          );
+
       case AutoCompleteType.TransportCompany:
         return (item: TransportCompany) =>
           this.onSelectAutoCompletion(
@@ -276,6 +318,13 @@ export class AutoCompleteConfigFactoryService {
             item[config.optionValueKey as keyof LADPlace]
           );
 
+      case AutoCompleteType.Devices:
+        return (item: DeviceInfo) =>
+          this.onSelectAutoCompletion(
+            controlId,
+            item[config.optionValueKey as keyof DeviceInfo]
+          );
+
       default:
         throw new Error(`Unsupported AutoCompleteType: ${type}`);
     }
@@ -291,6 +340,9 @@ export class AutoCompleteConfigFactoryService {
 
       case AutoCompleteType.LoadStatus:
         return () => this.getSearchLoadStatus();
+
+      case AutoCompleteType.LoaderType:
+        return (query: string) => this.getSearchLoaderType(query);
 
       case AutoCompleteType.TransportCompany:
         return (query: string) => this.getSearchTransportCompany(query);
@@ -310,6 +362,9 @@ export class AutoCompleteConfigFactoryService {
 
       case AutoCompleteType.LADPlaces:
         return (query: string) => this.getSearchLadPlace(query);
+
+      case AutoCompleteType.Devices:
+        return (_: string) => this.getDevices();
 
       default:
         throw new Error(`Unsupported AutoCompleteType: ${type}`);
@@ -336,6 +391,10 @@ export class AutoCompleteConfigFactoryService {
     return res.data ?? [];
   }
 
+  private async getSearchLoaderType(query: string): Promise<LoaderType[]> {
+    const res = await this.loadTypeService.GetLoaderTypesInfo(query);
+    return res.data ?? [];
+  }
   private async getSearchLadPlace(query: string): Promise<LADPlace[]> {
     const res = await this.ladPlacesService.GetLADPlaces(query);
     return res.data ?? [];
@@ -352,6 +411,11 @@ export class AutoCompleteConfigFactoryService {
     const res =
       await this.transportCompanyService.GetTransportCompaniesInfo(query);
     return res.data ?? [];
+  }
+
+  private async getDevices(): Promise<DeviceInfo[]> {
+    const response = await this.configService.GetAllOfDevices();
+    return response.data ?? [];
   }
 
   private async getSearchCity(query: string): Promise<City[]> {
