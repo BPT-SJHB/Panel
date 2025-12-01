@@ -173,7 +173,7 @@ export class TabManagerComponent
   }
 
   onSubTabChange(index?: string | number): void {
-    if (index) return;
+    if (index === undefined) return;
 
     this.selectTab.update((tab) =>
       tab ? { ...tab, selectedSubTab: Number(index) } : tab!

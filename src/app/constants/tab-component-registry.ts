@@ -56,6 +56,7 @@ import { CarouselFormComponent } from 'app/components/forms/carousel-form/carous
 import { LoadAnnouncementConfigFormComponent } from 'app/components/forms/load-announcement-config-form/load-announcement-config-form.component';
 import { GeneralConfigurationFormComponent } from 'app/components/forms/general-configuration-form/general-configuration-form.component';
 import { share } from 'rxjs';
+import { DeviceManagementFormComponent } from 'app/components/forms/device-management-form/device-management-form.component';
 
 export enum TabComponentKey {
   Main = -1,
@@ -122,6 +123,7 @@ export enum TabComponentKey {
   TrafficsAndParkingTariffManagement = 18,
   TrafficInitialRegistrationManagement = 34,
 
+  DeviceManagemnt = 36,
   GeneralConfigurationManagement = 45,
   LoadAnnouncementConfigManagement = 46,
 
@@ -607,6 +609,15 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       {
         title: 'پیکربندی عمومی سیستم',
         component: GeneralConfigurationFormComponent,
+      },
+    ],
+  },
+  [TabComponentKey.DeviceManagemnt]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: 'مدیریت دیپایس',
+        component: DeviceManagementFormComponent,
       },
     ],
   },

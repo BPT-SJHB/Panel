@@ -1,0 +1,64 @@
+<!-- Table showing all devices -->
+<app-table
+  [columns]="columns"
+  [rows]="devices()"
+  [enableCaptionButton]="true"
+  (clickCaptionButton)="onNew()"
+></app-table>
+
+<p-dialog
+  [header]="dialogTitle()"
+  [(visible)]="isDialogVisable"
+  [modal]="true"
+  [draggable]="false"
+  [style]="{ width: '40rem', maxWidth: '100%' }"
+  [maskStyle]="{ padding: '1rem' }"
+>
+  <div class="grid gap-y-3 gap-x-2 grid-cols-1">
+    <!-- Device ID (read-only) -->
+    <app-text-input
+      label="شناسه"
+      [control]="ctrl('DeviceId')"
+      [readOnly]="true"
+      [addonWidth]="addonWidth"
+      validationField="id"
+      [hidden]="formMode() === FormMode.REGISTER"
+    ></app-text-input>
+
+    <!-- Device title -->
+    <app-text-input
+      label="عنوان دیوایس"
+      [control]="ctrl('DeviceTitle')"
+      [addonWidth]="addonWidth"
+      validationField="title"
+    ></app-text-input>
+
+    <!-- Device location -->
+    <app-text-input
+      label="محل دیوایس"
+      [control]="ctrl('DeviceLocation')"
+      [addonWidth]="addonWidth"
+      validationField="deviceLocation"
+    ></app-text-input>
+
+    <!-- Active / inactive status -->
+    <app-toggle-switch-input
+      label="وضعیت"
+      [control]="ctrl('Active')"
+      language="any"
+      [readonly]="formMode() === FormMode.REGISTER"
+    ></app-toggle-switch-input>
+  </div>
+
+  <!-- Dialog action button -->
+  <div class="flex justify-end mt-4 pb-2">
+    <app-button
+      styleClass="w-40"
+      severity="info"
+      (onClick)="submitForm()"
+      [disabled]="loading() || form.invalid"
+    >
+      ثبت و ویرایش
+    </app-button>
+  </div>
+</p-dialog>

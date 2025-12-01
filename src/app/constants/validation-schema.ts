@@ -304,6 +304,11 @@ export const ValidationSchema = {
       ),
     ],
   },
+
+  deviceLocation: {
+    name: 'محل قرارگیری دیوایس',
+    validators: [Validators.required],
+  },
 };
 
 export type ValidationField = keyof typeof ValidationSchema;
