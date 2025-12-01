@@ -3,7 +3,7 @@ import { BaseLoading } from '../shared/component-base/base-loading';
 import { ConfigManagementService } from 'app/services/config-management/config-management.service';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ValidationSchema } from 'app/constants/validation-schema';
-import { DeviceInfo } from 'app/services/config-management/model/device-config.model';
+import { DeviceInfo } from 'app/services/config-management/model/device-info.model';
 
 import {
   deleteCell,
