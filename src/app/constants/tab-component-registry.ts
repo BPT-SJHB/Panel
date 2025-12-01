@@ -55,8 +55,9 @@ import { TrafficEntriesFormComponent } from 'app/components/forms/traffic-manage
 import { CarouselFormComponent } from 'app/components/forms/carousel-form/carousel-form.component';
 import { LoadAnnouncementConfigFormComponent } from 'app/components/forms/load-announcement-config-form/load-announcement-config-form.component';
 import { GeneralConfigurationFormComponent } from 'app/components/forms/general-configuration-form/general-configuration-form.component';
-import { share } from 'rxjs';
 import { DeviceManagementFormComponent } from 'app/components/forms/device-management-form/device-management-form.component';
+import { EquipmentDeviceConfigFormComponent } from 'app/components/forms/equipment-device-config-form/equipment-device-config-form.component';
+import { LoaderTypeAnnouncementRelationFormComponent } from 'app/components/forms/loader-type-announcement-relation-form/loader-type-announcement-relation-form.component';
 
 export enum TabComponentKey {
   Main = -1,
@@ -126,6 +127,7 @@ export enum TabComponentKey {
   DeviceManagemnt = 36,
   GeneralConfigurationManagement = 45,
   LoadAnnouncementConfigManagement = 46,
+  EquipmentDeviceManagement = 47,
 
   TicketManagement = 71,
 }
@@ -237,7 +239,13 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
 
   [TabComponentKey.LoaderTypeManagement]: {
     sharedSignal: false,
-    subTab: [{ title: 'بارگیرها', component: LoaderTypeFormComponent }],
+    subTab: [
+      { title: 'بارگیرها', component: LoaderTypeFormComponent },
+      {
+        title: 'بارگیر-گروه و زیرگروه اعلام بار',
+        component: LoaderTypeAnnouncementRelationFormComponent,
+      },
+    ],
   },
 
   [TabComponentKey.TravelTimeManagement]: {
@@ -618,6 +626,15 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       {
         title: 'مدیریت دیپایس',
         component: DeviceManagementFormComponent,
+      },
+    ],
+  },
+  [TabComponentKey.EquipmentDeviceManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: 'پیکربندی تجهیزات و دیوایس ها',
+        component: EquipmentDeviceConfigFormComponent,
       },
     ],
   },
