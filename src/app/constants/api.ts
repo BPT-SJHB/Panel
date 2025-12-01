@@ -90,6 +90,10 @@ export const API_ROUTES = {
       GetLoaderTypes: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetLoaderTypes`,
       GetLoaderTypeInfoForSoftwareUser: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetLoaderTypeBySoftwareUser`,
       ChangeLoaderTypeStatus: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}ChangeActivateStatusOfLoaderType`,
+
+      GetRelationsToAnnouncementSubGroups: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetLoaderTypeRelationAnnouncementSubGroups`,
+      RegisterRelationToAnnouncementSubGroup: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}LoaderTypeRelationAnnouncementSubGroupRegistering`,
+      DeleteRelationToAnnouncementSubGroup: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}LoaderTypeRelationAnnouncementSubGroupDeleting`,
     },
     ProductTypes: {
       GetProducts: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetProducts`,
