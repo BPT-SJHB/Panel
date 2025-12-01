@@ -90,6 +90,10 @@ export const API_ROUTES = {
       GetLoaderTypes: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetLoaderTypes`,
       GetLoaderTypeInfoForSoftwareUser: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetLoaderTypeBySoftwareUser`,
       ChangeLoaderTypeStatus: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}ChangeActivateStatusOfLoaderType`,
+
+      GetRelationsToAnnouncementSubGroups: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetLoaderTypeRelationAnnouncementSubGroups`,
+      RegisterRelationToAnnouncementSubGroup: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}LoaderTypeRelationAnnouncementSubGroupRegistering`,
+      DeleteRelationToAnnouncementSubGroup: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}LoaderTypeRelationAnnouncementSubGroupDeleting`,
     },
     ProductTypes: {
       GetProducts: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetProducts`,
@@ -295,6 +299,11 @@ export const API_ROUTES = {
     RegisterDevice: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}DeviceRegistering`,
     EditDevice: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}DeviceEditing`,
     DeleteDevice: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}DeviceDeleting`,
+
+    GetAllOfDeviceConfigs: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}GetAllConfigurationOfDevices`,
+    EditDeviceConfig: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}ConfigurationOfDeviceEditing`,
+    RegisterDeviceConfig: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}ConfigurationOfDeviceRegistering`,
+    DeleteDeviceConfig: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}ConfigurationOfDeviceDeleting`,
   },
   CarouselAPI: {
     GetCarousels: `${environment.apiUrl}:${CarouselsPort}${apiFixURLPart}GetCarousels`,

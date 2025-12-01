@@ -1,12 +1,21 @@
-export interface DeviceInfo {
+export interface DeviceConfig {
+  CODId: number;
+  CODName: string;
+  CODTitle: string;
+  CODIndex: number;
+  CODIndexTitle: string;
   DeviceId: number;
   DeviceTitle: string;
-  DeviceLocation: string;
-  Active: boolean;
+  Description: string;
+  CODValue: string;
 }
 
-export type RegisterInfoOfDevice = Pick<
-  DeviceInfo,
-  'DeviceTitle' | 'DeviceLocation' | 'Active'
+export type EditInfoOfDeviceConfig = Pick<
+  DeviceConfig,
+  'CODId' | 'CODIndex' | 'DeviceId' | 'CODValue'
 >;
-export type DeleteInfoOfDevice = Pick<DeviceInfo, 'DeviceId'>;
+
+export type DeleteInfoOfDeviceConfig = Pick<
+  DeviceConfig,
+  'CODId' | 'CODIndex' | 'DeviceId'
+>;
