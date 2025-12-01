@@ -1,0 +1,46 @@
+<app-table
+  [rows]="loaderTypeAnnouncementMappings()"
+  [columns]="columns"
+  [enableCaptionButton]="true"
+  (clickCaptionButton)="openDialog()"
+/>
+
+<p-dialog
+  [(visible)]="isDialogVisible"
+  [header]="dialogTitle()"
+  [modal]="true"
+  [style]="{
+    width: '60rem',
+    maxWidth: '100%',
+  }"
+  [maskStyle]="{ padding: '1rem' }"
+  [draggable]="false"
+>
+  <div class="grid grid-cols-1 gap-5">
+    <div class="grid grid-cols-1 gap-5">
+      <app-search-auto-complete-factory
+        [config]="loaderTypeInput"
+        [addonWidth]="addonWidth"
+      />
+
+      <app-search-auto-complete-factory
+        [config]="announcementInput"
+        [addonWidth]="addonWidth"
+      />
+
+      <app-search-auto-complete-factory
+        [config]="subAnnouncementInput"
+        [addonWidth]="addonWidth"
+      />
+    </div>
+
+    <div class="flex w-full justify-end px-3 py-3 pt-6">
+      <app-button
+        label="ثبت"
+        (click)="submitRegister()"
+        [disabled]="this.form.invalid || loading()"
+        styleClass="w-40"
+      />
+    </div>
+  </div>
+</p-dialog>
