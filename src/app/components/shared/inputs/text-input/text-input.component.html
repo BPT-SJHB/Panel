@@ -50,6 +50,7 @@
       (focus)="onFocusInput(inputRef)"
       (blur)="onBlurInput(inputRef)"
       (input)="valueChange($event)"
+      [autocomplete]="autocomplete()"
     />
 
     <!-- Button Addon -->

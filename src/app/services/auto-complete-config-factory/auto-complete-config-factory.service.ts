@@ -177,8 +177,8 @@ export class AutoCompleteConfigFactoryService {
 
     [AutoCompleteType.LoaderType]: {
       type: AutoCompleteType.LoaderType,
-      label: this.appTitle.inputs.loads.loadType,
-      placeholder: this.appTitle.inputs.loads.loadType,
+      label: 'بارگیر',
+      placeholder: 'بارگیر',
       optionLabel: 'LoaderTypeTitle' as keyof LoaderType,
       optionValueKey: 'LoaderTypeId' as keyof LoaderType,
       minLength: 2,
