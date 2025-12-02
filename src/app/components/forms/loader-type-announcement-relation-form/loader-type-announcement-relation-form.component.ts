@@ -57,7 +57,7 @@ export class LoaderTypeAnnouncementRelationFormComponent
 
   // STATE -----------------------------------------------------------
   isDialogVisible = false;
-  readonly addonWidth = '6rem';
+  readonly addonWidth = '7rem';
 
   // FORM ------------------------------------------------------------
   readonly form = this.fb.group({
@@ -110,7 +110,7 @@ export class LoaderTypeAnnouncementRelationFormComponent
   readonly columns: TableColumn<LoaderTypeAnnouncementMappingRow>[] = [
     { header: 'بارگیر', field: 'LoaderTypeTitle' },
     { header: 'گروه اعلام بارگیر', field: 'AnnouncementTitle' },
-    { header: 'بارگیر اعلام بار', field: 'AnnouncementSGTitle' },
+    { header: 'زیرگروه اعلام بار', field: 'AnnouncementSGTitle' },
     {
       ...deleteCell.config,
       field: 'delete',
