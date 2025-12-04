@@ -41,7 +41,7 @@ export class GeneralConfigurationFormComponent extends BaseLoading {
     { header: 'شناسه', field: 'CId' },
     { header: 'عنوان اصلی', field: 'CTitle' },
     { header: 'عنوان فرعی', field: 'CIndexTitle' },
-    { header: 'مقدار', field: 'CValue' },
+    { header: 'مقدار', field: 'CValue', dir: 'ltr' },
     { header: 'توضیحات', field: 'Description' },
     { field: 'edit', ...editCell.config, onAction: (row) => this.onEdit(row) },
   ];
