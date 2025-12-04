@@ -61,7 +61,7 @@ export const mockApiGroupProcess: ApiGroupProcess[] = [
         PTitle: 'صاحبین بار',
         PName: 'BarOwners',
         Description:
-          'موجودیة صاحب بار در این سامانه به منظور ردیابی محموله ، یکپارچگی در اطلاع رسانی های صورت گرفته و ایجاد ارتباط هماهنگ بین شرکت حمل و نقل ، راننده و صاحب بار است',
+          'موجودیت صاحب بار در این سامانه به منظور ردیابی محموله ، یکپارچگی در اطلاع رسانی های صورت گرفته و ایجاد ارتباط هماهنگ بین شرکت حمل و نقل ، راننده و صاحب بار است',
         PIconName: 'pi-box',
         ForeColor: 'Red',
         BackColor: 'Red',
@@ -121,7 +121,7 @@ export const mockApiGroupProcess: ApiGroupProcess[] = [
         PTitle: 'گروه ها و زیرگروه های اعلام بار',
         PName: 'Announcements',
         Description:
-          'اعلام بار بر اساس گروه ها و زیرگروه های اعلام بار صورت می گیرد.کالای حمل اساسا در یک زیرگروه اعلام بار دسته بندی می شود .امکان اعلام بار برای یک کالا در یک زیرگروه غیر مرتبط امکان پذیر نیست',
+          'اعلام بار بر اساس گروه ها  و زیرگروه های اعلام بار صورت می گیرد.کالای حمل اساسا در یک زیرگروه اعلام بار دسته بندی می شود .امکان اعلام بار برای یک کالا در یک زیرگروه غیر مرتبط امکان پذیر نیست',
         PIconName: 'pi-truck',
         ForeColor: 'Red',
         BackColor: 'Red',
@@ -285,7 +285,7 @@ export const mockApiGroupProcess: ApiGroupProcess[] = [
         PTitle: 'لیست نوبت های صادر شده',
         PName: 'TruckTurnsIssued',
         Description:
-          'از طریق این واسط راننده امکان مشاهده لیست نوبت های صادر شده را دارد.امکان ارسال درخواست ابطال نوبت نیز از این واسط وجود دارد',
+          'از طریق این واسط راننده امکان مشاهده لیست نوبت های صادر شده را دارد.امکان ارسال درخواست ابطال نوبت نیز از این واسط ��جود دارد',
         PIconName: 'pi-file',
         ForeColor: 'Red',
         BackColor: 'Red',
@@ -312,7 +312,7 @@ export const mockApiGroupProcess: ApiGroupProcess[] = [
         PTitle: 'عملکرد شارژ کاربر',
         PName: 'SoftwareUserChargingFunction',
         Description:
-          'هر کاربر ممکن است بر اساس مجوزهای موجود در سامانه اقدام به شارژ کیف پول نماید.از طریق این واسط مکان مشاهده عملکرد شارژ فراهم شده است',
+          'هر کاربر ممکن است بر اساس مجوزهای موجود در سامانه اقدام به شارژ کیف پول نماید.از طریق این واسط مکان م��اهده عملکرد شارژ فراهم شده است',
         PIconName: 'pi-cog',
         ForeColor: 'Red',
         BackColor: 'Red',
@@ -429,7 +429,7 @@ export const mockApiGroupProcess: ApiGroupProcess[] = [
         PTitle: 'ثبت درخواست حمل صاحبین کالا',
         PName: 'BarOwnerTransportationRequest',
         Description:
-          'اعلام بار و ثبت درخواست حمل بار از طرف صاحب بار که ماهیت شرکت حمل و نقل و یا مراکز و کارخانجات تولید را ندارد از طریق این منو صورت می گیرد',
+          'اعلام بار و ثبت درخواست حمل بار از طرف صاحب بار که ماهیت شرکت حمل و نقل و یا مراکز و ��ارخانجات تولید را ندارد از طریق این منو صورت می گیرد',
         PIconName: 'pi-verified',
         ForeColor: 'Red',
         BackColor: 'Red',
@@ -466,7 +466,7 @@ export const mockApiGroupProcess: ApiGroupProcess[] = [
         PTitle: 'مدیریت مجوزهای کاربر',
         PName: 'PermissionsManagement',
         Description:
-          'اعطای مجوزهای دسترسی به صورت پیش فرض توسط سیستم هنگام ثبت نام کاربر به صورت خودکار انجام می گیرد.لیکن مدیریت مجوزهای متعدی مشابه مجوز اجرای فرآیندهای خاص توسط تیم پشتیبانی و یا مدیران میانی سازمانی از طریق این واسط صورت می گیرد',
+          'اعطای مجوزهای دسترسی به صورت پیش فرض توسط سیستم هنگام ثبت نام کاربر به صورت خودکار انجام می گیرد.لیکن مدیریت مجوزهای متعدی مشابه مجوز اجرای فرآیندهای خاص توسط تیم پشتیبانی و یا مدیران میانی سازمانی از طریق این واسط صورت م�� گیرد',
         PIconName: 'pi-users',
         ForeColor: 'Red',
         BackColor: 'Red',
@@ -476,7 +476,7 @@ export const mockApiGroupProcess: ApiGroupProcess[] = [
         PTitle: 'لیست سیاه',
         PName: 'BlackLists',
         Description:
-          'لیست سیاه شامل ایجاد محدودیت هایی برای آبجکت های موجود و فعال در سامانه است.راننده ، شرکت حمل و نقل ، خودرو ، کاربر و حتی مبادی و مقاصد حمل بار جزو آبچکت های مورد نظر هستند',
+          'لیست سیاه شامل ایجاد محدودیت هایی برای  آبجکت های موجود و فعال در سامانه است.راننده ، شرکت حمل و نقل ، خودرو ، کاربر و حتی مبادی و مقاصد حمل بار جزو آبچکت های مورد نظر هستند',
         PIconName: 'pi-ban',
         ForeColor: 'Red',
         BackColor: 'Red',
@@ -573,7 +573,7 @@ export const mockApiGroupProcess: ApiGroupProcess[] = [
         PTitle: 'گزارش مجوزهای حمل بار کنسل شده',
         PName: 'LoadTransportationPermissionCancellationsReport',
         Description:
-          'کنسلی مجوز حمل با توجه به شرایط احتمالی حمل به وجود می آید.در این گزارش سوابق کنسلی مجوز حمل و دلایل آن ارائه شده است',
+          'کنسلی مجوز حمل با توجه به شرایط احتمالی حم�� به وجود می آید.در این گزارش سوابق کنسلی مجوز حمل و دلایل آن ارائه شده است',
         PIconName: 'pi-stop-circle',
         ForeColor: 'Red',
         BackColor: 'Red',
@@ -652,7 +652,7 @@ export const mockApiGroupProcess: ApiGroupProcess[] = [
   },
   {
     PGId: 7,
-    PGTitle: 'عملیات',
+    PGTitle: 'پشتیبانی',
     PGIconName: 'pi-desktop',
     WebProcesses: [
       {
@@ -662,6 +662,43 @@ export const mockApiGroupProcess: ApiGroupProcess[] = [
         Description:
           'کاربران پشتیبان سامانه از طریق این منو تیکت های ارسالی کاربران را پایش و اقدام به ارائه راه حل و پاسخ مطلوب می نمایند',
         PIconName: 'pi-headphones',
+        ForeColor: 'Red',
+        BackColor: 'Red',
+      },
+    ],
+  },
+  {
+    PGId: 8,
+    PGTitle: 'تنظیمات',
+    PGIconName: 'pi-desktop',
+    WebProcesses: [
+      {
+        PId: 45,
+        PTitle: 'پیکربندی عمومی سیستم',
+        PName: 'GeneralConfiguration',
+        Description:
+          'مدیر سیستم می تواند از طریق این منو اقدام به تغییر تنظیمات عمومی سیستم مثل رنگ ، فونت و یا حتی قواعد عمومی حمل نماید.فعالیت در این واسط نیاز به اطلاعات تخصصی در سامانه دارد',
+        PIconName: 'pi-table',
+        ForeColor: 'Red',
+        BackColor: 'Red',
+      },
+      {
+        PId: 46,
+        PTitle: 'پیکربندی اعلام بار',
+        PName: 'LoadAnnouncementConfiguration',
+        Description:
+          'بارهای اعلام شده در گروههای اعلام بار و زیرگروه های اعلام بار دسته بندی می شوند.تنظیمات ساعات اعلام بار ، قواعد رسوب بار و زمانبندی های هر فرآیند مختص گروه ها و زیرگروه های بار از طریق این منو صورت می گیرد',
+        PIconName: 'pi-sitemap',
+        ForeColor: 'Red',
+        BackColor: 'Red',
+      },
+      {
+        PId: 47,
+        PTitle: 'پیکربندی تجهیزات و دیوایس ها',
+        PName: 'ComponentConfiguration',
+        Description:
+          'تجهیزاتی مثل دوربین پلاک خوان ، دستگاههای پوز ، دستگاههای کارت خوان آر اف ، دستگاههای اثر انگشت و ... که به صورت فیزیکی به سامانه متصل می باشند مشمول تنظیماتی هستند تا هنگام اجرا عملکرد مطلوبی ارائه دهند',
+        PIconName: 'pi-th-large',
         ForeColor: 'Red',
         BackColor: 'Red',
       },

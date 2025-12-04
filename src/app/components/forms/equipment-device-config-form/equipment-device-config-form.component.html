@@ -1,0 +1,62 @@
+<app-table [rows]="devicesConfig()" [columns]="columns" />
+
+<p-dialog
+  [(visible)]="isDialogVisible"
+  [header]="dialogTitle()"
+  [modal]="true"
+  [style]="{
+    width: '60rem',
+    maxWidth: '100%',
+  }"
+  [maskStyle]="{ padding: '1rem' }"
+  [draggable]="false"
+>
+  <div class="grid grid-cols-1 gap-5">
+    <div class="gap-x-2 gap-y-5 grid grid-cols-1 md:grid-cols-3">
+      <app-text-input
+        label="شناسه"
+        [control]="this.ctrl('CODId')"
+        [readOnly]="true"
+        [addonWidth]="addonWidth"
+      />
+
+      <app-text-input
+        label="عنوان اصلی"
+        [control]="this.ctrl('CODTitle')"
+        [readOnly]="true"
+        [addonWidth]="addonWidth"
+      />
+
+      <app-text-input
+        label="عنوان فرعی"
+        [control]="this.ctrl('CODIndexTitle')"
+        [readOnly]="true"
+        [addonWidth]="addonWidth"
+      />
+    </div>
+
+    <div class="grid grid-cols-1 gap-5 py-2">
+      <app-search-auto-complete-factory
+        [config]="DevicesInput"
+        [addonWidth]="addonWidth"
+      />
+
+      <app-text-input
+        language="any"
+        label="مقدار"
+        [control]="this.ctrl('CODValue')"
+        placeholder="مقدار"
+        [addonWidth]="addonWidth"
+      />
+    </div>
+
+    <div class="flex w-full justify-end px-3 py-3 pt-6">
+      <app-button
+        label="ثبت"
+        (click)="save()"
+        [disabled]="this.form.invalid || loading()"
+        styleClass="w-40"
+      />
+    </div>
+  </div>
+</p-dialog>

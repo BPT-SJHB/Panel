@@ -69,6 +69,7 @@ export class TextInputComponent implements OnInit, OnChanges, OnDestroy {
   readonly type = input<'password' | 'text' | 'number'>('text');
   readonly language = input<'fa' | 'en' | 'any'>('fa');
   readonly format = input<'none' | 'currency' | 'carPlate'>('none');
+  readonly autocomplete = input<'on' | 'off'>('on');
 
   // ========= OUTPUTS =========
   readonly clickButton = output<void>();
