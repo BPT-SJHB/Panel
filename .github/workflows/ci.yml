@@ -27,3 +27,9 @@ jobs:
 
       - name: Build production
         run: npx ng build --configuration production --output-hashing=all
+
+      - name: Comment coverage on PR
+        if: github.event_name == 'pull_request'
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        with:
+          files: coverage/**/cobertura-coverage.xml
