@@ -135,7 +135,7 @@ export class LoadAnnouncementConfigFormComponent extends BaseLoading {
     { header: 'شناسه', field: 'COLAId' },
     { header: 'عنوان اصلی', field: 'COLATitle' },
     { header: 'عنوان فرعی', field: 'COLAIndexTitle' },
-    { header: 'گروه بار', field: 'AnnouncementTitle' },
+    { header: 'گروه اعلام بار', field: 'AnnouncementTitle' },
     { header: 'زیر گروه اعلام بار', field: 'AnnouncementSGTitle' },
     { header: 'مقدار', field: 'COLAValue' },
     { header: 'توضیحات', field: 'Description' },
