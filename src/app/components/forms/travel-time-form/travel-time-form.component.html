@@ -14,7 +14,7 @@
     (valueChange)="onAutoCompleteChange(searchLoaderTypeId)"
     [lazySearch]="onSearchLoaderType"
     [showIconOptionSelected]="searchLoaderTypeId.value !== 0"
-    addonWidth="8rem"
+    [addonWidth]="addonWidth"
   />
 
   <app-search-auto-complete
@@ -28,7 +28,7 @@
     (valueChange)="onAutoCompleteChange(searchSourceCityId)"
     [lazySearch]="onSearchCity"
     [showIconOptionSelected]="searchSourceCityId.value !== 0"
-    addonWidth="8rem"
+    [addonWidth]="addonWidth"
   />
 
   <app-search-auto-complete
@@ -39,10 +39,10 @@
     optionLabel="CityTitle"
     optionValue="CityTitle"
     (selectSuggestion)="onSelectSearchTargetCity($event)"
-    (valueChange)="onAutoCompleteChange(searchSourceCityId)"
+    (valueChange)="onAutoCompleteChange(searchTargetCityId)"
     [lazySearch]="onSearchCity"
     [showIconOptionSelected]="searchTargetCityId.value !== 0"
-    addonWidth="8rem"
+    [addonWidth]="addonWidth"
   />
 
   <div class="col-span-12 flex flex-row-reverse">

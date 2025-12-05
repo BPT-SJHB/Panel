@@ -105,6 +105,7 @@ export class TravelTimeFormComponent
   // UI state
   headerTitle = '';
   formDialogVisible = false;
+  readonly addonWidth = '5rem';
 
   // Cache keys
   cacheKeyLength = 3;
