@@ -109,7 +109,7 @@ export class LoaderTypeAnnouncementRelationFormComponent
   // TABLE COLUMNS ---------------------------------------------------
   readonly columns: TableColumn<LoaderTypeAnnouncementMappingRow>[] = [
     { header: 'بارگیر', field: 'LoaderTypeTitle' },
-    { header: 'گروه اعلام بارگیر', field: 'AnnouncementTitle' },
+    { header: 'گروه اعلام بار', field: 'AnnouncementTitle' },
     { header: 'زیرگروه اعلام بار', field: 'AnnouncementSGTitle' },
     {
       ...deleteCell.config,

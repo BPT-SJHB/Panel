@@ -59,7 +59,7 @@ export class LoaderTypeFormComponent
       header: 'عنوان بارگیر',
     },
     {
-      field: 'LoaderTypeFixStatusTitle', // Or use LoaderTypeFixStatusId if you want the ID
+      field: 'LoaderTypeFixStatusTitle',
       header: 'بارگیر ثابت/غیر ثابت',
     },
     {
