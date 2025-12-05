@@ -96,7 +96,7 @@ export class EquipmentDeviceConfigFormComponent extends BaseLoading {
     { header: 'عنوان اصلی', field: 'CODTitle' },
     { header: 'عنوان فرعی', field: 'CODIndexTitle' },
     { header: 'دیوایس', field: 'DeviceTitle' },
-    { header: 'مقدار', field: 'CODValue' },
+    { header: 'مقدار', field: 'CODValue', dir: 'ltr' },
     { header: 'توضیحات', field: 'Description' },
     {
       ...editCell.config,
