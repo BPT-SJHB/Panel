@@ -145,6 +145,11 @@ export const API_ROUTES = {
         DeleteRelation: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}AnnouncementRelationAnnouncementSubGroupDeleting`,
         RegisterRelation: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}AnnouncementRelationAnnouncementSubGroupRegistering`,
       },
+      RelationOfAnnouncementSubGroupsAndProvinces: {
+        GetRelations: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetAllAnnouncementRelationProvinces`,
+        RegisterRelation: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}AnnouncementSubGroupRelationProvinceRegistering`,
+        DeleteRelation: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}AnnouncementSubGroupRelationProvinceDeleting`,
+      },
     },
     SequentialTurns: {
       GetSequentialTurns: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetSequentialTurns`,
