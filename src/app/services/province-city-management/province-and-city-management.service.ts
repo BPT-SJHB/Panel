@@ -41,6 +41,21 @@ export class ProvinceAndCityManagementService {
     //#endregion
   }
 
+  public async GetAllProvinces(
+    searchString: string
+  ): Promise<ApiResponse<Province[]>> {
+    const apiUrl = API_ROUTES.TransportationAPI.ProvinceAndCities.GetProvinces;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SearchString: searchString,
+    };
+
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      Province[]
+    >(apiUrl, bodyValue, mockProvinces);
+  }
+
   public async ChangeProvinceStatus(
     provinceId: number,
     status: boolean
