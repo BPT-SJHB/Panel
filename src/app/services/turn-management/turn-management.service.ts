@@ -14,6 +14,8 @@ import { SequentialTurn } from '../sequential-turn-management/model/sequential-t
 import { Turn } from './model/turn.model';
 import { TurnForSoftwareUser } from './model/turn-for-software-user.model';
 import { mockTurnsForSoftwareUser } from './mock/turn-for-software-user.mock';
+import { DeleteInfoOfTurnCost, TurnCost } from './model/turn-cost.model';
+import { mockTurnCosts } from './mock/turn-cost.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -243,6 +245,64 @@ export class TurnManagementService {
         .RegisterReserveTurn;
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  //#endregion
+
+  //#region Turn Costs
+
+  public async GetAllTurnCosts(): Promise<ApiResponse<TurnCost[]>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.TurnCosts.GetAllTurnCosts;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      TurnCost[]
+    >(apiUrl, bodyValue, mockTurnCosts);
+    //#endregion
+  }
+
+  public async RegisterTurnCost(
+    turnCostInfo: TurnCost
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.TurnCosts.RegisterTurnCost;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      RawTurnCost: turnCostInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async DeleteTurnCost(
+    turnCostInfo: DeleteInfoOfTurnCost
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.TurnCosts.DeleteTurnCost;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SeqTurnId: turnCostInfo.SeqTurnId,
     };
     //#endregion
 
