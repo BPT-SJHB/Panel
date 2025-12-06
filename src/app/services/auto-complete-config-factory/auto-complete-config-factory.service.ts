@@ -4,7 +4,7 @@ import { AnnouncementGroup } from '../announcement-group-subgroup-management/mod
 import { AnnouncementSubGroup } from '../announcement-group-subgroup-management/model/announcement-subgroup.model';
 import { LoadStatus } from '../load-management/model/load-status.model';
 import { TransportCompany } from '../transport-company-management/model/transport-company-info.model';
-import { City } from 'app/data/model/province-city.model';
+import { City } from '../province-city-management/model/province-city.model';
 import { ProvinceAndCityManagementService } from '../province-city-management/province-and-city-management.service';
 import { TransportCompaniesManagementService } from '../transport-company-management/transport-companies-management.service';
 import { AnnouncementGroupSubgroupManagementService } from '../announcement-group-subgroup-management/announcement-group-subgroup-management.service';

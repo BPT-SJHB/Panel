@@ -22,7 +22,7 @@ import { ProvinceAndCityManagementService } from 'app/services/province-city-man
 import { ProductTypesService } from 'app/services/product-types/product-types.service';
 
 import { Tariff } from 'app/data/model/tariff.model';
-import { City } from 'app/data/model/province-city.model';
+import { City } from 'app/services/province-city-management/model/province-city.model';
 import { LoaderType } from 'app/services/loader-types/model/loader-type.model';
 import { Product } from 'app/data/model/product-type.model';
 import { ButtonComponent } from 'app/components/shared/button/button.component';

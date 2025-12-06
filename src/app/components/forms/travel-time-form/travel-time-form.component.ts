@@ -9,7 +9,7 @@ import {
 import { TravelTime } from 'app/data/model/travel-time.model';
 import { LoaderType } from 'app/services/loader-types/model/loader-type.model';
 import { ApiResponse } from 'app/data/model/api-Response.model';
-import { City } from 'app/data/model/province-city.model';
+import { City } from 'app/services/province-city-management/model/province-city.model';
 
 import { LoaderTypesService } from 'app/services/loader-types/loader-types.service';
 import { ProvinceAndCityManagementService } from 'app/services/province-city-management/province-and-city-management.service';
