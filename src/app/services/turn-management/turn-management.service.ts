@@ -1,7 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { UserAuthService } from '../user-auth-service/user-auth.service';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
-import { Driver_TruckManagementService } from '../driver-truck-management/driver-truck-management.service';
 import { API_ROUTES } from 'app/constants/api';
 import { TruckInfo } from 'app/services/driver-truck-management/model/truck-info.model';
 import { mockTurns } from './mock/turn.mock';
