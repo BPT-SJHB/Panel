@@ -1,4 +1,4 @@
-import { Province } from '../model/province-city.model';
+import { Province } from 'app/services/province-city-management/model/province-city.model';
 
 export const mockProvinceAndCities: Province[] = [
   {
@@ -1167,5 +1167,78 @@ export const mockProvinceAndCities: Province[] = [
         CityActive: false,
       },
     ],
+  },
+];
+
+export const mockProvinces: Province[] = [
+  {
+    ProvinceId: 26,
+    ProvinceName:
+      'آذربایجان شرقی                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ',
+  },
+  {
+    ProvinceId: 57,
+    ProvinceName:
+      'آذربایجان غربی                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ',
+  },
+  {
+    ProvinceId: 91,
+    ProvinceName:
+      'اردبیل                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ',
+  },
+  {
+    ProvinceId: 21,
+    ProvinceName:
+      'اصفهان                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ',
+  },
+  {
+    ProvinceId: 83,
+    ProvinceName:
+      'ایلام                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ',
+  },
+  {
+    ProvinceId: 11,
+    ProvinceName:
+      'تهران                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ',
+  },
+  {
+    ProvinceId: 77,
+    ProvinceName:
+      'چهارمحال و بختیاری                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ',
+  },
+  {
+    ProvinceId: 31,
+    ProvinceName:
+      'خراسان                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ',
+  },
+  {
+    ProvinceId: 33,
+    ProvinceName:
+      'خراسان جنوبی                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ',
+  },
+  {
+    ProvinceId: 32,
+    ProvinceName:
+      'خراسان شمالی                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ',
+  },
+  {
+    ProvinceId: 36,
+    ProvinceName:
+      'خوزستان                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ',
+  },
+  {
+    ProvinceId: 67,
+    ProvinceName:
+      'زنجان                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ',
+  },
+  {
+    ProvinceId: 87,
+    ProvinceName:
+      'سمنان                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ',
+  },
+  {
+    ProvinceId: 61,
+    ProvinceName:
+      'سیستان و بلوچستان                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ',
   },
 ];
