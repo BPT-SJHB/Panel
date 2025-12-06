@@ -253,7 +253,7 @@ export class TravelTimeFormComponent
     this.onCloseDialog();
   }
 
-  private isSuccessful(response: ApiResponse<any>): boolean {
+  private isSuccessful(response: ApiResponse<unknown>): boolean {
     if (!response.success || !response.data) {
       this.toast.error('خطا', response.error?.message ?? 'خطای غیرمنتظره');
       if (response.error?.code === 28) {

@@ -1,4 +1,3 @@
-
 import { Component, inject, signal, ViewChild } from '@angular/core';
 import {
   FormBuilder,
@@ -60,8 +59,8 @@ type TariffTable = Tariff & { edit: string; delete: string };
     ToggleSwitchInputComponent,
     SearchAutoCompleteComponent,
     ButtonComponent,
-    TableComponent
-],
+    TableComponent,
+  ],
   templateUrl: './tariffs-form.component.html',
   styleUrl: './tariffs-form.component.scss',
 })
@@ -422,7 +421,7 @@ export class TariffsFormComponent extends BaseLoading {
     });
   }
 
-  onFileExcelUpload(_: any) {
+  onFileExcelUpload(_: unknown) {
     this.fu?.clear();
     // this.toast.success('موفق', 'فایل اکسل با موفقیت بارگذاری شد.');
     this.toast.error('خطا', 'فرمت  فایل اکسل نامعتبر می باشد.');

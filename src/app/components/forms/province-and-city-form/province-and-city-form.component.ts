@@ -133,7 +133,7 @@ export class ProvinceAndCityFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  private isSuccessful(response: ApiResponse<any>): boolean {
+  private isSuccessful(response: ApiResponse<unknown>): boolean {
     if (!response.success || !response.data) {
       this.toast.error(
         'خطا',
