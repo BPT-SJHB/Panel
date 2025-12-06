@@ -83,6 +83,7 @@ export const API_ROUTES = {
     },
     ProvinceAndCities: {
       GetCities: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetCities`,
+      GetProvinces: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetProvinces`,
       ChangeProvinceStatus: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}ChangeActivateStatusOfProvince`,
       ChangeCityStatus: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}ChangeActivateStatusOfCity`,
     },
