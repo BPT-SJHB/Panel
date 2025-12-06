@@ -11,6 +11,11 @@ import { AnnouncementSubGroup } from 'app/services/announcement-group-subgroup-m
 import { mockAnnouncementSubGroups } from 'app/services/announcement-group-subgroup-management/mock/announcement-subgroup.mock';
 import { RelationOfAnnouncementGroupAndSubGroup } from './model/relation-of-announcement-group-subgroup.model';
 import { mockRelationOfAnnouncementGroupAndSubGroups } from './mock/relation-of-announcement-group-subgroup.mock';
+import {
+  RegisterAndDeleteRelationOfAnnouncementSubGroupAndProvinceInfo,
+  RelationOfAnnouncementSubGroupAndProvince,
+} from './model/relation-of-announcement-subgroup-province.model';
+import { mockRelationOfAnnouncementSubGroupAndProvinces } from './mock/relation-of-announcement-subgroup-province.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -317,5 +322,73 @@ export class AnnouncementGroupSubgroupManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+  //#endregion
+
+  //#region Announcement SubGroup/Province
+
+  public async GetRelationOfAnnouncementSubGroupsAndProvinces(): Promise<
+    ApiResponse<RelationOfAnnouncementSubGroupAndProvince[]>
+  > {
+    //#region Const
+    const apiUrl =
+      API_ROUTES.TransportationAPI.Announcements
+        .RelationOfAnnouncementSubGroupsAndProvinces.GetRelations;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      RelationOfAnnouncementSubGroupAndProvince[]
+    >(apiUrl, bodyValue, mockRelationOfAnnouncementSubGroupAndProvinces);
+    //#endregion
+  }
+
+  public async RegisterRelationOfAnnouncementSubGroupAndProvince(
+    relationInfo: RegisterAndDeleteRelationOfAnnouncementSubGroupAndProvinceInfo
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Const
+    const apiUrl =
+      API_ROUTES.TransportationAPI.Announcements
+        .RelationOfAnnouncementSubGroupsAndProvinces.RegisterRelation;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      ProvinceId: relationInfo.ProvinceId,
+      AnnouncementSubGroupId: relationInfo.AnnouncementSGId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async DeleteRelationOfAnnouncementSubGroupAndProvince(
+    relationInfo: RegisterAndDeleteRelationOfAnnouncementSubGroupAndProvinceInfo
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Const
+    const apiUrl =
+      API_ROUTES.TransportationAPI.Announcements
+        .RelationOfAnnouncementSubGroupsAndProvinces.DeleteRelation;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      ProvinceId: relationInfo.ProvinceId,
+      AnnouncementSubGroupId: relationInfo.AnnouncementSGId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
   //#endregion
 }
