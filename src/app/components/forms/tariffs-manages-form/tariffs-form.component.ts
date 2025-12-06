@@ -1,4 +1,3 @@
-
 import { Component, inject, signal, ViewChild } from '@angular/core';
 import {
   FormBuilder,
@@ -23,7 +22,7 @@ import { ProvinceAndCityManagementService } from 'app/services/province-city-man
 import { ProductTypesService } from 'app/services/product-types/product-types.service';
 
 import { Tariff } from 'app/data/model/tariff.model';
-import { City } from 'app/data/model/province-city.model';
+import { City } from 'app/services/province-city-management/model/province-city.model';
 import { LoaderType } from 'app/services/loader-types/model/loader-type.model';
 import { Product } from 'app/data/model/product-type.model';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
@@ -60,8 +59,8 @@ type TariffTable = Tariff & { edit: string; delete: string };
     ToggleSwitchInputComponent,
     SearchAutoCompleteComponent,
     ButtonComponent,
-    TableComponent
-],
+    TableComponent,
+  ],
   templateUrl: './tariffs-form.component.html',
   styleUrl: './tariffs-form.component.scss',
 })
@@ -422,7 +421,7 @@ export class TariffsFormComponent extends BaseLoading {
     });
   }
 
-  onFileExcelUpload(_: any) {
+  onFileExcelUpload(_: unknown) {
     this.fu?.clear();
     // this.toast.success('موفق', 'فایل اکسل با موفقیت بارگذاری شد.');
     this.toast.error('خطا', 'فرمت  فایل اکسل نامعتبر می باشد.');

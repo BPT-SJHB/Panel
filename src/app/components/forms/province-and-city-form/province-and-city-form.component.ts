@@ -8,7 +8,10 @@ import {
   TreeTableCheckboxComponent,
 } from 'app/components/trees/tree-table-checkbox/tree-table-checkbox.component';
 import { ApiResponse } from 'app/data/model/api-Response.model';
-import { Province, City } from 'app/data/model/province-city.model';
+import {
+  Province,
+  City,
+} from 'app/services/province-city-management/model/province-city.model';
 import { ShortResponse } from 'app/data/model/short-response.model';
 import { ProvinceAndCityManagementService } from 'app/services/province-city-management/province-and-city-management.service';
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
@@ -133,7 +136,7 @@ export class ProvinceAndCityFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  private isSuccessful(response: ApiResponse<any>): boolean {
+  private isSuccessful(response: ApiResponse<unknown>): boolean {
     if (!response.success || !response.data) {
       this.toast.error(
         'خطا',

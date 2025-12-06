@@ -83,6 +83,7 @@ export const API_ROUTES = {
     },
     ProvinceAndCities: {
       GetCities: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetCities`,
+      GetProvinces: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetProvinces`,
       ChangeProvinceStatus: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}ChangeActivateStatusOfProvince`,
       ChangeCityStatus: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}ChangeActivateStatusOfCity`,
     },
@@ -144,6 +145,11 @@ export const API_ROUTES = {
         DeleteRelation: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}AnnouncementRelationAnnouncementSubGroupDeleting`,
         RegisterRelation: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}AnnouncementRelationAnnouncementSubGroupRegistering`,
       },
+      RelationOfAnnouncementSubGroupsAndProvinces: {
+        GetRelations: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetAllAnnouncementRelationProvinces`,
+        RegisterRelation: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}AnnouncementSubGroupRelationProvinceRegistering`,
+        DeleteRelation: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}AnnouncementSubGroupRelationProvinceDeleting`,
+      },
     },
     SequentialTurns: {
       GetSequentialTurns: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetSequentialTurns`,
@@ -176,6 +182,11 @@ export const API_ROUTES = {
         ResuscitateReserveTurn: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}ResuscitationReserveTurn`,
         RegisterReserveTurn: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}ReserveTurnRegisterRequest`,
       },
+    },
+    TurnCosts: {
+      GetAllTurnCosts: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetAllTurnCosts`,
+      RegisterTurnCost: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}TurnCostRegistering`,
+      DeleteTurnCost: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}TurnCostDeleting`,
     },
     LoadPermissions: {
       CancelLoadPermission: `${environment.apiUrl}:${transportationAPIPort}/api/LoadPermissionCancelling`,

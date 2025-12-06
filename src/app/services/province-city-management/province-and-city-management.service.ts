@@ -3,10 +3,13 @@ import { UserAuthService } from '../user-auth-service/user-auth.service';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { API_ROUTES } from 'app/constants/api';
-import { mockProvinceAndCities } from 'app/data/mock/province-city.mock';
-import { City, Province } from 'app/data/model/province-city.model';
+import {
+  mockProvinceAndCities,
+  mockProvinces,
+} from 'app/services/province-city-management/mock/province-city.mock';
 import { mockShortResponse } from 'app/data/mock/short-response.mock';
 import { ShortResponse } from 'app/data/model/short-response.model';
+import { Province, City } from './model/province-city.model';
 
 @Injectable({
   providedIn: 'root',
@@ -36,6 +39,21 @@ export class ProvinceAndCityManagementService {
       Province[]
     >(apiUrl, bodyValue, mockProvinceAndCities);
     //#endregion
+  }
+
+  public async GetAllProvinces(
+    searchString: string
+  ): Promise<ApiResponse<Province[]>> {
+    const apiUrl = API_ROUTES.TransportationAPI.ProvinceAndCities.GetProvinces;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SearchString: searchString,
+    };
+
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      Province[]
+    >(apiUrl, bodyValue, mockProvinces);
   }
 
   public async ChangeProvinceStatus(
