@@ -177,6 +177,11 @@ export const API_ROUTES = {
         RegisterReserveTurn: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}ReserveTurnRegisterRequest`,
       },
     },
+    TurnCosts: {
+      GetAllTurnCosts: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetAllTurnCosts`,
+      RegisterTurnCost: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}TurnCostRegistering`,
+      DeleteTurnCost: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}TurnCostDeleting`,
+    },
     LoadPermissions: {
       CancelLoadPermission: `${environment.apiUrl}:${transportationAPIPort}/api/LoadPermissionCancelling`,
     },
