@@ -94,6 +94,8 @@ export enum TabComponentKey {
 
   // 📦 Products & Load
   ProductTypesManagement = 9,
+
+  //TODO: This code replaed with LastLoadPermissionsOfTransportCompanies
   LoadCapacitorManagement = 35,
 
   // 🏷️ Loader Types
@@ -124,7 +126,7 @@ export enum TabComponentKey {
   TrafficsAndParkingTariffManagement = 18,
   TrafficInitialRegistrationManagement = 34,
 
-  DeviceManagemnt = 36,
+  DeviceManagement = 36,
   GeneralConfigurationManagement = 45,
   LoadAnnouncementConfigManagement = 46,
   EquipmentDeviceManagement = 47,
@@ -620,7 +622,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       },
     ],
   },
-  [TabComponentKey.DeviceManagemnt]: {
+  [TabComponentKey.DeviceManagement]: {
     sharedSignal: false,
     subTab: [
       {
