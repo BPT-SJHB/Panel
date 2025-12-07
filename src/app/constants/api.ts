@@ -228,6 +228,18 @@ export const API_ROUTES = {
     CancelLoad: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}LoadCancelling`,
     FreeLineLoad: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}LoadFreeLining`,
     SedimentLoad: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}LoadSedimenting`,
+    TPTParams: {
+      GetTPTParam: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}GetTPTParameters`,
+      GetAllTPTParams: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}GetAllTPTParams`,
+      RegisterTPTParam: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}TransportPriceTarrifParameterRegistering`,
+      EditTPTParam: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}TransportPriceTarrifParameterEditing`,
+      DeleteTPTParam: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}TransportPriceTarrifParameterDeleting`,
+      RelationToAnnouncementGroupAndSubGroup: {
+        GetAllRelations: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}GetAllTPTParamsDetails`,
+        RegisterRelation: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}TransportPriceTarrifParameterDetailRegistering`,
+        EditRelation: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}TransportPriceTarrifParameterDetailEditing`,
+      },
+    },
   },
   LoadAllocationAPI: {
     RegistrationForDrivers: `${environment.apiUrl}:${LoadAllocationPort}${apiFixURLPart}LoadAllocationRegisteringforTruckDriver`,
