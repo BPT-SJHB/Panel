@@ -1,5 +1,11 @@
 {
   "words": [
-    "apicommunication"
+    "apicommunication",
+    "TPTP",
+    "TPTPD"
+  ],
+  "userWords": [
+    "Tarrif",
+    "mocktptparams"
   ]
 }
