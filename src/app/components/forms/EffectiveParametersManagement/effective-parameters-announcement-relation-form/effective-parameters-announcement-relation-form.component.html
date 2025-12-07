@@ -1,0 +1,61 @@
+<!-- ------------------ TABLE ------------------ -->
+<app-table
+  [rows]="tptParamsDetail()"
+  [columns]="columns"
+  [enableCaptionButton]="true"
+  (clickCaptionButton)="onNew()"
+></app-table>
+
+<!-- ------------------ DIALOG ------------------ -->
+<p-dialog
+  [(visible)]="isDialogVisible"
+  [header]="dialogTitle()"
+  [modal]="true"
+  [style]="{ width: '40rem', maxWidth: '100%' }"
+  [maskStyle]="{ padding: '1rem' }"
+  [draggable]="false"
+>
+  <div class="grid grid-cols-1 gap-5">
+    <!-- ------------------ FORM INPUTS ------------------ -->
+    <div class="grid grid-cols-1 gap-5">
+      <app-search-auto-complete-factory
+        [config]="TPTParamsInput"
+        [addonWidth]="addonWidth"
+      />
+
+      <app-search-auto-complete-factory
+        [config]="announcementInput"
+        [addonWidth]="addonWidth"
+      />
+
+      <app-search-auto-complete-factory
+        [config]="subAnnouncementInput"
+        [addonWidth]="addonWidth"
+      />
+
+      <app-text-input
+        label="مبلغ"
+        [control]="this.ctrl('Mblgh')"
+        [addonWidth]="addonWidth"
+        type="number"
+        format="currency"
+      />
+
+      <app-toggle-switch-input
+        label="وضعیت"
+        [control]="this.ctrl('Active')"
+        [readonly]="FormModel.REGISTER === formMode()"
+      />
+    </div>
+
+    <!-- ------------------ ACTION BUTTONS ------------------ -->
+    <div class="flex w-full justify-end px-3 py-2">
+      <app-button
+        label="ثبت"
+        (click)="save()"
+        [disabled]="form.invalid || loading()"
+        styleClass="w-40"
+      />
+    </div>
+  </div>
+</p-dialog>
