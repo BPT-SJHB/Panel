@@ -234,6 +234,11 @@ export const API_ROUTES = {
       RegisterTPTParam: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}TransportPriceTarrifParameterRegistering`,
       EditTPTParam: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}TransportPriceTarrifParameterEditing`,
       DeleteTPTParam: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}TransportPriceTarrifParameterDeleting`,
+      RelationToAnnouncementGroupAndSubGroup: {
+        GetAllRelations: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}GetAllTPTParamsDetails`,
+        RegisterRelation: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}TransportPriceTarrifParameterDetailRegistering`,
+        EditRelation: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}TransportPriceTarrifParameterDetailEditing`,
+      },
     },
   },
   LoadAllocationAPI: {
