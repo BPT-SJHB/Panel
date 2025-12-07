@@ -2,6 +2,8 @@ export interface TPTParamRelationToAnnouncementGroupAndSubGroup {
   TPTPDId: number;
   TPTPId: number;
   TPTPTitle: string;
+  AnnouncementId: number;
+  AnnouncementTitle: string;
   AnnouncementSGId: number;
   AnnouncementSGTitle: string;
   Cost: number;
