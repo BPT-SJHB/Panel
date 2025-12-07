@@ -462,16 +462,6 @@ export const mockApiGroupProcess: ApiGroupProcess[] = [
         BackColor: 'Red',
       },
       {
-        PId: 49,
-        PTitle: 'مدیریت مجوزهای کاربر',
-        PName: 'PermissionsManagement',
-        Description:
-          'اعطای مجوزهای دسترسی به صورت پیش فرض توسط سیستم هنگام ثبت نام کاربر به صورت خودکار انجام می گیرد.لیکن مدیریت مجوزهای متعدی مشابه مجوز اجرای فرآیندهای خاص توسط تیم پشتیبانی و یا مدیران میانی سازمانی از طریق این واسط صورت م�� گیرد',
-        PIconName: 'pi-users',
-        ForeColor: 'Red',
-        BackColor: 'Red',
-      },
-      {
         PId: 50,
         PTitle: 'لیست سیاه',
         PName: 'BlackLists',
@@ -496,7 +486,7 @@ export const mockApiGroupProcess: ApiGroupProcess[] = [
         PTitle: 'اس ام اس انبوه',
         PName: 'BulkSMSSending',
         Description:
-          'امکان تنظیم و ارسال اس ام اس شامل اطلاع رسانی های سازمانی و یا صنفی در حوزه حمل و نقل و یا اطلاع رسانی از طرف پشتیبانی سامانه در حوزه شرایط احتمالی سامانه از طریق این واسط وجود دارد',
+          'امکان تنظیم و ارسال اس ام اس شامل اطلاع رسانی های سازمانی و یا صنفی در حوزه حمل و نقل و یا اطلاع رسانی از طرف پشتیبانی سامانه در حوزه شرایط احتمالی سامانه از طریق این واسط وجود دار��',
         PIconName: 'pi-envelope',
         ForeColor: 'Red',
         BackColor: 'Red',
@@ -510,7 +500,7 @@ export const mockApiGroupProcess: ApiGroupProcess[] = [
     WebProcesses: [
       {
         PId: 35,
-        PTitle: 'مجوزهای صادر شده اخیر',
+        PTitle: 'مجوزهای صادر شده اخیر شرکت حمل و نقل',
         PName: 'LastLoadPermissions',
         Description:
           'ازطریق این واسط امکان مشاهده مجوزهای بارگیری صادر شده اخیر وجود دارد',
@@ -573,7 +563,7 @@ export const mockApiGroupProcess: ApiGroupProcess[] = [
         PTitle: 'گزارش مجوزهای حمل بار کنسل شده',
         PName: 'LoadTransportationPermissionCancellationsReport',
         Description:
-          'کنسلی مجوز حمل با توجه به شرایط احتمالی حم�� به وجود می آید.در این گزارش سوابق کنسلی مجوز حمل و دلایل آن ارائه شده است',
+          'کنسلی مجوز حمل با توجه به شرایط احتمالی حمل به وجود می آید.در این گزارش سوابق کنسلی مجوز حمل و دلایل آن ارائه شده است',
         PIconName: 'pi-stop-circle',
         ForeColor: 'Red',
         BackColor: 'Red',
@@ -603,7 +593,7 @@ export const mockApiGroupProcess: ApiGroupProcess[] = [
         PTitle: 'گزارش بارنامه های صادر شده',
         PName: 'BillOfLadingsReport',
         Description:
-          'مجوز حمل پس از صدور وارد فرآیند صدور بارنامه می گردد.اطلاعات بارنامه های صادر شده پس از صدور در سامانه ذخیره می گردند.در این گزارش لیست بارنامه های صادر شده ارائه شده است',
+          'مجوز حمل پس از صدور وارد فرآیند صدور بارنامه می گردد.اطلاعات بارنامه های صادر شده پس از صدور در سامانه ذخی��ه می گردند.در این گزارش لیست بارنامه های صادر شده ارائه شده است',
         PIconName: 'pi-chart-scatter',
         ForeColor: 'Red',
         BackColor: 'Red',
@@ -699,6 +689,26 @@ export const mockApiGroupProcess: ApiGroupProcess[] = [
         Description:
           'تجهیزاتی مثل دوربین پلاک خوان ، دستگاههای پوز ، دستگاههای کارت خوان آر اف ، دستگاههای اثر انگشت و ... که به صورت فیزیکی به سامانه متصل می باشند مشمول تنظیماتی هستند تا هنگام اجرا عملکرد مطلوبی ارائه دهند',
         PIconName: 'pi-th-large',
+        ForeColor: 'Red',
+        BackColor: 'Red',
+      },
+      {
+        PId: 69,
+        PTitle: 'پارامترهای موثر در تعرفه حمل بار',
+        PName: 'TransportTarrifParameters',
+        Description:
+          'بر اساس نوع بار و مبنی بر تعرفه حمل بار تعیین شده از طرف سازمان راهداری و شرایط حمل بار ممکن است هزینه حمل بار بیش از تعرفه وضع شده مذکور باشد لذا با ایجاد پارامترهایی می توانیم هزینه حمل را با دقت بیشتری تعیین نماییم',
+        PIconName: 'pi-headphones',
+        ForeColor: 'Red',
+        BackColor: 'Red',
+      },
+      {
+        PId: 72,
+        PTitle: 'شرایط مشاهده و انتخاب بار',
+        PName: 'LoadViewAndAllocationConditions',
+        Description:
+          'شرایط مشاهده و انتخاب بار اساسا برای کلیه کاربران سامانه یکسان نیست.از طریق این واسط و مبنی بر پارامترهایی همچون گروه و زیرگروه اعلام بار ، صف نوبت ، وضعیت بار ، محل درخواست ، و یا وضعیت نوبت شرایط مشاهد و انتخاب بار برنامه ریزی می گردد',
+        PIconName: 'pi-user-edit',
         ForeColor: 'Red',
         BackColor: 'Red',
       },
