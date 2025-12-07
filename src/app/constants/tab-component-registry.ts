@@ -116,7 +116,8 @@ export enum TabComponentKey {
   // 📦 Products & Load
   // Manage product types
   ProductTypesManagement = 9,
-  // Manage load capacitors
+
+  //TODO: This code replaed with LastLoadPermissionsOfTransportCompanies
   LoadCapacitorManagement = 35,
 
   // 🏷️ Loader Types
@@ -165,7 +166,7 @@ export enum TabComponentKey {
 
   // 🖥️ Device & Config Management
   // Manage devices
-  DeviceManagemnt = 36,
+  DeviceManagement = 36,
   // General app configuration
   GeneralConfigurationManagement = 45,
   // Load announcement configuration
@@ -686,7 +687,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       },
     ],
   },
-  [TabComponentKey.DeviceManagemnt]: {
+  [TabComponentKey.DeviceManagement]: {
     sharedSignal: false,
     subTab: [
       {
