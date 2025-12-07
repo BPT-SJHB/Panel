@@ -58,78 +58,128 @@ import { GeneralConfigurationFormComponent } from 'app/components/forms/general-
 import { DeviceManagementFormComponent } from 'app/components/forms/device-management-form/device-management-form.component';
 import { EquipmentDeviceConfigFormComponent } from 'app/components/forms/equipment-device-config-form/equipment-device-config-form.component';
 import { LoaderTypeAnnouncementRelationFormComponent } from 'app/components/forms/loader-type-announcement-relation-form/loader-type-announcement-relation-form.component';
+import { SequentialTurnCostFormComponent } from 'app/components/forms/sequential-turn-cost-form/sequential-turn-cost-form.component';
+import { ProvinceAnnouncementRelationFormComponent } from 'app/components/forms/province-announcement-relation-form/province-announcement-relation-form.component';
+import { EffectiveParametersFormComponent } from 'app/components/forms/EffectiveParametersManagement/effective-parameters-form/effective-parameters-form.component';
+import { EffectiveParametersAnnouncementRelationFormComponent } from 'app/components/forms/EffectiveParametersManagement/effective-parameters-announcement-relation-form/effective-parameters-announcement-relation-form.component';
 
 export enum TabComponentKey {
+  // Default or main tab
   Main = -1,
 
   // 📋 User & Profile
+  // Manage users (create, update, delete)
   UserManagement = 0,
+  // Manage user profiles
   UserProfileManagement = 22,
 
-  // Carousel
+  // 🎠 Carousel
+  // Manage homepage or app carousel slides
   CarouselManagement = 2,
 
   // 🚚 Truck/Driver
+  // Manage trucks and drivers
   TruckDriverManagement = 1,
+  // Manage driver-to-truck assignments
   Driver_TruckManagement = 10,
 
   // 💸 Wallets
+  // User charging operations
   UserChargingFunctions = 25,
+  // Manage SMS-related wallet balances
   SmsWalletManagement = 26,
+  // Manage user wallets
   UserWalletManagement = 27,
+  // Manage truck wallets
   TruckWalletManagement = 29,
+  // Manage transport company wallets
   TransportCompaniesWalletManagement = 30,
+  // Manage trucker association wallets
   TruckerAssociationWalletManagement = 31,
 
   // 🔁 Sequential Turn
+  // Manage sequential turn rules
   SequentialTurnManagement = 4,
 
   // 🏭 Factories & Production
+  // Manage transport companies
   TransportCompaniesManagement = 3,
+  // Manage factories and freight operations
   FactoriesAndFreightManagement = 6,
 
   // 📍 Geography
+  // Manage LAD places
   LADPlaceManagementService = 7,
+  // Manage provinces and cities
   ProvinceAndCityManagement = 8,
 
   // 📦 Products & Load
+  // Manage product types
   ProductTypesManagement = 9,
+  // Manage load capacitors
   LoadCapacitorManagement = 35,
 
   // 🏷️ Loader Types
+  // Manage loader types
   LoaderTypeManagement = 12,
 
   // 🛣️ Travel
+  // Manage travel time rules
   TravelTimeManagement = 14,
 
   // 💰 Tariffs
+  // Manage tariffs
   TariffsManagement = 53,
 
   // 📣 Announcement
+  // Manage announcements
   AnnouncementManagement = 11,
 
   // 🕓 Turns
+  // Manage turns
   TurnsManagement = 19,
+  // Register turns
   TurnsRegisterManagement = 23,
+  // Manage issued turns
   IssuedTurnManagement = 21,
 
+  // 📦 Load Management
+  // Manage driver loads
   DriverLoadManagement = 37,
+  // Manage loads for transport companies
   TransportCompaniesLoadManagement = 32,
+  // Manage loads for factories and freight
   FactoriesAndFreightLoadManagement = 33,
+  // Admin-level load management
   AdminLoadManagement = 39,
 
-  // Parking And Traffics
+  // 🅿️ Parking & Traffics
+  // Register and record traffic events
   RegisterAndRecordTrafficsManagement = 15,
+  // Register and edit traffic cards
   RegisterAndEditTrafficsCardManagement = 16,
+  // Manage traffic & parking tariffs
   TrafficsAndParkingTariffManagement = 18,
+  // Initial traffic registrations
   TrafficInitialRegistrationManagement = 34,
 
+  // 🖥️ Device & Config Management
+  // Manage devices
   DeviceManagemnt = 36,
+  // General app configuration
   GeneralConfigurationManagement = 45,
+  // Load announcement configuration
   LoadAnnouncementConfigManagement = 46,
+  // Equipment device management
   EquipmentDeviceManagement = 47,
 
+  // 🎫 Ticketing
+  // Manage tickets
   TicketManagement = 71,
+
+  // ⚙️ Effective Parameters
+  // Manage effective parameters
+  EffectiveParametersManagement = -69,
 }
 
 export interface TabConfig {
@@ -147,6 +197,14 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   [TabComponentKey.Main]: {
     sharedSignal: false,
     subTab: [
+      // {
+      //   title: 'پارامترهای موثر',
+      //   component: EffectiveParametersFormComponent,
+      // },
+      // {
+      //   title: 'پارامترهای موثر - گروه و زیرگروه اعلام بار',
+      //   component: EffectiveParametersAnnouncementRelationFormComponent,
+      // },
       {
         title: 'صفحه اصلی',
         component: MainViewComponent,
@@ -273,6 +331,10 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
         title: 'گروه و زیرگروه‌های اعلام بار',
         component: RelationOfAnnouncementGroupAndSubGroupComponent,
       },
+      {
+        title: 'گروه‌های اعلام بار، زیرگروه‌های اعلام بار و استان‌های مقصد',
+        component: ProvinceAnnouncementRelationFormComponent,
+      },
     ],
   },
 
@@ -287,6 +349,10 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       {
         title: 'صفوف نوبت و زیرگروه‌های اعلام بار',
         component: RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent,
+      },
+      {
+        title: 'صفوف نوبت و هزینه های نوبت',
+        component: SequentialTurnCostFormComponent,
       },
     ],
   },
@@ -635,6 +701,19 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       {
         title: 'پیکربندی تجهیزات و دیوایس ها',
         component: EquipmentDeviceConfigFormComponent,
+      },
+    ],
+  },
+  [TabComponentKey.EffectiveParametersManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: 'پارامترهای موثر',
+        component: EffectiveParametersFormComponent,
+      },
+      {
+        title: 'پارامترهای موثر - گروه و زیرگروه اعلام بار',
+        component: EffectiveParametersAnnouncementRelationFormComponent,
       },
     ],
   },
