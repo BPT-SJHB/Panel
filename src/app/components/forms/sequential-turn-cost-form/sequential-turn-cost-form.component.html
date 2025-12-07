@@ -1,0 +1,61 @@
+<app-table
+  [rows]="turnsCosts()"
+  [columns]="columns"
+  [enableCaptionButton]="true"
+  (clickCaptionButton)="onNew()"
+/>
+
+<p-dialog
+  [(visible)]="isDialogVisible"
+  [header]="dialogTitle()"
+  [modal]="true"
+  [style]="{
+    width: '60rem',
+    maxWidth: '100%',
+  }"
+  [maskStyle]="{ padding: '1rem' }"
+  [draggable]="false"
+>
+  <div class="grid grid-cols-1 gap-5">
+    <app-search-auto-complete-factory
+      [config]="SequentialInput"
+      [addonWidth]="addonWidth"
+    />
+
+    <app-text-input
+      label="سهم خودگردان"
+      [control]="this.ctrl('SelfGoverCost')"
+      placeholder="سهم خودگردان"
+      type="number"
+      format="currency"
+      [addonWidth]="addonWidth"
+    />
+
+    <app-text-input
+      label="صنف کامیون داران"
+      [control]="this.ctrl('TruckersAssociationCost')"
+      placeholder="سهم صنف کامیون داران"
+      type="number"
+      format="currency"
+      [addonWidth]="addonWidth"
+    />
+
+    <app-text-input
+      label="صنف رانندگان"
+      [control]="this.ctrl('TruckDriversAssociationCost')"
+      placeholder="سهم صنف رانندگان"
+      type="number"
+      format="currency"
+      [addonWidth]="addonWidth"
+    />
+  </div>
+
+  <div class="flex w-full justify-end px-3 py-3 pt-6">
+    <app-button
+      label="ثبت"
+      (click)="submitRegister()"
+      [disabled]="this.form.invalid || loading()"
+      styleClass="w-40"
+    />
+  </div>
+</p-dialog>

@@ -1,0 +1,50 @@
+<!-- ------------------ TABLE ------------------ -->
+<app-table
+  [rows]="tptParams()"
+  [columns]="columns"
+  [enableCaptionButton]="true"
+  (clickCaptionButton)="onNew()"
+></app-table>
+
+<!-- ------------------ DIALOG ------------------ -->
+<p-dialog
+  [(visible)]="isDialogVisible"
+  [header]="dialogTitle()"
+  [modal]="true"
+  [style]="{ width: '40rem', maxWidth: '100%' }"
+  [maskStyle]="{ padding: '1rem' }"
+  [draggable]="false"
+>
+  <div class="grid grid-cols-1 gap-5">
+    <!-- ------------------ FORM INPUTS ------------------ -->
+    <div class="grid grid-cols-1 gap-5 py-2">
+      <!-- ID Field (Read-only) -->
+      <app-text-input
+        label="شناسه"
+        [control]="ctrl('TPTPId')"
+        [readOnly]="true"
+        [addonWidth]="addonWidth"
+        [hidden]="FormModel.REGISTER === formMode()"
+      />
+
+      <!-- Title Field -->
+      <app-text-input
+        language="any"
+        label="عنوان"
+        [control]="ctrl('TPTPTitle')"
+        placeholder="عنوان"
+        [addonWidth]="addonWidth"
+      />
+    </div>
+
+    <!-- ------------------ ACTION BUTTONS ------------------ -->
+    <div class="flex w-full justify-end px-3 pb-2">
+      <app-button
+        label="ثبت"
+        (click)="save()"
+        [disabled]="form.invalid || loading()"
+        styleClass="w-40"
+      />
+    </div>
+  </div>
+</p-dialog>

@@ -4,7 +4,10 @@ import { AnnouncementGroup } from '../announcement-group-subgroup-management/mod
 import { AnnouncementSubGroup } from '../announcement-group-subgroup-management/model/announcement-subgroup.model';
 import { LoadStatus } from '../load-management/model/load-status.model';
 import { TransportCompany } from '../transport-company-management/model/transport-company-info.model';
-import { City } from '../province-city-management/model/province-city.model';
+import {
+  City,
+  Province,
+} from '../province-city-management/model/province-city.model';
 import { ProvinceAndCityManagementService } from '../province-city-management/province-and-city-management.service';
 import { TransportCompaniesManagementService } from '../transport-company-management/transport-companies-management.service';
 import { AnnouncementGroupSubgroupManagementService } from '../announcement-group-subgroup-management/announcement-group-subgroup-management.service';
@@ -20,11 +23,18 @@ import { DeviceInfo } from '../config-management/model/device-info.model';
 import { ConfigManagementService } from '../config-management/config-management.service';
 import { LoaderType } from '../loader-types/model/loader-type.model';
 import { LoaderTypesService } from '../loader-types/loader-types.service';
+import { SequentialTurn } from '../sequential-turn-management/model/sequential-turn.model';
+import { SequentialTurnManagementService } from '../sequential-turn-management/sequential-turn-management.service';
+import {
+  mockTPTParams,
+  TPTParams,
+} from 'app/components/forms/EffectiveParametersManagement/effective-parameters-form/effective-parameters-form.component';
 
 export enum AutoCompleteType {
   AnnouncementGroup = 'AnnouncementGroup',
   AnnouncementSubGroup = 'AnnouncementSubGroup',
   RelationAnnouncementGroupAndSubGroup = 'RelationAnnouncementGroupAndSubGroup',
+  Province = 'Province',
   City = 'City',
   LoadStatus = 'LoadStatus',
   TransportCompany = 'TransportCompany',
@@ -32,6 +42,8 @@ export enum AutoCompleteType {
   LADPlaces = 'LADPlaces',
   Devices = 'Devices',
   LoaderType = 'LoaderType',
+  SequentialTurn = 'SequentialTurn',
+  TPTParams = 'TPTParams',
 }
 
 type CachingMode = 'Focus' | 'CharacterPrefix';
@@ -43,11 +55,14 @@ interface AutoCompleteTypeMap {
   [AutoCompleteType.LoadStatus]: LoadStatus;
   [AutoCompleteType.TransportCompany]: TransportCompany;
   [AutoCompleteType.RelationAnnouncementGroupAndSubGroup]: AnnouncementSubGroup;
+  [AutoCompleteType.Province]: Province;
   [AutoCompleteType.City]: City;
   [AutoCompleteType.Product]: ProductType;
   [AutoCompleteType.LADPlaces]: LADPlace;
   [AutoCompleteType.Devices]: DeviceInfo;
   [AutoCompleteType.LoaderType]: LoaderType;
+  [AutoCompleteType.SequentialTurn]: SequentialTurn;
+  [AutoCompleteType.TPTParams]: TPTParams;
 }
 
 // Base filter type bound to a specific AutoCompleteType
@@ -79,6 +94,7 @@ export type LoadStatusFilter =
 export type TransportCompanyFilter =
   BaseAutoCompleteFilter<AutoCompleteType.TransportCompany>;
 export type CityFilter = BaseAutoCompleteFilter<AutoCompleteType.City>;
+export type ProvinceFilter = BaseAutoCompleteFilter<AutoCompleteType.Province>;
 export type RelationAnnouncementGroupAndSubGroupFilter =
   BaseAutoCompleteFilter<AutoCompleteType.RelationAnnouncementGroupAndSubGroup>;
 export type LADPlacesFilter =
@@ -87,6 +103,10 @@ export type ProductFilter = BaseAutoCompleteFilter<AutoCompleteType.Product>;
 export type LoaderTypeFilter =
   BaseAutoCompleteFilter<AutoCompleteType.LoaderType>;
 export type DeviceFilter = BaseAutoCompleteFilter<AutoCompleteType.Devices>;
+export type SequentialTurnFilter =
+  BaseAutoCompleteFilter<AutoCompleteType.SequentialTurn>;
+export type TPTParamsFilter =
+  BaseAutoCompleteFilter<AutoCompleteType.TPTParams>;
 
 // Union of all filters
 export type AutoCompleteFilter =
@@ -95,8 +115,11 @@ export type AutoCompleteFilter =
   | LoadStatusFilter
   | TransportCompanyFilter
   | CityFilter
+  | ProvinceFilter
   | LoaderTypeFilter
-  | DeviceFilter;
+  | DeviceFilter
+  | SequentialTurnFilter
+  | TPTParamsFilter;
 
 @Injectable({
   providedIn: 'root',
@@ -106,6 +129,9 @@ export class AutoCompleteConfigFactoryService {
   private readonly provinceService = inject(ProvinceAndCityManagementService);
   private readonly productService = inject(ProductTypesService);
   private readonly ladPlacesService = inject(LADPlaceManagementService);
+  private readonly sequentialTurnService = inject(
+    SequentialTurnManagementService
+  );
   private readonly configService = inject(ConfigManagementService);
   private readonly transportCompanyService = inject(
     TransportCompaniesManagementService
@@ -185,6 +211,16 @@ export class AutoCompleteConfigFactoryService {
       cachingMode: 'Focus' as const,
     },
 
+    [AutoCompleteType.SequentialTurn]: {
+      type: AutoCompleteType.SequentialTurn,
+      label: this.appTitle.inputs.sequentialTurns.sequentialTurnTitle,
+      placeholder: this.appTitle.getPlaceholder('sequentialTurnTitle'),
+      optionLabel: 'SeqTurnTitle' as keyof SequentialTurn,
+      optionValueKey: 'SeqTurnId' as keyof SequentialTurn,
+      minLength: 2,
+      cachingMode: 'Focus' as const,
+    },
+
     [AutoCompleteType.TransportCompany]: {
       type: AutoCompleteType.TransportCompany,
       label: this.appTitle.inputs.transportCompanies.transportCompanyTitle,
@@ -195,12 +231,32 @@ export class AutoCompleteConfigFactoryService {
       cachingMode: 'Focus' as const,
     },
 
+    [AutoCompleteType.TPTParams]: {
+      type: AutoCompleteType.TPTParams,
+      label: 'پارامتر های موثر',
+      placeholder: 'پارامتر های موثر',
+      optionLabel: 'TPTPTitle' as keyof TPTParams,
+      optionValueKey: 'TPTPId' as keyof TPTParams,
+      minLength: 0,
+      cachingMode: 'Focus' as const,
+    },
+
     [AutoCompleteType.City]: {
       type: AutoCompleteType.City,
       label: 'شهر',
       placeholder: 'شهر',
       optionLabel: 'CityTitle' as keyof City,
       optionValueKey: 'CityCode' as keyof City,
+      minLength: 2,
+      cachingMode: 'CharacterPrefix' as const,
+    },
+
+    [AutoCompleteType.Province]: {
+      type: AutoCompleteType.Province,
+      label: 'استان',
+      placeholder: 'استان',
+      optionLabel: 'ProvinceName' as keyof Province,
+      optionValueKey: 'ProvinceId' as keyof Province,
       minLength: 2,
       cachingMode: 'CharacterPrefix' as const,
     },
@@ -297,11 +353,25 @@ export class AutoCompleteConfigFactoryService {
             item[config.optionValueKey as keyof TransportCompany]
           );
 
+      case AutoCompleteType.SequentialTurn:
+        return (item: SequentialTurn) =>
+          this.onSelectAutoCompletion(
+            controlId,
+            item[config.optionValueKey as keyof SequentialTurn]
+          );
+
       case AutoCompleteType.City:
         return (item: City) =>
           this.onSelectAutoCompletion(
             controlId,
             item[config.optionValueKey as keyof City]
+          );
+
+      case AutoCompleteType.Province:
+        return (item: Province) =>
+          this.onSelectAutoCompletion(
+            controlId,
+            item[config.optionValueKey as keyof Province]
           );
 
       case AutoCompleteType.Product:
@@ -323,6 +393,13 @@ export class AutoCompleteConfigFactoryService {
           this.onSelectAutoCompletion(
             controlId,
             item[config.optionValueKey as keyof DeviceInfo]
+          );
+
+      case AutoCompleteType.TPTParams:
+        return (item: TPTParams) =>
+          this.onSelectAutoCompletion(
+            controlId,
+            item[config.optionValueKey as keyof TPTParams]
           );
 
       default:
@@ -350,6 +427,9 @@ export class AutoCompleteConfigFactoryService {
       case AutoCompleteType.City:
         return (query: string) => this.getSearchCity(query);
 
+      case AutoCompleteType.Province:
+        return (query: string) => this.getSearchProvince(query);
+
       case AutoCompleteType.RelationAnnouncementGroupAndSubGroup:
         if (!groupControlId) throw new Error(`groupControlId is undefined`);
         return (query: string) =>
@@ -364,7 +444,13 @@ export class AutoCompleteConfigFactoryService {
         return (query: string) => this.getSearchLadPlace(query);
 
       case AutoCompleteType.Devices:
-        return (_: string) => this.getDevices();
+        return (_: string) => this.getSearchDevices();
+
+      case AutoCompleteType.SequentialTurn:
+        return (query: string) => this.getSearchSequentialTurn(query);
+
+      case AutoCompleteType.TPTParams:
+        return () => this.getSearchTPTParams();
 
       default:
         throw new Error(`Unsupported AutoCompleteType: ${type}`);
@@ -413,9 +499,22 @@ export class AutoCompleteConfigFactoryService {
     return res.data ?? [];
   }
 
-  private async getDevices(): Promise<DeviceInfo[]> {
+  private async getSearchDevices(): Promise<DeviceInfo[]> {
     const response = await this.configService.GetAllOfDevices();
     return response.data ?? [];
+  }
+
+  private async getSearchSequentialTurn(
+    query: string
+  ): Promise<SequentialTurn[]> {
+    const response = await this.sequentialTurnService.GetSequentialTurns(query);
+    return response.data ?? [];
+  }
+
+  private async getSearchTPTParams(): Promise<TPTParams[]> {
+    return new Promise((resolve) => {
+      resolve(mockTPTParams);
+    });
   }
 
   private async getSearchCity(query: string): Promise<City[]> {
@@ -423,6 +522,14 @@ export class AutoCompleteConfigFactoryService {
     return checkAndToastError(res, this.toast)
       ? (res.data?.flatMap((p) => p?.Cities ?? []) ?? [])
       : [];
+  }
+
+  private async getSearchProvince(query: string): Promise<Province[]> {
+    const res = await this.provinceService.GetAllProvinces(query);
+    if (!checkAndToastError(res, this.toast)) {
+      return [];
+    }
+    return res.data?.map((p) => ({ ...p, Cities: undefined })) ?? [];
   }
 
   private async getSearchRelationOfAnnouncementGroupAndSubGroup(

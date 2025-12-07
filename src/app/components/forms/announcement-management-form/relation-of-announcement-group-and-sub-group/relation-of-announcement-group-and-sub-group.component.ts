@@ -67,7 +67,7 @@ export class RelationOfAnnouncementGroupAndSubGroupComponent {
 
   // 📊 UI State
   loading = false;
-  addonWidth = '8rem';
+  addonWidth = '7rem';
   relationsAnnouncement: RowRelationOfAnnouncementTableRow[] = [];
   readonly columns: TableColumn<RowRelationOfAnnouncementTableRow>[] = [
     {
