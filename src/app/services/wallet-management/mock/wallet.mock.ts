@@ -1,7 +1,7 @@
 import { Wallet } from '../model/wallet.model';
 
 export const mockWallet: Wallet = {
-  MoneyWalletId: 79,
-  MoneyWalletCode: '00000791Da',
-  Balance: 0,
+  MoneyWalletId: 1,
+  MoneyWalletCode: '0000001Ur1',
+  Balance: 99999999,
 };
