@@ -285,7 +285,7 @@ export const mockApiGroupProcess: ApiGroupProcess[] = [
         PTitle: 'لیست نوبت های صادر شده',
         PName: 'TruckTurnsIssued',
         Description:
-          'از طریق این واسط راننده امکان مشاهده لیست نوبت های صادر شده را دارد.امکان ارسال درخواست ابطال نوبت نیز از این واسط ��جود دارد',
+          'از طریق این واسط راننده امکان مشاهده لیست نوبت های صادر شده را دارد.امکان ارسال درخواست ابطال نوبت نیز از این واسط وجود دارد',
         PIconName: 'pi-file',
         ForeColor: 'Red',
         BackColor: 'Red',
@@ -312,7 +312,7 @@ export const mockApiGroupProcess: ApiGroupProcess[] = [
         PTitle: 'عملکرد شارژ کاربر',
         PName: 'SoftwareUserChargingFunction',
         Description:
-          'هر کاربر ممکن است بر اساس مجوزهای موجود در سامانه اقدام به شارژ کیف پول نماید.از طریق این واسط مکان م��اهده عملکرد شارژ فراهم شده است',
+          'هر کاربر ممکن است بر اساس مجوزهای موجود در سامانه اقدام به شارژ کیف پول نماید.از طریق این واسط مکان مشاهده عملکرد شارژ فراهم شده است',
         PIconName: 'pi-cog',
         ForeColor: 'Red',
         BackColor: 'Red',
@@ -429,7 +429,7 @@ export const mockApiGroupProcess: ApiGroupProcess[] = [
         PTitle: 'ثبت درخواست حمل صاحبین کالا',
         PName: 'BarOwnerTransportationRequest',
         Description:
-          'اعلام بار و ثبت درخواست حمل بار از طرف صاحب بار که ماهیت شرکت حمل و نقل و یا مراکز و ��ارخانجات تولید را ندارد از طریق این منو صورت می گیرد',
+          'اعلام بار و ثبت درخواست حمل بار از طرف صاحب بار که ماهیت شرکت حمل و نقل و یا مراکز و کارخانجات تولید را ندارد از طریق این منو صورت می گیرد',
         PIconName: 'pi-verified',
         ForeColor: 'Red',
         BackColor: 'Red',
@@ -458,16 +458,6 @@ export const mockApiGroupProcess: ApiGroupProcess[] = [
         Description:
           'همزمان با ارائه تقویم شمسی در این واسط تنظیماتی برای شرایط احتمالی حمل و نقلی در این واسط ارائه شده است .اعلام بار در روزهای تعطیل و یا ابطال نوبت ها و رسوب بار و قواعدی از این نمونه از طریق این تقویم منترل می شوند',
         PIconName: 'pi-calendar-clock',
-        ForeColor: 'Red',
-        BackColor: 'Red',
-      },
-      {
-        PId: 49,
-        PTitle: 'مدیریت مجوزهای کاربر',
-        PName: 'PermissionsManagement',
-        Description:
-          'اعطای مجوزهای دسترسی به صورت پیش فرض توسط سیستم هنگام ثبت نام کاربر به صورت خودکار انجام می گیرد.لیکن مدیریت مجوزهای متعدی مشابه مجوز اجرای فرآیندهای خاص توسط تیم پشتیبانی و یا مدیران میانی سازمانی از طریق این واسط صورت م�� گیرد',
-        PIconName: 'pi-users',
         ForeColor: 'Red',
         BackColor: 'Red',
       },
@@ -510,7 +500,7 @@ export const mockApiGroupProcess: ApiGroupProcess[] = [
     WebProcesses: [
       {
         PId: 35,
-        PTitle: 'مجوزهای صادر شده اخیر',
+        PTitle: 'مجوزهای صادر شده اخیر شرکت حمل و نقل',
         PName: 'LastLoadPermissions',
         Description:
           'ازطریق این واسط امکان مشاهده مجوزهای بارگیری صادر شده اخیر وجود دارد',
@@ -573,7 +563,7 @@ export const mockApiGroupProcess: ApiGroupProcess[] = [
         PTitle: 'گزارش مجوزهای حمل بار کنسل شده',
         PName: 'LoadTransportationPermissionCancellationsReport',
         Description:
-          'کنسلی مجوز حمل با توجه به شرایط احتمالی حم�� به وجود می آید.در این گزارش سوابق کنسلی مجوز حمل و دلایل آن ارائه شده است',
+          'کنسلی مجوز حمل با توجه به شرایط احتمالی حمل به وجود می آید.در این گزارش سوابق کنسلی مجوز حمل و دلایل آن ارائه شده است',
         PIconName: 'pi-stop-circle',
         ForeColor: 'Red',
         BackColor: 'Red',
@@ -699,6 +689,26 @@ export const mockApiGroupProcess: ApiGroupProcess[] = [
         Description:
           'تجهیزاتی مثل دوربین پلاک خوان ، دستگاههای پوز ، دستگاههای کارت خوان آر اف ، دستگاههای اثر انگشت و ... که به صورت فیزیکی به سامانه متصل می باشند مشمول تنظیماتی هستند تا هنگام اجرا عملکرد مطلوبی ارائه دهند',
         PIconName: 'pi-th-large',
+        ForeColor: 'Red',
+        BackColor: 'Red',
+      },
+      {
+        PId: 69,
+        PTitle: 'پارامترهای موثر در تعرفه حمل بار',
+        PName: 'TransportTarrifParameters',
+        Description:
+          'بر اساس نوع بار و مبنی بر تعرفه حمل بار تعیین شده از طرف سازمان راهداری و شرایط حمل بار ممکن است هزینه حمل بار بیش از تعرفه وضع شده مذکور باشد لذا با ایجاد پارامترهایی می توانیم هزینه حمل را با دقت بیشتری تعیین نماییم',
+        PIconName: 'pi-headphones',
+        ForeColor: 'Red',
+        BackColor: 'Red',
+      },
+      {
+        PId: 72,
+        PTitle: 'شرایط مشاهده و انتخاب بار',
+        PName: 'LoadViewAndAllocationConditions',
+        Description:
+          'شرایط مشاهده و انتخاب بار اساسا برای کلیه کاربران سامانه یکسان نیست.از طریق این واسط و مبنی بر پارامترهایی همچون گروه و زیرگروه اعلام بار ، صف نوبت ، وضعیت بار ، محل درخواست ، و یا وضعیت نوبت شرایط مشاهد و انتخاب بار برنامه ریزی می گردد',
+        PIconName: 'pi-user-edit',
         ForeColor: 'Red',
         BackColor: 'Red',
       },

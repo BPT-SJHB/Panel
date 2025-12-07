@@ -2,17 +2,17 @@ import { SoftwareUserProfile } from '../model/software-user-profile.model';
 
 export const mockSoftwareUserProfile: SoftwareUserProfile = {
   RawSoftwareUser: {
-    UserId: 7003,
-    UserName: 'حسن;عباسي',
-    MobileNumber: '09133155865',
-    UserTypeId: 3,
+    UserId: 21,
+    UserName: 'مرتضي شاهمرادي',
+    MobileNumber: '09132043148',
+    UserTypeId: 2,
     UserActive: true,
-    SMSOwnerActive: false,
-    UserTypeTitle: 'راننده',
+    SMSOwnerActive: true,
+    UserTypeTitle: 'ادمین سیستم',
   },
   MoneyWallet: {
     MoneyWalletId: 1,
-    MoneyWalletCode: '0000001xsY',
-    Balance: 10000000,
+    MoneyWalletCode: '0000001Ur1',
+    Balance: 99999999,
   },
 };
