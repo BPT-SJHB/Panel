@@ -11,110 +11,31 @@ import { SearchAutoCompleteFactoryComponent } from 'app/components/shared/inputs
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { Dialog } from 'primeng/dialog';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
-import { TransportCompaniesManagementService } from 'app/services/transport-company-management/transport-companies-management.service';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { AppConfirmService } from 'app/services/confirm/confirm.service';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import {
   AutoCompleteConfigFactoryService,
   AutoCompleteType,
 } from 'app/services/auto-complete-config-factory/auto-complete-config-factory.service';
 import { checkAndToastError } from 'app/utils/api-utils';
-import { mockShortResponse } from 'app/data/mock/short-response.mock';
 import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-switch-input/toggle-switch-input.component';
+import { TPTParamRelationToAnnouncementGroupAndSubGroup } from 'app/services/tpt-params-management/model/tptparam-info.model';
+import { TPTParamsManagementService } from 'app/services/tpt-params-management/tptparams-management.service';
+import { deepNullToUndefined } from 'app/utils/null-to-undefined';
 
 // ------------------ INTERFACE ------------------
-export interface TPTParamsDetail {
-  TPTPDId: number;
-  TPTPId: number;
-  TPTPTitle: string;
-  AnnouncementId: number;
-  AnnouncementTitle: string;
-  AnnouncementSGId: number;
-  AnnouncementSGTitle: string;
-  Mblgh: number;
-  Active: boolean;
-}
-
-type TPTParamsDetailRow = TPTParamsDetail & { edit: string; delete: string };
+type TPTParamsDetailRow = TPTParamRelationToAnnouncementGroupAndSubGroup & {
+  edit: string;
+  delete: string;
+};
 
 enum FormMode {
   EDITABLE,
   REGISTER,
 }
 
-// ------------------ MOCK DATA ------------------
-export const mockTPTParamsDetail: TPTParamsDetail[] = [
-  {
-    TPTPDId: 157,
-    TPTPId: 8,
-    TPTPTitle: 'پروژه',
-    AnnouncementId: 2,
-    AnnouncementTitle: 'تريلي برون شهري ذوب و سبا',
-    AnnouncementSGId: 7,
-    AnnouncementSGTitle: 'برون شهری آهن آلات ذوبی',
-    Mblgh: 7000000,
-    Active: true,
-  },
-  {
-    TPTPDId: 163,
-    TPTPId: 11,
-    TPTPTitle: 'تیرآهن نرمال',
-    AnnouncementId: 2,
-    AnnouncementTitle: 'تريلي برون شهري ذوب و سبا',
-    AnnouncementSGId: 7,
-    AnnouncementSGTitle: 'برون شهری آهن آلات ذوبی',
-    Mblgh: 7000000,
-    Active: true,
-  },
-  {
-    TPTPDId: 143,
-    TPTPId: 3,
-    TPTPTitle: 'چهار باسکوله (ذوب آهنی)',
-    AnnouncementId: 2,
-    AnnouncementTitle: 'تريلي برون شهري ذوب و سبا',
-    AnnouncementSGId: 7,
-    AnnouncementSGTitle: 'برون شهری آهن آلات ذوبی',
-    Mblgh: 14000000,
-    Active: true,
-  },
-  {
-    TPTPDId: 135,
-    TPTPId: 1,
-    TPTPTitle: 'دو باسکوله (ذوب آهنی)',
-    AnnouncementId: 2,
-    AnnouncementTitle: 'تريلي برون شهري ذوب و سبا',
-    AnnouncementSGId: 7,
-    AnnouncementSGTitle: 'برون شهری آهن آلات ذوبی',
-    Mblgh: 6000000,
-    Active: true,
-  },
-  {
-    TPTPDId: 297,
-    TPTPId: 1,
-    TPTPTitle: 'دو باسکوله (ذوب آهنی)',
-    AnnouncementId: 4,
-    AnnouncementTitle: 'شمش برون شهري',
-    AnnouncementSGId: 17,
-    AnnouncementSGTitle: 'شمش کوهپايه برون شهري',
-    Mblgh: 8000000,
-    Active: true,
-  },
-  {
-    TPTPDId: 217,
-    TPTPId: 20,
-    TPTPTitle: 'دو محل بارگیری ذوب و انبار (انبار دور با جابجایی 50%)',
-    AnnouncementId: 2,
-    AnnouncementTitle: 'تريلي برون شهري ذوب و سبا',
-    AnnouncementSGId: 7,
-    AnnouncementSGTitle: 'برون شهری آهن آلات ذوبی',
-    Mblgh: 19000000,
-    Active: true,
-  },
-];
-
 @Component({
-  selector: 'app-effective-parameters-announcement-relation-form',
+  selector: 'app-tpt-parameters-announcement-relation-form',
   imports: [
     TableComponent,
     SearchAutoCompleteFactoryComponent,
@@ -123,22 +44,20 @@ export const mockTPTParamsDetail: TPTParamsDetail[] = [
     ButtonComponent,
     ToggleSwitchInputComponent,
   ],
-  templateUrl:
-    './effective-parameters-announcement-relation-form.component.html',
-  styleUrl: './effective-parameters-announcement-relation-form.component.scss',
+  templateUrl: './tpt-parameters-announcement-relation-form.component.html',
+  styleUrl: './tpt-parameters-announcement-relation-form.component.scss',
 })
-export class EffectiveParametersAnnouncementRelationFormComponent extends BaseLoading {
+export class TPTParametersAnnouncementRelationFormComponent extends BaseLoading {
   // ------------------ INJECTED SERVICES ------------------
-  private readonly transportCompanyService = inject(
-    TransportCompaniesManagementService
-  );
+  private readonly tptParamsService = inject(TPTParamsManagementService);
   private readonly fb = inject(FormBuilder);
-  private readonly confirmService = inject(AppConfirmService);
   private readonly autoCompleteFactory = inject(
     AutoCompleteConfigFactoryService
   );
   // ------------------ SIGNALS & STATE ------------------
   readonly tptParamsDetail = signal<TPTParamsDetailRow[]>([]);
+  readonly selectedTPTParams =
+    signal<TPTParamRelationToAnnouncementGroupAndSubGroup | null>(null);
   readonly dialogTitle = signal<string>('');
   readonly formMode = signal<FormMode>(FormMode.REGISTER);
   isDialogVisible = false;
@@ -156,7 +75,7 @@ export class EffectiveParametersAnnouncementRelationFormComponent extends BaseLo
     AnnouncementSGId: this.fb.control<number | null>(null, ValidationSchema.id),
     AnnouncementSGTitle: this.fb.control<string>(''),
 
-    Mblgh: this.fb.control<number>(0, [Validators.min(1), Validators.required]),
+    Cost: this.fb.control<number>(0, [Validators.min(1), Validators.required]),
     Active: this.fb.control<boolean>(true),
   });
 
@@ -166,14 +85,9 @@ export class EffectiveParametersAnnouncementRelationFormComponent extends BaseLo
     { header: 'پارامتر موثر', field: 'TPTPTitle' },
     { header: 'گروه اعلام بار', field: 'AnnouncementTitle' },
     { header: 'زیرگروه اعلام بار', field: 'AnnouncementSGTitle' },
-    { header: 'مبلغ', field: 'Mblgh', format: 'currency' },
+    { header: 'مبلغ', field: 'Cost', format: 'currency' },
     { header: 'فعال/غیرفعال', field: 'Active', type: TableColumnType.BOOLEAN },
     { field: 'edit', ...editCell.config, onAction: (row) => this.onEdit(row) },
-    {
-      field: 'delete',
-      ...deleteCell.config,
-      onAction: (row) => this.onDelete(row),
-    },
   ];
 
   // AUTOCOMPLETE CONFIGS --------------------------------------------
@@ -214,7 +128,8 @@ export class EffectiveParametersAnnouncementRelationFormComponent extends BaseLo
   // ------------------ DATA METHODS ------------------
   private async loadTPTParamsDetail() {
     await this.withLoading(async () => {
-      const response = { success: true, data: mockTPTParamsDetail };
+      const response =
+        await this.tptParamsService.GetAllRelationsToAnnouncementGroupAndSubGroup();
       if (!checkAndToastError(response, this.toast)) return;
 
       const rows = response.data.map((d) => ({
@@ -227,25 +142,6 @@ export class EffectiveParametersAnnouncementRelationFormComponent extends BaseLo
   }
 
   // ------------------ CRUD ACTIONS ------------------
-  private async onDelete(row: TPTParamsDetail) {
-    this.confirmService.confirmDelete(
-      `پارامترهای موثر - گروه و زیرگروه اعلام بار با شناسه ${row.TPTPDId}`,
-      async () => {
-        if (this.loading()) return;
-
-        const deletePayload = this.serializeTPTParamsDetails(row);
-        console.log({ deletePayload });
-
-        await this.withLoading(async () => {
-          const res = { success: true, data: mockShortResponse };
-          if (!checkAndToastError(res, this.toast)) return;
-          this.toast.success('موفق', res.data.Message);
-        });
-
-        await this.loadTPTParamsDetail();
-      }
-    );
-  }
 
   async save() {
     if (this.form.invalid || this.loading()) return;
@@ -260,13 +156,18 @@ export class EffectiveParametersAnnouncementRelationFormComponent extends BaseLo
   }
 
   private async submitEdit() {
+    const selectedTPTParams = this.selectedTPTParams();
+    if (!selectedTPTParams) return;
+
     const editPayload = this.serializeTPTParamsDetails({
+      ...selectedTPTParams,
       ...this.form.getRawValue(),
-    } as TPTParamsDetailRow);
+    } as TPTParamRelationToAnnouncementGroupAndSubGroup);
 
-    console.log({ editPayload });
-
-    const res = { success: true, data: mockShortResponse };
+    const res =
+      await this.tptParamsService.EditTPTParamRelationToAnnouncementGroupAndSubGroup(
+        editPayload
+      );
     if (!checkAndToastError(res, this.toast)) return;
     this.toast.success('موفق', res.data.Message);
   }
@@ -275,18 +176,21 @@ export class EffectiveParametersAnnouncementRelationFormComponent extends BaseLo
     await this.withLoading(async () => {
       const registerPayload = this.serializeTPTParamsDetails({
         ...this.form.getRawValue(),
-      } as TPTParamsDetailRow);
+      } as TPTParamRelationToAnnouncementGroupAndSubGroup);
 
-      console.log({ registerPayload });
-
-      const res = { success: true, data: mockShortResponse };
+      const res =
+        await this.tptParamsService.RegisterTPTParamRelationToAnnouncementGroupAndSubGroup(
+          deepNullToUndefined(registerPayload)
+        );
       if (!checkAndToastError(res, this.toast)) return;
       this.toast.success('موفق', res.data.Message);
     });
   }
 
   // ------------------ UTILITIES ------------------
-  serializeTPTParamsDetails(obj: TPTParamsDetail): TPTParamsDetail {
+  serializeTPTParamsDetails(
+    obj: TPTParamRelationToAnnouncementGroupAndSubGroup
+  ): TPTParamRelationToAnnouncementGroupAndSubGroup {
     return {
       TPTPDId: Number(obj.TPTPDId),
       TPTPId: Number(obj.TPTPId),
@@ -295,7 +199,7 @@ export class EffectiveParametersAnnouncementRelationFormComponent extends BaseLo
       AnnouncementTitle: obj.AnnouncementTitle,
       AnnouncementSGId: Number(obj.AnnouncementSGId),
       AnnouncementSGTitle: obj.AnnouncementSGTitle,
-      Mblgh: Number(obj.Mblgh),
+      Cost: Number(obj.Cost),
       Active: obj.Active,
     };
   }
@@ -307,6 +211,7 @@ export class EffectiveParametersAnnouncementRelationFormComponent extends BaseLo
   onNew() {
     this.form.reset({ Active: true });
     this.formMode.set(FormMode.REGISTER);
+    this.selectedTPTParams.set(null);
     this.dialogTitle.set('ثبت پارامترهای موثر - گروه و زیرگروه اعلام بار');
     this.isDialogVisible = true;
   }
@@ -315,6 +220,7 @@ export class EffectiveParametersAnnouncementRelationFormComponent extends BaseLo
     this.form.reset({ Active: true });
     this.form.patchValue({ ...row });
     this.formMode.set(FormMode.EDITABLE);
+    this.selectedTPTParams.set(row);
     this.dialogTitle.set('ویرایش  پارامترهای موثر - گروه و زیرگروه اعلام بار');
     this.isDialogVisible = true;
   }

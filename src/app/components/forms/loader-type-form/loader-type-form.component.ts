@@ -83,8 +83,6 @@ export class LoaderTypeFormComponent
       return;
     }
 
-    console.log(response.data);
-
     this.loaderTypes.set(response.data);
   }
 

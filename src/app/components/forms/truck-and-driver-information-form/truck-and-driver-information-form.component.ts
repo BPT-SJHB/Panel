@@ -8,7 +8,7 @@ import { LoaderTypesService } from 'app/services/loader-types/loader-types.servi
 import { LoaderType } from 'app/services/loader-types/model/loader-type.model';
 import { TruckDriverInfo } from 'app/services/driver-truck-management/model/truck-driver-info.model';
 import { SplitterModule } from 'primeng/splitter';
-import { FormCardComponent } from "../../shared/form-card/form-card.component";
+import { FormCardComponent } from '../../shared/form-card/form-card.component';
 
 interface dataFormat {
   title: string;
@@ -64,8 +64,6 @@ export class TruckAndDriverInformationFormComponent implements OnInit {
     //#endregion
 
     this.populateDataForHtml();
-
-    console.log(this.TruckInfo, this.LoaderTypeInfo, this.DriverInfo);
   }
 
   private populateDataForHtml() {

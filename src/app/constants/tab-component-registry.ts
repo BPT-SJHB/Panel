@@ -60,8 +60,8 @@ import { EquipmentDeviceConfigFormComponent } from 'app/components/forms/equipme
 import { LoaderTypeAnnouncementRelationFormComponent } from 'app/components/forms/loader-type-announcement-relation-form/loader-type-announcement-relation-form.component';
 import { SequentialTurnCostFormComponent } from 'app/components/forms/sequential-turn-cost-form/sequential-turn-cost-form.component';
 import { ProvinceAnnouncementRelationFormComponent } from 'app/components/forms/province-announcement-relation-form/province-announcement-relation-form.component';
-import { EffectiveParametersFormComponent } from 'app/components/forms/EffectiveParametersManagement/effective-parameters-form/effective-parameters-form.component';
-import { EffectiveParametersAnnouncementRelationFormComponent } from 'app/components/forms/EffectiveParametersManagement/effective-parameters-announcement-relation-form/effective-parameters-announcement-relation-form.component';
+import { TPTParametersFormComponent } from 'app/components/forms/tpt-parameters-management/tpt-parameters-form/tpt-parameters-form.component';
+import { TPTParametersAnnouncementRelationFormComponent } from 'app/components/forms/tpt-parameters-management/tpt-parameters-announcement-relation-form/tpt-parameters-announcement-relation-form.component';
 
 export enum TabComponentKey {
   // Default or main tab
@@ -180,7 +180,7 @@ export enum TabComponentKey {
 
   // ⚙️ Effective Parameters
   // Manage effective parameters
-  EffectiveParametersManagement = -69,
+  TPTParametersManagement = 69,
 }
 
 export interface TabConfig {
@@ -198,14 +198,6 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   [TabComponentKey.Main]: {
     sharedSignal: false,
     subTab: [
-      // {
-      //   title: 'پارامترهای موثر',
-      //   component: EffectiveParametersFormComponent,
-      // },
-      // {
-      //   title: 'پارامترهای موثر - گروه و زیرگروه اعلام بار',
-      //   component: EffectiveParametersAnnouncementRelationFormComponent,
-      // },
       {
         title: 'صفحه اصلی',
         component: MainViewComponent,
@@ -705,16 +697,16 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       },
     ],
   },
-  [TabComponentKey.EffectiveParametersManagement]: {
+  [TabComponentKey.TPTParametersManagement]: {
     sharedSignal: false,
     subTab: [
       {
         title: 'پارامترهای موثر',
-        component: EffectiveParametersFormComponent,
+        component: TPTParametersFormComponent,
       },
       {
         title: 'پارامترهای موثر - گروه و زیرگروه اعلام بار',
-        component: EffectiveParametersAnnouncementRelationFormComponent,
+        component: TPTParametersAnnouncementRelationFormComponent,
       },
     ],
   },

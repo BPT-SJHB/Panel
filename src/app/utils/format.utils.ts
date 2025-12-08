@@ -6,8 +6,6 @@
  * @returns A formatted car plate string,
  */
 export function formatCarPlate(plate: string, serial: string): string {
-  console.log(plate);
-
   // Basic validation – trim to remove extra spaces
   const cleanPlate = plate.trim();
 

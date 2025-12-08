@@ -25,10 +25,8 @@ import { LoaderType } from '../loader-types/model/loader-type.model';
 import { LoaderTypesService } from '../loader-types/loader-types.service';
 import { SequentialTurn } from '../sequential-turn-management/model/sequential-turn.model';
 import { SequentialTurnManagementService } from '../sequential-turn-management/sequential-turn-management.service';
-import {
-  mockTPTParams,
-  TPTParams,
-} from 'app/components/forms/EffectiveParametersManagement/effective-parameters-form/effective-parameters-form.component';
+import { TPTParamInfo } from '../tpt-params-management/model/tptparam-info.model';
+import { TPTParamsManagementService } from '../tpt-params-management/tptparams-management.service';
 
 export enum AutoCompleteType {
   AnnouncementGroup = 'AnnouncementGroup',
@@ -62,7 +60,7 @@ interface AutoCompleteTypeMap {
   [AutoCompleteType.Devices]: DeviceInfo;
   [AutoCompleteType.LoaderType]: LoaderType;
   [AutoCompleteType.SequentialTurn]: SequentialTurn;
-  [AutoCompleteType.TPTParams]: TPTParams;
+  [AutoCompleteType.TPTParams]: TPTParamInfo;
 }
 
 // Base filter type bound to a specific AutoCompleteType
@@ -142,6 +140,7 @@ export class AutoCompleteConfigFactoryService {
   private readonly loadsService = inject(LoadManagementService);
   private readonly loadTypeService = inject(LoaderTypesService);
   private readonly toast = inject(ToastService);
+  private tptParamsService = inject(TPTParamsManagementService);
 
   private readonly appTitle = AppTitles;
 
@@ -235,8 +234,8 @@ export class AutoCompleteConfigFactoryService {
       type: AutoCompleteType.TPTParams,
       label: 'پارامتر های موثر',
       placeholder: 'پارامتر های موثر',
-      optionLabel: 'TPTPTitle' as keyof TPTParams,
-      optionValueKey: 'TPTPId' as keyof TPTParams,
+      optionLabel: 'TPTPTitle' as keyof TPTParamInfo,
+      optionValueKey: 'TPTPId' as keyof TPTParamInfo,
       minLength: 0,
       cachingMode: 'Focus' as const,
     },
@@ -396,10 +395,10 @@ export class AutoCompleteConfigFactoryService {
           );
 
       case AutoCompleteType.TPTParams:
-        return (item: TPTParams) =>
+        return (item: TPTParamInfo) =>
           this.onSelectAutoCompletion(
             controlId,
-            item[config.optionValueKey as keyof TPTParams]
+            item[config.optionValueKey as keyof TPTParamInfo]
           );
 
       default:
@@ -511,10 +510,9 @@ export class AutoCompleteConfigFactoryService {
     return response.data ?? [];
   }
 
-  private async getSearchTPTParams(): Promise<TPTParams[]> {
-    return new Promise((resolve) => {
-      resolve(mockTPTParams);
-    });
+  private async getSearchTPTParams(): Promise<TPTParamInfo[]> {
+    const response = await this.tptParamsService.GetAllTPTParams();
+    return response.data ?? [];
   }
 
   private async getSearchCity(query: string): Promise<City[]> {
