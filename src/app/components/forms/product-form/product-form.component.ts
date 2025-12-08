@@ -155,7 +155,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         'خطا',
         response.error?.message ?? 'خطای غیرمنتظره‌ای رخ داد'
       );
-      console.log(response);
 
       return response.error?.code === ErrorCodes.NoRecordFound;
     }
