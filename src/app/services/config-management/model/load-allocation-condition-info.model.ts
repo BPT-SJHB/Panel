@@ -1,18 +1,18 @@
 export interface LoadAllocationConditionInfo {
-  LoadAllocationConditionId: number; //E
+  LoadAllocationConditionId: number;
   AnnouncementId: number;
   AnnouncementTitle: string;
-  AnnouncementSGId: number; //R //E
+  AnnouncementSGId: number;
   AnnouncementSGTitle: string;
-  SequentialTurnId: number; //R //E
+  SequentialTurnId: number;
   SequentialTurnTitle: string;
-  TruckNativenessTypeId: number; //R //E
+  TruckNativenessTypeId: number;
   TruckNativenessTypeTitle: string;
-  LoadStatusId: number; //R //E
+  LoadStatusId: number;
   LoadStatusTitle: string;
-  RequesterId: number; //R //E
+  RequesterId: number;
   RequesterTitle: string;
-  TurnStatusId: number; //R //E
+  TurnStatusId: number;
   TurnStatusTitle: string;
 }
 
