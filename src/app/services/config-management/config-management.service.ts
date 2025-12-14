@@ -304,4 +304,19 @@ export class ConfigManagementService {
   }
 
   //#endregion
+  public async GetAllRequesters(): Promise<ApiResponse<RequesterInfo[]>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.KernelTasksAPI.GetAllRequesters;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      RequesterInfo[]
+    >(apiUrl, bodyValue, mockRequestersInfo);
+    //#endregion
+  }
 }
