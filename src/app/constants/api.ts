@@ -213,7 +213,7 @@ export const API_ROUTES = {
     },
   },
   LoadCapacitorAPI: {
-    GetLoadStatus: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}GetLoadStatusesForSoftwareUserType`,
+    GetAllLoadStatusesByUserType: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}GetLoadStatusesForSoftwareUserType`,
     GetLoad: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}GetLoad`,
     GetLoadsForDriver: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}GetLoadsforTruckDriver`,
     GetLoadsForTransportCompanies: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}GetLoadsforTransportCompanies`,
