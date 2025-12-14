@@ -338,6 +338,8 @@ export const API_ROUTES = {
     RegisterLoadViewCondition: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}LoadViewConditionRegistering`,
     EditLoadViewCondition: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}LoadViewConditionEditing`,
     DeleteLoadViewCondition: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}LoadViewConditionDeleting`,
+
+    GetAllRequesters: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}GetAllRequesters`,
   },
   CarouselAPI: {
     GetCarousels: `${environment.apiUrl}:${CarouselsPort}${apiFixURLPart}GetCarousels`,
