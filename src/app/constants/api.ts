@@ -333,6 +333,11 @@ export const API_ROUTES = {
     RegisterLoadAllocationCondition: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}LoadAllocationConditionRegistering`,
     EditLoadAllocationCondition: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}LoadAllocationConditionEditing`,
     DeleteLoadAllocationCondition: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}LoadAllocationConditionDeleting`,
+
+    GetAllLoadViewConditions: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}GetAllLoadViewConditions`,
+    RegisterLoadViewCondition: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}LoadViewConditionRegistering`,
+    EditLoadViewCondition: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}LoadViewConditionEditing`,
+    DeleteLoadViewCondition: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}LoadViewConditionDeleting`,
   },
   CarouselAPI: {
     GetCarousels: `${environment.apiUrl}:${CarouselsPort}${apiFixURLPart}GetCarousels`,
