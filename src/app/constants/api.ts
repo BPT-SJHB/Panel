@@ -53,6 +53,7 @@ export const API_ROUTES = {
       GetTruckInfoFromLocalAPI: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetTruckFromWebsite`,
       GetTruckInfoForSoftwareUser: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetTruckBySoftwareUser`,
       GetTruckNativeness: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetTruckNativeness`,
+      GetTruckNativenessTypes: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetTruckNativeness`,
       ChangeTruckNativeness: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}ChangeTruckNativeness`,
       ComposedInfos: {
         GetComposedTruckInfo: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetComposedTruckInf`,
