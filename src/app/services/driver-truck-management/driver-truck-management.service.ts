@@ -262,6 +262,24 @@ export class Driver_TruckManagementService {
     //#endregion
   }
 
+  public async GetTruckNativenessTypes(): Promise<
+    ApiResponse<TruckNativenessType[]>
+  > {
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.Truck.GetTruckNativenessTypes;
+    const bodyValue = {
+      sessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      TruckNativenessType[]
+    >(apiUrl, bodyValue, mockTruckNativenessTypesInfo);
+    //#endregion
+  }
+
   public async ChangeTruckNativeness(
     truckId: number,
     truckNativenessExpireDate: string
