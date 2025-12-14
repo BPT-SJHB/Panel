@@ -27,6 +27,22 @@ import {
   EditInfoOfDeviceConfig,
 } from './model/device-config.model';
 import { mockDeviceConfig } from './mock/device-config.mock';
+import {
+  DeleteLoadViewConditionInfo,
+  EditLoadViewConditionInfo,
+  LoadViewConditionInfo,
+  RegisterLoadViewConditionInfo,
+} from './model/load-view-condition-info.model';
+import { mockLoadViewConditionsInfo } from './mock/load-view-condition-info.mock';
+import { RequesterInfo } from './model/requester-info.model';
+import { mockRequestersInfo } from './mock/requester-info.mock';
+import {
+  DeleteLoadAllocationConditionInfo,
+  EditLoadAllocationConditionInfo,
+  LoadAllocationConditionInfo,
+  RegisterLoadAllocationConditionInfo,
+} from './model/load-allocation-condition-info.model';
+import { mockLoadAllocationConditionsInfo } from './mock/load-allocation-condition.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -304,6 +320,9 @@ export class ConfigManagementService {
   }
 
   //#endregion
+
+  //#region LoadViewCondition
+
   public async GetAllOfLoadViewConditions(): Promise<
     ApiResponse<LoadViewConditionInfo[]>
   > {
@@ -378,6 +397,8 @@ export class ConfigManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  //#region Requester
   public async GetAllRequesters(): Promise<ApiResponse<RequesterInfo[]>> {
     //#region Consts
     const apiUrl = API_ROUTES.KernelTasksAPI.GetAllRequesters;
@@ -393,6 +414,13 @@ export class ConfigManagementService {
     >(apiUrl, bodyValue, mockRequestersInfo);
     //#endregion
   }
+
+  //#endregion
+
+  //#endregion
+
+  //#region LoadAllocationCondition
+
   public async GetAllOfLoadAllocationConditions(): Promise<
     ApiResponse<LoadAllocationConditionInfo[]>
   > {
@@ -468,4 +496,6 @@ export class ConfigManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  //#endregion
 }
