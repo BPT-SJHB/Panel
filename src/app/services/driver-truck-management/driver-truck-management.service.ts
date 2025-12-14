@@ -12,7 +12,10 @@ import {
   TruckComposedInfo,
   TruckInfo,
 } from 'app/services/driver-truck-management/model/truck-info.model';
-import { TruckNativenessInfo } from 'app/services/driver-truck-management/model/truck-nativeness-info.model';
+import {
+  TruckNativenessInfo,
+  TruckNativenessType,
+} from 'app/services/driver-truck-management/model/truck-nativeness-info.model';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
 import { mockTruckDriverInfo } from 'app/services/driver-truck-management/mock/truck-driver-info.model';
 import { mockShortResponse } from 'app/data/mock/short-response.mock';
@@ -21,7 +24,10 @@ import {
   mockTruckComposedInfo,
   mockTruckInfo,
 } from 'app/services/driver-truck-management/mock/truck-info.mock';
-import { mockTruckNativenessInfo } from 'app/services/driver-truck-management/mock/truck-nativeness-info.mock';
+import {
+  mockTruckNativenessInfo,
+  mockTruckNativenessTypesInfo,
+} from 'app/services/driver-truck-management/mock/truck-nativeness-info.mock';
 import { Wallet } from 'app/services/wallet-management/model/wallet.model';
 import { mockWallet } from '../wallet-management/mock/wallet.mock';
 
