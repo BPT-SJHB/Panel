@@ -53,6 +53,7 @@ export const API_ROUTES = {
       GetTruckInfoFromLocalAPI: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetTruckFromWebsite`,
       GetTruckInfoForSoftwareUser: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetTruckBySoftwareUser`,
       GetTruckNativeness: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetTruckNativeness`,
+      GetTruckNativenessTypes: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetTruckNativeness`,
       ChangeTruckNativeness: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}ChangeTruckNativeness`,
       ComposedInfos: {
         GetComposedTruckInfo: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetComposedTruckInf`,
@@ -213,7 +214,7 @@ export const API_ROUTES = {
     },
   },
   LoadCapacitorAPI: {
-    GetLoadStatus: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}GetLoadStatusesForSoftwareUserType`,
+    GetAllLoadStatusesByUserType: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}GetLoadStatusesForSoftwareUserType`,
     GetLoad: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}GetLoad`,
     GetLoadsForDriver: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}GetLoadsforTruckDriver`,
     GetLoadsForTransportCompanies: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}GetLoadsforTransportCompanies`,
@@ -327,6 +328,18 @@ export const API_ROUTES = {
     EditDeviceConfig: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}ConfigurationOfDeviceEditing`,
     RegisterDeviceConfig: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}ConfigurationOfDeviceRegistering`,
     DeleteDeviceConfig: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}ConfigurationOfDeviceDeleting`,
+
+    GetAllOfLoadAllocationConditions: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}GetAllLoadAllocationConditions`,
+    RegisterLoadAllocationCondition: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}LoadAllocationConditionRegistering`,
+    EditLoadAllocationCondition: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}LoadAllocationConditionEditing`,
+    DeleteLoadAllocationCondition: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}LoadAllocationConditionDeleting`,
+
+    GetAllLoadViewConditions: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}GetAllLoadViewConditions`,
+    RegisterLoadViewCondition: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}LoadViewConditionRegistering`,
+    EditLoadViewCondition: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}LoadViewConditionEditing`,
+    DeleteLoadViewCondition: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}LoadViewConditionDeleting`,
+
+    GetAllRequesters: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}GetAllRequesters`,
   },
   CarouselAPI: {
     GetCarousels: `${environment.apiUrl}:${CarouselsPort}${apiFixURLPart}GetCarousels`,

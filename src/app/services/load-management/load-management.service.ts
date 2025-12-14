@@ -285,7 +285,7 @@ export class LoadManagementService {
 
   public async GetLoadStatuses(): Promise<ApiResponse<LoadStatus[]>> {
     //#region Consts
-    const apiUrl = API_ROUTES.LoadCapacitorAPI.GetLoadStatus;
+    const apiUrl = API_ROUTES.LoadCapacitorAPI.GetAllLoadStatusesByUserType;
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
     };

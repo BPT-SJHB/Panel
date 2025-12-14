@@ -3,3 +3,8 @@ export interface TruckNativenessInfo {
   TruckNativenessTypeTitle?: string;
   TruckNativenessExpireDate: string;
 }
+
+export type TruckNativenessType = Pick<
+  TruckNativenessInfo,
+  'TruckNativenessTypeId' | 'TruckNativenessTypeTitle'
+>;

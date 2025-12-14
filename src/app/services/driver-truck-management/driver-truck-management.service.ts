@@ -12,7 +12,10 @@ import {
   TruckComposedInfo,
   TruckInfo,
 } from 'app/services/driver-truck-management/model/truck-info.model';
-import { TruckNativenessInfo } from 'app/services/driver-truck-management/model/truck-nativeness-info.model';
+import {
+  TruckNativenessInfo,
+  TruckNativenessType,
+} from 'app/services/driver-truck-management/model/truck-nativeness-info.model';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
 import { mockTruckDriverInfo } from 'app/services/driver-truck-management/mock/truck-driver-info.model';
 import { mockShortResponse } from 'app/data/mock/short-response.mock';
@@ -21,7 +24,10 @@ import {
   mockTruckComposedInfo,
   mockTruckInfo,
 } from 'app/services/driver-truck-management/mock/truck-info.mock';
-import { mockTruckNativenessInfo } from 'app/services/driver-truck-management/mock/truck-nativeness-info.mock';
+import {
+  mockTruckNativenessInfo,
+  mockTruckNativenessTypesInfo,
+} from 'app/services/driver-truck-management/mock/truck-nativeness-info.mock';
 import { Wallet } from 'app/services/wallet-management/model/wallet.model';
 import { mockWallet } from '../wallet-management/mock/wallet.mock';
 
@@ -259,6 +265,24 @@ export class Driver_TruckManagementService {
       typeof bodyValue,
       TruckNativenessInfo
     >(apiUrl, bodyValue, mockTruckNativenessInfo);
+    //#endregion
+  }
+
+  public async GetTruckNativenessTypes(): Promise<
+    ApiResponse<TruckNativenessType[]>
+  > {
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.Truck.GetTruckNativenessTypes;
+    const bodyValue = {
+      sessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      TruckNativenessType[]
+    >(apiUrl, bodyValue, mockTruckNativenessTypesInfo);
     //#endregion
   }
 

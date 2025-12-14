@@ -27,6 +27,22 @@ import {
   EditInfoOfDeviceConfig,
 } from './model/device-config.model';
 import { mockDeviceConfig } from './mock/device-config.mock';
+import {
+  DeleteLoadViewConditionInfo,
+  EditLoadViewConditionInfo,
+  LoadViewConditionInfo,
+  RegisterLoadViewConditionInfo,
+} from './model/load-view-condition-info.model';
+import { mockLoadViewConditionsInfo } from './mock/load-view-condition-info.mock';
+import { RequesterInfo } from './model/requester-info.model';
+import { mockRequestersInfo } from './mock/requester-info.mock';
+import {
+  DeleteLoadAllocationConditionInfo,
+  EditLoadAllocationConditionInfo,
+  LoadAllocationConditionInfo,
+  RegisterLoadAllocationConditionInfo,
+} from './model/load-allocation-condition-info.model';
+import { mockLoadAllocationConditionsInfo } from './mock/load-allocation-condition.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -292,6 +308,184 @@ export class ConfigManagementService {
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
       RawConfigurationOfDevice: deviceConfigInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  //#endregion
+
+  //#region LoadViewCondition
+
+  public async GetAllOfLoadViewConditions(): Promise<
+    ApiResponse<LoadViewConditionInfo[]>
+  > {
+    //#region Consts
+    const apiUrl = API_ROUTES.KernelTasksAPI.GetAllLoadViewConditions;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoadViewConditionInfo[]
+    >(apiUrl, bodyValue, mockLoadViewConditionsInfo);
+    //#endregion
+  }
+
+  public async RegisterLoadViewCondition(
+    loadViewConditionInfo: RegisterLoadViewConditionInfo
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.KernelTasksAPI.RegisterLoadViewCondition;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      RawLoadViewCondition: loadViewConditionInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async EditLoadViewCondition(
+    loadViewConditionInfo: EditLoadViewConditionInfo
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.KernelTasksAPI.EditLoadViewCondition;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      RawLoadViewCondition: loadViewConditionInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async DeleteLoadViewCondition(
+    loadViewConditionInfo: DeleteLoadViewConditionInfo
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.KernelTasksAPI.DeleteLoadViewCondition;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LoadViewConditionId: loadViewConditionInfo.LoadViewConditionId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  //#region Requester
+  public async GetAllRequesters(): Promise<ApiResponse<RequesterInfo[]>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.KernelTasksAPI.GetAllRequesters;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      RequesterInfo[]
+    >(apiUrl, bodyValue, mockRequestersInfo);
+    //#endregion
+  }
+
+  //#endregion
+
+  //#endregion
+
+  //#region LoadAllocationCondition
+
+  public async GetAllOfLoadAllocationConditions(): Promise<
+    ApiResponse<LoadAllocationConditionInfo[]>
+  > {
+    //#region Consts
+    const apiUrl = API_ROUTES.KernelTasksAPI.GetAllOfLoadAllocationConditions;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoadAllocationConditionInfo[]
+    >(apiUrl, bodyValue, mockLoadAllocationConditionsInfo);
+    //endregion
+  }
+
+  public async RegisterLoadAllocationCondition(
+    loadAllocationConditionInfo: RegisterLoadAllocationConditionInfo
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.KernelTasksAPI.RegisterLoadAllocationCondition;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      RawLoadAllocationCondition: loadAllocationConditionInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async EditLoadAllocationCondition(
+    loadAllocationConditionInfo: EditLoadAllocationConditionInfo
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.KernelTasksAPI.EditLoadAllocationCondition;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      RawLoadAllocationCondition: loadAllocationConditionInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async DeleteLoadAllocationCondition(
+    loadAllocationConditionInfo: DeleteLoadAllocationConditionInfo
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.KernelTasksAPI.DeleteLoadAllocationCondition;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LoadAllocationConditionId:
+        loadAllocationConditionInfo.LoadAllocationConditionId,
     };
     //#endregion
 
