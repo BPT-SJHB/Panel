@@ -304,6 +304,80 @@ export class ConfigManagementService {
   }
 
   //#endregion
+  public async GetAllOfLoadViewConditions(): Promise<
+    ApiResponse<LoadViewConditionInfo[]>
+  > {
+    //#region Consts
+    const apiUrl = API_ROUTES.KernelTasksAPI.GetAllLoadViewConditions;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoadViewConditionInfo[]
+    >(apiUrl, bodyValue, mockLoadViewConditionsInfo);
+    //#endregion
+  }
+
+  public async RegisterLoadViewCondition(
+    loadViewConditionInfo: RegisterLoadViewConditionInfo
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.KernelTasksAPI.RegisterLoadViewCondition;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      RawLoadViewCondition: loadViewConditionInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async EditLoadViewCondition(
+    loadViewConditionInfo: EditLoadViewConditionInfo
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.KernelTasksAPI.EditLoadViewCondition;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      RawLoadViewCondition: loadViewConditionInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async DeleteLoadViewCondition(
+    loadViewConditionInfo: DeleteLoadViewConditionInfo
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.KernelTasksAPI.DeleteLoadViewCondition;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LoadViewConditionId: loadViewConditionInfo.LoadViewConditionId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
   public async GetAllRequesters(): Promise<ApiResponse<RequesterInfo[]>> {
     //#region Consts
     const apiUrl = API_ROUTES.KernelTasksAPI.GetAllRequesters;
