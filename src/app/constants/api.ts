@@ -328,6 +328,11 @@ export const API_ROUTES = {
     EditDeviceConfig: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}ConfigurationOfDeviceEditing`,
     RegisterDeviceConfig: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}ConfigurationOfDeviceRegistering`,
     DeleteDeviceConfig: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}ConfigurationOfDeviceDeleting`,
+
+    GetAllOfLoadAllocationConditions: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}GetAllLoadAllocationConditions`,
+    RegisterLoadAllocationCondition: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}LoadAllocationConditionRegistering`,
+    EditLoadAllocationCondition: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}LoadAllocationConditionEditing`,
+    DeleteLoadAllocationCondition: `${environment.apiUrl}:${KernelTasksPort}${apiFixURLPart}LoadAllocationConditionDeleting`,
   },
   CarouselAPI: {
     GetCarousels: `${environment.apiUrl}:${CarouselsPort}${apiFixURLPart}GetCarousels`,
