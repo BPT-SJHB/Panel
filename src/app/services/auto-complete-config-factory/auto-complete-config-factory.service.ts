@@ -1,5 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
+
+// --- Models ---
 import { AnnouncementGroup } from '../announcement-group-subgroup-management/model/announcement-group.model';
 import { AnnouncementSubGroup } from '../announcement-group-subgroup-management/model/announcement-subgroup.model';
 import { LoadStatus } from '../load-management/model/load-status.model';
@@ -8,26 +10,38 @@ import {
   City,
   Province,
 } from '../province-city-management/model/province-city.model';
+import { Product } from 'app/data/model/product-type.model';
+import { LADPlace } from 'app/data/model/lad-place.model';
+import { DeviceInfo } from '../config-management/model/device-info.model';
+import { LoaderType } from '../loader-types/model/loader-type.model';
+import { SequentialTurn } from '../sequential-turn-management/model/sequential-turn.model';
+import { TPTParamInfo } from '../tpt-params-management/model/tptparam-info.model';
+
+// --- Services ---
 import { ProvinceAndCityManagementService } from '../province-city-management/province-and-city-management.service';
 import { TransportCompaniesManagementService } from '../transport-company-management/transport-companies-management.service';
 import { AnnouncementGroupSubgroupManagementService } from '../announcement-group-subgroup-management/announcement-group-subgroup-management.service';
 import { LoadManagementService } from '../load-management/load-management.service';
-import { ToastService } from '../toast-service/toast.service';
-import { checkAndToastError } from 'app/utils/api-utils';
-import { Product, ProductType } from 'app/data/model/product-type.model';
-import { LADPlace } from 'app/data/model/lad-place.model';
 import { ProductTypesService } from '../product-types/product-types.service';
 import { LADPlaceManagementService } from '../lad-place-management/lad-place-management.service';
-import { AppTitles } from 'app/constants/Titles';
-import { DeviceInfo } from '../config-management/model/device-info.model';
 import { ConfigManagementService } from '../config-management/config-management.service';
-import { LoaderType } from '../loader-types/model/loader-type.model';
 import { LoaderTypesService } from '../loader-types/loader-types.service';
-import { SequentialTurn } from '../sequential-turn-management/model/sequential-turn.model';
 import { SequentialTurnManagementService } from '../sequential-turn-management/sequential-turn-management.service';
-import { TPTParamInfo } from '../tpt-params-management/model/tptparam-info.model';
 import { TPTParamsManagementService } from '../tpt-params-management/tptparams-management.service';
+import { ToastService } from '../toast-service/toast.service';
 
+// --- Utilities ---
+import { checkAndToastError } from 'app/utils/api-utils';
+import { AppTitles } from 'app/constants/Titles';
+import { Driver_TruckManagementService } from '../driver-truck-management/driver-truck-management.service';
+import { TruckNativenessType } from '../driver-truck-management/model/truck-nativeness-info.model';
+import {
+  mockTurnStatus,
+  TurnStatus,
+} from 'app/components/forms/load-condition-management-form/load-allocation-condition/load-allocation-condition-form.component';
+import { RequesterInfo } from '../config-management/model/requester-info.model';
+
+// --- AutoComplete Types ---
 export enum AutoCompleteType {
   AnnouncementGroup = 'AnnouncementGroup',
   AnnouncementSubGroup = 'AnnouncementSubGroup',
@@ -42,12 +56,15 @@ export enum AutoCompleteType {
   LoaderType = 'LoaderType',
   SequentialTurn = 'SequentialTurn',
   TPTParams = 'TPTParams',
+  NativenessType = 'NativenessType',
+  TurnStatus = 'TurnStatus',
+  RequesterInfo = 'RequesterInfo',
 }
 
 type CachingMode = 'Focus' | 'CharacterPrefix';
 
-// Map each AutoCompleteType to its corresponding model
-interface AutoCompleteTypeMap {
+// --- AutoComplete Type Mapping ---
+export interface AutoCompleteTypeMap {
   [AutoCompleteType.AnnouncementGroup]: AnnouncementGroup;
   [AutoCompleteType.AnnouncementSubGroup]: AnnouncementSubGroup;
   [AutoCompleteType.LoadStatus]: LoadStatus;
@@ -55,15 +72,18 @@ interface AutoCompleteTypeMap {
   [AutoCompleteType.RelationAnnouncementGroupAndSubGroup]: AnnouncementSubGroup;
   [AutoCompleteType.Province]: Province;
   [AutoCompleteType.City]: City;
-  [AutoCompleteType.Product]: ProductType;
+  [AutoCompleteType.Product]: Product;
   [AutoCompleteType.LADPlaces]: LADPlace;
   [AutoCompleteType.Devices]: DeviceInfo;
   [AutoCompleteType.LoaderType]: LoaderType;
   [AutoCompleteType.SequentialTurn]: SequentialTurn;
   [AutoCompleteType.TPTParams]: TPTParamInfo;
+  [AutoCompleteType.NativenessType]: TruckNativenessType;
+  [AutoCompleteType.TurnStatus]: TurnStatus;
+  [AutoCompleteType.RequesterInfo]: RequesterInfo;
 }
 
-// Base filter type bound to a specific AutoCompleteType
+// --- Base Filter ---
 export interface BaseAutoCompleteFilter<K extends keyof AutoCompleteTypeMap> {
   type: K;
   label: string;
@@ -71,7 +91,7 @@ export interface BaseAutoCompleteFilter<K extends keyof AutoCompleteTypeMap> {
   control: FormControl<string>;
   optionLabel: keyof AutoCompleteTypeMap[K];
   optionValueKey: keyof AutoCompleteTypeMap[K];
-  lazySearch: (query: string) => Promise<AutoCompleteTypeMap[K][]>;
+  lazySearch: (query?: string) => Promise<AutoCompleteTypeMap[K][]>;
   select: (item: AutoCompleteTypeMap[K]) => void;
   valueChange: () => void;
   showIcon: () => boolean;
@@ -82,79 +102,53 @@ export interface BaseAutoCompleteFilter<K extends keyof AutoCompleteTypeMap> {
   filter?: (item: AutoCompleteTypeMap[K]) => boolean;
 }
 
-// Specific filter types
-export type AnnouncementGroupFilter =
-  BaseAutoCompleteFilter<AutoCompleteType.AnnouncementGroup>;
-export type AnnouncementSubGroupFilter =
-  BaseAutoCompleteFilter<AutoCompleteType.AnnouncementSubGroup>;
-export type LoadStatusFilter =
-  BaseAutoCompleteFilter<AutoCompleteType.LoadStatus>;
-export type TransportCompanyFilter =
-  BaseAutoCompleteFilter<AutoCompleteType.TransportCompany>;
-export type CityFilter = BaseAutoCompleteFilter<AutoCompleteType.City>;
-export type ProvinceFilter = BaseAutoCompleteFilter<AutoCompleteType.Province>;
-export type RelationAnnouncementGroupAndSubGroupFilter =
-  BaseAutoCompleteFilter<AutoCompleteType.RelationAnnouncementGroupAndSubGroup>;
-export type LADPlacesFilter =
-  BaseAutoCompleteFilter<AutoCompleteType.LADPlaces>;
-export type ProductFilter = BaseAutoCompleteFilter<AutoCompleteType.Product>;
-export type LoaderTypeFilter =
-  BaseAutoCompleteFilter<AutoCompleteType.LoaderType>;
-export type DeviceFilter = BaseAutoCompleteFilter<AutoCompleteType.Devices>;
-export type SequentialTurnFilter =
-  BaseAutoCompleteFilter<AutoCompleteType.SequentialTurn>;
-export type TPTParamsFilter =
-  BaseAutoCompleteFilter<AutoCompleteType.TPTParams>;
+interface BaseConfig<K extends AutoCompleteType> {
+  type: K;
+  optionValueKey: keyof AutoCompleteTypeMap[K];
+  optionLabel: keyof AutoCompleteTypeMap[K];
+  label: string;
+  placeholder: string;
+  minLength: number;
+  cachingMode: CachingMode;
+  lazySearch: (query: string) => Promise<AutoCompleteTypeMap[K][]>;
+}
 
-// Union of all filters
-export type AutoCompleteFilter =
-  | AnnouncementGroupFilter
-  | AnnouncementSubGroupFilter
-  | LoadStatusFilter
-  | TransportCompanyFilter
-  | CityFilter
-  | ProvinceFilter
-  | LoaderTypeFilter
-  | DeviceFilter
-  | SequentialTurnFilter
-  | TPTParamsFilter;
-
-@Injectable({
-  providedIn: 'root',
-})
+// --- Service ---
+@Injectable({ providedIn: 'root' })
 export class AutoCompleteConfigFactoryService {
-  private readonly fb = inject(FormBuilder);
-  private readonly provinceService = inject(ProvinceAndCityManagementService);
-  private readonly productService = inject(ProductTypesService);
-  private readonly ladPlacesService = inject(LADPlaceManagementService);
-  private readonly sequentialTurnService = inject(
-    SequentialTurnManagementService
-  );
-  private readonly configService = inject(ConfigManagementService);
-  private readonly transportCompanyService = inject(
-    TransportCompaniesManagementService
-  );
-  private readonly announcementService = inject(
-    AnnouncementGroupSubgroupManagementService
-  );
-  private readonly loadsService = inject(LoadManagementService);
-  private readonly loadTypeService = inject(LoaderTypesService);
-  private readonly toast = inject(ToastService);
-  private tptParamsService = inject(TPTParamsManagementService);
+  private fb = inject(FormBuilder);
+  private toast = inject(ToastService);
+
+  // --- Injected Domain Services ---
+  private services = {
+    province: inject(ProvinceAndCityManagementService),
+    product: inject(ProductTypesService),
+    lad: inject(LADPlaceManagementService),
+    seqTurn: inject(SequentialTurnManagementService),
+    config: inject(ConfigManagementService),
+    company: inject(TransportCompaniesManagementService),
+    announce: inject(AnnouncementGroupSubgroupManagementService),
+    loads: inject(LoadManagementService),
+    loaderType: inject(LoaderTypesService),
+    tpt: inject(TPTParamsManagementService),
+    truckDriver: inject(Driver_TruckManagementService),
+  };
 
   private readonly appTitle = AppTitles;
 
-  private readonly defaultConfigs = {
+  private readonly defaultConfigs: {
+    [K in AutoCompleteType]: BaseConfig<K>;
+  } = {
     [AutoCompleteType.AnnouncementGroup]: {
       type: AutoCompleteType.AnnouncementGroup,
       label: this.appTitle.inputs.loadAnnouncements.loadAnnouncementGroupTitle,
       placeholder: this.appTitle.getPlaceholder('loadAnnouncementGroupTitle'),
-      optionLabel: 'AnnouncementTitle' as keyof AnnouncementGroup,
-      optionValueKey: 'AnnouncementId' as keyof AnnouncementGroup,
+      optionLabel: 'AnnouncementTitle',
+      optionValueKey: 'AnnouncementId',
       minLength: 0,
-      cachingMode: 'Focus' as const,
+      cachingMode: 'Focus',
+      lazySearch: (query: string) => this.getSearchAnnouncementGroup(query),
     },
-
     [AutoCompleteType.AnnouncementSubGroup]: {
       type: AutoCompleteType.AnnouncementSubGroup,
       label:
@@ -162,12 +156,12 @@ export class AutoCompleteConfigFactoryService {
       placeholder: this.appTitle.getPlaceholder(
         'loadAnnouncementSubGroupTitle'
       ),
-      optionLabel: 'AnnouncementSGTitle' as keyof AnnouncementSubGroup,
-      optionValueKey: 'AnnouncementSGTitle' as keyof AnnouncementSubGroup,
+      optionLabel: 'AnnouncementSGTitle',
+      optionValueKey: 'AnnouncementSGTitle',
       minLength: 0,
-      cachingMode: 'Focus' as const,
+      cachingMode: 'Focus',
+      lazySearch: (query: string) => this.getSearchAnnouncementSubGroup(query),
     },
-
     [AutoCompleteType.RelationAnnouncementGroupAndSubGroup]: {
       type: AutoCompleteType.RelationAnnouncementGroupAndSubGroup,
       label:
@@ -175,377 +169,306 @@ export class AutoCompleteConfigFactoryService {
       placeholder: this.appTitle.getPlaceholder(
         'loadAnnouncementSubGroupTitle'
       ),
-      optionLabel: 'AnnouncementSGTitle' as keyof AnnouncementSubGroup,
-      optionValueKey: 'AnnouncementSGId' as keyof AnnouncementSubGroup,
+      optionLabel: 'AnnouncementSGTitle',
+      optionValueKey: 'AnnouncementSGId',
       minLength: 0,
-      cachingMode: 'Focus' as const,
+      cachingMode: 'Focus',
+      lazySearch: (query: string, groupControlId?: FormControl) =>
+        this.getSearchRelationOfAnnouncementGroupAndSubGroup(
+          query,
+          groupControlId
+        ),
     },
     [AutoCompleteType.LoadStatus]: {
       type: AutoCompleteType.LoadStatus,
       label: this.appTitle.inputs.loads.loadStatus,
-      placeholder: '',
-      optionLabel: 'LoadStatusTitle' as keyof LoadStatus,
-      optionValueKey: 'LoadStatusId' as keyof LoadStatus,
+      placeholder: this.appTitle.getPlaceholder('loadStatus'),
+      optionLabel: 'LoadStatusTitle',
+      optionValueKey: 'LoadStatusId',
       minLength: 0,
-      cachingMode: 'Focus' as const,
+      cachingMode: 'Focus',
+      lazySearch: () => this.getSearchLoadStatus(),
     },
-
     [AutoCompleteType.Devices]: {
       type: AutoCompleteType.Devices,
       label: 'دیوایس',
       placeholder: 'دیوایس',
-      optionLabel: 'DeviceTitle' as keyof DeviceInfo,
-      optionValueKey: 'DeviceId' as keyof DeviceInfo,
+      optionLabel: 'DeviceTitle',
+      optionValueKey: 'DeviceId',
       minLength: 0,
-      cachingMode: 'Focus' as const,
+      cachingMode: 'Focus',
+      lazySearch: () => this.getSearchDevices(),
     },
-
     [AutoCompleteType.LoaderType]: {
       type: AutoCompleteType.LoaderType,
       label: 'بارگیر',
       placeholder: 'بارگیر',
-      optionLabel: 'LoaderTypeTitle' as keyof LoaderType,
-      optionValueKey: 'LoaderTypeId' as keyof LoaderType,
+      optionLabel: 'LoaderTypeTitle',
+      optionValueKey: 'LoaderTypeId',
       minLength: 2,
-      cachingMode: 'Focus' as const,
+      cachingMode: 'Focus',
+      lazySearch: (query: string) => this.getSearchLoaderType(query),
     },
-
     [AutoCompleteType.SequentialTurn]: {
       type: AutoCompleteType.SequentialTurn,
       label: this.appTitle.inputs.sequentialTurns.sequentialTurnTitle,
       placeholder: this.appTitle.getPlaceholder('sequentialTurnTitle'),
-      optionLabel: 'SeqTurnTitle' as keyof SequentialTurn,
-      optionValueKey: 'SeqTurnId' as keyof SequentialTurn,
+      optionLabel: 'SeqTurnTitle',
+      optionValueKey: 'SeqTurnId',
       minLength: 2,
-      cachingMode: 'Focus' as const,
+      cachingMode: 'Focus',
+      lazySearch: (query: string) => this.getSearchSequentialTurn(query),
     },
-
     [AutoCompleteType.TransportCompany]: {
       type: AutoCompleteType.TransportCompany,
       label: this.appTitle.inputs.transportCompanies.transportCompanyTitle,
       placeholder: this.appTitle.getPlaceholder('transportCompanyTitle'),
-      optionLabel: 'TCTitle' as keyof TransportCompany,
-      optionValueKey: 'TCId' as keyof TransportCompany,
+      optionLabel: 'TCTitle',
+      optionValueKey: 'TCId',
       minLength: 0,
-      cachingMode: 'Focus' as const,
+      cachingMode: 'Focus',
+      lazySearch: (query: string) => this.getSearchTransportCompany(query),
     },
-
     [AutoCompleteType.TPTParams]: {
       type: AutoCompleteType.TPTParams,
       label: 'پارامتر های موثر',
       placeholder: 'پارامتر های موثر',
-      optionLabel: 'TPTPTitle' as keyof TPTParamInfo,
-      optionValueKey: 'TPTPId' as keyof TPTParamInfo,
+      optionLabel: 'TPTPTitle',
+      optionValueKey: 'TPTPId',
       minLength: 0,
-      cachingMode: 'Focus' as const,
+      cachingMode: 'Focus',
+      lazySearch: () => this.getSearchTPTParams(),
     },
-
+    [AutoCompleteType.NativenessType]: {
+      type: AutoCompleteType.NativenessType,
+      label: 'بومی/غیربومی',
+      placeholder: 'بومی/غیربومی',
+      optionLabel: 'TruckNativenessTypeTitle',
+      optionValueKey: 'TruckNativenessTypeId',
+      minLength: 0,
+      cachingMode: 'Focus',
+      lazySearch: () => this.getSearchNativeness(),
+    },
     [AutoCompleteType.City]: {
       type: AutoCompleteType.City,
       label: 'شهر',
       placeholder: 'شهر',
-      optionLabel: 'CityTitle' as keyof City,
-      optionValueKey: 'CityCode' as keyof City,
+      optionLabel: 'CityTitle',
+      optionValueKey: 'CityCode',
       minLength: 2,
-      cachingMode: 'CharacterPrefix' as const,
+      cachingMode: 'CharacterPrefix',
+      lazySearch: (query: string) => this.getSearchCity(query),
     },
-
     [AutoCompleteType.Province]: {
       type: AutoCompleteType.Province,
       label: 'استان',
       placeholder: 'استان',
-      optionLabel: 'ProvinceName' as keyof Province,
-      optionValueKey: 'ProvinceId' as keyof Province,
+      optionLabel: 'ProvinceName',
+      optionValueKey: 'ProvinceId',
       minLength: 2,
-      cachingMode: 'CharacterPrefix' as const,
+      cachingMode: 'CharacterPrefix',
+      lazySearch: (query: string) => this.getSearchProvince(query),
     },
-
+    [AutoCompleteType.TurnStatus]: {
+      type: AutoCompleteType.TurnStatus,
+      label: 'وضعیت نوبت',
+      placeholder: 'وضعیت نوبت',
+      optionLabel: 'TurnStatusTitle',
+      optionValueKey: 'TurnStatusId',
+      minLength: 2,
+      cachingMode: 'CharacterPrefix',
+      lazySearch: () => this.getSearchTurnStatus(),
+    },
     [AutoCompleteType.LADPlaces]: {
       type: AutoCompleteType.LADPlaces,
       label: 'محل بارگیری',
       placeholder: 'محل بارگیری',
-      optionLabel: 'LADPlaceTitle' as keyof LADPlace,
-      optionValueKey: 'LADPlaceId' as keyof LADPlace,
+      optionLabel: 'LADPlaceTitle',
+      optionValueKey: 'LADPlaceId',
       minLength: 2,
-      cachingMode: 'CharacterPrefix' as const,
+      cachingMode: 'CharacterPrefix',
+      lazySearch: (query: string) => this.getSearchLadPlace(query),
     },
-
     [AutoCompleteType.Product]: {
       type: AutoCompleteType.Product,
       label: this.appTitle.inputs.products.productsTitle,
       placeholder: this.appTitle.getPlaceholder('productsTitle'),
-      optionLabel: 'ProductTitle' as keyof Product,
-      optionValueKey: 'ProductId' as keyof Product,
+      optionLabel: 'ProductTitle',
+      optionValueKey: 'ProductId',
       minLength: 2,
-      cachingMode: 'CharacterPrefix' as const,
+      cachingMode: 'CharacterPrefix',
+      lazySearch: (query: string) => this.getSearchProduct(query),
+    },
+    [AutoCompleteType.RequesterInfo]: {
+      type: AutoCompleteType.RequesterInfo,
+      label: 'محل درخواست',
+      placeholder: 'محل درخواست',
+      optionLabel: 'RequesterTitle',
+      optionValueKey: 'RequesterId',
+      minLength: 2,
+      cachingMode: 'CharacterPrefix',
+      lazySearch: () => this.getSearchRequsterInfo(),
     },
   };
 
-  create<T extends AutoCompleteFilter>(
-    type: AutoCompleteType,
-    controlId: FormControl,
-    overrides: Partial<T> = {}
-  ): T {
-    const defaultConfig = this.defaultConfigs[type];
-
-    const searchMethod = this.getLazySearch(type, overrides.groupControlId);
-
-    const config = {
-      ...defaultConfig,
-      control: this.fb.nonNullable.control(''),
-      lazySearch: searchMethod,
-      select: this.createSelectHandler(type, controlId, defaultConfig),
-      valueChange: () => this.onAutoCompleteChange(controlId),
-      showIcon: () => controlId.valid,
-      readOnly: () => false,
-      ...overrides,
-    } as T;
-
-    return config;
-  }
-
-  private createSelectHandler(
-    type: AutoCompleteType,
-    controlId: FormControl,
-    config: { optionValueKey: string }
-  ) {
-    switch (type) {
-      case AutoCompleteType.AnnouncementGroup:
-        return (item: AnnouncementGroup) =>
-          this.onSelectAutoCompletion(
-            controlId,
-            item[config.optionValueKey as keyof AnnouncementGroup]
-          );
-
-      case AutoCompleteType.AnnouncementSubGroup:
-        return (item: AnnouncementSubGroup) =>
-          this.onSelectAutoCompletion(
-            controlId,
-            item[config.optionValueKey as keyof AnnouncementSubGroup]
-          );
-
-      case AutoCompleteType.RelationAnnouncementGroupAndSubGroup:
-        return (item: AnnouncementSubGroup) =>
-          this.onSelectAutoCompletion(
-            controlId,
-            item[config.optionValueKey as keyof AnnouncementSubGroup]
-          );
-
-      case AutoCompleteType.LoadStatus:
-        return (item: LoadStatus) =>
-          this.onSelectAutoCompletion(
-            controlId,
-            item[config.optionValueKey as keyof LoadStatus]
-          );
-
-      case AutoCompleteType.LoaderType:
-        return (item: LoaderType) =>
-          this.onSelectAutoCompletion(
-            controlId,
-            item[config.optionValueKey as keyof LoaderType]
-          );
-
-      case AutoCompleteType.TransportCompany:
-        return (item: TransportCompany) =>
-          this.onSelectAutoCompletion(
-            controlId,
-            item[config.optionValueKey as keyof TransportCompany]
-          );
-
-      case AutoCompleteType.SequentialTurn:
-        return (item: SequentialTurn) =>
-          this.onSelectAutoCompletion(
-            controlId,
-            item[config.optionValueKey as keyof SequentialTurn]
-          );
-
-      case AutoCompleteType.City:
-        return (item: City) =>
-          this.onSelectAutoCompletion(
-            controlId,
-            item[config.optionValueKey as keyof City]
-          );
-
-      case AutoCompleteType.Province:
-        return (item: Province) =>
-          this.onSelectAutoCompletion(
-            controlId,
-            item[config.optionValueKey as keyof Province]
-          );
-
-      case AutoCompleteType.Product:
-        return (item: Product) =>
-          this.onSelectAutoCompletion(
-            controlId,
-            item[config.optionValueKey as keyof Product]
-          );
-
-      case AutoCompleteType.LADPlaces:
-        return (item: LADPlace) =>
-          this.onSelectAutoCompletion(
-            controlId,
-            item[config.optionValueKey as keyof LADPlace]
-          );
-
-      case AutoCompleteType.Devices:
-        return (item: DeviceInfo) =>
-          this.onSelectAutoCompletion(
-            controlId,
-            item[config.optionValueKey as keyof DeviceInfo]
-          );
-
-      case AutoCompleteType.TPTParams:
-        return (item: TPTParamInfo) =>
-          this.onSelectAutoCompletion(
-            controlId,
-            item[config.optionValueKey as keyof TPTParamInfo]
-          );
-
-      default:
-        throw new Error(`Unsupported AutoCompleteType: ${type}`);
-    }
-  }
-
-  private getLazySearch(type: AutoCompleteType, groupControlId?: FormControl) {
-    switch (type) {
-      case AutoCompleteType.AnnouncementGroup:
-        return (query: string) => this.getSearchAnnouncementGroup(query);
-
-      case AutoCompleteType.AnnouncementSubGroup:
-        return (query: string) => this.getSearchAnnouncementSubGroup(query);
-
-      case AutoCompleteType.LoadStatus:
-        return () => this.getSearchLoadStatus();
-
-      case AutoCompleteType.LoaderType:
-        return (query: string) => this.getSearchLoaderType(query);
-
-      case AutoCompleteType.TransportCompany:
-        return (query: string) => this.getSearchTransportCompany(query);
-
-      case AutoCompleteType.City:
-        return (query: string) => this.getSearchCity(query);
-
-      case AutoCompleteType.Province:
-        return (query: string) => this.getSearchProvince(query);
-
-      case AutoCompleteType.RelationAnnouncementGroupAndSubGroup:
-        if (!groupControlId) throw new Error(`groupControlId is undefined`);
-        return (query: string) =>
-          this.getSearchRelationOfAnnouncementGroupAndSubGroup(
-            query,
-            groupControlId
-          );
-      case AutoCompleteType.Product:
-        return (query: string) => this.getSearchProduct(query);
-
-      case AutoCompleteType.LADPlaces:
-        return (query: string) => this.getSearchLadPlace(query);
-
-      case AutoCompleteType.Devices:
-        return (_: string) => this.getSearchDevices();
-
-      case AutoCompleteType.SequentialTurn:
-        return (query: string) => this.getSearchSequentialTurn(query);
-
-      case AutoCompleteType.TPTParams:
-        return () => this.getSearchTPTParams();
-
-      default:
-        throw new Error(`Unsupported AutoCompleteType: ${type}`);
-    }
-  }
-
-  // --- Separate search functions remain unchanged ---
+  // --- Search functions ---
   private async getSearchAnnouncementGroup(
     query: string
   ): Promise<AnnouncementGroup[]> {
-    const res = await this.announcementService.GetAnnouncementGroups(query);
-    return res.data ?? [];
+    const res = await this.services.announce.GetAnnouncementGroups(query);
+    return checkAndToastError(res, this.toast) ? (res.data ?? []) : [];
   }
 
   private async getSearchAnnouncementSubGroup(
     query: string
   ): Promise<AnnouncementSubGroup[]> {
-    const res = await this.announcementService.GetAnnouncementSupGroups(query);
-    return res.data ?? [];
+    const res = await this.services.announce.GetAnnouncementSupGroups(query);
+    return checkAndToastError(res, this.toast) ? (res.data ?? []) : [];
   }
 
   private async getSearchLoadStatus(): Promise<LoadStatus[]> {
-    const res = await this.loadsService.GetLoadStatuses();
-    return res.data ?? [];
+    const res = await this.services.loads.GetLoadStatuses();
+    return checkAndToastError(res, this.toast) ? (res.data ?? []) : [];
   }
 
   private async getSearchLoaderType(query: string): Promise<LoaderType[]> {
-    const res = await this.loadTypeService.GetLoaderTypesInfo(query);
-    return res.data ?? [];
+    const res = await this.services.loaderType.GetLoaderTypesInfo(query);
+    return checkAndToastError(res, this.toast) ? (res.data ?? []) : [];
   }
+
   private async getSearchLadPlace(query: string): Promise<LADPlace[]> {
-    const res = await this.ladPlacesService.GetLADPlaces(query);
-    return res.data ?? [];
+    const res = await this.services.lad.GetLADPlaces(query);
+    return checkAndToastError(res, this.toast) ? (res.data ?? []) : [];
   }
 
   private async getSearchProduct(query: string): Promise<Product[]> {
-    const res = await this.productService.GetProductsInfo(query);
-    return res.data?.flatMap((pt) => pt.Products ?? []) ?? [];
+    const res = await this.services.product.GetProductsInfo(query);
+    return checkAndToastError(res, this.toast)
+      ? (res.data?.flatMap((pt) => pt.Products ?? []) ?? [])
+      : [];
   }
 
   private async getSearchTransportCompany(
     query: string
   ): Promise<TransportCompany[]> {
-    const res =
-      await this.transportCompanyService.GetTransportCompaniesInfo(query);
-    return res.data ?? [];
+    const res = await this.services.company.GetTransportCompaniesInfo(query);
+    return checkAndToastError(res, this.toast) ? (res.data ?? []) : [];
   }
 
   private async getSearchDevices(): Promise<DeviceInfo[]> {
-    const response = await this.configService.GetAllOfDevices();
-    return response.data ?? [];
+    const res = await this.services.config.GetAllOfDevices();
+    return checkAndToastError(res, this.toast) ? (res.data ?? []) : [];
   }
 
   private async getSearchSequentialTurn(
     query: string
   ): Promise<SequentialTurn[]> {
-    const response = await this.sequentialTurnService.GetSequentialTurns(query);
-    return response.data ?? [];
+    const res = await this.services.seqTurn.GetSequentialTurns(query);
+    return checkAndToastError(res, this.toast) ? (res.data ?? []) : [];
   }
 
   private async getSearchTPTParams(): Promise<TPTParamInfo[]> {
-    const response = await this.tptParamsService.GetAllTPTParams();
-    return response.data ?? [];
+    const res = await this.services.tpt.GetAllTPTParams();
+    return checkAndToastError(res, this.toast) ? (res.data ?? []) : [];
+  }
+
+  private async getSearchTurnStatus(): Promise<TurnStatus[]> {
+    const res = { success: true, data: mockTurnStatus };
+    if (!checkAndToastError(res, this.toast)) return [];
+    return res.data;
+  }
+
+  private async getSearchNativeness(): Promise<TruckNativenessType[]> {
+    const res = await this.services.truckDriver.GetTruckNativenessTypes();
+    if (!checkAndToastError(res, this.toast)) return [];
+    return res.data ?? [];
   }
 
   private async getSearchCity(query: string): Promise<City[]> {
-    const res = await this.provinceService.GetProvincesAndCitiesInfo(query);
+    const res = await this.services.province.GetProvincesAndCitiesInfo(query);
     return checkAndToastError(res, this.toast)
       ? (res.data?.flatMap((p) => p?.Cities ?? []) ?? [])
       : [];
   }
 
   private async getSearchProvince(query: string): Promise<Province[]> {
-    const res = await this.provinceService.GetAllProvinces(query);
-    if (!checkAndToastError(res, this.toast)) {
-      return [];
-    }
+    const res = await this.services.province.GetAllProvinces(query);
+    if (!checkAndToastError(res, this.toast)) return [];
     return res.data?.map((p) => ({ ...p, Cities: undefined })) ?? [];
   }
 
   private async getSearchRelationOfAnnouncementGroupAndSubGroup(
     query: string,
-    groupControlId: FormControl
+    groupControlId?: FormControl
   ): Promise<AnnouncementSubGroup[]> {
+    if (!groupControlId) throw new Error('groupControlId is undefined');
+
     const res =
-      await this.announcementService.GetRelationOfAnnouncementGroupAndSubGroup(
+      await this.services.announce.GetRelationOfAnnouncementGroupAndSubGroup(
         groupControlId.value
       );
-
-    // Safely access data and AnnouncementSubGroups
-    const subGroups = res.data?.[0]?.AnnouncementSubGroups ?? [];
-
-    // Filter by query
+    const subGroups = checkAndToastError(res, this.toast)
+      ? (res.data?.[0]?.AnnouncementSubGroups ?? [])
+      : [];
     return subGroups.filter((a) => a.AnnouncementSGTitle?.includes(query));
   }
 
+  private async getSearchRequsterInfo(): Promise<RequesterInfo[]> {
+    const res = await this.services.config.GetAllRequesters();
+    if (!checkAndToastError(res, this.toast)) return [];
+    return res.data ?? [];
+  }
+
+  // --- Public create method ---
+  create<K extends keyof AutoCompleteTypeMap>(
+    type: K,
+    controlId: FormControl,
+    overrides: Partial<BaseAutoCompleteFilter<K>> = {}
+  ): BaseAutoCompleteFilter<K> {
+    const defaultConfig = this.defaultConfigs[type];
+
+    if (type === AutoCompleteType.RelationAnnouncementGroupAndSubGroup) {
+      const groupControl = overrides.groupControlId;
+      const lazy: BaseAutoCompleteFilter<AutoCompleteType.RelationAnnouncementGroupAndSubGroup>['lazySearch'] =
+        async (query?: string) => {
+          return this.getSearchRelationOfAnnouncementGroupAndSubGroup(
+            query!,
+            groupControl
+          );
+        };
+
+      defaultConfig.lazySearch =
+        lazy as BaseAutoCompleteFilter<K>['lazySearch'];
+    }
+
+    const config: BaseAutoCompleteFilter<K> = {
+      ...defaultConfig,
+      control: this.fb.nonNullable.control(''),
+      select: this.createSelectHandler<K>(
+        controlId,
+        defaultConfig.optionValueKey
+      ),
+      valueChange: () => this.onAutoCompleteChange(controlId),
+      showIcon: () => controlId.valid,
+      readOnly: () => false,
+      ...overrides,
+    };
+
+    return config;
+  }
+
+  // --- Create select handler ---
+  private createSelectHandler<T extends AutoCompleteType>(
+    controlId: FormControl,
+    key: string | number | symbol
+  ) {
+    return (item: AutoCompleteTypeMap[T]) => {
+      const value = item[key as keyof AutoCompleteTypeMap[T]];
+      this.onSelectAutoCompletion(controlId, value);
+    };
+  }
+
+  // --- Helper Methods ---
   private onSelectAutoCompletion(controlId: FormControl, value: unknown): void {
     controlId.setValue(value);
   }
