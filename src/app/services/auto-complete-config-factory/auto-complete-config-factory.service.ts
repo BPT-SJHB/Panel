@@ -35,11 +35,9 @@ import { checkAndToastError } from 'app/utils/api-utils';
 import { AppTitles } from 'app/constants/Titles';
 import { Driver_TruckManagementService } from '../driver-truck-management/driver-truck-management.service';
 import { TruckNativenessType } from '../driver-truck-management/model/truck-nativeness-info.model';
-import {
-  mockTurnStatus,
-  TurnStatus,
-} from 'app/components/forms/load-condition-management-form/load-allocation-condition/load-allocation-condition-form.component';
 import { RequesterInfo } from '../config-management/model/requester-info.model';
+import { TurnStatus } from '../turn-management/model/turn-status.model';
+import { TurnManagementService } from '../turn-management/turn-management.service';
 
 // --- AutoComplete Types ---
 export enum AutoCompleteType {
@@ -124,6 +122,7 @@ export class AutoCompleteConfigFactoryService {
     province: inject(ProvinceAndCityManagementService),
     product: inject(ProductTypesService),
     lad: inject(LADPlaceManagementService),
+    turn: inject(TurnManagementService),
     seqTurn: inject(SequentialTurnManagementService),
     config: inject(ConfigManagementService),
     company: inject(TransportCompaniesManagementService),
@@ -275,8 +274,8 @@ export class AutoCompleteConfigFactoryService {
       placeholder: 'وضعیت نوبت',
       optionLabel: 'TurnStatusTitle',
       optionValueKey: 'TurnStatusId',
-      minLength: 2,
-      cachingMode: 'CharacterPrefix',
+      minLength: 0,
+      cachingMode: 'Focus',
       lazySearch: () => this.getSearchTurnStatus(),
     },
     [AutoCompleteType.LADPlaces]: {
@@ -373,7 +372,7 @@ export class AutoCompleteConfigFactoryService {
   }
 
   private async getSearchTurnStatus(): Promise<TurnStatus[]> {
-    const res = { success: true, data: mockTurnStatus };
+    const res = await this.services.turn.GetAllTurnStatus();
     if (!checkAndToastError(res, this.toast)) return [];
     return res.data;
   }
