@@ -122,7 +122,7 @@ export enum TabComponentKey {
 
   //TODO: This code replaed with LastLoadPermissionsOfTransportCompanies
   LoadCapacitorManagement = -100,
-  LoadPermissionsTransportForm = -35,
+  LoadPermissionsTransportManagement = -35,
 
   // 🏷️ Loader Types
   // Manage loader types
@@ -731,7 +731,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       },
     ],
   },
-  [TabComponentKey.LoadPermissionsTransportForm]: {
+  [TabComponentKey.LoadPermissionsTransportManagement]: {
     sharedSignal: false,
     subTab: [
       {
