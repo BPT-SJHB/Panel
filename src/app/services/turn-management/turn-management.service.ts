@@ -15,6 +15,8 @@ import { TurnForSoftwareUser } from './model/turn-for-software-user.model';
 import { mockTurnsForSoftwareUser } from './mock/turn-for-software-user.mock';
 import { DeleteInfoOfTurnCost, TurnCost } from './model/turn-cost.model';
 import { mockTurnCosts } from './mock/turn-cost.mock';
+import { TurnStatus } from './model/turn-status.model';
+import { mockTurnStatus } from './mock/turn-status.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -313,5 +315,20 @@ export class TurnManagementService {
     //#endregion
   }
 
+  public async GetAllTurnStatus(): Promise<ApiResponse<TurnStatus[]>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.Turns.GetAllTurnStatus;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      TurnStatus[]
+    >(apiUrl, bodyValue, mockTurnStatus);
+    //#endregion
+  }
   //#endregion
 }

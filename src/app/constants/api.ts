@@ -53,7 +53,7 @@ export const API_ROUTES = {
       GetTruckInfoFromLocalAPI: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetTruckFromWebsite`,
       GetTruckInfoForSoftwareUser: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetTruckBySoftwareUser`,
       GetTruckNativeness: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetTruckNativeness`,
-      GetTruckNativenessTypes: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetTruckNativeness`,
+      GetTruckNativenessTypes: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetTruckNativenessTypes`,
       ChangeTruckNativeness: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}ChangeTruckNativeness`,
       ComposedInfos: {
         GetComposedTruckInfo: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetComposedTruckInf`,
@@ -175,6 +175,7 @@ export const API_ROUTES = {
       GetAccounting: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetTurnAccounting`,
       CancelTurn: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}TurnCancellation`,
       ResuscitateTurn: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}TurnResuscitation`,
+      GetAllTurnStatus: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetAllTurnStatuses`,
       TurnRegisterRequests: {
         RealTimeTurnRegister: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}RealTimeTurnRegisterRequest`,
         EmergencyTurnRegister: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}EmergencyTurnRegisterRequest`,

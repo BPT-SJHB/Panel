@@ -62,6 +62,9 @@ import { SequentialTurnCostFormComponent } from 'app/components/forms/sequential
 import { ProvinceAnnouncementRelationFormComponent } from 'app/components/forms/province-announcement-relation-form/province-announcement-relation-form.component';
 import { TPTParametersFormComponent } from 'app/components/forms/tpt-parameters-management/tpt-parameters-form/tpt-parameters-form.component';
 import { TPTParametersAnnouncementRelationFormComponent } from 'app/components/forms/tpt-parameters-management/tpt-parameters-announcement-relation-form/tpt-parameters-announcement-relation-form.component';
+import { TransportLoadPermissionsFormComponent } from 'app/components/forms/transport-load-permissions-form/transport-load-permissions-form.component';
+import { LoadViewConditionFormComponent } from 'app/components/forms/load-condition-management-form/load-view-condition/load-view-condition-form.component';
+import { LoadAllocationConditionFormComponent } from 'app/components/forms/load-condition-management-form/load-allocation-condition/load-allocation-condition-form.component';
 
 export enum TabComponentKey {
   // Default or main tab
@@ -118,7 +121,8 @@ export enum TabComponentKey {
   ProductTypesManagement = 9,
 
   //TODO: This code replaed with LastLoadPermissionsOfTransportCompanies
-  LoadCapacitorManagement = 35,
+  LoadCapacitorManagement = -100,
+  LoadPermissionsTransportManagement = -35,
 
   // 🏷️ Loader Types
   // Manage loader types
@@ -178,9 +182,12 @@ export enum TabComponentKey {
   // Manage tickets
   TicketManagement = 71,
 
-  // ⚙️ Effective Parameters
-  // Manage effective parameters
+  // ⚙️ TPT Parameters
+  // Manage TPT parameters
   TPTParametersManagement = 69,
+
+  // Manage Load Condition View and Select
+  LoadConditionManagement = 72,
 }
 
 export interface TabConfig {
@@ -697,6 +704,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       },
     ],
   },
+
   [TabComponentKey.TPTParametersManagement]: {
     sharedSignal: false,
     subTab: [
@@ -707,6 +715,28 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
       {
         title: 'پارامترهای موثر - گروه و زیرگروه اعلام بار',
         component: TPTParametersAnnouncementRelationFormComponent,
+      },
+    ],
+  },
+  [TabComponentKey.LoadConditionManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: 'شرایط مشاهد بار',
+        component: LoadViewConditionFormComponent,
+      },
+      {
+        title: 'شرایط انتخاب بار',
+        component: LoadAllocationConditionFormComponent,
+      },
+    ],
+  },
+  [TabComponentKey.LoadPermissionsTransportManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: 'مجوزهای شرکتهای حمل و نقل',
+        component: TransportLoadPermissionsFormComponent,
       },
     ],
   },
