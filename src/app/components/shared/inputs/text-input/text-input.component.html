@@ -47,6 +47,8 @@
       [class.cursor-not-allowed]="control().disabled || readOnly()"
       [class.rounded-l-2xl]="buttonIcon().trim() === ''"
       [class.border-l-2]="buttonIcon().trim() === ''"
+      [class.text-right]="language() === 'en'"
+      [dir]="language() === 'en' ? 'ltr' : 'rtl'"
       (focus)="onFocusInput(inputRef)"
       (blur)="onBlurInput(inputRef)"
       (input)="valueChange($event)"
