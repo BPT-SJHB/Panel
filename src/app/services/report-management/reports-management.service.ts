@@ -64,7 +64,7 @@ export class ReportsManagementService {
     //#endregion
   }
 
-  public async GetLatestLoadPermissionForCompany(): Promise<
+  public async GetLatestLoadPermissionsForCompany(): Promise<
     ApiResponse<LoadPermissionForCompany[]>
   > {
     //#region Consts
