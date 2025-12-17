@@ -63,7 +63,7 @@ export class UserManagementService {
     //#endregion
 
     //#region Request
-    var response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       APIUsernamePassword
     >(apiUrl, bodyValue, mockAPIUsernamePassword);
@@ -73,8 +73,8 @@ export class UserManagementService {
     return {
       success: response.success,
       data: {
-        Username: response.data?.UserShenaseh!,
-        Password: response.data?.UserPassword!,
+        Username: response.data?.UserShenaseh ?? '',
+        Password: response.data?.UserPassword ?? '',
       },
       error: response.error,
     };
@@ -104,6 +104,7 @@ export class UserManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
 
   public async ActivateUserSMS(
     userId: number
@@ -159,14 +160,14 @@ export class UserManagementService {
     //#region Request
     const response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      any
+      SoftwareUserInfo
     >(apiUrl, bodyValue, mockSoftwareUserInfo);
     //#endregion
 
     //#region Return
     return {
       success: response.success,
-      data: { UserId: response.data?.SoftwareUserId! },
+      data: { UserId: response.data?.UserId ?? -1 },
       error: response.error,
     };
     //#endregion
@@ -203,19 +204,11 @@ export class UserManagementService {
     };
     //#endregion
 
-    //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       SoftwareUserProfile
     >(apiUrl, bodyValue, mockSoftwareUserProfile);
-    //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: response.data,
-      error: response.error,
-    };
     //#endregion
   }
 
