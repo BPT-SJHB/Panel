@@ -25,8 +25,8 @@ import { TransportCompaniesManagementService } from 'app/services/transport-comp
 import { LoadInfo } from 'app/services/load-management/model/load-info.model';
 import {
   AutoCompleteConfigFactoryService,
-  AutoCompleteFilter,
   AutoCompleteType,
+  BaseAutoCompleteFilter,
 } from 'app/services/auto-complete-config-factory/auto-complete-config-factory.service';
 import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
 import { AppTitles } from 'app/constants/Titles';
@@ -187,7 +187,8 @@ export class LoadsListFormComponent
     },
   ];
 
-  readonly autoCompletions: AutoCompleteFilter[] = [
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  readonly autoCompletions: BaseAutoCompleteFilter<any>[] = [
     this.autoCompleteFactory.create(
       AutoCompleteType.AnnouncementGroup,
       this.getLoadFilterControl('announceGroupId')
