@@ -121,8 +121,7 @@ export enum TabComponentKey {
   ProductTypesManagement = 9,
 
   //TODO: This code replaed with LastLoadPermissionsOfTransportCompanies
-  LoadCapacitorManagement = -100,
-  LoadPermissionsTransportManagement = -35,
+  LoadPermissionsTransportManagement = 35,
 
   // 🏷️ Loader Types
   // Manage loader types
