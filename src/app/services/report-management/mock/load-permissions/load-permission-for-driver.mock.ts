@@ -1,4 +1,4 @@
-import { LoadPermissionForDriver } from '../../model/load/load-permission-for-driver.model';
+import { LoadPermissionForDriver } from '../../model/load-permissions/load-permission-for-driver.model';
 
 export const mockLoadPermissionsForDriver: LoadPermissionForDriver[] = [
   {

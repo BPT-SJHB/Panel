@@ -1,4 +1,4 @@
-import { LoadPermission } from '../../model/load/load-permission.model';
+import { LoadPermission } from '../../model/load-permissions/load-permission.model';
 
 export const mockLoadPermissions: LoadPermission[] = [
   {

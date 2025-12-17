@@ -1,4 +1,4 @@
-import { LoadAccounting } from '../../model/load/load-accounting.model';
+import { LoadAccounting } from '../../model/load-accounting/load-accounting.model';
 
 export const mockLoadAccounting: LoadAccounting[] = [
   {
