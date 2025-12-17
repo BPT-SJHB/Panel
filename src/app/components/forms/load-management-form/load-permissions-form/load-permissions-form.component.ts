@@ -5,7 +5,7 @@ import {
   TableColumn,
   TableComponent,
 } from 'app/components/shared/table/table.component';
-import { LoadPermission } from 'app/services/report-management/model/load/load-permission.model';
+import { LoadPermission } from 'app/services/report-management/model/load-permissions/load-permission.model';
 import { LoadInfo } from 'app/services/load-management/model/load-info.model';
 import { ReportsManagementService } from 'app/services/report-management/reports-management.service';
 import { checkAndToastError } from 'app/utils/api-utils';

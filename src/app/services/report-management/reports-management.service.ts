@@ -1,15 +1,15 @@
 import { inject, Injectable } from '@angular/core';
 import { UserAuthService } from '../user-auth-service/user-auth.service';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
-import { LoadPermission } from './model/load/load-permission.model';
+import { LoadPermission } from './model/load-permissions/load-permission.model';
 import { API_ROUTES } from 'app/constants/api';
 import { LoadInfo } from '../load-management/model/load-info.model';
-import { mockLoadPermissions } from './mock/load/load-permission.mock';
+import { mockLoadPermissions } from './mock/load-permissions/load-permission.mock';
 import { ApiResponse } from 'app/data/model/api-Response.model';
-import { LoadAccounting } from './model/load/load-accounting.model';
-import { mockLoadAccounting } from './mock/load/load-accounting.mock';
-import { LoadPermissionForDriver } from './model/load/load-permission-for-driver.model';
-import { mockLoadPermissionsForDriver } from './mock/load/load-permission-for-driver.mock';
+import { LoadPermissionForDriver } from './model/load-permissions/load-permission-for-driver.model';
+import { mockLoadPermissionsForDriver } from './mock/load-permissions/load-permission-for-driver.mock';
+import { LoadAccounting } from './model/load-accounting/load-accounting.model';
+import { mockLoadAccounting } from './mock/load-accounting/load-accounting.mock';
 
 @Injectable({
   providedIn: 'root',
