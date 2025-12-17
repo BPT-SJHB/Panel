@@ -63,7 +63,7 @@ export class UserManagementService {
     //#endregion
 
     //#region Request
-    var response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       APIUsernamePassword
     >(apiUrl, bodyValue, mockAPIUsernamePassword);
@@ -73,8 +73,8 @@ export class UserManagementService {
     return {
       success: response.success,
       data: {
-        Username: response.data?.UserShenaseh!,
-        Password: response.data?.UserPassword!,
+        Username: response.data?.UserShenaseh ?? '',
+        Password: response.data?.UserPassword ?? '',
       },
       error: response.error,
     };
@@ -103,6 +103,60 @@ export class UserManagementService {
       ShortResponse
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
+  }
+
+  public async ForgetSoftwareUserPassword(
+    mobileNumber: string,
+    captchaValue: string
+  ): Promise<ApiResponse<{ Message: string }>> {
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.SoftwareUserAPI.UserManagement.ForgetSoftwareUserPassword;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SoftwareUserMobileNumber: mobileNumber,
+      Captcha: captchaValue,
+    };
+    //#endregion
+
+    //#region Request + Return
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      string
+    >(apiUrl, bodyValue, 'کد یکبار مصرف ارسال شده را وارد نمایید');
+    //#endregion
+
+    return {
+      success: response.success,
+      data: { Message: response.data ?? '' },
+      error: response.error,
+    };
+  }
+
+  public async VerifyUserByOTPCode(
+    otpCode: string
+  ): Promise<ApiResponse<{ Message: string }>> {
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.SoftwareUserAPI.UserManagement.VerifySoftwareUserByOTPCode;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      OTPCode: otpCode,
+    };
+    //#endregion
+
+    //#region Request + Return
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      string
+    >(apiUrl, bodyValue, 'رمز عبور ارسال شد');
+    //#endregion
+
+    return {
+      success: response.success,
+      data: { Message: response.data ?? '' },
+      error: response.error,
+    };
   }
 
   public async ActivateUserSMS(
@@ -159,14 +213,14 @@ export class UserManagementService {
     //#region Request
     const response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      any
+      SoftwareUserInfo
     >(apiUrl, bodyValue, mockSoftwareUserInfo);
     //#endregion
 
     //#region Return
     return {
       success: response.success,
-      data: { UserId: response.data?.SoftwareUserId! },
+      data: { UserId: response.data?.UserId ?? -1 },
       error: response.error,
     };
     //#endregion
@@ -203,19 +257,11 @@ export class UserManagementService {
     };
     //#endregion
 
-    //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       SoftwareUserProfile
     >(apiUrl, bodyValue, mockSoftwareUserProfile);
-    //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: response.data,
-      error: response.error,
-    };
     //#endregion
   }
 

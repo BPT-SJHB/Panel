@@ -78,7 +78,7 @@ export class UserProfileFormComponent implements OnInit {
   isUserSmsActivated = true;
 
   // 🔽 Table column definitions for user profile view
-  readonly cols: ReadonlyArray<{ field: keyof UserProfile; col: string }> = [
+  readonly cols: readonly { field: keyof UserProfile; col: string }[] = [
     { field: 'UserId', col: 'کد کاربری' },
     { field: 'UserName', col: 'نام کاربری' },
     { field: 'UserTypeTitle', col: 'نوع کاربر' },
