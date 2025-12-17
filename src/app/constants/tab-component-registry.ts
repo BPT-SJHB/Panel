@@ -289,10 +289,10 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
     subTab: [{ title: 'کالاها', component: ProductFormComponent }],
   },
 
-  [TabComponentKey.LoadCapacitorManagement]: {
-    sharedSignal: false,
-    subTab: [{ title: 'مخزن بار', component: LoadCapacitorFormComponent }],
-  },
+  // [TabComponentKey.LoadCapacitorManagement]: {
+  //   sharedSignal: false,
+  //   subTab: [{ title: 'مخزن بار', component: LoadCapacitorFormComponent }],
+  // },
 
   [TabComponentKey.LoaderTypeManagement]: {
     sharedSignal: false,
