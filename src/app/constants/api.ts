@@ -31,6 +31,7 @@ export const API_ROUTES = {
       EditSoftwareUser: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}EditSoftwareUser`,
       ActivateSMSOwner: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}ActivateSMSOwner`,
       ResetSoftwareUserPassword: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}ResetSoftwareUserPassword`,
+      CustomSoftwareUserPassword: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}CustomizationSoftwareUserPassword`,
       SendWebsiteLink: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}SendWebsiteLink`,
       GetWebProcessGroups_WebProcesses: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}GetAllOfWebprocessGroupsWebprocesses`,
       ChangeSoftwareUserWebProcessGroupAccess: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}ChangeSoftwareUserWebProcessGroupAccess`,
