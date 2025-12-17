@@ -81,6 +81,30 @@ export class UserManagementService {
     //#endregion
   }
 
+  public async CustomSoftwareUserPassword(
+    userId: number,
+    oldPass: string,
+    newPass: string
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.SoftwareUserAPI.UserManagement.CustomSoftwareUserPassword;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      SoftwareUserId: userId,
+      OldPassword: oldPass,
+      NewPassword: newPass,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
   public async ActivateUserSMS(
     userId: number
   ): Promise<ApiResponse<ShortResponse>> {
