@@ -10,6 +10,8 @@ import { LoadPermissionForDriver } from './model/load-permissions/load-permissio
 import { mockLoadPermissionsForDriver } from './mock/load-permissions/load-permission-for-driver.mock';
 import { LoadAccounting } from './model/load-accounting/load-accounting.model';
 import { mockLoadAccounting } from './mock/load-accounting/load-accounting.mock';
+import { LoadPermissionForCompany } from './model/load-permissions/load-permission-for-company.model';
+import { mockLoadPermissionsForCompany } from './mock/load-permissions/load-permission-for-company.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -59,6 +61,25 @@ export class ReportsManagementService {
       typeof bodyValue,
       LoadPermission[]
     >(apiUrl, bodyValue, mockLoadPermissions);
+    //#endregion
+  }
+
+  public async GetLatestLoadPermissionForCompany(): Promise<
+    ApiResponse<LoadPermissionForCompany[]>
+  > {
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.Reports.Load.GetLatestTransportCompanyLoadPermissions;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoadPermissionForCompany[]
+    >(apiUrl, bodyValue, mockLoadPermissionsForCompany);
     //#endregion
   }
 
