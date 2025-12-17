@@ -133,6 +133,32 @@ export class UserManagementService {
     };
   }
 
+  public async VerifyUserByOTPCode(
+    otpCode: string
+  ): Promise<ApiResponse<{ Message: string }>> {
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.SoftwareUserAPI.UserManagement.VerifySoftwareUserByOTPCode;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      OTPCode: otpCode,
+    };
+    //#endregion
+
+    //#region Request + Return
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      string
+    >(apiUrl, bodyValue, 'رمز عبور ارسال شد');
+    //#endregion
+
+    return {
+      success: response.success,
+      data: { Message: response.data ?? '' },
+      error: response.error,
+    };
+  }
+
   public async ActivateUserSMS(
     userId: number
   ): Promise<ApiResponse<ShortResponse>> {
