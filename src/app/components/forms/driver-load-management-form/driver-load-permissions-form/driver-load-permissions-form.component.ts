@@ -9,7 +9,7 @@ import {
 import { CardModule } from 'primeng/card';
 import { BaseLoading } from 'app/components/forms/shared/component-base/base-loading';
 import { ReportsManagementService } from 'app/services/report-management/reports-management.service';
-import { LoadPermissionForDriver } from 'app/services/report-management/model/load/load-permission-for-driver.model';
+import { LoadPermissionForDriver } from 'app/services/report-management/model/load-permissions/load-permission-for-driver.model';
 import { checkAndToastError } from 'app/utils/api-utils';
 
 interface SearchLoadPermissionsForm {

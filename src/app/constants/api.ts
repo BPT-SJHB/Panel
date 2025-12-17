@@ -257,6 +257,7 @@ export const API_ROUTES = {
   Reports: {
     Load: {
       GetLoadPermissions: `${environment.apiUrl}:${ReportsPort}${apiFixURLPart}GetLoadPermissions`,
+      GetLatestTransportCompanyLoadPermissions: `${environment.apiUrl}:${ReportsPort}${apiFixURLPart}GetTransportCompany100LastLoadPermissions`,
       GetLoadPermissionsForDriver: `${environment.apiUrl}:${ReportsPort}${apiFixURLPart}GetLoadPermissionsforTruckDriver`,
       GetLoadAccounting: `${environment.apiUrl}:${ReportsPort}${apiFixURLPart}GetLoadAccountingRecords`,
     },

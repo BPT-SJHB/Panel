@@ -1,15 +1,17 @@
 import { inject, Injectable } from '@angular/core';
 import { UserAuthService } from '../user-auth-service/user-auth.service';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
-import { LoadPermission } from './model/load/load-permission.model';
+import { LoadPermission } from './model/load-permissions/load-permission.model';
 import { API_ROUTES } from 'app/constants/api';
 import { LoadInfo } from '../load-management/model/load-info.model';
-import { mockLoadPermissions } from './mock/load/load-permission.mock';
+import { mockLoadPermissions } from './mock/load-permissions/load-permission.mock';
 import { ApiResponse } from 'app/data/model/api-Response.model';
-import { LoadAccounting } from './model/load/load-accounting.model';
-import { mockLoadAccounting } from './mock/load/load-accounting.mock';
-import { LoadPermissionForDriver } from './model/load/load-permission-for-driver.model';
-import { mockLoadPermissionsForDriver } from './mock/load/load-permission-for-driver.mock';
+import { LoadPermissionForDriver } from './model/load-permissions/load-permission-for-driver.model';
+import { mockLoadPermissionsForDriver } from './mock/load-permissions/load-permission-for-driver.mock';
+import { LoadAccounting } from './model/load-accounting/load-accounting.model';
+import { mockLoadAccounting } from './mock/load-accounting/load-accounting.mock';
+import { LoadPermissionForCompany } from './model/load-permissions/load-permission-for-company.model';
+import { mockLoadPermissionsForCompany } from './mock/load-permissions/load-permission-for-company.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +19,28 @@ import { mockLoadPermissionsForDriver } from './mock/load/load-permission-for-dr
 export class ReportsManagementService {
   private userAuth = inject(UserAuthService);
   private apiCommunicator = inject(APICommunicationManagementService);
+
+  public async GetLoadAccounting(
+    loadId: number
+  ): Promise<ApiResponse<LoadAccounting[]>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.Reports.Load.GetLoadAccounting;
+    const loadInfo: LoadInfo = {
+      LoadId: loadId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LoadId: loadInfo.LoadId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoadAccounting[]
+    >(apiUrl, bodyValue, mockLoadAccounting);
+    //#endregion
+  }
 
   public async GetLoadPermissions(
     loadId: number
@@ -40,25 +64,22 @@ export class ReportsManagementService {
     //#endregion
   }
 
-  public async GetLoadAccounting(
-    loadId: number
-  ): Promise<ApiResponse<LoadAccounting[]>> {
+  public async GetLatestLoadPermissionsForCompany(): Promise<
+    ApiResponse<LoadPermissionForCompany[]>
+  > {
     //#region Consts
-    const apiUrl = API_ROUTES.Reports.Load.GetLoadAccounting;
-    const loadInfo: LoadInfo = {
-      LoadId: loadId,
-    };
+    const apiUrl =
+      API_ROUTES.Reports.Load.GetLatestTransportCompanyLoadPermissions;
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
-      LoadId: loadInfo.LoadId,
     };
     //#endregion
 
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      LoadAccounting[]
-    >(apiUrl, bodyValue, mockLoadAccounting);
+      LoadPermissionForCompany[]
+    >(apiUrl, bodyValue, mockLoadPermissionsForCompany);
     //#endregion
   }
 

@@ -2,7 +2,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
 import { BaseLoading } from '../shared/component-base/base-loading';
 import { ReportsManagementService } from 'app/services/report-management/reports-management.service';
-import { LoadAccounting } from 'app/services/report-management/model/load/load-accounting.model';
+import { LoadAccounting } from 'app/services/report-management/model/load-accounting/load-accounting.model';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { LoadInfo } from 'app/services/load-management/model/load-info.model';
 import {

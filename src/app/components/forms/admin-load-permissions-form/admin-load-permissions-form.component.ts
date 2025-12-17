@@ -13,7 +13,7 @@ import { CheckboxInputComponent } from 'app/components/shared/inputs/checkbox-in
 // Base & services
 import { BaseLoading } from '../shared/component-base/base-loading';
 import { LoadInfo } from 'app/services/load-management/model/load-info.model';
-import { LoadPermission } from 'app/services/report-management/model/load/load-permission.model';
+import { LoadPermission } from 'app/services/report-management/model/load-permissions/load-permission.model';
 import { ReportsManagementService } from 'app/services/report-management/reports-management.service';
 import { LoadManagementService } from 'app/services/load-management/load-management.service';
 
