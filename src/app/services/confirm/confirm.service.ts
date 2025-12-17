@@ -200,4 +200,20 @@ export class AppConfirmService {
       accept,
     });
   }
+
+  // بازنشانی رمز عبور (کاربر جاری)
+  confirmResetPassword(accept: () => void) {
+    this.confirmationService.confirm({
+      header: 'تأیید بازنشانی رمز عبور',
+      message: `
+      آیا مطمئن هستید که می‌خواهید رمز عبور خود را بازنشانی کنید؟
+    `,
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'بازنشانی',
+      rejectLabel: 'انصراف',
+      acceptButtonProps: { severity: 'danger' },
+      rejectButtonProps: { severity: 'secondary' },
+      accept,
+    });
+  }
 }
