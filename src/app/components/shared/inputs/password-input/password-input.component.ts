@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
@@ -20,18 +20,20 @@ import { ValidationField } from 'app/constants/validation-schema';
   styleUrl: './password-input.component.scss',
 })
 export class PasswordInputComponent {
-  @Input() control: FormControl = new FormControl('');
-  @Input() validationField: ValidationField | null = null;
-  @Input() placeholder: string = 'رمز عبور';
-  @Input() readOnly: boolean = false;
-  @Input() disabled: boolean = false;
-  @Input() icon: string = 'pi pi-user';
-  @Input() label: string = '';
-  @Input() addonWidth: string | null = null;
+  readonly control = input(new FormControl<string | null>(''));
+  readonly validationField = input<ValidationField | null>('password');
+  readonly placeholder = input('رمز عبور');
+  readonly readOnly = input(false);
+  readonly disabled = input(false);
+  readonly icon = input('pi pi-user');
+  readonly label = input('');
+  readonly addonWidth = input<string | null>(null);
+  readonly hidePassword = signal(true);
 
-  hidePassword: boolean = true;
+  readonly togglePasswordVisibility = output<boolean>();
 
   togglePassword(): void {
-    this.hidePassword = !this.hidePassword;
+    this.hidePassword.update((hp) => !hp);
+    this.togglePasswordVisibility.emit(this.hidePassword());
   }
 }
