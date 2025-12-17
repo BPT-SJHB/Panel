@@ -18,28 +18,6 @@ export class ReportsManagementService {
   private userAuth = inject(UserAuthService);
   private apiCommunicator = inject(APICommunicationManagementService);
 
-  public async GetLoadPermissions(
-    loadId: number
-  ): Promise<ApiResponse<LoadPermission[]>> {
-    //#region Consts
-    const apiUrl = API_ROUTES.Reports.Load.GetLoadPermissions;
-    const loadInfo: LoadInfo = {
-      LoadId: loadId,
-    };
-    const bodyValue = {
-      SessionId: this.userAuth.getSessionId(),
-      LoadId: loadInfo.LoadId,
-    };
-    //#endregion
-
-    //#region Request + Return
-    return await this.apiCommunicator.CommunicateWithAPI_Post<
-      typeof bodyValue,
-      LoadPermission[]
-    >(apiUrl, bodyValue, mockLoadPermissions);
-    //#endregion
-  }
-
   public async GetLoadAccounting(
     loadId: number
   ): Promise<ApiResponse<LoadAccounting[]>> {
@@ -59,6 +37,28 @@ export class ReportsManagementService {
       typeof bodyValue,
       LoadAccounting[]
     >(apiUrl, bodyValue, mockLoadAccounting);
+    //#endregion
+  }
+
+  public async GetLoadPermissions(
+    loadId: number
+  ): Promise<ApiResponse<LoadPermission[]>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.Reports.Load.GetLoadPermissions;
+    const loadInfo: LoadInfo = {
+      LoadId: loadId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LoadId: loadInfo.LoadId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoadPermission[]
+    >(apiUrl, bodyValue, mockLoadPermissions);
     //#endregion
   }
 
