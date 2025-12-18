@@ -106,57 +106,54 @@ export class UserManagementService {
   }
 
   public async ForgetSoftwareUserPassword(
+    // for captcha
+    sessionId: string,
     mobileNumber: string,
     captchaValue: string
-  ): Promise<ApiResponse<{ Message: string }>> {
+  ): Promise<ApiResponse<ShortResponse>> {
     //#region Consts
     const apiUrl =
       API_ROUTES.SoftwareUserAPI.UserManagement.ForgetSoftwareUserPassword;
     const bodyValue = {
-      SessionId: this.userAuth.getSessionId(),
+      SessionId: sessionId,
       SoftwareUserMobileNumber: mobileNumber,
       Captcha: captchaValue,
     };
     //#endregion
 
     //#region Request + Return
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      string
-    >(apiUrl, bodyValue, 'کد یکبار مصرف ارسال شده را وارد نمایید');
+      ShortResponse
+    >(apiUrl, bodyValue, {
+      ...mockShortResponse,
+      Message: 'کد یکبار مصرف ارسال شده را وارد نمایید',
+    });
     //#endregion
-
-    return {
-      success: response.success,
-      data: { Message: response.data ?? '' },
-      error: response.error,
-    };
   }
 
   public async VerifyUserByOTPCode(
+    sessionId: string,
     otpCode: string
-  ): Promise<ApiResponse<{ Message: string }>> {
+  ): Promise<ApiResponse<ShortResponse>> {
     //#region Consts
     const apiUrl =
       API_ROUTES.SoftwareUserAPI.UserManagement.VerifySoftwareUserByOTPCode;
     const bodyValue = {
-      SessionId: this.userAuth.getSessionId(),
+      SessionId: sessionId,
       OTPCode: otpCode,
     };
     //#endregion
 
     //#region Request + Return
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    return this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      string
-    >(apiUrl, bodyValue, 'رمز عبور ارسال شد');
+      ShortResponse
+    >(apiUrl, bodyValue, {
+      ...mockShortResponse,
+      Message: 'رمز عبور ارسال شد',
+    });
     //#endregion
-
-    return {
-      success: response.success,
-      data: { Message: response.data ?? '' },
-      error: response.error,
-    };
   }
 
   public async ActivateUserSMS(

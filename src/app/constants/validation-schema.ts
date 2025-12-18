@@ -5,15 +5,23 @@ import {
   Validators,
 } from '@angular/forms';
 
-export interface ErrorsValidation {
-  required?: any;
-  email?: any;
-  pattern?: any;
-  minlength?: any;
-  maxlength?: any;
-  min?: any;
-  max?: any;
-  exactLength?: any;
+export interface ErrorsValidation extends ValidationErrors {
+  required?: boolean;
+  email?: boolean;
+  pattern?: boolean;
+  minlength?: { requiredLength: number; actualLength: number };
+  maxlength?: { requiredLength: number; actualLength: number };
+  min?: { min: number; actual: number };
+  max?: { max: number; actual: number };
+  exactLength?: { requiredLength: number; actualLength: number };
+
+  passwordMinLength?: { requiredLength: number; actualLength: number };
+  passwordUppercase?: boolean;
+  passwordLowercase?: boolean;
+  passwordNumber?: boolean;
+  passwordSymbol?: boolean;
+  passwordInvalidChar?: boolean;
+  passwordMismatch?: boolean;
 }
 
 export function getDefaultErrorMessage(
@@ -21,6 +29,23 @@ export function getDefaultErrorMessage(
   e: ErrorsValidation
 ): string | null {
   if (e.required) return `${name} الزامی است`;
+
+  if (e.passwordMinLength) return `${name} باید حداقل ۸ کاراکتر باشد`;
+
+  if (e.passwordUppercase) return `${name} باید حداقل یک حرف بزرگ داشته باشد`;
+
+  if (e.passwordLowercase) return `${name} باید حداقل یک حرف کوچک داشته باشد`;
+
+  if (e.passwordNumber) return `${name} باید حداقل یک عدد داشته باشد`;
+
+  if (e.passwordSymbol)
+    return `${name} باید حداقل یک کاراکتر ویژه از _ - . داشته باشد`;
+
+  if (e.passwordInvalidChar)
+    return `${name} فقط می‌تواند شامل حروف، عدد و کاراکترهای _ - . باشد`;
+
+  if (e.passwordMismatch) return `رمز عبور و تکرار آن با هم مطابقت ندارند`;
+
   if (e.email) return `فرمت ${name} نامعتبر است`;
 
   if (e.exactLength) {
@@ -30,6 +55,7 @@ export function getDefaultErrorMessage(
 
   if (e.minlength)
     return `${name} باید حداقل ${e.minlength.requiredLength} کاراکتر باشد`;
+
   if (e.maxlength)
     return `${name} باید حداکثر ${e.maxlength.requiredLength} کاراکتر باشد`;
 
@@ -84,6 +110,14 @@ export const ValidationSchema = {
   password: {
     name: 'رمز عبور',
     validators: [Validators.required, Validators.minLength(1)],
+  },
+  passwordCreation: {
+    name: 'رمز عبور جدید',
+    validators: [Validators.required, strongPasswordValidgtor()],
+  },
+  confirmPassword: {
+    name: 'تکرار رمز',
+    validators: [Validators.required],
   },
   captcha: {
     name: 'کد امنیتی',
@@ -265,6 +299,10 @@ export const ValidationSchema = {
     ],
   },
 
+  optCode: {
+    name: 'رمز یکبار مصرف',
+    validators: [Validators.required],
+  },
   ticketTrackCode: {
     name: 'شماره پیگیری',
     validators: [
@@ -315,18 +353,75 @@ export type ValidationField = keyof typeof ValidationSchema;
 
 /**
  * Exact length validator
- * @param length required length
  */
 export function exactLengthValidator(length: number): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
-    if (control.value == null || control.value === '') {
-      return null; // don’t validate empty — let Validators.required handle it
-    }
+    if (!control.value) return null;
 
     const valueLength = control.value.toString().length;
-
     return valueLength === length
       ? null
       : { exactLength: { requiredLength: length, actualLength: valueLength } };
+  };
+}
+
+/**
+ * Strong password validator with detailed errors
+ */
+export function strongPasswordValidgtor(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    if (!control.value) return null;
+
+    const value = control.value.toString();
+    const errors: ValidationErrors = {};
+
+    if (value.length < 8)
+      errors['passwordMinLength'] = {
+        requiredLength: 8,
+        actualLength: value.length,
+      };
+    if (!/[A-Z]/.test(value)) errors['passwordUppercase'] = true;
+    if (!/[a-z]/.test(value)) errors['passwordLowercase'] = true;
+    if (!/\d/.test(value)) errors['passwordNumber'] = true;
+    if (!/[_\-.]/.test(value)) errors['passwordSymbol'] = true;
+    if (!/^[A-Za-z0-9_\-.]+$/.test(value)) errors['passwordInvalidChar'] = true;
+
+    return Object.keys(errors).length ? errors : null;
+  };
+}
+
+/**
+ * Validator to check if two fields match
+ * @param passwordField name of the original password control
+ * @param confirmField name of the confirm password control
+ */
+
+export function confirmPasswordValidator(
+  passwordKey: string,
+  confirmKey: string
+): ValidatorFn {
+  return (group: AbstractControl): ValidationErrors | null => {
+    const password = group.get(passwordKey);
+    const confirm = group.get(confirmKey);
+
+    if (!password || !confirm) return null;
+
+    if (password.value !== confirm.value) {
+      confirm.setErrors({
+        ...confirm.errors,
+        passwordMismatch: true,
+      });
+
+      return null;
+    }
+
+    // clean up when it matches
+    if (confirm.errors?.['passwordMismatch']) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { passwordMismatch: _, ...rest } = confirm.errors;
+      confirm.setErrors(Object.keys(rest).length ? rest : null);
+    }
+
+    return null;
   };
 }
