@@ -68,7 +68,12 @@ export class UserAuthService {
 
   public async logout(): Promise<void> {
     this.cookieService.delete(this.sessionKey, '/');
-    await this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
+    try {
+      await this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (err) {
+      // console.error('Router navigate failed', err);
+    }
     // سمت سرور اضافه شود در صورت نیاز
   }
 
