@@ -44,7 +44,7 @@
   ></app-button>
 
   <app-button
-    (click)="confirmResetPassword()"
+    (click)="isChangePasswordDialogVisible = true"
     [disabled]="loading() || !userProfile()"
     [label]="appTitle.buttons.generateNewPassword"
     styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
@@ -60,11 +60,27 @@
   ></app-button>
 </div>
 
-<!-- Confirm dialog -->
-<p-confirmDialog
-  position="top"
-  acceptLabel="تایید"
-  rejectLabel="انصراف"
-  acceptButtonStyleClass="px-8 app-button-info py-2 text-sm"
-  rejectButtonStyleClass="px-6 app-button-secondary py-2 text-sm"
-/>
+<p-dialog
+  header="تغییر رمز عبور"
+  [modal]="true"
+  [draggable]="false"
+  [(visible)]="isChangePasswordDialogVisible"
+  [style]="{ width: '20rem', maxWidth: '100%' }"
+>
+  <div class="grid grid-cols-1 gap-3 px-6 py-2">
+    <app-button
+      label="بروز رسانی رمز عبور"
+      styleClass="w-full"
+      [disabled]="loading() || !userProfile()"
+      severity="info"
+      (onClick)="confirmResetPassword()"
+    />
+    <app-button
+      label="شخصی سازی رمز عبور"
+      styleClass="w-full"
+      severity="primary"
+      [disabled]="loading() || !userProfile()"
+      (onClick)="openPersonalizePasswordForm()"
+    />
+  </div>
+</p-dialog>
