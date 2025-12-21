@@ -6,8 +6,21 @@ import { UserAuthService } from '../user-auth-service/user-auth.service';
 })
 export class DevAuthService {
   private readonly userAuth = inject(UserAuthService);
-  private readonly captcha = '123456';
+  private readonly _sessionId = ''; // captcha sesstionId
+  private readonly _captcha = '123456';
   private readonly password = '123';
+  private readonly _adminUsername = '09132043148';
+
+  public get adminUsername() {
+    return this._adminUsername;
+  }
+
+  public get sessionId() {
+    return this._sessionId;
+  }
+  public get captcha() {
+    return this._captcha;
+  }
 
   async loginAsAdmin() {
     const username = '09132043148';
@@ -25,7 +38,7 @@ export class DevAuthService {
   }
 
   async loginAsDriver() {
-    const username = '09130843148';
+    const username = this.adminUsername;
     const response = await this.login({
       username: username,
       password: this.password,
@@ -58,15 +71,9 @@ export class DevAuthService {
     await this.userAuth.logout();
   }
 
-  private async login({
-    username,
-    password,
-  }: {
-    username: string;
-    password: string;
-  }) {
+  async login({ username, password }: { username: string; password: string }) {
     const response = await this.userAuth.login({
-      sessionId: '',
+      sessionId: this.sessionId,
       captcha: this.captcha,
       password,
       username,
