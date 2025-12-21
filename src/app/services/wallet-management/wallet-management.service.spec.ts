@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { WalletManagementService } from './wallet-management.service';
 import { DevAuthService } from '../dev-auth-service/dev-auth.service';
 
-describe('WalletManagementService (real API)', () => {
+describe('WalletManagementService', () => {
   let service: WalletManagementService;
   let devAuth: DevAuthService;
 
@@ -26,9 +26,10 @@ describe('WalletManagementService (real API)', () => {
   });
 
   it('GetTruckWalletInfo: should return truck wallet info', async () => {
-    await devAuth.loginAsDriver();
+    await devAuth.loginAsAdmin();
 
-    const res = await service.GetTruckWalletInfo(1);
+    const walletId = 1;
+    const res = await service.GetTruckWalletInfo(walletId);
     expect(res.data).toEqual(jasmine.any(Object));
     expect(res.data?.MoneyWalletId).toBeDefined();
   });
@@ -42,7 +43,7 @@ describe('WalletManagementService (real API)', () => {
   });
 
   it('GetTransportCompanyWallet: should return transport company wallet', async () => {
-    await devAuth.loginAsCompany();
+    await devAuth.loginAsAdmin();
     const companyId = 1;
 
     const res = await service.GetTransportCompanyWallet(companyId);
@@ -61,10 +62,10 @@ describe('WalletManagementService (real API)', () => {
   it('GetTotalOfUserFunctions: should return total of user functions', async () => {
     await devAuth.loginAsAdmin();
 
-    const startDate = '2025-01-01';
-    const endDate = '2025-01-31';
-    const startTime = '00:00';
-    const endTime = '23:59';
+    const startDate = '1404/04/01';
+    const endDate = '1404/09/01';
+    const startTime = '00:00:00';
+    const endTime = '23:59:00';
 
     const res = await service.GetTotalOfUserFunctions(
       startDate,
@@ -77,10 +78,12 @@ describe('WalletManagementService (real API)', () => {
   });
 
   it('GetUserChargingFunctions: should return user charging functions', async () => {
-    const startDate = '2025-01-01';
-    const endDate = '2025-01-31';
-    const startTime = '00:00';
-    const endTime = '23:59';
+    await devAuth.loginAsAdmin();
+
+    const startDate = '1404/04/01';
+    const endDate = '1404/09/01';
+    const startTime = '00:00:00';
+    const endTime = '23:59:00';
 
     const res = await service.GetUserChargingFunctions(
       startDate,
