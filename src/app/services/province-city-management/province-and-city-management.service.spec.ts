@@ -1,0 +1,66 @@
+import { TestBed } from '@angular/core/testing';
+import { ProvinceAndCityManagementService } from './province-and-city-management.service';
+import { DevAuthService } from '../dev-auth-service/dev-auth.service';
+import { Province } from './model/province-city.model';
+
+describe('ProvinceAndCityManagementService', () => {
+  let service: ProvinceAndCityManagementService;
+  let devAuth: DevAuthService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [ProvinceAndCityManagementService, DevAuthService],
+    });
+
+    service = TestBed.inject(ProvinceAndCityManagementService);
+    devAuth = TestBed.inject(DevAuthService);
+
+    devAuth.logout();
+  });
+
+  it('GetProvincesAndCitiesInfo: should return provinces with cities', async () => {
+    await devAuth.loginAsAdmin();
+
+    const provinceName = 'تهران';
+    const res = await service.GetProvincesAndCitiesInfo(provinceName);
+
+    expect(res.data).toEqual(jasmine.any(Array));
+    res.data?.forEach((item: Province) =>
+      expect(item).toEqual(jasmine.any(Object))
+    );
+  });
+
+  it('GetAllProvinces: should return all provinces', async () => {
+    await devAuth.loginAsAdmin();
+
+    const searchString = 'ا';
+    const res = await service.GetAllProvinces(searchString);
+
+    expect(res.data).toEqual(jasmine.any(Array));
+    res.data?.forEach((item: Province) =>
+      expect(item).toEqual(jasmine.any(Object))
+    );
+  });
+
+  it('ChangeProvinceStatus: should change province status', async () => {
+    await devAuth.loginAsAdmin();
+
+    const provinceId = 11; // Tehran ID
+    const status = true;
+    const res = await service.ChangeProvinceStatus(provinceId, status);
+
+    expect(res.data).toEqual(jasmine.any(Object));
+    expect(res.data?.Message).toBeDefined();
+  });
+
+  it('ChangeCityStatus: should change city status', async () => {
+    await devAuth.loginAsAdmin();
+
+    const cityCode = 11320000;
+    const status = false;
+    const res = await service.ChangeCityStatus(cityCode, status);
+
+    expect(res.data).toEqual(jasmine.any(Object));
+    expect(res.data?.Message).toBeDefined();
+  });
+});
