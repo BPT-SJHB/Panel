@@ -208,18 +208,10 @@ export class UserManagementService {
     //#endregion
 
     //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       SoftwareUserInfo
     >(apiUrl, bodyValue, mockSoftwareUserInfo);
-    //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: { UserId: response.data?.UserId ?? -1 },
-      error: response.error,
-    };
     //#endregion
   }
 
