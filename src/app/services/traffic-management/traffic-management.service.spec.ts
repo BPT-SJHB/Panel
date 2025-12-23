@@ -9,7 +9,7 @@ describe('TrafficManagementService', () => {
   let service: TrafficManagementService;
   let devAuth: DevAuthService;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     TestBed.configureTestingModule({
       providers: [
         TrafficManagementService,
@@ -20,10 +20,11 @@ describe('TrafficManagementService', () => {
 
     service = TestBed.inject(TrafficManagementService);
     devAuth = TestBed.inject(DevAuthService);
-    devAuth.loginAsAdmin();
+    await devAuth.logout();
   });
 
   it('RegisterTrafficCardType: should return ShortResponse', async () => {
+    await devAuth.loginAsAdmin();
     const res = await service.RegisterTrafficCardType(
       `تستـ${Date.now().toLocaleString()}`
     );
@@ -38,6 +39,7 @@ describe('TrafficManagementService', () => {
   });
 
   it('EditTrafficCardType: should return ShortResponse', async () => {
+    await devAuth.loginAsAdmin();
     const res = await service.EditTrafficCardType({
       TrafficCardTypeId: 1,
       TrafficCardTypeTitle: `ویرایش_تستـ${Date.now().toLocaleString()}`,
@@ -50,6 +52,7 @@ describe('TrafficManagementService', () => {
   });
 
   it('GetTrafficCardTypes: should return array', async () => {
+    await devAuth.loginAsAdmin();
     const res = await service.GetTrafficCardTypes();
 
     expect(res.data)
@@ -58,6 +61,7 @@ describe('TrafficManagementService', () => {
   });
 
   it('GetTrafficCardTempTypes: should return array', async () => {
+    await devAuth.loginAsAdmin();
     const res = await service.GetTrafficCardTempTypes();
 
     expect(res.data)
@@ -66,6 +70,7 @@ describe('TrafficManagementService', () => {
   });
 
   it('RegisterTrafficCard: should return ShortResponse', async () => {
+    await devAuth.loginAsAdmin();
     const res = await service.RegisterTrafficCard(generateCardNumber(), 1, 1);
 
     expect(res.data)
@@ -78,6 +83,7 @@ describe('TrafficManagementService', () => {
   });
 
   it('GetTrafficCosts: should return array', async () => {
+    await devAuth.loginAsAdmin();
     const res = await service.GetTrafficCosts();
 
     expect(res.data)
@@ -86,12 +92,13 @@ describe('TrafficManagementService', () => {
   });
 
   it('RegisterTrafficCost: should return ShortResponse', async () => {
+    await devAuth.loginAsAdmin();
     const res = await service.RegisterTrafficCost({
       TrafficCardTypeId: 1,
-      EntryBaseCost: 100000,
-      ExcessStoppageCost: 100000,
-      ExcessStoppageDuration: 100000,
-      NoCostStoppageDuration: 10000,
+      EntryBaseCost: 300000,
+      ExcessStoppageCost: 300000,
+      ExcessStoppageDuration: 24,
+      NoCostStoppageDuration: 30,
       Active: true,
     });
 
@@ -100,7 +107,9 @@ describe('TrafficManagementService', () => {
       .toBeDefined();
   });
 
-  it('GetTrafficRecords: should return array', async () => {
+  // TODO: Fix API: the server returns no context in the response
+  xit('GetTrafficRecords: should return array', async () => {
+    await devAuth.loginAsAdmin();
     const res = await service.GetTrafficRecords(1);
 
     expect(res.data)
@@ -108,8 +117,12 @@ describe('TrafficManagementService', () => {
       .toEqual(jasmine.any(Array));
   });
 
-  it('RegisterTraffic: should return TrafficInfo', async () => {
+  // TODO: Fix API: the server returns the error message 'کیف پول یافت نشد'
+  xit('RegisterTraffic: should return TrafficInfo', async () => {
+    await devAuth.loginAsAdmin();
     const res = await service.RegisterTraffic(1, '123', 'image');
+
+    console.log(res.error);
 
     expect(res.data)
       .withContext('RegisterTraffic: should return traffic info')
