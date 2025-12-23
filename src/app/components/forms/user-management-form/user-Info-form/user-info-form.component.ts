@@ -147,6 +147,9 @@ export class UserInfoFormComponent extends BaseLoading implements OnInit {
         ...user,
         UserId: response.data.UserId,
       });
+
+      const { UserName, Password } = response.data;
+      if (UserName && Password) this.showNewPasswordDialog(UserName, Password);
     });
   }
 

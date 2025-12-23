@@ -172,7 +172,7 @@ export class UserProfileFormComponent extends BaseLoading implements OnInit {
     this.isChangePasswordDialogVisible = false;
     this.dialogService.open(PersonalizePasswordDialogComponent, {
       header: 'شخصی سازی رمز عبور',
-      width: '40rem',
+      width: '25rem',
       modal: true,
       closable: true,
       inputValues: { userId: userId },

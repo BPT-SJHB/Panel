@@ -46,7 +46,7 @@ export async function copyTextAndToast(
 ): Promise<void> {
   try {
     await copyText(text);
-    toast.success('موفق', '');
+    toast.success('موفق', 'متن با موفقیت کپی شد.');
   } catch (err) {
     toast.error('خطا', '');
   }
