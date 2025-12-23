@@ -2,10 +2,9 @@
 <p-toast
   baseZIndex="100"
   position="top-center"
-  [showTransformOptions]="'translateY(100%)'"
-  [showTransformOptions]="'translateX(100%)'"
-  styleClass="max-w-95vw"
+  [motionOptions]="montionToastConfig()"
 />
+
 <p-confirm-dialog></p-confirm-dialog>
 <router-outlet />
 <app-theme-management hidden />
