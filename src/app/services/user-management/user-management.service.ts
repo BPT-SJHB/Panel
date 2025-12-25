@@ -149,10 +149,15 @@ export class UserManagementService {
     return this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, {
-      ...mockShortResponse,
-      Message: 'رمز عبور ارسال شد',
-    });
+    >(
+      apiUrl,
+      bodyValue,
+      {
+        ...mockShortResponse,
+        Message: 'رمز عبور ارسال شد',
+      },
+      { redirectToLoginOnUnauthorized: false }
+    );
     //#endregion
   }
 
