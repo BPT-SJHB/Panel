@@ -27,7 +27,6 @@ import { mockTicketCaptcha } from './mock/ticket-captcha.mock';
 import { mockTicketStatuses } from './mock/ticket-status.mock';
 import { mockTicketPaging } from './mock/ticket-paging.mock';
 import { Observable } from 'rxjs';
-import { uuidV4 } from 'app/utils/uuid';
 
 @Injectable({
   providedIn: 'root',
@@ -43,7 +42,7 @@ export class TicketServiceManagementService {
       apiUrl,
       body,
       mockTicketUser,
-      true
+      { withCredentials: true }
     );
   }
   //#endregion
@@ -53,7 +52,7 @@ export class TicketServiceManagementService {
     return this.api.CommunicateWithAPI_Get<TicketType[]>(
       API_ROUTES.TicketAPI.Tickets.GetAllActiveTicketTypes,
       mockTicketTypes,
-      true
+      { withCredentials: true }
     );
   }
 
@@ -61,7 +60,7 @@ export class TicketServiceManagementService {
     return this.api.CommunicateWithAPI_Get<Department[]>(
       API_ROUTES.TicketAPI.Departments.GetAllActiveDepartments,
       mockDepartments,
-      true
+      { withCredentials: true }
     );
   }
 
@@ -69,7 +68,7 @@ export class TicketServiceManagementService {
     return this.api.CommunicateWithAPI_Get<TicketStatus[]>(
       API_ROUTES.TicketAPI.Tickets.GetAllActiveTicketStatuses,
       mockTicketStatuses,
-      true
+      { withCredentials: true }
     );
   }
   //#endregion
@@ -87,7 +86,9 @@ export class TicketServiceManagementService {
     return this.api.CommunicateWithAPI_Post<
       TicketCreateRequest,
       { id: string; trackCode: string }
-    >(API_ROUTES.TicketAPI.Tickets.CreateTicket, ticket, mockResponse, true);
+    >(API_ROUTES.TicketAPI.Tickets.CreateTicket, ticket, mockResponse, {
+      withCredentials: true,
+    });
   }
 
   GetTicketByTrackCode(
@@ -99,7 +100,7 @@ export class TicketServiceManagementService {
       API_ROUTES.TicketAPI.Tickets.GetTicketByTrackCode,
       body,
       mockTickets[0],
-      true
+      { withCredentials: true }
     );
   }
 
@@ -109,7 +110,7 @@ export class TicketServiceManagementService {
       API_ROUTES.TicketAPI.Tickets.GetTicketByID,
       body,
       mockTickets[Math.floor(Math.random() * mockTickets.length)],
-      true
+      { withCredentials: true }
     );
   }
   //#endregion
@@ -119,7 +120,7 @@ export class TicketServiceManagementService {
     return this.api.CommunicateWithAPI_Get<TicketCaptcha>(
       API_ROUTES.TicketAPI.Captcha.GetCaptcha,
       mockTicketCaptcha,
-      true
+      { withCredentials: true }
     );
   }
 
@@ -129,7 +130,7 @@ export class TicketServiceManagementService {
       API_ROUTES.TicketAPI.Captcha.VerifyCaptcha,
       body,
       null,
-      true
+      { withCredentials: true }
     );
   }
   //#endregion
@@ -149,12 +150,9 @@ export class TicketServiceManagementService {
     return this.api.CommunicateWithAPI_Post<
       CreateChatMessageRequest,
       ChatMessage
-    >(
-      API_ROUTES.TicketAPI.Tickets.CreateChat(ticketId),
-      chat,
-      mockResponse,
-      true
-    );
+    >(API_ROUTES.TicketAPI.Tickets.CreateChat(ticketId), chat, mockResponse, {
+      withCredentials: true,
+    });
   }
   //#endregion
 
@@ -165,12 +163,9 @@ export class TicketServiceManagementService {
     return this.api.CommunicateWithAPI_Post<
       TicketQueryParams,
       PagingResponse<Ticket>
-    >(
-      API_ROUTES.TicketAPI.Tickets.GetTicketsList,
-      query,
-      mockTicketPaging,
-      true
-    );
+    >(API_ROUTES.TicketAPI.Tickets.GetTicketsList, query, mockTicketPaging, {
+      withCredentials: true,
+    });
   }
   //#endregion
 
@@ -181,7 +176,7 @@ export class TicketServiceManagementService {
       API_ROUTES.TicketAPI.Users.GetUserByID,
       body,
       mockTicketUser,
-      true
+      { withCredentials: true }
     );
   }
 
@@ -191,7 +186,7 @@ export class TicketServiceManagementService {
       API_ROUTES.TicketAPI.Users.GetUserByUsername,
       body,
       mockTicketUser,
-      true
+      { withCredentials: true }
     );
   }
 
@@ -201,7 +196,7 @@ export class TicketServiceManagementService {
       API_ROUTES.TicketAPI.Users.GetUsersIDs,
       body,
       [mockTicketUser],
-      true
+      { withCredentials: true }
     );
   }
   //#endregion
@@ -217,7 +212,7 @@ export class TicketServiceManagementService {
       API_ROUTES.TicketAPI.File.DownloadTicketFile(fileId),
       { id: ticketId },
       { url: '' },
-      true
+      { withCredentials: true }
     );
     if (!response.success || !response.data?.url) {
       // Safely return the same structure (cast to correct type)
@@ -236,7 +231,9 @@ export class TicketServiceManagementService {
     const mock = { id: `uuidV4().${file.type}` };
     return this.api.CommunicateWithAPI_Post_FromData_With_Progress<{
       id: string;
-    }>(API_ROUTES.TicketAPI.File.UploadTicketFile, body, mock, true);
+    }>(API_ROUTES.TicketAPI.File.UploadTicketFile, body, mock, {
+      withCredentials: true,
+    });
   }
 
   LoginTicketWithPassword(
@@ -247,7 +244,7 @@ export class TicketServiceManagementService {
       API_ROUTES.TicketAPI.Auth.Login,
       { username, password },
       null,
-      true
+      { withCredentials: true }
     );
   }
 }
