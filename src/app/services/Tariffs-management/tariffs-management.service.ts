@@ -18,7 +18,7 @@ import { mockShortResponse } from 'app/data/mock/short-response.mock';
 export class TariffsManagementService {
   private userAuth = inject(UserAuthService);
   private apiCommunicator = inject(APICommunicationManagementService);
-  //
+
   public async GetTariffs(
     loaderTypeId: number,
     sourceCityId: number | undefined,
@@ -91,7 +91,7 @@ export class TariffsManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
-  //
+
   public async DeleteTariff(
     tariffInfo: DeleteTariffInfo
   ): Promise<ApiResponse<ShortResponse>> {
@@ -110,7 +110,7 @@ export class TariffsManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
-  //
+
   public async EditTariffs(
     tariffInfo: EditTariffInfo
   ): Promise<ApiResponse<ShortResponse>> {
@@ -148,7 +148,7 @@ export class TariffsManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
-  //
+
   public async RegisterTariff(
     tariffInfo: Tariff
   ): Promise<ApiResponse<ShortResponse>> {
