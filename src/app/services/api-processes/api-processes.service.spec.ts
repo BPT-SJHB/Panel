@@ -33,4 +33,12 @@ describe('ApiProcessesService', () => {
 
     validateResponse<PageGroup[]>(response, ApiPageGroupSchema);
   });
+
+  it('getTaskBarWebProcesses Method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.getTaskBarWebProcesses();
+
+    validateResponse<PageGroup[]>(response, ApiPageGroupSchema);
+  });
 });
