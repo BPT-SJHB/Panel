@@ -24,6 +24,7 @@ import {
   RelationOfAnnouncementSubGroupAndProvince,
   zodRelationOfAnnouncementSubGroupAndProvince,
 } from './model/relation-of-announcement-subgroup-province.model';
+
 const groupSampleData: AnnouncementGroup = {
   AnnouncementId: 0,
   AnnouncementTitle: 'تست',
@@ -105,6 +106,34 @@ fdescribe('AnnouncementGroupSubgroupManagementService', () => {
 
     const resDel = await service.DeleteAnnouncementGroup(
       groupSampleData.AnnouncementId
+    );
+    validateResponse<ShortResponse>(resDel, ApiShortResponseSchema);
+  });
+
+  it('Testing Announcement SubGroup methods with flow', async () => {
+    await devAuth.loginAsAdmin();
+
+    const resReg = await service.RegisterNewAnnouncementSubGroup('تست');
+    validateResponse<ShortResponse>(resReg, ApiShortResponseSchema);
+
+    const resGet = await service.GetAnnouncementSubGroups('تست');
+    validateResponse<AnnouncementSubGroup[]>(
+      resGet,
+      createApiResponseSchema(z.array(zodAnnouncementSubGroup))
+    );
+
+    subGroupSampleData.AnnouncementSGId =
+      resGet.data[resGet.data.length - 1].AnnouncementSGId;
+
+    const resEdit = await service.EditAnnouncementGroup(
+      subGroupSampleData.AnnouncementSGId,
+      subGroupSampleData.AnnouncementSGTitle!,
+      subGroupSampleData.Active!
+    );
+    validateResponse<ShortResponse>(resEdit, ApiShortResponseSchema);
+
+    const resDel = await service.DeleteAnnouncementGroup(
+      subGroupSampleData.AnnouncementSGId
     );
     validateResponse<ShortResponse>(resDel, ApiShortResponseSchema);
   });
