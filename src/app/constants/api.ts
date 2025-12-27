@@ -126,10 +126,10 @@ export const API_ROUTES = {
       GetTariffs: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetTariffs`,
       ChangeTariffsPercentage: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}TariffsRegisteringWithAddPercentage`,
       ChangeTariffsStatus: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}TariffsDeactivate`,
-      DeleteTariffs: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}TariffsDeleting`,
-      EditTariffs: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}TariffsEditing`,
+      DeleteTariff: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}TariffDeleting`,
+      EditTariff: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}TariffEditing`,
       UploadTariffsFile: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}TariffsUploading`,
-      RegisterTariff: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}TariffsRegistering`,
+      RegisterTariff: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}TariffRegistering`,
     },
     Announcements: {
       Groups: {
