@@ -1,6 +1,14 @@
 import { zodError } from 'app/data/model/api-Response.model';
 import z, { ZodType } from 'zod';
 
+/**
+ * Validates an API response against a Zod schema.
+ * Asserts that the response is successful and contains non-empty data.
+ * If validation fails or data is missing/empty, it triggers a test failure.
+ * @template ResponseDataType The expected type of the response data payload.
+ * @param response The raw data to validate.
+ * @param schema The Zod schema to validate against.
+ */
 export function validateResponse<ResponseDataType>(
   response: unknown,
   schema: ZodType<{
@@ -31,6 +39,12 @@ export function validateResponse<ResponseDataType>(
   }
 }
 
+/**
+ * Creates a standardized Zod schema for API responses.
+ * * @template T The type of the data payload.
+ * @param dataSchema The Zod schema for the internal 'data' field.
+ * @returns A Zod object schema containing success, data, and optional error fields.
+ */
 export const createApiResponseSchema = <T>(dataSchema: ZodType<T>) =>
   z.object({
     success: z.boolean(),
