@@ -16,7 +16,7 @@ export class APICommunicationManagementService {
   public async CommunicateWithAPI_Post<TBody, TExpect>(
     url: string,
     bodyValue: TBody,
-    mockValue?: TExpect,
+    mockValue: TExpect,
     withCredentials = false
   ): Promise<ApiResponse<TExpect>> {
     if (!environment.production && environment.disableApi) {
@@ -46,7 +46,7 @@ export class APICommunicationManagementService {
 
   public async CommunicateWithAPI_Get<TExpect>(
     url: string,
-    mockValue?: TExpect,
+    mockValue: TExpect,
     withCredentials = false
   ): Promise<ApiResponse<TExpect>> {
     if (!environment.production && environment.disableApi) {
@@ -70,7 +70,7 @@ export class APICommunicationManagementService {
   public CommunicateWithAPI_Post_FromData_With_Progress<TExpect>(
     url: string,
     bodyValue: FormData,
-    mockValue?: any,
+    mockValue: TExpect,
     withCredentials = false
   ): Observable<ApiResponse<TExpect> | number> {
     if (!environment.production && environment.disableApi) {
