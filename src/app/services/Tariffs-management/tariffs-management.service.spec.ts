@@ -36,4 +36,49 @@ describe('TariffsManagementService', () => {
 
     devAuth.logout();
   });
+
+  it('Flow: Register -> Get -> Edit -> Delete\nRegister -> AddPercentage -> ChangeStat', async () => {
+    await devAuth.loginAsAdmin();
+
+    const resReg = await service.RegisterTariff(tariffSampleData);
+    validateResponse<ShortResponse>(resReg, ApiShortResponseSchema);
+
+    const resGet = await service.GetTariffs(
+      tariffSampleData.LoaderTypeId,
+      tariffSampleData.SourceCityId,
+      tariffSampleData.TargetCityId,
+      tariffSampleData.GoodId
+    );
+    validateResponse<Tariff[]>(resGet, ApiTariffSchema);
+
+    const resEdit = await service.EditTariffs({
+      LoaderTypeId: tariffSampleData.LoaderTypeId,
+      TargetCityId: tariffSampleData.TargetCityId,
+      SourceCityId: tariffSampleData.SourceCityId,
+      GoodId: tariffSampleData.GoodId,
+      Tariff: tariffSampleData.Tariff,
+      BaseTonnag: tariffSampleData.BaseTonnag,
+    });
+    validateResponse<ShortResponse>(resEdit, ApiShortResponseSchema);
+
+    const resDel = await service.DeleteTariff({
+      LoaderTypeId: tariffSampleData.LoaderTypeId,
+      SourceCityId: tariffSampleData.SourceCityId,
+      TargetCityId: tariffSampleData.TargetCityId,
+      GoodId: tariffSampleData.GoodId,
+    });
+    validateResponse<ShortResponse>(resDel, ApiShortResponseSchema);
+
+    const resRegSec = await service.RegisterTariff(tariffSampleData);
+    validateResponse<ShortResponse>(resRegSec, ApiShortResponseSchema);
+
+    const resAddPer = await service.AddPercentageToTariffs(
+      [tariffSampleData],
+      20
+    );
+    validateResponse<ShortResponse>(resAddPer, ApiShortResponseSchema);
+
+    const resChangeStat = await service.ChangeTariffsStatus([tariffSampleData]);
+    validateResponse<ShortResponse>(resChangeStat, ApiShortResponseSchema);
+  });
 });
