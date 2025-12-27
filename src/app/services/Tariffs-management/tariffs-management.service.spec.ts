@@ -19,6 +19,9 @@ const tariffSampleData: Tariff = {
   BaseTonnag: 24,
   CalculationReference: 'Test',
 };
+
+const ApiTariffSchema = createApiResponseSchema(z.array(zodTariff));
+
 describe('TariffsManagementService', () => {
   let service: TariffsManagementService;
   let devAuth: DevAuthService;
