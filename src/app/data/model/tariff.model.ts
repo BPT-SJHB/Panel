@@ -29,3 +29,18 @@ export const zodTariff = z.object({
   CalculationReference: z.string().optional(),
   Active: z.boolean().optional(),
 });
+
+export type DeleteTariffInfo = Pick<
+  Tariff,
+  'SourceCityId' | 'TargetCityId' | 'LoaderTypeId' | 'GoodId'
+>;
+
+export type EditTariffInfo = Pick<
+  Tariff,
+  | 'SourceCityId'
+  | 'TargetCityId'
+  | 'LoaderTypeId'
+  | 'GoodId'
+  | 'Tariff'
+  | 'BaseTonnag'
+>;
