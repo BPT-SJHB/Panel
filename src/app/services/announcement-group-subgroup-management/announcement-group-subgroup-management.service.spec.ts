@@ -164,4 +164,30 @@ fdescribe('AnnouncementGroupSubgroupManagementService', () => {
 
     validateResponse<ShortResponse>(resDel, ApiShortResponseSchema);
   });
+
+  it('Testing Announcement SubGroup/Province methods with flow', async () => {
+    await devAuth.loginAsAdmin();
+
+    const resReg = service.RegisterRelationOfAnnouncementSubGroupAndProvince({
+      ProvinceId:
+        relationOfAnnouncementSubGroupAndProvinceSampleData.ProvinceId,
+      AnnouncementSGId:
+        relationOfAnnouncementSubGroupAndProvinceSampleData.AnnouncementSGId,
+    });
+    validateResponse<ShortResponse>(resReg, ApiShortResponseSchema);
+
+    const resGet =
+      await service.GetRelationOfAnnouncementSubGroupsAndProvinces();
+    validateResponse<RelationOfAnnouncementSubGroupAndProvince[]>(
+      resGet,
+      ApiRelationOfAnnouncementSubGroupAndProvinceSchema
+    );
+
+    const resDel = await service.DeleteRelationOfAnnouncementGroupAndSubGroup(
+      groupSampleData.AnnouncementId,
+      subGroupSampleData.AnnouncementSGId
+    );
+
+    validateResponse<ShortResponse>(resDel, ApiShortResponseSchema);
+  });
 });
