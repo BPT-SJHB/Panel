@@ -236,7 +236,7 @@ export class AnnouncementGroupSubgroupManagementService {
   //#region Announcement Group/SubGroup
 
   public async GetRelationOfAnnouncementGroupAndSubGroup(
-    groupId: number
+    announcementGroupId: number
   ): Promise<ApiResponse<RelationOfAnnouncementGroupAndSubGroup[]>> {
     //#region Consts
     const apiUrl =
@@ -244,7 +244,7 @@ export class AnnouncementGroupSubgroupManagementService {
         .RelationOfAnnouncementGroupAndSubGroup.GetRelations;
     const relationOfAnnouncementGroupAndSubGroupInfo: RelationOfAnnouncementGroupAndSubGroup =
       {
-        AnnouncementId: groupId,
+        AnnouncementId: announcementGroupId,
         AnnouncementSubGroups: [],
       };
     const bodyValue = {
