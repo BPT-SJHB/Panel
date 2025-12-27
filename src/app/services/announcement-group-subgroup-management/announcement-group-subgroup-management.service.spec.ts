@@ -24,6 +24,30 @@ import {
   RelationOfAnnouncementSubGroupAndProvince,
   zodRelationOfAnnouncementSubGroupAndProvince,
 } from './model/relation-of-announcement-subgroup-province.model';
+const groupSampleData: AnnouncementGroup = {
+  AnnouncementId: 0,
+  AnnouncementTitle: 'تست',
+  Active: true,
+};
+
+const subGroupSampleData: AnnouncementSubGroup = {
+  AnnouncementSGId: 0,
+  AnnouncementSGTitle: 'تست',
+  Active: true,
+};
+
+const relationOfAnnouncementSubGroupAndProvinceSampleData: relationOfAnnouncementSubGroupAndProvince =
+  {
+    ProvinceId: 26,
+    ProvinceName:
+      'آذربایجان شرقی                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ',
+    AnnouncementId: 3,
+    AnnouncementTitle:
+      'اعلام بار انباری                                                                                    ',
+    AnnouncementSGId: 14,
+    AnnouncementSGTitle:
+      'برون شهری آهن آلات انباری                                                                           ',
+  };
 fdescribe('AnnouncementGroupSubgroupManagementService', () => {
   let service: AnnouncementGroupSubgroupManagementService;
   let devAuth: DevAuthService;
