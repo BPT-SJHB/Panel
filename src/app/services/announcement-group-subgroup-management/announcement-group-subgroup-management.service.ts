@@ -155,8 +155,7 @@ export class AnnouncementGroupSubgroupManagementService {
   }
 
   public async RegisterNewAnnouncementSubGroup(
-    title: string,
-    status: boolean
+    title: string
   ): Promise<ApiResponse<ShortResponse>> {
     //#region Consts
     const apiUrl =
@@ -165,7 +164,6 @@ export class AnnouncementGroupSubgroupManagementService {
     const announcementSubGroupInfo: AnnouncementSubGroup = {
       AnnouncementSGId: 0,
       AnnouncementSGTitle: title,
-      Active: status,
     };
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
@@ -238,7 +236,7 @@ export class AnnouncementGroupSubgroupManagementService {
   //#region Announcement Group/SubGroup
 
   public async GetRelationOfAnnouncementGroupAndSubGroup(
-    id: number
+    groupId: number
   ): Promise<ApiResponse<RelationOfAnnouncementGroupAndSubGroup[]>> {
     //#region Consts
     const apiUrl =
@@ -246,7 +244,7 @@ export class AnnouncementGroupSubgroupManagementService {
         .RelationOfAnnouncementGroupAndSubGroup.GetRelations;
     const relationOfAnnouncementGroupAndSubGroupInfo: RelationOfAnnouncementGroupAndSubGroup =
       {
-        AnnouncementId: id,
+        AnnouncementId: groupId,
         AnnouncementSubGroups: [],
       };
     const bodyValue = {

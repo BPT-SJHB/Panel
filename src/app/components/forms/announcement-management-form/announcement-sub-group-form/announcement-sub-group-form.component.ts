@@ -219,8 +219,7 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
     const { AnnouncementSGTitle, Active } = this.extractFormData();
     const response =
       await this.announcementService.RegisterNewAnnouncementSubGroup(
-        AnnouncementSGTitle ?? '',
-        Active ?? true
+        AnnouncementSGTitle ?? ''
       );
     if (!checkAndToastError(response, this.toast)) return;
     this.toast.success('موفق', response.data.Message ?? '');
