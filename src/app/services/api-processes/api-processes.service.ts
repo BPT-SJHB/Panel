@@ -86,8 +86,8 @@ export class ApiProcessesService {
     //#endregion
   }
 
-  public async getVeyUsefulWebProcesses(): Promise<ApiResponse<PageGroup[]>> {
-    const api = API_ROUTES.SoftwareUserAPI.GetVeyUsefulWebProcesses;
+  public async getUsefulWebProcesses(): Promise<ApiResponse<PageGroup[]>> {
+    const api = API_ROUTES.SoftwareUserAPI.GetUsefulWebProcesses;
     //#region Consts
     const bodyValue = {
       sessionId: this.userAuth.getSessionId(),
