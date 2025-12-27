@@ -25,4 +25,12 @@ describe('ApiProcessesService', () => {
 
     devAuth.logout();
   });
+
+  it('getApiProcesses Method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.getApiProcesses();
+
+    validateResponse<PageGroup[]>(response, ApiPageGroupSchema);
+  });
 });
