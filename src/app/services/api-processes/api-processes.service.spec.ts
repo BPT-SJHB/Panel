@@ -41,4 +41,12 @@ describe('ApiProcessesService', () => {
 
     validateResponse<PageGroup[]>(response, ApiPageGroupSchema);
   });
+
+  it('getUsefulWebProcesses Method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.getUsefulWebProcesses();
+
+    validateResponse<PageGroup[]>(response, ApiPageGroupSchema);
+  });
 });
