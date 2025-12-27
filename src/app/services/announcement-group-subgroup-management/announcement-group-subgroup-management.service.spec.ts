@@ -37,7 +37,7 @@ const subGroupSampleData: AnnouncementSubGroup = {
   Active: true,
 };
 
-const relationOfAnnouncementSubGroupAndProvinceSampleData: relationOfAnnouncementSubGroupAndProvince =
+const relationOfAnnouncementSubGroupAndProvinceSampleData: RelationOfAnnouncementSubGroupAndProvince =
   {
     ProvinceId: 26,
     ProvinceName:
