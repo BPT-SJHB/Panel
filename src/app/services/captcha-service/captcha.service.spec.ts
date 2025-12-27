@@ -23,4 +23,12 @@ describe('AnnouncementGroupSubgroupManagementService', () => {
 
     devAuth.logout();
   });
+
+  it('Testing Announcement Group methods with flow', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.getCaptcha();
+
+    validateResponse<Captcha>(response, ApiCaptchaSchema);
+  });
 });
