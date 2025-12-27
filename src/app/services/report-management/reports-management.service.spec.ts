@@ -23,9 +23,10 @@ describe('ReportsManagementService', () => {
 
   it('GetLoadAccounting: should return load accounting info', async () => {
     await devAuth.loginAsAdmin();
-    const loadId = 14;
+    const loadId = 6031;
 
     const res = await service.GetLoadAccounting(loadId);
+
     expect(res.data).toEqual(jasmine.any(Array));
     res.data?.forEach((item: LoadAccounting) =>
       expect(item).toEqual(jasmine.any(Object))
@@ -34,10 +35,8 @@ describe('ReportsManagementService', () => {
 
   it('GetLoadPermissions: should return load permissions', async () => {
     await devAuth.loginAsAdmin();
-    const loadId = 1;
+    const loadId = 6032;
 
-    // TODO: the server returns no data for LoadId values from 1 to 50,
-    // so LoadId is temporarily set to 1.
     const res = await service.GetLoadPermissions(loadId);
     expect(res.data).toEqual(jasmine.any(Array));
     res.data?.forEach((item: LoadPermission) =>
@@ -49,17 +48,17 @@ describe('ReportsManagementService', () => {
     await devAuth.loginAsCompany();
 
     const res = await service.GetLatestLoadPermissionsForCompany();
+
     expect(res.data).toEqual(jasmine.any(Array));
     res.data?.forEach((item: LoadPermissionForCompany) =>
       expect(item).toEqual(jasmine.any(Object))
     );
   });
 
+  // TODO: Fix Data input
   it('GetLoadPermissionsForDriver: should return driver load permissions', async () => {
     await devAuth.loginAsDriver();
 
-    // TODO: no Load found for this GroupId/SubGroupId combination.
-    // Using these values as a temporary placeholder.
     const groupId = 1;
     const subGroupId = 1;
 

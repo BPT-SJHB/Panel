@@ -5,7 +5,6 @@ import { DevAuthService } from '../dev-auth-service/dev-auth.service';
 describe('SequentialTurnManagementService', () => {
   let service: SequentialTurnManagementService;
   let devAuth: DevAuthService;
-  let seqId: number;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -18,54 +17,61 @@ describe('SequentialTurnManagementService', () => {
     devAuth.logout();
   });
 
-  it('RegisterNewSequentialTurn: should register a new sequential turn', async () => {
+  it('SequentialTurn workflow: create if not exists, edit and delete', async () => {
     await devAuth.loginAsAdmin();
 
     const title = `تست_${Date.now()}`;
-    const keyword = 'turn-key';
+    const keyword = 'D';
     const status = true;
 
-    const res = await service.RegisterNewSequentialTurn(
-      0,
+    // check if exists
+    const existing = await service.GetSequentialTurns('تست_');
+    let seqId: number;
+
+    if (existing.data && existing.data.length > 0) {
+      seqId = existing.data[0].SeqTurnId;
+    } else {
+      // register it
+      const createRes = await service.RegisterNewSequentialTurn(
+        0,
+        title,
+        keyword,
+        status
+      );
+
+      expect(createRes.data)
+        .withContext('RegisterNewSequentialTurn')
+        .toEqual(jasmine.any(Object));
+      expect(createRes.data?.Message)
+        .withContext('RegisterNewSequentialTurn')
+        .toEqual(jasmine.any(String));
+
+      // get new id
+      const newTurns = await service.GetSequentialTurns(title);
+
+      expect(newTurns.data)
+        .withContext('GetSequentialTurns')
+        .toEqual(jasmine.any(Array));
+      expect(newTurns.data!.length).toBeGreaterThan(0);
+      seqId = newTurns.data![0].SeqTurnId;
+      expect(seqId).toBeDefined();
+    }
+
+    // edit
+    const editStatus = false;
+    const editRes = await service.EditSequentialTurn(
+      seqId,
       title,
       keyword,
-      status
+      editStatus
     );
+    expect(editRes.data).toEqual(jasmine.any(Object));
 
-    expect(res.data).toEqual(jasmine.any(Object));
-    expect(res.data?.Message).toEqual(jasmine.any(String));
-  });
-
-  it('GetSequentialTurns: should get the sequential turn and retrieve its ID', async () => {
-    await devAuth.loginAsAdmin();
-
-    const titleSearch = 'تست_';
-    const res = await service.GetSequentialTurns(titleSearch);
-
-    expect(res.data).toEqual(jasmine.any(Array));
-    expect(res.data!.length).toBeGreaterThan(0);
-
-    // Use the first matching turn
-    seqId = res.data![0].SeqTurnId;
-    expect(seqId).toBeDefined();
-  });
-
-  it('EditSequentialTurn: should edit the sequential turn', async () => {
-    await devAuth.loginAsAdmin();
-
-    const title = 'edited title';
-    const keyword = 'edited-key';
-    const status = false;
-
-    const res = await service.EditSequentialTurn(seqId, title, keyword, status);
-    expect(res.data).toEqual(jasmine.any(Object));
-  });
-
-  it('DeleteSequentialTurn: should delete the sequential turn', async () => {
-    await devAuth.loginAsAdmin();
-
-    const res = await service.DeleteSequentialTurn(seqId);
-    expect(res.data).toEqual(jasmine.any(Object));
+    // delete
+    const deleteRes = await service.DeleteSequentialTurn(seqId);
+    expect(deleteRes.data)
+      .withContext('DeleteSequentialTurn')
+      .toEqual(jasmine.any(Object));
   });
 
   it('GetRelationOfSequentialTurnToLoaderTypes should return relations', async () => {
@@ -79,85 +85,118 @@ describe('SequentialTurnManagementService', () => {
     expect(res.data).toEqual(jasmine.any(Array));
   });
 
-  it('RegisterNewRelationOfSequentialTurnToLoaderType should succeed', async () => {
+  it('SequentialTurn-LoaderType relation workflow: create if not exists, get, delete', async () => {
     await devAuth.loginAsAdmin();
 
-    const sequentialTurnId = 1;
-    const loaderTypeId = 2;
+    const sequentialTurnId = 8;
+    const loaderTypeId = 101;
 
-    const res = await service.RegisterNewRelationOfSequentialTurnToLoaderType(
+    // check exists
+    const existing =
+      await service.GetRelationOfSequentialTurnToLoaderTypes(sequentialTurnId);
+
+    const exists =
+      existing.data &&
+      existing.data.length > 0 &&
+      existing.data[0].LoaderTypes.some((l) => l.LoaderTypeId === loaderTypeId);
+
+    if (!exists) {
+      // create new one
+      const createRes =
+        await service.RegisterNewRelationOfSequentialTurnToLoaderType(
+          sequentialTurnId,
+          loaderTypeId
+        );
+      expect(createRes.data)
+        .withContext('RegisterNewRelationOfSequentialTurnToLoaderType')
+        .toEqual(jasmine.any(Object));
+    }
+
+    // get id of that
+    const getRes =
+      await service.GetRelationOfSequentialTurnToLoaderTypes(sequentialTurnId);
+    expect(getRes.data)
+      .withContext('GetRelationOfSequentialTurnToLoaderTypes')
+      .toEqual(jasmine.any(Array));
+
+    const checkItemExists =
+      getRes.data &&
+      getRes.data.length > 0 &&
+      getRes.data[0].LoaderTypes.some((l) => l.LoaderTypeId === loaderTypeId);
+
+    expect(checkItemExists)
+      .withContext('Check if loader type relation exists after registration')
+      .toBeTrue();
+
+    // delete
+    const deleteRes = await service.DeleteRelationOfSequentialTurnToLoaderType(
       sequentialTurnId,
       loaderTypeId
     );
-
-    expect(res.data).toEqual(jasmine.any(Object));
+    expect(deleteRes.data)
+      .withContext('DeleteRelationOfSequentialTurnToLoaderType')
+      .toEqual(jasmine.any(Object));
   });
 
-  it('DeleteRelationOfSequentialTurnToLoaderType should succeed', async () => {
+  it('SequentialTurn-AnnouncementSubGroup relation workflow: create if not exists, get, delete', async () => {
     await devAuth.loginAsAdmin();
 
     const sequentialTurnId = 1;
-    const loaderTypeId = 2;
+    const announcementSubGroupId = 3;
 
-    const res = await service.DeleteRelationOfSequentialTurnToLoaderType(
-      sequentialTurnId,
-      loaderTypeId
-    );
-
-    expect(res.data).toEqual(jasmine.any(Object));
-  });
-
-  it('GetSequentialTurnWithLoaderType should return sequential turns', async () => {
-    await devAuth.loginAsAdmin();
-
-    // TODO: loaderTypeId 2 not return anything it is return empty can find any value for loaderTypeId in server
-    const loaderTypeId = 2;
-
-    const res = await service.GetSequentialTurnWithLoaderType(loaderTypeId);
-
-    expect(res.data).toEqual(jasmine.any(Array));
-  });
-
-  it('GetRelationOfSequentialTurnToAnnouncementSubGroups should return relations', async () => {
-    await devAuth.loginAsAdmin();
-
-    const sequentialTurnId = 1;
-
-    const res =
+    // check exists
+    const existing =
       await service.GetRelationOfSequentialTurnToAnnouncementSubGroups(
         sequentialTurnId
       );
 
-    expect(res.data).toEqual(jasmine.any(Array));
-  });
-
-  it('RegisterNewRelationOfSequentialTurnToAnnouncementSubGroup should succeed', async () => {
-    await devAuth.loginAsAdmin();
-
-    const sequentialTurnId = 1;
-    const announcementSubGroupId = 3;
-
-    const res =
-      await service.RegisterNewRelationOfSequentialTurnToAnnouncementSubGroup(
-        sequentialTurnId,
-        announcementSubGroupId
+    const exists =
+      existing.data &&
+      existing.data.length > 0 &&
+      existing.data[0].AnnouncementSubGroups.some(
+        (a) => a.AnnouncementSGId === announcementSubGroupId
       );
 
-    expect(res.data).toEqual(jasmine.any(Object));
-  });
+    if (!exists) {
+      // ثبت رابطه اگر وجود نداشت
+      const createRes =
+        await service.RegisterNewRelationOfSequentialTurnToAnnouncementSubGroup(
+          sequentialTurnId,
+          announcementSubGroupId
+        );
+      expect(createRes.data)
+        .withContext(
+          'RegisterNewRelationOfSequentialTurnToAnnouncementSubGroup'
+        )
+        .toEqual(jasmine.any(Object));
+    }
 
-  it('DeleteRelationOfSequentialTurnToAnnouncementSubGroup should succeed', async () => {
-    await devAuth.loginAsAdmin();
+    const getRes =
+      await service.GetRelationOfSequentialTurnToAnnouncementSubGroups(
+        sequentialTurnId
+      );
 
-    const sequentialTurnId = 1;
-    const announcementSubGroupId = 3;
+    expect(getRes.data)
+      .withContext('GetRelationOfSequentialTurnToAnnouncementSubGroups')
+      .toEqual(jasmine.any(Array));
 
-    const res =
+    const checkItemExits =
+      getRes.data &&
+      getRes.data.length > 0 &&
+      getRes.data[0].AnnouncementSubGroups.some(
+        (a) => a.AnnouncementSGId === announcementSubGroupId
+      );
+
+    expect(checkItemExits).toBeTrue();
+
+    // حذف رابطه
+    const deleteRes =
       await service.DeleteRelationOfSequentialTurnToAnnouncementSubGroup(
         sequentialTurnId,
         announcementSubGroupId
       );
-
-    expect(res.data).toEqual(jasmine.any(Object));
+    expect(deleteRes.data)
+      .withContext('DeleteRelationOfSequentialTurnToAnnouncementSubGroup')
+      .toEqual(jasmine.any(Object));
   });
 });

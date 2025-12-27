@@ -13,12 +13,16 @@ export class DevAuthService {
   private readonly userAuth = inject(UserAuthService);
   private readonly _sessionId = ''; // captcha sesstionId
   private readonly _captcha = '123456';
-  private readonly password = '123';
+  private readonly _password = '123';
   private readonly _adminUsername = '09132043148';
   private readonly _driverUsername = '09130853148';
   private readonly _companyUsername = '09131118842';
 
   private readonly loginType: LoginType = LoginType.SESSTION;
+
+  public get password() {
+    return this._password;
+  }
 
   private readonly adminSesstionId =
     'c244e7168fe85bf2a255a6c813bbdb70T)PTe^*V4FT2';

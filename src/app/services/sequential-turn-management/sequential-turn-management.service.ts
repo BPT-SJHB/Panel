@@ -241,6 +241,7 @@ export class SequentialTurnManagementService {
 
   //#region To AnnouncementSubGroup Relation
 
+  // TODO: Fix return type to a single object instead of an array
   public async GetRelationOfSequentialTurnToAnnouncementSubGroups(
     id: number
   ): Promise<ApiResponse<RelationOfSequentialTurnToAnnouncementSubGroup[]>> {

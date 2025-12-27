@@ -37,7 +37,8 @@ describe('TransportCompaniesManagementService', () => {
 
   it('GetTransportCompanyInfo: should return single transport company', async () => {
     await devAuth.loginAsAdmin();
-    const res = await service.GetTransportCompanyInfo(1);
+    const companyId = 21043;
+    const res = await service.GetTransportCompanyInfo(companyId);
 
     expect(res.data)
       .withContext(
@@ -59,9 +60,11 @@ describe('TransportCompaniesManagementService', () => {
 
   it('EditTransportCompany: should return ShortResponse', async () => {
     await devAuth.loginAsAdmin();
+    const companyId = 21043;
+    const resData = await service.GetTransportCompanyInfo(companyId);
+
     const res = await service.EditTransportCompany({
-      TCId: 1,
-      TCTitle: 'میرایش _تست',
+      ...resData.data!,
     });
 
     expect(res.data)
@@ -73,9 +76,11 @@ describe('TransportCompaniesManagementService', () => {
       .toBeDefined();
   });
 
-  it('ActiveTransportCompanySmsService: should return ShortResponse', async () => {
+  // TODO: server return error موجودی کیف پول کافی نیست
+  xit('ActiveTransportCompanySmsService: should return ShortResponse', async () => {
     await devAuth.loginAsAdmin();
-    const res = await service.ActiveTransportCompanySmsService(1);
+    const companyId = 21043;
+    const res = await service.ActiveTransportCompanySmsService(companyId);
 
     expect(res.data)
       .withContext(
@@ -109,7 +114,8 @@ describe('TransportCompaniesManagementService', () => {
 
   it('ChangeTransportCompanyStatus: should return ShortResponse', async () => {
     await devAuth.loginAsAdmin();
-    const res = await service.ChangeTransportCompanyStatus(1, true);
+    const companyId = 21043;
+    const res = await service.ChangeTransportCompanyStatus(companyId, true);
 
     expect(res.data)
       .withContext('ChangeTransportCompanyStatus: should return response data')
