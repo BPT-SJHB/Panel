@@ -413,7 +413,7 @@ export class TariffsFormComponent extends BaseLoading {
 
   async deleteTariffs(tariffs: Tariff[]): Promise<void> {
     this.withLoading(async () => {
-      const response = await this.tariffService.DeleteTariffs(tariffs);
+      const response = await this.tariffService.DeleteTariff(tariffs);
       if (checkAndToastError(response, this.toast)) {
         this.toast.success('موفق', response.data.Message);
         await this.updateTable();
