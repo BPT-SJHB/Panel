@@ -17,15 +17,15 @@ export interface Tariff {
 
 export const zodTariff = z.object({
   LoaderTypeId: z.number(),
-  SourceCityId: z.number().optional(),
-  TargetCityId: z.number().optional(),
-  GoodId: z.number().optional(),
+  SourceCityId: z.number().or(z.undefined()),
+  TargetCityId: z.number().or(z.undefined()),
+  GoodId: z.number().or(z.undefined()),
   LoaderTypeTitle: z.string().optional(),
   SourceCityTitle: z.string().optional(),
   TargetCityTitle: z.string().optional(),
   GoodTitle: z.string().optional(),
-  Tariff: z.number(),
-  BaseTonnag: z.number(),
+  Tariff: z.number().optional(),
+  BaseTonnag: z.number().optional(),
   CalculationReference: z.string().optional(),
-  Active: z.boolean(),
+  Active: z.boolean().optional(),
 });
