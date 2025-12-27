@@ -4,7 +4,7 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 // 🔽 PrimeNG UI Modules
 import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
-import { DialogService } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 // 🔽 App Services & Utilities
 import { UserManagementService } from 'app/services/user-management/user-management.service';
@@ -19,6 +19,7 @@ import { Dialog } from 'primeng/dialog';
 import { BaseLoading } from '../shared/component-base/base-loading';
 import { AppConfirmService } from 'app/services/confirm/confirm.service';
 import { PersonalizePasswordDialogComponent } from 'app/components/shared/dialog/personalize-password-dialog/personalize-password-dialog.component';
+import { takeUntil } from 'rxjs';
 
 // 🔽 Interfaces
 interface UserProfile {
@@ -54,6 +55,7 @@ export class UserProfileFormComponent extends BaseLoading implements OnInit {
   private readonly dialogService = inject(DialogService);
   private readonly userAuth = inject(UserAuthService);
   private readonly confirmService = inject(AppConfirmService);
+  private ref: DynamicDialogRef<NewPasswordDialogComponent> | null = null;
 
   // 🔽 Signal to manage and track user profile state
   readonly userProfile = signal<UserProfile>({
@@ -156,12 +158,16 @@ export class UserProfileFormComponent extends BaseLoading implements OnInit {
     });
     if (!password || !username) return;
     this.isChangePasswordDialogVisible = false;
-    this.dialogService.open(NewPasswordDialogComponent, {
+    this.ref = this.dialogService.open(NewPasswordDialogComponent, {
       header: 'رمز عبور جدید',
       width: '20rem',
       modal: true,
       closable: true,
       inputValues: { username, password },
+    });
+
+    this.ref?.onClose.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.userAuth.logout();
     });
   }
 
