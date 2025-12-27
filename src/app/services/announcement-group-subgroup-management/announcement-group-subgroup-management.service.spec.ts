@@ -76,4 +76,36 @@ fdescribe('AnnouncementGroupSubgroupManagementService', () => {
 
     devAuth.logout();
   });
+
+  it('Testing Announcement Group methods with flow', async () => {
+    await devAuth.loginAsAdmin();
+
+    const resReg = await service.RegisterNewAnnouncementGroup(
+      groupSampleData.AnnouncementTitle!
+    );
+    validateResponse<ShortResponse>(resReg, ApiShortResponseSchema);
+
+    const resGet = await service.GetAnnouncementGroups(
+      groupSampleData.AnnouncementTitle!
+    );
+    validateResponse<AnnouncementGroup[]>(
+      resGet,
+      ApiAnnouncementGroupsResponseSchema
+    );
+
+    groupSampleData.AnnouncementId =
+      resGet.data[resGet.data.length - 1].AnnouncementId;
+
+    const resEdit = await service.EditAnnouncementGroup(
+      groupSampleData.AnnouncementId,
+      groupSampleData.AnnouncementTitle!,
+      groupSampleData.Active!
+    );
+    validateResponse<ShortResponse>(resEdit, ApiShortResponseSchema);
+
+    const resDel = await service.DeleteAnnouncementGroup(
+      groupSampleData.AnnouncementId
+    );
+    validateResponse<ShortResponse>(resDel, ApiShortResponseSchema);
+  });
 });
