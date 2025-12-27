@@ -63,7 +63,7 @@ const ApiRelationOfAnnouncementSubGroupAndProvinceSchema =
     z.array(zodRelationOfAnnouncementSubGroupAndProvince)
   );
 
-fdescribe('AnnouncementGroupSubgroupManagementService', () => {
+describe('AnnouncementGroupSubgroupManagementService', () => {
   let service: AnnouncementGroupSubgroupManagementService;
   let devAuth: DevAuthService;
 
