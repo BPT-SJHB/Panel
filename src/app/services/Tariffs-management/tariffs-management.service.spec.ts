@@ -9,6 +9,16 @@ import {
 import { ApiShortResponseSchema } from 'app/data/model/short-response.model.spec';
 import { ShortResponse } from 'app/data/model/short-response.model';
 import z from 'zod';
+
+const tariffSampleData: Tariff = {
+  LoaderTypeId: 505,
+  SourceCityId: 21310000,
+  TargetCityId: 11320000,
+  GoodId: 2130000,
+  Tariff: 12600000,
+  BaseTonnag: 24,
+  CalculationReference: 'Test',
+};
 describe('TariffsManagementService', () => {
   let service: TariffsManagementService;
   let devAuth: DevAuthService;
