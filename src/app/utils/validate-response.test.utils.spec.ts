@@ -30,3 +30,10 @@ export function validateResponse<ResponseDataType>(
     );
   }
 }
+
+export const createApiResponseSchema = <T>(dataSchema: ZodType<T>) =>
+  z.object({
+    success: z.boolean(),
+    data: dataSchema,
+    error: zodError.optional(),
+  });
