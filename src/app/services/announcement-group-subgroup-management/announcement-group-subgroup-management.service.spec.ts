@@ -48,6 +48,20 @@ const relationOfAnnouncementSubGroupAndProvinceSampleData: relationOfAnnouncemen
     AnnouncementSGTitle:
       'برون شهری آهن آلات انباری                                                                           ',
   };
+
+const ApiAnnouncementGroupsResponseSchema = createApiResponseSchema(
+  z.array(zodAnnouncementGroup)
+);
+
+const ApiRelationOfAnnouncementGroupAndSubGroupSchema = createApiResponseSchema(
+  z.array(zodRelationOfAnnouncementGroupAndSubGroup)
+);
+
+const ApiRelationOfAnnouncementSubGroupAndProvinceSchema =
+  createApiResponseSchema(
+    z.array(zodRelationOfAnnouncementSubGroupAndProvince)
+  );
+
 fdescribe('AnnouncementGroupSubgroupManagementService', () => {
   let service: AnnouncementGroupSubgroupManagementService;
   let devAuth: DevAuthService;
