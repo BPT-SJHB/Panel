@@ -129,7 +129,7 @@ export class AnnouncementGroupSubgroupManagementService {
 
   //#region Announcement SubGroups
 
-  public async GetAnnouncementSupGroups(
+  public async GetAnnouncementSubGroups(
     title: string
   ): Promise<ApiResponse<AnnouncementSubGroup[]>> {
     //#region Consts
