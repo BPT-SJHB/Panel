@@ -232,4 +232,39 @@ describe('ConfigManagementService', () => {
     validateResponse<ShortResponse>(delRes, ApiShortResponseSchema);
   });
 
+  it('Testing LoadViewCondition methods with flow', async () => {
+    await devAuth.loginAsAdmin();
+
+    const regRes = await service.RegisterLoadViewCondition({
+      AnnouncementSGId: LoadViewConditionSampleData.AnnouncementSGId,
+      SequentialTurnId: LoadViewConditionSampleData.SequentialTurnId,
+      TruckNativenessTypeId: LoadViewConditionSampleData.TruckNativenessTypeId,
+      LoadStatusId: LoadViewConditionSampleData.LoadStatusId,
+      RequesterId: LoadViewConditionSampleData.RequesterId,
+    });
+    validateResponse<ShortResponse>(regRes, ApiShortResponseSchema);
+
+    const getRes = await service.GetAllOfLoadViewConditions();
+    validateResponse<LoadViewConditionInfo[]>(
+      getRes,
+      ApiLoadViewConditionInfoSchema
+    );
+
+    const regData = getRes.data[getRes.data.length - 1];
+
+    const editRes = await service.EditLoadViewCondition({
+      LoadViewConditionId: regData.LoadViewConditionId,
+      AnnouncementSGId: regData.AnnouncementSGId,
+      SequentialTurnId: regData.SequentialTurnId,
+      TruckNativenessTypeId: regData.TruckNativenessTypeId,
+      LoadStatusId: regData.LoadStatusId,
+      RequesterId: regData.RequesterId,
+    });
+    validateResponse<ShortResponse>(editRes, ApiShortResponseSchema);
+
+    const delRes = await service.DeleteLoadViewCondition({
+      LoadViewConditionId: regData.LoadViewConditionId,
+    });
+    validateResponse<ShortResponse>(delRes, ApiShortResponseSchema);
+  });
 });
