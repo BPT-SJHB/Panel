@@ -74,6 +74,8 @@ describe('Driver_TruckManagementService', () => {
     devAuth.logout();
   });
 
+  //#region Driver
+
   it('Testing GetDriverInfoForSoftwareUser method', async () => {
     await devAuth.loginAsDriver();
 
@@ -120,4 +122,6 @@ describe('Driver_TruckManagementService', () => {
     );
     validateResponse<ShortResponse>(sendLinkRes, ApiShortResponseSchema);
   });
+
+  //#endregion
 });
