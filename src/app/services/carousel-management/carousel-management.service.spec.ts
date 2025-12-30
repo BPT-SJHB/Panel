@@ -50,4 +50,12 @@ describe('CarouselManagementService', () => {
 
     devAuth.logout();
   });
+
+  it('Testing GetAllCarousels method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.GetAllCarousels();
+
+    validateResponse<CarouselInfo[]>(response, ApiCarouselInfoSchema);
+  });
 });
