@@ -1,15 +1,15 @@
 export interface LoadAnnouncementConfig {
-  COLAId: number; ////
+  COLAId: number;
   COLAName: string;
   COLATitle: string;
-  AnnouncementId: number; //
-  AnnouncementSGId: number; //
+  AnnouncementId: number;
+  AnnouncementSGId: number;
   AnnouncementTitle: string;
   AnnouncementSGTitle: string;
-  COLAIndex: number; ////
+  COLAIndex: number;
   COLAIndexTitle: string;
   Description: string;
-  COLAValue: string; //
+  COLAValue: string;
 }
 
 export type DeleteInfoOfLoadAnnouncementConfig = Pick<
