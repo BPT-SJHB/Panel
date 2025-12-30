@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-import { DevAuthService } from '../dev-auth-service/dev-auth.service';
 import {
   createApiResponseSchema,
   validateResponse,
@@ -11,7 +10,6 @@ const ApiCaptchaSchema = createApiResponseSchema(zodCaptcha);
 
 describe('AnnouncementGroupSubgroupManagementService', () => {
   let service: CaptchaService;
-  let devAuth: DevAuthService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -19,14 +17,9 @@ describe('AnnouncementGroupSubgroupManagementService', () => {
     });
 
     service = TestBed.inject(CaptchaService);
-    devAuth = TestBed.inject(DevAuthService);
-
-    devAuth.logout();
   });
 
   it('Testing Announcement Group methods with flow', async () => {
-    await devAuth.loginAsAdmin();
-
     const response = await service.getCaptcha();
 
     validateResponse<Captcha>(response, ApiCaptchaSchema);
