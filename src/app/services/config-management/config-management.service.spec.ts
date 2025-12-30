@@ -171,4 +171,15 @@ describe('ConfigManagementService', () => {
     validateResponse<ShortResponse>(delRes, ApiShortResponseSchema);
   });
 
+  it('Testing GeneralConfig methods with flow', async () => {
+    await devAuth.loginAsAdmin();
+
+    const getAllRes = await service.GetAllOfGeneralConfig();
+    validateResponse<GeneralConfig[]>(getAllRes, ApiGeneralConfigSchema);
+
+    const regData = getAllRes.data[getAllRes.data.length - 1];
+
+    const editRes = await service.EditGeneralConfig(regData);
+    validateResponse<ShortResponse>(editRes, ApiShortResponseSchema);
+  });
 });
