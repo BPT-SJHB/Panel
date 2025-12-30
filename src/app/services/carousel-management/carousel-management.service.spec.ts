@@ -15,6 +15,15 @@ import { mockCarouselPic } from './mock/carousel-pic.mock';
 import { ShortResponse } from 'app/data/model/short-response.model';
 import { ApiShortResponseSchema } from 'app/data/model/short-response.model.spec';
 import { CarouselPic, zodCarouselPic } from './model/carousel-pic.model';
+
+const ApiCarouselInfoSchema = createApiResponseSchema(z.array(zodCarouselInfo));
+
+const ApiCarouselForViewPicSchema = createApiResponseSchema(
+  z.array(zodCarouselForViewPic)
+);
+
+const ApiCarouselPicSchema = createApiResponseSchema(zodCarouselPic);
+
 const carouselSampleData: CarouselInfo = {
   CId: 0,
   CTitle: 'تست',
