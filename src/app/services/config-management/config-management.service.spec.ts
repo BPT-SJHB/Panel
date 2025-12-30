@@ -267,4 +267,43 @@ describe('ConfigManagementService', () => {
     });
     validateResponse<ShortResponse>(delRes, ApiShortResponseSchema);
   });
+
+  it('Testing LoadAllocationCondition methods with flow', async () => {
+    await devAuth.loginAsAdmin();
+
+    const regRes = await service.RegisterLoadAllocationCondition({
+      AnnouncementSGId: LoadAllocationConditionSampleData.AnnouncementSGId,
+      SequentialTurnId: LoadAllocationConditionSampleData.SequentialTurnId,
+      TruckNativenessTypeId:
+        LoadAllocationConditionSampleData.TruckNativenessTypeId,
+      LoadStatusId: LoadAllocationConditionSampleData.LoadStatusId,
+      RequesterId: LoadAllocationConditionSampleData.RequesterId,
+      TurnStatusId: LoadAllocationConditionSampleData.TurnStatusId,
+    });
+    validateResponse<ShortResponse>(regRes, ApiShortResponseSchema);
+
+    const getRes = await service.GetAllOfLoadAllocationConditions();
+    validateResponse<LoadAllocationConditionInfo[]>(
+      getRes,
+      ApiLoadAllocationConditionInfoSchema
+    );
+
+    const regData = getRes.data[getRes.data.length - 1];
+
+    const editRes = await service.EditLoadAllocationCondition({
+      LoadAllocationConditionId: regData.LoadAllocationConditionId,
+      AnnouncementSGId: regData.AnnouncementSGId,
+      SequentialTurnId: regData.SequentialTurnId,
+      TruckNativenessTypeId: regData.TruckNativenessTypeId,
+      LoadStatusId: regData.LoadStatusId,
+      RequesterId: regData.RequesterId,
+      TurnStatusId: regData.TurnStatusId,
+    });
+    validateResponse<ShortResponse>(editRes, ApiShortResponseSchema);
+
+    const delRes = await service.DeleteLoadAllocationCondition({
+      LoadAllocationConditionId: regData.LoadAllocationConditionId,
+    });
+    validateResponse<ShortResponse>(delRes, ApiShortResponseSchema);
+  });
 });
