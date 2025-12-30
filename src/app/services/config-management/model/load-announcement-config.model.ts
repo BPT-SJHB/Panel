@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 export interface LoadAnnouncementConfig {
   COLAId: number;
   COLAName: string;
@@ -11,6 +13,20 @@ export interface LoadAnnouncementConfig {
   Description: string;
   COLAValue: string;
 }
+
+export const zodLoadAnnouncementConfig = z.object({
+  COLAId: z.number(),
+  COLAName: z.string(),
+  COLATitle: z.string(),
+  AnnouncementId: z.number(),
+  AnnouncementSGId: z.number(),
+  AnnouncementTitle: z.string(),
+  AnnouncementSGTitle: z.string(),
+  COLAIndex: z.number(),
+  COLAIndexTitle: z.string(),
+  Description: z.string(),
+  COLAValue: z.string(),
+});
 
 export type DeleteInfoOfLoadAnnouncementConfig = Pick<
   LoadAnnouncementConfig,
