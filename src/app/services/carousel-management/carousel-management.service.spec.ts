@@ -15,6 +15,18 @@ import { mockCarouselPic } from './mock/carousel-pic.mock';
 import { ShortResponse } from 'app/data/model/short-response.model';
 import { ApiShortResponseSchema } from 'app/data/model/short-response.model.spec';
 import { CarouselPic, zodCarouselPic } from './model/carousel-pic.model';
+const carouselSampleData: CarouselInfo = {
+  CId: 0,
+  CTitle: 'تست',
+  URL: 'Https://ATISMobile.ir                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ',
+  Description: 'تست',
+  DateTimeMilladi: '2025-08-12T00:00:00',
+  ShamsiDate: '1404/05/21',
+  Time: '00:00:00',
+  Active: true,
+  Picture: mockCarouselPic.Picture,
+};
+
 describe('CarouselManagementService', () => {
   let service: CarouselManagementService;
   let devAuth: DevAuthService;
