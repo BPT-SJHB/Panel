@@ -141,4 +141,17 @@ describe('Driver_TruckManagementService', () => {
 
     validateResponse<TruckInfo>(response, ApiTruckInfoSchema);
   });
+
+  it('Testing GetTruckNativeness method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.GetTruckNativeness(
+      TruckInfoSampleData.TruckId
+    );
+    validateResponse<TruckNativenessInfo>(
+      response,
+      ApiTruckNativenessInfoSchema
+    );
+  });
+
 });
