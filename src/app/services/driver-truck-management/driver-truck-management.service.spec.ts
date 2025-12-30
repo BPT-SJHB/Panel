@@ -82,4 +82,14 @@ describe('Driver_TruckManagementService', () => {
     validateResponse<TruckDriverInfo>(response, ApiTruckDriverInfoSchema);
   });
 
+  it('Testing GetDriverInfoFromAPI method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.GetDriverInfoFromAPI(
+      TruckDriverInfoSampleData.NationalCode!
+    );
+
+    validateResponse<TruckDriverInfo>(response, ApiTruckDriverInfoSchema);
+  });
+
 });
