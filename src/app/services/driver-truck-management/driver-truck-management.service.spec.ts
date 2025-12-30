@@ -124,4 +124,12 @@ describe('Driver_TruckManagementService', () => {
   });
 
   //#endregion
+  it('Testing GetTruckInfoForSoftwareUser method', async () => {
+    await devAuth.loginAsDriver();
+
+    const response = await service.GetTruckInfoForSoftwareUser();
+
+    validateResponse<TruckInfo>(response, ApiTruckInfoSchema);
+  });
+
 });
