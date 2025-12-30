@@ -23,6 +23,84 @@ import {
   LoadAllocationConditionInfo,
   zodLoadAllocationConditionInfo,
 } from './model/load-allocation-condition-info.model';
+
+const loadAnnouncementConfigSampleData: LoadAnnouncementConfig = {
+  COLAId: 1,
+  COLAName: 'LoadAnnounceTimeCycle',
+  COLATitle: 'زمانبندی اعلام بار',
+  AnnouncementId: 3,
+  AnnouncementTitle: 'برسام',
+  AnnouncementSGId: 14,
+  AnnouncementSGTitle: 'برون شهری آهن آلات انباری',
+  COLAIndex: 0,
+  COLAIndexTitle: 'ساعات',
+  Description: 'اعلام بار انباری برون شهری',
+  COLAValue: '11:00:00-10:00:00-12:00:00-14:00:00',
+};
+
+const DeviceInfoSampleData: DeviceInfo = {
+  DeviceId: 6,
+  DeviceTitle: 'ورودي تريلي',
+  DeviceLocation: 'ورودي تريلي',
+  Active: true,
+};
+
+const DeviceConfigSampleData: DeviceConfig = {
+  CODId: 1,
+  CODName:
+    'LPRCamera                                                                                           ',
+  CODTitle: 'دوربين پلاک خوان',
+  CODIndex: 1,
+  CODIndexTitle: 'فعال/غيرفعال',
+  DeviceId: 1,
+  DeviceTitle: 'ورودي تريلي',
+  Description: 'فعال يا غيرفعال سازي دوربين پلاک خوان گيت تردد',
+  CODValue: 'HttpS://',
+};
+
+const LoadViewConditionSampleData: LoadViewConditionInfo = {
+  LoadViewConditionId: 10011,
+  AnnouncementId: 2,
+  AnnouncementTitle:
+    'تريلي برون شهري ذوب و سبا                                                                           ',
+  AnnouncementSGId: 7,
+  AnnouncementSGTitle:
+    'برون شهری آهن آلات ذوبی                                                                             ',
+  SequentialTurnId: 5,
+  SequentialTurnTitle:
+    'تريلي  برون شهري - آهن آلات ذوبي صادراتي                                                            ',
+  TruckNativenessTypeId: 2,
+  TruckNativenessTypeTitle: 'غیر بومی',
+  LoadStatusId: 5,
+  LoadStatusTitle:
+    'رسوب شده                                                                                            ',
+  RequesterId: 5,
+  RequesterTitle: 'محل درخواست لیست بار برای راننده',
+};
+
+const LoadAllocationConditionSampleData: LoadAllocationConditionInfo = {
+  LoadAllocationConditionId: 6,
+  AnnouncementId: 2,
+  AnnouncementTitle:
+    'تريلي برون شهري ذوب و سبا                                                                           ',
+  AnnouncementSGId: 7,
+  AnnouncementSGTitle:
+    'برون شهری آهن آلات ذوبی                                                                             ',
+  SequentialTurnId: 2,
+  SequentialTurnTitle:
+    'تريلي برون شهري - آهن آلات انباري و ذوبي ، رول سبا                                                  ',
+  TruckNativenessTypeId: 2,
+  TruckNativenessTypeTitle: 'غیر بومی',
+  LoadStatusId: 5,
+  LoadStatusTitle:
+    'رسوب شده                                                                                            ',
+  RequesterId: 1,
+  RequesterTitle: 'محل درخواست نوبت بلادرنگ',
+  TurnStatusId: 1,
+  TurnStatusTitle:
+    'صادر شده                                                                                            ',
+};
+
 describe('ConfigManagementService', () => {
   let service: ConfigManagementService;
   let devAuth: DevAuthService;
