@@ -74,4 +74,12 @@ describe('Driver_TruckManagementService', () => {
     devAuth.logout();
   });
 
+  it('Testing GetDriverInfoForSoftwareUser method', async () => {
+    await devAuth.loginAsDriver();
+
+    const response = await service.GetDriverInfoForSoftwareUser();
+
+    validateResponse<TruckDriverInfo>(response, ApiTruckDriverInfoSchema);
+  });
+
 });
