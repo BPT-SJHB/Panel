@@ -130,7 +130,7 @@ export class FpcManagementService {
     //#endregion
 
     //#region  Request
-    var response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       APIUsernamePassword
     >(apiUrl, bodyValue, mockAPIUsernamePassword);
@@ -140,8 +140,8 @@ export class FpcManagementService {
     return {
       success: response.success,
       data: {
-        Username: response.data?.UserShenaseh!,
-        Password: response.data?.UserPassword!,
+        Username: response.data?.UserShenaseh ?? '',
+        Password: response.data?.UserPassword ?? '',
       },
       error: response.error,
     };
