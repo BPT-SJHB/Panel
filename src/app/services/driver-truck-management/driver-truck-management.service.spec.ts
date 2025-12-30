@@ -132,4 +132,13 @@ describe('Driver_TruckManagementService', () => {
     validateResponse<TruckInfo>(response, ApiTruckInfoSchema);
   });
 
+  it('Testing GetTruckInfoFromAPI method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.GetTruckInfoFromAPI(
+      TruckInfoSampleData.SmartCardNo!
+    );
+
+    validateResponse<TruckInfo>(response, ApiTruckInfoSchema);
+  });
 });
