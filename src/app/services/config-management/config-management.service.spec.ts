@@ -139,4 +139,36 @@ describe('ConfigManagementService', () => {
 
     devAuth.logout();
   });
+
+  it('Testing LoadAnnouncementConfig methods with flow', async () => {
+    await devAuth.loginAsAdmin();
+
+    const regRes = await service.RegisterLoadAnnouncementConfig(
+      loadAnnouncementConfigSampleData
+    );
+    validateResponse<LoadAnnouncementConfig>(
+      regRes,
+      ApiLoadAnnouncementConfigSchema
+    );
+
+    const getAllRes = await service.GetAllOfLoadAnnouncementConfig();
+    validateResponse<LoadAnnouncementConfig[]>(
+      getAllRes,
+      ApiLoadAnnouncementConfigsSchema
+    );
+
+    const regData = getAllRes.data[getAllRes.data.length - 1];
+
+    const editRes = await service.EditLoadAnnouncementConfig(regData);
+    validateResponse<ShortResponse>(editRes, ApiShortResponseSchema);
+
+    const delRes = await service.DeleteLoadAnnouncementConfig({
+      AnnouncementId: regData.AnnouncementId,
+      AnnouncementSGId: regData.AnnouncementSGId,
+      COLAId: regData.COLAId,
+      COLAIndex: regData.COLAIndex,
+    });
+    validateResponse<ShortResponse>(delRes, ApiShortResponseSchema);
+  });
+
 });
