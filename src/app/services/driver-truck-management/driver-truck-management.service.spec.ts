@@ -92,4 +92,32 @@ describe('Driver_TruckManagementService', () => {
     validateResponse<TruckDriverInfo>(response, ApiTruckDriverInfoSchema);
   });
 
+  it('Testing Driver methods with flow', async () => {
+    await devAuth.loginAsAdmin();
+
+    const regRes = await service.RegisterNew_EditDriverMobileNumber(
+      TruckDriverInfoSampleData.DriverId,
+      TruckDriverInfoSampleData.MobileNumber!
+    );
+    validateResponse<ShortResponse>(regRes, ApiShortResponseSchema);
+
+    const activeRes = await service.ActivateDriverSMS(
+      TruckDriverInfoSampleData.DriverId
+    );
+    validateResponse<ShortResponse>(activeRes, ApiShortResponseSchema);
+
+    // Activation of last request
+    // take 1 min after request finished
+    delay(60000);
+
+    const resetPassRes = await service.ResetDriverPassword(
+      TruckDriverInfoSampleData.DriverId
+    );
+    validateResponse<UsernamePassword>(resetPassRes, ApiUsernamePasswordSchema);
+
+    const sendLinkRes = await service.SendWebsiteLink(
+      TruckDriverInfoSampleData.DriverId
+    );
+    validateResponse<ShortResponse>(sendLinkRes, ApiShortResponseSchema);
+  });
 });
