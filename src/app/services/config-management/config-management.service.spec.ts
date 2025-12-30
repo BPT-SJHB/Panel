@@ -182,4 +182,26 @@ describe('ConfigManagementService', () => {
     const editRes = await service.EditGeneralConfig(regData);
     validateResponse<ShortResponse>(editRes, ApiShortResponseSchema);
   });
+
+  it('Testing Devices methods with flow', async () => {
+    await devAuth.loginAsAdmin();
+
+    const regRes = await service.RegisterDevice({
+      DeviceTitle: DeviceInfoSampleData.DeviceTitle,
+      DeviceLocation: DeviceInfoSampleData.DeviceLocation,
+      Active: DeviceInfoSampleData.Active,
+    });
+    validateResponse<ShortResponse>(regRes, ApiShortResponseSchema);
+
+    const getRes = await service.GetAllOfDevices();
+    validateResponse<DeviceInfo[]>(getRes, ApiDevicesInfoSchema);
+
+    const regData = getRes.data[getRes.data.length - 1];
+
+    const editRes = await service.EditDevice(regData);
+    validateResponse<ShortResponse>(editRes, ApiShortResponseSchema);
+
+    const delRes = await service.DeleteDevice({ DeviceId: regData.DeviceId });
+    validateResponse<ShortResponse>(delRes, ApiShortResponseSchema);
+  });
 });
