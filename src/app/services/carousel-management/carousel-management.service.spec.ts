@@ -58,4 +58,42 @@ describe('CarouselManagementService', () => {
 
     validateResponse<CarouselInfo[]>(response, ApiCarouselInfoSchema);
   });
+
+  it('Testing with flow | Register -> GetAll -> GetPic -> Edit -> ChangeStatus -> Delete', async () => {
+    await devAuth.loginAsAdmin();
+
+    const regRes = await service.RegisterCarousel(
+      carouselSampleData.CTitle,
+      carouselSampleData.URL,
+      carouselSampleData.Description,
+      carouselSampleData.Picture ?? ''
+    );
+    validateResponse<ShortResponse>(regRes, ApiShortResponseSchema);
+
+    const getAllRes = await service.GetAllActiveCarousels();
+    validateResponse<CarouselInfo[]>(getAllRes, ApiCarouselInfoSchema);
+
+    carouselSampleData.CId = getAllRes.data[getAllRes.data.length - 1].CId;
+
+    const getPicRes = await service.GetCarouselPic(carouselSampleData.CId);
+    validateResponse<CarouselPic>(getPicRes, ApiCarouselPicSchema);
+
+    const editRes = await service.EditCarousel(
+      carouselSampleData.CId,
+      carouselSampleData.CTitle,
+      carouselSampleData.URL,
+      carouselSampleData.Description,
+      carouselSampleData.Picture ?? ''
+    );
+    validateResponse<ShortResponse>(editRes, ApiShortResponseSchema);
+
+    const changeStatRes = await service.ChangeCarouselStatus(
+      carouselSampleData.CId,
+      carouselSampleData.Active
+    );
+    validateResponse<ShortResponse>(changeStatRes, ApiShortResponseSchema);
+
+    const delRes = await service.DeleteCarousel(carouselSampleData.CId);
+    validateResponse<ShortResponse>(delRes, ApiShortResponseSchema);
+  });
 });
