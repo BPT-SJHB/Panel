@@ -25,6 +25,25 @@ import {
   zodTruckNativenessType,
 } from './model/truck-nativeness-info.model';
 import z from 'zod';
+
+const TruckDriverInfoSampleData: TruckDriverInfo = {
+  DriverId: 1,
+  NameFamily: ';محمد;عباسي',
+  NationalCode: '5759871382',
+  MobileNumber: '09131210201',
+  FatherName: 'قياقلي',
+  DrivingLicenseNo: '4010300402',
+  Address: '',
+  SmartCardNo: '1228050',
+};
+
+const TruckInfoSampleData: TruckInfo = {
+  TruckId: 5,
+  LoaderTypeId: 605,
+  Pelak: '673ع32',
+  Serial: '52',
+  SmartCardNo: '2305365',
+};
 describe('Driver_TruckManagementService', () => {
   let service: Driver_TruckManagementService;
   let devAuth: DevAuthService;
