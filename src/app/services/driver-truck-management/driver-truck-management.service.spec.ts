@@ -124,6 +124,9 @@ describe('Driver_TruckManagementService', () => {
   });
 
   //#endregion
+
+  //#region Truck
+
   it('Testing GetTruckInfoForSoftwareUser method', async () => {
     await devAuth.loginAsDriver();
 
@@ -178,5 +181,7 @@ describe('Driver_TruckManagementService', () => {
       ApiTruckNativenessInfoSchema
     );
   });
+
+  //#endregion
 
 });
