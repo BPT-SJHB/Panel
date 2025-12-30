@@ -101,6 +101,30 @@ const LoadAllocationConditionSampleData: LoadAllocationConditionInfo = {
     'صادر شده                                                                                            ',
 };
 
+const ApiLoadAnnouncementConfigSchema = createApiResponseSchema(
+  zodLoadAnnouncementConfig
+);
+
+const ApiLoadAnnouncementConfigsSchema = createApiResponseSchema(
+  z.array(zodLoadAnnouncementConfig)
+);
+
+const ApiGeneralConfigSchema = createApiResponseSchema(
+  z.array(zodGeneralConfig)
+);
+
+const ApiLoadViewConditionInfoSchema = createApiResponseSchema(
+  z.array(zodLoadViewConditionInfo)
+);
+
+const ApiDeviceConfigSchema = createApiResponseSchema(z.array(zodDeviceConfig));
+
+const ApiDevicesInfoSchema = createApiResponseSchema(z.array(zodDeviceInfo));
+
+const ApiLoadAllocationConditionInfoSchema = createApiResponseSchema(
+  z.array(zodLoadAllocationConditionInfo)
+);
+
 describe('ConfigManagementService', () => {
   let service: ConfigManagementService;
   let devAuth: DevAuthService;
