@@ -154,4 +154,14 @@ describe('Driver_TruckManagementService', () => {
     );
   });
 
+  it('Testing GetTruckNativenessTypes method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.GetTruckNativenessTypes();
+
+    validateResponse<TruckNativenessType[]>(
+      response,
+      ApiTruckNativenessTypeSchema
+    );
+  });
 });
