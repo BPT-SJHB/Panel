@@ -164,4 +164,19 @@ describe('Driver_TruckManagementService', () => {
       ApiTruckNativenessTypeSchema
     );
   });
+
+  it('Testing ChangeTruckNativeness method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.ChangeTruckNativeness(
+      TruckInfoSampleData.TruckId,
+      '1500/12/27'
+    );
+
+    validateResponse<TruckNativenessInfo>(
+      response,
+      ApiTruckNativenessInfoSchema
+    );
+  });
+
 });
