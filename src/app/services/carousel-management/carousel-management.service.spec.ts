@@ -96,4 +96,15 @@ describe('CarouselManagementService', () => {
     const delRes = await service.DeleteCarousel(carouselSampleData.CId);
     validateResponse<ShortResponse>(delRes, ApiShortResponseSchema);
   });
+
+  it('Testing GetCarouselsForView method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.GetCarouselsForView();
+
+    validateResponse<CarouselForViewPic[]>(
+      response,
+      ApiCarouselForViewPicSchema
+    );
+  });
 });
