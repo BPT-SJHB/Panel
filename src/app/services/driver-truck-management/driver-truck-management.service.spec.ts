@@ -44,6 +44,21 @@ const TruckInfoSampleData: TruckInfo = {
   Serial: '52',
   SmartCardNo: '2305365',
 };
+
+const ApiTruckDriverInfoSchema = createApiResponseSchema(zodTruckDriverInfo);
+
+const ApiUsernamePasswordSchema = createApiResponseSchema(zodUsernamePassword);
+
+const ApiTruckInfoSchema = createApiResponseSchema(zodTruckInfo);
+
+const ApiTruckNativenessInfoSchema = createApiResponseSchema(
+  zodTruckNativenessInfo
+);
+
+const ApiTruckNativenessTypeSchema = createApiResponseSchema(
+  z.array(zodTruckNativenessType)
+);
+
 describe('Driver_TruckManagementService', () => {
   let service: Driver_TruckManagementService;
   let devAuth: DevAuthService;
@@ -58,4 +73,5 @@ describe('Driver_TruckManagementService', () => {
 
     devAuth.logout();
   });
+
 });
