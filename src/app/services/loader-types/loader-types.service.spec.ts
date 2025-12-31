@@ -59,4 +59,13 @@ describe('LoaderTypesService', () => {
 
     devAuth.logout();
   });
+  it('Testing GetLoaderTypesInfo method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.GetLoaderTypesInfo(
+      loaderTypeSampleData.LoaderTypeTitle!
+    );
+
+    validateResponse<LoaderType[]>(response, ApiLoaderTypesSchema);
+  });
 });
