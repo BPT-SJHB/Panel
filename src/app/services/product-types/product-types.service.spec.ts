@@ -61,4 +61,14 @@ describe('ProductTypesService', () => {
     validateResponse<ShortResponse>(response, ApiShortResponseSchema);
   });
 
+  it('Testing ChangeProductStatus method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.ChangeProductStatus(
+      productTypeSampleData.Products![0].ProductId,
+      true
+    );
+
+    validateResponse<ShortResponse>(response, ApiShortResponseSchema);
+  });
 });
