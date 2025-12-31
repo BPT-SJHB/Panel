@@ -9,6 +9,9 @@ import { ProductType, zodProductType } from 'app/data/model/product-type.model';
 import z from 'zod';
 import { ShortResponse } from 'app/data/model/short-response.model';
 import { ApiShortResponseSchema } from 'app/data/model/short-response.model.spec';
+
+const ApiProductTypesSchema = createApiResponseSchema(z.array(zodProductType));
+
 describe('ProductTypesService', () => {
   let service: ProductTypesService;
   let devAuth: DevAuthService;
