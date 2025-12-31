@@ -59,6 +59,9 @@ describe('LoaderTypesService', () => {
 
     devAuth.logout();
   });
+
+  //#region LoaderTypes
+
   it('Testing GetLoaderTypesInfo method', async () => {
     await devAuth.loginAsAdmin();
 
@@ -90,4 +93,7 @@ describe('LoaderTypesService', () => {
     );
     validateResponse<ShortResponse>(reActiveRes, ApiShortResponseSchema);
   });
+
+  //#endregion
+
 });
