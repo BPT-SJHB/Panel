@@ -12,6 +12,19 @@ import { ApiShortResponseSchema } from 'app/data/model/short-response.model.spec
 
 const ApiProductTypesSchema = createApiResponseSchema(z.array(zodProductType));
 
+const productTypeSampleData: ProductType = {
+  ProductTypeId: 1001,
+  ProductTypeTitle: 'آهن آلات',
+  ProductTypeActive: true,
+  Products: [
+    {
+      ProductId: 2650000,
+      ProductTitle: 'اكسيد آهن',
+      ProductActive: false,
+    },
+  ],
+};
+
 describe('ProductTypesService', () => {
   let service: ProductTypesService;
   let devAuth: DevAuthService;
