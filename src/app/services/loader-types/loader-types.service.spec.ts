@@ -21,6 +21,30 @@ const ApiLoaderTypeRelationsToAnnouncementSubGroups = createApiResponseSchema(
   z.array(zodLoaderTypeToAnnouncementSubGroupRelation)
 );
 
+const loaderTypeSampleData: LoaderType = {
+  LoaderTypeId: 505,
+  LoaderTypeTitle:
+    'کفی 18 چرخ                                                                                          ',
+  LoaderTypeOrganizationId: 505,
+  LoaderTypeFixStatusId: 2,
+  LoaderTypeFixStatusTitle:
+    'بارگير غير ثابت                                                                                     ',
+  Active: true,
+};
+
+const loaderTypeToAnnouncementSubGroupRelationSampleData: LoaderTypeToAnnouncementSubGroupRelation =
+  {
+    LoaderTypeId: 505,
+    LoaderTypeTitle:
+      'کفی 18 چرخ                                                                                          ',
+    AnnouncementSGId: 7,
+    AnnouncementSGTitle:
+      'برون شهری آهن آلات ذوبی                                                                             ',
+    AnnouncementId: 2,
+    AnnouncementTitle:
+      'تريلي برون شهري ذوب و سبا                                                                           ',
+  };
+
 describe('LoaderTypesService', () => {
   let service: LoaderTypesService;
   let devAuth: DevAuthService;
