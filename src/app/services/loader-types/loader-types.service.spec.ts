@@ -77,4 +77,17 @@ describe('LoaderTypesService', () => {
     validateResponse<LoaderType>(response, ApiLoaderTypeSchema);
   });
 
+  it('Testing ChangeLoaderTypeStatus method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const deActiveRes = await service.ChangeLoaderTypeStatus(
+      loaderTypeSampleData.LoaderTypeId
+    );
+    validateResponse<ShortResponse>(deActiveRes, ApiShortResponseSchema);
+
+    const reActiveRes = await service.ChangeLoaderTypeStatus(
+      loaderTypeSampleData.LoaderTypeId
+    );
+    validateResponse<ShortResponse>(reActiveRes, ApiShortResponseSchema);
+  });
 });
