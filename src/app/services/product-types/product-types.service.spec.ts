@@ -50,4 +50,15 @@ describe('ProductTypesService', () => {
     validateResponse<ProductType[]>(response, ApiProductTypesSchema);
   });
 
+  it('Testing ChangeProductTypeStatus method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.ChangeProductTypeStatus(
+      productTypeSampleData.ProductTypeId,
+      true
+    );
+
+    validateResponse<ShortResponse>(response, ApiShortResponseSchema);
+  });
+
 });
