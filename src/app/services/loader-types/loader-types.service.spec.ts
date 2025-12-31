@@ -96,6 +96,8 @@ describe('LoaderTypesService', () => {
 
   //#endregion
 
+  //#region RelationToAnnouncementSubGroups
+
   it('Testing RelationToAnnouncementSubGroups methods with flow', async () => {
     await devAuth.loginAsAdmin();
 
@@ -122,4 +124,6 @@ describe('LoaderTypesService', () => {
     });
     validateResponse<ShortResponse>(delRes, ApiShortResponseSchema);
   });
+
+  //#endregion
 });
