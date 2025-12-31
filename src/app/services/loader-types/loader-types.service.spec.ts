@@ -14,6 +14,13 @@ import {
   zodLoaderTypeToAnnouncementSubGroupRelation,
 } from './model/loader-type-announcement-sub-groups-relation.model';
 
+const ApiLoaderTypesSchema = createApiResponseSchema(z.array(zodLoaderType));
+const ApiLoaderTypeSchema = createApiResponseSchema(zodLoaderType);
+
+const ApiLoaderTypeRelationsToAnnouncementSubGroups = createApiResponseSchema(
+  z.array(zodLoaderTypeToAnnouncementSubGroupRelation)
+);
+
 describe('LoaderTypesService', () => {
   let service: LoaderTypesService;
   let devAuth: DevAuthService;
