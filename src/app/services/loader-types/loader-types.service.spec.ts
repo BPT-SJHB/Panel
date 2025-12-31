@@ -68,4 +68,13 @@ describe('LoaderTypesService', () => {
 
     validateResponse<LoaderType[]>(response, ApiLoaderTypesSchema);
   });
+
+  it('Testing GetLoaderTypeInfoForSoftwareUser method', async () => {
+    await devAuth.loginAsDriver();
+
+    const response = await service.GetLoaderTypeInfoForSoftwareUser();
+
+    validateResponse<LoaderType>(response, ApiLoaderTypeSchema);
+  });
+
 });
