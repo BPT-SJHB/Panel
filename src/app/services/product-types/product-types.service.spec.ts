@@ -39,4 +39,15 @@ describe('ProductTypesService', () => {
 
     devAuth.logout();
   });
+
+  it('Testing GetProductsInfo method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.GetProductsInfo(
+      productTypeSampleData.ProductTypeTitle!
+    );
+
+    validateResponse<ProductType[]>(response, ApiProductTypesSchema);
+  });
+
 });
