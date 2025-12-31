@@ -96,4 +96,30 @@ describe('LoaderTypesService', () => {
 
   //#endregion
 
+  it('Testing RelationToAnnouncementSubGroups methods with flow', async () => {
+    await devAuth.loginAsAdmin();
+
+    const regRes = await service.RegisterRelationToAnnouncementSubGroup({
+      LoaderTypeId:
+        loaderTypeToAnnouncementSubGroupRelationSampleData.LoaderTypeId,
+      AnnouncementSGId:
+        loaderTypeToAnnouncementSubGroupRelationSampleData.AnnouncementSGId,
+    });
+    validateResponse<ShortResponse>(regRes, ApiShortResponseSchema);
+
+    const getAllRes =
+      await service.GetLoaderTypeRelationsToAnnouncementSubGroups();
+    validateResponse<LoaderTypeToAnnouncementSubGroupRelation[]>(
+      getAllRes,
+      ApiLoaderTypeRelationsToAnnouncementSubGroups
+    );
+
+    const delRes = await service.DeleteRelationToAnnouncementSubGroup({
+      LoaderTypeId:
+        loaderTypeToAnnouncementSubGroupRelationSampleData.LoaderTypeId,
+      AnnouncementSGId:
+        loaderTypeToAnnouncementSubGroupRelationSampleData.AnnouncementSGId,
+    });
+    validateResponse<ShortResponse>(delRes, ApiShortResponseSchema);
+  });
 });
