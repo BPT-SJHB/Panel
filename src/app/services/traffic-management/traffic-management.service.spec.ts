@@ -177,16 +177,20 @@ describe('TrafficManagementService', () => {
     }
   });
 
-  // TODO: Fix API: the server returns the error message 'کیف پول یافت نشد'
-  xit('RegisterTraffic: should return TrafficInfo', async () => {
+  it('Testing TrafficRecords methods with flow', async () => {
     await devAuth.loginAsAdmin();
-    const res = await service.RegisterTraffic(1, '123', 'image');
 
-    console.log(res.error);
+    const regRes = await service.RegisterTraffic(
+      registerTrafficRecordSampleData.trafficGateId,
+      registerTrafficRecordSampleData.trafficCardNumber,
+      registerTrafficRecordSampleData.trafficPicture
+    );
+    validateResponse<TrafficInfo>(regRes, ApiTrafficInfoSchema);
 
-    expect(res.data)
-      .withContext('RegisterTraffic: should return traffic info')
-      .toBeDefined();
+    const getRes = await service.GetTrafficRecords(
+      registerTrafficRecordSampleData.trafficCardId
+    );
+    validateResponse<TrafficReportInfo[]>(getRes, ApiTrafficReportInfoSchema);
   });
 });
 
