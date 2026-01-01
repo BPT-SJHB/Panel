@@ -28,6 +28,34 @@ import {
   zodTrafficReportInfo,
 } from './model/traffic-report-info.model';
 
+const trafficCardTypeSampleData: TrafficCardType = {
+  TrafficCardTypeId: 2,
+  TrafficCardTypeTitle:
+    'تریلی                                                                                               ',
+  Active: true,
+};
+
+const trafficCardInfoSampleData = {
+  trafficCardNumber: '0000090BaK',
+  trafficCardTypeId: 1,
+  trafficCardTempTypeId: 1,
+};
+
+const trafficCardTypeCostSampleData: TrafficCardTypeCost = {
+  TrafficCardTypeId: 1,
+  EntryBaseCost: 100000,
+  NoCostStoppageDuration: 24,
+  ExcessStoppageDuration: 24,
+  ExcessStoppageCost: 50000,
+};
+
+const registerTrafficRecordSampleData = {
+  trafficGateId: 1,
+  trafficCardNumber: '0000090BaK',
+  trafficPicture: '',
+  trafficCardId: 1,
+};
+
 describe('TrafficManagementService', () => {
   let service: TrafficManagementService;
   let devAuth: DevAuthService;
