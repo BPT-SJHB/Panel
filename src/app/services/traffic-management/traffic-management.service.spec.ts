@@ -4,6 +4,29 @@ import { APICommunicationManagementService } from '../api-communication-manageme
 import { UserAuthService } from '../user-auth-service/user-auth.service';
 import { ShortResponse } from 'app/data/model/short-response.model';
 import { DevAuthService } from '../dev-auth-service/dev-auth.service';
+import {
+  TrafficCardType,
+  zodTrafficCardType,
+} from './model/traffic-card-type.model';
+import {
+  createApiResponseSchema,
+  validateResponse,
+} from 'app/utils/validate-response.test.utils.spec';
+import { z } from 'zod';
+import { ApiShortResponseSchema } from 'app/data/model/short-response.model.spec';
+import {
+  TrafficCardTempType,
+  zodTrafficCardTempType,
+} from './model/traffic-card-temp-type.model';
+import {
+  TrafficCardTypeCost,
+  zodTrafficCardTypeCost,
+} from './model/traffic-card-type-cost.model';
+import { TrafficInfo, zodTrafficInfo } from './model/traffic-info.model';
+import {
+  TrafficReportInfo,
+  zodTrafficReportInfo,
+} from './model/traffic-report-info.model';
 
 describe('TrafficManagementService', () => {
   let service: TrafficManagementService;
