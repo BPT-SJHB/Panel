@@ -123,17 +123,17 @@ describe('ReportsManagementService', () => {
     );
   });
 
-  // TODO: Fix Data input
-  it('GetLoadPermissionsForDriver: should return driver load permissions', async () => {
+  it('Testing GetLoadPermissionsForDriver method', async () => {
     await devAuth.loginAsDriver();
 
-    const groupId = 1;
-    const subGroupId = 1;
+    const response = await service.GetLoadPermissionsForDriver(
+      announcementGroupAndSubGroupIDsampleData.announcementGroupId,
+      announcementGroupAndSubGroupIDsampleData.announcementSubGroupId
+    );
 
-    const res = await service.GetLoadPermissionsForDriver(groupId, subGroupId);
-    expect(res.data).toEqual(jasmine.any(Array));
-    res.data?.forEach((item: LoadPermissionForDriver) =>
-      expect(item).toEqual(jasmine.any(Object))
+    validateResponse<LoadPermissionForDriver[]>(
+      response,
+      ApiLoadPermissionsForDriver
     );
   });
 });
