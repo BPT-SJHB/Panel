@@ -110,68 +110,43 @@ describe('SequentialTurnManagementService', () => {
     validateResponse<ShortResponse>(delRes, ApiShortResponseSchema);
   });
 
-  it('GetRelationOfSequentialTurnToLoaderTypes should return relations', async () => {
+  it('Testing SequentialTurn to LoaderType relations methods with flow', async () => {
     await devAuth.loginAsAdmin();
 
-    const sequentialTurnId = 1;
+    const regRes =
+      await service.RegisterNewRelationOfSequentialTurnToLoaderType(
+        sequentialTurnToLoaderTypesRelationSampleData.SeqTurnId,
+        sequentialTurnToLoaderTypesRelationSampleData.LoaderTypes[0]
+          .LoaderTypeId
+      );
+    validateResponse<ShortResponse>(regRes, ApiShortResponseSchema);
 
-    const res =
-      await service.GetRelationOfSequentialTurnToLoaderTypes(sequentialTurnId);
-
-    expect(res.data).toEqual(jasmine.any(Array));
-  });
-
-  it('SequentialTurn-LoaderType relation workflow: create if not exists, get, delete', async () => {
-    await devAuth.loginAsAdmin();
-
-    const sequentialTurnId = 8;
-    const loaderTypeId = 101;
-
-    // check exists
-    const existing =
-      await service.GetRelationOfSequentialTurnToLoaderTypes(sequentialTurnId);
-
-    const exists =
-      existing.data &&
-      existing.data.length > 0 &&
-      existing.data[0].LoaderTypes.some((l) => l.LoaderTypeId === loaderTypeId);
-
-    if (!exists) {
-      // create new one
-      const createRes =
-        await service.RegisterNewRelationOfSequentialTurnToLoaderType(
-          sequentialTurnId,
-          loaderTypeId
-        );
-      expect(createRes.data)
-        .withContext('RegisterNewRelationOfSequentialTurnToLoaderType')
-        .toEqual(jasmine.any(Object));
-    }
-
-    // get id of that
-    const getRes =
-      await service.GetRelationOfSequentialTurnToLoaderTypes(sequentialTurnId);
-    expect(getRes.data)
-      .withContext('GetRelationOfSequentialTurnToLoaderTypes')
-      .toEqual(jasmine.any(Array));
-
-    const checkItemExists =
-      getRes.data &&
-      getRes.data.length > 0 &&
-      getRes.data[0].LoaderTypes.some((l) => l.LoaderTypeId === loaderTypeId);
-
-    expect(checkItemExists)
-      .withContext('Check if loader type relation exists after registration')
-      .toBeTrue();
-
-    // delete
-    const deleteRes = await service.DeleteRelationOfSequentialTurnToLoaderType(
-      sequentialTurnId,
-      loaderTypeId
+    const getIdWithLoaderTypeRes =
+      await service.GetSequentialTurnWithLoaderType(
+        sequentialTurnToLoaderTypesRelationSampleData.LoaderTypes[0]
+          .LoaderTypeId
+      );
+    validateResponse<SequentialTurn[]>(
+      getIdWithLoaderTypeRes,
+      ApiSequentialTurnsSchema
     );
-    expect(deleteRes.data)
-      .withContext('DeleteRelationOfSequentialTurnToLoaderType')
-      .toEqual(jasmine.any(Object));
+
+    const getIdWithSequentialTurnRes =
+      await service.GetRelationOfSequentialTurnToLoaderTypes(
+        sequentialTurnToLoaderTypesRelationSampleData.SeqTurnId
+      );
+    validateResponse<RelationOfSequentialTurnToLoaderType[]>(
+      getIdWithSequentialTurnRes,
+      ApiRelationOfSequentialTurnToLoaderTypeSchema
+    );
+
+    const delRelationRes =
+      await service.DeleteRelationOfSequentialTurnToLoaderType(
+        sequentialTurnToLoaderTypesRelationSampleData.SeqTurnId,
+        sequentialTurnToLoaderTypesRelationSampleData.LoaderTypes[0]
+          .LoaderTypeId
+      );
+    validateResponse<ShortResponse>(delRelationRes, ApiShortResponseSchema);
   });
 
   it('SequentialTurn-AnnouncementSubGroup relation workflow: create if not exists, get, delete', async () => {
