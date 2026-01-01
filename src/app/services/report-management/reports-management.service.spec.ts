@@ -102,15 +102,14 @@ describe('ReportsManagementService', () => {
     validateResponse<LoadAccounting[]>(response, ApiLoadAccountingSchema);
   });
 
-  it('GetLoadPermissions: should return load permissions', async () => {
+  it('Testing GetLoadPermissions method', async () => {
     await devAuth.loginAsAdmin();
-    const loadId = 6032;
 
-    const res = await service.GetLoadPermissions(loadId);
-    expect(res.data).toEqual(jasmine.any(Array));
-    res.data?.forEach((item: LoadPermission) =>
-      expect(item).toEqual(jasmine.any(Object))
+    const response = await service.GetLoadPermissions(
+      loadPermissionSampleData.LoadId
     );
+
+    validateResponse<LoadPermission[]>(response, ApiLoadPermissionsSchema);
   });
 
   it('GetLatestLoadPermissionsForCompany: should return latest company load permissions', async () => {
