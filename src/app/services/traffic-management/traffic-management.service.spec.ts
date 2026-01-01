@@ -114,17 +114,15 @@ describe('TrafficManagementService', () => {
     validateResponse<TrafficCardType[]>(response, ApiTrafficCardTypesSchema);
   });
 
-  it('RegisterTrafficCard: should return ShortResponse', async () => {
+  it('Testing GetTrafficCardTempTypes method', async () => {
     await devAuth.loginAsAdmin();
-    const res = await service.RegisterTrafficCard(generateCardNumber(), 1, 1);
 
-    expect(res.data)
-      .withContext('RegisterTrafficCard: should return response data')
-      .toBeDefined();
+    const response = await service.GetTrafficCardTempTypes();
 
-    expect((res.data as ShortResponse)?.Message)
-      .withContext('RegisterTrafficCard: should return success message')
-      .toBeDefined();
+    validateResponse<TrafficCardTempType[]>(
+      response,
+      ApiTrafficCardTempTypesSchema
+    );
   });
 
   it('GetTrafficCosts: should return array', async () => {
