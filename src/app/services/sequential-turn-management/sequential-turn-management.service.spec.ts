@@ -52,6 +52,19 @@ const sequentialTurnToAnnouncementSubGroupRelationSampleData: RelationOfSequenti
     ],
   };
 
+const ApiSequentialTurnsSchema = createApiResponseSchema(
+  z.array(zodSequentialTurn)
+);
+
+const ApiRelationOfSequentialTurnToLoaderTypeSchema = createApiResponseSchema(
+  z.array(zodRelationOfSequentialTurnToLoaderType)
+);
+
+const ApiRelationOfSequentialTurnToAnnouncementSubGroupSchema =
+  createApiResponseSchema(
+    z.array(zodRelationOfSequentialTurnToAnnouncementSubGroup)
+  );
+
 describe('SequentialTurnManagementService', () => {
   let service: SequentialTurnManagementService;
   let devAuth: DevAuthService;
