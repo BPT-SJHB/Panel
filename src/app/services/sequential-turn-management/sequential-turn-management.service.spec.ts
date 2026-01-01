@@ -21,6 +21,37 @@ import {
   zodRelationOfSequentialTurnToAnnouncementSubGroup,
 } from './model/relation-of-sequentialTurn-to-announcementSubGroup.model';
 
+const sequentialTurnSampleData: SequentialTurn = {
+  SeqTurnId: 5,
+  SeqTurnTitle: 'تریلی  برون شهری - آهن آلات ذوبی صادراتی',
+  SeqTurnKeyWord: 'X',
+  Active: true,
+};
+
+const sequentialTurnToLoaderTypesRelationSampleData: RelationOfSequentialTurnToLoaderType =
+  {
+    SeqTurnId: 3,
+    SeqTurnTitle: 'تریلی شهری - آهن آلات انباری و ذوبی ، رول سبا',
+    LoaderTypes: [
+      {
+        LoaderTypeId: 505,
+        LoaderTypeTitle: 'کفی 18 چرخ',
+      },
+    ],
+  };
+
+const sequentialTurnToAnnouncementSubGroupRelationSampleData: RelationOfSequentialTurnToAnnouncementSubGroup =
+  {
+    SeqTurnId: 8,
+    SeqTurnTitle: 'مرتضي شاهمرادي',
+    AnnouncementSubGroups: [
+      {
+        AnnouncementSGId: 15,
+        AnnouncementSGTitle: 'شهری آهن آلات انباری',
+      },
+    ],
+  };
+
 describe('SequentialTurnManagementService', () => {
   let service: SequentialTurnManagementService;
   let devAuth: DevAuthService;
