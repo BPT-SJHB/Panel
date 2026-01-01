@@ -30,6 +30,17 @@ const tptParamSampleData: TPTParamRelationToAnnouncementGroupAndSubGroup = {
   Active: true,
 };
 
+const ApiTPTParamsInfoSchema = createApiResponseSchema(
+  z.array(zodTPTParamInfo)
+);
+
+const ApiTPTParamInfoSchema = createApiResponseSchema(zodTPTParamInfo);
+
+const ApiTPTParamRelationsToAnnouncementGroupAndSubGroup =
+  createApiResponseSchema(
+    z.array(zodTPTParamRelationToAnnouncementGroupAndSubGroup)
+  );
+
 describe('TPTParamsManagementService (integration)', () => {
   let service: TPTParamsManagementService;
   let devAuth: DevAuthService;
