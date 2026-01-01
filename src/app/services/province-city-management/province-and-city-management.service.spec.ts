@@ -71,14 +71,14 @@ describe('ProvinceAndCityManagementService', () => {
     validateResponse<ShortResponse>(response, ApiShortResponseSchema);
   });
 
-  it('ChangeCityStatus: should change city status', async () => {
+  it('Testing ChangeCityStatus method', async () => {
     await devAuth.loginAsAdmin();
 
-    const cityCode = 11320000;
-    const status = false;
-    const res = await service.ChangeCityStatus(cityCode, status);
+    const response = await service.ChangeCityStatus(
+      provinceSampleData.Cities![0].CityCode,
+      provinceSampleData.Cities![0].CityActive!
+    );
 
-    expect(res.data).toEqual(jasmine.any(Object));
-    expect(res.data?.Message).toBeDefined();
+    validateResponse<ShortResponse>(response, ApiShortResponseSchema);
   });
 });
