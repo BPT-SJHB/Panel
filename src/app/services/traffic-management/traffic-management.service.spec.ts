@@ -56,6 +56,24 @@ const registerTrafficRecordSampleData = {
   trafficCardId: 1,
 };
 
+const ApiTrafficCardTypesSchema = createApiResponseSchema(
+  z.array(zodTrafficCardType)
+);
+
+const ApiTrafficCardTempTypesSchema = createApiResponseSchema(
+  z.array(zodTrafficCardTempType)
+);
+
+const ApiTrafficCardTypeCostSchema = createApiResponseSchema(
+  z.array(zodTrafficCardTypeCost)
+);
+
+const ApiTrafficInfoSchema = createApiResponseSchema(zodTrafficInfo);
+
+const ApiTrafficReportInfoSchema = createApiResponseSchema(
+  z.array(zodTrafficReportInfo)
+);
+
 describe('TrafficManagementService', () => {
   let service: TrafficManagementService;
   let devAuth: DevAuthService;
