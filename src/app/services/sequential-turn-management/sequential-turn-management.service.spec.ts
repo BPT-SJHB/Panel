@@ -1,6 +1,25 @@
 import { TestBed } from '@angular/core/testing';
 import { SequentialTurnManagementService } from './sequential-turn-management.service';
 import { DevAuthService } from '../dev-auth-service/dev-auth.service';
+import {
+  createApiResponseSchema,
+  validateResponse,
+} from 'app/utils/validate-response.test.utils.spec';
+import { ShortResponse } from 'app/data/model/short-response.model';
+import { ApiShortResponseSchema } from 'app/data/model/short-response.model.spec';
+import {
+  SequentialTurn,
+  zodSequentialTurn,
+} from './model/sequential-turn.model';
+import z from 'zod';
+import {
+  RelationOfSequentialTurnToLoaderType,
+  zodRelationOfSequentialTurnToLoaderType,
+} from './model/relation-of-sequentialTurn-to-loaderType.model';
+import {
+  RelationOfSequentialTurnToAnnouncementSubGroup,
+  zodRelationOfSequentialTurnToAnnouncementSubGroup,
+} from './model/relation-of-sequentialTurn-to-announcementSubGroup.model';
 
 describe('SequentialTurnManagementService', () => {
   let service: SequentialTurnManagementService;
