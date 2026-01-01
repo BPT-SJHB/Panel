@@ -16,6 +16,20 @@ import {
 import { z } from 'zod';
 import { ApiShortResponseSchema } from 'app/data/model/short-response.model.spec';
 
+const tptParamSampleData: TPTParamRelationToAnnouncementGroupAndSubGroup = {
+  TPTPDId: 157,
+  TPTPId: 8,
+  TPTPTitle: 'پروژه',
+  AnnouncementId: 2,
+  AnnouncementTitle:
+    'تريلي برون شهري ذوب و سبا                                                                           ',
+  AnnouncementSGId: 7,
+  AnnouncementSGTitle:
+    'برون شهری آهن آلات ذوبی                                                                             ',
+  Cost: 7000000,
+  Active: true,
+};
+
 describe('TPTParamsManagementService (integration)', () => {
   let service: TPTParamsManagementService;
   let devAuth: DevAuthService;
