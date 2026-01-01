@@ -149,65 +149,32 @@ describe('SequentialTurnManagementService', () => {
     validateResponse<ShortResponse>(delRelationRes, ApiShortResponseSchema);
   });
 
-  it('SequentialTurn-AnnouncementSubGroup relation workflow: create if not exists, get, delete', async () => {
+  it('Testing SequentialTurn to AnnouncementSubGroup relations with flow', async () => {
     await devAuth.loginAsAdmin();
 
-    const sequentialTurnId = 1;
-    const announcementSubGroupId = 3;
-
-    // check exists
-    const existing =
-      await service.GetRelationOfSequentialTurnToAnnouncementSubGroups(
-        sequentialTurnId
+    const regRes =
+      await service.RegisterNewRelationOfSequentialTurnToAnnouncementSubGroup(
+        sequentialTurnToAnnouncementSubGroupRelationSampleData.SeqTurnId,
+        sequentialTurnToAnnouncementSubGroupRelationSampleData
+          .AnnouncementSubGroups[0].AnnouncementSGId
       );
-
-    const exists =
-      existing.data &&
-      existing.data.length > 0 &&
-      existing.data[0].AnnouncementSubGroups.some(
-        (a) => a.AnnouncementSGId === announcementSubGroupId
-      );
-
-    if (!exists) {
-      // ثبت رابطه اگر وجود نداشت
-      const createRes =
-        await service.RegisterNewRelationOfSequentialTurnToAnnouncementSubGroup(
-          sequentialTurnId,
-          announcementSubGroupId
-        );
-      expect(createRes.data)
-        .withContext(
-          'RegisterNewRelationOfSequentialTurnToAnnouncementSubGroup'
-        )
-        .toEqual(jasmine.any(Object));
-    }
+    validateResponse<ShortResponse>(regRes, ApiShortResponseSchema);
 
     const getRes =
       await service.GetRelationOfSequentialTurnToAnnouncementSubGroups(
-        sequentialTurnId
+        sequentialTurnToAnnouncementSubGroupRelationSampleData.SeqTurnId
       );
+    validateResponse<RelationOfSequentialTurnToAnnouncementSubGroup[]>(
+      getRes,
+      ApiRelationOfSequentialTurnToAnnouncementSubGroupSchema
+    );
 
-    expect(getRes.data)
-      .withContext('GetRelationOfSequentialTurnToAnnouncementSubGroups')
-      .toEqual(jasmine.any(Array));
-
-    const checkItemExits =
-      getRes.data &&
-      getRes.data.length > 0 &&
-      getRes.data[0].AnnouncementSubGroups.some(
-        (a) => a.AnnouncementSGId === announcementSubGroupId
-      );
-
-    expect(checkItemExits).toBeTrue();
-
-    // حذف رابطه
-    const deleteRes =
+    const delRes =
       await service.DeleteRelationOfSequentialTurnToAnnouncementSubGroup(
-        sequentialTurnId,
-        announcementSubGroupId
+        sequentialTurnToAnnouncementSubGroupRelationSampleData.SeqTurnId,
+        sequentialTurnToAnnouncementSubGroupRelationSampleData
+          .AnnouncementSubGroups[0].AnnouncementSGId
       );
-    expect(deleteRes.data)
-      .withContext('DeleteRelationOfSequentialTurnToAnnouncementSubGroup')
-      .toEqual(jasmine.any(Object));
+    validateResponse<ShortResponse>(delRes, ApiShortResponseSchema);
   });
 });
