@@ -22,6 +22,9 @@ const provinceSampleData: Province = {
     },
   ],
 };
+
+const ApiProvinceSchema = createApiResponseSchema(z.array(zodProvince));
+
 describe('ProvinceAndCityManagementService', () => {
   let service: ProvinceAndCityManagementService;
   let devAuth: DevAuthService;
