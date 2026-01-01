@@ -125,13 +125,16 @@ describe('TrafficManagementService', () => {
     );
   });
 
-  it('GetTrafficCosts: should return array', async () => {
+  it('Testing RegisterTrafficCard method', async () => {
     await devAuth.loginAsAdmin();
-    const res = await service.GetTrafficCosts();
 
-    expect(res.data)
-      .withContext('GetTrafficCosts: should return an array')
-      .toEqual(jasmine.any(Array));
+    const response = await service.RegisterTrafficCard(
+      trafficCardInfoSampleData.trafficCardNumber,
+      trafficCardInfoSampleData.trafficCardTypeId,
+      trafficCardInfoSampleData.trafficCardTempTypeId
+    );
+
+    validateResponse<ShortResponse>(response, ApiShortResponseSchema);
   });
 
   it('RegisterTrafficCost: should return ShortResponse', async () => {
