@@ -1,8 +1,27 @@
 import { TestBed } from '@angular/core/testing';
 import { ProvinceAndCityManagementService } from './province-and-city-management.service';
 import { DevAuthService } from '../dev-auth-service/dev-auth.service';
-import { Province } from './model/province-city.model';
+import { Province, zodProvince } from './model/province-city.model';
+import {
+  createApiResponseSchema,
+  validateResponse,
+} from 'app/utils/validate-response.test.utils.spec';
+import z from 'zod';
+import { ShortResponse } from 'app/data/model/short-response.model';
+import { ApiShortResponseSchema } from 'app/data/model/short-response.model.spec';
 
+const provinceSampleData: Province = {
+  ProvinceId: 11,
+  ProvinceName: 'تهران',
+  ProvinceActive: true,
+  Cities: [
+    {
+      CityCode: 11320000,
+      CityTitle: 'تهران',
+      CityActive: true,
+    },
+  ],
+};
 describe('ProvinceAndCityManagementService', () => {
   let service: ProvinceAndCityManagementService;
   let devAuth: DevAuthService;
