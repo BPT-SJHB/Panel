@@ -92,16 +92,14 @@ describe('ReportsManagementService', () => {
     devAuth.logout();
   });
 
-  it('GetLoadAccounting: should return load accounting info', async () => {
+  it('Testing GetLoadAccounting method', async () => {
     await devAuth.loginAsAdmin();
-    const loadId = 6031;
 
-    const res = await service.GetLoadAccounting(loadId);
-
-    expect(res.data).toEqual(jasmine.any(Array));
-    res.data?.forEach((item: LoadAccounting) =>
-      expect(item).toEqual(jasmine.any(Object))
+    const response = await service.GetLoadAccounting(
+      loadPermissionSampleData.LoadId
     );
+
+    validateResponse<LoadAccounting[]>(response, ApiLoadAccountingSchema);
   });
 
   it('GetLoadPermissions: should return load permissions', async () => {
