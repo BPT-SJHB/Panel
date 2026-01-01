@@ -50,16 +50,14 @@ describe('ProvinceAndCityManagementService', () => {
     validateResponse<Province[]>(response, ApiProvinceSchema);
   });
 
-  it('GetAllProvinces: should return all provinces', async () => {
+  it('Testing GetAllProvinces method', async () => {
     await devAuth.loginAsAdmin();
 
-    const searchString = 'ا';
-    const res = await service.GetAllProvinces(searchString);
-
-    expect(res.data).toEqual(jasmine.any(Array));
-    res.data?.forEach((item: Province) =>
-      expect(item).toEqual(jasmine.any(Object))
+    const response = await service.GetAllProvinces(
+      provinceSampleData.ProvinceName!
     );
+
+    validateResponse<Province[]>(response, ApiProvinceSchema);
   });
 
   it('ChangeProvinceStatus: should change province status', async () => {
