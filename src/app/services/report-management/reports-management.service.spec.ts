@@ -23,6 +23,7 @@ import {
 } from 'app/utils/validate-response.test.utils.spec';
 import z from 'zod';
 
+const loadPermissionSampleData: LoadPermission = {
   LoadId: 15,
   GoodTitle: 'شمش چدن',
   LoadSourceCity: 'اصفهان - ذوب آهن',
@@ -54,6 +55,27 @@ import z from 'zod';
     'تایید شده و مجوز صادر شده                                                                           ',
   TPTParamsJoint: '0',
 };
+
+const announcementGroupAndSubGroupIDsampleData = {
+  announcementGroupId: 1,
+  announcementSubGroupId: 1,
+};
+
+const ApiLoadAccountingSchema = createApiResponseSchema(
+  z.array(zodLoadAccounting)
+);
+
+const ApiLoadPermissionsSchema = createApiResponseSchema(
+  z.array(zodLoadPermission)
+);
+
+const ApiLoadPermissionsForCompany = createApiResponseSchema(
+  z.array(zodLoadPermissionForCompany)
+);
+
+const ApiLoadPermissionsForDriver = createApiResponseSchema(
+  z.array(zodLoadPermissionForDriver)
+);
 
 describe('ReportsManagementService', () => {
   let service: ReportsManagementService;
