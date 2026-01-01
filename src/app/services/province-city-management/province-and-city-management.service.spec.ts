@@ -40,16 +40,14 @@ describe('ProvinceAndCityManagementService', () => {
     devAuth.logout();
   });
 
-  it('GetProvincesAndCitiesInfo: should return provinces with cities', async () => {
+  it('Testing GetProvincesAndCitiesInfo method', async () => {
     await devAuth.loginAsAdmin();
 
-    const provinceName = 'تهران';
-    const res = await service.GetProvincesAndCitiesInfo(provinceName);
-
-    expect(res.data).toEqual(jasmine.any(Array));
-    res.data?.forEach((item: Province) =>
-      expect(item).toEqual(jasmine.any(Object))
+    const response = await service.GetProvincesAndCitiesInfo(
+      provinceSampleData.ProvinceName!
     );
+
+    validateResponse<Province[]>(response, ApiProvinceSchema);
   });
 
   it('GetAllProvinces: should return all provinces', async () => {
