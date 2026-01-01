@@ -1,10 +1,27 @@
 import { TestBed } from '@angular/core/testing';
 import { ReportsManagementService } from './reports-management.service';
 import { DevAuthService } from '../dev-auth-service/dev-auth.service';
-import { LoadAccounting } from './model/load-accounting/load-accounting.model';
-import { LoadPermission } from './model/load-permissions/load-permission.model';
-import { LoadPermissionForCompany } from './model/load-permissions/load-permission-for-company.model';
-import { LoadPermissionForDriver } from './model/load-permissions/load-permission-for-driver.model';
+import {
+  LoadAccounting,
+  zodLoadAccounting,
+} from './model/load-accounting/load-accounting.model';
+import {
+  LoadPermission,
+  zodLoadPermission,
+} from './model/load-permissions/load-permission.model';
+import {
+  LoadPermissionForCompany,
+  zodLoadPermissionForCompany,
+} from './model/load-permissions/load-permission-for-company.model';
+import {
+  LoadPermissionForDriver,
+  zodLoadPermissionForDriver,
+} from './model/load-permissions/load-permission-for-driver.model';
+import {
+  createApiResponseSchema,
+  validateResponse,
+} from 'app/utils/validate-response.test.utils.spec';
+import z from 'zod';
 
 describe('ReportsManagementService', () => {
   let service: ReportsManagementService;
