@@ -106,22 +106,12 @@ describe('TrafficManagementService', () => {
     validateResponse<ShortResponse>(editRes, ApiShortResponseSchema);
   });
 
-  it('GetTrafficCardTypes: should return array', async () => {
+  it('Testing GetTrafficCardTypes method', async () => {
     await devAuth.loginAsAdmin();
-    const res = await service.GetTrafficCardTypes();
 
-    expect(res.data)
-      .withContext('GetTrafficCardTypes: should return an array')
-      .toEqual(jasmine.any(Array));
-  });
+    const response = await service.GetTrafficCardTypes();
 
-  it('GetTrafficCardTempTypes: should return array', async () => {
-    await devAuth.loginAsAdmin();
-    const res = await service.GetTrafficCardTempTypes();
-
-    expect(res.data)
-      .withContext('GetTrafficCardTempTypes: should return an array')
-      .toEqual(jasmine.any(Array));
+    validateResponse<TrafficCardType[]>(response, ApiTrafficCardTypesSchema);
   });
 
   it('RegisterTrafficCard: should return ShortResponse', async () => {
