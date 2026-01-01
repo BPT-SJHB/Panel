@@ -137,30 +137,44 @@ describe('TrafficManagementService', () => {
     validateResponse<ShortResponse>(response, ApiShortResponseSchema);
   });
 
-  it('RegisterTrafficCost: should return ShortResponse', async () => {
+  it('Testing TrafficCost methods with flow', async () => {
     await devAuth.loginAsAdmin();
-    const res = await service.RegisterTrafficCost({
-      TrafficCardTypeId: 1,
-      EntryBaseCost: 300000,
-      ExcessStoppageCost: 300000,
-      ExcessStoppageDuration: 24,
-      NoCostStoppageDuration: 30,
+
+    const regRes = await service.RegisterTrafficCost({
+      TrafficCardTypeId: trafficCardTypeCostSampleData.TrafficCardTypeId,
+      EntryBaseCost: trafficCardTypeCostSampleData.EntryBaseCost,
+      NoCostStoppageDuration:
+        trafficCardTypeCostSampleData.NoCostStoppageDuration,
+      ExcessStoppageDuration:
+        trafficCardTypeCostSampleData.ExcessStoppageDuration,
+      ExcessStoppageCost: trafficCardTypeCostSampleData.ExcessStoppageCost,
       Active: true,
     });
+    validateResponse<ShortResponse>(regRes, ApiShortResponseSchema);
 
-    expect(res.data)
-      .withContext('RegisterTrafficCost: should return response data')
-      .toBeDefined();
-  });
+    const getRes = await service.GetTrafficCosts();
+    validateResponse<TrafficCardTypeCost[]>(
+      getRes,
+      ApiTrafficCardTypeCostSchema
+    );
 
-  // TODO: Fix API: the server returns no context in the response
-  xit('GetTrafficRecords: should return array', async () => {
-    await devAuth.loginAsAdmin();
-    const res = await service.GetTrafficRecords(1);
+    const regData = getRes.data[getRes.data.length - 1];
 
-    expect(res.data)
-      .withContext('GetTrafficRecords: should return an array')
-      .toEqual(jasmine.any(Array));
+    if (
+      !(
+        trafficCardTypeCostSampleData.TrafficCardTypeId ===
+          regData.TrafficCardTypeId &&
+        trafficCardTypeCostSampleData.EntryBaseCost === regData.EntryBaseCost &&
+        trafficCardTypeCostSampleData.NoCostStoppageDuration ===
+          regData.NoCostStoppageDuration &&
+        trafficCardTypeCostSampleData.ExcessStoppageDuration ===
+          regData.ExcessStoppageDuration &&
+        trafficCardTypeCostSampleData.ExcessStoppageCost ===
+          regData.ExcessStoppageCost
+      )
+    ) {
+      fail('TrafficCardTypeCosts are not equal');
+    }
   });
 
   // TODO: Fix API: the server returns the error message 'کیف پول یافت نشد'
