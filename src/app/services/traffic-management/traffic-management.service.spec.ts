@@ -193,17 +193,3 @@ describe('TrafficManagementService', () => {
     validateResponse<TrafficReportInfo[]>(getRes, ApiTrafficReportInfoSchema);
   });
 });
-
-function generateCardNumber(): string {
-  const chars: string[] = [];
-  const randomChar = (min: number, max: number) =>
-    String.fromCharCode(Math.floor(Math.random() * (max - min + 1)) + min);
-
-  // Add letters (upper/lower) and digits
-  for (let i = 0; i < 2; i++) chars.push(randomChar(65, 90)); // A–Z
-  for (let i = 0; i < 2; i++) chars.push(randomChar(97, 122)); // a–z
-  for (let i = 0; i < 2; i++) chars.push(randomChar(48, 57)); // 0–9
-
-  // Shuffle characters and join
-  return chars.sort(() => Math.random() - 0.5).join('');
-}
