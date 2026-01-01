@@ -3,6 +3,18 @@ import { TPTParamsManagementService } from './tptparams-management.service';
 import { UserAuthService } from '../user-auth-service/user-auth.service';
 import { DevAuthService } from '../dev-auth-service/dev-auth.service';
 import { ShortResponse } from 'app/data/model/short-response.model';
+import {
+  TPTParamInfo,
+  TPTParamRelationToAnnouncementGroupAndSubGroup,
+  zodTPTParamInfo,
+  zodTPTParamRelationToAnnouncementGroupAndSubGroup,
+} from './model/tptparam-info.model';
+import {
+  createApiResponseSchema,
+  validateResponse,
+} from 'app/utils/validate-response.test.utils.spec';
+import { z } from 'zod';
+import { ApiShortResponseSchema } from 'app/data/model/short-response.model.spec';
 
 describe('TPTParamsManagementService (integration)', () => {
   let service: TPTParamsManagementService;
