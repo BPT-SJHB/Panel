@@ -60,15 +60,15 @@ describe('ProvinceAndCityManagementService', () => {
     validateResponse<Province[]>(response, ApiProvinceSchema);
   });
 
-  it('ChangeProvinceStatus: should change province status', async () => {
+  it('Testing ChangeProvinceStatus method', async () => {
     await devAuth.loginAsAdmin();
 
-    const provinceId = 11; // Tehran ID
-    const status = true;
-    const res = await service.ChangeProvinceStatus(provinceId, status);
+    const response = await service.ChangeProvinceStatus(
+      provinceSampleData.ProvinceId,
+      provinceSampleData.ProvinceActive!
+    );
 
-    expect(res.data).toEqual(jasmine.any(Object));
-    expect(res.data?.Message).toBeDefined();
+    validateResponse<ShortResponse>(response, ApiShortResponseSchema);
   });
 
   it('ChangeCityStatus: should change city status', async () => {
