@@ -54,73 +54,29 @@ describe('TPTParamsManagementService (integration)', () => {
     devAuth = TestBed.inject(DevAuthService);
 
     devAuth.logout();
-    await devAuth.loginAsAdmin();
   });
 
-  it('should perform full CRUD lifecycle for a TPT param', async () => {
+  it('Testing Transport Price Tarrif Parameter methods with flow', async () => {
     await devAuth.loginAsAdmin();
 
-    const title = `تست_${Date.now()}`;
+    const getAllRes = await service.GetAllTPTParams();
+    validateResponse<TPTParamInfo[]>(getAllRes, ApiTPTParamsInfoSchema);
 
-    // ===== CREATE =====
-    const createRes = await service.RegisterTPTParam({
-      TPTPTitle: title,
+    const regRes = await service.RegisterTPTParam({
+      TPTPTitle: tptParamSampleData.TPTPTitle,
     });
+    validateResponse<ShortResponse>(regRes, ApiShortResponseSchema);
 
-    expect(createRes.data)
-      .withContext('RegisterTPTParam: should return response data')
-      .toBeDefined();
+    const getRes = await service.GetTPTParam(tptParamSampleData.TPTPTitle);
+    validateResponse<TPTParamInfo>(getRes, ApiTPTParamInfoSchema);
 
-    expect((createRes.data as ShortResponse)?.Message)
-      .withContext('RegisterTPTParam: should return success message')
-      .toBeDefined();
+    const editRes = await service.EditTPTParam(tptParamSampleData);
+    validateResponse<ShortResponse>(editRes, ApiShortResponseSchema);
 
-    // ===== READ =====
-    const allRes = await service.GetAllTPTParams();
-
-    expect(allRes.data)
-      .withContext('GetAllTPTParams: should return an array')
-      .toEqual(jasmine.any(Array));
-
-    const createdItem =
-      allRes.data?.find((item) => item.TPTPTitle === title) ?? allRes?.data![0];
-
-    expect(createdItem)
-      .withContext('GetAllTPTParams: should include created item')
-      .toBeDefined();
-
-    expect(createdItem!.TPTPId)
-      .withContext('GetAllTPTParams: created item should have numeric id')
-      .toEqual(jasmine.any(Number));
-
-    const createdId = createdItem!.TPTPId;
-
-    // ===== UPDATE =====
-    const editRes = await service.EditTPTParam({
-      TPTPId: createdId,
-      TPTPTitle: `${title}_ویرایش`,
+    const delRes = await service.DeleteTPTParam({
+      TPTPId: tptParamSampleData.TPTPId,
     });
-
-    expect(editRes.data)
-      .withContext('EditTPTParam: should return response data')
-      .toBeDefined();
-
-    expect((editRes.data as ShortResponse)?.Message)
-      .withContext('EditTPTParam: should return success message')
-      .toBeDefined();
-
-    // ===== DELETE =====
-    const deleteRes = await service.DeleteTPTParam({
-      TPTPId: createdId,
-    });
-
-    expect(deleteRes.data)
-      .withContext('DeleteTPTParam: should return response data')
-      .toBeDefined();
-
-    expect((deleteRes.data as ShortResponse)?.Message)
-      .withContext('DeleteTPTParam: should return success message')
-      .toBeDefined();
+    validateResponse<ShortResponse>(delRes, ApiShortResponseSchema);
   });
 
   it('should fetch all relations to announcement groups and subgroups', async () => {
