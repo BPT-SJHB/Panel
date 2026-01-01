@@ -79,22 +79,32 @@ describe('TPTParamsManagementService (integration)', () => {
     validateResponse<ShortResponse>(delRes, ApiShortResponseSchema);
   });
 
-  it('should fetch all relations to announcement groups and subgroups', async () => {
+  it('Testing Relation to announcement group and sub group methods with flow', async () => {
     await devAuth.loginAsAdmin();
-    const res = await service.GetAllRelationsToAnnouncementGroupAndSubGroup();
 
-    expect(res.data)
-      .withContext(
-        'GetAllRelationsToAnnouncementGroupAndSubGroup: should return an array'
-      )
-      .toEqual(jasmine.any(Array));
+    const regRes =
+      await service.RegisterTPTParamRelationToAnnouncementGroupAndSubGroup({
+        TPTPId: tptParamSampleData.TPTPId,
+        AnnouncementSGId: tptParamSampleData.AnnouncementSGId,
+        Cost: tptParamSampleData.Cost,
+      });
+    validateResponse<ShortResponse>(regRes, ApiShortResponseSchema);
 
-    res.data?.forEach((item) => {
-      expect(item)
-        .withContext(
-          'GetAllRelationsToAnnouncementGroupAndSubGroup: each item should be an object'
-        )
-        .toEqual(jasmine.any(Object));
-    });
+    const getAllRes =
+      await service.GetAllRelationsToAnnouncementGroupAndSubGroup();
+    validateResponse<TPTParamRelationToAnnouncementGroupAndSubGroup[]>(
+      getAllRes,
+      ApiTPTParamRelationsToAnnouncementGroupAndSubGroup
+    );
+
+    const editRes =
+      await service.EditTPTParamRelationToAnnouncementGroupAndSubGroup({
+        TPTPDId: tptParamSampleData.TPTPDId,
+        TPTPId: tptParamSampleData.TPTPId,
+        AnnouncementSGId: tptParamSampleData.AnnouncementSGId,
+        Cost: tptParamSampleData.Cost,
+        Active: tptParamSampleData.Active,
+      });
+    validateResponse<ShortResponse>(editRes, ApiShortResponseSchema);
   });
 });
