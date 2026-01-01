@@ -24,6 +24,8 @@ export class TrafficManagementService {
   private apiCommunicator = inject(APICommunicationManagementService);
   private userAuth = inject(UserAuthService);
 
+  //#region TrafficCardType
+
   public async RegisterTrafficCardType(
     trafficCardTypeName: string
   ): Promise<ApiResponse<ShortResponse>> {
@@ -79,6 +81,10 @@ export class TrafficManagementService {
     //#endregion
   }
 
+  //#endregion
+
+  //#region TrafficCardTempType
+
   public async GetTrafficCardTempTypes(): Promise<
     ApiResponse<TrafficCardTempType[]>
   > {
@@ -96,6 +102,10 @@ export class TrafficManagementService {
     >(apiUrl, bodyValue, mockTrafficCardTempTypes);
     //#endregion
   }
+
+  //#endregion
+
+  //#region TrafficCard
 
   public async RegisterTrafficCard(
     trafficCardNumber: string,
@@ -119,6 +129,10 @@ export class TrafficManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  //#endregion
+
+  //#region TrafficCost
 
   public async GetTrafficCosts(): Promise<ApiResponse<TrafficCardTypeCost[]>> {
     //#region Consts
@@ -156,6 +170,10 @@ export class TrafficManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
+  //#endregion
+
+  //#region TrafficRecords
 
   public async GetTrafficRecords(
     trafficCardId: number
@@ -198,4 +216,6 @@ export class TrafficManagementService {
     >(apiUrl, bodyValue, mockTrafficInfo);
     //#endregion
   }
+
+  //#endregion
 }
