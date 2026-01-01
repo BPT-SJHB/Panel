@@ -92,32 +92,18 @@ describe('TrafficManagementService', () => {
     await devAuth.logout();
   });
 
-  it('RegisterTrafficCardType: should return ShortResponse', async () => {
+  it('Testing register & edit TrafficCardType methods with flow', async () => {
     await devAuth.loginAsAdmin();
-    const res = await service.RegisterTrafficCardType(
-      `تستـ${Date.now().toLocaleString()}`
+
+    const regRes = await service.RegisterTrafficCardType(
+      trafficCardTypeSampleData.TrafficCardTypeTitle
     );
+    validateResponse<ShortResponse>(regRes, ApiShortResponseSchema);
 
-    expect(res.data)
-      .withContext('RegisterTrafficCardType: should return response data')
-      .toBeDefined();
-
-    expect((res.data as ShortResponse)?.Message)
-      .withContext('RegisterTrafficCardType: should return success message')
-      .toBeDefined();
-  });
-
-  it('EditTrafficCardType: should return ShortResponse', async () => {
-    await devAuth.loginAsAdmin();
-    const res = await service.EditTrafficCardType({
-      TrafficCardTypeId: 1,
-      TrafficCardTypeTitle: `ویرایش_تستـ${Date.now().toLocaleString()}`,
-      Active: true,
-    });
-
-    expect(res.data)
-      .withContext('EditTrafficCardType: should return response data')
-      .toBeDefined();
+    const editRes = await service.EditTrafficCardType(
+      trafficCardTypeSampleData
+    );
+    validateResponse<ShortResponse>(editRes, ApiShortResponseSchema);
   });
 
   it('GetTrafficCardTypes: should return array', async () => {
