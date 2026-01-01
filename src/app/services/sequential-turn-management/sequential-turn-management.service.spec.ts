@@ -80,61 +80,34 @@ describe('SequentialTurnManagementService', () => {
     devAuth.logout();
   });
 
-  it('SequentialTurn workflow: create if not exists, edit and delete', async () => {
+  it('Testing SequentialTurn methods with flow', async () => {
     await devAuth.loginAsAdmin();
 
-    const title = `تست_${Date.now()}`;
-    const keyword = 'D';
-    const status = true;
-
-    // check if exists
-    const existing = await service.GetSequentialTurns('تست_');
-    let seqId: number;
-
-    if (existing.data && existing.data.length > 0) {
-      seqId = existing.data[0].SeqTurnId;
-    } else {
-      // register it
-      const createRes = await service.RegisterNewSequentialTurn(
-        0,
-        title,
-        keyword,
-        status
-      );
-
-      expect(createRes.data)
-        .withContext('RegisterNewSequentialTurn')
-        .toEqual(jasmine.any(Object));
-      expect(createRes.data?.Message)
-        .withContext('RegisterNewSequentialTurn')
-        .toEqual(jasmine.any(String));
-
-      // get new id
-      const newTurns = await service.GetSequentialTurns(title);
-
-      expect(newTurns.data)
-        .withContext('GetSequentialTurns')
-        .toEqual(jasmine.any(Array));
-      expect(newTurns.data!.length).toBeGreaterThan(0);
-      seqId = newTurns.data![0].SeqTurnId;
-      expect(seqId).toBeDefined();
-    }
-
-    // edit
-    const editStatus = false;
-    const editRes = await service.EditSequentialTurn(
-      seqId,
-      title,
-      keyword,
-      editStatus
+    const regRes = await service.RegisterNewSequentialTurn(
+      sequentialTurnSampleData.SeqTurnId,
+      sequentialTurnSampleData.SeqTurnTitle!,
+      sequentialTurnSampleData.SeqTurnKeyWord!,
+      sequentialTurnSampleData.Active!
     );
-    expect(editRes.data).toEqual(jasmine.any(Object));
+    validateResponse<ShortResponse>(regRes, ApiShortResponseSchema);
 
-    // delete
-    const deleteRes = await service.DeleteSequentialTurn(seqId);
-    expect(deleteRes.data)
-      .withContext('DeleteSequentialTurn')
-      .toEqual(jasmine.any(Object));
+    const getRes = await service.GetSequentialTurns(
+      sequentialTurnSampleData.SeqTurnTitle!
+    );
+    validateResponse<SequentialTurn[]>(getRes, ApiSequentialTurnsSchema);
+
+    const editRes = await service.EditSequentialTurn(
+      sequentialTurnSampleData.SeqTurnId,
+      sequentialTurnSampleData.SeqTurnTitle!,
+      sequentialTurnSampleData.SeqTurnKeyWord!,
+      sequentialTurnSampleData.Active!
+    );
+    validateResponse<ShortResponse>(editRes, ApiShortResponseSchema);
+
+    const delRes = await service.DeleteSequentialTurn(
+      sequentialTurnSampleData.SeqTurnId
+    );
+    validateResponse<ShortResponse>(delRes, ApiShortResponseSchema);
   });
 
   it('GetRelationOfSequentialTurnToLoaderTypes should return relations', async () => {
