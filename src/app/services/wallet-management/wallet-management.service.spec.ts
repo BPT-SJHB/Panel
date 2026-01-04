@@ -160,9 +160,14 @@ describe('WalletManagementService', () => {
     validateResponse<Wallet>(response, ApiWalletSchema);
   });
 
+  it('Testing GetTransportCompanyWallet method', async () => {
     await devAuth.loginAsAdmin();
 
+    const response = await service.GetTransportCompanyWallet(
+      transportCompanySampleData.TCId
     );
+
+    validateResponse<Wallet>(response, ApiWalletSchema);
   });
 
     await devAuth.loginAsAdmin();
