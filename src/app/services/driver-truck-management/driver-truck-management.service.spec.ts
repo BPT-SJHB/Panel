@@ -17,7 +17,12 @@ import {
   zodUsernamePassword,
 } from 'app/data/model/username-password.model';
 import { delay } from 'rxjs';
-import { TruckInfo, zodTruckInfo } from './model/truck-info.model';
+import {
+  TruckComposedInfo,
+  TruckInfo,
+  zodTruckComposedInfo,
+  zodTruckInfo,
+} from './model/truck-info.model';
 import {
   TruckNativenessInfo,
   TruckNativenessType,
@@ -25,6 +30,8 @@ import {
   zodTruckNativenessType,
 } from './model/truck-nativeness-info.model';
 import z from 'zod';
+import { sleep } from 'app/utils/sleep.test.utils';
+import { Wallet, zodWallet } from '../wallet-management/model/wallet.model';
 
 const TruckDriverInfoSampleData: TruckDriverInfo = {
   DriverId: 1,
