@@ -120,7 +120,15 @@ describe('WalletManagementService', () => {
     validateResponse<Wallet>(response, ApiWalletSchema);
   });
 
+  it('Testing GetWalletDefaultAmounts method', async () => {
+    await devAuth.loginAsDriver();
 
+    const response = await service.GetWalletDefaultAmounts();
+
+    validateResponse<WalletDefaultAmount[]>(
+      response,
+      ApiWalletDefaultAmountsSchema
+    );
   });
 
 
