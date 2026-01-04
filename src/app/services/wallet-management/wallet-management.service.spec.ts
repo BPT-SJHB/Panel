@@ -201,6 +201,17 @@ describe('WalletManagementService', () => {
     );
   });
 
+  it('Testing GetWalletPaymentRecords method', async () => {
+    await devAuth.loginAsDriver();
+
+    const response = await service.GetWalletPaymentRecords(
+      walletSampleData.MoneyWalletId
+    );
+
+    validateResponse<WalletPaymentHistory[]>(
+      response,
+      ApiWalletPaymentHistoriesSchema
+    );
   });
 
 
