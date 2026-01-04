@@ -65,6 +65,38 @@ const dateTimeSampleData = {
   EndTime: '23:59',
 };
 
+const ApiWalletSchema = createApiResponseSchema(zodWallet);
+
+const ApiWalletDefaultAmountsSchema = createApiResponseSchema(
+  z.array(zodWalletDefaultAmount)
+);
+
+const ApiWalletPaymentRequestSchema = createApiResponseSchema(
+  zodWalletPaymentRequest
+);
+
+const ApiBalanceSchema = createApiResponseSchema(
+  z.object({ Balance: z.number() })
+);
+
+const ApiWalletTransactionsSchema = createApiResponseSchema(
+  z.array(zodWalletTransaction)
+);
+
+const ApiWalletPaymentHistoriesSchema = createApiResponseSchema(
+  z.array(zodWalletPaymentHistory)
+);
+
+const ApiWalletUserChargingFunctionSchema = createApiResponseSchema(
+  z.array(zodWalletUserChargingFunction)
+);
+
+const ApiTotalFunctionsSchema = createApiResponseSchema(
+  z.object({
+    Total: z.number(),
+  })
+);
+
 describe('WalletManagementService', () => {
   let service: WalletManagementService;
   let devAuth: DevAuthService;
