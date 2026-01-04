@@ -196,6 +196,8 @@ describe('Driver_TruckManagementService', () => {
 
   //#endregion
 
+  //#region Relations of Driver, Truck, MoneyWallet
+
   it('Testing ComponsedTruckInfo methods with flow', async () => {
     await devAuth.loginAsAdmin();
 
@@ -232,4 +234,5 @@ describe('Driver_TruckManagementService', () => {
     validateResponse<ShortResponse>(setRes, ApiShortResponseSchema);
   });
 
+  //#endregion
 });
