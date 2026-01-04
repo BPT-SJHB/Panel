@@ -170,8 +170,13 @@ describe('WalletManagementService', () => {
     validateResponse<Wallet>(response, ApiWalletSchema);
   });
 
+  it('Testing GetSmsWalletInfo method', async () => {
     await devAuth.loginAsAdmin();
 
+    const response = await service.GetSmsWalletInfo();
+
+    validateResponse<Wallet>(response, ApiWalletSchema);
+  });
 
     );
 
