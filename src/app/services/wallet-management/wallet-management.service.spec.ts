@@ -30,6 +30,41 @@ import {
   zodWalletUserChargingFunction,
 } from './model/wallet-user-charging-function.model';
 
+const paymentRequestSampleData = 500000;
+
+const transportCompanySampleData: TransportCompany = {
+  TCId: 21651,
+  TCTitle: 'پارسيان',
+  TCOrganizationCode: '2100651',
+  TCCityTitle: 'اصفهان - مباركه',
+  TCTel: '',
+  TCManagerMobileNumber: '',
+  TCManagerNameFamily: '',
+  EmailAddress: 'morteza1466@gmail.com',
+  Active: true,
+};
+
+const TruckInfoSampleData: TruckInfo = {
+  TruckId: 5,
+  LoaderTypeId: 605,
+  Pelak: '673ع32',
+  Serial: '52',
+  SmartCardNo: '2305365',
+};
+
+const walletSampleData: Wallet = {
+  MoneyWalletId: 1,
+  MoneyWalletCode: '0000001Ur1',
+  Balance: 99999999,
+};
+
+const dateTimeSampleData = {
+  StartDate: '1404/01/01',
+  StartTime: '00:01',
+  EndDate: '1404/12/27',
+  EndTime: '23:59',
+};
+
 describe('WalletManagementService', () => {
   let service: WalletManagementService;
   let devAuth: DevAuthService;
