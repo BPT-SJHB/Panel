@@ -8,7 +8,7 @@ import { CaptchaService } from './captcha.service';
 
 const ApiCaptchaSchema = createApiResponseSchema(zodCaptcha);
 
-describe('AnnouncementGroupSubgroupManagementService', () => {
+describe('CaptchaService', () => {
   let service: CaptchaService;
 
   beforeEach(() => {
@@ -19,7 +19,7 @@ describe('AnnouncementGroupSubgroupManagementService', () => {
     service = TestBed.inject(CaptchaService);
   });
 
-  it('Testing Announcement Group methods with flow', async () => {
+  it('Testing getCaptcha method', async () => {
     const response = await service.getCaptcha();
 
     validateResponse<Captcha>(response, ApiCaptchaSchema);
