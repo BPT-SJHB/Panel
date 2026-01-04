@@ -25,3 +25,9 @@ const FPCInfoSampleData: FPCInfo = {
   Active: true,
 };
 
+const ApiFPCsInfoSchema = createApiResponseSchema(z.array(zodFPCInfo));
+
+const ApiFPCInfoSchema = createApiResponseSchema(zodFPCInfo);
+
+const ApiUsernamePasswordSchema = createApiResponseSchema(zodUsernamePassword);
+
