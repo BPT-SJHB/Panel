@@ -196,4 +196,40 @@ describe('Driver_TruckManagementService', () => {
 
   //#endregion
 
+  it('Testing ComponsedTruckInfo methods with flow', async () => {
+    await devAuth.loginAsAdmin();
+
+    const getLastActiveRes =
+      await service.GetComposedTruckInfoWithLastActiveTurn(
+        TruckInfoSampleData.TruckId
+      );
+    validateResponse<TruckComposedInfo>(
+      getLastActiveRes,
+      ApiTruckComposedInfoSchema
+    );
+
+    const getWalletRes = await service.GetVirtualWallet();
+    validateResponse<Wallet>(getWalletRes, ApiWalletSchema);
+
+    const walletId = getWalletRes.data.MoneyWalletId;
+
+    const getLastTurnRes = await service.GetComposedTruckInfoWithLastTurn(
+      TruckInfoSampleData.TruckId
+    );
+    validateResponse<TruckComposedInfo>(
+      getLastTurnRes,
+      ApiTruckComposedInfoSchema
+    );
+
+    const turnId = getLastTurnRes.data.Turn?.TurnId ?? -1;
+
+    const setRes = await service.SetComposedTruckInfo(
+      TruckInfoSampleData.TruckId,
+      TruckDriverInfoSampleData.DriverId,
+      turnId,
+      walletId
+    );
+    validateResponse<ShortResponse>(setRes, ApiShortResponseSchema);
+  });
+
 });
