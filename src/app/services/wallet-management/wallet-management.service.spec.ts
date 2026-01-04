@@ -178,8 +178,14 @@ describe('WalletManagementService', () => {
     validateResponse<Wallet>(response, ApiWalletSchema);
   });
 
+  it('Testing GetWalletBalance method', async () => {
+    await devAuth.loginAsDriver();
+
+    const response = await service.GetWalletBalance(
+      walletSampleData.MoneyWalletId
     );
 
+    validateResponse<{ Balance: number }>(response, ApiBalanceSchema);
   });
 
 
