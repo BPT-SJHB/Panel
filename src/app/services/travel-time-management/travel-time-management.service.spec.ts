@@ -10,6 +10,17 @@ import { ApiShortResponseSchema } from 'app/data/model/short-response.model.spec
 import { ShortResponse } from 'app/data/model/short-response.model';
 import z from 'zod';
 
+const travelTimeSampleData: TravelTime = {
+  LoaderTypeId: 505,
+  LoaderTypeTitle: 'کفی 18 چرخ',
+  SourceCityId: 21310000,
+  SourceCityName: 'اصفهان - اصفهان',
+  TargetCityId: 11320000,
+  TargetCityName: 'تهران',
+  TravelTime: 24,
+  Active: true,
+};
+
 describe('TravelTimeManagementService', () => {
   let service: TravelTimeManagementService;
   let devAuth: DevAuthService;
