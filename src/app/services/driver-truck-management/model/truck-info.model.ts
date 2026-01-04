@@ -1,6 +1,6 @@
-import { TruckDriverInfo } from './truck-driver-info.model';
-import { Turn } from '../../turn-management/model/turn.model';
-import { Wallet } from '../../wallet-management/model/wallet.model';
+import { TruckDriverInfo, zodTruckDriverInfo } from './truck-driver-info.model';
+import { Turn, zodTurn } from '../../turn-management/model/turn.model';
+import { Wallet, zodWallet } from '../../wallet-management/model/wallet.model';
 import { z } from 'zod';
 
 export interface TruckInfo {
@@ -25,3 +25,10 @@ export interface TruckComposedInfo {
   Turn?: Turn;
   MoneyWallet?: Wallet;
 }
+
+export const zodTruckComposedInfo = z.object({
+  Truck: zodTruckInfo,
+  TruckDriver: zodTruckDriverInfo.optional(),
+  Turn: zodTurn.optional(),
+  MoneyWallet: zodWallet.optional(),
+});
