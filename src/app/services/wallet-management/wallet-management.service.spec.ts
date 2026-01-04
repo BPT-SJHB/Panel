@@ -103,7 +103,7 @@ describe('WalletManagementService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [WalletManagementService, DevAuthService],
+      providers: [],
     });
 
     devAuth = TestBed.inject(DevAuthService);
