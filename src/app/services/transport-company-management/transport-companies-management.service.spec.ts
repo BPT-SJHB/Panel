@@ -61,10 +61,41 @@ describe('TransportCompaniesManagementService', () => {
     validateResponse<TransportCompany>(response, ApiTransportCompanySchema);
   });
 
+  it('Testing TransportCompany methods with flow', async () => {
     await devAuth.loginAsAdmin();
 
+    const getRes = await service.GetTransportCompanyInfo(
+      transportCompanySampleData.TCId
+    );
+    validateResponse<TransportCompany>(getRes, ApiTransportCompanySchema);
 
+    const getAllRes = await service.GetTransportCompaniesInfo(
+      transportCompanySampleData.TCTitle!
+    );
+    validateResponse<TransportCompany[]>(
+      getAllRes,
+      ApiTransportCompaniesSchema
+    );
 
+    const activeSMSRes = await service.ActiveTransportCompanySmsService(
+      transportCompanySampleData.TCId
+    );
+    validateResponse<ShortResponse>(activeSMSRes, ApiShortResponseSchema);
 
+    const editRes = await service.EditTransportCompany(
+      transportCompanySampleData
+    );
+    validateResponse<ShortResponse>(editRes, ApiShortResponseSchema);
+
+    const resetPassRes = await service.ResetTransportCompanyPassword(
+      transportCompanySampleData.TCId
+    );
+    validateResponse<UsernamePassword>(resetPassRes, ApiUsernamePasswordSchema);
+
+    const changeStatRes = await service.ChangeTransportCompanyStatus(
+      transportCompanySampleData.TCId,
+      transportCompanySampleData.Active!
+    );
+    validateResponse<ShortResponse>(changeStatRes, ApiShortResponseSchema);
   });
 });
