@@ -51,7 +51,7 @@ export class UserAuthService {
     const result = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       { SessionId: string }
-    >(this.apiUrl, bodyValue);
+    >(this.apiUrl, bodyValue, { SessionId: '' });
 
     if (result.data?.SessionId)
       await this.setSessionId(result.data.SessionId, rememberMe);
@@ -96,7 +96,7 @@ export class UserAuthService {
     const response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       { ISSessionLive: boolean }
-    >(apiUrl, bodyValue);
+    >(apiUrl, bodyValue, { ISSessionLive: true });
     return response;
   }
 
