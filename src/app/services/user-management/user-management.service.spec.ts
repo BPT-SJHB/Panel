@@ -1,11 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { UserManagementService } from './user-management.service';
 import { DevAuthService } from '../dev-auth-service/dev-auth.service';
+import { sleep } from 'app/utils/sleep.test.utils';
 
 const TEST_PASSWORD = 'NewPass123-';
 
 // TODO: need captcha login not session Login
-xdescribe('UserManagementService', () => {
+describe('UserManagementService', () => {
   let service: UserManagementService;
   let devAuth: DevAuthService;
   const sleepTimeToWalletConnect = 120; // secound
@@ -169,8 +170,4 @@ function createUserPayload(phone: string) {
 
 function generateRandomPhoneNumber(): string {
   return '09' + Math.floor(1e8 + Math.random() * 9e8).toString();
-}
-
-function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
 }
