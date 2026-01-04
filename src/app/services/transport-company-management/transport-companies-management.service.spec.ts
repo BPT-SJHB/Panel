@@ -45,11 +45,7 @@ describe('TransportCompaniesManagementService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        TransportCompaniesManagementService,
-        UserAuthService,
-        APICommunicationManagementService,
-      ],
+      providers: [],
     });
 
     service = TestBed.inject(TransportCompaniesManagementService);
