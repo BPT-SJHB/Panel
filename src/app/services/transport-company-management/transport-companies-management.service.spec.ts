@@ -19,6 +19,18 @@ import {
 import z from 'zod';
 import { ApiShortResponseSchema } from 'app/data/model/short-response.model.spec';
 
+const transportCompanySampleData: TransportCompany = {
+  TCId: 21651,
+  TCTitle: 'پارسيان',
+  TCOrganizationCode: '2100651',
+  TCCityTitle: 'اصفهان - مباركه',
+  TCTel: '',
+  TCManagerMobileNumber: '',
+  TCManagerNameFamily: '',
+  EmailAddress: 'morteza1466@gmail.com',
+  Active: true,
+};
+
 describe('TransportCompaniesManagementService', () => {
   let service: TransportCompaniesManagementService;
   let devAuth: DevAuthService;
