@@ -1,10 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { TravelTimeManagementService } from './travel-time-management.service';
-import { UserAuthService } from '../user-auth-service/user-auth.service';
-import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
-import { ShortResponse } from 'app/data/model/short-response.model';
-import { TravelTime } from 'app/data/model/travel-time.model';
+import { TravelTime, zodTravelTime } from 'app/data/model/travel-time.model';
 import { DevAuthService } from '../dev-auth-service/dev-auth.service';
+import {
+  createApiResponseSchema,
+  validateResponse,
+} from 'app/utils/validate-response.test.utils.spec';
+import { ApiShortResponseSchema } from 'app/data/model/short-response.model.spec';
+import { ShortResponse } from 'app/data/model/short-response.model';
+import z from 'zod';
 
 describe('TravelTimeManagementService', () => {
   let service: TravelTimeManagementService;
