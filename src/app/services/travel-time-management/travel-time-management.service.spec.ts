@@ -31,11 +31,7 @@ describe('TravelTimeManagementService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        TravelTimeManagementService,
-        UserAuthService,
-        APICommunicationManagementService,
-      ],
+      providers: [],
     });
 
     service = TestBed.inject(TravelTimeManagementService);
