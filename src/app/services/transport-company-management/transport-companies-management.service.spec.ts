@@ -53,9 +53,12 @@ describe('TransportCompaniesManagementService', () => {
     devAuth.logout();
   });
 
+  it('Testing GetTransportCompanyBySoftwareUser method', async () => {
     await devAuth.loginAsCompany();
 
+    const response = await service.GetTransportCompanyBySoftwareUser();
 
+    validateResponse<TransportCompany>(response, ApiTransportCompanySchema);
   });
 
     await devAuth.loginAsAdmin();
