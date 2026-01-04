@@ -131,7 +131,15 @@ describe('WalletManagementService', () => {
     );
   });
 
+  it('Testing  SendPaymentRequest method', async () => {
+    await devAuth.loginAsDriver();
 
+    const response = await service.SendPaymentRequest(paymentRequestSampleData);
+
+    validateResponse<WalletPaymentRequest>(
+      response,
+      ApiWalletPaymentRequestSchema
+    );
   });
 
     await devAuth.loginAsAdmin();
