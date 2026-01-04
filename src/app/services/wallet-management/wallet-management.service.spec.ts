@@ -142,8 +142,12 @@ describe('WalletManagementService', () => {
     );
   });
 
+  it('Testing GetTruckerAssociationWalletInfo method', async () => {
     await devAuth.loginAsAdmin();
 
+    const response = await service.GetTruckerAssociationWalletInfo();
+
+    validateResponse<Wallet>(response, ApiWalletSchema);
   });
 
     await devAuth.loginAsAdmin();
