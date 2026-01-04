@@ -1,6 +1,34 @@
 import { TestBed } from '@angular/core/testing';
 import { WalletManagementService } from './wallet-management.service';
 import { DevAuthService } from '../dev-auth-service/dev-auth.service';
+import {
+  createApiResponseSchema,
+  validateResponse,
+} from 'app/utils/validate-response.test.utils.spec';
+import { Wallet, zodWallet } from './model/wallet.model';
+import {
+  WalletDefaultAmount,
+  zodWalletDefaultAmount,
+} from './model/wallet-default-amount.model';
+import z from 'zod';
+import {
+  WalletPaymentRequest,
+  zodWalletPaymentRequest,
+} from './model/wallet-payment-request.model';
+import { TransportCompany } from '../transport-company-management/model/transport-company-info.model';
+import { TruckInfo } from '../driver-truck-management/model/truck-info.model';
+import {
+  WalletTransaction,
+  zodWalletTransaction,
+} from './model/wallet-transaction.model';
+import {
+  WalletPaymentHistory,
+  zodWalletPaymentHistory,
+} from './model/wallet-payment-history.model';
+import {
+  WalletUserChargingFunction,
+  zodWalletUserChargingFunction,
+} from './model/wallet-user-charging-function.model';
 
 describe('WalletManagementService', () => {
   let service: WalletManagementService;
