@@ -31,3 +31,18 @@ const ApiFPCInfoSchema = createApiResponseSchema(zodFPCInfo);
 
 const ApiUsernamePasswordSchema = createApiResponseSchema(zodUsernamePassword);
 
+describe('FpcManagementService', () => {
+  let service: FpcManagementService;
+  let devAuth: DevAuthService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [],
+    });
+
+    service = TestBed.inject(FpcManagementService);
+    devAuth = TestBed.inject(DevAuthService);
+
+    devAuth.logout();
+  });
+});
