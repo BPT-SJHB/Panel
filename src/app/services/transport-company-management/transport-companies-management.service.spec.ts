@@ -31,6 +31,14 @@ const transportCompanySampleData: TransportCompany = {
   Active: true,
 };
 
+const ApiTransportCompanySchema = createApiResponseSchema(zodTransportCompany);
+
+const ApiTransportCompaniesSchema = createApiResponseSchema(
+  z.array(zodTransportCompany)
+);
+
+const ApiUsernamePasswordSchema = createApiResponseSchema(zodUsernamePassword);
+
 describe('TransportCompaniesManagementService', () => {
   let service: TransportCompaniesManagementService;
   let devAuth: DevAuthService;
