@@ -21,6 +21,10 @@ const travelTimeSampleData: TravelTime = {
   Active: true,
 };
 
+const ApiTravelTimesSchema = createApiResponseSchema(z.array(zodTravelTime));
+
+const ApiTravelTimeSchema = createApiResponseSchema(zodTravelTime);
+
 describe('TravelTimeManagementService', () => {
   let service: TravelTimeManagementService;
   let devAuth: DevAuthService;
