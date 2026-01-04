@@ -3,8 +3,21 @@ import { TransportCompaniesManagementService } from './transport-companies-manag
 import { UserAuthService } from '../user-auth-service/user-auth.service';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
 import { ShortResponse } from 'app/data/model/short-response.model';
-import { UsernamePassword } from 'app/data/model/username-password.model';
+import {
+  UsernamePassword,
+  zodUsernamePassword,
+} from 'app/data/model/username-password.model';
 import { DevAuthService } from '../dev-auth-service/dev-auth.service';
+import {
+  createApiResponseSchema,
+  validateResponse,
+} from 'app/utils/validate-response.test.utils.spec';
+import {
+  TransportCompany,
+  zodTransportCompany,
+} from './model/transport-company-info.model';
+import z from 'zod';
+import { ApiShortResponseSchema } from 'app/data/model/short-response.model.spec';
 
 describe('TransportCompaniesManagementService', () => {
   let service: TransportCompaniesManagementService;
