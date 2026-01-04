@@ -31,7 +31,7 @@ describe('ProvinceAndCityManagementService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ProvinceAndCityManagementService, DevAuthService],
+      providers: [],
     });
 
     service = TestBed.inject(ProvinceAndCityManagementService);

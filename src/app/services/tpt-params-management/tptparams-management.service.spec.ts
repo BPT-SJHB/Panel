@@ -47,7 +47,7 @@ describe('TPTParamsManagementService (integration)', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      providers: [TPTParamsManagementService, UserAuthService, DevAuthService],
+      providers: [],
     });
 
     service = TestBed.inject(TPTParamsManagementService);

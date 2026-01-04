@@ -83,7 +83,7 @@ describe('ReportsManagementService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ReportsManagementService, DevAuthService],
+      providers: [],
     });
 
     service = TestBed.inject(ReportsManagementService);

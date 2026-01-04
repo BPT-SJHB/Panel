@@ -80,11 +80,7 @@ describe('TrafficManagementService', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      providers: [
-        TrafficManagementService,
-        APICommunicationManagementService,
-        UserAuthService,
-      ],
+      providers: [],
     });
 
     service = TestBed.inject(TrafficManagementService);

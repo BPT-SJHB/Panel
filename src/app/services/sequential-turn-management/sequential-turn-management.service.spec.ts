@@ -71,7 +71,7 @@ describe('SequentialTurnManagementService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [SequentialTurnManagementService, DevAuthService],
+      providers: [],
     });
 
     service = TestBed.inject(SequentialTurnManagementService);
