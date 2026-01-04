@@ -39,12 +39,58 @@ describe('TravelTimeManagementService', () => {
     devAuth.logout();
   });
 
+  it('Testing TravelTime methods with flow', async () => {
+    await devAuth.loginAsAdmin();
 
+    const regRes = await service.RegisterNewTravelTime(
+      travelTimeSampleData.LoaderTypeId,
+      travelTimeSampleData.SourceCityId!,
+      travelTimeSampleData.TargetCityId!,
+      travelTimeSampleData.TravelTime!
+    );
+    validateResponse<ShortResponse>(regRes, ApiShortResponseSchema);
 
+    const getAllRes = await service.GetTravelTimes(
+      travelTimeSampleData.LoaderTypeId,
+      travelTimeSampleData.SourceCityId!,
+      travelTimeSampleData.TargetCityId!
+    );
+    validateResponse<TravelTime[]>(getAllRes, ApiTravelTimesSchema);
 
+    const getByIdRes = await service.GetTravelTime(
+      travelTimeSampleData.LoaderTypeId,
+      travelTimeSampleData.SourceCityId!,
+      travelTimeSampleData.TargetCityId!
+    );
+    validateResponse<TravelTime>(getByIdRes, ApiTravelTimeSchema);
 
+    const editRes = await service.EditTravelTime(
+      travelTimeSampleData.LoaderTypeId,
+      travelTimeSampleData.SourceCityId!,
+      travelTimeSampleData.TargetCityId!,
+      travelTimeSampleData.TravelTime!
+    );
+    validateResponse<ShortResponse>(editRes, ApiShortResponseSchema);
 
+    const deActiveStatRes = await service.ChangeTravelTimeStatus(
+      travelTimeSampleData.LoaderTypeId,
+      travelTimeSampleData.SourceCityId!,
+      travelTimeSampleData.TargetCityId!
+    );
+    validateResponse<ShortResponse>(deActiveStatRes, ApiShortResponseSchema);
 
+    const ActiveStatRes = await service.ChangeTravelTimeStatus(
+      travelTimeSampleData.LoaderTypeId,
+      travelTimeSampleData.SourceCityId!,
+      travelTimeSampleData.TargetCityId!
+    );
+    validateResponse<ShortResponse>(ActiveStatRes, ApiShortResponseSchema);
 
+    const delRes = await service.DeleteTravelTime(
+      travelTimeSampleData.LoaderTypeId,
+      travelTimeSampleData.SourceCityId!,
+      travelTimeSampleData.TargetCityId!
+    );
+    validateResponse<ShortResponse>(delRes, ApiShortResponseSchema);
   });
 });
