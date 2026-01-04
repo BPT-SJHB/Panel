@@ -150,8 +150,14 @@ describe('WalletManagementService', () => {
     validateResponse<Wallet>(response, ApiWalletSchema);
   });
 
+  it('Testing GetTruckWalletInfo method', async () => {
     await devAuth.loginAsAdmin();
 
+    const response = await service.GetTruckWalletInfo(
+      TruckInfoSampleData.TruckId
+    );
+
+    validateResponse<Wallet>(response, ApiWalletSchema);
   });
 
     await devAuth.loginAsAdmin();
