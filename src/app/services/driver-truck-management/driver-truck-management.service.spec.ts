@@ -66,6 +66,11 @@ const ApiTruckNativenessTypeSchema = createApiResponseSchema(
   z.array(zodTruckNativenessType)
 );
 
+const ApiTruckComposedInfoSchema =
+  createApiResponseSchema(zodTruckComposedInfo);
+
+const ApiWalletSchema = createApiResponseSchema(zodWallet);
+
 describe('Driver_TruckManagementService', () => {
   let service: Driver_TruckManagementService;
   let devAuth: DevAuthService;
