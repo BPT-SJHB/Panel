@@ -122,7 +122,7 @@ describe('Driver_TruckManagementService', () => {
 
     // Activation of last request
     // take 1 min after request finished
-    delay(60000);
+    await sleep(60000);
 
     const resetPassRes = await service.ResetDriverPassword(
       TruckDriverInfoSampleData.DriverId
