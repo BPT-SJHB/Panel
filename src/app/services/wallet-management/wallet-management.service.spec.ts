@@ -227,7 +227,19 @@ describe('WalletManagementService', () => {
     validateResponse<{ Total: number }>(response, ApiTotalFunctionsSchema);
   });
 
+  it('Testing GetUserChargingFunctions method', async () => {
+    await devAuth.loginAsDriver();
 
     const response = await service.GetUserChargingFunctions(
+      dateTimeSampleData.StartDate,
+      dateTimeSampleData.EndDate,
+      dateTimeSampleData.StartTime,
+      dateTimeSampleData.EndTime
+    );
+
+    validateResponse<WalletUserChargingFunction[]>(
+      response,
+      ApiWalletUserChargingFunctionSchema
+    );
   });
 });
