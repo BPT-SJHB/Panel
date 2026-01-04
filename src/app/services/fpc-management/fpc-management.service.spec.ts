@@ -45,4 +45,33 @@ describe('FpcManagementService', () => {
 
     devAuth.logout();
   });
+
+  it('Testing FPC methods with flow', async () => {
+    await devAuth.loginAsAdmin();
+
+    const regRes = await service.FPCRegistering(FPCInfoSampleData);
+    validateResponse<ShortResponse>(regRes, ApiShortResponseSchema);
+
+    const getAllRes = await service.GetFPCsInfo(FPCInfoSampleData.FPCTitle!);
+    validateResponse<FPCInfo[]>(getAllRes, ApiFPCsInfoSchema);
+
+    const getByIdRes = await service.GetFPCInfo(FPCInfoSampleData.FPCId);
+    validateResponse<FPCInfo>(getByIdRes, ApiFPCInfoSchema);
+
+    const activeSMSRes = await service.ActivateFPCSms(FPCInfoSampleData.FPCId);
+    validateResponse<ShortResponse>(activeSMSRes, ApiShortResponseSchema);
+
+    const editRes = await service.EditFPC(FPCInfoSampleData);
+    validateResponse<ShortResponse>(editRes, ApiShortResponseSchema);
+
+    const resetPassRes = await service.ResetFPCUserPassword(
+      FPCInfoSampleData.FPCId
+    );
+    validateResponse<UsernamePassword>(resetPassRes, ApiUsernamePasswordSchema);
+
+    const changeStatRes = await service.FPCChangeActiveStatus(
+      FPCInfoSampleData.FPCId
+    );
+    validateResponse<ShortResponse>(changeStatRes, ApiShortResponseSchema);
+  });
 });
