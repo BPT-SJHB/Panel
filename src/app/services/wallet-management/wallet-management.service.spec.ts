@@ -214,7 +214,17 @@ describe('WalletManagementService', () => {
     );
   });
 
+  it('Testing GetTotalOfUserFunctions method', async () => {
+    await devAuth.loginAsDriver();
 
+    const response = await service.GetTotalOfUserFunctions(
+      dateTimeSampleData.StartDate,
+      dateTimeSampleData.EndDate,
+      dateTimeSampleData.StartTime,
+      dateTimeSampleData.EndTime
+    );
+
+    validateResponse<{ Total: number }>(response, ApiTotalFunctionsSchema);
   });
 
 
