@@ -112,7 +112,12 @@ describe('WalletManagementService', () => {
     devAuth.logout();
   });
 
+  it('Testing GetUserWalletInfo method', async () => {
+    await devAuth.loginAsDriver();
 
+    const response = await service.GetUserWalletInfo();
+
+    validateResponse<Wallet>(response, ApiWalletSchema);
   });
 
 
