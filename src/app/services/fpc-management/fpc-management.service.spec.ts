@@ -14,3 +14,14 @@ import {
   zodUsernamePassword,
 } from 'app/data/model/username-password.model';
 
+const FPCInfoSampleData: FPCInfo = {
+  FPCId: 1002,
+  FPCTitle: 'فولاد',
+  FPCTel: '',
+  FPCAddress: 'کوهپایه',
+  FPCManagerMobileNumber: '09120432155',
+  FPCManagerNameFamily: 'محمدی',
+  EmailAddress: 'y@gmail.com',
+  Active: true,
+};
+
