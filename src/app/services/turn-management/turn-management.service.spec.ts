@@ -100,14 +100,38 @@ describe('TurnManagementService', () => {
     validateResponse<ShortResponse>(delRes, ApiShortResponseSchema);
   });
 
+  it('Testing Turn methods as admin with flow', async () => {
+    await devAuth.loginAsAdmin();
 
-
-
-
-
-
+    const regEmergencyTurnRes = await service.EmergencyTurnRegister(
+      truckInfoSampleData.TruckId,
+      turnCostSampleData.SeqTurnId,
+      'تست'
+    );
+    validateResponse<ShortResponse>(
+      regEmergencyTurnRes,
+      ApiShortResponseSchema
     );
 
+    const getById = await service.GetLatestTurns(truckInfoSampleData.TruckId);
+    validateResponse<Turn[]>(getById, ApiTurnSchema);
+
+    const regTurnId = getById.data[0].TurnId;
+
+    const cancelTurnRes = await service.CancelTurn(regTurnId);
+    validateResponse<ShortResponse>(cancelTurnRes, ApiShortResponseSchema);
+
+    const ResuscitateTurnRes = await service.ResuscitateTurn(regTurnId);
+    validateResponse<ShortResponse>(ResuscitateTurnRes, ApiShortResponseSchema);
+
+    const getAllTurnAccounting = await service.GetTurnAccounting(regTurnId);
+    validateResponse<TurnAccounting[]>(
+      getAllTurnAccounting,
+      ApiTurnAccountingSchema
+    );
+
+    const reCancelTurnRes = await service.CancelTurn(regTurnId);
+    validateResponse<ShortResponse>(reCancelTurnRes, ApiShortResponseSchema);
   });
 
 
