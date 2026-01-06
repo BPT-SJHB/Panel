@@ -37,4 +37,57 @@ describe('LADPlaceManagementService', () => {
 
     devAuth.logout();
   });
+
+  it('Testing LADPlace methods with flow', async () => {
+    await devAuth.loginAsAdmin();
+
+    const regRes = await service.RegisterNewLADPlace(LADPlaceSampleData);
+    validateResponse<LADPlace>(regRes, ApiLADPlaceSchema);
+
+    LADPlaceSampleData.LADPlaceId = regRes.data.LADPlaceId;
+
+    const getAllRes = await service.GetLADPlaces(
+      LADPlaceSampleData.LADPlaceTitle
+    );
+    validateResponse<LADPlace[]>(getAllRes, ApiLADPlacesSchema);
+
+    const getByIdRes = await service.GetLADPlace(LADPlaceSampleData.LADPlaceId);
+    validateResponse<LADPlace>(getByIdRes, ApiLADPlaceSchema);
+
+    const updateRes = await service.UpdateLADPlace(LADPlaceSampleData);
+    validateResponse<ShortResponse>(updateRes, ApiShortResponseSchema);
+
+    const deactivateLoadingPlaceRes = await service.ChangeLoadingPlaceStatus(
+      LADPlaceSampleData.LADPlaceId
+    );
+    validateResponse<ShortResponse>(
+      deactivateLoadingPlaceRes,
+      ApiShortResponseSchema
+    );
+
+    const activateLoadingPlaceRes = await service.ChangeLoadingPlaceStatus(
+      LADPlaceSampleData.LADPlaceId
+    );
+    validateResponse<ShortResponse>(
+      activateLoadingPlaceRes,
+      ApiShortResponseSchema
+    );
+
+    const deactivateDischargingPlaceRes =
+      await service.ChangeDischargingPlaceStatus(LADPlaceSampleData.LADPlaceId);
+    validateResponse<ShortResponse>(
+      deactivateDischargingPlaceRes,
+      ApiShortResponseSchema
+    );
+
+    const activateDischargingPlaceRes =
+      await service.ChangeDischargingPlaceStatus(LADPlaceSampleData.LADPlaceId);
+    validateResponse<ShortResponse>(
+      activateDischargingPlaceRes,
+      ApiShortResponseSchema
+    );
+
+    const delRes = await service.DeleteLADPlace(LADPlaceSampleData.LADPlaceId);
+    validateResponse<ShortResponse>(delRes, ApiShortResponseSchema);
+  });
 });
