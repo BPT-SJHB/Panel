@@ -23,6 +23,31 @@ import {
   zodTurnForSoftwareUser,
 } from './model/turn-for-software-user.model';
 
+const turnCostSampleData: TurnCost = {
+  SeqTurnId: 1,
+  SeqTurnTitle: 'اطاقدار شوينده',
+  SelfGoverCost: 350000,
+  TruckersAssociationCost: 50000,
+  TruckDriversAssociationCost: 50000,
+};
+
+const turnAccountingSampleData: TurnAccounting = {
+  TurnId: 7,
+  SequentialTurnId: 'Z1404/000003:7',
+  DateShamsi: '1404/04/09',
+  Time: '22:14:47',
+  AccountingTypeTitle: 'صدور نوبت',
+  UserName: 'مرتضي شاهمرادي',
+};
+
+const truckInfoSampleData: TruckInfo = {
+  TruckId: 5,
+  LoaderTypeId: 605,
+  Pelak: '673ع32',
+  Serial: '52',
+  SmartCardNo: '2305365',
+};
+
 describe('TurnManagementService', () => {
   let service: TurnManagementService;
   let auth: DevAuthService;
