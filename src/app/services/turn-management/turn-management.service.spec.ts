@@ -155,7 +155,21 @@ describe('TurnManagementService', () => {
     validateResponse<ShortResponse>(cancelTurnRes, ApiShortResponseSchema);
   });
 
+  it('Testing Turn methods as second driver with flow', async () => {
+    await devAuth.loginAsAdmin();
 
+    const regReserveTurnRes = await service.ReserveTurnRegister();
+    validateResponse<ShortResponse>(regReserveTurnRes, ApiShortResponseSchema);
 
+    const resuscitateReserveTurnRes = await service.ResuscitateReserveTurn(
+      truckInfoSampleData.TruckId,
+      turnCostSampleData.SeqTurnId,
+      turnAccountingSampleData.DateShamsi!,
+      turnAccountingSampleData.Time!
+    );
+    validateResponse<ShortResponse>(
+      resuscitateReserveTurnRes,
+      ApiShortResponseSchema
+    );
   });
 });
