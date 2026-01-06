@@ -77,8 +77,12 @@ describe('TurnManagementService', () => {
     devAuth.logout();
   });
 
+  it('Testing TurnStatus method', async () => {
+    await devAuth.loginAsAdmin();
 
+    const response = await service.GetAllTurnStatus();
 
+    validateResponse<TurnStatus[]>(response, ApiTurnStatusesSchema);
   });
 
 
