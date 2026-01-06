@@ -85,9 +85,19 @@ describe('TurnManagementService', () => {
     validateResponse<TurnStatus[]>(response, ApiTurnStatusesSchema);
   });
 
+  it('Testing TurnCost methods with flow', async () => {
+    await devAuth.loginAsAdmin();
 
+    const regRes = await service.RegisterTurnCost(turnCostSampleData);
+    validateResponse<ShortResponse>(regRes, ApiShortResponseSchema);
 
+    const getAllRes = await service.GetAllTurnCosts();
+    validateResponse<TurnCost[]>(getAllRes, ApiTurnCostsSchema);
 
+    const delRes = await service.DeleteTurnCost({
+      SeqTurnId: turnCostSampleData.SeqTurnId,
+    });
+    validateResponse<ShortResponse>(delRes, ApiShortResponseSchema);
   });
 
 
