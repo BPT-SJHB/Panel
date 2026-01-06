@@ -23,3 +23,18 @@ const ApiLADPlaceSchema = createApiResponseSchema(zodLADPlace);
 
 const ApiLADPlacesSchema = createApiResponseSchema(z.array(zodLADPlace));
 
+describe('LADPlaceManagementService', () => {
+  let service: LADPlaceManagementService;
+  let devAuth: DevAuthService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [],
+    });
+
+    service = TestBed.inject(LADPlaceManagementService);
+    devAuth = TestBed.inject(DevAuthService);
+
+    devAuth.logout();
+  });
+});
