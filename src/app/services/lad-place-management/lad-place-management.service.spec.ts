@@ -19,3 +19,7 @@ const LADPlaceSampleData: LADPlace = {
   DischargingActive: true,
 };
 
+const ApiLADPlaceSchema = createApiResponseSchema(zodLADPlace);
+
+const ApiLADPlacesSchema = createApiResponseSchema(z.array(zodLADPlace));
+
