@@ -64,7 +64,7 @@ const ApiTurnForSoftwareUserSchema = createApiResponseSchema(
 
 describe('TurnManagementService', () => {
   let service: TurnManagementService;
-  let auth: DevAuthService;
+  let devAuth: DevAuthService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -72,9 +72,9 @@ describe('TurnManagementService', () => {
     });
 
     service = TestBed.inject(TurnManagementService);
-    auth = TestBed.inject(DevAuthService);
+    devAuth = TestBed.inject(DevAuthService);
 
-    auth.logout();
+    devAuth.logout();
   });
 
   // TODO: add truck Id that exits
