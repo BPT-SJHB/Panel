@@ -134,10 +134,25 @@ describe('TurnManagementService', () => {
     validateResponse<ShortResponse>(reCancelTurnRes, ApiShortResponseSchema);
   });
 
+  it('Testing Turn methods as driver with flow', async () => {
+    await devAuth.loginAsDriver();
 
+    const realTimeTurnRegRes = await service.RealTimeTurnRegister(
+      truckInfoSampleData.TruckId,
+      turnCostSampleData.SeqTurnId
+    );
+    validateResponse<ShortResponse>(realTimeTurnRegRes, ApiShortResponseSchema);
 
+    const getTurnIdRes = await service.GetLatestTurnsForSoftwareUser();
+    validateResponse<TurnForSoftwareUser[]>(
+      getTurnIdRes,
+      ApiTurnForSoftwareUserSchema
+    );
 
+    const regTurnId = getTurnIdRes.data[0].TurnId;
 
+    const cancelTurnRes = await service.CancelTurn(regTurnId);
+    validateResponse<ShortResponse>(cancelTurnRes, ApiShortResponseSchema);
   });
 
 
