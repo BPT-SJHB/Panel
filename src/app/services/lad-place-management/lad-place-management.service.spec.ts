@@ -10,3 +10,12 @@ import z from 'zod';
 import { ShortResponse } from 'app/data/model/short-response.model';
 import { ApiShortResponseSchema } from 'app/data/model/short-response.model.spec';
 
+const LADPlaceSampleData: LADPlace = {
+  LADPlaceId: 0,
+  LADPlaceTitle: 'فولاد',
+  LADPlaceTel: '',
+  LADPlaceAddress: '',
+  LoadingActive: true,
+  DischargingActive: true,
+};
+
