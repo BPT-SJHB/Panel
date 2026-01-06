@@ -2,8 +2,26 @@ import { TestBed } from '@angular/core/testing';
 import { TurnManagementService } from './turn-management.service';
 import { UserAuthService } from '../user-auth-service/user-auth.service';
 import { DevAuthService } from '../dev-auth-service/dev-auth.service';
-import { TurnCost } from './model/turn-cost.model';
+import { TurnCost, zodTurnCost } from './model/turn-cost.model';
 import { mockTurnCosts } from './mock/turn-cost.mock';
+import z from 'zod';
+import {
+  createApiResponseSchema,
+  validateResponse,
+} from 'app/utils/validate-response.test.utils.spec';
+import { TurnStatus, zodTurnStatus } from './model/turn-status.model';
+import { ShortResponse } from 'app/data/model/short-response.model';
+import { ApiShortResponseSchema } from 'app/data/model/short-response.model.spec';
+import { Turn, zodTurn } from './model/turn.model';
+import {
+  TurnAccounting,
+  zodTurnAccounting,
+} from './model/turn-accounting.model';
+import { TruckInfo } from '../driver-truck-management/model/truck-info.model';
+import {
+  TurnForSoftwareUser,
+  zodTurnForSoftwareUser,
+} from './model/turn-for-software-user.model';
 
 describe('TurnManagementService', () => {
   let service: TurnManagementService;
