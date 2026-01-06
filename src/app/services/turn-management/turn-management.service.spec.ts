@@ -48,6 +48,20 @@ const truckInfoSampleData: TruckInfo = {
   SmartCardNo: '2305365',
 };
 
+const ApiTurnStatusesSchema = createApiResponseSchema(z.array(zodTurnStatus));
+
+const ApiTurnCostsSchema = createApiResponseSchema(z.array(zodTurnCost));
+
+const ApiTurnSchema = createApiResponseSchema(z.array(zodTurn));
+
+const ApiTurnAccountingSchema = createApiResponseSchema(
+  z.array(zodTurnAccounting)
+);
+
+const ApiTurnForSoftwareUserSchema = createApiResponseSchema(
+  z.array(zodTurnForSoftwareUser)
+);
+
 describe('TurnManagementService', () => {
   let service: TurnManagementService;
   let auth: DevAuthService;
