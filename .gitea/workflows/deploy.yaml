@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: alpine
     steps:
       - name: Execute Remote Commands via SSH
         uses: https://github.com/appleboy/ssh-action@master
