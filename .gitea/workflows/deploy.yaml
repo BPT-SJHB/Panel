@@ -1,13 +1,36 @@
-name: Auto Update Directory
-on: [push] # Triggers on every push
+name: Panel Production Deploy
+on:
+  push:
+    branches: [main]
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest # Or your custom label
+  build-and-deploy:
+    runs-on: local-server # Your runner name
     steps:
-      - name: Update local folder
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '24' # Replaces your NVM logic
+          cache: 'npm'       # Speeds up install by caching node_modules
+
+      - name: Install Dependencies
+        run: npm ci          # 'ci' is cleaner/faster than 'install' for CI/CD
+
+      - name: Build Angular App
+        run: npx ng build --output-hashing=all --configuration production
+
+      - name: Deploy to Web Directory
         run: |
-          cd /home/user/my-app-folder
-          git pull origin main
-          # Optional: restart your app
-          # pm2 restart my-app
+          # We use sudo here only if your runner has passwordless sudo permission
+          sudo mkdir -p /var/www/eldoria
+          sudo cp -r ./dist/bpt-sjhb-panel/browser/* /var/www/eldoria/
+          sudo chown -R www-data:www-data /var/www/eldoria
+          
+      - name: Reload Nginx
+        run: |
+          sudo nginx -t && sudo nginx -s reload
