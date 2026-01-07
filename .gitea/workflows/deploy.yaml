@@ -7,7 +7,6 @@ on:
 jobs:
   deploy:
     runs-on: local-host
-    timeout-minutes: 10
     steps:
       - name: 🛠️ Setup Environment and Update Code
         run: |
