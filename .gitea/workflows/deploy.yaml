@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: alpine
+    runs-on: alpine:latest
     steps:
       - name: Execute Remote Commands via SSH
         uses: https://github.com/appleboy/ssh-action@master
