@@ -30,6 +30,8 @@ jobs:
             else
               echo "npm ci failed" && exit 1
             fi
+            
+            cp ../environment.ts ./src/environments/
 
             if ng build --output-hashing=all --configuration production; then
               echo "Build successful"
