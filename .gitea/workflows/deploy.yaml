@@ -16,24 +16,15 @@ jobs:
           key: ${{ secrets.PRIVATEKEYTOSSH }}
           port: 2280
           script: |
-            # 1. Setup Environment (Node v24)
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             
             nvm use 24
 
-            # 2. Navigate and Update Source
-            cd /home/bpt-user/Downloads/Panel
+            cd /home/bpt-user/Downloads/Panel/
             git fetch origin main
-            git reset --hard origin/main  # Cleaner than stash; forces host to match Git exactly
-            
-            # 3. Update Source
-            cd $REPO_DIR
-            git fetch origin main
-            # Using reset --hard is safer for automation than pull --force
             git reset --hard origin/main 
-
-            # 4. Build Process
+            
             if npm ci; then
               echo "Packages installed successfully"
             else
@@ -46,7 +37,6 @@ jobs:
               echo "Build failed" && exit 1
             fi
 
-            # 6. Reload Nginx
             if sudo nginx -s reload; then
               echo "Nginx reloaded successfully"
             else
