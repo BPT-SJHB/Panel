@@ -1,12 +1,13 @@
+---
 name: Panel Production Deploy (SSH Mode)
 on:
   push:
     branches:
       - rezishon-patch-1
-     
 jobs:
   deploy:
     runs-on: local-host
+    timeout-minutes: 10
     steps:
       - name: 🛠️ Setup Environment and Update Code
         run: |
@@ -14,42 +15,42 @@ jobs:
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           nvm use 24
           cd /home/bpt-user/Downloads/Panel/
-          
+
           git fetch origin main
           git reset --hard origin/main
-      
+          
       - name: 📦 Install Dependencies
         run: |
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           nvm use 24
           cd /home/bpt-user/Downloads/Panel/
-          
+
           if [ ! -d "node_modules" ]; then
             npm install
           else
             npm install --prefer-offline --no-audit
           fi
-       
-       - name: 🏗️ Angular Build
-         run: |
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm use 24
-            cd /home/bpt-user/Downloads/Panel/
-            
-            cp ../environment.ts ./src/environments/
-
-            if ng build --output-hashing=all --configuration production; then
-              echo "Build successful"
-            else
-              echo "Build failed" && exit 1
-            fi
           
-       - name: 🚀 Deploy to Nginx
-         run: |
-            if sudo nginx -s reload; then
-              echo "Nginx reloaded successfully"
-            else
-              echo "Nginx reload failed" && exit 1
-            fi
+      - name: 🏗️ Angular Build
+        run: |
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          nvm use 24
+          cd /home/bpt-user/Downloads/Panel/
+
+          cp ../environment.ts ./src/environments/
+
+          if ng build --output-hashing=all --configuration production; then
+            echo "Build successful"
+          else
+            echo "Build failed" && exit 1
+          fi
+          
+      - name: 🚀 Deploy to Nginx
+        run: |
+          if sudo nginx -s reload; then
+            echo "Nginx reloaded successfully"
+          else
+            echo "Nginx reload failed" && exit 1
+          fi
