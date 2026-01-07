@@ -1,0 +1,13 @@
+name: Auto Update Directory
+on: [push] # Triggers on every push
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # Or your custom label
+    steps:
+      - name: Update local folder
+        run: |
+          cd /home/user/my-app-folder
+          git pull origin main
+          # Optional: restart your app
+          # pm2 restart my-app
