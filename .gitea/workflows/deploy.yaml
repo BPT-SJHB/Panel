@@ -3,16 +3,10 @@ on:
   push:
     branches:
       - rezishon-patch-1
-      
-defaults:
-  run:
-    shell: sh
-
+     
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-    container: 
-      image: alpine:latest
+    runs-on: local-host 
     steps:
       - name: Execute Remote Commands via SSH
         uses: https://github.com/appleboy/ssh-action@master
