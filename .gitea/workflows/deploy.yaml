@@ -3,7 +3,7 @@ name: Panel Production Deploy (SSH Mode)
 on:
   push:
     branches:
-      - main
+      - rezishon-patch-1
 jobs:
   deploy:
     runs-on: local-host
