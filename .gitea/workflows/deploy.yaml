@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - rezishon-patch-1
+      
+defaults:
+  run:
+    shell: sh
 
 jobs:
   deploy:
