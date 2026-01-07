@@ -44,4 +44,3 @@ jobs:
             else
               echo "Nginx reload failed" && exit 1
             fi
-            
