@@ -1,36 +1,54 @@
-name: Panel Production Deploy
+name: Panel Production Deploy (SSH Mode)
 on:
   push:
-    branches: [main]
+    branches:
+      - rezishon-patch-1
 
 jobs:
-  build-and-deploy:
-    runs-on: local-server # Your runner name
+  deploy:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+      - name: Execute Remote Commands via SSH
+        uses: https://github.com/appleboy/ssh-action@master
         with:
-          fetch-depth: 0
+          host: 192.168.1.9  # Use your server's internal IP
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 2280
+          script: |
+            # 1. Setup Environment (Node v24)
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            
+            nvm use 24
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '24' # Replaces your NVM logic
-          cache: 'npm'       # Speeds up install by caching node_modules
+            # 2. Navigate and Update Source
+            cd /home/bpt-user/Downloads/Panel
+            git fetch origin main
+            git reset --hard origin/main  # Cleaner than stash; forces host to match Git exactly
+            
+            # 3. Update Source
+            cd $REPO_DIR
+            git fetch origin main
+            # Using reset --hard is safer for automation than pull --force
+            git reset --hard origin/main 
 
-      - name: Install Dependencies
-        run: npm ci          # 'ci' is cleaner/faster than 'install' for CI/CD
+            # 4. Build Process
+            if npm ci; then
+              echo "Packages installed successfully"
+            else
+              echo "npm ci failed" && exit 1
+            fi
 
-      - name: Build Angular App
-        run: npx ng build --output-hashing=all --configuration production
+            if ng build --output-hashing=all --configuration production; then
+              echo "Build successful"
+            else
+              echo "Build failed" && exit 1
+            fi
 
-      - name: Deploy to Web Directory
-        run: |
-          # We use sudo here only if your runner has passwordless sudo permission
-          sudo mkdir -p /var/www/eldoria
-          sudo cp -r ./dist/bpt-sjhb-panel/browser/* /var/www/eldoria/
-          sudo chown -R www-data:www-data /var/www/eldoria
-          
-      - name: Reload Nginx
-        run: |
-          sudo nginx -t && sudo nginx -s reload
+            # 6. Reload Nginx
+            if sudo nginx -s reload; then
+              echo "Nginx reloaded successfully"
+            else
+              echo "Nginx reload failed" && exit 1
+            fi
