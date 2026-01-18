@@ -1,4 +1,3 @@
-
 import { Component, OnInit, OnDestroy, inject, signal } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
@@ -14,7 +13,7 @@ import { checkAndToastError } from 'app/utils/api-utils';
 
 // 📦 Models
 import { TurnForSoftwareUser } from 'app/services/turn-management/model/turn-for-software-user.model';
-import { ButtonComponent } from "app/components/shared/button/button.component";
+import { ButtonComponent } from 'app/components/shared/button/button.component';
 
 interface CardTurnItem {
   TurnId: number;
@@ -48,7 +47,7 @@ export class IssuedTurnListFormComponent implements OnInit, OnDestroy {
   readonly loading = signal(false);
 
   // 📌 Table columns config
-  readonly cols: ReadonlyArray<{ col: string; field: keyof CardTurnItem }> = [
+  readonly cols: readonly { col: string; field: keyof CardTurnItem }[] = [
     { col: 'شماره نوبت', field: 'TurnId' },
     { col: 'فاصله تا اعتبار', field: 'TurnDistanceToValidity' },
     { col: 'زمان', field: 'Time' },
@@ -103,7 +102,8 @@ export class IssuedTurnListFormComponent implements OnInit, OnDestroy {
     try {
       this.loadingService.setLoading(true);
 
-      const response = await this.turnsManagerService.GetLatestTurnsForSoftwareUser();
+      const response =
+        await this.turnsManagerService.GetLatestTurnsForSoftwareUser();
 
       if (!checkAndToastError(response, this.toast)) {
         this.turnsList.set([]);
@@ -111,14 +111,16 @@ export class IssuedTurnListFormComponent implements OnInit, OnDestroy {
       }
 
       // 🧱 Map backend data into display-friendly format
-      const turnItems: CardTurnItem[] = response.data.map((turn: TurnForSoftwareUser) => ({
-        TurnId: turn.TurnId,
-        TurnDistanceToValidity: turn.TurnDistanceToValidity,
-        Time: `${turn.TurnIssueDate} - ${turn.TurnIssueTime}`,
-        TurnStatusTitle: turn.TurnStatusTitle,
-        LspString: turn.LPString,
-        TruckDriver: turn.TruckDriver,
-      }));
+      const turnItems: CardTurnItem[] = response.data.map(
+        (turn: TurnForSoftwareUser) => ({
+          TurnId: turn.TurnId,
+          TurnDistanceToValidity: turn.TurnDistanceToValidity,
+          Time: `${turn.TurnIssueDate} - ${turn.TurnIssueTime}`,
+          TurnStatusTitle: turn.TurnStatusTitle,
+          LspString: turn.LPString,
+          TruckDriver: turn.TruckDriver,
+        })
+      );
 
       this.turnsList.set(turnItems);
     } finally {
