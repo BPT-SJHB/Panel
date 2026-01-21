@@ -185,4 +185,12 @@ describe('LoadManagementService', () => {
     validateResponse<ShortResponse>(response, ApiShortResponseSchema);
   });
 
+  it('Testing FreeLineLoad method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.FreeLineLoad(loadInfoSampleData.LoadId);
+
+    validateResponse<ShortResponse>(response, ApiShortResponseSchema);
+  });
+
 });
