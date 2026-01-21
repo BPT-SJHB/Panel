@@ -420,5 +420,25 @@ describe('LoadManagementService', () => {
 
   //#region LoadPermission method
 
+  it('Testing CancelLoadPermission method', async () => {
+    const inputData = {
+      laId: 1,
+      description: 'testing',
+      TurnResuscitation: true,
+      LoadResuscitation: true,
+    };
+
+    await devAuth.loginAsAdmin();
+
+    const response = await service.CancelLoadPermission(
+      inputData.laId,
+      inputData.description,
+      inputData.TurnResuscitation,
+      inputData.LoadResuscitation
+    );
+
+    validateResponse<ShortResponse>(response, ApiShortResponseSchema);
+  });
+
   //#endregion
 });
