@@ -276,4 +276,33 @@ describe('LoadManagementService', () => {
     validateResponse<LoadInfo>(response, ApiLoadInfoSchema);
   });
 
+  it('Testing GetTPTParams methods with flow', async () => {
+    await devAuth.loginAsCompany();
+
+    const getInArrayRes = await service.GetTransportTariffParamsInArray(
+      mockTransportTariffParamInString.TPTParams
+    );
+    validateResponse<TransportTariffParam[]>(
+      getInArrayRes,
+      ApiTransportTariffParamsSchema
+    );
+
+    const getInStringRes = await service.GetTransportTariffParamsInString([
+      tPTParamSampleData,
+    ]);
+    validateResponse<TransportTariffParam[]>(
+      getInStringRes,
+      ApiTransportTariffParamsSchema
+    );
+
+    const getByAnnouncementSubGroupRes =
+      await service.GetTransportTariffParamsByAnnouncementSubGroupId(
+        loadInfoSampleData.AnnouncementSubGroupId!
+      );
+    validateResponse<TransportTariffParam[]>(
+      getByAnnouncementSubGroupRes,
+      ApiTransportTariffParamsSchema
+    );
+  });
+
 });
