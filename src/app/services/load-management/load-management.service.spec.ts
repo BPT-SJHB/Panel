@@ -305,4 +305,14 @@ describe('LoadManagementService', () => {
     );
   });
 
+  it('Testing ChangePriorityLoadAllocations method', async () => {
+    await devAuth.loginAsDriver();
+
+    const response = await service.ChangePriorityLoadAllocations(
+      loadAllocationsPrioritySampleData
+    );
+
+    validateResponse<ShortResponse>(response, ApiShortResponseSchema);
+  });
+
 });
