@@ -320,6 +320,8 @@ describe('LoadManagementService', () => {
 
   //#endregion
 
+  //#region LoadAllocation methods
+
   it('Testing LoadAllocation for companies with flow', async () => {
     await devAuth.loginAsCompany();
 
@@ -413,5 +415,7 @@ describe('LoadManagementService', () => {
       ApiShortResponseSchema
     );
   });
+
+  //#endregion
 
 });
