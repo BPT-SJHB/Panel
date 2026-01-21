@@ -201,4 +201,15 @@ describe('LoadManagementService', () => {
     validateResponse<ShortResponse>(response, ApiShortResponseSchema);
   });
 
+  it('Testing GetLoadsForTransportCompanies method', async () => {
+    await devAuth.loginAsCompany();
+
+    const response = await service.GetLoadsForTransportCompanies();
+
+    validateResponse<LoadForTransportCompanies_Factories_Admins_Drivers[]>(
+      response,
+      ApiLoadForTransportCompanies_Factories_Admins_DriversSchema
+    );
+  });
+
 });
