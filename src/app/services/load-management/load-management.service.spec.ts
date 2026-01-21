@@ -320,4 +320,29 @@ describe('LoadManagementService', () => {
 
   //#endregion
 
+  it('Testing LoadAllocation for companies with flow', async () => {
+    await devAuth.loginAsCompany();
+
+    const regRes = await service.RegisterNewLoadAllocationForTransportCompanies(
+      truck_DriverInfoSampleData.TruckId,
+      truck_DriverInfoSampleData.DriverId,
+      loadInfoSampleData.LoadId
+    );
+    validateResponse<ShortResponse>(regRes, ApiShortResponseSchema);
+
+    const getRes = await service.GetRecordsOfLoadAllocation();
+    validateResponse<LoadAllocationInfo[]>(getRes, ApiLoadAllocationInfoSchema);
+
+    const regLAId = getRes.data[0].LAId;
+
+    const cancelLoadAllocationRes = await service.CancelLoadAllocation(
+      regLAId,
+      loadInfoSampleData.LoadId
+    );
+    validateResponse<ShortResponse>(
+      cancelLoadAllocationRes,
+      ApiShortResponseSchema
+    );
+  });
+
 });
