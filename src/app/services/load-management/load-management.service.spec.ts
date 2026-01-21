@@ -75,6 +75,39 @@ const truck_DriverInfoSampleData = {
 };
 //#endregion
 
+//#region ApiSchema
+const ApiNewLoadIdSchema = createApiResponseSchema(
+  z.object({ newLoadId: z.number() })
+);
+
+const ApiLoadForTransportCompanies_Factories_Admins_DriversSchema =
+  createApiResponseSchema(
+    z.array(zodLoadForTransportCompanies_Factories_Admins_Drivers)
+  );
+
+const ApiLoadStatusesSchema = createApiResponseSchema(z.array(zodLoadStatus));
+
+const ApiLoadInfoSchema = createApiResponseSchema(zodLoadInfo);
+
+const ApiTransportTariffParamsSchema = createApiResponseSchema(
+  z.array(zodTransportTariffParam)
+);
+
+const ApiLoadAllocationInfoSchema = createApiResponseSchema(
+  z.array(zodLoadAllocationInfo)
+);
+
+const ApiTravelTimeSchema = createApiResponseSchema(
+  z.object({
+    TravelTime: z.number(),
+  })
+);
+
+const ApiLoadAllocateToNextTurnSchema = createApiResponseSchema(
+  zodLoadAllocateToNextTurn
+);
+//#endregion
+
 describe('LoadManagementService', () => {
   let service: LoadManagementService;
   let devAuth: DevAuthService;
