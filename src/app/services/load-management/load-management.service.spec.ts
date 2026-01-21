@@ -385,4 +385,33 @@ describe('LoadManagementService', () => {
     );
   });
 
+  it('Testing LoadAllocation for driver with flow', async () => {
+    await devAuth.loginAsDriver();
+
+    const regRes = await service.RegisterNewLoadAllocationForDrivers(
+      loadInfoSampleData.LoadId
+    );
+    validateResponse<ShortResponse>(regRes, ApiShortResponseSchema);
+
+    const getRes = await service.GetLoadAllocationOfDriver();
+    validateResponse<LoadAllocationInfo[]>(getRes, ApiLoadAllocationInfoSchema);
+
+    const regLAId = getRes.data[0].LAId;
+
+    const getTravelTimeRes =
+      await service.GetTravelTimeOfLoadAllocation(regLAId);
+    validateResponse<{
+      TravelTime: number;
+    }>(getTravelTimeRes, ApiTravelTimeSchema);
+
+    const cancelLoadAllocationRes = await service.CancelLoadAllocation(
+      regLAId,
+      loadInfoSampleData.LoadId
+    );
+    validateResponse<ShortResponse>(
+      cancelLoadAllocationRes,
+      ApiShortResponseSchema
+    );
+  });
+
 });
