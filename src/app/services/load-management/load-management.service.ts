@@ -13,7 +13,10 @@ import { mockLoadStatuses } from './mock/load-status.mock';
 import { LoadInfo } from './model/load-info.model';
 import { mockLoadInfo } from './mock/load-info.mock';
 import { TransportTariffParam } from './model/transport-tariff-param.model';
-import { mockTransportTariffParams } from './mock/transport-tariff-param.mock';
+import {
+  mockTransportTariffParamInString,
+  mockTransportTariffParams,
+} from './mock/transport-tariff-param.mock';
 import { LoadRegister } from './model/load-register.model';
 import { LoadEdit } from './model/load-edit.model';
 import { ShortResponse } from 'app/data/model/short-response.model';
@@ -133,13 +136,13 @@ export class LoadManagementService {
   }
 
   public async ChangePriorityLoadAllocations(
-    prioritys: LoadAllocationPriority[]
+    priority: LoadAllocationPriority[]
   ): Promise<ApiResponse<ShortResponse>> {
     //#region Consts
     const apiUrl = API_ROUTES.LoadAllocationAPI.ChangeLoadAllocationsPriority;
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
-      LAIdPrioritys: prioritys,
+      LAIdPrioritys: priority,
     };
     //#endregion
 
@@ -701,6 +704,7 @@ export class LoadManagementService {
   //#endregion
 
   //#region LoadPermission methods
+
   public async CancelLoadPermission(
     laId: number,
     description: string,
@@ -726,5 +730,6 @@ export class LoadManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
   //#endregion
 }
