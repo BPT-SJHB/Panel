@@ -418,4 +418,7 @@ describe('LoadManagementService', () => {
 
   //#endregion
 
+  //#region LoadPermission method
+
+  //#endregion
 });
