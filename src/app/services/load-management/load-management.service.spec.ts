@@ -30,6 +30,51 @@ import {
   zodLoadAllocateToNextTurn,
 } from './model/load-allocated-to-next-turn.model';
 
+//#region SampleData
+const loadInfoSampleData: LoadInfo = {
+  LoadId: 0,
+  // AnnounceDate: '1404/05/19',
+  // AnnounceTime: '14:41:59',
+  TransportCompanyId: 21306,
+  GoodId: 2520000,
+  AnnouncementGroupId: 2,
+  AnnouncementSubGroupId: 7,
+  SourceCityId: 21451004,
+  TargetCityId: 91390000,
+  LoadingPlaceId: 1002,
+  DischargingPlaceId: 1003,
+  TotalNumber: 1,
+  Tonaj: 22,
+  Tariff: '295541600',
+  Recipient: '',
+  Address: '',
+  Description: 'فرداصبح بارگيري',
+  // LoadStatusId: 1,
+  TPTParams:
+    '135:0;139:0;143:0;147:0;151:0;157:0;16:0;163:0;169:0;175:0;181:0;187:0;193:0;199:0;205:0;211:0;217:0;223:0;229:0;235:0',
+  // TPTParamsJoint: '0',
+};
+
+const tPTParamSampleData: TransportTariffParam = {
+  TPTPDId: 135,
+  TPTPTitle: 'دو باسکوله (ذوب آهنی)',
+  Cost: 6000000,
+  Checked: false,
+};
+
+const loadAllocationsPrioritySampleData: LoadAllocationPriority[] = [
+  { LAId: 1, Priority: 1 },
+  { LAId: 2, Priority: 2 },
+  { LAId: 3, Priority: 3 },
+  { LAId: 4, Priority: 4 },
+];
+
+const truck_DriverInfoSampleData = {
+  TruckId: 5,
+  DriverId: 5,
+};
+//#endregion
+
 describe('LoadManagementService', () => {
   let service: LoadManagementService;
   let devAuth: DevAuthService;
