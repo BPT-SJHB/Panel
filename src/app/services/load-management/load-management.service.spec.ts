@@ -226,4 +226,24 @@ describe('LoadManagementService', () => {
     );
   });
 
+  it('Testing GetLoadsForAdmin method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.GetLoadsForAdmin(
+      loadInfoSampleData.TransportCompanyId,
+      loadInfoSampleData.AnnouncementGroupId,
+      loadInfoSampleData.AnnouncementSubGroupId,
+      true,
+      loadInfoSampleData.AnnounceDate,
+      loadInfoSampleData.LoadStatusId,
+      loadInfoSampleData.SourceCityId,
+      loadInfoSampleData.TargetCityId
+    );
+
+    validateResponse<LoadForTransportCompanies_Factories_Admins_Drivers[]>(
+      response,
+      ApiLoadForTransportCompanies_Factories_Admins_DriversSchema
+    );
+  });
+
 });
