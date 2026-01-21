@@ -122,4 +122,28 @@ describe('LoadManagementService', () => {
 
     devAuth.logout();
   });
+  it('Testing RegisterNewLoad method', async () => {
+    await devAuth.loginAsCompany();
+
+    const response = await service.RegisterNewLoad({
+      TransportCompanyId: loadInfoSampleData.TransportCompanyId,
+      GoodId: loadInfoSampleData.GoodId,
+      AnnouncementGroupId: loadInfoSampleData.AnnouncementGroupId,
+      AnnouncementSubGroupId: loadInfoSampleData.AnnouncementSubGroupId,
+      SourceCityId: loadInfoSampleData.SourceCityId,
+      TargetCityId: loadInfoSampleData.TargetCityId,
+      LoadingPlaceId: loadInfoSampleData.LoadingPlaceId,
+      DischargingPlaceId: loadInfoSampleData.DischargingPlaceId,
+      TotalNumber: loadInfoSampleData.TotalNumber,
+      Tonaj: loadInfoSampleData.Tonaj,
+      Tariff: loadInfoSampleData.Tariff,
+      Recipient: loadInfoSampleData.Recipient,
+      Address: loadInfoSampleData.Address,
+      Description: loadInfoSampleData.Description,
+      LoadStatusId: loadInfoSampleData.LoadStatusId,
+      TPTParams: loadInfoSampleData.TPTParams,
+    });
+
+    validateResponse<{ newLoadId: number }>(response, ApiNewLoadIdSchema);
+  });
 });
