@@ -169,4 +169,12 @@ describe('LoadManagementService', () => {
     validateResponse<ShortResponse>(response, ApiShortResponseSchema);
   });
 
+  it('Testing DeleteLoad method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.DeleteLoad(loadInfoSampleData.LoadId);
+
+    validateResponse<ShortResponse>(response, ApiShortResponseSchema);
+  });
+
 });
