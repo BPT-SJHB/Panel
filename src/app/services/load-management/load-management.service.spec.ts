@@ -268,4 +268,12 @@ describe('LoadManagementService', () => {
     validateResponse<LoadStatus[]>(response, ApiLoadStatusesSchema);
   });
 
+  it('Testing GetLoadInfo method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.GetLoadInfo(loadInfoSampleData.LoadId);
+
+    validateResponse<LoadInfo>(response, ApiLoadInfoSchema);
+  });
+
 });
