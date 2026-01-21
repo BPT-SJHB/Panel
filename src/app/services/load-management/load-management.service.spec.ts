@@ -212,4 +212,18 @@ describe('LoadManagementService', () => {
     );
   });
 
+  it('Testing GetLoadsForDrivers method', async () => {
+    await devAuth.loginAsDriver();
+
+    const response = await service.GetLoadsForDrivers(
+      loadInfoSampleData.AnnouncementSubGroupId!,
+      loadInfoSampleData.LoadStatusId!
+    );
+
+    validateResponse<LoadForTransportCompanies_Factories_Admins_Drivers[]>(
+      response,
+      ApiLoadForTransportCompanies_Factories_Admins_DriversSchema
+    );
+  });
+
 });
