@@ -260,4 +260,12 @@ describe('LoadManagementService', () => {
     );
   });
 
+  it('Testing GetLoadStatuses method', async () => {
+    await devAuth.loginAsDriver();
+
+    const response = await service.GetLoadStatuses();
+
+    validateResponse<LoadStatus[]>(response, ApiLoadStatusesSchema);
+  });
+
 });
