@@ -177,4 +177,12 @@ describe('LoadManagementService', () => {
     validateResponse<ShortResponse>(response, ApiShortResponseSchema);
   });
 
+  it('Testing CancelLoad method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.CancelLoad(loadInfoSampleData.LoadId);
+
+    validateResponse<ShortResponse>(response, ApiShortResponseSchema);
+  });
+
 });
