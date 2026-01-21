@@ -193,4 +193,12 @@ describe('LoadManagementService', () => {
     validateResponse<ShortResponse>(response, ApiShortResponseSchema);
   });
 
+  it('Testing SedimentLoad method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.SedimentLoad(loadInfoSampleData.LoadId);
+
+    validateResponse<ShortResponse>(response, ApiShortResponseSchema);
+  });
+
 });
