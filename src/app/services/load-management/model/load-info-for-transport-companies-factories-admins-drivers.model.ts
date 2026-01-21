@@ -51,3 +51,14 @@ export const zodLoadInfoForTransportCompanies_Factories_Admins_Drivers =
     TPTParamsJoint: z.string(),
   });
 
+export interface LoadForTransportCompanies_Factories_Admins_Drivers {
+  ProvinceName: string;
+  ProvinceId: number;
+  myLoads: LoadInfoForTransportCompanies_Factories_Admins_Drivers[];
+}
+
+export const zodLoadForTransportCompanies_Factories_Admins_Drivers = z.object({
+  ProvinceName: z.string(),
+  ProvinceId: z.number(),
+  myLoads: z.array(zodLoadInfoForTransportCompanies_Factories_Admins_Drivers),
+});
