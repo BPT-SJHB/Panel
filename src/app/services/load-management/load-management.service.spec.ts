@@ -246,4 +246,18 @@ describe('LoadManagementService', () => {
     );
   });
 
+  xit('Testing GetLoadsForFactoriesAndProductionCenters method', async () => {
+    // await devAuth.loginAsFactory();
+
+    const response = await service
+      .GetLoadsForFactoriesAndProductionCenters
+      // Inputs
+      ();
+
+    validateResponse<LoadForTransportCompanies_Factories_Admins_Drivers[]>(
+      response,
+      ApiLoadForTransportCompanies_Factories_Admins_DriversSchema
+    );
+  });
+
 });
