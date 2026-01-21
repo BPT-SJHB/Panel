@@ -146,4 +146,27 @@ describe('LoadManagementService', () => {
 
     validateResponse<{ newLoadId: number }>(response, ApiNewLoadIdSchema);
   });
+
+  it('Testing EditLoad method', async () => {
+    await devAuth.loginAsCompany();
+
+    const response = await service.EditLoad({
+      LoadId: loadInfoSampleData.LoadId,
+      GoodId: loadInfoSampleData.GoodId,
+      SourceCityId: loadInfoSampleData.SourceCityId,
+      TargetCityId: loadInfoSampleData.TargetCityId,
+      LoadingPlaceId: loadInfoSampleData.LoadingPlaceId,
+      DischargingPlaceId: loadInfoSampleData.DischargingPlaceId,
+      TotalNumber: loadInfoSampleData.TotalNumber,
+      Tonaj: loadInfoSampleData.Tonaj,
+      Tariff: loadInfoSampleData.Tariff,
+      Recipient: loadInfoSampleData.Recipient,
+      Address: loadInfoSampleData.Address,
+      Description: loadInfoSampleData.Description,
+      TPTParams: loadInfoSampleData.TPTParams,
+    });
+
+    validateResponse<ShortResponse>(response, ApiShortResponseSchema);
+  });
+
 });
