@@ -122,6 +122,9 @@ describe('LoadManagementService', () => {
 
     devAuth.logout();
   });
+
+  //#region Load methods
+
   it('Testing RegisterNewLoad method', async () => {
     await devAuth.loginAsCompany();
 
@@ -314,5 +317,7 @@ describe('LoadManagementService', () => {
 
     validateResponse<ShortResponse>(response, ApiShortResponseSchema);
   });
+
+  //#endregion
 
 });
