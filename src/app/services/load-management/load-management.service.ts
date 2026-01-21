@@ -357,10 +357,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       { TPTParams: string }
-    >(apiUrl, bodyValue, {
-      TPTParams:
-        '135:0;139:0;143:0;147:0;151:0;157:0;16:0;163:0;169:0;175:0;181:0;187:0;193:0;199:0;205:0;211:0;217:0;223:0;229:0;235:0',
-    });
+    >(apiUrl, bodyValue, mockTransportTariffParamInString);
     //#endregion
   }
 
