@@ -1,5 +1,3 @@
-import { CaptchaChallenge } from '../model/captcha-challenge.model';
-
 export const mockCaptcha = {
   SessionId: 'cb3d7916307b7713875d7cf0fd9639e4a5qddt$oRi2A',
   Captcha:
