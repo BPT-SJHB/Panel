@@ -21,7 +21,7 @@ import { LoaderTypesService } from 'app/services/loader-types/loader-types.servi
 import { ProvinceAndCityManagementService } from 'app/services/province-city-management/province-and-city-management.service';
 import { ProductTypesService } from 'app/services/product-types/product-types.service';
 
-import { Tariff } from 'app/data/model/tariff.model';
+import { DeleteTariffInfo, Tariff } from 'app/data/model/tariff.model';
 import { City } from 'app/services/province-city-management/model/province-city.model';
 import { LoaderType } from 'app/services/loader-types/model/loader-type.model';
 import { Product } from 'app/data/model/product-type.model';
@@ -263,7 +263,12 @@ export class TariffsFormComponent extends BaseLoading {
     this.confirmService.confirmDelete(
       `${row.LoaderTypeTitle} - ${row.GoodTitle} - ${row.SourceCityTitle} به ${row.TargetCityTitle}`,
       async () => {
-        await this.deleteTariffs([row]);
+        await this.deleteTariff({
+          LoaderTypeId: row.LoaderTypeId,
+          GoodId: row.GoodId,
+          SourceCityId: row.SourceCityId,
+          TargetCityId: row.TargetCityId,
+        });
       }
     );
   }
@@ -411,9 +416,9 @@ export class TariffsFormComponent extends BaseLoading {
     this.GoodId.setValue(value.ProductId);
   }
 
-  async deleteTariffs(tariffs: Tariff[]): Promise<void> {
+  async deleteTariff(tariff: DeleteTariffInfo): Promise<void> {
     this.withLoading(async () => {
-      const response = await this.tariffService.DeleteTariff(tariffs);
+      const response = await this.tariffService.DeleteTariff(tariff);
       if (checkAndToastError(response, this.toast)) {
         this.toast.success('موفق', response.data.Message);
         await this.updateTable();
