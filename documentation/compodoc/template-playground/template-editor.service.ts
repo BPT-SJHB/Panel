@@ -118,7 +118,7 @@ export class TemplateEditorService {
         ],
 
         comment: [
-          [/-->/, 'comment', '@pop'],
+          [/--!?>/, 'comment', '@pop'],
           [/[^-]+/, 'comment'],
           [/./, 'comment']
         ],
