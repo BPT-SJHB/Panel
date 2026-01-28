@@ -1,0 +1,238 @@
+import { TestBed } from '@angular/core/testing';
+import {
+  createApiResponseSchema,
+  validateResponse,
+} from 'app/utils/validate-response.test.utils.spec';
+import { DevAuthService } from '../dev-auth-service/dev-auth.service';
+import { Driver_TruckManagementService } from './driver-truck-management.service';
+import {
+  TruckDriverInfo,
+  zodTruckDriverInfo,
+} from './model/truck-driver-info.model';
+import { ApiResponse } from 'app/data/model/api-Response.model';
+import { ShortResponse } from 'app/data/model/short-response.model';
+import { ApiShortResponseSchema } from 'app/data/model/short-response.model.spec';
+import {
+  UsernamePassword,
+  zodUsernamePassword,
+} from 'app/data/model/username-password.model';
+import { delay } from 'rxjs';
+import {
+  TruckComposedInfo,
+  TruckInfo,
+  zodTruckComposedInfo,
+  zodTruckInfo,
+} from './model/truck-info.model';
+import {
+  TruckNativenessInfo,
+  TruckNativenessType,
+  zodTruckNativenessInfo,
+  zodTruckNativenessType,
+} from './model/truck-nativeness-info.model';
+import z from 'zod';
+import { sleep } from 'app/utils/sleep.test.utils';
+import { Wallet, zodWallet } from '../wallet-management/model/wallet.model';
+
+const TruckDriverInfoSampleData: TruckDriverInfo = {
+  DriverId: 1,
+  NameFamily: ';محمد;عباسي',
+  NationalCode: '5759871382',
+  MobileNumber: '09131210201',
+  FatherName: 'قياقلي',
+  DrivingLicenseNo: '4010300402',
+  Address: '',
+  SmartCardNo: '1228050',
+};
+
+const TruckInfoSampleData: TruckInfo = {
+  TruckId: 5,
+  LoaderTypeId: 605,
+  Pelak: '673ع32',
+  Serial: '52',
+  SmartCardNo: '2305365',
+};
+
+const ApiTruckDriverInfoSchema = createApiResponseSchema(zodTruckDriverInfo);
+
+const ApiUsernamePasswordSchema = createApiResponseSchema(zodUsernamePassword);
+
+const ApiTruckInfoSchema = createApiResponseSchema(zodTruckInfo);
+
+const ApiTruckNativenessInfoSchema = createApiResponseSchema(
+  zodTruckNativenessInfo
+);
+
+const ApiTruckNativenessTypeSchema = createApiResponseSchema(
+  z.array(zodTruckNativenessType)
+);
+
+const ApiTruckComposedInfoSchema =
+  createApiResponseSchema(zodTruckComposedInfo);
+
+const ApiWalletSchema = createApiResponseSchema(zodWallet);
+
+describe('Driver_TruckManagementService', () => {
+  let service: Driver_TruckManagementService;
+  let devAuth: DevAuthService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [],
+    });
+
+    service = TestBed.inject(Driver_TruckManagementService);
+    devAuth = TestBed.inject(DevAuthService);
+
+    devAuth.logout();
+  });
+
+  //#region Driver
+
+  it('Testing GetDriverInfoForSoftwareUser method', async () => {
+    await devAuth.loginAsDriver();
+
+    const response = await service.GetDriverInfoForSoftwareUser();
+
+    validateResponse<TruckDriverInfo>(response, ApiTruckDriverInfoSchema);
+  });
+
+  it('Testing GetDriverInfoFromAPI method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.GetDriverInfoFromAPI(
+      TruckDriverInfoSampleData.NationalCode!
+    );
+
+    validateResponse<TruckDriverInfo>(response, ApiTruckDriverInfoSchema);
+  });
+
+  it('Testing Driver methods with flow', async () => {
+    await devAuth.loginAsAdmin();
+
+    const regRes = await service.RegisterNew_EditDriverMobileNumber(
+      TruckDriverInfoSampleData.DriverId,
+      TruckDriverInfoSampleData.MobileNumber!
+    );
+    validateResponse<ShortResponse>(regRes, ApiShortResponseSchema);
+
+    const activeRes = await service.ActivateDriverSMS(
+      TruckDriverInfoSampleData.DriverId
+    );
+    validateResponse<ShortResponse>(activeRes, ApiShortResponseSchema);
+
+    // Activation of last request
+    // take 1 min after request finished
+    await sleep(60000);
+
+    const resetPassRes = await service.ResetDriverPassword(
+      TruckDriverInfoSampleData.DriverId
+    );
+    validateResponse<UsernamePassword>(resetPassRes, ApiUsernamePasswordSchema);
+
+    const sendLinkRes = await service.SendWebsiteLink(
+      TruckDriverInfoSampleData.DriverId
+    );
+    validateResponse<ShortResponse>(sendLinkRes, ApiShortResponseSchema);
+  });
+
+  //#endregion
+
+  //#region Truck
+
+  it('Testing GetTruckInfoForSoftwareUser method', async () => {
+    await devAuth.loginAsDriver();
+
+    const response = await service.GetTruckInfoForSoftwareUser();
+
+    validateResponse<TruckInfo>(response, ApiTruckInfoSchema);
+  });
+
+  it('Testing GetTruckInfoFromAPI method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.GetTruckInfoFromAPI(
+      TruckInfoSampleData.SmartCardNo!
+    );
+
+    validateResponse<TruckInfo>(response, ApiTruckInfoSchema);
+  });
+
+  it('Testing GetTruckNativeness method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.GetTruckNativeness(
+      TruckInfoSampleData.TruckId
+    );
+    validateResponse<TruckNativenessInfo>(
+      response,
+      ApiTruckNativenessInfoSchema
+    );
+  });
+
+  it('Testing GetTruckNativenessTypes method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.GetTruckNativenessTypes();
+
+    validateResponse<TruckNativenessType[]>(
+      response,
+      ApiTruckNativenessTypeSchema
+    );
+  });
+
+  it('Testing ChangeTruckNativeness method', async () => {
+    await devAuth.loginAsAdmin();
+
+    const response = await service.ChangeTruckNativeness(
+      TruckInfoSampleData.TruckId,
+      '1500/12/27'
+    );
+
+    validateResponse<TruckNativenessInfo>(
+      response,
+      ApiTruckNativenessInfoSchema
+    );
+  });
+
+  //#endregion
+
+  //#region Relations of Driver, Truck, MoneyWallet
+
+  it('Testing ComponsedTruckInfo methods with flow', async () => {
+    await devAuth.loginAsAdmin();
+
+    const getLastActiveRes =
+      await service.GetComposedTruckInfoWithLastActiveTurn(
+        TruckInfoSampleData.TruckId
+      );
+    validateResponse<TruckComposedInfo>(
+      getLastActiveRes,
+      ApiTruckComposedInfoSchema
+    );
+
+    const getWalletRes = await service.GetVirtualWallet();
+    validateResponse<Wallet>(getWalletRes, ApiWalletSchema);
+
+    const walletId = getWalletRes.data.MoneyWalletId;
+
+    const getLastTurnRes = await service.GetComposedTruckInfoWithLastTurn(
+      TruckInfoSampleData.TruckId
+    );
+    validateResponse<TruckComposedInfo>(
+      getLastTurnRes,
+      ApiTruckComposedInfoSchema
+    );
+
+    const turnId = getLastTurnRes.data.Turn?.TurnId ?? -1;
+
+    const setRes = await service.SetComposedTruckInfo(
+      TruckInfoSampleData.TruckId,
+      TruckDriverInfoSampleData.DriverId,
+      turnId,
+      walletId
+    );
+    validateResponse<ShortResponse>(setRes, ApiShortResponseSchema);
+  });
+
+  //#endregion
+});

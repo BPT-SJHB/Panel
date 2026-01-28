@@ -1,0 +1,2374 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bpt-sjhb-panel documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">bpt-sjhb-panel documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >ConfigManagementService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/config-management/config-management.service.ts</code>
+        </p>
+
+
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#apiCommunicator" >apiCommunicator</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#userAuth" >userAuth</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#DeleteDevice" >DeleteDevice</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#DeleteDeviceConfig" >DeleteDeviceConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#DeleteLoadAllocationCondition" >DeleteLoadAllocationCondition</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#DeleteLoadAnnouncementConfig" >DeleteLoadAnnouncementConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#DeleteLoadViewCondition" >DeleteLoadViewCondition</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#EditDevice" >EditDevice</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#EditDeviceConfig" >EditDeviceConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#EditGeneralConfig" >EditGeneralConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#EditLoadAllocationCondition" >EditLoadAllocationCondition</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#EditLoadAnnouncementConfig" >EditLoadAnnouncementConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#EditLoadViewCondition" >EditLoadViewCondition</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#GetAllOfDeviceConfigs" >GetAllOfDeviceConfigs</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#GetAllOfDevices" >GetAllOfDevices</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#GetAllOfGeneralConfig" >GetAllOfGeneralConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#GetAllOfLoadAllocationConditions" >GetAllOfLoadAllocationConditions</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#GetAllOfLoadAnnouncementConfig" >GetAllOfLoadAnnouncementConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#GetAllOfLoadViewConditions" >GetAllOfLoadViewConditions</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#GetAllRequesters" >GetAllRequesters</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#RegisterDevice" >RegisterDevice</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#RegisterDeviceConfig" >RegisterDeviceConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#RegisterLoadAllocationCondition" >RegisterLoadAllocationCondition</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#RegisterLoadAnnouncementConfig" >RegisterLoadAnnouncementConfig</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#RegisterLoadViewCondition" >RegisterLoadViewCondition</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DeleteDevice"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>DeleteDevice</b></span>
+                        <a href="#DeleteDevice"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>DeleteDevice(deviceInfo: <a href="../miscellaneous/typealiases.html#DeleteInfoOfDevice" target="_self">DeleteInfoOfDevice</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="231"
+                                    class="link-to-prism">src/app/services/config-management/config-management.service.ts:231</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>deviceInfo</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#DeleteInfoOfDevice" target="_self" >DeleteInfoOfDevice</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DeleteDeviceConfig"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>DeleteDeviceConfig</b></span>
+                        <a href="#DeleteDeviceConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>DeleteDeviceConfig(deviceConfigInfo: <a href="../miscellaneous/typealiases.html#DeleteInfoOfDeviceConfig" target="_self">DeleteInfoOfDeviceConfig</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="303"
+                                    class="link-to-prism">src/app/services/config-management/config-management.service.ts:303</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>deviceConfigInfo</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#DeleteInfoOfDeviceConfig" target="_self" >DeleteInfoOfDeviceConfig</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DeleteLoadAllocationCondition"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>DeleteLoadAllocationCondition</b></span>
+                        <a href="#DeleteLoadAllocationCondition"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>DeleteLoadAllocationCondition(loadAllocationConditionInfo: <a href="../miscellaneous/typealiases.html#DeleteLoadAllocationConditionInfo" target="_self">DeleteLoadAllocationConditionInfo</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="482"
+                                    class="link-to-prism">src/app/services/config-management/config-management.service.ts:482</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>loadAllocationConditionInfo</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#DeleteLoadAllocationConditionInfo" target="_self" >DeleteLoadAllocationConditionInfo</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DeleteLoadAnnouncementConfig"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>DeleteLoadAnnouncementConfig</b></span>
+                        <a href="#DeleteLoadAnnouncementConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>DeleteLoadAnnouncementConfig(deleteInfo: <a href="../miscellaneous/typealiases.html#DeleteInfoOfLoadAnnouncementConfig" target="_self">DeleteInfoOfLoadAnnouncementConfig</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">src/app/services/config-management/config-management.service.ts:74</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>deleteInfo</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#DeleteInfoOfLoadAnnouncementConfig" target="_self" >DeleteInfoOfLoadAnnouncementConfig</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DeleteLoadViewCondition"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>DeleteLoadViewCondition</b></span>
+                        <a href="#DeleteLoadViewCondition"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>DeleteLoadViewCondition(loadViewConditionInfo: <a href="../miscellaneous/typealiases.html#DeleteLoadViewConditionInfo" target="_self">DeleteLoadViewConditionInfo</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="382"
+                                    class="link-to-prism">src/app/services/config-management/config-management.service.ts:382</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>loadViewConditionInfo</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#DeleteLoadViewConditionInfo" target="_self" >DeleteLoadViewConditionInfo</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="EditDevice"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>EditDevice</b></span>
+                        <a href="#EditDevice"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>EditDevice(deviceInfo: <a href="../interfaces/DeviceInfo.html" target="_self">DeviceInfo</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="212"
+                                    class="link-to-prism">src/app/services/config-management/config-management.service.ts:212</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>deviceInfo</td>
+                                            <td>
+                                                            <code><a href="../interfaces/DeviceInfo.html" target="_self" >DeviceInfo</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="EditDeviceConfig"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>EditDeviceConfig</b></span>
+                        <a href="#EditDeviceConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>EditDeviceConfig(deviceConfigInfo: <a href="../miscellaneous/typealiases.html#EditInfoOfDeviceConfig" target="_self">EditInfoOfDeviceConfig</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="269"
+                                    class="link-to-prism">src/app/services/config-management/config-management.service.ts:269</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>deviceConfigInfo</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#EditInfoOfDeviceConfig" target="_self" >EditInfoOfDeviceConfig</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="EditGeneralConfig"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>EditGeneralConfig</b></span>
+                        <a href="#EditGeneralConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>EditGeneralConfig(generalInfo: <a href="../miscellaneous/typealiases.html#EditInfoOfGeneralConfig" target="_self">EditInfoOfGeneralConfig</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="154"
+                                    class="link-to-prism">src/app/services/config-management/config-management.service.ts:154</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>generalInfo</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#EditInfoOfGeneralConfig" target="_self" >EditInfoOfGeneralConfig</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="EditLoadAllocationCondition"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>EditLoadAllocationCondition</b></span>
+                        <a href="#EditLoadAllocationCondition"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>EditLoadAllocationCondition(loadAllocationConditionInfo: <a href="../miscellaneous/typealiases.html#EditLoadAllocationConditionInfo" target="_self">EditLoadAllocationConditionInfo</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="463"
+                                    class="link-to-prism">src/app/services/config-management/config-management.service.ts:463</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>loadAllocationConditionInfo</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#EditLoadAllocationConditionInfo" target="_self" >EditLoadAllocationConditionInfo</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="EditLoadAnnouncementConfig"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>EditLoadAnnouncementConfig</b></span>
+                        <a href="#EditLoadAnnouncementConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>EditLoadAnnouncementConfig(loadAnnouncementConfigInfo: <a href="../interfaces/LoadAnnouncementConfig.html" target="_self">LoadAnnouncementConfig</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="115"
+                                    class="link-to-prism">src/app/services/config-management/config-management.service.ts:115</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>loadAnnouncementConfigInfo</td>
+                                            <td>
+                                                            <code><a href="../interfaces/LoadAnnouncementConfig.html" target="_self" >LoadAnnouncementConfig</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="EditLoadViewCondition"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>EditLoadViewCondition</b></span>
+                        <a href="#EditLoadViewCondition"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>EditLoadViewCondition(loadViewConditionInfo: <a href="../miscellaneous/typealiases.html#EditLoadViewConditionInfo" target="_self">EditLoadViewConditionInfo</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="363"
+                                    class="link-to-prism">src/app/services/config-management/config-management.service.ts:363</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>loadViewConditionInfo</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#EditLoadViewConditionInfo" target="_self" >EditLoadViewConditionInfo</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetAllOfDeviceConfigs"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>GetAllOfDeviceConfigs</b></span>
+                        <a href="#GetAllOfDeviceConfigs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>GetAllOfDeviceConfigs()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="253"
+                                    class="link-to-prism">src/app/services/config-management/config-management.service.ts:253</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;DeviceConfig[]&gt;&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetAllOfDevices"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>GetAllOfDevices</b></span>
+                        <a href="#GetAllOfDevices"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>GetAllOfDevices()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="177"
+                                    class="link-to-prism">src/app/services/config-management/config-management.service.ts:177</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;DeviceInfo[]&gt;&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetAllOfGeneralConfig"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>GetAllOfGeneralConfig</b></span>
+                        <a href="#GetAllOfGeneralConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>GetAllOfGeneralConfig()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="138"
+                                    class="link-to-prism">src/app/services/config-management/config-management.service.ts:138</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;GeneralConfig[]&gt;&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetAllOfLoadAllocationConditions"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>GetAllOfLoadAllocationConditions</b></span>
+                        <a href="#GetAllOfLoadAllocationConditions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>GetAllOfLoadAllocationConditions()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="424"
+                                    class="link-to-prism">src/app/services/config-management/config-management.service.ts:424</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;LoadAllocationConditionInfo[]&gt;&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetAllOfLoadAnnouncementConfig"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>GetAllOfLoadAnnouncementConfig</b></span>
+                        <a href="#GetAllOfLoadAnnouncementConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>GetAllOfLoadAnnouncementConfig()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="56"
+                                    class="link-to-prism">src/app/services/config-management/config-management.service.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;LoadAnnouncementConfig[]&gt;&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetAllOfLoadViewConditions"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>GetAllOfLoadViewConditions</b></span>
+                        <a href="#GetAllOfLoadViewConditions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>GetAllOfLoadViewConditions()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="326"
+                                    class="link-to-prism">src/app/services/config-management/config-management.service.ts:326</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;LoadViewConditionInfo[]&gt;&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetAllRequesters"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>GetAllRequesters</b></span>
+                        <a href="#GetAllRequesters"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>GetAllRequesters()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="402"
+                                    class="link-to-prism">src/app/services/config-management/config-management.service.ts:402</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;RequesterInfo[]&gt;&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RegisterDevice"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>RegisterDevice</b></span>
+                        <a href="#RegisterDevice"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>RegisterDevice(deviceInfo: <a href="../miscellaneous/typealiases.html#RegisterInfoOfDevice" target="_self">RegisterInfoOfDevice</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="193"
+                                    class="link-to-prism">src/app/services/config-management/config-management.service.ts:193</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>deviceInfo</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#RegisterInfoOfDevice" target="_self" >RegisterInfoOfDevice</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RegisterDeviceConfig"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>RegisterDeviceConfig</b></span>
+                        <a href="#RegisterDeviceConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>RegisterDeviceConfig(deviceConfigInfo: <a href="../interfaces/DeviceConfig.html" target="_self">DeviceConfig</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="288"
+                                    class="link-to-prism">src/app/services/config-management/config-management.service.ts:288</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>deviceConfigInfo</td>
+                                            <td>
+                                                            <code><a href="../interfaces/DeviceConfig.html" target="_self" >DeviceConfig</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RegisterLoadAllocationCondition"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>RegisterLoadAllocationCondition</b></span>
+                        <a href="#RegisterLoadAllocationCondition"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>RegisterLoadAllocationCondition(loadAllocationConditionInfo: <a href="../miscellaneous/typealiases.html#RegisterLoadAllocationConditionInfo" target="_self">RegisterLoadAllocationConditionInfo</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="444"
+                                    class="link-to-prism">src/app/services/config-management/config-management.service.ts:444</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>loadAllocationConditionInfo</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#RegisterLoadAllocationConditionInfo" target="_self" >RegisterLoadAllocationConditionInfo</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RegisterLoadAnnouncementConfig"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>RegisterLoadAnnouncementConfig</b></span>
+                        <a href="#RegisterLoadAnnouncementConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>RegisterLoadAnnouncementConfig(configInfo: <a href="../interfaces/LoadAnnouncementConfig.html" target="_self">LoadAnnouncementConfig</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="96"
+                                    class="link-to-prism">src/app/services/config-management/config-management.service.ts:96</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>configInfo</td>
+                                            <td>
+                                                            <code><a href="../interfaces/LoadAnnouncementConfig.html" target="_self" >LoadAnnouncementConfig</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RegisterLoadViewCondition"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>RegisterLoadViewCondition</b></span>
+                        <a href="#RegisterLoadViewCondition"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>RegisterLoadViewCondition(loadViewConditionInfo: <a href="../miscellaneous/typealiases.html#RegisterLoadViewConditionInfo" target="_self">RegisterLoadViewConditionInfo</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="344"
+                                    class="link-to-prism">src/app/services/config-management/config-management.service.ts:344</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>loadViewConditionInfo</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#RegisterLoadViewConditionInfo" target="_self" >RegisterLoadViewConditionInfo</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="apiCommunicator"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>apiCommunicator</b></span>
+                        <a href="#apiCommunicator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(APICommunicationManagementService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/services/config-management/config-management.service.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userAuth"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>userAuth</b></span>
+                        <a href="#userAuth"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(UserAuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/services/config-management/config-management.service.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { inject, Injectable } from &#x27;@angular/core&#x27;;
+import { UserAuthService } from &#x27;../user-auth-service/user-auth.service&#x27;;
+import { APICommunicationManagementService } from &#x27;../api-communication-management/apicommunication-management.service&#x27;;
+import {
+  DeleteInfoOfLoadAnnouncementConfig,
+  LoadAnnouncementConfig,
+} from &#x27;./model/load-announcement-config.model&#x27;;
+import { API_ROUTES } from &#x27;app/constants/api&#x27;;
+import { mockLoadAnnouncementConfigs } from &#x27;./mock/load-announcement-config.mock&#x27;;
+import { ApiResponse } from &#x27;app/data/model/api-Response.model&#x27;;
+import { ShortResponse } from &#x27;app/data/model/short-response.model&#x27;;
+import { mockShortResponse } from &#x27;app/data/mock/short-response.mock&#x27;;
+import {
+  EditInfoOfGeneralConfig,
+  GeneralConfig,
+} from &#x27;./model/general-config.model&#x27;;
+import { mockGeneralConfigs } from &#x27;./mock/general-config.mock&#x27;;
+import { mockDevicesInfo } from &#x27;./mock/device-info.mock&#x27;;
+import {
+  DeleteInfoOfDevice,
+  DeviceInfo,
+  RegisterInfoOfDevice,
+} from &#x27;./model/device-info.model&#x27;;
+import {
+  DeleteInfoOfDeviceConfig,
+  DeviceConfig,
+  EditInfoOfDeviceConfig,
+} from &#x27;./model/device-config.model&#x27;;
+import { mockDeviceConfig } from &#x27;./mock/device-config.mock&#x27;;
+import {
+  DeleteLoadViewConditionInfo,
+  EditLoadViewConditionInfo,
+  LoadViewConditionInfo,
+  RegisterLoadViewConditionInfo,
+} from &#x27;./model/load-view-condition-info.model&#x27;;
+import { mockLoadViewConditionsInfo } from &#x27;./mock/load-view-condition-info.mock&#x27;;
+import { RequesterInfo } from &#x27;./model/requester-info.model&#x27;;
+import { mockRequestersInfo } from &#x27;./mock/requester-info.mock&#x27;;
+import {
+  DeleteLoadAllocationConditionInfo,
+  EditLoadAllocationConditionInfo,
+  LoadAllocationConditionInfo,
+  RegisterLoadAllocationConditionInfo,
+} from &#x27;./model/load-allocation-condition-info.model&#x27;;
+import { mockLoadAllocationConditionsInfo } from &#x27;./mock/load-allocation-condition.mock&#x27;;
+
+@Injectable({
+  providedIn: &#x27;root&#x27;,
+})
+export class ConfigManagementService {
+  private userAuth &#x3D; inject(UserAuthService);
+  private apiCommunicator &#x3D; inject(APICommunicationManagementService);
+
+  //#region LoadAnnouncementConfig
+
+  public async GetAllOfLoadAnnouncementConfig(): Promise&lt;
+    ApiResponse&lt;LoadAnnouncementConfig[]&gt;
+  &gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.KernelTasksAPI.GetAllOfLoadAnnouncementConfig;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      LoadAnnouncementConfig[]
+    &gt;(apiUrl, bodyValue, mockLoadAnnouncementConfigs);
+    //#endregion
+  }
+
+  public async DeleteLoadAnnouncementConfig(
+    deleteInfo: DeleteInfoOfLoadAnnouncementConfig
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.KernelTasksAPI.DeleteLoadAnnouncementConfig;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      COLAId: deleteInfo.COLAId,
+      COLAIndex: deleteInfo.COLAIndex,
+      AnnouncementId: deleteInfo.AnnouncementId,
+      AnnouncementSGId: deleteInfo.AnnouncementSGId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async RegisterLoadAnnouncementConfig(
+    configInfo: LoadAnnouncementConfig
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.KernelTasksAPI.RegisterLoadAnnouncementConfig;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      RawConfigurationOfLoadAnnouncement: configInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async EditLoadAnnouncementConfig(
+    loadAnnouncementConfigInfo: LoadAnnouncementConfig
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.KernelTasksAPI.EditLoadAnnouncementConfig;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      RawConfigurationOfLoadAnnouncement: loadAnnouncementConfigInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  //#endregion
+
+  //#region GeneralConfig
+
+  public async GetAllOfGeneralConfig(): Promise&lt;ApiResponse&lt;GeneralConfig[]&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.KernelTasksAPI.GetAllOfGeneralConfig;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      GeneralConfig[]
+    &gt;(apiUrl, bodyValue, mockGeneralConfigs);
+    //#endregion
+  }
+
+  public async EditGeneralConfig(
+    generalInfo: EditInfoOfGeneralConfig
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.KernelTasksAPI.EditGeneralConfig;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      RawGeneralConfiguration: generalInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  //#endregion
+
+  //#region Devices
+
+  public async GetAllOfDevices(): Promise&lt;ApiResponse&lt;DeviceInfo[]&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.KernelTasksAPI.GetAllOfDevices;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      DeviceInfo[]
+    &gt;(apiUrl, bodyValue, mockDevicesInfo);
+    //#endregion
+  }
+
+  public async RegisterDevice(
+    deviceInfo: RegisterInfoOfDevice
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.KernelTasksAPI.RegisterDevice;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      RawDevice: deviceInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async EditDevice(
+    deviceInfo: DeviceInfo
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.KernelTasksAPI.EditDevice;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      RawDevice: deviceInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async DeleteDevice(
+    deviceInfo: DeleteInfoOfDevice
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.KernelTasksAPI.DeleteDevice;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      DeviceId: deviceInfo.DeviceId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+  //#endregion
+
+  //#region DevicesConfig
+
+  public async GetAllOfDeviceConfigs(): Promise&lt;ApiResponse&lt;DeviceConfig[]&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.KernelTasksAPI.GetAllOfDeviceConfigs;
+    const bodyValue &#x3D; {
+      sessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      DeviceConfig[]
+    &gt;(apiUrl, bodyValue, mockDeviceConfig);
+    //#endregion
+  }
+
+  public async EditDeviceConfig(
+    deviceConfigInfo: EditInfoOfDeviceConfig
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.KernelTasksAPI.EditDeviceConfig;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      RawConfigurationOfDevice: deviceConfigInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async RegisterDeviceConfig(
+    deviceConfigInfo: DeviceConfig
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    const apiUrl &#x3D; API_ROUTES.KernelTasksAPI.RegisterDeviceConfig;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      RawConfigurationOfDevice: deviceConfigInfo,
+    };
+
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+  }
+
+  public async DeleteDeviceConfig(
+    deviceConfigInfo: DeleteInfoOfDeviceConfig
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.KernelTasksAPI.DeleteDeviceConfig;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      RawConfigurationOfDevice: deviceConfigInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  //#endregion
+
+  //#region LoadViewCondition
+
+  public async GetAllOfLoadViewConditions(): Promise&lt;
+    ApiResponse&lt;LoadViewConditionInfo[]&gt;
+  &gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.KernelTasksAPI.GetAllLoadViewConditions;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      LoadViewConditionInfo[]
+    &gt;(apiUrl, bodyValue, mockLoadViewConditionsInfo);
+    //#endregion
+  }
+
+  public async RegisterLoadViewCondition(
+    loadViewConditionInfo: RegisterLoadViewConditionInfo
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.KernelTasksAPI.RegisterLoadViewCondition;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      RawLoadViewCondition: loadViewConditionInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async EditLoadViewCondition(
+    loadViewConditionInfo: EditLoadViewConditionInfo
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.KernelTasksAPI.EditLoadViewCondition;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      RawLoadViewCondition: loadViewConditionInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async DeleteLoadViewCondition(
+    loadViewConditionInfo: DeleteLoadViewConditionInfo
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.KernelTasksAPI.DeleteLoadViewCondition;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      LoadViewConditionId: loadViewConditionInfo.LoadViewConditionId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  //#region Requester
+  public async GetAllRequesters(): Promise&lt;ApiResponse&lt;RequesterInfo[]&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.KernelTasksAPI.GetAllRequesters;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      RequesterInfo[]
+    &gt;(apiUrl, bodyValue, mockRequestersInfo);
+    //#endregion
+  }
+
+  //#endregion
+
+  //#endregion
+
+  //#region LoadAllocationCondition
+
+  public async GetAllOfLoadAllocationConditions(): Promise&lt;
+    ApiResponse&lt;LoadAllocationConditionInfo[]&gt;
+  &gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.KernelTasksAPI.GetAllOfLoadAllocationConditions;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      LoadAllocationConditionInfo[]
+    &gt;(apiUrl, bodyValue, mockLoadAllocationConditionsInfo);
+    //endregion
+  }
+
+  //#endregion
+
+  public async RegisterLoadAllocationCondition(
+    loadAllocationConditionInfo: RegisterLoadAllocationConditionInfo
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.KernelTasksAPI.RegisterLoadAllocationCondition;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      RawLoadAllocationCondition: loadAllocationConditionInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async EditLoadAllocationCondition(
+    loadAllocationConditionInfo: EditLoadAllocationConditionInfo
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.KernelTasksAPI.EditLoadAllocationCondition;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      RawLoadAllocationCondition: loadAllocationConditionInfo,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async DeleteLoadAllocationCondition(
+    loadAllocationConditionInfo: DeleteLoadAllocationConditionInfo
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.KernelTasksAPI.DeleteLoadAllocationCondition;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      LoadAllocationConditionId:
+        loadAllocationConditionInfo.LoadAllocationConditionId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  //#endregion
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'ConfigManagementService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,1048 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bpt-sjhb-panel documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">bpt-sjhb-panel documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  BaseConfig</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/auto-complete-config-factory/auto-complete-config-factory.service.ts</code>
+        </p>
+
+
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#cachingMode" 
+>
+                                            cachingMode
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#label" 
+>
+                                            label
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#lazySearch" 
+>
+                                            lazySearch
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#minLength" 
+>
+                                            minLength
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#optionLabel" 
+>
+                                            optionLabel
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#optionValueKey" 
+>
+                                            optionValueKey
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#placeholder" 
+>
+                                            placeholder
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#type" 
+>
+                                            type
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="cachingMode"></a>
+                                        <span class="name "><b>cachingMode</b>
+                                            <a href="#cachingMode">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>cachingMode:         <code><a href="../miscellaneous/typealiases.html#CachingMode" target="_self" >CachingMode</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#CachingMode" target="_self" >CachingMode</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="label"></a>
+                                        <span class="name "><b>label</b>
+                                            <a href="#label">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>label:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="lazySearch"></a>
+                                        <span class="name "><b>lazySearch</b>
+                                            <a href="#lazySearch">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>lazySearch:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="minLength"></a>
+                                        <span class="name "><b>minLength</b>
+                                            <a href="#minLength">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>minLength:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="optionLabel"></a>
+                                        <span class="name "><b>optionLabel</b>
+                                            <a href="#optionLabel">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>optionLabel:     <code>unknown</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>unknown</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="optionValueKey"></a>
+                                        <span class="name "><b>optionValueKey</b>
+                                            <a href="#optionValueKey">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>optionValueKey:     <code>unknown</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>unknown</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="placeholder"></a>
+                                        <span class="name "><b>placeholder</b>
+                                            <a href="#placeholder">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>placeholder:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="type"></a>
+                                        <span class="name "><b>type</b>
+                                            <a href="#type">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>type:     <code>K</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>K</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { inject, Injectable } from &#x27;@angular/core&#x27;;
+import { FormBuilder, FormControl } from &#x27;@angular/forms&#x27;;
+
+// --- Models ---
+import { AnnouncementGroup } from &#x27;../announcement-group-subgroup-management/model/announcement-group.model&#x27;;
+import { AnnouncementSubGroup } from &#x27;../announcement-group-subgroup-management/model/announcement-subgroup.model&#x27;;
+import { LoadStatus } from &#x27;../load-management/model/load-status.model&#x27;;
+import { TransportCompany } from &#x27;../transport-company-management/model/transport-company-info.model&#x27;;
+import {
+  City,
+  Province,
+} from &#x27;../province-city-management/model/province-city.model&#x27;;
+import { Product } from &#x27;app/data/model/product-type.model&#x27;;
+import { LADPlace } from &#x27;app/data/model/lad-place.model&#x27;;
+import { DeviceInfo } from &#x27;../config-management/model/device-info.model&#x27;;
+import { LoaderType } from &#x27;../loader-types/model/loader-type.model&#x27;;
+import { SequentialTurn } from &#x27;../sequential-turn-management/model/sequential-turn.model&#x27;;
+import { TPTParamInfo } from &#x27;../tpt-params-management/model/tptparam-info.model&#x27;;
+
+// --- Services ---
+import { ProvinceAndCityManagementService } from &#x27;../province-city-management/province-and-city-management.service&#x27;;
+import { TransportCompaniesManagementService } from &#x27;../transport-company-management/transport-companies-management.service&#x27;;
+import { AnnouncementGroupSubgroupManagementService } from &#x27;../announcement-group-subgroup-management/announcement-group-subgroup-management.service&#x27;;
+import { LoadManagementService } from &#x27;../load-management/load-management.service&#x27;;
+import { ProductTypesService } from &#x27;../product-types/product-types.service&#x27;;
+import { LADPlaceManagementService } from &#x27;../lad-place-management/lad-place-management.service&#x27;;
+import { ConfigManagementService } from &#x27;../config-management/config-management.service&#x27;;
+import { LoaderTypesService } from &#x27;../loader-types/loader-types.service&#x27;;
+import { SequentialTurnManagementService } from &#x27;../sequential-turn-management/sequential-turn-management.service&#x27;;
+import { TPTParamsManagementService } from &#x27;../tpt-params-management/tptparams-management.service&#x27;;
+import { ToastService } from &#x27;../toast-service/toast.service&#x27;;
+
+// --- Utilities ---
+import { checkAndToastError } from &#x27;app/utils/api-utils&#x27;;
+import { AppTitles } from &#x27;app/constants/Titles&#x27;;
+import { Driver_TruckManagementService } from &#x27;../driver-truck-management/driver-truck-management.service&#x27;;
+import { TruckNativenessType } from &#x27;../driver-truck-management/model/truck-nativeness-info.model&#x27;;
+import { RequesterInfo } from &#x27;../config-management/model/requester-info.model&#x27;;
+import { TurnStatus } from &#x27;../turn-management/model/turn-status.model&#x27;;
+import { TurnManagementService } from &#x27;../turn-management/turn-management.service&#x27;;
+
+// --- AutoComplete Types ---
+export enum AutoCompleteType {
+  AnnouncementGroup &#x3D; &#x27;AnnouncementGroup&#x27;,
+  AnnouncementSubGroup &#x3D; &#x27;AnnouncementSubGroup&#x27;,
+  RelationAnnouncementGroupAndSubGroup &#x3D; &#x27;RelationAnnouncementGroupAndSubGroup&#x27;,
+  Province &#x3D; &#x27;Province&#x27;,
+  City &#x3D; &#x27;City&#x27;,
+  LoadStatus &#x3D; &#x27;LoadStatus&#x27;,
+  TransportCompany &#x3D; &#x27;TransportCompany&#x27;,
+  Product &#x3D; &#x27;Product&#x27;,
+  LADPlaces &#x3D; &#x27;LADPlaces&#x27;,
+  Devices &#x3D; &#x27;Devices&#x27;,
+  LoaderType &#x3D; &#x27;LoaderType&#x27;,
+  SequentialTurn &#x3D; &#x27;SequentialTurn&#x27;,
+  TPTParams &#x3D; &#x27;TPTParams&#x27;,
+  NativenessType &#x3D; &#x27;NativenessType&#x27;,
+  TurnStatus &#x3D; &#x27;TurnStatus&#x27;,
+  RequesterInfo &#x3D; &#x27;RequesterInfo&#x27;,
+}
+
+type CachingMode &#x3D; &#x27;Focus&#x27; | &#x27;CharacterPrefix&#x27;;
+
+// --- AutoComplete Type Mapping ---
+export interface AutoCompleteTypeMap {
+  [AutoCompleteType.AnnouncementGroup]: AnnouncementGroup;
+  [AutoCompleteType.AnnouncementSubGroup]: AnnouncementSubGroup;
+  [AutoCompleteType.LoadStatus]: LoadStatus;
+  [AutoCompleteType.TransportCompany]: TransportCompany;
+  [AutoCompleteType.RelationAnnouncementGroupAndSubGroup]: AnnouncementSubGroup;
+  [AutoCompleteType.Province]: Province;
+  [AutoCompleteType.City]: City;
+  [AutoCompleteType.Product]: Product;
+  [AutoCompleteType.LADPlaces]: LADPlace;
+  [AutoCompleteType.Devices]: DeviceInfo;
+  [AutoCompleteType.LoaderType]: LoaderType;
+  [AutoCompleteType.SequentialTurn]: SequentialTurn;
+  [AutoCompleteType.TPTParams]: TPTParamInfo;
+  [AutoCompleteType.NativenessType]: TruckNativenessType;
+  [AutoCompleteType.TurnStatus]: TurnStatus;
+  [AutoCompleteType.RequesterInfo]: RequesterInfo;
+}
+
+// --- Base Filter ---
+export interface BaseAutoCompleteFilter&lt;K extends keyof AutoCompleteTypeMap&gt; {
+  type: K;
+  label: string;
+  placeholder: string;
+  control: FormControl&lt;string&gt;;
+  optionLabel: keyof AutoCompleteTypeMap[K];
+  optionValueKey: keyof AutoCompleteTypeMap[K];
+  lazySearch: (query?: string) &#x3D;&gt; Promise&lt;AutoCompleteTypeMap[K][]&gt;;
+  select: (item: AutoCompleteTypeMap[K]) &#x3D;&gt; void;
+  valueChange: () &#x3D;&gt; void;
+  showIcon: () &#x3D;&gt; boolean;
+  readOnly?: () &#x3D;&gt; boolean;
+  minLength: number;
+  cachingMode: CachingMode;
+  groupControlId?: FormControl;
+  filter?: (item: AutoCompleteTypeMap[K]) &#x3D;&gt; boolean;
+}
+
+interface BaseConfig&lt;K extends AutoCompleteType&gt; {
+  type: K;
+  optionValueKey: keyof AutoCompleteTypeMap[K];
+  optionLabel: keyof AutoCompleteTypeMap[K];
+  label: string;
+  placeholder: string;
+  minLength: number;
+  cachingMode: CachingMode;
+  lazySearch: (query: string) &#x3D;&gt; Promise&lt;AutoCompleteTypeMap[K][]&gt;;
+}
+
+// --- Service ---
+@Injectable({ providedIn: &#x27;root&#x27; })
+export class AutoCompleteConfigFactoryService {
+  private fb &#x3D; inject(FormBuilder);
+  private toast &#x3D; inject(ToastService);
+
+  // --- Injected Domain Services ---
+  private services &#x3D; {
+    province: inject(ProvinceAndCityManagementService),
+    product: inject(ProductTypesService),
+    lad: inject(LADPlaceManagementService),
+    turn: inject(TurnManagementService),
+    seqTurn: inject(SequentialTurnManagementService),
+    config: inject(ConfigManagementService),
+    company: inject(TransportCompaniesManagementService),
+    announce: inject(AnnouncementGroupSubgroupManagementService),
+    loads: inject(LoadManagementService),
+    loaderType: inject(LoaderTypesService),
+    tpt: inject(TPTParamsManagementService),
+    truckDriver: inject(Driver_TruckManagementService),
+  };
+
+  private readonly appTitle &#x3D; AppTitles;
+
+  private readonly defaultConfigs: {
+    [K in AutoCompleteType]: BaseConfig&lt;K&gt;;
+  } &#x3D; {
+    [AutoCompleteType.AnnouncementGroup]: {
+      type: AutoCompleteType.AnnouncementGroup,
+      label: this.appTitle.inputs.loadAnnouncements.loadAnnouncementGroupTitle,
+      placeholder: this.appTitle.getPlaceholder(&#x27;loadAnnouncementGroupTitle&#x27;),
+      optionLabel: &#x27;AnnouncementTitle&#x27;,
+      optionValueKey: &#x27;AnnouncementId&#x27;,
+      minLength: 0,
+      cachingMode: &#x27;Focus&#x27;,
+      lazySearch: (query: string) &#x3D;&gt; this.getSearchAnnouncementGroup(query),
+    },
+    [AutoCompleteType.AnnouncementSubGroup]: {
+      type: AutoCompleteType.AnnouncementSubGroup,
+      label:
+        this.appTitle.inputs.loadAnnouncements.loadAnnouncementSubGroupTitle,
+      placeholder: this.appTitle.getPlaceholder(
+        &#x27;loadAnnouncementSubGroupTitle&#x27;
+      ),
+      optionLabel: &#x27;AnnouncementSGTitle&#x27;,
+      optionValueKey: &#x27;AnnouncementSGTitle&#x27;,
+      minLength: 0,
+      cachingMode: &#x27;Focus&#x27;,
+      lazySearch: (query: string) &#x3D;&gt; this.getSearchAnnouncementSubGroup(query),
+    },
+    [AutoCompleteType.RelationAnnouncementGroupAndSubGroup]: {
+      type: AutoCompleteType.RelationAnnouncementGroupAndSubGroup,
+      label:
+        this.appTitle.inputs.loadAnnouncements.loadAnnouncementSubGroupTitle,
+      placeholder: this.appTitle.getPlaceholder(
+        &#x27;loadAnnouncementSubGroupTitle&#x27;
+      ),
+      optionLabel: &#x27;AnnouncementSGTitle&#x27;,
+      optionValueKey: &#x27;AnnouncementSGId&#x27;,
+      minLength: 0,
+      cachingMode: &#x27;Focus&#x27;,
+      lazySearch: (query: string, groupControlId?: FormControl) &#x3D;&gt;
+        this.getSearchRelationOfAnnouncementGroupAndSubGroup(
+          query,
+          groupControlId
+        ),
+    },
+    [AutoCompleteType.LoadStatus]: {
+      type: AutoCompleteType.LoadStatus,
+      label: this.appTitle.inputs.loads.loadStatus,
+      placeholder: this.appTitle.getPlaceholder(&#x27;loadStatus&#x27;),
+      optionLabel: &#x27;LoadStatusTitle&#x27;,
+      optionValueKey: &#x27;LoadStatusId&#x27;,
+      minLength: 0,
+      cachingMode: &#x27;Focus&#x27;,
+      lazySearch: () &#x3D;&gt; this.getSearchLoadStatus(),
+    },
+    [AutoCompleteType.Devices]: {
+      type: AutoCompleteType.Devices,
+      label: &#x27;دیوایس&#x27;,
+      placeholder: &#x27;دیوایس&#x27;,
+      optionLabel: &#x27;DeviceTitle&#x27;,
+      optionValueKey: &#x27;DeviceId&#x27;,
+      minLength: 0,
+      cachingMode: &#x27;Focus&#x27;,
+      lazySearch: () &#x3D;&gt; this.getSearchDevices(),
+    },
+    [AutoCompleteType.LoaderType]: {
+      type: AutoCompleteType.LoaderType,
+      label: &#x27;بارگیر&#x27;,
+      placeholder: &#x27;بارگیر&#x27;,
+      optionLabel: &#x27;LoaderTypeTitle&#x27;,
+      optionValueKey: &#x27;LoaderTypeId&#x27;,
+      minLength: 2,
+      cachingMode: &#x27;Focus&#x27;,
+      lazySearch: (query: string) &#x3D;&gt; this.getSearchLoaderType(query),
+    },
+    [AutoCompleteType.SequentialTurn]: {
+      type: AutoCompleteType.SequentialTurn,
+      label: this.appTitle.inputs.sequentialTurns.sequentialTurnTitle,
+      placeholder: this.appTitle.getPlaceholder(&#x27;sequentialTurnTitle&#x27;),
+      optionLabel: &#x27;SeqTurnTitle&#x27;,
+      optionValueKey: &#x27;SeqTurnId&#x27;,
+      minLength: 2,
+      cachingMode: &#x27;Focus&#x27;,
+      lazySearch: (query: string) &#x3D;&gt; this.getSearchSequentialTurn(query),
+    },
+    [AutoCompleteType.TransportCompany]: {
+      type: AutoCompleteType.TransportCompany,
+      label: this.appTitle.inputs.transportCompanies.transportCompanyTitle,
+      placeholder: this.appTitle.getPlaceholder(&#x27;transportCompanyTitle&#x27;),
+      optionLabel: &#x27;TCTitle&#x27;,
+      optionValueKey: &#x27;TCId&#x27;,
+      minLength: 0,
+      cachingMode: &#x27;Focus&#x27;,
+      lazySearch: (query: string) &#x3D;&gt; this.getSearchTransportCompany(query),
+    },
+    [AutoCompleteType.TPTParams]: {
+      type: AutoCompleteType.TPTParams,
+      label: &#x27;پارامتر های موثر&#x27;,
+      placeholder: &#x27;پارامتر های موثر&#x27;,
+      optionLabel: &#x27;TPTPTitle&#x27;,
+      optionValueKey: &#x27;TPTPId&#x27;,
+      minLength: 0,
+      cachingMode: &#x27;Focus&#x27;,
+      lazySearch: () &#x3D;&gt; this.getSearchTPTParams(),
+    },
+    [AutoCompleteType.NativenessType]: {
+      type: AutoCompleteType.NativenessType,
+      label: &#x27;بومی/غیربومی&#x27;,
+      placeholder: &#x27;بومی/غیربومی&#x27;,
+      optionLabel: &#x27;TruckNativenessTypeTitle&#x27;,
+      optionValueKey: &#x27;TruckNativenessTypeId&#x27;,
+      minLength: 0,
+      cachingMode: &#x27;Focus&#x27;,
+      lazySearch: () &#x3D;&gt; this.getSearchNativeness(),
+    },
+    [AutoCompleteType.City]: {
+      type: AutoCompleteType.City,
+      label: &#x27;شهر&#x27;,
+      placeholder: &#x27;شهر&#x27;,
+      optionLabel: &#x27;CityTitle&#x27;,
+      optionValueKey: &#x27;CityCode&#x27;,
+      minLength: 2,
+      cachingMode: &#x27;CharacterPrefix&#x27;,
+      lazySearch: (query: string) &#x3D;&gt; this.getSearchCity(query),
+    },
+    [AutoCompleteType.Province]: {
+      type: AutoCompleteType.Province,
+      label: &#x27;استان&#x27;,
+      placeholder: &#x27;استان&#x27;,
+      optionLabel: &#x27;ProvinceName&#x27;,
+      optionValueKey: &#x27;ProvinceId&#x27;,
+      minLength: 2,
+      cachingMode: &#x27;CharacterPrefix&#x27;,
+      lazySearch: (query: string) &#x3D;&gt; this.getSearchProvince(query),
+    },
+    [AutoCompleteType.TurnStatus]: {
+      type: AutoCompleteType.TurnStatus,
+      label: &#x27;وضعیت نوبت&#x27;,
+      placeholder: &#x27;وضعیت نوبت&#x27;,
+      optionLabel: &#x27;TurnStatusTitle&#x27;,
+      optionValueKey: &#x27;TurnStatusId&#x27;,
+      minLength: 0,
+      cachingMode: &#x27;Focus&#x27;,
+      lazySearch: () &#x3D;&gt; this.getSearchTurnStatus(),
+    },
+    [AutoCompleteType.LADPlaces]: {
+      type: AutoCompleteType.LADPlaces,
+      label: &#x27;محل بارگیری&#x27;,
+      placeholder: &#x27;محل بارگیری&#x27;,
+      optionLabel: &#x27;LADPlaceTitle&#x27;,
+      optionValueKey: &#x27;LADPlaceId&#x27;,
+      minLength: 2,
+      cachingMode: &#x27;CharacterPrefix&#x27;,
+      lazySearch: (query: string) &#x3D;&gt; this.getSearchLadPlace(query),
+    },
+    [AutoCompleteType.Product]: {
+      type: AutoCompleteType.Product,
+      label: this.appTitle.inputs.products.productsTitle,
+      placeholder: this.appTitle.getPlaceholder(&#x27;productsTitle&#x27;),
+      optionLabel: &#x27;ProductTitle&#x27;,
+      optionValueKey: &#x27;ProductId&#x27;,
+      minLength: 2,
+      cachingMode: &#x27;CharacterPrefix&#x27;,
+      lazySearch: (query: string) &#x3D;&gt; this.getSearchProduct(query),
+    },
+    [AutoCompleteType.RequesterInfo]: {
+      type: AutoCompleteType.RequesterInfo,
+      label: &#x27;محل درخواست&#x27;,
+      placeholder: &#x27;محل درخواست&#x27;,
+      optionLabel: &#x27;RequesterTitle&#x27;,
+      optionValueKey: &#x27;RequesterId&#x27;,
+      minLength: 2,
+      cachingMode: &#x27;CharacterPrefix&#x27;,
+      lazySearch: () &#x3D;&gt; this.getSearchRequsterInfo(),
+    },
+  };
+
+  // --- Search functions ---
+  private async getSearchAnnouncementGroup(
+    query: string
+  ): Promise&lt;AnnouncementGroup[]&gt; {
+    const res &#x3D; await this.services.announce.GetAnnouncementGroups(query);
+    return checkAndToastError(res, this.toast) ? (res.data ?? []) : [];
+  }
+
+  private async getSearchAnnouncementSubGroup(
+    query: string
+  ): Promise&lt;AnnouncementSubGroup[]&gt; {
+    const res &#x3D; await this.services.announce.GetAnnouncementSubGroups(query);
+    return checkAndToastError(res, this.toast) ? (res.data ?? []) : [];
+  }
+
+  private async getSearchLoadStatus(): Promise&lt;LoadStatus[]&gt; {
+    const res &#x3D; await this.services.loads.GetLoadStatuses();
+    return checkAndToastError(res, this.toast) ? (res.data ?? []) : [];
+  }
+
+  private async getSearchLoaderType(query: string): Promise&lt;LoaderType[]&gt; {
+    const res &#x3D; await this.services.loaderType.GetLoaderTypesInfo(query);
+    return checkAndToastError(res, this.toast) ? (res.data ?? []) : [];
+  }
+
+  private async getSearchLadPlace(query: string): Promise&lt;LADPlace[]&gt; {
+    const res &#x3D; await this.services.lad.GetLADPlaces(query);
+    return checkAndToastError(res, this.toast) ? (res.data ?? []) : [];
+  }
+
+  private async getSearchProduct(query: string): Promise&lt;Product[]&gt; {
+    const res &#x3D; await this.services.product.GetProductsInfo(query);
+    return checkAndToastError(res, this.toast)
+      ? (res.data?.flatMap((pt) &#x3D;&gt; pt.Products ?? []) ?? [])
+      : [];
+  }
+
+  private async getSearchTransportCompany(
+    query: string
+  ): Promise&lt;TransportCompany[]&gt; {
+    const res &#x3D; await this.services.company.GetTransportCompaniesInfo(query);
+    return checkAndToastError(res, this.toast) ? (res.data ?? []) : [];
+  }
+
+  private async getSearchDevices(): Promise&lt;DeviceInfo[]&gt; {
+    const res &#x3D; await this.services.config.GetAllOfDevices();
+    return checkAndToastError(res, this.toast) ? (res.data ?? []) : [];
+  }
+
+  private async getSearchSequentialTurn(
+    query: string
+  ): Promise&lt;SequentialTurn[]&gt; {
+    const res &#x3D; await this.services.seqTurn.GetSequentialTurns(query);
+    return checkAndToastError(res, this.toast) ? (res.data ?? []) : [];
+  }
+
+  private async getSearchTPTParams(): Promise&lt;TPTParamInfo[]&gt; {
+    const res &#x3D; await this.services.tpt.GetAllTPTParams();
+    return checkAndToastError(res, this.toast) ? (res.data ?? []) : [];
+  }
+
+  private async getSearchTurnStatus(): Promise&lt;TurnStatus[]&gt; {
+    const res &#x3D; await this.services.turn.GetAllTurnStatus();
+    if (!checkAndToastError(res, this.toast)) return [];
+    return res.data;
+  }
+
+  private async getSearchNativeness(): Promise&lt;TruckNativenessType[]&gt; {
+    const res &#x3D; await this.services.truckDriver.GetTruckNativenessTypes();
+    if (!checkAndToastError(res, this.toast)) return [];
+    return res.data ?? [];
+  }
+
+  private async getSearchCity(query: string): Promise&lt;City[]&gt; {
+    const res &#x3D; await this.services.province.GetProvincesAndCitiesInfo(query);
+    return checkAndToastError(res, this.toast)
+      ? (res.data?.flatMap((p) &#x3D;&gt; p?.Cities ?? []) ?? [])
+      : [];
+  }
+
+  private async getSearchProvince(query: string): Promise&lt;Province[]&gt; {
+    const res &#x3D; await this.services.province.GetAllProvinces(query);
+    if (!checkAndToastError(res, this.toast)) return [];
+    return res.data?.map((p) &#x3D;&gt; ({ ...p, Cities: undefined })) ?? [];
+  }
+
+  private async getSearchRelationOfAnnouncementGroupAndSubGroup(
+    query: string,
+    groupControlId?: FormControl
+  ): Promise&lt;AnnouncementSubGroup[]&gt; {
+    if (!groupControlId) throw new Error(&#x27;groupControlId is undefined&#x27;);
+
+    const res &#x3D;
+      await this.services.announce.GetRelationOfAnnouncementGroupAndSubGroup(
+        groupControlId.value
+      );
+    const subGroups &#x3D; checkAndToastError(res, this.toast)
+      ? (res.data?.[0]?.AnnouncementSubGroups ?? [])
+      : [];
+    return subGroups.filter((a) &#x3D;&gt; a.AnnouncementSGTitle?.includes(query));
+  }
+
+  private async getSearchRequsterInfo(): Promise&lt;RequesterInfo[]&gt; {
+    const res &#x3D; await this.services.config.GetAllRequesters();
+    if (!checkAndToastError(res, this.toast)) return [];
+    return res.data ?? [];
+  }
+
+  // --- Public create method ---
+  create&lt;K extends keyof AutoCompleteTypeMap&gt;(
+    type: K,
+    controlId: FormControl,
+    overrides: Partial&lt;BaseAutoCompleteFilter&lt;K&gt;&gt; &#x3D; {}
+  ): BaseAutoCompleteFilter&lt;K&gt; {
+    const defaultConfig &#x3D; this.defaultConfigs[type];
+
+    if (type &#x3D;&#x3D;&#x3D; AutoCompleteType.RelationAnnouncementGroupAndSubGroup) {
+      const groupControl &#x3D; overrides.groupControlId;
+      const lazy: BaseAutoCompleteFilter&lt;AutoCompleteType.RelationAnnouncementGroupAndSubGroup&gt;[&#x27;lazySearch&#x27;] &#x3D;
+        async (query?: string) &#x3D;&gt; {
+          return this.getSearchRelationOfAnnouncementGroupAndSubGroup(
+            query!,
+            groupControl
+          );
+        };
+
+      defaultConfig.lazySearch &#x3D;
+        lazy as BaseAutoCompleteFilter&lt;K&gt;[&#x27;lazySearch&#x27;];
+    }
+
+    const config: BaseAutoCompleteFilter&lt;K&gt; &#x3D; {
+      ...defaultConfig,
+      control: this.fb.nonNullable.control(&#x27;&#x27;),
+      select: this.createSelectHandler&lt;K&gt;(
+        controlId,
+        defaultConfig.optionValueKey
+      ),
+      valueChange: () &#x3D;&gt; this.onAutoCompleteChange(controlId),
+      showIcon: () &#x3D;&gt; controlId.valid,
+      readOnly: () &#x3D;&gt; false,
+      ...overrides,
+    };
+
+    return config;
+  }
+
+  // --- Create select handler ---
+  private createSelectHandler&lt;T extends AutoCompleteType&gt;(
+    controlId: FormControl,
+    key: string | number | symbol
+  ) {
+    return (item: AutoCompleteTypeMap[T]) &#x3D;&gt; {
+      const value &#x3D; item[key as keyof AutoCompleteTypeMap[T]];
+      this.onSelectAutoCompletion(controlId, value);
+    };
+  }
+
+  // --- Helper Methods ---
+  private onSelectAutoCompletion(controlId: FormControl, value: unknown): void {
+    controlId.setValue(value);
+  }
+
+  private onAutoCompleteChange(controlId: FormControl): void {
+    controlId.setValue(null);
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'BaseConfig.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

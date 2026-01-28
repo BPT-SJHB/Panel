@@ -1,0 +1,1498 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bpt-sjhb-panel documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">bpt-sjhb-panel documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  DriverLoadPermissionsFormComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/forms/driver-load-management-form/driver-load-permissions-form/driver-load-permissions-form.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Extends</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="../components/BaseLoading.html" target="_self" >BaseLoading</a></code>
+    </p>
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-driver-load-permissions-form</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CardModule</code>
+                                <code><a href="../components/ButtonComponent.html" target="_self" >ButtonComponent</a></code>
+                                <code><a href="../components/SearchAutoCompleteFactoryComponent.html" target="_self" >SearchAutoCompleteFactoryComponent</a></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./driver-load-permissions-form.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./driver-load-permissions-form.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#addonWidth" >addonWidth</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#autoCompleteAnnouncementGroup" >autoCompleteAnnouncementGroup</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#autoCompleteFactory" >autoCompleteFactory</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#autoCompleteSubAnnouncementGroup" >autoCompleteSubAnnouncementGroup</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#loadsPermissions" >loadsPermissions</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#reportService" >reportService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#searchLoadPermissions" >searchLoadPermissions</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#activeRequests" >activeRequests</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#destroy$" >destroy$</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#loadingService" >loadingService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#toast" >toast</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ctrl" >ctrl</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#loadLoadPermissions" >loadLoadPermissions</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#endLoading" >endLoading</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#startLoading" >startLoading</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#withLoading" >withLoading</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ctrl"></a>
+                    <span class="name">
+                        <span ><b>ctrl</b></span>
+                        <a href="#ctrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ctrl(name: K)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="86"
+                                    class="link-to-prism">src/app/components/forms/driver-load-management-form/driver-load-permissions-form/driver-load-permissions-form.component.ts:86</a></div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Type parameters :</b>
+                            <ul class="type-parameters">
+                                    <li>K</li>
+                            </ul>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>name</td>
+                                            <td>
+                                                        <code>K</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>FormControl&lt;unknown&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadLoadPermissions"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>loadLoadPermissions</b></span>
+                        <a href="#loadLoadPermissions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadLoadPermissions()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">src/app/components/forms/driver-load-management-form/driver-load-permissions-form/driver-load-permissions-form.component.ts:74</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="endLoading"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>endLoading</b></span>
+                        <a href="#endLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>endLoading()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Inherited from         <code><a href="../components/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../components/BaseLoading.html#source" target="_self" >BaseLoading:50</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Inherited from         <code><a href="../components/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../components/BaseLoading.html#source" target="_self" >BaseLoading:23</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Inherited from         <code><a href="../components/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../components/BaseLoading.html#source" target="_self" >BaseLoading:15</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="startLoading"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>startLoading</b></span>
+                        <a href="#startLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>startLoading()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Inherited from         <code><a href="../components/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../components/BaseLoading.html#source" target="_self" >BaseLoading:41</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="withLoading"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>withLoading</b></span>
+                        <a href="#withLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>withLoading(fn: () => void)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Inherited from         <code><a href="../components/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../components/BaseLoading.html#source" target="_self" >BaseLoading:32</a></code>
+</div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Type parameters :</b>
+                            <ul class="type-parameters">
+                                    <li>T</li>
+                            </ul>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><h1>================================
+ Utility wrapper to centralize loading toggling
+ Handles multiple parallel promises correctly</h1>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>fn</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;T | undefined&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addonWidth"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>addonWidth</b></span>
+                        <a href="#addonWidth"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;10rem&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/forms/driver-load-management-form/driver-load-permissions-form/driver-load-permissions-form.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="autoCompleteAnnouncementGroup"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>autoCompleteAnnouncementGroup</b></span>
+                        <a href="#autoCompleteAnnouncementGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.autoCompleteFactory.create(
+    AutoCompleteType.AnnouncementGroup,
+    this.ctrl(&#x27;AnnouncementGroupId&#x27;),
+    {
+      control: this.ctrl(&#x27;AnnouncementGroupTitle&#x27;),
+      valueChange: () &#x3D;&gt; {
+        this.ctrl(&#x27;AnnouncementGroupId&#x27;).setValue(null);
+        this.ctrl(&#x27;AnnouncementSubGroupId&#x27;).setValue(null);
+        this.ctrl(&#x27;AnnouncementSubGroupTitle&#x27;).reset(&#x27;&#x27;);
+      },
+    }
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/components/forms/driver-load-management-form/driver-load-permissions-form/driver-load-permissions-form.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="autoCompleteFactory"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>autoCompleteFactory</b></span>
+                        <a href="#autoCompleteFactory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(
+    AutoCompleteConfigFactoryService
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/forms/driver-load-management-form/driver-load-permissions-form/driver-load-permissions-form.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="autoCompleteSubAnnouncementGroup"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>autoCompleteSubAnnouncementGroup</b></span>
+                        <a href="#autoCompleteSubAnnouncementGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.autoCompleteFactory.create(
+    AutoCompleteType.RelationAnnouncementGroupAndSubGroup,
+    this.ctrl(&#x27;AnnouncementSubGroupId&#x27;),
+    {
+      control: this.ctrl(&#x27;AnnouncementSubGroupTitle&#x27;) as FormControl&lt;string&gt;,
+      groupControlId: this.ctrl(&#x27;AnnouncementGroupId&#x27;),
+      readOnly: () &#x3D;&gt; this.ctrl(&#x27;AnnouncementGroupId&#x27;).invalid,
+    }
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/components/forms/driver-load-management-form/driver-load-permissions-form/driver-load-permissions-form.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/forms/driver-load-management-form/driver-load-permissions-form/driver-load-permissions-form.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadsPermissions"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>loadsPermissions</b></span>
+                        <a href="#loadsPermissions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;LoadPermissionForDriver[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/forms/driver-load-management-form/driver-load-permissions-form/driver-load-permissions-form.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reportService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>reportService</b></span>
+                        <a href="#reportService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ReportsManagementService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/forms/driver-load-management-form/driver-load-permissions-form/driver-load-permissions-form.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchLoadPermissions"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>searchLoadPermissions</b></span>
+                        <a href="#searchLoadPermissions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.fb.group({
+    AnnouncementGroupId: this.fb.control&lt;number | null&gt;(
+      null,
+      Validators.required
+    ),
+    AnnouncementGroupTitle: this.fb.nonNullable.control(&#x27;&#x27;),
+    AnnouncementSubGroupId: this.fb.control&lt;number | null&gt;(
+      null,
+      Validators.required
+    ),
+    AnnouncementSubGroupTitle: this.fb.nonNullable.control(&#x27;&#x27;),
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/forms/driver-load-management-form/driver-load-permissions-form/driver-load-permissions-form.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activeRequests"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>activeRequests</b></span>
+                        <a href="#activeRequests"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../components/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../components/BaseLoading.html#source" target="_self" >BaseLoading:12</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroy$"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>destroy$</b></span>
+                        <a href="#destroy$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../components/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../components/BaseLoading.html#source" target="_self" >BaseLoading:8</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../components/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../components/BaseLoading.html#source" target="_self" >BaseLoading:13</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingService"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>loadingService</b></span>
+                        <a href="#loadingService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(LoadingService)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../components/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../components/BaseLoading.html#source" target="_self" >BaseLoading:9</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toast"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>toast</b></span>
+                        <a href="#toast"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../components/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../components/BaseLoading.html#source" target="_self" >BaseLoading:10</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, signal } from &#x27;@angular/core&#x27;;
+import { FormBuilder, FormControl, Validators } from &#x27;@angular/forms&#x27;;
+import { ButtonComponent } from &#x27;app/components/shared/button/button.component&#x27;;
+import { SearchAutoCompleteFactoryComponent } from &#x27;app/components/shared/inputs/search-auto-complete-factory/search-auto-complete-factory.component&#x27;;
+import {
+  AutoCompleteConfigFactoryService,
+  AutoCompleteType,
+} from &#x27;app/services/auto-complete-config-factory/auto-complete-config-factory.service&#x27;;
+import { CardModule } from &#x27;primeng/card&#x27;;
+import { BaseLoading } from &#x27;app/components/forms/shared/component-base/base-loading&#x27;;
+import { ReportsManagementService } from &#x27;app/services/report-management/reports-management.service&#x27;;
+import { LoadPermissionForDriver } from &#x27;app/services/report-management/model/load-permissions/load-permission-for-driver.model&#x27;;
+import { checkAndToastError } from &#x27;app/utils/api-utils&#x27;;
+
+interface SearchLoadPermissionsForm {
+  AnnouncementGroupId: number | null;
+  AnnouncementGroupTitle: string;
+  AnnouncementSubGroupId: number | null;
+  AnnouncementSubGroupTitle: string;
+}
+
+@Component({
+  selector: &#x27;app-driver-load-permissions-form&#x27;,
+  templateUrl: &#x27;./driver-load-permissions-form.component.html&#x27;,
+  imports: [CardModule, ButtonComponent, SearchAutoCompleteFactoryComponent],
+  styleUrls: [&#x27;./driver-load-permissions-form.component.scss&#x27;],
+})
+export class DriverLoadPermissionsFormComponent extends BaseLoading {
+  private readonly fb &#x3D; inject(FormBuilder);
+  private readonly reportService &#x3D; inject(ReportsManagementService);
+  private readonly autoCompleteFactory &#x3D; inject(
+    AutoCompleteConfigFactoryService
+  );
+
+  readonly loadsPermissions &#x3D; signal&lt;LoadPermissionForDriver[]&gt;([]);
+  readonly addonWidth &#x3D; &#x27;10rem&#x27;;
+  readonly searchLoadPermissions &#x3D; this.fb.group({
+    AnnouncementGroupId: this.fb.control&lt;number | null&gt;(
+      null,
+      Validators.required
+    ),
+    AnnouncementGroupTitle: this.fb.nonNullable.control(&#x27;&#x27;),
+    AnnouncementSubGroupId: this.fb.control&lt;number | null&gt;(
+      null,
+      Validators.required
+    ),
+    AnnouncementSubGroupTitle: this.fb.nonNullable.control(&#x27;&#x27;),
+  });
+
+  // autocomplete configs
+  readonly autoCompleteAnnouncementGroup &#x3D; this.autoCompleteFactory.create(
+    AutoCompleteType.AnnouncementGroup,
+    this.ctrl(&#x27;AnnouncementGroupId&#x27;),
+    {
+      control: this.ctrl(&#x27;AnnouncementGroupTitle&#x27;),
+      valueChange: () &#x3D;&gt; {
+        this.ctrl(&#x27;AnnouncementGroupId&#x27;).setValue(null);
+        this.ctrl(&#x27;AnnouncementSubGroupId&#x27;).setValue(null);
+        this.ctrl(&#x27;AnnouncementSubGroupTitle&#x27;).reset(&#x27;&#x27;);
+      },
+    }
+  );
+
+  readonly autoCompleteSubAnnouncementGroup &#x3D; this.autoCompleteFactory.create(
+    AutoCompleteType.RelationAnnouncementGroupAndSubGroup,
+    this.ctrl(&#x27;AnnouncementSubGroupId&#x27;),
+    {
+      control: this.ctrl(&#x27;AnnouncementSubGroupTitle&#x27;) as FormControl&lt;string&gt;,
+      groupControlId: this.ctrl(&#x27;AnnouncementGroupId&#x27;),
+      readOnly: () &#x3D;&gt; this.ctrl(&#x27;AnnouncementGroupId&#x27;).invalid,
+    }
+  );
+
+  async loadLoadPermissions() {
+    if (this.searchLoadPermissions.invalid || this.loading()) return;
+    await this.withLoading(async () &#x3D;&gt; {
+      const response &#x3D; await this.reportService.GetLoadPermissionsForDriver(
+        this.ctrl(&#x27;AnnouncementGroupId&#x27;).value!,
+        this.ctrl(&#x27;AnnouncementSubGroupId&#x27;).value!
+      );
+
+      if (!checkAndToastError(response, this.toast)) return;
+      this.loadsPermissions.set(response.data);
+    });
+  }
+  ctrl&lt;K extends keyof SearchLoadPermissionsForm&gt;(
+    name: K
+  ): FormControl&lt;SearchLoadPermissionsForm[K]&gt; {
+    const control &#x3D; this.searchLoadPermissions.get(name as string);
+    if (!control) {
+      throw new Error(&#x60;Control &quot;${String(name)}&quot; not found&#x60;);
+    }
+    return control as FormControl&lt;SearchLoadPermissionsForm[K]&gt;;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;grid grid-cols-12 gap-5&quot;&gt;
+  &lt;app-search-auto-complete-factory
+    class&#x3D;&quot;col-span-12 md:col-span-6&quot;
+    [config]&#x3D;&quot;autoCompleteAnnouncementGroup&quot;
+    [addonWidth]&#x3D;&quot;addonWidth&quot;
+  &gt;
+  &lt;/app-search-auto-complete-factory&gt;
+
+  &lt;app-search-auto-complete-factory
+    class&#x3D;&quot;col-span-12 md:col-span-6&quot;
+    [config]&#x3D;&quot;autoCompleteSubAnnouncementGroup&quot;
+    [addonWidth]&#x3D;&quot;addonWidth&quot;
+  &gt;&lt;/app-search-auto-complete-factory&gt;
+
+  &lt;app-button
+    class&#x3D;&quot;col-span-12 mt-2 md:flex md:justify-end&quot;
+    styleClass&#x3D;&quot;w-full md:w-40 lg:w-48&quot;
+    (onClick)&#x3D;&quot;loadLoadPermissions()&quot;
+    [disabled]&#x3D;&quot;this.searchLoadPermissions.invalid&quot;
+    severity&#x3D;&quot;info&quot;
+  &gt;
+  مشاهده
+  &lt;/app-button&gt;
+&lt;/div&gt;
+
+&lt;div class&#x3D;&quot;flex flex-col items-center mt-20 gap-3&quot;&gt;
+  @for (load of loadsPermissions(); track $index) {
+    &lt;p-card
+      class&#x3D;&quot;w-[90%] min-w-[300px] max-w-[450px] mb-3 shadow-md rounded-2xl bg-emphasis&quot;
+    &gt;
+      &lt;!-- Header: Good title and priority --&gt;
+      &lt;div class&#x3D;&quot;flex justify-between items-center mb-2&quot;&gt;
+        &lt;span class&#x3D;&quot;font-bold text-lg&quot;&gt;{{ load.GoodTitle || &quot;---&quot; }}&lt;/span&gt;
+        &lt;span class&#x3D;&quot;text-sm px-2 py-0.5 rounded-full bg-highlight&quot;&gt;
+          اولویت: {{ load.Priority }}
+        &lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Body content --&gt;
+      &lt;div class&#x3D;&quot;text-sm border-t pt-2 pb-1&quot;&gt;
+        &lt;div&gt;
+          مبدا: {{ load.LoadSourceCity || &quot;---&quot; }} ← مقصد:
+          {{ load.LoadTargetCity || &quot;---&quot; }}
+        &lt;/div&gt;
+        &lt;div&gt;تناژ: {{ load.Tonaj || &quot;-&quot; }}&lt;/div&gt;
+        &lt;div&gt;نوبت: {{ load.SequentialTurn || &quot;-&quot; }}&lt;/div&gt;
+        &lt;div&gt;
+          تاریخ: {{ load.ShamsiDate || &quot;-&quot; }} | ساعت: {{ load.Time || &quot;-&quot; }}
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/p-card&gt;
+  } @empty {
+    &lt;p-card class&#x3D;&quot;w-full my-4 shadow-sm&quot;&gt;
+      &lt;div class&#x3D;&quot;text-center text-sm flex items-center justify-center&quot;&gt;
+        رکوردی برای نمایش وجود ندارد
+      &lt;/div&gt;
+    &lt;/p-card&gt;
+  }
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./driver-load-permissions-form.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="grid grid-cols-12 gap-5">  <app-search-auto-complete-factory    class="col-span-12 md:col-span-6"    [config]="autoCompleteAnnouncementGroup"    [addonWidth]="addonWidth"  >  </app-search-auto-complete-factory>  <app-search-auto-complete-factory    class="col-span-12 md:col-span-6"    [config]="autoCompleteSubAnnouncementGroup"    [addonWidth]="addonWidth"  ></app-search-auto-complete-factory>  <app-button    class="col-span-12 mt-2 md:flex md:justify-end"    styleClass="w-full md:w-40 lg:w-48"    (onClick)="loadLoadPermissions()"    [disabled]="this.searchLoadPermissions.invalid"    severity="info"  >  مشاهده  </app-button></div><div class="flex flex-col items-center mt-20 gap-3">  @for (load of loadsPermissions(); track $index) {    <p-card      class="w-[90%] min-w-[300px] max-w-[450px] mb-3 shadow-md rounded-2xl bg-emphasis"    >      <!-- Header: Good title and priority -->      <div class="flex justify-between items-center mb-2">        <span class="font-bold text-lg">{{ load.GoodTitle || "---" }}</span>        <span class="text-sm px-2 py-0.5 rounded-full bg-highlight">          اولویت: {{ load.Priority }}        </span>      </div>      <!-- Body content -->      <div class="text-sm border-t pt-2 pb-1">        <div>          مبدا: {{ load.LoadSourceCity || "---" }} ← مقصد:          {{ load.LoadTargetCity || "---" }}        </div>        <div>تناژ: {{ load.Tonaj || "-" }}</div>        <div>نوبت: {{ load.SequentialTurn || "-" }}</div>        <div>          تاریخ: {{ load.ShamsiDate || "-" }} | ساعت: {{ load.Time || "-" }}        </div>      </div>    </p-card>  } @empty {    <p-card class="w-full my-4 shadow-sm">      <div class="text-center text-sm flex items-center justify-center">        رکوردی برای نمایش وجود ندارد      </div>    </p-card>  }</div></div>'
+    var COMPONENTS = [{'name': 'AdminLoadPermissionsFormComponent', 'selector': 'app-admin-load-permissions-form'},{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BaseLoading', 'selector': ''},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CarouselFormComponent', 'selector': 'app-carousel-form'},{'name': 'ChatBoxInputComponent', 'selector': 'app-chat-box-input'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DashboardContentManagerComponent', 'selector': 'app-dashboard-content-manager'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DeviceManagementFormComponent', 'selector': 'app-device-management-form'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverLoadAllocationFormComponent', 'selector': 'app-driver-load-allocation-form'},{'name': 'DriverLoadPermissionsFormComponent', 'selector': 'app-driver-load-permissions-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'EquipmentDeviceConfigFormComponent', 'selector': 'app-equipment-device-config-form'},{'name': 'ExitConfirmationDialogComponent', 'selector': 'app-exit-confirmation-dialog'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FilesUploadInputComponent', 'selector': 'app-files-upload-input'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FrameHeaderComponent', 'selector': 'app-frame-header'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'GeneralConfigurationFormComponent', 'selector': 'app-general-configuration-form'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'IssuedTurnListFormComponent', 'selector': 'app-issued-turn-list-form'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadAccountingFormComponent', 'selector': 'app-load-accounting-form'},{'name': 'LoadAllocationConditionFormComponent', 'selector': 'app-load-allocation-condition-form'},{'name': 'LoadAllocationFormComponent', 'selector': 'app-load-allocation-form'},{'name': 'LoadAllocationPriorityComponent', 'selector': 'app-load-allocation-priority'},{'name': 'LoadAnnouncementConfigFormComponent', 'selector': 'app-load-announcement-config-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeAnnouncementRelationFormComponent', 'selector': 'app-loader-type-announcement-relation-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoadPermissionsFormComponent', 'selector': 'app-load-permissions-form'},{'name': 'LoadsAnnouncementFormComponent', 'selector': 'app-loads-announcement-form'},{'name': 'LoadsListFormComponent', 'selector': 'app-loads-list-form'},{'name': 'LoadViewConditionFormComponent', 'selector': 'app-load-view-condition-form'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'LogoComponent', 'selector': 'app-logo'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MapSvgComponent', 'selector': 'app-map-svg'},{'name': 'MobileTabBarComponent', 'selector': 'app-mobile-tab-bar'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'OptInputComponent', 'selector': 'app-opt-input'},{'name': 'ParkingTrafficRecordsFormComponent', 'selector': 'app-parking-traffic-records'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'PersonalizePasswordDialogComponent', 'selector': 'app-personalize-password-dialog'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'ProvinceAnnouncementRelationFormComponent', 'selector': 'app-province-announcement-relation-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RegisterTurnFormComponent', 'selector': 'app-register-turn-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchAutoCompleteFactoryComponent', 'selector': 'app-search-auto-complete-factory'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SearchProcessesComponent', 'selector': 'app-search-processes'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnCostFormComponent', 'selector': 'app-sequential-turn-cost-form'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarPageGroupComponent', 'selector': 'app-sidebar-page-group'},{'name': 'SidebarWebProcesses', 'selector': 'app-sidebar-web-processes'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabManagerComponent', 'selector': 'app-tab-manager'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'ThemeManagementComponent', 'selector': 'app-theme-management'},{'name': 'TicketChatMessageFormComponent', 'selector': 'app-ticket-chat-message-form'},{'name': 'TicketCreateFormComponent', 'selector': 'app-ticket-create-form'},{'name': 'TicketCreatePageComponent', 'selector': 'app-create-page'},{'name': 'TicketFilesUploadComponent', 'selector': 'app-ticket-files-upload'},{'name': 'TicketGuardCaptchaFormComponent', 'selector': 'app-ticket-guard-captcha-form'},{'name': 'TicketListsFormComponent', 'selector': 'app-ticket-lists-form'},{'name': 'TicketTrackerPageComponent', 'selector': 'app-ticket-tracker-page'},{'name': 'TicketTrackFormComponent', 'selector': 'app-ticket-track-form'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'ToggleSwitchInputComponent', 'selector': 'app-toggle-switch-input'},{'name': 'TPTParametersAnnouncementRelationFormComponent', 'selector': 'app-tpt-parameters-announcement-relation-form'},{'name': 'TPTParametersFormComponent', 'selector': 'app-tpt-parameters-form'},{'name': 'TrafficAndParkingTariffFormComponent', 'selector': 'app-traffic-and-parking-tariff'},{'name': 'TrafficCardTypeFormComponent', 'selector': 'app-traffic-card-type-form-component'},{'name': 'TrafficEntriesFormComponent', 'selector': 'app-traffic-entries-form'},{'name': 'TrafficInitialRegistrationFormComponent', 'selector': 'app-traffic-initial-registration-form'},{'name': 'TransportCompaniesFormComponent', 'selector': 'app-transport-companies-form'},{'name': 'TransportCompaniesWalletPaymentFormComponent', 'selector': 'app-transport-companies-wallet-payment-form'},{'name': 'TransportLoadPermissionsFormComponent', 'selector': 'app-transport-load-permissions-form'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TruckWalletPaymentFormComponent', 'selector': 'app-truck-wallet-payment-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserChargingFunctionFormComponent', 'selector': 'app-user-charging-function-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UserProfileComponent', 'selector': 'app-user-profile'},{'name': 'UserProfileFormComponent', 'selector': 'app-user-profile-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'},{'name': 'WalletPaymentFormComponent', 'selector': 'app-wallet-payment-form'},{'name': 'WalletPaymentRecordTableComponent', 'selector': 'app-payment-record-table'},{'name': 'WalletProfileComponent', 'selector': 'app-wallet-profile'},{'name': 'WalletTransactionsTableComponent', 'selector': 'app-wallet-transactions-table'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'DriverLoadPermissionsFormComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'DriverLoadPermissionsFormComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

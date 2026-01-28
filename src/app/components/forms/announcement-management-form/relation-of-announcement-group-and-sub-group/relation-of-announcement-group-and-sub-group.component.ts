@@ -101,7 +101,7 @@ export class RelationOfAnnouncementGroupAndSubGroupComponent {
   };
 
   searchAnnouncementSubGroup = async (query: string) => {
-    const res = await this.announcementService.GetAnnouncementSupGroups(query);
+    const res = await this.announcementService.GetAnnouncementSubGroups(query);
     if (!checkAndToastError(res, this.toast)) return [];
     return res.data!;
   };

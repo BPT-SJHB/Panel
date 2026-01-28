@@ -13,6 +13,7 @@ import { ShortResponse } from 'app/data/model/short-response.model';
 import { mockShortResponse } from 'app/data/mock/short-response.mock';
 import { mockCarouselForViewPic } from './mock/carousel-pic-forView.mock';
 import { CarouselForViewPic } from './model/carousel-pic-forView.model';
+import { CarouselPic } from './model/carousel-pic.model';
 
 @Injectable({
   providedIn: 'root',
@@ -54,11 +55,12 @@ export class CarouselManagementService {
       typeof bodyValue,
       CarouselInfo[]
     >(apiUrl, bodyValue, mockActiveCarouselInfos);
+    //#endregion
   }
 
   public async GetCarouselPic(
     carouselId: number
-  ): Promise<ApiResponse<{ Picture: string }>> {
+  ): Promise<ApiResponse<CarouselPic>> {
     //#region Consts
     const apiUrl = API_ROUTES.CarouselAPI.GetCarouselPic;
 
@@ -71,8 +73,9 @@ export class CarouselManagementService {
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      { Picture: string }
+      CarouselPic
     >(apiUrl, bodyValue, mockCarouselPic);
+    //#endregion
   }
 
   public async RegisterCarousel(
@@ -105,6 +108,7 @@ export class CarouselManagementService {
       typeof bodyValue,
       ShortResponse
     >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
   }
 
   public async EditCarousel(
@@ -184,14 +188,18 @@ export class CarouselManagementService {
   public async GetCarouselsForView(): Promise<
     ApiResponse<CarouselForViewPic[]>
   > {
+    //#region Consts
     const apiUrl = API_ROUTES.CarouselAPI.GetCarouselsForView;
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
     };
+    //#endregion
 
+    //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       CarouselForViewPic[]
     >(apiUrl, bodyValue, mockCarouselForViewPic);
+    //#endregion
   }
 }

@@ -321,7 +321,7 @@ export class AutoCompleteConfigFactoryService {
   private async getSearchAnnouncementSubGroup(
     query: string
   ): Promise<AnnouncementSubGroup[]> {
-    const res = await this.services.announce.GetAnnouncementSupGroups(query);
+    const res = await this.services.announce.GetAnnouncementSubGroups(query);
     return checkAndToastError(res, this.toast) ? (res.data ?? []) : [];
   }
 

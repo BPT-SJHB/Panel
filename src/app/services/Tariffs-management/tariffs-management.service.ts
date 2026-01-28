@@ -3,7 +3,11 @@ import { APICommunicationManagementService } from '../api-communication-manageme
 import { UserAuthService } from '../user-auth-service/user-auth.service';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { API_ROUTES } from 'app/constants/api';
-import { Tariff } from 'app/data/model/tariff.model';
+import {
+  DeleteTariffInfo,
+  EditTariffInfo,
+  Tariff,
+} from 'app/data/model/tariff.model';
 import { mockTariffs } from 'app/data/mock/tariff.mock';
 import { ShortResponse } from 'app/data/model/short-response.model';
 import { mockShortResponse } from 'app/data/mock/short-response.mock';
@@ -88,14 +92,14 @@ export class TariffsManagementService {
     //#endregion
   }
 
-  public async DeleteTariffs(
-    tariffs: Tariff[]
+  public async DeleteTariff(
+    tariffInfo: DeleteTariffInfo
   ): Promise<ApiResponse<ShortResponse>> {
     //#region Consts
-    const apiUrl = API_ROUTES.TransportationAPI.Tariffs.DeleteTariffs;
+    const apiUrl = API_ROUTES.TransportationAPI.Tariffs.DeleteTariff;
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
-      Tariffs: tariffs,
+      Tariff: tariffInfo,
     };
     //#endregion
 
@@ -108,13 +112,13 @@ export class TariffsManagementService {
   }
 
   public async EditTariffs(
-    tariff: Tariff
+    tariffInfo: EditTariffInfo
   ): Promise<ApiResponse<ShortResponse>> {
     //#region Consts
-    const apiUrl = API_ROUTES.TransportationAPI.Tariffs.EditTariffs;
+    const apiUrl = API_ROUTES.TransportationAPI.Tariffs.EditTariff;
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
-      Tariffs: [tariff],
+      Tariff: tariffInfo,
     };
     //#endregion
 
@@ -146,13 +150,13 @@ export class TariffsManagementService {
   }
 
   public async RegisterTariff(
-    tariff: Tariff
+    tariffInfo: Tariff
   ): Promise<ApiResponse<ShortResponse>> {
     //#region Consts
     const apiUrl = API_ROUTES.TransportationAPI.Tariffs.RegisterTariff;
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
-      Tariffs: [tariff],
+      Tariff: tariffInfo,
     };
     //#endregion
 

@@ -13,7 +13,10 @@ import { mockLoadStatuses } from './mock/load-status.mock';
 import { LoadInfo } from './model/load-info.model';
 import { mockLoadInfo } from './mock/load-info.mock';
 import { TransportTariffParam } from './model/transport-tariff-param.model';
-import { mockTransportTariffParams } from './mock/transport-tariff-param.mock';
+import {
+  mockTransportTariffParamInString,
+  mockTransportTariffParams,
+} from './mock/transport-tariff-param.mock';
 import { LoadRegister } from './model/load-register.model';
 import { LoadEdit } from './model/load-edit.model';
 import { ShortResponse } from 'app/data/model/short-response.model';
@@ -133,13 +136,13 @@ export class LoadManagementService {
   }
 
   public async ChangePriorityLoadAllocations(
-    prioritys: LoadAllocationPriority[]
+    priority: LoadAllocationPriority[]
   ): Promise<ApiResponse<ShortResponse>> {
     //#region Consts
     const apiUrl = API_ROUTES.LoadAllocationAPI.ChangeLoadAllocationsPriority;
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
-      LAIdPrioritys: prioritys,
+      LAIdPrioritys: priority,
     };
     //#endregion
 
@@ -357,10 +360,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       { TPTParams: string }
-    >(apiUrl, bodyValue, {
-      TPTParams:
-        '135:0;139:0;143:0;147:0;151:0;157:0;16:0;163:0;169:0;175:0;181:0;187:0;193:0;199:0;205:0;211:0;217:0;223:0;229:0;235:0',
-    });
+    >(apiUrl, bodyValue, mockTransportTariffParamInString);
     //#endregion
   }
 
@@ -704,6 +704,7 @@ export class LoadManagementService {
   //#endregion
 
   //#region LoadPermission methods
+
   public async CancelLoadPermission(
     laId: number,
     description: string,
@@ -729,5 +730,6 @@ export class LoadManagementService {
     >(apiUrl, bodyValue, mockShortResponse);
     //#endregion
   }
+
   //#endregion
 }

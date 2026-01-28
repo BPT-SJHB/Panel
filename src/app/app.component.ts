@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { ToastModule } from 'primeng/toast';
@@ -18,4 +18,15 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {}
+export class AppComponent {
+  readonly montionToastConfig = signal({
+    type: 'animation' as const,
+    disabled: false,
+    appear: true,
+    enter: true,
+    leave: true,
+    duration: 1000,
+    autoHeight: true,
+    autoWidth: true,
+  });
+}

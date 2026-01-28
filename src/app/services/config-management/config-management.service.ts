@@ -439,6 +439,8 @@ export class ConfigManagementService {
     //endregion
   }
 
+  //#endregion
+
   public async RegisterLoadAllocationCondition(
     loadAllocationConditionInfo: RegisterLoadAllocationConditionInfo
   ): Promise<ApiResponse<ShortResponse>> {
