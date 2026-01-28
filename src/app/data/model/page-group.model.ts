@@ -1,4 +1,5 @@
-import { WebProcess } from './web-process.model';
+import { z } from 'zod';
+import { WebProcess, zodWebProcess } from './web-process.model';
 
 export interface PageGroup {
   id: number;
@@ -6,3 +7,10 @@ export interface PageGroup {
   icon: string;
   processes: WebProcess[];
 }
+
+export const zodPageGroup = z.object({
+  id: z.number(),
+  title: z.string(),
+  icon: z.string(),
+  processes: z.array(zodWebProcess),
+});

@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 export interface LoadAllocationConditionInfo {
   LoadAllocationConditionId: number;
   AnnouncementId: number;
@@ -15,6 +17,24 @@ export interface LoadAllocationConditionInfo {
   TurnStatusId: number;
   TurnStatusTitle: string;
 }
+
+export const zodLoadAllocationConditionInfo = z.object({
+  LoadAllocationConditionId: z.number(),
+  AnnouncementId: z.number(),
+  AnnouncementTitle: z.string(),
+  AnnouncementSGId: z.number(),
+  AnnouncementSGTitle: z.string(),
+  SequentialTurnId: z.number(),
+  SequentialTurnTitle: z.string(),
+  TruckNativenessTypeId: z.number(),
+  TruckNativenessTypeTitle: z.string(),
+  LoadStatusId: z.number(),
+  LoadStatusTitle: z.string(),
+  RequesterId: z.number(),
+  RequesterTitle: z.string(),
+  TurnStatusId: z.number(),
+  TurnStatusTitle: z.string(),
+});
 
 export type RegisterLoadAllocationConditionInfo = Pick<
   LoadAllocationConditionInfo,

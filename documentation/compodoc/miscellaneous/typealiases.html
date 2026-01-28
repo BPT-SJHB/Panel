@@ -1,0 +1,1383 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bpt-sjhb-panel documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">bpt-sjhb-panel documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-typealiases">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Miscellaneous</li>
+  <li class="breadcrumb-item">Type aliases</li>
+</ol>
+
+<section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#AnnouncementGroupTableRow" title="src/app/components/forms/announcement-management-form/announcement-group-form/announcement-group-form.component.ts" ><b>AnnouncementGroupTableRow</b>&nbsp;&nbsp;&nbsp;(src/.../announcement-group-form.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#AnnouncementProvinceRow" title="src/app/components/forms/province-announcement-relation-form/province-announcement-relation-form.component.ts" ><b>AnnouncementProvinceRow</b>&nbsp;&nbsp;&nbsp;(src/.../province-announcement-relation-form.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#AnnouncementSubGroupTableRow" title="src/app/components/forms/announcement-management-form/announcement-sub-group-form/announcement-sub-group-form.component.ts" ><b>AnnouncementSubGroupTableRow</b>&nbsp;&nbsp;&nbsp;(src/.../announcement-sub-group-form.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ButtonSeverity" title="src/app/components/shared/button/button.component.ts" ><b>ButtonSeverity</b>&nbsp;&nbsp;&nbsp;(src/.../button.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CachingMode" title="src/app/services/auto-complete-config-factory/auto-complete-config-factory.service.ts" ><b>CachingMode</b>&nbsp;&nbsp;&nbsp;(src/.../auto-complete-config-factory.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CarouselInfoRow" title="src/app/components/forms/carousel-form/carousel-form.component.ts" ><b>CarouselInfoRow</b>&nbsp;&nbsp;&nbsp;(src/.../carousel-form.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DeleteInfoOfDevice" title="src/app/services/config-management/model/device-info.model.ts" ><b>DeleteInfoOfDevice</b>&nbsp;&nbsp;&nbsp;(src/.../device-info.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DeleteInfoOfDeviceConfig" title="src/app/services/config-management/model/device-config.model.ts" ><b>DeleteInfoOfDeviceConfig</b>&nbsp;&nbsp;&nbsp;(src/.../device-config.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DeleteInfoOfLoadAnnouncementConfig" title="src/app/services/config-management/model/load-announcement-config.model.ts" ><b>DeleteInfoOfLoadAnnouncementConfig</b>&nbsp;&nbsp;&nbsp;(src/.../load-announcement-config.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DeleteInfoOfTurnCost" title="src/app/services/turn-management/model/turn-cost.model.ts" ><b>DeleteInfoOfTurnCost</b>&nbsp;&nbsp;&nbsp;(src/.../turn-cost.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DeleteLoadAllocationConditionInfo" title="src/app/services/config-management/model/load-allocation-condition-info.model.ts" ><b>DeleteLoadAllocationConditionInfo</b>&nbsp;&nbsp;&nbsp;(src/.../load-allocation-condition-info.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DeleteLoadViewConditionInfo" title="src/app/services/config-management/model/load-view-condition-info.model.ts" ><b>DeleteLoadViewConditionInfo</b>&nbsp;&nbsp;&nbsp;(src/.../load-view-condition-info.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DeleteTariffInfo" title="src/app/data/model/tariff.model.ts" ><b>DeleteTariffInfo</b>&nbsp;&nbsp;&nbsp;(src/.../tariff.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DeleteTPTParamInfo" title="src/app/services/tpt-params-management/model/tptparam-info.model.ts" ><b>DeleteTPTParamInfo</b>&nbsp;&nbsp;&nbsp;(src/.../tptparam-info.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DetailTicket" title="src/app/components/forms/tickets-management-form/ticket-lists-form/ticket-lists-form.component.ts" ><b>DetailTicket</b>&nbsp;&nbsp;&nbsp;(src/.../ticket-lists-form.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DetailTicket" title="src/app/components/forms/tickets-management-form/ticket-track-form/ticket-track-form.component.ts" ><b>DetailTicket</b>&nbsp;&nbsp;&nbsp;(src/.../ticket-track-form.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DeviceConfigRow" title="src/app/components/forms/equipment-device-config-form/equipment-device-config-form.component.ts" ><b>DeviceConfigRow</b>&nbsp;&nbsp;&nbsp;(src/.../equipment-device-config-form.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DeviceInfoRow" title="src/app/components/forms/device-management-form/device-management-form.component.ts" ><b>DeviceInfoRow</b>&nbsp;&nbsp;&nbsp;(src/.../device-management-form.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#Direction" title="src/app/pages/home/home-page.component.ts" ><b>Direction</b>&nbsp;&nbsp;&nbsp;(src/.../home-page.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#EditInfoOfDeviceConfig" title="src/app/services/config-management/model/device-config.model.ts" ><b>EditInfoOfDeviceConfig</b>&nbsp;&nbsp;&nbsp;(src/.../device-config.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#EditInfoOfGeneralConfig" title="src/app/services/config-management/model/general-config.model.ts" ><b>EditInfoOfGeneralConfig</b>&nbsp;&nbsp;&nbsp;(src/.../general-config.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#EditLoadAllocationConditionInfo" title="src/app/services/config-management/model/load-allocation-condition-info.model.ts" ><b>EditLoadAllocationConditionInfo</b>&nbsp;&nbsp;&nbsp;(src/.../load-allocation-condition-info.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#EditLoadViewConditionInfo" title="src/app/services/config-management/model/load-view-condition-info.model.ts" ><b>EditLoadViewConditionInfo</b>&nbsp;&nbsp;&nbsp;(src/.../load-view-condition-info.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#EditTariffInfo" title="src/app/data/model/tariff.model.ts" ><b>EditTariffInfo</b>&nbsp;&nbsp;&nbsp;(src/.../tariff.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#EditTPTParamRelationToAnnouncementGroupAndSubGroup" title="src/app/services/tpt-params-management/model/tptparam-info.model.ts" ><b>EditTPTParamRelationToAnnouncementGroupAndSubGroup</b>&nbsp;&nbsp;&nbsp;(src/.../tptparam-info.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#FeatureItem" title="documentation/src/components/HomepageFeatures/index.tsx" ><b>FeatureItem</b>&nbsp;&nbsp;&nbsp;(documentation/.../index.tsx)</a>
+                        </li>
+                        <li>
+                            <a href="#GeneralConfigRow" title="src/app/components/forms/general-configuration-form/general-configuration-form.component.ts" ><b>GeneralConfigRow</b>&nbsp;&nbsp;&nbsp;(src/.../general-configuration-form.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#LADPlaceTableRow" title="src/app/components/forms/lad-places-form/lad-places-form.component.ts" ><b>LADPlaceTableRow</b>&nbsp;&nbsp;&nbsp;(src/.../lad-places-form.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#LoadAllocationConditionRow" title="src/app/components/forms/load-condition-management-form/load-allocation-condition/load-allocation-condition-form.component.ts" ><b>LoadAllocationConditionRow</b>&nbsp;&nbsp;&nbsp;(src/.../load-allocation-condition-form.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#LoadAnnouncementConfigRow" title="src/app/components/forms/load-announcement-config-form/load-announcement-config-form.component.ts" ><b>LoadAnnouncementConfigRow</b>&nbsp;&nbsp;&nbsp;(src/.../load-announcement-config-form.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#LoaderTypeAnnouncementMappingRow" title="src/app/components/forms/loader-type-announcement-relation-form/loader-type-announcement-relation-form.component.ts" ><b>LoaderTypeAnnouncementMappingRow</b>&nbsp;&nbsp;&nbsp;(src/.../loader-type-announcement-relation-form.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#LoadViewConditionRow" title="src/app/components/forms/load-condition-management-form/load-view-condition/load-view-condition-form.component.ts" ><b>LoadViewConditionRow</b>&nbsp;&nbsp;&nbsp;(src/.../load-view-condition-form.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#NullToUndefined" title="src/app/utils/null-to-undefined.ts" ><b>NullToUndefined</b>&nbsp;&nbsp;&nbsp;(src/.../null-to-undefined.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#PlaceholderKey" title="src/app/constants/Titles.ts" ><b>PlaceholderKey</b>&nbsp;&nbsp;&nbsp;(src/.../Titles.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ProvinceCode" title="src/app/pages/home/map-svg/map-svg.component.ts" ><b>ProvinceCode</b>&nbsp;&nbsp;&nbsp;(src/.../map-svg.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ProvinceMap" title="src/app/pages/home/map-svg/map-svg.component.ts" ><b>ProvinceMap</b>&nbsp;&nbsp;&nbsp;(src/.../map-svg.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ProvinceName" title="src/app/pages/home/map-svg/map-svg.component.ts" ><b>ProvinceName</b>&nbsp;&nbsp;&nbsp;(src/.../map-svg.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#RegisterAndDeleteRelationOfAnnouncementSubGroupAndProvinceInfo" title="src/app/services/announcement-group-subgroup-management/model/relation-of-announcement-subgroup-province.model.ts" ><b>RegisterAndDeleteRelationOfAnnouncementSubGroupAndProvinceInfo</b>&nbsp;&nbsp;&nbsp;(src/.../relation-of-announcement-subgroup-province.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#RegisterDeleteRelationToAnnouncementSubGroup" title="src/app/services/loader-types/model/loader-type-announcement-sub-groups-relation.model.ts" ><b>RegisterDeleteRelationToAnnouncementSubGroup</b>&nbsp;&nbsp;&nbsp;(src/.../loader-type-announcement-sub-groups-relation.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#RegisterInfoOfDevice" title="src/app/services/config-management/model/device-info.model.ts" ><b>RegisterInfoOfDevice</b>&nbsp;&nbsp;&nbsp;(src/.../device-info.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#RegisterLoadAllocationConditionInfo" title="src/app/services/config-management/model/load-allocation-condition-info.model.ts" ><b>RegisterLoadAllocationConditionInfo</b>&nbsp;&nbsp;&nbsp;(src/.../load-allocation-condition-info.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#RegisterLoadViewConditionInfo" title="src/app/services/config-management/model/load-view-condition-info.model.ts" ><b>RegisterLoadViewConditionInfo</b>&nbsp;&nbsp;&nbsp;(src/.../load-view-condition-info.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#RegisterTPTParamInfo" title="src/app/services/tpt-params-management/model/tptparam-info.model.ts" ><b>RegisterTPTParamInfo</b>&nbsp;&nbsp;&nbsp;(src/.../tptparam-info.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#RegisterTPTParamRelationToAnnouncementGroupAndSubGroup" title="src/app/services/tpt-params-management/model/tptparam-info.model.ts" ><b>RegisterTPTParamRelationToAnnouncementGroupAndSubGroup</b>&nbsp;&nbsp;&nbsp;(src/.../tptparam-info.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#RowRelationOfAnnouncementTableRow" title="src/app/components/forms/announcement-management-form/relation-of-announcement-group-and-sub-group/relation-of-announcement-group-and-sub-group.component.ts" ><b>RowRelationOfAnnouncementTableRow</b>&nbsp;&nbsp;&nbsp;(src/.../relation-of-announcement-group-and-sub-group.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SelectionMode" title="src/app/components/shared/table/table.component.ts" ><b>SelectionMode</b>&nbsp;&nbsp;&nbsp;(src/.../table.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SequentialTurnTableRow" title="src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts" ><b>SequentialTurnTableRow</b>&nbsp;&nbsp;&nbsp;(src/.../sequential-turns-form.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#TariffTable" title="src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts" ><b>TariffTable</b>&nbsp;&nbsp;&nbsp;(src/.../tariffs-form.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#TPTParamInfo" title="src/app/services/tpt-params-management/model/tptparam-info.model.ts" ><b>TPTParamInfo</b>&nbsp;&nbsp;&nbsp;(src/.../tptparam-info.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#TPTParamsDetailRow" title="src/app/components/forms/tpt-parameters-management/tpt-parameters-announcement-relation-form/tpt-parameters-announcement-relation-form.component.ts" ><b>TPTParamsDetailRow</b>&nbsp;&nbsp;&nbsp;(src/.../tpt-parameters-announcement-relation-form.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#TPTParamsRow" title="src/app/components/forms/tpt-parameters-management/tpt-parameters-form/tpt-parameters-form.component.ts" ><b>TPTParamsRow</b>&nbsp;&nbsp;&nbsp;(src/.../tpt-parameters-form.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#TransportLoadPermissionsRow" title="src/app/components/forms/transport-load-permissions-form/transport-load-permissions-form.component.ts" ><b>TransportLoadPermissionsRow</b>&nbsp;&nbsp;&nbsp;(src/.../transport-load-permissions-form.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#TravelTimeTableRow" title="src/app/components/forms/travel-time-form/travel-time-form.component.ts" ><b>TravelTimeTableRow</b>&nbsp;&nbsp;&nbsp;(src/.../travel-time-form.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#TruckNativenessType" title="src/app/services/driver-truck-management/model/truck-nativeness-info.model.ts" ><b>TruckNativenessType</b>&nbsp;&nbsp;&nbsp;(src/.../truck-nativeness-info.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#TurnCostRow" title="src/app/components/forms/sequential-turn-cost-form/sequential-turn-cost-form.component.ts" ><b>TurnCostRow</b>&nbsp;&nbsp;&nbsp;(src/.../sequential-turn-cost-form.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#TurnTableRow" title="src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts" ><b>TurnTableRow</b>&nbsp;&nbsp;&nbsp;(src/.../turns-list-form.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ValidationField" title="src/app/constants/validation-schema.ts" ><b>ValidationField</b>&nbsp;&nbsp;&nbsp;(src/.../validation-schema.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/app/components/forms/announcement-management-form/announcement-group-form/announcement-group-form.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="AnnouncementGroupTableRow"></a>
+                    <span class="name "><b>AnnouncementGroupTableRow</b><a href="#AnnouncementGroupTableRow"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/forms/province-announcement-relation-form/province-announcement-relation-form.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="AnnouncementProvinceRow"></a>
+                    <span class="name "><b>AnnouncementProvinceRow</b><a href="#AnnouncementProvinceRow"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/forms/announcement-management-form/announcement-sub-group-form/announcement-sub-group-form.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="AnnouncementSubGroupTableRow"></a>
+                    <span class="name "><b>AnnouncementSubGroupTableRow</b><a href="#AnnouncementSubGroupTableRow"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/shared/button/button.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ButtonSeverity"></a>
+                    <span class="name "><b>ButtonSeverity</b><a href="#ButtonSeverity"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>&quot;primary&quot; | &quot;green&quot; | &quot;info&quot; | &quot;danger&quot; | &quot;secondary&quot; | &quot;warn&quot; | &quot;disabled&quot;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/services/auto-complete-config-factory/auto-complete-config-factory.service.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CachingMode"></a>
+                    <span class="name "><b>CachingMode</b><a href="#CachingMode"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>&quot;Focus&quot; | &quot;CharacterPrefix&quot;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/forms/carousel-form/carousel-form.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CarouselInfoRow"></a>
+                    <span class="name "><b>CarouselInfoRow</b><a href="#CarouselInfoRow"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/services/config-management/model/device-info.model.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DeleteInfoOfDevice"></a>
+                    <span class="name "><b>DeleteInfoOfDevice</b><a href="#DeleteInfoOfDevice"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../interfaces/DeviceInfo.html" target="_self" >Pick&lt;DeviceInfo | DeviceId&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RegisterInfoOfDevice"></a>
+                    <span class="name "><b>RegisterInfoOfDevice</b><a href="#RegisterInfoOfDevice"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../interfaces/DeviceInfo.html" target="_self" >Pick&lt;DeviceInfo | &quot;DeviceTitle&quot; | &quot;DeviceLocation&quot; | &quot;Active&quot;&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/services/config-management/model/device-config.model.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DeleteInfoOfDeviceConfig"></a>
+                    <span class="name "><b>DeleteInfoOfDeviceConfig</b><a href="#DeleteInfoOfDeviceConfig"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../interfaces/DeviceConfig.html" target="_self" >Pick&lt;DeviceConfig | &quot;CODId&quot; | &quot;CODIndex&quot; | &quot;DeviceId&quot;&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="EditInfoOfDeviceConfig"></a>
+                    <span class="name "><b>EditInfoOfDeviceConfig</b><a href="#EditInfoOfDeviceConfig"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../interfaces/DeviceConfig.html" target="_self" >Pick&lt;DeviceConfig | &quot;CODId&quot; | &quot;CODIndex&quot; | &quot;DeviceId&quot; | &quot;CODValue&quot;&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/services/config-management/model/load-announcement-config.model.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DeleteInfoOfLoadAnnouncementConfig"></a>
+                    <span class="name "><b>DeleteInfoOfLoadAnnouncementConfig</b><a href="#DeleteInfoOfLoadAnnouncementConfig"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../interfaces/LoadAnnouncementConfig.html" target="_self" >Pick&lt;LoadAnnouncementConfig | &quot;COLAId&quot; | &quot;COLAIndex&quot; | &quot;AnnouncementId&quot; | &quot;AnnouncementSGId&quot;&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/services/turn-management/model/turn-cost.model.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DeleteInfoOfTurnCost"></a>
+                    <span class="name "><b>DeleteInfoOfTurnCost</b><a href="#DeleteInfoOfTurnCost"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>Pick&lt;TurnCost | SeqTurnId&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/services/config-management/model/load-allocation-condition-info.model.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DeleteLoadAllocationConditionInfo"></a>
+                    <span class="name "><b>DeleteLoadAllocationConditionInfo</b><a href="#DeleteLoadAllocationConditionInfo"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../interfaces/LoadAllocationConditionInfo.html" target="_self" >Pick&lt;LoadAllocationConditionInfo | LoadAllocationConditionId&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="EditLoadAllocationConditionInfo"></a>
+                    <span class="name "><b>EditLoadAllocationConditionInfo</b><a href="#EditLoadAllocationConditionInfo"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#TruckNativenessType" target="_self" >Pick&lt;LoadAllocationConditionInfo | &quot;LoadAllocationConditionId&quot; | &quot;AnnouncementSGId&quot; | &quot;SequentialTurnId&quot; | &quot;TruckNativenessTypeId&quot; | &quot;LoadStatusId&quot; | &quot;RequesterId&quot; | &quot;TurnStatusId&quot;&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RegisterLoadAllocationConditionInfo"></a>
+                    <span class="name "><b>RegisterLoadAllocationConditionInfo</b><a href="#RegisterLoadAllocationConditionInfo"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#TruckNativenessType" target="_self" >Pick&lt;LoadAllocationConditionInfo | &quot;AnnouncementSGId&quot; | &quot;SequentialTurnId&quot; | &quot;TruckNativenessTypeId&quot; | &quot;LoadStatusId&quot; | &quot;RequesterId&quot; | &quot;TurnStatusId&quot;&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/services/config-management/model/load-view-condition-info.model.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DeleteLoadViewConditionInfo"></a>
+                    <span class="name "><b>DeleteLoadViewConditionInfo</b><a href="#DeleteLoadViewConditionInfo"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../interfaces/LoadViewConditionInfo.html" target="_self" >Pick&lt;LoadViewConditionInfo | LoadViewConditionId&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="EditLoadViewConditionInfo"></a>
+                    <span class="name "><b>EditLoadViewConditionInfo</b><a href="#EditLoadViewConditionInfo"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#TruckNativenessType" target="_self" >Pick&lt;LoadViewConditionInfo | &quot;LoadViewConditionId&quot; | &quot;AnnouncementSGId&quot; | &quot;SequentialTurnId&quot; | &quot;TruckNativenessTypeId&quot; | &quot;LoadStatusId&quot; | &quot;RequesterId&quot;&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RegisterLoadViewConditionInfo"></a>
+                    <span class="name "><b>RegisterLoadViewConditionInfo</b><a href="#RegisterLoadViewConditionInfo"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#TruckNativenessType" target="_self" >Pick&lt;LoadViewConditionInfo | &quot;AnnouncementSGId&quot; | &quot;SequentialTurnId&quot; | &quot;TruckNativenessTypeId&quot; | &quot;LoadStatusId&quot; | &quot;RequesterId&quot;&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/data/model/tariff.model.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DeleteTariffInfo"></a>
+                    <span class="name "><b>DeleteTariffInfo</b><a href="#DeleteTariffInfo"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>Pick&lt;Tariff | &quot;SourceCityId&quot; | &quot;TargetCityId&quot; | &quot;LoaderTypeId&quot; | &quot;GoodId&quot;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="EditTariffInfo"></a>
+                    <span class="name "><b>EditTariffInfo</b><a href="#EditTariffInfo"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>Pick&lt;Tariff | &quot;SourceCityId&quot; | &quot;TargetCityId&quot; | &quot;LoaderTypeId&quot; | &quot;GoodId&quot; | &quot;Tariff&quot; | &quot;BaseTonnag&quot;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/services/tpt-params-management/model/tptparam-info.model.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DeleteTPTParamInfo"></a>
+                    <span class="name "><b>DeleteTPTParamInfo</b><a href="#DeleteTPTParamInfo"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>Pick&lt;TPTParamRelationToAnnouncementGroupAndSubGroup | TPTPId&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="EditTPTParamRelationToAnnouncementGroupAndSubGroup"></a>
+                    <span class="name "><b>EditTPTParamRelationToAnnouncementGroupAndSubGroup</b><a href="#EditTPTParamRelationToAnnouncementGroupAndSubGroup"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>Pick&lt;TPTParamRelationToAnnouncementGroupAndSubGroup | &quot;TPTPDId&quot; | &quot;TPTPId&quot; | &quot;AnnouncementSGId&quot; | &quot;Cost&quot; | &quot;Active&quot;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RegisterTPTParamInfo"></a>
+                    <span class="name "><b>RegisterTPTParamInfo</b><a href="#RegisterTPTParamInfo"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>Pick&lt;TPTParamRelationToAnnouncementGroupAndSubGroup | TPTPTitle&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RegisterTPTParamRelationToAnnouncementGroupAndSubGroup"></a>
+                    <span class="name "><b>RegisterTPTParamRelationToAnnouncementGroupAndSubGroup</b><a href="#RegisterTPTParamRelationToAnnouncementGroupAndSubGroup"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>Pick&lt;TPTParamRelationToAnnouncementGroupAndSubGroup | &quot;TPTPId&quot; | &quot;AnnouncementSGId&quot; | &quot;Cost&quot;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TPTParamInfo"></a>
+                    <span class="name "><b>TPTParamInfo</b><a href="#TPTParamInfo"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>Pick&lt;TPTParamRelationToAnnouncementGroupAndSubGroup | &quot;TPTPId&quot; | &quot;TPTPTitle&quot;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/forms/tickets-management-form/ticket-lists-form/ticket-lists-form.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DetailTicket"></a>
+                    <span class="name "><b>DetailTicket</b><a href="#DetailTicket"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/forms/tickets-management-form/ticket-track-form/ticket-track-form.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DetailTicket"></a>
+                    <span class="name "><b>DetailTicket</b><a href="#DetailTicket"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/forms/equipment-device-config-form/equipment-device-config-form.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DeviceConfigRow"></a>
+                    <span class="name "><b>DeviceConfigRow</b><a href="#DeviceConfigRow"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/forms/device-management-form/device-management-form.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DeviceInfoRow"></a>
+                    <span class="name "><b>DeviceInfoRow</b><a href="#DeviceInfoRow"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/pages/home/home-page.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Direction"></a>
+                    <span class="name "><b>Direction</b><a href="#Direction"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>&quot;left&quot; | &quot;right&quot; | &quot;down&quot; | &quot;up&quot; | undefined</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/services/config-management/model/general-config.model.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="EditInfoOfGeneralConfig"></a>
+                    <span class="name "><b>EditInfoOfGeneralConfig</b><a href="#EditInfoOfGeneralConfig"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../interfaces/GeneralConfig.html" target="_self" >Pick&lt;GeneralConfig | &quot;CId&quot; | &quot;CIndex&quot; | &quot;CValue&quot;&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>documentation/src/components/HomepageFeatures/index.tsx</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="FeatureItem"></a>
+                    <span class="name "><b>FeatureItem</b><a href="#FeatureItem"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/forms/general-configuration-form/general-configuration-form.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GeneralConfigRow"></a>
+                    <span class="name "><b>GeneralConfigRow</b><a href="#GeneralConfigRow"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/forms/lad-places-form/lad-places-form.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="LADPlaceTableRow"></a>
+                    <span class="name "><b>LADPlaceTableRow</b><a href="#LADPlaceTableRow"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/forms/load-condition-management-form/load-allocation-condition/load-allocation-condition-form.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="LoadAllocationConditionRow"></a>
+                    <span class="name "><b>LoadAllocationConditionRow</b><a href="#LoadAllocationConditionRow"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/forms/load-announcement-config-form/load-announcement-config-form.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="LoadAnnouncementConfigRow"></a>
+                    <span class="name "><b>LoadAnnouncementConfigRow</b><a href="#LoadAnnouncementConfigRow"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/forms/loader-type-announcement-relation-form/loader-type-announcement-relation-form.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="LoaderTypeAnnouncementMappingRow"></a>
+                    <span class="name "><b>LoaderTypeAnnouncementMappingRow</b><a href="#LoaderTypeAnnouncementMappingRow"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/forms/load-condition-management-form/load-view-condition/load-view-condition-form.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="LoadViewConditionRow"></a>
+                    <span class="name "><b>LoadViewConditionRow</b><a href="#LoadViewConditionRow"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/utils/null-to-undefined.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="NullToUndefined"></a>
+                    <span class="name "><b>NullToUndefined</b><a href="#NullToUndefined"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/constants/Titles.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="PlaceholderKey"></a>
+                    <span class="name "><b>PlaceholderKey</b><a href="#PlaceholderKey"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>&quot;globalIdPlaceholder&quot; | &quot;globalTitlePlaceholder&quot; | &quot;globalPhoneNumberPlaceholder&quot; | &quot;globalAddressPlaceholder&quot; | &quot;globalEmailPlaceholder&quot; | &quot;userPhoneNumberPlaceholder&quot; | &quot;userNamePlaceholder&quot; | &quot;userNationalCodePlaceholder&quot; | &quot;webProcessesPlaceholder&quot; | &quot;driverSmartCardNumberPlaceholder&quot; | &quot;truckSmartCardNumberPlaceholder&quot; | &quot;truckLoader&quot; | &quot;truckId&quot; | &quot;nativenessPlaceholder&quot; | &quot;factoriesOrProductionCenterTitle&quot; | &quot;factoriesOrProductionCenterName&quot; | &quot;factoriesOrProductionCenterOwnerName&quot; | &quot;factoriesOrProductionCenterOwnerPhoneNumber&quot; | &quot;loadAnnouncementPlaceTitle&quot; | &quot;provinceAndCitiesTitle&quot; | &quot;productsTitle&quot; | &quot;loadAnnouncementGroupTitle&quot; | &quot;loadAnnouncementSubGroupTitle&quot; | &quot;loadStatus&quot; | &quot;startCity&quot; | &quot;endCity&quot; | &quot;transportCompanyTitle&quot; | &quot;travelTimeDurationTitle&quot; | &quot;transportCompanyOwnerPhoneNumber&quot; | &quot;transportCompanyOwnerName&quot; | &quot;sequentialTurnTitle&quot; | &quot;loadType&quot; | &quot;loadsLoadingPlace&quot; | &quot;loadsDischargingPlace&quot; | &quot;loadsRecipient&quot; | &quot;loadsDescription&quot; | &quot;sequentialTurnKeywork&quot;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/pages/home/map-svg/map-svg.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ProvinceCode"></a>
+                    <span class="name "><b>ProvinceCode</b><a href="#ProvinceCode"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ProvinceMap"></a>
+                    <span class="name "><b>ProvinceMap</b><a href="#ProvinceMap"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ProvinceName"></a>
+                    <span class="name "><b>ProvinceName</b><a href="#ProvinceName"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#ProvinceMap" target="_self" >ProvinceMap</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/services/announcement-group-subgroup-management/model/relation-of-announcement-subgroup-province.model.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RegisterAndDeleteRelationOfAnnouncementSubGroupAndProvinceInfo"></a>
+                    <span class="name "><b>RegisterAndDeleteRelationOfAnnouncementSubGroupAndProvinceInfo</b><a href="#RegisterAndDeleteRelationOfAnnouncementSubGroupAndProvinceInfo"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>Pick&lt;RelationOfAnnouncementSubGroupAndProvince | &quot;ProvinceId&quot; | &quot;AnnouncementSGId&quot;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/services/loader-types/model/loader-type-announcement-sub-groups-relation.model.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RegisterDeleteRelationToAnnouncementSubGroup"></a>
+                    <span class="name "><b>RegisterDeleteRelationToAnnouncementSubGroup</b><a href="#RegisterDeleteRelationToAnnouncementSubGroup"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>Pick&lt;LoaderTypeToAnnouncementSubGroupRelation | &quot;LoaderTypeId&quot; | &quot;AnnouncementSGId&quot;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/forms/announcement-management-form/relation-of-announcement-group-and-sub-group/relation-of-announcement-group-and-sub-group.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RowRelationOfAnnouncementTableRow"></a>
+                    <span class="name "><b>RowRelationOfAnnouncementTableRow</b><a href="#RowRelationOfAnnouncementTableRow"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/shared/table/table.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SelectionMode"></a>
+                    <span class="name "><b>SelectionMode</b><a href="#SelectionMode"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>&quot;single&quot; | &quot;multiple&quot;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SequentialTurnTableRow"></a>
+                    <span class="name "><b>SequentialTurnTableRow</b><a href="#SequentialTurnTableRow"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/forms/tariffs-manages-form/tariffs-form.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TariffTable"></a>
+                    <span class="name "><b>TariffTable</b><a href="#TariffTable"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/forms/tpt-parameters-management/tpt-parameters-announcement-relation-form/tpt-parameters-announcement-relation-form.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TPTParamsDetailRow"></a>
+                    <span class="name "><b>TPTParamsDetailRow</b><a href="#TPTParamsDetailRow"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/forms/tpt-parameters-management/tpt-parameters-form/tpt-parameters-form.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TPTParamsRow"></a>
+                    <span class="name "><b>TPTParamsRow</b><a href="#TPTParamsRow"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/forms/transport-load-permissions-form/transport-load-permissions-form.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TransportLoadPermissionsRow"></a>
+                    <span class="name "><b>TransportLoadPermissionsRow</b><a href="#TransportLoadPermissionsRow"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/forms/travel-time-form/travel-time-form.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TravelTimeTableRow"></a>
+                    <span class="name "><b>TravelTimeTableRow</b><a href="#TravelTimeTableRow"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/services/driver-truck-management/model/truck-nativeness-info.model.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TruckNativenessType"></a>
+                    <span class="name "><b>TruckNativenessType</b><a href="#TruckNativenessType"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../interfaces/TruckNativenessInfo.html" target="_self" >Pick&lt;TruckNativenessInfo | &quot;TruckNativenessTypeId&quot; | &quot;TruckNativenessTypeTitle&quot;&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/forms/sequential-turn-cost-form/sequential-turn-cost-form.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TurnCostRow"></a>
+                    <span class="name "><b>TurnCostRow</b><a href="#TurnCostRow"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/components/forms/turns-management-form/turns-list-form/turns-list-form.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TurnTableRow"></a>
+                    <span class="name "><b>TurnTableRow</b><a href="#TurnTableRow"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/app/constants/validation-schema.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ValidationField"></a>
+                    <span class="name "><b>ValidationField</b><a href="#ValidationField"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>unknown</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-typealiases';
+            var COMPODOC_CURRENT_PAGE_URL = 'typealiases.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

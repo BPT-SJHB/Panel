@@ -1,0 +1,551 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bpt-sjhb-panel documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">bpt-sjhb-panel documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  ChatGroupedByDate</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/components/forms/tickets-management-form/ticket-chat-message-form/ticket-chat-message-form.component.ts</code>
+        </p>
+
+
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#date" 
+>
+                                            date
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#messages" 
+>
+                                            messages
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="date"></a>
+                                        <span class="name "><b>date</b>
+                                            <a href="#date">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>date:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="messages"></a>
+                                        <span class="name "><b>messages</b>
+                                            <a href="#messages">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>messages:     <code>literal type[]</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>literal type[]</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  signal,
+  ViewChild,
+} from &#x27;@angular/core&#x27;;
+import { FormBuilder, FormControl, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
+import { NgClass } from &#x27;@angular/common&#x27;;
+import { ValidationSchema } from &#x27;app/constants/validation-schema&#x27;;
+import { BaseLoading } from &#x27;../../shared/component-base/base-loading&#x27;;
+import {
+  ChatMessage,
+  CreateChatMessageRequest,
+  Ticket,
+} from &#x27;app/services/ticket-service-management/model/ticket.model&#x27;;
+import { TicketServiceManagementService } from &#x27;app/services/ticket-service-management/ticket-service-management.service&#x27;;
+import { checkAndToastError } from &#x27;app/utils/api-utils&#x27;;
+import { ChatBoxInputComponent } from &#x27;app/components/shared/inputs/chat-box-input/chat-box-input.component&#x27;;
+import { DialogModule } from &#x27;primeng/dialog&#x27;;
+import { TicketFilesUploadComponent } from &#x27;../ticket-files-upload/ticket-files-upload.component&#x27;;
+import { TicketGuardCaptchaFormComponent } from &#x27;../ticket-guard-captcha-form/ticket-guard-captcha-form.component&#x27;;
+import { TicketErrorCodes } from &#x27;app/constants/error-messages&#x27;;
+
+interface ChatGroupedByDate {
+  date: string;
+  messages: {
+    id: string;
+    senderId: number;
+    message: string;
+    time: string;
+    attachments?: string[];
+  }[];
+}
+
+// TODO: Add captcha guard here
+@Component({
+  selector: &#x27;app-ticket-chat-message-form&#x27;,
+  standalone: true,
+  imports: [
+    NgClass,
+    DialogModule,
+    ReactiveFormsModule,
+    ChatBoxInputComponent,
+    TicketFilesUploadComponent,
+    TicketGuardCaptchaFormComponent,
+  ],
+  templateUrl: &#x27;./ticket-chat-message-form.component.html&#x27;,
+  styleUrls: [&#x27;./ticket-chat-message-form.component.scss&#x27;],
+})
+export class TicketChatMessageFormComponent extends BaseLoading {
+  @ViewChild(&#x27;chatContainer&#x27;) chatContainer!: ElementRef&lt;HTMLDivElement&gt;;
+  @ViewChild(&#x27;chatInput&#x27;) chatInput!: ElementRef&lt;HTMLTextAreaElement&gt;;
+
+  private readonly fb &#x3D; inject(FormBuilder);
+  private readonly ticketService &#x3D; inject(TicketServiceManagementService);
+  readonly guardType &#x3D; computed(() &#x3D;&gt;
+    this.sender() &#x3D;&#x3D;&#x3D; &#x27;admin&#x27; ? &#x27;auth&#x27; : &#x27;captcha&#x27;
+  );
+
+  readonly captchaGuardVisible &#x3D; signal(false);
+  readonly ticket &#x3D; input&lt;Ticket | null&gt;(null);
+  readonly sender &#x3D; input&lt;&#x27;user&#x27; | &#x27;admin&#x27;&gt;(&#x27;user&#x27;);
+  readonly userId &#x3D; input&lt;number&gt;(0);
+  readonly captchaAction &#x3D; () &#x3D;&gt; this.sendMessage();
+
+  readonly chatForm &#x3D; this.fb.nonNullable.group({
+    ticketId: this.fb.nonNullable.control&lt;string&gt;(&#x27;&#x27;, ValidationSchema.id),
+    message: this.fb.nonNullable.control&lt;string&gt;(
+      &#x27;&#x27;,
+      ValidationSchema.description
+    ),
+    attachments: this.fb.nonNullable.control&lt;string[]&gt;([]),
+    attachmentMessage: this.fb.nonNullable.control&lt;string&gt;(&#x27;&#x27;),
+  });
+
+  readonly groupChats &#x3D; signal&lt;ChatGroupedByDate[]&gt;([]);
+
+  uploadFileVisible &#x3D; false;
+
+  constructor() {
+    super();
+
+    // React to ticket changes
+    effect(() &#x3D;&gt; {
+      this.ctrl(&#x27;ticketId&#x27;).setValue(this.ticket()?.id ?? &#x27;&#x27;);
+      this.groupChats.set(this.groupChatsByDate(this.ticket()?.chat ?? []));
+    });
+  }
+
+  ctrl&lt;T&gt;(controlName: keyof typeof this.chatForm.controls): FormControl&lt;T&gt; {
+    return this.chatForm.get(controlName) as FormControl&lt;T&gt;;
+  }
+
+  /** Groups chats by Jalali date */
+  private groupChatsByDate(chats: ChatMessage[]): ChatGroupedByDate[] {
+    const sortedChats &#x3D; [...chats].sort(
+      (a, b) &#x3D;&gt;
+        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+    );
+
+    const grouped: Record&lt;string, ChatGroupedByDate&gt; &#x3D; {};
+
+    sortedChats.forEach((chat) &#x3D;&gt; {
+      const { date, time } &#x3D; this.formatJalaliDate(chat.createdAt);
+
+      if (!grouped[date]) grouped[date] &#x3D; { date, messages: [] };
+
+      grouped[date].messages.push({
+        id: chat.id,
+        senderId: chat.senderId,
+        message: chat.message,
+        time,
+        attachments: chat.attachments,
+      });
+    });
+
+    return Object.values(grouped);
+  }
+
+  /** Format ISO to Jalali date + time */
+  private formatJalaliDate(isoDate: string) {
+    if (!isoDate) return { date: &#x27;&#x27;, time: &#x27;&#x27; };
+    const d &#x3D; new Date(isoDate);
+
+    return {
+      date: new Intl.DateTimeFormat(&#x27;fa-IR&#x27;, { dateStyle: &#x27;medium&#x27; }).format(d),
+      time: new Intl.DateTimeFormat(&#x27;fa-IR&#x27;, { timeStyle: &#x27;short&#x27; }).format(d),
+    };
+  }
+
+  /** Check if message belongs to current sender */
+  isSender(senderId: number): boolean {
+    if (!this.ticket()) return false;
+    return this.sender() &#x3D;&#x3D;&#x3D; &#x27;user&#x27;
+      ? this.ticket()!.userId &#x3D;&#x3D;&#x3D; senderId
+      : this.ticket()!.userId !&#x3D;&#x3D; senderId;
+  }
+
+  /** Auto resize textarea up to 5 rows */
+  autoResize(event: Event) {
+    const textarea &#x3D; event.target as HTMLTextAreaElement;
+    textarea.style.height &#x3D; &#x27;auto&#x27;;
+    const maxHeight &#x3D; 5 * 24; // ~5 rows
+    textarea.style.height &#x3D; Math.min(textarea.scrollHeight, maxHeight) + &#x27;px&#x27;;
+  }
+
+  /** Scroll chat to bottom */
+  private scrollToBottom(): void {
+    setTimeout(() &#x3D;&gt; {
+      if (this.chatContainer?.nativeElement) {
+        const el &#x3D; this.chatContainer.nativeElement;
+        el.scrollTop &#x3D; el.scrollHeight;
+      }
+    });
+  }
+
+  /** Append new chat to grouped list */
+  private addChatMessage(newMessage: ChatMessage): void {
+    this.ticket()?.chat.push(newMessage);
+    this.groupChats.set(this.groupChatsByDate(this.ticket()?.chat ?? []));
+    this.scrollToBottom();
+  }
+
+  /** Send a new chat message */
+  async sendMessage() {
+    const msg &#x3D; this.ctrl&lt;string&gt;(&#x27;message&#x27;).value.trim();
+    if (!msg) return;
+
+    const newChat: CreateChatMessageRequest &#x3D; {
+      message: msg,
+      senderId: this.userId(),
+      attachments: this.ctrl&lt;string[]&gt;(&#x27;attachments&#x27;).value ?? [],
+    };
+
+    this.chatForm.reset();
+    this.uploadFileVisible &#x3D; false;
+    await this.withLoading(async () &#x3D;&gt; {
+      const res &#x3D; await this.ticketService.CreateChat(
+        this.ticket()?.id ?? &#x27;&#x27;,
+        newChat
+      );
+
+      if (!checkAndToastError(res, this.toast)) {
+        if (
+          TicketErrorCodes.CaptchaExpired &#x3D;&#x3D;&#x3D; res.error?.code ||
+          TicketErrorCodes.CaptchaIncorrect &#x3D;&#x3D;&#x3D; res.error?.code
+        ) {
+          this.captchaGuardVisible.set(true);
+          return;
+        }
+      }
+
+      // Add chat to grouped UI
+      if (!res.data) return;
+      this.addChatMessage(res.data);
+    });
+  }
+
+  downloadTicketFile(fileId: string) {
+    this.withLoading(async () &#x3D;&gt; {
+      const ticketId &#x3D; this.ticket()?.id;
+      if (!ticketId) return;
+
+      const response &#x3D; await this.ticketService.DownloadTicketFile(
+        ticketId,
+        fileId
+      );
+      if (!checkAndToastError(response, this.toast)) return;
+    });
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'ChatGroupedByDate.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,722 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bpt-sjhb-panel documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">bpt-sjhb-panel documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  RowRelationOfSequentialToLoader</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/components/forms/sequential-turns-management-form/relation-of-sequential-turn-to-loader-type-form/relation-of-sequential-turn-to-loader-type-form.component.ts</code>
+        </p>
+
+
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#delete" 
+>
+                                            delete
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#LoaderTypeId" 
+>
+                                            LoaderTypeId
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#LoaderTypeTitle" 
+>
+                                            LoaderTypeTitle
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#SeqTurnId" 
+>
+                                            SeqTurnId
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#SeqTurnTitle" 
+>
+                                            SeqTurnTitle
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="delete"></a>
+                                        <span class="name "><b>delete</b>
+                                            <a href="#delete">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>delete:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="LoaderTypeId"></a>
+                                        <span class="name "><b>LoaderTypeId</b>
+                                            <a href="#LoaderTypeId">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>LoaderTypeId:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="LoaderTypeTitle"></a>
+                                        <span class="name "><b>LoaderTypeTitle</b>
+                                            <a href="#LoaderTypeTitle">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>LoaderTypeTitle:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="SeqTurnId"></a>
+                                        <span class="name "><b>SeqTurnId</b>
+                                            <a href="#SeqTurnId">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>SeqTurnId:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="SeqTurnTitle"></a>
+                                        <span class="name "><b>SeqTurnTitle</b>
+                                            <a href="#SeqTurnTitle">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>SeqTurnTitle:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject } from &#x27;@angular/core&#x27;;
+import {
+  FormBuilder,
+  FormControl,
+  ReactiveFormsModule,
+  Validators,
+} from &#x27;@angular/forms&#x27;;
+import { ButtonModule } from &#x27;primeng/button&#x27;;
+import { ConfirmDialogModule } from &#x27;primeng/confirmdialog&#x27;;
+import { TableModule } from &#x27;primeng/table&#x27;;
+import { ConfirmationService } from &#x27;primeng/api&#x27;;
+
+import { SearchAutoCompleteComponent } from &#x27;app/components/shared/inputs/search-auto-complete/search-auto-complete.component&#x27;;
+import { LoaderTypesService } from &#x27;app/services/loader-types/loader-types.service&#x27;;
+import { LoadingService } from &#x27;app/services/loading-service/loading-service.service&#x27;;
+import { ToastService } from &#x27;app/services/toast-service/toast.service&#x27;;
+import { SequentialTurnManagementService } from &#x27;app/services/sequential-turn-management/sequential-turn-management.service&#x27;;
+import { SequentialTurn } from &#x27;app/services/sequential-turn-management/model/sequential-turn.model&#x27;;
+import { RelationOfSequentialTurnToLoaderType } from &#x27;app/services/sequential-turn-management/model/relation-of-sequentialTurn-to-loaderType.model&#x27;;
+import { checkAndToastError } from &#x27;app/utils/api-utils&#x27;;
+import { LoaderType } from &#x27;app/services/loader-types/model/loader-type.model&#x27;;
+import { TableConfig } from &#x27;app/constants/ui/table.ui&#x27;;
+import { ButtonComponent } from &#x27;app/components/shared/button/button.component&#x27;;
+import {
+  deleteCell,
+  TableColumn,
+  TableComponent,
+} from &#x27;app/components/shared/table/table.component&#x27;;
+import { AppConfirmService } from &#x27;app/services/confirm/confirm.service&#x27;;
+import { AppTitles } from &#x27;app/constants/Titles&#x27;;
+
+// &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+// 📄 Table Row Interface
+// &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+interface RowRelationOfSequentialToLoader {
+  SeqTurnId: number;
+  SeqTurnTitle: string;
+  LoaderTypeId: number;
+  LoaderTypeTitle: string;
+  delete: string;
+}
+
+// &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+// 🧩 Component Definition
+// &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+@Component({
+  selector: &#x27;app-relation-of-announcement-group-and-sub-group&#x27;,
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    ButtonModule,
+    ConfirmDialogModule,
+    SearchAutoCompleteComponent,
+    ButtonComponent,
+    TableComponent,
+  ],
+  providers: [ConfirmationService],
+  templateUrl:
+    &#x27;./relation-of-sequential-turn-to-loader-type-form.component.html&#x27;,
+  styleUrl: &#x27;./relation-of-sequential-turn-to-loader-type-form.component.scss&#x27;,
+})
+export class RelationOfSequentialTurnToLoaderTypeFormComponent {
+  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+  // 💉 Dependency Injection
+  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+  private fb &#x3D; inject(FormBuilder);
+  private loadingService &#x3D; inject(LoadingService);
+  private toast &#x3D; inject(ToastService);
+  private confirmService &#x3D; inject(AppConfirmService);
+  private loaderTypeService &#x3D; inject(LoaderTypesService);
+  private sequentialTurnService &#x3D; inject(SequentialTurnManagementService);
+  readonly tableUi &#x3D; TableConfig;
+  readonly appTitle &#x3D; AppTitles;
+
+  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+  // 📊 Component State
+  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+  loading &#x3D; false;
+  addonWidth &#x3D; &#x27;7rem&#x27;;
+  cols &#x3D; [&#x27;حذف&#x27;, &#x27;صفوف نوبت دهی&#x27;, &#x27;بارگیرها&#x27;];
+
+  readonly columns: TableColumn&lt;RowRelationOfSequentialToLoader&gt;[] &#x3D; [
+    {
+      field: &#x27;SeqTurnId&#x27;,
+      header: &#x27;شناسه صف نوبت&#x27;,
+    },
+    {
+      field: &#x27;SeqTurnTitle&#x27;,
+      header: &#x27;صف نوبت&#x27;,
+    },
+    {
+      field: &#x27;LoaderTypeId&#x27;,
+      header: &#x27;شناسه بارگیر&#x27;,
+    },
+    {
+      field: &#x27;LoaderTypeTitle&#x27;,
+      header: &#x27;بارگیر&#x27;,
+    },
+    {
+      ...deleteCell.config,
+      field: &#x27;delete&#x27;,
+      onAction: (row: RowRelationOfSequentialToLoader) &#x3D;&gt; this.onDelete(row),
+    },
+  ];
+
+  relationsAnnouncement: RowRelationOfSequentialToLoader[] &#x3D; [];
+
+  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+  // 📝 Reactive Form
+  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+  relationSequentialToLoaderForm &#x3D; this.fb.group({
+    sequentialId: [-1, Validators.min(0)],
+    sequentialTitle: [&#x27;&#x27;, Validators.required],
+    loaderTypeId: [-1, Validators.min(0)],
+    loaderTypeTitle: [&#x27;&#x27;, Validators.required],
+  });
+
+  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+  // 📥 Form Getters
+  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+  get sequentialId() {
+    return this.relationSequentialToLoaderForm.get(
+      &#x27;sequentialId&#x27;
+    ) as FormControl;
+  }
+
+  get sequentialTitle() {
+    return this.relationSequentialToLoaderForm.get(
+      &#x27;sequentialTitle&#x27;
+    ) as FormControl;
+  }
+
+  get loaderTypeId() {
+    return this.relationSequentialToLoaderForm.get(
+      &#x27;loaderTypeId&#x27;
+    ) as FormControl;
+  }
+
+  get loaderTypeTitle() {
+    return this.relationSequentialToLoaderForm.get(
+      &#x27;loaderTypeTitle&#x27;
+    ) as FormControl;
+  }
+
+  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+  // 🔄 Reset Autocomplete
+  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+  onAutoCompleteChange(control: FormControl) {
+    control.setValue(-1);
+    if (this.sequentialId.invalid) {
+      this.loaderTypeTitle.reset(&#x27;&#x27;);
+      this.loaderTypeId.reset(-1);
+    }
+  }
+
+  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+  // 🎯 Autocomplete Selections
+  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+
+  // When a sequential turn is selected
+  async onSelectSequentialTurn(sequentialTurn: SequentialTurn) {
+    this.sequentialId.setValue(sequentialTurn.SeqTurnId);
+    this.loadingService.setLoading(true);
+    try {
+      await this.loadRelationOfSequentialToLoader(sequentialTurn.SeqTurnId);
+    } finally {
+      this.loadingService.setLoading(false);
+    }
+  }
+
+  // When a loader type is selected
+  onSelectLoaderType(loaderType: LoaderType) {
+    this.loaderTypeId.setValue(loaderType.LoaderTypeId);
+  }
+
+  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+  // 🔍 Autocomplete Search
+  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+  searchSequentialTurn &#x3D; async (query: string) &#x3D;&gt; {
+    const res &#x3D; await this.sequentialTurnService.GetSequentialTurns(query);
+    if (!checkAndToastError(res, this.toast)) return [];
+    return res.data!;
+  };
+
+  searchLoaderType &#x3D; async (query: string) &#x3D;&gt; {
+    const res &#x3D; await this.loaderTypeService.GetLoaderTypesInfo(query);
+    if (!checkAndToastError(res, this.toast)) return [];
+    return res.data!;
+  };
+  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+  // 🔗 Load Relation Data
+  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+  private async loadRelationOfSequentialToLoader(sequentialId: number) {
+    const res &#x3D;
+      await this.sequentialTurnService.GetRelationOfSequentialTurnToLoaderTypes(
+        sequentialId
+      );
+    if (!checkAndToastError(res, this.toast)) {
+      this.relationsAnnouncement &#x3D; [];
+    }
+    this.relationsAnnouncement &#x3D; this.flattenSequentialRelations(res.data!);
+  }
+
+  // Convert nested backend data to flat rows for table
+  private flattenSequentialRelations(
+    data: RelationOfSequentialTurnToLoaderType[]
+  ): RowRelationOfSequentialToLoader[] {
+    return data.flatMap((group) &#x3D;&gt;
+      group.LoaderTypes.map((sub) &#x3D;&gt; ({
+        SeqTurnId: group.SeqTurnId,
+        SeqTurnTitle: group.SeqTurnTitle ?? &#x27;&#x27;,
+        LoaderTypeId: sub.LoaderTypeId,
+        LoaderTypeTitle: sub.LoaderTypeTitle ?? &#x27;&#x27;,
+        delete: deleteCell.value,
+      }))
+    );
+  }
+
+  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+  // ❌ Delete a Relation
+  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+  onDelete(row: RowRelationOfSequentialToLoader) {
+    this.confirmService.confirmDelete(
+      &#x60;${row.SeqTurnTitle} - ${row.LoaderTypeTitle}&#x60;,
+      async () &#x3D;&gt; {
+        this.loadingService.setLoading(true);
+        try {
+          await this.deleteRelationSequentialToLoader(row);
+        } finally {
+          this.loadingService.setLoading(false);
+        }
+      }
+    );
+  }
+
+  private async deleteRelationSequentialToLoader(
+    row: RowRelationOfSequentialToLoader
+  ) {
+    const res &#x3D;
+      await this.sequentialTurnService.DeleteRelationOfSequentialTurnToLoaderType(
+        row.SeqTurnId,
+        row.LoaderTypeId
+      );
+    if (!checkAndToastError(res, this.toast)) return;
+    this.toast.success(&#x27;موفق&#x27;, res.data.Message);
+    await this.loadRelationOfSequentialToLoader(row.SeqTurnId);
+  }
+
+  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+  // ✅ Register New Relation
+  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+  async registerRelationSequentialToLoader() {
+    if (this.relationSequentialToLoaderForm.invalid || this.loading) return;
+
+    this.loadingService.setLoading(true);
+    try {
+      const res &#x3D;
+        await this.sequentialTurnService.RegisterNewRelationOfSequentialTurnToLoaderType(
+          this.sequentialId.value,
+          this.loaderTypeId.value
+        );
+      if (!checkAndToastError(res, this.toast)) return;
+      this.toast.success(&#x27;موفق&#x27;, res.data?.Message ?? &#x27;&#x27;);
+      await this.loadRelationOfSequentialToLoader(this.sequentialId.value);
+    } finally {
+      this.loadingService.setLoading(false);
+    }
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'RowRelationOfSequentialToLoader.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

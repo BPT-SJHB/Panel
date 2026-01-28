@@ -82,10 +82,10 @@ export class CaptchaInputComponent implements OnInit {
 
     this.imageAddon.set({
       alt: 'کد امنیتی',
-      src: 'data:image/png;base64,' + captcha.data.imageData,
+      src: 'data:image/png;base64,' + captcha.data.Captcha,
     });
 
-    this.sessionIdControl().setValue(captcha.data.sessionId);
+    this.sessionIdControl().setValue(captcha.data.SessionId);
   }
 
   async onRefreshClick() {

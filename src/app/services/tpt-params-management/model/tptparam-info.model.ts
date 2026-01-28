@@ -1,3 +1,5 @@
+import z from 'zod';
+
 export interface TPTParamRelationToAnnouncementGroupAndSubGroup {
   TPTPDId: number;
   TPTPId: number;
@@ -10,10 +12,27 @@ export interface TPTParamRelationToAnnouncementGroupAndSubGroup {
   Active: boolean;
 }
 
+export const zodTPTParamRelationToAnnouncementGroupAndSubGroup = z.object({
+  TPTPDId: z.number(),
+  TPTPId: z.number(),
+  TPTPTitle: z.string(),
+  AnnouncementId: z.number(),
+  AnnouncementTitle: z.string(),
+  AnnouncementSGId: z.number(),
+  AnnouncementSGTitle: z.string(),
+  Cost: z.number(),
+  Active: z.boolean(),
+});
+
 export type TPTParamInfo = Pick<
   TPTParamRelationToAnnouncementGroupAndSubGroup,
   'TPTPId' | 'TPTPTitle'
 >;
+
+export const zodTPTParamInfo = z.object({
+  TPTPId: z.number(),
+  TPTPTitle: z.string(),
+});
 
 export type RegisterTPTParamInfo = Pick<
   TPTParamRelationToAnnouncementGroupAndSubGroup,

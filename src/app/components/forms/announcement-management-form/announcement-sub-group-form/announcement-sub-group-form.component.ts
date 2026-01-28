@@ -193,7 +193,7 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
     this.loadingService.setLoading(true);
     try {
       const response =
-        await this.announcementService.GetAnnouncementSupGroups('');
+        await this.announcementService.GetAnnouncementSubGroups('');
       if (!checkAndToastError(response, this.toast)) return;
 
       const rows: AnnouncementSubGroupTableRow[] = response.data.map((as) => ({
@@ -219,8 +219,7 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
     const { AnnouncementSGTitle, Active } = this.extractFormData();
     const response =
       await this.announcementService.RegisterNewAnnouncementSubGroup(
-        AnnouncementSGTitle ?? '',
-        Active ?? true
+        AnnouncementSGTitle ?? ''
       );
     if (!checkAndToastError(response, this.toast)) return;
     this.toast.success('موفق', response.data.Message ?? '');

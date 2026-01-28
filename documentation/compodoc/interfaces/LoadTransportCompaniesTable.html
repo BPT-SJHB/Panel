@@ -1,0 +1,1518 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bpt-sjhb-panel documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">bpt-sjhb-panel documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  LoadTransportCompaniesTable</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/components/forms/load-management-form/loads-list-form/loads-list-form.component.ts</code>
+        </p>
+
+
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#Address" 
+>
+                                            Address
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#AnnounceDate" 
+>
+                                            AnnounceDate
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#AnnouncementSGTitle" 
+>
+                                            AnnouncementSGTitle
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#AnnouncementTitle" 
+>
+                                            AnnouncementTitle
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#AnnounceTime" 
+>
+                                            AnnounceTime
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#Description" 
+>
+                                            Description
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#DischargingPlaceTitle" 
+>
+                                            DischargingPlaceTitle
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#GoodTitle" 
+>
+                                            GoodTitle
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#LoadId" 
+>
+                                            LoadId
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#LoadingPlaceTitle" 
+>
+                                            LoadingPlaceTitle
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#LoadStatusName" 
+>
+                                            LoadStatusName
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#ProvinceId" 
+>
+                                            ProvinceId
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#ProvinceName" 
+>
+                                            ProvinceName
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#Recipient" 
+>
+                                            Recipient
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#Reminder" 
+>
+                                            Reminder
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#SoureCityTitle" 
+>
+                                            SoureCityTitle
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#TargetCityTitle" 
+>
+                                            TargetCityTitle
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#Tariff" 
+>
+                                            Tariff
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#TCTitle" 
+>
+                                            TCTitle
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#Tonaj" 
+>
+                                            Tonaj
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#Total" 
+>
+                                            Total
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#TPTParamsJoint" 
+>
+                                            TPTParamsJoint
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#UserName" 
+>
+                                            UserName
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="Address"></a>
+                                        <span class="name "><b>Address</b>
+                                            <a href="#Address">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>Address:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="AnnounceDate"></a>
+                                        <span class="name "><b>AnnounceDate</b>
+                                            <a href="#AnnounceDate">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>AnnounceDate:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="AnnouncementSGTitle"></a>
+                                        <span class="name "><b>AnnouncementSGTitle</b>
+                                            <a href="#AnnouncementSGTitle">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>AnnouncementSGTitle:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="AnnouncementTitle"></a>
+                                        <span class="name "><b>AnnouncementTitle</b>
+                                            <a href="#AnnouncementTitle">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>AnnouncementTitle:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="AnnounceTime"></a>
+                                        <span class="name "><b>AnnounceTime</b>
+                                            <a href="#AnnounceTime">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>AnnounceTime:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="Description"></a>
+                                        <span class="name "><b>Description</b>
+                                            <a href="#Description">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>Description:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="DischargingPlaceTitle"></a>
+                                        <span class="name "><b>DischargingPlaceTitle</b>
+                                            <a href="#DischargingPlaceTitle">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>DischargingPlaceTitle:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="GoodTitle"></a>
+                                        <span class="name "><b>GoodTitle</b>
+                                            <a href="#GoodTitle">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>GoodTitle:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="LoadId"></a>
+                                        <span class="name "><b>LoadId</b>
+                                            <a href="#LoadId">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>LoadId:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="LoadingPlaceTitle"></a>
+                                        <span class="name "><b>LoadingPlaceTitle</b>
+                                            <a href="#LoadingPlaceTitle">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>LoadingPlaceTitle:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="LoadStatusName"></a>
+                                        <span class="name "><b>LoadStatusName</b>
+                                            <a href="#LoadStatusName">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>LoadStatusName:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="ProvinceId"></a>
+                                        <span class="name "><b>ProvinceId</b>
+                                            <a href="#ProvinceId">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>ProvinceId:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="ProvinceName"></a>
+                                        <span class="name "><b>ProvinceName</b>
+                                            <a href="#ProvinceName">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>ProvinceName:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="Recipient"></a>
+                                        <span class="name "><b>Recipient</b>
+                                            <a href="#Recipient">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>Recipient:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="Reminder"></a>
+                                        <span class="name "><b>Reminder</b>
+                                            <a href="#Reminder">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>Reminder:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="SoureCityTitle"></a>
+                                        <span class="name "><b>SoureCityTitle</b>
+                                            <a href="#SoureCityTitle">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>SoureCityTitle:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="TargetCityTitle"></a>
+                                        <span class="name "><b>TargetCityTitle</b>
+                                            <a href="#TargetCityTitle">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>TargetCityTitle:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="Tariff"></a>
+                                        <span class="name "><b>Tariff</b>
+                                            <a href="#Tariff">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>Tariff:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="TCTitle"></a>
+                                        <span class="name "><b>TCTitle</b>
+                                            <a href="#TCTitle">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>TCTitle:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="Tonaj"></a>
+                                        <span class="name "><b>Tonaj</b>
+                                            <a href="#Tonaj">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>Tonaj:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="Total"></a>
+                                        <span class="name "><b>Total</b>
+                                            <a href="#Total">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>Total:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="TPTParamsJoint"></a>
+                                        <span class="name "><b>TPTParamsJoint</b>
+                                            <a href="#TPTParamsJoint">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>TPTParamsJoint:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="UserName"></a>
+                                        <span class="name "><b>UserName</b>
+                                            <a href="#UserName">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>UserName:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Component,
+  effect,
+  inject,
+  signal,
+  ViewChild,
+  WritableSignal,
+} from &#x27;@angular/core&#x27;;
+import { FormBuilder, FormControl, Validators } from &#x27;@angular/forms&#x27;;
+
+import { SearchAutoCompleteFactoryComponent } from &#x27;app/components/shared/inputs/search-auto-complete-factory/search-auto-complete-factory.component&#x27;;
+import { DatePickerInput } from &#x27;app/components/shared/inputs/date-picker-input/date-picker-input.component&#x27;;
+import {
+  TableComponent,
+  TableColumn,
+} from &#x27;app/components/shared/table/table.component&#x27;;
+import { ButtonComponent } from &#x27;app/components/shared/button/button.component&#x27;;
+import { CheckboxInputComponent } from &#x27;app/components/shared/inputs/checkbox-input/checkbox-input.component&#x27;;
+
+import { BaseLoading } from &#x27;app/components/forms/shared/component-base/base-loading&#x27;;
+import { checkAndToastError } from &#x27;app/utils/api-utils&#x27;;
+
+import { LoadManagementService } from &#x27;app/services/load-management/load-management.service&#x27;;
+import { TransportCompaniesManagementService } from &#x27;app/services/transport-company-management/transport-companies-management.service&#x27;;
+import { LoadInfo } from &#x27;app/services/load-management/model/load-info.model&#x27;;
+import {
+  AutoCompleteConfigFactoryService,
+  AutoCompleteType,
+  BaseAutoCompleteFilter,
+} from &#x27;app/services/auto-complete-config-factory/auto-complete-config-factory.service&#x27;;
+import { OnViewActivated } from &#x27;app/interfaces/on-view-activated.interface&#x27;;
+import { AppTitles } from &#x27;app/constants/Titles&#x27;;
+
+interface LoadFilter {
+  announceGroupId: number | null;
+  announceSubgroupId: number | null;
+  announceSubgroupTitle: string;
+  date: string | null;
+  transportCompanyId: number | null;
+  loadsStatusId: number | null;
+  sourceCityId: number | null;
+  targetCityId: number | null;
+  inventory: boolean;
+  transportCompanyTitle: string;
+}
+
+interface LoadTransportCompaniesTable {
+  ProvinceId: number;
+  ProvinceName: string;
+  LoadId: number;
+  TCTitle: string;
+  GoodTitle: string;
+  Tonaj: number;
+  SoureCityTitle: string;
+  TargetCityTitle: string;
+  LoadingPlaceTitle: string;
+  DischargingPlaceTitle: string;
+  Total: number;
+  Reminder: number;
+  Tariff: string;
+  LoadStatusName: string;
+  AnnounceDate: string;
+  AnnounceTime: string;
+  AnnouncementTitle: string;
+  AnnouncementSGTitle: string;
+  Recipient: string;
+  Address: string;
+  Description: string;
+  UserName: string;
+  TPTParamsJoint: string;
+}
+
+export enum LoadListType {
+  TRANSPORT_COMPANY &#x3D; &#x27;TRANSPORT_COMPANY&#x27;,
+  ADMIN &#x3D; &#x27;ADMIN&#x27;,
+  FACTORIES_PRODUCTION_CENTERS &#x3D; &#x27;FACTORIES_PRODUCTION_CENTERS&#x27;,
+}
+
+@Component({
+  selector: &#x27;app-loads-list-form&#x27;,
+  imports: [
+    SearchAutoCompleteFactoryComponent,
+    DatePickerInput,
+    TableComponent,
+    ButtonComponent,
+    CheckboxInputComponent,
+  ],
+  templateUrl: &#x27;./loads-list-form.component.html&#x27;,
+  styleUrls: [&#x27;./loads-list-form.component.scss&#x27;],
+})
+export class LoadsListFormComponent
+  extends BaseLoading
+  implements OnViewActivated
+{
+  @ViewChild(TableComponent) table?: TableComponent&lt;LoadInfo&gt;;
+
+  readonly loadType: LoadListType &#x3D; LoadListType.TRANSPORT_COMPANY;
+  readonly addonWidth &#x3D; &#x27;8rem&#x27;;
+  readonly appTitle &#x3D; AppTitles;
+
+  sharedSignal!: WritableSignal&lt;null | LoadInfo&gt;;
+  rows &#x3D; signal&lt;LoadTransportCompaniesTable[]&gt;([]);
+
+  private readonly fb &#x3D; inject(FormBuilder);
+  private readonly loadsService &#x3D; inject(LoadManagementService);
+  private readonly autoCompleteFactory &#x3D; inject(
+    AutoCompleteConfigFactoryService
+  );
+  private readonly transportCompanyService &#x3D; inject(
+    TransportCompaniesManagementService
+  );
+
+  readonly loadFilterForm &#x3D; this.fb.group({
+    announceGroupId: this.fb.control&lt;number | null&gt;(null, Validators.required),
+    announceSubgroupId: this.fb.control&lt;number | null&gt;(
+      null,
+      Validators.required
+    ),
+    announceSubgroupTitle: this.fb.nonNullable.control(&#x27;&#x27;, Validators.required),
+    date: this.fb.control&lt;string | null&gt;(null, Validators.required),
+    loadsStatusId: this.fb.control&lt;number | null&gt;(null, Validators.required),
+    sourceCityId: this.fb.control&lt;number | null&gt;(null, Validators.required),
+    targetCityId: this.fb.control&lt;number | null&gt;(null, Validators.required),
+    transportCompanyId: this.fb.control&lt;number | null&gt;(
+      null,
+      Validators.required
+    ),
+    inventory: this.fb.nonNullable.control(false, Validators.required),
+    transportCompanyTitle: this.fb.nonNullable.control(&#x27;&#x27;),
+  });
+
+  readonly columns: TableColumn&lt;LoadTransportCompaniesTable&gt;[] &#x3D; [
+    { header: this.appTitle.tables.loads.loadProvince, field: &#x27;ProvinceName&#x27; },
+    { header: this.appTitle.tables.loads.loadId, field: &#x27;LoadId&#x27; },
+    { header: this.appTitle.tables.loads.transportCompany, field: &#x27;TCTitle&#x27; },
+    { header: this.appTitle.tables.loads.product, field: &#x27;GoodTitle&#x27; },
+    {
+      header: this.appTitle.tables.loads.loadSize,
+      field: &#x27;Tonaj&#x27;,
+      class: &#x27;font-bold&#x27;,
+    },
+    { header: this.appTitle.tables.loads.sourceCity, field: &#x27;SoureCityTitle&#x27; },
+    { header: this.appTitle.tables.loads.targetCity, field: &#x27;TargetCityTitle&#x27; },
+    {
+      header: this.appTitle.tables.loads.loadingPlace,
+      field: &#x27;LoadingPlaceTitle&#x27;,
+    },
+    {
+      header: this.appTitle.tables.loads.dischargingPlace,
+      field: &#x27;DischargingPlaceTitle&#x27;,
+    },
+    {
+      header: this.appTitle.tables.loads.loadTotalAmount,
+      field: &#x27;Total&#x27;,
+      class: &#x27;text-right&#x27;,
+    },
+    {
+      header: this.appTitle.tables.loads.loadRemainedAmount,
+      field: &#x27;Reminder&#x27;,
+      class: &#x27;text-right&#x27;,
+    },
+    { header: this.appTitle.tables.loads.loadCost, field: &#x27;Tariff&#x27; },
+    { header: this.appTitle.tables.loads.loadStatus, field: &#x27;LoadStatusName&#x27; },
+    {
+      header: this.appTitle.tables.loads.loadAnnouncementDate,
+      field: &#x27;AnnounceDate&#x27;,
+    },
+    {
+      header: this.appTitle.tables.loads.loadAnnouncementTime,
+      field: &#x27;AnnounceTime&#x27;,
+    },
+    {
+      header: this.appTitle.tables.loads.announcementGroup,
+      field: &#x27;AnnouncementTitle&#x27;,
+    },
+    {
+      header: this.appTitle.tables.loads.announcementSubGroup,
+      field: &#x27;AnnouncementSGTitle&#x27;,
+    },
+    { header: this.appTitle.tables.loads.recipient, field: &#x27;Recipient&#x27; },
+    { header: this.appTitle.tables.loads.address, field: &#x27;Address&#x27; },
+    { header: this.appTitle.tables.loads.description, field: &#x27;Description&#x27; },
+    { header: &#x27;نام کاربر&#x27;, field: &#x27;UserName&#x27; },
+    {
+      header: this.appTitle.tables.loads.tptParamsJoint,
+      field: &#x27;TPTParamsJoint&#x27;,
+    },
+  ];
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  readonly autoCompletions: BaseAutoCompleteFilter&lt;any&gt;[] &#x3D; [
+    this.autoCompleteFactory.create(
+      AutoCompleteType.AnnouncementGroup,
+      this.getLoadFilterControl(&#x27;announceGroupId&#x27;)
+    ),
+    this.autoCompleteFactory.create(
+      AutoCompleteType.RelationAnnouncementGroupAndSubGroup,
+      this.getLoadFilterControl(&#x27;announceSubgroupId&#x27;),
+      {
+        control: this.getLoadFilterControl(&#x27;announceSubgroupTitle&#x27;),
+        readOnly: () &#x3D;&gt; this.getLoadFilterControl(&#x27;announceGroupId&#x27;).invalid,
+        groupControlId: this.getLoadFilterControl(&#x27;announceGroupId&#x27;),
+      }
+    ),
+    this.autoCompleteFactory.create(
+      AutoCompleteType.LoadStatus,
+      this.getLoadFilterControl(&#x27;loadsStatusId&#x27;)
+    ),
+    this.autoCompleteFactory.create(
+      AutoCompleteType.TransportCompany,
+      this.getLoadFilterControl(&#x27;transportCompanyId&#x27;),
+      {
+        readOnly: () &#x3D;&gt; this.loadType &#x3D;&#x3D;&#x3D; LoadListType.TRANSPORT_COMPANY,
+        control: this.getLoadFilterControl(&#x27;transportCompanyTitle&#x27;),
+      }
+    ),
+    this.autoCompleteFactory.create(
+      AutoCompleteType.City,
+      this.getLoadFilterControl(&#x27;sourceCityId&#x27;),
+      { label: &#x27;شهر مبدا&#x27;, placeholder: &#x27;شهر مبدا&#x27; }
+    ),
+    this.autoCompleteFactory.create(
+      AutoCompleteType.City,
+      this.getLoadFilterControl(&#x27;targetCityId&#x27;),
+      { label: &#x27;شهر مقصد&#x27;, placeholder: &#x27;شهر مقصد&#x27; }
+    ),
+  ];
+
+  constructor() {
+    super();
+    effect(() &#x3D;&gt; {
+      if (this.sharedSignal() &#x3D;&#x3D;&#x3D; null) {
+        this.table?.clearSelections();
+      }
+    });
+  }
+  async onViewActivated(): Promise&lt;void&gt; {
+    await this.initializeLoads();
+    this.getLoadFilterControl(&#x27;date&#x27;).setValue(null);
+  }
+
+  async filterListLoad(): Promise&lt;void&gt; {
+    if (this.loading() || this.isFilterInvalid()) return;
+
+    await this.withLoading(async () &#x3D;&gt; {
+      const response &#x3D; await this.getListLoadInfo();
+
+      if (!checkAndToastError(response, this.toast)) {
+        this.rows.set([]);
+        return;
+      }
+
+      this.rows.set(
+        response.data.flatMap((l) &#x3D;&gt;
+          l.myLoads.map((c) &#x3D;&gt; ({ ProvinceName: l.ProvinceName, ...c }))
+        )
+      );
+    });
+  }
+
+  rowSelect(row: LoadTransportCompaniesTable): void {
+    this.sharedSignal.set(row as LoadInfo);
+  }
+
+  rowUnSelect(_: LoadTransportCompaniesTable): void {
+    this.sharedSignal.set(null);
+  }
+
+  isFilterInvalid(): boolean {
+    const required: (keyof LoadFilter)[] &#x3D; [
+      &#x27;transportCompanyId&#x27;,
+      &#x27;announceGroupId&#x27;,
+      &#x27;announceSubgroupId&#x27;,
+      &#x27;date&#x27;,
+      &#x27;loadsStatusId&#x27;,
+      &#x27;sourceCityId&#x27;,
+      &#x27;targetCityId&#x27;,
+    ];
+    return required.every((c) &#x3D;&gt; this.getLoadFilterControl(c).invalid);
+  }
+
+  getLoadFilterControl&lt;K extends keyof LoadFilter&gt;(
+    name: K
+  ): FormControl&lt;LoadFilter[K]&gt; {
+    const control &#x3D; this.loadFilterForm.get(name as string);
+    if (!control) throw new Error(&#x60;Control &quot;${String(name)}&quot; not found&#x60;);
+    return control as FormControl&lt;LoadFilter[K]&gt;;
+  }
+
+  private async initializeLoads(): Promise&lt;void&gt; {
+    if (this.loadType &#x3D;&#x3D;&#x3D; LoadListType.TRANSPORT_COMPANY) {
+      await this.loadTransportCompany();
+      await this.filterListLoad();
+    }
+  }
+
+  private async loadTransportCompany(): Promise&lt;void&gt; {
+    await this.withLoading(async () &#x3D;&gt; {
+      const response &#x3D;
+        await this.transportCompanyService.GetTransportCompanyBySoftwareUser();
+      if (!checkAndToastError(response, this.toast)) return;
+
+      this.getLoadFilterControl(&#x27;transportCompanyTitle&#x27;).setValue(
+        response.data.TCTitle ?? &#x27;&#x27;
+      );
+      this.getLoadFilterControl(&#x27;transportCompanyId&#x27;).setValue(
+        response.data.TCId
+      );
+    });
+  }
+
+  private extractFilterFormData() {
+    const form &#x3D; this.loadFilterForm.controls;
+    return {
+      transportCompanyId: form.transportCompanyId.value || undefined,
+      announceGroupId: form.announceGroupId.value || undefined,
+      announceSubgroupId: form.announceSubgroupId.value || undefined,
+      date: form.date.value || undefined,
+      loadsStatusId: form.loadsStatusId.value || undefined,
+      sourceCityId: form.sourceCityId.value || undefined,
+      targetCityId: form.targetCityId.value || undefined,
+      inventory: form.inventory.value,
+    };
+  }
+
+  private getListLoadInfo() {
+    const f &#x3D; this.extractFilterFormData();
+    const commonArgs: [
+      number | undefined,
+      number | undefined,
+      boolean | undefined,
+      string | undefined,
+      number | undefined,
+      number | undefined,
+      number | undefined,
+    ] &#x3D; [
+      f.announceGroupId,
+      f.announceSubgroupId,
+      f.inventory,
+      f.date,
+      f.loadsStatusId,
+      f.sourceCityId,
+      f.targetCityId,
+    ];
+
+    switch (this.loadType) {
+      case LoadListType.TRANSPORT_COMPANY:
+        return this.loadsService.GetLoadsForTransportCompanies(...commonArgs);
+      case LoadListType.ADMIN:
+        return this.loadsService.GetLoadsForAdmin(
+          f.transportCompanyId,
+          ...commonArgs
+        );
+      case LoadListType.FACTORIES_PRODUCTION_CENTERS:
+        return this.loadsService.GetLoadsForFactoriesAndProductionCenters(
+          f.transportCompanyId,
+          ...commonArgs
+        );
+      default:
+        throw new Error(&#x60;Unknown load type: ${this.loadType}&#x60;);
+    }
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'LoadTransportCompaniesTable.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

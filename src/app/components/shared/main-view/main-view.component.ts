@@ -68,7 +68,7 @@ export class MainViewComponent
   }
 
   private async loadProcesses() {
-    const response = await this.processService.getVeyUsefulWebProcesses();
+    const response = await this.processService.getUsefulWebProcesses();
     if (!checkAndToastError(response, this.toast)) return;
     const process = response.data.flatMap((pg) =>
       pg.processes.map((p) => ({ ...p }))

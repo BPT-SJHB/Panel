@@ -1,0 +1,1296 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bpt-sjhb-panel documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">bpt-sjhb-panel documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content class">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Classes</li>
+  <li class="breadcrumb-item" >AppTitles</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/constants/Titles.ts</code>
+        </p>
+
+
+
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Static</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#appBrokenTitle" >appBrokenTitle</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#appOnLineTitle" >appOnLineTitle</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#buttons" >buttons</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#datePicker" >datePicker</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#footerTitle" >footerTitle</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#inputs" >inputs</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#sectionTitles" >sectionTitles</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#tables" >tables</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#toggleSwitches" >toggleSwitches</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#getPlaceholder" >getPlaceholder</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="appBrokenTitle"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>appBrokenTitle</b></span>
+                        <a href="#appBrokenTitle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;سامانه جامع حمل و نقل کالا&lt;br&gt;سازمان راهداری و حمل و نقل جاده ای&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/constants/Titles.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="appOnLineTitle"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>appOnLineTitle</b></span>
+                        <a href="#appOnLineTitle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;سامانه جامع حمل و نقل کالا سازمان راهداری و حمل و نقل جاده ای&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/constants/Titles.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="buttons"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>buttons</b></span>
+                        <a href="#buttons"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    search: &#x27;جستجو&#x27;,
+    retrieveFromOutdoorSystem: &#x27;استعلام&#x27;,
+    add: {
+      addUser: &#x27;جدید&#x27;,
+      addRecord: &#x27;جدید&#x27;,
+    },
+    saveAndEdit: &#x27;ثبت و ویرایش&#x27;,
+    activateSMS: &#x27;فعال‌سازی پیامک&#x27;,
+    sendSystemLink: &#x27;ارسال لینک سامانه&#x27;,
+    generateNewPassword: &#x27;ایجاد رمز‌عبور جدید&#x27;,
+    changeNativenessStatus: &#x27;تغییر وضعیت بومی‌گری&#x27;,
+    createNewWallet: &#x27;ساخت کیف پول جدید&#x27;,
+    seeLoads: &#x27;مشاهده بار&#x27;,
+    allocateLoad: &#x27;تخصیص بار&#x27;,
+    newTurnRequest: &#x27;درخواست صدور نوبت&#x27;,
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="197" class="link-to-prism">src/app/constants/Titles.ts:197</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="datePicker"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>datePicker</b></span>
+                        <a href="#datePicker"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    endDate: &#x27;تاریخ اتمام&#x27;,
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="230" class="link-to-prism">src/app/constants/Titles.ts:230</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="footerTitle"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>footerTitle</b></span>
+                        <a href="#footerTitle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;کلیه حقوق این وبسایت متعلق به سازمان‌ راهداری و حمل و نقل جاده ای میباشد | نسخه فرانت-اند: 1.19.32 | نسخه بک-اند: 11.0.0 | طراحی و پیاده‌سازی توسط شرکت برسام پژوهش&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/constants/Titles.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="inputs"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>inputs</b></span>
+                        <a href="#inputs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    global: {
+      id: &#x27;شناسه&#x27;,
+      title: &#x27;عنوان&#x27;,
+      phoneNumber: &#x27;شماره تلفن&#x27;,
+      address: &#x27;آدرس&#x27;,
+      email: &#x27;ایمیل&#x27;,
+    },
+    phoneNumbers: {
+      inputTitle: &#x27;شماره موبایل&#x27;,
+    },
+    users: {
+      userIdTitle: &#x27;شناسه کاربری&#x27;,
+      userNameTitle: &#x27;نام کاربری&#x27;,
+      userTypesTitle: &#x27;نوع کاربری&#x27;,
+      userNationalCodeTitle: &#x27;شناسه ملی&#x27;,
+      userFatherName: &#x27;نام پدر&#x27;,
+      userNameAndLastName: &#x27;نام و نام‌خانوادگی&#x27;,
+    },
+    webProcesses: {
+      webProcessTitle: &#x27;عنوان منو یا زیر‌منو&#x27;,
+    },
+    drivers: {
+      driverId: &#x27;شناسه راننده&#x27;,
+      driverLicenseNumber: &#x27;شماره گواهینامه&#x27;,
+      driverSmartCardNumber: &#x27;شماره هوشمند&#x27;,
+    },
+    trucks: {
+      truckSmartCardNumber: &#x27;شماره هوشمند&#x27;,
+      truckId: &#x27;شناسه ناوگان&#x27;,
+      licensePlateNumber: &#x27;پلاک ناوگان&#x27;,
+      licensePlateSerialNumber: &#x27;شماره سریال&#x27;,
+      truckLoader: &#x27;بارگیر&#x27;,
+    },
+    nativenesses: {
+      nativenessStatus: &#x27;وضعیت بومی‌گری&#x27;,
+    },
+    turns: {
+      turnId: &#x27;شناسه نوبت&#x27;,
+      turnTitle: &#x27;شماره نوبت&#x27;,
+      turnStatus: &#x27;وضعیت نوبت&#x27;,
+    },
+    wallet: {
+      walletId: &#x27;شناسه کیف پول&#x27;,
+      walletTitle: &#x27;کیف پول&#x27;,
+    },
+    factoryAndProductionCenters: {
+      factoriesOrProductionCenterTitle: &#x27;عنوان کارخانه یا مرکز تولید&#x27;,
+      factoriesOrProductionCenterId: &#x27;شناسه مرکز&#x27;,
+      factoriesOrProductionCenterName: &#x27;عنوان مرکز&#x27;,
+      factoriesOrProductionCenterOwnerName: &#x27;نام مدیر&#x27;,
+      factoriesOrProductionCenterOwnerPhoneNumber: &#x27;موبایل مدیر&#x27;,
+    },
+    loadAnnouncementPlaces: {
+      loadAnnouncementPlaceTitle: &#x27;عنوان مبدا یا مقصد حمل&#x27;,
+    },
+    loadAnnouncements: {
+      loadAnnouncementGroupTitle: &#x27;گروه اعلام بار&#x27;,
+      loadAnnouncementSubGroupTitle: &#x27;زیرگروه اعلام بار&#x27;,
+    },
+    loads: {
+      loadId: &#x27;شناسه مخزن بار&#x27;,
+      loadStatus: &#x27;وضعیت نهایی بار&#x27;,
+      loadType: &#x27;نوع بار&#x27;,
+      loadCost: &#x27;تعرفه حمل&#x27;,
+      loadingPlace: &#x27;محل بارگیری&#x27;,
+      dischargingPlace: &#x27;محل تخلیه&#x27;,
+      loadAmount: &#x27;تعداد&#x27;,
+      loadSize: &#x27;تناژ&#x27;,
+      loadRecipient: &#x27;گیرنده&#x27;,
+      loadDescription: &#x27;توضیحات&#x27;,
+      tptParamsJoint: &#x27; پارامترهای موثر&#x27;,
+    },
+    loadAnnouncementDetails: {
+      loadDateAndTime: &#x27;زمان اعلام بار&#x27;,
+    },
+    provinceAndCities: {
+      provinceAndCitiesTitle: &#x27;نام استان یا شهر&#x27;,
+      startCity: &#x27;شهر مبدا&#x27;,
+      endCity: &#x27;شهر مقصد&#x27;,
+    },
+    products: {
+      productsTitle: &#x27;نام کالا&#x27;,
+    },
+    transportCompanies: {
+      transportCompanyTitle: &#x27;شرکت حمل و نقل&#x27;,
+      transportCompanyId: &#x27;شناسه شرکت&#x27;,
+      transportCompanyName: &#x27;عنوان شرکت&#x27;,
+      transportCompanyOrganizationId: &#x27;شناسه سازمانی&#x27;,
+      transportCompanyLocation: &#x27;شهر محل استقرار&#x27;,
+      transportCompanyOwnerPhoneNumber: &#x27;موبایل مدیرعامل&#x27;,
+      transportCompanyOwnerName: &#x27;نام مدیرعامل&#x27;,
+    },
+    travelTime: {
+      travelTimeDurationTitle: &#x27;زمان سفر&#x27;,
+    },
+    sequentialTurns: {
+      sequentialTurnTitle: &#x27;صف نوبت&#x27;,
+      keyWord: &#x27;کلمه کلیدی&#x27;,
+    },
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/constants/Titles.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sectionTitles"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>sectionTitles</b></span>
+                        <a href="#sectionTitles"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    truckInfo: &#x27;اطلاعات ناوگان&#x27;,
+    nativenessInfo: &#x27;بومی گری&#x27;,
+    driverInfo: &#x27;اطلاعات راننده&#x27;,
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="224" class="link-to-prism">src/app/constants/Titles.ts:224</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tables"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>tables</b></span>
+                        <a href="#tables"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    loads: {
+      loadProvince: &#x27;استان&#x27;,
+      loadId: this.inputs.loads.loadId,
+      product: &#x27;کالا&#x27;,
+      sourceCity: this.inputs.provinceAndCities.startCity,
+      targetCity: this.inputs.provinceAndCities.endCity,
+      announcementGroup:
+        this.inputs.loadAnnouncements.loadAnnouncementGroupTitle,
+      announcementSubGroup:
+        this.inputs.loadAnnouncements.loadAnnouncementSubGroupTitle,
+      transportCompany: this.inputs.transportCompanies.transportCompanyTitle,
+      recipient: this.inputs.loads.loadRecipient,
+      address: this.inputs.global.address,
+      description: this.inputs.loads.loadDescription,
+      loadRegisteringUser: &#x27;کاربر ثبت بار&#x27;,
+      loadAllocationUser: &#x27;کاربر تخصیص بار&#x27;,
+      loadAllocationId: &#x27;شناسه تخصیص بار&#x27;,
+      licensePlate: this.inputs.trucks.licensePlateNumber,
+      smartCardNo: this.inputs.trucks.truckSmartCardNumber,
+      truckDriver: &#x27;راننده&#x27;,
+      nationalCode: this.inputs.users.userNationalCodeTitle,
+      mobileNumber: this.inputs.phoneNumbers.inputTitle,
+      allocationDate: &#x27;تاریخ تخصیص بار&#x27;,
+      allocationTime: &#x27;ساعت تخصیص بار&#x27;,
+      sequentialTurn: &#x27;تسلسل نوبت&#x27;,
+      note: this.inputs.loads.loadDescription,
+      loadAllocationStatusTitle: &#x27;وضعیت تخصیص بار&#x27;,
+      tptParamsJoint: this.inputs.loads.tptParamsJoint,
+      loadSize: this.inputs.loads.loadSize,
+      loadTotalAmount: &#x27;تعداد کل&#x27;,
+      loadRemainedAmount: &#x27;تعداد باقیمانده&#x27;,
+      loadCost: this.inputs.loads.loadCost,
+      loadingPlace: this.inputs.loads.loadingPlace,
+      dischargingPlace: this.inputs.loads.dischargingPlace,
+      loadStatus: this.inputs.loads.loadStatus,
+      loadAnnouncementDate: &#x27;تاریخ اعلام بار&#x27;,
+      loadAnnouncementTime: &#x27;ساعت اعلام بار&#x27;,
+    },
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="156" class="link-to-prism">src/app/constants/Titles.ts:156</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleSwitches"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>toggleSwitches</b></span>
+                        <a href="#toggleSwitches"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    status: &#x27;وضعیت&#x27;,
+    smsStatus: &#x27;وضعیت پیامک&#x27;,
+    userStatus: &#x27;وضعیت کاربر&#x27;,
+    factoryOrProductionCenterStatus: &#x27;وضعیت مرکز&#x27;,
+    loadingStatus: &#x27;وضعیت مبدا بارگیری&#x27;,
+    dischargingStatus: &#x27;وضعیت مقصد تخلیه&#x27;,
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="215" class="link-to-prism">src/app/constants/Titles.ts:215</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPlaceholder"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                        <span ><b>getPlaceholder</b></span>
+                        <a href="#getPlaceholder"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getPlaceholder(key: <a href="../miscellaneous/typealiases.html#PlaceholderKey" target="_self">PlaceholderKey</a>, suffix: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="234"
+                                    class="link-to-prism">src/app/constants/Titles.ts:234</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>key</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#PlaceholderKey" target="_self" >PlaceholderKey</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>suffix</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27; را وارد کنید&#x27;</code>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export type PlaceholderKey &#x3D;
+  //#region Global Inputs
+  | &#x27;globalIdPlaceholder&#x27;
+  | &#x27;globalTitlePlaceholder&#x27;
+  | &#x27;globalPhoneNumberPlaceholder&#x27;
+  | &#x27;globalAddressPlaceholder&#x27;
+  | &#x27;globalEmailPlaceholder&#x27;
+  //#endregion
+  //#region User
+  | &#x27;userPhoneNumberPlaceholder&#x27;
+  | &#x27;userNamePlaceholder&#x27;
+  | &#x27;userNationalCodePlaceholder&#x27;
+  //#endregion
+  | &#x27;webProcessesPlaceholder&#x27;
+  | &#x27;driverSmartCardNumberPlaceholder&#x27;
+  | &#x27;truckSmartCardNumberPlaceholder&#x27;
+  | &#x27;truckLoader&#x27;
+  | &#x27;truckId&#x27;
+  | &#x27;nativenessPlaceholder&#x27;
+  //#region Factories and production centers
+  | &#x27;factoriesOrProductionCenterTitle&#x27;
+  | &#x27;factoriesOrProductionCenterName&#x27;
+  | &#x27;factoriesOrProductionCenterOwnerName&#x27;
+  | &#x27;factoriesOrProductionCenterOwnerPhoneNumber&#x27;
+  //#endregion
+  | &#x27;loadAnnouncementPlaceTitle&#x27;
+  | &#x27;provinceAndCitiesTitle&#x27;
+  | &#x27;productsTitle&#x27;
+  | &#x27;loadAnnouncementGroupTitle&#x27;
+  | &#x27;loadAnnouncementSubGroupTitle&#x27;
+  | &#x27;loadStatus&#x27;
+  | &#x27;startCity&#x27;
+  | &#x27;endCity&#x27;
+  | &#x27;transportCompanyTitle&#x27;
+  | &#x27;travelTimeDurationTitle&#x27;
+  | &#x27;transportCompanyOwnerPhoneNumber&#x27;
+  | &#x27;transportCompanyOwnerName&#x27;
+  | &#x27;sequentialTurnTitle&#x27;
+  | &#x27;loadType&#x27;
+  | &#x27;loadsLoadingPlace&#x27;
+  | &#x27;loadsDischargingPlace&#x27;
+  | &#x27;loadsRecipient&#x27;
+  | &#x27;loadsDescription&#x27;
+  | &#x27;sequentialTurnKeywork&#x27;;
+
+export class AppTitles {
+  public static readonly appOnLineTitle &#x3D;
+    &#x27;سامانه جامع حمل و نقل کالا سازمان راهداری و حمل و نقل جاده ای&#x27;;
+  public static readonly appBrokenTitle &#x3D;
+    &#x27;سامانه جامع حمل و نقل کالا&lt;br&gt;سازمان راهداری و حمل و نقل جاده ای&#x27;;
+  public static readonly footerTitle &#x3D;
+    &#x27;کلیه حقوق این وبسایت متعلق به سازمان‌ راهداری و حمل و نقل جاده ای میباشد | نسخه فرانت-اند: 1.19.32 | نسخه بک-اند: 11.0.0 | طراحی و پیاده‌سازی توسط شرکت برسام پژوهش&#x27;;
+
+  public static readonly inputs &#x3D; {
+    global: {
+      id: &#x27;شناسه&#x27;,
+      title: &#x27;عنوان&#x27;,
+      phoneNumber: &#x27;شماره تلفن&#x27;,
+      address: &#x27;آدرس&#x27;,
+      email: &#x27;ایمیل&#x27;,
+    },
+    phoneNumbers: {
+      inputTitle: &#x27;شماره موبایل&#x27;,
+    },
+    users: {
+      userIdTitle: &#x27;شناسه کاربری&#x27;,
+      userNameTitle: &#x27;نام کاربری&#x27;,
+      userTypesTitle: &#x27;نوع کاربری&#x27;,
+      userNationalCodeTitle: &#x27;شناسه ملی&#x27;,
+      userFatherName: &#x27;نام پدر&#x27;,
+      userNameAndLastName: &#x27;نام و نام‌خانوادگی&#x27;,
+    },
+    webProcesses: {
+      webProcessTitle: &#x27;عنوان منو یا زیر‌منو&#x27;,
+    },
+    drivers: {
+      driverId: &#x27;شناسه راننده&#x27;,
+      driverLicenseNumber: &#x27;شماره گواهینامه&#x27;,
+      driverSmartCardNumber: &#x27;شماره هوشمند&#x27;,
+    },
+    trucks: {
+      truckSmartCardNumber: &#x27;شماره هوشمند&#x27;,
+      truckId: &#x27;شناسه ناوگان&#x27;,
+      licensePlateNumber: &#x27;پلاک ناوگان&#x27;,
+      licensePlateSerialNumber: &#x27;شماره سریال&#x27;,
+      truckLoader: &#x27;بارگیر&#x27;,
+    },
+    nativenesses: {
+      nativenessStatus: &#x27;وضعیت بومی‌گری&#x27;,
+    },
+    turns: {
+      turnId: &#x27;شناسه نوبت&#x27;,
+      turnTitle: &#x27;شماره نوبت&#x27;,
+      turnStatus: &#x27;وضعیت نوبت&#x27;,
+    },
+    wallet: {
+      walletId: &#x27;شناسه کیف پول&#x27;,
+      walletTitle: &#x27;کیف پول&#x27;,
+    },
+    factoryAndProductionCenters: {
+      factoriesOrProductionCenterTitle: &#x27;عنوان کارخانه یا مرکز تولید&#x27;,
+      factoriesOrProductionCenterId: &#x27;شناسه مرکز&#x27;,
+      factoriesOrProductionCenterName: &#x27;عنوان مرکز&#x27;,
+      factoriesOrProductionCenterOwnerName: &#x27;نام مدیر&#x27;,
+      factoriesOrProductionCenterOwnerPhoneNumber: &#x27;موبایل مدیر&#x27;,
+    },
+    loadAnnouncementPlaces: {
+      loadAnnouncementPlaceTitle: &#x27;عنوان مبدا یا مقصد حمل&#x27;,
+    },
+    loadAnnouncements: {
+      loadAnnouncementGroupTitle: &#x27;گروه اعلام بار&#x27;,
+      loadAnnouncementSubGroupTitle: &#x27;زیرگروه اعلام بار&#x27;,
+    },
+    loads: {
+      loadId: &#x27;شناسه مخزن بار&#x27;,
+      loadStatus: &#x27;وضعیت نهایی بار&#x27;,
+      loadType: &#x27;نوع بار&#x27;,
+      loadCost: &#x27;تعرفه حمل&#x27;,
+      loadingPlace: &#x27;محل بارگیری&#x27;,
+      dischargingPlace: &#x27;محل تخلیه&#x27;,
+      loadAmount: &#x27;تعداد&#x27;,
+      loadSize: &#x27;تناژ&#x27;,
+      loadRecipient: &#x27;گیرنده&#x27;,
+      loadDescription: &#x27;توضیحات&#x27;,
+      tptParamsJoint: &#x27; پارامترهای موثر&#x27;,
+    },
+    loadAnnouncementDetails: {
+      loadDateAndTime: &#x27;زمان اعلام بار&#x27;,
+    },
+    provinceAndCities: {
+      provinceAndCitiesTitle: &#x27;نام استان یا شهر&#x27;,
+      startCity: &#x27;شهر مبدا&#x27;,
+      endCity: &#x27;شهر مقصد&#x27;,
+    },
+    products: {
+      productsTitle: &#x27;نام کالا&#x27;,
+    },
+    transportCompanies: {
+      transportCompanyTitle: &#x27;شرکت حمل و نقل&#x27;,
+      transportCompanyId: &#x27;شناسه شرکت&#x27;,
+      transportCompanyName: &#x27;عنوان شرکت&#x27;,
+      transportCompanyOrganizationId: &#x27;شناسه سازمانی&#x27;,
+      transportCompanyLocation: &#x27;شهر محل استقرار&#x27;,
+      transportCompanyOwnerPhoneNumber: &#x27;موبایل مدیرعامل&#x27;,
+      transportCompanyOwnerName: &#x27;نام مدیرعامل&#x27;,
+    },
+    travelTime: {
+      travelTimeDurationTitle: &#x27;زمان سفر&#x27;,
+    },
+    sequentialTurns: {
+      sequentialTurnTitle: &#x27;صف نوبت&#x27;,
+      keyWord: &#x27;کلمه کلیدی&#x27;,
+    },
+  };
+
+  public static readonly tables &#x3D; {
+    loads: {
+      loadProvince: &#x27;استان&#x27;,
+      loadId: this.inputs.loads.loadId,
+      product: &#x27;کالا&#x27;,
+      sourceCity: this.inputs.provinceAndCities.startCity,
+      targetCity: this.inputs.provinceAndCities.endCity,
+      announcementGroup:
+        this.inputs.loadAnnouncements.loadAnnouncementGroupTitle,
+      announcementSubGroup:
+        this.inputs.loadAnnouncements.loadAnnouncementSubGroupTitle,
+      transportCompany: this.inputs.transportCompanies.transportCompanyTitle,
+      recipient: this.inputs.loads.loadRecipient,
+      address: this.inputs.global.address,
+      description: this.inputs.loads.loadDescription,
+      loadRegisteringUser: &#x27;کاربر ثبت بار&#x27;,
+      loadAllocationUser: &#x27;کاربر تخصیص بار&#x27;,
+      loadAllocationId: &#x27;شناسه تخصیص بار&#x27;,
+      licensePlate: this.inputs.trucks.licensePlateNumber,
+      smartCardNo: this.inputs.trucks.truckSmartCardNumber,
+      truckDriver: &#x27;راننده&#x27;,
+      nationalCode: this.inputs.users.userNationalCodeTitle,
+      mobileNumber: this.inputs.phoneNumbers.inputTitle,
+      allocationDate: &#x27;تاریخ تخصیص بار&#x27;,
+      allocationTime: &#x27;ساعت تخصیص بار&#x27;,
+      sequentialTurn: &#x27;تسلسل نوبت&#x27;,
+      note: this.inputs.loads.loadDescription,
+      loadAllocationStatusTitle: &#x27;وضعیت تخصیص بار&#x27;,
+      tptParamsJoint: this.inputs.loads.tptParamsJoint,
+      loadSize: this.inputs.loads.loadSize,
+      loadTotalAmount: &#x27;تعداد کل&#x27;,
+      loadRemainedAmount: &#x27;تعداد باقیمانده&#x27;,
+      loadCost: this.inputs.loads.loadCost,
+      loadingPlace: this.inputs.loads.loadingPlace,
+      dischargingPlace: this.inputs.loads.dischargingPlace,
+      loadStatus: this.inputs.loads.loadStatus,
+      loadAnnouncementDate: &#x27;تاریخ اعلام بار&#x27;,
+      loadAnnouncementTime: &#x27;ساعت اعلام بار&#x27;,
+    },
+  };
+
+  public static readonly buttons &#x3D; {
+    search: &#x27;جستجو&#x27;,
+    retrieveFromOutdoorSystem: &#x27;استعلام&#x27;,
+    add: {
+      addUser: &#x27;جدید&#x27;,
+      addRecord: &#x27;جدید&#x27;,
+    },
+    saveAndEdit: &#x27;ثبت و ویرایش&#x27;,
+    activateSMS: &#x27;فعال‌سازی پیامک&#x27;,
+    sendSystemLink: &#x27;ارسال لینک سامانه&#x27;,
+    generateNewPassword: &#x27;ایجاد رمز‌عبور جدید&#x27;,
+    changeNativenessStatus: &#x27;تغییر وضعیت بومی‌گری&#x27;,
+    createNewWallet: &#x27;ساخت کیف پول جدید&#x27;,
+    seeLoads: &#x27;مشاهده بار&#x27;,
+    allocateLoad: &#x27;تخصیص بار&#x27;,
+    newTurnRequest: &#x27;درخواست صدور نوبت&#x27;,
+  };
+
+  public static readonly toggleSwitches &#x3D; {
+    status: &#x27;وضعیت&#x27;,
+    smsStatus: &#x27;وضعیت پیامک&#x27;,
+    userStatus: &#x27;وضعیت کاربر&#x27;,
+    factoryOrProductionCenterStatus: &#x27;وضعیت مرکز&#x27;,
+    loadingStatus: &#x27;وضعیت مبدا بارگیری&#x27;,
+    dischargingStatus: &#x27;وضعیت مقصد تخلیه&#x27;,
+  };
+
+  public static readonly sectionTitles &#x3D; {
+    truckInfo: &#x27;اطلاعات ناوگان&#x27;,
+    nativenessInfo: &#x27;بومی گری&#x27;,
+    driverInfo: &#x27;اطلاعات راننده&#x27;,
+  };
+
+  public static readonly datePicker &#x3D; {
+    endDate: &#x27;تاریخ اتمام&#x27;,
+  };
+
+  public static getPlaceholder(
+    key: PlaceholderKey,
+    suffix &#x3D; &#x27; را وارد کنید&#x27;
+  ): string {
+    let placeholderValue: string;
+
+    switch (key) {
+      //#region Global Inputs
+      case &#x27;globalIdPlaceholder&#x27;:
+        placeholderValue &#x3D; this.inputs.global.id;
+        break;
+      case &#x27;globalTitlePlaceholder&#x27;:
+        placeholderValue &#x3D; this.inputs.global.title;
+        break;
+      case &#x27;globalPhoneNumberPlaceholder&#x27;:
+        placeholderValue &#x3D; this.inputs.global.phoneNumber;
+        break;
+      case &#x27;globalAddressPlaceholder&#x27;:
+        placeholderValue &#x3D; this.inputs.global.address;
+        break;
+      case &#x27;globalEmailPlaceholder&#x27;:
+        placeholderValue &#x3D; this.inputs.global.email;
+        break;
+      //#endregion
+
+      //#region User
+      case &#x27;userPhoneNumberPlaceholder&#x27;:
+        placeholderValue &#x3D; this.inputs.phoneNumbers.inputTitle;
+        break;
+      case &#x27;userNamePlaceholder&#x27;:
+        placeholderValue &#x3D; this.inputs.users.userNameTitle;
+        break;
+      case &#x27;userNationalCodePlaceholder&#x27;:
+        placeholderValue &#x3D; this.inputs.users.userNationalCodeTitle;
+        break;
+      //#endregion
+
+      case &#x27;webProcessesPlaceholder&#x27;:
+        placeholderValue &#x3D; this.inputs.webProcesses.webProcessTitle;
+        break;
+
+      case &#x27;driverSmartCardNumberPlaceholder&#x27;:
+        placeholderValue &#x3D; this.inputs.drivers.driverSmartCardNumber;
+        break;
+
+      case &#x27;truckSmartCardNumberPlaceholder&#x27;:
+        placeholderValue &#x3D; this.inputs.trucks.truckSmartCardNumber;
+        break;
+
+      case &#x27;truckLoader&#x27;:
+        placeholderValue &#x3D; this.inputs.trucks.truckLoader;
+        break;
+
+      case &#x27;truckId&#x27;:
+        placeholderValue &#x3D; this.inputs.trucks.truckId;
+        break;
+
+      case &#x27;nativenessPlaceholder&#x27;:
+        placeholderValue &#x3D; this.inputs.nativenesses.nativenessStatus;
+        break;
+
+      //#region Factories and production centers
+      case &#x27;factoriesOrProductionCenterTitle&#x27;:
+        placeholderValue &#x3D;
+          this.inputs.factoryAndProductionCenters
+            .factoriesOrProductionCenterTitle;
+        break;
+      case &#x27;factoriesOrProductionCenterName&#x27;:
+        placeholderValue &#x3D;
+          this.inputs.factoryAndProductionCenters
+            .factoriesOrProductionCenterName;
+        break;
+      case &#x27;factoriesOrProductionCenterOwnerName&#x27;:
+        placeholderValue &#x3D;
+          this.inputs.factoryAndProductionCenters
+            .factoriesOrProductionCenterOwnerName;
+        break;
+      case &#x27;factoriesOrProductionCenterOwnerPhoneNumber&#x27;:
+        placeholderValue &#x3D;
+          this.inputs.factoryAndProductionCenters
+            .factoriesOrProductionCenterOwnerPhoneNumber;
+        break;
+      //#endregion
+
+      case &#x27;loadAnnouncementPlaceTitle&#x27;:
+        placeholderValue &#x3D;
+          this.inputs.loadAnnouncementPlaces.loadAnnouncementPlaceTitle;
+        break;
+
+      case &#x27;loadAnnouncementGroupTitle&#x27;:
+        placeholderValue &#x3D;
+          this.inputs.loadAnnouncements.loadAnnouncementGroupTitle;
+        break;
+
+      case &#x27;loadAnnouncementSubGroupTitle&#x27;:
+        placeholderValue &#x3D;
+          this.inputs.loadAnnouncements.loadAnnouncementSubGroupTitle;
+        break;
+
+      case &#x27;loadStatus&#x27;:
+        placeholderValue &#x3D; this.inputs.loads.loadStatus;
+        break;
+
+      case &#x27;provinceAndCitiesTitle&#x27;:
+        placeholderValue &#x3D; this.inputs.provinceAndCities.provinceAndCitiesTitle;
+        break;
+
+      case &#x27;productsTitle&#x27;:
+        placeholderValue &#x3D; this.inputs.products.productsTitle;
+        break;
+
+      case &#x27;startCity&#x27;:
+        placeholderValue &#x3D; this.inputs.provinceAndCities.startCity;
+        break;
+
+      case &#x27;endCity&#x27;:
+        placeholderValue &#x3D; this.inputs.provinceAndCities.endCity;
+        break;
+
+      case &#x27;transportCompanyTitle&#x27;:
+        placeholderValue &#x3D; this.inputs.transportCompanies.transportCompanyTitle;
+        break;
+
+      case &#x27;travelTimeDurationTitle&#x27;:
+        placeholderValue &#x3D; this.inputs.travelTime.travelTimeDurationTitle;
+        break;
+
+      case &#x27;transportCompanyOwnerPhoneNumber&#x27;:
+        placeholderValue &#x3D;
+          this.inputs.transportCompanies.transportCompanyOwnerPhoneNumber;
+        break;
+
+      case &#x27;transportCompanyOwnerName&#x27;:
+        placeholderValue &#x3D;
+          this.inputs.transportCompanies.transportCompanyOwnerName;
+        break;
+
+      case &#x27;sequentialTurnTitle&#x27;:
+        placeholderValue &#x3D; this.inputs.sequentialTurns.sequentialTurnTitle;
+        break;
+
+      case &#x27;loadType&#x27;:
+        placeholderValue &#x3D; this.inputs.loads.loadType;
+        break;
+
+      case &#x27;loadsLoadingPlace&#x27;:
+        placeholderValue &#x3D; this.inputs.loads.loadingPlace;
+        break;
+
+      case &#x27;loadsDischargingPlace&#x27;:
+        placeholderValue &#x3D; this.inputs.loads.dischargingPlace;
+        break;
+
+      case &#x27;loadsRecipient&#x27;:
+        placeholderValue &#x3D; this.inputs.loads.loadRecipient;
+        break;
+
+      case &#x27;loadsDescription&#x27;:
+        placeholderValue &#x3D; this.inputs.loads.loadDescription;
+        break;
+
+      case &#x27;sequentialTurnKeywork&#x27;:
+        placeholderValue &#x3D; this.inputs.sequentialTurns.keyWord;
+        break;
+
+      default:
+        placeholderValue &#x3D; &#x27;&#x27;;
+        break;
+    }
+
+    return &#x60;${placeholderValue}${suffix}&#x60;;
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'AppTitles.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

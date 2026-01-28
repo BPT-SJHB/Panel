@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 export interface TrafficReportInfo {
   EntryExitId: number;
   EntryShamsiDate: string;
@@ -14,3 +16,20 @@ export interface TrafficReportInfo {
   ExitGateTitle: string;
   FlagA: boolean;
 }
+
+export const zodTrafficReportInfo = z.object({
+  EntryExitId: z.number(),
+  EntryShamsiDate: z.string(),
+  EntryTime: z.string(),
+  EntryTrafficCardNo: z.string(),
+  EntrySoftwareUser: z.string(),
+  EntryCost: z.number(),
+  EntryGateTitle: z.string(),
+  ExitShamsiDate: z.string(),
+  ExitTime: z.string(),
+  ExitTrafficCardNo: z.string(),
+  ExitSoftwareUser: z.string(),
+  ExitCost: z.number(),
+  ExitGateTitle: z.string(),
+  FlagA: z.boolean(),
+});

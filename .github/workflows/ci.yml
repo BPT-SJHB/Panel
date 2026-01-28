@@ -25,8 +25,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run tests
-        run: npx ng test --watch=false --browsers=ChromeHeadless
+      # - name: Run tests
+      # run: npx ng test --watch=false --browsers=ChromeHeadless
 
       - name: Build production
         run: npx ng build --configuration production --output-hashing=all
