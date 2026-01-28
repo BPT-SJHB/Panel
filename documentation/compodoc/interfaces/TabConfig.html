@@ -1,0 +1,1078 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bpt-sjhb-panel documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">bpt-sjhb-panel documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  TabConfig</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/constants/tab-component-registry.ts</code>
+        </p>
+
+
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#sharedSignal" 
+>
+                                            sharedSignal
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#subTab" 
+>
+                                            subTab
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sharedSignal"></a>
+                                        <span class="name "><b>sharedSignal</b>
+                                            <a href="#sharedSignal">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sharedSignal:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="subTab"></a>
+                                        <span class="name "><b>subTab</b>
+                                            <a href="#subTab">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>subTab:         <code><a href="../interfaces/TabView.html" target="_self" >TabView[]</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/TabView.html" target="_self" >TabView[]</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { signal, Type } from &#x27;@angular/core&#x27;;
+import { UserInfoFormComponent } from &#x27;app/components/forms/user-management-form/user-Info-form/user-info-form.component&#x27;;
+import { TruckInfoFormComponent } from &#x27;app/components/forms/truck-driver-manages-form/truck-info-form/truck-info-form.component&#x27;;
+import { DriverInfoFormComponent } from &#x27;app/components/forms/truck-driver-manages-form/driver-info-form/driver-info-form.component&#x27;;
+import { UsersMenuAccessFormComponent } from &#x27;app/components/forms/user-management-form/users-menu-access-form/users-menu-access-form.component&#x27;;
+import { DriverTruckWalletFormComponent } from &#x27;app/components/forms/truck-driver-manages-form/driver-truck-wallet-form/driver-truck-wallet-form.component&#x27;;
+import { FactoriesAndFreightFormComponent } from &#x27;app/components/forms/factories-production-centers-form/factories-production-centers-form.component&#x27;;
+import { LoaderTypeFormComponent } from &#x27;app/components/forms/loader-type-form/loader-type-form.component&#x27;;
+import { ProvinceAndCityFormComponent } from &#x27;app/components/forms/province-and-city-form/province-and-city-form.component&#x27;;
+import { ProductFormComponent } from &#x27;app/components/forms/product-form/product-form.component&#x27;;
+import { LadPlacesFormComponent } from &#x27;app/components/forms/lad-places-form/lad-places-form.component&#x27;;
+import { TravelTimeFormComponent } from &#x27;app/components/forms/travel-time-form/travel-time-form.component&#x27;;
+import { TariffsFormComponent } from &#x27;app/components/forms/tariffs-manages-form/tariffs-form.component&#x27;;
+import { AnnouncementGroupFormComponent } from &#x27;app/components/forms/announcement-management-form/announcement-group-form/announcement-group-form.component&#x27;;
+import { AnnouncementSubGroupFormComponent } from &#x27;app/components/forms/announcement-management-form/announcement-sub-group-form/announcement-sub-group-form.component&#x27;;
+import { RelationOfAnnouncementGroupAndSubGroupComponent } from &#x27;app/components/forms/announcement-management-form/relation-of-announcement-group-and-sub-group/relation-of-announcement-group-and-sub-group.component&#x27;;
+import { SequentialTurnsFormComponent } from &#x27;app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component&#x27;;
+import { RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent } from &#x27;app/components/forms/sequential-turns-management-form/relation-of-sequential-turn-to-announcement-sub-groups/relation-of-sequential-turn-to-announcement-sub-groups-form.component&#x27;;
+import { MainViewComponent } from &#x27;app/components/shared/main-view/main-view.component&#x27;;
+import { RelationOfSequentialTurnToLoaderTypeFormComponent } from &#x27;app/components/forms/sequential-turns-management-form/relation-of-sequential-turn-to-loader-type-form/relation-of-sequential-turn-to-loader-type-form.component&#x27;;
+import { TruckAndDriverInformationFormComponent } from &#x27;app/components/forms/truck-and-driver-information-form/truck-and-driver-information-form.component&#x27;;
+import { TurnsListFormComponent } from &#x27;app/components/forms/turns-management-form/turns-list-form/turns-list-form.component&#x27;;
+import { RealTimeTurnsFormComponent } from &#x27;app/components/forms/turns-management-form/real-time-turns-form/real-time-turns-form.component&#x27;;
+import { EmergencyTurnsFormComponent } from &#x27;app/components/forms/turns-management-form/emergency-time-turns-form copy/emergency-turns-form.component&#x27;;
+import { ResuscitateTurnsFormComponent } from &#x27;app/components/forms/turns-management-form/resuscitate-time-turns-form/resuscitate-turns-form.component&#x27;;
+import { RegisterTurnFormComponent } from &#x27;app/components/forms/register-turn-form/register-turn-form.component&#x27;;
+import { WalletTransactionsTableComponent } from &#x27;app/components/forms/shared/wallet-transactions-table/wallet-transactions-table.component&#x27;;
+import { WalletPaymentRecordTableComponent } from &#x27;app/components/forms/shared/wallet-payment-record-table/wallet-payment-record-table.component&#x27;;
+import { WalletPaymentFormComponent } from &#x27;app/components/forms/wallet-payment-form/wallet-payment-form.component&#x27;;
+import { UserProfileFormComponent } from &#x27;app/components/forms/user-profile-form/user-profile-form.component&#x27;;
+import { IssuedTurnListFormComponent } from &#x27;app/components/forms/issued-turn-list-form/issued-turn-list-form.component&#x27;;
+import { TransportCompaniesFormComponent } from &#x27;app/components/forms/transport-companies-form/transport-companies-form.component&#x27;;
+import { TruckWalletPaymentFormComponent } from &#x27;app/components/forms/truck-wallet-payment-form/truck-wallet-payment-form.component&#x27;;
+import { TransportCompaniesWalletPaymentFormComponent } from &#x27;app/components/forms/transport-companies-wallet-payment-form/transport-companies-wallet-payment-form.component&#x27;;
+import { UserChargingFunctionFormComponent } from &#x27;app/components/forms/user-charging-function-form/user-charging-function-form.component&#x27;;
+import {
+  LoadListType,
+  LoadsListFormComponent,
+} from &#x27;app/components/forms/load-management-form/loads-list-form/loads-list-form.component&#x27;;
+import { LoadsAnnouncementFormComponent } from &#x27;app/components/forms/load-management-form/loads-announcement-form/loads-announcement-form.component&#x27;;
+import { LoadAllocationFormComponent } from &#x27;app/components/forms/load-management-form/load-allocation-form/load-allocation-form.component&#x27;;
+import { LoadPermissionsFormComponent } from &#x27;app/components/forms/load-management-form/load-permissions-form/load-permissions-form.component&#x27;;
+import { LoadCapacitorFormComponent } from &#x27;app/components/forms/driver-load-management-form/load-capacitor-form/load-capacitor-form.component&#x27;;
+import { LoadAllocationPriorityComponent } from &#x27;app/components/forms/driver-load-management-form/load-allocation-priority/load-allocation-priority.component&#x27;;
+import { DriverLoadAllocationFormComponent } from &#x27;app/components/forms/driver-load-management-form/driver-load-allocation-form/driver-load-allocation-form.component&#x27;;
+import { DriverLoadPermissionsFormComponent } from &#x27;app/components/forms/driver-load-management-form/driver-load-permissions-form/driver-load-permissions-form.component&#x27;;
+import { LoadAccountingFormComponent } from &#x27;app/components/forms/load-accounting-form/load-accounting-form.component&#x27;;
+import { AdminLoadPermissionsFormComponent } from &#x27;app/components/forms/admin-load-permissions-form/admin-load-permissions-form.component&#x27;;
+import { TicketListsFormComponent } from &#x27;app/components/forms/tickets-management-form/ticket-lists-form/ticket-lists-form.component&#x27;;
+import { TrafficInitialRegistrationFormComponent } from &#x27;app/components/forms/traffic-management-forms/traffic-initial-registration-form/traffic-initial-registration-form.component&#x27;;
+import { TrafficAndParkingTariffFormComponent } from &#x27;app/components/forms/traffic-management-forms/traffic-and-parking-tariff-form/traffic-and-parking-tariff-form.component&#x27;;
+import { ParkingTrafficRecordsFormComponent } from &#x27;app/components/forms/traffic-management-forms/parking-traffic-records-form/parking-traffic-records-form.component&#x27;;
+import { TrafficCardTypeFormComponent } from &#x27;app/components/forms/traffic-management-forms/traffic-card-type-form/traffic-card-type-form.component&#x27;;
+import { TrafficEntriesFormComponent } from &#x27;app/components/forms/traffic-management-forms/traffic-entries-form/traffic-entries-form.component&#x27;;
+import { CarouselFormComponent } from &#x27;app/components/forms/carousel-form/carousel-form.component&#x27;;
+import { LoadAnnouncementConfigFormComponent } from &#x27;app/components/forms/load-announcement-config-form/load-announcement-config-form.component&#x27;;
+import { GeneralConfigurationFormComponent } from &#x27;app/components/forms/general-configuration-form/general-configuration-form.component&#x27;;
+import { DeviceManagementFormComponent } from &#x27;app/components/forms/device-management-form/device-management-form.component&#x27;;
+import { EquipmentDeviceConfigFormComponent } from &#x27;app/components/forms/equipment-device-config-form/equipment-device-config-form.component&#x27;;
+import { LoaderTypeAnnouncementRelationFormComponent } from &#x27;app/components/forms/loader-type-announcement-relation-form/loader-type-announcement-relation-form.component&#x27;;
+import { SequentialTurnCostFormComponent } from &#x27;app/components/forms/sequential-turn-cost-form/sequential-turn-cost-form.component&#x27;;
+import { ProvinceAnnouncementRelationFormComponent } from &#x27;app/components/forms/province-announcement-relation-form/province-announcement-relation-form.component&#x27;;
+import { TPTParametersFormComponent } from &#x27;app/components/forms/tpt-parameters-management/tpt-parameters-form/tpt-parameters-form.component&#x27;;
+import { TPTParametersAnnouncementRelationFormComponent } from &#x27;app/components/forms/tpt-parameters-management/tpt-parameters-announcement-relation-form/tpt-parameters-announcement-relation-form.component&#x27;;
+import { TransportLoadPermissionsFormComponent } from &#x27;app/components/forms/transport-load-permissions-form/transport-load-permissions-form.component&#x27;;
+import { LoadViewConditionFormComponent } from &#x27;app/components/forms/load-condition-management-form/load-view-condition/load-view-condition-form.component&#x27;;
+import { LoadAllocationConditionFormComponent } from &#x27;app/components/forms/load-condition-management-form/load-allocation-condition/load-allocation-condition-form.component&#x27;;
+
+export enum TabComponentKey {
+  // Default or main tab
+  Main &#x3D; -1,
+
+  // 📋 User &amp; Profile
+  // Manage users (create, update, delete)
+  UserManagement &#x3D; 0,
+  // Manage user profiles
+  UserProfileManagement &#x3D; 22,
+
+  // 🎠 Carousel
+  // Manage homepage or app carousel slides
+  CarouselManagement &#x3D; 2,
+
+  // 🚚 Truck/Driver
+  // Manage trucks and drivers
+  TruckDriverManagement &#x3D; 1,
+  // Manage driver-to-truck assignments
+  Driver_TruckManagement &#x3D; 10,
+
+  // 💸 Wallets
+  // User charging operations
+  UserChargingFunctions &#x3D; 25,
+  // Manage SMS-related wallet balances
+  SmsWalletManagement &#x3D; 26,
+  // Manage user wallets
+  UserWalletManagement &#x3D; 27,
+  // Manage truck wallets
+  TruckWalletManagement &#x3D; 29,
+  // Manage transport company wallets
+  TransportCompaniesWalletManagement &#x3D; 30,
+  // Manage trucker association wallets
+  TruckerAssociationWalletManagement &#x3D; 31,
+
+  // 🔁 Sequential Turn
+  // Manage sequential turn rules
+  SequentialTurnManagement &#x3D; 4,
+
+  // 🏭 Factories &amp; Production
+  // Manage transport companies
+  TransportCompaniesManagement &#x3D; 3,
+  // Manage factories and freight operations
+  FactoriesAndFreightManagement &#x3D; 6,
+
+  // 📍 Geography
+  // Manage LAD places
+  LADPlaceManagementService &#x3D; 7,
+  // Manage provinces and cities
+  ProvinceAndCityManagement &#x3D; 8,
+
+  // 📦 Products &amp; Load
+  // Manage product types
+  ProductTypesManagement &#x3D; 9,
+
+  //TODO: This code replaed with LastLoadPermissionsOfTransportCompanies
+  LoadPermissionsTransportManagement &#x3D; 35,
+
+  // 🏷️ Loader Types
+  // Manage loader types
+  LoaderTypeManagement &#x3D; 12,
+
+  // 🛣️ Travel
+  // Manage travel time rules
+  TravelTimeManagement &#x3D; 14,
+
+  // 💰 Tariffs
+  // Manage tariffs
+  TariffsManagement &#x3D; 53,
+
+  // 📣 Announcement
+  // Manage announcements
+  AnnouncementManagement &#x3D; 11,
+
+  // 🕓 Turns
+  // Manage turns
+  TurnsManagement &#x3D; 19,
+  // Register turns
+  TurnsRegisterManagement &#x3D; 23,
+  // Manage issued turns
+  IssuedTurnManagement &#x3D; 21,
+
+  // 📦 Load Management
+  // Manage driver loads
+  DriverLoadManagement &#x3D; 37,
+  // Manage loads for transport companies
+  TransportCompaniesLoadManagement &#x3D; 32,
+  // Manage loads for factories and freight
+  FactoriesAndFreightLoadManagement &#x3D; 33,
+  // Admin-level load management
+  AdminLoadManagement &#x3D; 39,
+
+  // 🅿️ Parking &amp; Traffics
+  // Register and record traffic events
+  RegisterAndRecordTrafficsManagement &#x3D; 15,
+  // Register and edit traffic cards
+  RegisterAndEditTrafficsCardManagement &#x3D; 16,
+  // Manage traffic &amp; parking tariffs
+  TrafficsAndParkingTariffManagement &#x3D; 18,
+  // Initial traffic registrations
+  TrafficInitialRegistrationManagement &#x3D; 34,
+
+  // 🖥️ Device &amp; Config Management
+  // Manage devices
+  DeviceManagement &#x3D; 36,
+  // General app configuration
+  GeneralConfigurationManagement &#x3D; 45,
+  // Load announcement configuration
+  LoadAnnouncementConfigManagement &#x3D; 46,
+  // Equipment device management
+  EquipmentDeviceManagement &#x3D; 47,
+
+  // 🎫 Ticketing
+  // Manage tickets
+  TicketManagement &#x3D; 71,
+
+  // ⚙️ TPT Parameters
+  // Manage TPT parameters
+  TPTParametersManagement &#x3D; 69,
+
+  // Manage Load Condition View and Select
+  LoadConditionManagement &#x3D; 72,
+}
+
+export interface TabConfig {
+  sharedSignal: boolean;
+  subTab: TabView[];
+}
+
+export interface TabView&lt;T &#x3D; object&gt; {
+  title: string;
+  component: Type&lt;T&gt;;
+  data?: object;
+}
+
+export const TabComponentRegistry: Record&lt;TabComponentKey, TabConfig&gt; &#x3D; {
+  [TabComponentKey.Main]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: &#x27;صفحه اصلی&#x27;,
+        component: MainViewComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.CarouselManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: &#x27;کاروسل&#x27;,
+        component: CarouselFormComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.UserManagement]: {
+    sharedSignal: false,
+    subTab: [
+      { title: &#x27;مدیریت کاربران&#x27;, component: UserInfoFormComponent },
+      { title: &#x27;مدریت دسترسی کابران&#x27;, component: UsersMenuAccessFormComponent },
+    ],
+  },
+
+  [TabComponentKey.TruckDriverManagement]: {
+    sharedSignal: false,
+    subTab: [
+      { title: &#x27;راننده&#x27;, component: DriverInfoFormComponent },
+      { title: &#x27;ناوگان&#x27;, component: TruckInfoFormComponent },
+      {
+        title: &#x27;راننده-ناوگان-کیف‌پول&#x27;,
+        component: DriverTruckWalletFormComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.Driver_TruckManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: &#x27;ناوگان&#x27;,
+        component: TruckAndDriverInformationFormComponent,
+        data: { insideTabType: &#x27;Truck&#x27; },
+      },
+      {
+        title: &#x27;بارگیر&#x27;,
+        component: TruckAndDriverInformationFormComponent,
+        data: { insideTabType: &#x27;LoaderType&#x27; },
+      },
+      {
+        title: &#x27;راننده&#x27;,
+        component: TruckAndDriverInformationFormComponent,
+        data: { insideTabType: &#x27;Driver&#x27; },
+      },
+    ],
+  },
+
+  [TabComponentKey.FactoriesAndFreightManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: &#x27;کارخانجات و مراکز تولید بار &#x27;,
+        component: FactoriesAndFreightFormComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.LADPlaceManagementService]: {
+    sharedSignal: false,
+    subTab: [
+      { title: &#x27;مبادی و مقاصد حمل بار&#x27;, component: LadPlacesFormComponent },
+    ],
+  },
+
+  [TabComponentKey.ProvinceAndCityManagement]: {
+    sharedSignal: false,
+    subTab: [{ title: &#x27;استان شهرها&#x27;, component: ProvinceAndCityFormComponent }],
+  },
+
+  [TabComponentKey.ProductTypesManagement]: {
+    sharedSignal: false,
+    subTab: [{ title: &#x27;کالاها&#x27;, component: ProductFormComponent }],
+  },
+
+  // [TabComponentKey.LoadCapacitorManagement]: {
+  //   sharedSignal: false,
+  //   subTab: [{ title: &#x27;مخزن بار&#x27;, component: LoadCapacitorFormComponent }],
+  // },
+
+  [TabComponentKey.LoaderTypeManagement]: {
+    sharedSignal: false,
+    subTab: [
+      { title: &#x27;بارگیرها&#x27;, component: LoaderTypeFormComponent },
+      {
+        title: &#x27;بارگیر-گروه و زیرگروه اعلام بار&#x27;,
+        component: LoaderTypeAnnouncementRelationFormComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.TravelTimeManagement]: {
+    sharedSignal: false,
+    subTab: [{ title: &#x27;مدت سفر&#x27;, component: TravelTimeFormComponent }],
+  },
+
+  [TabComponentKey.TariffsManagement]: {
+    sharedSignal: false,
+    subTab: [{ title: &#x27;تعرفه های حمل بار&#x27;, component: TariffsFormComponent }],
+  },
+
+  [TabComponentKey.AnnouncementManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: &#x27;گروه‌های اعلام بار&#x27;,
+        component: AnnouncementGroupFormComponent,
+      },
+      {
+        title: &#x27;زیر گروه‌های اعلام بار&#x27;,
+        component: AnnouncementSubGroupFormComponent,
+      },
+      {
+        title: &#x27;گروه و زیرگروه‌های اعلام بار&#x27;,
+        component: RelationOfAnnouncementGroupAndSubGroupComponent,
+      },
+      {
+        title: &#x27;گروه‌های اعلام بار، زیرگروه‌های اعلام بار و استان‌های مقصد&#x27;,
+        component: ProvinceAnnouncementRelationFormComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.SequentialTurnManagement]: {
+    sharedSignal: false,
+    subTab: [
+      { title: &#x27;صفوف نوبت&#x27;, component: SequentialTurnsFormComponent },
+      {
+        title: &#x27;صفوف نوبت و بارگیرها&#x27;,
+        component: RelationOfSequentialTurnToLoaderTypeFormComponent,
+      },
+      {
+        title: &#x27;صفوف نوبت و زیرگروه‌های اعلام بار&#x27;,
+        component: RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent,
+      },
+      {
+        title: &#x27;صفوف نوبت و هزینه های نوبت&#x27;,
+        component: SequentialTurnCostFormComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.TurnsManagement]: {
+    sharedSignal: false,
+    subTab: [
+      { title: &#x27;لیست نوبت‌ها&#x27;, component: TurnsListFormComponent },
+      { title: &#x27;نوبت بلادرنگ&#x27;, component: RealTimeTurnsFormComponent },
+      {
+        title: &#x27;نوبت اضطراری&#x27;,
+        component: EmergencyTurnsFormComponent,
+      },
+      {
+        title: &#x27;احیای نوبت رزرو&#x27;,
+        component: ResuscitateTurnsFormComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.TurnsRegisterManagement]: {
+    sharedSignal: false,
+    subTab: [
+      { title: &#x27;درخواست - صدورنوبت&#x27;, component: RegisterTurnFormComponent },
+    ],
+  },
+
+  [TabComponentKey.IssuedTurnManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: &#x27;لیست نوبت های صادر شده&#x27;,
+        component: IssuedTurnListFormComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.UserProfileManagement]: {
+    sharedSignal: false,
+    subTab: [
+      { title: &#x27;مدیریت پروفایل کاربر&#x27;, component: UserProfileFormComponent },
+    ],
+  },
+
+  [TabComponentKey.SmsWalletManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: &#x27;کیف پول&#x27;,
+        component: WalletPaymentFormComponent,
+        data: { walletType: signal(&#x27;SMS&#x27;) },
+      },
+      {
+        title: &#x27;تراکنش ها&#x27;,
+        component: WalletTransactionsTableComponent,
+        data: { walletType: signal(&#x27;SMS&#x27;) },
+      },
+      {
+        title: &#x27;سوابق شارژ&#x27;,
+        component: WalletPaymentRecordTableComponent,
+        data: { walletType: signal(&#x27;SMS&#x27;) },
+      },
+    ],
+  },
+
+  [TabComponentKey.UserWalletManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: &#x27;شارژ&#x27;,
+        component: WalletPaymentFormComponent,
+        data: { walletType: signal(&#x27;User&#x27;) },
+      },
+      {
+        title: &#x27;تراکنش ها&#x27;,
+        component: WalletTransactionsTableComponent,
+        data: { walletType: signal(&#x27;User&#x27;) },
+      },
+      {
+        title: &#x27;سوابق شارژ&#x27;,
+        component: WalletPaymentRecordTableComponent,
+        data: { walletType: signal(&#x27;User&#x27;) },
+      },
+    ],
+  },
+
+  [TabComponentKey.TruckWalletManagement]: {
+    sharedSignal: true,
+    subTab: [
+      {
+        title: &#x27;شارژ&#x27;,
+        component: TruckWalletPaymentFormComponent,
+      },
+      {
+        title: &#x27;تراکنش ها&#x27;,
+        component: WalletTransactionsTableComponent,
+        data: { walletType: signal(&#x27;Truck&#x27;) },
+      },
+      {
+        title: &#x27;سوابق شارژ&#x27;,
+        component: WalletPaymentRecordTableComponent,
+        data: { walletType: signal(&#x27;Truck&#x27;) },
+      },
+    ],
+  },
+
+  [TabComponentKey.TransportCompaniesWalletManagement]: {
+    sharedSignal: true,
+    subTab: [
+      {
+        title: &#x27;شارژ&#x27;,
+        component: TransportCompaniesWalletPaymentFormComponent,
+      },
+      {
+        title: &#x27;تراکنش ها&#x27;,
+        component: WalletTransactionsTableComponent,
+        data: { walletType: signal(&#x27;TransportCompony&#x27;) },
+      },
+      {
+        title: &#x27;سوابق شارژ&#x27;,
+        component: WalletPaymentRecordTableComponent,
+        data: { walletType: signal(&#x27;TransportCompony&#x27;) },
+      },
+    ],
+  },
+
+  [TabComponentKey.TruckerAssociationWalletManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: &#x27;شارژ&#x27;,
+        component: WalletPaymentFormComponent,
+        data: { walletType: signal(&#x27;TruckerAssociation&#x27;) },
+      },
+      {
+        title: &#x27;تراکنش ها&#x27;,
+        component: WalletTransactionsTableComponent,
+        data: { walletType: signal(&#x27;TruckerAssociation&#x27;) },
+      },
+      {
+        title: &#x27;سوابق شارژ&#x27;,
+        component: WalletPaymentRecordTableComponent,
+        data: { walletType: signal(&#x27;TruckerAssociation&#x27;) },
+      },
+    ],
+  },
+
+  [TabComponentKey.TransportCompaniesManagement]: {
+    sharedSignal: false,
+    subTab: [
+      { title: &#x27;شرکت ها حمل نقل&#x27;, component: TransportCompaniesFormComponent },
+    ],
+  },
+
+  [TabComponentKey.UserChargingFunctions]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: &#x27;عملکرد شارژ کاربر&#x27;,
+        component: UserChargingFunctionFormComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.DriverLoadManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: &#x27;مخزن بار&#x27;,
+        component: LoadCapacitorFormComponent,
+      },
+      {
+        title: &#x27;اولویت بندی تخصیص بار&#x27;,
+        component: LoadAllocationPriorityComponent,
+      },
+      {
+        title: &#x27;سوابق تخصیص بار&#x27;,
+        component: DriverLoadAllocationFormComponent,
+      },
+      {
+        title: &#x27;مجوز های صادر شده&#x27;,
+        component: DriverLoadPermissionsFormComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.TransportCompaniesLoadManagement]: {
+    sharedSignal: true,
+    subTab: [
+      {
+        title: &#x27;اعلام بار&#x27;,
+        component: LoadsAnnouncementFormComponent,
+        data: { loadType: LoadListType.TRANSPORT_COMPANY },
+      },
+      {
+        title: &#x27;لیست بار&#x27;,
+        component: LoadsListFormComponent,
+        data: { loadType: LoadListType.TRANSPORT_COMPANY },
+      },
+      {
+        title: &#x27;تخصیص بار&#x27;,
+        component: LoadAllocationFormComponent,
+        data: { loadType: LoadListType.TRANSPORT_COMPANY },
+      },
+      {
+        title: &#x27;مجوز های صادر شده&#x27;,
+        component: LoadPermissionsFormComponent,
+        data: { loadType: LoadListType.TRANSPORT_COMPANY },
+      },
+    ],
+  },
+
+  [TabComponentKey.FactoriesAndFreightLoadManagement]: {
+    sharedSignal: true,
+    subTab: [
+      {
+        title: &#x27;اعلام بار&#x27;,
+        component: LoadsAnnouncementFormComponent,
+        data: { loadType: LoadListType.FACTORIES_PRODUCTION_CENTERS },
+      },
+      {
+        title: &#x27;لیست بار&#x27;,
+        component: LoadsListFormComponent,
+        data: { loadType: LoadListType.FACTORIES_PRODUCTION_CENTERS },
+      },
+      {
+        title: &#x27;مجوز های صادر شده&#x27;,
+        component: LoadPermissionsFormComponent,
+        data: { loadType: LoadListType.FACTORIES_PRODUCTION_CENTERS },
+      },
+    ],
+  },
+
+  [TabComponentKey.AdminLoadManagement]: {
+    sharedSignal: true,
+    subTab: [
+      {
+        title: &#x27;اعلام بار&#x27;,
+        component: LoadsAnnouncementFormComponent,
+        data: { loadType: LoadListType.ADMIN },
+      },
+      {
+        title: &#x27;لیست بار&#x27;,
+        component: LoadsListFormComponent,
+        data: { loadType: LoadListType.ADMIN },
+      },
+      {
+        title: &#x27;ترکنش های بار&#x27;,
+        component: LoadAccountingFormComponent,
+        data: { loadType: LoadListType.ADMIN },
+      },
+      {
+        title: &#x27;تخصیص بار&#x27;,
+        component: LoadAllocationFormComponent,
+        data: { loadType: LoadListType.ADMIN },
+      },
+      {
+        title: &#x27;مجوز های صادر شده&#x27;,
+        component: AdminLoadPermissionsFormComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.TicketManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: &#x27;تیکت&#x27;,
+        component: TicketListsFormComponent,
+      },
+    ],
+  },
+  [TabComponentKey.RegisterAndRecordTrafficsManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: &#x27;ثبت تردد&#x27;,
+        component: TrafficEntriesFormComponent,
+      },
+      {
+        title: &#x27;سوابق تردد&#x27;,
+        component: ParkingTrafficRecordsFormComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.TrafficsAndParkingTariffManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: &#x27;هزینه‌های تردد و توقف پارکینگ&#x27;,
+        component: TrafficAndParkingTariffFormComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.TrafficInitialRegistrationManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: &#x27;ثبت و ویرایش انواع کارت تردد&#x27;,
+        component: TrafficInitialRegistrationFormComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.RegisterAndEditTrafficsCardManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: &#x27;ثبت و ویرایش انواع کارت تردد&#x27;,
+        component: TrafficCardTypeFormComponent,
+      },
+    ],
+  },
+  [TabComponentKey.LoadAnnouncementConfigManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: &#x27;پیکربندی اعلام بار&#x27;,
+        component: LoadAnnouncementConfigFormComponent,
+      },
+    ],
+  },
+  [TabComponentKey.GeneralConfigurationManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: &#x27;پیکربندی عمومی سیستم&#x27;,
+        component: GeneralConfigurationFormComponent,
+      },
+    ],
+  },
+  [TabComponentKey.DeviceManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: &#x27;مدیریت دیپایس&#x27;,
+        component: DeviceManagementFormComponent,
+      },
+    ],
+  },
+  [TabComponentKey.EquipmentDeviceManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: &#x27;پیکربندی تجهیزات و دیوایس ها&#x27;,
+        component: EquipmentDeviceConfigFormComponent,
+      },
+    ],
+  },
+
+  [TabComponentKey.TPTParametersManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: &#x27;پارامترهای موثر&#x27;,
+        component: TPTParametersFormComponent,
+      },
+      {
+        title: &#x27;پارامترهای موثر - گروه و زیرگروه اعلام بار&#x27;,
+        component: TPTParametersAnnouncementRelationFormComponent,
+      },
+    ],
+  },
+  [TabComponentKey.LoadConditionManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: &#x27;شرایط مشاهد بار&#x27;,
+        component: LoadViewConditionFormComponent,
+      },
+      {
+        title: &#x27;شرایط انتخاب بار&#x27;,
+        component: LoadAllocationConditionFormComponent,
+      },
+    ],
+  },
+  [TabComponentKey.LoadPermissionsTransportManagement]: {
+    sharedSignal: false,
+    subTab: [
+      {
+        title: &#x27;مجوزهای شرکتهای حمل و نقل&#x27;,
+        component: TransportLoadPermissionsFormComponent,
+      },
+    ],
+  },
+};
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'TabConfig.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
