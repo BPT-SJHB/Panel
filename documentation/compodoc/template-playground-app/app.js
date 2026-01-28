@@ -144,7 +144,7 @@ class TemplatePlayground {
                                 [/\{\{\{.*?\}\}\}/, 'string.html'],
                                 [/\{\{.*?\}\}/, 'keyword'],
                                 [/<[^>]+>/, 'tag'],
-                                [/<!--.*?-->/, 'comment'],
+                                [/<!--[\s\S]*?-->/, 'comment'],
                                 [/"[^"]*"/, 'string'],
                                 [/'[^']*'/, 'string'],
                                 [/[{}[\]()]/, 'delimiter.bracket'],
