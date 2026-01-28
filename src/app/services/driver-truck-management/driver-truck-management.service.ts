@@ -72,6 +72,8 @@ export class Driver_TruckManagementService {
     }
 
     return response;
+
+    //#endregion
   }
 
   public async GetDriverInfoForSoftwareUser(): Promise<

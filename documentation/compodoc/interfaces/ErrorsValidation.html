@@ -1,0 +1,1370 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bpt-sjhb-panel documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">bpt-sjhb-panel documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  ErrorsValidation</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/constants/validation-schema.ts</code>
+        </p>
+
+
+
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                            <code><a href="https://angular.io/api/forms/ValidationErrors" target="_blank" >ValidationErrors</a></code>
+            </p>
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#email" 
+>
+                                            email
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#exactLength" 
+>
+                                            exactLength
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#max" 
+>
+                                            max
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#maxlength" 
+>
+                                            maxlength
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#min" 
+>
+                                            min
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#minlength" 
+>
+                                            minlength
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#passwordInvalidChar" 
+>
+                                            passwordInvalidChar
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#passwordLowercase" 
+>
+                                            passwordLowercase
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#passwordMinLength" 
+>
+                                            passwordMinLength
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#passwordMismatch" 
+>
+                                            passwordMismatch
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#passwordNumber" 
+>
+                                            passwordNumber
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#passwordSymbol" 
+>
+                                            passwordSymbol
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#passwordUppercase" 
+>
+                                            passwordUppercase
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#pattern" 
+>
+                                            pattern
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#required" 
+>
+                                            required
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="email"></a>
+                                        <span class="name "><b>email</b>
+                                            <a href="#email">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>email:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="exactLength"></a>
+                                        <span class="name "><b>exactLength</b>
+                                            <a href="#exactLength">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>exactLength:     <code>literal type</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>literal type</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="max"></a>
+                                        <span class="name "><b>max</b>
+                                            <a href="#max">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>max:     <code>literal type</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>literal type</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="maxlength"></a>
+                                        <span class="name "><b>maxlength</b>
+                                            <a href="#maxlength">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>maxlength:     <code>literal type</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>literal type</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="min"></a>
+                                        <span class="name "><b>min</b>
+                                            <a href="#min">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>min:     <code>literal type</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>literal type</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="minlength"></a>
+                                        <span class="name "><b>minlength</b>
+                                            <a href="#minlength">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>minlength:     <code>literal type</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>literal type</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="passwordInvalidChar"></a>
+                                        <span class="name "><b>passwordInvalidChar</b>
+                                            <a href="#passwordInvalidChar">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>passwordInvalidChar:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="passwordLowercase"></a>
+                                        <span class="name "><b>passwordLowercase</b>
+                                            <a href="#passwordLowercase">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>passwordLowercase:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="passwordMinLength"></a>
+                                        <span class="name "><b>passwordMinLength</b>
+                                            <a href="#passwordMinLength">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>passwordMinLength:     <code>literal type</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>literal type</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="passwordMismatch"></a>
+                                        <span class="name "><b>passwordMismatch</b>
+                                            <a href="#passwordMismatch">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>passwordMismatch:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="passwordNumber"></a>
+                                        <span class="name "><b>passwordNumber</b>
+                                            <a href="#passwordNumber">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>passwordNumber:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="passwordSymbol"></a>
+                                        <span class="name "><b>passwordSymbol</b>
+                                            <a href="#passwordSymbol">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>passwordSymbol:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="passwordUppercase"></a>
+                                        <span class="name "><b>passwordUppercase</b>
+                                            <a href="#passwordUppercase">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>passwordUppercase:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="pattern"></a>
+                                        <span class="name "><b>pattern</b>
+                                            <a href="#pattern">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>pattern:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="required"></a>
+                                        <span class="name "><b>required</b>
+                                            <a href="#required">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>required:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  AbstractControl,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from &#x27;@angular/forms&#x27;;
+
+export interface ErrorsValidation extends ValidationErrors {
+  required?: boolean;
+  email?: boolean;
+  pattern?: boolean;
+  minlength?: { requiredLength: number; actualLength: number };
+  maxlength?: { requiredLength: number; actualLength: number };
+  min?: { min: number; actual: number };
+  max?: { max: number; actual: number };
+  exactLength?: { requiredLength: number; actualLength: number };
+
+  passwordMinLength?: { requiredLength: number; actualLength: number };
+  passwordUppercase?: boolean;
+  passwordLowercase?: boolean;
+  passwordNumber?: boolean;
+  passwordSymbol?: boolean;
+  passwordInvalidChar?: boolean;
+  passwordMismatch?: boolean;
+}
+
+export function getDefaultErrorMessage(
+  name: string,
+  e: ErrorsValidation
+): string | null {
+  if (e.required) return &#x60;${name} الزامی است&#x60;;
+
+  if (e.passwordMinLength) return &#x60;${name} باید حداقل ۸ کاراکتر باشد&#x60;;
+
+  if (e.passwordUppercase) return &#x60;${name} باید حداقل یک حرف بزرگ داشته باشد&#x60;;
+
+  if (e.passwordLowercase) return &#x60;${name} باید حداقل یک حرف کوچک داشته باشد&#x60;;
+
+  if (e.passwordNumber) return &#x60;${name} باید حداقل یک عدد داشته باشد&#x60;;
+
+  if (e.passwordSymbol)
+    return &#x60;${name} باید حداقل یک کاراکتر ویژه از _ - . داشته باشد&#x60;;
+
+  if (e.passwordInvalidChar)
+    return &#x60;${name} فقط می‌تواند شامل حروف، عدد و کاراکترهای _ - . باشد&#x60;;
+
+  if (e.passwordMismatch) return &#x60;رمز عبور و تکرار آن با هم مطابقت ندارند&#x60;;
+
+  if (e.email) return &#x60;فرمت ${name} نامعتبر است&#x60;;
+
+  if (e.exactLength) {
+    const ex &#x3D; e.exactLength;
+    return &#x60;${name} باید دقیقا ${ex.requiredLength} کاراکتر باشد&#x60;;
+  }
+
+  if (e.minlength)
+    return &#x60;${name} باید حداقل ${e.minlength.requiredLength} کاراکتر باشد&#x60;;
+
+  if (e.maxlength)
+    return &#x60;${name} باید حداکثر ${e.maxlength.requiredLength} کاراکتر باشد&#x60;;
+
+  if (e.pattern) return &#x60;فرمت ${name} معتبر نیست&#x60;;
+  if (e.min) return &#x60;${name} نمی‌تواند کمتر از مقدار مجاز باشد&#x60;;
+  if (e.max) return &#x60;${name} نمی‌توان بیشتر از مقدار مجاز باشد&#x60;;
+
+  return null;
+}
+
+export const ValidationSchema &#x3D; {
+  mobile: {
+    name: &#x27;شماره موبایل&#x27;,
+    validators: [
+      Validators.required,
+      exactLengthValidator(11),
+      Validators.pattern(
+        /^09(1[0-9]|2[0-9]|3[0-9]|9[0-9])-?[0-9]{3}-?[0-9]{4}$/
+      ),
+    ],
+  },
+  mobileOrEmpty: {
+    name: &#x27;شماره موبایل&#x27;,
+    validators: [
+      Validators.pattern(/09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}/),
+    ],
+  },
+  nationalId: {
+    name: &#x27;کد ملی&#x27;,
+    validators: [Validators.required, Validators.pattern(/^\d{10}$/)],
+  },
+  email: {
+    name: &#x27;ایمیل&#x27;,
+    validators: [Validators.required, Validators.email],
+  },
+  emailOrEmpty: {
+    name: &#x27;ایمیل&#x27;,
+    validators: [Validators.email],
+  },
+  fullName: {
+    name: &#x27;نام کاربر&#x27;,
+    validators: [Validators.required, Validators.minLength(3)],
+  },
+  fullNameOrEmpty: {
+    name: &#x27;نام کاربر&#x27;,
+    validators: [Validators.minLength(3)],
+  },
+  username: {
+    name: &#x27;نام کاربری&#x27;,
+    validators: [Validators.required, Validators.minLength(5)],
+  },
+  password: {
+    name: &#x27;رمز عبور&#x27;,
+    validators: [Validators.required, Validators.minLength(1)],
+  },
+  passwordCreation: {
+    name: &#x27;رمز عبور جدید&#x27;,
+    validators: [Validators.required, strongPasswordValidgtor()],
+  },
+  confirmPassword: {
+    name: &#x27;تکرار رمز&#x27;,
+    validators: [Validators.required],
+  },
+  captcha: {
+    name: &#x27;کد امنیتی&#x27;,
+    validators: [Validators.required],
+  },
+  id: {
+    name: &#x27;شناسه&#x27;,
+    validators: [Validators.required],
+  },
+  driverId: {
+    name: &#x27;شناسه راننده&#x27;,
+    validators: [Validators.required],
+  },
+  telephone: {
+    name: &#x27;شماره تلفن&#x27;,
+    validators: [Validators.required, Validators.pattern(/^0\d{10}$/)],
+  },
+  telephoneOrEmpty: {
+    name: &#x27;شماره تلفن&#x27;,
+    validators: [Validators.pattern(/^0\d{10}$/)],
+  },
+  address: {
+    name: &#x27;آدرس&#x27;,
+    validators: [Validators.required, Validators.minLength(5)],
+  },
+  title: {
+    name: &#x27;عنوان&#x27;,
+    validators: [Validators.required],
+  },
+  keyword: {
+    name: &#x27;کلمه کلیدی&#x27;,
+    validators: [Validators.required],
+  },
+  managerName: {
+    name: &#x27;نام مدیر&#x27;,
+    validators: [Validators.required, Validators.minLength(3)],
+  },
+  fatherName: {
+    name: &#x27;نام پدر&#x27;,
+    validators: [Validators.required, Validators.minLength(3)],
+  },
+  wallet: {
+    name: &#x27;کیف پول&#x27;,
+    validators: [Validators.required],
+  },
+  walletId: {
+    name: &#x27;شناسه کیف پول&#x27;,
+    validators: [Validators.required],
+  },
+  licenseNumber: {
+    name: &#x27;شماره گواهینامه&#x27;,
+    validators: [
+      Validators.required,
+      Validators.minLength(10),
+      Validators.pattern(/^\d{10}$/),
+    ],
+  },
+  serialNumber: {
+    name: &#x27;شماره سریال&#x27;,
+    validators: [Validators.required, Validators.pattern(/^\d+$/)],
+  },
+  smartCard: {
+    name: &#x27;شماره هوشمند&#x27;,
+    validators: [Validators.required, Validators.pattern(/^\d{7}$/)],
+  },
+  truckId: {
+    name: &#x27;شناسه ناوگان&#x27;,
+    validators: [Validators.required],
+  },
+  licensePlateNumber: {
+    name: &#x27;شماره پلاک&#x27;,
+    validators: [Validators.required],
+  },
+  turn: {
+    name: &#x27;نوبت&#x27;,
+    validators: [Validators.required],
+  },
+  turnId: {
+    name: &#x27;شناسه نوبت&#x27;,
+    validators: [Validators.required],
+  },
+  smsActive: {
+    name: &#x27;فعال‌سازی پیامک&#x27;,
+    validators: [Validators.required],
+  },
+  loaderType: {
+    name: &#x27;نوع بارگیر&#x27;,
+    validators: [Validators.required],
+  },
+  nativeness: {
+    name: &#x27;بومی گری ناوگان&#x27;,
+    validators: [Validators.required],
+  },
+  truckNativenessExpiredDate: {
+    name: &#x27;تاریخ انقضای بومی‌گری&#x27;,
+    validators: [
+      Validators.required,
+      Validators.pattern(
+        /^(13|14)\d{2}\/(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])$/
+      ),
+    ],
+  },
+  announceDate: {
+    name: &#x27;تاریخ ثبت بار&#x27;,
+    validators: [Validators.required],
+  },
+  loadStatus: {
+    name: &#x27;وضعیت بار&#x27;,
+    validators: [Validators.required],
+  },
+  good: {
+    name: &#x27;نوع بار&#x27;,
+    validators: [Validators.required],
+  },
+  loadAnnouncementGroup: {
+    name: &#x27;گروه اعلام بار&#x27;,
+    validators: [Validators.required],
+  },
+  loadAnnouncementSubGroup: {
+    name: &#x27;زیرگروه اعلام بار&#x27;,
+    validators: [Validators.required],
+  },
+  sourceCity: {
+    name: &#x27;شهر مبدا&#x27;,
+    validators: [Validators.required],
+  },
+  targetCity: {
+    name: &#x27;شهر مقصد&#x27;,
+    validators: [Validators.required],
+  },
+  loadingPlace: {
+    name: &#x27;محل بارگیری&#x27;,
+    validators: [Validators.required],
+  },
+  dischargingPlace: {
+    name: &#x27;محل تخلیه&#x27;,
+    validators: [Validators.required],
+  },
+  transportCompany: {
+    name: &#x27;شرکت حمل و نقل&#x27;,
+    validators: [Validators.required],
+  },
+  totalNumber: {
+    name: &#x27;تعداد&#x27;,
+    validators: [Validators.required, Validators.min(1)],
+  },
+  tonaj: {
+    name: &#x27;تناژ&#x27;,
+    validators: [Validators.required, Validators.min(0.1)],
+  },
+  recipient: {
+    name: &#x27;گیرنده&#x27;,
+    validators: [Validators.required],
+  },
+  tariff: {
+    name: &#x27;تعرفه&#x27;,
+    validators: [Validators.required, Validators.min(1)],
+  },
+  description: {
+    name: &#x27;توضیحات&#x27;,
+    validators: [Validators.required, Validators.minLength(3)],
+  },
+  price: {
+    name: &#x27;مبلغ شارژ&#x27;,
+    validators: [
+      Validators.required,
+      Validators.pattern(/^[0-9]+$/),
+      Validators.min(1000),
+      // Validators.max(300000)
+    ],
+  },
+  parentage: {
+    name: &#x27;درصد&#x27;,
+    validators: [
+      Validators.required,
+      Validators.min(0.1),
+      Validators.max(100), // optional: to cap it at 100%
+      Validators.pattern(/^\d+(\.\d{1,2})?$/),
+    ],
+  },
+
+  optCode: {
+    name: &#x27;رمز یکبار مصرف&#x27;,
+    validators: [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.maxLength(6),
+    ],
+  },
+  ticketTrackCode: {
+    name: &#x27;شماره پیگیری&#x27;,
+    validators: [
+      exactLengthValidator(8),
+      Validators.pattern(/^[A-Za-z0-9]{8}$/),
+    ],
+  },
+
+  trafficCard: {
+    name: &#x27;شناسه کارت تردد&#x27;,
+    validators: [Validators.required],
+  },
+
+  EntryBaseCost: {
+    name: &#x27;هزینه پایه ورود&#x27;,
+    validators: [Validators.required, Validators.min(1)],
+  },
+  NoCostStoppageDuration: {
+    name: &#x27;مدت زمان توقف بدون هزینه&#x27;,
+    validators: [Validators.required, Validators.min(1)],
+  },
+  ExcessStoppageDuration: {
+    name: &#x27;مدت زمان توقف اضافی&#x27;,
+    validators: [Validators.required, Validators.min(1)],
+  },
+  ExcessStoppageCost: {
+    name: &#x27;هزینه توقف اضافی&#x27;,
+    validators: [Validators.required, Validators.min(1)],
+  },
+  URL: {
+    name: &#x27;آدرس (URL)&#x27;,
+    validators: [
+      Validators.required,
+
+      Validators.pattern(
+        /^(https?:\/\/)?((([a-z0-9-]+\.)+[a-z]{2,})|(\d{1,3}(\.\d{1,3}){3}))(:\d{1,5})?(\/\S*)?$/i
+      ),
+    ],
+  },
+
+  deviceLocation: {
+    name: &#x27;محل قرارگیری دیوایس&#x27;,
+    validators: [Validators.required],
+  },
+};
+
+export type ValidationField &#x3D; keyof typeof ValidationSchema;
+
+/**
+ * Exact length validator
+ */
+export function exactLengthValidator(length: number): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+    if (!control.value) return null;
+
+    const valueLength &#x3D; control.value.toString().length;
+    return valueLength &#x3D;&#x3D;&#x3D; length
+      ? null
+      : { exactLength: { requiredLength: length, actualLength: valueLength } };
+  };
+}
+
+/**
+ * Strong password validator with detailed errors
+ */
+export function strongPasswordValidgtor(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+    if (!control.value) return null;
+
+    const value &#x3D; control.value.toString();
+    const errors: ValidationErrors &#x3D; {};
+
+    if (value.length &lt; 8)
+      errors[&#x27;passwordMinLength&#x27;] &#x3D; {
+        requiredLength: 8,
+        actualLength: value.length,
+      };
+    if (!/[A-Z]/.test(value)) errors[&#x27;passwordUppercase&#x27;] &#x3D; true;
+    if (!/[a-z]/.test(value)) errors[&#x27;passwordLowercase&#x27;] &#x3D; true;
+    if (!/\d/.test(value)) errors[&#x27;passwordNumber&#x27;] &#x3D; true;
+    if (!/[_\-.]/.test(value)) errors[&#x27;passwordSymbol&#x27;] &#x3D; true;
+    if (!/^[A-Za-z0-9_\-.]+$/.test(value)) errors[&#x27;passwordInvalidChar&#x27;] &#x3D; true;
+
+    return Object.keys(errors).length ? errors : null;
+  };
+}
+
+/**
+ * Validator to check if two fields match
+ * @param passwordField name of the original password control
+ * @param confirmField name of the confirm password control
+ */
+
+export function confirmPasswordValidator(
+  passwordKey: string,
+  confirmKey: string
+): ValidatorFn {
+  return (group: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+    const password &#x3D; group.get(passwordKey);
+    const confirm &#x3D; group.get(confirmKey);
+
+    if (!password || !confirm) return null;
+
+    if (password.value !&#x3D;&#x3D; confirm.value) {
+      confirm.setErrors({
+        ...confirm.errors,
+        passwordMismatch: true,
+      });
+
+      return null;
+    }
+
+    // clean up when it matches
+    if (confirm.errors?.[&#x27;passwordMismatch&#x27;]) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { passwordMismatch: _, ...rest } &#x3D; confirm.errors;
+      confirm.setErrors(Object.keys(rest).length ? rest : null);
+    }
+
+    return null;
+  };
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'ErrorsValidation.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

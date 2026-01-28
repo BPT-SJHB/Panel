@@ -17,6 +17,7 @@ import { TruckInfo } from '../driver-truck-management/model/truck-info.model';
 import { WalletUserChargingFunction } from './model/wallet-user-charging-function.model';
 import { mockWalletUserChargingFunctions } from './mock/wallet-user-charging-function.mock';
 import { TransportCompany } from '../transport-company-management/model/transport-company-info.model';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -32,19 +33,11 @@ export class WalletManagementService {
     };
     //#endregion
 
-    //#region Request
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       Wallet
     >(apiUrl, bodyValue, mockWallet);
-    //#endregion
-
-    //#region Return
-    return {
-      success: response.success,
-      data: response.data,
-      error: response.error,
-    };
     //#endregion
   }
 

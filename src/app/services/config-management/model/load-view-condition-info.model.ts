@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 export interface LoadViewConditionInfo {
   LoadViewConditionId: number;
   AnnouncementId: number;
@@ -13,6 +15,22 @@ export interface LoadViewConditionInfo {
   RequesterId: number;
   RequesterTitle: string;
 }
+
+export const zodLoadViewConditionInfo = z.object({
+  LoadViewConditionId: z.number(),
+  AnnouncementId: z.number(),
+  AnnouncementTitle: z.string(),
+  AnnouncementSGId: z.number(),
+  AnnouncementSGTitle: z.string(),
+  SequentialTurnId: z.number(),
+  SequentialTurnTitle: z.string(),
+  TruckNativenessTypeId: z.number(),
+  TruckNativenessTypeTitle: z.string(),
+  LoadStatusId: z.number(),
+  LoadStatusTitle: z.string(),
+  RequesterId: z.number(),
+  RequesterTitle: z.string(),
+});
 
 export type RegisterLoadViewConditionInfo = Pick<
   LoadViewConditionInfo,

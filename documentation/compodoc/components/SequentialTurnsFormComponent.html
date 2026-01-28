@@ -1,0 +1,2689 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bpt-sjhb-panel documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">bpt-sjhb-panel documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  SequentialTurnsFormComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Extends</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="../components/BaseLoading.html" target="_self" >BaseLoading</a></code>
+    </p>
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                            <code>ConfirmationService</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-sequential-turns-form</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>ButtonModule</code>
+                                <code><a href="../components/SearchInputComponent.html" target="_self" >SearchInputComponent</a></code>
+                                <code><a href="../components/TableComponent.html" target="_self" >TableComponent</a></code>
+                            <code>ConfirmDialogModule</code>
+                            <code>Dialog</code>
+                                <code><a href="../components/TextInputComponent.html" target="_self" >TextInputComponent</a></code>
+                                <code><a href="../components/ToggleSwitchInputComponent.html" target="_self" >ToggleSwitchInputComponent</a></code>
+                                <code><a href="https://angular.io/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                                <code><a href="../components/ButtonComponent.html" target="_self" >ButtonComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./sequential-turns-form.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./sequential-turns-form.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#appTitle" >appTitle</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#columns" >columns</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#confirmService" >confirmService</a>
+                            </li>
+                            <li>
+                                <a href="#displaySequentialTurns" >displaySequentialTurns</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <a href="#filterSequentialTurnGroup" >filterSequentialTurnGroup</a>
+                            </li>
+                            <li>
+                                <a href="#formDialogVisible" >formDialogVisible</a>
+                            </li>
+                            <li>
+                                <a href="#headerTitle" >headerTitle</a>
+                            </li>
+                            <li>
+                                <a href="#searchSequentialTurn" >searchSequentialTurn</a>
+                            </li>
+                            <li>
+                                <a href="#sequentialTurnForm" >sequentialTurnForm</a>
+                            </li>
+                            <li>
+                                <a href="#sequentialTurnFormMode" >sequentialTurnFormMode</a>
+                            </li>
+                            <li>
+                                <a href="#sequentialTurns" >sequentialTurns</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#sequentialTurnsService" >sequentialTurnsService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#tableUi" >tableUi</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#activeRequests" >activeRequests</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#destroy$" >destroy$</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#loadingService" >loadingService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#toast" >toast</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#deleteSequentialTurn" >deleteSequentialTurn</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#editSequentialTurn" >editSequentialTurn</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#extractSequentialForm" >extractSequentialForm</a>
+                            </li>
+                            <li>
+                                <a href="#handleSearch" >handleSearch</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#initialize" >initialize</a>
+                            </li>
+                            <li>
+                                <a href="#isFormEditable" >isFormEditable</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#loadSequentialTurns" >loadSequentialTurns</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onCloseDialog" >onCloseDialog</a>
+                            </li>
+                            <li>
+                                <a href="#onDelete" >onDelete</a>
+                            </li>
+                            <li>
+                                <a href="#onEdit" >onEdit</a>
+                            </li>
+                            <li>
+                                <a href="#onNew" >onNew</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#populateSequentialForm" >populateSequentialForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#registerOrEdit" >registerOrEdit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#registerSequentialTurn" >registerSequentialTurn</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#resetSequentialTurnForm" >resetSequentialTurnForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#endLoading" >endLoading</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#startLoading" >startLoading</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#withLoading" >withLoading</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#sequentialTurnId" >sequentialTurnId</a>
+                                </li>
+                                <li>
+                                    <a href="#sequentialTurnTitle" >sequentialTurnTitle</a>
+                                </li>
+                                <li>
+                                    <a href="#sequentialTurnKeyword" >sequentialTurnKeyword</a>
+                                </li>
+                                <li>
+                                    <a href="#sequentialTurnStatus" >sequentialTurnStatus</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteSequentialTurn"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>deleteSequentialTurn</b></span>
+                        <a href="#deleteSequentialTurn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteSequentialTurn(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="235"
+                                    class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:235</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editSequentialTurn"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>editSequentialTurn</b></span>
+                        <a href="#editSequentialTurn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>editSequentialTurn()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="222"
+                                    class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:222</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="extractSequentialForm"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>extractSequentialForm</b></span>
+                        <a href="#extractSequentialForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>extractSequentialForm()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="199"
+                                    class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:199</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/SequentialTurn.html" target="_self" >SequentialTurn</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleSearch"></a>
+                    <span class="name">
+                        <span ><b>handleSearch</b></span>
+                        <a href="#handleSearch"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleSearch(results: SequentialTurnTableRow[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="136"
+                                    class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:136</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>results</td>
+                                            <td>
+                                                        <code>SequentialTurnTableRow[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initialize"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>initialize</b></span>
+                        <a href="#initialize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>initialize()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="117"
+                                    class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:117</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isFormEditable"></a>
+                    <span class="name">
+                        <span ><b>isFormEditable</b></span>
+                        <a href="#isFormEditable"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isFormEditable()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="174"
+                                    class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:174</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadSequentialTurns"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>loadSequentialTurns</b></span>
+                        <a href="#loadSequentialTurns"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadSequentialTurns()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="123"
+                                    class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:123</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Inherited from         <code><a href="../components/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../components/BaseLoading.html#source" target="_self" >BaseLoading:113</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onCloseDialog"></a>
+                    <span class="name">
+                        <span ><b>onCloseDialog</b></span>
+                        <a href="#onCloseDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onCloseDialog()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="170"
+                                    class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:170</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDelete"></a>
+                    <span class="name">
+                        <span ><b>onDelete</b></span>
+                        <a href="#onDelete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onDelete(row: <a href="../interfaces/SequentialTurn.html" target="_self">SequentialTurn</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="143"
+                                    class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:143</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>row</td>
+                                            <td>
+                                                            <code><a href="../interfaces/SequentialTurn.html" target="_self" >SequentialTurn</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onEdit"></a>
+                    <span class="name">
+                        <span ><b>onEdit</b></span>
+                        <a href="#onEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onEdit(row: <a href="../interfaces/SequentialTurn.html" target="_self">SequentialTurn</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="156"
+                                    class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:156</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>row</td>
+                                            <td>
+                                                            <code><a href="../interfaces/SequentialTurn.html" target="_self" >SequentialTurn</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onNew"></a>
+                    <span class="name">
+                        <span ><b>onNew</b></span>
+                        <a href="#onNew"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onNew()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="163"
+                                    class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:163</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="populateSequentialForm"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>populateSequentialForm</b></span>
+                        <a href="#populateSequentialForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>populateSequentialForm(data: <a href="../interfaces/SequentialTurn.html" target="_self">SequentialTurn</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="190"
+                                    class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:190</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                            <code><a href="../interfaces/SequentialTurn.html" target="_self" >SequentialTurn</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registerOrEdit"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>registerOrEdit</b></span>
+                        <a href="#registerOrEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>registerOrEdit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="178"
+                                    class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:178</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registerSequentialTurn"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>registerSequentialTurn</b></span>
+                        <a href="#registerSequentialTurn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>registerSequentialTurn()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="208"
+                                    class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:208</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetSequentialTurnForm"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>resetSequentialTurnForm</b></span>
+                        <a href="#resetSequentialTurnForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>resetSequentialTurnForm()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="242"
+                                    class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:242</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="endLoading"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>endLoading</b></span>
+                        <a href="#endLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>endLoading()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Inherited from         <code><a href="../components/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../components/BaseLoading.html#source" target="_self" >BaseLoading:50</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Inherited from         <code><a href="../components/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../components/BaseLoading.html#source" target="_self" >BaseLoading:23</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="startLoading"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>startLoading</b></span>
+                        <a href="#startLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>startLoading()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Inherited from         <code><a href="../components/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../components/BaseLoading.html#source" target="_self" >BaseLoading:41</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="withLoading"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>withLoading</b></span>
+                        <a href="#withLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>withLoading(fn: () => void)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Inherited from         <code><a href="../components/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../components/BaseLoading.html#source" target="_self" >BaseLoading:32</a></code>
+</div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Type parameters :</b>
+                            <ul class="type-parameters">
+                                    <li>T</li>
+                            </ul>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><h1>================================
+ Utility wrapper to centralize loading toggling
+ Handles multiple parallel promises correctly</h1>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>fn</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;T | undefined&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="appTitle"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>appTitle</b></span>
+                        <a href="#appTitle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>AppTitles</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:70</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="columns"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>columns</b></span>
+                        <a href="#columns"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>TableColumn&lt;SequentialTurnTableRow&gt;[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {
+      field: &#x27;SeqTurnId&#x27;,
+      header: &#x27;شناسه&#x27;,
+    },
+    {
+      field: &#x27;SeqTurnTitle&#x27;,
+      header: &#x27;صف نوبت&#x27;,
+    },
+    {
+      field: &#x27;SeqTurnKeyWord&#x27;,
+      header: &#x27;کلمه کلیدی&#x27;,
+      class: &#x27;font-bold&#x27;,
+    },
+    {
+      ...editCell.config,
+      field: &#x27;edit&#x27;,
+      onAction: (row: SequentialTurn) &#x3D;&gt; this.onEdit(row),
+    },
+    {
+      ...deleteCell.config,
+      field: &#x27;delete&#x27;,
+      onAction: (row: SequentialTurn) &#x3D;&gt; this.onDelete(row),
+    },
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:87</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>confirmService</b></span>
+                        <a href="#confirmService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AppConfirmService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:68</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="displaySequentialTurns"></a>
+                    <span class="name">
+                        <span ><b>displaySequentialTurns</b></span>
+                        <a href="#displaySequentialTurns"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>SequentialTurnTableRow[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:82</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filterSequentialTurnGroup"></a>
+                    <span class="name">
+                        <span ><b>filterSequentialTurnGroup</b></span>
+                        <a href="#filterSequentialTurnGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="140" class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:140</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formDialogVisible"></a>
+                    <span class="name">
+                        <span ><b>formDialogVisible</b></span>
+                        <a href="#formDialogVisible"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:85</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="headerTitle"></a>
+                    <span class="name">
+                        <span ><b>headerTitle</b></span>
+                        <a href="#headerTitle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:84</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchSequentialTurn"></a>
+                    <span class="name">
+                        <span ><b>searchSequentialTurn</b></span>
+                        <a href="#searchSequentialTurn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormControl&lt;string&gt;(&#x27;&#x27;, Validators.required)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sequentialTurnForm"></a>
+                    <span class="name">
+                        <span ><b>sequentialTurnForm</b></span>
+                        <a href="#sequentialTurnForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.fb.group({
+    id: this.fb.control&lt;number | null&gt;(null),
+    title: [&#x27;&#x27;, ValidationSchema.title],
+    keyword: [&#x27;&#x27;, ValidationSchema.keyword],
+    status: [true, Validators.required],
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:72</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sequentialTurnFormMode"></a>
+                    <span class="name">
+                        <span ><b>sequentialTurnFormMode</b></span>
+                        <a href="#sequentialTurnFormMode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>FormMode.REGISTER</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:79</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sequentialTurns"></a>
+                    <span class="name">
+                        <span ><b>sequentialTurns</b></span>
+                        <a href="#sequentialTurns"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>SequentialTurnTableRow[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:81</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sequentialTurnsService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>sequentialTurnsService</b></span>
+                        <a href="#sequentialTurnsService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(
+    SequentialTurnManagementService
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tableUi"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>tableUi</b></span>
+                        <a href="#tableUi"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>TableConfig</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activeRequests"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>activeRequests</b></span>
+                        <a href="#activeRequests"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../components/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../components/BaseLoading.html#source" target="_self" >BaseLoading:12</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroy$"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>destroy$</b></span>
+                        <a href="#destroy$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../components/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../components/BaseLoading.html#source" target="_self" >BaseLoading:8</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../components/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../components/BaseLoading.html#source" target="_self" >BaseLoading:13</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingService"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>loadingService</b></span>
+                        <a href="#loadingService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(LoadingService)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../components/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../components/BaseLoading.html#source" target="_self" >BaseLoading:9</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toast"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>toast</b></span>
+                        <a href="#toast"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../components/BaseLoading.html" target="_self" >BaseLoading</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../components/BaseLoading.html#source" target="_self" >BaseLoading:10</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="sequentialTurnId"></a>
+                        <span class="name"><b>sequentialTurnId</b><a href="#sequentialTurnId"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>sequentialTurnId()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="252" class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:252</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="sequentialTurnTitle"></a>
+                        <span class="name"><b>sequentialTurnTitle</b><a href="#sequentialTurnTitle"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>sequentialTurnTitle()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="256" class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:256</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="sequentialTurnKeyword"></a>
+                        <span class="name"><b>sequentialTurnKeyword</b><a href="#sequentialTurnKeyword"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>sequentialTurnKeyword()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="260" class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:260</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="sequentialTurnStatus"></a>
+                        <span class="name"><b>sequentialTurnStatus</b><a href="#sequentialTurnStatus"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>sequentialTurnStatus()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="264" class="link-to-prism">src/app/components/forms/sequential-turns-management-form/sequential-turns-form/sequential-turns-form.component.ts:264</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject } from &#x27;@angular/core&#x27;;
+import {
+  FormBuilder,
+  FormControl,
+  ReactiveFormsModule,
+  Validators,
+} from &#x27;@angular/forms&#x27;;
+
+import { ButtonModule } from &#x27;primeng/button&#x27;;
+import { ConfirmDialogModule } from &#x27;primeng/confirmdialog&#x27;;
+import { Dialog } from &#x27;primeng/dialog&#x27;;
+import { ConfirmationService } from &#x27;primeng/api&#x27;;
+
+import { SearchInputComponent } from &#x27;app/components/shared/inputs/search-input/search-input.component&#x27;;
+import { TextInputComponent } from &#x27;app/components/shared/inputs/text-input/text-input.component&#x27;;
+import { ToggleSwitchInputComponent } from &#x27;app/components/shared/inputs/toggle-switch-input/toggle-switch-input.component&#x27;;
+
+import { SequentialTurnManagementService } from &#x27;app/services/sequential-turn-management/sequential-turn-management.service&#x27;;
+
+import { checkAndToastError } from &#x27;app/utils/api-utils&#x27;;
+import { ValidationSchema } from &#x27;app/constants/validation-schema&#x27;;
+import { SequentialTurn } from &#x27;app/services/sequential-turn-management/model/sequential-turn.model&#x27;;
+import { TableConfig } from &#x27;app/constants/ui/table.ui&#x27;;
+import { ButtonComponent } from &#x27;app/components/shared/button/button.component&#x27;;
+import { AppConfirmService } from &#x27;app/services/confirm/confirm.service&#x27;;
+import {
+  deleteCell,
+  editCell,
+  TableColumn,
+  TableComponent,
+} from &#x27;app/components/shared/table/table.component&#x27;;
+import { AppTitles } from &#x27;app/constants/Titles&#x27;;
+import { BaseLoading } from &#x27;../../shared/component-base/base-loading&#x27;;
+
+enum FormMode {
+  EDITABLE,
+  REGISTER,
+}
+
+export type SequentialTurnTableRow &#x3D; SequentialTurn &amp; {
+  edit: string;
+  delete: string;
+};
+
+@Component({
+  selector: &#x27;app-sequential-turns-form&#x27;,
+  templateUrl: &#x27;./sequential-turns-form.component.html&#x27;,
+  styleUrl: &#x27;./sequential-turns-form.component.scss&#x27;,
+  standalone: true,
+  imports: [
+    ButtonModule,
+    SearchInputComponent,
+    TableComponent,
+    ConfirmDialogModule,
+    Dialog,
+    TextInputComponent,
+    ToggleSwitchInputComponent,
+    ReactiveFormsModule,
+    ButtonComponent,
+  ],
+  providers: [ConfirmationService],
+})
+export class SequentialTurnsFormComponent extends BaseLoading {
+  private readonly fb &#x3D; inject(FormBuilder);
+  private readonly sequentialTurnsService &#x3D; inject(
+    SequentialTurnManagementService
+  );
+  private readonly confirmService &#x3D; inject(AppConfirmService);
+  readonly tableUi &#x3D; TableConfig;
+  readonly appTitle &#x3D; AppTitles;
+
+  sequentialTurnForm &#x3D; this.fb.group({
+    id: this.fb.control&lt;number | null&gt;(null),
+    title: [&#x27;&#x27;, ValidationSchema.title],
+    keyword: [&#x27;&#x27;, ValidationSchema.keyword],
+    status: [true, Validators.required],
+  });
+
+  sequentialTurnFormMode &#x3D; FormMode.REGISTER;
+  searchSequentialTurn &#x3D; new FormControl&lt;string&gt;(&#x27;&#x27;, Validators.required);
+  sequentialTurns: SequentialTurnTableRow[] &#x3D; [];
+  displaySequentialTurns: SequentialTurnTableRow[] &#x3D; [];
+
+  headerTitle &#x3D; &#x27;&#x27;;
+  formDialogVisible &#x3D; false;
+
+  readonly columns: TableColumn&lt;SequentialTurnTableRow&gt;[] &#x3D; [
+    {
+      field: &#x27;SeqTurnId&#x27;,
+      header: &#x27;شناسه&#x27;,
+    },
+    {
+      field: &#x27;SeqTurnTitle&#x27;,
+      header: &#x27;صف نوبت&#x27;,
+    },
+    {
+      field: &#x27;SeqTurnKeyWord&#x27;,
+      header: &#x27;کلمه کلیدی&#x27;,
+      class: &#x27;font-bold&#x27;,
+    },
+    {
+      ...editCell.config,
+      field: &#x27;edit&#x27;,
+      onAction: (row: SequentialTurn) &#x3D;&gt; this.onEdit(row),
+    },
+    {
+      ...deleteCell.config,
+      field: &#x27;delete&#x27;,
+      onAction: (row: SequentialTurn) &#x3D;&gt; this.onDelete(row),
+    },
+  ];
+
+  override ngOnInit(): void {
+    super.ngOnInit();
+    this.initialize();
+  }
+  private async initialize(): Promise&lt;void&gt; {
+    this.withLoading(async () &#x3D;&gt; {
+      await this.loadSequentialTurns();
+    });
+  }
+
+  private async loadSequentialTurns(): Promise&lt;void&gt; {
+    const response &#x3D; await this.sequentialTurnsService.GetSequentialTurns(&#x27;&#x27;);
+    if (!checkAndToastError(response, this.toast)) return;
+
+    const rows &#x3D; response.data.map((st) &#x3D;&gt; ({
+      ...st,
+      edit: editCell.value,
+      delete: deleteCell.value,
+    }));
+    this.sequentialTurns &#x3D; rows;
+    this.displaySequentialTurns &#x3D; [...this.sequentialTurns];
+  }
+
+  handleSearch(results: SequentialTurnTableRow[]): void {
+    this.displaySequentialTurns &#x3D; results;
+  }
+
+  filterSequentialTurnGroup &#x3D; (turn: SequentialTurn, query: string): boolean &#x3D;&gt;
+    turn.SeqTurnTitle?.includes(query) ?? false;
+
+  onDelete(row: SequentialTurn): void {
+    if (this.loading()) return;
+
+    this.confirmService.confirmDelete(
+      &#x60;${row.SeqTurnTitle} با شناسه ${row.SeqTurnId}&#x60;,
+      async () &#x3D;&gt; {
+        await this.withLoading(async () &#x3D;&gt; {
+          await this.deleteSequentialTurn(row.SeqTurnId);
+        });
+      }
+    );
+  }
+
+  onEdit(row: SequentialTurn): void {
+    this.headerTitle &#x3D; &#x27;ویرایش صف نوبت&#x27;;
+    this.populateSequentialForm(row);
+    this.sequentialTurnFormMode &#x3D; FormMode.EDITABLE;
+    this.formDialogVisible &#x3D; true;
+  }
+
+  onNew(): void {
+    this.headerTitle &#x3D; &#x27;افزودن  صف نوبت&#x27;;
+    this.resetSequentialTurnForm();
+    this.sequentialTurnFormMode &#x3D; FormMode.REGISTER;
+    this.formDialogVisible &#x3D; true;
+  }
+
+  onCloseDialog(): void {
+    this.formDialogVisible &#x3D; false;
+  }
+
+  isFormEditable(): boolean {
+    return this.sequentialTurnFormMode &#x3D;&#x3D;&#x3D; FormMode.EDITABLE;
+  }
+
+  async registerOrEdit(): Promise&lt;void&gt; {
+    if (this.loading()) return;
+    await this.withLoading(async () &#x3D;&gt; {
+      if (this.sequentialTurnFormMode &#x3D;&#x3D;&#x3D; FormMode.REGISTER) {
+        await this.registerSequentialTurn();
+      } else {
+        await this.editSequentialTurn();
+      }
+      this.onCloseDialog();
+    });
+  }
+
+  private populateSequentialForm(data: SequentialTurn): void {
+    this.sequentialTurnForm.patchValue({
+      id: data.SeqTurnId,
+      title: data.SeqTurnTitle,
+      keyword: data.SeqTurnKeyWord,
+      status: data.Active,
+    });
+  }
+
+  private extractSequentialForm(): SequentialTurn {
+    return {
+      SeqTurnId: this.sequentialTurnId.value,
+      SeqTurnTitle: this.sequentialTurnTitle.value,
+      SeqTurnKeyWord: this.sequentialTurnKeyword.value,
+      Active: this.sequentialTurnStatus.value,
+    };
+  }
+
+  private async registerSequentialTurn(): Promise&lt;void&gt; {
+    const turn &#x3D; this.extractSequentialForm();
+    const response &#x3D;
+      await this.sequentialTurnsService.RegisterNewSequentialTurn(
+        turn.SeqTurnId,
+        turn.SeqTurnTitle ?? &#x27;&#x27;,
+        turn.SeqTurnKeyWord ?? &#x27;&#x27;,
+        turn.Active ?? true
+      );
+    if (!checkAndToastError(response, this.toast)) return;
+    this.toast.success(&#x27;موفق&#x27;, response.data.Message);
+    await this.loadSequentialTurns();
+  }
+
+  private async editSequentialTurn(): Promise&lt;void&gt; {
+    const turn &#x3D; this.extractSequentialForm();
+    const response &#x3D; await this.sequentialTurnsService.EditSequentialTurn(
+      turn.SeqTurnId,
+      turn.SeqTurnTitle ?? &#x27;&#x27;,
+      turn.SeqTurnKeyWord ?? &#x27;&#x27;,
+      turn.Active ?? true
+    );
+    if (!checkAndToastError(response, this.toast)) return;
+    this.toast.success(&#x27;موفق&#x27;, response.data.Message);
+    await this.loadSequentialTurns();
+  }
+
+  private async deleteSequentialTurn(id: number): Promise&lt;void&gt; {
+    const response &#x3D; await this.sequentialTurnsService.DeleteSequentialTurn(id);
+    if (!checkAndToastError(response, this.toast)) return;
+    this.toast.success(&#x27;موفق&#x27;, response.data.Message);
+    await this.loadSequentialTurns();
+  }
+
+  private resetSequentialTurnForm(): void {
+    this.sequentialTurnForm.reset({
+      id: null,
+      title: &#x27;&#x27;,
+      keyword: &#x27;&#x27;,
+      status: true,
+    });
+  }
+
+  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; Form Getters &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+  get sequentialTurnId(): FormControl {
+    return this.sequentialTurnForm.get(&#x27;id&#x27;) as FormControl;
+  }
+
+  get sequentialTurnTitle(): FormControl {
+    return this.sequentialTurnForm.get(&#x27;title&#x27;) as FormControl;
+  }
+
+  get sequentialTurnKeyword(): FormControl {
+    return this.sequentialTurnForm.get(&#x27;keyword&#x27;) as FormControl;
+  }
+
+  get sequentialTurnStatus(): FormControl {
+    return this.sequentialTurnForm.get(&#x27;status&#x27;) as FormControl;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;!-- 🔍 Search Input --&gt;
+&lt;div class&#x3D;&quot;w-full mb-4&quot;&gt;
+  &lt;app-search-input
+    class&#x3D;&quot;w-full&quot;
+    [placeholder]&#x3D;&quot;&#x27;عنوان &#x27; + appTitle.getPlaceholder(&#x27;sequentialTurnTitle&#x27;)&quot;
+    [staticData]&#x3D;&quot;sequentialTurns&quot;
+    [itemMatchesQuery]&#x3D;&quot;filterSequentialTurnGroup&quot;
+    [autoTriggerSearch]&#x3D;&quot;true&quot;
+    [fallbackToAllWhenQueryShort]&#x3D;&quot;true&quot;
+    [minSearchLength]&#x3D;&quot;2&quot;
+    [control]&#x3D;&quot;searchSequentialTurn&quot;
+    (searchResult)&#x3D;&quot;handleSearch($event)&quot;
+  /&gt;
+&lt;/div&gt;
+
+&lt;!-- 📋 Sequential Turn Table --&gt;
+&lt;app-table
+  [columns]&#x3D;&quot;columns&quot;
+  [rows]&#x3D;&quot;displaySequentialTurns&quot;
+  (clickCaptionButton)&#x3D;&quot;onNew()&quot;
+  [enableCaptionButton]&#x3D;&quot;true&quot;
+&gt;
+&lt;/app-table&gt;
+&lt;!-- 🧾 Dialog --&gt;
+&lt;p-dialog
+  [(visible)]&#x3D;&quot;formDialogVisible&quot;
+  [modal]&#x3D;&quot;true&quot;
+  [header]&#x3D;&quot;headerTitle&quot;
+  draggable&#x3D;&quot;false&quot;
+  maskStyleClass&#x3D;&quot;px-4 z-15&quot;
+  [style]&#x3D;&quot;{ width: &#x27;30rem&#x27;, maxWidth: &#x27;100%&#x27; }&quot;
+  (onHide)&#x3D;&quot;onCloseDialog()&quot;
+&gt;
+  &lt;form
+    class&#x3D;&quot;grid grid-cols-12 gap-6&quot;
+    [class.pointer-events-none]&#x3D;&quot;loading()&quot;
+    [class.opacity-60]&#x3D;&quot;loading()&quot;
+    [formGroup]&#x3D;&quot;sequentialTurnForm&quot;
+  &gt;
+    &lt;div class&#x3D;&quot;grid grid-cols-12 col-span-12 gap-2&quot;&gt;
+      &lt;app-text-input
+        [label]&#x3D;&quot;this.appTitle.inputs.global.id&quot;
+        class&#x3D;&quot;col-span-12&quot;
+        [control]&#x3D;&quot;sequentialTurnId&quot;
+        validationField&#x3D;&quot;id&quot;
+        [disabled]&#x3D;&quot;true&quot;
+        [readOnly]&#x3D;&quot;true&quot;
+        addonWidth&#x3D;&quot;8rem&quot;
+      /&gt;
+
+      &lt;app-text-input
+        [label]&#x3D;&quot;appTitle.inputs.global.title&quot;
+        [placeholder]&#x3D;&quot;appTitle.getPlaceholder(&#x27;globalTitlePlaceholder&#x27;)&quot;
+        class&#x3D;&quot;col-span-12&quot;
+        [control]&#x3D;&quot;sequentialTurnTitle&quot;
+        validationField&#x3D;&quot;title&quot;
+        addonWidth&#x3D;&quot;8rem&quot;
+      /&gt;
+
+      &lt;app-text-input
+        [label]&#x3D;&quot;appTitle.inputs.sequentialTurns.keyWord&quot;
+        [placeholder]&#x3D;&quot;appTitle.getPlaceholder(&#x27;sequentialTurnKeywork&#x27;)&quot;
+        class&#x3D;&quot;col-span-12&quot;
+        [control]&#x3D;&quot;sequentialTurnKeyword&quot;
+        validationField&#x3D;&quot;keyword&quot;
+        addonWidth&#x3D;&quot;8rem&quot;
+        language&#x3D;&quot;en&quot;
+      /&gt;
+    &lt;/div&gt;
+    &lt;app-toggle-switch-input
+      class&#x3D;&quot;col-span-12 flex px-2&quot;
+      [label]&#x3D;&quot;appTitle.toggleSwitches.status&quot;
+      [control]&#x3D;&quot;sequentialTurnStatus&quot;
+      [readonly]&#x3D;&quot;!isFormEditable()&quot;
+    /&gt;
+
+    &lt;div class&#x3D;&quot;col-span-12 flex justify-end&quot;&gt;
+      &lt;app-button
+        (click)&#x3D;&quot;registerOrEdit()&quot;
+        [label]&#x3D;&quot;appTitle.buttons.saveAndEdit&quot;
+        [disabled]&#x3D;&quot;sequentialTurnForm.invalid || loading()&quot;
+      /&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+&lt;/p-dialog&gt;
+
+&lt;!-- 🛑 Confirm Dialog --&gt;
+&lt;p-confirm-dialog /&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!-- 🔍 Search Input --><div class="w-full mb-4">  <app-search-input    class="w-full"    [placeholder]="\'عنوان \' + appTitle.getPlaceholder(\'sequentialTurnTitle\')"    [staticData]="sequentialTurns"    [itemMatchesQuery]="filterSequentialTurnGroup"    [autoTriggerSearch]="true"    [fallbackToAllWhenQueryShort]="true"    [minSearchLength]="2"    [control]="searchSequentialTurn"    (searchResult)="handleSearch($event)"  /></div><!-- 📋 Sequential Turn Table --><app-table  [columns]="columns"  [rows]="displaySequentialTurns"  (clickCaptionButton)="onNew()"  [enableCaptionButton]="true"></app-table><!-- 🧾 Dialog --><p-dialog  [(visible)]="formDialogVisible"  [modal]="true"  [header]="headerTitle"  draggable="false"  maskStyleClass="px-4 z-15"  [style]="{ width: \'30rem\', maxWidth: \'100%\' }"  (onHide)="onCloseDialog()">  <form    class="grid grid-cols-12 gap-6"    [class.pointer-events-none]="loading()"    [class.opacity-60]="loading()"    [formGroup]="sequentialTurnForm"  >    <div class="grid grid-cols-12 col-span-12 gap-2">      <app-text-input        [label]="this.appTitle.inputs.global.id"        class="col-span-12"        [control]="sequentialTurnId"        validationField="id"        [disabled]="true"        [readOnly]="true"        addonWidth="8rem"      />      <app-text-input        [label]="appTitle.inputs.global.title"        [placeholder]="appTitle.getPlaceholder(\'globalTitlePlaceholder\')"        class="col-span-12"        [control]="sequentialTurnTitle"        validationField="title"        addonWidth="8rem"      />      <app-text-input        [label]="appTitle.inputs.sequentialTurns.keyWord"        [placeholder]="appTitle.getPlaceholder(\'sequentialTurnKeywork\')"        class="col-span-12"        [control]="sequentialTurnKeyword"        validationField="keyword"        addonWidth="8rem"        language="en"      />    </div>    <app-toggle-switch-input      class="col-span-12 flex px-2"      [label]="appTitle.toggleSwitches.status"      [control]="sequentialTurnStatus"      [readonly]="!isFormEditable()"    />    <div class="col-span-12 flex justify-end">      <app-button        (click)="registerOrEdit()"        [label]="appTitle.buttons.saveAndEdit"        [disabled]="sequentialTurnForm.invalid || loading()"      />    </div>  </form></p-dialog><!-- 🛑 Confirm Dialog --><p-confirm-dialog /></div>'
+    var COMPONENTS = [{'name': 'AdminLoadPermissionsFormComponent', 'selector': 'app-admin-load-permissions-form'},{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BaseLoading', 'selector': ''},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CarouselFormComponent', 'selector': 'app-carousel-form'},{'name': 'ChatBoxInputComponent', 'selector': 'app-chat-box-input'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DashboardContentManagerComponent', 'selector': 'app-dashboard-content-manager'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DeviceManagementFormComponent', 'selector': 'app-device-management-form'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverLoadAllocationFormComponent', 'selector': 'app-driver-load-allocation-form'},{'name': 'DriverLoadPermissionsFormComponent', 'selector': 'app-driver-load-permissions-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'EquipmentDeviceConfigFormComponent', 'selector': 'app-equipment-device-config-form'},{'name': 'ExitConfirmationDialogComponent', 'selector': 'app-exit-confirmation-dialog'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FilesUploadInputComponent', 'selector': 'app-files-upload-input'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FrameHeaderComponent', 'selector': 'app-frame-header'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'GeneralConfigurationFormComponent', 'selector': 'app-general-configuration-form'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'IssuedTurnListFormComponent', 'selector': 'app-issued-turn-list-form'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadAccountingFormComponent', 'selector': 'app-load-accounting-form'},{'name': 'LoadAllocationConditionFormComponent', 'selector': 'app-load-allocation-condition-form'},{'name': 'LoadAllocationFormComponent', 'selector': 'app-load-allocation-form'},{'name': 'LoadAllocationPriorityComponent', 'selector': 'app-load-allocation-priority'},{'name': 'LoadAnnouncementConfigFormComponent', 'selector': 'app-load-announcement-config-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeAnnouncementRelationFormComponent', 'selector': 'app-loader-type-announcement-relation-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoadPermissionsFormComponent', 'selector': 'app-load-permissions-form'},{'name': 'LoadsAnnouncementFormComponent', 'selector': 'app-loads-announcement-form'},{'name': 'LoadsListFormComponent', 'selector': 'app-loads-list-form'},{'name': 'LoadViewConditionFormComponent', 'selector': 'app-load-view-condition-form'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'LogoComponent', 'selector': 'app-logo'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MapSvgComponent', 'selector': 'app-map-svg'},{'name': 'MobileTabBarComponent', 'selector': 'app-mobile-tab-bar'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'OptInputComponent', 'selector': 'app-opt-input'},{'name': 'ParkingTrafficRecordsFormComponent', 'selector': 'app-parking-traffic-records'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'PersonalizePasswordDialogComponent', 'selector': 'app-personalize-password-dialog'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'ProvinceAnnouncementRelationFormComponent', 'selector': 'app-province-announcement-relation-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RegisterTurnFormComponent', 'selector': 'app-register-turn-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchAutoCompleteFactoryComponent', 'selector': 'app-search-auto-complete-factory'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SearchProcessesComponent', 'selector': 'app-search-processes'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnCostFormComponent', 'selector': 'app-sequential-turn-cost-form'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarPageGroupComponent', 'selector': 'app-sidebar-page-group'},{'name': 'SidebarWebProcesses', 'selector': 'app-sidebar-web-processes'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabManagerComponent', 'selector': 'app-tab-manager'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'ThemeManagementComponent', 'selector': 'app-theme-management'},{'name': 'TicketChatMessageFormComponent', 'selector': 'app-ticket-chat-message-form'},{'name': 'TicketCreateFormComponent', 'selector': 'app-ticket-create-form'},{'name': 'TicketCreatePageComponent', 'selector': 'app-create-page'},{'name': 'TicketFilesUploadComponent', 'selector': 'app-ticket-files-upload'},{'name': 'TicketGuardCaptchaFormComponent', 'selector': 'app-ticket-guard-captcha-form'},{'name': 'TicketListsFormComponent', 'selector': 'app-ticket-lists-form'},{'name': 'TicketTrackerPageComponent', 'selector': 'app-ticket-tracker-page'},{'name': 'TicketTrackFormComponent', 'selector': 'app-ticket-track-form'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'ToggleSwitchInputComponent', 'selector': 'app-toggle-switch-input'},{'name': 'TPTParametersAnnouncementRelationFormComponent', 'selector': 'app-tpt-parameters-announcement-relation-form'},{'name': 'TPTParametersFormComponent', 'selector': 'app-tpt-parameters-form'},{'name': 'TrafficAndParkingTariffFormComponent', 'selector': 'app-traffic-and-parking-tariff'},{'name': 'TrafficCardTypeFormComponent', 'selector': 'app-traffic-card-type-form-component'},{'name': 'TrafficEntriesFormComponent', 'selector': 'app-traffic-entries-form'},{'name': 'TrafficInitialRegistrationFormComponent', 'selector': 'app-traffic-initial-registration-form'},{'name': 'TransportCompaniesFormComponent', 'selector': 'app-transport-companies-form'},{'name': 'TransportCompaniesWalletPaymentFormComponent', 'selector': 'app-transport-companies-wallet-payment-form'},{'name': 'TransportLoadPermissionsFormComponent', 'selector': 'app-transport-load-permissions-form'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TruckWalletPaymentFormComponent', 'selector': 'app-truck-wallet-payment-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserChargingFunctionFormComponent', 'selector': 'app-user-charging-function-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UserProfileComponent', 'selector': 'app-user-profile'},{'name': 'UserProfileFormComponent', 'selector': 'app-user-profile-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'},{'name': 'WalletPaymentFormComponent', 'selector': 'app-wallet-payment-form'},{'name': 'WalletPaymentRecordTableComponent', 'selector': 'app-payment-record-table'},{'name': 'WalletProfileComponent', 'selector': 'app-wallet-profile'},{'name': 'WalletTransactionsTableComponent', 'selector': 'app-wallet-transactions-table'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'SequentialTurnsFormComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'SequentialTurnsFormComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

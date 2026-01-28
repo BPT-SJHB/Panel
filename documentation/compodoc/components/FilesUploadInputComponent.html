@@ -1,0 +1,1944 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bpt-sjhb-panel documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">bpt-sjhb-panel documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  FilesUploadInputComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-files-upload-input</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>FileUploadModule</code>
+                            <code>ProgressBarModule</code>
+                            <code>ButtonModule</code>
+                            <code>CardModule</code>
+                            <code>BadgeModule</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./files-upload-input.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./files-upload-input.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#config" >config</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#files" >files</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#toast" >toast</a>
+                            </li>
+                            <li>
+                                <a href="#UploadFileStatus" >UploadFileStatus</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#uploadFn" >uploadFn</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#choose" >choose</a>
+                            </li>
+                            <li>
+                                <a href="#clearAll" >clearAll</a>
+                            </li>
+                            <li>
+                                <a href="#formatSize" >formatSize</a>
+                            </li>
+                            <li>
+                                <a href="#onClearTemplatingUpload" >onClearTemplatingUpload</a>
+                            </li>
+                            <li>
+                                <a href="#onRemoveTemplatingFile" >onRemoveTemplatingFile</a>
+                            </li>
+                            <li>
+                                <a href="#onSelectedFiles" >onSelectedFiles</a>
+                            </li>
+                            <li>
+                                <a href="#SetUploadFiles" >SetUploadFiles</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#startUpload" >startUpload</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#updateProgress" >updateProgress</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#updateStatus" >updateStatus</a>
+                            </li>
+                            <li>
+                                <a href="#verifyAccept" >verifyAccept</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#accept" >accept</a>
+                            </li>
+                            <li>
+                                <a href="#cancelLabel" >cancelLabel</a>
+                            </li>
+                            <li>
+                                <a href="#chooseLabel" >chooseLabel</a>
+                            </li>
+                            <li>
+                                <a href="#fileLimit" >fileLimit</a>
+                            </li>
+                            <li>
+                                <a href="#maxFileSize" >maxFileSize</a>
+                            </li>
+                            <li>
+                                <a href="#uploadLabel" >uploadLabel</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#removeUploadFile" >removeUploadFile</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="accept"></a>
+                        <b>accept</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;image/*&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts:45</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="cancelLabel"></a>
+                        <b>cancelLabel</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;انصراف&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts:41</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="chooseLabel"></a>
+                        <b>chooseLabel</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;انتخاب فایل&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts:43</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="fileLimit"></a>
+                        <b>fileLimit</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>3</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts:46</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="maxFileSize"></a>
+                        <b>maxFileSize</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>1024 * 1024</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts:44</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="uploadLabel"></a>
+                        <b>uploadLabel</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;آپلود فایل&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts:42</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="removeUploadFile"></a>
+                        <b>removeUploadFile</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/UploadFile.html" target="_self" >UploadFile</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts:58</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="choose"></a>
+                    <span class="name">
+                        <span ><b>choose</b></span>
+                        <a href="#choose"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>choose(_: <a href="https://angular.io/api/router/Event" target="_blank">Event</a>, callback: () => void)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="182"
+                                    class="link-to-prism">src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts:182</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>_</td>
+                                            <td>
+                                                            <code><a href="https://angular.io/api/router/Event" target="_blank" >Event</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>callback</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clearAll"></a>
+                    <span class="name">
+                        <span ><b>clearAll</b></span>
+                        <a href="#clearAll"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clearAll()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="186"
+                                    class="link-to-prism">src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts:186</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatSize"></a>
+                    <span class="name">
+                        <span ><b>formatSize</b></span>
+                        <a href="#formatSize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>formatSize(bytes: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="172"
+                                    class="link-to-prism">src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts:172</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>bytes</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onClearTemplatingUpload"></a>
+                    <span class="name">
+                        <span ><b>onClearTemplatingUpload</b></span>
+                        <a href="#onClearTemplatingUpload"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onClearTemplatingUpload(clear: () => void)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="154"
+                                    class="link-to-prism">src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts:154</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>clear</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onRemoveTemplatingFile"></a>
+                    <span class="name">
+                        <span ><b>onRemoveTemplatingFile</b></span>
+                        <a href="#onRemoveTemplatingFile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onRemoveTemplatingFile(event: <a href="https://angular.io/api/router/Event" target="_blank">Event</a>, fileToRemove: <a href="../interfaces/UploadFile.html" target="_self">UploadFile</a>, removeFileCallback: (event: <a href="https://angular.io/api/router/Event" target="_blank">Event</a>, index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>) => void, index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="134"
+                                    class="link-to-prism">src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts:134</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://angular.io/api/router/Event" target="_blank" >Event</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>fileToRemove</td>
+                                            <td>
+                                                            <code><a href="../interfaces/UploadFile.html" target="_self" >UploadFile</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>removeFileCallback</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSelectedFiles"></a>
+                    <span class="name">
+                        <span ><b>onSelectedFiles</b></span>
+                        <a href="#onSelectedFiles"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSelectedFiles(event: FileSelectEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="60"
+                                    class="link-to-prism">src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts:60</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>FileSelectEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SetUploadFiles"></a>
+                    <span class="name">
+                        <span ><b>SetUploadFiles</b></span>
+                        <a href="#SetUploadFiles"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>SetUploadFiles(uploadFiles: <a href="../interfaces/UploadFile.html" target="_self">UploadFile[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="193"
+                                    class="link-to-prism">src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts:193</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>uploadFiles</td>
+                                            <td>
+                                                            <code><a href="../interfaces/UploadFile.html" target="_self" >UploadFile[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="startUpload"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>startUpload</b></span>
+                        <a href="#startUpload"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>startUpload(file: <a href="../interfaces/UploadFile.html" target="_self">UploadFile</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts:104</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>file</td>
+                                            <td>
+                                                            <code><a href="../interfaces/UploadFile.html" target="_self" >UploadFile</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateProgress"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>updateProgress</b></span>
+                        <a href="#updateProgress"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateProgress(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, progress: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="122"
+                                    class="link-to-prism">src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts:122</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>progress</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateStatus"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>updateStatus</b></span>
+                        <a href="#updateStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateStatus(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, status: <a href="../miscellaneous/enumerations.html#UploadFileStatus" target="_self">UploadFileStatus</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="128"
+                                    class="link-to-prism">src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts:128</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>status</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/enumerations.html#UploadFileStatus" target="_self" >UploadFileStatus</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="verifyAccept"></a>
+                    <span class="name">
+                        <span ><b>verifyAccept</b></span>
+                        <a href="#verifyAccept"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>verifyAccept(file: File)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="162"
+                                    class="link-to-prism">src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts:162</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>file</td>
+                                            <td>
+                                                        <code>File</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="config"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>config</b></span>
+                        <a href="#config"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(PrimeNG)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="files"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>files</b></span>
+                        <a href="#files"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;UploadFile[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toast"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>toast</b></span>
+                        <a href="#toast"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="UploadFileStatus"></a>
+                    <span class="name">
+                        <span ><b>UploadFileStatus</b></span>
+                        <a href="#UploadFileStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>UploadFileStatus</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uploadFn"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>uploadFn</b></span>
+                        <a href="#uploadFn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>input&lt;
+      (
+        file: UploadFile,
+        onProgress: (p: number) &#x3D;&gt; void,
+        abort?: AbortController
+      ) &#x3D;&gt; Promise&lt;void&gt;
+    &gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/components/shared/inputs/files-upload-input/files-upload-input.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, input, output, signal } from &#x27;@angular/core&#x27;;
+import { PrimeNG } from &#x27;primeng/config&#x27;;
+import { FileSelectEvent, FileUploadModule } from &#x27;primeng/fileupload&#x27;;
+import { ProgressBarModule } from &#x27;primeng/progressbar&#x27;;
+import { ButtonModule } from &#x27;primeng/button&#x27;;
+import { CardModule } from &#x27;primeng/card&#x27;;
+import { BadgeModule } from &#x27;primeng/badge&#x27;;
+import { uuidV4 } from &#x27;app/utils/uuid&#x27;;
+import { ToastService } from &#x27;app/services/toast-service/toast.service&#x27;;
+
+export enum UploadFileStatus {
+  Success,
+  Uploading,
+  Failed,
+}
+
+export interface UploadFile {
+  id: string;
+  status: UploadFileStatus;
+  raw: File;
+  progress: number;
+}
+
+@Component({
+  selector: &#x27;app-files-upload-input&#x27;,
+  imports: [
+    FileUploadModule,
+    ProgressBarModule,
+    ButtonModule,
+    CardModule,
+    BadgeModule,
+  ],
+  templateUrl: &#x27;./files-upload-input.component.html&#x27;,
+  styleUrls: [&#x27;./files-upload-input.component.scss&#x27;],
+})
+export class FilesUploadInputComponent {
+  private readonly config &#x3D; inject(PrimeNG);
+  private toast &#x3D; inject(ToastService);
+  readonly files &#x3D; signal&lt;UploadFile[]&gt;([]);
+
+  readonly cancelLabel &#x3D; input(&#x27;انصراف&#x27;);
+  readonly uploadLabel &#x3D; input(&#x27;آپلود فایل&#x27;);
+  readonly chooseLabel &#x3D; input(&#x27;انتخاب فایل&#x27;);
+  readonly maxFileSize &#x3D; input(1024 * 1024);
+  readonly accept &#x3D; input(&#x27;image/*&#x27;);
+  readonly fileLimit &#x3D; input(3);
+
+  readonly uploadFn &#x3D;
+    input&lt;
+      (
+        file: UploadFile,
+        onProgress: (p: number) &#x3D;&gt; void,
+        abort?: AbortController
+      ) &#x3D;&gt; Promise&lt;void&gt;
+    &gt;();
+
+  UploadFileStatus &#x3D; UploadFileStatus;
+  removeUploadFile &#x3D; output&lt;UploadFile&gt;();
+
+  onSelectedFiles(event: FileSelectEvent): void {
+    const selectedFiles &#x3D; event.files ?? [];
+    const validFiles: UploadFile[] &#x3D; [];
+
+    for (const file of selectedFiles) {
+      // 🔸 Check file size
+      if (file.size &gt; this.maxFileSize()) {
+        this.toast.error(&#x27;خطا&#x27;, &#x60;حجم فایل &quot;${file.name}&quot; بیش از حد مجاز است.&#x60;);
+        continue;
+      }
+
+      // 🔸 Check file type
+      if (!this.verifyAccept(file)) {
+        this.toast.error(&#x27;خطا&#x27;, &#x60;نوع فایل &quot;${file.name}&quot; مجاز نیست.&#x60;);
+        continue;
+      }
+
+      // 🔸 Create upload file object
+      validFiles.push({
+        id: uuidV4(),
+        raw: file,
+        status: UploadFileStatus.Uploading,
+        progress: 0,
+      });
+    }
+
+    // 🔸 Check total file count limit
+    const totalFiles &#x3D; this.files().length + validFiles.length;
+
+    if (totalFiles &gt; this.fileLimit()) {
+      this.toast.error(
+        &#x27;خطا&#x27;,
+        &#x60;حداکثر مجاز به انتخاب ${this.fileLimit()} فایل هستید.&#x60;
+      );
+      return;
+    }
+
+    // 🔸 Add valid files and start uploading
+    this.files.update((existing) &#x3D;&gt; [...existing, ...validFiles]);
+
+    for (const file of validFiles) {
+      this.startUpload(file);
+    }
+  }
+  private async startUpload(file: UploadFile) {
+    const fn &#x3D; this.uploadFn();
+    if (!fn) {
+      this.toast.error(&#x27;خطا&#x27;, &#x27;تابع آپلود تنظیم نشده است.&#x27;);
+      return;
+    }
+
+    try {
+      await fn(file, (p) &#x3D;&gt; this.updateProgress(file.id, p));
+      this.updateProgress(file.id, 100);
+      setTimeout(() &#x3D;&gt; {
+        this.updateStatus(file.id, UploadFileStatus.Success);
+      }, 1000);
+    } catch (err) {
+      this.updateStatus(file.id, UploadFileStatus.Failed);
+    }
+  }
+
+  private updateProgress(id: string, progress: number) {
+    this.files.update((list) &#x3D;&gt;
+      list.map((f) &#x3D;&gt; (f.id &#x3D;&#x3D;&#x3D; id ? { ...f, progress } : f))
+    );
+  }
+
+  private updateStatus(id: string, status: UploadFileStatus) {
+    this.files.update((list) &#x3D;&gt;
+      list.map((f) &#x3D;&gt; (f.id &#x3D;&#x3D;&#x3D; id ? { ...f, status } : f))
+    );
+  }
+
+  onRemoveTemplatingFile(
+    event: Event,
+    fileToRemove: UploadFile,
+    removeFileCallback: (event: Event, index: number) &#x3D;&gt; void,
+    index: number
+  ): void {
+    removeFileCallback(event, index);
+
+    // Remove file from list
+    this.files.update((files) &#x3D;&gt;
+      files.filter((file) &#x3D;&gt; {
+        if (file.id &#x3D;&#x3D;&#x3D; fileToRemove.id) {
+          this.removeUploadFile.emit(file);
+          return false;
+        }
+        return true;
+      })
+    );
+  }
+
+  onClearTemplatingUpload(clear: () &#x3D;&gt; void): void {
+    clear();
+
+    // Cancel all uploads
+    this.files().forEach((file) &#x3D;&gt; this.removeUploadFile.emit(file));
+    this.files.set([]);
+  }
+
+  verifyAccept(file: File): boolean {
+    const allowed &#x3D; this.accept()
+      .split(&#x27;,&#x27;)
+      .map((x) &#x3D;&gt; x.trim());
+    return (
+      allowed.includes(file.type) ||
+      allowed.includes(file.type.split(&#x27;/&#x27;)[0] + &#x27;/*&#x27;)
+    );
+  }
+
+  formatSize(bytes: number): string {
+    const k &#x3D; 1024;
+    const dm &#x3D; 3;
+    const sizes &#x3D; this.config.translation.fileSizeTypes ?? [];
+    if (bytes &#x3D;&#x3D;&#x3D; 0) return &#x60;0 ${sizes[0] ?? &#x27;B&#x27;}&#x60;;
+    const i &#x3D; Math.floor(Math.log(bytes) / Math.log(k));
+    const formatted &#x3D; parseFloat((bytes / Math.pow(k, i)).toFixed(dm));
+    return &#x60;${formatted} ${sizes[i] ?? &#x27;B&#x27;}&#x60;;
+  }
+
+  choose(_: Event, callback: () &#x3D;&gt; void): void {
+    callback();
+  }
+
+  clearAll() {
+    this.onClearTemplatingUpload(() &#x3D;&gt; {
+      // empty function
+    });
+  }
+
+  // can call by parent
+  SetUploadFiles(uploadFiles: UploadFile[]) {
+    this.files.set(uploadFiles);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;flex justify-center&quot;&gt;
+  &lt;div class&#x3D;&quot;w-full&quot;&gt;
+    &lt;p-fileupload
+      name&#x3D;&quot;files[]&quot;
+      url&#x3D;&quot;https://www.primefaces.org/cdn/api/upload.php&quot;
+      [multiple]&#x3D;&quot;true&quot;
+      [accept]&#x3D;&quot;accept()&quot;
+      [maxFileSize]&#x3D;&quot;maxFileSize()&quot;
+      mode&#x3D;&quot;advanced&quot;
+      (onSelect)&#x3D;&quot;onSelectedFiles($event)&quot;
+    &gt;
+      &lt;!-- Header --&gt;
+      &lt;ng-template
+        #header
+        let-chooseCallback&#x3D;&quot;chooseCallback&quot;
+        let-clearCallback&#x3D;&quot;clearCallback&quot;
+      &gt;
+        &lt;div class&#x3D;&quot;flex justify-between items-center flex-wrap gap-4&quot;&gt;
+          &lt;div class&#x3D;&quot;flex gap-2&quot;&gt;
+            &lt;p-button
+              (onClick)&#x3D;&quot;choose($event, chooseCallback)&quot;
+              icon&#x3D;&quot;pi pi-images&quot;
+              [rounded]&#x3D;&quot;true&quot;
+              [outlined]&#x3D;&quot;true&quot;
+            /&gt;
+            &lt;p-button
+              (onClick)&#x3D;&quot;onClearTemplatingUpload(clearCallback)&quot;
+              icon&#x3D;&quot;pi pi-times&quot;
+              [rounded]&#x3D;&quot;true&quot;
+              [outlined]&#x3D;&quot;true&quot;
+              severity&#x3D;&quot;danger&quot;
+              [disabled]&#x3D;&quot;files().length &#x3D;&#x3D;&#x3D; 0&quot;
+            /&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/ng-template&gt;
+
+      &lt;!-- Content --&gt;
+      &lt;ng-template
+        #content
+        let-chooseCallback&#x3D;&quot;chooseCallback&quot;
+        let-uploadedFiles&#x3D;&quot;uploadedFiles&quot;
+        let-removeFileCallback&#x3D;&quot;removeFileCallback&quot;
+      &gt;
+        &lt;div class&#x3D;&quot;flex flex-col gap-3 pt-4&quot;&gt;
+          @for (file of files(); track $index) {
+            &lt;div
+              class&#x3D;&quot;relative flex flex-col md:flex-row items-center justify-between border border-surface rounded-lg p-4 shadow-sm hover:shadow-md transition-all&quot;
+            &gt;
+              &lt;!-- File preview --&gt;
+              &lt;div
+                class&#x3D;&quot;flex mt-5 flex-col md:flex-row items-center gap-4 w-full&quot;
+              &gt;
+                &lt;div
+                  class&#x3D;&quot;w-[80px] h-[80px] flex items-center justify-center border rounded-md overflow-hidden shrink-0&quot;
+                &gt;
+                  @if (
+                    file.raw.type.startsWith(&quot;image/&quot;) &amp;&amp;
+                    $any(file.raw).objectURL
+                  ) {
+                    &lt;img
+                      [src]&#x3D;&quot;$any(file.raw).objectURL&quot;
+                      [alt]&#x3D;&quot;file.raw.name&quot;
+                      class&#x3D;&quot;w-full h-full object-cover&quot;
+                    /&gt;
+                  } @else {
+                    &lt;i class&#x3D;&quot;pi pi-file text-4xl text-muted-color&quot;&gt;&lt;/i&gt;
+                  }
+                &lt;/div&gt;
+
+                &lt;!-- File info --&gt;
+                &lt;div class&#x3D;&quot;flex flex-col gap-1 w-[70%] max-w-[400px]&quot;&gt;
+                  &lt;span
+                    class&#x3D;&quot;font-medium text-base text-ellipsis whitespace-nowrap overflow-hidden text-center md:text-right&quot;
+                  &gt;
+                    {{ file.raw.name }}
+                  &lt;/span&gt;
+                  &lt;small class&#x3D;&quot;text-muted-color text-center md:text-right&quot;&gt;
+                    {{ formatSize(file.raw.size) }}
+                  &lt;/small&gt;
+                  &lt;p-progress-bar
+                    [hidden]&#x3D;&quot;file.status !&#x3D;&#x3D; UploadFileStatus.Uploading&quot;
+                    [value]&#x3D;&quot;file.progress&quot;
+                    [showValue]&#x3D;&quot;false&quot;
+                    class&#x3D;&quot;h-2 mt-2 rounded-md&quot;
+                  /&gt;
+
+                  &lt;div
+                    class&#x3D;&quot;absolute top-2 right-2 scale-80 w-auto md:w-[93px] flex items-center justify-center&quot;
+                  &gt;
+                    @switch (file.status) {
+                      @case (UploadFileStatus.Success) {
+                        &lt;p-badge
+                          value&#x3D;&quot;موفق&quot;
+                          severity&#x3D;&quot;success&quot;
+                          size&#x3D;&quot;small&quot;
+                          class&#x3D;&quot;text-sm px-4 py-2 rounded-md&quot;
+                        /&gt;
+                      }
+                      @case (UploadFileStatus.Uploading) {
+                        &lt;p-badge
+                          value&#x3D;&quot;بارگزاری ...&quot;
+                          severity&#x3D;&quot;info&quot;
+                          size&#x3D;&quot;small&quot;
+                          class&#x3D;&quot;text-sm px-2 py-1 rounded-md&quot;
+                        /&gt;
+                      }
+                      @case (UploadFileStatus.Failed) {
+                        &lt;p-badge
+                          value&#x3D;&quot;ناموفق&quot;
+                          severity&#x3D;&quot;danger&quot;
+                          size&#x3D;&quot;small&quot;
+                          class&#x3D;&quot;text-sm px-4 py-2 rounded-md&quot;
+                        /&gt;
+                      }
+                    }
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;!-- Remove button --&gt;
+              &lt;p-button
+                icon&#x3D;&quot;pi pi-times&quot;
+                (click)&#x3D;&quot;
+                  onRemoveTemplatingFile(
+                    $event,
+                    file,
+                    removeFileCallback,
+                    $index
+                  )
+                &quot;
+                [outlined]&#x3D;&quot;true&quot;
+                [rounded]&#x3D;&quot;true&quot;
+                severity&#x3D;&quot;danger&quot;
+                class&#x3D;&quot;absolute top-2 left-2 scale-80 md:scale-100 md:top-0 md:left-0 md:ml-4 md:relative&quot;
+              /&gt;
+            &lt;/div&gt;
+          } @empty {
+            &lt;div
+              (click)&#x3D;&quot;choose($event, chooseCallback)&quot;
+              class&#x3D;&quot;flex flex-col items-center cursor-pointer hover:bg-surface-100 dark:hover:bg-surface-950 justify-center border-2 border-dashed rounded-lg py-10 text-center text-muted-color transition-colors&quot;
+            &gt;
+              &lt;i class&#x3D;&quot;pi pi-upload text-5xl mb-3 text-muted-color&quot;&gt;&lt;/i&gt;
+              &lt;p class&#x3D;&quot;text-lg font-medium text-surface-600&quot;&gt;
+                فایل‌های خود را اینجا بکشید و رها کنید
+              &lt;/p&gt;
+              &lt;p class&#x3D;&quot;text-sm text-surface-500 mt-1&quot;&gt;
+                یا از دکمه بالا برای انتخاب فایل استفاده کنید
+              &lt;/p&gt;
+            &lt;/div&gt;
+          }
+        &lt;/div&gt;
+      &lt;/ng-template&gt;
+    &lt;/p-fileupload&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./files-upload-input.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="flex justify-center">  <div class="w-full">    <p-fileupload      name="files[]"      url="https://www.primefaces.org/cdn/api/upload.php"      [multiple]="true"      [accept]="accept()"      [maxFileSize]="maxFileSize()"      mode="advanced"      (onSelect)="onSelectedFiles($event)"    >      <!-- Header -->      <ng-template        #header        let-chooseCallback="chooseCallback"        let-clearCallback="clearCallback"      >        <div class="flex justify-between items-center flex-wrap gap-4">          <div class="flex gap-2">            <p-button              (onClick)="choose($event, chooseCallback)"              icon="pi pi-images"              [rounded]="true"              [outlined]="true"            />            <p-button              (onClick)="onClearTemplatingUpload(clearCallback)"              icon="pi pi-times"              [rounded]="true"              [outlined]="true"              severity="danger"              [disabled]="files().length === 0"            />          </div>        </div>      </ng-template>      <!-- Content -->      <ng-template        #content        let-chooseCallback="chooseCallback"        let-uploadedFiles="uploadedFiles"        let-removeFileCallback="removeFileCallback"      >        <div class="flex flex-col gap-3 pt-4">          @for (file of files(); track $index) {            <div              class="relative flex flex-col md:flex-row items-center justify-between border border-surface rounded-lg p-4 shadow-sm hover:shadow-md transition-all"            >              <!-- File preview -->              <div                class="flex mt-5 flex-col md:flex-row items-center gap-4 w-full"              >                <div                  class="w-[80px] h-[80px] flex items-center justify-center border rounded-md overflow-hidden shrink-0"                >                  @if (                    file.raw.type.startsWith("image/") &&                    $any(file.raw).objectURL                  ) {                    <img                      [src]="$any(file.raw).objectURL"                      [alt]="file.raw.name"                      class="w-full h-full object-cover"                    />                  } @else {                    <i class="pi pi-file text-4xl text-muted-color"></i>                  }                </div>                <!-- File info -->                <div class="flex flex-col gap-1 w-[70%] max-w-[400px]">                  <span                    class="font-medium text-base text-ellipsis whitespace-nowrap overflow-hidden text-center md:text-right"                  >                    {{ file.raw.name }}                  </span>                  <small class="text-muted-color text-center md:text-right">                    {{ formatSize(file.raw.size) }}                  </small>                  <p-progress-bar                    [hidden]="file.status !== UploadFileStatus.Uploading"                    [value]="file.progress"                    [showValue]="false"                    class="h-2 mt-2 rounded-md"                  />                  <div                    class="absolute top-2 right-2 scale-80 w-auto md:w-[93px] flex items-center justify-center"                  >                    @switch (file.status) {                      @case (UploadFileStatus.Success) {                        <p-badge                          value="موفق"                          severity="success"                          size="small"                          class="text-sm px-4 py-2 rounded-md"                        />                      }                      @case (UploadFileStatus.Uploading) {                        <p-badge                          value="بارگزاری ..."                          severity="info"                          size="small"                          class="text-sm px-2 py-1 rounded-md"                        />                      }                      @case (UploadFileStatus.Failed) {                        <p-badge                          value="ناموفق"                          severity="danger"                          size="small"                          class="text-sm px-4 py-2 rounded-md"                        />                      }                    }                  </div>                </div>              </div>              <!-- Remove button -->              <p-button                icon="pi pi-times"                (click)="                  onRemoveTemplatingFile(                    $event,                    file,                    removeFileCallback,                    $index                  )                "                [outlined]="true"                [rounded]="true"                severity="danger"                class="absolute top-2 left-2 scale-80 md:scale-100 md:top-0 md:left-0 md:ml-4 md:relative"              />            </div>          } @empty {            <div              (click)="choose($event, chooseCallback)"              class="flex flex-col items-center cursor-pointer hover:bg-surface-100 dark:hover:bg-surface-950 justify-center border-2 border-dashed rounded-lg py-10 text-center text-muted-color transition-colors"            >              <i class="pi pi-upload text-5xl mb-3 text-muted-color"></i>              <p class="text-lg font-medium text-surface-600">                فایل‌های خود را اینجا بکشید و رها کنید              </p>              <p class="text-sm text-surface-500 mt-1">                یا از دکمه بالا برای انتخاب فایل استفاده کنید              </p>            </div>          }        </div>      </ng-template>    </p-fileupload>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AdminLoadPermissionsFormComponent', 'selector': 'app-admin-load-permissions-form'},{'name': 'AnnouncementGroupFormComponent', 'selector': 'app-announcement-group-form'},{'name': 'AnnouncementSubGroupFormComponent', 'selector': 'app-announcement-sub-group-form'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BaseLoading', 'selector': ''},{'name': 'BinaryRadioInputComponent', 'selector': 'app-binary-radio-input'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'CaptchaInputComponent', 'selector': 'app-captcha-input'},{'name': 'CarouselComponent', 'selector': 'app-carousel'},{'name': 'CarouselFormComponent', 'selector': 'app-carousel-form'},{'name': 'ChatBoxInputComponent', 'selector': 'app-chat-box-input'},{'name': 'CheckboxInputComponent', 'selector': 'app-checkbox-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DashboardContentManagerComponent', 'selector': 'app-dashboard-content-manager'},{'name': 'DatePickerInput', 'selector': 'app-date-picker-input'},{'name': 'DeviceManagementFormComponent', 'selector': 'app-device-management-form'},{'name': 'DriverInfoFormComponent', 'selector': 'app-driver-info-form'},{'name': 'DriverLoadAllocationFormComponent', 'selector': 'app-driver-load-allocation-form'},{'name': 'DriverLoadPermissionsFormComponent', 'selector': 'app-driver-load-permissions-form'},{'name': 'DriverTruckWalletFormComponent', 'selector': 'app-driver-truck-wallet-form'},{'name': 'EmergencyTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'EquipmentDeviceConfigFormComponent', 'selector': 'app-equipment-device-config-form'},{'name': 'ExitConfirmationDialogComponent', 'selector': 'app-exit-confirmation-dialog'},{'name': 'FactoriesAndFreightFormComponent', 'selector': 'app-factories-and-freight-form'},{'name': 'FilesUploadInputComponent', 'selector': 'app-files-upload-input'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgetPasswordFormComponent', 'selector': 'app-forget-password-form'},{'name': 'ForgetPasswordPageComponent', 'selector': 'app-forget-password-page'},{'name': 'FormCardComponent', 'selector': 'app-form-card'},{'name': 'FrameHeaderComponent', 'selector': 'app-frame-header'},{'name': 'FullScreenBackgroundComponent', 'selector': 'app-full-screen-background'},{'name': 'GeneralConfigurationFormComponent', 'selector': 'app-general-configuration-form'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomePageComponent', 'selector': 'app-home'},{'name': 'IssuedTurnListFormComponent', 'selector': 'app-issued-turn-list-form'},{'name': 'LadPlacesFormComponent', 'selector': 'app-lad-places-form'},{'name': 'LoadAccountingFormComponent', 'selector': 'app-load-accounting-form'},{'name': 'LoadAllocationConditionFormComponent', 'selector': 'app-load-allocation-condition-form'},{'name': 'LoadAllocationFormComponent', 'selector': 'app-load-allocation-form'},{'name': 'LoadAllocationPriorityComponent', 'selector': 'app-load-allocation-priority'},{'name': 'LoadAnnouncementConfigFormComponent', 'selector': 'app-load-announcement-config-form'},{'name': 'LoadCapacitorFormComponent', 'selector': 'app-load-capacitor-form'},{'name': 'LoaderTypeAnnouncementRelationFormComponent', 'selector': 'app-loader-type-announcement-relation-form'},{'name': 'LoaderTypeFormComponent', 'selector': 'app-loader-type-form'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoadPermissionsFormComponent', 'selector': 'app-load-permissions-form'},{'name': 'LoadsAnnouncementFormComponent', 'selector': 'app-loads-announcement-form'},{'name': 'LoadsListFormComponent', 'selector': 'app-loads-list-form'},{'name': 'LoadViewConditionFormComponent', 'selector': 'app-load-view-condition-form'},{'name': 'LoginFormComponent', 'selector': 'app-login-form'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'LogoComponent', 'selector': 'app-logo'},{'name': 'MainViewComponent', 'selector': 'app-main-tab'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MapSvgComponent', 'selector': 'app-map-svg'},{'name': 'MobileTabBarComponent', 'selector': 'app-mobile-tab-bar'},{'name': 'NewPasswordDialogComponent', 'selector': 'app-reset-password-dialog'},{'name': 'OptInputComponent', 'selector': 'app-opt-input'},{'name': 'ParkingTrafficRecordsFormComponent', 'selector': 'app-parking-traffic-records'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'PersonalizePasswordDialogComponent', 'selector': 'app-personalize-password-dialog'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProvinceAndCityFormComponent', 'selector': 'app-province-and-city-form'},{'name': 'ProvinceAnnouncementRelationFormComponent', 'selector': 'app-province-announcement-relation-form'},{'name': 'RealTimeTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'RegisterTurnFormComponent', 'selector': 'app-register-turn-form'},{'name': 'RelationOfAnnouncementGroupAndSubGroupComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToAnnouncementSubGroupsFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'RelationOfSequentialTurnToLoaderTypeFormComponent', 'selector': 'app-relation-of-announcement-group-and-sub-group'},{'name': 'ResuscitateTurnsFormComponent', 'selector': 'app-real-time-turns-form'},{'name': 'SearchAutoCompleteComponent', 'selector': 'app-search-auto-complete'},{'name': 'SearchAutoCompleteFactoryComponent', 'selector': 'app-search-auto-complete-factory'},{'name': 'SearchInputComponent', 'selector': 'app-search-input'},{'name': 'SearchProcessesComponent', 'selector': 'app-search-processes'},{'name': 'SelectInputComponent', 'selector': 'app-select-input'},{'name': 'SequentialTurnCostFormComponent', 'selector': 'app-sequential-turn-cost-form'},{'name': 'SequentialTurnsFormComponent', 'selector': 'app-sequential-turns-form'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SidebarPageGroupComponent', 'selector': 'app-sidebar-page-group'},{'name': 'SidebarWebProcesses', 'selector': 'app-sidebar-web-processes'},{'name': 'SupportButtonComponent', 'selector': 'app-support-button'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TabManagerComponent', 'selector': 'app-tab-manager'},{'name': 'TariffsFormComponent', 'selector': 'app-tariffs-editor-form'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'TerminalCardComponent', 'selector': 'app-terminal-card'},{'name': 'TextAreaInputComponent', 'selector': 'app-text-area-input'},{'name': 'TextInputComponent', 'selector': 'app-text-input'},{'name': 'ThemeManagementComponent', 'selector': 'app-theme-management'},{'name': 'TicketChatMessageFormComponent', 'selector': 'app-ticket-chat-message-form'},{'name': 'TicketCreateFormComponent', 'selector': 'app-ticket-create-form'},{'name': 'TicketCreatePageComponent', 'selector': 'app-create-page'},{'name': 'TicketFilesUploadComponent', 'selector': 'app-ticket-files-upload'},{'name': 'TicketGuardCaptchaFormComponent', 'selector': 'app-ticket-guard-captcha-form'},{'name': 'TicketListsFormComponent', 'selector': 'app-ticket-lists-form'},{'name': 'TicketTrackerPageComponent', 'selector': 'app-ticket-tracker-page'},{'name': 'TicketTrackFormComponent', 'selector': 'app-ticket-track-form'},{'name': 'TimePickerInput', 'selector': 'app-time-picker-input'},{'name': 'ToggleSwitchInputComponent', 'selector': 'app-toggle-switch-input'},{'name': 'TPTParametersAnnouncementRelationFormComponent', 'selector': 'app-tpt-parameters-announcement-relation-form'},{'name': 'TPTParametersFormComponent', 'selector': 'app-tpt-parameters-form'},{'name': 'TrafficAndParkingTariffFormComponent', 'selector': 'app-traffic-and-parking-tariff'},{'name': 'TrafficCardTypeFormComponent', 'selector': 'app-traffic-card-type-form-component'},{'name': 'TrafficEntriesFormComponent', 'selector': 'app-traffic-entries-form'},{'name': 'TrafficInitialRegistrationFormComponent', 'selector': 'app-traffic-initial-registration-form'},{'name': 'TransportCompaniesFormComponent', 'selector': 'app-transport-companies-form'},{'name': 'TransportCompaniesWalletPaymentFormComponent', 'selector': 'app-transport-companies-wallet-payment-form'},{'name': 'TransportLoadPermissionsFormComponent', 'selector': 'app-transport-load-permissions-form'},{'name': 'TravelTimeFormComponent', 'selector': 'app-travel-time-form'},{'name': 'TreeTableCheckboxComponent', 'selector': 'app-tree-table-checkbox'},{'name': 'TruckAndDriverInformationFormComponent', 'selector': 'app-truck-and-driver-information-form'},{'name': 'TruckInfoFormComponent', 'selector': 'app-truck-info-form'},{'name': 'TruckWalletPaymentFormComponent', 'selector': 'app-truck-wallet-payment-form'},{'name': 'TurnsListFormComponent', 'selector': 'app-turns-list-form'},{'name': 'TurnsTruckInfoBaseFormComponent', 'selector': 'app-turns-truck-info-base-form'},{'name': 'UserChargingFunctionFormComponent', 'selector': 'app-user-charging-function-form'},{'name': 'UserInfoFormComponent', 'selector': 'app-user-info-form'},{'name': 'UserProfileComponent', 'selector': 'app-user-profile'},{'name': 'UserProfileFormComponent', 'selector': 'app-user-profile-form'},{'name': 'UsersMenuAccessFormComponent', 'selector': 'app-users-menu-access-form'},{'name': 'WalletPaymentFormComponent', 'selector': 'app-wallet-payment-form'},{'name': 'WalletPaymentRecordTableComponent', 'selector': 'app-payment-record-table'},{'name': 'WalletProfileComponent', 'selector': 'app-wallet-profile'},{'name': 'WalletTransactionsTableComponent', 'selector': 'app-wallet-transactions-table'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'FilesUploadInputComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'FilesUploadInputComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

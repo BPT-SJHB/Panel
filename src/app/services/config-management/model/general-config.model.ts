@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 export interface GeneralConfig {
   CId: number;
   CTitle: string;
@@ -7,6 +9,16 @@ export interface GeneralConfig {
   CValue: string;
   Description: string;
 }
+
+export const zodGeneralConfig = z.object({
+  CId: z.number(),
+  CTitle: z.string(),
+  CName: z.string(),
+  CIndex: z.number(),
+  CIndexTitle: z.string(),
+  CValue: z.string(),
+  Description: z.string(),
+});
 
 export type EditInfoOfGeneralConfig = Pick<
   GeneralConfig,

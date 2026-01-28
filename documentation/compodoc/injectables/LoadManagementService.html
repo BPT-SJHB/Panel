@@ -1,0 +1,3224 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bpt-sjhb-panel documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">bpt-sjhb-panel documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >LoadManagementService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/load-management/load-management.service.ts</code>
+        </p>
+
+
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#apiCommunicator" >apiCommunicator</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#userAuth" >userAuth</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#AllocateLoadToNextTurn" >AllocateLoadToNextTurn</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#CancelLoad" >CancelLoad</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#CancelLoadAllocation" >CancelLoadAllocation</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#CancelLoadPermission" >CancelLoadPermission</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#ChangePriorityLoadAllocations" >ChangePriorityLoadAllocations</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#DeleteLoad" >DeleteLoad</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#EditLoad" >EditLoad</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#FreeLineLoad" >FreeLineLoad</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#GetLoadAllocationOfDriver" >GetLoadAllocationOfDriver</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#GetLoadInfo" >GetLoadInfo</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#GetLoadsForAdmin" >GetLoadsForAdmin</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#GetLoadsForDrivers" >GetLoadsForDrivers</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#GetLoadsForFactoriesAndProductionCenters" >GetLoadsForFactoriesAndProductionCenters</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#GetLoadsForTransportCompanies" >GetLoadsForTransportCompanies</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#GetLoadStatuses" >GetLoadStatuses</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#GetRecordsOfLoadAllocation" >GetRecordsOfLoadAllocation</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#GetTransportTariffParamsByAnnouncementSubGroupId" >GetTransportTariffParamsByAnnouncementSubGroupId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#GetTransportTariffParamsInArray" >GetTransportTariffParamsInArray</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#GetTransportTariffParamsInString" >GetTransportTariffParamsInString</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#GetTravelTimeOfLoadAllocation" >GetTravelTimeOfLoadAllocation</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#RegisterNewLoad" >RegisterNewLoad</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#RegisterNewLoadAllocationForAdmins" >RegisterNewLoadAllocationForAdmins</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#RegisterNewLoadAllocationForDrivers" >RegisterNewLoadAllocationForDrivers</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#RegisterNewLoadAllocationForTransportCompanies" >RegisterNewLoadAllocationForTransportCompanies</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#SedimentLoad" >SedimentLoad</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="AllocateLoadToNextTurn"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>AllocateLoadToNextTurn</b></span>
+                        <a href="#AllocateLoadToNextTurn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>AllocateLoadToNextTurn(laId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="591"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:591</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>laId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;LoadAllocatedToNextTurn&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CancelLoad"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>CancelLoad</b></span>
+                        <a href="#CancelLoad"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>CancelLoad(loadId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="445"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:445</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>loadId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CancelLoadAllocation"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>CancelLoadAllocation</b></span>
+                        <a href="#CancelLoadAllocation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>CancelLoadAllocation(laId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, loadId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="650"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:650</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>laId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>loadId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CancelLoadPermission"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>CancelLoadPermission</b></span>
+                        <a href="#CancelLoadPermission"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>CancelLoadPermission(laId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, description: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, TurnResuscitation: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>, LoadResuscitation: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="708"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:708</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>laId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>description</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>TurnResuscitation</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>LoadResuscitation</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ChangePriorityLoadAllocations"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>ChangePriorityLoadAllocations</b></span>
+                        <a href="#ChangePriorityLoadAllocations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ChangePriorityLoadAllocations(priority: <a href="../interfaces/LoadAllocationPriority.html" target="_self">LoadAllocationPriority[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="138"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:138</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>priority</td>
+                                            <td>
+                                                            <code><a href="../interfaces/LoadAllocationPriority.html" target="_self" >LoadAllocationPriority[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DeleteLoad"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>DeleteLoad</b></span>
+                        <a href="#DeleteLoad"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>DeleteLoad(loadId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="425"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:425</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>loadId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="EditLoad"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>EditLoad</b></span>
+                        <a href="#EditLoad"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>EditLoad(load: <a href="../interfaces/LoadEdit.html" target="_self">LoadEdit</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="408"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:408</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>load</td>
+                                            <td>
+                                                            <code><a href="../interfaces/LoadEdit.html" target="_self" >LoadEdit</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="FreeLineLoad"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>FreeLineLoad</b></span>
+                        <a href="#FreeLineLoad"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>FreeLineLoad(loadId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="465"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:465</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>loadId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetLoadAllocationOfDriver"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>GetLoadAllocationOfDriver</b></span>
+                        <a href="#GetLoadAllocationOfDriver"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>GetLoadAllocationOfDriver()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="632"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:632</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;LoadAllocationInfo[]&gt;&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetLoadInfo"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>GetLoadInfo</b></span>
+                        <a href="#GetLoadInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>GetLoadInfo(loadId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="305"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:305</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>loadId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;LoadInfo&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetLoadsForAdmin"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>GetLoadsForAdmin</b></span>
+                        <a href="#GetLoadsForAdmin"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>GetLoadsForAdmin(transportCompanyId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, announcementGroupId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, announcementSubGroupId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, inventory?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>, date?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, loadStatusId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, loadSourceCityId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, loadTargetCityId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="224"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:224</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>transportCompanyId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>announcementGroupId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>announcementSubGroupId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>inventory</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>date</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>loadStatusId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>loadSourceCityId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>loadTargetCityId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;LoadForTransportCompanies_Factories_Admins_Drivers[]&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetLoadsForDrivers"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>GetLoadsForDrivers</b></span>
+                        <a href="#GetLoadsForDrivers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>GetLoadsForDrivers(announcementSubGroupId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, loadStatusId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:104</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>announcementSubGroupId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>loadStatusId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;LoadForTransportCompanies_Factories_Admins_Drivers[]&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetLoadsForFactoriesAndProductionCenters"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>GetLoadsForFactoriesAndProductionCenters</b></span>
+                        <a href="#GetLoadsForFactoriesAndProductionCenters"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>GetLoadsForFactoriesAndProductionCenters(transportCompanyId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, announcementGroupId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, announcementSubGroupId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, inventory?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>, date?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, loadStatusId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, loadSourceCityId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, loadTargetCityId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="157"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:157</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>transportCompanyId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>announcementGroupId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>announcementSubGroupId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>inventory</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>date</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>loadStatusId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>loadSourceCityId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>loadTargetCityId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;LoadForTransportCompanies_Factories_Admins_Drivers[]&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetLoadsForTransportCompanies"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>GetLoadsForTransportCompanies</b></span>
+                        <a href="#GetLoadsForTransportCompanies"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>GetLoadsForTransportCompanies(announcementGroupId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, announcementSubGroupId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, inventory?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>, date?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, loadStatusId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, loadSourceCityId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, loadTargetCityId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="43"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>announcementGroupId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>announcementSubGroupId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>inventory</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>date</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>loadStatusId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>loadSourceCityId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>loadTargetCityId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;LoadForTransportCompanies_Factories_Admins_Drivers[]&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetLoadStatuses"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>GetLoadStatuses</b></span>
+                        <a href="#GetLoadStatuses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>GetLoadStatuses()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="289"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:289</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;LoadStatus[]&gt;&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetRecordsOfLoadAllocation"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>GetRecordsOfLoadAllocation</b></span>
+                        <a href="#GetRecordsOfLoadAllocation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>GetRecordsOfLoadAllocation()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="614"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:614</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;LoadAllocationInfo[]&gt;&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetTransportTariffParamsByAnnouncementSubGroupId"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>GetTransportTariffParamsByAnnouncementSubGroupId</b></span>
+                        <a href="#GetTransportTariffParamsByAnnouncementSubGroupId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>GetTransportTariffParamsByAnnouncementSubGroupId(announcementSubGroupId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="367"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:367</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>announcementSubGroupId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;TransportTariffParam[]&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetTransportTariffParamsInArray"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>GetTransportTariffParamsInArray</b></span>
+                        <a href="#GetTransportTariffParamsInArray"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>GetTransportTariffParamsInArray(tptParams: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="325"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:325</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>tptParams</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;TransportTariffParam[]&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetTransportTariffParamsInString"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>GetTransportTariffParamsInString</b></span>
+                        <a href="#GetTransportTariffParamsInString"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>GetTransportTariffParamsInString(transportTariffParam: TransportTariffParam[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="348"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:348</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>transportTariffParam</td>
+                                            <td>
+                                                        <code>TransportTariffParam[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ApiResponse.html" target="_self" >Promise&lt;ApiResponse&lt;literal type&gt;&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GetTravelTimeOfLoadAllocation"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>GetTravelTimeOfLoadAllocation</b></span>
+                        <a href="#GetTravelTimeOfLoadAllocation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>GetTravelTimeOfLoadAllocation(laId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="675"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:675</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>laId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ApiResponse.html" target="_self" >Promise&lt;ApiResponse&lt;literal type&gt;&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RegisterNewLoad"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>RegisterNewLoad</b></span>
+                        <a href="#RegisterNewLoad"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>RegisterNewLoad(load: <a href="../interfaces/LoadRegister.html" target="_self">LoadRegister</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="387"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:387</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>load</td>
+                                            <td>
+                                                            <code><a href="../interfaces/LoadRegister.html" target="_self" >LoadRegister</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ApiResponse.html" target="_self" >Promise&lt;ApiResponse&lt;literal type&gt;&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RegisterNewLoadAllocationForAdmins"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>RegisterNewLoadAllocationForAdmins</b></span>
+                        <a href="#RegisterNewLoadAllocationForAdmins"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>RegisterNewLoadAllocationForAdmins(truckId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, driverId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, loadId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="546"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:546</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>truckId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>driverId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>loadId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RegisterNewLoadAllocationForDrivers"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>RegisterNewLoadAllocationForDrivers</b></span>
+                        <a href="#RegisterNewLoadAllocationForDrivers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>RegisterNewLoadAllocationForDrivers(loadId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="569"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:569</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>loadId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RegisterNewLoadAllocationForTransportCompanies"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>RegisterNewLoadAllocationForTransportCompanies</b></span>
+                        <a href="#RegisterNewLoadAllocationForTransportCompanies"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>RegisterNewLoadAllocationForTransportCompanies(truckId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, driverId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, loadId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="513"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:513</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>truckId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>driverId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>loadId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SedimentLoad"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>SedimentLoad</b></span>
+                        <a href="#SedimentLoad"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>SedimentLoad(loadId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="487"
+                                    class="link-to-prism">src/app/services/load-management/load-management.service.ts:487</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>loadId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="apiCommunicator"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>apiCommunicator</b></span>
+                        <a href="#apiCommunicator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(APICommunicationManagementService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/services/load-management/load-management.service.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userAuth"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>userAuth</b></span>
+                        <a href="#userAuth"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(UserAuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/services/load-management/load-management.service.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { inject, Injectable } from &#x27;@angular/core&#x27;;
+import { UserAuthService } from &#x27;../user-auth-service/user-auth.service&#x27;;
+import { APICommunicationManagementService } from &#x27;../api-communication-management/apicommunication-management.service&#x27;;
+import { ApiResponse } from &#x27;app/data/model/api-Response.model&#x27;;
+import {
+  LoadForTransportCompanies_Factories_Admins_Drivers,
+  LoadInfoForTransportCompanies_Factories_Admins_Drivers,
+} from &#x27;./model/load-info-for-transport-companies-factories-admins-drivers.model&#x27;;
+import { API_ROUTES } from &#x27;app/constants/api&#x27;;
+import { mockLoadsForTransportCompanies_Factories_Admins_Drivers } from &#x27;./mock/load-info-for-transport-companies-factories-admins-drivers.mock&#x27;;
+import { LoadStatus } from &#x27;./model/load-status.model&#x27;;
+import { mockLoadStatuses } from &#x27;./mock/load-status.mock&#x27;;
+import { LoadInfo } from &#x27;./model/load-info.model&#x27;;
+import { mockLoadInfo } from &#x27;./mock/load-info.mock&#x27;;
+import { TransportTariffParam } from &#x27;./model/transport-tariff-param.model&#x27;;
+import {
+  mockTransportTariffParamInString,
+  mockTransportTariffParams,
+} from &#x27;./mock/transport-tariff-param.mock&#x27;;
+import { LoadRegister } from &#x27;./model/load-register.model&#x27;;
+import { LoadEdit } from &#x27;./model/load-edit.model&#x27;;
+import { ShortResponse } from &#x27;app/data/model/short-response.model&#x27;;
+import { mockShortResponse } from &#x27;app/data/mock/short-response.mock&#x27;;
+import { TruckInfo } from &#x27;../driver-truck-management/model/truck-info.model&#x27;;
+import { TruckDriverInfo } from &#x27;../driver-truck-management/model/truck-driver-info.model&#x27;;
+import { AnnouncementSubGroup } from &#x27;../announcement-group-subgroup-management/model/announcement-subgroup.model&#x27;;
+import { LoadAllocationInfo } from &#x27;./model/load-allocation-info.model&#x27;;
+import { mockLoadAllocationInfos } from &#x27;./mock/load-allocation-info.mock&#x27;;
+import { LoadAllocatedToNextTurn } from &#x27;./model/load-allocated-to-next-turn.model&#x27;;
+import { mockLoadAllocatedToNextTurn } from &#x27;./mock/load-allocated-to-next-turn.mock&#x27;;
+import { LoadAllocationPriority } from &#x27;./model/load-allocation-priority&#x27;;
+import { mockLoadAllocationRecords } from &#x27;./mock/load-allocation-records&#x27;;
+
+@Injectable({
+  providedIn: &#x27;root&#x27;,
+})
+export class LoadManagementService {
+  private userAuth &#x3D; inject(UserAuthService);
+  private apiCommunicator &#x3D; inject(APICommunicationManagementService);
+
+  //#region Load methods
+
+  public async GetLoadsForTransportCompanies(
+    announcementGroupId?: number,
+    announcementSubGroupId?: number,
+    inventory?: boolean,
+    date?: string,
+    loadStatusId?: number,
+    loadSourceCityId?: number,
+    loadTargetCityId?: number
+  ): Promise&lt;
+    ApiResponse&lt;LoadForTransportCompanies_Factories_Admins_Drivers[]&gt;
+  &gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.LoadCapacitorAPI.GetLoadsForTransportCompanies;
+    const bodyValue: {
+      SessionId: string;
+      AnnouncementGroupId?: number;
+      AnnouncementSubGroupId?: number;
+      Inventory?: boolean;
+      ShamsiDate?: string;
+      LoadStatusId?: number;
+      LoadSourceCityId?: number;
+      LoadTargetCityId?: number;
+    } &#x3D; {
+      SessionId: this.userAuth.getSessionId() ?? &#x27;&#x27;,
+    };
+
+    if (announcementGroupId !&#x3D;&#x3D; undefined) {
+      bodyValue.AnnouncementGroupId &#x3D; announcementGroupId;
+    }
+    if (announcementSubGroupId !&#x3D;&#x3D; undefined) {
+      bodyValue.AnnouncementSubGroupId &#x3D; announcementSubGroupId;
+    }
+    if (inventory !&#x3D;&#x3D; undefined) {
+      bodyValue.Inventory &#x3D; inventory;
+    }
+    if (date !&#x3D;&#x3D; undefined) {
+      bodyValue.ShamsiDate &#x3D; date;
+    }
+    if (loadStatusId !&#x3D;&#x3D; undefined) {
+      bodyValue.LoadStatusId &#x3D; loadStatusId;
+    }
+    if (loadSourceCityId !&#x3D;&#x3D; undefined) {
+      bodyValue.LoadSourceCityId &#x3D; loadSourceCityId;
+    }
+    if (loadTargetCityId !&#x3D;&#x3D; undefined) {
+      bodyValue.LoadTargetCityId &#x3D; loadTargetCityId;
+    }
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      LoadForTransportCompanies_Factories_Admins_Drivers[]
+    &gt;(
+      apiUrl,
+      bodyValue,
+      mockLoadsForTransportCompanies_Factories_Admins_Drivers
+    );
+    //#endregion
+  }
+
+  public async GetLoadsForDrivers(
+    announcementSubGroupId: number,
+    loadStatusId: number
+  ): Promise&lt;
+    ApiResponse&lt;LoadForTransportCompanies_Factories_Admins_Drivers[]&gt;
+  &gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.LoadCapacitorAPI.GetLoadsForDriver;
+    const loadInfo: LoadInfo &#x3D; {
+      LoadId: 0,
+      LoadStatusId: loadStatusId,
+    };
+    const announcementSubgroupInfo: AnnouncementSubGroup &#x3D; {
+      AnnouncementSGId: announcementSubGroupId,
+    };
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      AnnouncementSGId: announcementSubgroupInfo.AnnouncementSGId,
+      LoadStatusId: loadInfo.LoadStatusId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      LoadForTransportCompanies_Factories_Admins_Drivers[]
+    &gt;(
+      apiUrl,
+      bodyValue,
+      mockLoadsForTransportCompanies_Factories_Admins_Drivers
+    );
+    //#endregion
+  }
+
+  public async ChangePriorityLoadAllocations(
+    priority: LoadAllocationPriority[]
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.LoadAllocationAPI.ChangeLoadAllocationsPriority;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      LAIdPrioritys: priority,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async GetLoadsForFactoriesAndProductionCenters(
+    transportCompanyId?: number,
+    announcementGroupId?: number,
+    announcementSubGroupId?: number,
+    inventory?: boolean,
+    date?: string,
+    loadStatusId?: number,
+    loadSourceCityId?: number,
+    loadTargetCityId?: number
+  ): Promise&lt;
+    ApiResponse&lt;LoadForTransportCompanies_Factories_Admins_Drivers[]&gt;
+  &gt; {
+    //#region Consts
+    const apiUrl &#x3D;
+      API_ROUTES.LoadCapacitorAPI.GetLoadsForFactoriesAndProductionCenters;
+    const bodyValue: {
+      SessionId: string;
+      TransportCompanyId?: number;
+      AnnouncementGroupId?: number;
+      AnnouncementSubGroupId?: number;
+      Inventory?: boolean;
+      ShamsiDate?: string;
+      LoadStatusId?: number;
+      LoadSourceCityId?: number;
+      LoadTargetCityId?: number;
+    } &#x3D; {
+      SessionId: this.userAuth.getSessionId() ?? &#x27;&#x27;,
+    };
+    if (transportCompanyId !&#x3D;&#x3D; undefined) {
+      bodyValue.TransportCompanyId &#x3D; transportCompanyId;
+    }
+    if (announcementGroupId !&#x3D;&#x3D; undefined) {
+      bodyValue.AnnouncementGroupId &#x3D; announcementGroupId;
+    }
+    if (announcementSubGroupId !&#x3D;&#x3D; undefined) {
+      bodyValue.AnnouncementSubGroupId &#x3D; announcementSubGroupId;
+    }
+    if (inventory !&#x3D;&#x3D; undefined) {
+      bodyValue.Inventory &#x3D; inventory;
+    }
+    if (date !&#x3D;&#x3D; undefined) {
+      bodyValue.ShamsiDate &#x3D; date;
+    }
+    if (loadStatusId !&#x3D;&#x3D; undefined) {
+      bodyValue.LoadStatusId &#x3D; loadStatusId;
+    }
+    if (loadSourceCityId !&#x3D;&#x3D; undefined) {
+      bodyValue.LoadSourceCityId &#x3D; loadSourceCityId;
+    }
+    if (loadTargetCityId !&#x3D;&#x3D; undefined) {
+      bodyValue.LoadTargetCityId &#x3D; loadTargetCityId;
+    }
+
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      LoadForTransportCompanies_Factories_Admins_Drivers[]
+    &gt;(
+      apiUrl,
+      bodyValue,
+      mockLoadsForTransportCompanies_Factories_Admins_Drivers
+    );
+    //#endregion
+  }
+
+  public async GetLoadsForAdmin(
+    transportCompanyId?: number,
+    announcementGroupId?: number,
+    announcementSubGroupId?: number,
+    inventory?: boolean,
+    date?: string,
+    loadStatusId?: number,
+    loadSourceCityId?: number,
+    loadTargetCityId?: number
+  ): Promise&lt;
+    ApiResponse&lt;LoadForTransportCompanies_Factories_Admins_Drivers[]&gt;
+  &gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.LoadCapacitorAPI.GetLoadsForAdmin;
+    const bodyValue: {
+      SessionId: string;
+      TransportCompanyId?: number;
+      AnnouncementGroupId?: number;
+      AnnouncementSubGroupId?: number;
+      Inventory?: boolean;
+      ShamsiDate?: string;
+      LoadStatusId?: number;
+      LoadSourceCityId?: number;
+      LoadTargetCityId?: number;
+    } &#x3D; {
+      SessionId: this.userAuth.getSessionId() ?? &#x27;&#x27;,
+    };
+    if (transportCompanyId !&#x3D;&#x3D; undefined) {
+      bodyValue.TransportCompanyId &#x3D; transportCompanyId;
+    }
+    if (announcementGroupId !&#x3D;&#x3D; undefined) {
+      bodyValue.AnnouncementGroupId &#x3D; announcementGroupId;
+    }
+    if (announcementSubGroupId !&#x3D;&#x3D; undefined) {
+      bodyValue.AnnouncementSubGroupId &#x3D; announcementSubGroupId;
+    }
+    if (inventory !&#x3D;&#x3D; undefined) {
+      bodyValue.Inventory &#x3D; inventory;
+    }
+    if (date !&#x3D;&#x3D; undefined) {
+      bodyValue.ShamsiDate &#x3D; date;
+    }
+    if (loadStatusId !&#x3D;&#x3D; undefined) {
+      bodyValue.LoadStatusId &#x3D; loadStatusId;
+    }
+    if (loadSourceCityId !&#x3D;&#x3D; undefined) {
+      bodyValue.LoadSourceCityId &#x3D; loadStatusId;
+    }
+    if (loadTargetCityId !&#x3D;&#x3D; undefined) {
+      bodyValue.LoadTargetCityId &#x3D; loadTargetCityId;
+    }
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      LoadForTransportCompanies_Factories_Admins_Drivers[]
+    &gt;(
+      apiUrl,
+      bodyValue,
+      mockLoadsForTransportCompanies_Factories_Admins_Drivers
+    );
+    //#endregion
+  }
+
+  public async GetLoadStatuses(): Promise&lt;ApiResponse&lt;LoadStatus[]&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.LoadCapacitorAPI.GetAllLoadStatusesByUserType;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      LoadStatus[]
+    &gt;(apiUrl, bodyValue, mockLoadStatuses);
+    //#endregion
+  }
+
+  public async GetLoadInfo(loadId: number): Promise&lt;ApiResponse&lt;LoadInfo&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.LoadCapacitorAPI.GetLoad;
+    const loadInfo: LoadInfo &#x3D; {
+      LoadId: loadId,
+    };
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      LoadId: loadInfo.LoadId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      LoadInfo
+    &gt;(apiUrl, bodyValue, mockLoadInfo);
+    //#endregion
+  }
+
+  public async GetTransportTariffParamsInArray(
+    tptParams: string
+  ): Promise&lt;ApiResponse&lt;TransportTariffParam[]&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.LoadCapacitorAPI.GetTransportTariffParamsInJson;
+    const loadInfo: LoadInfo &#x3D; {
+      LoadId: 0,
+      TPTParams: tptParams,
+    };
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      TPTParams: loadInfo.TPTParams,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      TransportTariffParam[]
+    &gt;(apiUrl, bodyValue, mockTransportTariffParams);
+    //#endregion
+  }
+
+  public async GetTransportTariffParamsInString(
+    transportTariffParam: TransportTariffParam[]
+  ): Promise&lt;ApiResponse&lt;{ TPTParams: string }&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.LoadCapacitorAPI.GetTransportTariffParamsInString;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      ListofTransportTariffsParams: transportTariffParam,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      { TPTParams: string }
+    &gt;(apiUrl, bodyValue, mockTransportTariffParamInString);
+    //#endregion
+  }
+
+  public async GetTransportTariffParamsByAnnouncementSubGroupId(
+    announcementSubGroupId: number
+  ): Promise&lt;ApiResponse&lt;TransportTariffParam[]&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D;
+      API_ROUTES.LoadCapacitorAPI.GetTransportTariffParamsByAnnouncementSGId;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      AnnouncementSGId: announcementSubGroupId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      TransportTariffParam[]
+    &gt;(apiUrl, bodyValue, mockTransportTariffParams);
+    //#endregion
+  }
+
+  public async RegisterNewLoad(
+    load: LoadRegister
+  ): Promise&lt;ApiResponse&lt;{ newLoadId: number }&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.LoadCapacitorAPI.RegisterLoad;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      Load: load,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      { newLoadId: number }
+    &gt;(apiUrl, bodyValue, {
+      newLoadId: 15,
+    });
+    //#endregion
+  }
+
+  public async EditLoad(load: LoadEdit): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.LoadCapacitorAPI.EditLoad;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      Load: load,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async DeleteLoad(loadId: number): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.LoadCapacitorAPI.DeleteLoad;
+    const loadInfo: LoadInfo &#x3D; {
+      LoadId: loadId,
+    };
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      LoadId: loadInfo.LoadId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async CancelLoad(loadId: number): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.LoadCapacitorAPI.CancelLoad;
+    const loadInfo: LoadInfo &#x3D; {
+      LoadId: loadId,
+    };
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      LoadId: loadInfo.LoadId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async FreeLineLoad(
+    loadId: number
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.LoadCapacitorAPI.FreeLineLoad;
+    const loadInfo: LoadInfo &#x3D; {
+      LoadId: loadId,
+    };
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      LoadId: loadInfo.LoadId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async SedimentLoad(
+    loadId: number
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.LoadCapacitorAPI.SedimentLoad;
+    const loadInfo: LoadInfo &#x3D; {
+      LoadId: loadId,
+    };
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      LoadId: loadInfo.LoadId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  //#endregion
+
+  //#region LoadAllocation methods
+
+  public async RegisterNewLoadAllocationForTransportCompanies(
+    truckId: number,
+    driverId: number,
+    loadId: number
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D;
+      API_ROUTES.LoadAllocationAPI.RegistrationForTransportCompanies;
+    const truckInfo: TruckInfo &#x3D; {
+      TruckId: truckId,
+    };
+    const driverInfo: TruckDriverInfo &#x3D; {
+      DriverId: driverId,
+    };
+    const loadInfo: LoadInfo &#x3D; {
+      LoadId: loadId,
+    };
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      TruckId: truckInfo.TruckId,
+      TruckDriverId: driverInfo.DriverId,
+      LoadId: loadInfo.LoadId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async RegisterNewLoadAllocationForAdmins(
+    truckId: number,
+    driverId: number,
+    loadId: number
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.LoadAllocationAPI.RegistrationForAdmins;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      TruckId: truckId,
+      TruckDriverId: driverId,
+      LoadId: loadId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async RegisterNewLoadAllocationForDrivers(
+    loadId: number
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.LoadAllocationAPI.RegistrationForDrivers;
+    const loadInfo: LoadInfo &#x3D; {
+      LoadId: loadId,
+    };
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      LoadId: loadInfo.LoadId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async AllocateLoadToNextTurn(
+    laId: number
+  ): Promise&lt;ApiResponse&lt;LoadAllocatedToNextTurn&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.LoadAllocationAPI.AllocateLoadToNextTurn;
+    const loadAllocationInfo: LoadAllocationInfo &#x3D; {
+      LoadId: 0,
+      LAId: laId,
+    };
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      LAId: loadAllocationInfo.LAId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      LoadAllocatedToNextTurn
+    &gt;(apiUrl, bodyValue, mockLoadAllocatedToNextTurn);
+    //#endregion
+  }
+
+  public async GetRecordsOfLoadAllocation(): Promise&lt;
+    ApiResponse&lt;LoadAllocationInfo[]&gt;
+  &gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.LoadAllocationAPI.GetRecordsOfLoadAllocation;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      LoadAllocationInfo[]
+    &gt;(apiUrl, bodyValue, mockLoadAllocationRecords);
+    //#endregion
+  }
+
+  public async GetLoadAllocationOfDriver(): Promise&lt;
+    ApiResponse&lt;LoadAllocationInfo[]&gt;
+  &gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.LoadAllocationAPI.GetLoadAllocationOfDriver;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      LoadAllocationInfo[]
+    &gt;(apiUrl, bodyValue, mockLoadAllocationInfos);
+    //#endregion
+  }
+
+  public async CancelLoadAllocation(
+    laId: number,
+    loadId: number
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.LoadAllocationAPI.CancelLoadAllocation;
+    const LoadAllocationInfo: LoadAllocationInfo &#x3D; {
+      LAId: laId,
+      LoadId: loadId,
+    };
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      LAId: LoadAllocationInfo.LAId,
+      LoadId: LoadAllocationInfo.LoadId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async GetTravelTimeOfLoadAllocation(laId: number): Promise&lt;
+    ApiResponse&lt;{
+      TravelTime: number;
+    }&gt;
+  &gt; {
+    //#region Consts
+    const apiUrl &#x3D; API_ROUTES.LoadAllocationAPI.GetTravelTimeOfLoadAllocation;
+    const LoadAllocationInfo: LoadAllocationInfo &#x3D; {
+      LAId: laId,
+      LoadId: 0,
+    };
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      LAId: LoadAllocationInfo.LAId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      {
+        TravelTime: number;
+      }
+    &gt;(apiUrl, bodyValue, {
+      TravelTime: 73,
+    });
+    //#endregion
+  }
+
+  //#endregion
+
+  //#region LoadPermission methods
+
+  public async CancelLoadPermission(
+    laId: number,
+    description: string,
+    TurnResuscitation: boolean,
+    LoadResuscitation: boolean
+  ): Promise&lt;ApiResponse&lt;ShortResponse&gt;&gt; {
+    //#region Consts
+    const apiUrl &#x3D;
+      API_ROUTES.TransportationAPI.LoadPermissions.CancelLoadPermission;
+    const bodyValue &#x3D; {
+      SessionId: this.userAuth.getSessionId(),
+      LAId: laId,
+      Description: description,
+      TurnResuscitation: TurnResuscitation,
+      LoadResuscitation: LoadResuscitation,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post&lt;
+      typeof bodyValue,
+      ShortResponse
+    &gt;(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  //#endregion
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'LoadManagementService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
