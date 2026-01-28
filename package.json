@@ -22,7 +22,7 @@
     "@angular/platform-browser-dynamic": "^21.1.1",
     "@angular/router": "^21.1.1",
     "@angular/service-worker": "^21.1.1",
-    "@ngrx/store": "21.0.0-beta.0",
+    "@ngrx/store": "21.0.1",
     "@omnedia/ngx-fade": "^4.0.1",
     "@omnedia/ngx-number-ticker": "^4.0.1",
     "@omnedia/ngx-retro-grid": "^4.0.1",
