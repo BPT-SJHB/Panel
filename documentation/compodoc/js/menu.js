@@ -28,26 +28,78 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /**
      * Ensure that a URL is safe to use in src/href attributes.
-     * Allows relative URLs and absolute http/https URLs.
-     * Rejects javascript:, data:, vbscript:, and other non-http(s) schemes.
+     * Allows only:
+     *   - relative URLs that stay within the documentation root, and
+     *   - absolute http/https URLs on the same origin.
+     * Rejects javascript:, data:, vbscript:, protocol-relative URLs, and
+     * any URL containing HTML/meta-characters that could be reinterpreted.
      */
     function getSafeUrl(url) {
         if (!url) {
             return null;
         }
         var trimmed = url.trim();
-        // If there is no ":" before any "/" or "?", treat as relative URL and allow.
+        if (!trimmed) {
+            return null;
+        }
+        // Basic character-level hardening: disallow obvious HTML/JS meta-characters.
+        if (/[<>"'`\\]/.test(trimmed)) {
+            return null;
+        }
         var firstColon = trimmed.indexOf(':');
         var firstSlash = trimmed.search(/[\/?]/);
-        if (firstColon === -1 || (firstSlash !== -1 && firstColon > firstSlash)) {
+
+        // Treat as relative URL if there is no ":" before any "/" or "?".
+        var isRelative = firstColon === -1 || (firstSlash !== -1 && firstColon > firstSlash);
+
+        if (isRelative) {
+            // Disallow protocol-relative URLs like //example.com
+            if (trimmed.indexOf('//') === 0) {
+                return null;
+            }
+            // Normalize leading "./"
+            if (trimmed.indexOf('./') === 0) {
+                trimmed = trimmed.slice(2);
+            }
+            // Split path and ensure it does not escape documentation root with ".."
+            var segments = trimmed.split('/');
+            var depth = 0;
+            for (var i = 0; i < segments.length; i++) {
+                var seg = segments[i];
+                if (!seg || seg === '.') {
+                    continue;
+                }
+                if (seg === '..') {
+                    depth--;
+                    if (depth < 0) {
+                        // Attempt to traverse above the allowed root
+                        return null;
+                    }
+                } else {
+                    depth++;
+                }
+            }
             return trimmed;
         }
+
+        // Absolute URL: only allow http/https, and only on the same origin.
         var scheme = trimmed.slice(0, firstColon).toLowerCase();
-        if (scheme === 'http' || scheme === 'https') {
-            return trimmed;
+        if (scheme !== 'http' && scheme !== 'https') {
+            // Disallow other schemes (e.g., javascript:, data:, vbscript:)
+            return null;
         }
-        // Disallow other schemes (e.g., javascript:, data:, vbscript:)
-        return null;
+
+        try {
+            // Use the URL API when available to enforce same-origin policy.
+            var parsed = new URL(trimmed, window.location.href);
+            if (parsed.origin !== window.location.origin) {
+                return null;
+            }
+            return parsed.toString();
+        } catch (e) {
+            // If URL constructor is not supported or parsing fails, reject.
+            return null;
+        }
     }
 
     var processLink = function (link, url) {
