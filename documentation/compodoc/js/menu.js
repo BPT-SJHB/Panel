@@ -26,6 +26,30 @@ document.addEventListener('DOMContentLoaded', function () {
         return el.className && new RegExp('(\\s|^)' + cls + '(\\s|$)').test(el.className);
     }
 
+    /**
+     * Ensure that a URL is safe to use in src/href attributes.
+     * Allows relative URLs and absolute http/https URLs.
+     * Rejects javascript:, data:, vbscript:, and other non-http(s) schemes.
+     */
+    function getSafeUrl(url) {
+        if (!url) {
+            return null;
+        }
+        var trimmed = url.trim();
+        // If there is no ":" before any "/" or "?", treat as relative URL and allow.
+        var firstColon = trimmed.indexOf(':');
+        var firstSlash = trimmed.search(/[\/?]/);
+        if (firstColon === -1 || (firstSlash !== -1 && firstColon > firstSlash)) {
+            return trimmed;
+        }
+        var scheme = trimmed.slice(0, firstColon).toLowerCase();
+        if (scheme === 'http' || scheme === 'https') {
+            return trimmed;
+        }
+        // Disallow other schemes (e.g., javascript:, data:, vbscript:)
+        return null;
+    }
+
     var processLink = function (link, url) {
         if (url.charAt(0) !== '.') {
             var prefix = '';
@@ -86,10 +110,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 var url = entityLogo.getAttribute('data-src');
                 // Dark mode + logo
                 let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                if (isDarkMode && url.indexOf('compodoc') !== -1) {
+                if (isDarkMode && url && url.indexOf('compodoc') !== -1) {
                     url = 'images/compodoc-vectorise-inverted.png';
                 }
-                if (url.charAt(0) !== '.') {
+                if (url && url.charAt(0) !== '.') {
                     var prefix = '';
                     switch (COMPODOC_CURRENT_PAGE_DEPTH) {
                         case 5:
@@ -111,7 +135,11 @@ document.addEventListener('DOMContentLoaded', function () {
                             prefix = './';
                             break;
                     }
-                    entityLogo.src = prefix + url;
+                    var resolvedUrl = prefix + url;
+                    var safeUrl = getSafeUrl(resolvedUrl);
+                    if (safeUrl) {
+                        entityLogo.src = safeUrl;
+                    }
                 }
             }
         }
