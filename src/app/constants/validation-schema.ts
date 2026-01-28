@@ -301,7 +301,11 @@ export const ValidationSchema = {
 
   optCode: {
     name: 'رمز یکبار مصرف',
-    validators: [Validators.required],
+    validators: [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.maxLength(6),
+    ],
   },
   ticketTrackCode: {
     name: 'شماره پیگیری',

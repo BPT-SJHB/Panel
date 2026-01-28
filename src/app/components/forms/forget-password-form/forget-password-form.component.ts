@@ -12,6 +12,7 @@ import { interval, Subscription, takeUntil } from 'rxjs';
 import { Dialog } from 'primeng/dialog';
 import { UserManagementService } from 'app/services/user-management/user-management.service';
 import { UserAuthService } from 'app/services/user-auth-service/user-auth.service';
+import { OptInputComponent } from 'app/components/shared/inputs/opt-input/opt-input.component';
 
 @Component({
   selector: 'app-forget-password-form',
@@ -22,6 +23,7 @@ import { UserAuthService } from 'app/services/user-auth-service/user-auth.servic
     ButtonComponent,
     CaptchaInputComponent,
     Dialog,
+    OptInputComponent,
   ],
   templateUrl: './forget-password-form.component.html',
   styleUrl: './forget-password-form.component.scss',
@@ -59,7 +61,7 @@ export class ForgetPasswordFormComponent extends BaseLoading implements OnInit {
   // ------------------------
   // Timer State
   // ------------------------
-  otpCooldown = 120; // seconds
+  otpCooldown = 0; // seconds
   remainingTime = signal(0); // seconds remaining for resend
   private timerSub?: Subscription;
 
@@ -163,8 +165,6 @@ export class ForgetPasswordFormComponent extends BaseLoading implements OnInit {
   async verifyCode() {
     const sessionId = this.ctrl('sessionId').value;
     if (this.loading() || this.optCodeCrl.invalid || !sessionId) return;
-
-    console.log({ sessionId });
 
     await this.withLoading(async () => {
       const opt = this.optCodeCrl.value;
