@@ -1,210 +1,198 @@
-<div class="grid grid-cols-12">
+<div class="flex flex-col justify-center gap-4">
   <!-- Search by SmartCard -->
   <form
-    class="col-span-12"
+    class="flex justify-center w-full self-center"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
     [formGroup]="mainSearchForm"
   >
-    <div class="flex gap-4">
-      <app-search-input
-        [control]="searchSmartCard"
-        validationField="smartCard"
-        icon="pi pi-search"
-        class="flex-1"
-        [placeholder]="
-          appTitle.getPlaceholder('truckSmartCardNumberPlaceholder')
-        "
-        [disableSearchButton]="mainSearchForm.invalid"
-        [searchButtonLabel]="appTitle.buttons.retrieveFromOutdoorSystem"
-        [onSearchQuery]="loadComposedForm"
-        type="number"
-      />
-    </div>
+    <app-search-input
+      [control]="searchSmartCard"
+      validationField="smartCard"
+      icon="pi pi-search"
+      class="min-w-[70%]"
+      [placeholder]="appTitle.getPlaceholder('truckSmartCardNumberPlaceholder')"
+      [disableSearchButton]="mainSearchForm.invalid"
+      [searchButtonLabel]="appTitle.buttons.retrieveFromOutdoorSystem"
+      [onSearchQuery]="loadComposedForm"
+      type="number"
+    />
   </form>
 
   <!-- Truck Info -->
-  <div class="grid grid-cols-12 col-span-12 gap-4 mt-6">
-    <span class="text-lg font-bold col-span-12">{{
-      appTitle.sectionTitles.truckInfo
-    }}</span>
-
-    <div class="grid grid-cols-12 col-span-12 gap-4">
+  <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-4">
       <form
-        class="grid grid-cols-12 gap-4 col-span-12"
         [class.pointer-events-none]="loading"
         [class.opacity-60]="loading"
         [formGroup]="truckComposedInfoForm"
         (ngSubmit)="loadTruckInfo()"
       >
-        <div class="grid grid-cols-12 gap-4 col-span-12">
-          <app-text-input
-            hidden
-            [label]="appTitle.inputs.trucks.truckId"
-            [readOnly]="true"
-            [control]="truckId"
-            validationField="truckId"
-            [addonWidth]="addonWidth"
-          />
+        <app-section-card>
+          <div class="flex w-full flex-col">
+            <span class="text-lg font-bold w-full mb-2">{{
+              appTitle.sectionTitles.truckInfo
+            }}</span>
 
-          <div class="flex gap-2 col-span-12 md:col-span-6">
             <app-text-input
+              hidden
+              [label]="appTitle.inputs.trucks.truckId"
+              [readOnly]="true"
+              [control]="truckId"
+              validationField="truckId"
+              [addonWidth]="addonWidth"
+            />
+
+            <app-search-input
               [label]="appTitle.inputs.trucks.truckSmartCardNumber"
-              class="flex-1"
+              [control]="smartCard"
+              [addonWidth]="addonWidth"
+              [disableSearchButton]="smartCard.invalid || loading"
+              validationField="smartCard"
+              class="min-w-[70%]"
               [placeholder]="
                 appTitle.getPlaceholder('truckSmartCardNumberPlaceholder')
               "
-              [control]="smartCard"
-              validationField="smartCard"
-              [addonWidth]="addonWidth"
+              [searchButtonLabel]="appTitle.buttons.retrieveFromOutdoorSystem"
+              [onSearchQuery]="loadTruckInfo"
               type="number"
             />
-            <app-button
-              (click)="loadTruckInfo()"
-              [disabled]="this.smartCard.invalid || loading"
-              size="small"
-              styleClass="mt-1 w-24 h-8"
-              type="submit"
-              [label]="appTitle.buttons.retrieveFromOutdoorSystem"
-            />
-          </div>
 
-          <div class="col-span-12 md:col-span-6">
-            <app-text-input
-              [label]="appTitle.inputs.trucks.licensePlateNumber"
-              class="flex-1"
-              [readOnly]="true"
-              [control]="licensePlateNumber"
-              validationField="licenseNumber"
-              [addonWidth]="addonWidth"
-              format="carPlate"
-            />
+            <div class="flex flex-col md:flex-row gap-4 -mt-1">
+              <app-text-input
+                [label]="appTitle.inputs.trucks.licensePlateNumber"
+                class="w-full"
+                [readOnly]="true"
+                [control]="licensePlateNumber"
+                validationField="licenseNumber"
+                [addonWidth]="addonWidth"
+                format="carPlate"
+              />
+              <app-text-input
+                [label]="appTitle.inputs.trucks.licensePlateSerialNumber"
+                class="w-full"
+                [readOnly]="true"
+                [control]="serialNumber"
+                validationField="serialNumber"
+                [addonWidth]="addonWidth"
+              />
+            </div>
           </div>
-          <div class="col-span-12 md:col-span-6">
-            <app-text-input
-              [label]="appTitle.inputs.trucks.licensePlateSerialNumber"
-              class="flex-1"
-              [readOnly]="true"
-              [control]="serialNumber"
-              validationField="serialNumber"
-              [addonWidth]="addonWidth"
-            />
-          </div>
-        </div>
+        </app-section-card>
       </form>
 
       <!-- Driver Info -->
-      <form
-        class="grid grid-cols-12 gap-4 col-span-12"
-        [class.pointer-events-none]="loading"
-        [class.opacity-60]="loading"
-        [formGroup]="truckComposedInfoForm"
-        (ngSubmit)="loadDriverInfo()"
-      >
-        <div class="grid grid-cols-12 gap-4 col-span-12">
-          <app-text-input
-            hidden
-            [label]="appTitle.inputs.drivers.driverId"
-            [readOnly]="true"
-            [control]="driverId"
-            validationField="driverId"
-            [addonWidth]="addonWidth"
-          />
+      <app-section-card>
+        <form
+          [class.pointer-events-none]="loading"
+          [class.opacity-60]="loading"
+          [formGroup]="truckComposedInfoForm"
+          (ngSubmit)="loadDriverInfo()"
+        >
+          <div class="flex w-full flex-col">
+            <span class="text-lg font-bold w-full mb-2"
+              >{{ appTitle.sectionTitles.driverInfo }}
+            </span>
 
-          <div class="flex gap-2 col-span-12 md:col-span-6">
             <app-text-input
+              hidden
+              [label]="appTitle.inputs.drivers.driverId"
+              [readOnly]="true"
+              [control]="driverId"
+              validationField="driverId"
+              [addonWidth]="addonWidth"
+            />
+
+            <app-search-input
               [label]="appTitle.inputs.users.userNationalCodeTitle"
-              class="flex-1"
+              [control]="nationalId"
+              [addonWidth]="addonWidth"
+              [disableSearchButton]="nationalId.invalid || loading"
+              validationField="nationalId"
+              class="min-w-[70%]"
               [placeholder]="
                 appTitle.getPlaceholder('userNationalCodePlaceholder')
               "
-              [control]="nationalId"
-              validationField="nationalId"
-              [addonWidth]="addonWidth"
+              [searchButtonLabel]="appTitle.buttons.retrieveFromOutdoorSystem"
+              [onSearchQuery]="loadDriverInfo"
               type="number"
             />
-            <app-button
-              (click)="loadDriverInfo()"
-              [disabled]="this.nationalId.invalid || loading"
-              size="small"
-              type="submit"
-              styleClass="mt-1 w-24 h-8 "
-              [label]="appTitle.buttons.retrieveFromOutdoorSystem"
-            />
-          </div>
 
-          <div class="col-span-12 md:col-span-6">
+            <div class="w-full -mt-1">
+              <app-text-input
+                [label]="appTitle.inputs.users.userNameAndLastName"
+                class="flex-1"
+                [readOnly]="true"
+                [control]="fullName"
+                validationField="fullName"
+                [addonWidth]="addonWidth"
+              />
+            </div>
+          </div>
+        </form>
+
+        <!-- Wallet / Turn Info -->
+        <form
+          [class.pointer-events-none]="loading"
+          [class.opacity-60]="loading"
+        >
+          <div class="flex flex-col mt-4">
+            <span class="text-lg font-bold w-full mb-2"
+              >{{ appTitle.sectionTitles.turnInfo }}
+            </span>
+
             <app-text-input
-              [label]="appTitle.inputs.users.userNameAndLastName"
-              class="flex-1"
+              hidden
+              [label]="appTitle.inputs.wallet.walletId"
               [readOnly]="true"
-              [control]="fullName"
-              validationField="fullName"
+              [control]="walletId"
+              validationField="walletId"
               [addonWidth]="addonWidth"
             />
-          </div>
-        </div>
-      </form>
 
-      <!-- Wallet / Turn Info -->
-      <form
-        class="grid grid-cols-12 gap-4 col-span-12"
-        [class.pointer-events-none]="loading"
-        [class.opacity-60]="loading"
-      >
-        <div class="grid grid-cols-12 gap-4 col-span-12">
-          <app-text-input
-            hidden
-            [label]="appTitle.inputs.wallet.walletId"
-            [readOnly]="true"
-            [control]="walletId"
-            validationField="walletId"
-            [addonWidth]="addonWidth"
-          />
-
-          <app-text-input
-            hidden
-            [label]="appTitle.inputs.turns.turnId"
-            [readOnly]="true"
-            [control]="turnId"
-            validationField="turnId"
-            [addonWidth]="addonWidth"
-          />
-
-          <div class="col-span-12 md:col-span-6">
             <app-text-input
-              [label]="appTitle.inputs.turns.turnTitle"
-              class="flex-1"
+              hidden
+              [label]="appTitle.inputs.turns.turnId"
               [readOnly]="true"
-              [control]="turn"
-              validationField="turn"
+              [control]="turnId"
+              validationField="turnId"
               [addonWidth]="addonWidth"
             />
-          </div>
 
-          <div class="col-span-12 md:col-span-6">
-            <app-text-input
-              [label]="appTitle.inputs.wallet.walletTitle"
-              class="flex-1"
-              [readOnly]="true"
-              [control]="wallet"
-              validationField="wallet"
-              [addonWidth]="addonWidth"
-            />
+            <div class="flex flex-col md:flex-row gap-4">
+              <app-text-input
+                [label]="appTitle.inputs.turns.turnTitle"
+                [readOnly]="true"
+                [control]="turn"
+                validationField="turn"
+                [addonWidth]="addonWidth"
+                class="w-full"
+              />
+
+              <app-text-input
+                [label]="appTitle.inputs.wallet.walletTitle"
+                [readOnly]="true"
+                [control]="wallet"
+                validationField="wallet"
+                [addonWidth]="addonWidth"
+                class="w-full"
+              />
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </app-section-card>
     </div>
 
     <!-- Action Buttons -->
     <div
-      class="col-span-12 gap-3 md:flex md:flex-row-reverse md:flex-wrap items-center mt-2"
+      class="flex self-center flex-col flex-wrap md:flex-row w-full max-w-[51vh] md:max-w-full items-center justify-center gap-2 md:gap-5"
     >
       <app-button
         (click)="setComposedInformation()"
         [disabled]="this.truckComposedInfoForm.invalid || loading"
         [label]="appTitle.buttons.saveAndEdit"
-        styleClass="md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+        class="w-full md:w-fit"
+        styleClass="my-2 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
       ></app-button>
 
       <app-button
@@ -212,7 +200,8 @@
         [disabled]="this.truckComposedInfoForm.invalid || loading"
         severity="info"
         [label]="appTitle.buttons.createNewWallet"
-        styleClass="md:my-0 text-xs md:text-sm lg:text-base w-full md:w-40 lg:w-50"
+        class="w-full md:w-fit text-nowrap"
+        styleClass="my-2 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
       ></app-button>
     </div>
   </div>
