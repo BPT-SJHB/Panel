@@ -9,6 +9,10 @@ import {
   ViewChild,
   input,
   output,
+  signal,
+  effect,
+  ChangeDetectionStrategy,
+  viewChild,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { InputGroupModule } from 'primeng/inputgroup';
@@ -44,6 +48,7 @@ export interface ImageAddon {
   ],
   templateUrl: './text-input.component.html',
   styleUrl: './text-input.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextInputComponent implements OnInit, OnChanges, OnDestroy {
   // ========= VIEW CHILD =========
@@ -83,6 +88,7 @@ export class TextInputComponent implements OnInit, OnChanges, OnDestroy {
   private sub!: Subscription;
   private lastToastTime = 0; // timestamp of last toast shown
   private readonly separator = ',';
+  deleteButtonDisabled = signal(true);
 
   // ========= LIFECYCLE HOOKS =========
   ngOnInit(): void {
@@ -91,6 +97,7 @@ export class TextInputComponent implements OnInit, OnChanges, OnDestroy {
     // Subscribe to control changes for formatting
     this.sub = this.control().valueChanges.subscribe((value) => {
       this.applyFormat(value?.toString() ?? '');
+      this.deleteButtonDisabled.set(false);
     });
   }
 
@@ -154,6 +161,21 @@ export class TextInputComponent implements OnInit, OnChanges, OnDestroy {
     this.sanitizeInput(target);
     this.applyFormat(target.value);
     this.input.emit(target);
+
+    if (target.value === '') {
+      this.deleteButtonDisabled.set(true);
+    } else {
+      if (!this.isDisabled) {
+        this.deleteButtonDisabled.set(false);
+      }
+    }
+  }
+
+  clearInput(inputElement: HTMLInputElement) {
+    this.control().reset();
+    this.deleteButtonDisabled.set(true);
+
+    inputElement.focus();
   }
 
   // ========= INPUT SANITIZATION =========
