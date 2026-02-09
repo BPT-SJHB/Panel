@@ -1,11 +1,4 @@
-import {
-  Component,
-  computed,
-  effect,
-  inject,
-  input,
-  signal,
-} from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TreeNode } from 'primeng/api';
 import { TreeTableModule } from 'primeng/treetable';
@@ -154,19 +147,25 @@ export class UsersMenuAccessFormComponent extends BaseLoading {
   /**
    * Handle TreeTable checkbox changes and track modifications
    */
-  onTableCheckBoxChange(changes: TreeTableChangedData): void {
-    if (changes.parent) {
-      const { PGId } = changes.parent;
-      this.parentChanges.has(PGId)
-        ? this.parentChanges.delete(PGId)
-        : this.parentChanges.set(PGId, changes.parent);
+  onTableCheckBoxChange({ parent, children }: TreeTableChangedData): void {
+    if (parent) {
+      const { PGId } = parent;
+
+      if (this.parentChanges.has(PGId)) {
+        this.parentChanges.delete(PGId);
+      } else {
+        this.parentChanges.set(PGId, parent);
+      }
     }
 
-    changes.children?.forEach((child) => {
+    children?.forEach((child) => {
       const { PId } = child;
-      this.childChanges.has(PId)
-        ? this.childChanges.delete(PId)
-        : this.childChanges.set(PId, child);
+
+      if (this.childChanges.has(PId)) {
+        this.childChanges.delete(PId);
+      } else {
+        this.childChanges.set(PId, child);
+      }
     });
   }
 
