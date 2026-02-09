@@ -1,4 +1,11 @@
-import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  OnDestroy,
+  signal,
+  Input,
+} from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { ButtonModule } from 'primeng/button';
@@ -19,6 +26,10 @@ import { ValidationSchema } from 'app/constants/validation-schema';
 import { BaseLoading } from '../../shared/component-base/base-loading';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { AppTitles } from 'app/constants/Titles';
+import { FormCardComponent } from 'app/components/shared/form-card/form-card.component';
+import { CardModule } from 'primeng/card';
+import { TerminalCardComponent } from 'app/components/shared/terminal-card/terminal-card.component';
+import { SectionCardComponent } from 'app/components/shared/section-card/section-card.component';
 
 interface UserInfoForm {
   id: number | null;
@@ -41,12 +52,16 @@ interface UserInfoForm {
     TextInputComponent,
     SearchInputComponent,
     ButtonComponent,
+    TerminalCardComponent,
+    SectionCardComponent,
   ],
   providers: [DialogService],
   templateUrl: './user-info-form.component.html',
   styleUrl: './user-info-form.component.scss',
 })
 export class UserInfoFormComponent extends BaseLoading implements OnInit {
+  @Input() sharedSignal = signal<string | null>(null);
+
   private readonly fb = inject(FormBuilder);
   private readonly userManager = inject(UserManagementService);
   private readonly dialogService = inject(DialogService);
@@ -94,6 +109,7 @@ export class UserInfoFormComponent extends BaseLoading implements OnInit {
       if (!checkAndToastError(response, this.toast)) return;
 
       this.populateForm(response.data);
+      this.sharedSignal.set(phone ?? '');
     });
   };
 
