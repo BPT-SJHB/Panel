@@ -1,13 +1,14 @@
 <div>
-  <div class="grid grid-cols-12">
-    <div class="col-span-12">
+  <div class="flex flex-col">
+    <div class="flex justify-center w-full self-center">
       <app-search-input
-        [placeholder]="appTitles.getPlaceholder('userPhoneNumberPlaceholder')"
-        [onSearchQuery]="searchUser"
-        [control]="mobileControl"
-        [disableSearchButton]="mobileControl.invalid || loading()"
-        validationField="mobile"
+        class="min-w-[70%]"
         icon="pi pi-search"
+        [placeholder]="appTitles.getPlaceholder('userPhoneNumberPlaceholder')"
+        [control]="mobileControl"
+        validationField="mobile"
+        [disableSearchButton]="mobileControl.invalid || loading()"
+        [onSearchQuery]="searchUser"
         type="number"
       />
     </div>
