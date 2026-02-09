@@ -222,10 +222,16 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
   },
 
   [TabComponentKey.UserManagement]: {
-    sharedSignal: false,
+    sharedSignal: true,
     subTab: [
-      { title: 'مدیریت کاربران', component: UserInfoFormComponent },
-      { title: 'مدریت دسترسی کابران', component: UsersMenuAccessFormComponent },
+      {
+        title: 'مدیریت کاربران',
+        component: UserInfoFormComponent,
+      },
+      {
+        title: 'مدریت دسترسی کابران',
+        component: UsersMenuAccessFormComponent,
+      },
     ],
   },
 
