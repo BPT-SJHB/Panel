@@ -19,6 +19,7 @@ import { LoadingService } from 'app/services/loading-service/loading-service.ser
 import { Subject, takeUntil } from 'rxjs';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { AppTitles } from 'app/constants/Titles';
+import { SectionCardComponent } from 'app/components/shared/section-card/section-card.component';
 
 @Component({
   selector: 'app-driver-truck-wallet-form',
@@ -28,6 +29,7 @@ import { AppTitles } from 'app/constants/Titles';
     ReactiveFormsModule,
     SearchInputComponent,
     ButtonComponent,
+    SectionCardComponent,
   ],
   templateUrl: './driver-truck-wallet-form.component.html',
   styleUrl: './driver-truck-wallet-form.component.scss',
