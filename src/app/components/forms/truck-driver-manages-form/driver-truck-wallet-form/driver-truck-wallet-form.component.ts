@@ -102,7 +102,7 @@ export class DriverTruckWalletFormComponent implements OnInit, OnDestroy {
   };
 
   // feat: load truck info by smart card
-  async loadTruckInfo() {
+  loadTruckInfo = async () => {
     if (this.smartCard.invalid) return;
 
     this.loadingService.setLoading(true);
@@ -114,10 +114,10 @@ export class DriverTruckWalletFormComponent implements OnInit, OnDestroy {
     } finally {
       this.loadingService.setLoading(false);
     }
-  }
+  };
 
   // feat: load driver info by national ID
-  async loadDriverInfo() {
+  loadDriverInfo = async () => {
     if (this.nationalId.invalid) return;
 
     this.loadingService.setLoading(true);
@@ -132,7 +132,7 @@ export class DriverTruckWalletFormComponent implements OnInit, OnDestroy {
     } finally {
       this.loadingService.setLoading(false);
     }
-  }
+  };
 
   // feat: set composed truck-driver-wallet-turn info
   async setComposedInformation(): Promise<void> {
