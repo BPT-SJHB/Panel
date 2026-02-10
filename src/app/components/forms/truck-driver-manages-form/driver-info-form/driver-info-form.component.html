@@ -1,45 +1,38 @@
-<div class="p-fluid grid grid-cols-12 gap-6 relative">
+<div class="flex flex-col justify-center gap-5">
   <form
-    class="col-span-12"
+    class="flex justify-center self-center w-full"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
     [formGroup]="searchForm"
   >
-    <div class="flex gap-2">
-      <app-search-input
-        [control]="searchNationalId"
-        validationField="nationalId"
-        icon="pi pi-search"
-        class="flex-1"
-        [placeholder]="appTitle.getPlaceholder('userNationalCodePlaceholder')"
-        [searchButtonLabel]="appTitle.buttons.retrieveFromOutdoorSystem"
-        [disableSearchButton]="this.searchForm.invalid"
-        [onSearchQuery]="loadDriverInfoFromAPI"
-        type="number"
-      />
-    </div>
+    <app-search-input
+      [control]="searchNationalId"
+      validationField="nationalId"
+      icon="pi pi-search"
+      class="min-w-[70%]"
+      [placeholder]="appTitle.getPlaceholder('userNationalCodePlaceholder')"
+      [searchButtonLabel]="appTitle.buttons.retrieveFromOutdoorSystem"
+      [disableSearchButton]="this.searchForm.invalid"
+      [onSearchQuery]="loadDriverInfoFromAPI"
+      type="number"
+    />
   </form>
-  <div
-    class="p-fluid grid grid-cols-12 col-span-12 gap-6 relative"
-    [class.pointer-events-none]="loading"
-    [class.opacity-60]="loading"
-  >
-    <div class="grid grid-cols-12 col-span-12 gap-4">
-      <div class="col-span-12 md:col-span-6">
+
+  <app-section-card>
+    <div class="flex flex-col gap-2 md:gap-5">
+      <div class="flex flex-col md:flex-row gap-2">
         <app-text-input
+          class="w-full"
           [label]="appTitle.inputs.drivers.driverId"
-          class="flex-1"
           [readOnly]="true"
           [control]="driverId"
           validationField="driverId"
           [addonWidth]="addonWidth"
         />
-      </div>
 
-      <div class="col-span-12 md:col-span-6">
         <app-text-input
+          class="w-full"
           [label]="appTitle.inputs.users.userNationalCodeTitle"
-          class="flex-1"
           [control]="nationalId"
           validationField="nationalId"
           [readOnly]="true"
@@ -48,36 +41,19 @@
         />
       </div>
 
-      <div class="col-span-12 md:col-span-6">
+      <div class="flex flex-col md:flex-row gap-2">
         <app-text-input
+          class="w-full"
           [label]="appTitle.inputs.users.userNameAndLastName"
-          class="flex-1"
           [control]="fullName"
           validationField="fullName"
           [readOnly]="true"
           [addonWidth]="addonWidth"
         />
-      </div>
 
-      <div class="col-span-12 md:col-span-6 relative">
         <app-text-input
-          [label]="appTitle.inputs.phoneNumbers.inputTitle"
-          class="flex-1"
-          [placeholder]="appTitle.getPlaceholder('userPhoneNumberPlaceholder')"
-          buttonIcon="pi pi-save"
-          [control]="mobile"
-          validationField="mobile"
-          [addonWidth]="addonWidth"
-          [buttonDisabled]="driverForm.invalid"
-          (clickButton)="updateDriverMobileNumber()"
-          type="number"
-        />
-      </div>
-
-      <div class="col-span-12 md:col-span-6">
-        <app-text-input
+          class="w-full"
           [label]="appTitle.inputs.users.userFatherName"
-          class="flex-1"
           [control]="fatherName"
           validationField="fatherName"
           [readOnly]="true"
@@ -85,21 +61,19 @@
         />
       </div>
 
-      <div class="col-span-12 md:col-span-6">
+      <div class="flex flex-col md:flex-row gap-2">
         <app-text-input
+          class="w-full"
           [label]="appTitle.inputs.drivers.driverLicenseNumber"
-          class="flex-1"
           [control]="licenseNumber"
           validationField="licenseNumber"
           [readOnly]="true"
           [addonWidth]="addonWidth"
         />
-      </div>
 
-      <div class="col-span-12 md:col-span-6">
         <app-text-input
+          class="w-full"
           [label]="appTitle.inputs.drivers.driverSmartCardNumber"
-          class="flex-1"
           [control]="smartCard"
           validationField="smartCard"
           [readOnly]="true"
@@ -107,45 +81,69 @@
         />
       </div>
 
-      <div class="col-span-12 md:col-span-6">
+      <div class="flex flex-col md:flex-row gap-2">
         <app-text-input
+          class="w-full"
+          [label]="appTitle.inputs.phoneNumbers.inputTitle"
+          [placeholder]="appTitle.getPlaceholder('userPhoneNumberPlaceholder')"
+          [control]="mobile"
+          validationField="mobile"
+          [addonWidth]="addonWidth"
+          [buttonDisabled]="driverForm.invalid"
+          (clickButton)="updateDriverMobileNumber()"
+          type="number"
+        />
+
+        <app-text-input
+          class="w-full"
           [label]="appTitle.inputs.global.address"
-          class="flex-1"
-          [placeholder]="appTitle.getPlaceholder('globalAddressPlaceholder')"
           [control]="address"
           validationField="address"
           [addonWidth]="addonWidth"
+          [readOnly]="true"
         />
       </div>
     </div>
+  </app-section-card>
 
-    <!-- Action Buttons -->
-    <div
-      class="col-span-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center"
-    >
-      <app-button
-        (click)="activateDriverSms()"
-        [disabled]="this.driverForm.invalid || loading"
-        severity="warn"
-        [label]="appTitle.buttons.activateSMS"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-      ></app-button>
+  <!-- Action Buttons -->
+  <div
+    class="flex self-center flex-col flex-wrap md:flex-row w-full max-w-[51vh] md:max-w-full items-center justify-center gap-2 md:gap-5"
+  >
+    <app-button
+      (click)="updateDriverMobileNumber()"
+      [disabled]="this.driverForm.invalid || loading"
+      severity="green"
+      [label]="appTitle.buttons.saveAndEdit"
+      class="w-full md:w-fit"
+      styleClass="my-2 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+    ></app-button>
 
-      <app-button
-        (click)="sendWebsiteLink()"
-        [disabled]="this.driverForm.invalid || loading"
-        severity="warn"
-        [label]="appTitle.buttons.sendSystemLink"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-      ></app-button>
+    <app-button
+      (click)="activateDriverSms()"
+      [disabled]="this.driverForm.invalid || loading"
+      severity="warn"
+      [label]="appTitle.buttons.activateSMS"
+      class="w-full md:w-fit"
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+    ></app-button>
 
-      <app-button
-        (click)="resetDriverPassword()"
-        [disabled]="this.driverForm.invalid || loading"
-        severity="info"
-        [label]="appTitle.buttons.generateNewPassword"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-      ></app-button>
-    </div>
+    <app-button
+      (click)="sendWebsiteLink()"
+      [disabled]="this.driverForm.invalid || loading"
+      severity="warn"
+      [label]="appTitle.buttons.sendSystemLink"
+      class="w-full md:w-fit"
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+    ></app-button>
+
+    <app-button
+      (click)="resetDriverPassword()"
+      [disabled]="this.driverForm.invalid || loading"
+      severity="info"
+      [label]="appTitle.buttons.generateNewPassword"
+      class="w-full md:w-fit"
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+    ></app-button>
   </div>
 </div>
