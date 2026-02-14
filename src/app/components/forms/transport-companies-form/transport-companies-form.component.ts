@@ -20,6 +20,8 @@ import { TransportCompany } from 'app/services/transport-company-management/mode
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-switch-input/toggle-switch-input.component';
 import { AppTitles } from 'app/constants/Titles';
+import { FormButtonsSectionComponent } from 'app/components/shared/sections/form-buttons-section/form-buttons-section.component';
+import { FormInputsSectionComponent } from 'app/components/shared/sections/form-inputs-section/form-inputs-section.component';
 
 @Component({
   selector: 'app-transport-companies-form',
@@ -31,6 +33,8 @@ import { AppTitles } from 'app/constants/Titles';
     ConfirmDialogModule,
     ButtonComponent,
     ToggleSwitchInputComponent,
+    FormButtonsSectionComponent,
+    FormInputsSectionComponent,
   ],
   providers: [ConfirmationService, DialogService],
   templateUrl: './transport-companies-form.component.html',
