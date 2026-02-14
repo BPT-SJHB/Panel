@@ -1,218 +1,205 @@
-<div class="grid grid-cols-12 gap-4">
-  <!-- Search Input -->
-  <div class="col-span-12 w-full">
-    <app-search-auto-complete
-      [lazySearch]="searchFPCs"
-      class="w-full"
-      optionLabel="FPCTitle"
-      optionValue="FPCTitle"
-      [placeholder]="
-        appTitle.getPlaceholder('factoriesOrProductionCenterTitle')
-      "
-      (selectSuggestion)="selectSearchItem($event)"
-    />
-  </div>
+<!-- Search Input -->
+<div class="flex justify-center w-full">
+  <app-search-auto-complete
+    [lazySearch]="searchFPCs"
+    class="min-w-[70%]"
+    optionLabel="FPCTitle"
+    optionValue="FPCTitle"
+    [placeholder]="appTitle.getPlaceholder('factoriesOrProductionCenterTitle')"
+    (selectSuggestion)="selectSearchItem($event)"
+  />
+</div>
 
-  <div class="flex flex-row-reverse col-span-12 mt-3">
-    <app-button
-      [rounded]="true"
-      (click)="resetFpcForm()"
-      styleClass="px-7"
-      severity="info"
-    >
-      {{ appTitle.buttons.add.addUser }}
-    </app-button>
-  </div>
-
-  <!-- Form -->
-  <form
-    class="grid grid-cols-12 gap-4 col-span-12"
-    [class.pointer-events-none]="loading()"
-    [class.opacity-60]="loading()"
-    [formGroup]="fpcForm"
-  >
-    <div class="grid grid-cols-12 gap-4 col-span-12">
-      <!-- Hidden FPC ID -->
-      <div class="col-span-12 md:col-span-6">
-        <app-text-input
-          [label]="
-            appTitle.inputs.factoryAndProductionCenters
-              .factoriesOrProductionCenterId
-          "
-          [readOnly]="true"
-          [control]="fpcId"
-          validationField="id"
-          [addonWidth]="addonWidth"
-        />
-      </div>
+<!-- Form -->
+<form
+  class="mt-10"
+  [class.pointer-events-none]="loading()"
+  [class.opacity-60]="loading()"
+  [formGroup]="fpcForm"
+>
+  <app-form-inputs-section>
+    <app-form-inputs-section [flexDir]="'flex-row'" [isCard]="false">
+      <!-- FPC ID -->
+      <app-text-input
+        [label]="
+          appTitle.inputs.factoryAndProductionCenters
+            .factoriesOrProductionCenterId
+        "
+        [readOnly]="true"
+        [control]="fpcId"
+        validationField="id"
+        [addonWidth]="addonWidth"
+        class="w-full"
+      />
 
       <!-- Title -->
-      <div class="col-span-12 md:col-span-6">
-        <app-text-input
-          [label]="
-            appTitle.inputs.factoryAndProductionCenters
-              .factoriesOrProductionCenterName
-          "
-          [placeholder]="
-            appTitle.getPlaceholder('factoriesOrProductionCenterName')
-          "
-          class="flex-1"
-          [control]="title"
-          validationField="title"
-          [addonWidth]="addonWidth"
-        />
-      </div>
+      <app-text-input
+        [label]="
+          appTitle.inputs.factoryAndProductionCenters
+            .factoriesOrProductionCenterName
+        "
+        [placeholder]="
+          appTitle.getPlaceholder('factoriesOrProductionCenterName')
+        "
+        class="flex-1"
+        [control]="title"
+        validationField="title"
+        [addonWidth]="addonWidth"
+        class="w-full"
+      />
+    </app-form-inputs-section>
 
+    <app-form-inputs-section [flexDir]="'flex-row'" [isCard]="false">
       <!-- Manager Name -->
-      <div class="col-span-12 md:col-span-6">
-        <app-text-input
-          [label]="
-            appTitle.inputs.factoryAndProductionCenters
-              .factoriesOrProductionCenterOwnerName
-          "
-          [placeholder]="
-            appTitle.getPlaceholder('factoriesOrProductionCenterOwnerName')
-          "
-          class="flex-1"
-          [control]="managerName"
-          validationField="managerName"
-          [addonWidth]="addonWidth"
-        />
-      </div>
+      <app-text-input
+        [label]="
+          appTitle.inputs.factoryAndProductionCenters
+            .factoriesOrProductionCenterOwnerName
+        "
+        [placeholder]="
+          appTitle.getPlaceholder('factoriesOrProductionCenterOwnerName')
+        "
+        class="flex-1"
+        [control]="managerName"
+        validationField="managerName"
+        [addonWidth]="addonWidth"
+      />
 
       <!-- Manager Mobile -->
-      <div class="col-span-12 md:col-span-6">
-        <app-text-input
-          [label]="
-            appTitle.inputs.factoryAndProductionCenters
-              .factoriesOrProductionCenterOwnerPhoneNumber
-          "
-          [placeholder]="
-            appTitle.getPlaceholder(
-              'factoriesOrProductionCenterOwnerPhoneNumber'
-            )
-          "
-          class="flex-1"
-          [control]="managerMobile"
-          validationField="mobile"
-          [addonWidth]="addonWidth"
-          type="number"
-        />
-      </div>
+      <app-text-input
+        [label]="
+          appTitle.inputs.factoryAndProductionCenters
+            .factoriesOrProductionCenterOwnerPhoneNumber
+        "
+        [placeholder]="
+          appTitle.getPlaceholder('factoriesOrProductionCenterOwnerPhoneNumber')
+        "
+        class="flex-1"
+        [control]="managerMobile"
+        validationField="mobile"
+        [addonWidth]="addonWidth"
+        type="number"
+      />
+    </app-form-inputs-section>
 
+    <app-form-inputs-section [flexDir]="'flex-row'" [isCard]="false">
       <!-- Telephone -->
-      <div class="col-span-12 md:col-span-6">
-        <app-text-input
-          [label]="appTitle.inputs.global.phoneNumber"
-          [placeholder]="
-            appTitle.getPlaceholder('globalPhoneNumberPlaceholder')
-          "
-          class="flex-1"
-          [control]="telephone"
-          validationField="telephone"
-          [addonWidth]="addonWidth"
-          type="number"
-        />
-      </div>
+      <app-text-input
+        [label]="appTitle.inputs.global.phoneNumber"
+        [placeholder]="appTitle.getPlaceholder('globalPhoneNumberPlaceholder')"
+        class="flex-1"
+        [control]="telephone"
+        validationField="telephone"
+        [addonWidth]="addonWidth"
+        type="number"
+      />
 
       <!-- Address -->
-      <div class="col-span-12 md:col-span-6">
-        <app-text-input
-          [label]="appTitle.inputs.global.address"
-          [placeholder]="appTitle.getPlaceholder('globalAddressPlaceholder')"
-          class="flex-1"
-          [control]="address"
-          validationField="address"
-          [addonWidth]="addonWidth"
-        />
-      </div>
+      <app-text-input
+        [label]="appTitle.inputs.global.address"
+        [placeholder]="appTitle.getPlaceholder('globalAddressPlaceholder')"
+        class="flex-1"
+        [control]="address"
+        validationField="address"
+        [addonWidth]="addonWidth"
+      />
+    </app-form-inputs-section>
 
+    <div class="flex flex-col gap-4">
       <!-- Email -->
-      <div class="col-span-12 md:col-span-6">
-        <app-text-input
-          [label]="appTitle.inputs.global.email"
-          [placeholder]="appTitle.getPlaceholder('globalEmailPlaceholder')"
-          class="flex-1"
-          [control]="email"
-          validationField="email"
-          [addonWidth]="addonWidth"
-          language="any"
-        />
-      </div>
+      <app-text-input
+        [label]="appTitle.inputs.global.email"
+        [placeholder]="appTitle.getPlaceholder('globalEmailPlaceholder')"
+        class="flex-1"
+        [control]="email"
+        validationField="email"
+        [addonWidth]="addonWidth"
+        language="any"
+      />
 
       <!-- FPC Active -->
-      <div class="col-span-12 md:col-span-6 flex px-2">
-        <app-toggle-switch-input
-          [label]="appTitle.toggleSwitches.factoryOrProductionCenterStatus"
-          [control]="fpcActive"
-          [readonly]="fpcId.invalid"
-          (valueChagne)="changeFpcActiveStatus($event)"
-        />
+      <app-toggle-switch-input
+        [label]="appTitle.toggleSwitches.factoryOrProductionCenterStatus"
+        [control]="fpcActive"
+        [readonly]="fpcId.invalid"
+        (valueChagne)="changeFpcActiveStatus($event)"
+        class="flex flex-1 self-center md:self-start justify-center"
+      />
+    </div>
+  </app-form-inputs-section>
+</form>
+
+<!-- Action Buttons -->
+<app-form-buttons-section>
+  <app-button
+    (click)="registerOrEditFpc()"
+    [disabled]="!isFormValidExcept('fpcId') || loading()"
+    [label]="appTitle.buttons.saveAndEdit"
+    class="w-full md:w-fit"
+    styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+  ></app-button>
+
+  <app-button
+    (click)="activateFpcSms()"
+    [disabled]="fpcId.invalid || loading()"
+    severity="warn"
+    [label]="appTitle.buttons.activateSMS"
+    class="w-full md:w-fit"
+    styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+  ></app-button>
+
+  <app-button
+    (click)="resetPasswordFpc()"
+    [disabled]="fpcId.invalid || loading()"
+    severity="info"
+    [label]="appTitle.buttons.generateNewPassword"
+    class="w-full md:w-fit"
+    styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+  ></app-button>
+
+  <app-button
+    [rounded]="true"
+    (click)="resetFpcForm()"
+    severity="info"
+    class="w-full md:w-fit"
+    styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+  >
+    {{ appTitle.buttons.add.addUser }}
+  </app-button>
+</app-form-buttons-section>
+
+<div class="card flex justify-center">
+  <p-dialog
+    header="رمز عبور جدید"
+    [modal]="true"
+    (onHide)="onCloseDialog()"
+    [(visible)]="passwordDialogVisible"
+    [style]="{ width: '25rem' }"
+  >
+    <div class="flex gap-4 flex-col">
+      <div class="flex items-center justify-between">
+        <span class="w-32"> شناسه کابری: </span>
+        <app-button
+          (click)="copyToClipboard(userNameDialog)"
+          size="small"
+          styleClass="px-6 w-40"
+          severity="info"
+        >
+          {{ userNameDialog }}
+        </app-button>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <span class="w-32"> رمز عبور جدید </span>
+        <app-button
+          (click)="copyToClipboard(newUserPasswordDialog)"
+          size="small"
+          styleClass="px-6 w-40"
+          severity="green"
+        >
+          {{ newUserPasswordDialog }}
+        </app-button>
       </div>
     </div>
-  </form>
-
-  <!-- Action Buttons -->
-  <div
-    class="col-span-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center"
-  >
-    <app-button
-      (click)="registerOrEditFpc()"
-      [disabled]="!isFormValidExcept('fpcId') || loading()"
-      [label]="appTitle.buttons.saveAndEdit"
-      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-    ></app-button>
-
-    <app-button
-      (click)="activateFpcSms()"
-      [disabled]="fpcId.invalid || loading()"
-      severity="warn"
-      [label]="appTitle.buttons.activateSMS"
-      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-    ></app-button>
-
-    <app-button
-      (click)="resetPasswordFpc()"
-      [disabled]="fpcId.invalid || loading()"
-      severity="info"
-      [label]="appTitle.buttons.generateNewPassword"
-      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-    ></app-button>
-  </div>
-
-  <div class="card flex justify-center">
-    <p-dialog
-      header="رمز عبور جدید"
-      [modal]="true"
-      (onHide)="onCloseDialog()"
-      [(visible)]="passwordDialogVisible"
-      [style]="{ width: '25rem' }"
-    >
-      <div class="flex gap-4 flex-col">
-        <div class="flex items-center justify-between">
-          <span class="w-32"> شناسه کابری: </span>
-          <app-button
-            (click)="copyToClipboard(userNameDialog)"
-            size="small"
-            styleClass="px-6 w-40"
-            severity="info"
-          >
-            {{ userNameDialog }}
-          </app-button>
-        </div>
-
-        <div class="flex items-center justify-between">
-          <span class="w-32"> رمز عبور جدید </span>
-          <app-button
-            (click)="copyToClipboard(newUserPasswordDialog)"
-            size="small"
-            styleClass="px-6 w-40"
-            severity="green"
-          >
-            {{ newUserPasswordDialog }}
-          </app-button>
-        </div>
-      </div>
-    </p-dialog>
-  </div>
+  </p-dialog>
 </div>

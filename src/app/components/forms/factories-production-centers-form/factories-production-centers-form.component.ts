@@ -15,6 +15,9 @@ import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { BaseLoading } from '../shared/component-base/base-loading';
 import { AppTitles } from 'app/constants/Titles';
+import { FormInputsSectionComponent } from 'app/components/shared/sections/form-inputs-section/form-inputs-section.component';
+import { FormButtonsSectionComponent } from 'app/components/shared/sections/form-buttons-section/form-buttons-section.component';
+import { FormButtonComponent } from 'app/components/shared/button/form-button/form-button.component';
 
 @Component({
   selector: 'app-factories-and-freight-form',
@@ -29,6 +32,9 @@ import { AppTitles } from 'app/constants/Titles';
     ToggleSwitchInputComponent,
     SearchAutoCompleteComponent,
     ButtonComponent,
+    FormInputsSectionComponent,
+    FormButtonsSectionComponent,
+    FormButtonComponent,
   ],
 })
 export class FactoriesAndFreightFormComponent extends BaseLoading {
