@@ -1,155 +1,148 @@
-<div class="flex flex-col justify-center gap-4">
-  <form
-    [class.pointer-events-none]="loading()"
-    [class.opacity-60]="loading()"
-    [formGroup]="searchForm"
-  >
-    <app-search-input
-      class="min-w-[70%]"
-      icon="pi pi-search"
-      [placeholder]="appTitles.getPlaceholder('userPhoneNumberPlaceholder')"
-      [control]="searchPhone"
-      validationField="mobile"
-      [disableSearchButton]="searchForm.invalid || loading()"
-      [onSearchQuery]="fetchUserByPhone"
-      type="number"
+<form
+  class="flex justify-center w-full"
+  [class.pointer-events-none]="loading()"
+  [class.opacity-60]="loading()"
+  [formGroup]="searchForm"
+>
+  <app-search-input
+    class="min-w-[70%]"
+    icon="pi pi-search"
+    [placeholder]="appTitles.getPlaceholder('userPhoneNumberPlaceholder')"
+    [control]="searchPhone"
+    validationField="mobile"
+    [disableSearchButton]="searchForm.invalid || loading()"
+    [onSearchQuery]="fetchUserByPhone"
+    type="number"
+  />
+</form>
+
+<form
+  class="flex flex-col justify-center w-full gap-5"
+  [class.pointer-events-none]="loading()"
+  [class.opacity-60]="loading()"
+  [formGroup]="userInfoForm"
+>
+  <app-form-inputs-section>
+    <!-- User ID (ReadOnly) -->
+    <app-text-input
+      class="flex-1"
+      [readOnly]="true"
+      [control]="getUserFormControl('id')"
+      validationField="id"
+      icon="pi pi-id-card"
+      label="شناسه کاربری"
+      [addonWidth]="addonWidth"
+      language="en"
     />
-  </form>
 
-  <form
-    class="flex flex-col justify-center items-center gap-10"
-    [class.pointer-events-none]="loading()"
-    [class.opacity-60]="loading()"
-    [formGroup]="userInfoForm"
-  >
-    <app-section-card class="w-full">
-      <div class="flex flex-col w-full gap-5">
-        <!-- User ID (ReadOnly) -->
-        <app-text-input
-          class="flex-1"
-          [readOnly]="true"
-          [control]="getUserFormControl('id')"
-          validationField="id"
-          icon="pi pi-id-card"
-          label="شناسه کاربری"
-          [addonWidth]="addonWidth"
-          language="en"
-        />
+    <!-- Full Name -->
+    <app-text-input
+      validationField="fullName"
+      icon="pi pi-user"
+      [placeholder]="appTitles.getPlaceholder('userNamePlaceholder')"
+      [control]="getUserFormControl('name')"
+      [addonWidth]="addonWidth"
+      [label]="appTitles.inputs.users.userNameTitle"
+      validationField="fullName"
+    />
 
-        <!-- Full Name -->
-        <app-text-input
-          validationField="fullName"
-          icon="pi pi-user"
-          [placeholder]="appTitles.getPlaceholder('userNamePlaceholder')"
-          [control]="getUserFormControl('name')"
-          [addonWidth]="addonWidth"
-          [label]="appTitles.inputs.users.userNameTitle"
-          validationField="fullName"
-        />
+    <!-- Phone -->
+    <app-text-input
+      [label]="appTitles.inputs.phoneNumbers.inputTitle"
+      addonWidth="7rem"
+      class="flex-1"
+      [placeholder]="appTitles.getPlaceholder('userPhoneNumberPlaceholder')"
+      [control]="getUserFormControl('phone')"
+      [addonWidth]="addonWidth"
+      type="number"
+      validationField="mobile"
+    />
 
-        <!-- Phone -->
-        <app-text-input
-          [label]="appTitles.inputs.phoneNumbers.inputTitle"
-          addonWidth="7rem"
-          class="flex-1"
-          [placeholder]="appTitles.getPlaceholder('userPhoneNumberPlaceholder')"
-          [control]="getUserFormControl('phone')"
-          [addonWidth]="addonWidth"
-          type="number"
-          validationField="mobile"
-        />
+    <!-- User Type -->
+    <app-select-input
+      [control]="getUserFormControl('userType')"
+      [options]="roles"
+      [addonWidth]="addonWidth"
+      [label]="appTitles.inputs.users.userTypesTitle"
+    />
 
-        <!-- User Type -->
-        <app-select-input
-          [control]="getUserFormControl('userType')"
-          [options]="roles"
-          [addonWidth]="addonWidth"
-          icon=""
-          [label]="appTitles.inputs.users.userTypesTitle"
-        />
-
-        <!-- Radio: SMS System -->
-        <div class="flex flex-row justify-around flex-wrap gap-5">
-          <div class="col-span-12 md:col-span-6 gap-2 flex px-2 items-center">
-            <span class="font-medium">{{
-              appTitles.toggleSwitches.smsStatus
-            }}</span>
-            <span
-              class="ms-2 font-semibold"
-              [class]="
-                getUserFormControl('smsActive').value
-                  ? 'text-green-600'
-                  : 'text-red-600'
-              "
-            >
-              {{ getUserFormControl("smsActive").value ? "فعال" : "غیرفعال" }}
-            </span>
-          </div>
-
-          <!-- Radio: User Active -->
-          <div class="col-span-12 md:col-span-6 flex px-2">
-            <app-toggle-switch-input
-              [label]="appTitles.toggleSwitches.userStatus"
-              [control]="getUserFormControl('userActive')"
-            />
-          </div>
-        </div>
+    <!-- Radio: SMS System -->
+    <div class="flex flex-row justify-around flex-wrap gap-5">
+      <div class="col-span-12 md:col-span-6 gap-2 flex px-2 items-center">
+        <span class="font-medium">{{
+          appTitles.toggleSwitches.smsStatus
+        }}</span>
+        <span
+          class="ms-2 font-semibold"
+          [class]="
+            getUserFormControl('smsActive').value
+              ? 'text-green-600'
+              : 'text-red-600'
+          "
+        >
+          {{ getUserFormControl("smsActive").value ? "فعال" : "غیرفعال" }}
+        </span>
       </div>
-    </app-section-card>
 
-    <!-- Action Buttons -->
-    <!-- class="col-span-12 mt-10 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center" -->
-    <div
-      class="flex flex-col flex-wrap md:flex-row w-full max-w-[50vh] md:max-w-full items-center justify-center gap-2 md:gap-5"
-    >
-      <app-button
-        (click)="resetUserInfoForm()"
-        class="w-full md:w-fit"
-        [rounded]="true"
-        severity="info"
-        [label]="appTitles.buttons.add.addUser"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-      >
-      </app-button>
-
-      <app-button
-        (click)="submitUserInfo()"
-        class="w-full md:w-fit"
-        [disabled]="!isFormValidExcept('id') || loading()"
-        [label]="appTitles.buttons.saveAndEdit"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-      ></app-button>
-
-      <app-button
-        (click)="activateUserSms()"
-        class="w-full md:w-fit"
-        [disabled]="
-          getUserFormControl('id').invalid ||
-          getUserFormControl('smsActive').value ||
-          loading()
-        "
-        severity="warn"
-        [label]="appTitles.buttons.activateSMS"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-      ></app-button>
-
-      <app-button
-        (click)="sendWebsiteLink()"
-        class="w-full md:w-fit"
-        [disabled]="getUserFormControl('id').invalid || loading()"
-        severity="warn"
-        [label]="appTitles.buttons.sendSystemLink"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-      ></app-button>
-
-      <app-button
-        (click)="resetUserPassword()"
-        class="w-full md:w-fit"
-        [disabled]="getUserFormControl('id').invalid || loading()"
-        severity="info"
-        [label]="appTitles.buttons.generateNewPassword"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
-      ></app-button>
+      <!-- Radio: User Active -->
+      <div class="col-span-12 md:col-span-6 flex px-2">
+        <app-toggle-switch-input
+          [label]="appTitles.toggleSwitches.userStatus"
+          [control]="getUserFormControl('userActive')"
+        />
+      </div>
     </div>
-  </form>
-</div>
+  </app-form-inputs-section>
+
+  <!-- Action Buttons -->
+  <app-form-buttons-section>
+    <app-button
+      (click)="resetUserInfoForm()"
+      class="w-full md:w-fit"
+      [rounded]="true"
+      severity="info"
+      [label]="appTitles.buttons.add.addUser"
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+    >
+    </app-button>
+
+    <app-button
+      (click)="submitUserInfo()"
+      class="w-full md:w-fit"
+      [disabled]="!isFormValidExcept('id') || loading()"
+      [label]="appTitles.buttons.saveAndEdit"
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+    ></app-button>
+
+    <app-button
+      (click)="activateUserSms()"
+      class="w-full md:w-fit"
+      [disabled]="
+        getUserFormControl('id').invalid ||
+        getUserFormControl('smsActive').value ||
+        loading()
+      "
+      severity="warn"
+      [label]="appTitles.buttons.activateSMS"
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+    ></app-button>
+
+    <app-button
+      (click)="sendWebsiteLink()"
+      class="w-full md:w-fit"
+      [disabled]="getUserFormControl('id').invalid || loading()"
+      severity="warn"
+      [label]="appTitles.buttons.sendSystemLink"
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+    ></app-button>
+
+    <app-button
+      (click)="resetUserPassword()"
+      class="w-full md:w-fit"
+      [disabled]="getUserFormControl('id').invalid || loading()"
+      severity="info"
+      [label]="appTitles.buttons.generateNewPassword"
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+    ></app-button>
+  </app-form-buttons-section>
+</form>

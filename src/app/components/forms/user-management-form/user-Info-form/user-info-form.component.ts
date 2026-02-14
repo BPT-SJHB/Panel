@@ -1,11 +1,4 @@
-import {
-  Component,
-  inject,
-  OnInit,
-  OnDestroy,
-  signal,
-  Input,
-} from '@angular/core';
+import { Component, inject, OnInit, signal, Input } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { ButtonModule } from 'primeng/button';
@@ -26,10 +19,9 @@ import { ValidationSchema } from 'app/constants/validation-schema';
 import { BaseLoading } from '../../shared/component-base/base-loading';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { AppTitles } from 'app/constants/Titles';
-import { FormCardComponent } from 'app/components/shared/form-card/form-card.component';
-import { CardModule } from 'primeng/card';
 import { TerminalCardComponent } from 'app/components/shared/terminal-card/terminal-card.component';
-import { SectionCardComponent } from 'app/components/shared/section-card/section-card.component';
+import { FormInputsSectionComponent } from 'app/components/shared/sections/form-inputs-section/form-inputs-section.component';
+import { FormButtonsSectionComponent } from 'app/components/shared/sections/form-buttons-section/form-buttons-section.component';
 
 interface UserInfoForm {
   id: number | null;
@@ -53,7 +45,8 @@ interface UserInfoForm {
     SearchInputComponent,
     ButtonComponent,
     TerminalCardComponent,
-    SectionCardComponent,
+    FormInputsSectionComponent,
+    FormButtonsSectionComponent,
   ],
   providers: [DialogService],
   templateUrl: './user-info-form.component.html',
