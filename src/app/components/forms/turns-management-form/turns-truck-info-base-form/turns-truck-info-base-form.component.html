@@ -1,13 +1,12 @@
 <!-- 🔍 Search Form: Smart Card -->
 <form
   [formGroup]="searchTruckInfoForm"
-  class="grid grid-cols-12 gap-4"
   [class.pointer-events-none]="loading"
   [class.opacity-60]="loading"
 >
-  <div class="col-span-12">
+  <div class="flex justify-center w-full">
     <app-search-input
-      class="w-full"
+      class="min-w-[70%]"
       [label]="appTitle.inputs.trucks.truckSmartCardNumber"
       [placeholder]="appTitle.getPlaceholder('truckSmartCardNumberPlaceholder')"
       [searchButtonLabel]="appTitle.buttons.retrieveFromOutdoorSystem"
@@ -24,12 +23,10 @@
 </form>
 
 <!-- 🚚 Truck Info Card -->
-<p-card [style]="{ 'box-shadow': '0 0 10px rgba(0, 0, 0, 0.3)' }" class="mb-6">
-  <span class="w-full text-xl font-bold px-2 mb-4 block">
-    {{ appTitle.sectionTitles.truckInfo }}
-  </span>
-  <div class="grid grid-cols-12 gap-4">
-    <div class="col-span-12 md:col-span-6 py-1 md:py-0">
+
+<div class="flex flex-col gap-4">
+  <app-form-inputs-section [header]="appTitle.sectionTitles.truckInfo">
+    <app-form-inputs-section [flexDir]="'flex-col'" [isCard]="false">
       <app-text-input
         [label]="appTitle.inputs.trucks.truckId"
         [control]="truckId"
@@ -37,9 +34,8 @@
         [readOnly]="true"
         [disabled]="true"
         [addonWidth]="addonWidth"
+        class="w-full"
       />
-    </div>
-    <div class="col-span-12 md:col-span-6 py-1 md:py-0">
       <app-text-input
         [label]="appTitle.inputs.trucks.licensePlateNumber"
         [control]="licensePlate"
@@ -48,18 +44,14 @@
         [disabled]="true"
         [addonWidth]="addonWidth"
         format="carPlate"
+        class="w-full"
       />
-    </div>
-  </div>
-</p-card>
+    </app-form-inputs-section>
+  </app-form-inputs-section>
 
-<!-- 👤 Driver Info Card -->
-<p-card [style]="{ 'box-shadow': '0 0 10px rgba(0, 0, 0, 0.3)' }" class="mb-6">
-  <span class="w-full text-xl font-bold px-2 mb-4 block">
-    {{ appTitle.sectionTitles.driverInfo }}
-  </span>
-  <div class="grid grid-cols-12 gap-4">
-    <div class="col-span-12 md:col-span-6 xl:col-span-4 py-1 md:py-0">
+  <!-- 👤 Driver Info Card -->
+  <app-form-inputs-section [header]="appTitle.sectionTitles.driverInfo">
+    <app-form-inputs-section [flexDir]="'flex-col'" [isCard]="false">
       <app-text-input
         [label]="appTitle.inputs.drivers.driverId"
         [control]="driverId"
@@ -68,8 +60,6 @@
         [readOnly]="true"
         [disabled]="true"
       />
-    </div>
-    <div class="col-span-12 md:col-span-6 xl:col-span-4 py-1 md:py-0">
       <app-text-input
         [label]="appTitle.inputs.users.userNationalCodeTitle"
         [control]="driverNationalId"
@@ -78,8 +68,6 @@
         [readOnly]="true"
         [disabled]="true"
       />
-    </div>
-    <div class="col-span-12 md:col-span-6 xl:col-span-4 py-1 lg:py-0">
       <app-text-input
         [label]="appTitle.inputs.users.userNameAndLastName"
         [control]="driverName"
@@ -88,15 +76,12 @@
         [readOnly]="true"
         [disabled]="true"
       />
-    </div>
-  </div>
-</p-card>
+    </app-form-inputs-section>
+  </app-form-inputs-section>
 
-<!-- 🔁 Turn Status Card -->
-<p-card [style]="{ 'box-shadow': '0 0 10px rgba(0, 0, 0, 0.3)' }" class="mb-6">
-  <span class="w-full text-xl font-bold px-2 mb-4 block">آخرین نوبت</span>
-  <div class="grid grid-cols-12 gap-4">
-    <div class="col-span-12 md:col-span-6 xl:col-span-4 py-1 xl:py-0">
+  <!-- 🔁 Turn Status Card -->
+  <app-form-inputs-section [header]="appTitle.sectionTitles.turnInfo">
+    <app-form-inputs-section [flexDir]="'flex-col'" [isCard]="false">
       <app-text-input
         label="تسلسل نوبت"
         [control]="otaghdarTurnNumber"
@@ -104,8 +89,6 @@
         [readOnly]="true"
         [disabled]="true"
       />
-    </div>
-    <div class="col-span-12 md:col-span-6 xl:col-span-4 py-1 xl:py-0">
       <app-text-input
         label="صف نوبت"
         [control]="sequentialTurn"
@@ -113,8 +96,6 @@
         [readOnly]="true"
         [disabled]="true"
       />
-    </div>
-    <div class="col-span-12 md:col-span-6 xl:col-span-4 py-1 xl:py-0">
       <app-text-input
         [label]="appTitle.inputs.turns.turnStatus"
         [control]="turnStats"
@@ -122,8 +103,6 @@
         [readOnly]="true"
         [disabled]="true"
       />
-    </div>
-    <div class="col-span-12 md:col-span-6 xl:col-span-4 py-1 xl:py-0">
       <app-text-input
         label="شرح"
         [control]="turnDescription"
@@ -131,15 +110,12 @@
         [readOnly]="true"
         [disabled]="true"
       />
-    </div>
-  </div>
-</p-card>
+    </app-form-inputs-section>
+  </app-form-inputs-section>
 
-<!-- 💳 Wallet Info Card -->
-<p-card [style]="{ 'box-shadow': '0 0 10px rgba(0, 0, 0, 0.3)' }" class="mb-6">
-  <span class="w-full text-xl font-bold px-2 mb-4 block">کیف پول</span>
-  <div class="grid grid-cols-12 gap-4">
-    <div class="col-span-12 md:col-span-6 py-1 md:py-0">
+  <!-- 💳 Wallet Info Card -->
+  <app-form-inputs-section [header]="appTitle.sectionTitles.walletInfo">
+    <app-form-inputs-section [flexDir]="'flex-col'" [isCard]="false">
       <app-text-input
         label="شناسه کیف پول"
         [control]="walletCode"
@@ -147,8 +123,6 @@
         [readOnly]="true"
         [disabled]="true"
       />
-    </div>
-    <div class="col-span-12 md:col-span-6 py-1 md:py-0">
       <app-text-input
         label="موجودی"
         [control]="walletBalance"
@@ -156,23 +130,26 @@
         [readOnly]="true"
         [disabled]="true"
       />
-    </div>
+    </app-form-inputs-section>
+  </app-form-inputs-section>
+
+  <div class="flex justify-center w-full">
+    <!-- 🔍 Autocomplete: Sequential Turn -->
+    <app-search-auto-complete
+      class="min-w-[70%]"
+      [label]="appTitle.inputs.sequentialTurns.sequentialTurnTitle"
+      [placeholder]="appTitle.getPlaceholder('sequentialTurnTitle')"
+      [control]="sequentialTurnTitle"
+      optionLabel="SeqTurnTitle"
+      optionValue="SeqTurnTitle"
+      (selectSuggestion)="onSelectSequentialTurn($event)"
+      (valueChange)="onAutoCompleteChange(sequentialTurnId)"
+      [lazySearch]="searchSequentialTurnWithLoaderType"
+      [showIconOptionSelected]="sequentialTurnId.valid"
+      addonWidth="7rem"
+      [minLength]="0"
+      cachingMode="Focus"
+      [disabled]="loading || loaderTypeId.invalid"
+    />
   </div>
-</p-card>
-<!-- 🔍 Autocomplete: Sequential Turn -->
-<app-search-auto-complete
-  class="col-span-12 sm:col-span-6"
-  [label]="appTitle.inputs.sequentialTurns.sequentialTurnTitle"
-  [placeholder]="appTitle.getPlaceholder('sequentialTurnTitle')"
-  [control]="sequentialTurnTitle"
-  optionLabel="SeqTurnTitle"
-  optionValue="SeqTurnTitle"
-  (selectSuggestion)="onSelectSequentialTurn($event)"
-  (valueChange)="onAutoCompleteChange(sequentialTurnId)"
-  [lazySearch]="searchSequentialTurnWithLoaderType"
-  [showIconOptionSelected]="sequentialTurnId.valid"
-  addonWidth="7rem"
-  [minLength]="0"
-  cachingMode="Focus"
-  [disabled]="loading || loaderTypeId.invalid"
-/>
+</div>

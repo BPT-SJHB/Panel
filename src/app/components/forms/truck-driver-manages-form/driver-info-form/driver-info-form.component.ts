@@ -22,6 +22,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { NewPasswordDialogComponent } from 'app/components/shared/dialog/new-password-dialog/new-password-dialog.component';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { AppTitles } from 'app/constants/Titles';
+import { FormInputsSectionComponent } from 'app/components/shared/sections/form-inputs-section/form-inputs-section.component';
 
 @Component({
   selector: 'app-driver-info-form',
@@ -32,6 +33,7 @@ import { AppTitles } from 'app/constants/Titles';
     TextInputComponent,
     SearchInputComponent,
     ButtonComponent,
+    FormInputsSectionComponent,
   ],
   providers: [DialogService],
   templateUrl: './driver-info-form.component.html',

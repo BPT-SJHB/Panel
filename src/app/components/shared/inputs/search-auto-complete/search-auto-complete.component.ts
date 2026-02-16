@@ -83,12 +83,23 @@ export class SearchAutoCompleteComponent<T extends object> {
 
   valueInputChange($event: HTMLInputElement) {
     const value = $event.value;
-    if (value === undefined) return;
+    if (!value) {
+      this.showIconOptionSelected = false;
+      this.isDropDownHidden.set(true);
+      this.hoverIndex.set(-1);
+      this.valueChange.emit('');
+      return;
+    }
 
     this.hoverIndex.set(-1);
-    this.onSearch($event.value || '');
+    this.onSearch(value);
     this.isDropDownHidden.set(false);
-    this.valueChange.emit($event.value || '');
+    this.valueChange.emit(value);
+  }
+
+  onCleared($event: HTMLInputElement) {
+    this.showIconOptionSelected = false;
+    this.valueInputChange($event);
   }
 
   private filterSuggestions(source: T[], query: string): T[] {

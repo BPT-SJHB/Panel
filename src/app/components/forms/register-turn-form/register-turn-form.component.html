@@ -1,27 +1,23 @@
 @if (truckInfo()) {
-  <div class="grid grid-cols-12 gap-4">
+  <div class="flex flex-col justify-center items-center w-full gap-4">
     <!-- 🟩 Sequential Turns List -->
     @for (turn of sequentialTurns(); track turn.SeqTurnId) {
-      <div
-        class="shadow-md rounded-lg dark:shadow-gray-700 col-span-12 md:col-span-6 lg:col-span-4"
+      <app-form-inputs-section
+        class="w-full md:max-w-[70%] lg:max-w-[50%] border-2 rounded-lg border-primary"
       >
-        <p-card class="py-5 rounded-lg">
-          <ng-template pTemplate="header">
-            <div class="font-semibold text-primary text-center text-sm">
-              {{ turn.SeqTurnTitle || "بدون عنوان" }}
-            </div>
-          </ng-template>
+        <div class="font-semibold text-primary text-center text-sm">
+          {{ turn.SeqTurnTitle || "بدون عنوان" }}
+        </div>
 
-          <div class="flex justify-center mt-4">
-            <app-button
-              label="صدور نوبت"
-              styleClass="w-30 py-2 text-sm"
-              (click)="submitRealTimeTurn(turn.SeqTurnId)"
-            >
-            </app-button>
-          </div>
-        </p-card>
-      </div>
+        <div class="flex justify-center mt-4">
+          <app-button
+            label="صدور نوبت"
+            styleClass="w-30 py-2 text-sm"
+            (click)="submitRealTimeTurn(turn.SeqTurnId)"
+          >
+          </app-button>
+        </div>
+      </app-form-inputs-section>
     } @empty {
       <div class="col-span-12 text-center text-base font-bold text-red-500">
         نوبتی برای نمایش یافت نشد

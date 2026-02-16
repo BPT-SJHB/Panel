@@ -55,6 +55,16 @@
       [autocomplete]="autocomplete()"
     />
 
+    <!-- Delete Button -->
+    <div class="flex items-center relative">
+      @if (!this.readOnly() && !deleteButtonDisabled()) {
+        <span
+          (click)="clearInput(inputRef)"
+          class="pi pi-times z-10 absolute end-2 scale-80 text-red-400 hover:text-red-600 hover:scale-90 transition-transform duration-300"
+        ></span>
+      }
+    </div>
+
     <!-- Button Addon -->
     @if (buttonIcon().trim()) {
       <p-inputgroup-addon class="flex h-10 rounded-l-2xl p-0 m-0 border-0">

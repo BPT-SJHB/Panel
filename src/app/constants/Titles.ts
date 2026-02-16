@@ -225,6 +225,8 @@ export class AppTitles {
     truckInfo: 'اطلاعات ناوگان',
     nativenessInfo: 'بومی گری',
     driverInfo: 'اطلاعات راننده',
+    turnInfo: 'اطلاعات نوبت',
+    walletInfo: 'اطلاعات کیف پول',
   };
 
   public static readonly datePicker = {
