@@ -82,6 +82,7 @@ export class TextInputComponent implements OnInit, OnChanges, OnDestroy {
   readonly focus = output<HTMLInputElement>();
   readonly blur = output<HTMLInputElement>();
   readonly keydown = output<KeyboardEvent>();
+  readonly onClear = output<HTMLInputElement>();
 
   // ========= STATE =========
   validationMessage: string | null = null;
@@ -174,6 +175,7 @@ export class TextInputComponent implements OnInit, OnChanges, OnDestroy {
   clearInput(inputElement: HTMLInputElement) {
     this.control().reset();
     this.deleteButtonDisabled.set(true);
+    this.onClear.emit(inputElement);
 
     inputElement.focus();
   }
