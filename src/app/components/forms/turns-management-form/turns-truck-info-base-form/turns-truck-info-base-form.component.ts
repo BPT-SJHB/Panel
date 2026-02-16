@@ -31,6 +31,7 @@ import { TextInputComponent } from 'app/components/shared/inputs/text-input/text
 import { SearchAutoCompleteComponent } from 'app/components/shared/inputs/search-auto-complete/search-auto-complete.component';
 import { Card } from 'primeng/card';
 import { AppTitles } from 'app/constants/Titles';
+import { FormInputsSectionComponent } from 'app/components/shared/sections/form-inputs-section/form-inputs-section.component';
 
 @Component({
   selector: 'app-turns-truck-info-base-form',
@@ -40,6 +41,7 @@ import { AppTitles } from 'app/constants/Titles';
     TextInputComponent,
     SearchAutoCompleteComponent,
     Card,
+    FormInputsSectionComponent,
   ],
   templateUrl: './turns-truck-info-base-form.component.html',
   styleUrl: './turns-truck-info-base-form.component.scss',
