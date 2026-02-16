@@ -22,7 +22,7 @@ import { SearchInputComponent } from '../../../shared/inputs/search-input/search
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { DatePickerInput } from 'app/components/shared/inputs/date-picker-input/date-picker-input.component';
 import { AppTitles } from 'app/constants/Titles';
-import { SectionCardComponent } from 'app/components/shared/section-card/section-card.component';
+import { FormInputsSectionComponent } from 'app/components/shared/sections/form-inputs-section/form-inputs-section.component';
 
 @Component({
   selector: 'app-truck-info-form',
@@ -36,7 +36,7 @@ import { SectionCardComponent } from 'app/components/shared/section-card/section
     SearchInputComponent,
     ButtonComponent,
     DatePickerInput,
-    SectionCardComponent,
+    FormInputsSectionComponent,
   ],
 })
 export class TruckInfoFormComponent implements OnDestroy, OnInit {
