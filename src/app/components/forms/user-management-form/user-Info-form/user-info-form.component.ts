@@ -19,7 +19,6 @@ import { ValidationSchema } from 'app/constants/validation-schema';
 import { BaseLoading } from '../../shared/component-base/base-loading';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { AppTitles } from 'app/constants/Titles';
-import { TerminalCardComponent } from 'app/components/shared/terminal-card/terminal-card.component';
 import { FormInputsSectionComponent } from 'app/components/shared/sections/form-inputs-section/form-inputs-section.component';
 import { FormButtonsSectionComponent } from 'app/components/shared/sections/form-buttons-section/form-buttons-section.component';
 
@@ -44,7 +43,6 @@ interface UserInfoForm {
     TextInputComponent,
     SearchInputComponent,
     ButtonComponent,
-    TerminalCardComponent,
     FormInputsSectionComponent,
     FormButtonsSectionComponent,
   ],
