@@ -1,4 +1,4 @@
-<div class="flex flex-col justify-center gap-4">
+<div class="flex flex-col justify-center gap-5">
   <!-- Search by SmartCard -->
   <form
     class="flex justify-center w-full self-center"
@@ -28,7 +28,7 @@
         [formGroup]="truckComposedInfoForm"
         (ngSubmit)="loadTruckInfo()"
       >
-        <app-section-card>
+        <app-form-inputs-section>
           <div class="flex w-full flex-col">
             <span class="text-lg font-bold w-full mb-2">{{
               appTitle.sectionTitles.truckInfo
@@ -78,11 +78,11 @@
               />
             </div>
           </div>
-        </app-section-card>
+        </app-form-inputs-section>
       </form>
 
       <!-- Driver Info -->
-      <app-section-card>
+      <app-form-inputs-section>
         <form
           [class.pointer-events-none]="loading"
           [class.opacity-60]="loading"
@@ -180,7 +180,7 @@
             </div>
           </div>
         </form>
-      </app-section-card>
+      </app-form-inputs-section>
     </div>
 
     <!-- Action Buttons -->
