@@ -49,9 +49,11 @@
   (valueChange)="onSubTabChange($event)"
 >
   <div class="w-full overflow-x-auto" #tabContent>
-    <p-tablist class="w-full overflow-x-auto">
+    <p-tablist class="w-full overflow-x-auto" [pt]="tabListPTValue">
       @for (view of selectTab().config.subTab; track $index) {
-        <p-tab class="text-sm" [value]="$index">{{ view.title }}</p-tab>
+        <p-tab class="text-sm" [value]="$index" [pt]="tabPTValue">{{
+          view.title
+        }}</p-tab>
       }
     </p-tablist>
   </div>
