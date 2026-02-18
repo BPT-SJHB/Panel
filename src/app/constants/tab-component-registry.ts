@@ -229,7 +229,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
         component: UserInfoFormComponent,
       },
       {
-        title: 'مدریت دسترسی کابران',
+        title: 'مدیریت دسترسی کاربران',
         component: UsersMenuAccessFormComponent,
       },
     ],
