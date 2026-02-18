@@ -81,22 +81,6 @@ export class TabManagerComponent
   // ================================
   private readonly store = inject(Store);
 
-  readonly tabListPTValue = {
-    root: {
-      class: 'bg-transparent pb-2 m-0 z-10',
-    },
-    activeBar: {
-      class:
-        'h-8 rounded-2xl mb-2 -z-10 bg-[var(--p-highlight-focus-background)]',
-    },
-  };
-
-  readonly tabPTValue = {
-    root: {
-      class: 'border-none p-3',
-    },
-  };
-
   private prvTabId = '-100';
 
   private tabsCached = true;
