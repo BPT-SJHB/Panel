@@ -5,13 +5,13 @@
         <div
           (mouseover)="hoverTabId.set(tab.id)"
           (mouseleave)="mouseLeaveOnTabHover(tab.id)"
-          class="relative flex items-center h-8"
+          class="relative flex justify-center items-center h-8"
         >
           <div>
             <div
               [id]="tab.id"
               (click)="onClickTab(tab)"
-              class="flex gap-2 rounded-t-2xl pr-3 py-2 cursor-pointer transition-all ease-in-out duration-300 border"
+              class="flex justify-center items-center gap-2 rounded-t-2xl pr-3 py-1 cursor-pointer transition-all ease-in-out duration-300 border-x border-t"
               [class.bg-highlight-emphasis]="selectTab().id === tab.id"
               [ngClass]="{
                 'pl-7 text-shadow-primary-emphasis border-primary font-bold text-sm':
@@ -31,7 +31,7 @@
           ) {
             <button
               (click)="closeTab(tab.id)"
-              class="absolute top-0.5 left-2 scale-80 text-red-400 hover:text-red-600 hover:scale-90 transition-transform duration-300"
+              class="absolute top-2 left-2 scale-80 text-red-400 hover:text-red-600 hover:scale-90 transition-transform duration-300"
               [title]="`بستن تب ${tab.title}`"
             >
               <i class="pi pi-times"></i>
@@ -47,11 +47,16 @@
   [hidden]="selectTab().config.subTab.length < 2 || hiddenSubTab()"
   [(value)]="selectTab().selectedSubTab"
   (valueChange)="onSubTabChange($event)"
+  scrollable
 >
   <div class="w-full overflow-x-auto" #tabContent>
-    <p-tablist class="w-full overflow-x-auto">
+    <p-tablist class="w-[99wvh] overflow-x-auto">
       @for (view of selectTab().config.subTab; track $index) {
-        <p-tab class="text-sm" [value]="$index">{{ view.title }}</p-tab>
+        <p-tab
+          class="text-sm text-green-700 dark:text-green-500 flex justify-center items-center"
+          [value]="$index"
+          >{{ view.title }}</p-tab
+        >
       }
     </p-tablist>
   </div>
