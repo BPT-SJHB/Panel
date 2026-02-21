@@ -15,6 +15,7 @@ import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { BaseLoading } from '../shared/component-base/base-loading';
 import { AppTitles } from 'app/constants/Titles';
+import { copyTextAndToast } from 'app/utils/copy-text';
 import { FormInputsSectionComponent } from 'app/components/shared/sections/form-inputs-section/form-inputs-section.component';
 import { FormButtonsSectionComponent } from 'app/components/shared/sections/form-buttons-section/form-buttons-section.component';
 
@@ -76,8 +77,7 @@ export class FactoriesAndFreightFormComponent extends BaseLoading {
   }
 
   copyToClipboard(text: string): void {
-    navigator.clipboard.writeText(text);
-    this.toast.success('متن در کلیپبورد ذخیره شد', '');
+    copyTextAndToast(text, this.toast);
   }
 
   onCloseDialog(): void {

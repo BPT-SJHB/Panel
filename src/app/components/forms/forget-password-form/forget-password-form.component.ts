@@ -13,6 +13,8 @@ import { Dialog } from 'primeng/dialog';
 import { UserManagementService } from 'app/services/user-management/user-management.service';
 import { UserAuthService } from 'app/services/user-auth-service/user-auth.service';
 import { OptInputComponent } from 'app/components/shared/inputs/opt-input/opt-input.component';
+import { ErrorCodes } from 'app/constants/error-messages';
+import { PanelGuardCaptchaFormComponent } from '../panel-guard-captcha-form/panel-guard-captcha-form.component';
 
 @Component({
   selector: 'app-forget-password-form',
@@ -24,6 +26,7 @@ import { OptInputComponent } from 'app/components/shared/inputs/opt-input/opt-in
     CaptchaInputComponent,
     Dialog,
     OptInputComponent,
+    PanelGuardCaptchaFormComponent,
   ],
   templateUrl: './forget-password-form.component.html',
   styleUrl: './forget-password-form.component.scss',
@@ -57,6 +60,7 @@ export class ForgetPasswordFormComponent extends BaseLoading implements OnInit {
   // Signals (Reactive State)
   // ------------------------
   sentPhoneNumber = signal<string | null>(null); // stores phone number for OTP dialog
+  isCaptchaGuardVisible = signal<boolean>(false);
 
   // ------------------------
   // Timer State
@@ -95,7 +99,6 @@ export class ForgetPasswordFormComponent extends BaseLoading implements OnInit {
       }
 
       this.toast.success('موفق', response.data.Message);
-
       this.markOTPRequested();
       this.startOTPTimer();
       this.isDialogVisible = true;
@@ -162,7 +165,7 @@ export class ForgetPasswordFormComponent extends BaseLoading implements OnInit {
   // ------------------------
   // OTP Verification
   // ------------------------
-  async verifyCode() {
+  verifyCode = async () => {
     const sessionId = this.ctrl('sessionId').value;
     if (this.loading() || this.optCodeCrl.invalid || !sessionId) return;
 
@@ -173,11 +176,21 @@ export class ForgetPasswordFormComponent extends BaseLoading implements OnInit {
         opt
       );
 
-      if (!checkAndToastError(response, this.toast)) return;
+      // need to fill captcha agian
+      if (response.error?.code === ErrorCodes.NotAuthenticated) {
+        this.isCaptchaGuardVisible.set(true);
+        return;
+      }
+
+      this.isCaptchaGuardVisible.set(false);
+      if (!checkAndToastError(response, this.toast)) {
+        this.optCodeCrl.reset('');
+        return;
+      }
       this.toast.success('موفق', response.data.Message);
       await this.authService.logout();
     });
-  }
+  };
 
   // ------------------------
   // Reset Form and Refresh Captcha
