@@ -10,10 +10,18 @@ import {
 } from 'app/components/shared/inputs/select-input/select-input.component';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { FormInputsSectionComponent } from 'app/components/shared/sections/form-inputs-section/form-inputs-section.component';
+import { FormButtonsSectionComponent } from 'app/components/shared/sections/form-buttons-section/form-buttons-section.component';
 
 @Component({
   selector: 'app-traffic-initial-registration-form',
-  imports: [TextInputComponent, SelectInputComponent, ButtonComponent],
+  imports: [
+    TextInputComponent,
+    SelectInputComponent,
+    ButtonComponent,
+    FormInputsSectionComponent,
+    FormButtonsSectionComponent,
+  ],
   templateUrl: './traffic-initial-registration-form.component.html',
   styleUrl: './traffic-initial-registration-form.component.scss',
 })

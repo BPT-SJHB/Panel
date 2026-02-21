@@ -11,11 +11,14 @@
     </aside>
 
     <!-- Content -->
-    <section class="flex flex-col flex-1 overflow-hidden">
+    <section class="flex flex-col w-full overflow-hidden">
       <div class="shrink-0">
         <app-tab-manager />
       </div>
-      <div class="overflow-y-auto flex-1 mb-20 lg:mb-0" dir="ltr">
+      <div
+        class="items-center overflow-y-auto flex-1 lg:px-20 mb-20 lg:mb-0"
+        dir="ltr"
+      >
         <app-dashboard-content-manager dir="rtl" />
       </div>
     </section>

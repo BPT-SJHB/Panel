@@ -10,6 +10,7 @@ import { ToastService } from 'app/services/toast-service/toast.service';
 import { DatePickerInput } from 'app/components/shared/inputs/date-picker-input/date-picker-input.component';
 import { TimePickerInput } from 'app/components/shared/inputs/time-picker-input/time-picker-input.component.component';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { FormButtonsSectionComponent } from 'app/components/shared/sections/form-buttons-section/form-buttons-section.component';
 
 @Component({
   selector: 'app-real-time-turns-form',
@@ -19,6 +20,7 @@ import { ButtonComponent } from 'app/components/shared/button/button.component';
     DatePickerInput,
     TimePickerInput,
     ButtonComponent,
+    FormButtonsSectionComponent,
   ],
   templateUrl: './resuscitate-turns-form.component.html',
   styleUrl: './resuscitate-turns-form.component.scss',

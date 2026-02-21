@@ -1,100 +1,111 @@
-<!-- جستجوی شرکت حمل و نقل -->
-<app-search-auto-complete
-  [placeholder]="'نام ' + appTitle.getPlaceholder('transportCompanyTitle')"
-  optionLabel="TCTitle"
-  optionValue="TCTitle"
-  [lazySearch]="searchTransportCompony"
-  [minLength]="3"
-  (selectSuggestion)="onTransportComponySelect($event)"
-/>
+<div class="flex justify-center w-full">
+  <!-- جستجوی شرکت حمل و نقل -->
+  <app-search-auto-complete
+    [placeholder]="'نام ' + appTitle.getPlaceholder('transportCompanyTitle')"
+    class="min-w-[70%]"
+    optionLabel="TCTitle"
+    optionValue="TCTitle"
+    [lazySearch]="searchTransportCompony"
+    [minLength]="3"
+    (selectSuggestion)="onTransportComponySelect($event)"
+  />
+</div>
 
 <!-- فرم اطلاعات شرکت حمل و نقل -->
-<form [formGroup]="transportComponyForm" class="mt-8">
-  <div class="grid grid-cols-12 gap-4">
-    <!-- کد شرکت -->
-    <app-text-input
-      class="col-span-12 md:col-span-6"
-      [label]="appTitle.inputs.transportCompanies.transportCompanyId"
-      [control]="TCId"
-      [readOnly]="true"
-      [addonWidth]="addonWidth"
-    />
+<form [formGroup]="transportComponyForm" class="mt-10">
+  <app-form-inputs-section>
+    <app-form-inputs-section [flexDir]="'flex-row'" [isCard]="false">
+      <!-- کد شرکت -->
+      <app-text-input
+        class="flex-1"
+        [label]="appTitle.inputs.transportCompanies.transportCompanyId"
+        [control]="TCId"
+        [readOnly]="true"
+        [addonWidth]="addonWidth"
+      />
 
-    <!-- عنوان شرکت -->
-    <app-text-input
-      class="col-span-12 md:col-span-6"
-      [label]="appTitle.inputs.transportCompanies.transportCompanyName"
-      [control]="TCTitle"
-      [readOnly]="true"
-      [addonWidth]="addonWidth"
-    />
+      <!-- عنوان شرکت -->
+      <app-text-input
+        class="flex-1"
+        [label]="appTitle.inputs.transportCompanies.transportCompanyName"
+        [control]="TCTitle"
+        [readOnly]="true"
+        [addonWidth]="addonWidth"
+      />
+    </app-form-inputs-section>
 
-    <!-- کد سازمانی -->
-    <app-text-input
-      class="col-span-12 md:col-span-6"
-      [label]="
-        appTitle.inputs.transportCompanies.transportCompanyOrganizationId
-      "
-      [control]="TCOrganizationCode"
-      [readOnly]="true"
-      [addonWidth]="addonWidth"
-    />
+    <app-form-inputs-section [flexDir]="'flex-row'" [isCard]="false">
+      <!-- کد سازمانی -->
+      <app-text-input
+        class="w-full"
+        [label]="
+          appTitle.inputs.transportCompanies.transportCompanyOrganizationId
+        "
+        [control]="TCOrganizationCode"
+        [readOnly]="true"
+        [addonWidth]="addonWidth"
+      />
 
-    <!-- شهر استقرار -->
-    <app-text-input
-      class="col-span-12 md:col-span-6"
-      [label]="appTitle.inputs.transportCompanies.transportCompanyLocation"
-      [control]="TCCityTitle"
-      [readOnly]="true"
-      [addonWidth]="addonWidth"
-    />
+      <!-- شهر استقرار -->
+      <app-text-input
+        class="w-full"
+        [label]="appTitle.inputs.transportCompanies.transportCompanyLocation"
+        [control]="TCCityTitle"
+        [readOnly]="true"
+        [addonWidth]="addonWidth"
+      />
+    </app-form-inputs-section>
 
-    <!-- تلفن -->
-    <app-text-input
-      class="col-span-12 md:col-span-6"
-      [label]="appTitle.inputs.global.phoneNumber"
-      [placeholder]="appTitle.getPlaceholder('globalPhoneNumberPlaceholder')"
-      [control]="TCTel"
-      validationField="telephone"
-      [addonWidth]="addonWidth"
-      type="number"
-    />
+    <app-form-inputs-section [flexDir]="'flex-row'" [isCard]="false">
+      <!-- تلفن -->
+      <app-text-input
+        class="w-full"
+        [label]="appTitle.inputs.global.phoneNumber"
+        [placeholder]="appTitle.getPlaceholder('globalPhoneNumberPlaceholder')"
+        [control]="TCTel"
+        validationField="telephone"
+        [addonWidth]="addonWidth"
+        type="number"
+      />
 
-    <!-- موبایل مدیر -->
-    <app-text-input
-      class="col-span-12 md:col-span-6"
-      [label]="
-        appTitle.inputs.transportCompanies.transportCompanyOwnerPhoneNumber
-      "
-      [placeholder]="
-        appTitle.getPlaceholder('transportCompanyOwnerPhoneNumber')
-      "
-      validationField="mobile"
-      [control]="TCManagerMobileNumber"
-      [addonWidth]="addonWidth"
-      type="number"
-    />
+      <!-- موبایل مدیر -->
+      <app-text-input
+        class="w-full"
+        [label]="
+          appTitle.inputs.transportCompanies.transportCompanyOwnerPhoneNumber
+        "
+        [placeholder]="
+          appTitle.getPlaceholder('transportCompanyOwnerPhoneNumber')
+        "
+        validationField="mobile"
+        [control]="TCManagerMobileNumber"
+        [addonWidth]="addonWidth"
+        type="number"
+      />
+    </app-form-inputs-section>
 
-    <!-- نام و نام خانوادگی مدیر -->
-    <app-text-input
-      class="col-span-12 md:col-span-6"
-      [label]="appTitle.inputs.transportCompanies.transportCompanyOwnerName"
-      [placeholder]="appTitle.getPlaceholder('transportCompanyOwnerName')"
-      validationField="fullName"
-      [control]="TCManagerNameFamily"
-      [addonWidth]="addonWidth"
-    />
+    <app-form-inputs-section [flexDir]="'flex-row'" [isCard]="false">
+      <!-- نام و نام خانوادگی مدیر -->
+      <app-text-input
+        class="w-full"
+        [label]="appTitle.inputs.transportCompanies.transportCompanyOwnerName"
+        [placeholder]="appTitle.getPlaceholder('transportCompanyOwnerName')"
+        validationField="fullName"
+        [control]="TCManagerNameFamily"
+        [addonWidth]="addonWidth"
+      />
 
-    <!-- ایمیل -->
-    <app-text-input
-      class="col-span-12 md:col-span-6"
-      [label]="appTitle.inputs.global.email"
-      [placeholder]="appTitle.getPlaceholder('globalEmailPlaceholder')"
-      validationField="email"
-      [control]="EmailAddress"
-      [addonWidth]="addonWidth"
-      language="any"
-    />
+      <!-- ایمیل -->
+      <app-text-input
+        class="w-full"
+        [label]="appTitle.inputs.global.email"
+        [placeholder]="appTitle.getPlaceholder('globalEmailPlaceholder')"
+        validationField="email"
+        [control]="EmailAddress"
+        [addonWidth]="addonWidth"
+        language="any"
+      />
+    </app-form-inputs-section>
 
     <!-- وضعیت -->
     <app-toggle-switch-input
@@ -104,16 +115,15 @@
       [control]="Active"
       (valueChagne)="changeStatusTransportCompony($event)"
     />
-  </div>
+  </app-form-inputs-section>
 
   <!-- دکمه‌های عملیات -->
-  <div
-    class="col-span-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center"
-  >
+  <app-form-buttons-section>
     <app-button
       (click)="editTransportCompony()"
       [disabled]="transportComponyForm.invalid || loading()"
       [label]="appTitle.buttons.saveAndEdit"
+      class="w-full md:w-fit"
       styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
     ></app-button>
 
@@ -122,6 +132,7 @@
       [disabled]="TCId.invalid || loading()"
       severity="warn"
       [label]="appTitle.buttons.activateSMS"
+      class="w-full md:w-fit"
       styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
     ></app-button>
 
@@ -130,9 +141,10 @@
       [disabled]="TCId.invalid || loading()"
       severity="info"
       [label]="appTitle.buttons.generateNewPassword"
+      class="w-full md:w-fit"
       styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
     ></app-button>
-  </div>
+  </app-form-buttons-section>
 </form>
 
 <!-- دیالوگ تایید -->

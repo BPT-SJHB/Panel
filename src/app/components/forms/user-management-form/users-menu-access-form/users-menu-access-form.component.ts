@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TreeNode } from 'primeng/api';
 import { TreeTableModule } from 'primeng/treetable';
@@ -46,6 +46,8 @@ interface Process {
   ],
 })
 export class UsersMenuAccessFormComponent extends BaseLoading {
+  readonly sharedSignal = signal<string | null>(null);
+
   private readonly userService = inject(UserManagementService);
 
   readonly mobileControl = new FormControl('', ValidationSchema.mobile);
@@ -59,6 +61,24 @@ export class UsersMenuAccessFormComponent extends BaseLoading {
 
   private parentChanges = new Map<number, PageGroup>();
   private childChanges = new Map<number, Process>();
+
+  readonly mobileNumber = computed(() => {
+    return this.sharedSignal();
+  });
+
+  constructor() {
+    super();
+
+    effect(() => {
+      const mobile = this.sharedSignal();
+
+      if (!mobile) return;
+      this.mobileControl.patchValue(mobile);
+      this.mobileControl.markAsPristine();
+
+      this.tree.set([]);
+    });
+  }
 
   /**
    * Search user by mobile number and load their menu access tree
@@ -76,7 +96,7 @@ export class UsersMenuAccessFormComponent extends BaseLoading {
       }
 
       const treeNodes = await this.getGroupProcesses(
-        this.userInfo()?.MobileNumber!
+        this.userInfo()?.MobileNumber ?? ''
       );
       this.tree.set(treeNodes);
     });
@@ -127,19 +147,25 @@ export class UsersMenuAccessFormComponent extends BaseLoading {
   /**
    * Handle TreeTable checkbox changes and track modifications
    */
-  onTableCheckBoxChange(changes: TreeTableChangedData): void {
-    if (changes.parent) {
-      const { PGId } = changes.parent;
-      this.parentChanges.has(PGId)
-        ? this.parentChanges.delete(PGId)
-        : this.parentChanges.set(PGId, changes.parent);
+  onTableCheckBoxChange({ parent, children }: TreeTableChangedData): void {
+    if (parent) {
+      const { PGId } = parent;
+
+      if (this.parentChanges.has(PGId)) {
+        this.parentChanges.delete(PGId);
+      } else {
+        this.parentChanges.set(PGId, parent);
+      }
     }
 
-    changes.children?.forEach((child) => {
+    children?.forEach((child) => {
       const { PId } = child;
-      this.childChanges.has(PId)
-        ? this.childChanges.delete(PId)
-        : this.childChanges.set(PId, child);
+
+      if (this.childChanges.has(PId)) {
+        this.childChanges.delete(PId);
+      } else {
+        this.childChanges.set(PId, child);
+      }
     });
   }
 

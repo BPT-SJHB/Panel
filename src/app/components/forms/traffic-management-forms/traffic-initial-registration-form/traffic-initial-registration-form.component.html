@@ -1,12 +1,4 @@
-<div class="flex flex-row justify-end pb-5 pt-2">
-  <app-button
-    label="جدید"
-    (click)="resetForm()"
-    severity="info"
-    styleClass="w-30 md:w-40"
-  />
-</div>
-<div class="grid gap-4 grid-cols-1 md:grid-cols-2 2xl:grid-cols-3">
+<app-form-inputs-section>
   <!-- Card Number (Read-only field) -->
   <app-text-input
     label="شماره کارت تردد"
@@ -34,13 +26,21 @@
   />
 
   <!-- Action Buttons (spanning all columns) -->
-  <div class="flex gap-5 justify-end col-span-full mt-2">
-    <app-button
-      label="ثبت"
-      (click)="registerCard()"
-      severity="primary"
-      styleClass="w-30 md:w-40"
-      [disabled]="registerForm.invalid || loading()"
-    />
-  </div>
-</div>
+</app-form-inputs-section>
+
+<app-form-buttons-section>
+  <app-button
+    label="ثبت"
+    (click)="registerCard()"
+    severity="primary"
+    styleClass="w-30 md:w-40"
+    [disabled]="registerForm.invalid || loading()"
+  />
+
+  <app-button
+    label="جدید"
+    (click)="resetForm()"
+    severity="info"
+    styleClass="w-30 md:w-40"
+  />
+</app-form-buttons-section>

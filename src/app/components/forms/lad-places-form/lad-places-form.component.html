@@ -1,13 +1,17 @@
-<app-search-input
-  [placeholder]="appTitle.getPlaceholder('loadAnnouncementPlaceTitle')"
-  [asyncSearchFn]="searchLADPlace"
-  [itemMatchesQuery]="filterLADPlace"
-  (searchResult)="handelSearchLADPlaces($event)"
-  [minSearchLength]="2"
-  [enableCaching]="false"
-  [control]="searchFiledControl"
-  [disableSearchButton]="searchFiledControl.invalid"
-/>
+<div class="flex justify-center w-full">
+  <app-search-input
+    class="w-full md:max-w-[70%]"
+    [placeholder]="appTitle.getPlaceholder('loadAnnouncementPlaceTitle')"
+    [asyncSearchFn]="searchLADPlace"
+    [itemMatchesQuery]="filterLADPlace"
+    (searchResult)="handelSearchLADPlaces($event)"
+    [minSearchLength]="2"
+    [enableCaching]="false"
+    [control]="searchFiledControl"
+    [disableSearchButton]="searchFiledControl.invalid"
+  />
+</div>
+
 <app-table
   [columns]="cloumns"
   [rows]="ladPlaces()"

@@ -94,12 +94,37 @@
   />
 </div>
 
-<div class="grid grid-cols-12 gap-4 mt-6">
-  <span class="text-xl font-bold col-span-12">بارگزاری فایل</span>
+<div class="w-full mt-10">
+  <span class="text-xl font-bold w-full">بارگذاری فایل</span>
   <p-fileUpload
     #fu
-    class="col-span-12"
+    class="w-full text-nowrap"
+    [pt]="{
+      root: {
+        class: 'my-3 p-0',
+      },
+      host: {
+        class: 'm-1',
+      },
+      header: {
+        class:
+          'flex flex-col md:flex-row justify-center items-stretch md:items-center',
+      },
+      pcChooseButton: {
+        root: { class: 'text-sm lg:text-base w-full' },
+      },
+      pcUploadButton: {
+        root: { class: 'text-sm lg:text-base w-full' },
+      },
+      pcCancelButton: {
+        root: { class: 'text-sm lg:text-base w-full' },
+      },
+      content: {
+        class: 'hidden',
+      },
+    }"
     chooseLabel="انتخاب فایل اکسل"
+    chooseStyleClass="text-sm"
     accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
     chooseIcon="pi pi-upload"
     label="بارگزاری فایل اکسل"

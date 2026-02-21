@@ -18,6 +18,8 @@ import { RawTrafficCost } from 'app/services/traffic-management/model/raw-traffi
 import { TrafficCardTypeCost } from 'app/services/traffic-management/model/traffic-card-type-cost.model';
 
 import { checkAndToastError } from 'app/utils/api-utils';
+import { FormInputsSectionComponent } from 'app/components/shared/sections/form-inputs-section/form-inputs-section.component';
+import { FormButtonsSectionComponent } from 'app/components/shared/sections/form-buttons-section/form-buttons-section.component';
 
 @Component({
   selector: 'app-traffic-and-parking-tariff',
@@ -27,6 +29,8 @@ import { checkAndToastError } from 'app/utils/api-utils';
     TextInputComponent,
     ButtonComponent,
     ToggleSwitchInputComponent,
+    FormInputsSectionComponent,
+    FormButtonsSectionComponent,
   ],
   templateUrl: './traffic-and-parking-tariff-form.component.html',
   styleUrls: ['./traffic-and-parking-tariff-form.component.scss'],

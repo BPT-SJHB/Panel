@@ -16,6 +16,8 @@ import { checkAndToastError } from 'app/utils/api-utils';
 import { BaseLoading } from '../shared/component-base/base-loading';
 import { AppTitles } from 'app/constants/Titles';
 import { copyTextAndToast } from 'app/utils/copy-text';
+import { FormInputsSectionComponent } from 'app/components/shared/sections/form-inputs-section/form-inputs-section.component';
+import { FormButtonsSectionComponent } from 'app/components/shared/sections/form-buttons-section/form-buttons-section.component';
 
 @Component({
   selector: 'app-factories-and-freight-form',
@@ -30,6 +32,8 @@ import { copyTextAndToast } from 'app/utils/copy-text';
     ToggleSwitchInputComponent,
     SearchAutoCompleteComponent,
     ButtonComponent,
+    FormInputsSectionComponent,
+    FormButtonsSectionComponent,
   ],
 })
 export class FactoriesAndFreightFormComponent extends BaseLoading {
