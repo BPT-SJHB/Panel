@@ -1,0 +1,28 @@
+@if (isCard()) {
+  @if (header()) {
+    <div class="card">
+      <p-panel
+        class="flex flex-col w-full gap-4"
+        [header]="header()"
+        [toggleable]="true"
+        [pt]="ptValue"
+      >
+        <ng-container *ngTemplateOutlet="content" />
+      </p-panel>
+    </div>
+  } @else {
+    <p-card class="bg-stone-100 dark:bg-zinc-800 shadow-md">
+      <div class="flex flex-col w-full gap-4">
+        <ng-container *ngTemplateOutlet="content" />
+      </div>
+    </p-card>
+  }
+} @else {
+  <div [class]="'flex w-full gap-4 flex-col md:' + flexDir()">
+    <ng-container *ngTemplateOutlet="content" />
+  </div>
+}
+
+<ng-template #content>
+  <ng-content />
+</ng-template>

@@ -1,18 +1,18 @@
-::ng-deep span.p-tablist-active-bar {
-  height: 2rem;
-  border-radius: 1rem;
-  margin-bottom: 0.4rem;
-  z-index: -1;
-  background-color: var(--p-highlight-focus-background);
+::ng-deep .p-tablist-active-bar {
+  height: 2rem !important;
+  border-radius: 1rem !important;
+  margin-bottom: 0.4rem !important;
+  z-index: -1 !important;
+  background-color: var(--p-highlight-focus-background) !important;
 }
 
-::ng-deep div.p-tablist-tab-list {
-  background-color: transparent;
-  padding: 0 8px 0 0;
-  margin: 0;
-  z-index: 8;
+::ng-deep .p-tablist-tab-list {
+  background-color: transparent !important;
+  padding: 0 8px 0 0 !important;
+  margin: 0 !important;
+  z-index: 8 !important;
   .p-tab {
-    border: none;
-    padding: 0.8rem 0.7rem 0.8rem 0.8rem;
+    border: none !important;
+    padding: 0.8rem 0.7rem 0.8rem 0.8rem !important;
   }
 }

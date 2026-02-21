@@ -4,9 +4,6 @@ import { CardModule } from 'primeng/card';
   selector: 'app-form-card',
   imports: [CardModule],
   templateUrl: './form-card.component.html',
-  styleUrl: './form-card.component.scss'
+  styleUrl: './form-card.component.scss',
 })
-
-export class FormCardComponent {
-
-}
+export class FormCardComponent {}

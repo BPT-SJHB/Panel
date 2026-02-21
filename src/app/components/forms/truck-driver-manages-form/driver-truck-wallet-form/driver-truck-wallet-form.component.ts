@@ -19,6 +19,7 @@ import { LoadingService } from 'app/services/loading-service/loading-service.ser
 import { Subject, takeUntil } from 'rxjs';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { AppTitles } from 'app/constants/Titles';
+import { FormInputsSectionComponent } from 'app/components/shared/sections/form-inputs-section/form-inputs-section.component';
 
 @Component({
   selector: 'app-driver-truck-wallet-form',
@@ -28,6 +29,7 @@ import { AppTitles } from 'app/constants/Titles';
     ReactiveFormsModule,
     SearchInputComponent,
     ButtonComponent,
+    FormInputsSectionComponent,
   ],
   templateUrl: './driver-truck-wallet-form.component.html',
   styleUrl: './driver-truck-wallet-form.component.scss',
@@ -102,7 +104,7 @@ export class DriverTruckWalletFormComponent implements OnInit, OnDestroy {
   };
 
   // feat: load truck info by smart card
-  async loadTruckInfo() {
+  loadTruckInfo = async () => {
     if (this.smartCard.invalid) return;
 
     this.loadingService.setLoading(true);
@@ -114,10 +116,10 @@ export class DriverTruckWalletFormComponent implements OnInit, OnDestroy {
     } finally {
       this.loadingService.setLoading(false);
     }
-  }
+  };
 
   // feat: load driver info by national ID
-  async loadDriverInfo() {
+  loadDriverInfo = async () => {
     if (this.nationalId.invalid) return;
 
     this.loadingService.setLoading(true);
@@ -132,7 +134,7 @@ export class DriverTruckWalletFormComponent implements OnInit, OnDestroy {
     } finally {
       this.loadingService.setLoading(false);
     }
-  }
+  };
 
   // feat: set composed truck-driver-wallet-turn info
   async setComposedInformation(): Promise<void> {

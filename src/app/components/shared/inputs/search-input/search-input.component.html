@@ -1,4 +1,4 @@
-<div class="relative flex justify-center items-center gap-4 h-16">
+<div class="relative flex justify-center items-center gap-1 md:gap-4 h-16">
   <app-text-input
     [id]="id"
     class="grow h-full"
@@ -22,9 +22,9 @@
         (click)="onSearchButtonClick()"
         [label]="searchButtonLabel"
         [disabled]="disableSearchButton"
-        styleClass="px-6 py-2"
+        styleClass="px-6 py-2 text-sm md:text-base"
         severity="info"
-        class="h-full"
+        class="h-full z-10"
         [style]="{ 'margin-bottom': '30px' }"
       ></app-button>
     }

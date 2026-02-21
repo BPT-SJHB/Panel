@@ -1,40 +1,35 @@
-<div class="p-fluid grid grid-cols-12 gap-6 relative">
+<div class="flex flex-col justify-center gap-4">
   <!-- Search Form -->
   <form
-    class="col-span-12 mt-6"
+    class="flex justify-center w-full self-center"
     [class.pointer-events-none]="loading"
     [class.opacity-60]="loading"
     [formGroup]="searchForm"
   >
-    <div class="flex gap-2">
-      <app-search-input
-        [control]="searchSmartCard"
-        validationField="smartCard"
-        icon="pi pi-search"
-        class="flex-1"
-        [placeholder]="
-          appTitle.getPlaceholder('truckSmartCardNumberPlaceholder')
-        "
-        [disableSearchButton]="searchForm.invalid || loading"
-        [searchButtonLabel]="appTitle.buttons.retrieveFromOutdoorSystem"
-        [onSearchQuery]="loadFormsInformation"
-        type="number"
-      ></app-search-input>
-    </div>
+    <app-search-input
+      [control]="searchSmartCard"
+      validationField="smartCard"
+      icon="pi pi-search"
+      class="min-w-[70%]"
+      [placeholder]="appTitle.getPlaceholder('truckSmartCardNumberPlaceholder')"
+      [disableSearchButton]="searchForm.invalid || loading"
+      [searchButtonLabel]="appTitle.buttons.retrieveFromOutdoorSystem"
+      [onSearchQuery]="loadFormsInformation"
+      type="number"
+    ></app-search-input>
   </form>
 
   <!-- Truck Info & Nativeness Form -->
-  <form
-    class="p-fluid grid grid-cols-12 gap-2 col-span-12"
-    [class.pointer-events-none]="loading"
-    [class.opacity-60]="loading"
-    [formGroup]="truckInfoForm"
-  >
-    <span class="text-lg w-28 font-bold">{{
-      appTitle.sectionTitles.truckInfo
-    }}</span>
-    <div class="p-fluid grid grid-cols-12 gap-6 col-span-12">
-      <div class="grid grid-cols-12 gap-4 col-span-12">
+  <app-form-inputs-section>
+    <form
+      [class.pointer-events-none]="loading"
+      [class.opacity-60]="loading"
+      [formGroup]="truckInfoForm"
+    >
+      <span class="text-lg w-28 font-bold">{{
+        appTitle.sectionTitles.truckInfo
+      }}</span>
+      <div class="flex flex-col mt-3 gap-4">
         <div class="col-span-12 md:col-span-6">
           <app-text-input
             [label]="appTitle.inputs.trucks.truckId"
@@ -91,56 +86,58 @@
           ></app-text-input>
         </div>
       </div>
-    </div>
-  </form>
+    </form>
+  </app-form-inputs-section>
 
-  <form
-    class="p-fluid grid grid-cols-12 gap-4 col-span-12"
-    [class.pointer-events-none]="loading"
-    [class.opacity-60]="loading"
-    [formGroup]="truckNativenessForm"
-    (ngSubmit)="changeNativeness()"
-  >
-    <span class="text-lg w-20 font-bold">{{
-      appTitle.sectionTitles.nativenessInfo
-    }}</span>
-    <div class="p-fluid grid grid-cols-12 gap-4 col-span-12">
-      <div class="grid grid-cols-12 gap-4 col-span-12">
-        <div class="col-span-12 md:col-span-6">
-          <app-text-input
-            [label]="appTitle.inputs.nativenesses.nativenessStatus"
-            class="flex-1"
-            [placeholder]="appTitle.getPlaceholder('nativenessPlaceholder')"
-            [control]="nativeness"
-            validationField="nativeness"
-            [readOnly]="true"
-            [addonWidth]="addonWidth"
-          ></app-text-input>
-        </div>
+  <app-form-inputs-section>
+    <form
+      class="p-fluid grid grid-cols-12 gap-4 col-span-12"
+      [class.pointer-events-none]="loading"
+      [class.opacity-60]="loading"
+      [formGroup]="truckNativenessForm"
+      (ngSubmit)="changeNativeness()"
+    >
+      <span class="text-lg w-20 font-bold">{{
+        appTitle.sectionTitles.nativenessInfo
+      }}</span>
+      <div class="p-fluid grid grid-cols-12 gap-4 col-span-12">
+        <div class="grid grid-cols-12 gap-4 col-span-12">
+          <div class="col-span-12 md:col-span-6">
+            <app-text-input
+              [label]="appTitle.inputs.nativenesses.nativenessStatus"
+              class="flex-1"
+              [placeholder]="appTitle.getPlaceholder('nativenessPlaceholder')"
+              [control]="nativeness"
+              validationField="nativeness"
+              [readOnly]="true"
+              [addonWidth]="addonWidth"
+            ></app-text-input>
+          </div>
 
-        <div class="col-span-12 md:col-span-6">
-          <app-date-picker-input
-            class="flex-1"
-            [label]="appTitle.datePicker.endDate"
-            datePickerPosition="top"
-            [control]="truckNativenessExpiredDate"
-            validationField="truckNativenessExpiredDate"
-            [readOnly]="truckId.invalid"
-            [addonWidth]="addonWidth"
-          ></app-date-picker-input>
+          <div class="col-span-12 md:col-span-6">
+            <app-date-picker-input
+              class="flex-1"
+              [label]="appTitle.datePicker.endDate"
+              datePickerPosition="top"
+              [control]="truckNativenessExpiredDate"
+              validationField="truckNativenessExpiredDate"
+              [readOnly]="truckId.invalid"
+              [addonWidth]="addonWidth"
+            ></app-date-picker-input>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- Action Buttons -->
-    <div
-      class="col-span-12 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center"
-    >
-      <app-button
-        (click)="changeNativeness()"
-        [label]="appTitle.buttons.changeNativenessStatus"
-        [disabled]="truckId.invalid || truckNativenessForm.invalid || loading"
-        styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-48 lg:w-60"
-      ></app-button>
-    </div>
-  </form>
+    </form>
+  </app-form-inputs-section>
+
+  <!-- Action Buttons -->
+  <div class="flex w-full justify-center">
+    <app-button
+      (click)="changeNativeness()"
+      [label]="appTitle.buttons.changeNativenessStatus"
+      [disabled]="truckId.invalid || truckNativenessForm.invalid || loading"
+      class="w-full md:w-fit"
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-48 lg:w-60"
+    ></app-button>
+  </div>
 </div>

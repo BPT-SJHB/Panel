@@ -38,6 +38,8 @@ import { AnnouncementSubGroup } from 'app/services/announcement-group-subgroup-m
 import { AppTitles } from 'app/constants/Titles';
 import { interval, Subscription, takeUntil } from 'rxjs';
 import { LoadRegister } from 'app/services/load-management/model/load-register.model';
+import { FormInputsSectionComponent } from 'app/components/shared/sections/form-inputs-section/form-inputs-section.component';
+import { FormButtonsSectionComponent } from 'app/components/shared/sections/form-buttons-section/form-buttons-section.component';
 
 @Component({
   selector: 'app-loads-announcement-form',
@@ -47,6 +49,8 @@ import { LoadRegister } from 'app/services/load-management/model/load-register.m
     SearchAutoCompleteFactoryComponent,
     BinaryRadioInputComponent,
     ButtonComponent,
+    FormInputsSectionComponent,
+    FormButtonsSectionComponent,
   ],
   templateUrl: './loads-announcement-form.component.html',
   styleUrl: './loads-announcement-form.component.scss',
@@ -293,6 +297,8 @@ export class LoadsAnnouncementFormComponent
   /** Reset form */
   private resetForm(): void {
     this.loadsForm.reset();
+    this.loadsForm.markAsPristine();
+    this.loadsForm.updateValueAndValidity();
   }
 
   /** Shared disable condition */
@@ -578,32 +584,45 @@ export class LoadsAnnouncementFormComponent
         hidden: () => false,
         disabled: () => this.baseDisabled(),
       },
+      {
+        label: 'جدید',
+        severity: 'info' as ButtonSeverity,
+        action: () => this.reloadForm(),
+        widthClass: this.baseWidthClass,
+        hidden: () => false,
+        disabled: () => {
+          return false;
+        },
+      },
     ];
   }
 
   reloadForm(): void {
     this.sharedSignal.set(null);
-    let keep: (keyof LoadInfo)[] = [];
+    this.transportTariffParams.set([]);
 
-    switch (this.loadType) {
-      case LoadListType.TRANSPORT_COMPANY:
-        keep = ['TransportCompanyId', 'TransportCompanyTitle'];
-        break;
-    }
+    const keepKeys: (keyof LoadInfo)[] =
+      this.loadType === LoadListType.TRANSPORT_COMPANY
+        ? ['TransportCompanyId', 'TransportCompanyTitle']
+        : [];
 
-    const valuesToKeep = {} as Partial<LoadInfo>;
+    const currentValues = this.loadsForm.getRawValue();
+    const valuesToKeep = keepKeys.reduce(
+      (x, key) => ({
+        ...x,
+        [key]: currentValues[key],
+      }),
+      {}
+    );
 
-    keep.forEach((k) => {
-      const control = this.loadsForm.get(k);
-      if (control) {
-        const value = control.value as LoadInfo[typeof k];
-        Object.assign(valuesToKeep, { [k]: value });
-      }
+    this.loadsForm.reset({
+      ...valuesToKeep,
+      AnnounceDate: this.getToday(),
     });
 
-    this.loadsForm.reset({ AnnounceDate: this.getToday() });
-    this.loadsForm.patchValue(valuesToKeep);
-    this.transportTariffParams.set([]);
+    this.loadsForm.markAsPristine();
+    this.loadsForm.markAsUntouched();
+    this.loadsForm.updateValueAndValidity();
   }
 
   private getToday() {

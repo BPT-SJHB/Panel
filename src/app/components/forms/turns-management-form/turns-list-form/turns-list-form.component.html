@@ -1,14 +1,16 @@
 <div class="grid grid-cols-12 gap-4 mb-8">
-  <app-search-input
-    class="col-span-12"
-    [onSearchQuery]="searchTruckInformation"
-    [placeholder]="appTitle.getPlaceholder('truckSmartCardNumberPlaceholder')"
-    [searchButtonLabel]="appTitle.buttons.search"
-    validationField="smartCard"
-    [control]="smartCode"
-    [disableSearchButton]="smartCode.invalid"
-    type="number"
-  />
+  <div class="flex justify-center w-full col-span-12">
+    <app-search-input
+      class="min-w-[70%]"
+      [onSearchQuery]="searchTruckInformation"
+      [placeholder]="appTitle.getPlaceholder('truckSmartCardNumberPlaceholder')"
+      [searchButtonLabel]="appTitle.buttons.search"
+      validationField="smartCard"
+      [control]="smartCode"
+      [disableSearchButton]="smartCode.invalid"
+      type="number"
+    />
+  </div>
 
   <app-text-input
     [control]="truckId"

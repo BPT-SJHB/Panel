@@ -1,4 +1,11 @@
-import { Component, inject, Input, ViewChild } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  ViewChild,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { TurnsTruckInfoBaseFormComponent } from '../turns-truck-info-base-form/turns-truck-info-base-form.component';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
@@ -9,15 +16,22 @@ import { checkAndToastError } from 'app/utils/api-utils';
 import { ToastService } from 'app/services/toast-service/toast.service';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { ValidationSchema } from 'app/constants/validation-schema';
-import { ButtonComponent } from "app/components/shared/button/button.component";
+import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { FormButtonsSectionComponent } from 'app/components/shared/sections/form-buttons-section/form-buttons-section.component';
 
 @Component({
   selector: 'app-real-time-turns-form',
-  imports: [ButtonModule, TurnsTruckInfoBaseFormComponent, TextInputComponent, ButtonComponent],
+  imports: [
+    ButtonModule,
+    TurnsTruckInfoBaseFormComponent,
+    TextInputComponent,
+    ButtonComponent,
+    FormButtonsSectionComponent,
+  ],
   templateUrl: './emergency-turns-form.component.html',
   styleUrl: './emergency-turns-form.component.scss',
 })
-export class EmergencyTurnsFormComponent {
+export class EmergencyTurnsFormComponent implements OnDestroy, OnInit {
   @ViewChild(TurnsTruckInfoBaseFormComponent)
   turnsBaseComponent!: TurnsTruckInfoBaseFormComponent;
 

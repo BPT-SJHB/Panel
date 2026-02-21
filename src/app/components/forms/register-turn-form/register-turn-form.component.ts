@@ -17,11 +17,12 @@ import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
 import { BaseLoading } from '../shared/component-base/base-loading';
 import { CardModule } from 'primeng/card';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { FormInputsSectionComponent } from 'app/components/shared/sections/form-inputs-section/form-inputs-section.component';
 
 @Component({
   selector: 'app-register-turn-form',
   standalone: true,
-  imports: [CardModule, ButtonComponent],
+  imports: [CardModule, ButtonComponent, FormInputsSectionComponent],
   templateUrl: './register-turn-form.component.html',
   styleUrls: ['./register-turn-form.component.scss'], // ✅ fixed styleUrl → styleUrls
 })
