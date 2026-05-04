@@ -1,9 +1,12 @@
 ---
-name: Panel Production Deploy (SSH Mode)
+name: Panel Production Deploy
+
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
+
 jobs:
   deploy:
     runs-on: local-host
@@ -18,7 +21,7 @@ jobs:
 
           git fetch origin main
           git reset --hard origin/main
-          
+
       - name: 📦 Install Dependencies
         run: |
           export NVM_DIR="$HOME/.nvm"
@@ -31,7 +34,7 @@ jobs:
           else
             npm install --prefer-offline --no-audit
           fi
-          
+
       - name: 🏗️ Angular Build
         run: |
           export NVM_DIR="$HOME/.nvm"
@@ -46,7 +49,7 @@ jobs:
           else
             echo "Build failed" && exit 1
           fi
-          
+
       - name: 🚀 Deploy to Nginx
         run: |
           if sudo nginx -s reload; then
