@@ -1,5 +1,5 @@
 ---
-name: Panel Production Deploy
+name: Panel Production Deploy (SSH)
 
 on:
   push:
