@@ -1,0 +1,13 @@
+name: test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: start of test
+        run: |
+          echo "You tested it" > /test.txt
