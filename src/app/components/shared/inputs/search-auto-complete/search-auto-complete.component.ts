@@ -83,6 +83,9 @@ export class SearchAutoCompleteComponent<T extends object> {
 
   valueInputChange($event: HTMLInputElement) {
     const value = $event.value;
+
+    if (value === undefined) return;
+
     if (!value) {
       this.showIconOptionSelected = false;
       this.isDropDownHidden.set(true);
