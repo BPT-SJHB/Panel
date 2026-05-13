@@ -22,6 +22,7 @@ interface CardTurnItem {
   TurnStatusTitle: string;
   LspString: string;
   TruckDriver: string;
+  SequentialTurn: string;
 }
 
 @Component({
@@ -48,7 +49,7 @@ export class IssuedTurnListFormComponent implements OnInit, OnDestroy {
 
   // 📌 Table columns config
   readonly cols: readonly { col: string; field: keyof CardTurnItem }[] = [
-    { col: 'شماره نوبت', field: 'TurnId' },
+    { col: 'شماره نوبت', field: 'SequentialTurn' },
     { col: 'فاصله تا اعتبار', field: 'TurnDistanceToValidity' },
     { col: 'زمان', field: 'Time' },
     { col: 'وضعیت نوبت', field: 'TurnStatusTitle' },
@@ -74,7 +75,7 @@ export class IssuedTurnListFormComponent implements OnInit, OnDestroy {
   // ❗ Show confirmation dialog before canceling a turn
   confirmCancelTurn(turn: CardTurnItem): void {
     this.confirmationService.confirm({
-      message: `آیا مطمئن هستید که می‌خواهید نوبت شماره ${turn.TurnId} را لغو کنید؟`,
+      message: `آیا مطمئن هستید که می‌خواهید نوبت شماره ${turn.SequentialTurn} را لغو کنید؟`,
       header: 'تأیید لغو نوبت',
       icon: 'pi pi-exclamation-triangle',
       accept: async () => {
@@ -119,6 +120,7 @@ export class IssuedTurnListFormComponent implements OnInit, OnDestroy {
           TurnStatusTitle: turn.TurnStatusTitle,
           LspString: turn.LPString,
           TruckDriver: turn.TruckDriver,
+          SequentialTurn: turn.SequentialTurn,
         })
       );
 
