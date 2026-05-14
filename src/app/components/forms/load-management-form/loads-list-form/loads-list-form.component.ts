@@ -239,24 +239,49 @@ export class LoadsListFormComponent
     this.getLoadFilterControl('date').setValue(null);
   }
 
-  async filterListLoad(): Promise<void> {
+  async filterListLoad(oninit = false): Promise<void> {
     if (this.loading() || this.isFilterInvalid()) return;
 
     await this.withLoading(async () => {
       const response = await this.getListLoadInfo();
+      let hasError = false;
+      if (oninit) {
+        hasError = false;
+      } else {
+        hasError = checkAndToastError(response, this.toast);
+      }
 
-      if (!checkAndToastError(response, this.toast)) {
+      if (hasError) {
         this.rows.set([]);
         return;
       }
 
       this.rows.set(
-        response.data.flatMap((l) =>
+        response.data!.flatMap((l) =>
           l.myLoads.map((c) => ({ ProvinceName: l.ProvinceName, ...c }))
         )
       );
     });
   }
+
+  // async filterListLoad(oninit = false): Promise<void> {
+  //   if (this.loading() || this.isFilterInvalid()) return;
+  //
+  //   await this.withLoading(async () => {
+  //     const response = await this.getListLoadInfo();
+  //
+  //     if (!checkAndToastError(response, this.toast) && oninit === false) {
+  //       this.rows.set([]);
+  //       return;
+  //     }
+  //
+  //     this.rows.set(
+  //       response.data!.flatMap((l) =>
+  //         l.myLoads.map((c) => ({ ProvinceName: l.ProvinceName, ...c }))
+  //       )
+  //     );
+  //   });
+  // }
 
   rowSelect(row: LoadTransportCompaniesTable): void {
     this.sharedSignal.set(row as LoadInfo);
@@ -290,7 +315,7 @@ export class LoadsListFormComponent
   private async initializeLoads(): Promise<void> {
     if (this.loadType === LoadListType.TRANSPORT_COMPANY) {
       await this.loadTransportCompany();
-      await this.filterListLoad();
+      await this.filterListLoad(true);
     }
   }
 
