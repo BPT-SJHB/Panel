@@ -11,6 +11,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 15,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش چدن',
           Tonaj: 22,
           SoureCityTitle: 'اصفهان - ذوب آهن',
@@ -47,6 +48,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 6,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش چدن',
           Tonaj: 22,
           SoureCityTitle: 'اصفهان - اصفهان  ',
@@ -76,6 +78,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 11,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش چدن',
           Tonaj: 22,
           SoureCityTitle: 'اصفهان - ذوب آهن',
@@ -105,6 +108,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 7,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش چدن',
           Tonaj: 22,
           SoureCityTitle: 'اصفهان - اصفهان  ',
@@ -134,6 +138,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 8,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش چدن',
           Tonaj: 25,
           SoureCityTitle: 'اصفهان - اصفهان  ',
@@ -170,6 +175,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 13,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش چدن',
           Tonaj: 24,
           SoureCityTitle: 'اصفهان - ذوب آهن',
@@ -206,6 +212,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 12,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش چدن',
           Tonaj: 22,
           SoureCityTitle: 'اصفهان - ذوب آهن',
@@ -235,6 +242,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 10,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش چدن',
           Tonaj: 25,
           SoureCityTitle: 'اصفهان - زرين شهر',
@@ -264,6 +272,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 16,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش چدن',
           Tonaj: 22,
           SoureCityTitle: 'اصفهان - ذوب آهن',
@@ -293,6 +302,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 17,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش چدن',
           Tonaj: 25,
           SoureCityTitle: 'اصفهان - اصفهان  ',
@@ -323,6 +333,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 18,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش چدن',
           Tonaj: 25,
           SoureCityTitle: 'اصفهان - اصفهان  ',
@@ -353,6 +364,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 19,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش چدن',
           Tonaj: 25,
           SoureCityTitle: 'اصفهان - اصفهان  ',
@@ -383,6 +395,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 20,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش چدن',
           Tonaj: 25,
           SoureCityTitle: 'اصفهان - اصفهان  ',
@@ -413,6 +426,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 21,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش چدن',
           Tonaj: 25,
           SoureCityTitle: 'اصفهان - اصفهان  ',
@@ -443,6 +457,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 22,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش چدن',
           Tonaj: 24,
           SoureCityTitle: 'اصفهان - اصفهان  ',
@@ -473,6 +488,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 26,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش چدن',
           Tonaj: 25,
           SoureCityTitle: 'اصفهان - اصفهان  ',
@@ -503,6 +519,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 27,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش چدن',
           Tonaj: 25,
           SoureCityTitle: 'اصفهان - اصفهان  ',
@@ -533,6 +550,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 5,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش چدن',
           Tonaj: 22,
           SoureCityTitle: 'اصفهان - اصفهان  ',
@@ -569,6 +587,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 4,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش چدن',
           Tonaj: 22,
           SoureCityTitle: 'اصفهان - اصفهان  ',
@@ -605,6 +624,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 3,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش چدن',
           Tonaj: 23,
           SoureCityTitle: 'اصفهان - اصفهان  ',
@@ -641,6 +661,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 9,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش چدن',
           Tonaj: 22,
           SoureCityTitle: 'اصفهان - ذوب آهن',
@@ -677,6 +698,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 1,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش فولاد',
           Tonaj: 22,
           SoureCityTitle: 'اصفهان - كوهپايه اصفهان',
@@ -713,6 +735,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 2,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش چدن',
           Tonaj: 25,
           SoureCityTitle: 'اصفهان - اصفهان  ',
@@ -742,6 +765,7 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           LoadId: 14,
           TCTitle:
             'ا مانت  بار                                                                                                                                                                                             ',
+          TCTel: '09132043148',
           GoodTitle: 'شمش چدن',
           Tonaj: 23,
           SoureCityTitle: 'اصفهان - اصفهان  ',

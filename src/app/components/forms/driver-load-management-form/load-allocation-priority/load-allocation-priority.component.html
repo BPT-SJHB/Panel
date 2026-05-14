@@ -37,7 +37,7 @@
           <i
             class="pi cursor-pointer text-base md:text-lg"
             [ngClass]="panel.collapsed ? 'pi-chevron-down' : 'pi-chevron-up'"
-            (click)="panel.toggle($event)"
+            (click)="panel.toggle($event); $event.stopPropagation()"
           ></i>
         </ng-template>
 
