@@ -3,6 +3,7 @@ import z from 'zod';
 export interface LoadInfoForTransportCompanies_Factories_Admins_Drivers {
   LoadId: number;
   TCTitle: string;
+  TCTel: string;
   GoodTitle: string;
   Tonaj: number;
   SoureCityTitle: string;
@@ -29,6 +30,7 @@ export const zodLoadInfoForTransportCompanies_Factories_Admins_Drivers =
   z.object({
     LoadId: z.number(),
     TCTitle: z.string(),
+    TCTel: z.string(),
     GoodTitle: z.string(),
     Tonaj: z.number(),
     SoureCityTitle: z.string(),
