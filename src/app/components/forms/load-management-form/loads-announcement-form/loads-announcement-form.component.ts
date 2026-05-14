@@ -542,7 +542,8 @@ export class LoadsAnnouncementFormComponent
         action: () => this.clickRegisterLoad(),
         widthClass: this.baseWidthClass,
         hidden: () => this.ctrl('LoadId').valid,
-        disabled: () => !this.isLoadRegisterValid() || this.loading(),
+        disabled: () =>
+          this.loadsForm.valid || !this.isLoadRegisterValid() || this.loading(),
       },
       {
         label: 'ویرایش',
