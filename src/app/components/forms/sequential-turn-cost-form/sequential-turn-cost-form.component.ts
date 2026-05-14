@@ -53,15 +53,15 @@ export class SequentialTurnCostFormComponent
     SeqTurnTitle: this.fb.nonNullable.control('', ValidationSchema.title),
     SelfGoverCost: this.fb.control<number | null>(null, [
       Validators.required,
-      Validators.min(1),
+      Validators.min(0),
     ]),
     TruckersAssociationCost: this.fb.control<number | null>(null, [
       Validators.required,
-      Validators.min(1),
+      Validators.min(0),
     ]),
     TruckDriversAssociationCost: this.fb.control<number | null>(null, [
       Validators.required,
-      Validators.min(1),
+      Validators.min(0),
     ]),
   });
 
