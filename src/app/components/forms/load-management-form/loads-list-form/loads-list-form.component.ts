@@ -248,7 +248,7 @@ export class LoadsListFormComponent
       if (oninit) {
         hasError = false;
       } else {
-        hasError = checkAndToastError(response, this.toast);
+        hasError = !checkAndToastError(response, this.toast);
       }
 
       if (hasError) {
@@ -263,25 +263,6 @@ export class LoadsListFormComponent
       );
     });
   }
-
-  // async filterListLoad(oninit = false): Promise<void> {
-  //   if (this.loading() || this.isFilterInvalid()) return;
-  //
-  //   await this.withLoading(async () => {
-  //     const response = await this.getListLoadInfo();
-  //
-  //     if (!checkAndToastError(response, this.toast) && oninit === false) {
-  //       this.rows.set([]);
-  //       return;
-  //     }
-  //
-  //     this.rows.set(
-  //       response.data!.flatMap((l) =>
-  //         l.myLoads.map((c) => ({ ProvinceName: l.ProvinceName, ...c }))
-  //       )
-  //     );
-  //   });
-  // }
 
   rowSelect(row: LoadTransportCompaniesTable): void {
     this.sharedSignal.set(row as LoadInfo);
