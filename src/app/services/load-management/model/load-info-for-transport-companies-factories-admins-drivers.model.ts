@@ -15,8 +15,8 @@ export interface LoadInfoForTransportCompanies_Factories_Admins_Drivers {
   Reminder: number;
   Tariff: string;
   LoadStatusName: string;
-  AnnounceDate: string;
-  AnnounceTime: string;
+  LoadIssueDate: string;
+  LoadIssueTime: string;
   AnnouncementTitle: string;
   AnnouncementSGTitle: string;
   Recipient: string;
@@ -42,8 +42,8 @@ export const zodLoadInfoForTransportCompanies_Factories_Admins_Drivers =
     Reminder: z.number(),
     Tariff: z.string(),
     LoadStatusName: z.string(),
-    AnnounceDate: z.string(),
-    AnnounceTime: z.string(),
+    LoadIssueDate: z.string(),
+    LoadIssueTime: z.string(),
     AnnouncementTitle: z.string(),
     AnnouncementSGTitle: z.string(),
     Recipient: z.string(),

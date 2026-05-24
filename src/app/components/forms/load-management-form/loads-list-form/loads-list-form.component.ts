@@ -59,8 +59,8 @@ interface LoadTransportCompaniesTable {
   Reminder: number;
   Tariff: string;
   LoadStatusName: string;
-  AnnounceDate: string;
-  AnnounceTime: string;
+  LoadIssueDate: string;
+  LoadIssueTime: string;
   AnnouncementTitle: string;
   AnnouncementSGTitle: string;
   Recipient: string;
@@ -163,11 +163,11 @@ export class LoadsListFormComponent
     { header: this.appTitle.tables.loads.loadStatus, field: 'LoadStatusName' },
     {
       header: this.appTitle.tables.loads.loadAnnouncementDate,
-      field: 'AnnounceDate',
+      field: 'LoadIssueDate',
     },
     {
       header: this.appTitle.tables.loads.loadAnnouncementTime,
-      field: 'AnnounceTime',
+      field: 'LoadIssueTime',
     },
     {
       header: this.appTitle.tables.loads.announcementGroup,

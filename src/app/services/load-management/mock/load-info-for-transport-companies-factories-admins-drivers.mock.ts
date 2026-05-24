@@ -24,8 +24,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '295541600',
           LoadStatusName:
             'ثبت شده                                                                                             ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '14:41:59',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '14:41:59',
           AnnouncementTitle:
             'تريلي برون شهري                                                                                     ',
           AnnouncementSGTitle:
@@ -61,8 +61,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '50384920',
           LoadStatusName:
             'ثبت شده                                                                                             ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '15:40:57',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '15:40:57',
           AnnouncementTitle:
             'اعلام بار انباری                                                                                    ',
           AnnouncementSGTitle:
@@ -91,8 +91,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '63764520',
           LoadStatusName:
             'ثبت شده                                                                                             ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '14:56:07',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '14:56:07',
           AnnouncementTitle:
             'اعلام بار شهری                                                                                      ',
           AnnouncementSGTitle:
@@ -121,8 +121,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '69546640',
           LoadStatusName:
             'ثبت شده                                                                                             ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '15:37:43',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '15:37:43',
           AnnouncementTitle:
             'اعلام بار انباری                                                                                    ',
           AnnouncementSGTitle:
@@ -151,8 +151,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '79030273',
           LoadStatusName:
             'ثبت شده                                                                                             ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '15:35:29',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '15:35:29',
           AnnouncementTitle:
             'اعلام بار انباری                                                                                    ',
           AnnouncementSGTitle:
@@ -188,8 +188,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '319059258',
           LoadStatusName:
             'ثبت شده                                                                                             ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '14:49:06',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '14:49:06',
           AnnouncementTitle:
             'تريلي برون شهري                                                                                     ',
           AnnouncementSGTitle:
@@ -225,8 +225,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '202614960',
           LoadStatusName:
             'ثبت شده                                                                                             ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '14:51:55',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '14:51:55',
           AnnouncementTitle:
             'تريلي برون شهري                                                                                     ',
           AnnouncementSGTitle:
@@ -255,8 +255,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '189171920',
           LoadStatusName:
             'ثبت شده                                                                                             ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '14:56:27',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '14:56:27',
           AnnouncementTitle:
             'تريلي برون شهري                                                                                     ',
           AnnouncementSGTitle:
@@ -285,8 +285,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '195614960',
           LoadStatusName:
             'ثبت شده                                                                                             ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '14:33:39',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '14:33:39',
           AnnouncementTitle:
             'تريلي برون شهري                                                                                     ',
           AnnouncementSGTitle:
@@ -315,8 +315,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '41363636',
           LoadStatusName:
             'بار آزاد                                                                                            ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '17:34:37',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '17:34:37',
           AnnouncementTitle:
             'تريلي برون شهري                                                                                     ',
           AnnouncementSGTitle:
@@ -346,8 +346,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '41363636',
           LoadStatusName:
             'ثبت شده                                                                                             ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '17:37:42',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '17:37:42',
           AnnouncementTitle:
             'تريلي برون شهري                                                                                     ',
           AnnouncementSGTitle:
@@ -377,8 +377,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '41363636',
           LoadStatusName:
             'ثبت شده                                                                                             ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '17:37:52',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '17:37:52',
           AnnouncementTitle:
             'تريلي برون شهري                                                                                     ',
           AnnouncementSGTitle:
@@ -408,8 +408,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '41363636',
           LoadStatusName:
             'ثبت شده                                                                                             ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '17:41:04',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '17:41:04',
           AnnouncementTitle:
             'تريلي برون شهري                                                                                     ',
           AnnouncementSGTitle:
@@ -439,8 +439,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '41363636',
           LoadStatusName:
             'ثبت شده                                                                                             ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '17:42:00',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '17:42:00',
           AnnouncementTitle:
             'تريلي برون شهري                                                                                     ',
           AnnouncementSGTitle:
@@ -470,8 +470,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '38909091',
           LoadStatusName:
             'ثبت شده                                                                                             ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '18:25:18',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '18:25:18',
           AnnouncementTitle:
             'تريلي برون شهري                                                                                     ',
           AnnouncementSGTitle:
@@ -501,8 +501,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '39363636',
           LoadStatusName:
             'ثبت شده                                                                                             ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '18:55:44',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '18:55:44',
           AnnouncementTitle:
             'تريلي برون شهري                                                                                     ',
           AnnouncementSGTitle:
@@ -532,8 +532,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '39363636',
           LoadStatusName:
             'ثبت شده                                                                                             ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '18:55:49',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '18:55:49',
           AnnouncementTitle:
             'تريلي برون شهري                                                                                     ',
           AnnouncementSGTitle:
@@ -563,8 +563,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '175492240',
           LoadStatusName:
             'ثبت شده                                                                                             ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '15:42:19',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '15:42:19',
           AnnouncementTitle:
             'اعلام بار انباری                                                                                    ',
           AnnouncementSGTitle:
@@ -600,8 +600,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '121314160',
           LoadStatusName:
             'ثبت شده                                                                                             ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '16:05:21',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '16:05:21',
           AnnouncementTitle:
             'اعلام بار انباری                                                                                    ',
           AnnouncementSGTitle:
@@ -637,8 +637,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '0',
           LoadStatusName:
             'ثبت شده                                                                                             ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '16:23:31',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '16:23:31',
           AnnouncementTitle:
             'اعلام بار انباری                                                                                    ',
           AnnouncementSGTitle:
@@ -674,8 +674,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '184291280',
           LoadStatusName:
             'ثبت شده                                                                                             ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '14:57:33',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '14:57:33',
           AnnouncementTitle:
             'تريلي برون شهري                                                                                     ',
           AnnouncementSGTitle:
@@ -711,8 +711,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '247136000',
           LoadStatusName:
             'ثبت شده                                                                                             ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '11:51:02',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '11:51:02',
           AnnouncementTitle:
             'تريلي برون شهري                                                                                     ',
           AnnouncementSGTitle:
@@ -748,8 +748,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '235240682',
           LoadStatusName:
             'ثبت شده                                                                                             ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '16:24:23',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '16:24:23',
           AnnouncementTitle:
             'اعلام بار انباری                                                                                    ',
           AnnouncementSGTitle:
@@ -778,8 +778,8 @@ export const mockLoadsForTransportCompanies_Factories_Admins_Drivers: LoadForTra
           Tariff: '216421427',
           LoadStatusName:
             'ثبت شده                                                                                             ',
-          AnnounceDate: '1404/05/19',
-          AnnounceTime: '14:47:44',
+          LoadIssueDate: '1404/05/19',
+          LoadIssueTime: '14:47:44',
           AnnouncementTitle:
             'اعلام بار انباری                                                                                    ',
           AnnouncementSGTitle:
