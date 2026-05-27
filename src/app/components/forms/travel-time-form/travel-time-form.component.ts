@@ -135,7 +135,7 @@ export class TravelTimeFormComponent
     loaderType: [''],
     sourceCityName: [''],
     targetCityName: [''],
-    travelTime: [0, Validators.min(1)],
+    travelTime: [0, [Validators.min(0), Validators.required]],
     travelTimeActive: [true, Validators.required],
   });
 
