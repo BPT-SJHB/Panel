@@ -10,6 +10,9 @@
       [rows]="loadPermissionsRows()"
       [columns]="columns"
       [config]="tableConfig"
+      selectionMode="single"
+      (rowSelect)="rowSelect($event)"
+      (rowUnSelect)="rowUnSelect($event)"
     />
 
     <!-- Cancellation Section -->

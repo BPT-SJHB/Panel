@@ -113,7 +113,6 @@ export class AdminLoadPermissionsFormComponent extends BaseLoading {
       }
 
       this.loadPermissionsRows.set(res.data);
-      this.form.patchValue({ LAId: res.data[0].LoadAllocationId });
     });
   }
 
@@ -150,6 +149,14 @@ export class AdminLoadPermissionsFormComponent extends BaseLoading {
         Turn: res.data.TurnId,
       });
     });
+  }
+
+  rowSelect(row: LoadPermission): void {
+    this.form.patchValue({ LAId: row.LoadAllocationId });
+  }
+
+  rowUnSelect(_: LoadPermission): void {
+    this.form.patchValue({ LAId: null });
   }
 
   ctrl<K extends keyof LoadPermissionCancelForm>(
