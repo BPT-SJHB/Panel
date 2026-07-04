@@ -22,6 +22,8 @@ import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-
 import { AppTitles } from 'app/constants/Titles';
 import { FormButtonsSectionComponent } from 'app/components/shared/sections/form-buttons-section/form-buttons-section.component';
 import { FormInputsSectionComponent } from 'app/components/shared/sections/form-inputs-section/form-inputs-section.component';
+import { LocationManagementService } from 'app/services/location-management/location-management.service';
+import { string } from 'zod';
 
 @Component({
   selector: 'app-transport-companies-form',
@@ -46,6 +48,7 @@ export class TransportCompaniesFormComponent extends BaseLoading {
   private transportComponyService = inject(TransportCompaniesManagementService);
   private dialogService = inject(DialogService);
   private readonly confirmationService = inject(ConfirmationService);
+  private readonly locationService = inject(LocationManagementService);
 
   // === Form Setup ===
   readonly addonWidth = '7rem';
@@ -59,7 +62,7 @@ export class TransportCompaniesFormComponent extends BaseLoading {
     TCManagerMobileNumber: ['', ValidationSchema.mobile],
     TCManagerNameFamily: ['', ValidationSchema.fullName],
     EmailAddress: ['', ValidationSchema.email],
-    Active: [true],
+    Active: [false],
   });
 
   // === Search + Select Handling ===
@@ -170,6 +173,13 @@ export class TransportCompaniesFormComponent extends BaseLoading {
 
   private extractTransportComponyForm() {
     return this.transportComponyForm.getRawValue() as TransportCompany;
+  }
+
+  reloadForm() {
+    this.transportComponyForm.reset();
+    this.transportComponyForm.markAsPristine();
+    this.transportComponyForm.markAsUntouched();
+    this.transportComponyForm.updateValueAndValidity();
   }
 
   // === Getters for Form Controls ===

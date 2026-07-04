@@ -28,9 +28,11 @@
       <app-text-input
         class="flex-1"
         [label]="appTitle.inputs.transportCompanies.transportCompanyName"
+        [placeholder]="appTitle.getPlaceholder('transportCompanyName')"
+        validationField="title"
         [control]="TCTitle"
-        [readOnly]="true"
         [addonWidth]="addonWidth"
+        type="text"
       />
     </app-form-inputs-section>
 
@@ -41,18 +43,24 @@
         [label]="
           appTitle.inputs.transportCompanies.transportCompanyOrganizationId
         "
+        [placeholder]="
+          appTitle.getPlaceholder('transportCompanyOrganizationId')
+        "
+        validationField="id"
         [control]="TCOrganizationCode"
-        [readOnly]="true"
         [addonWidth]="addonWidth"
+        type="number"
       />
 
       <!-- شهر استقرار -->
       <app-text-input
         class="w-full"
         [label]="appTitle.inputs.transportCompanies.transportCompanyLocation"
+        [placeholder]="appTitle.getPlaceholder('transportCompanyLocation')"
+        validationField="sourceCity"
         [control]="TCCityTitle"
-        [readOnly]="true"
         [addonWidth]="addonWidth"
+        type="text"
       />
     </app-form-inputs-section>
 
@@ -141,6 +149,14 @@
       [disabled]="TCId.invalid || loading()"
       severity="info"
       [label]="appTitle.buttons.generateNewPassword"
+      class="w-full md:w-fit"
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+    ></app-button>
+
+    <app-button
+      (click)="reloadForm()"
+      severity="info"
+      [label]="appTitle.buttons.add.addUser"
       class="w-full md:w-fit"
       styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
     ></app-button>
