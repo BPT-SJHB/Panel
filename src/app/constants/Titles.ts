@@ -33,6 +33,10 @@ export type PlaceholderKey =
   | 'endCity'
   | 'transportCompanyTitle'
   | 'travelTimeDurationTitle'
+  | 'transportCompanyId'
+  | 'transportCompanyName'
+  | 'transportCompanyOrganizationId'
+  | 'transportCompanyLocation'
   | 'transportCompanyOwnerPhoneNumber'
   | 'transportCompanyOwnerName'
   | 'sequentialTurnTitle'
@@ -396,6 +400,24 @@ export class AppTitles {
 
       case 'sequentialTurnKeywork':
         placeholderValue = this.inputs.sequentialTurns.keyWord;
+        break;
+
+      case 'transportCompanyId':
+        placeholderValue = this.inputs.transportCompanies.transportCompanyId;
+        break;
+
+      case 'transportCompanyName':
+        placeholderValue = this.inputs.transportCompanies.transportCompanyName;
+        break;
+
+      case 'transportCompanyOrganizationId':
+        placeholderValue =
+          this.inputs.transportCompanies.transportCompanyOrganizationId;
+        break;
+
+      case 'transportCompanyLocation':
+        placeholderValue =
+          this.inputs.transportCompanies.transportCompanyLocation;
         break;
 
       default:
