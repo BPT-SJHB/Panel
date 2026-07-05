@@ -41,7 +41,8 @@ export class Driver_TruckManagementService {
   //#region Driver
 
   public async GetDriverInfoFromAPI(
-    nationalCode: string
+    nationalCode: string,
+    sessionId: string | undefined = undefined
   ): Promise<ApiResponse<TruckDriverInfo>> {
     //#region Consts
     const outdoorApiUrl =
@@ -53,7 +54,7 @@ export class Driver_TruckManagementService {
       NationalCode: nationalCode,
     };
     const bodyValue = {
-      SessionId: this.userAuth.getSessionId(),
+      SessionId: sessionId ?? this.userAuth.getSessionId(),
       TruckDriverNationalCode: truckDriverInfo.NationalCode,
     };
     //#endregion
@@ -199,7 +200,8 @@ export class Driver_TruckManagementService {
   //#region Truck
 
   public async GetTruckInfoFromAPI(
-    smartCardNo: string
+    smartCardNo: string,
+    sessionId: string | undefined = undefined
   ): Promise<ApiResponse<TruckInfo>> {
     //#region Consts
     const truckInfo: TruckInfo = {
@@ -211,7 +213,7 @@ export class Driver_TruckManagementService {
     const outdoorApiUrl =
       API_ROUTES.TransportationAPI.Truck.GetTruckInfoFromOutdoorAPI;
     const bodyValue = {
-      SessionId: this.userAuth.getSessionId(),
+      SessionId: sessionId ?? this.userAuth.getSessionId(),
       SmartCardNo: truckInfo.SmartCardNo,
     };
     //#endregion
