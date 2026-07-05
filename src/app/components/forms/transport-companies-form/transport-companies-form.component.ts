@@ -1,5 +1,5 @@
 // Angular & PrimeNG imports
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -24,6 +24,12 @@ import { FormButtonsSectionComponent } from 'app/components/shared/sections/form
 import { FormInputsSectionComponent } from 'app/components/shared/sections/form-inputs-section/form-inputs-section.component';
 import { LocationManagementService } from 'app/services/location-management/location-management.service';
 import { string } from 'zod';
+import {
+  AutoCompleteConfigFactoryService,
+  AutoCompleteType,
+} from 'app/services/auto-complete-config-factory/auto-complete-config-factory.service';
+import { SearchAutoCompleteFactoryComponent } from 'app/components/shared/inputs/search-auto-complete-factory/search-auto-complete-factory.component';
+import { FileUpload, FileUploadModule } from 'primeng/fileupload';
 
 @Component({
   selector: 'app-transport-companies-form',
@@ -37,25 +43,33 @@ import { string } from 'zod';
     ToggleSwitchInputComponent,
     FormButtonsSectionComponent,
     FormInputsSectionComponent,
+    SearchAutoCompleteFactoryComponent,
+    FileUploadModule,
   ],
   providers: [ConfirmationService, DialogService],
   templateUrl: './transport-companies-form.component.html',
   styleUrl: './transport-companies-form.component.scss',
 })
 export class TransportCompaniesFormComponent extends BaseLoading {
+  @ViewChild('fu') fu?: FileUpload;
+
   // === Injected services ===
   private fb = inject(FormBuilder);
   private transportComponyService = inject(TransportCompaniesManagementService);
   private dialogService = inject(DialogService);
   private readonly confirmationService = inject(ConfirmationService);
+  private readonly autoCompleteFactory = inject(
+    AutoCompleteConfigFactoryService
+  );
 
   // === Form Setup ===
   readonly addonWidth = '7rem';
   readonly appTitle = AppTitles;
   readonly transportComponyForm = this.fb.group({
-    TCId: new FormControl<number | null>(null, ValidationSchema.id),
+    TCId: new FormControl<number | null>(null),
     TCTitle: [''],
     TCOrganizationCode: [''],
+    TCCityId: new FormControl<number | null>(null),
     TCCityTitle: [''],
     TCTel: ['', ValidationSchema.telephone],
     TCManagerMobileNumber: ['', ValidationSchema.mobile],
@@ -63,6 +77,7 @@ export class TransportCompaniesFormComponent extends BaseLoading {
     EmailAddress: ['', ValidationSchema.email],
     Active: [false],
   });
+  readonly autoCompletions = this.createAutoCompletions();
 
   // === Search + Select Handling ===
   searchTransportCompony = async (query: string) => {
@@ -84,20 +99,43 @@ export class TransportCompaniesFormComponent extends BaseLoading {
     }
   }
 
+  private createAutoCompletions() {
+    return {
+      sourceCity: this.autoCompleteFactory.create(
+        AutoCompleteType.City,
+        this.transportComponyForm.controls.TCCityId,
+        {
+          placeholder: this.appTitle.getPlaceholder('transportCompanyLocation'),
+          label:
+            this.appTitle.inputs.transportCompanies.transportCompanyLocation,
+          control: this.transportComponyForm.controls
+            .TCCityTitle as FormControl<string>,
+        }
+      ),
+    };
+  }
+
   // === Form Submit Handlers ===
-  async editTransportCompony() {
+  async save_editTransportCompony() {
     if (this.loading() || this.transportComponyForm.invalid) return;
     await this.withLoading(async () => {
-      const response = await this.transportComponyService.EditTransportCompany(
-        this.extractTransportComponyForm()
-      );
-      if (!checkAndToastError(response, this.toast)) return;
-      this.toast.success('موفق', response.data.Message);
+      const data = this.extractTransportComponyForm();
+      if (data.TCId) {
+        const response =
+          await this.transportComponyService.EditTransportCompany(data);
+        if (!checkAndToastError(response, this.toast)) return;
+        this.toast.success('موفق', response.data.Message);
+      } else {
+        const response =
+          await this.transportComponyService.RegisterTransportCompany(data);
+        if (!checkAndToastError(response, this.toast)) return;
+        this.toast.success('موفق', response.data.Message);
+      }
     });
   }
 
   async activateTransportComponySms() {
-    if (this.loading() || this.TCId.invalid) return;
+    if (this.loading() || !this.TCId.value) return;
     try {
       this.loadingService.setLoading(true);
       const response =
@@ -129,7 +167,7 @@ export class TransportCompaniesFormComponent extends BaseLoading {
   }
 
   private async resetTransportComponyPassword() {
-    if (this.TCId.invalid) return;
+    if (!this.TCId.value) return;
     try {
       this.loadingService.setLoading(true);
       const response =
@@ -151,7 +189,7 @@ export class TransportCompaniesFormComponent extends BaseLoading {
   }
 
   async changeStatusTransportCompony(value: boolean) {
-    if (this.loading() || this.TCId.invalid) return;
+    if (this.loading() || !this.TCId.value) return;
     this.withLoading(async () => {
       const response =
         await this.transportComponyService.ChangeTransportCompanyStatus(

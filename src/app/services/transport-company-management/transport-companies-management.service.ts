@@ -85,6 +85,30 @@ export class TransportCompaniesManagementService {
     //#endregion
   }
 
+  public async RegisterTransportCompany(
+    transportCompanyInfo: TransportCompany
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.TransportCompanies.RegisterTransportCompany;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      RawTransportCompany: transportCompanyInfo,
+    };
+    //#endregion
+
+    console.log('in register transport company');
+
+    console.log(bodyValue);
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
   public async EditTransportCompany(
     transportCompanyInfo: TransportCompany
   ): Promise<ApiResponse<ShortResponse>> {
@@ -96,6 +120,33 @@ export class TransportCompaniesManagementService {
       RawTransportCompany: transportCompanyInfo,
     };
     //#endregion
+
+    console.log('in edit transport company');
+
+    console.log(bodyValue);
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async UploadTransportCompaniesExcel(file: string) {
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.TransportCompanies
+        .UploadTransportCompaniesExcel;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TransportCompanies: file,
+    };
+    //#endregion
+
+    console.log('in upload transport companies excel');
+
+    console.log(bodyValue);
 
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<

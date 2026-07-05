@@ -53,14 +53,20 @@
       />
 
       <!-- شهر استقرار -->
-      <app-text-input
+      <!-- <app-text-input -->
+      <!--   class="w-full" -->
+      <!--   [label]="appTitle.inputs.transportCompanies.transportCompanyLocation" -->
+      <!--   [placeholder]="appTitle.getPlaceholder('transportCompanyLocation')" -->
+      <!--   validationField="sourceCity" -->
+      <!--   [control]="TCCityTitle" -->
+      <!--   [addonWidth]="addonWidth" -->
+      <!--   type="text" -->
+      <!-- /> -->
+
+      <app-search-auto-complete-factory
         class="w-full"
-        [label]="appTitle.inputs.transportCompanies.transportCompanyLocation"
-        [placeholder]="appTitle.getPlaceholder('transportCompanyLocation')"
-        validationField="sourceCity"
-        [control]="TCCityTitle"
+        [config]="autoCompletions.sourceCity"
         [addonWidth]="addonWidth"
-        type="text"
       />
     </app-form-inputs-section>
 
@@ -128,7 +134,7 @@
   <!-- دکمه‌های عملیات -->
   <app-form-buttons-section>
     <app-button
-      (click)="editTransportCompony()"
+      (click)="save_editTransportCompony()"
       [disabled]="transportComponyForm.invalid || loading()"
       [label]="appTitle.buttons.saveAndEdit"
       class="w-full md:w-fit"
