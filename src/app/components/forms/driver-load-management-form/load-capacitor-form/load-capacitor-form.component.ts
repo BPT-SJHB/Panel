@@ -15,6 +15,10 @@ import { Panel } from 'primeng/panel';
 import { CardModule } from 'primeng/card';
 import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
 import { AppTitles } from 'app/constants/Titles';
+import {
+  ILocation,
+  LocationManagementService,
+} from 'app/services/location-management/location-management.service';
 
 interface SearchLoadsForm {
   announcementGroupId: number | null;
@@ -48,6 +52,7 @@ export class LoadCapacitorFormComponent
   private readonly autoCompleteFactory = inject(
     AutoCompleteConfigFactoryService
   );
+  private readonly locationService = inject(LocationManagementService);
 
   readonly addonWidth = '7rem';
   readonly appTitle = AppTitles;
@@ -62,6 +67,8 @@ export class LoadCapacitorFormComponent
     subgroup: string;
     loadstatus: string;
   } | null>(null);
+
+  private currentLocation = signal<ILocation | undefined>(undefined);
 
   // form
   readonly searchLoadsForm = this.fb.nonNullable.group({
@@ -138,6 +145,9 @@ export class LoadCapacitorFormComponent
     if (this.searchLoadsForm.invalid || this.loading()) return;
 
     this.withLoading(async () => {
+      await this.getUserLocation();
+      if (!this.currentLocation()) return;
+
       const response = await this.loadService.GetLoadsForDrivers(
         this.ctrl('announcementSubGroupId').value!,
         this.ctrl('loadStatusId').value!
@@ -151,6 +161,43 @@ export class LoadCapacitorFormComponent
       this.driverLoads.set(response.data);
       this.updateSelectedFilter();
     });
+  }
+
+  async getUserLocation() {
+    this.currentLocation.set(undefined);
+
+    const permission = await this.locationService.checkPermissionStatus();
+    if (!permission) {
+      this.toast.error('خطا', 'دسترسی به موقعیت مکانی امکان‌پذیر نیست');
+      return;
+    }
+
+    const location = await this.locationService.fetchUserLocation();
+    if (!location) {
+      this.toast.error('خطا', 'دریافت موقعیت مکانی امکان‌پذیر نیست');
+      return;
+    }
+
+    if (location.accuracy > 250) {
+      this.toast.error(
+        'خطا',
+        'موقعیت مکانی دقت کافی را ندارد. لطفا دقایقی منتظر بمانید'
+      );
+      return;
+    } else if (location.accuracy < 10) {
+      this.toast.error('خطا', 'موقعیت مکانی دقت بیش از حد مجاز دارد');
+      return;
+    }
+
+    this.currentLocation.set(location);
+
+    // alert(
+    //   this.currentLocation()?.latitude +
+    //     '-' +
+    //     this.currentLocation()?.longitude +
+    //     '-' +
+    //     this.currentLocation()?.accuracy
+    // );
   }
 
   // filter label builder
@@ -170,8 +217,15 @@ export class LoadCapacitorFormComponent
     if (this.loading()) return;
 
     this.withLoading(async () => {
+      await this.getUserLocation();
+      if (!this.currentLocation()) return;
+
       const response =
-        await this.loadService.RegisterNewLoadAllocationForDrivers(loadId);
+        await this.loadService.RegisterNewLoadAllocationForDrivers(
+          loadId,
+          this.currentLocation()?.latitude ?? 0,
+          this.currentLocation()?.longitude ?? 0
+        );
       if (!checkAndToastError(response, this.toast)) {
         return;
       }
