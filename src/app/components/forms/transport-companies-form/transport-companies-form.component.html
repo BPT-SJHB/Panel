@@ -169,11 +169,55 @@
   </app-form-buttons-section>
 </form>
 
-<!-- دیالوگ تایید -->
-<p-confirmDialog
-  position="top"
-  acceptLabel="تایید"
-  rejectLabel="انصراف"
-  acceptButtonStyleClass="px-8 app-button-danger py-2 text-sm"
-  rejectButtonStyleClass="px-6 app-button-secondary py-2 text-sm"
-/>
+<div class="w-full mt-10">
+  <span class="text-xl font-bold w-full">بارگذاری فایل</span>
+  <p-fileUpload
+    #fu
+    class="w-full text-nowrap"
+    [pt]="{
+      root: {
+        class: 'my-3 p-0',
+      },
+      host: {
+        class: 'm-1',
+      },
+      header: {
+        class:
+          'flex flex-col md:flex-row justify-center items-stretch md:items-center',
+      },
+      pcChooseButton: {
+        root: { class: 'text-sm lg:text-base w-full' },
+      },
+      pcUploadButton: {
+        root: { class: 'text-sm lg:text-base w-full' },
+      },
+      pcCancelButton: {
+        root: { class: 'text-sm lg:text-base w-full' },
+      },
+      content: {
+        class: 'hidden',
+      },
+    }"
+    chooseLabel="انتخاب فایل اکسل"
+    chooseStyleClass="text-sm"
+    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+    chooseIcon="pi pi-upload"
+    label="بارگزاری فایل اکسل"
+    severity="warn"
+    cancelLabel="لغو"
+    [maxFileSize]="1024 * 1024"
+    uploadLabel="بارگزاری فایل"
+    [auto]="false"
+    [customUpload]="true"
+    (uploadHandler)="onFileExcelUpload($event)"
+  />
+
+  <!-- دیالوگ تایید -->
+  <p-confirmDialog
+    position="top"
+    acceptLabel="تایید"
+    rejectLabel="انصراف"
+    acceptButtonStyleClass="px-8 app-button-danger py-2 text-sm"
+    rejectButtonStyleClass="px-6 app-button-secondary py-2 text-sm"
+  />
+</div>

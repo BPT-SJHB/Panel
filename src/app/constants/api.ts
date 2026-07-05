@@ -80,6 +80,8 @@ export const API_ROUTES = {
       GetTransportCompany: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetTransportCompany`,
       GetTransportCompanyBySoftwareUser: `${environment.apiUrl}:${transportationAPIPort}/api/GetTransportCompanyfromSoftwareUser`,
       EditTransportCompany: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}EditTransportCompany`,
+      UploadTransportCompaniesExcel: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}RegisteringTransportCompanies`,
+      RegisterTransportCompany: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}RegisteringTransportCompany`,
       ActivateTransportCompanySmsService: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}ActivateTransportCompanySMSOwner`,
       ResetTransportCompanyPassword: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}ResetTransportCompanyUserPassword`,
       TransportCompanyChangeStatus: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}TransportCompanyChangeActiveStatus`,

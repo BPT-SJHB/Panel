@@ -219,6 +219,38 @@ export class TransportCompaniesFormComponent extends BaseLoading {
     this.transportComponyForm.updateValueAndValidity();
   }
 
+  async onFileExcelUpload(event: any) {
+    const file = event.files[0];
+
+    try {
+      await this.withLoading(async () => {
+        const fileString = await this.fileToBase64(file);
+
+        const response =
+          await this.transportComponyService.UploadTransportCompaniesExcel(
+            fileString
+          );
+
+        if (!checkAndToastError(response, this.toast)) return;
+
+        this.toast.success('موفق', 'فایل اکسل با موفقیت بارگذاری شد.');
+        this.fu?.clear();
+      });
+    } catch (error) {
+      this.toast.error('خطا', 'فرمت فایل اکسل نامعتبر می باشد.');
+      this.fu?.clear();
+    }
+  }
+
+  fileToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = (error) => reject(error);
+    });
+  }
+
   // === Getters for Form Controls ===
   get TCId() {
     return this.transportComponyForm.get('TCId') as FormControl<number | null>;
