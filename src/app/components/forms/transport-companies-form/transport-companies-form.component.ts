@@ -48,7 +48,6 @@ export class TransportCompaniesFormComponent extends BaseLoading {
   private transportComponyService = inject(TransportCompaniesManagementService);
   private dialogService = inject(DialogService);
   private readonly confirmationService = inject(ConfirmationService);
-  private readonly locationService = inject(LocationManagementService);
 
   // === Form Setup ===
   readonly addonWidth = '7rem';
