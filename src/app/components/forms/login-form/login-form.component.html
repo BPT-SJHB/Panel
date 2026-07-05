@@ -37,17 +37,24 @@
       placeholder="نام کاربری خود را وارد کنید"
     />
 
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2 mb-[-0.5rem]">
       <app-password-input
         icon="pi pi-lock"
         [control]="password"
-        placeholder="رمز عبور خود را وارد کنید."
+        placeholder="رمز عبور خود را وارد کنید"
       />
 
-      <div class="flex justify-end w-full mb-1">
+      <div class="flex justify-start w-full">
         <a [href]="hrefForgetPassword">
           <span class="text-cyan-500 text-shadow-sm text-sm">
             رمز عبورتان را فراموش کرده‌اید؟</span
+          >
+        </a>
+      </div>
+      <div class="flex justify-start w-full">
+        <a [href]="hrefSignUp">
+          <span class="text-cyan-500 text-shadow-sm text-sm"
+            >ثبت نام غیرحضوری</span
           >
         </a>
       </div>

@@ -9,7 +9,7 @@ const KernelTasksPort = 88;
 const CarouselsPort = 90;
 const TrafficPort = 91;
 const ticketPort = 8080;
-const ticketUrl = 'http://localhost';
+const ticketUrl = 'http://irmto.ir';
 const apiFixURLPart = '/api/';
 const ticketApiFixURLPart = '/api/v1/';
 
@@ -34,6 +34,8 @@ export const API_ROUTES = {
       CustomSoftwareUserPassword: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}CustomizationSoftwareUserPassword`,
       ForgetSoftwareUserPassword: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}SoftwareUserForgetPassword`,
       VerifySoftwareUserByOTPCode: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}VerifySoftwareUserOTPCode`,
+      VerifyAnyUserByOTPCode: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}SendOTPCode`,
+      RegisterAnyUserByOTPCode: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}TruckDriverRegistering`,
       SendWebsiteLink: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}SendWebsiteLink`,
       GetWebProcessGroups_WebProcesses: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}GetAllOfWebprocessGroupsWebprocesses`,
       ChangeSoftwareUserWebProcessGroupAccess: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}ChangeSoftwareUserWebProcessGroupAccess`,

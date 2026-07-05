@@ -23,9 +23,17 @@ export const routes: Routes = [
   {
     path: APP_ROUTES.AUTH.FORGET_PASSWORD,
     loadComponent: () =>
-      import(
-        'app/pages/auth/forget-password-page/forget-password-page.component'
-      ).then((m) => m.ForgetPasswordPageComponent),
+      import('app/pages/auth/forget-password-page/forget-password-page.component').then(
+        (m) => m.ForgetPasswordPageComponent
+      ),
+    canActivate: [loginAuthGuard],
+  },
+  {
+    path: APP_ROUTES.AUTH.SIGN_UP,
+    loadComponent: () =>
+      import('app/pages/auth/sign-up-page/sign-up-page.component').then(
+        (m) => m.SignUpPageComponent
+      ),
     canActivate: [loginAuthGuard],
   },
   {
@@ -40,17 +48,17 @@ export const routes: Routes = [
   {
     path: APP_ROUTES.TICKET.CREATE,
     loadComponent: () =>
-      import(
-        'app/pages/tickets/ticket-create-page/ticket-create-page.component'
-      ).then((m) => m.TicketCreatePageComponent),
+      import('app/pages/tickets/ticket-create-page/ticket-create-page.component').then(
+        (m) => m.TicketCreatePageComponent
+      ),
   },
 
   {
     path: APP_ROUTES.TICKET.TRACK,
     loadComponent: () =>
-      import(
-        'app/pages/tickets/ticket-tracker-page/ticket-tracker-page.component'
-      ).then((m) => m.TicketTrackerPageComponent),
+      import('app/pages/tickets/ticket-tracker-page/ticket-tracker-page.component').then(
+        (m) => m.TicketTrackerPageComponent
+      ),
     data: { preload: true },
   },
 ];
