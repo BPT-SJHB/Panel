@@ -567,16 +567,17 @@ export class LoadManagementService {
   }
 
   public async RegisterNewLoadAllocationForDrivers(
-    loadId: number
+    loadId: number,
+    latitude: number,
+    longitude: number
   ): Promise<ApiResponse<ShortResponse>> {
     //#region Consts
     const apiUrl = API_ROUTES.LoadAllocationAPI.RegistrationForDrivers;
-    const loadInfo: LoadInfo = {
-      LoadId: loadId,
-    };
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
-      LoadId: loadInfo.LoadId,
+      LoadId: loadId,
+      Latitude: latitude,
+      Longitude: longitude,
     };
     //#endregion
 
