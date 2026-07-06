@@ -192,7 +192,7 @@ export class SignUpFormComponent extends BaseLoading implements OnInit {
       const nationalId = this.ctrl('nationalId').value;
       const smartCard = this.ctrl('smartCard').value;
 
-      const response = await this.userService.RegisterAnyUserByOTPCode(
+      const response = await this.driver_truckService.RegisterAnyUserByOTPCode(
         sessionId,
         opt,
         nationalId,

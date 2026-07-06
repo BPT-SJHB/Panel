@@ -195,6 +195,30 @@ export class Driver_TruckManagementService {
     //#endregion
   }
 
+  public async RegisterAnyUserByOTPCode(
+    sessionId: string,
+    otpCode: string,
+    nationalId: string,
+    smartCard: string
+  ) {
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.Driver.RegisterAnyUserByOTPCode;
+    const bodyValue = {
+      SessionId: sessionId,
+      OTPCode: otpCode,
+      TruckDriverNationalCode: nationalId,
+      TruckSmartCardNo: smartCard,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
   //#endregion
 
   //#region Truck

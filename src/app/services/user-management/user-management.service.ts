@@ -184,31 +184,6 @@ export class UserManagementService {
     //#endregion
   }
 
-  public async RegisterAnyUserByOTPCode(
-    sessionId: string,
-    otpCode: string,
-    nationalId: string,
-    smartCard: string
-  ) {
-    //#region Consts
-    const apiUrl =
-      API_ROUTES.SoftwareUserAPI.UserManagement.RegisterAnyUserByOTPCode;
-    const bodyValue = {
-      SessionId: sessionId,
-      OTPCode: otpCode,
-      TruckDriverNationalCode: nationalId,
-      TruckSmartCardNo: smartCard,
-    };
-    //#endregion
-
-    //#region Request + Return
-    return await this.apiCommunicator.CommunicateWithAPI_Post<
-      typeof bodyValue,
-      ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
-    //#endregion
-  }
-
   public async ActivateUserSMS(
     userId: number
   ): Promise<ApiResponse<ShortResponse>> {
