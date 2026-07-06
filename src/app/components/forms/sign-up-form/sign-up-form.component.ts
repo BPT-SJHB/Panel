@@ -1,25 +1,15 @@
 import { Component, inject, OnInit, signal, ViewChild } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { Router } from '@angular/router';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { CaptchaInputComponent } from 'app/components/shared/inputs/captcha-input/captcha-input.component';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
-import { CryptographyService } from 'app/services/cryptography-service/cryptography.service';
 import { UserAuthService } from 'app/services/user-auth-service/user-auth.service';
 import { ButtonModule } from 'primeng/button';
 import { BaseLoading } from '../shared/component-base/base-loading';
 import { AppTitles } from 'app/constants/Titles';
-import { APP_ROUTES } from 'app/constants/routes';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { Dialog } from 'primeng/dialog';
 import { OptInputComponent } from 'app/components/shared/inputs/opt-input/opt-input.component';
 import { PanelGuardCaptchaFormComponent } from '../panel-guard-captcha-form/panel-guard-captcha-form.component';
-import { UserManagementService } from 'app/services/user-management/user-management.service';
 import { interval, Subscription, takeUntil } from 'rxjs';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { ErrorCodes } from 'app/constants/error-messages';
@@ -50,7 +40,6 @@ export class SignUpFormComponent extends BaseLoading implements OnInit {
   // Dependency Injection
   // ------------------------
   private fb = inject(FormBuilder);
-  private userService = inject(UserManagementService);
   private readonly authService = inject(UserAuthService);
   private driver_truckService = inject(Driver_TruckManagementService);
 
@@ -116,7 +105,6 @@ export class SignUpFormComponent extends BaseLoading implements OnInit {
         return;
       }
 
-      this.toast.success('موفق', response.data.Message);
       this.markOTPRequested();
       this.startOTPTimer();
       this.isDialogVisible = true;
@@ -208,28 +196,6 @@ export class SignUpFormComponent extends BaseLoading implements OnInit {
       this.isCaptchaGuardVisible.set(false);
       if (!checkAndToastError(response, this.toast)) {
         this.optCodeCrl.reset('');
-        return;
-      }
-
-      const dataOfTruckFromAPI =
-        await this.driver_truckService.GetTruckInfoFromAPI(
-          smartCard,
-          sessionId
-        );
-      if (!checkAndToastError(dataOfTruckFromAPI, this.toast)) {
-        this.optCodeCrl.reset('');
-        this.form.reset();
-        return;
-      }
-
-      const dataOfDriverFromAPI =
-        await this.driver_truckService.GetDriverInfoFromAPI(
-          nationalId,
-          sessionId
-        );
-      if (!checkAndToastError(dataOfDriverFromAPI, this.toast)) {
-        this.optCodeCrl.reset('');
-        this.form.reset();
         return;
       }
 
