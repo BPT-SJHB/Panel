@@ -34,7 +34,6 @@ export const API_ROUTES = {
       CustomSoftwareUserPassword: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}CustomizationSoftwareUserPassword`,
       ForgetSoftwareUserPassword: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}SoftwareUserForgetPassword`,
       VerifySoftwareUserByOTPCode: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}VerifySoftwareUserOTPCode`,
-      VerifyAnyUserByOTPCode: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}SendOTPCode`,
       SendWebsiteLink: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}SendWebsiteLink`,
       GetWebProcessGroups_WebProcesses: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}GetAllOfWebprocessGroupsWebprocesses`,
       ChangeSoftwareUserWebProcessGroupAccess: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}ChangeSoftwareUserWebProcessGroupAccess`,
@@ -52,6 +51,7 @@ export const API_ROUTES = {
       ResetTruckDriverUserPassword: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}ResetTruckDriverUserPassword`,
       SendWebsiteLink: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}SendWebsiteLink`,
       RegisterAnyUserByOTPCode: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}TruckDriverRegistering`,
+      VerifyAnyUserByOTPCode: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}SendOTPCode`,
     },
     Truck: {
       GetTruckInfoFromOutdoorAPI: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}GetTruckFromRMTO`,

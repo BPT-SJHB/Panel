@@ -17,7 +17,7 @@ import {
   TruckNativenessType,
 } from 'app/services/driver-truck-management/model/truck-nativeness-info.model';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
-import { mockTruckDriverInfo } from 'app/services/driver-truck-management/mock/truck-driver-info.model';
+import { mockTruckDriverInfo } from 'app/services/driver-truck-management/mock/truck-driver-info.mock';
 import { mockShortResponse } from 'app/data/mock/short-response.mock';
 import { mockAPIUsernamePassword } from 'app/data/mock/username-password.mock';
 import {
@@ -30,6 +30,8 @@ import {
 } from 'app/services/driver-truck-management/mock/truck-nativeness-info.mock';
 import { Wallet } from 'app/services/wallet-management/model/wallet.model';
 import { mockWallet } from '../wallet-management/mock/wallet.mock';
+import { SignUpInfo } from './model/sign-up-info.model';
+import { mockSignUpInfo } from './mock/sign-up-info.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -216,6 +218,32 @@ export class Driver_TruckManagementService {
       typeof bodyValue,
       ShortResponse
     >(apiUrl, bodyValue, mockShortResponse);
+    //#endregion
+  }
+
+  public async VerifyAnyUserByOTPCode(
+    sessionId: string,
+    phone: string,
+    captchaValue: string,
+    driverNationalId: number,
+    smartCardId: number
+  ): Promise<ApiResponse<SignUpInfo>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.Driver.VerifyAnyUserByOTPCode;
+    const bodyValue = {
+      SessionId: sessionId,
+      MobileNumber: phone,
+      Captcha: captchaValue,
+      TruckDriverNationalCode: driverNationalId,
+      TruckSmartCardNo: smartCardId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      SignUpInfo
+    >(apiUrl, bodyValue, mockSignUpInfo);
     //#endregion
   }
 
