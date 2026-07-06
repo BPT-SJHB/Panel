@@ -222,24 +222,19 @@ export class TransportCompaniesFormComponent extends BaseLoading {
   async onFileExcelUpload(event: any) {
     const file = event.files[0];
 
-    try {
-      await this.withLoading(async () => {
-        const fileString = await this.fileToBase64(file);
+    await this.withLoading(async () => {
+      const fileString = await this.fileToBase64(file);
 
-        const response =
-          await this.transportComponyService.UploadTransportCompaniesExcel(
-            fileString
-          );
+      const response =
+        await this.transportComponyService.UploadTransportCompaniesExcel(
+          fileString
+        );
 
-        if (!checkAndToastError(response, this.toast)) return;
+      if (!checkAndToastError(response, this.toast)) return;
 
-        this.toast.success('موفق', 'فایل اکسل با موفقیت بارگذاری شد.');
-        this.fu?.clear();
-      });
-    } catch (error) {
-      this.toast.error('خطا', 'فرمت فایل اکسل نامعتبر می باشد.');
+      this.toast.success('موفق', response.data.Message);
       this.fu?.clear();
-    }
+    });
   }
 
   fileToBase64(file: File): Promise<string> {
