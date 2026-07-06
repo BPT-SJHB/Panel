@@ -68,13 +68,59 @@
     <p class="text-sm">
       کاربر گرامی، رمز یک‌بارمصرف به شماره
       <strong class="text-base">{{ sentPhoneNumber() }}</strong>
-      ارسال شد. لطفاً جهت تکمیل ثبت نام غیرحضوری، رمز پیامک شده را وارد نمایید.
+      ارسال شد. لطفاً جهت تکمیل ثبت نام غیرحضوری، رمز پیامک شده را وارد کنید.
     </p>
+
+    <div
+      class="flex flex-col border-y-2 border-gray-300 dark:border-gray-600 py-2 gap-2"
+    >
+      <div class="flex flex-row justify-between items-center">
+        <div>نام و نام خانوادگی راننده:</div>
+        <div>
+          {{ driverSignUpInfo()?.TruckDriverNameFamily }}
+        </div>
+      </div>
+      <div class="flex flex-row justify-between items-center">
+        <div>پلاک ناوگان:</div>
+        <p-splitter
+          class="w-36 h-18 mt-2"
+          [panelSizes]="[50, 60]"
+          [minSizes]="[50, 50]"
+        >
+          <ng-template #panel>
+            <p-splitter
+              layout="vertical"
+              [panelSizes]="[50, 50]"
+              [minSizes]="[50, 50]"
+            >
+              <ng-template #panel>
+                <div class="flex items-center justify-center h-full">
+                  <span>ایران</span>
+                </div>
+              </ng-template>
+              <ng-template #panel>
+                <div class="flex items-center justify-center h-full">
+                  <span>{{ driverSignUpInfo()?.Serial }}</span>
+                </div>
+              </ng-template>
+            </p-splitter>
+          </ng-template>
+          <ng-template #panel>
+            <span class="flex flex-row self-center m-auto">{{
+              driverSignUpInfo()?.Pelak
+            }}</span>
+          </ng-template>
+        </p-splitter>
+      </div>
+    </div>
 
     <div class="grid grid-cols-1 gap-4">
       <app-opt-input [control]="optCodeCrl" [length]="6" />
 
-      <div class="flex justify-center items-center py-1">
+      <div class="flex flex-col gap-3 justify-center items-center py-3">
+        <p class="font-bold text-red-500 text-center">
+          تایید شما به منزله اطمینان کامل از صحت اطلاعات جهت ثبت نام میباشد.
+        </p>
         <app-button
           (click)="verifyCode()"
           styleClass="px-10"

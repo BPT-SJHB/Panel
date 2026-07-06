@@ -1,4 +1,5 @@
 import { Component, inject, OnInit, signal, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { CaptchaInputComponent } from 'app/components/shared/inputs/captcha-input/captcha-input.component';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
@@ -14,6 +15,8 @@ import { interval, Subscription, takeUntil } from 'rxjs';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { ErrorCodes } from 'app/constants/error-messages';
 import { Driver_TruckManagementService } from 'app/services/driver-truck-management/driver-truck-management.service';
+import { SignUpInfo } from 'app/services/driver-truck-management/model/sign-up-info.model';
+import { SplitterModule } from 'primeng/splitter';
 
 @Component({
   selector: 'app-sign-up-form',
@@ -26,6 +29,7 @@ import { Driver_TruckManagementService } from 'app/services/driver-truck-managem
     Dialog,
     OptInputComponent,
     PanelGuardCaptchaFormComponent,
+    SplitterModule,
   ],
   templateUrl: './sign-up-form.component.html',
   styleUrl: './sign-up-form.component.scss',
@@ -68,6 +72,7 @@ export class SignUpFormComponent extends BaseLoading implements OnInit {
   // ------------------------
   sentPhoneNumber = signal<string | null>(null); // stores phone number for OTP dialog
   isCaptchaGuardVisible = signal<boolean>(false);
+  driverSignUpInfo = signal<SignUpInfo | undefined>(undefined);
 
   // ------------------------
   // Timer State
@@ -94,10 +99,12 @@ export class SignUpFormComponent extends BaseLoading implements OnInit {
     if (this.loading() || this.form.invalid || this.remainingTime() > 0) return;
 
     await this.withLoading(async () => {
-      const response = await this.userService.VerifyAnyUserByOTPCode(
+      const response = await this.driver_truckService.VerifyAnyUserByOTPCode(
         this.ctrl('sessionId').value,
         this.ctrl('phone').value,
-        this.ctrl('captcha').value
+        this.ctrl('captcha').value,
+        this.ctrl('nationalId').value,
+        this.ctrl('smartCard').value
       );
 
       if (!checkAndToastError(response, this.toast)) {
@@ -105,6 +112,8 @@ export class SignUpFormComponent extends BaseLoading implements OnInit {
         return;
       }
 
+      this.driverSignUpInfo.set(response.data);
+      // this.toast.success('موفق', response.data.Message);
       this.markOTPRequested();
       this.startOTPTimer();
       this.isDialogVisible = true;
