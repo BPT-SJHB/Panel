@@ -8,8 +8,8 @@ const ReportsPort = 86;
 const KernelTasksPort = 88;
 const CarouselsPort = 90;
 const TrafficPort = 91;
-const ticketPort = 8080;
-const ticketUrl = 'http://irmto.ir';
+// const ticketPort = 8080;
+const ticketUrl = 'https://irmto.ir/ticket';
 const apiFixURLPart = '/api/';
 const ticketApiFixURLPart = '/api/v1/';
 
@@ -271,41 +271,41 @@ export const API_ROUTES = {
   },
   TicketAPI: {
     Auth: {
-      SignUp: `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}auth/SignUp/`,
-      Login: `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}auth/Login/`,
-      LoginWithNoAuth: `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}auth/LoginWithNoAuth/`,
-      LoginWithSingleUseToken: `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}auth/LoginWithSingleUseToken/`,
-      GetSingleUseToken: `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}auth/GetSingleUseToken/`,
+      SignUp: `${ticketUrl}${ticketApiFixURLPart}auth/SignUp/`,
+      Login: `${ticketUrl}${ticketApiFixURLPart}auth/Login/`,
+      LoginWithNoAuth: `${ticketUrl}${ticketApiFixURLPart}auth/LoginWithNoAuth/`,
+      LoginWithSingleUseToken: `${ticketUrl}${ticketApiFixURLPart}auth/LoginWithSingleUseToken/`,
+      GetSingleUseToken: `${ticketUrl}${ticketApiFixURLPart}auth/GetSingleUseToken/`,
     },
     Captcha: {
-      GetCaptcha: `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}captcha/GetCaptcha/`,
-      VerifyCaptcha: `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}captcha/VerifyCaptcha/`,
+      GetCaptcha: `${ticketUrl}${ticketApiFixURLPart}captcha/GetCaptcha/`,
+      VerifyCaptcha: `${ticketUrl}${ticketApiFixURLPart}captcha/VerifyCaptcha/`,
     },
     Version: {
-      GetCurrentVersion: `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}`,
+      GetCurrentVersion: `${ticketUrl}${ticketApiFixURLPart}`,
     },
     Tickets: {
-      CreateTicket: `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}tickets/CreateTicket/`,
-      GetTicketByTrackCode: `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}tickets/GetTicketByTrackCode/`,
-      GetTicketByID: `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}tickets/GetTicketByID/`,
+      CreateTicket: `${ticketUrl}${ticketApiFixURLPart}tickets/CreateTicket/`,
+      GetTicketByTrackCode: `${ticketUrl}${ticketApiFixURLPart}tickets/GetTicketByTrackCode/`,
+      GetTicketByID: `${ticketUrl}${ticketApiFixURLPart}tickets/GetTicketByID/`,
       CreateChat: (id: string) =>
-        `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}tickets/${id}/CreateChat/`,
-      GetTicketsList: `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}tickets/GetTicketsList/`,
-      GetAllActiveTicketTypes: `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}tickets/GetAllActiveTicketTypes/`,
-      GetAllActiveTicketStatuses: `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}tickets/GetAllActiveTicketStatuses/`,
+        `${ticketUrl}${ticketApiFixURLPart}tickets/${id}/CreateChat/`,
+      GetTicketsList: `${ticketUrl}${ticketApiFixURLPart}tickets/GetTicketsList/`,
+      GetAllActiveTicketTypes: `${ticketUrl}${ticketApiFixURLPart}tickets/GetAllActiveTicketTypes/`,
+      GetAllActiveTicketStatuses: `${ticketUrl}${ticketApiFixURLPart}tickets/GetAllActiveTicketStatuses/`,
     },
     Departments: {
-      GetAllActiveDepartments: `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}departments/GetAllActiveDepartments/`,
+      GetAllActiveDepartments: `${ticketUrl}${ticketApiFixURLPart}departments/GetAllActiveDepartments/`,
     },
     Users: {
-      GetUserByID: `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}users/GetUserByID/`,
-      GetUserByUsername: `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}users/GetUserByUsername/`,
-      GetUsersIDs: `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}users/GetUsersByIDs/`,
+      GetUserByID: `${ticketUrl}${ticketApiFixURLPart}users/GetUserByID/`,
+      GetUserByUsername: `${ticketUrl}${ticketApiFixURLPart}users/GetUserByUsername/`,
+      GetUsersIDs: `${ticketUrl}${ticketApiFixURLPart}users/GetUsersByIDs/`,
     },
     File: {
-      UploadTicketFile: `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}files/UploadTicketFile/`,
+      UploadTicketFile: `${ticketUrl}${ticketApiFixURLPart}files/UploadTicketFile/`,
       DownloadTicketFile: (id: string) =>
-        `${ticketUrl}:${ticketPort}${ticketApiFixURLPart}files/GetDownloadLinkTicketFile/${id}`,
+        `${ticketUrl}${ticketApiFixURLPart}files/GetDownloadLinkTicketFile/${id}`,
     },
   },
   TrafficAPI: {
