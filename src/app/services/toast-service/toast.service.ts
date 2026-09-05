@@ -3,7 +3,7 @@ import { MessageService } from 'primeng/api';
 
 @Injectable({ providedIn: 'root' })
 export class ToastService {
-  private messageService = inject(MessageService);
+  private messageService = inject(MessageService, { optional: true });
 
   // Store last message and timestamp
   private lastMessage: {
@@ -15,6 +15,10 @@ export class ToastService {
   private readonly ignoreDuration = 3000; // milliseconds
 
   private show(severity: string, title: string, detail: string) {
+    if (!this.messageService) {
+      return;
+    }
+
     const now = Date.now();
 
     if (

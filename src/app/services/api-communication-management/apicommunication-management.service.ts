@@ -8,10 +8,14 @@ import { environment } from 'environments/environment';
 import { trimInDeep } from 'app/utils/api-utils';
 
 import { HttpErrorService } from '../http-error-service/http-error.service';
+import { ToastService } from '../toast-service/toast.service';
 
-interface ApiRequestOptions {
+export interface ApiRequestOptions {
   withCredentials?: boolean;
   redirectToLoginOnUnauthorized?: boolean;
+  showSuccessToast?: boolean;
+  showErrorToast?: boolean;
+  successMessage?: string;
 }
 
 @Injectable({
@@ -20,6 +24,7 @@ interface ApiRequestOptions {
 export class APICommunicationManagementService {
   private readonly http = inject(HttpClient);
   private readonly httpErrorService = inject(HttpErrorService);
+  private readonly toastService = inject(ToastService);
 
   // ---------------- POST ----------------
 
@@ -30,7 +35,9 @@ export class APICommunicationManagementService {
     option?: ApiRequestOptions
   ): Promise<ApiResponse<TExpect>> {
     if (this.isMockEnabled()) {
-      return this.mockResponse(mockValue);
+      const mockResult = this.mockResponse(mockValue);
+      this.handleSuccessToast(mockResult.data, option);
+      return mockResult;
     }
 
     try {
@@ -40,12 +47,17 @@ export class APICommunicationManagementService {
         })
       );
 
-      return this.success(this.normalizeResponse(response));
+      const normalized = this.normalizeResponse(response);
+      const result = this.success(normalized);
+      this.handleSuccessToast(normalized, option);
+      return result;
     } catch (error) {
-      return this.httpErrorService.handleHttpError<TExpect>(
+      const errorResult = await this.httpErrorService.handleHttpError<TExpect>(
         error,
         option?.redirectToLoginOnUnauthorized ?? true
       );
+      this.handleErrorToast(errorResult, option);
+      return errorResult;
     }
   }
 
@@ -57,7 +69,11 @@ export class APICommunicationManagementService {
     option?: ApiRequestOptions
   ): Promise<ApiResponse<TExpect>> {
     if (this.isMockEnabled()) {
-      return this.mockResponse(mockValue);
+      const mockResult = this.mockResponse(mockValue);
+      if (option?.showSuccessToast) {
+        this.handleSuccessToast(mockResult.data, option);
+      }
+      return mockResult;
     }
 
     try {
@@ -67,12 +83,19 @@ export class APICommunicationManagementService {
         })
       );
 
-      return this.success(trimInDeep(response));
+      const data = trimInDeep(response);
+      const result = this.success(data);
+      if (option?.showSuccessToast) {
+        this.handleSuccessToast(data, option);
+      }
+      return result;
     } catch (error) {
-      return this.httpErrorService.handleHttpError<TExpect>(
+      const errorResult = await this.httpErrorService.handleHttpError<TExpect>(
         error,
         option?.redirectToLoginOnUnauthorized ?? true
       );
+      this.handleErrorToast(errorResult, option);
+      return errorResult;
     }
   }
 
@@ -85,7 +108,7 @@ export class APICommunicationManagementService {
     option?: ApiRequestOptions
   ): Observable<ApiResponse<TExpect> | number> {
     if (this.isMockEnabled()) {
-      return this.mockProgress(mockValue);
+      return this.mockProgress(mockValue, option);
     }
 
     return this.http
@@ -102,20 +125,26 @@ export class APICommunicationManagementService {
               const percentDone = Math.round(percent);
               return percentDone;
             }
-            case HttpEventType.Response:
+            case HttpEventType.Response: {
+              const data = trimInDeep(event.body);
+              this.handleSuccessToast(data, option);
               return {
                 success: true,
-                data: trimInDeep(event.body),
+                data,
               } as ApiResponse<TExpect>;
+            }
             default:
               return 0;
           }
         }),
         catchError(async (error: unknown) => {
-          throw await this.httpErrorService.handleHttpError<TExpect>(
-            error,
-            option?.redirectToLoginOnUnauthorized ?? true
-          );
+          const errorResult =
+            await this.httpErrorService.handleHttpError<TExpect>(
+              error,
+              option?.redirectToLoginOnUnauthorized ?? true
+            );
+          this.handleErrorToast(errorResult, option);
+          throw errorResult;
         })
       );
   }
@@ -141,7 +170,42 @@ export class APICommunicationManagementService {
     return trimInDeep(response);
   }
 
-  private mockProgress<T>(mock?: T): Observable<ApiResponse<T> | number> {
+  private handleSuccessToast<T>(data: T, option?: ApiRequestOptions): void {
+    if (!option?.showSuccessToast) {
+      return;
+    }
+
+    let message = option.successMessage;
+    if (!message && data && typeof data === 'object') {
+      if ('Message' in data && typeof data.Message === 'string') {
+        message = data.Message;
+      } else if ('message' in data && typeof (data as { message?: unknown }).message === 'string') {
+        message = (data as { message: string }).message;
+      }
+    }
+
+    if (message) {
+      this.toastService.success('موفق', message);
+    }
+  }
+
+  private handleErrorToast<T>(
+    result: ApiResponse<T>,
+    option?: ApiRequestOptions
+  ): void {
+    if (option?.showErrorToast === false) {
+      return;
+    }
+
+    if (result.error?.message) {
+      this.toastService.error('خطا', result.error.message);
+    }
+  }
+
+  private mockProgress<T>(
+    mock?: T,
+    option?: ApiRequestOptions
+  ): Observable<ApiResponse<T> | number> {
     return new Observable((observer) => {
       let progress = 0;
       const timer = setInterval(() => {
@@ -150,7 +214,9 @@ export class APICommunicationManagementService {
 
         if (progress >= 100) {
           clearInterval(timer);
-          observer.next(this.mockResponse(mock));
+          const response = this.mockResponse(mock);
+          this.handleSuccessToast(response.data, option);
+          observer.next(response);
           observer.complete();
         }
       }, 200);
