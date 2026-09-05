@@ -88,6 +88,7 @@ export class TicketServiceManagementService {
       { id: string; trackCode: string }
     >(API_ROUTES.TicketAPI.Tickets.CreateTicket, ticket, mockResponse, {
       withCredentials: true,
+      showSuccessToast: true,
     });
   }
 
@@ -152,6 +153,7 @@ export class TicketServiceManagementService {
       ChatMessage
     >(API_ROUTES.TicketAPI.Tickets.CreateChat(ticketId), chat, mockResponse, {
       withCredentials: true,
+      showSuccessToast: true,
     });
   }
   //#endregion
@@ -233,6 +235,7 @@ export class TicketServiceManagementService {
       id: string;
     }>(API_ROUTES.TicketAPI.File.UploadTicketFile, body, mock, {
       withCredentials: true,
+      showSuccessToast: true,
     });
   }
 

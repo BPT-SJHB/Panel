@@ -1,13 +1,19 @@
 import { TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TicketServiceManagementService } from './ticket-service-management.service';
 import { TicketCreateRequest } from './model/ticket.model';
 
-xdescribe('TicketServiceManagementService', () => {
+describe('TicketServiceManagementService', () => {
   let service: TicketServiceManagementService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [TicketServiceManagementService],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        TicketServiceManagementService,
+      ],
     });
 
     service = TestBed.inject(TicketServiceManagementService);
