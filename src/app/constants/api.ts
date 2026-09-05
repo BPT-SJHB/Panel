@@ -9,7 +9,7 @@ const KernelTasksPort = 88;
 const CarouselsPort = 90;
 const TrafficPort = 91;
 // const ticketPort = 8080;
-const ticketUrl = 'https://irmto.ir/ticket';
+const ticketUrl = environment.ticketApiUrl;
 const apiFixURLPart = '/api/';
 const ticketApiFixURLPart = '/api/v1/';
 
