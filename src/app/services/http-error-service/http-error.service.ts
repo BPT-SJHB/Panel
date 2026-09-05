@@ -35,6 +35,13 @@ export class HttpErrorService {
       ));
     } else if (typeof error.error === 'string') {
       message = error.error;
+    } else if (
+      typeof error.error === 'object' &&
+      error.error !== null &&
+      'message' in error.error &&
+      typeof (error.error as { message?: unknown }).message === 'string'
+    ) {
+      message = (error.error as { message: string }).message;
     }
 
     return { success: false, error: { code, message, details } };
@@ -110,7 +117,6 @@ export class HttpErrorService {
 
   private isMainPanelError(error: HttpErrorResponse): boolean {
     return (
-      error.status === ErrorCodes.InternalServerError &&
       typeof error.error === 'object' &&
       error.error !== null &&
       ('ErrorMessage' in error.error || 'ErrorMessageCode' in error.error)
