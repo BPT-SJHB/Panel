@@ -391,7 +391,9 @@ describe('LoadManagementService', () => {
     await devAuth.loginAsDriver();
 
     const regRes = await service.RegisterNewLoadAllocationForDrivers(
-      loadInfoSampleData.LoadId
+      loadInfoSampleData.LoadId,
+      35.6892,
+      51.389
     );
     validateResponse<ShortResponse>(regRes, ApiShortResponseSchema);
 
