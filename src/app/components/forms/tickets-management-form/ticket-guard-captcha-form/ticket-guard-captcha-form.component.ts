@@ -13,7 +13,6 @@ import { ValidationSchema } from 'app/constants/validation-schema';
 import { CaptchaInputComponent } from 'app/components/shared/inputs/captcha-input/captcha-input.component';
 import { DialogModule } from 'primeng/dialog';
 import { TicketServiceManagementService } from 'app/services/ticket-service-management/ticket-service-management.service';
-import { checkAndToastError } from 'app/utils/api-utils';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { TicketErrorCodes } from 'app/constants/error-messages';
 
@@ -70,8 +69,8 @@ export class TicketGuardCaptchaFormComponent extends BaseLoading {
         this.captchaAnswer.value
       );
 
-      // Show toast if error occurred
-      if (!checkAndToastError(response, this.toast)) {
+      // Handle error condition
+      if (!response.success) {
         if (
           response.error?.code === TicketErrorCodes.CaptchaIncorrect ||
           response.error?.code === TicketErrorCodes.CaptchaExpired

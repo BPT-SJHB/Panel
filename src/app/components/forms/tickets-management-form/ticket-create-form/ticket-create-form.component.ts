@@ -118,7 +118,7 @@ export class TicketCreateFormComponent extends BaseLoading {
         const response = await this.ticketService.LoginWithNoAuth(
           this.ctrl<string>('username').value
         );
-        if (!checkAndToastError(response, this.toast)) {
+        if (!response.success || !response.data) {
           if (response.error?.code === TicketErrorCodes.Unauthorized) {
             this.activeCaptcha.set(true);
           }
@@ -139,7 +139,7 @@ export class TicketCreateFormComponent extends BaseLoading {
       };
 
       const result = await this.ticketService.CreateTicket(ticket);
-      if (!checkAndToastError(result, this.toast)) {
+      if (!result.success || !result.data) {
         if (result.error?.code === TicketErrorCodes.Unauthorized) {
           this.activeCaptcha.set(true);
         }

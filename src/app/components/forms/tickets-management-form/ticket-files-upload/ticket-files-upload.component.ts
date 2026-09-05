@@ -7,7 +7,6 @@ import {
 import { TicketServiceManagementService } from 'app/services/ticket-service-management/ticket-service-management.service';
 import { Subscription, takeUntil } from 'rxjs';
 import { BaseLoading } from '../../shared/component-base/base-loading';
-import { checkAndToastError } from 'app/utils/api-utils';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { TicketErrorCodes } from 'app/constants/error-messages';
 import { TicketGuardCaptchaFormComponent } from '../ticket-guard-captcha-form/ticket-guard-captcha-form.component';
@@ -58,8 +57,7 @@ export class TicketFilesUploadComponent extends BaseLoading {
               return;
             }
             // Final API response
-            const success = checkAndToastError(response, this.toast);
-            if (success) {
+            if (response.success && response.data) {
               this.uploadedFiles.set(file.id, response.data.id);
               this.updateControlValue();
               resolve();
@@ -69,17 +67,13 @@ export class TicketFilesUploadComponent extends BaseLoading {
           },
           error: (err: ApiResponse<unknown>) => {
             this.uploadingFiles.delete(file.id);
-            const handled = checkAndToastError(err, this.toast);
-            if (!handled) {
-              if (
-                err.error?.code === TicketErrorCodes.CaptchaIncorrect ||
-                err.error?.code === TicketErrorCodes.CaptchaExpired
-              ) {
-                this.captchaGuardVisible.set(true);
-              }
-              reject(new Error(`Upload failed for file: ${file.raw.name}`));
+            if (
+              err.error?.code === TicketErrorCodes.CaptchaIncorrect ||
+              err.error?.code === TicketErrorCodes.CaptchaExpired
+            ) {
+              this.captchaGuardVisible.set(true);
             }
-            resolve();
+            reject(new Error(`Upload failed for file: ${file.raw.name}`));
           },
           complete: () => {
             this.uploadingFiles.delete(file.id);

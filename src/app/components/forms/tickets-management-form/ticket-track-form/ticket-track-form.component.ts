@@ -100,7 +100,7 @@ export class TicketTrackFormComponent
         phone
       );
 
-      if (!checkAndToastError(response, this.toast)) {
+      if (!response.success || !response.data) {
         if (response.error?.code === TicketErrorCodes.Unauthorized) {
           this.activeCaptcha.set(true);
         }

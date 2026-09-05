@@ -184,7 +184,7 @@ export class TicketChatMessageFormComponent extends BaseLoading {
         newChat
       );
 
-      if (!checkAndToastError(res, this.toast)) {
+      if (!res.success || !res.data) {
         if (
           TicketErrorCodes.CaptchaExpired === res.error?.code ||
           TicketErrorCodes.CaptchaIncorrect === res.error?.code
@@ -192,10 +192,10 @@ export class TicketChatMessageFormComponent extends BaseLoading {
           this.captchaGuardVisible.set(true);
           return;
         }
+        return;
       }
 
       // Add chat to grouped UI
-      if (!res.data) return;
       this.addChatMessage(res.data);
     });
   }

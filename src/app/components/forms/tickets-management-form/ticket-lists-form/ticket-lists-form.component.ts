@@ -123,7 +123,7 @@ export class TicketListsFormComponent implements OnInit {
           this.paramsQuery()
         );
 
-        if (!checkAndToastError(response, this.toast)) {
+        if (!response.success || !response.data) {
           await new Promise((resolve) => setTimeout(resolve, 500));
           if (response.error?.code === TicketErrorCodes.Unauthorized) {
             // Unauthorized → ask password and login
@@ -144,8 +144,8 @@ export class TicketListsFormComponent implements OnInit {
             }
             continue;
           }
+          return;
         }
-        if (!response.data) return;
 
         // Success → populate tickets
         const total = response.data.total ?? 0;
@@ -299,7 +299,7 @@ export class TicketListsFormComponent implements OnInit {
 
   private async loadTicketTypes(): Promise<void> {
     const response = await this.ticketService.GetTicketTypes();
-    if (!checkAndToastError(response, this.toast)) return;
+    if (!response.success || !response.data) return;
     const selection: SelectOption[] = response.data.map((ts) => ({
       value: ts.id,
       label: ts.title,
@@ -309,7 +309,7 @@ export class TicketListsFormComponent implements OnInit {
 
   private async loadDepartments(): Promise<void> {
     const response = await this.ticketService.GetDepartments();
-    if (!checkAndToastError(response, this.toast)) return;
+    if (!response.success || !response.data) return;
     const selection: SelectOption[] = response.data.map((d) => ({
       value: d.id,
       label: d.title,
@@ -319,7 +319,7 @@ export class TicketListsFormComponent implements OnInit {
 
   private async loadTicketStatuses(): Promise<void> {
     const response = await this.ticketService.GetTicketStatuses();
-    if (!checkAndToastError(response, this.toast)) return;
+    if (!response.success || !response.data) return;
     const selection: SelectOption[] = response.data.map((s) => ({
       value: s.id,
       label: s.title,
@@ -335,10 +335,11 @@ export class TicketListsFormComponent implements OnInit {
 
     if (userIds.length === 0) return;
     const response = await this.ticketService.GetUsersByIds(userIds);
-    if (!checkAndToastError(response, this.toast)) return false;
+    if (!response.success || !response.data) return false;
+    const usersData = response.data;
 
     this.users.update((m) => {
-      response.data.forEach((user) => {
+      usersData.forEach((user) => {
         m.set(user.id, user.username);
       });
 
@@ -353,7 +354,7 @@ export class TicketListsFormComponent implements OnInit {
     if (username === '') return undefined;
 
     const response = await this.ticketService.GetUserByUsername(username);
-    if (!checkAndToastError(response, this.toast)) return -1;
+    if (!response.success || !response.data) return -1;
     return response.data.id;
   }
 
@@ -371,7 +372,7 @@ export class TicketListsFormComponent implements OnInit {
 
   private async showTicketChats(id: string) {
     const response = await this.ticketService.GetTicketById(id);
-    if (!checkAndToastError(response, this.toast)) {
+    if (!response.success || !response.data) {
       this.selectedTicket.set(null);
       return;
     }
