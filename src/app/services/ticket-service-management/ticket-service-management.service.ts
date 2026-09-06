@@ -27,6 +27,8 @@ import { mockTicketCaptcha } from './mock/ticket-captcha.mock';
 import { mockTicketStatuses } from './mock/ticket-status.mock';
 import { mockTicketPaging } from './mock/ticket-paging.mock';
 import { Observable } from 'rxjs';
+import { SendOTPResponse, VerifyOTPResponse } from './model/ticket-otp.model';
+import { mockTicketSendOtp, mockTicketVerifyOtp } from './mock/ticket-otp.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -201,6 +203,45 @@ export class TicketServiceManagementService {
       { withCredentials: true }
     );
   }
+  //#endregion
+
+  //#region OTP
+  async SendOTP(phoneNumber: string): Promise<ApiResponse<SendOTPResponse>> {
+    //#region consts
+    const apiUrl = API_ROUTES.TicketAPI.OTP.SendOTP;
+    const bodyValue = {
+      phoneNumber: phoneNumber,
+    };
+    //#endregion
+
+    //#region request + return
+    return await this.api.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      SendOTPResponse
+    >(apiUrl, bodyValue, mockTicketSendOtp, { withCredentials: true });
+    //#endregion
+  }
+
+  async VerifyOTP(
+    otpCode: string,
+    phoneNumber: string
+  ): Promise<ApiResponse<VerifyOTPResponse>> {
+    //#region consts
+    const apiUrl = API_ROUTES.TicketAPI.OTP.VerifyOTP;
+    const body = {
+      code: otpCode,
+      phoneNumber: phoneNumber,
+    };
+    //#endregion
+
+    //#region request + return
+    return await this.api.CommunicateWithAPI_Post<
+      typeof body,
+      VerifyOTPResponse
+    >(apiUrl, body, mockTicketVerifyOtp, { withCredentials: true });
+    //#endregion
+  }
+
   //#endregion
 
   async DownloadTicketFile(

@@ -290,6 +290,10 @@ export const API_ROUTES = {
       GetAllActiveTicketTypes: `${environment.ticketApiUrl}${ticketApiFixURLPart}tickets/GetAllActiveTicketTypes/`,
       GetAllActiveTicketStatuses: `${environment.ticketApiUrl}${ticketApiFixURLPart}tickets/GetAllActiveTicketStatuses/`,
     },
+    OTP: {
+      SendOTP: `${environment.ticketApiUrl}${ticketApiFixURLPart}otp/send/`,
+      VerifyOTP: `${environment.ticketApiUrl}${ticketApiFixURLPart}otp/verify/`,
+    },
     Departments: {
       GetAllActiveDepartments: `${environment.ticketApiUrl}${ticketApiFixURLPart}departments/GetAllActiveDepartments/`,
     },
