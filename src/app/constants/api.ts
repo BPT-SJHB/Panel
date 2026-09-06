@@ -9,7 +9,6 @@ const KernelTasksPort = 88;
 const CarouselsPort = 90;
 const TrafficPort = 91;
 // const ticketPort = 8080;
-const ticketUrl = environment.ticketApiUrl;
 const apiFixURLPart = '/api/';
 const ticketApiFixURLPart = '/api/v1/';
 
@@ -271,41 +270,38 @@ export const API_ROUTES = {
   },
   TicketAPI: {
     Auth: {
-      SignUp: `${ticketUrl}${ticketApiFixURLPart}auth/SignUp/`,
-      Login: `${ticketUrl}${ticketApiFixURLPart}auth/Login/`,
-      LoginWithNoAuth: `${ticketUrl}${ticketApiFixURLPart}auth/LoginWithNoAuth/`,
-      LoginWithSingleUseToken: `${ticketUrl}${ticketApiFixURLPart}auth/LoginWithSingleUseToken/`,
-      GetSingleUseToken: `${ticketUrl}${ticketApiFixURLPart}auth/GetSingleUseToken/`,
+      SignUp: `${environment.ticketApiUrl}${ticketApiFixURLPart}auth/SignUp/`,
+      Login: `${environment.ticketApiUrl}${ticketApiFixURLPart}auth/Login/`,
+      LoginWithNoAuth: `${environment.ticketApiUrl}${ticketApiFixURLPart}auth/LoginWithNoAuth/`,
+      LoginWithSingleUseToken: `${environment.ticketApiUrl}${ticketApiFixURLPart}auth/LoginWithSingleUseToken/`,
+      GetSingleUseToken: `${environment.ticketApiUrl}${ticketApiFixURLPart}auth/GetSingleUseToken/`,
     },
     Captcha: {
-      GetCaptcha: `${ticketUrl}${ticketApiFixURLPart}captcha/GetCaptcha/`,
-      VerifyCaptcha: `${ticketUrl}${ticketApiFixURLPart}captcha/VerifyCaptcha/`,
-    },
-    Version: {
-      GetCurrentVersion: `${ticketUrl}${ticketApiFixURLPart}`,
+      GetCaptcha: `${environment.ticketApiUrl}${ticketApiFixURLPart}captcha/GetCaptcha/`,
+      VerifyCaptcha: `${environment.ticketApiUrl}${ticketApiFixURLPart}captcha/VerifyCaptcha/`,
     },
     Tickets: {
-      CreateTicket: `${ticketUrl}${ticketApiFixURLPart}tickets/CreateTicket/`,
-      GetTicketByTrackCode: `${ticketUrl}${ticketApiFixURLPart}tickets/GetTicketByTrackCode/`,
-      GetTicketByID: `${ticketUrl}${ticketApiFixURLPart}tickets/GetTicketByID/`,
+      CreateTicket: `${environment.ticketApiUrl}${ticketApiFixURLPart}tickets/CreateTicket/`,
+      GetTicketByTrackCode: `${environment.ticketApiUrl}${ticketApiFixURLPart}tickets/GetTicketByTrackCode/`,
+      GetTicketByID: `${environment.ticketApiUrl}${ticketApiFixURLPart}tickets/GetTicketByID/`,
       CreateChat: (id: string) =>
-        `${ticketUrl}${ticketApiFixURLPart}tickets/${id}/CreateChat/`,
-      GetTicketsList: `${ticketUrl}${ticketApiFixURLPart}tickets/GetTicketsList/`,
-      GetAllActiveTicketTypes: `${ticketUrl}${ticketApiFixURLPart}tickets/GetAllActiveTicketTypes/`,
-      GetAllActiveTicketStatuses: `${ticketUrl}${ticketApiFixURLPart}tickets/GetAllActiveTicketStatuses/`,
+        `${environment.ticketApiUrl}${ticketApiFixURLPart}tickets/${id}/CreateChat/`,
+      GetTicketsList: `${environment.ticketApiUrl}${ticketApiFixURLPart}tickets/GetTicketsList/`,
+      GetAllActiveTicketTypes: `${environment.ticketApiUrl}${ticketApiFixURLPart}tickets/GetAllActiveTicketTypes/`,
+      GetAllActiveTicketStatuses: `${environment.ticketApiUrl}${ticketApiFixURLPart}tickets/GetAllActiveTicketStatuses/`,
     },
     Departments: {
-      GetAllActiveDepartments: `${ticketUrl}${ticketApiFixURLPart}departments/GetAllActiveDepartments/`,
+      GetAllActiveDepartments: `${environment.ticketApiUrl}${ticketApiFixURLPart}departments/GetAllActiveDepartments/`,
     },
     Users: {
-      GetUserByID: `${ticketUrl}${ticketApiFixURLPart}users/GetUserByID/`,
-      GetUserByUsername: `${ticketUrl}${ticketApiFixURLPart}users/GetUserByUsername/`,
-      GetUsersIDs: `${ticketUrl}${ticketApiFixURLPart}users/GetUsersByIDs/`,
+      GetUserByID: `${environment.ticketApiUrl}${ticketApiFixURLPart}users/GetUserByID/`,
+      GetUserByUsername: `${environment.ticketApiUrl}${ticketApiFixURLPart}users/GetUserByUsername/`,
+      GetUsersIDs: `${environment.ticketApiUrl}${ticketApiFixURLPart}users/GetUsersByIDs/`,
     },
     File: {
-      UploadTicketFile: `${ticketUrl}${ticketApiFixURLPart}files/UploadTicketFile/`,
+      UploadTicketFile: `${environment.ticketApiUrl}${ticketApiFixURLPart}files/UploadTicketFile/`,
       DownloadTicketFile: (id: string) =>
-        `${ticketUrl}${ticketApiFixURLPart}files/GetDownloadLinkTicketFile/${id}`,
+        `${environment.ticketApiUrl}${ticketApiFixURLPart}files/GetDownloadLinkTicketFile/${id}`,
     },
   },
   TrafficAPI: {
