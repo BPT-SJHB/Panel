@@ -18,6 +18,10 @@ import { TicketErrorCodes } from 'app/constants/error-messages';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { OptInputComponent } from 'app/components/shared/inputs/opt-input/opt-input.component';
+import { MinuteAndSecondPipe } from 'app/pipes/minute-and-second.pipe';
+import { interval, Subscription, takeUntil } from 'rxjs';
+
+const OTP_COOLDOWN_SECONDS = 120;
 
 @Component({
   selector: 'app-ticket-guard-captcha-form',
@@ -28,6 +32,7 @@ import { OptInputComponent } from 'app/components/shared/inputs/opt-input/opt-in
     ButtonComponent,
     TextInputComponent,
     OptInputComponent,
+    MinuteAndSecondPipe,
   ],
   templateUrl: './ticket-guard-captcha-form.component.html',
   styleUrls: ['./ticket-guard-captcha-form.component.scss'],
@@ -48,6 +53,10 @@ export class TicketGuardCaptchaFormComponent extends BaseLoading {
   captchaDialogVisible = signal<boolean>(false);
   otpDialogVisible = signal<boolean>(false);
   otpPhoneNumber = signal<string>('');
+  remainingTime = signal<number>(0);
+
+  // Timer
+  private timerSub?: Subscription;
 
   // Services
   private readonly ticketService = inject(TicketServiceManagementService);
@@ -108,6 +117,7 @@ export class TicketGuardCaptchaFormComponent extends BaseLoading {
       if (!checkAndToastError(otpResponse, this.toast)) return;
       this.toast.success('موفق', otpResponse.data.message);
       this.otpPhoneNumber.set(this.phoneNumber.value);
+      this.startOtpTimer();
 
       this.captchaDialogVisible.set(false);
       this.otpDialogVisible.set(true);
@@ -124,6 +134,8 @@ export class TicketGuardCaptchaFormComponent extends BaseLoading {
   }
 
   onOtpDialogHide(): void {
+    this.stopOtpTimer();
+    this.remainingTime.set(0);
     this.hiddenDialog.emit();
     this.resetCaptcha();
     this.phoneNumber.reset('');
@@ -139,6 +151,26 @@ export class TicketGuardCaptchaFormComponent extends BaseLoading {
     this.captchaAnswer.reset('');
   }
 
+  private startOtpTimer(): void {
+    this.stopOtpTimer();
+    this.remainingTime.set(OTP_COOLDOWN_SECONDS);
+
+    this.timerSub = interval(1000)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        if (this.remainingTime() > 0) {
+          this.remainingTime.update((time) => time - 1);
+        } else {
+          this.stopOtpTimer();
+        }
+      });
+  }
+
+  private stopOtpTimer(): void {
+    this.timerSub?.unsubscribe();
+    this.timerSub = undefined;
+  }
+
   verifyOTPCode = async (): Promise<void> => {
     if (this.loading() || this.otpCode.invalid) return;
 
@@ -151,6 +183,7 @@ export class TicketGuardCaptchaFormComponent extends BaseLoading {
 
       if (!checkAndToastError(response, this.toast)) {
         if (response.error?.code === TicketErrorCodes.TooManyRequests) {
+          this.stopOtpTimer();
           this.otpDialogVisible.set(false);
         } else {
           this.otpCode.reset('');
@@ -165,6 +198,7 @@ export class TicketGuardCaptchaFormComponent extends BaseLoading {
       }
 
       this.toast.success('موفق', response.data.message);
+      this.stopOtpTimer();
 
       const actionFn = this.action();
       if (actionFn) await actionFn();
@@ -172,4 +206,20 @@ export class TicketGuardCaptchaFormComponent extends BaseLoading {
       this.otpDialogVisible.set(false);
     });
   };
+
+  async retrySendOtp(): Promise<void> {
+    if (this.loading() || this.remainingTime() > 0 || !this.otpPhoneNumber())
+      return;
+
+    await this.withLoading(async () => {
+      const otpResponse = await this.ticketService.SendOTP(
+        this.otpPhoneNumber()
+      );
+
+      if (!checkAndToastError(otpResponse, this.toast)) return;
+      this.toast.success('موفق', otpResponse.data.message);
+      this.resetOTPForm();
+      this.startOtpTimer();
+    });
+  }
 }

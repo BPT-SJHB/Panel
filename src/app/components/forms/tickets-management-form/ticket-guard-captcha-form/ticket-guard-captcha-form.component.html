@@ -72,15 +72,31 @@
     </p>
 
     <div class="grid grid-cols-1 gap-4">
+      <div
+        class="flex items-center justify-start gap-1.5 text-sm font-medium text-gray-500 dark:text-gray-400"
+      >
+        <i class="pi pi-clock"></i>
+        <span>{{ remainingTime() | minuteAndSecond }}</span>
+      </div>
+
       <app-opt-input [control]="otpCode" [length]="6" />
 
-      <div class="flex justify-center items-center py-1">
+      <div class="flex justify-center items-center py-1 gap-3">
         <app-button
           (click)="verifyOTPCode()"
           styleClass="px-10"
           [disabled]="otpCode.invalid || loading()"
         >
           تایید
+        </app-button>
+
+        <app-button
+          (click)="retrySendOtp()"
+          styleClass="px-5"
+          [disabled]="remainingTime() > 0 || loading()"
+          severity="warn"
+        >
+          ارسال مجدد کد
         </app-button>
       </div>
     </div>
