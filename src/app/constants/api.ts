@@ -284,6 +284,7 @@ export const API_ROUTES = {
       CreateTicket: `${environment.ticketApiUrl}${ticketApiFixURLPart}tickets/CreateTicket/`,
       GetTicketByTrackCode: `${environment.ticketApiUrl}${ticketApiFixURLPart}tickets/GetTicketByTrackCode/`,
       GetTicketByID: `${environment.ticketApiUrl}${ticketApiFixURLPart}tickets/GetTicketByID/`,
+      CloseTicket: `${environment.ticketApiUrl}${ticketApiFixURLPart}tickets/CloseTicket/`,
       CreateChat: (id: string) =>
         `${environment.ticketApiUrl}${ticketApiFixURLPart}tickets/${id}/CreateChat/`,
       GetTicketsList: `${environment.ticketApiUrl}${ticketApiFixURLPart}tickets/GetTicketsList/`,
@@ -304,8 +305,8 @@ export const API_ROUTES = {
     },
     File: {
       UploadTicketFile: `${environment.ticketApiUrl}${ticketApiFixURLPart}files/UploadTicketFile/`,
-      DownloadTicketFile: (id: string) =>
-        `${environment.ticketApiUrl}${ticketApiFixURLPart}files/GetDownloadLinkTicketFile/${id}`,
+      DownloadTicketFile: (objectName: string) =>
+        `${environment.ticketApiUrl}${ticketApiFixURLPart}files/GetDownloadLinkTicketFile/${objectName}/`,
     },
   },
   TrafficAPI: {

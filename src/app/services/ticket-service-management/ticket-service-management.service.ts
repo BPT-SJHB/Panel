@@ -17,6 +17,13 @@ import { Department } from './model/department.model';
 import { TicketCaptcha } from './model/ticket-captcha.model';
 import { TicketStatus } from './model/ticket-status.model';
 import { PagingResponse } from './model/paging-response.model';
+import {
+  GenerateSingleUseTokenDTO,
+  LoginWithNoAuthDTO,
+  LoginWithPasswordDTO,
+  SignUpWithPasswordDTO,
+  SingleUseTokenResponseDTO,
+} from './model/ticket-auth.model';
 
 // Mock data
 import { mockTicketTypes } from './mock/ticket-type.mock';
@@ -34,18 +41,69 @@ import { mockTicketSendOtp, mockTicketVerifyOtp } from './mock/ticket-otp.mock';
   providedIn: 'root',
 })
 export class TicketServiceManagementService {
-  private api = inject(APICommunicationManagementService);
+  private readonly api = inject(APICommunicationManagementService);
 
-  //#region Ticket User
-  LoginWithNoAuth(username: string): Promise<ApiResponse<TicketUser>> {
+  //#region Auth & Single-Use Tokens
+  LoginWithNoAuth(
+    username: string,
+    departmentId = 1
+  ): Promise<ApiResponse<TicketUser>> {
     const apiUrl = API_ROUTES.TicketAPI.Auth.LoginWithNoAuth;
-    const body = { username, departmentId: 1 };
-    return this.api.CommunicateWithAPI_Post<typeof body, TicketUser>(
+    const body: LoginWithNoAuthDTO = { username, departmentId };
+    return this.api.CommunicateWithAPI_Post<LoginWithNoAuthDTO, TicketUser>(
       apiUrl,
       body,
       mockTicketUser,
       { withCredentials: true }
     );
+  }
+
+  LoginTicketWithPassword(
+    username: string,
+    password: string
+  ): Promise<ApiResponse<null>> {
+    const body: LoginWithPasswordDTO = { username, password };
+    return this.api.CommunicateWithAPI_Post<LoginWithPasswordDTO, null>(
+      API_ROUTES.TicketAPI.Auth.Login,
+      body,
+      null,
+      { withCredentials: true }
+    );
+  }
+
+  SignUpWithPassword(
+    payload: SignUpWithPasswordDTO
+  ): Promise<ApiResponse<null>> {
+    return this.api.CommunicateWithAPI_Post<SignUpWithPasswordDTO, null>(
+      API_ROUTES.TicketAPI.Auth.SignUp,
+      payload,
+      null,
+      { withCredentials: true }
+    );
+  }
+
+  GetSingleUseToken(
+    username: string
+  ): Promise<ApiResponse<SingleUseTokenResponseDTO>> {
+    const body: GenerateSingleUseTokenDTO = { username };
+    return this.api.CommunicateWithAPI_Post<
+      GenerateSingleUseTokenDTO,
+      SingleUseTokenResponseDTO
+    >(
+      API_ROUTES.TicketAPI.Auth.GetSingleUseToken,
+      body,
+      { token: 'mock-single-use-token' },
+      { withCredentials: true }
+    );
+  }
+
+  LoginWithSingleUseToken(token: string): Promise<ApiResponse<null>> {
+    const url = `${API_ROUTES.TicketAPI.Auth.LoginWithSingleUseToken}?token=${encodeURIComponent(
+      token
+    )}`;
+    return this.api.CommunicateWithAPI_Get<null>(url, null, {
+      withCredentials: true,
+    });
   }
   //#endregion
 
@@ -94,11 +152,10 @@ export class TicketServiceManagementService {
     });
   }
 
-  GetTicketByTrackCode(
-    trackCode: string,
-    username: string
-  ): Promise<ApiResponse<Ticket>> {
-    const body = { trackCode, username };
+  GetTicketByTrackCode(trackCode: string): Promise<ApiResponse<Ticket>> {
+    const body = {
+      trackCode,
+    };
     return this.api.CommunicateWithAPI_Post<typeof body, Ticket>(
       API_ROUTES.TicketAPI.Tickets.GetTicketByTrackCode,
       body,
@@ -114,6 +171,16 @@ export class TicketServiceManagementService {
       body,
       mockTickets[Math.floor(Math.random() * mockTickets.length)],
       { withCredentials: true }
+    );
+  }
+
+  CloseTicket(id: string): Promise<ApiResponse<null>> {
+    const body = { id };
+    return this.api.CommunicateWithAPI_Post<typeof body, null>(
+      API_ROUTES.TicketAPI.Tickets.CloseTicket,
+      body,
+      null,
+      { withCredentials: true, showSuccessToast: true }
     );
   }
   //#endregion
@@ -145,7 +212,8 @@ export class TicketServiceManagementService {
   ): Promise<ApiResponse<ChatMessage>> {
     const mockResponse: ChatMessage = {
       ...chat,
-      id: '',
+      id: crypto.randomUUID(),
+      attachments: chat.attachments ?? [],
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
@@ -155,7 +223,6 @@ export class TicketServiceManagementService {
       ChatMessage
     >(API_ROUTES.TicketAPI.Tickets.CreateChat(ticketId), chat, mockResponse, {
       withCredentials: true,
-      showSuccessToast: true,
     });
   }
   //#endregion
@@ -207,61 +274,44 @@ export class TicketServiceManagementService {
 
   //#region OTP
   async SendOTP(phoneNumber: string): Promise<ApiResponse<SendOTPResponse>> {
-    //#region consts
     const apiUrl = API_ROUTES.TicketAPI.OTP.SendOTP;
-    const bodyValue = {
-      phoneNumber: phoneNumber,
-    };
-    //#endregion
-
-    //#region request + return
+    const bodyValue = { phoneNumber };
     return await this.api.CommunicateWithAPI_Post<
       typeof bodyValue,
       SendOTPResponse
     >(apiUrl, bodyValue, mockTicketSendOtp, { withCredentials: true });
-    //#endregion
   }
 
   async VerifyOTP(
     otpCode: string,
     phoneNumber: string
   ): Promise<ApiResponse<VerifyOTPResponse>> {
-    //#region consts
     const apiUrl = API_ROUTES.TicketAPI.OTP.VerifyOTP;
-    const body = {
-      code: otpCode,
-      phoneNumber: phoneNumber,
-    };
-    //#endregion
-
-    //#region request + return
+    const body = { code: otpCode, phoneNumber };
     return await this.api.CommunicateWithAPI_Post<
       typeof body,
       VerifyOTPResponse
     >(apiUrl, body, mockTicketVerifyOtp, { withCredentials: true });
-    //#endregion
   }
-
   //#endregion
 
+  //#region Files
   async DownloadTicketFile(
     ticketId: string,
-    fileId: string
+    objectName: string
   ): Promise<ApiResponse<null>> {
     const response = await this.api.CommunicateWithAPI_Post<
       { id: string },
       { url: string }
     >(
-      API_ROUTES.TicketAPI.File.DownloadTicketFile(fileId),
+      API_ROUTES.TicketAPI.File.DownloadTicketFile(objectName),
       { id: ticketId },
       { url: '' },
       { withCredentials: true }
     );
     if (!response.success || !response.data?.url) {
-      // Safely return the same structure (cast to correct type)
       return response as unknown as ApiResponse<null>;
     }
-    // Second request to actually download file using the presigned URL
     window.open(response.data.url, '_blank');
     return response as unknown as ApiResponse<null>;
   }
@@ -279,16 +329,5 @@ export class TicketServiceManagementService {
       showSuccessToast: true,
     });
   }
-
-  LoginTicketWithPassword(
-    username: string,
-    password: string
-  ): Promise<ApiResponse<null>> {
-    return this.api.CommunicateWithAPI_Post(
-      API_ROUTES.TicketAPI.Auth.Login,
-      { username, password },
-      null,
-      { withCredentials: true }
-    );
-  }
+  //#endregion
 }

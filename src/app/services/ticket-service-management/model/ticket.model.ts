@@ -1,30 +1,30 @@
 export interface ChatMessage {
   id: string;
-  senderId: number;
+  senderId?: number;
+  senderType?: string;
   message: string;
   createdAt: string;
   updatedAt: string;
-  attachments: string[];
+  attachments?: string[];
 }
 
 export interface CreateChatMessageRequest {
-  senderId: number;
   message: string;
-  attachments: string[];
+  attachments?: string[];
 }
 
 export interface TicketCreateRequest {
-  userId: number;
-  departmentId: number;
-  ticketTypeId: number;
   title: string;
   body: string;
-  attachments: string[];
+  departmentId: number;
+  ticketTypeId: number;
+  attachments?: string[];
 }
 
 export interface Ticket {
   id: string;
-  userId: number;
+  userId?: number;
+  phoneNumber?: string;
   departmentId: number;
   ticketTypeId: number;
   ticketStatusId: number;
@@ -38,11 +38,10 @@ export interface Ticket {
 export interface TicketQueryParams {
   page?: number; // page number
   pageSize?: number; // items per page
-
-  status?: number; // optional filter
+  ticketStatusId?: number; // optional filter
+  ticketTypeId?: number; // optional filter
   userId?: number; // optional filter
   departmentId?: number; // optional filter
-
   orderBy?: string; // field to order by
   orderDir?: 'asc' | 'desc'; // asc or desc
 }
