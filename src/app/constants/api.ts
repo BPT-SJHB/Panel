@@ -275,6 +275,7 @@ export const API_ROUTES = {
       LoginWithNoAuth: `${environment.ticketApiUrl}${ticketApiFixURLPart}auth/LoginWithNoAuth/`,
       LoginWithSingleUseToken: `${environment.ticketApiUrl}${ticketApiFixURLPart}auth/LoginWithSingleUseToken/`,
       GetSingleUseToken: `${environment.ticketApiUrl}${ticketApiFixURLPart}auth/GetSingleUseToken/`,
+      CheckToken: `${environment.ticketApiUrl}${ticketApiFixURLPart}auth/CheckToken/`,
     },
     Captcha: {
       GetCaptcha: `${environment.ticketApiUrl}${ticketApiFixURLPart}captcha/GetCaptcha/`,

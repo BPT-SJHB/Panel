@@ -18,6 +18,7 @@ import { TicketCaptcha } from './model/ticket-captcha.model';
 import { TicketStatus } from './model/ticket-status.model';
 import { PagingResponse } from './model/paging-response.model';
 import {
+  CheckedToken,
   GenerateSingleUseTokenDTO,
   LoginWithNoAuthDTO,
   LoginWithPasswordDTO,
@@ -36,6 +37,7 @@ import { mockTicketPaging } from './mock/ticket-paging.mock';
 import { Observable } from 'rxjs';
 import { SendOTPResponse, VerifyOTPResponse } from './model/ticket-otp.model';
 import { mockTicketSendOtp, mockTicketVerifyOtp } from './mock/ticket-otp.mock';
+import { mockTicketTokenChecked } from './mock/ticket-auth.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -44,13 +46,13 @@ export class TicketServiceManagementService {
   private readonly api = inject(APICommunicationManagementService);
 
   //#region Auth & Single-Use Tokens
-  LoginWithNoAuth(
+  public async LoginWithNoAuth(
     username: string,
     departmentId = 1
   ): Promise<ApiResponse<TicketUser>> {
     const apiUrl = API_ROUTES.TicketAPI.Auth.LoginWithNoAuth;
     const body: LoginWithNoAuthDTO = { username, departmentId };
-    return this.api.CommunicateWithAPI_Post<LoginWithNoAuthDTO, TicketUser>(
+    return await this.api.CommunicateWithAPI_Post<LoginWithNoAuthDTO, TicketUser>(
       apiUrl,
       body,
       mockTicketUser,
@@ -58,12 +60,12 @@ export class TicketServiceManagementService {
     );
   }
 
-  LoginTicketWithPassword(
+  public async LoginTicketWithPassword(
     username: string,
     password: string
   ): Promise<ApiResponse<null>> {
     const body: LoginWithPasswordDTO = { username, password };
-    return this.api.CommunicateWithAPI_Post<LoginWithPasswordDTO, null>(
+    return await this.api.CommunicateWithAPI_Post<LoginWithPasswordDTO, null>(
       API_ROUTES.TicketAPI.Auth.Login,
       body,
       null,
@@ -71,10 +73,10 @@ export class TicketServiceManagementService {
     );
   }
 
-  SignUpWithPassword(
+  public async SignUpWithPassword(
     payload: SignUpWithPasswordDTO
   ): Promise<ApiResponse<null>> {
-    return this.api.CommunicateWithAPI_Post<SignUpWithPasswordDTO, null>(
+    return await this.api.CommunicateWithAPI_Post<SignUpWithPasswordDTO, null>(
       API_ROUTES.TicketAPI.Auth.SignUp,
       payload,
       null,
@@ -82,11 +84,11 @@ export class TicketServiceManagementService {
     );
   }
 
-  GetSingleUseToken(
+  public async GetSingleUseToken(
     username: string
   ): Promise<ApiResponse<SingleUseTokenResponseDTO>> {
     const body: GenerateSingleUseTokenDTO = { username };
-    return this.api.CommunicateWithAPI_Post<
+    return await this.api.CommunicateWithAPI_Post<
       GenerateSingleUseTokenDTO,
       SingleUseTokenResponseDTO
     >(
@@ -97,35 +99,49 @@ export class TicketServiceManagementService {
     );
   }
 
-  LoginWithSingleUseToken(token: string): Promise<ApiResponse<null>> {
+  public async CheckToken(): Promise<ApiResponse<CheckedToken>> {
+    //#region consts
+    const apiUrl = API_ROUTES.TicketAPI.Auth.CheckToken;
+    //#endregion
+
+    //#region request + response
+    return await this.api.CommunicateWithAPI_Get<CheckedToken>(
+      apiUrl,
+      mockTicketTokenChecked,
+      { withCredentials: true }
+    );
+    //#endregion
+  }
+
+  public async LoginWithSingleUseToken(token: string): Promise<ApiResponse<null>> {
     const url = `${API_ROUTES.TicketAPI.Auth.LoginWithSingleUseToken}?token=${encodeURIComponent(
       token
     )}`;
-    return this.api.CommunicateWithAPI_Get<null>(url, null, {
+    return await this.api.CommunicateWithAPI_Get<null>(url, null, {
       withCredentials: true,
     });
   }
   //#endregion
 
   //#region Ticket Types / Departments / Statuses
-  GetTicketTypes(): Promise<ApiResponse<TicketType[]>> {
-    return this.api.CommunicateWithAPI_Get<TicketType[]>(
+  public async GetTicketTypes(): Promise<ApiResponse<TicketType[]>> {
+    return await this.api.CommunicateWithAPI_Get<TicketType[]>(
       API_ROUTES.TicketAPI.Tickets.GetAllActiveTicketTypes,
       mockTicketTypes,
       { withCredentials: true }
     );
   }
 
-  GetDepartments(): Promise<ApiResponse<Department[]>> {
-    return this.api.CommunicateWithAPI_Get<Department[]>(
+  public async GetDepartments(): Promise<ApiResponse<Department[]>> {
+    return await this.api.CommunicateWithAPI_Get<Department[]>(
       API_ROUTES.TicketAPI.Departments.GetAllActiveDepartments,
       mockDepartments,
       { withCredentials: true }
     );
   }
 
-  GetTicketStatuses(): Promise<ApiResponse<TicketStatus[]>> {
-    return this.api.CommunicateWithAPI_Get<TicketStatus[]>(
+  public async GetTicketStatuses(): Promise<ApiResponse<TicketStatus[]>> {
+    return await this.api.CommunicateWithAPI_Get<TicketStatus[]>(
       API_ROUTES.TicketAPI.Tickets.GetAllActiveTicketStatuses,
       mockTicketStatuses,
       { withCredentials: true }
@@ -134,7 +150,7 @@ export class TicketServiceManagementService {
   //#endregion
 
   //#region Ticket CRUD
-  CreateTicket(
+  public async CreateTicket(
     ticket: TicketCreateRequest
   ): Promise<ApiResponse<{ id: string; trackCode: string }>> {
     const mockResponse = {
@@ -143,7 +159,7 @@ export class TicketServiceManagementService {
         mockTickets[0]?.trackCode ?? Math.random().toString(36).substring(2, 8),
     };
 
-    return this.api.CommunicateWithAPI_Post<
+    return await this.api.CommunicateWithAPI_Post<
       TicketCreateRequest,
       { id: string; trackCode: string }
     >(API_ROUTES.TicketAPI.Tickets.CreateTicket, ticket, mockResponse, {
@@ -152,11 +168,11 @@ export class TicketServiceManagementService {
     });
   }
 
-  GetTicketByTrackCode(trackCode: string): Promise<ApiResponse<Ticket>> {
+  public async GetTicketByTrackCode(trackCode: string): Promise<ApiResponse<Ticket>> {
     const body = {
       trackCode,
     };
-    return this.api.CommunicateWithAPI_Post<typeof body, Ticket>(
+    return await this.api.CommunicateWithAPI_Post<typeof body, Ticket>(
       API_ROUTES.TicketAPI.Tickets.GetTicketByTrackCode,
       body,
       mockTickets[0],
@@ -164,9 +180,9 @@ export class TicketServiceManagementService {
     );
   }
 
-  GetTicketById(id: string): Promise<ApiResponse<Ticket>> {
+  public async GetTicketById(id: string): Promise<ApiResponse<Ticket>> {
     const body = { id };
-    return this.api.CommunicateWithAPI_Post<typeof body, Ticket>(
+    return await this.api.CommunicateWithAPI_Post<typeof body, Ticket>(
       API_ROUTES.TicketAPI.Tickets.GetTicketByID,
       body,
       mockTickets[Math.floor(Math.random() * mockTickets.length)],
@@ -174,9 +190,9 @@ export class TicketServiceManagementService {
     );
   }
 
-  CloseTicket(id: string): Promise<ApiResponse<null>> {
+  public async CloseTicket(id: string): Promise<ApiResponse<null>> {
     const body = { id };
-    return this.api.CommunicateWithAPI_Post<typeof body, null>(
+    return await this.api.CommunicateWithAPI_Post<typeof body, null>(
       API_ROUTES.TicketAPI.Tickets.CloseTicket,
       body,
       null,
@@ -186,17 +202,17 @@ export class TicketServiceManagementService {
   //#endregion
 
   //#region Captcha
-  GetCaptcha(): Promise<ApiResponse<TicketCaptcha>> {
-    return this.api.CommunicateWithAPI_Get<TicketCaptcha>(
+  public async GetCaptcha(): Promise<ApiResponse<TicketCaptcha>> {
+    return await this.api.CommunicateWithAPI_Get<TicketCaptcha>(
       API_ROUTES.TicketAPI.Captcha.GetCaptcha,
       mockTicketCaptcha,
       { withCredentials: true }
     );
   }
 
-  VerifyCaptcha(id: string, answer: string): Promise<ApiResponse<null>> {
+  public async VerifyCaptcha(id: string, answer: string): Promise<ApiResponse<null>> {
     const body = { id, captcha: answer };
-    return this.api.CommunicateWithAPI_Post<typeof body, null>(
+    return await this.api.CommunicateWithAPI_Post<typeof body, null>(
       API_ROUTES.TicketAPI.Captcha.VerifyCaptcha,
       body,
       null,
@@ -206,7 +222,7 @@ export class TicketServiceManagementService {
   //#endregion
 
   //#region Chat
-  CreateChat(
+  public async CreateChat(
     ticketId: string,
     chat: CreateChatMessageRequest
   ): Promise<ApiResponse<ChatMessage>> {
@@ -218,7 +234,7 @@ export class TicketServiceManagementService {
       updatedAt: new Date().toISOString(),
     };
 
-    return this.api.CommunicateWithAPI_Post<
+    return await this.api.CommunicateWithAPI_Post<
       CreateChatMessageRequest,
       ChatMessage
     >(API_ROUTES.TicketAPI.Tickets.CreateChat(ticketId), chat, mockResponse, {
@@ -228,10 +244,10 @@ export class TicketServiceManagementService {
   //#endregion
 
   //#region Paging
-  GetTickets(
+  public async GetTickets(
     query: TicketQueryParams
   ): Promise<ApiResponse<PagingResponse<Ticket>>> {
-    return this.api.CommunicateWithAPI_Post<
+    return await this.api.CommunicateWithAPI_Post<
       TicketQueryParams,
       PagingResponse<Ticket>
     >(API_ROUTES.TicketAPI.Tickets.GetTicketsList, query, mockTicketPaging, {
@@ -241,9 +257,9 @@ export class TicketServiceManagementService {
   //#endregion
 
   //#region Users
-  GetUserById(id: number): Promise<ApiResponse<TicketUser>> {
+  public async GetUserById(id: number): Promise<ApiResponse<TicketUser>> {
     const body = { id };
-    return this.api.CommunicateWithAPI_Post<typeof body, TicketUser>(
+    return await this.api.CommunicateWithAPI_Post<typeof body, TicketUser>(
       API_ROUTES.TicketAPI.Users.GetUserByID,
       body,
       mockTicketUser,
@@ -251,9 +267,9 @@ export class TicketServiceManagementService {
     );
   }
 
-  GetUserByUsername(username: string): Promise<ApiResponse<TicketUser>> {
+  public async GetUserByUsername(username: string): Promise<ApiResponse<TicketUser>> {
     const body = { username };
-    return this.api.CommunicateWithAPI_Post<typeof body, TicketUser>(
+    return await this.api.CommunicateWithAPI_Post<typeof body, TicketUser>(
       API_ROUTES.TicketAPI.Users.GetUserByUsername,
       body,
       mockTicketUser,
@@ -261,9 +277,9 @@ export class TicketServiceManagementService {
     );
   }
 
-  GetUsersByIds(ids: number[]): Promise<ApiResponse<TicketUser[]>> {
+  public async GetUsersByIds(ids: number[]): Promise<ApiResponse<TicketUser[]>> {
     const body = { ids };
-    return this.api.CommunicateWithAPI_Post<typeof body, TicketUser[]>(
+    return await this.api.CommunicateWithAPI_Post<typeof body, TicketUser[]>(
       API_ROUTES.TicketAPI.Users.GetUsersIDs,
       body,
       [mockTicketUser],
@@ -273,7 +289,7 @@ export class TicketServiceManagementService {
   //#endregion
 
   //#region OTP
-  async SendOTP(phoneNumber: string): Promise<ApiResponse<SendOTPResponse>> {
+  public async SendOTP(phoneNumber: string): Promise<ApiResponse<SendOTPResponse>> {
     const apiUrl = API_ROUTES.TicketAPI.OTP.SendOTP;
     const bodyValue = { phoneNumber };
     return await this.api.CommunicateWithAPI_Post<
@@ -282,7 +298,7 @@ export class TicketServiceManagementService {
     >(apiUrl, bodyValue, mockTicketSendOtp, { withCredentials: true });
   }
 
-  async VerifyOTP(
+  public async VerifyOTP(
     otpCode: string,
     phoneNumber: string
   ): Promise<ApiResponse<VerifyOTPResponse>> {
@@ -296,7 +312,7 @@ export class TicketServiceManagementService {
   //#endregion
 
   //#region Files
-  async DownloadTicketFile(
+  public async DownloadTicketFile(
     ticketId: string,
     objectName: string
   ): Promise<ApiResponse<null>> {
@@ -316,7 +332,7 @@ export class TicketServiceManagementService {
     return response as unknown as ApiResponse<null>;
   }
 
-  UploadTicketFile(
+  public UploadTicketFile(
     file: File
   ): Observable<ApiResponse<{ id: string }> | number> {
     const body = new FormData();

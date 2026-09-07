@@ -21,3 +21,14 @@ export interface GenerateSingleUseTokenDTO {
 export interface SingleUseTokenResponseDTO {
   token: string;
 }
+
+export interface CheckedToken {
+  permissions?: string[];
+  phoneNumber?: string;
+  phoneVerified: boolean;
+  roleIds?: number[];
+  tokenType: string;
+  userId?: number;
+  username?: string;
+  valid: boolean;
+}
