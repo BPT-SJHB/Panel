@@ -56,7 +56,6 @@ describe('TicketServiceManagementService', () => {
     const ticket: TicketCreateRequest = {
       title: 'test ticket',
       body: 'تست',
-      userId: 1,
       ticketTypeId: 1,
       departmentId: 2,
       attachments: [],
