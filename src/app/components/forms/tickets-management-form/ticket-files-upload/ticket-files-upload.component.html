@@ -6,9 +6,8 @@
   accept="image/png,image/jpg,image/jepg"
 />
 
-@if (captchaGuardVisible() && guardType() === "captcha") {
-  <app-ticket-guard-captcha-form
-    [activeCaptcha]="captchaGuardVisible()"
-    (hiddenDialog)="captchaGuardVisible.set(false)"
-  />
-}
+<app-ticket-guard-captcha-form
+  [action]="onCaptchaSuccess"
+  [activeCaptcha]="captchaGuardVisible()"
+  (hiddenDialog)="onCaptchaDismiss()"
+/>

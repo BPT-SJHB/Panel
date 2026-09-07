@@ -8,7 +8,7 @@ import { TicketServiceManagementService } from 'app/services/ticket-service-mana
 import { Subscription, takeUntil } from 'rxjs';
 import { BaseLoading } from '../../shared/component-base/base-loading';
 import { ApiResponse } from 'app/data/model/api-Response.model';
-import { TicketErrorCodes } from 'app/constants/error-messages';
+import { ErrorCodes, TicketErrorCodes } from 'app/constants/error-messages';
 import { TicketGuardCaptchaFormComponent } from '../ticket-guard-captcha-form/ticket-guard-captcha-form.component';
 
 @Component({
@@ -20,7 +20,6 @@ import { TicketGuardCaptchaFormComponent } from '../ticket-guard-captcha-form/ti
 export class TicketFilesUploadComponent extends BaseLoading {
   @ViewChild(FilesUploadInputComponent) inputFile?: FilesUploadInputComponent;
   // inputs
-  //
   readonly control = input(new FormControl<string[]>([]));
   readonly guardType = input<'captcha' | 'auth'>('captcha');
 
@@ -29,6 +28,9 @@ export class TicketFilesUploadComponent extends BaseLoading {
   private uploadingFiles = new Map<string, Subscription>();
   private uploadedFiles = new Map<string, string>();
   readonly captchaGuardVisible = signal(false);
+
+  private pendingAuthPromise: Promise<boolean> | null = null;
+  private authResolver: ((value: boolean) => void) | null = null;
 
   override ngOnInit(): void {
     super.ngOnInit();
@@ -42,10 +44,65 @@ export class TicketFilesUploadComponent extends BaseLoading {
       });
   }
 
-  onUploadFile = (
+  private async ensureAuthenticated(): Promise<boolean> {
+    if (this.guardType() !== 'captcha') {
+      return true;
+    }
+
+    try {
+      const response = await this.ticketService.CheckToken();
+      if (
+        response.success &&
+        response.data?.valid &&
+        response.data.phoneVerified
+      ) {
+        return true;
+      }
+    } catch {
+      // CheckToken failed, prompt captcha verification
+    }
+
+    if (this.pendingAuthPromise) {
+      return await this.pendingAuthPromise;
+    }
+
+    this.pendingAuthPromise = new Promise<boolean>((resolve) => {
+      this.authResolver = resolve;
+      this.captchaGuardVisible.set(true);
+    });
+
+    return await this.pendingAuthPromise;
+  }
+
+  onCaptchaSuccess = async (): Promise<void> => {
+    if (this.authResolver) {
+      this.authResolver(true);
+      this.authResolver = null;
+    }
+    this.pendingAuthPromise = null;
+    this.captchaGuardVisible.set(false);
+  };
+
+  onCaptchaDismiss(): void {
+    if (this.authResolver) {
+      this.authResolver(false);
+      this.authResolver = null;
+    }
+    this.pendingAuthPromise = null;
+    this.captchaGuardVisible.set(false);
+  }
+
+  onUploadFile = async (
     file: UploadFile,
     onProgress: (progress: number) => void
   ): Promise<void> => {
+    const isAuthenticated = await this.ensureAuthenticated();
+    if (!isAuthenticated) {
+      throw new Error(
+        `Authentication required to upload file: ${file.raw.name}`
+      );
+    }
+
     return new Promise<void>((resolve, reject) => {
       const sub = this.ticketService
         .UploadTicketFile(file.raw)
@@ -69,7 +126,9 @@ export class TicketFilesUploadComponent extends BaseLoading {
             this.uploadingFiles.delete(file.id);
             if (
               err.error?.code === TicketErrorCodes.CaptchaIncorrect ||
-              err.error?.code === TicketErrorCodes.CaptchaExpired
+              err.error?.code === TicketErrorCodes.CaptchaExpired ||
+              err.error?.code === TicketErrorCodes.Unauthorized ||
+              err.error?.code === ErrorCodes.Unauthorized
             ) {
               this.captchaGuardVisible.set(true);
             }

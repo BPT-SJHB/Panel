@@ -5,7 +5,7 @@
   [visible]="captchaDialogVisible()"
   [style]="{ width: '30rem' }"
   (visibleChange)="captchaDialogVisible.set($event)"
-  (onHide)="onDialogHidden()"
+  (onHide)="onCaptchaDialogHide()"
 >
   <div class="flex flex-col gap-4">
     <!-- explanatory text -->
@@ -20,7 +20,8 @@
         placeholder="شماره موبایل خود را وارد کنید."
         validationField="mobile"
         [control]="phoneNumber"
-        type="number"
+        type="text"
+        language="en"
       />
 
       <app-captcha-input
@@ -60,7 +61,7 @@
   [draggable]="false"
   [visible]="otpDialogVisible()"
   (visibleChange)="otpDialogVisible.set($event)"
-  (onHide)="resetOTPForm()"
+  (onHide)="onOtpDialogHide()"
   [style]="{ width: '30rem', maxWidth: '100%' }"
 >
   <div class="flex flex-col gap-4">

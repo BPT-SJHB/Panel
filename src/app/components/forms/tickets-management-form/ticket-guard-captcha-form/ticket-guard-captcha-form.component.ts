@@ -114,10 +114,20 @@ export class TicketGuardCaptchaFormComponent extends BaseLoading {
     });
   }
 
-  onDialogHidden(): void {
+  onCaptchaDialogHide(): void {
+    // Only emit hiddenDialog if not transitioning to OTP dialog
+    if (!this.otpDialogVisible()) {
+      this.hiddenDialog.emit();
+      this.resetCaptcha();
+      this.phoneNumber.reset('');
+    }
+  }
+
+  onOtpDialogHide(): void {
     this.hiddenDialog.emit();
     this.resetCaptcha();
     this.phoneNumber.reset('');
+    this.resetOTPForm();
   }
 
   resetOTPForm(): void {
@@ -142,7 +152,6 @@ export class TicketGuardCaptchaFormComponent extends BaseLoading {
       if (!checkAndToastError(response, this.toast)) {
         if (response.error?.code === TicketErrorCodes.TooManyRequests) {
           this.otpDialogVisible.set(false);
-          this.resetOTPForm();
         } else {
           this.otpCode.reset('');
         }
