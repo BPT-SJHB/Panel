@@ -1,32 +1,32 @@
 <!-- فرم پیگیری تیکت -->
-<div class="grid grid-cols-12 gap-4 px-5 py-5">
-  <!-- کد پیگیری -->
-  <app-text-input
-    [addonWidth]="addonWidth"
-    [control]="ctrl('trackCode')"
-    label="کد پیگیری"
-    placeholder="مثال: ABCD1234"
-    validationField="ticketTrackCode"
-    class="col-span-12 md:col-span-6 lg:col-span-4"
-    language="en"
-  ></app-text-input>
+<div class="py-5">
+  <div class="flex flex-row justify-end px-3 max-w-[600px] mx-auto gap-4">
+    <!-- کد پیگیری -->
+    <app-text-input
+      [addonWidth]="addonWidth"
+      [control]="ctrl('trackCode')"
+      label="کد پیگیری"
+      placeholder="مثال: ABCD1234"
+      validationField="ticketTrackCode"
+      class="w-full"
+      language="en"
+    ></app-text-input>
 
-  <!-- دکمه پیگیری -->
-  <div class="col-span-12 flex justify-end px-3">
+    <!-- دکمه پیگیری -->
     <app-button
-      styleClass="w-full sm:w-48 md:w-40"
+      styleClass="w-full h-full px-4"
+      class="text-center"
       (onClick)="searchTicket()"
       severity="info"
       [disabled]="searchForm.invalid || loading()"
     >
-      <i class="pi pi-search ms-2"></i>
-      پیگیری تیکت
+      <i class="pi pi-search"></i>
     </app-button>
   </div>
 </div>
 
 @if (currentTicket()) {
-  <div class="mt-6 px-5 max-w-[600px] mx-auto">
+  <div class="mt-4 px-5 max-w-[600px] mx-auto">
     <p-card class="relative p-4 border rounded-xl shadow-md">
       <!-- وضعیت badge (top right) -->
 
