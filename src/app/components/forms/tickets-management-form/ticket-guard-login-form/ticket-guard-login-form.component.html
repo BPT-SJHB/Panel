@@ -1,0 +1,59 @@
+<p-dialog
+  dir="rtl"
+  draggable="false"
+  header="ورود به سامانه تیکت"
+  [modal]="true"
+  [visible]="loginDialogVisible()"
+  [style]="{ width: '30rem', maxWidth: '95vw' }"
+  (visibleChange)="loginDialogVisible.set($event)"
+  (onHide)="onDialogHide()"
+>
+  <div class="flex flex-col gap-4">
+    <p class="text-gray-600 dark:text-gray-400 text-sm m-0">
+      جهت مشاهده و مدیریت تیکت‌ها، لطفاً اطلاعات حساب کاربری و رمز عبور سامانه
+      تیکت را وارد کنید.
+    </p>
+
+    @if (loginDialogVisible()) {
+      <app-text-input
+        label="شماره موبایل"
+        placeholder="شماره موبایل خود را وارد کنید"
+        validationField="mobile"
+        [control]="username"
+        type="text"
+        language="en"
+      />
+
+      <app-password-input
+        label="رمز عبور"
+        placeholder="رمز عبور خود را وارد کنید"
+        validationField="password"
+        [control]="password"
+      />
+
+      <app-captcha-input
+        captchaServiceType="ticket"
+        [sessionIdControl]="captchaId"
+        [captchaInputControl]="captchaAnswer"
+      />
+    }
+  </div>
+
+  <div class="flex justify-end gap-2 mt-4">
+    <app-button
+      type="button"
+      label="لغو"
+      severity="info"
+      styleClass="w-20"
+      (click)="loginDialogVisible.set(false)"
+    />
+    <app-button
+      type="button"
+      label="ورود"
+      icon="pi pi-sign-in"
+      (click)="login()"
+      styleClass="w-28"
+      [disabled]="isFormInvalid || loading()"
+    />
+  </div>
+</p-dialog>
