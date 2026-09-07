@@ -24,7 +24,6 @@ import { TicketGuardCaptchaFormComponent } from '../ticket-guard-captcha-form/ti
 import { TicketErrorCodes } from 'app/constants/error-messages';
 
 type DetailTicket = Ticket & {
-  username: string;
   ticketType: string;
   department: string;
   ticketStatus: string;
@@ -46,7 +45,6 @@ export class TicketTrackFormComponent
   extends BaseLoading
   implements AfterContentInit
 {
-  readonly phone = input('');
   readonly trackCode = input('');
 
   private fb = inject(FormBuilder);
@@ -59,7 +57,6 @@ export class TicketTrackFormComponent
   readonly addonWidth = '6rem';
 
   readonly searchForm = this.fb.group({
-    phone: this.fb.nonNullable.control<string>('', ValidationSchema.mobile),
     trackCode: this.fb.nonNullable.control<string>(
       '',
       ValidationSchema.ticketTrackCode
@@ -69,7 +66,6 @@ export class TicketTrackFormComponent
   chatDialogVisible = false;
   constructor() {
     effect(() => {
-      this.ctrl('phone').setValue(this.phone());
       this.ctrl('trackCode').setValue(this.trackCode());
     });
 
@@ -93,12 +89,8 @@ export class TicketTrackFormComponent
     if (this.searchForm.invalid || this.loading()) return;
 
     const trackCode = this.ctrl<string>('trackCode').value;
-    const phone = this.ctrl<string>('phone').value;
     await this.withLoading(async () => {
-      const response = await this.ticketService.GetTicketByTrackCode(
-        trackCode,
-        phone
-      );
+      const response = await this.ticketService.GetTicketByTrackCode(trackCode);
 
       if (!response.success || !response.data) {
         if (response.error?.code === TicketErrorCodes.Unauthorized) {
@@ -108,7 +100,6 @@ export class TicketTrackFormComponent
       }
       this.currentTicket.set({
         ...response.data,
-        username: this.ctrl<string>('phone').value,
         ticketType: this.findTicketType(response.data.ticketTypeId),
         department: this.findDepartment(response.data.departmentId),
         ticketStatus: this.findTicketStatues(response.data.ticketStatusId),

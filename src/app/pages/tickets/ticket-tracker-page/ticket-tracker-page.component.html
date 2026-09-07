@@ -27,11 +27,7 @@
   <main class="flex flex-1 overflow-hidden">
     <section class="flex flex-col flex-1 overflow-hidden">
       <div class="overflow-y-auto flex-1 lg:mb-0" dir="ltr">
-        <app-ticket-track-form
-          dir="rtl"
-          [phone]="phoneNumber()"
-          [trackCode]="trackingCode()"
-        />
+        <app-ticket-track-form dir="rtl" [trackCode]="trackingCode()" />
       </div>
     </section>
   </main>

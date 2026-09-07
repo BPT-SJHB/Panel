@@ -51,7 +51,6 @@ export class TicketCreateFormComponent extends BaseLoading {
   readonly createdTrackCodeTicket = signal<string | null>(
     mockTickets[0].trackCode
   );
-  readonly trackPhone = signal<string>('');
   readonly addonWidth = '6rem';
   ticketDialogVisible = false;
   readonly activeCaptcha = signal<boolean>(false);
@@ -59,22 +58,12 @@ export class TicketCreateFormComponent extends BaseLoading {
 
   // Form setup
   readonly ticketForm = this.fb.group({
-    userId: this.fb.control<number | null>(null),
-    username: this.fb.control<string>('', ValidationSchema.mobile),
     ticketTypeId: this.fb.control<number | null>(null, ValidationSchema.id),
     departmentId: this.fb.control<number | null>(null, ValidationSchema.id),
     title: this.fb.control<string>('', ValidationSchema.title),
     body: this.fb.control<string>('', ValidationSchema.description),
     attachment: this.fb.control<string[]>([]),
   });
-
-  constructor() {
-    super();
-    effect(() => {
-      this.ctrl('username').setValue(this.phone());
-      this.ctrl('userId').setValue(null);
-    });
-  }
 
   override ngOnInit(): void {
     super.ngOnInit();
@@ -112,25 +101,7 @@ export class TicketCreateFormComponent extends BaseLoading {
     if (this.ticketForm.invalid || this.loading()) return;
 
     this.withLoading(async () => {
-      let userId = this.ctrl<number | null>('userId').value;
-
-      if (userId === null) {
-        const response = await this.ticketService.LoginWithNoAuth(
-          this.ctrl<string>('username').value
-        );
-        if (!response.success || !response.data) {
-          if (response.error?.code === TicketErrorCodes.Unauthorized) {
-            this.activeCaptcha.set(true);
-          }
-          return;
-        }
-
-        userId = response.data.id;
-        this.ctrl('userId').setValue(userId);
-      }
-
       const ticket: TicketCreateRequest = {
-        userId: this.ctrl<number>('userId').value,
         ticketTypeId: this.ctrl<number>('ticketTypeId').value,
         departmentId: this.ctrl<number>('departmentId').value,
         title: this.ctrl<string>('title').value,
@@ -148,8 +119,7 @@ export class TicketCreateFormComponent extends BaseLoading {
 
       this.activeCaptcha.set(false);
       this.createdTrackCodeTicket.set(result.data.trackCode);
-      this.trackPhone.set(this.ctrl<string>('username').value);
-      this.ticketForm.reset({ username: this.phone() });
+      this.ticketForm.reset();
       this.ticketDialogVisible = true;
     });
   };
@@ -161,7 +131,6 @@ export class TicketCreateFormComponent extends BaseLoading {
 
     this.router.navigate([APP_ROUTES.TICKET.TRACK], {
       queryParams: {
-        phone: this.trackPhone(),
         trackingCode: trackCode,
       },
     });

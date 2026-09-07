@@ -29,7 +29,7 @@ interface ChatGroupedByDate {
   date: string;
   messages: {
     id: string;
-    senderId: number;
+    senderId?: number;
     message: string;
     time: string;
     attachments?: string[];
@@ -64,7 +64,6 @@ export class TicketChatMessageFormComponent extends BaseLoading {
   readonly captchaGuardVisible = signal(false);
   readonly ticket = input<Ticket | null>(null);
   readonly sender = input<'user' | 'admin'>('user');
-  readonly userId = input<number>(0);
   readonly captchaAction = () => this.sendMessage();
 
   readonly chatForm = this.fb.nonNullable.group({
@@ -133,8 +132,8 @@ export class TicketChatMessageFormComponent extends BaseLoading {
   }
 
   /** Check if message belongs to current sender */
-  isSender(senderId: number): boolean {
-    if (!this.ticket()) return false;
+  isSender(senderId?: number): boolean {
+    if (!this.ticket() || senderId === undefined) return false;
     return this.sender() === 'user'
       ? this.ticket()!.userId === senderId
       : this.ticket()!.userId !== senderId;
@@ -172,7 +171,6 @@ export class TicketChatMessageFormComponent extends BaseLoading {
 
     const newChat: CreateChatMessageRequest = {
       message: msg,
-      senderId: this.userId(),
       attachments: this.ctrl<string[]>('attachments').value ?? [],
     };
 

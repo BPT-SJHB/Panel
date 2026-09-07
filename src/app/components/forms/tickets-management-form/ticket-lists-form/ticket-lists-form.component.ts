@@ -155,7 +155,9 @@ export class TicketListsFormComponent implements OnInit {
         const baseIndex = (page - 1) * pageSize;
 
         // Fetch users info
-        const userIds = response.data.items.map((item) => item.userId);
+        const userIds = response.data.items
+          .map((item) => item.userId)
+          .filter((id): id is number => typeof id === 'number');
         await this.updateUsersMap(userIds);
 
         response.data.items.forEach((item, index) => {
@@ -164,7 +166,10 @@ export class TicketListsFormComponent implements OnInit {
 
           tickets[targetIndex] = {
             ...item,
-            username: this.users().get(item.userId) ?? '',
+            username:
+              item.userId !== undefined
+                ? this.users().get(item.userId) ?? ''
+                : item.phoneNumber ?? '',
             department: this.findDepartment(item.departmentId),
             ticketType: this.findTicketType(item.ticketTypeId),
             ticketStatus: this.findTicketStatuses(item.ticketStatusId),

@@ -1,16 +1,5 @@
 <!-- فرم پیگیری تیکت -->
 <div class="grid grid-cols-12 gap-4 px-5 py-5">
-  <!-- شماره موبایل -->
-  <app-text-input
-    [addonWidth]="addonWidth"
-    type="number"
-    [control]="ctrl('phone')"
-    label="شماره موبایل"
-    placeholder="شماره موبایل را وارد کنید"
-    validationField="mobile"
-    class="col-span-12 md:col-span-6 lg:col-span-4"
-  ></app-text-input>
-
   <!-- کد پیگیری -->
   <app-text-input
     [addonWidth]="addonWidth"
@@ -53,11 +42,6 @@
         </div>
       </div>
       <div class="space-y-5 text-base">
-        <div class="grid grid-cols-2">
-          <span class="block font-medium mb-1">شماره موبایل</span>
-          <span class="block">{{ currentTicket()?.username }}</span>
-        </div>
-
         <div class="grid grid-cols-2">
           <span class="block font-medium mb-1">عنوان</span>
           <span class="block">{{ currentTicket()?.title }}</span>
@@ -105,10 +89,7 @@
   >
     @if (chatDialogVisible && currentTicket()) {
       <div class="border-t">
-        <app-ticket-chat-message-form
-          [ticket]="currentTicket()"
-          [userId]="currentTicket()?.userId ?? 0"
-        />
+        <app-ticket-chat-message-form [ticket]="currentTicket()" />
       </div>
     }
   </p-dialog>
