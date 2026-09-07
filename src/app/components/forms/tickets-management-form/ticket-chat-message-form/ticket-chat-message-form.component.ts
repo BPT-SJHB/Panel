@@ -77,8 +77,7 @@ export class TicketChatMessageFormComponent extends BaseLoading {
   });
 
   readonly groupChats = signal<ChatGroupedByDate[]>([]);
-
-  uploadFileVisible = false;
+  readonly uploadFileVisible = signal(false);
 
   constructor() {
     super();
@@ -175,7 +174,7 @@ export class TicketChatMessageFormComponent extends BaseLoading {
     };
 
     this.chatForm.reset();
-    this.uploadFileVisible = false;
+    this.uploadFileVisible.set(false);
     await this.withLoading(async () => {
       const res = await this.ticketService.CreateChat(
         this.ticket()?.id ?? '',

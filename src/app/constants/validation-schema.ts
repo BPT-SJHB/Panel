@@ -77,9 +77,7 @@ export const ValidationSchema = {
   },
   mobileOrEmpty: {
     name: 'شماره موبایل',
-    validators: [
-      Validators.pattern(/^09\d{9}$/),
-    ],
+    validators: [Validators.pattern(/^09\d{9}$/)],
   },
   nationalId: {
     name: 'کد ملی',
@@ -308,6 +306,7 @@ export const ValidationSchema = {
   ticketTrackCode: {
     name: 'شماره پیگیری',
     validators: [
+      Validators.required,
       exactLengthValidator(8),
       Validators.pattern(/^[A-Za-z0-9]{8}$/),
     ],

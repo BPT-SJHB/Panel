@@ -19,7 +19,7 @@
       severity="info"
       [disabled]="searchForm.invalid || loading()"
     >
-      <i class="pi pi-search mr-2"></i>
+      <i class="pi pi-search ms-2"></i>
       پیگیری تیکت
     </app-button>
   </div>
@@ -72,7 +72,7 @@
           severity="secondary"
           (onClick)="showChat()"
         >
-          <i class="pi pi-comments mr-2"></i>
+          <i class="pi pi-comments ms-2"></i>
           نمایش گفتگو
         </app-button>
       </div>
@@ -83,11 +83,12 @@
     id="chat-message-dialog"
     header="گفتگو"
     [modal]="true"
-    [(visible)]="chatDialogVisible"
+    [visible]="chatDialogVisible()"
+    (visibleChange)="chatDialogVisible.set($event)"
     [style]="{ width: '40rem', maxWidth: '100%' }"
     [maskStyle]="{ padding: '1rem' }"
   >
-    @if (chatDialogVisible && currentTicket()) {
+    @if (chatDialogVisible() && currentTicket()) {
       <div class="border-t">
         <app-ticket-chat-message-form [ticket]="currentTicket()" />
       </div>

@@ -1,7 +1,7 @@
 import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { LoadingService } from 'app/services/loading-service/loading-service.service';
 import { ToastService } from 'app/services/toast-service/toast.service';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Component({ template: '' })
 export abstract class BaseLoading implements OnDestroy, OnInit {
@@ -12,13 +12,7 @@ export abstract class BaseLoading implements OnDestroy, OnInit {
   private activeRequests = 0; // track concurrent promises
   loading = signal(false);
 
-  ngOnInit(): void {
-    this.loadingService.loading$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((_) => {
-        // this.loading.set(value);
-      });
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.destroy$.next();

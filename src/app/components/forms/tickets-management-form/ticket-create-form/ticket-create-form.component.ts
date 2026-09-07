@@ -1,4 +1,4 @@
-import { Component, effect, inject, input, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Dialog } from 'primeng/dialog';
@@ -13,7 +13,6 @@ import { copyTextAndToast } from 'app/utils/copy-text';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { APP_ROUTES } from 'app/constants/routes';
 import { AppTitles } from 'app/constants/Titles';
-import { mockTickets } from 'app/services/ticket-service-management/mock/ticket.mock';
 import { TicketGuardCaptchaFormComponent } from '../ticket-guard-captcha-form/ticket-guard-captcha-form.component';
 import { TicketErrorCodes } from 'app/constants/error-messages';
 import { TicketFilesUploadComponent } from '../ticket-files-upload/ticket-files-upload.component';
@@ -45,14 +44,11 @@ export class TicketCreateFormComponent extends BaseLoading {
   private readonly ticketService = inject(TicketServiceManagementService);
 
   // Inputs and signals
-  readonly phone = input<string>('');
   readonly ticketTypes = signal<SelectOption[]>([]);
   readonly departments = signal<SelectOption[]>([]);
-  readonly createdTrackCodeTicket = signal<string | null>(
-    mockTickets[0].trackCode
-  );
+  readonly createdTrackCodeTicket = signal<string | null>(null);
   readonly addonWidth = '6rem';
-  ticketDialogVisible = false;
+  readonly ticketDialogVisible = signal<boolean>(false);
   readonly activeCaptcha = signal<boolean>(false);
   appTitle = AppTitles;
 
@@ -120,7 +116,7 @@ export class TicketCreateFormComponent extends BaseLoading {
       this.activeCaptcha.set(false);
       this.createdTrackCodeTicket.set(result.data.trackCode);
       this.ticketForm.reset();
-      this.ticketDialogVisible = true;
+      this.ticketDialogVisible.set(true);
     });
   };
 

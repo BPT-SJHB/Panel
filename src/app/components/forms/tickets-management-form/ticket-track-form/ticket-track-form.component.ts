@@ -63,7 +63,7 @@ export class TicketTrackFormComponent
     ),
   });
 
-  chatDialogVisible = false;
+  readonly chatDialogVisible = signal(false);
   constructor() {
     effect(() => {
       this.ctrl('trackCode').setValue(this.trackCode());
@@ -146,6 +146,6 @@ export class TicketTrackFormComponent
   }
 
   showChat() {
-    this.chatDialogVisible = true;
+    this.chatDialogVisible.set(true);
   }
 }
