@@ -16,8 +16,8 @@
           <div
             class="flex flex-col"
             [ngClass]="{
-              'items-end': !isSender(chat.senderId),
-              'items-start': isSender(chat.senderId),
+              'items-end': !isSender(chat.senderId, chat.senderType),
+              'items-start': isSender(chat.senderId, chat.senderType),
             }"
           >
             <!-- Bubble + Time Wrapper -->
@@ -26,8 +26,8 @@
               <div
                 class="relative px-4 py-3 rounded-2xl border border-primary shadow-sm break-words flex flex-col gap-3"
                 [ngClass]="{
-                  'bg-primary-contrast': !isSender(chat.senderId),
-                  'bg-highlight-emphasis': isSender(chat.senderId),
+                  'bg-primary-contrast': !isSender(chat.senderId, chat.senderType),
+                  'bg-highlight-emphasis': isSender(chat.senderId, chat.senderType),
                 }"
               >
                 <!-- Attachments Section -->
@@ -65,8 +65,8 @@
               <span
                 class="text-xs opacity-60 mt-1"
                 [ngClass]="{
-                  'text-end': isSender(chat.senderId),
-                  'text-start': !isSender(chat.senderId),
+                  'text-end': isSender(chat.senderId, chat.senderType),
+                  'text-start': !isSender(chat.senderId, chat.senderType),
                 }"
               >
                 {{ chat.time }}

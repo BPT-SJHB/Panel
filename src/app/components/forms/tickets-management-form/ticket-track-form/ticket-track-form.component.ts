@@ -100,9 +100,9 @@ export class TicketTrackFormComponent
       }
       this.currentTicket.set({
         ...response.data,
-        ticketType: this.findTicketType(response.data.ticketTypeId),
-        department: this.findDepartment(response.data.departmentId),
-        ticketStatus: this.findTicketStatues(response.data.ticketStatusId),
+        ticketType: this.findTicketType(response.data.ticketTypeId ?? -1),
+        department: this.findDepartment(response.data.departmentId ?? -1),
+        ticketStatus: this.findTicketStatues(response.data.ticketStatusId ?? -1),
       });
       this.activeCaptcha.set(false);
     });

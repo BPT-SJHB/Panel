@@ -30,6 +30,7 @@ interface ChatGroupedByDate {
   messages: {
     id: string;
     senderId?: number;
+    senderType?: string;
     message: string;
     time: string;
     attachments?: string[];
@@ -97,20 +98,22 @@ export class TicketChatMessageFormComponent extends BaseLoading {
   private groupChatsByDate(chats: ChatMessage[]): ChatGroupedByDate[] {
     const sortedChats = [...chats].sort(
       (a, b) =>
-        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        new Date(a.createdAt ?? '').getTime() -
+        new Date(b.createdAt ?? '').getTime()
     );
 
     const grouped: Record<string, ChatGroupedByDate> = {};
 
     sortedChats.forEach((chat) => {
-      const { date, time } = this.formatJalaliDate(chat.createdAt);
+      const { date, time } = this.formatJalaliDate(chat.createdAt ?? '');
 
       if (!grouped[date]) grouped[date] = { date, messages: [] };
 
       grouped[date].messages.push({
-        id: chat.id,
+        id: chat.id ?? '',
         senderId: chat.senderId,
-        message: chat.message,
+        senderType: chat.senderType,
+        message: chat.message ?? '',
         time,
         attachments: chat.attachments,
       });
@@ -131,11 +134,23 @@ export class TicketChatMessageFormComponent extends BaseLoading {
   }
 
   /** Check if message belongs to current sender */
-  isSender(senderId?: number): boolean {
-    if (!this.ticket() || senderId === undefined) return false;
-    return this.sender() === 'user'
-      ? this.ticket()!.userId === senderId
-      : this.ticket()!.userId !== senderId;
+  isSender(senderId?: number, senderType?: string): boolean {
+    const ticket = this.ticket();
+    if (!ticket || senderId === undefined) return false;
+
+    const isGuestTicket = ticket.userId === 0;
+
+    // 1. Client / Guest view
+    if (this.sender() === 'user') {
+      return isGuestTicket
+        ? senderId === 0 || senderType === 'user'
+        : senderId === ticket.userId;
+    }
+
+    // 2. Admin / Staff view
+    return isGuestTicket
+      ? senderId !== 0 || senderType === 'agent'
+      : senderId !== ticket.userId;
   }
 
   /** Auto resize textarea up to 5 rows */
@@ -158,7 +173,7 @@ export class TicketChatMessageFormComponent extends BaseLoading {
 
   /** Append new chat to grouped list */
   private addChatMessage(newMessage: ChatMessage): void {
-    this.ticket()?.chat.push(newMessage);
+    this.ticket()?.chat?.push(newMessage);
     this.groupChats.set(this.groupChatsByDate(this.ticket()?.chat ?? []));
     this.scrollToBottom();
   }

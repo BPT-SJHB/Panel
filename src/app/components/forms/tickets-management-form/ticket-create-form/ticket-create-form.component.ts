@@ -57,7 +57,7 @@ export class TicketCreateFormComponent extends BaseLoading {
     ticketTypeId: this.fb.control<number | null>(null, ValidationSchema.id),
     departmentId: this.fb.control<number | null>(null, ValidationSchema.id),
     title: this.fb.control<string>('', ValidationSchema.title),
-    body: this.fb.control<string>('', ValidationSchema.description),
+    description: this.fb.control<string>('', ValidationSchema.description),
     attachment: this.fb.control<string[]>([]),
   });
 
@@ -80,7 +80,10 @@ export class TicketCreateFormComponent extends BaseLoading {
     const response = await this.ticketService.GetTicketTypes();
     if (!checkAndToastError(response, this.toast)) return;
     this.ticketTypes.set(
-      response.data.map((tt) => ({ value: tt.id, label: tt.title }))
+      response.data.map((tt) => ({
+        value: tt.id ?? 0,
+        label: tt.title ?? '',
+      }))
     );
   }
 
@@ -88,7 +91,7 @@ export class TicketCreateFormComponent extends BaseLoading {
     const response = await this.ticketService.GetDepartments();
     if (!checkAndToastError(response, this.toast)) return;
     this.departments.set(
-      response.data.map((d) => ({ value: d.id, label: d.title }))
+      response.data.map((d) => ({ value: d.id ?? 0, label: d.title ?? '' }))
     );
   }
 
@@ -101,7 +104,7 @@ export class TicketCreateFormComponent extends BaseLoading {
         ticketTypeId: this.ctrl<number>('ticketTypeId').value,
         departmentId: this.ctrl<number>('departmentId').value,
         title: this.ctrl<string>('title').value,
-        body: this.ctrl<string>('body').value,
+        body: this.ctrl<string>('description').value,
         attachments: this.ctrl<string[]>('attachment').value,
       };
 
@@ -114,7 +117,7 @@ export class TicketCreateFormComponent extends BaseLoading {
       }
 
       this.activeCaptcha.set(false);
-      this.createdTrackCodeTicket.set(result.data.trackCode);
+      this.createdTrackCodeTicket.set(result.data.trackCode ?? null);
       this.ticketForm.reset();
       this.ticketDialogVisible.set(true);
     });

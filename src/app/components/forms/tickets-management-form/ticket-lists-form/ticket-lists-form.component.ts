@@ -91,7 +91,7 @@ export class TicketListsFormComponent implements OnInit {
       type: TableColumnType.BUTTON_ICON,
       buttonSeverity: 'info',
       class: 'py-3 scale-90',
-      onAction: (row: Ticket) => this.showTicketChats(row.id),
+      onAction: (row: Ticket) => this.showTicketChats(row.id ?? ''),
     },
   ];
 
@@ -133,12 +133,12 @@ export class TicketListsFormComponent implements OnInit {
       const baseIndex = (page - 1) * pageSize;
 
       // Fetch users info
-      const userIds = response.data.items
+      const userIds = (response.data.items ?? [])
         .map((item) => item.userId)
         .filter((id): id is number => typeof id === 'number');
       await this.updateUsersMap(userIds);
 
-      response.data.items.forEach((item, index) => {
+      (response.data.items ?? []).forEach((item, index) => {
         const targetIndex = baseIndex + index;
         if (targetIndex >= total) return;
 
@@ -148,11 +148,11 @@ export class TicketListsFormComponent implements OnInit {
             item.userId !== undefined
               ? (this.users().get(item.userId) ?? '')
               : (item.phoneNumber ?? ''),
-          department: this.findDepartment(item.departmentId),
-          ticketType: this.findTicketType(item.ticketTypeId),
-          ticketStatus: this.findTicketStatuses(item.ticketStatusId),
-          createdAt: this.formatJalaliDate(item.createdAt),
-          updatedAt: this.formatJalaliDate(item.updatedAt),
+          department: this.findDepartment(item.departmentId ?? -1),
+          ticketType: this.findTicketType(item.ticketTypeId ?? -1),
+          ticketStatus: this.findTicketStatuses(item.ticketStatusId ?? -1),
+          createdAt: this.formatJalaliDate(item.createdAt ?? ''),
+          updatedAt: this.formatJalaliDate(item.updatedAt ?? ''),
           chatIcon: 'pi pi-comments',
         };
       });
@@ -255,8 +255,8 @@ export class TicketListsFormComponent implements OnInit {
     const response = await this.ticketService.GetTicketTypes();
     if (!response.success || !response.data) return;
     const selection: SelectOption[] = response.data.map((ts) => ({
-      value: ts.id,
-      label: ts.title,
+      value: ts.id ?? 0,
+      label: ts.title ?? '',
     }));
     this.ticketTypes.set([{ label: 'همه', value: -1 }, ...selection]);
   }
@@ -265,8 +265,8 @@ export class TicketListsFormComponent implements OnInit {
     const response = await this.ticketService.GetDepartments();
     if (!response.success || !response.data) return;
     const selection: SelectOption[] = response.data.map((d) => ({
-      value: d.id,
-      label: d.title,
+      value: d.id ?? 0,
+      label: d.title ?? '',
     }));
     this.departments.set([{ label: 'همه', value: -1 }, ...selection]);
   }
@@ -275,8 +275,8 @@ export class TicketListsFormComponent implements OnInit {
     const response = await this.ticketService.GetTicketStatuses();
     if (!response.success || !response.data) return;
     const selection: SelectOption[] = response.data.map((s) => ({
-      value: s.id,
-      label: s.title,
+      value: s.id ?? 0,
+      label: s.title ?? '',
     }));
     this.ticketStatuses.set([{ label: 'همه', value: -1 }, ...selection]);
   }
@@ -294,7 +294,9 @@ export class TicketListsFormComponent implements OnInit {
 
     this.users.update((m) => {
       usersData.forEach((user) => {
-        m.set(user.id, user.username);
+        if (user.id !== undefined && user.username !== undefined) {
+          m.set(user.id, user.username);
+        }
       });
 
       return m;
