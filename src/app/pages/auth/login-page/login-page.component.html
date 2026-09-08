@@ -1,10 +1,21 @@
-<app-full-screen-background />
-
-
-<div class="flex items-center justify-center md:justify-end pt-5 sm:mt-0 md:ml-16 min-h-screen">
- <app-form-card class="w-full p-0 h-full max-w-[500px] min-w-[280px] mx-4 lg:mx-0">
-   <app-login-form />
- </app-form-card>
+<div
+  class="flex flex-row right-0 m-5 rounded-full p-1 px-2 opacity-70 text-black font-bold bg-gray-300 w-fit absolute"
+  (click)="navigateToMainPage()"
+  style="cursor: pointer"
+>
+  صفحه اصلی
 </div>
 
-<app-support-button/>
+<app-full-screen-background />
+
+<div
+  class="flex items-center justify-center md:justify-end pt-5 sm:mt-0 md:ml-16 min-h-screen"
+>
+  <app-form-card
+    class="w-full p-0 h-full max-w-[500px] min-w-[280px] mx-4 lg:mx-0"
+  >
+    <app-login-form />
+  </app-form-card>
+</div>
+
+<app-support-button />

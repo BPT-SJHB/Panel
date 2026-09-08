@@ -605,7 +605,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
         data: { loadType: LoadListType.ADMIN },
       },
       {
-        title: 'ترکنش های بار',
+        title: 'تراکنش های بار',
         component: LoadAccountingFormComponent,
         data: { loadType: LoadListType.ADMIN },
       },

@@ -17,19 +17,8 @@ import {
   TruckNativenessType,
 } from 'app/services/driver-truck-management/model/truck-nativeness-info.model';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
-import { mockTruckDriverInfo } from 'app/services/driver-truck-management/mock/truck-driver-info.model';
-import { mockShortResponse } from 'app/data/mock/short-response.mock';
-import { mockAPIUsernamePassword } from 'app/data/mock/username-password.mock';
-import {
-  mockTruckComposedInfo,
-  mockTruckInfo,
-} from 'app/services/driver-truck-management/mock/truck-info.mock';
-import {
-  mockTruckNativenessInfo,
-  mockTruckNativenessTypesInfo,
-} from 'app/services/driver-truck-management/mock/truck-nativeness-info.mock';
 import { Wallet } from 'app/services/wallet-management/model/wallet.model';
-import { mockWallet } from '../wallet-management/mock/wallet.mock';
+import { SignUpInfo } from './model/sign-up-info.model';
 
 @Injectable({
   providedIn: 'root',
@@ -41,7 +30,8 @@ export class Driver_TruckManagementService {
   //#region Driver
 
   public async GetDriverInfoFromAPI(
-    nationalCode: string
+    nationalCode: string,
+    sessionId: string | undefined = undefined
   ): Promise<ApiResponse<TruckDriverInfo>> {
     //#region Consts
     const outdoorApiUrl =
@@ -53,7 +43,7 @@ export class Driver_TruckManagementService {
       NationalCode: nationalCode,
     };
     const bodyValue = {
-      SessionId: this.userAuth.getSessionId(),
+      SessionId: sessionId ?? this.userAuth.getSessionId(),
       TruckDriverNationalCode: truckDriverInfo.NationalCode,
     };
     //#endregion
@@ -62,13 +52,13 @@ export class Driver_TruckManagementService {
     let response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TruckDriverInfo
-    >(localApiUrl, bodyValue, mockTruckDriverInfo);
+    >(localApiUrl, bodyValue);
 
     if (!response.success) {
       response = await this.apiCommunicator.CommunicateWithAPI_Post<
         typeof bodyValue,
         TruckDriverInfo
-      >(outdoorApiUrl, bodyValue, mockTruckDriverInfo);
+      >(outdoorApiUrl, bodyValue);
     }
 
     return response;
@@ -91,7 +81,7 @@ export class Driver_TruckManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TruckDriverInfo
-    >(apiUrl, bodyValue, mockTruckDriverInfo);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -117,7 +107,7 @@ export class Driver_TruckManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -138,7 +128,7 @@ export class Driver_TruckManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -159,7 +149,7 @@ export class Driver_TruckManagementService {
     const response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       APIUsernamePassword
-    >(apiUrl, bodyValue, mockAPIUsernamePassword);
+    >(apiUrl, bodyValue);
     //#endregion
 
     //#region Return
@@ -190,7 +180,57 @@ export class Driver_TruckManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
+    //#endregion
+  }
+
+  public async RegisterAnyUserByOTPCode(
+    sessionId: string,
+    otpCode: string,
+    nationalId: string,
+    smartCard: string
+  ) {
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.Driver.RegisterAnyUserByOTPCode;
+    const bodyValue = {
+      SessionId: sessionId,
+      OTPCode: otpCode,
+      TruckDriverNationalCode: nationalId,
+      TruckSmartCardNo: smartCard,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue);
+    //#endregion
+  }
+
+  public async VerifyAnyUserByOTPCode(
+    sessionId: string,
+    phone: string,
+    captchaValue: string,
+    driverNationalId: number,
+    smartCardId: number
+  ): Promise<ApiResponse<SignUpInfo>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.Driver.VerifyAnyUserByOTPCode;
+    const bodyValue = {
+      SessionId: sessionId,
+      MobileNumber: phone,
+      Captcha: captchaValue,
+      TruckDriverNationalCode: driverNationalId,
+      TruckSmartCardNo: smartCardId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      SignUpInfo
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -199,7 +239,8 @@ export class Driver_TruckManagementService {
   //#region Truck
 
   public async GetTruckInfoFromAPI(
-    smartCardNo: string
+    smartCardNo: string,
+    sessionId: string | undefined = undefined
   ): Promise<ApiResponse<TruckInfo>> {
     //#region Consts
     const truckInfo: TruckInfo = {
@@ -211,7 +252,7 @@ export class Driver_TruckManagementService {
     const outdoorApiUrl =
       API_ROUTES.TransportationAPI.Truck.GetTruckInfoFromOutdoorAPI;
     const bodyValue = {
-      SessionId: this.userAuth.getSessionId(),
+      SessionId: sessionId ?? this.userAuth.getSessionId(),
       SmartCardNo: truckInfo.SmartCardNo,
     };
     //#endregion
@@ -220,13 +261,13 @@ export class Driver_TruckManagementService {
     let response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TruckInfo
-    >(localApiUrl, bodyValue, mockTruckInfo);
+    >(localApiUrl, bodyValue);
 
     if (!response.success) {
       response = await this.apiCommunicator.CommunicateWithAPI_Post<
         typeof bodyValue,
         TruckInfo
-      >(outdoorApiUrl, bodyValue, mockTruckInfo);
+      >(outdoorApiUrl, bodyValue);
     }
 
     return response;
@@ -246,7 +287,7 @@ export class Driver_TruckManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TruckInfo
-    >(apiUrl, bodyValue, mockTruckInfo);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -266,7 +307,7 @@ export class Driver_TruckManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TruckNativenessInfo
-    >(apiUrl, bodyValue, mockTruckNativenessInfo);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -284,7 +325,7 @@ export class Driver_TruckManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TruckNativenessType[]
-    >(apiUrl, bodyValue, mockTruckNativenessTypesInfo);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -309,7 +350,7 @@ export class Driver_TruckManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TruckNativenessInfo
-    >(apiUrl, bodyValue, mockTruckNativenessInfo);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -334,7 +375,7 @@ export class Driver_TruckManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TruckComposedInfo
-    >(apiUrl, bodyValue, mockTruckComposedInfo);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -358,7 +399,7 @@ export class Driver_TruckManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TruckComposedInfo
-    >(apiUrl, bodyValue, mockTruckComposedInfo);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -390,7 +431,7 @@ export class Driver_TruckManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -406,7 +447,7 @@ export class Driver_TruckManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       Wallet
-    >(apiUrl, bodyValue, mockWallet);
+    >(apiUrl, bodyValue);
     //#endregion
   }
   //#endregion

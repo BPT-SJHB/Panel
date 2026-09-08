@@ -4,14 +4,7 @@ import { APICommunicationManagementService } from '../api-communication-manageme
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { CarouselInfo } from './model/carousel-info.model';
 import { API_ROUTES } from 'app/constants/api';
-import {
-  mockActiveCarouselInfos,
-  mockAllCarouselInfos,
-} from './mock/carousel-info.mock';
-import { mockCarouselPic } from './mock/carousel-pic.mock';
 import { ShortResponse } from 'app/data/model/short-response.model';
-import { mockShortResponse } from 'app/data/mock/short-response.mock';
-import { mockCarouselForViewPic } from './mock/carousel-pic-forView.mock';
 import { CarouselForViewPic } from './model/carousel-pic-forView.model';
 import { CarouselPic } from './model/carousel-pic.model';
 
@@ -36,7 +29,7 @@ export class CarouselManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       CarouselInfo[]
-    >(apiUrl, bodyValue, mockAllCarouselInfos);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -54,7 +47,7 @@ export class CarouselManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       CarouselInfo[]
-    >(apiUrl, bodyValue, mockActiveCarouselInfos);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -74,7 +67,7 @@ export class CarouselManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       CarouselPic
-    >(apiUrl, bodyValue, mockCarouselPic);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -107,7 +100,7 @@ export class CarouselManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -141,7 +134,7 @@ export class CarouselManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -160,7 +153,7 @@ export class CarouselManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -181,7 +174,7 @@ export class CarouselManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -199,7 +192,7 @@ export class CarouselManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       CarouselForViewPic[]
-    >(apiUrl, bodyValue, mockCarouselForViewPic);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 }

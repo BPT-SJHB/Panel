@@ -5,17 +5,11 @@ import { ApiResponse } from 'app/data/model/api-Response.model';
 import { WalletTransaction } from './model/wallet-transaction.model';
 import { API_ROUTES } from 'app/constants/api';
 import { Wallet } from './model/wallet.model';
-import { mockWalletTransactions } from './mock/wallet-transaction.mock';
 import { WalletPaymentHistory } from './model/wallet-payment-history.model';
-import { mockWalletPaymentHistories } from './mock/wallet-payment-history.mock';
-import { mockWallet } from './mock/wallet.mock';
 import { WalletDefaultAmount } from './model/wallet-default-amount.model';
-import { mockWalletDefaultAmounts } from './mock/wallet-default-amount.mock';
 import { WalletPaymentRequest } from './model/wallet-payment-request.model';
-import { mockWalletPaymentRequest } from './mock/wallet-payment-request.mock';
 import { TruckInfo } from '../driver-truck-management/model/truck-info.model';
 import { WalletUserChargingFunction } from './model/wallet-user-charging-function.model';
-import { mockWalletUserChargingFunctions } from './mock/wallet-user-charging-function.mock';
 import { TransportCompany } from '../transport-company-management/model/transport-company-info.model';
 
 @Injectable({
@@ -37,7 +31,7 @@ export class WalletManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       Wallet
-    >(apiUrl, bodyValue, mockWallet);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -59,7 +53,7 @@ export class WalletManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       Wallet
-    >(apiUrl, bodyValue, mockWallet);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -76,7 +70,7 @@ export class WalletManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       Wallet
-    >(apiUrl, bodyValue, mockWallet);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -97,7 +91,7 @@ export class WalletManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       Wallet
-    >(apiUrl, bodyValue, mockWallet);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -113,7 +107,7 @@ export class WalletManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       Wallet
-    >(apiUrl, bodyValue, mockWallet);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -171,7 +165,7 @@ export class WalletManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       WalletUserChargingFunction[]
-    >(apiUrl, bodyValue, mockWalletUserChargingFunctions);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -213,7 +207,7 @@ export class WalletManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       WalletDefaultAmount[]
-    >(apiUrl, bodyValue, mockWalletDefaultAmounts);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -232,7 +226,7 @@ export class WalletManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       WalletPaymentRequest
-    >(apiUrl, bodyValue, mockWalletPaymentRequest);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -255,7 +249,7 @@ export class WalletManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       WalletTransaction[]
-    >(apiUrl, bodyValue, mockWalletTransactions);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -278,7 +272,7 @@ export class WalletManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       WalletPaymentHistory[]
-    >(apiUrl, bodyValue, mockWalletPaymentHistories);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 }

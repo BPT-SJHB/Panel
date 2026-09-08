@@ -15,6 +15,7 @@ export const mockTickets: Ticket[] = [
       {
         id: '41062d8c-a50e-4d5f-a140-e5c0e311ac89',
         senderId: 101,
+        senderType: 'user',
         message: 'من نمی‌توانم وارد حساب کاربری خود شوم.',
         createdAt: new Date('2025-09-20T10:05:00Z').toISOString(),
         updatedAt: new Date('2025-09-20T10:05:00Z').toISOString(),
@@ -23,6 +24,7 @@ export const mockTickets: Ticket[] = [
       {
         id: 'f80cf70b-7816-46a8-b0fd-7ac62315a4a0',
         senderId: 201, // support staff
+        senderType: 'agent',
         message: 'لطفاً بررسی کنید که رمز عبور صحیح است و دوباره تلاش کنید.',
         createdAt: new Date('2025-09-20T10:15:00Z').toISOString(),
         updatedAt: new Date('2025-09-20T10:15:00Z').toISOString(),
@@ -44,6 +46,7 @@ export const mockTickets: Ticket[] = [
       {
         id: '69f7f30e-c713-4c0c-a834-8bed9ffb4374',
         senderId: 102,
+        senderType: 'user',
         message: 'می‌خواستم بدانم محصول X موجود است یا خیر.',
         createdAt: new Date('2025-09-18T08:32:00Z').toISOString(),
         updatedAt: new Date('2025-09-18T08:32:00Z').toISOString(),
@@ -52,6 +55,7 @@ export const mockTickets: Ticket[] = [
       {
         id: '68186ad5-e681-47b1-8e14-3839eaac0d90',
         senderId: 202, // support staff
+        senderType: 'agent',
         message: 'بله، محصول در انبار موجود است و می‌توانید سفارش دهید.',
         createdAt: new Date('2025-09-18T08:45:00Z').toISOString(),
         updatedAt: new Date('2025-09-18T08:45:00Z').toISOString(),
@@ -73,6 +77,7 @@ export const mockTickets: Ticket[] = [
       {
         id: '03bc34cf-b234-4210-838f-15638d478fd6',
         senderId: 103,
+        senderType: 'user',
         message: 'پرداخت فاکتور شماره 123 با خطا مواجه شد.',
         createdAt: new Date('2025-09-19T14:22:00Z').toISOString(),
         updatedAt: new Date('2025-09-19T14:22:00Z').toISOString(),
@@ -81,6 +86,7 @@ export const mockTickets: Ticket[] = [
       {
         id: 'f360edc0-0465-4b86-ab52-8599c0051493',
         senderId: 203, // support staff
+        senderType: 'agent',
         message: 'لطفاً مجدداً تلاش کنید یا روش پرداخت دیگری انتخاب کنید.',
         createdAt: new Date('2025-09-19T14:35:00Z').toISOString(),
         updatedAt: new Date('2025-09-19T14:35:00Z').toISOString(),

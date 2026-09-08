@@ -4,9 +4,7 @@ import { APICommunicationManagementService } from '../api-communication-manageme
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { Product, ProductType } from 'app/data/model/product-type.model';
 import { API_ROUTES } from 'app/constants/api';
-import { mockProductTypes } from 'app/data/mock/product-type.mock';
 import { ShortResponse } from 'app/data/model/short-response.model';
-import { mockShortResponse } from 'app/data/mock/short-response.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +32,7 @@ export class ProductTypesService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ProductType[]
-    >(apiUrl, bodyValue, mockProductTypes);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -60,7 +58,7 @@ export class ProductTypesService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -86,7 +84,7 @@ export class ProductTypesService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 }

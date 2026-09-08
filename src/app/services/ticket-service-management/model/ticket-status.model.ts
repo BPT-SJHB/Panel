@@ -1,5 +1,5 @@
 export interface TicketStatus {
-  id: number;
-  title: string;
-  descriptions: string;
+  id?: number;
+  title?: string;
+  description?: string;
 }

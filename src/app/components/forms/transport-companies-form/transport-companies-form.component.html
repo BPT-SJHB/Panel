@@ -28,9 +28,11 @@
       <app-text-input
         class="flex-1"
         [label]="appTitle.inputs.transportCompanies.transportCompanyName"
+        [placeholder]="appTitle.getPlaceholder('transportCompanyName')"
+        validationField="title"
         [control]="TCTitle"
-        [readOnly]="true"
         [addonWidth]="addonWidth"
+        type="text"
       />
     </app-form-inputs-section>
 
@@ -41,17 +43,29 @@
         [label]="
           appTitle.inputs.transportCompanies.transportCompanyOrganizationId
         "
+        [placeholder]="
+          appTitle.getPlaceholder('transportCompanyOrganizationId')
+        "
+        validationField="id"
         [control]="TCOrganizationCode"
-        [readOnly]="true"
         [addonWidth]="addonWidth"
+        type="number"
       />
 
       <!-- شهر استقرار -->
-      <app-text-input
+      <!-- <app-text-input -->
+      <!--   class="w-full" -->
+      <!--   [label]="appTitle.inputs.transportCompanies.transportCompanyLocation" -->
+      <!--   [placeholder]="appTitle.getPlaceholder('transportCompanyLocation')" -->
+      <!--   validationField="sourceCity" -->
+      <!--   [control]="TCCityTitle" -->
+      <!--   [addonWidth]="addonWidth" -->
+      <!--   type="text" -->
+      <!-- /> -->
+
+      <app-search-auto-complete-factory
         class="w-full"
-        [label]="appTitle.inputs.transportCompanies.transportCompanyLocation"
-        [control]="TCCityTitle"
-        [readOnly]="true"
+        [config]="autoCompletions.sourceCity"
         [addonWidth]="addonWidth"
       />
     </app-form-inputs-section>
@@ -120,7 +134,7 @@
   <!-- دکمه‌های عملیات -->
   <app-form-buttons-section>
     <app-button
-      (click)="editTransportCompony()"
+      (click)="save_editTransportCompony()"
       [disabled]="transportComponyForm.invalid || loading()"
       [label]="appTitle.buttons.saveAndEdit"
       class="w-full md:w-fit"
@@ -144,14 +158,66 @@
       class="w-full md:w-fit"
       styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
     ></app-button>
+
+    <app-button
+      (click)="reloadForm()"
+      severity="info"
+      [label]="appTitle.buttons.add.addUser"
+      class="w-full md:w-fit"
+      styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
+    ></app-button>
   </app-form-buttons-section>
 </form>
 
-<!-- دیالوگ تایید -->
-<p-confirmDialog
-  position="top"
-  acceptLabel="تایید"
-  rejectLabel="انصراف"
-  acceptButtonStyleClass="px-8 app-button-danger py-2 text-sm"
-  rejectButtonStyleClass="px-6 app-button-secondary py-2 text-sm"
-/>
+<div class="w-full mt-10">
+  <span class="text-xl font-bold w-full">بارگذاری فایل</span>
+  <p-fileUpload
+    #fu
+    class="w-full text-nowrap"
+    [pt]="{
+      root: {
+        class: 'my-3 p-0',
+      },
+      host: {
+        class: 'm-1',
+      },
+      header: {
+        class:
+          'flex flex-col md:flex-row justify-center items-stretch md:items-center',
+      },
+      pcChooseButton: {
+        root: { class: 'text-sm lg:text-base w-full' },
+      },
+      pcUploadButton: {
+        root: { class: 'text-sm lg:text-base w-full' },
+      },
+      pcCancelButton: {
+        root: { class: 'text-sm lg:text-base w-full' },
+      },
+      content: {
+        class: 'hidden',
+      },
+    }"
+    chooseLabel="انتخاب فایل اکسل"
+    chooseStyleClass="text-sm"
+    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+    chooseIcon="pi pi-upload"
+    label="بارگزاری فایل اکسل"
+    severity="warn"
+    cancelLabel="لغو"
+    [maxFileSize]="1024 * 1024"
+    uploadLabel="بارگزاری فایل"
+    [auto]="false"
+    [customUpload]="true"
+    (uploadHandler)="onFileExcelUpload($event)"
+  />
+
+  <!-- دیالوگ تایید -->
+  <p-confirmDialog
+    position="top"
+    acceptLabel="تایید"
+    rejectLabel="انصراف"
+    acceptButtonStyleClass="px-8 app-button-danger py-2 text-sm"
+    rejectButtonStyleClass="px-6 app-button-secondary py-2 text-sm"
+  />
+</div>

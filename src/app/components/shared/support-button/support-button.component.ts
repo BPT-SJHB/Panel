@@ -10,6 +10,7 @@ import { AppTitles } from 'app/constants/Titles';
 import { TicketGuardCaptchaFormComponent } from 'app/components/forms/tickets-management-form/ticket-guard-captcha-form/ticket-guard-captcha-form.component';
 import { Router } from '@angular/router';
 import { APP_ROUTES } from 'app/constants/routes';
+import { TicketServiceManagementService } from 'app/services/ticket-service-management/ticket-service-management.service';
 
 @Component({
   selector: 'app-support-button',
@@ -26,10 +27,14 @@ import { APP_ROUTES } from 'app/constants/routes';
 })
 export class SupportButtonComponent {
   readonly AppTitle = AppTitles;
+
   private toast = inject(ToastService);
   private readonly router = inject(Router);
+  private ticketService = inject(TicketServiceManagementService);
+
   readonly activeCaptcha = signal<boolean>(false);
   readonly captchaAction = signal<() => void>(() => undefined);
+
   readonly APP_ROUTS = APP_ROUTES;
   dialog = false;
   visible = false;
@@ -66,14 +71,33 @@ export class SupportButtonComponent {
     copyTextAndToast(text, this.toast);
   }
 
-  redirectUrl(route: string) {
+  async redirectUrl(route: string) {
     this.captchaAction.set(() => {
-      const url = this.router.serializeUrl(this.router.createUrlTree([route]));
-      window.open(url, '_blank');
-      this.activeCaptcha.set(false);
-      this.dialog = false;
-      this.visible = false;
+      this.navigateToRoute(route);
     });
-    this.activeCaptcha.set(true);
+
+    let isCredentialValid = false;
+    const response = await this.ticketService.CheckToken();
+    if (
+      response.success &&
+      response.data?.valid &&
+      response.data.phoneVerified
+    ) {
+      isCredentialValid = true;
+    }
+
+    if (isCredentialValid) {
+      this.navigateToRoute(route);
+    } else {
+      this.activeCaptcha.set(true);
+    }
+  }
+
+  private navigateToRoute(route: string) {
+    const url = this.router.serializeUrl(this.router.createUrlTree([route]));
+    window.open(url, '_blank');
+    this.activeCaptcha.set(false);
+    this.dialog = false;
+    this.visible = false;
   }
 }

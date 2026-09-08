@@ -72,16 +72,12 @@ export const ValidationSchema = {
     validators: [
       Validators.required,
       exactLengthValidator(11),
-      Validators.pattern(
-        /^09(1[0-9]|2[0-9]|3[0-9]|9[0-9])-?[0-9]{3}-?[0-9]{4}$/
-      ),
+      Validators.pattern(/^09\d{9}$/),
     ],
   },
   mobileOrEmpty: {
     name: 'شماره موبایل',
-    validators: [
-      Validators.pattern(/09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}/),
-    ],
+    validators: [Validators.pattern(/^09\d{9}$/)],
   },
   nationalId: {
     name: 'کد ملی',
@@ -310,6 +306,7 @@ export const ValidationSchema = {
   ticketTrackCode: {
     name: 'شماره پیگیری',
     validators: [
+      Validators.required,
       exactLengthValidator(8),
       Validators.pattern(/^[A-Za-z0-9]{8}$/),
     ],

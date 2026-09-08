@@ -4,18 +4,13 @@ import { APICommunicationManagementService } from '../api-communication-manageme
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { AnnouncementGroup } from 'app/services/announcement-group-subgroup-management/model/announcement-group.model';
 import { API_ROUTES } from 'app/constants/api';
-import { mockAnnouncementGroups } from 'app/services/announcement-group-subgroup-management/mock/announcement-group.mock';
 import { ShortResponse } from 'app/data/model/short-response.model';
-import { mockShortResponse } from 'app/data/mock/short-response.mock';
 import { AnnouncementSubGroup } from 'app/services/announcement-group-subgroup-management/model/announcement-subgroup.model';
-import { mockAnnouncementSubGroups } from 'app/services/announcement-group-subgroup-management/mock/announcement-subgroup.mock';
 import { RelationOfAnnouncementGroupAndSubGroup } from './model/relation-of-announcement-group-subgroup.model';
-import { mockRelationOfAnnouncementGroupAndSubGroups } from './mock/relation-of-announcement-group-subgroup.mock';
 import {
   RegisterAndDeleteRelationOfAnnouncementSubGroupAndProvinceInfo,
   RelationOfAnnouncementSubGroupAndProvince,
 } from './model/relation-of-announcement-subgroup-province.model';
-import { mockRelationOfAnnouncementSubGroupAndProvinces } from './mock/relation-of-announcement-subgroup-province.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -46,7 +41,7 @@ export class AnnouncementGroupSubgroupManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       AnnouncementGroup[]
-    >(apiUrl, bodyValue, mockAnnouncementGroups);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -71,7 +66,7 @@ export class AnnouncementGroupSubgroupManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -98,7 +93,7 @@ export class AnnouncementGroupSubgroupManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -121,7 +116,7 @@ export class AnnouncementGroupSubgroupManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -150,7 +145,7 @@ export class AnnouncementGroupSubgroupManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       AnnouncementSubGroup[]
-    >(apiUrl, bodyValue, mockAnnouncementSubGroups);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -175,7 +170,7 @@ export class AnnouncementGroupSubgroupManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -203,7 +198,7 @@ export class AnnouncementGroupSubgroupManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -227,7 +222,7 @@ export class AnnouncementGroupSubgroupManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -257,7 +252,7 @@ export class AnnouncementGroupSubgroupManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       RelationOfAnnouncementGroupAndSubGroup[]
-    >(apiUrl, bodyValue, mockRelationOfAnnouncementGroupAndSubGroups);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -287,7 +282,7 @@ export class AnnouncementGroupSubgroupManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -317,7 +312,7 @@ export class AnnouncementGroupSubgroupManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
   //#endregion
@@ -340,7 +335,7 @@ export class AnnouncementGroupSubgroupManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       RelationOfAnnouncementSubGroupAndProvince[]
-    >(apiUrl, bodyValue, mockRelationOfAnnouncementSubGroupAndProvinces);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -362,7 +357,7 @@ export class AnnouncementGroupSubgroupManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -384,7 +379,7 @@ export class AnnouncementGroupSubgroupManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 

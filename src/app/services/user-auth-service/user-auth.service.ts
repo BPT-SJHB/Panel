@@ -5,10 +5,8 @@ import { ApiResponse } from 'app/data/model/api-Response.model';
 import { UserSession } from 'app/data/model/user-session.model';
 import { CookieOptions, CookieService } from 'ngx-cookie-service';
 import { environment } from 'environments/environment';
-import { mockUserSession } from 'app/data/mock/user-session.mock';
 import { SoftwareUserInfo } from 'app/services/user-management/model/software-user-info.model';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
-import { mockSoftwareUserInfo } from '../user-management/mock/software-user-info.mock';
 import { Router } from '@angular/router';
 import { APP_ROUTES } from 'app/constants/routes';
 
@@ -26,17 +24,6 @@ export class UserAuthService {
   public async login(
     loginFormData: LoginFormData
   ): Promise<ApiResponse<UserSession>> {
-    //#region Mock Handling
-    if (!environment.production && environment.disableApi) {
-      await this.setSessionId(mockUserSession.sessionId, true);
-      return {
-        success: true,
-        data: mockUserSession,
-      };
-    }
-    //#endregion
-
-    //#region Const
     const { sessionId, username, password, captcha, rememberMe } =
       loginFormData;
     const bodyValue = {
@@ -45,13 +32,11 @@ export class UserAuthService {
       Userpassword: password,
       Captcha: captcha,
     };
-    //#endregion
 
-    //#region Request + Return
     const result = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       { SessionId: string }
-    >(this.apiUrl, bodyValue, { SessionId: '' });
+    >(this.apiUrl, bodyValue);
 
     if (result.data?.SessionId)
       await this.setSessionId(result.data.SessionId, rememberMe);
@@ -63,18 +48,15 @@ export class UserAuthService {
       },
       error: result.error,
     };
-    //#endregion
   }
 
   public async logout(): Promise<void> {
     this.cookieService.delete(this.sessionKey, '/');
     try {
       await this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (err) {
-      // console.error('Router navigate failed', err);
+    } catch {
+      // ignore
     }
-    // سمت سرور اضافه شود در صورت نیاز
   }
 
   public async isLoggedIn(): Promise<ApiResponse<{ ISSessionLive: boolean }>> {
@@ -83,21 +65,13 @@ export class UserAuthService {
       return { success: true, data: { ISSessionLive: false } };
     }
 
-    //#region Mock Handling
-    if (!environment.production && environment.disableApi) {
-      return { success: true, data: { ISSessionLive: true } };
-    }
-    //#endregion
-
     const apiUrl = API_ROUTES.SoftwareUserAPI.SessionChecker;
-
     const bodyValue = { sessionId: this.getSessionId() };
 
-    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       { ISSessionLive: boolean }
-    >(apiUrl, bodyValue, { ISSessionLive: true });
-    return response;
+    >(apiUrl, bodyValue);
   }
 
   public getSessionId(): string | null {
@@ -136,6 +110,6 @@ export class UserAuthService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       SoftwareUserInfo
-    >(apiUrl, bodyValue, mockSoftwareUserInfo);
+    >(apiUrl, bodyValue);
   }
 }

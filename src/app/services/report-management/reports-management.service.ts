@@ -4,14 +4,10 @@ import { APICommunicationManagementService } from '../api-communication-manageme
 import { LoadPermission } from './model/load-permissions/load-permission.model';
 import { API_ROUTES } from 'app/constants/api';
 import { LoadInfo } from '../load-management/model/load-info.model';
-import { mockLoadPermissions } from './mock/load-permissions/load-permission.mock';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { LoadPermissionForDriver } from './model/load-permissions/load-permission-for-driver.model';
-import { mockLoadPermissionsForDriver } from './mock/load-permissions/load-permission-for-driver.mock';
 import { LoadAccounting } from './model/load-accounting/load-accounting.model';
-import { mockLoadAccounting } from './mock/load-accounting/load-accounting.mock';
 import { LoadPermissionForCompany } from './model/load-permissions/load-permission-for-company.model';
-import { mockLoadPermissionsForCompany } from './mock/load-permissions/load-permission-for-company.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -38,7 +34,7 @@ export class ReportsManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       LoadAccounting[]
-    >(apiUrl, bodyValue, mockLoadAccounting);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -60,7 +56,7 @@ export class ReportsManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       LoadPermission[]
-    >(apiUrl, bodyValue, mockLoadPermissions);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -79,7 +75,7 @@ export class ReportsManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       LoadPermissionForCompany[]
-    >(apiUrl, bodyValue, mockLoadPermissionsForCompany);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -100,7 +96,7 @@ export class ReportsManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       LoadPermissionForDriver[]
-    >(apiUrl, bodyValue, mockLoadPermissionsForDriver);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 }

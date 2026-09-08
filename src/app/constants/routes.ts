@@ -3,6 +3,7 @@ export const APP_ROUTES = {
   AUTH: {
     LOGIN: 'auth/login',
     FORGET_PASSWORD: 'auth/forget-password',
+    SIGN_UP: 'auth/sign-up',
   },
   DASHBOARD: {
     HOME: 'dashboard',

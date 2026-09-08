@@ -26,15 +26,22 @@ export class HttpErrorService {
     let message = ERROR_MESSAGES[code] ?? 'خطای نامشخصی رخ داده است.';
     let details = error.message;
 
-    if (this.isMainPanelError(error)) {
+    if (this.isTicketError(error)) {
+      ({ code, message, details } = this.handleTicketError(error));
+    } else if (this.isMainPanelError(error)) {
       ({ code, message, details } = await this.handleMainPanelError(
         error,
         redirectToLoginOnUnauthorized
       ));
-    } else if (this.isTicketError(error)) {
-      ({ code, message, details } = this.handleTicketError(error));
     } else if (typeof error.error === 'string') {
       message = error.error;
+    } else if (
+      typeof error.error === 'object' &&
+      error.error !== null &&
+      'message' in error.error &&
+      typeof (error.error as { message?: unknown }).message === 'string'
+    ) {
+      message = (error.error as { message: string }).message;
     }
 
     return { success: false, error: { code, message, details } };
@@ -110,7 +117,6 @@ export class HttpErrorService {
 
   private isMainPanelError(error: HttpErrorResponse): boolean {
     return (
-      error.status === ErrorCodes.InternalServerError &&
       typeof error.error === 'object' &&
       error.error !== null &&
       ('ErrorMessage' in error.error || 'ErrorMessageCode' in error.error)

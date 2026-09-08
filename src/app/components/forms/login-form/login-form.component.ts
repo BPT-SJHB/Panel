@@ -42,6 +42,7 @@ export class LoginFormComponent extends BaseLoading {
 
   @ViewChild('captchaRef') captchaComponent!: CaptchaInputComponent;
   hrefForgetPassword: string = APP_ROUTES.AUTH.FORGET_PASSWORD;
+  hrefSignUp: string = APP_ROUTES.AUTH.SIGN_UP;
   loginTitle: string = AppTitles.appBrokenTitle;
   loginForm = this.fb.group({
     username: ['', ValidationSchema.username],

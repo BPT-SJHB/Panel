@@ -59,8 +59,8 @@ interface LoadTransportCompaniesTable {
   Reminder: number;
   Tariff: string;
   LoadStatusName: string;
-  AnnounceDate: string;
-  AnnounceTime: string;
+  LoadIssueDate: string;
+  LoadIssueTime: string;
   AnnouncementTitle: string;
   AnnouncementSGTitle: string;
   Recipient: string;
@@ -163,11 +163,11 @@ export class LoadsListFormComponent
     { header: this.appTitle.tables.loads.loadStatus, field: 'LoadStatusName' },
     {
       header: this.appTitle.tables.loads.loadAnnouncementDate,
-      field: 'AnnounceDate',
+      field: 'LoadIssueDate',
     },
     {
       header: this.appTitle.tables.loads.loadAnnouncementTime,
-      field: 'AnnounceTime',
+      field: 'LoadIssueTime',
     },
     {
       header: this.appTitle.tables.loads.announcementGroup,
@@ -248,7 +248,7 @@ export class LoadsListFormComponent
       if (oninit) {
         hasError = false;
       } else {
-        hasError = checkAndToastError(response, this.toast);
+        hasError = !checkAndToastError(response, this.toast);
       }
 
       if (hasError) {
@@ -263,25 +263,6 @@ export class LoadsListFormComponent
       );
     });
   }
-
-  // async filterListLoad(oninit = false): Promise<void> {
-  //   if (this.loading() || this.isFilterInvalid()) return;
-  //
-  //   await this.withLoading(async () => {
-  //     const response = await this.getListLoadInfo();
-  //
-  //     if (!checkAndToastError(response, this.toast) && oninit === false) {
-  //       this.rows.set([]);
-  //       return;
-  //     }
-  //
-  //     this.rows.set(
-  //       response.data!.flatMap((l) =>
-  //         l.myLoads.map((c) => ({ ProvinceName: l.ProvinceName, ...c }))
-  //       )
-  //     );
-  //   });
-  // }
 
   rowSelect(row: LoadTransportCompaniesTable): void {
     this.sharedSignal.set(row as LoadInfo);

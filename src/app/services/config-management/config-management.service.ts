@@ -6,16 +6,12 @@ import {
   LoadAnnouncementConfig,
 } from './model/load-announcement-config.model';
 import { API_ROUTES } from 'app/constants/api';
-import { mockLoadAnnouncementConfigs } from './mock/load-announcement-config.mock';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { ShortResponse } from 'app/data/model/short-response.model';
-import { mockShortResponse } from 'app/data/mock/short-response.mock';
 import {
   EditInfoOfGeneralConfig,
   GeneralConfig,
 } from './model/general-config.model';
-import { mockGeneralConfigs } from './mock/general-config.mock';
-import { mockDevicesInfo } from './mock/device-info.mock';
 import {
   DeleteInfoOfDevice,
   DeviceInfo,
@@ -26,23 +22,19 @@ import {
   DeviceConfig,
   EditInfoOfDeviceConfig,
 } from './model/device-config.model';
-import { mockDeviceConfig } from './mock/device-config.mock';
 import {
   DeleteLoadViewConditionInfo,
   EditLoadViewConditionInfo,
   LoadViewConditionInfo,
   RegisterLoadViewConditionInfo,
 } from './model/load-view-condition-info.model';
-import { mockLoadViewConditionsInfo } from './mock/load-view-condition-info.mock';
 import { RequesterInfo } from './model/requester-info.model';
-import { mockRequestersInfo } from './mock/requester-info.mock';
 import {
   DeleteLoadAllocationConditionInfo,
   EditLoadAllocationConditionInfo,
   LoadAllocationConditionInfo,
   RegisterLoadAllocationConditionInfo,
 } from './model/load-allocation-condition-info.model';
-import { mockLoadAllocationConditionsInfo } from './mock/load-allocation-condition.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -67,7 +59,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       LoadAnnouncementConfig[]
-    >(apiUrl, bodyValue, mockLoadAnnouncementConfigs);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -89,7 +81,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -108,7 +100,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -127,7 +119,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -147,7 +139,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       GeneralConfig[]
-    >(apiUrl, bodyValue, mockGeneralConfigs);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -166,7 +158,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -186,7 +178,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       DeviceInfo[]
-    >(apiUrl, bodyValue, mockDevicesInfo);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -205,7 +197,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -224,7 +216,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -243,7 +235,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
   //#endregion
@@ -262,7 +254,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       DeviceConfig[]
-    >(apiUrl, bodyValue, mockDeviceConfig);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -281,7 +273,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -297,7 +289,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
   }
 
   public async DeleteDeviceConfig(
@@ -315,7 +307,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -337,7 +329,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       LoadViewConditionInfo[]
-    >(apiUrl, bodyValue, mockLoadViewConditionsInfo);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -356,7 +348,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -375,7 +367,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -394,7 +386,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -411,7 +403,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       RequesterInfo[]
-    >(apiUrl, bodyValue, mockRequestersInfo);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -435,7 +427,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       LoadAllocationConditionInfo[]
-    >(apiUrl, bodyValue, mockLoadAllocationConditionsInfo);
+    >(apiUrl, bodyValue);
     //endregion
   }
 
@@ -456,7 +448,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -475,7 +467,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -495,7 +487,7 @@ export class ConfigManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 

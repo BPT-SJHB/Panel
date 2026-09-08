@@ -11,12 +11,7 @@ import {
   TPTParamRelationToAnnouncementGroupAndSubGroup,
 } from './model/tptparam-info.model';
 import { API_ROUTES } from 'app/constants/api';
-import {
-  mockTPTParamsInfo,
-  mockTPTParamsRelationToAnnouncementGroupAndSubGroupInfo,
-} from './mock/tptparam-info.mock';
 import { ShortResponse } from 'app/data/model/short-response.model';
-import { mockShortResponse } from 'app/data/mock/short-response.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -42,7 +37,7 @@ export class TPTParamsManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TPTParamInfo
-    >(apiUrl, bodyValue, mockTPTParamsInfo[0]);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -58,7 +53,7 @@ export class TPTParamsManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TPTParamInfo[]
-    >(apiUrl, bodyValue, mockTPTParamsInfo);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -77,7 +72,7 @@ export class TPTParamsManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -96,7 +91,7 @@ export class TPTParamsManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -115,7 +110,7 @@ export class TPTParamsManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -141,9 +136,7 @@ export class TPTParamsManagementService {
       TPTParamRelationToAnnouncementGroupAndSubGroup[]
     >(
       apiUrl,
-      bodyValue,
-      mockTPTParamsRelationToAnnouncementGroupAndSubGroupInfo
-    );
+      bodyValue);
     //#endregion
   }
 
@@ -164,7 +157,7 @@ export class TPTParamsManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -185,7 +178,7 @@ export class TPTParamsManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 

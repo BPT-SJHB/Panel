@@ -18,8 +18,6 @@ import {
   TicketQueryParams,
 } from 'app/services/ticket-service-management/model/ticket.model';
 import { TicketServiceManagementService } from 'app/services/ticket-service-management/ticket-service-management.service';
-import { ToastService } from 'app/services/toast-service/toast.service';
-import { checkAndToastError } from 'app/utils/api-utils';
 import { SortEvent } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
@@ -28,7 +26,7 @@ import { SelectInputComponent } from 'app/components/shared/inputs/select-input/
 import { TicketChatMessageFormComponent } from '../ticket-chat-message-form/ticket-chat-message-form.component';
 import { Dialog } from 'primeng/dialog';
 import { TicketErrorCodes } from 'app/constants/error-messages';
-import { UserManagementService } from 'app/services/user-management/user-management.service';
+import { TicketGuardLoginFormComponent } from '../ticket-guard-login-form/ticket-guard-login-form.component';
 
 type DetailTicket = Ticket & {
   username: string;
@@ -53,6 +51,7 @@ interface SelectOption {
     SelectInputComponent,
     TicketChatMessageFormComponent,
     Dialog,
+    TicketGuardLoginFormComponent,
   ],
   templateUrl: './ticket-lists-form.component.html',
   styleUrls: ['./ticket-lists-form.component.scss'],
@@ -60,9 +59,7 @@ interface SelectOption {
 })
 export class TicketListsFormComponent implements OnInit {
   private readonly ticketService = inject(TicketServiceManagementService);
-  private readonly toast = inject(ToastService);
   private readonly fb = inject(FormBuilder);
-  private readonly userService = inject(UserManagementService);
 
   readonly selectedTicket = signal<Ticket | null>(null);
   readonly ticketTypes = signal<SelectOption[]>([]);
@@ -94,13 +91,14 @@ export class TicketListsFormComponent implements OnInit {
       type: TableColumnType.BUTTON_ICON,
       buttonSeverity: 'info',
       class: 'py-3 scale-90',
-      onAction: (row: Ticket) => this.showTicketChats(row.id),
+      onAction: (row: Ticket) => this.showTicketChats(row.id ?? ''),
     },
   ];
 
   readonly loading = signal(false);
   readonly data = signal<(DetailTicket | null)[]>([]);
   readonly chatDialogVisible = signal<boolean>(false);
+  readonly loginGuardVisible = signal<boolean>(false);
   readonly filterForm = this.fb.group({
     ticketStatusId: this.fb.nonNullable.control(-1),
     ticketTypeId: this.fb.nonNullable.control(-1),
@@ -112,102 +110,58 @@ export class TicketListsFormComponent implements OnInit {
     this.loadInitialData();
   }
 
-  async searchTickets(): Promise<void> {
+  searchTickets = async (): Promise<void> => {
     this.loading.set(true);
-    const maxTry = 3;
-    let userLoginTry = 0;
 
     try {
-      while (userLoginTry < maxTry) {
-        const response = await this.ticketService.GetTickets(
-          this.paramsQuery()
-        );
+      const response = await this.ticketService.GetTickets(
+        this.paramsQuery()
+      );
 
-        if (!checkAndToastError(response, this.toast)) {
-          await new Promise((resolve) => setTimeout(resolve, 500));
-          if (response.error?.code === TicketErrorCodes.Unauthorized) {
-            // Unauthorized → ask password and login
-            const isLoggedIn = await this.loginUser();
-
-            if (isLoggedIn) {
-              // Retry fetching tickets after successful login
-              continue;
-            }
-
-            // Login failed → increment retry counter
-            userLoginTry++;
-            if (userLoginTry >= maxTry) {
-              this.data.set([]);
-
-              await new Promise((resolve) => setTimeout(resolve, 500));
-              break;
-            }
-            continue;
-          }
+      if (!response.success || !response.data) {
+        if (response.error?.code === TicketErrorCodes.Unauthorized) {
+          this.loginGuardVisible.set(true);
         }
-        if (!response.data) return;
-
-        // Success → populate tickets
-        const total = response.data.total ?? 0;
-        const tickets: (DetailTicket | null)[] = Array(total).fill(null);
-
-        const { page = 1, pageSize = 5 } = this.paramsQuery();
-        const baseIndex = (page - 1) * pageSize;
-
-        // Fetch users info
-        const userIds = response.data.items.map((item) => item.userId);
-        await this.updateUsersMap(userIds);
-
-        response.data.items.forEach((item, index) => {
-          const targetIndex = baseIndex + index;
-          if (targetIndex >= total) return;
-
-          tickets[targetIndex] = {
-            ...item,
-            username: this.users().get(item.userId) ?? '',
-            department: this.findDepartment(item.departmentId),
-            ticketType: this.findTicketType(item.ticketTypeId),
-            ticketStatus: this.findTicketStatuses(item.ticketStatusId),
-            createdAt: this.formatJalaliDate(item.createdAt),
-            updatedAt: this.formatJalaliDate(item.updatedAt),
-            chatIcon: 'pi pi-comments',
-          };
-        });
-
-        this.data.set(tickets);
-        break; // exit loop after success
+        return;
       }
+
+      // Success → populate tickets
+      const total = response.data.total ?? 0;
+      const tickets: (DetailTicket | null)[] = Array(total).fill(null);
+
+      const { page = 1, pageSize = 5 } = this.paramsQuery();
+      const baseIndex = (page - 1) * pageSize;
+
+      // Fetch users info
+      const userIds = (response.data.items ?? [])
+        .map((item) => item.userId)
+        .filter((id): id is number => typeof id === 'number');
+      await this.updateUsersMap(userIds);
+
+      (response.data.items ?? []).forEach((item, index) => {
+        const targetIndex = baseIndex + index;
+        if (targetIndex >= total) return;
+
+        tickets[targetIndex] = {
+          ...item,
+          username:
+            item.userId !== undefined
+              ? (this.users().get(item.userId) ?? '')
+              : (item.phoneNumber ?? ''),
+          department: this.findDepartment(item.departmentId ?? -1),
+          ticketType: this.findTicketType(item.ticketTypeId ?? -1),
+          ticketStatus: this.findTicketStatuses(item.ticketStatusId ?? -1),
+          createdAt: this.formatJalaliDate(item.createdAt ?? ''),
+          updatedAt: this.formatJalaliDate(item.updatedAt ?? ''),
+          chatIcon: 'pi pi-comments',
+        };
+      });
+
+      this.data.set(tickets);
     } finally {
       this.loading.set(false);
     }
-  }
-
-  // Separate login function
-  private async loginUser(): Promise<boolean> {
-    const password = prompt('Enter password:');
-    if (!password) {
-      this.data.set([]);
-      return false;
-    }
-
-    const profile = await this.userService.GetSoftwareUserProfile();
-    if (!checkAndToastError(profile, this.toast)) {
-      this.data.set([]);
-      return false;
-    }
-
-    const username = profile.data.RawSoftwareUser.MobileNumber ?? '';
-    const login = await this.ticketService.LoginTicketWithPassword(
-      username,
-      password
-    );
-    if (!checkAndToastError(login, this.toast)) {
-      this.data.set([]);
-      return false;
-    }
-
-    return true; // login successful
-  }
+  };
 
   async customSort(event: SortEvent): Promise<void> {
     const field = event.field as keyof DetailTicket;
@@ -299,30 +253,30 @@ export class TicketListsFormComponent implements OnInit {
 
   private async loadTicketTypes(): Promise<void> {
     const response = await this.ticketService.GetTicketTypes();
-    if (!checkAndToastError(response, this.toast)) return;
+    if (!response.success || !response.data) return;
     const selection: SelectOption[] = response.data.map((ts) => ({
-      value: ts.id,
-      label: ts.title,
+      value: ts.id ?? 0,
+      label: ts.title ?? '',
     }));
     this.ticketTypes.set([{ label: 'همه', value: -1 }, ...selection]);
   }
 
   private async loadDepartments(): Promise<void> {
     const response = await this.ticketService.GetDepartments();
-    if (!checkAndToastError(response, this.toast)) return;
+    if (!response.success || !response.data) return;
     const selection: SelectOption[] = response.data.map((d) => ({
-      value: d.id,
-      label: d.title,
+      value: d.id ?? 0,
+      label: d.title ?? '',
     }));
     this.departments.set([{ label: 'همه', value: -1 }, ...selection]);
   }
 
   private async loadTicketStatuses(): Promise<void> {
     const response = await this.ticketService.GetTicketStatuses();
-    if (!checkAndToastError(response, this.toast)) return;
+    if (!response.success || !response.data) return;
     const selection: SelectOption[] = response.data.map((s) => ({
-      value: s.id,
-      label: s.title,
+      value: s.id ?? 0,
+      label: s.title ?? '',
     }));
     this.ticketStatuses.set([{ label: 'همه', value: -1 }, ...selection]);
   }
@@ -335,11 +289,14 @@ export class TicketListsFormComponent implements OnInit {
 
     if (userIds.length === 0) return;
     const response = await this.ticketService.GetUsersByIds(userIds);
-    if (!checkAndToastError(response, this.toast)) return false;
+    if (!response.success || !response.data) return false;
+    const usersData = response.data;
 
     this.users.update((m) => {
-      response.data.forEach((user) => {
-        m.set(user.id, user.username);
+      usersData.forEach((user) => {
+        if (user.id !== undefined && user.username !== undefined) {
+          m.set(user.id, user.username);
+        }
       });
 
       return m;
@@ -353,7 +310,7 @@ export class TicketListsFormComponent implements OnInit {
     if (username === '') return undefined;
 
     const response = await this.ticketService.GetUserByUsername(username);
-    if (!checkAndToastError(response, this.toast)) return -1;
+    if (!response.success || !response.data) return -1;
     return response.data.id;
   }
 
@@ -371,7 +328,7 @@ export class TicketListsFormComponent implements OnInit {
 
   private async showTicketChats(id: string) {
     const response = await this.ticketService.GetTicketById(id);
-    if (!checkAndToastError(response, this.toast)) {
+    if (!response.success || !response.data) {
       this.selectedTicket.set(null);
       return;
     }

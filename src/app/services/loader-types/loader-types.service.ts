@@ -5,13 +5,10 @@ import { ApiResponse } from 'app/data/model/api-Response.model';
 import { LoaderType } from 'app/services/loader-types/model/loader-type.model';
 import { API_ROUTES } from 'app/constants/api';
 import { ShortResponse } from 'app/data/model/short-response.model';
-import { mockShortResponse } from 'app/data/mock/short-response.mock';
-import { mockLoaderTypes } from './mock/loader-type.mock';
 import {
   LoaderTypeToAnnouncementSubGroupRelation,
   RegisterDeleteRelationToAnnouncementSubGroup,
 } from './model/loader-type-announcement-sub-groups-relation.model';
-import { mockLoaderTypeToAnnouncementSubGroupRelation } from './mock/loader-type-announcement-sub-groups-relation.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +36,7 @@ export class LoaderTypesService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       LoaderType[]
-    >(apiUrl, bodyValue, mockLoaderTypes);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -58,7 +55,7 @@ export class LoaderTypesService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       LoaderType
-    >(apiUrl, bodyValue, mockLoaderTypes[0]);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -81,7 +78,7 @@ export class LoaderTypesService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -103,7 +100,7 @@ export class LoaderTypesService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       LoaderTypeToAnnouncementSubGroupRelation[]
-    >(apiUrl, bodyValue, mockLoaderTypeToAnnouncementSubGroupRelation);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -125,7 +122,7 @@ export class LoaderTypesService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -147,7 +144,7 @@ export class LoaderTypesService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 

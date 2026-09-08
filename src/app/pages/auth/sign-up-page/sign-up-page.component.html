@@ -1,0 +1,17 @@
+<div
+  class="flex flex-row right-0 m-5 rounded-full p-1 px-2 opacity-70 text-black font-bold bg-gray-300 w-fit absolute"
+  (click)="navigateToMainPage()"
+  style="cursor: pointer"
+>
+  صفحه اصلی
+</div>
+
+<app-full-screen-background [blur]="5" />
+
+<div
+  class="flex items-center mx-6 justify-center md:justify-end md:ml-16 min-h-screen"
+>
+  <app-form-card class="forget-password-page">
+    <app-sign-up-form />
+  </app-form-card>
+</div>

@@ -24,7 +24,6 @@ import {
   TableComponent,
 } from 'app/components/shared/table/table.component';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
-import { BinaryRadioInputComponent } from 'app/components/shared/inputs/binary-radio-input/binary-radio-input.component';
 import { SearchAutoCompleteFactoryComponent } from 'app/components/shared/inputs/search-auto-complete-factory/search-auto-complete-factory.component';
 import {
   ButtonComponent,
@@ -47,7 +46,6 @@ import { FormButtonsSectionComponent } from 'app/components/shared/sections/form
     TableComponent,
     TextInputComponent,
     SearchAutoCompleteFactoryComponent,
-    BinaryRadioInputComponent,
     ButtonComponent,
     FormInputsSectionComponent,
     FormButtonsSectionComponent,

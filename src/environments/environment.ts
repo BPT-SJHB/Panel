@@ -1,8 +1,10 @@
-const apiBaseUrl = 'https://example.com';
-const apiPort = 443;
+const mainApiBaseUrl = 'https://bar.irmto.ir';
+const ticketApiBaseUrl = 'https://irmto.ir/ticket';
 
 export const environment = {
-  production: false,
-  apiUrl: `${apiBaseUrl}:${apiPort}`,
-  disableApi: false, // این قسمت برای من هست که دسترسی به api ندارم
+  production: true,
+  mainApiUrl: `${mainApiBaseUrl}`,
+  ticketApiUrl: `${ticketApiBaseUrl}`,
+  apiUrl: `${mainApiBaseUrl}`,
+  disableApi: false,
 };

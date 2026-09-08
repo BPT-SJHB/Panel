@@ -12,13 +12,7 @@ import {
   UsernamePassword,
 } from 'app/data/model/username-password.model';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
-import { mockUserTypes } from 'app/data/mock/user-types.mock';
-import { mockSoftwareUserInfo } from './mock/software-user-info.mock';
-import { mockShortResponse } from 'app/data/mock/short-response.mock';
-import { mockAPIUsernamePassword } from 'app/data/mock/username-password.mock';
-import { mockApiGroupProcess } from 'app/data/mock/api-group-process.mock';
 import { SoftwareUserProfile } from './model/software-user-profile.model';
-import { mockSoftwareUserProfile } from './mock/software-user-profile.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -45,7 +39,7 @@ export class UserManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -66,7 +60,7 @@ export class UserManagementService {
     const response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       APIUsernamePassword
-    >(apiUrl, bodyValue, mockAPIUsernamePassword);
+    >(apiUrl, bodyValue);
     //#endregion
 
     //#region Return
@@ -101,7 +95,7 @@ export class UserManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -125,10 +119,7 @@ export class UserManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, {
-      ...mockShortResponse,
-      Message: 'کد یکبار مصرف ارسال شده را وارد نمایید',
-    });
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -152,10 +143,6 @@ export class UserManagementService {
     >(
       apiUrl,
       bodyValue,
-      {
-        ...mockShortResponse,
-        Message: 'رمز عبور ارسال شد',
-      },
       { redirectToLoginOnUnauthorized: false }
     );
     //#endregion
@@ -177,7 +164,7 @@ export class UserManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -196,7 +183,7 @@ export class UserManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -216,7 +203,7 @@ export class UserManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       SoftwareUserInfo
-    >(apiUrl, bodyValue, mockSoftwareUserInfo);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -236,7 +223,7 @@ export class UserManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       SoftwareUserInfo
-    >(apiUrl, bodyValue, mockSoftwareUserInfo);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -255,7 +242,7 @@ export class UserManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       SoftwareUserProfile
-    >(apiUrl, bodyValue, mockSoftwareUserProfile);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -271,7 +258,7 @@ export class UserManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       UserType[]
-    >(apiUrl, bodyValue, mockUserTypes);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -295,7 +282,7 @@ export class UserManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
   }
 
   public async ChangeUserWebProcessGroupAccess(
@@ -322,7 +309,7 @@ export class UserManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
   }
 
   public async GetWebProcessGroups_WebProcesses(
@@ -343,6 +330,6 @@ export class UserManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ApiGroupProcess[]
-    >(apiUrl, bodyValue, mockApiGroupProcess);
+    >(apiUrl, bodyValue);
   }
 }

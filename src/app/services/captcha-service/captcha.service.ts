@@ -2,7 +2,6 @@ import { inject, Injectable } from '@angular/core';
 import { Captcha } from 'app/data/model/captcha-challenge.model';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { API_ROUTES } from 'app/constants/api';
-import { mockCaptcha } from 'app/data/mock/captcha-challenge.mock';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
 
 @Injectable({
@@ -18,9 +17,7 @@ export class CaptchaService {
 
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Get<Captcha>(
-      apiUrl,
-      mockCaptcha
-    );
+      apiUrl);
     //#endregion
   }
 }

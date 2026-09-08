@@ -1,4 +1,4 @@
-import { Component, effect, inject, input, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Dialog } from 'primeng/dialog';
@@ -13,7 +13,6 @@ import { copyTextAndToast } from 'app/utils/copy-text';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { APP_ROUTES } from 'app/constants/routes';
 import { AppTitles } from 'app/constants/Titles';
-import { mockTickets } from 'app/services/ticket-service-management/mock/ticket.mock';
 import { TicketGuardCaptchaFormComponent } from '../ticket-guard-captcha-form/ticket-guard-captcha-form.component';
 import { TicketErrorCodes } from 'app/constants/error-messages';
 import { TicketFilesUploadComponent } from '../ticket-files-upload/ticket-files-upload.component';
@@ -45,36 +44,22 @@ export class TicketCreateFormComponent extends BaseLoading {
   private readonly ticketService = inject(TicketServiceManagementService);
 
   // Inputs and signals
-  readonly phone = input<string>('');
   readonly ticketTypes = signal<SelectOption[]>([]);
   readonly departments = signal<SelectOption[]>([]);
-  readonly createdTrackCodeTicket = signal<string | null>(
-    mockTickets[0].trackCode
-  );
-  readonly trackPhone = signal<string>('');
+  readonly createdTrackCodeTicket = signal<string | null>(null);
   readonly addonWidth = '6rem';
-  ticketDialogVisible = false;
+  readonly ticketDialogVisible = signal<boolean>(false);
   readonly activeCaptcha = signal<boolean>(false);
   appTitle = AppTitles;
 
   // Form setup
   readonly ticketForm = this.fb.group({
-    userId: this.fb.control<number | null>(null),
-    username: this.fb.control<string>('', ValidationSchema.mobile),
     ticketTypeId: this.fb.control<number | null>(null, ValidationSchema.id),
     departmentId: this.fb.control<number | null>(null, ValidationSchema.id),
     title: this.fb.control<string>('', ValidationSchema.title),
-    body: this.fb.control<string>('', ValidationSchema.description),
+    description: this.fb.control<string>('', ValidationSchema.description),
     attachment: this.fb.control<string[]>([]),
   });
-
-  constructor() {
-    super();
-    effect(() => {
-      this.ctrl('username').setValue(this.phone());
-      this.ctrl('userId').setValue(null);
-    });
-  }
 
   override ngOnInit(): void {
     super.ngOnInit();
@@ -95,7 +80,10 @@ export class TicketCreateFormComponent extends BaseLoading {
     const response = await this.ticketService.GetTicketTypes();
     if (!checkAndToastError(response, this.toast)) return;
     this.ticketTypes.set(
-      response.data.map((tt) => ({ value: tt.id, label: tt.title }))
+      response.data.map((tt) => ({
+        value: tt.id ?? 0,
+        label: tt.title ?? '',
+      }))
     );
   }
 
@@ -103,7 +91,7 @@ export class TicketCreateFormComponent extends BaseLoading {
     const response = await this.ticketService.GetDepartments();
     if (!checkAndToastError(response, this.toast)) return;
     this.departments.set(
-      response.data.map((d) => ({ value: d.id, label: d.title }))
+      response.data.map((d) => ({ value: d.id ?? 0, label: d.title ?? '' }))
     );
   }
 
@@ -112,34 +100,16 @@ export class TicketCreateFormComponent extends BaseLoading {
     if (this.ticketForm.invalid || this.loading()) return;
 
     this.withLoading(async () => {
-      let userId = this.ctrl<number | null>('userId').value;
-
-      if (userId === null) {
-        const response = await this.ticketService.LoginWithNoAuth(
-          this.ctrl<string>('username').value
-        );
-        if (!checkAndToastError(response, this.toast)) {
-          if (response.error?.code === TicketErrorCodes.Unauthorized) {
-            this.activeCaptcha.set(true);
-          }
-          return;
-        }
-
-        userId = response.data.id;
-        this.ctrl('userId').setValue(userId);
-      }
-
       const ticket: TicketCreateRequest = {
-        userId: this.ctrl<number>('userId').value,
         ticketTypeId: this.ctrl<number>('ticketTypeId').value,
         departmentId: this.ctrl<number>('departmentId').value,
         title: this.ctrl<string>('title').value,
-        body: this.ctrl<string>('body').value,
+        body: this.ctrl<string>('description').value,
         attachments: this.ctrl<string[]>('attachment').value,
       };
 
       const result = await this.ticketService.CreateTicket(ticket);
-      if (!checkAndToastError(result, this.toast)) {
+      if (!result.success || !result.data) {
         if (result.error?.code === TicketErrorCodes.Unauthorized) {
           this.activeCaptcha.set(true);
         }
@@ -147,10 +117,9 @@ export class TicketCreateFormComponent extends BaseLoading {
       }
 
       this.activeCaptcha.set(false);
-      this.createdTrackCodeTicket.set(result.data.trackCode);
-      this.trackPhone.set(this.ctrl<string>('username').value);
-      this.ticketForm.reset({ username: this.phone() });
-      this.ticketDialogVisible = true;
+      this.createdTrackCodeTicket.set(result.data.trackCode ?? null);
+      this.ticketForm.reset();
+      this.ticketDialogVisible.set(true);
     });
   };
 
@@ -161,7 +130,6 @@ export class TicketCreateFormComponent extends BaseLoading {
 
     this.router.navigate([APP_ROUTES.TICKET.TRACK], {
       queryParams: {
-        phone: this.trackPhone(),
         trackingCode: trackCode,
       },
     });

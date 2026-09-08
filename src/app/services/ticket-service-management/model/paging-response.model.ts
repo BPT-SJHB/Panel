@@ -1,7 +1,7 @@
 export interface PagingResponse<T> {
-  items: T[]; // paged items
-  total: number; // total number of items
-  page: number; // current page
-  pageSize: number; // number of items per page
-  totalPages: number; // total pages
+  items?: T[];
+  page?: number;
+  page_size?: number;
+  total?: number;
+  total_pages?: number;
 }

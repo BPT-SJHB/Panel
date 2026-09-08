@@ -3,15 +3,12 @@ import { UserAuthService } from '../user-auth-service/user-auth.service';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
 import { TransportCompany } from './model/transport-company-info.model';
 import { API_ROUTES } from 'app/constants/api';
-import { mockTransportCompaniesInfo } from './mock/transport-company-info.mock';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { ShortResponse } from 'app/data/model/short-response.model';
-import { mockShortResponse } from 'app/data/mock/short-response.mock';
 import {
   APIUsernamePassword,
   UsernamePassword,
 } from 'app/data/model/username-password.model';
-import { mockAPIUsernamePassword } from 'app/data/mock/username-password.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -40,7 +37,7 @@ export class TransportCompaniesManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TransportCompany[]
-    >(apiUrl, bodyValue, mockTransportCompaniesInfo);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -61,7 +58,7 @@ export class TransportCompaniesManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TransportCompany
-    >(apiUrl, bodyValue, mockTransportCompaniesInfo[0]);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -81,7 +78,31 @@ export class TransportCompaniesManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TransportCompany
-    >(apiUrl, bodyValue, mockTransportCompaniesInfo[0]);
+    >(apiUrl, bodyValue);
+    //#endregion
+  }
+
+  public async RegisterTransportCompany(
+    transportCompanyInfo: TransportCompany
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.TransportCompanies.RegisterTransportCompany;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      RawTransportCompany: transportCompanyInfo,
+    };
+    //#endregion
+
+    console.log('in register transport company');
+
+    console.log(bodyValue);
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -97,11 +118,38 @@ export class TransportCompaniesManagementService {
     };
     //#endregion
 
+    console.log('in edit transport company');
+
+    console.log(bodyValue);
+
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
+    //#endregion
+  }
+
+  public async UploadTransportCompaniesExcel(file: string) {
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.TransportCompanies
+        .UploadTransportCompaniesExcel;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TransportCompanies: file,
+    };
+    //#endregion
+
+    console.log('in upload transport companies excel');
+
+    console.log(bodyValue);
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -125,7 +173,7 @@ export class TransportCompaniesManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -149,7 +197,7 @@ export class TransportCompaniesManagementService {
     const response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       APIUsernamePassword
-    >(apiUrl, bodyValue, mockAPIUsernamePassword);
+    >(apiUrl, bodyValue);
     //#endregion
 
     //#region Return
@@ -187,7 +235,7 @@ export class TransportCompaniesManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 }

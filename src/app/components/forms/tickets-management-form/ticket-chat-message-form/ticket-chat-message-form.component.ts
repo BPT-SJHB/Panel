@@ -29,7 +29,8 @@ interface ChatGroupedByDate {
   date: string;
   messages: {
     id: string;
-    senderId: number;
+    senderId?: number;
+    senderType?: string;
     message: string;
     time: string;
     attachments?: string[];
@@ -64,7 +65,6 @@ export class TicketChatMessageFormComponent extends BaseLoading {
   readonly captchaGuardVisible = signal(false);
   readonly ticket = input<Ticket | null>(null);
   readonly sender = input<'user' | 'admin'>('user');
-  readonly userId = input<number>(0);
   readonly captchaAction = () => this.sendMessage();
 
   readonly chatForm = this.fb.nonNullable.group({
@@ -78,8 +78,7 @@ export class TicketChatMessageFormComponent extends BaseLoading {
   });
 
   readonly groupChats = signal<ChatGroupedByDate[]>([]);
-
-  uploadFileVisible = false;
+  readonly uploadFileVisible = signal(false);
 
   constructor() {
     super();
@@ -99,20 +98,22 @@ export class TicketChatMessageFormComponent extends BaseLoading {
   private groupChatsByDate(chats: ChatMessage[]): ChatGroupedByDate[] {
     const sortedChats = [...chats].sort(
       (a, b) =>
-        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        new Date(a.createdAt ?? '').getTime() -
+        new Date(b.createdAt ?? '').getTime()
     );
 
     const grouped: Record<string, ChatGroupedByDate> = {};
 
     sortedChats.forEach((chat) => {
-      const { date, time } = this.formatJalaliDate(chat.createdAt);
+      const { date, time } = this.formatJalaliDate(chat.createdAt ?? '');
 
       if (!grouped[date]) grouped[date] = { date, messages: [] };
 
       grouped[date].messages.push({
-        id: chat.id,
+        id: chat.id ?? '',
         senderId: chat.senderId,
-        message: chat.message,
+        senderType: chat.senderType,
+        message: chat.message ?? '',
         time,
         attachments: chat.attachments,
       });
@@ -133,11 +134,23 @@ export class TicketChatMessageFormComponent extends BaseLoading {
   }
 
   /** Check if message belongs to current sender */
-  isSender(senderId: number): boolean {
-    if (!this.ticket()) return false;
-    return this.sender() === 'user'
-      ? this.ticket()!.userId === senderId
-      : this.ticket()!.userId !== senderId;
+  isSender(senderId?: number, senderType?: string): boolean {
+    const ticket = this.ticket();
+    if (!ticket || senderId === undefined) return false;
+
+    const isGuestTicket = ticket.userId === 0;
+
+    // 1. Client / Guest view
+    if (this.sender() === 'user') {
+      return isGuestTicket
+        ? senderId === 0 || senderType === 'user'
+        : senderId === ticket.userId;
+    }
+
+    // 2. Admin / Staff view
+    return isGuestTicket
+      ? senderId !== 0 || senderType === 'agent'
+      : senderId !== ticket.userId;
   }
 
   /** Auto resize textarea up to 5 rows */
@@ -160,7 +173,7 @@ export class TicketChatMessageFormComponent extends BaseLoading {
 
   /** Append new chat to grouped list */
   private addChatMessage(newMessage: ChatMessage): void {
-    this.ticket()?.chat.push(newMessage);
+    this.ticket()?.chat?.push(newMessage);
     this.groupChats.set(this.groupChatsByDate(this.ticket()?.chat ?? []));
     this.scrollToBottom();
   }
@@ -172,19 +185,18 @@ export class TicketChatMessageFormComponent extends BaseLoading {
 
     const newChat: CreateChatMessageRequest = {
       message: msg,
-      senderId: this.userId(),
       attachments: this.ctrl<string[]>('attachments').value ?? [],
     };
 
     this.chatForm.reset();
-    this.uploadFileVisible = false;
+    this.uploadFileVisible.set(false);
     await this.withLoading(async () => {
       const res = await this.ticketService.CreateChat(
         this.ticket()?.id ?? '',
         newChat
       );
 
-      if (!checkAndToastError(res, this.toast)) {
+      if (!res.success || !res.data) {
         if (
           TicketErrorCodes.CaptchaExpired === res.error?.code ||
           TicketErrorCodes.CaptchaIncorrect === res.error?.code
@@ -192,10 +204,10 @@ export class TicketChatMessageFormComponent extends BaseLoading {
           this.captchaGuardVisible.set(true);
           return;
         }
+        return;
       }
 
       // Add chat to grouped UI
-      if (!res.data) return;
       this.addChatMessage(res.data);
     });
   }

@@ -4,7 +4,6 @@ import { UserAuthService } from 'app/services/user-auth-service/user-auth.servic
 import { ApiGroupProcess } from 'app/data/model/api-group-process.model';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { PageGroup } from 'app/data/model/page-group.model';
-import { mockApiGroupProcesses } from 'app/data/mock/page-group.mock';
 import { APICommunicationManagementService } from 'app/services/api-communication-management/apicommunication-management.service';
 
 @Injectable({
@@ -27,7 +26,7 @@ export class ApiProcessesService {
     const response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ApiGroupProcess[]
-    >(this.apiUrl, bodyValue, mockApiGroupProcesses);
+    >(this.apiUrl, bodyValue);
     //#endregion
 
     //#region Return
@@ -72,7 +71,7 @@ export class ApiProcessesService {
     const response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ApiGroupProcess[]
-    >(api, bodyValue, mockApiGroupProcesses);
+    >(api, bodyValue);
     //#endregion
 
     //#region Return
@@ -98,7 +97,7 @@ export class ApiProcessesService {
     const response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ApiGroupProcess[]
-    >(api, bodyValue, mockApiGroupProcesses);
+    >(api, bodyValue);
     //#endregion
 
     //#region Return

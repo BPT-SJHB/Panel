@@ -6,7 +6,8 @@
   >
     <!-- Row 1 -->
     <app-text-input
-      type="number"
+      type="text"
+      language="en"
       [control]="ctrl('username')"
       label="شماره تلفن"
       placeholder="جستجو شماره تلفن"
@@ -34,7 +35,7 @@
       placeholder="انتخاب بخش"
     ></app-select-input>
 
-    <app-button label="اعمال فیلتر" (click)="applyFilter()"></app-button>
+    <app-button label="اعمال فیلتر" (onClick)="applyFilter()"></app-button>
   </div>
 
   <!-- Table always full width -->
@@ -66,3 +67,9 @@
     }
   </p-dialog>
 </div>
+
+<app-ticket-guard-login-form
+  [activeLogin]="loginGuardVisible()"
+  (hiddenDialog)="loginGuardVisible.set(false)"
+  [action]="searchTickets"
+/>

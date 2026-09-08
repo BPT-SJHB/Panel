@@ -4,6 +4,7 @@ export interface TransportCompany {
   TCId: number;
   TCTitle?: string;
   TCOrganizationCode?: string;
+  TCCityId?: number;
   TCCityTitle?: string;
   TCTel?: string;
   TCManagerMobileNumber?: string;
@@ -16,6 +17,7 @@ export const zodTransportCompany = z.object({
   TCId: z.number(),
   TCTitle: z.string().optional(),
   TCOrganizationCode: z.string().optional(),
+  TCCityId: z.number().optional(),
   TCCityTitle: z.string().optional(),
   TCTel: z.string().optional(),
   TCManagerMobileNumber: z.string().optional(),

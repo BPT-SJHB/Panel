@@ -77,9 +77,7 @@ export class DriverLoadAllocationFormComponent
   }
 
   /** Refresh loads when view is activated */
-  onViewActivated(): void {
-    this.withLoading(async () => {
-      await this.fetchLoadAllocations();
-    });
+  async onViewActivated(): Promise<void> {
+    await this.fetchLoadAllocations();
   }
 }

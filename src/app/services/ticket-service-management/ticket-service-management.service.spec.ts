@@ -1,13 +1,19 @@
 import { TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TicketServiceManagementService } from './ticket-service-management.service';
 import { TicketCreateRequest } from './model/ticket.model';
 
-xdescribe('TicketServiceManagementService', () => {
+describe('TicketServiceManagementService', () => {
   let service: TicketServiceManagementService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [TicketServiceManagementService],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        TicketServiceManagementService,
+      ],
     });
 
     service = TestBed.inject(TicketServiceManagementService);
@@ -25,9 +31,9 @@ xdescribe('TicketServiceManagementService', () => {
   });
 
   it('LoginWithNoAuth should return ticket user', async () => {
-    const username = '09100000000';
+    const payload = { username: '09100000000', departmentId: 1 };
 
-    const res = await service.LoginWithNoAuth(username);
+    const res = await service.LoginWithNoAuth(payload);
     expect(res.data).toEqual(jasmine.any(Object));
   });
 
@@ -50,7 +56,6 @@ xdescribe('TicketServiceManagementService', () => {
     const ticket: TicketCreateRequest = {
       title: 'test ticket',
       body: 'تست',
-      userId: 1,
       ticketTypeId: 1,
       departmentId: 2,
       attachments: [],

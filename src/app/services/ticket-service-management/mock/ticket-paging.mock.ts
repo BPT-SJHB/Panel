@@ -39,7 +39,7 @@ export const mockTicketPaging: PagingResponse<Ticket> = {
   items: generateMockTickets(), // first page items
   total: 30, // total records
   page: 1, // current page
-  pageSize: 5, // items per page
-  totalPages: 6, // total pages
+  page_size: 5, // items per page
+  total_pages: 6, // total pages
 };
 
