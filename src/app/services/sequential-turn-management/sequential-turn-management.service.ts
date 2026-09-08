@@ -3,14 +3,10 @@ import { UserAuthService } from '../user-auth-service/user-auth.service';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
 import { SequentialTurn } from './model/sequential-turn.model';
 import { API_ROUTES } from 'app/constants/api';
-import { mockSequentialTurns } from './mock/sequential-turn.mock';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { ShortResponse } from 'app/data/model/short-response.model';
-import { mockShortResponse } from 'app/data/mock/short-response.mock';
 import { RelationOfSequentialTurnToLoaderType } from './model/relation-of-sequentialTurn-to-loaderType.model';
-import { mockRelationOfSequentialTurnToLoaderTypes } from './mock/relation-of-sequentialTurn-to-loaderType.mock';
 import { RelationOfSequentialTurnToAnnouncementSubGroup } from './model/relation-of-sequentialTurn-to-announcementSubGroup.model';
-import { mockRelationOfSequentialTurnToAnnouncementSubGroups } from './mock/relation-of-sequentialTurn-to-announcementSubGroup.mock';
 import { LoaderType } from '../loader-types/model/loader-type.model';
 
 @Injectable({
@@ -42,7 +38,7 @@ export class SequentialTurnManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       SequentialTurn[]
-    >(apiUrl, bodyValue, mockSequentialTurns);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -71,7 +67,7 @@ export class SequentialTurnManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -100,7 +96,7 @@ export class SequentialTurnManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -121,7 +117,7 @@ export class SequentialTurnManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -151,7 +147,7 @@ export class SequentialTurnManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       RelationOfSequentialTurnToLoaderType[]
-    >(apiUrl, bodyValue, mockRelationOfSequentialTurnToLoaderTypes);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -180,7 +176,7 @@ export class SequentialTurnManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -209,7 +205,7 @@ export class SequentialTurnManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -233,7 +229,7 @@ export class SequentialTurnManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       SequentialTurn[]
-    >(apiUrl, bodyValue, mockSequentialTurns);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -265,7 +261,7 @@ export class SequentialTurnManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       RelationOfSequentialTurnToAnnouncementSubGroup[]
-    >(apiUrl, bodyValue, mockRelationOfSequentialTurnToAnnouncementSubGroups);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -296,7 +292,7 @@ export class SequentialTurnManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -328,7 +324,7 @@ export class SequentialTurnManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
   //#endregion

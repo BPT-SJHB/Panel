@@ -3,20 +3,14 @@ import { UserAuthService } from '../user-auth-service/user-auth.service';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
 import { API_ROUTES } from 'app/constants/api';
 import { TruckInfo } from 'app/services/driver-truck-management/model/truck-info.model';
-import { mockTurns } from './mock/turn.mock';
 import { ApiResponse } from 'app/data/model/api-Response.model';
 import { TurnAccounting } from './model/turn-accounting.model';
-import { mockTurnAccounting } from './mock/turn-accounting.mock';
 import { ShortResponse } from 'app/data/model/short-response.model';
-import { mockShortResponse } from 'app/data/mock/short-response.mock';
 import { SequentialTurn } from '../sequential-turn-management/model/sequential-turn.model';
 import { Turn } from './model/turn.model';
 import { TurnForSoftwareUser } from './model/turn-for-software-user.model';
-import { mockTurnsForSoftwareUser } from './mock/turn-for-software-user.mock';
 import { DeleteInfoOfTurnCost, TurnCost } from './model/turn-cost.model';
-import { mockTurnCosts } from './mock/turn-cost.mock';
 import { TurnStatus } from './model/turn-status.model';
-import { mockTurnStatus } from './mock/turn-status.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -43,7 +37,7 @@ export class TurnManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       Turn[]
-    >(apiUrl, bodyValue, mockTurns);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -62,7 +56,7 @@ export class TurnManagementService {
     const response = await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TurnForSoftwareUser[]
-    >(apiUrl, bodyValue, mockTurnsForSoftwareUser);
+    >(apiUrl, bodyValue);
     //#endregion
 
     //#region Return
@@ -92,7 +86,7 @@ export class TurnManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TurnAccounting[]
-    >(apiUrl, bodyValue, mockTurnAccounting);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -114,7 +108,7 @@ export class TurnManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -134,7 +128,7 @@ export class TurnManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -167,7 +161,7 @@ export class TurnManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -198,7 +192,7 @@ export class TurnManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -235,7 +229,7 @@ export class TurnManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -253,7 +247,7 @@ export class TurnManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -273,7 +267,7 @@ export class TurnManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TurnCost[]
-    >(apiUrl, bodyValue, mockTurnCosts);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -292,7 +286,7 @@ export class TurnManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -311,7 +305,7 @@ export class TurnManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -327,7 +321,7 @@ export class TurnManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TurnStatus[]
-    >(apiUrl, bodyValue, mockTurnStatus);
+    >(apiUrl, bodyValue);
     //#endregion
   }
   //#endregion

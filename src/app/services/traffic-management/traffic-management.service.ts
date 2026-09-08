@@ -4,18 +4,12 @@ import { ApiResponse } from 'app/data/model/api-Response.model';
 import { UserAuthService } from '../user-auth-service/user-auth.service';
 import { TrafficCardType } from './model/traffic-card-type.model';
 import { API_ROUTES } from 'app/constants/api';
-import { mockTrafficCardTypes } from './mock/traffic-card-type.mock';
 import { ShortResponse } from 'app/data/model/short-response.model';
-import { mockShortResponse } from 'app/data/mock/short-response.mock';
 import { TrafficCardTempType } from './model/traffic-card-temp-type.model';
-import { mockTrafficCardTempTypes } from './mock/traffic-card-temp-type.mock';
 import { TrafficCardTypeCost } from './model/traffic-card-type-cost.model';
-import { mockTrafficCardTypeCosts } from './mock/traffic-card-type-cost.mock';
 import { RawTrafficCost } from './model/raw-traffic-cost.model';
 import { TrafficReportInfo } from './model/traffic-report-info.model';
-import { mockTrafficReportInfos } from './mock/traffic-report-info.mock';
 import { TrafficInfo } from './model/traffic-info.model';
-import { mockTrafficInfo } from './mock/traffic-info.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -41,7 +35,7 @@ export class TrafficManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -61,7 +55,7 @@ export class TrafficManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -77,7 +71,7 @@ export class TrafficManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TrafficCardType[]
-    >(apiUrl, bodyValue, mockTrafficCardTypes);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -99,7 +93,7 @@ export class TrafficManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TrafficCardTempType[]
-    >(apiUrl, bodyValue, mockTrafficCardTempTypes);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -126,7 +120,7 @@ export class TrafficManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -146,7 +140,7 @@ export class TrafficManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TrafficCardTypeCost[]
-    >(apiUrl, bodyValue, mockTrafficCardTypeCosts);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -167,7 +161,7 @@ export class TrafficManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -190,7 +184,7 @@ export class TrafficManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TrafficReportInfo[]
-    >(apiUrl, bodyValue, mockTrafficReportInfos);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -213,7 +207,7 @@ export class TrafficManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TrafficInfo
-    >(apiUrl, bodyValue, mockTrafficInfo);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 

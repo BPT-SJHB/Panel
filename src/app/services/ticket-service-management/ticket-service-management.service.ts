@@ -26,19 +26,8 @@ import {
   SignUpWithPasswordDTO,
   SingleUseTokenResponseDTO,
 } from './model/ticket-auth.model';
-
-// Mock data
-import { mockTicketTypes } from './mock/ticket-type.mock';
-import { mockTicketUser } from './mock/ticket-user.mock';
-import { mockTickets } from './mock/ticket.mock';
-import { mockDepartments } from './mock/department.mock';
-import { mockTicketCaptcha } from './mock/ticket-captcha.mock';
-import { mockTicketStatuses } from './mock/ticket-status.mock';
-import { mockTicketPaging } from './mock/ticket-paging.mock';
 import { Observable } from 'rxjs';
 import { SendOTPResponse, VerifyOTPResponse } from './model/ticket-otp.model';
-import { mockTicketSendOtp, mockTicketVerifyOtp } from './mock/ticket-otp.mock';
-import { mockTicketTokenChecked } from './mock/ticket-auth.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -54,7 +43,6 @@ export class TicketServiceManagementService {
     return await this.api.CommunicateWithAPI_Post<LoginWithNoAuthDTO, TicketUser>(
       apiUrl,
       payload,
-      mockTicketUser,
       { withCredentials: true }
     );
   }
@@ -67,7 +55,6 @@ export class TicketServiceManagementService {
     return await this.api.CommunicateWithAPI_Post<LoginWithPasswordDTO, null>(
       API_ROUTES.TicketAPI.Auth.Login,
       body,
-      null,
       { withCredentials: true }
     );
   }
@@ -78,7 +65,6 @@ export class TicketServiceManagementService {
     return await this.api.CommunicateWithAPI_Post<SignUpWithPasswordDTO, null>(
       API_ROUTES.TicketAPI.Auth.SignUp,
       payload,
-      null,
       { withCredentials: true }
     );
   }
@@ -93,30 +79,23 @@ export class TicketServiceManagementService {
     >(
       API_ROUTES.TicketAPI.Auth.GetSingleUseToken,
       body,
-      { token: 'mock-single-use-token' },
       { withCredentials: true }
     );
   }
 
   public async CheckToken(): Promise<ApiResponse<CheckedToken>> {
-    //#region consts
     const apiUrl = API_ROUTES.TicketAPI.Auth.CheckToken;
-    //#endregion
-
-    //#region request + response
     return await this.api.CommunicateWithAPI_Get<CheckedToken>(
       apiUrl,
-      mockTicketTokenChecked,
       { withCredentials: true }
     );
-    //#endregion
   }
 
   public async LoginWithSingleUseToken(token: string): Promise<ApiResponse<null>> {
     const url = `${API_ROUTES.TicketAPI.Auth.LoginWithSingleUseToken}?token=${encodeURIComponent(
       token
     )}`;
-    return await this.api.CommunicateWithAPI_Get<null>(url, null, {
+    return await this.api.CommunicateWithAPI_Get<null>(url, {
       withCredentials: true,
     });
   }
@@ -126,7 +105,6 @@ export class TicketServiceManagementService {
   public async GetTicketTypes(): Promise<ApiResponse<TicketType[]>> {
     return await this.api.CommunicateWithAPI_Get<TicketType[]>(
       API_ROUTES.TicketAPI.Tickets.GetAllActiveTicketTypes,
-      mockTicketTypes,
       { withCredentials: true }
     );
   }
@@ -134,7 +112,6 @@ export class TicketServiceManagementService {
   public async GetDepartments(): Promise<ApiResponse<Department[]>> {
     return await this.api.CommunicateWithAPI_Get<Department[]>(
       API_ROUTES.TicketAPI.Departments.GetAllActiveDepartments,
-      mockDepartments,
       { withCredentials: true }
     );
   }
@@ -142,7 +119,6 @@ export class TicketServiceManagementService {
   public async GetTicketStatuses(): Promise<ApiResponse<TicketStatus[]>> {
     return await this.api.CommunicateWithAPI_Get<TicketStatus[]>(
       API_ROUTES.TicketAPI.Tickets.GetAllActiveTicketStatuses,
-      mockTicketStatuses,
       { withCredentials: true }
     );
   }
@@ -152,16 +128,10 @@ export class TicketServiceManagementService {
   public async CreateTicket(
     ticket: TicketCreateRequest
   ): Promise<ApiResponse<TicketCreateResponse>> {
-    const mockResponse: TicketCreateResponse = {
-      id: mockTickets[0]?.id ?? crypto.randomUUID(),
-      trackCode:
-        mockTickets[0]?.trackCode ?? Math.random().toString(36).substring(2, 8),
-    };
-
     return await this.api.CommunicateWithAPI_Post<
       TicketCreateRequest,
       TicketCreateResponse
-    >(API_ROUTES.TicketAPI.Tickets.CreateTicket, ticket, mockResponse, {
+    >(API_ROUTES.TicketAPI.Tickets.CreateTicket, ticket, {
       withCredentials: true,
       showSuccessToast: true,
     });
@@ -174,7 +144,6 @@ export class TicketServiceManagementService {
     return await this.api.CommunicateWithAPI_Post<typeof body, Ticket>(
       API_ROUTES.TicketAPI.Tickets.GetTicketByTrackCode,
       body,
-      mockTickets[0],
       { withCredentials: true }
     );
   }
@@ -184,7 +153,6 @@ export class TicketServiceManagementService {
     return await this.api.CommunicateWithAPI_Post<typeof body, Ticket>(
       API_ROUTES.TicketAPI.Tickets.GetTicketByID,
       body,
-      mockTickets[Math.floor(Math.random() * mockTickets.length)],
       { withCredentials: true }
     );
   }
@@ -194,7 +162,6 @@ export class TicketServiceManagementService {
     return await this.api.CommunicateWithAPI_Post<typeof body, null>(
       API_ROUTES.TicketAPI.Tickets.CloseTicket,
       body,
-      null,
       { withCredentials: true, showSuccessToast: true }
     );
   }
@@ -204,7 +171,6 @@ export class TicketServiceManagementService {
   public async GetCaptcha(): Promise<ApiResponse<TicketCaptcha>> {
     return await this.api.CommunicateWithAPI_Get<TicketCaptcha>(
       API_ROUTES.TicketAPI.Captcha.GetCaptcha,
-      mockTicketCaptcha,
       { withCredentials: true }
     );
   }
@@ -214,7 +180,6 @@ export class TicketServiceManagementService {
     return await this.api.CommunicateWithAPI_Post<typeof body, null>(
       API_ROUTES.TicketAPI.Captcha.VerifyCaptcha,
       body,
-      null,
       { withCredentials: true }
     );
   }
@@ -225,18 +190,10 @@ export class TicketServiceManagementService {
     ticketId: string,
     chat: CreateChatMessageRequest
   ): Promise<ApiResponse<ChatMessage>> {
-    const mockResponse: ChatMessage = {
-      ...chat,
-      id: crypto.randomUUID(),
-      attachments: chat.attachments ?? [],
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
-
     return await this.api.CommunicateWithAPI_Post<
       CreateChatMessageRequest,
       ChatMessage
-    >(API_ROUTES.TicketAPI.Tickets.CreateChat(ticketId), chat, mockResponse, {
+    >(API_ROUTES.TicketAPI.Tickets.CreateChat(ticketId), chat, {
       withCredentials: true,
     });
   }
@@ -249,7 +206,7 @@ export class TicketServiceManagementService {
     return await this.api.CommunicateWithAPI_Post<
       TicketQueryParams,
       PagingResponse<Ticket>
-    >(API_ROUTES.TicketAPI.Tickets.GetTicketsList, query, mockTicketPaging, {
+    >(API_ROUTES.TicketAPI.Tickets.GetTicketsList, query, {
       withCredentials: true,
     });
   }
@@ -261,7 +218,6 @@ export class TicketServiceManagementService {
     return await this.api.CommunicateWithAPI_Post<typeof body, TicketUser>(
       API_ROUTES.TicketAPI.Users.GetUserByID,
       body,
-      mockTicketUser,
       { withCredentials: true }
     );
   }
@@ -271,7 +227,6 @@ export class TicketServiceManagementService {
     return await this.api.CommunicateWithAPI_Post<typeof body, TicketUser>(
       API_ROUTES.TicketAPI.Users.GetUserByUsername,
       body,
-      mockTicketUser,
       { withCredentials: true }
     );
   }
@@ -281,7 +236,6 @@ export class TicketServiceManagementService {
     return await this.api.CommunicateWithAPI_Post<typeof body, TicketUser[]>(
       API_ROUTES.TicketAPI.Users.GetUsersIDs,
       body,
-      [mockTicketUser],
       { withCredentials: true }
     );
   }
@@ -294,7 +248,7 @@ export class TicketServiceManagementService {
     return await this.api.CommunicateWithAPI_Post<
       typeof bodyValue,
       SendOTPResponse
-    >(apiUrl, bodyValue, mockTicketSendOtp, { withCredentials: true });
+    >(apiUrl, bodyValue, { withCredentials: true });
   }
 
   public async VerifyOTP(
@@ -306,7 +260,7 @@ export class TicketServiceManagementService {
     return await this.api.CommunicateWithAPI_Post<
       typeof body,
       VerifyOTPResponse
-    >(apiUrl, body, mockTicketVerifyOtp, { withCredentials: true });
+    >(apiUrl, body, { withCredentials: true });
   }
   //#endregion
 
@@ -321,7 +275,6 @@ export class TicketServiceManagementService {
     >(
       API_ROUTES.TicketAPI.File.DownloadTicketFile(objectName),
       { id: ticketId },
-      { url: '' },
       { withCredentials: true }
     );
     if (!response.success || !response.data?.url) {
@@ -336,10 +289,9 @@ export class TicketServiceManagementService {
   ): Observable<ApiResponse<{ id: string }> | number> {
     const body = new FormData();
     body.append('file', file);
-    const mock = { id: `uuidV4().${file.type}` };
     return this.api.CommunicateWithAPI_Post_FromData_With_Progress<{
       id: string;
-    }>(API_ROUTES.TicketAPI.File.UploadTicketFile, body, mock, {
+    }>(API_ROUTES.TicketAPI.File.UploadTicketFile, body, {
       withCredentials: true,
       showSuccessToast: true,
     });

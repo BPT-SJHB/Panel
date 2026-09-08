@@ -7,29 +7,18 @@ import {
   LoadInfoForTransportCompanies_Factories_Admins_Drivers,
 } from './model/load-info-for-transport-companies-factories-admins-drivers.model';
 import { API_ROUTES } from 'app/constants/api';
-import { mockLoadsForTransportCompanies_Factories_Admins_Drivers } from './mock/load-info-for-transport-companies-factories-admins-drivers.mock';
 import { LoadStatus } from './model/load-status.model';
-import { mockLoadStatuses } from './mock/load-status.mock';
 import { LoadInfo } from './model/load-info.model';
-import { mockLoadInfo } from './mock/load-info.mock';
 import { TransportTariffParam } from './model/transport-tariff-param.model';
-import {
-  mockTransportTariffParamInString,
-  mockTransportTariffParams,
-} from './mock/transport-tariff-param.mock';
 import { LoadRegister } from './model/load-register.model';
 import { LoadEdit } from './model/load-edit.model';
 import { ShortResponse } from 'app/data/model/short-response.model';
-import { mockShortResponse } from 'app/data/mock/short-response.mock';
 import { TruckInfo } from '../driver-truck-management/model/truck-info.model';
 import { TruckDriverInfo } from '../driver-truck-management/model/truck-driver-info.model';
 import { AnnouncementSubGroup } from '../announcement-group-subgroup-management/model/announcement-subgroup.model';
 import { LoadAllocationInfo } from './model/load-allocation-info.model';
-import { mockLoadAllocationInfos } from './mock/load-allocation-info.mock';
 import { LoadAllocatedToNextTurn } from './model/load-allocated-to-next-turn.model';
-import { mockLoadAllocatedToNextTurn } from './mock/load-allocated-to-next-turn.mock';
 import { LoadAllocationPriority } from './model/load-allocation-priority';
-import { mockLoadAllocationRecords } from './mock/load-allocation-records';
 
 @Injectable({
   providedIn: 'root',
@@ -95,9 +84,7 @@ export class LoadManagementService {
       LoadForTransportCompanies_Factories_Admins_Drivers[]
     >(
       apiUrl,
-      bodyValue,
-      mockLoadsForTransportCompanies_Factories_Admins_Drivers
-    );
+      bodyValue);
     //#endregion
   }
 
@@ -129,9 +116,7 @@ export class LoadManagementService {
       LoadForTransportCompanies_Factories_Admins_Drivers[]
     >(
       apiUrl,
-      bodyValue,
-      mockLoadsForTransportCompanies_Factories_Admins_Drivers
-    );
+      bodyValue);
     //#endregion
   }
 
@@ -150,7 +135,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -215,9 +200,7 @@ export class LoadManagementService {
       LoadForTransportCompanies_Factories_Admins_Drivers[]
     >(
       apiUrl,
-      bodyValue,
-      mockLoadsForTransportCompanies_Factories_Admins_Drivers
-    );
+      bodyValue);
     //#endregion
   }
 
@@ -280,9 +263,7 @@ export class LoadManagementService {
       LoadForTransportCompanies_Factories_Admins_Drivers[]
     >(
       apiUrl,
-      bodyValue,
-      mockLoadsForTransportCompanies_Factories_Admins_Drivers
-    );
+      bodyValue);
     //#endregion
   }
 
@@ -298,7 +279,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       LoadStatus[]
-    >(apiUrl, bodyValue, mockLoadStatuses);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -318,7 +299,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       LoadInfo
-    >(apiUrl, bodyValue, mockLoadInfo);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -341,7 +322,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TransportTariffParam[]
-    >(apiUrl, bodyValue, mockTransportTariffParams);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -360,7 +341,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       { TPTParams: string }
-    >(apiUrl, bodyValue, mockTransportTariffParamInString);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -380,7 +361,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TransportTariffParam[]
-    >(apiUrl, bodyValue, mockTransportTariffParams);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -418,7 +399,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -438,7 +419,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -458,7 +439,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -480,7 +461,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -502,7 +483,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -539,7 +520,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -562,7 +543,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -585,7 +566,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -608,7 +589,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       LoadAllocatedToNextTurn
-    >(apiUrl, bodyValue, mockLoadAllocatedToNextTurn);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -626,7 +607,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       LoadAllocationInfo[]
-    >(apiUrl, bodyValue, mockLoadAllocationRecords);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -644,7 +625,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       LoadAllocationInfo[]
-    >(apiUrl, bodyValue, mockLoadAllocationInfos);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -669,7 +650,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -728,7 +709,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 

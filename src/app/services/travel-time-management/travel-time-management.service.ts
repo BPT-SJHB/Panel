@@ -5,8 +5,6 @@ import { ApiResponse } from 'app/data/model/api-Response.model';
 import { API_ROUTES } from 'app/constants/api';
 import { TravelTime } from 'app/data/model/travel-time.model';
 import { ShortResponse } from 'app/data/model/short-response.model';
-import { mockTravelTimes } from 'app/data/mock/travel-time.mock';
-import { mockShortResponse } from 'app/data/mock/short-response.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -55,7 +53,7 @@ export class TravelTimeManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TravelTime[]
-    >(apiUrl, bodyValue, mockTravelTimes);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -83,7 +81,7 @@ export class TravelTimeManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       TravelTime
-    >(apiUrl, bodyValue, mockTravelTimes[0]);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -111,7 +109,7 @@ export class TravelTimeManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -139,7 +137,7 @@ export class TravelTimeManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -165,7 +163,7 @@ export class TravelTimeManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -192,7 +190,7 @@ export class TravelTimeManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(apiUrl, bodyValue, mockShortResponse);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 }
