@@ -1,10 +1,10 @@
 import { SoftwareUserInfo } from '../model/software-user-info.model';
 
 export const mockSoftwareUserInfo: SoftwareUserInfo = {
-  UserId: 7018,
-  UserName: 'مرتضي شاهمرادي',
-  MobileNumber: '09132043180',
-  Password: 'Password',
+  UserId: 1001,
+  UserName: 'کاربر آزمایشی',
+  MobileNumber: '09000000000',
+  Password: 'Password123',
   UserTypeId: 2,
   UserActive: true,
   SMSOwnerActive: true,

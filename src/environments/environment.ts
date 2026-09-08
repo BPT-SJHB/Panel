@@ -2,7 +2,7 @@ const mainApiBaseUrl = 'https://bar.irmto.ir';
 const ticketApiBaseUrl = 'https://irmto.ir/ticket';
 
 export const environment = {
-  production: false,
+  production: true,
   mainApiUrl: `${mainApiBaseUrl}`,
   ticketApiUrl: `${ticketApiBaseUrl}`,
   apiUrl: `${mainApiBaseUrl}`,
