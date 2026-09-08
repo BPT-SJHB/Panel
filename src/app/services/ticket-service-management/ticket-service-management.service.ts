@@ -11,6 +11,7 @@ import {
   CreateChatMessageRequest,
   Ticket,
   TicketCreateRequest,
+  TicketCreateResponse,
   TicketQueryParams,
 } from './model/ticket.model';
 import { Department } from './model/department.model';
@@ -47,14 +48,12 @@ export class TicketServiceManagementService {
 
   //#region Auth & Single-Use Tokens
   public async LoginWithNoAuth(
-    username: string,
-    departmentId = 1
+    payload: LoginWithNoAuthDTO
   ): Promise<ApiResponse<TicketUser>> {
     const apiUrl = API_ROUTES.TicketAPI.Auth.LoginWithNoAuth;
-    const body: LoginWithNoAuthDTO = { username, departmentId };
     return await this.api.CommunicateWithAPI_Post<LoginWithNoAuthDTO, TicketUser>(
       apiUrl,
-      body,
+      payload,
       mockTicketUser,
       { withCredentials: true }
     );
@@ -152,8 +151,8 @@ export class TicketServiceManagementService {
   //#region Ticket CRUD
   public async CreateTicket(
     ticket: TicketCreateRequest
-  ): Promise<ApiResponse<{ id: string; trackCode: string }>> {
-    const mockResponse = {
+  ): Promise<ApiResponse<TicketCreateResponse>> {
+    const mockResponse: TicketCreateResponse = {
       id: mockTickets[0]?.id ?? crypto.randomUUID(),
       trackCode:
         mockTickets[0]?.trackCode ?? Math.random().toString(36).substring(2, 8),
@@ -161,7 +160,7 @@ export class TicketServiceManagementService {
 
     return await this.api.CommunicateWithAPI_Post<
       TicketCreateRequest,
-      { id: string; trackCode: string }
+      TicketCreateResponse
     >(API_ROUTES.TicketAPI.Tickets.CreateTicket, ticket, mockResponse, {
       withCredentials: true,
       showSuccessToast: true,

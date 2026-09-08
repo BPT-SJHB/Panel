@@ -6,5 +6,4 @@ export const mockTicketUser: TicketUser = {
   departmentId: 1,
   createdAt: new Date('2025-01-01T00:00:00Z').toISOString(),
   updatedAt: new Date('2025-01-01T00:00:00Z').toISOString(),
-  roleIds: [1, 2, 3],
 };

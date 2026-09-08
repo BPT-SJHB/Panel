@@ -31,9 +31,9 @@ describe('TicketServiceManagementService', () => {
   });
 
   it('LoginWithNoAuth should return ticket user', async () => {
-    const username = '09100000000';
+    const payload = { username: '09100000000', departmentId: 1 };
 
-    const res = await service.LoginWithNoAuth(username);
+    const res = await service.LoginWithNoAuth(payload);
     expect(res.data).toEqual(jasmine.any(Object));
   });
 
