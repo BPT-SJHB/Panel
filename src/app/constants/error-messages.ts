@@ -51,4 +51,5 @@ export enum TicketErrorCodes {
   OTPExpired = 26,
   OTPInvalid = 27,
   OTPSendFailed = 28,
+  OTPMaxAttemptsExceeded = 29,
 }
