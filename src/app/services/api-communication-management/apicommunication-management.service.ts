@@ -31,32 +31,28 @@ export class APICommunicationManagementService {
   public async CommunicateWithAPI_Post<TBody, TExpect>(
     url: string,
     bodyValue: TBody,
-    mockValue?: TExpect,
+    optionOrMock?: ApiRequestOptions | TExpect,
     option?: ApiRequestOptions
   ): Promise<ApiResponse<TExpect>> {
-    if (this.isMockEnabled()) {
-      const mockResult = this.mockResponse(mockValue);
-      this.handleSuccessToast(mockResult.data, option);
-      return mockResult;
-    }
+    const opts = this.resolveOptions(optionOrMock, option);
 
     try {
       const response = await firstValueFrom(
         this.http.post<TExpect>(url, bodyValue, {
-          withCredentials: option?.withCredentials ?? false,
+          withCredentials: opts?.withCredentials ?? false,
         })
       );
 
       const normalized = this.normalizeResponse(response);
       const result = this.success(normalized);
-      this.handleSuccessToast(normalized, option);
+      this.handleSuccessToast(normalized, opts);
       return result;
     } catch (error) {
       const errorResult = await this.httpErrorService.handleHttpError<TExpect>(
         error,
-        option?.redirectToLoginOnUnauthorized ?? true
+        opts?.redirectToLoginOnUnauthorized ?? true
       );
-      this.handleErrorToast(errorResult, option);
+      this.handleErrorToast(errorResult, opts);
       return errorResult;
     }
   }
@@ -65,36 +61,30 @@ export class APICommunicationManagementService {
 
   public async CommunicateWithAPI_Get<TExpect>(
     url: string,
-    mockValue?: TExpect,
+    optionOrMock?: ApiRequestOptions | TExpect,
     option?: ApiRequestOptions
   ): Promise<ApiResponse<TExpect>> {
-    if (this.isMockEnabled()) {
-      const mockResult = this.mockResponse(mockValue);
-      if (option?.showSuccessToast) {
-        this.handleSuccessToast(mockResult.data, option);
-      }
-      return mockResult;
-    }
+    const opts = this.resolveOptions(optionOrMock, option);
 
     try {
       const response = await firstValueFrom(
         this.http.get<TExpect>(url, {
-          withCredentials: option?.withCredentials ?? false,
+          withCredentials: opts?.withCredentials ?? false,
         })
       );
 
       const data = trimInDeep(response);
       const result = this.success(data);
-      if (option?.showSuccessToast) {
-        this.handleSuccessToast(data, option);
+      if (opts?.showSuccessToast) {
+        this.handleSuccessToast(data, opts);
       }
       return result;
     } catch (error) {
       const errorResult = await this.httpErrorService.handleHttpError<TExpect>(
         error,
-        option?.redirectToLoginOnUnauthorized ?? true
+        opts?.redirectToLoginOnUnauthorized ?? true
       );
-      this.handleErrorToast(errorResult, option);
+      this.handleErrorToast(errorResult, opts);
       return errorResult;
     }
   }
@@ -104,16 +94,14 @@ export class APICommunicationManagementService {
   public CommunicateWithAPI_Post_FromData_With_Progress<TExpect>(
     url: string,
     bodyValue: FormData,
-    mockValue?: TExpect,
+    optionOrMock?: ApiRequestOptions | TExpect,
     option?: ApiRequestOptions
   ): Observable<ApiResponse<TExpect> | number> {
-    if (this.isMockEnabled()) {
-      return this.mockProgress(mockValue, option);
-    }
+    const opts = this.resolveOptions(optionOrMock, option);
 
     return this.http
       .post<TExpect>(url, bodyValue, {
-        withCredentials: option?.withCredentials ?? false,
+        withCredentials: opts?.withCredentials ?? false,
         reportProgress: true,
         observe: 'events',
       })
@@ -127,7 +115,7 @@ export class APICommunicationManagementService {
             }
             case HttpEventType.Response: {
               const data = trimInDeep(event.body);
-              this.handleSuccessToast(data, option);
+              this.handleSuccessToast(data, opts);
               return {
                 success: true,
                 data,
@@ -141,9 +129,9 @@ export class APICommunicationManagementService {
           const errorResult =
             await this.httpErrorService.handleHttpError<TExpect>(
               error,
-              option?.redirectToLoginOnUnauthorized ?? true
+              opts?.redirectToLoginOnUnauthorized ?? true
             );
-          this.handleErrorToast(errorResult, option);
+          this.handleErrorToast(errorResult, opts);
           throw errorResult;
         })
       );
@@ -151,8 +139,23 @@ export class APICommunicationManagementService {
 
   // ---------------- helpers ----------------
 
-  private isMockEnabled(): boolean {
-    return !environment.production && environment.disableApi;
+  private resolveOptions(
+    optionOrMock?: any,
+    option?: ApiRequestOptions
+  ): ApiRequestOptions | undefined {
+    if (option) return option;
+    if (
+      optionOrMock &&
+      typeof optionOrMock === 'object' &&
+      ('withCredentials' in optionOrMock ||
+        'redirectToLoginOnUnauthorized' in optionOrMock ||
+        'showSuccessToast' in optionOrMock ||
+        'showErrorToast' in optionOrMock ||
+        'successMessage' in optionOrMock)
+    ) {
+      return optionOrMock as ApiRequestOptions;
+    }
+    return undefined;
   }
 
   private success<T>(data: T): ApiResponse<T> {

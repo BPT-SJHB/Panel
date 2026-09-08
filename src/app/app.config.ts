@@ -5,7 +5,7 @@ import {
   isDevMode,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import { providePrimeNG } from 'primeng/config';
@@ -22,12 +22,13 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { sidebarReducer } from './store/sidebar/sidebar.reducer';
 import { contentManagerReducer } from './store/content-manager/content-manager.reducer';
 import { tabReducer } from './store/tab/tab.reducer';
+import { mockApiInterceptor } from './interceptors/mock-api.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([mockApiInterceptor])),
     provideAnimationsAsync(),
     providePrimeNG({ theme: customTheme }),
     importProvidersFrom(ToastModule),
