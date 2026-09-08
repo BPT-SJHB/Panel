@@ -1,10 +1,10 @@
 export interface ChatMessage {
-  id: string;
+  id?: string;
   senderId?: number;
   senderType?: string;
-  message: string;
-  createdAt: string;
-  updatedAt: string;
+  message?: string;
+  createdAt?: string;
+  updatedAt?: string;
   attachments?: string[];
 }
 
@@ -21,27 +21,32 @@ export interface TicketCreateRequest {
   attachments?: string[];
 }
 
+export interface TicketCreateResponse {
+  id?: string;
+  trackCode?: string;
+}
+
 export interface Ticket {
-  id: string;
+  id?: string;
   userId?: number;
   phoneNumber?: string;
-  departmentId: number;
-  ticketTypeId: number;
-  ticketStatusId: number;
-  title: string;
-  trackCode: string;
-  createdAt: string;
-  updatedAt: string;
-  chat: ChatMessage[];
+  departmentId?: number;
+  ticketTypeId?: number;
+  ticketStatusId?: number;
+  title?: string;
+  trackCode?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  chat?: ChatMessage[];
 }
 
 export interface TicketQueryParams {
+  departmentId?: number;
+  orderBy?: string; // field to order by
+  orderDir?: string; // asc or desc
   page?: number; // page number
   pageSize?: number; // items per page
   ticketStatusId?: number; // optional filter
-  ticketTypeId?: number; // optional filter
+  ticketTypeId?: number;
   userId?: number; // optional filter
-  departmentId?: number; // optional filter
-  orderBy?: string; // field to order by
-  orderDir?: 'asc' | 'desc'; // asc or desc
 }
