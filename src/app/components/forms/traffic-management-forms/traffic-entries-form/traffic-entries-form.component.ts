@@ -1,7 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { BaseLoading } from '../../shared/component-base/base-loading';
 import { TrafficManagementService } from 'app/services/traffic-management/traffic-management.service';
-import { mockTrafficInfo } from 'app/services/traffic-management/mock/traffic-info.mock';
 import { TrafficInfo } from 'app/services/traffic-management/model/traffic-info.model';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { CommonModule } from '@angular/common';
@@ -30,7 +29,7 @@ export class TrafficEntriesFormComponent extends BaseLoading {
     this.withLoading(async () => {
       const trafficGateId = 1;
       const trafficCardNo = 'ABcDEf0';
-      const trafficPic = mockTrafficInfo.TrafficPicture ?? '';
+      const trafficPic = '';
       const response = await this.trafficService.RegisterTraffic(
         trafficGateId,
         trafficCardNo,

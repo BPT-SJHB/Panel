@@ -26,8 +26,14 @@
               <div
                 class="relative px-4 py-3 rounded-2xl border border-primary shadow-sm break-words flex flex-col gap-3"
                 [ngClass]="{
-                  'bg-primary-contrast': !isSender(chat.senderId, chat.senderType),
-                  'bg-highlight-emphasis': isSender(chat.senderId, chat.senderType),
+                  'bg-primary-contrast': !isSender(
+                    chat.senderId,
+                    chat.senderType
+                  ),
+                  'bg-highlight-emphasis': isSender(
+                    chat.senderId,
+                    chat.senderType
+                  ),
                 }"
               >
                 <!-- Attachments Section -->
