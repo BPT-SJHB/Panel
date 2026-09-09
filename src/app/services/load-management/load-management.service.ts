@@ -82,9 +82,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       LoadForTransportCompanies_Factories_Admins_Drivers[]
-    >(
-      apiUrl,
-      bodyValue);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -114,9 +112,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       LoadForTransportCompanies_Factories_Admins_Drivers[]
-    >(
-      apiUrl,
-      bodyValue);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -198,9 +194,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       LoadForTransportCompanies_Factories_Admins_Drivers[]
-    >(
-      apiUrl,
-      bodyValue);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -261,9 +255,7 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       LoadForTransportCompanies_Factories_Admins_Drivers[]
-    >(
-      apiUrl,
-      bodyValue);
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -654,13 +646,13 @@ export class LoadManagementService {
     //#endregion
   }
 
-  public async GetTravelTimeOfLoadAllocation(laId: number): Promise<
+  public async GetTravelTimeOfMyLoadAllocation(laId: number): Promise<
     ApiResponse<{
       TravelTime: number;
     }>
   > {
     //#region Consts
-    const apiUrl = API_ROUTES.LoadAllocationAPI.GetTravelTimeOfLoadAllocation;
+    const apiUrl = API_ROUTES.LoadAllocationAPI.GetTravelTimeOfMyLoadAllocation;
     const LoadAllocationInfo: LoadAllocationInfo = {
       LAId: laId,
       LoadId: 0,

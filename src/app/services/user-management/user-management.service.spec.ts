@@ -81,7 +81,6 @@ describe('UserManagementService', () => {
 
     // 7️⃣ Custom password change
     const customRes = await service.CustomSoftwareUserPassword(
-      userId,
       oldPassword,
       TEST_PASSWORD
     );

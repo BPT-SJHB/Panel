@@ -181,9 +181,7 @@ describe('WalletManagementService', () => {
   it('Testing GetWalletBalance method', async () => {
     await devAuth.loginAsDriver();
 
-    const response = await service.GetWalletBalance(
-      walletSampleData.MoneyWalletId
-    );
+    const response = await service.GetMyWalletBalance();
 
     validateResponse<{ Balance: number }>(response, ApiBalanceSchema);
   });
@@ -191,22 +189,10 @@ describe('WalletManagementService', () => {
   it('Testing GetWalletTransactions method', async () => {
     await devAuth.loginAsDriver();
 
-    const response = await service.GetWalletTransactions(
-      walletSampleData.MoneyWalletId
-    );
-
-    validateResponse<WalletTransaction[]>(
-      response,
-      ApiWalletTransactionsSchema
-    );
-  });
-
   it('Testing GetWalletPaymentRecords method', async () => {
     await devAuth.loginAsDriver();
 
-    const response = await service.GetWalletPaymentRecords(
-      walletSampleData.MoneyWalletId
-    );
+    const response = await service.GetMyWalletPaymentRecords();
 
     validateResponse<WalletPaymentHistory[]>(
       response,

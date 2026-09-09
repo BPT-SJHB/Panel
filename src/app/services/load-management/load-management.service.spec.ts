@@ -403,7 +403,7 @@ describe('LoadManagementService', () => {
     const regLAId = getRes.data[0].LAId;
 
     const getTravelTimeRes =
-      await service.GetTravelTimeOfLoadAllocation(regLAId);
+      await service.GetTravelTimeOfMyLoadAllocation(regLAId);
     validateResponse<{
       TravelTime: number;
     }>(getTravelTimeRes, ApiTravelTimeSchema);
