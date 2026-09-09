@@ -156,9 +156,16 @@ export class WalletTransactionsTableComponent
 
     try {
       this.loadingService.setLoading(true);
-      const response = await this.walletService.GetWalletTransactions(
-        this.walletId()!
-      );
+
+      let response;
+      if (this.walletType() === 'User') {
+        response = await this.walletService.GetMyWalletTransactions();
+      } else {
+        response = await this.walletService.GetWalletTransactions(
+          this.walletId()!
+        );
+      }
+
       if (!checkAndToastError(response, this.toast)) {
         this.transactions.set([]);
         return;

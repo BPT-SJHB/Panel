@@ -81,7 +81,7 @@ export class IssuedTurnListFormComponent implements OnInit, OnDestroy {
       accept: async () => {
         try {
           this.loadingService.setLoading(true);
-          await this.cancelTurn(turn.TurnId);
+          await this.cancelTurn();
         } finally {
           this.loadingService.setLoading(false);
         }
@@ -90,8 +90,8 @@ export class IssuedTurnListFormComponent implements OnInit, OnDestroy {
   }
 
   // 🚫 API call to cancel a turn and reload the list
-  private async cancelTurn(turnId: number): Promise<void> {
-    const response = await this.turnsManagerService.CancelTurn(turnId);
+  private async cancelTurn(): Promise<void> {
+    const response = await this.turnsManagerService.CancelMyTurn();
     if (!checkAndToastError(response, this.toast)) return;
 
     this.toast.success('موفق', response.data.Message);

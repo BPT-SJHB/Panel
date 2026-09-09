@@ -107,7 +107,7 @@ export class LoadAllocationPriorityComponent
     this.loadingTimeTravels.update((lt) => lt.add(ladId));
     try {
       const response =
-        await this.loadsService.GetTravelTimeOfLoadAllocation(ladId);
+        await this.loadsService.GetTravelTimeOfMyLoadAllocation(ladId);
       if (!checkAndToastError(response, this.toast)) return;
       this.travelTime.update((map) => map.set(ladId, response.data.TravelTime));
     } finally {

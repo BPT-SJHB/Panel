@@ -132,6 +132,22 @@ export class TurnManagementService {
     //#endregion
   }
 
+  public async CancelMyTurn(): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.Turns.CancelMyTurn;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue);
+    //#endregion
+  }
+
   //#endregion
 
   //#region Turn Registering method
@@ -153,6 +169,30 @@ export class TurnManagementService {
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
       TruckId: truckInfo.TruckId,
+      SequentialTurnId: sequentialTurnInfo.SeqTurnId,
+    };
+    //#endregion
+
+    //#region Request
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue);
+    //#endregion
+  }
+
+  public async RealTimeMyTurnRegister(
+    sequentialTurnId: number
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.TransportationAPI.Turns.TurnRegisterRequests
+        .RealTimeMyTurnRegister;
+    const sequentialTurnInfo: SequentialTurn = {
+      SeqTurnId: sequentialTurnId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
       SequentialTurnId: sequentialTurnInfo.SeqTurnId,
     };
     //#endregion

@@ -75,8 +75,34 @@ export class UserManagementService {
     //#endregion
   }
 
+  public async ResetMyPassword(): Promise<ApiResponse<UsernamePassword>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.SoftwareUserAPI.UserManagement.ResetMyPassword;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request
+    const response = await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      APIUsernamePassword
+    >(apiUrl, bodyValue);
+    //#endregion
+
+    //#region Return
+    return {
+      success: response.success,
+      data: {
+        Username: response.data?.UserShenaseh ?? '',
+        Password: response.data?.UserPassword ?? '',
+      },
+      error: response.error,
+    };
+    //#endregion
+  }
+
   public async CustomSoftwareUserPassword(
-    userId: number,
     oldPass: string,
     newPass: string
   ): Promise<ApiResponse<ShortResponse>> {
@@ -85,7 +111,6 @@ export class UserManagementService {
       API_ROUTES.SoftwareUserAPI.UserManagement.CustomSoftwareUserPassword;
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
-      SoftwareUserId: userId,
       OldPassword: oldPass,
       NewPassword: newPass,
     };
@@ -140,11 +165,7 @@ export class UserManagementService {
     return this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
-    >(
-      apiUrl,
-      bodyValue,
-      { redirectToLoginOnUnauthorized: false }
-    );
+    >(apiUrl, bodyValue, { redirectToLoginOnUnauthorized: false });
     //#endregion
   }
 

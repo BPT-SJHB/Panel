@@ -187,9 +187,23 @@ export class WalletManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       { Balance: number }
-    >(apiUrl, bodyValue, {
-      Balance: 10000000,
-    });
+    >(apiUrl, bodyValue);
+    //#endregion
+  }
+
+  public async GetMyWalletBalance(): Promise<ApiResponse<{ Balance: number }>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.WalletAndTrafficApi.WalletInfo.GetMyWalletBalance;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      { Balance: number }
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
@@ -253,6 +267,25 @@ export class WalletManagementService {
     //#endregion
   }
 
+  public async GetMyWalletTransactions(): Promise<
+    ApiResponse<WalletTransaction[]>
+  > {
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.WalletAndTrafficApi.WalletInfo.GetMyWalletTransactions;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      WalletTransaction[]
+    >(apiUrl, bodyValue);
+    //#endregion
+  }
+
   public async GetWalletPaymentRecords(
     walletId: number
   ): Promise<ApiResponse<WalletPaymentHistory[]>> {
@@ -265,6 +298,25 @@ export class WalletManagementService {
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
       MoneyWalletId: walletInfo.MoneyWalletId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      WalletPaymentHistory[]
+    >(apiUrl, bodyValue);
+    //#endregion
+  }
+
+  public async GetMyWalletPaymentRecords(): Promise<
+    ApiResponse<WalletPaymentHistory[]>
+  > {
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.WalletAndTrafficApi.WalletInfo.GetMyWalletPaymentRecords;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
     };
     //#endregion
 

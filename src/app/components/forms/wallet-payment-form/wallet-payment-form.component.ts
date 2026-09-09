@@ -109,8 +109,15 @@ export class WalletPaymentFormComponent
     if (!walletId) return;
     try {
       this.loadingService.setLoading(true);
-      const response = await this.walletService.GetWalletBalance(walletId);
+
+      let response;
+      if (this.walletType() === 'User') {
+        response = await this.walletService.GetMyWalletBalance();
+      } else {
+        response = await this.walletService.GetWalletBalance(walletId);
+      }
       if (!checkAndToastError(response, this.toast)) return;
+
       this.userWallet.update((wallet) => ({
         ...wallet!,
         Balance: response.data.Balance,
