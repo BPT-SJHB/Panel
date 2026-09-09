@@ -92,14 +92,13 @@ export class RegisterTurnFormComponent
    * Submits a real-time turn registration for the selected sequential turn.
    */
   async submitRealTimeTurn(sequentialTurnId: number) {
-    const truckInfo = this.truckInfo();
-    if (this.loading() || !truckInfo) return;
+    if (this.loading()) return;
 
     this.withLoading(async () => {
-      const response = await this.turnManagementService.RealTimeTurnRegister(
-        truckInfo.TruckId,
-        sequentialTurnId
-      );
+      const response =
+        await this.turnManagementService.RealTimeMyTurnRegister(
+          sequentialTurnId
+        );
 
       if (!checkAndToastError(response, this.toast)) return;
 

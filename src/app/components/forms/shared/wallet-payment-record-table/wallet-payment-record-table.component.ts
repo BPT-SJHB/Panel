@@ -96,9 +96,16 @@ export class WalletPaymentRecordTableComponent
 
     try {
       this.loadingService.setLoading(true);
-      const response = await this.walletService.GetWalletPaymentRecords(
-        this.walletId()!
-      );
+
+      let response;
+      if (this.walletType() === 'User') {
+        response = await this.walletService.GetMyWalletPaymentRecords();
+      } else {
+        response = await this.walletService.GetWalletPaymentRecords(
+          this.walletId()!
+        );
+      }
+
       if (!checkAndToastError(response, this.toast)) return;
       this.paymentHistory.set(response.data);
     } finally {

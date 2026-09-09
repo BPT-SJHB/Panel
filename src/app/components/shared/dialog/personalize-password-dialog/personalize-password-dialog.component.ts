@@ -101,7 +101,6 @@ export class PersonalizePasswordDialogComponent extends BaseLoading {
   private async submitPersonalizePassword() {
     await this.withLoading(async () => {
       const res = await this.userService.CustomSoftwareUserPassword(
-        this.ctrl('userId').value,
         this.ctrl('oldPassowrd').value,
         this.ctrl('newPassword').value
       );

@@ -146,12 +146,9 @@ export class UserProfileFormComponent extends BaseLoading implements OnInit {
 
   // 🔽 Reset user password and open dialog with new credentials
   async resetUserPassword(): Promise<void> {
-    const userId = this.userProfile().UserId;
-    if (userId === -1) return;
-
     let { password, username } = { password: '', username: '' };
     await this.withLoading(async () => {
-      const res = await this.userService.ResetSoftwareUserPassword(userId);
+      const res = await this.userService.ResetMyPassword();
       if (!checkAndToastError(res, this.toast)) return;
       password = res.data.Password;
       username = res.data.Username;
