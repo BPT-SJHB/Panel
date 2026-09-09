@@ -103,14 +103,98 @@ export function getMockResponseForUrl(url: string, _method: string): any {
   // Common Endpoints
   if (url.includes('GetFPCs')) return mockFPCsInfo;
   if (url.includes('GetCargoTerminals') || url.includes('GetLoadAnnouncementPlaces')) return mockCargoTerminals;
-  if (url.includes('GetProductTypes')) return mockProductTypes;
+  if (url.includes('GetProductTypes') || url.includes('GetProducts')) return mockProductTypes;
   if (url.includes('GetTariffs')) return mockTariffs;
-  if (url.includes('GetTravelTimes')) return mockTravelTimes;
+  if (url.includes('GetTravelTimes') || url.includes('GetTravelTime')) return mockTravelTimes;
   if (url.includes('GetUserTypes')) return mockUserTypes;
   if (url.includes('GetSoftwareUser')) return mockSoftwareUserInfo;
   if (url.includes('GetSoftwareUserProfile')) return mockSoftwareUserProfile;
   if (url.includes('GetAllOfWebprocessGroupsWebprocesses') || url.includes('GetWebProcesses')) return mockApiGroupProcesses;
   if (url.includes('GetAllTurnStatuses') || url.includes('TurnStatus')) return mockTurnStatus;
+
+  // Announcements & Sequential Turns
+  if (url.includes('GetAnnouncements')) return mockAnnouncementGroups;
+  if (url.includes('GetAnnouncementSubGroups')) return mockAnnouncementSubGroups;
+  if (url.includes('GetAnnouncementRelationAnnouncementSubGroups')) return mockRelationOfAnnouncementGroupAndSubGroups;
+  if (url.includes('GetAllAnnouncementRelationProvinces')) return mockRelationOfAnnouncementSubGroupAndProvinces;
+  if (url.includes('GetSequentialTurnsByLoaderType') || url.includes('GetSequentialTurns')) return mockSequentialTurns;
+  if (url.includes('GetSequentialTurnRelationAnnouncementSubGroups')) return mockRelationOfSequentialTurnToAnnouncementSubGroups;
+  if (url.includes('GetSequentialTurnsRelationLoaderTypes')) return mockRelationOfSequentialTurnToLoaderTypes;
+
+  // Driver & Truck
+  if (url.includes('GetTruckDriver')) return mockTruckDriverInfo;
+  if (url.includes('GetTruckBySoftwareUser') || url.includes('GetTruckFrom') || url.includes('GetComposedTruckInf')) return mockTruckInfo;
+  if (url.includes('GetTruckNativenessTypes')) return mockTruckNativenessTypesInfo;
+  if (url.includes('GetTruckNativeness')) return mockTruckNativenessInfo;
+
+  // Loads & Load Allocations
+  if (url.includes('GetLoadsfor') || url.includes('GetLoadStatusesForSoftwareUserType')) return mockLoadsForTransportCompanies_Factories_Admins_Drivers;
+  if (url.includes('GetLoadStatuses')) return mockLoadStatuses;
+  if (url.includes('GetLoad') && !url.includes('GetLoads')) return mockLoadInfo;
+  if (url.includes('GetTruckDriverLoadAllocationsRecords')) return mockLoadAllocationRecords;
+  if (url.includes('GetTruckDriverLoadAllocations')) return mockLoadAllocationInfos;
+  if (url.includes('LoadAllocateToOther')) return mockLoadAllocatedToNextTurn;
+
+  // Loader types & Province / Cities
+  if (url.includes('GetLoaderTypes') || url.includes('GetLoaderTypeBySoftwareUser')) return mockLoaderTypes;
+  if (url.includes('GetLoaderTypeRelationAnnouncementSubGroups')) return mockLoaderTypeToAnnouncementSubGroupRelation;
+  if (url.includes('GetProvinces') || url.includes('GetCities')) return mockProvinceAndCities;
+
+  // Turns
+  if (url.includes('GetTop10TruckTurns') || url.includes('GetTop5TruckTurns')) return mockTurnsForSoftwareUser;
+  if (url.includes('GetTurnAccounting')) return mockTurnAccounting;
+  if (url.includes('GetAllTurnCosts')) return mockTurnCosts;
+
+  // Traffic
+  if (url.includes('TrafficCardTempTypes') || url.includes('GetTrafficCardTempTypes')) return mockTrafficCardTempTypes;
+  if (url.includes('TrafficCardTypeCosts') || url.includes('GetTrafficCardTypeCosts')) return mockTrafficCardTypeCosts;
+  if (url.includes('TrafficCardTypes') || url.includes('GetTrafficCardTypes')) return mockTrafficCardTypes;
+  if (url.includes('TrafficReport') || url.includes('GetTrafficReport')) return mockTrafficReportInfos;
+  if (url.includes('Traffic') || url.includes('GetTraffic')) return mockTrafficInfo;
+
+  // TPT Params & Transport Companies
+  if (url.includes('GetAllTPTParams') || url.includes('GetTPTParams') || url.includes('GetListofTransportTariffsParams')) return mockTPTParamsInfo;
+  if (url.includes('GetTransportCompanies') || url.includes('GetTransportCompany')) return mockTransportCompaniesInfo;
+
+  // Reports
+  if (url.includes('GetLoadPermissions')) return mockLoadPermissions;
+  if (url.includes('GetTurnCostReport') || url.includes('GetLoadAccounting')) return mockLoadAccounting;
+
+  // Config & Carousels
+  if (url.includes('GetCarousel')) return mockAllCarouselInfos;
+  if (url.includes('GetGeneralConfig')) return mockGeneralConfigs;
+  if (url.includes('GetDeviceConfig')) return mockDeviceConfig;
+  if (url.includes('GetDevicesInfo')) return mockDevicesInfo;
+  if (url.includes('GetRequestersInfo')) return mockRequestersInfo;
+  if (url.includes('GetLoadAllocationConditions')) return mockLoadAllocationConditionsInfo;
+  if (url.includes('GetLoadAnnouncementConfigs')) return mockLoadAnnouncementConfigs;
+  if (url.includes('GetLoadViewConditions')) return mockLoadViewConditionsInfo;
+
+  // Wallet
+  if (url.includes('GetMoneyWalletBalance') || url.includes('GetWalletBalance')) {
+    return { Balance: mockWallet.Balance };
+  }
+  if (url.includes('GetMoneyWalletTransactions') || url.includes('GetWalletTransactions')) {
+    return mockWalletTransactions;
+  }
+  if (url.includes('GetMoneyWalletChargeRecords') || url.includes('GetWalletPaymentRecords')) {
+    return mockWalletPaymentHistories;
+  }
+  if (url.includes('GetDefaultAmounts')) {
+    return mockWalletDefaultAmounts;
+  }
+  if (url.includes('GetTotalAmountOfUserFunction')) {
+    return { Total: 10000000 };
+  }
+  if (url.includes('GetUserChargingFunction')) {
+    return mockWalletUserChargingFunctions;
+  }
+  if (url.includes('PaymentRequest')) {
+    return mockWalletPaymentRequest;
+  }
+  if (url.includes('MoneyWallet') || url.includes('Wallet')) {
+    return mockWallet;
+  }
 
   // Default fallback for action responses
   return mockShortResponse;
