@@ -169,44 +169,6 @@ export class WalletManagementService {
     //#endregion
   }
 
-  public async GetWalletBalance(
-    walletId: number
-  ): Promise<ApiResponse<{ Balance: number }>> {
-    //#region Consts
-    const apiUrl = API_ROUTES.WalletAndTrafficApi.WalletInfo.GetWalletBalance;
-    const walletInfo: Wallet = {
-      MoneyWalletId: walletId,
-    };
-    const bodyValue = {
-      SessionId: this.userAuth.getSessionId(),
-      MoneyWalletId: walletInfo.MoneyWalletId,
-    };
-    //#endregion
-
-    //#region Request + Return
-    return await this.apiCommunicator.CommunicateWithAPI_Post<
-      typeof bodyValue,
-      { Balance: number }
-    >(apiUrl, bodyValue);
-    //#endregion
-  }
-
-  public async GetMyWalletBalance(): Promise<ApiResponse<{ Balance: number }>> {
-    //#region Consts
-    const apiUrl = API_ROUTES.WalletAndTrafficApi.WalletInfo.GetMyWalletBalance;
-    const bodyValue = {
-      SessionId: this.userAuth.getSessionId(),
-    };
-    //#endregion
-
-    //#region Request + Return
-    return await this.apiCommunicator.CommunicateWithAPI_Post<
-      typeof bodyValue,
-      { Balance: number }
-    >(apiUrl, bodyValue);
-    //#endregion
-  }
-
   public async GetWalletDefaultAmounts(): Promise<
     ApiResponse<WalletDefaultAmount[]>
   > {

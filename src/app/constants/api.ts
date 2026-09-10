@@ -206,8 +206,6 @@ export const API_ROUTES = {
   WalletAndTrafficApi: {
     WalletInfo: {
       GetUserWallet: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}GetUserMoneyWallet`,
-      GetWalletBalance: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}GetMoneyWalletBalance`,
-      GetMyWalletBalance: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}GetMoneyWalletBalanceForMe`,
       GetDefaultAmounts: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}GetDefaultAmounts`,
       GetWalletTransactions: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}GetMoneyWalletTransactions`,
       GetMyWalletTransactions: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}GetMoneyWalletTransactionsForMe`,
