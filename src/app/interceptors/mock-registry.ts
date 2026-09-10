@@ -171,9 +171,6 @@ export function getMockResponseForUrl(url: string, _method: string): any {
   if (url.includes('GetLoadViewConditions')) return mockLoadViewConditionsInfo;
 
   // Wallet
-  if (url.includes('GetMoneyWalletBalance') || url.includes('GetWalletBalance')) {
-    return { Balance: mockWallet.Balance };
-  }
   if (url.includes('GetMoneyWalletTransactions') || url.includes('GetWalletTransactions')) {
     return mockWalletTransactions;
   }

@@ -103,30 +103,6 @@ export class WalletPaymentFormComponent
     }
   }
 
-  // 🔄 Refresh wallet balance (e.g. after payment)
-  async refreshWalletBalance(): Promise<void> {
-    const walletId = this.userWallet()?.MoneyWalletId;
-    if (!walletId) return;
-    try {
-      this.loadingService.setLoading(true);
-
-      let response;
-      if (this.walletType() === 'User') {
-        response = await this.walletService.GetMyWalletBalance();
-      } else {
-        response = await this.walletService.GetWalletBalance(walletId);
-      }
-      if (!checkAndToastError(response, this.toast)) return;
-
-      this.userWallet.update((wallet) => ({
-        ...wallet!,
-        Balance: response.data.Balance,
-      }));
-    } finally {
-      this.loadingService.setLoading(false);
-    }
-  }
-
   // 💰 Trigger a payment request and open the payment URI
   async paymentMoney(): Promise<void> {
     if (this.amount.invalid) return;

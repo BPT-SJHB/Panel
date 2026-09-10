@@ -75,10 +75,6 @@ const ApiWalletPaymentRequestSchema = createApiResponseSchema(
   zodWalletPaymentRequest
 );
 
-const ApiBalanceSchema = createApiResponseSchema(
-  z.object({ Balance: z.number() })
-);
-
 const ApiWalletTransactionsSchema = createApiResponseSchema(
   z.array(zodWalletTransaction)
 );
@@ -178,16 +174,16 @@ describe('WalletManagementService', () => {
     validateResponse<Wallet>(response, ApiWalletSchema);
   });
 
-  it('Testing GetWalletBalance method', async () => {
+  it('Testing GetMyWalletTransactions method', async () => {
     await devAuth.loginAsDriver();
 
-    const response = await service.GetMyWalletBalance();
+    const response = await service.GetMyWalletTransactions();
 
-    validateResponse<{ Balance: number }>(response, ApiBalanceSchema);
+    validateResponse<WalletTransaction[]>(
+      response,
+      ApiWalletTransactionsSchema
+    );
   });
-
-  it('Testing GetWalletTransactions method', async () => {
-    await devAuth.loginAsDriver();
 
   it('Testing GetWalletPaymentRecords method', async () => {
     await devAuth.loginAsDriver();
