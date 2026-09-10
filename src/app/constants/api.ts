@@ -212,7 +212,7 @@ export const API_ROUTES = {
       GetWalletTransactions: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}GetMoneyWalletTransactions`,
       GetMyWalletTransactions: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}GetMoneyWalletTransactionsForMe`,
       GetWalletPaymentRecords: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}GetMoneyWalletChargeRecords`,
-      GetMyWalletPaymentRecords: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}GetMoneyWalletChargeRecordsForMy`,
+      GetMyWalletPaymentRecords: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}GetMoneyWalletChargeRecordsForMe`,
       GetSmsWallet: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}GetSmsMoneyWallet`,
       GetTruckerAssociationWallet: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}GetTruckersAssociationMoneyWallet`,
       GetTransportCompanyWallet: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}GetTransportCompanyMoneyWallet`,
