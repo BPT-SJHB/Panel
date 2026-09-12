@@ -229,9 +229,18 @@ export class LoadsAnnouncementFormComponent
       const newLoad = this.loadsForm.getRawValue() as LoadRegister;
       newLoad.TPTParams = tptParams;
 
-      const response = await this.withLoading(() =>
-        this.loadService.RegisterNewLoad(newLoad)
-      );
+      const response = await this.withLoading(() => {
+        switch (this.loadType) {
+          case LoadListType.TRANSPORT_COMPANY:
+            return this.loadService.RegisterNewLoadForTransportCompanies(
+              newLoad
+            );
+          case LoadListType.ADMIN:
+            return this.loadService.RegisterNewLoadForAdmin(newLoad);
+          case LoadListType.FACTORIES_PRODUCTION_CENTERS:
+            return this.loadService.RegisterNewLoadForFPC(newLoad);
+        }
+      });
 
       if (!response || !checkAndToastError(response, this.toast)) return;
       this.toast.success('موفق', '');

@@ -357,11 +357,55 @@ export class LoadManagementService {
     //#endregion
   }
 
-  public async RegisterNewLoad(
+  public async RegisterNewLoadForTransportCompanies(
     load: LoadRegister
   ): Promise<ApiResponse<{ newLoadId: number }>> {
     //#region Consts
-    const apiUrl = API_ROUTES.LoadCapacitorAPI.RegisterLoad;
+    const apiUrl =
+      API_ROUTES.LoadCapacitorAPI.RegisterLoadForTransportCompanies;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      Load: load,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      { newLoadId: number }
+    >(apiUrl, bodyValue, {
+      newLoadId: 15,
+    });
+    //#endregion
+  }
+
+  public async RegisterNewLoadForAdmin(
+    load: LoadRegister
+  ): Promise<ApiResponse<{ newLoadId: number }>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.LoadCapacitorAPI.RegisterLoadForAdmin;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      Load: load,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      { newLoadId: number }
+    >(apiUrl, bodyValue, {
+      newLoadId: 15,
+    });
+    //#endregion
+  }
+
+  public async RegisterNewLoadForFPC(
+    load: LoadRegister
+  ): Promise<ApiResponse<{ newLoadId: number }>> {
+    //#region Consts
+    const apiUrl =
+      API_ROUTES.LoadCapacitorAPI.RegisterLoadForFactoriesAndProductionCenters;
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
       Load: load,
