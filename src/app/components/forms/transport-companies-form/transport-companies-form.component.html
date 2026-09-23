@@ -123,7 +123,7 @@
 
     <!-- وضعیت -->
     <app-toggle-switch-input
-      [readonly]="this.TCId.invalid"
+      [readonly]="!this.TCId.value"
       class="col-span-12 flex px-4"
       [label]="appTitle.toggleSwitches.status"
       [control]="Active"
@@ -143,7 +143,7 @@
 
     <app-button
       (click)="activateTransportComponySms()"
-      [disabled]="TCId.invalid || loading()"
+      [disabled]="!TCId.value || loading()"
       severity="warn"
       [label]="appTitle.buttons.activateSMS"
       class="w-full md:w-fit"
@@ -152,7 +152,7 @@
 
     <app-button
       (click)="confirmResetPassword()"
-      [disabled]="TCId.invalid || loading()"
+      [disabled]="!TCId.value || loading()"
       severity="info"
       [label]="appTitle.buttons.generateNewPassword"
       class="w-full md:w-fit"
@@ -202,11 +202,10 @@
     chooseStyleClass="text-sm"
     accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
     chooseIcon="pi pi-upload"
-    label="بارگزاری فایل اکسل"
     severity="warn"
     cancelLabel="لغو"
     [maxFileSize]="1024 * 1024"
-    uploadLabel="بارگزاری فایل"
+    uploadLabel="بارگذاری فایل"
     [auto]="false"
     [customUpload]="true"
     (uploadHandler)="onFileExcelUpload($event)"

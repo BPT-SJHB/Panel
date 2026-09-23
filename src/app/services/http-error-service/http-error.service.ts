@@ -63,9 +63,7 @@ export class HttpErrorService {
       ErrorCodes.InternalServerError;
 
     if (redirect && code === ErrorCodes.NotAuthenticated) {
-      await this.router.navigate([APP_ROUTES.AUTH.LOGIN]).catch(() => {
-        console.log('redirect failed!');
-      });
+      await this.router.navigate([APP_ROUTES.AUTH.LOGIN]).catch(() => {});
     }
 
     return {

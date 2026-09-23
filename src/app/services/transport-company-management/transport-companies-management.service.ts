@@ -94,10 +94,6 @@ export class TransportCompaniesManagementService {
     };
     //#endregion
 
-    console.log('in register transport company');
-
-    console.log(bodyValue);
-
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
@@ -118,10 +114,6 @@ export class TransportCompaniesManagementService {
     };
     //#endregion
 
-    console.log('in edit transport company');
-
-    console.log(bodyValue);
-
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
@@ -130,7 +122,9 @@ export class TransportCompaniesManagementService {
     //#endregion
   }
 
-  public async UploadTransportCompaniesExcel(file: string) {
+  public async UploadTransportCompaniesExcel(
+    file: string
+  ): Promise<ApiResponse<ShortResponse>> {
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.TransportCompanies
@@ -140,10 +134,6 @@ export class TransportCompaniesManagementService {
       TransportCompanies: file,
     };
     //#endregion
-
-    console.log('in upload transport companies excel');
-
-    console.log(bodyValue);
 
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
