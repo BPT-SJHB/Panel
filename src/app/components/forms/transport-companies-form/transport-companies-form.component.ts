@@ -206,6 +206,7 @@ export class TransportCompaniesFormComponent extends BaseLoading {
   // === Utility Methods ===
   private populateTransportComponyForm(tcInfo: TransportCompany) {
     this.transportComponyForm.patchValue({ ...tcInfo });
+    this.transportComponyForm.markAllAsTouched();
   }
 
   private extractTransportComponyForm() {
