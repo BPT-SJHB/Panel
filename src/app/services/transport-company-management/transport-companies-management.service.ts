@@ -122,7 +122,9 @@ export class TransportCompaniesManagementService {
     //#endregion
   }
 
-  public async UploadTransportCompaniesExcel(file: string) {
+  public async UploadTransportCompaniesExcel(
+    file: string
+  ): Promise<ApiResponse<ShortResponse>> {
     //#region Consts
     const apiUrl =
       API_ROUTES.TransportationAPI.TransportCompanies

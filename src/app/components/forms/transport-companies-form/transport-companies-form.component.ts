@@ -1,5 +1,5 @@
 // Angular & PrimeNG imports
-import { Component, inject, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -22,14 +22,12 @@ import { ToggleSwitchInputComponent } from 'app/components/shared/inputs/toggle-
 import { AppTitles } from 'app/constants/Titles';
 import { FormButtonsSectionComponent } from 'app/components/shared/sections/form-buttons-section/form-buttons-section.component';
 import { FormInputsSectionComponent } from 'app/components/shared/sections/form-inputs-section/form-inputs-section.component';
-import { LocationManagementService } from 'app/services/location-management/location-management.service';
-import { string } from 'zod';
 import {
   AutoCompleteConfigFactoryService,
   AutoCompleteType,
 } from 'app/services/auto-complete-config-factory/auto-complete-config-factory.service';
 import { SearchAutoCompleteFactoryComponent } from 'app/components/shared/inputs/search-auto-complete-factory/search-auto-complete-factory.component';
-import { FileUpload, FileUploadModule } from 'primeng/fileupload';
+import { FileUpload, FileUploadHandlerEvent, FileUploadModule } from 'primeng/fileupload';
 
 @Component({
   selector: 'app-transport-companies-form',
@@ -49,6 +47,7 @@ import { FileUpload, FileUploadModule } from 'primeng/fileupload';
   providers: [ConfirmationService, DialogService],
   templateUrl: './transport-companies-form.component.html',
   styleUrl: './transport-companies-form.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransportCompaniesFormComponent extends BaseLoading {
   @ViewChild('fu') fu?: FileUpload;
@@ -88,15 +87,12 @@ export class TransportCompaniesFormComponent extends BaseLoading {
   };
 
   async onTransportComponySelect(tcInfo: TransportCompany) {
-    try {
-      this.loadingService.setLoading(true);
+    await this.withLoading(async () => {
       const response =
         await this.transportComponyService.GetTransportCompanyInfo(tcInfo.TCId);
       if (!checkAndToastError(response, this.toast)) return;
       this.populateTransportComponyForm(response.data);
-    } finally {
-      this.loadingService.setLoading(false);
-    }
+    });
   }
 
   private createAutoCompletions() {
@@ -136,17 +132,14 @@ export class TransportCompaniesFormComponent extends BaseLoading {
 
   async activateTransportComponySms() {
     if (this.loading() || !this.TCId.value) return;
-    try {
-      this.loadingService.setLoading(true);
+    await this.withLoading(async () => {
       const response =
         await this.transportComponyService.ActiveTransportCompanySmsService(
           this.TCId.value!
         );
       if (!checkAndToastError(response, this.toast)) return;
       this.toast.success('موفق', response.data.Message);
-    } finally {
-      this.loadingService.setLoading(false);
-    }
+    });
   }
 
   // === Password Reset Handling ===
@@ -156,41 +149,33 @@ export class TransportCompaniesFormComponent extends BaseLoading {
       header: 'تغییر رمز عبور',
       icon: 'pi pi-exclamation-triangle',
       accept: async () => {
-        try {
-          this.loadingService.setLoading(true);
+        await this.withLoading(async () => {
           await this.resetTransportComponyPassword();
-        } finally {
-          this.loadingService.setLoading(false);
-        }
+        });
       },
     });
   }
 
   private async resetTransportComponyPassword() {
     if (!this.TCId.value) return;
-    try {
-      this.loadingService.setLoading(true);
-      const response =
-        await this.transportComponyService.ResetTransportCompanyPassword(
-          this.TCId.value!
-        );
-      if (!checkAndToastError(response, this.toast)) return;
-      const { Username, Password } = response.data!;
-      this.dialogService.open(NewPasswordDialogComponent, {
-        header: 'رمز عبور جدید',
-        width: '20rem',
-        modal: true,
-        closable: true,
-        inputValues: { username: Username, password: Password },
-      });
-    } finally {
-      this.loadingService.setLoading(false);
-    }
+    const response =
+      await this.transportComponyService.ResetTransportCompanyPassword(
+        this.TCId.value!
+      );
+    if (!checkAndToastError(response, this.toast)) return;
+    const { Username, Password } = response.data!;
+    this.dialogService.open(NewPasswordDialogComponent, {
+      header: 'رمز عبور جدید',
+      width: '20rem',
+      modal: true,
+      closable: true,
+      inputValues: { username: Username, password: Password },
+    });
   }
 
   async changeStatusTransportCompony(value: boolean) {
     if (this.loading() || !this.TCId.value) return;
-    this.withLoading(async () => {
+    await this.withLoading(async () => {
       const response =
         await this.transportComponyService.ChangeTransportCompanyStatus(
           this.extractTransportComponyForm().TCId,
@@ -214,13 +199,13 @@ export class TransportCompaniesFormComponent extends BaseLoading {
   }
 
   reloadForm() {
-    this.transportComponyForm.reset();
+    this.transportComponyForm.reset({ Active: false });
     this.transportComponyForm.markAsPristine();
     this.transportComponyForm.markAsUntouched();
     this.transportComponyForm.updateValueAndValidity();
   }
 
-  async onFileExcelUpload(event: any) {
+  async onFileExcelUpload(event: FileUploadHandlerEvent) {
     const file = event.files[0];
 
     await this.withLoading(async () => {
