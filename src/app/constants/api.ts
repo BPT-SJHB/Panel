@@ -215,13 +215,11 @@ export const API_ROUTES = {
       GetTruckerAssociationWallet: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}GetTruckersAssociationMoneyWallet`,
       GetTransportCompanyWallet: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}GetTransportCompanyMoneyWallet`,
       GetTruckWallet: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}GetTruckMoneyWallet`,
-      GetWalletWithCardNumber: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}GetMoneyWalletByCardNo`,
       GetTotalOfUserFunctions: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}GetTotalAmountOfUserFunction`,
       GetUserChargingFunctions: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}GetUserChargingFunction`,
     },
     WalletRequests: {
       PaymentRequest: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}PaymentRequest`,
-      TransferWalletBalance: `${environment.apiUrl}:${walletAndTrafficPort}${apiFixURLPart}TransferMoneyWalletBalance`,
     },
   },
   LoadCapacitorAPI: {

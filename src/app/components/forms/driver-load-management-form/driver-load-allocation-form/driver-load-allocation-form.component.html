@@ -1,6 +1,6 @@
 <div class="flex flex-row flex-wrap justify-around items-center gap-3">
   <!-- Loop over allocations -->
-  @for (load of loadAllocations(); track $index) {
+  @for (load of loadAllocations(); track load.LAId) {
     <p-card
       class="w-[90%] min-w-[300px] max-w-[450px] mb-3 shadow-md rounded-2xl"
       [class]="getRowColor(load.LoadAllocationStatusColor ?? 'BLACK')"
@@ -8,13 +8,15 @@
       <!-- Header: Good title + Priority -->
       <div class="flex justify-between items-center mb-2">
         <div class="flex gap-3">
-        <span class="font-bold text-lg">{{ load.GoodTitle || "---" }}</span>
-        <span class="flex items-center justify-center px-3 py-1 text-xs md:text-sm rounded-full bg-highlight  border border-blue-300">
-                {{ 'اولویت ' + load.Priority }}
-        </span>
+          <span class="font-bold text-lg">{{ load.GoodTitle || "---" }}</span>
+          <span
+            class="flex items-center justify-center px-3 py-1 text-xs md:text-sm rounded-full bg-highlight border border-blue-300"
+          >
+            {{ "اولویت " + (load.Priority ?? "-") }}
+          </span>
         </div>
         <span class="text-sm px-2 py-0.5 rounded-full bg-highlight">
-          {{load.LAId}}
+          {{ load.LAId }}
         </span>
       </div>
 
@@ -34,6 +36,7 @@
         <div>توضیحات: {{ load.Description || "-" }}</div>
         <div>آدرس: {{ load.Address || "-" }}</div>
         <div>پارامترهای موثر: {{ load.TPTParamsJoint || "-" }}</div>
+        <div>توضیحات تخصیص بار: {{ load.LANote || "-" }}</div>
       </div>
     </p-card>
   }

@@ -70,7 +70,7 @@ export class AppTitles {
       userIdTitle: 'شناسه کاربری',
       userNameTitle: 'نام کاربری',
       userTypesTitle: 'نوع کاربری',
-      userNationalCodeTitle: 'شناسه ملی',
+      userNationalCodeTitle: 'شماره ملی',
       userFatherName: 'نام پدر',
       userNameAndLastName: 'نام و نام‌خانوادگی',
     },

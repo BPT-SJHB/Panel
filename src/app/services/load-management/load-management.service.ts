@@ -2,10 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { UserAuthService } from '../user-auth-service/user-auth.service';
 import { APICommunicationManagementService } from '../api-communication-management/apicommunication-management.service';
 import { ApiResponse } from 'app/data/model/api-Response.model';
-import {
-  LoadForTransportCompanies_Factories_Admins_Drivers,
-  LoadInfoForTransportCompanies_Factories_Admins_Drivers,
-} from './model/load-info-for-transport-companies-factories-admins-drivers.model';
+import { LoadForTransportCompanies_Factories_Admins_Drivers } from './model/load-info-for-transport-companies-factories-admins-drivers.model';
 import { API_ROUTES } from 'app/constants/api';
 import { LoadStatus } from './model/load-status.model';
 import { LoadInfo } from './model/load-info.model';
@@ -244,7 +241,7 @@ export class LoadManagementService {
       bodyValue.LoadStatusId = loadStatusId;
     }
     if (loadSourceCityId !== undefined) {
-      bodyValue.LoadSourceCityId = loadStatusId;
+      bodyValue.LoadSourceCityId = loadSourceCityId;
     }
     if (loadTargetCityId !== undefined) {
       bodyValue.LoadTargetCityId = loadTargetCityId;
@@ -359,7 +356,7 @@ export class LoadManagementService {
 
   public async RegisterNewLoadForTransportCompanies(
     load: LoadRegister
-  ): Promise<ApiResponse<{ newLoadId: number }>> {
+  ): Promise<ApiResponse<ShortResponse>> {
     //#region Consts
     const apiUrl =
       API_ROUTES.LoadCapacitorAPI.RegisterLoadForTransportCompanies;
@@ -372,16 +369,14 @@ export class LoadManagementService {
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      { newLoadId: number }
-    >(apiUrl, bodyValue, {
-      newLoadId: 15,
-    });
+      ShortResponse
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
   public async RegisterNewLoadForAdmin(
     load: LoadRegister
-  ): Promise<ApiResponse<{ newLoadId: number }>> {
+  ): Promise<ApiResponse<ShortResponse>> {
     //#region Consts
     const apiUrl = API_ROUTES.LoadCapacitorAPI.RegisterLoadForAdmin;
     const bodyValue = {
@@ -393,16 +388,14 @@ export class LoadManagementService {
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      { newLoadId: number }
-    >(apiUrl, bodyValue, {
-      newLoadId: 15,
-    });
+      ShortResponse
+    >(apiUrl, bodyValue);
     //#endregion
   }
 
   public async RegisterNewLoadForFPC(
     load: LoadRegister
-  ): Promise<ApiResponse<{ newLoadId: number }>> {
+  ): Promise<ApiResponse<ShortResponse>> {
     //#region Consts
     const apiUrl =
       API_ROUTES.LoadCapacitorAPI.RegisterLoadForFactoriesAndProductionCenters;
@@ -415,10 +408,8 @@ export class LoadManagementService {
     //#region Request + Return
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
-      { newLoadId: number }
-    >(apiUrl, bodyValue, {
-      newLoadId: 15,
-    });
+      ShortResponse
+    >(apiUrl, bodyValue);
     //#endregion
   }
 

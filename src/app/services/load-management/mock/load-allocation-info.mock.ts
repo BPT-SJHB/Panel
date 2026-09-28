@@ -17,6 +17,7 @@ export const mockLoadAllocationInfos: LoadAllocationInfo[] = [
     Address: 'خیابان اول',
     Recipient: 'علی رضایی',
     TPTParamsJoint: 'پارامتر A',
+    LANote: 'مجوز صادر شده',
   },
   {
     LAId: 30032,
@@ -34,6 +35,7 @@ export const mockLoadAllocationInfos: LoadAllocationInfo[] = [
     Address: 'خیابان دوم',
     Recipient: 'مریم کاظمی',
     TPTParamsJoint: 'پارامتر B',
+    LANote: 'مجوز صادر شده',
   },
   {
     LAId: 30033,
@@ -51,6 +53,7 @@ export const mockLoadAllocationInfos: LoadAllocationInfo[] = [
     Address: 'خیابان سوم',
     Recipient: 'حمید حسینی',
     TPTParamsJoint: 'پارامتر C',
+    LANote: 'مجوز صادر شده',
   },
   {
     LAId: 30034,
@@ -67,6 +70,5 @@ export const mockLoadAllocationInfos: LoadAllocationInfo[] = [
     Description: 'بارگیری فردا صبح',
     Address: 'خیابان چهارم',
     Recipient: 'زهرا احمدی',
-    TPTParamsJoint: 'پارامتر D',
   },
 ];
