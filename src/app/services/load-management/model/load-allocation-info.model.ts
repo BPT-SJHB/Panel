@@ -16,6 +16,7 @@ export interface LoadAllocationInfo {
   Address?: string;
   Recipient?: string;
   TPTParamsJoint?: string;
+  LANote?: string;
 }
 
 export const zodLoadAllocationInfo = z.object({
@@ -33,5 +34,6 @@ export const zodLoadAllocationInfo = z.object({
   Description: z.string(),
   Address: z.string(),
   Recipient: z.string(),
-  TPTParamsJoint: z.string(),
+  TPTParamsJoint: z.string().optional(),
+  LANote: z.string().optional(),
 });
