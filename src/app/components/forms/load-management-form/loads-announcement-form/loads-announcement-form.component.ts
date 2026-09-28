@@ -243,7 +243,7 @@ export class LoadsAnnouncementFormComponent
       });
 
       if (!response || !checkAndToastError(response, this.toast)) return;
-      this.toast.success('موفق', '');
+      this.toast.success('موفق', response.data.Message);
       this.reloadForm();
     });
   }
