@@ -10,12 +10,11 @@ import { LoadInfo } from 'app/services/load-management/model/load-info.model';
 import { ReportsManagementService } from 'app/services/report-management/reports-management.service';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
-import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { AppTitles } from 'app/constants/Titles';
 
 @Component({
   selector: 'app-load-permissions-form',
-  imports: [TableComponent, ButtonComponent],
+  imports: [TableComponent],
   templateUrl: './load-permissions-form.component.html',
   styleUrl: './load-permissions-form.component.scss',
 })
@@ -107,9 +106,5 @@ export class LoadPermissionsFormComponent
       }
       this.rows.set(response.data);
     });
-  }
-
-  printPermissions() {
-    window.print();
   }
 }
