@@ -1,4 +1,10 @@
-import { Component, inject, signal, WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { BaseLoading } from 'app/components/forms/shared/component-base/base-loading';
 import { TableConfig } from 'app/constants/ui/table.ui';
 import {
@@ -17,6 +23,7 @@ import { AppTitles } from 'app/constants/Titles';
   imports: [TableComponent],
   templateUrl: './load-permissions-form.component.html',
   styleUrl: './load-permissions-form.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoadPermissionsFormComponent
   extends BaseLoading
@@ -30,7 +37,6 @@ export class LoadPermissionsFormComponent
     ...TableConfig,
     paginator: false,
   };
-  readonly addonWidth = '8rem';
   readonly appTitle = AppTitles;
 
   readonly rows = signal<LoadPermission[]>([]);
