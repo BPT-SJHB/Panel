@@ -1,6 +1,6 @@
 <div class="flex flex-row flex-wrap justify-around items-center gap-3">
   <!-- Loop over allocations -->
-  @for (load of loadAllocations(); track $index) {
+  @for (load of loadAllocations(); track load.LAId) {
     <p-card
       class="w-[90%] min-w-[300px] max-w-[450px] mb-3 shadow-md rounded-2xl"
       [class]="getRowColor(load.LoadAllocationStatusColor ?? 'BLACK')"
@@ -12,7 +12,7 @@
           <span
             class="flex items-center justify-center px-3 py-1 text-xs md:text-sm rounded-full bg-highlight border border-blue-300"
           >
-            {{ "اولویت " + load.Priority }}
+            {{ "اولویت " + (load.Priority ?? "-") }}
           </span>
         </div>
         <span class="text-sm px-2 py-0.5 rounded-full bg-highlight">

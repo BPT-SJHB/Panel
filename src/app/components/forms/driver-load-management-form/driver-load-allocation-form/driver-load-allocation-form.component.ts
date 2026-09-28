@@ -64,7 +64,9 @@ export class DriverLoadAllocationFormComponent
       const response = await this.loadService.GetRecordsOfLoadAllocation();
       if (!checkAndToastError(response, this.toast)) return;
 
-      this.loadAllocations.set(response.data);
+      this.loadAllocations.set(
+        Array.isArray(response.data) ? response.data : []
+      );
     });
   }
 
