@@ -32,15 +32,15 @@ export interface PrintCardsOptions {
   showCounter?: boolean;
 }
 
-export interface PrintTableColumn<T = any> {
+export interface PrintTableColumn<T extends object = Record<string, unknown>> {
   header: string;
   field: keyof T | string;
-  formatter?: (val: any, row: T) => string;
+  formatter?: (val: unknown, row: T) => string;
   compact?: boolean;
   align?: 'right' | 'center' | 'left';
 }
 
-export interface PrintTableOptions<T = any> {
+export interface PrintTableOptions<T extends object = Record<string, unknown>> {
   title: string;
   columns: PrintTableColumn<T>[];
   data: T[];
@@ -60,6 +60,16 @@ export interface PrintElementOptions {
   providedIn: 'root',
 })
 export class PrintService {
+  private static escapeHtml(val: unknown): string {
+    if (val === null || val === undefined) return '';
+    return String(val)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
   private static readonly VAZIRMATN_FONT_CSS = `
     @font-face {
       font-family: 'Vazirmatn';
@@ -88,25 +98,25 @@ export class PrintService {
       return;
     }
 
-    const docTitle = options.documentTitle || 'گزارش چاپی';
+    const docTitle = PrintService.escapeHtml(options.documentTitle || 'گزارش چاپی');
     const orientation = options.orientation || 'portrait';
     const pageSize = options.pageSize || 'A4';
     const showCounter = options.showCounter !== false;
-    const dateFa = new Date().toLocaleDateString('fa-IR');
+    const dateFa = new Date().toLocaleDateString('fa-IR-u-ca-persian');
 
     const cardsHtml = options.cards
       .map((card, idx) => {
         const sectionsHtml = card.sections
           .map(sec => {
             const secTitle = sec.title
-              ? `<div class="section-title">${sec.title}</div>`
+              ? `<div class="section-title">${PrintService.escapeHtml(sec.title)}</div>`
               : '';
             const fieldsHtml = sec.fields
               .map(
                 f => `
                 <div class="field-box ${f.fullWidth ? 'col-span-full' : ''}">
-                  <span class="field-label">${f.label}:</span>
-                  <span class="field-value">${f.value ?? '-'}</span>
+                  <span class="field-label">${PrintService.escapeHtml(f.label)}:</span>
+                  <span class="field-value">${PrintService.escapeHtml(f.value ?? '-')}</span>
                 </div>
               `
               )
@@ -126,7 +136,7 @@ export class PrintService {
         const signaturesHtml = card.signatures?.length
           ? `
             <div class="signatures">
-              ${card.signatures.map(s => `<div class="sig-box">${s.label}</div>`).join('')}
+              ${card.signatures.map(s => `<div class="sig-box">${PrintService.escapeHtml(s.label)}</div>`).join('')}
             </div>
           `
           : '';
@@ -136,11 +146,11 @@ export class PrintService {
             <!-- Card Header -->
             <div class="card-header">
               <div class="header-main">
-                <span class="permit-title">${card.title}</span>
-                ${card.subtitle ? `<span class="permit-subtitle">${card.subtitle}</span>` : ''}
+                <span class="permit-title">${PrintService.escapeHtml(card.title)}</span>
+                ${card.subtitle ? `<span class="permit-subtitle">${PrintService.escapeHtml(card.subtitle)}</span>` : ''}
               </div>
               <div class="header-side">
-                ${card.badge ? `<span class="badge">${card.badge}</span>` : ''}
+                ${card.badge ? `<span class="badge">${PrintService.escapeHtml(card.badge)}</span>` : ''}
                 ${showCounter ? `<span class="card-counter">برگ ${idx + 1} از ${options.cards.length}</span>` : ''}
               </div>
             </div>
@@ -155,7 +165,7 @@ export class PrintService {
               ${signaturesHtml}
               <div class="footer-meta">
                 <span>تاریخ چاپ: ${dateFa}</span>
-                ${card.footerNote ? `<span>${card.footerNote}</span>` : ''}
+                ${card.footerNote ? `<span>${PrintService.escapeHtml(card.footerNote)}</span>` : ''}
               </div>
             </div>
           </div>
@@ -320,15 +330,15 @@ export class PrintService {
       return;
     }
 
-    const title = options.title || 'گزارش';
+    const title = PrintService.escapeHtml(options.title || 'گزارش');
     const orientation = options.landscape !== false ? 'landscape' : 'portrait';
     const showIndex = options.showIndex !== false;
-    const dateFa = new Date().toLocaleDateString('fa-IR');
+    const dateFa = new Date().toLocaleDateString('fa-IR-u-ca-persian');
 
     const theadCols = options.columns
       .map(
         col =>
-          `<th class="${col.compact ? 'col-compact' : 'col-flexible'}" style="text-align: ${col.align || (col.compact ? 'center' : 'right')}">${col.header}</th>`
+          `<th class="${col.compact ? 'col-compact' : 'col-flexible'}" style="text-align: ${col.align || (col.compact ? 'center' : 'right')}">${PrintService.escapeHtml(col.header)}</th>`
       )
       .join('');
 
@@ -336,11 +346,11 @@ export class PrintService {
       .map((row, index) => {
         const cells = options.columns
           .map(col => {
-            const rawVal = (row as Record<string, any>)[col.field as string];
+            const rawVal = (row as Record<string, unknown>)[col.field as string];
             const val = col.formatter ? col.formatter(rawVal, row) : (rawVal ?? '-');
             const cssClass = col.compact ? 'col-compact' : 'col-flexible';
             const align = col.align || (col.compact ? 'center' : 'right');
-            return `<td class="${cssClass}" style="text-align: ${align}">${val}</td>`;
+            return `<td class="${cssClass}" style="text-align: ${align}">${PrintService.escapeHtml(val)}</td>`;
           })
           .join('');
         const indexCell = showIndex
@@ -520,20 +530,36 @@ export class PrintService {
     frame.style.border = '0';
     document.body.appendChild(frame);
 
+    const cleanup = () => {
+      if (document.body.contains(frame)) {
+        frame.remove();
+      }
+    };
+
     const doc = frame.contentWindow?.document;
     if (!doc) {
-      frame.remove();
+      cleanup();
       return;
     }
 
-    doc.open();
-    doc.write(html);
-    doc.close();
+    try {
+      doc.open();
+      doc.write(html);
+      doc.close();
 
-    setTimeout(() => {
-      frame.contentWindow?.focus();
-      frame.contentWindow?.print();
-      setTimeout(() => frame.remove(), 1000);
-    }, 250);
+      const win = frame.contentWindow;
+      if (win) {
+        win.addEventListener('afterprint', cleanup, { once: true });
+        setTimeout(() => {
+          win.focus();
+          win.print();
+          setTimeout(cleanup, 2000);
+        }, 250);
+      } else {
+        cleanup();
+      }
+    } catch {
+      cleanup();
+    }
   }
 }
