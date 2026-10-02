@@ -63,8 +63,11 @@ export class LoadAccountingFormComponent
 
     await this.withLoading(async () => {
       const response = await this.reportService.GetLoadAccounting(loadId);
-      if (!checkAndToastError(response, this.toast)) return;
-      this.loadsAccounting.set(response.data);
+      if (!checkAndToastError(response, this.toast)) {
+        this.loadsAccounting.set([]);
+        return;
+      }
+      this.loadsAccounting.set(response.data ?? []);
     });
   }
 

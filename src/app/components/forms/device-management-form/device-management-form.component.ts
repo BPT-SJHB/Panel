@@ -99,9 +99,12 @@ export class DeviceManagementFormComponent extends BaseLoading {
   private async loadDevices() {
     await this.withLoading(async () => {
       const response = await this.configService.GetAllOfDevices();
-      if (!checkAndToastError(response, this.toast)) return;
+      if (!checkAndToastError(response, this.toast)) {
+        this.devices.set([]);
+        return;
+      }
 
-      const rows = response.data.map((d) => ({
+      const rows = (response.data ?? []).map((d) => ({
         ...d,
         edit: editCell.value,
         delete: deleteCell.value,

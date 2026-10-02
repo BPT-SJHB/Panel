@@ -54,8 +54,11 @@ export class ParkingTrafficRecordsFormComponent
       const response = await this.trafficService.GetTrafficRecords(
         this.trafficCardId()
       );
-      if (!checkAndToastError(response, this.toast)) return;
-      this.trafficRecords.set(response.data);
+      if (!checkAndToastError(response, this.toast)) {
+        this.trafficRecords.set([]);
+        return;
+      }
+      this.trafficRecords.set(response.data ?? []);
     });
   }
 }

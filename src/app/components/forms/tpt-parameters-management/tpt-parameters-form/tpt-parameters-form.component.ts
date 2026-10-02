@@ -82,9 +82,12 @@ export class TPTParametersFormComponent
   private async loadTPTParams() {
     await this.withLoading(async () => {
       const response = await this.tptParamsService.GetAllTPTParams();
-      if (!checkAndToastError(response, this.toast)) return;
+      if (!checkAndToastError(response, this.toast)) {
+        this.tptParams.set([]);
+        return;
+      }
 
-      const rows = response.data.map((d) => ({
+      const rows = (response.data ?? []).map((d) => ({
         ...d,
         delete: deleteCell.value,
         edit: editCell.value,

@@ -170,8 +170,11 @@ export class CarouselFormComponent extends BaseLoading {
 
     await this.withLoading(async () => {
       const res = await this.carouselService.GetAllCarousels();
-      if (!checkAndToastError(res, this.toast)) return;
-      this.carousels.set(this.mapResponse(res.data));
+      if (!checkAndToastError(res, this.toast)) {
+        this.carousels.set([]);
+        return;
+      }
+      this.carousels.set(this.mapResponse(res.data ?? []));
     });
   }
 
@@ -180,8 +183,11 @@ export class CarouselFormComponent extends BaseLoading {
 
     await this.withLoading(async () => {
       const res = await this.carouselService.GetAllActiveCarousels();
-      if (!checkAndToastError(res, this.toast)) return;
-      this.carousels.set(this.mapResponse(res.data));
+      if (!checkAndToastError(res, this.toast)) {
+        this.carousels.set([]);
+        return;
+      }
+      this.carousels.set(this.mapResponse(res.data ?? []));
     });
   }
 

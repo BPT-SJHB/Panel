@@ -178,9 +178,12 @@ export class LoadViewConditionFormComponent extends BaseLoading {
   private async loadLoadsViews() {
     await this.withLoading(async () => {
       const response = await this.configService.GetAllOfLoadViewConditions();
-      if (!checkAndToastError(response, this.toast)) return;
+      if (!checkAndToastError(response, this.toast)) {
+        this.loadsViews.set([]);
+        return;
+      }
 
-      const rows = response.data.map((d) => ({
+      const rows = (response.data ?? []).map((d) => ({
         ...d,
         delete: deleteCell.value,
         edit: editCell.value,

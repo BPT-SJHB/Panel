@@ -199,8 +199,12 @@ export class AnnouncementGroupFormComponent implements OnInit, OnDestroy {
     this.loadingService.setLoading(true);
     try {
       const response = await this.announcementService.GetAnnouncementGroups('');
-      if (!checkAndToastError(response, this.toast)) return;
-      const rows = response.data.map((a) => ({
+      if (!checkAndToastError(response, this.toast)) {
+        this.announcementsGroup = [];
+        this.displayAnnouncementsGroup = [];
+        return;
+      }
+      const rows = (response.data ?? []).map((a) => ({
         ...a,
         edit: editCell.value,
         delete: deleteCell.value,

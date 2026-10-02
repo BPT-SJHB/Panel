@@ -131,9 +131,12 @@ export class EquipmentDeviceConfigFormComponent extends BaseLoading {
   private async loadDevicesConfigs() {
     await this.withLoading(async () => {
       const res = await this.configService.GetAllOfDeviceConfigs();
-      if (!checkAndToastError(res, this.toast)) return;
+      if (!checkAndToastError(res, this.toast)) {
+        this.devicesConfig.set([]);
+        return;
+      }
 
-      const rows = res.data.map((item) => ({
+      const rows = (res.data ?? []).map((item) => ({
         ...item,
         edit: editCell.value,
         delete: deleteCell.value,

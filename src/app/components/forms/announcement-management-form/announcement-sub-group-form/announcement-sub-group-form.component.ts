@@ -194,9 +194,12 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
     try {
       const response =
         await this.announcementService.GetAnnouncementSubGroups('');
-      if (!checkAndToastError(response, this.toast)) return;
+      if (!checkAndToastError(response, this.toast)) {
+        this.announcementsSubGroup = this.displayAnnouncementsSubGroup = [];
+        return;
+      }
 
-      const rows: AnnouncementSubGroupTableRow[] = response.data.map((as) => ({
+      const rows: AnnouncementSubGroupTableRow[] = (response.data ?? []).map((as) => ({
         ...as,
         edit: editCell.value,
         delete: deleteCell.value,
@@ -216,7 +219,7 @@ export class AnnouncementSubGroupFormComponent implements OnInit, OnDestroy {
   }
 
   private async registerAnnouncementSubGroup(): Promise<void> {
-    const { AnnouncementSGTitle, Active } = this.extractFormData();
+    const { AnnouncementSGTitle } = this.extractFormData();
     const response =
       await this.announcementService.RegisterNewAnnouncementSubGroup(
         AnnouncementSGTitle ?? ''

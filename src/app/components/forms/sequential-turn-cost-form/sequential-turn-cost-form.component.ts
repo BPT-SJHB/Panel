@@ -110,9 +110,12 @@ export class SequentialTurnCostFormComponent
   private async loadTurnsCost() {
     await this.withLoading(async () => {
       const response = await this.turnService.GetAllTurnCosts();
-      if (!checkAndToastError(response, this.toast)) return;
+      if (!checkAndToastError(response, this.toast)) {
+        this.turnsCosts.set([]);
+        return;
+      }
 
-      const rows = response.data.map((d) => ({
+      const rows = (response.data ?? []).map((d) => ({
         ...d,
         delete: deleteCell.value,
       }));

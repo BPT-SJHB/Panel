@@ -176,9 +176,12 @@ export class LoadAnnouncementConfigFormComponent extends BaseLoading {
   private async loadConfigs() {
     await this.withLoading(async () => {
       const res = await this.configService.GetAllOfLoadAnnouncementConfig();
-      if (!checkAndToastError(res, this.toast)) return;
+      if (!checkAndToastError(res, this.toast)) {
+        this.loadsConfig.set([]);
+        return;
+      }
 
-      const rows = res.data.map((item) => ({
+      const rows = (res.data ?? []).map((item) => ({
         ...item,
         edit: editCell.value,
         delete: deleteCell.value,
