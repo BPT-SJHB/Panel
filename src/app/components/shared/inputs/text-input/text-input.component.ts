@@ -28,7 +28,7 @@ import {
   ValidationSchema,
 } from 'app/constants/validation-schema';
 import { ToastService } from 'app/services/toast-service/toast.service';
-import { formatCarPlate } from 'app/utils/format.utils';
+import { formatCarPlate, normalizeArabicToPersian } from 'app/utils/format.utils';
 
 export interface ImageAddon {
   src: string;
@@ -185,7 +185,8 @@ export class TextInputComponent implements OnInit, OnChanges, OnDestroy {
     const now = Date.now();
     const canShowToast = now - this.lastToastTime > 4000;
 
-    const value = input.value;
+    const value = normalizeArabicToPersian(input.value);
+    input.value = value;
     // --- number type ---
     if (this.type() === 'number') {
       const raw = this.getNumberFromInput(value);
