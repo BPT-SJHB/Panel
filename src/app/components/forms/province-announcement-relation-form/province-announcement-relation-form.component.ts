@@ -121,9 +121,12 @@ export class ProvinceAnnouncementRelationFormComponent
     await this.withLoading(async () => {
       const response =
         await this.announcementService.GetRelationOfAnnouncementSubGroupsAndProvinces();
-      if (!checkAndToastError(response, this.toast)) return;
+      if (!checkAndToastError(response, this.toast)) {
+        this.AnnouncementsProvinces.set([]);
+        return;
+      }
 
-      const rows = response.data.map((d) => ({
+      const rows = (response.data ?? []).map((d) => ({
         ...d,
         delete: deleteCell.value,
       }));

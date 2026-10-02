@@ -50,9 +50,12 @@ export class TransportLoadPermissionsFormComponent
     await this.withLoading(async () => {
       const response =
         await this.reportService.GetLatestLoadPermissionsForCompany();
-      if (!checkAndToastError(response, this.toast)) return;
+      if (!checkAndToastError(response, this.toast)) {
+        this.loadPermissions.set([]);
+        return;
+      }
 
-      const rows: TransportLoadPermissionsRow[] = response.data.map((d) => ({
+      const rows: TransportLoadPermissionsRow[] = (response.data ?? []).map((d) => ({
         ...d,
         fullPlate: `${d.Serial} - ${d.Pelak}`,
       }));

@@ -59,9 +59,12 @@ export class GeneralConfigurationFormComponent extends BaseLoading {
   private async loadAllConfig() {
     await this.withLoading(async () => {
       const response = await this.configService.GetAllOfGeneralConfig();
-      if (!checkAndToastError(response, this.toast)) return;
+      if (!checkAndToastError(response, this.toast)) {
+        this.configs.set([]);
+        return;
+      }
 
-      const rows = response.data.map((d) => ({
+      const rows = (response.data ?? []).map((d) => ({
         ...d,
         edit: editCell.value,
       }));

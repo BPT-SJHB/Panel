@@ -106,8 +106,11 @@ export class WalletPaymentRecordTableComponent
         );
       }
 
-      if (!checkAndToastError(response, this.toast)) return;
-      this.paymentHistory.set(response.data);
+      if (!checkAndToastError(response, this.toast)) {
+        this.paymentHistory.set([]);
+        return;
+      }
+      this.paymentHistory.set(response.data ?? []);
     } finally {
       this.loadingService.setLoading(false);
     }

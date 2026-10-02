@@ -70,9 +70,12 @@ export class UserChargingFunctionFormComponent {
       this.startTime.value,
       this.endTime.value
     );
-    if (!checkAndToastError(responseOfTable, this.toast)) return;
+    if (!checkAndToastError(responseOfTable, this.toast)) {
+      this.userFunctions.set([]);
+      return;
+    }
 
-    this.userFunctions.set(this.sortTable(responseOfTable.data));
+    this.userFunctions.set(this.sortTable(responseOfTable.data ?? []));
 
     const responseOfTotalFunctionsAmount =
       await this.walletManager.GetTotalOfUserFunctions(

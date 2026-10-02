@@ -196,9 +196,12 @@ export class LoadAllocationConditionFormComponent extends BaseLoading {
     await this.withLoading(async () => {
       const response =
         await this.configService.GetAllOfLoadAllocationConditions();
-      if (!checkAndToastError(response, this.toast)) return;
+      if (!checkAndToastError(response, this.toast)) {
+        this.loadsAllocations.set([]);
+        return;
+      }
 
-      const rows = response.data.map((d) => ({
+      const rows = (response.data ?? []).map((d) => ({
         ...d,
         delete: deleteCell.value,
         edit: editCell.value,
