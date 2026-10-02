@@ -27,6 +27,13 @@ npm run doc
 
 ---
 
+## ⚡ Standards & Skill References
+
+- Modern Angular standards: Follow `.claude/skills/angular-developer/SKILL.md` (Standalone components, Signals `input()`/`output()`/`model()`, `inject()`, `ChangeDetectionStrategy.OnPush`, `@if`/`@for`, typed forms).
+
+
+---
+
 ## 🏛️ Architecture & Best Practices
 
 1. **Angular & Standalone Architecture**:
