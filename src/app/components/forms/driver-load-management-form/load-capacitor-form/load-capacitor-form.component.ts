@@ -166,18 +166,21 @@ export class LoadCapacitorFormComponent
   async getUserLocation() {
     this.currentLocation.set(undefined);
 
-    const permission = await this.locationService.checkPermissionStatus();
-    if (!permission) {
-      this.toast.error('خطا', 'دسترسی به موقعیت مکانی امکان‌پذیر نیست');
+    const result = await this.locationService.fetchUserLocation();
+    if (!result.success) {
+      const errorMessages: Record<string, string> = {
+        PERMISSION_DENIED:
+          'دسترسی به موقعیت مکانی رد شد. لطفاً در تنظیمات مرورگر یا گوشی دسترسی را فعال کنید.',
+        POSITION_UNAVAILABLE:
+          'موقعیت مکانی در دسترس نیست. لطفاً روشن بودن GPS گوشی را بررسی کنید.',
+        TIMEOUT: 'زمان دریافت موقعیت مکانی به پایان رسید. لطفاً مجدداً تلاش کنید.',
+        NOT_SUPPORTED: 'مرورگر شما از قابلیت موقعیت مکانی پشتیبانی نمی‌کند.',
+      };
+      this.toast.error('خطای موقعیت مکانی', errorMessages[result.error]);
       return;
     }
 
-    const location = await this.locationService.fetchUserLocation();
-    if (!location) {
-      this.toast.error('خطا', 'دریافت موقعیت مکانی امکان‌پذیر نیست');
-      return;
-    }
-
+    const location = result.location;
     if (location.accuracy > 250) {
       this.toast.error(
         'خطا',
@@ -190,14 +193,6 @@ export class LoadCapacitorFormComponent
     }
 
     this.currentLocation.set(location);
-
-    // alert(
-    //   this.currentLocation()?.latitude +
-    //     '-' +
-    //     this.currentLocation()?.longitude +
-    //     '-' +
-    //     this.currentLocation()?.accuracy
-    // );
   }
 
   // filter label builder
