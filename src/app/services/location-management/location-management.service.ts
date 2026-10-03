@@ -6,50 +6,60 @@ export interface ILocation {
   accuracy: number;
 }
 
+export type LocationErrorCode =
+  | 'PERMISSION_DENIED'
+  | 'POSITION_UNAVAILABLE'
+  | 'TIMEOUT'
+  | 'NOT_SUPPORTED';
+
+export type LocationResult =
+  | { success: true; location: ILocation }
+  | { success: false; error: LocationErrorCode };
+
 @Injectable({
   providedIn: 'root',
 })
 export class LocationManagementService {
-  async checkPermissionStatus() {
-    let permissionStatus: unknown;
-
-    if (!navigator.permissions) {
-      return 'Permissions API not supported by your browser.';
+  async checkPermissionStatus(): Promise<PermissionState | 'unsupported'> {
+    if (!navigator.permissions?.query) {
+      return 'unsupported';
     }
 
     try {
       const status = await navigator.permissions.query({ name: 'geolocation' });
-      permissionStatus = status.state;
-
-      status.onchange = () => {
-        permissionStatus = status.state;
-      };
-
-      return permissionStatus;
-    } catch (err) {
-      return (
-        'Permissions API not supported for geolocation in this browser.' + err
-      );
+      return status.state;
+    } catch {
+      return 'unsupported';
     }
   }
 
-  async fetchUserLocation(): Promise<ILocation | null> {
+  async fetchUserLocation(): Promise<LocationResult> {
     if (!navigator.geolocation) {
-      return null;
+      return { success: false, error: 'NOT_SUPPORTED' };
     }
 
     return new Promise((resolve) => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          const locationPayload: ILocation = {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            accuracy: position.coords.accuracy,
-          };
-          resolve(locationPayload);
+          resolve({
+            success: true,
+            location: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              accuracy: position.coords.accuracy,
+            },
+          });
         },
-        (_) => {
-          resolve(null);
+        (error) => {
+          const errorMap: Record<number, LocationErrorCode> = {
+            1: 'PERMISSION_DENIED',
+            2: 'POSITION_UNAVAILABLE',
+            3: 'TIMEOUT',
+          };
+          resolve({
+            success: false,
+            error: errorMap[error.code] ?? 'POSITION_UNAVAILABLE',
+          });
         },
         { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
       );
