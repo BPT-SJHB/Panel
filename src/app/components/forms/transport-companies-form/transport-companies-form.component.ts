@@ -10,6 +10,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { BaseLoading } from '../shared/component-base/base-loading';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { checkAndToastError } from 'app/utils/api-utils';
+import { fileToBase64Raw } from 'app/utils/image.utils';
 import { NewPasswordDialogComponent } from 'app/components/shared/dialog/new-password-dialog/new-password-dialog.component';
 import { SearchAutoCompleteComponent } from 'app/components/shared/inputs/search-auto-complete/search-auto-complete.component';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
@@ -209,7 +210,7 @@ export class TransportCompaniesFormComponent extends BaseLoading {
     const file = event.files[0];
 
     await this.withLoading(async () => {
-      const fileString = await this.fileToBase64(file);
+      const fileString = await fileToBase64Raw(file);
 
       const response =
         await this.transportComponyService.UploadTransportCompaniesExcel(
@@ -220,15 +221,6 @@ export class TransportCompaniesFormComponent extends BaseLoading {
 
       this.toast.success('موفق', response.data.Message);
       this.fu?.clear();
-    });
-  }
-
-  fileToBase64(file: File): Promise<string> {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve((reader.result as string).split(',')[1]);
-      reader.onerror = (error) => reject(error);
     });
   }
 
