@@ -165,4 +165,23 @@ export class TariffsManagementService {
     >(apiUrl, bodyValue);
     //#endregion
   }
+
+  public async UploadTariffsFile(
+    file: string
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.TransportationAPI.Tariffs.UploadTariffsFile;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      TransportTariffs: file,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue);
+    //#endregion
+  }
 }

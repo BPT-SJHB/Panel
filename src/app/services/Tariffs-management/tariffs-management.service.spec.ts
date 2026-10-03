@@ -80,5 +80,8 @@ describe('TariffsManagementService', () => {
 
     const resChangeStat = await service.ChangeTariffsStatus([tariffSampleData]);
     validateResponse<ShortResponse>(resChangeStat, ApiShortResponseSchema);
+
+    const resUpload = await service.UploadTariffsFile('mockBase64String');
+    validateResponse<ShortResponse>(resUpload, ApiShortResponseSchema);
   });
 });
