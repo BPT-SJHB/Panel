@@ -9,7 +9,7 @@ import {
 // PrimeNG UI Components
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
-import { FileUpload, FileUploadModule } from 'primeng/fileupload';
+import { FileUpload, FileUploadHandlerEvent, FileUploadModule } from 'primeng/fileupload';
 
 // Shared Components
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
@@ -36,6 +36,7 @@ import {
 } from 'app/components/shared/table/table.component';
 import { TariffsManagementService } from 'app/services/Tariffs-management/tariffs-management.service';
 import { checkAndToastError } from 'app/utils/api-utils';
+import { fileToBase64Raw } from 'app/utils/image.utils';
 import { AppConfirmService } from 'app/services/confirm/confirm.service';
 import { ValidationSchema } from 'app/constants/validation-schema';
 import { AppTitles } from 'app/constants/Titles';
@@ -175,8 +176,6 @@ export class TariffsFormComponent extends BaseLoading {
       onAction: async (row: Tariff) => await this.onDelete(row),
     },
   ];
-
-  excelFile = this.nonNullable.control([]);
 
   async searchTariffs(): Promise<void> {
     const loaderTypeId = this.searchLoaderTypeId.value;
@@ -426,10 +425,19 @@ export class TariffsFormComponent extends BaseLoading {
     });
   }
 
-  onFileExcelUpload(_: unknown) {
-    this.fu?.clear();
-    // this.toast.success('موفق', 'فایل اکسل با موفقیت بارگذاری شد.');
-    this.toast.error('خطا', 'فرمت  فایل اکسل نامعتبر می باشد.');
+  async onFileExcelUpload(event: FileUploadHandlerEvent) {
+    const file = event.files[0];
+
+    await this.withLoading(async () => {
+      const fileString = await fileToBase64Raw(file);
+
+      const response = await this.tariffService.UploadTariffsFile(fileString);
+
+      if (!checkAndToastError(response, this.toast)) return;
+
+      this.toast.success('موفق', response.data.Message);
+      this.fu?.clear();
+    });
   }
 
   onIncTariff() {

@@ -222,6 +222,7 @@ export function getMockResponseForUrl(url: string, _method: string): any {
     url.includes('TariffDeleting') ||
     url.includes('TariffEditing') ||
     url.includes('TariffsUploading') ||
+    url.includes('TransportTariffsRegistering') ||
     url.includes('TariffRegistering')
   ) {
     return mockShortResponse;

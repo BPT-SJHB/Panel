@@ -132,7 +132,7 @@ export const API_ROUTES = {
       ChangeTariffsStatus: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}TariffsDeactivate`,
       DeleteTariff: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}TariffDeleting`,
       EditTariff: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}TariffEditing`,
-      UploadTariffsFile: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}TariffsUploading`,
+      UploadTariffsFile: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}TransportTariffsRegistering`,
       RegisterTariff: `${environment.apiUrl}:${transportationAPIPort}${apiFixURLPart}TariffRegistering`,
     },
     Announcements: {
