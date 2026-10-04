@@ -381,6 +381,7 @@ export function getMockResponseForUrl(url: string, _method: string): any {
   }
   if (
     url.includes('LoadEditing') ||
+    url.includes('LoadDeletingForMe') ||
     url.includes('LoadDeleting') ||
     url.includes('LoadCancelling') ||
     url.includes('LoadFreeLining') ||

@@ -186,7 +186,18 @@ export class LoadsAnnouncementFormComponent
 
     this.confirmService.confirmDelete(`بار با کد ${loadId}`, async () => {
       await this.withLoading(async () => {
-        const response = await this.loadService.DeleteLoad(loadId);
+        let response;
+        switch (this.loadType) {
+          case LoadListType.TRANSPORT_COMPANY:
+            response = await this.loadService.DeleteMyLoad(loadId);
+            break;
+          case LoadListType.FACTORIES_PRODUCTION_CENTERS:
+            response = await this.loadService.DeleteMyLoad(loadId);
+            break;
+          case LoadListType.ADMIN:
+            response = await this.loadService.DeleteLoad(loadId);
+            break;
+        }
         if (checkAndToastError(response, this.toast)) {
           this.toast.success('موفق', response.data.Message);
           this.reloadForm();
@@ -204,7 +215,7 @@ export class LoadsAnnouncementFormComponent
       if (this.loadsForm.invalid || this.loading()) return;
 
       const tptParams = await this.getTransportTariffParamsAsString();
-      if (!tptParams) return;
+      if (tptParams === null) return;
 
       const loadEdit = this.loadsForm.getRawValue() as LoadEdit;
       loadEdit.TPTParams = tptParams;
@@ -224,7 +235,7 @@ export class LoadsAnnouncementFormComponent
 
     this.confirmService.confirmSubmit('بار مورد نظر', async () => {
       const tptParams = await this.getTransportTariffParamsAsString();
-      if (!tptParams) return;
+      if (tptParams === null) return;
 
       const newLoad = this.loadsForm.getRawValue() as LoadRegister;
       newLoad.TPTParams = tptParams;
@@ -517,6 +528,7 @@ export class LoadsAnnouncementFormComponent
       );
 
     if (!checkAndToastError(response, this.toast)) {
+      this.transportTariffParams.set([]);
       return;
     }
 
@@ -525,19 +537,14 @@ export class LoadsAnnouncementFormComponent
 
   private async getTransportTariffParamsAsString(): Promise<string | null> {
     const paramsArray = this.transportTariffParams();
-
-    if (paramsArray.length === 0) {
-      return null;
-    }
+    if (!paramsArray.length) return '';
 
     const response =
       await this.loadService.GetTransportTariffParamsInString(paramsArray);
 
-    if (!checkAndToastError(response, this.toast)) {
-      return null;
-    }
-
-    return response.data.TPTParams;
+    return checkAndToastError(response, this.toast)
+      ? response.data.TPTParams
+      : null;
   }
 
   /** Creates action buttons config */

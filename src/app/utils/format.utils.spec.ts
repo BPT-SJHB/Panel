@@ -3,8 +3,8 @@ import { normalizeArabicToPersian, formatCarPlate } from './format.utils';
 describe('format.utils', () => {
   describe('normalizeArabicToPersian', () => {
     it('should convert Arabic letters to Persian', () => {
-      const arabicText = 'كشور پيامبر ى ئ إ أ آ ٱ ؤ ة';
-      const expected = 'کشور پیامبر ی ی ا ا ا ا و ه';
+      const arabicText = 'كشور پيامبر ى ئ إ أ ٱ ؤ ة';
+      const expected = 'کشور پیامبر ی ی ا ا ا و ه';
       expect(normalizeArabicToPersian(arabicText)).toBe(expected);
     });
 

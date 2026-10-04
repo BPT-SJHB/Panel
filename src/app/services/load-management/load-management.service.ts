@@ -450,6 +450,28 @@ export class LoadManagementService {
     //#endregion
   }
 
+  public async DeleteMyLoad(
+    loadId: number
+  ): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.LoadCapacitorAPI.DeleteMyLoad;
+    const loadInfo: LoadInfo = {
+      LoadId: loadId,
+    };
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      LoadId: loadInfo.LoadId,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue);
+    //#endregion
+  }
+
   public async CancelLoad(loadId: number): Promise<ApiResponse<ShortResponse>> {
     //#region Consts
     const apiUrl = API_ROUTES.LoadCapacitorAPI.CancelLoad;

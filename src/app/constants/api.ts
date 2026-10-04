@@ -237,6 +237,7 @@ export const API_ROUTES = {
     RegisterLoadForFactoriesAndProductionCenters: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}LoadRegisteringForFPC`,
     EditLoad: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}LoadEditing`,
     DeleteLoad: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}LoadDeleting`,
+    DeleteMyLoad: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}LoadDeletingForMe`,
     CancelLoad: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}LoadCancelling`,
     FreeLineLoad: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}LoadFreeLining`,
     SedimentLoad: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}LoadSedimenting`,
