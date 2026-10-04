@@ -186,7 +186,18 @@ export class LoadsAnnouncementFormComponent
 
     this.confirmService.confirmDelete(`بار با کد ${loadId}`, async () => {
       await this.withLoading(async () => {
-        const response = await this.loadService.DeleteLoad(loadId);
+        let response;
+        switch (this.loadType) {
+          case LoadListType.TRANSPORT_COMPANY:
+            response = await this.loadService.DeleteMyLoad(loadId);
+            break;
+          case LoadListType.FACTORIES_PRODUCTION_CENTERS:
+            response = await this.loadService.DeleteMyLoad(loadId);
+            break;
+          case LoadListType.ADMIN:
+            response = await this.loadService.DeleteLoad(loadId);
+            break;
+        }
         if (checkAndToastError(response, this.toast)) {
           this.toast.success('موفق', response.data.Message);
           this.reloadForm();
