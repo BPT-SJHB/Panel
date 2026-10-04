@@ -1,73 +1,76 @@
 @if (insideTabType === "Truck") {
-<div class="flex items-center justify-center w-full">
-  <app-form-card class="w-full md:w-6/12">
-    <div class="costumeText">
-      <label>کد ناوگان :</label>
-      <span>{{ TruckInfo?.TruckId || "نامشخص" }}</span>
-    </div>
-    <div class="costumeText">
-      <label>پلاک و سریال :</label>
-      <div class="flex flex-row gap-6">
-        @if (TruckInfo == undefined) {
-        <span>نامشخص</span>
-        }@else {
-        <p-splitter
-          class="w-36 h-18 mt-2"
-          [panelSizes]="[50, 50]"
-          [minSizes]="[50, 50]"
-        >
-          <ng-template #panel>
+  <div class="flex items-center justify-center w-full">
+    <app-form-card class="w-full md:w-6/12">
+      <div class="costumeText">
+        <span>کد ناوگان :</span>
+        <span>{{ TruckInfo?.TruckId || "نامشخص" }}</span>
+      </div>
+      <div class="costumeText">
+        <span>شماره هوشمند :</span>
+        <span>{{ TruckInfo?.SmartCardNo || "نامشخص" }}</span>
+      </div>
+      <div class="costumeText">
+        <span>پلاک و سریال :</span>
+        <div class="flex flex-row gap-6">
+          @if (!TruckInfo) {
+            <span>نامشخص</span>
+          } @else {
             <p-splitter
-              layout="vertical"
+              class="w-36 h-18 mt-2"
               [panelSizes]="[50, 50]"
               [minSizes]="[50, 50]"
             >
               <ng-template #panel>
-                <div class="flex items-center justify-center h-full">
-                  <span>ایران</span>
-                </div>
+                <p-splitter
+                  layout="vertical"
+                  [panelSizes]="[50, 50]"
+                  [minSizes]="[50, 50]"
+                >
+                  <ng-template #panel>
+                    <div class="flex items-center justify-center h-full">
+                      <span>ایران</span>
+                    </div>
+                  </ng-template>
+                  <ng-template #panel>
+                    <div class="flex items-center justify-center h-full">
+                      <span>{{ TruckInfo.Serial }}</span>
+                    </div>
+                  </ng-template>
+                </p-splitter>
               </ng-template>
               <ng-template #panel>
-                <div class="flex items-center justify-center h-full">
-                  <span >{{ TruckInfo.Serial }}</span>
-                </div>
+                <span class="flex flex-row self-center m-auto">{{
+                  TruckInfo.Pelak
+                }}</span>
               </ng-template>
             </p-splitter>
-          </ng-template>
-          <ng-template #panel>
-            <span
-              class="flex flex-row self-center m-auto"
-              >{{ TruckInfo.Pelak }}</span
-            >
-          </ng-template>
-        </p-splitter>
-        }
+          }
+        </div>
       </div>
-    </div>
-  </app-form-card>
-</div>
-
-} @if (insideTabType === "LoaderType") {
-<div class="flex items-center justify-center w-full">
-  <app-form-card class="w-full md:w-6/12">
-    @for (item of loaderTypeDataForHtml; track $index) {
-    <div class="costumeText">
-      <label>{{ item.title || "نامشخص" }}</label>
-      <span>{{ item.value || "نامشخص" }}</span>
-    </div>
-    }
-  </app-form-card>
-</div>
-
-} @if (insideTabType === "Driver") {
-<div class="flex items-center justify-center w-full">
-  <app-form-card class="w-full md:w-6/12">
-    @for (item of driverDataForHtml; track $index) {
-    <div class="costumeText">
-      <label>{{ item.title || "نامشخص" }}</label>
-      <span>{{ item.value || "نامشخص" }}</span>
-    </div>
-    }
-  </app-form-card>
-</div>
+    </app-form-card>
+  </div>
+}
+@if (insideTabType === "LoaderType") {
+  <div class="flex items-center justify-center w-full">
+    <app-form-card class="w-full md:w-6/12">
+      @for (item of loaderTypeDataForHtml; track $index) {
+        <div class="costumeText">
+          <span>{{ item.title || "نامشخص" }}</span>
+          <span>{{ item.value || "نامشخص" }}</span>
+        </div>
+      }
+    </app-form-card>
+  </div>
+}
+@if (insideTabType === "Driver") {
+  <div class="flex items-center justify-center w-full">
+    <app-form-card class="w-full md:w-6/12">
+      @for (item of driverDataForHtml; track $index) {
+        <div class="costumeText">
+          <span>{{ item.title || "نامشخص" }}</span>
+          <span>{{ item.value || "نامشخص" }}</span>
+        </div>
+      }
+    </app-form-card>
+  </div>
 }
