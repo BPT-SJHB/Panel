@@ -8,7 +8,6 @@ const ARABIC_TO_PERSIAN_MAP: Record<string, string> = {
   'ئ': 'ی',
   'إ': 'ا',
   'أ': 'ا',
-  'آ': 'ا',
   'ٱ': 'ا',
   'ؤ': 'و',
   'ة': 'ه',
@@ -24,7 +23,7 @@ const ARABIC_TO_PERSIAN_MAP: Record<string, string> = {
   '٩': '۹',
 };
 
-const ARABIC_CHAR_REGEX = /[كيىئإأآٱؤة٠-٩]/g;
+const ARABIC_CHAR_REGEX = /[كيىئإأٱؤة٠-٩]/g;
 const CAR_PLATE_LETTER_REGEX = /([؀-ۿ])/g;
 
 /**
