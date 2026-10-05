@@ -242,6 +242,7 @@ export const API_ROUTES = {
     CancelLoad: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}LoadCancelling`,
     FreeLineLoad: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}LoadFreeLining`,
     SedimentLoad: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}LoadSedimenting`,
+    GetLimitsOfLoadPriceInput: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}CanUserEnterTarrifValue`,
     TPTParams: {
       GetTPTParam: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}GetAllTPTParameters`,
       GetAllTPTParams: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}GetAllTPTParams`,

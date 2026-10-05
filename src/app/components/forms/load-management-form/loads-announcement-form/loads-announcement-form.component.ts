@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 // Interfaces & Models
@@ -35,7 +35,7 @@ import { LoadListType } from '../loads-list-form/loads-list-form.component';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { AnnouncementSubGroup } from 'app/services/announcement-group-subgroup-management/model/announcement-subgroup.model';
 import { AppTitles } from 'app/constants/Titles';
-import { interval, Subscription, takeUntil } from 'rxjs';
+import { interval, takeUntil } from 'rxjs';
 import { LoadRegister } from 'app/services/load-management/model/load-register.model';
 import { FormInputsSectionComponent } from 'app/components/shared/sections/form-inputs-section/form-inputs-section.component';
 import { FormButtonsSectionComponent } from 'app/components/shared/sections/form-buttons-section/form-buttons-section.component';
@@ -52,6 +52,7 @@ import { FormButtonsSectionComponent } from 'app/components/shared/sections/form
   ],
   templateUrl: './loads-announcement-form.component.html',
   styleUrl: './loads-announcement-form.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoadsAnnouncementFormComponent
   extends BaseLoading
@@ -73,9 +74,9 @@ export class LoadsAnnouncementFormComponent
   readonly selectedLoadInfo = computed(() => {
     return this.sharedSignal();
   });
+  priceInputIsEnable = signal<boolean>(false);
 
   readonly transportTariffParams = signal<TransportTariffParam[]>([]);
-  private timerSub?: Subscription;
 
   // =====================================================
   // 🔹 Services
@@ -111,7 +112,7 @@ export class LoadsAnnouncementFormComponent
   // 🔹 Lifecycle
   // =====================================================
   override ngOnInit(): void {
-    this.timerSub = interval(1000)
+    interval(1000)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         if (this.selectedLoadInfo()) return;
@@ -120,15 +121,16 @@ export class LoadsAnnouncementFormComponent
     super.ngOnInit();
   }
 
-  onViewActivated(): void {
+  async onViewActivated(): Promise<void> {
     const currentId = this.selectedLoadInfo()?.LoadId ?? null;
 
-    if (this.prvLoadId() == currentId) return;
+    if (this.prvLoadId() === currentId) return;
     this.prvLoadId.set(currentId);
     this.resetForm();
 
     this.transportTariffParams.set([]);
-    this.initialize();
+    await this.initialize();
+    await this.fetchPriceInputLimits();
   }
 
   // =====================================================
@@ -272,7 +274,9 @@ export class LoadsAnnouncementFormComponent
   }
 
   isLoadRegisterValid() {
-    return this.isFormValidExcept('LoadId', 'LoadStatusId', 'Tariff');
+    return this.priceInputIsEnable()
+      ? this.isFormValidExcept('LoadId', 'LoadStatusId')
+      : this.isFormValidExcept('LoadId', 'LoadStatusId', 'Tariff');
   }
 
   // =====================================================
@@ -354,8 +358,6 @@ export class LoadsAnnouncementFormComponent
         await this.initializeTransportCompany();
         break;
       }
-
-      case LoadListType.ADMIN:
       case LoadListType.FACTORIES_PRODUCTION_CENTERS: {
         const loadinfo = this.selectedLoadInfo();
         if (!loadinfo) return;
@@ -382,6 +384,27 @@ export class LoadsAnnouncementFormComponent
       const loadinfo = this.selectedLoadInfo();
       if (!loadinfo) return;
       await this.fetchLoadInfo(loadinfo.LoadId);
+    });
+  }
+
+  private async fetchPriceInputLimits(): Promise<void> {
+    await this.withLoading(async () => {
+      const response = await this.loadService.GetLimitsOfLoadPriceInput();
+      if (!checkAndToastError(response, this.toast)) return;
+
+      const { Enable, MinValue, MaxValue } = response.data;
+      this.priceInputIsEnable.set(Enable);
+
+      const tariffCtrl = this.ctrl('Tariff');
+      if (Enable) {
+        const validators = [Validators.required];
+        if (MinValue !== undefined && MinValue !== null) validators.push(Validators.min(MinValue));
+        if (MaxValue !== undefined && MaxValue !== null) validators.push(Validators.max(MaxValue));
+        tariffCtrl.setValidators(validators);
+      } else {
+        tariffCtrl.clearValidators();
+      }
+      tariffCtrl.updateValueAndValidity();
     });
   }
 

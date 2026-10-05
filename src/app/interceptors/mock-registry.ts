@@ -38,6 +38,7 @@ import { mockLoadInfo } from 'app/services/load-management/mock/load-info.mock';
 import { mockLoadsForTransportCompanies_Factories_Admins_Drivers } from 'app/services/load-management/mock/load-info-for-transport-companies-factories-admins-drivers.mock';
 import { mockLoadStatuses } from 'app/services/load-management/mock/load-status.mock';
 import { mockTransportTariffParamInString, mockTransportTariffParams } from 'app/services/load-management/mock/transport-tariff-param.mock';
+import { mockLoadPriceInputLimit } from 'app/services/load-management/mock/load-price-input-limit.mock';
 import { mockLoaderTypes } from 'app/services/loader-types/mock/loader-type.mock';
 import { mockLoaderTypeToAnnouncementSubGroupRelation } from 'app/services/loader-types/mock/loader-type-announcement-sub-groups-relation.mock';
 import { mockProvinceAndCities, mockProvinces } from 'app/services/province-city-management/mock/province-city.mock';
@@ -372,6 +373,9 @@ export function getMockResponseForUrl(url: string, _method: string): any {
   if (url.includes('GetLoadPermissions')) return mockLoadPermissions;
   if (url.includes('GetTurnCostReport') || url.includes('GetLoadAccounting') || url.includes('GetLoadAccountingRecords')) return mockLoadAccounting;
   if (url.includes('GetLoad') && !url.includes('GetLoads')) return mockLoadInfo;
+  if (url.includes('CanUserEnterTarrifValue') || url.includes('GetLimitsOfLoadPriceInput')) {
+    return mockLoadPriceInputLimit;
+  }
   if (
     url.includes('LoadRegisteringForTransportCompany') ||
     url.includes('LoadRegisteringForAdministrator') ||
