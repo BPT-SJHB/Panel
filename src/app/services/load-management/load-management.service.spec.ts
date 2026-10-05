@@ -125,10 +125,10 @@ describe('LoadManagementService', () => {
 
   //#region Load methods
 
-  it('Testing RegisterNewLoad method', async () => {
+  it('Testing RegisterNewLoadForTransportCompanies method', async () => {
     await devAuth.loginAsCompany();
 
-    const response = await service.RegisterNewLoad({
+    const response = await service.RegisterNewLoadForTransportCompanies({
       TransportCompanyId: loadInfoSampleData.TransportCompanyId,
       GoodId: loadInfoSampleData.GoodId,
       AnnouncementGroupId: loadInfoSampleData.AnnouncementGroupId,
@@ -147,7 +147,7 @@ describe('LoadManagementService', () => {
       TPTParams: loadInfoSampleData.TPTParams,
     });
 
-    validateResponse<{ newLoadId: number }>(response, ApiNewLoadIdSchema);
+    validateResponse<ShortResponse>(response, ApiShortResponseSchema);
   });
 
   it('Testing EditLoad method', async () => {
