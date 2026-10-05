@@ -83,15 +83,25 @@
   </app-form-inputs-section>
 
   <app-form-inputs-section [flexDir]="'flex-row'" [isCard]="false">
-    <!-- Tariff (Read-only) -->
-    <app-text-input
-      class="w-full"
-      [label]="appTitles.inputs.loads.loadCost"
-      [control]="ctrl('Tariff')"
-      [addonWidth]="addonWidth"
-      [readOnly]="true"
-      language="en"
-    ></app-text-input>
+    <!-- Tariff -->
+    <div class="relative w-full">
+      @if (priceInputIsEnable() && ctrl('Tariff').valid && ctrl('Tariff').value) {
+        <div class="absolute z-10 flex items-center justify-center left-4 w-10 rounded-l-2xl h-full pointer-events-none">
+          <i class="pi pi-check-circle text-xl text-emerald-600"></i>
+        </div>
+      }
+      <app-text-input
+        class="w-full"
+        [label]="appTitles.inputs.loads.loadCost"
+        [control]="ctrl('Tariff')"
+        [addonWidth]="addonWidth"
+        [readOnly]="!priceInputIsEnable()"
+        validationField="tariff"
+        type="number"
+        format="currency"
+        language="en"
+      ></app-text-input>
+    </div>
 
     <!-- Loading Place Auto-complete -->
     <app-search-auto-complete-factory

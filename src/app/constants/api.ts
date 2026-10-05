@@ -236,11 +236,13 @@ export const API_ROUTES = {
     RegisterLoadForAdmin: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}LoadRegisteringForAdministrator`,
     RegisterLoadForFactoriesAndProductionCenters: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}LoadRegisteringForFPC`,
     EditLoad: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}LoadEditing`,
+    EditMyLoad: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}LoadEditingForMe`,
     DeleteLoad: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}LoadDeleting`,
     DeleteMyLoad: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}LoadDeletingForMe`,
     CancelLoad: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}LoadCancelling`,
     FreeLineLoad: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}LoadFreeLining`,
     SedimentLoad: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}LoadSedimenting`,
+    GetLimitsOfLoadPriceInput: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}CanUserEnterTarrifValue`,
     TPTParams: {
       GetTPTParam: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}GetAllTPTParameters`,
       GetAllTPTParams: `${environment.apiUrl}:${LoadCapacitorPort}${apiFixURLPart}GetAllTPTParams`,

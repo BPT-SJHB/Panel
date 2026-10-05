@@ -16,6 +16,7 @@ import { AnnouncementSubGroup } from '../announcement-group-subgroup-management/
 import { LoadAllocationInfo } from './model/load-allocation-info.model';
 import { LoadAllocatedToNextTurn } from './model/load-allocated-to-next-turn.model';
 import { LoadAllocationPriority } from './model/load-allocation-priority';
+import { LoadPriceInputLimit } from './model/load-price-input-limit.model';
 
 @Injectable({
   providedIn: 'root',
@@ -430,6 +431,23 @@ export class LoadManagementService {
     //#endregion
   }
 
+  public async EditMyLoad(load: LoadEdit): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.LoadCapacitorAPI.EditMyLoad;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      Load: load,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue);
+    //#endregion
+  }
+
   public async DeleteLoad(loadId: number): Promise<ApiResponse<ShortResponse>> {
     //#region Consts
     const apiUrl = API_ROUTES.LoadCapacitorAPI.DeleteLoad;
@@ -532,6 +550,24 @@ export class LoadManagementService {
     return await this.apiCommunicator.CommunicateWithAPI_Post<
       typeof bodyValue,
       ShortResponse
+    >(apiUrl, bodyValue);
+    //#endregion
+  }
+
+  public async GetLimitsOfLoadPriceInput(): Promise<
+    ApiResponse<LoadPriceInputLimit>
+  > {
+    //#region Consts
+    const apiUrl = API_ROUTES.LoadCapacitorAPI.GetLimitsOfLoadPriceInput;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      LoadPriceInputLimit
     >(apiUrl, bodyValue);
     //#endregion
   }

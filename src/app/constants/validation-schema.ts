@@ -26,7 +26,8 @@ export interface ErrorsValidation extends ValidationErrors {
 
 export function getDefaultErrorMessage(
   name: string,
-  e: ErrorsValidation
+  e: ErrorsValidation,
+  unit?: string
 ): string | null {
   if (e.required) return `${name} الزامی است`;
 
@@ -60,8 +61,21 @@ export function getDefaultErrorMessage(
     return `${name} باید حداکثر ${e.maxlength.requiredLength} کاراکتر باشد`;
 
   if (e.pattern) return `فرمت ${name} معتبر نیست`;
-  if (e.min) return `${name} نمی‌تواند کمتر از مقدار مجاز باشد`;
-  if (e.max) return `${name} نمی‌توان بیشتر از مقدار مجاز باشد`;
+  const unitSuffix = unit ? ` ${unit}` : '';
+  if (e.min) {
+    const minVal =
+      e.min.min !== undefined
+        ? ` (${Number(e.min.min).toLocaleString('fa-IR')}${unitSuffix})`
+        : '';
+    return `${name} نمی‌تواند کمتر از مقدار مجاز${minVal} باشد`;
+  }
+  if (e.max) {
+    const maxVal =
+      e.max.max !== undefined
+        ? ` (${Number(e.max.max).toLocaleString('fa-IR')}${unitSuffix})`
+        : '';
+    return `${name} نمی‌تواند بیشتر از مقدار مجاز${maxVal} باشد`;
+  }
 
   return null;
 }
@@ -270,6 +284,7 @@ export const ValidationSchema = {
   },
   tariff: {
     name: 'تعرفه',
+    unit: 'ریال',
     validators: [Validators.required, Validators.min(1)],
   },
   description: {

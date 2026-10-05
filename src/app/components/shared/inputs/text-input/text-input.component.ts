@@ -98,7 +98,7 @@ export class TextInputComponent implements OnInit, OnChanges, OnDestroy {
     // Subscribe to control changes for formatting
     this.sub = this.control().valueChanges.subscribe((value) => {
       this.applyFormat(value?.toString() ?? '');
-      this.deleteButtonDisabled.set(false);
+      this.deleteButtonDisabled.set(!value);
     });
   }
 
@@ -117,9 +117,11 @@ export class TextInputComponent implements OnInit, OnChanges, OnDestroy {
     const validation = this.validationField();
 
     if (!validation || !this.control().errors) return null;
+    const rule = ValidationSchema[validation] as { name: string; unit?: string };
     return getDefaultErrorMessage(
-      ValidationSchema[validation].name,
-      this.control().errors as ErrorsValidation
+      rule.name,
+      this.control().errors as ErrorsValidation,
+      rule.unit
     );
   }
 
