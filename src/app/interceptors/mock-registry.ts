@@ -380,6 +380,7 @@ export function getMockResponseForUrl(url: string, _method: string): any {
     return { newLoadId: 15 };
   }
   if (
+    url.includes('LoadEditingForMe') ||
     url.includes('LoadEditing') ||
     url.includes('LoadDeletingForMe') ||
     url.includes('LoadDeleting') ||

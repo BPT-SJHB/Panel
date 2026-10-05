@@ -221,7 +221,19 @@ export class LoadsAnnouncementFormComponent
       loadEdit.TPTParams = tptParams;
 
       await this.withLoading(async () => {
-        const response = await this.loadService.EditLoad(loadEdit);
+        let response;
+        switch (this.loadType) {
+          case LoadListType.TRANSPORT_COMPANY:
+            response = await this.loadService.EditMyLoad(loadEdit);
+            break;
+          case LoadListType.FACTORIES_PRODUCTION_CENTERS:
+            response = await this.loadService.EditMyLoad(loadEdit);
+            break;
+          case LoadListType.ADMIN:
+            response = await this.loadService.EditLoad(loadEdit);
+            break;
+        }
+
         if (checkAndToastError(response, this.toast)) {
           this.toast.success('موفق', response.data.Message);
           await this.fetchLoadInfo(loadId);

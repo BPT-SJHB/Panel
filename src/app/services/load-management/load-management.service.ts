@@ -430,6 +430,23 @@ export class LoadManagementService {
     //#endregion
   }
 
+  public async EditMyLoad(load: LoadEdit): Promise<ApiResponse<ShortResponse>> {
+    //#region Consts
+    const apiUrl = API_ROUTES.LoadCapacitorAPI.EditMyLoad;
+    const bodyValue = {
+      SessionId: this.userAuth.getSessionId(),
+      Load: load,
+    };
+    //#endregion
+
+    //#region Request + Return
+    return await this.apiCommunicator.CommunicateWithAPI_Post<
+      typeof bodyValue,
+      ShortResponse
+    >(apiUrl, bodyValue);
+    //#endregion
+  }
+
   public async DeleteLoad(loadId: number): Promise<ApiResponse<ShortResponse>> {
     //#region Consts
     const apiUrl = API_ROUTES.LoadCapacitorAPI.DeleteLoad;
