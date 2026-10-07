@@ -1,4 +1,10 @@
-import { Component, computed, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  signal,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 // Interfaces & Models
@@ -66,15 +72,29 @@ export class LoadsAnnouncementFormComponent
   readonly baseWidthClass = 'w-24 sm:w-32 md:w-40 lg:w-48';
   readonly appTitles = AppTitles;
 
+  private static readonly dateFormatter = new Intl.DateTimeFormat(
+    'en-u-ca-persian',
+    {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }
+  );
+
+  private static readonly timeFormatter = new Intl.DateTimeFormat('en', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  });
+
   // =====================================================
   // 🔹 Signals & State
   // =====================================================
   readonly sharedSignal = signal<LoadInfo | null>(null);
-  private readonly prvLoadId = signal<number | null>(-1000);
-  readonly selectedLoadInfo = computed(() => {
-    return this.sharedSignal();
-  });
-  priceInputIsEnable = signal<boolean>(false);
+  private prvLoadId: number | null = -1000;
+  readonly selectedLoadInfo = computed(() => this.sharedSignal());
+  readonly priceInputIsEnable = signal<boolean>(false);
 
   readonly transportTariffParams = signal<TransportTariffParam[]>([]);
 
@@ -116,7 +136,9 @@ export class LoadsAnnouncementFormComponent
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         if (this.selectedLoadInfo()) return;
-        this.ctrl('AnnounceDate').setValue(this.getToday());
+        this.ctrl('AnnounceDate').setValue(this.getToday(), {
+          emitEvent: false,
+        });
       });
     super.ngOnInit();
   }
@@ -124,8 +146,8 @@ export class LoadsAnnouncementFormComponent
   async onViewActivated(): Promise<void> {
     const currentId = this.selectedLoadInfo()?.LoadId ?? null;
 
-    if (this.prvLoadId() === currentId) return;
-    this.prvLoadId.set(currentId);
+    if (this.prvLoadId === currentId) return;
+    this.prvLoadId = currentId;
     this.resetForm();
 
     this.transportTariffParams.set([]);
@@ -188,18 +210,11 @@ export class LoadsAnnouncementFormComponent
 
     this.confirmService.confirmDelete(`بار با کد ${loadId}`, async () => {
       await this.withLoading(async () => {
-        let response;
-        switch (this.loadType) {
-          case LoadListType.TRANSPORT_COMPANY:
-            response = await this.loadService.DeleteMyLoad(loadId);
-            break;
-          case LoadListType.FACTORIES_PRODUCTION_CENTERS:
-            response = await this.loadService.DeleteMyLoad(loadId);
-            break;
-          case LoadListType.ADMIN:
-            response = await this.loadService.DeleteLoad(loadId);
-            break;
-        }
+        const response =
+          this.loadType === LoadListType.ADMIN
+            ? await this.loadService.DeleteLoad(loadId)
+            : await this.loadService.DeleteMyLoad(loadId);
+
         if (checkAndToastError(response, this.toast)) {
           this.toast.success('موفق', response.data.Message);
           this.reloadForm();
@@ -223,18 +238,10 @@ export class LoadsAnnouncementFormComponent
       loadEdit.TPTParams = tptParams;
 
       await this.withLoading(async () => {
-        let response;
-        switch (this.loadType) {
-          case LoadListType.TRANSPORT_COMPANY:
-            response = await this.loadService.EditMyLoad(loadEdit);
-            break;
-          case LoadListType.FACTORIES_PRODUCTION_CENTERS:
-            response = await this.loadService.EditMyLoad(loadEdit);
-            break;
-          case LoadListType.ADMIN:
-            response = await this.loadService.EditLoad(loadEdit);
-            break;
-        }
+        const response =
+          this.loadType === LoadListType.ADMIN
+            ? await this.loadService.EditLoad(loadEdit)
+            : await this.loadService.EditMyLoad(loadEdit);
 
         if (checkAndToastError(response, this.toast)) {
           this.toast.success('موفق', response.data.Message);
@@ -358,15 +365,14 @@ export class LoadsAnnouncementFormComponent
         await this.initializeTransportCompany();
         break;
       }
-      case LoadListType.FACTORIES_PRODUCTION_CENTERS: {
+
+      case LoadListType.FACTORIES_PRODUCTION_CENTERS:
+      case LoadListType.ADMIN: {
         const loadinfo = this.selectedLoadInfo();
         if (!loadinfo) return;
         await this.fetchLoadInfo(loadinfo.LoadId);
         break;
       }
-
-      default:
-        break;
     }
   }
 
@@ -398,8 +404,10 @@ export class LoadsAnnouncementFormComponent
       const tariffCtrl = this.ctrl('Tariff');
       if (Enable) {
         const validators = [Validators.required];
-        if (MinValue !== undefined && MinValue !== null) validators.push(Validators.min(MinValue));
-        if (MaxValue !== undefined && MaxValue !== null) validators.push(Validators.max(MaxValue));
+        if (MinValue !== undefined && MinValue !== null)
+          validators.push(Validators.min(MinValue));
+        if (MaxValue !== undefined && MaxValue !== null)
+          validators.push(Validators.max(MaxValue));
         tariffCtrl.setValidators(validators);
       } else {
         tariffCtrl.clearValidators();
@@ -507,7 +515,9 @@ export class LoadsAnnouncementFormComponent
           },
           select: (item: AnnouncementSubGroup) => {
             this.withLoading(async () => {
-              this.loadTransportTariffParamsBySubGroup(item.AnnouncementSGId);
+              await this.loadTransportTariffParamsBySubGroup(
+                item.AnnouncementSGId
+              );
               this.ctrl('AnnouncementSubGroupId').setValue(
                 item.AnnouncementSGId
               );
@@ -678,25 +688,14 @@ export class LoadsAnnouncementFormComponent
   private getToday() {
     const today = new Date();
 
-    const dateFormatter = new Intl.DateTimeFormat('en-u-ca-persian', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-    });
-
-    const timeFormatter = new Intl.DateTimeFormat('en', {
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: false,
-    });
-
-    const dateParts = dateFormatter.formatToParts(today);
+    const dateParts =
+      LoadsAnnouncementFormComponent.dateFormatter.formatToParts(today);
     const y = dateParts.find((p) => p.type === 'year')?.value;
     const m = dateParts.find((p) => p.type === 'month')?.value;
     const d = dateParts.find((p) => p.type === 'day')?.value;
 
-    const timeParts = timeFormatter.formatToParts(today);
+    const timeParts =
+      LoadsAnnouncementFormComponent.timeFormatter.formatToParts(today);
     const hh = timeParts.find((p) => p.type === 'hour')?.value;
     const mm = timeParts.find((p) => p.type === 'minute')?.value;
     const ss = timeParts.find((p) => p.type === 'second')?.value;
