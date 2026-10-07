@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { from, of, switchMap, tap } from 'rxjs';
 import { BaseLoading } from 'app/components/forms/shared/component-base/base-loading';
 import { LoadManagementService } from 'app/services/load-management/load-management.service';
 import { AnnouncementGroupSubgroupManagementService } from 'app/services/announcement-group-subgroup-management/announcement-group-subgroup-management.service';
@@ -76,15 +77,48 @@ export class LoadCapacitorFormComponent
 
   constructor() {
     super();
+
+    // Start with sub-group disabled until a group is chosen
+    this.ctrl('announcementSubGroupId').disable({ emitEvent: false });
+
     this.ctrl('announcementGroupId')
-      .valueChanges.pipe(takeUntilDestroyed())
-      .subscribe((groupId) => {
-        this.ctrl('announcementSubGroupId').reset(null);
-        if (groupId !== null && groupId !== undefined) {
-          this.loadSubGroups(groupId);
-        } else {
+      .valueChanges.pipe(
+        takeUntilDestroyed(),
+        tap((groupId) => {
+          this.ctrl('announcementSubGroupId').reset(null);
           this.announcementSubGroupOptions.set([]);
+
+          if (groupId !== null && groupId !== undefined) {
+            this.ctrl('announcementSubGroupId').enable({ emitEvent: false });
+          } else {
+            this.ctrl('announcementSubGroupId').disable({ emitEvent: false });
+          }
+        }),
+        switchMap((groupId) =>
+          groupId !== null && groupId !== undefined
+            ? from(
+                this.announcementService.GetRelationOfAnnouncementGroupAndSubGroup(
+                  groupId
+                )
+              )
+            : of(null)
+        )
+      )
+      .subscribe((response) => {
+        if (!response) return;
+
+        if (!checkAndToastError(response, this.toast)) {
+          this.announcementSubGroupOptions.set([]);
+          return;
         }
+
+        const subGroups = response.data?.[0]?.AnnouncementSubGroups ?? [];
+        this.announcementSubGroupOptions.set(
+          subGroups.map((sub) => ({
+            label: sub.AnnouncementSGTitle ?? '',
+            value: sub.AnnouncementSGId,
+          }))
+        );
       });
   }
 
@@ -117,26 +151,6 @@ export class LoadCapacitorFormComponent
       response.data.map((group) => ({
         label: group.AnnouncementTitle ?? '',
         value: group.AnnouncementId,
-      }))
-    );
-  }
-
-  // announcement sub-groups list based on selected group
-  private async loadSubGroups(groupId: number) {
-    const response =
-      await this.announcementService.GetRelationOfAnnouncementGroupAndSubGroup(
-        groupId
-      );
-    if (!checkAndToastError(response, this.toast)) {
-      this.announcementSubGroupOptions.set([]);
-      return;
-    }
-
-    const subGroups = response.data?.[0]?.AnnouncementSubGroups ?? [];
-    this.announcementSubGroupOptions.set(
-      subGroups.map((sub) => ({
-        label: sub.AnnouncementSGTitle ?? '',
-        value: sub.AnnouncementSGId,
       }))
     );
   }
