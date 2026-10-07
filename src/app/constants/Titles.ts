@@ -241,6 +241,10 @@ export class AppTitles {
     endDate: 'تاریخ اتمام',
   };
 
+  public static readonly placeholders = {
+    select: 'انتخاب کنید',
+  };
+
   public static getPlaceholder(
     key: PlaceholderKey,
     suffix = ' را وارد کنید'
