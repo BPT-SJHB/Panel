@@ -1,5 +1,5 @@
-<div class="flex w-full h-10">
-  <p-input-group>
+<div class="flex w-full h-10 min-w-0">
+  <p-input-group class="w-full min-w-0">
     <p-inputgroup-addon
       [style]="{
         flex: '0 0 ' + addonWidth,
@@ -7,7 +7,7 @@
         margin: 0,
         border: 0,
       }"
-      class="rounded-2xl"
+      class="rounded-2xl shrink-0"
     >
       <div
         class="w-full h-full flex justify-center items-center py-4 px-6 bg-primary-emphasis z-1 rounded-r-2xl text-primary-contrast"
@@ -28,7 +28,8 @@
       [placeholder]="placeholder"
       optionLabel="label"
       optionValue="value"
-      class="h-full w-full bg-transparent border-y-2 border-l-2 rounded-l-2xl dark:bg-transparent border-gray-400 placeholder:text-gray-400 text-sm"
+      appendTo="body"
+      class="h-full flex-1 min-w-0 bg-transparent border-y-2 border-l-2 rounded-l-2xl dark:bg-transparent border-gray-400 placeholder:text-gray-400 text-sm"
       [ngClass]="{
         'border-red-500': control.touched && control.invalid,
         'bg-gray-100 text-gray-500 opacity-60 cursor-not-allowed': disabled,
