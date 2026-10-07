@@ -290,6 +290,7 @@ export function getMockResponseForUrl(url: string, _method: string): any {
   }
 
   // Driver & Truck
+  if (url.includes('GetCargoTerminals') || url.includes('GetLoadAnnouncementPlaces')) return mockCargoTerminals;
   if (
     url.includes('GetTruckDriverFromRMTO') ||
     url.includes('GetTruckDriverFromWebsite') ||
