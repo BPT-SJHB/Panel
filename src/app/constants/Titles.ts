@@ -54,7 +54,8 @@ export class AppTitles {
     'سامانه جامع حمل و نقل کالا<br>اداره کل راهداری و حمل و نقل جاده ای<br>استان اصفهان';
   public static readonly frontendVersion = '1.70.07';
   public static readonly backendVersion = '12.2.9';
-  public static readonly versionTitle = `نسخه فرانت-اند: ${this.frontendVersion} | نسخه بک-اند: ${this.backendVersion}`;
+  public static readonly frontVersionTitle = `نسخه فرانت-اند: ${this.frontendVersion}`;
+  public static readonly backVersionTitle = `نسخه بک-اند: ${this.backendVersion}`;
   public static readonly footerTitle =
     'کلیه حقوق این وبسایت متعلق به اداره راهداری و حمل و نقل جاده ای استان اصفهان میباشد | طراحی و پیاده‌سازی توسط شرکت برسام پژوهش';
 
