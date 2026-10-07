@@ -181,14 +181,15 @@ export class LoadCapacitorFormComponent
     }
 
     const location = result.location;
-    if (location.accuracy > 250) {
+    // ponytail: simple threshold checks; server-side geofencing/anti-spoofing if fraud risk increases
+    if (location.accuracy > 5000) {
       this.toast.error(
         'خطا',
         'موقعیت مکانی دقت کافی را ندارد. لطفا دقایقی منتظر بمانید'
       );
       return;
-    } else if (location.accuracy < 10) {
-      this.toast.error('خطا', 'موقعیت مکانی دقت بیش از حد مجاز دارد');
+    } else if (location.accuracy <= 0) {
+      this.toast.error('خطا', 'موقعیت مکانی نامعتبر است');
       return;
     }
 
