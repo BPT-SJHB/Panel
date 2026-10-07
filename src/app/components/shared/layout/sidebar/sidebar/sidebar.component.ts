@@ -1,5 +1,5 @@
 // Angular core
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 
 // RxJS
@@ -37,8 +37,10 @@ import { ThemeManagementComponent } from "../../header/theme-management/theme-ma
   styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent implements OnInit {
+  private readonly store = inject(Store);
+
   // Sidebar drawer width (default: 18rem)
-  @Input() width: string = '18rem';
+  @Input() width = '18rem';
 
   // List of page groups to display inside the sidebar
   @Input() pageGroupItems: PageGroupItem[] = [];
@@ -48,8 +50,6 @@ export class SidebarComponent implements OnInit {
 
   // Observable for sidebar open/close state
   isOpen$!: Observable<boolean>;
-
-  constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.updateIsMobile();
