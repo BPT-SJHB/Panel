@@ -1,7 +1,7 @@
 <div class="flex flex-col gap-5">
-  <div class="flex flex-col md:flex-row gap-5">
+  <div class="flex flex-wrap gap-5">
     <app-select-input
-      class="w-full md:w-1/2 min-w-0"
+      class="w-full md:w-[calc(50%-0.625rem)] lg:w-auto lg:flex-1 min-w-0"
       [label]="appTitle.inputs.loadAnnouncements.loadAnnouncementGroupTitle"
       [placeholder]="appTitle.placeholders.select"
       [options]="announcementGroupOptions()"
@@ -10,7 +10,7 @@
     />
 
     <app-select-input
-      class="w-full md:w-1/2 min-w-0"
+      class="w-full md:w-[calc(50%-0.625rem)] lg:w-auto lg:flex-1 min-w-0"
       [label]="appTitle.inputs.loadAnnouncements.loadAnnouncementSubGroupTitle"
       [placeholder]="appTitle.placeholders.select"
       [options]="announcementSubGroupOptions()"
@@ -20,7 +20,7 @@
     />
 
     <app-select-input
-      class="w-full md:w-1/2 min-w-0"
+      class="w-full md:w-[calc(50%-0.625rem)] lg:w-auto lg:flex-1 min-w-0"
       [label]="appTitle.inputs.loads.loadStatus"
       [placeholder]="appTitle.placeholders.select"
       [options]="loadStatusOptions()"
