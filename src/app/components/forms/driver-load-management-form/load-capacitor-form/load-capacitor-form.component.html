@@ -1,22 +1,27 @@
 <div class="grid grid-cols-12 gap-5">
-  <app-search-auto-complete-factory
+  <app-select-input
     class="col-span-12 md:col-span-6"
-    [config]="autoCompleteAnnouncementGroup"
+    [label]="appTitle.inputs.loadAnnouncements.loadAnnouncementGroupTitle"
+    [placeholder]="appTitle.placeholders.select"
+    [options]="announcementGroupOptions()"
     [addonWidth]="addonWidth"
-  >
-  </app-search-auto-complete-factory>
-
-  <app-search-auto-complete-factory
-    class="col-span-12 md:col-span-6"
-    [config]="autoCompleteSubAnnouncementGroup"
-    [addonWidth]="addonWidth"
-  >
-  </app-search-auto-complete-factory>
+    [control]="this.ctrl('announcementGroupId')"
+  />
 
   <app-select-input
-    [label]="appTitle.inputs.loads.loadStatus"
-    [placeholder]="appTitle.getPlaceholder('loadStatus')"
     class="col-span-12 md:col-span-6"
+    [label]="appTitle.inputs.loadAnnouncements.loadAnnouncementSubGroupTitle"
+    [placeholder]="appTitle.placeholders.select"
+    [options]="announcementSubGroupOptions()"
+    [addonWidth]="addonWidth"
+    [control]="this.ctrl('announcementSubGroupId')"
+    [disabled]="this.ctrl('announcementGroupId').invalid"
+  />
+
+  <app-select-input
+    class="col-span-12 md:col-span-6"
+    [label]="appTitle.inputs.loads.loadStatus"
+    [placeholder]="appTitle.placeholders.select"
     [options]="loadStatusOptions()"
     [addonWidth]="addonWidth"
     [control]="this.ctrl('loadStatusId')"
