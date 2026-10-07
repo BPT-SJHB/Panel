@@ -172,13 +172,17 @@ export class LoadCapacitorFormComponent
   loadDriverLoads() {
     if (this.searchLoadsForm.invalid || this.loading()) return;
 
+    const subGroupId = this.ctrl('announcementSubGroupId').value;
+    const loadStatusId = this.ctrl('loadStatusId').value;
+    if (!subGroupId || !loadStatusId) return;
+
     this.withLoading(async () => {
       await this.getUserLocation();
       if (!this.currentLocation()) return;
 
       const response = await this.loadService.GetLoadsForDrivers(
-        this.ctrl('announcementSubGroupId').value!,
-        this.ctrl('loadStatusId').value!
+        subGroupId,
+        loadStatusId
       );
 
       if (!checkAndToastError(response, this.toast)) {
