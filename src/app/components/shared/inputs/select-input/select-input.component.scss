@@ -1,3 +1,23 @@
-::ng-deep span.p-select-label {
-  font-size: 0.9rem;
+:host {
+  display: block;
+  min-width: 0;
+
+  ::ng-deep {
+    .p-inputgroup {
+      min-width: 0;
+    }
+
+    p-select.p-select {
+      min-width: 0;
+    }
+
+    span.p-select-label {
+      display: block;
+      font-size: 0.9rem;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
 }

@@ -115,3 +115,38 @@ input.border-red-500:focus {
   box-shadow: none !important;
   outline: none !important;
 }
+
+/* Responsive Toast */
+.p-toast {
+  width: min(25rem, calc(100vw - 2rem)) !important;
+  max-width: calc(100vw - 2rem) !important;
+
+  .p-toast-message {
+    margin: 0 0 0.5rem 0;
+    width: 100%;
+    word-break: break-word;
+
+    .p-toast-message-content {
+      align-items: flex-start;
+      gap: 0.75rem;
+
+      .p-toast-message-text {
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .p-toast.p-toast-top-center,
+  .p-toast.p-toast-top-right,
+  .p-toast.p-toast-top-left {
+    left: 1rem !important;
+    right: 1rem !important;
+    transform: none !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+}
+

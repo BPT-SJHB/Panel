@@ -1,13 +1,14 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { from, of, switchMap, tap } from 'rxjs';
 import { BaseLoading } from 'app/components/forms/shared/component-base/base-loading';
 import { LoadManagementService } from 'app/services/load-management/load-management.service';
+import { AnnouncementGroupSubgroupManagementService } from 'app/services/announcement-group-subgroup-management/announcement-group-subgroup-management.service';
 import {
-  AutoCompleteConfigFactoryService,
-  AutoCompleteType,
-} from 'app/services/auto-complete-config-factory/auto-complete-config-factory.service';
-import { SearchAutoCompleteFactoryComponent } from 'app/components/shared/inputs/search-auto-complete-factory/search-auto-complete-factory.component';
-import { SelectInputComponent } from 'app/components/shared/inputs/select-input/select-input.component';
+  SelectInputComponent,
+  SelectOption,
+} from 'app/components/shared/inputs/select-input/select-input.component';
 import { ButtonComponent } from 'app/components/shared/button/button.component';
 import { checkAndToastError } from 'app/utils/api-utils';
 import { LoadForTransportCompanies_Factories_Admins_Drivers } from 'app/services/load-management/model/load-info-for-transport-companies-factories-admins-drivers.model';
@@ -22,24 +23,13 @@ import {
 
 interface SearchLoadsForm {
   announcementGroupId: number | null;
-  announcementGroupTitle: string;
-
   announcementSubGroupId: number | null;
-  announcementSubGroupTitle: string;
-
   loadStatusId: number | null;
-  loadStatusTitle: string;
 }
 
 @Component({
   selector: 'app-load-capacitor-form',
-  imports: [
-    SearchAutoCompleteFactoryComponent,
-    SelectInputComponent,
-    ButtonComponent,
-    Panel,
-    CardModule,
-  ],
+  imports: [SelectInputComponent, ButtonComponent, Panel, CardModule],
   templateUrl: './load-capacitor-form.component.html',
   styleUrl: './load-capacitor-form.component.scss',
 })
@@ -48,17 +38,19 @@ export class LoadCapacitorFormComponent
   implements OnViewActivated
 {
   private readonly loadService = inject(LoadManagementService);
-  private readonly fb = inject(FormBuilder);
-  private readonly autoCompleteFactory = inject(
-    AutoCompleteConfigFactoryService
+  private readonly announcementService = inject(
+    AnnouncementGroupSubgroupManagementService
   );
+  private readonly fb = inject(FormBuilder);
   private readonly locationService = inject(LocationManagementService);
 
   readonly addonWidth = '7rem';
   readonly appTitle = AppTitles;
 
   // signals
-  readonly loadStatusOptions = signal<{ label: string; value: number }[]>([]);
+  readonly announcementGroupOptions = signal<SelectOption<number>[]>([]);
+  readonly announcementSubGroupOptions = signal<SelectOption<number>[]>([]);
+  readonly loadStatusOptions = signal<SelectOption<number>[]>([]);
   readonly driverLoads = signal<
     LoadForTransportCompanies_Factories_Admins_Drivers[]
   >([]);
@@ -71,49 +63,72 @@ export class LoadCapacitorFormComponent
   private currentLocation = signal<ILocation | undefined>(undefined);
 
   // form
-  readonly searchLoadsForm = this.fb.nonNullable.group({
+  readonly searchLoadsForm = this.fb.group({
     announcementGroupId: this.fb.control<number | null>(
       null,
       Validators.required
     ),
-    announcementGroupTitle: this.fb.nonNullable.control(''),
-
     announcementSubGroupId: this.fb.control<number | null>(
       null,
       Validators.required
     ),
-    announcementSubGroupTitle: this.fb.nonNullable.control(''),
-
     loadStatusId: this.fb.control<number | null>(null, Validators.required),
-    loadStatusTitle: this.fb.nonNullable.control(''),
   });
 
-  // autocomplete configs
-  readonly autoCompleteAnnouncementGroup = this.autoCompleteFactory.create(
-    AutoCompleteType.AnnouncementGroup,
-    this.ctrl('announcementGroupId'),
-    {
-      control: this.ctrl('announcementGroupTitle'),
-      valueChange: () => {
-        this.ctrl('announcementGroupId').setValue(null);
-        this.ctrl('announcementSubGroupId').setValue(null);
-        this.ctrl('announcementSubGroupTitle').reset('');
-      },
-    }
-  );
+  constructor() {
+    super();
 
-  readonly autoCompleteSubAnnouncementGroup = this.autoCompleteFactory.create(
-    AutoCompleteType.RelationAnnouncementGroupAndSubGroup,
-    this.ctrl('announcementSubGroupId'),
-    {
-      control: this.ctrl('announcementSubGroupTitle') as FormControl<string>,
-      groupControlId: this.ctrl('announcementGroupId'),
-      readOnly: () => this.ctrl('announcementGroupId').invalid,
-    }
-  );
+    // Start with sub-group disabled until a group is chosen
+    this.ctrl('announcementSubGroupId').disable({ emitEvent: false });
+
+    this.ctrl('announcementGroupId')
+      .valueChanges.pipe(
+        takeUntilDestroyed(),
+        tap((groupId) => {
+          this.ctrl('announcementSubGroupId').reset(null);
+          this.announcementSubGroupOptions.set([]);
+
+          if (groupId !== null && groupId !== undefined) {
+            this.ctrl('announcementSubGroupId').enable({ emitEvent: false });
+          } else {
+            this.ctrl('announcementSubGroupId').disable({ emitEvent: false });
+          }
+        }),
+        switchMap((groupId) =>
+          groupId !== null && groupId !== undefined
+            ? from(
+                this.announcementService.GetRelationOfAnnouncementGroupAndSubGroup(
+                  groupId
+                )
+              )
+            : of(null)
+        )
+      )
+      .subscribe((response) => {
+        if (!response) return;
+
+        if (!checkAndToastError(response, this.toast)) {
+          this.announcementSubGroupOptions.set([]);
+          return;
+        }
+
+        const subGroups = response.data?.[0]?.AnnouncementSubGroups ?? [];
+        this.announcementSubGroupOptions.set(
+          subGroups.map((sub) => ({
+            label: sub.AnnouncementSGTitle ?? '',
+            value: sub.AnnouncementSGId,
+          }))
+        );
+      });
+  }
 
   onViewActivated(): void {
-    this.withLoading(async () => await this.loadLoadStatuses());
+    this.withLoading(async () => {
+      await Promise.all([
+        this.loadAnnouncementGroups(),
+        this.loadLoadStatuses(),
+      ]);
+    });
   }
 
   // form helper
@@ -125,6 +140,19 @@ export class LoadCapacitorFormComponent
       throw new Error(`Control "${String(name)}" not found`);
     }
     return control as FormControl<SearchLoadsForm[K]>;
+  }
+
+  // announcement groups list
+  private async loadAnnouncementGroups() {
+    const response = await this.announcementService.GetAnnouncementGroups('');
+    if (!checkAndToastError(response, this.toast)) return;
+
+    this.announcementGroupOptions.set(
+      response.data.map((group) => ({
+        label: group.AnnouncementTitle ?? '',
+        value: group.AnnouncementId,
+      }))
+    );
   }
 
   // load status list
@@ -144,13 +172,17 @@ export class LoadCapacitorFormComponent
   loadDriverLoads() {
     if (this.searchLoadsForm.invalid || this.loading()) return;
 
+    const subGroupId = this.ctrl('announcementSubGroupId').value;
+    const loadStatusId = this.ctrl('loadStatusId').value;
+    if (!subGroupId || !loadStatusId) return;
+
     this.withLoading(async () => {
       await this.getUserLocation();
       if (!this.currentLocation()) return;
 
       const response = await this.loadService.GetLoadsForDrivers(
-        this.ctrl('announcementSubGroupId').value!,
-        this.ctrl('loadStatusId').value!
+        subGroupId,
+        loadStatusId
       );
 
       if (!checkAndToastError(response, this.toast)) {
@@ -173,7 +205,8 @@ export class LoadCapacitorFormComponent
           'دسترسی به موقعیت مکانی رد شد. لطفاً در تنظیمات مرورگر یا گوشی دسترسی را فعال کنید.',
         POSITION_UNAVAILABLE:
           'موقعیت مکانی در دسترس نیست. لطفاً روشن بودن GPS گوشی را بررسی کنید.',
-        TIMEOUT: 'زمان دریافت موقعیت مکانی به پایان رسید. لطفاً مجدداً تلاش کنید.',
+        TIMEOUT:
+          'زمان دریافت موقعیت مکانی به پایان رسید. لطفاً مجدداً تلاش کنید.',
         NOT_SUPPORTED: 'مرورگر شما از قابلیت موقعیت مکانی پشتیبانی نمی‌کند.',
       };
       this.toast.error('خطای موقعیت مکانی', errorMessages[result.error]);
@@ -198,8 +231,14 @@ export class LoadCapacitorFormComponent
 
   // filter label builder
   private updateSelectedFilter() {
-    const group = this.ctrl('announcementGroupTitle').value;
-    const subgroup = this.ctrl('announcementSubGroupTitle').value;
+    const group =
+      this.announcementGroupOptions().find(
+        (e) => e.value === this.ctrl('announcementGroupId').value
+      )?.label ?? '';
+    const subgroup =
+      this.announcementSubGroupOptions().find(
+        (e) => e.value === this.ctrl('announcementSubGroupId').value
+      )?.label ?? '';
     const loadstatus =
       this.loadStatusOptions().find(
         (e) => e.value === this.ctrl('loadStatusId').value

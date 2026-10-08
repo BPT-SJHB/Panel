@@ -1,36 +1,45 @@
-<div class="grid grid-cols-12 gap-5">
-  <app-search-auto-complete-factory
-    class="col-span-12 md:col-span-6"
-    [config]="autoCompleteAnnouncementGroup"
-    [addonWidth]="addonWidth"
-  >
-  </app-search-auto-complete-factory>
+<div class="flex flex-col gap-5">
+  <div class="flex flex-wrap gap-5">
+    <app-select-input
+      class="w-full md:w-[calc(50%-0.625rem)] lg:w-auto lg:flex-1 min-w-0"
+      [label]="appTitle.inputs.loadAnnouncements.loadAnnouncementGroupTitle"
+      [placeholder]="appTitle.placeholders.select"
+      [options]="announcementGroupOptions()"
+      [addonWidth]="addonWidth"
+      [control]="this.ctrl('announcementGroupId')"
+    />
 
-  <app-search-auto-complete-factory
-    class="col-span-12 md:col-span-6"
-    [config]="autoCompleteSubAnnouncementGroup"
-    [addonWidth]="addonWidth"
-  >
-  </app-search-auto-complete-factory>
+    <app-select-input
+      class="w-full md:w-[calc(50%-0.625rem)] lg:w-auto lg:flex-1 min-w-0"
+      [label]="appTitle.inputs.loadAnnouncements.loadAnnouncementSubGroupTitle"
+      [placeholder]="appTitle.placeholders.select"
+      [options]="announcementSubGroupOptions()"
+      [addonWidth]="addonWidth"
+      [control]="this.ctrl('announcementSubGroupId')"
+      [disabled]="this.ctrl('announcementGroupId').invalid"
+    />
 
-  <app-select-input
-    [label]="appTitle.inputs.loads.loadStatus"
-    [placeholder]="appTitle.getPlaceholder('loadStatus')"
-    class="col-span-12 md:col-span-6"
-    [options]="loadStatusOptions()"
-    [addonWidth]="addonWidth"
-    [control]="this.ctrl('loadStatusId')"
-  />
+    <app-select-input
+      class="w-full md:w-[calc(50%-0.625rem)] lg:w-auto lg:flex-1 min-w-0"
+      [label]="appTitle.inputs.loads.loadStatus"
+      [placeholder]="appTitle.placeholders.select"
+      [options]="loadStatusOptions()"
+      [addonWidth]="addonWidth"
+      [control]="this.ctrl('loadStatusId')"
+    />
+  </div>
 
-  <app-button
-    class="col-span-12 mt-2 md:flex md:justify-end"
-    styleClass="w-full md:w-40 lg:w-48"
-    (onClick)="loadDriverLoads()"
-    [disabled]="this.searchLoadsForm.invalid"
-    severity="info"
-  >
-    {{ appTitle.buttons.seeLoads }}
-  </app-button>
+  <div class="flex w-full md:justify-end">
+    <app-button
+      class="w-full md:w-auto"
+      styleClass="w-full md:w-40 lg:w-48"
+      (onClick)="loadDriverLoads()"
+      [disabled]="this.searchLoadsForm.invalid"
+      severity="info"
+    >
+      {{ appTitle.buttons.seeLoads }}
+    </app-button>
+  </div>
 </div>
 
 <div class="flex flex-wrap flex-col items-center justify-center mt-20">

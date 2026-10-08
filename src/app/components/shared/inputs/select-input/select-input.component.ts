@@ -39,7 +39,7 @@ export class SelectInputComponent<T> implements OnInit, OnChanges {
   @Input() label = '';
   @Input() addonWidth: string | null = null;
 
-  compareFn(o1: any, o2: any): boolean {
+  compareFn(o1: unknown, o2: unknown): boolean {
     return o1 === o2;
   }
 
