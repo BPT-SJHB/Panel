@@ -104,19 +104,17 @@ export class UserInfoFormComponent extends BaseLoading implements OnInit {
     });
   };
 
-  async activateUserSms(): Promise<void> {
+  async changeUserSmsStatus(): Promise<void> {
     const id = this.getUserFormControl('id');
     const smsActive = this.getUserFormControl('smsActive');
 
-    const canUserSendSms = id.valid && !smsActive.value;
-
-    if (this.loading() || !canUserSendSms) return;
+    if (this.loading() || id.invalid) return;
 
     await this.withLoading(async () => {
-      const response = await this.userManager.ActivateUserSMS(id.value!);
+      const response = await this.userManager.ChangeUserSMSStatus(id.value!);
       if (!checkAndToastError(response, this.toast)) return;
 
-      smsActive.setValue(true);
+      smsActive.setValue(!smsActive.value);
       this.toast.success('موفق', response.data.Message);
     });
   }

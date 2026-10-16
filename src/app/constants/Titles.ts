@@ -211,6 +211,7 @@ export class AppTitles {
     },
     saveAndEdit: 'ثبت و ویرایش',
     activateSMS: 'فعال‌سازی پیامک',
+    changeSMSStatus: 'تغییر وضعیت پیامک',
     sendSystemLink: 'ارسال لینک سامانه',
     generateNewPassword: 'ایجاد رمز‌عبور جدید',
     changeNativenessStatus: 'تغییر وضعیت بومی‌گری',
