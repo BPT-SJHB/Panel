@@ -23,6 +23,7 @@ interface CardTurnItem {
   LspString: string;
   TruckDriver: string;
   SequentialTurn: string;
+  IsForCancellation: boolean;
 }
 
 @Component({
@@ -74,6 +75,8 @@ export class IssuedTurnListFormComponent implements OnInit, OnDestroy {
 
   // ❗ Show confirmation dialog before canceling a turn
   confirmCancelTurn(turn: CardTurnItem): void {
+    if (!turn.IsForCancellation) return;
+
     this.confirmationService.confirm({
       message: `آیا مطمئن هستید که می‌خواهید نوبت شماره ${turn.SequentialTurn} را لغو کنید؟`,
       header: 'تأیید لغو نوبت',
@@ -121,6 +124,7 @@ export class IssuedTurnListFormComponent implements OnInit, OnDestroy {
           LspString: turn.LPString,
           TruckDriver: turn.TruckDriver,
           SequentialTurn: turn.SequentialTurn,
+          IsForCancellation: Boolean(turn.IsForCancellation),
         })
       );
 
