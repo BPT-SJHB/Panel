@@ -9,6 +9,7 @@ export interface TurnForSoftwareUser {
   SequentialTurn: string;
   TurnStatusTitle: string;
   LPString: string;
+  IsForCancellation: boolean;
 }
 
 export const zodTurnForSoftwareUser = z.object({
@@ -20,4 +21,5 @@ export const zodTurnForSoftwareUser = z.object({
   SequentialTurn: z.string(),
   TurnStatusTitle: z.string(),
   LPString: z.string(),
+  IsForCancellation: z.boolean(),
 });

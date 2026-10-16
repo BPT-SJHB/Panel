@@ -12,6 +12,7 @@ export const mockTurnsForSoftwareUser: TurnForSoftwareUser[] = [
     TurnStatusTitle:
       'فعال                                                                                                ',
     LPString: '286ع11-13',
+    IsForCancellation: true,
   },
   {
     TurnDistanceToValidity: 0,
@@ -24,6 +25,7 @@ export const mockTurnsForSoftwareUser: TurnForSoftwareUser[] = [
     TurnStatusTitle:
       'غیرفعال                                                                                             ',
     LPString: '286ع11-13',
+    IsForCancellation: false,
   },
   {
     TurnDistanceToValidity: 0,
@@ -36,6 +38,7 @@ export const mockTurnsForSoftwareUser: TurnForSoftwareUser[] = [
     TurnStatusTitle:
       'غیرفعال                                                                                             ',
     LPString: '286ع11-13',
+    IsForCancellation: false,
   },
   {
     TurnDistanceToValidity: 0,
@@ -48,6 +51,7 @@ export const mockTurnsForSoftwareUser: TurnForSoftwareUser[] = [
     TurnStatusTitle:
       'غیرفعال                                                                                             ',
     LPString: '286ع11-13',
+    IsForCancellation: false,
   },
   {
     TurnDistanceToValidity: 0,
@@ -60,5 +64,6 @@ export const mockTurnsForSoftwareUser: TurnForSoftwareUser[] = [
     TurnStatusTitle:
       'غیرفعال                                                                                             ',
     LPString: '286ع11-13',
+    IsForCancellation: false,
   },
 ];
