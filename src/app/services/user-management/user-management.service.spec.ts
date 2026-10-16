@@ -98,9 +98,9 @@ describe('UserManagementService', () => {
       .withContext('ForgetSoftwareUserPassword failed')
       .toBeTrue();
 
-    // 9️⃣ Activate SMS
-    const smsRes = await service.ActivateUserSMS(1);
-    expect(smsRes.success).withContext('ActivateUserSMS failed').toBeTrue();
+    // 9️⃣ Change SMS status
+    const smsRes = await service.ChangeUserSMSStatus(1);
+    expect(smsRes.success).withContext('ChangeUserSMSStatus failed').toBeTrue();
 
     // 🔟 Admin verification
     await devAuth.loginAsAdmin();

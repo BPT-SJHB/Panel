@@ -169,11 +169,11 @@ export class UserManagementService {
     //#endregion
   }
 
-  public async ActivateUserSMS(
+  public async ChangeUserSMSStatus(
     userId: number
   ): Promise<ApiResponse<ShortResponse>> {
     //#region Consts
-    const apiUrl = API_ROUTES.SoftwareUserAPI.UserManagement.ActivateSMSOwner;
+    const apiUrl = API_ROUTES.SoftwareUserAPI.UserManagement.ChangeSMSStatus;
     const userInfo: SoftwareUserInfo = { UserId: userId };
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),

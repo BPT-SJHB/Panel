@@ -28,7 +28,7 @@ export const API_ROUTES = {
       GetUserTypes: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}GetUserTypes`,
       RegisteringSoftwareUser: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}RegisteringSoftwareUser`,
       EditSoftwareUser: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}EditSoftwareUser`,
-      ActivateSMSOwner: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}ActivateSMSOwner`,
+      ChangeSMSStatus: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}ChangeSMSOwnerCurrentStatus`,
       ResetSoftwareUserPassword: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}ResetSoftwareUserPassword`,
       ResetMyPassword: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}ResetSoftwareUserPasswordForMe`,
       CustomSoftwareUserPassword: `${environment.apiUrl}:${softwareUserAPIPort}${apiFixURLPart}CustomizationSoftwareUserPassword`,
