@@ -40,10 +40,10 @@ export function getDefaultErrorMessage(
   if (e.passwordNumber) return `${name} باید حداقل یک عدد داشته باشد`;
 
   if (e.passwordSymbol)
-    return `${name} باید حداقل یک کاراکتر ویژه از _ - . داشته باشد`;
+    return `${name} باید حداقل یک کاراکتر ویژه از _ - . # @ داشته باشد`;
 
   if (e.passwordInvalidChar)
-    return `${name} فقط می‌تواند شامل حروف، عدد و کاراکترهای _ - . باشد`;
+    return `${name} فقط می‌تواند شامل حروف، عدد و کاراکترهای _ - . # @ باشد`;
 
   if (e.passwordMismatch) return `رمز عبور و تکرار آن با هم مطابقت ندارند`;
 
@@ -399,8 +399,8 @@ export function strongPasswordValidgtor(): ValidatorFn {
     if (!/[A-Z]/.test(value)) errors['passwordUppercase'] = true;
     if (!/[a-z]/.test(value)) errors['passwordLowercase'] = true;
     if (!/\d/.test(value)) errors['passwordNumber'] = true;
-    if (!/[_\-.]/.test(value)) errors['passwordSymbol'] = true;
-    if (!/^[A-Za-z0-9_\-.]+$/.test(value)) errors['passwordInvalidChar'] = true;
+    if (!/[_\-.#@]/.test(value)) errors['passwordSymbol'] = true;
+    if (!/^[A-Za-z0-9_\-.#@]+$/.test(value)) errors['passwordInvalidChar'] = true;
 
     return Object.keys(errors).length ? errors : null;
   };
