@@ -183,10 +183,10 @@ export class SearchAutoCompleteComponent<T extends object> {
     const len = this.suggestions().length;
     if (len === 0) return;
 
-    const code = event.code;
+    const key = event.key;
     const current = this.hoverIndex();
 
-    switch (code) {
+    switch (key) {
       case 'Enter': {
         event.preventDefault();
         const selected = this.suggestions()[current];
@@ -198,7 +198,7 @@ export class SearchAutoCompleteComponent<T extends object> {
       case 'ArrowDown':
       case 'ArrowUp': {
         event.preventDefault();
-        const delta = code === 'ArrowDown' ? 1 : -1;
+        const delta = key === 'ArrowDown' ? 1 : -1;
         const next = (current + delta + len) % len;
         this.hoverIndex.set(next);
         this.scrollToIndex(next);

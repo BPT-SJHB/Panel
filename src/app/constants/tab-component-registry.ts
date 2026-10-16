@@ -695,7 +695,7 @@ export const TabComponentRegistry: Record<TabComponentKey, TabConfig> = {
     sharedSignal: false,
     subTab: [
       {
-        title: 'مدیریت دیپایس',
+        title: 'مدیریت دیوایس',
         component: DeviceManagementFormComponent,
       },
     ],

@@ -115,15 +115,11 @@
     ></app-button>
 
     <app-button
-      (click)="activateUserSms()"
+      (click)="changeUserSmsStatus()"
       class="w-full md:w-fit"
-      [disabled]="
-        getUserFormControl('id').invalid ||
-        getUserFormControl('smsActive').value ||
-        loading()
-      "
+      [disabled]="getUserFormControl('id').invalid || loading()"
       severity="warn"
-      [label]="appTitles.buttons.activateSMS"
+      [label]="appTitles.buttons.changeSMSStatus"
       styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
     ></app-button>
 

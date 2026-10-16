@@ -30,7 +30,8 @@
                 styleClass="px-6 py-2 text-sm font-semibold"
                 severity="danger"
                 label="ابطال نوبت"
-                (click)="confirmCancelTurn(turn)"
+                [disabled]="!turn.IsForCancellation"
+                (onClick)="confirmCancelTurn(turn)"
               />
             </div>
           </div>

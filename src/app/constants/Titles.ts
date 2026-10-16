@@ -52,7 +52,7 @@ export class AppTitles {
     'سامانه جامع حمل و نقل کالا سازمان راهداری و حمل و نقل جاده ای';
   public static readonly appBrokenTitle =
     'سامانه جامع حمل و نقل کالا<br>اداره کل راهداری و حمل و نقل جاده ای<br>استان اصفهان';
-  public static readonly frontendVersion = '1.70.09';
+  public static readonly frontendVersion = '1.70.10';
   public static readonly backendVersion = '12.2.9';
   public static readonly frontVersionTitle = `نسخه فرانت-اند: ${this.frontendVersion}`;
   public static readonly backVersionTitle = `نسخه بک-اند: ${this.backendVersion}`;
@@ -211,6 +211,7 @@ export class AppTitles {
     },
     saveAndEdit: 'ثبت و ویرایش',
     activateSMS: 'فعال‌سازی پیامک',
+    changeSMSStatus: 'تغییر وضعیت پیامک',
     sendSystemLink: 'ارسال لینک سامانه',
     generateNewPassword: 'ایجاد رمز‌عبور جدید',
     changeNativenessStatus: 'تغییر وضعیت بومی‌گری',

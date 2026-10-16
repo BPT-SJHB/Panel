@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   Component,
+  ComponentRef,
   inject,
   OnDestroy,
   signal,
@@ -35,6 +36,7 @@ export class DashboardContentManagerComponent
   private pageGroupSub$?: Subscription;
   private contentSub$?: Subscription;
   private currentTabId = '';
+  private activeComponentRef?: ComponentRef<unknown>;
 
   webProcesses: WebProcess[] = [];
   subMenuVisible = false;
@@ -79,6 +81,9 @@ export class DashboardContentManagerComponent
       .select(selectContentState)
       .subscribe((state) => {
         this.subMenuVisible = state.context === 'subMenu';
+        if (this.subMenuVisible) {
+          this.closeOpenOverlays();
+        }
       });
   }
 
@@ -89,11 +94,27 @@ export class DashboardContentManagerComponent
 
   private clearPreviousContent(): void {
     if (this.tabContent && this.tabContent.length > 0) {
+      this.closeOpenOverlays();
       this.tabContent.detach(0);
+      this.activeComponentRef = undefined;
     }
   }
 
-  private loadCachedComponent(componentRef: any, tab: DynamicTab): void {
+  private closeOpenOverlays(): void {
+    document.dispatchEvent(new MouseEvent('click'));
+    document
+      .querySelectorAll<HTMLElement>('.p-overlay, .p-select-overlay')
+      .forEach((el) => {
+        el.style.display = 'none';
+      });
+    this.activeComponentRef?.changeDetectorRef.markForCheck();
+  }
+
+  private loadCachedComponent(
+    componentRef: ComponentRef<unknown>,
+    tab: DynamicTab
+  ): void {
+    this.activeComponentRef = componentRef;
     this.tabContent?.insert(componentRef.hostView);
     this.activateComponent(componentRef.instance);
     this.sendRenderContent(tab);
@@ -109,6 +130,7 @@ export class DashboardContentManagerComponent
     if (!componentType) return;
 
     const componentRef = this.tabContent.createComponent(componentType);
+    this.activeComponentRef = componentRef;
 
     this.assignStaticData(componentRef, subTab.data);
     this.setupSharedSignal(componentRef, tab, config);
@@ -118,14 +140,20 @@ export class DashboardContentManagerComponent
     this.sendRenderContent(tab);
   }
 
-  private assignStaticData(componentRef: any, data?: any): void {
-    if (data) {
-      Object.assign(componentRef.instance, data);
+  private assignStaticData(
+    componentRef: ComponentRef<unknown>,
+    data?: object
+  ): void {
+    if (data && componentRef.instance) {
+      Object.assign(
+        componentRef.instance as Record<string, unknown>,
+        data
+      );
     }
   }
 
   private setupSharedSignal(
-    componentRef: any,
+    componentRef: ComponentRef<unknown>,
     tab: DynamicTab,
     config: TabConfig
   ): void {
@@ -133,12 +161,15 @@ export class DashboardContentManagerComponent
       if (!tab.sharedSignal) {
         tab.sharedSignal = signal(null);
       }
-      Object.assign(componentRef.instance, { sharedSignal: tab.sharedSignal });
+      Object.assign(
+        componentRef.instance as Record<string, unknown>,
+        { sharedSignal: tab.sharedSignal }
+      );
     }
   }
 
-  private activateComponent(instance: any): void {
-    instance.onViewActivated?.();
+  private activateComponent(instance: unknown): void {
+    (instance as { onViewActivated?: () => void })?.onViewActivated?.();
   }
 
   private sendRenderContent(tab: DynamicTab): void {

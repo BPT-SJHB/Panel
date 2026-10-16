@@ -1,5 +1,5 @@
 // 🔽 Angular & RxJS Imports
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal, computed } from '@angular/core';
 
 // 🔽 PrimeNG UI Modules
 import { AvatarModule } from 'primeng/avatar';
@@ -72,8 +72,10 @@ export class UserProfileFormComponent extends BaseLoading implements OnInit {
 
   readonly appTitle = AppTitles;
 
-  // 🔽 User's SMS activation status (separate boolean flag)
-  isUserSmsActivated = true;
+  // 🔽 User's SMS activation status (derived computed flag)
+  readonly isUserSmsActivated = computed(
+    () => this.userProfile().SMSOwnerActive === 'فعال'
+  );
   isChangePasswordDialogVisible = false;
 
   // 🔽 Table column definitions for user profile view
@@ -114,8 +116,6 @@ export class UserProfileFormComponent extends BaseLoading implements OnInit {
         walletCode: wallet.MoneyWalletCode ?? '-',
         balance: wallet.Balance ?? 0,
       });
-
-      this.isUserSmsActivated = !!user.SMSOwnerActive;
     });
   }
 
@@ -126,21 +126,20 @@ export class UserProfileFormComponent extends BaseLoading implements OnInit {
     });
   }
 
-  // 🔽 Trigger SMS activation for user (if not already active)
-  async activateUserSms(): Promise<void> {
+  // 🔽 Trigger SMS status change for user
+  async changeUserSmsStatus(): Promise<void> {
     const userId = this.userProfile().UserId;
-    if (this.loading() || this.isUserSmsActivated || userId === -1) return;
+    if (this.loading() || userId === -1) return;
 
     await this.withLoading(async () => {
-      const res = await this.userService.ActivateUserSMS(userId);
+      const res = await this.userService.ChangeUserSMSStatus(userId);
       if (!checkAndToastError(res, this.toast)) return;
 
       this.toast.success('موفق', res.data.Message);
       this.userProfile.update((profile) => ({
         ...profile,
-        SMSOwnerActive: 'فعال',
+        SMSOwnerActive: profile.SMSOwnerActive === 'فعال' ? 'غیرفعال' : 'فعال',
       }));
-      this.isUserSmsActivated = true;
     });
   }
 

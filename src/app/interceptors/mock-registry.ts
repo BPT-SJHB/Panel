@@ -82,7 +82,7 @@ import { mockWallet } from 'app/services/wallet-management/mock/wallet.mock';
 /**
  * Route URL prefix map to Mock data in dev offline mode
  */
-export function getMockResponseForUrl(url: string, _method: string): any {
+export function getMockResponseForUrl(url: string, _method: string): unknown {
   // Section 11: TicketAPI (evaluated first to prevent endpoint collisions e.g. GetCaptcha)
   if (url.includes('/ticket') || url.includes('/api/v1/') || url.includes(':8080')) {
     // Auth
@@ -153,6 +153,7 @@ export function getMockResponseForUrl(url: string, _method: string): any {
   }
   if (
     url.includes('EditSoftwareUser') ||
+    url.includes('ChangeSMSOwnerCurrentStatus') ||
     url.includes('ActivateSMSOwner') ||
     url.includes('CustomizationSoftwareUserPassword') ||
     url.includes('SoftwareUserForgetPassword') ||

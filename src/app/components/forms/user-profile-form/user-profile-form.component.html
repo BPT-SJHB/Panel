@@ -36,10 +36,10 @@
   class="col-span-12 my-4 md:flex md:flex-row-reverse md:flex-wrap gap-4 items-center"
 >
   <app-button
-    (click)="activateUserSms()"
-    [disabled]="loading() || isUserSmsActivated || !userProfile()"
+    (click)="changeUserSmsStatus()"
+    [disabled]="loading() || userProfile().UserId === -1"
     severity="warn"
-    [label]="appTitle.buttons.activateSMS"
+    [label]="appTitle.buttons.changeSMSStatus"
     styleClass="my-2 md:my-0 text-xs md:text-sm lg:text-base w-full md:w-36 lg:w-40"
   ></app-button>
 
