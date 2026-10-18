@@ -146,7 +146,10 @@ export class TurnsListFormComponent
     const resTurnsInfo = await this.turnManagerService.GetLatestTurns(
       resTruckInfo.data.TruckId
     );
-    if (!checkAndToastError(resTurnsInfo, this.toast)) return;
+    if (!checkAndToastError(resTurnsInfo, this.toast)) {
+      this.truckTurnsList.set([]);
+      return;
+    }
 
     const turns: TurnTableRow[] = resTurnsInfo.data.map((t) => ({
       ...t,
