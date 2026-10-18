@@ -18,6 +18,7 @@ export const mockTurns: Turn[] = [
     DateOfLastChanged: '',
     SequentialTurnTitle:
       'مرتضي شاهمرادي                                                                                      ',
+    IsForCancellation: true,
   },
   {
     TurnId: 6,
@@ -36,6 +37,7 @@ export const mockTurns: Turn[] = [
     DateOfLastChanged: '1404/04/09',
     SequentialTurnTitle:
       'مرتضي شاهمرادي                                                                                      ',
+    IsForCancellation: false,
   },
   {
     TurnId: 5,
@@ -54,6 +56,7 @@ export const mockTurns: Turn[] = [
     DateOfLastChanged: '1404/04/09',
     SequentialTurnTitle:
       'مرتضي شاهمرادي                                                                                      ',
+    IsForCancellation: false,
   },
   {
     TurnId: 4,
@@ -72,6 +75,7 @@ export const mockTurns: Turn[] = [
     DateOfLastChanged: '1404/04/09',
     SequentialTurnTitle:
       'مرتضي شاهمرادي                                                                                      ',
+    IsForCancellation: false,
   },
   {
     TurnId: 3,
@@ -90,6 +94,7 @@ export const mockTurns: Turn[] = [
     DateOfLastChanged: '1404/04/09',
     SequentialTurnTitle:
       'شهري - شمش کوهپايه                                                                                  ',
+    IsForCancellation: false,
   },
   {
     TurnId: 2,
@@ -108,6 +113,7 @@ export const mockTurns: Turn[] = [
     DateOfLastChanged: '1404/04/09',
     SequentialTurnTitle:
       'تريلي برون شهري - آهن آلات انباري و ذوبي ، رول سبا                                                  ',
+    IsForCancellation: false,
   },
   {
     TurnId: 1,
@@ -126,5 +132,6 @@ export const mockTurns: Turn[] = [
     DateOfLastChanged: '1404/04/09',
     SequentialTurnTitle:
       'تريلي برون شهري - آهن آلات انباري و ذوبي ، رول سبا                                                  ',
+    IsForCancellation: false,
   },
 ];

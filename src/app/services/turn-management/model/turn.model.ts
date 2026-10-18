@@ -12,6 +12,7 @@ export interface Turn {
   TurnStatusDescription?: string;
   DateOfLastChanged?: string;
   SequentialTurnTitle?: string;
+  IsForCancellation?: boolean;
 }
 
 export const zodTurn = z.object({
@@ -26,4 +27,5 @@ export const zodTurn = z.object({
   TurnStatusDescription: z.string().optional(),
   DateOfLastChanged: z.string().optional(),
   SequentialTurnTitle: z.string().optional(),
+  IsForCancellation: z.boolean().optional(),
 });

@@ -1,4 +1,4 @@
-import { Component, inject, signal, ViewChild, viewChild } from '@angular/core';
+import { Component, inject, signal, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { SearchInputComponent } from 'app/components/shared/inputs/search-input/search-input.component';
 import { TextInputComponent } from 'app/components/shared/inputs/text-input/text-input.component';
@@ -83,6 +83,7 @@ export class TurnsListFormComponent
       ...deleteCell.config,
       field: 'deactivate',
       header: 'ابطال نوبت',
+      disable: (row: TurnTableRow) => !row.IsForCancellation,
       onAction: (row: TurnTableRow) => this.confirmDeactivation(row),
     },
     {
@@ -149,6 +150,7 @@ export class TurnsListFormComponent
 
     const turns: TurnTableRow[] = resTurnsInfo.data.map((t) => ({
       ...t,
+      IsForCancellation: Boolean(t.IsForCancellation),
       deactivate: 'pi-times',
       activate: 'pi-refresh',
       accounting: 'pi-list',
@@ -208,6 +210,7 @@ export class TurnsListFormComponent
 
   // For deactivation
   confirmDeactivation(row: TurnTableRow) {
+    if (!row.IsForCancellation) return;
     const message = `شناسه ${row.TurnId} - راننده ${row.TruckDriver}`;
     this.confirmService.confirmTurnAction('deactivate', message, async () => {
       if (this.loading()) return;
