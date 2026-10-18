@@ -150,6 +150,7 @@ export class TurnsListFormComponent
 
     const turns: TurnTableRow[] = resTurnsInfo.data.map((t) => ({
       ...t,
+      OtaghdarTurnNumber: t.OtaghdarTurnNumber?.trim(),
       IsForCancellation: Boolean(t.IsForCancellation),
       deactivate: 'pi-times',
       activate: 'pi-refresh',
@@ -199,7 +200,8 @@ export class TurnsListFormComponent
 
   // --- Confirmations ---
   confirmActivation(row: TurnTableRow) {
-    const message = `شناسه ${row.TurnId} - راننده ${row.TruckDriver}`;
+    const turnNumber = row.OtaghdarTurnNumber || row.TurnId;
+    const message = `شماره نوبت ${turnNumber} - راننده ${row.TruckDriver}`;
     this.confirmService.confirmTurnAction('activate', message, async () => {
       if (this.loading()) return;
       await this.withLoading(async () => {
@@ -211,7 +213,8 @@ export class TurnsListFormComponent
   // For deactivation
   confirmDeactivation(row: TurnTableRow) {
     if (!row.IsForCancellation) return;
-    const message = `شناسه ${row.TurnId} - راننده ${row.TruckDriver}`;
+    const turnNumber = row.OtaghdarTurnNumber || row.TurnId;
+    const message = `شماره نوبت ${turnNumber} - راننده ${row.TruckDriver}`;
     this.confirmService.confirmTurnAction('deactivate', message, async () => {
       if (this.loading()) return;
       await this.withLoading(async () => {
