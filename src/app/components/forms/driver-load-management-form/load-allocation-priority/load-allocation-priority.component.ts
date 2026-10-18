@@ -96,8 +96,11 @@ export class LoadAllocationPriorityComponent
   private async loadLoadsAllocation(): Promise<void> {
     await this.withLoading(async () => {
       const response = await this.loadsService.GetLoadAllocationOfDriver();
-      if (!checkAndToastError(response, this.toast)) return;
-      this.loadsAllocations.set(response.data);
+      if (!checkAndToastError(response, this.toast)) {
+        this.loadsAllocations.set([]);
+        return;
+      }
+      this.loadsAllocations.set(response.data ?? []);
     });
   }
 
