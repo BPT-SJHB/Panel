@@ -11,6 +11,7 @@ export interface LoadPermissionForDriver {
   GoodTitle: string;
   LoadSourceCity: string;
   LoadTargetCity: string;
+  TCTitle: string;
 }
 
 export const zodLoadPermissionForDriver = z.object({
@@ -24,4 +25,5 @@ export const zodLoadPermissionForDriver = z.object({
   GoodTitle: z.string(),
   LoadSourceCity: z.string(),
   LoadTargetCity: z.string(),
+  TCTitle: z.string(),
 });

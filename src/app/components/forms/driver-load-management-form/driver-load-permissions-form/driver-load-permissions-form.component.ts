@@ -79,7 +79,10 @@ export class DriverLoadPermissionsFormComponent extends BaseLoading {
         this.ctrl('AnnouncementSubGroupId').value!
       );
 
-      if (!checkAndToastError(response, this.toast)) return;
+      if (!checkAndToastError(response, this.toast)) {
+        this.loadsPermissions.set([]);
+        return;
+      }
       this.loadsPermissions.set(response.data);
     });
   }

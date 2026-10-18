@@ -19,7 +19,7 @@
     [disabled]="this.searchLoadPermissions.invalid"
     severity="info"
   >
-  مشاهده
+    مشاهده
   </app-button>
 </div>
 
@@ -47,6 +47,7 @@
         <div>
           تاریخ: {{ load.ShamsiDate || "-" }} | ساعت: {{ load.Time || "-" }}
         </div>
+        <div>شرکت حمل و نقل: {{ load.TCTitle || "-" }}</div>
       </div>
     </p-card>
   } @empty {

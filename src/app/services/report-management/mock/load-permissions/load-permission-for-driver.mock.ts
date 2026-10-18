@@ -13,5 +13,6 @@ export const mockLoadPermissionsForDriver: LoadPermissionForDriver[] = [
     GoodTitle: 'شمش چدن',
     LoadSourceCity: 'اصفهان - ذوب آهن',
     LoadTargetCity: 'مشگين شهر',
+    TCTitle: 'شرکت حمل و نقل جهان آرا بار',
   },
 ];
