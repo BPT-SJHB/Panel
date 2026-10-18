@@ -25,6 +25,9 @@ npm start
 npm run build
 # or: ng build --configuration production
 
+# Dev watch build
+npm run watch
+
 # Linting (Angular ESLint + ESLint 9)
 npm run lint
 
@@ -35,9 +38,14 @@ npm test -- --watch=false --browsers=ChromeHeadless
 # Run a single unit test file
 npx ng test --include='src/app/pipes/minute-and-second.pipe.spec.ts' --watch=false --browsers=ChromeHeadless
 
+# Bundle analysis
+npm run explore
+
 # Documentation (Compodoc)
 npm run doc
 ```
+
+CI (`.github/workflows/ci.yml`) runs Node 24, `npm ci`, then `npx ng build --configuration production --output-hashing=all`. Unit tests in CI are commented out.
 
 ---
 
@@ -71,12 +79,13 @@ npm run doc
    - Centralize API error interceptors and HTTP status handling.
 
 5. **Dynamic Tab & Form Component Registry**:
-   - The dashboard avoids standard sub-routing for panel tools.
-   - `DashboardContentManagerComponent` queries `src/app/constants/tab-component-registry.ts` to dynamically instantiate form components into tabs.
+   - Router only covers home, auth, dashboard, and public ticket pages (`src/app/constants/routes.ts`). Panel tools are not child routes.
+   - `DashboardContentManagerComponent` queries `src/app/constants/tab-component-registry.ts` (`TabComponentKey` + `TabConfig`) to dynamically instantiate form components into tabs.
    - UI state (tabs, sub-tabs, sidebar page groups) is managed across NgRx slices in `src/app/store/` (`tab`, `sidebar`, `content-manager`).
 
 6. **Multi-Port Backend Microservices Routing**:
-   - `src/app/constants/api.ts` maps endpoints to distinct microservice ports (e.g., SoftwareUserAPI: 81, TransportationAPI: 82, Wallet/Traffic: 83, LoadCapacitor: 84, LoadAllocation: 85, Reports: 86, Carousels: 90, Traffic: 91, Ticket: 8080) relative to base hosts configured in `src/environments/`.
+   - `src/app/constants/api.ts` maps most endpoints to distinct microservice ports on `environment.apiUrl` / `environment.mainApiUrl`: SoftwareUserAPI 81, TransportationAPI 82, Wallet/Traffic 83, LoadCapacitor 84, LoadAllocation 85, Reports 86, KernelTasks 88, Carousels 90, Traffic 91.
+   - Ticket APIs use `environment.ticketApiUrl` + `/api/v1/` (no port suffix). Dev host is in `src/environments/environment.development.ts`; prod host is in `src/environments/environment.ts`.
 
 7. **Offline Mock System**:
    - When `environment.disableApi` is `true` (`src/environments/environment.development.ts`), `mockApiInterceptor` intercepts HTTP traffic.
