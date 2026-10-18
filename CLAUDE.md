@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-Enterprise Angular management panel built with **Angular 21**, **PrimeNG 21**, **Tailwind CSS v4**, **NgRx Store**, **RxJS**, **Leaflet**, and **Jalali Calendar/RTL support**.
+Enterprise Angular management panel (`bpt-sjhb-panel`) built with **Angular 21**, **PrimeNG 21**, **Tailwind CSS v4**, **NgRx Store**, **RxJS**, **Leaflet**, and **Jalali Calendar/RTL support**. Production output: `dist/bpt-sjhb-panel`. Production build enables the Angular service worker (`ngsw-config.json`); `provideServiceWorker` is `enabled: !isDevMode()`.
 
 ---
 
@@ -79,28 +79,32 @@ TypeScript `baseUrl` is `src/`, so imports use `app/...` and `environments/...`.
    - Keep forms DRY using shared form components (`src/app/components/forms/`).
 
 4. **Security & Data Handling**:
-   - Strict route guards (`src/app/guard/login-guard`, `src/app/guard/dashboard-guard`).
-   - Secure token and credential storage (`ngx-cookie-service`, `crypto-js`).
-   - Sanitize dynamic HTML/URL bindings (`DomSanitizer`) to prevent XSS.
-   - Centralize API error interceptors and HTTP status handling.
+   - Session cookie key is `sessionId` (`UserAuthService`). `dashboardGuard` requires `IsSessionLive`; `loginAuthGuard` sends live sessions to dashboard.
+   - Public ticket pages (`tickets`, `tickets/track`) have no auth guard.
+   - Credential storage: `ngx-cookie-service`, `crypto-js`. Sanitize dynamic HTML/URL bindings (`DomSanitizer`).
+   - HTTP errors: `HttpErrorService` (`src/app/services/http-error-service/http-error.service.ts`).
 
 5. **Dynamic Tab & Form Component Registry**:
    - Router only covers home, auth, dashboard, and public ticket pages (`src/app/constants/routes.ts`). Panel tools are not child routes.
-   - `DashboardContentManagerComponent` queries `src/app/constants/tab-component-registry.ts` (`TabComponentKey` + `TabConfig`) to dynamically instantiate form components into tabs.
-   - UI state (tabs, sub-tabs, sidebar page groups) is managed across NgRx slices in `src/app/store/` (`tab`, `sidebar`, `content-manager`).
+   - Sidebar menu comes from `GetWebProcesses`. Each process `PId` **is** `TabComponentKey` — new tools must reuse the backend ID, not an arbitrary enum value.
+   - `DashboardContentManagerComponent` looks up `TabConfig` in `src/app/constants/tab-component-registry.ts`, creates `subTab[].component` into a `ViewContainerRef`, caches `ComponentRef` per sub-tab, `Object.assign`s `subTab.data`, and optionally shares a signal when `sharedSignal` is true.
+   - UI state (active tab, sidebar page groups, content vs submenu) lives in NgRx slices `tab`, `sidebar`, `content-manager`.
 
-6. **Multi-Port Backend Microservices Routing**:
+6. **HTTP layer**:
+   - Forms/services call `APICommunicationManagementService` (`CommunicateWithAPI_Post` / `CommunicateWithAPI_Get`), not raw `HttpClient`. Envelope: `ApiResponse<T>` in `src/app/data/model/api-Response.model.ts`. Responses are checked with `checkAndToastError()`.
+
+7. **Multi-Port Backend Microservices Routing**:
    - `src/app/constants/api.ts` maps most endpoints to distinct microservice ports on `environment.apiUrl` / `environment.mainApiUrl`: SoftwareUserAPI 81, TransportationAPI 82, Wallet/Traffic 83, LoadCapacitor 84, LoadAllocation 85, Reports 86, KernelTasks 88, Carousels 90, Traffic 91.
    - Ticket APIs use `environment.ticketApiUrl` + `/api/v1/` (no port suffix). Dev host is in `src/environments/environment.development.ts`; prod host is in `src/environments/environment.ts`.
 
-7. **Offline Mock System**:
+8. **Offline Mock System**:
    - `provideHttpClient(withInterceptors([mockApiInterceptor]))` in `src/app/app.config.ts` always registers the interceptor; it only mocks when `environment.disableApi` is `true` (`src/environments/environment.development.ts`).
    - Mock handlers and payloads are registered in `src/app/interceptors/mock-registry.ts` and loaded from `src/app/data/mock/` or service-level `mock/` directories.
 
-8. **Form Base, Loading & API Error Handling**:
+9. **Form Base, Loading & API Error Handling**:
    - Forms extend `BaseLoading` (`src/app/components/forms/shared/component-base/base-loading.ts`) for signal-based loading state (`withLoading`) and cleanup (`destroy$`).
    - API responses are validated using `checkAndToastError()` (`src/app/utils/api-utils.ts`). Tables and dependent fields should reset to empty states on API errors.
 
-9. **New panel tool wiring** (not a route): add the form under `src/app/components/forms/`, register `TabComponentKey` + `TabConfig` in `tab-component-registry.ts`, add endpoints in `constants/api.ts` + a service under `src/app/services/`, and a mock handler in `mock-registry.ts`.
+10. **New panel tool wiring** (not a route): add the form under `src/app/components/forms/`, register `TabComponentKey` (must equal backend `PId`) + `TabConfig` in `tab-component-registry.ts`, add endpoints in `constants/api.ts` + a service under `src/app/services/`, and a mock handler in `mock-registry.ts`.
 
-10. **Print**: `PrintService` (`src/app/services/print/print.service.ts`) prints from data via an iframe — do not clone live DOM. Spec: `docs/reporting-and-print-service.md`.
+11. **Print**: `PrintService` (`src/app/services/print/print.service.ts`) prints from data via an iframe — do not clone live DOM. Spec: `docs/reporting-and-print-service.md`.
