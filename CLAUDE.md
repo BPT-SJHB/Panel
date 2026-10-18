@@ -1,6 +1,16 @@
-# BPT SJHB Panel - Architecture & Guidelines
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 Enterprise Angular management panel built with **Angular 21**, **PrimeNG 21**, **Tailwind CSS v4**, **NgRx Store**, **RxJS**, **Leaflet**, and **Jalali Calendar/RTL support**.
+
+---
+
+## Mandatory Project Guidelines
+
+- **Clean Code, DRY & KISS**: Prefer shortest working diff, reuse existing codebase utilities, avoid unnecessary abstractions and boilerplate.
+- **English Only**: All communications and generated documentation must be in English.
+- **API Integrity Tests**: Existing API tests (`src/app/services/**/*.service.spec.ts`) are backend/API integrity verification tests hitting real endpoints, not agent unit tests. Do not alter, author, or run them as change verification without explicit instructions.
 
 ---
 
@@ -20,6 +30,10 @@ npm run lint
 
 # Unit tests
 npm run test
+# Headless test run
+npm test -- --watch=false --browsers=ChromeHeadless
+# Run a single unit test file
+npx ng test --include='src/app/pipes/minute-and-second.pipe.spec.ts' --watch=false --browsers=ChromeHeadless
 
 # Documentation (Compodoc)
 npm run doc
@@ -30,7 +44,6 @@ npm run doc
 ## ⚡ Standards & Skill References
 
 - Modern Angular standards: Follow `.claude/skills/angular-developer/SKILL.md` (Standalone components, Signals `input()`/`output()`/`model()`, `inject()`, `ChangeDetectionStrategy.OnPush`, `@if`/`@for`, typed forms).
-
 
 ---
 
@@ -56,3 +69,19 @@ npm run doc
    - Secure token and credential storage (`ngx-cookie-service`, `crypto-js`).
    - Sanitize dynamic HTML/URL bindings (`DomSanitizer`) to prevent XSS.
    - Centralize API error interceptors and HTTP status handling.
+
+5. **Dynamic Tab & Form Component Registry**:
+   - The dashboard avoids standard sub-routing for panel tools.
+   - `DashboardContentManagerComponent` queries `src/app/constants/tab-component-registry.ts` to dynamically instantiate form components into tabs.
+   - UI state (tabs, sub-tabs, sidebar page groups) is managed across NgRx slices in `src/app/store/` (`tab`, `sidebar`, `content-manager`).
+
+6. **Multi-Port Backend Microservices Routing**:
+   - `src/app/constants/api.ts` maps endpoints to distinct microservice ports (e.g., SoftwareUserAPI: 81, TransportationAPI: 82, Wallet/Traffic: 83, LoadCapacitor: 84, LoadAllocation: 85, Reports: 86, Carousels: 90, Traffic: 91, Ticket: 8080) relative to base hosts configured in `src/environments/`.
+
+7. **Offline Mock System**:
+   - When `environment.disableApi` is `true` (`src/environments/environment.development.ts`), `mockApiInterceptor` intercepts HTTP traffic.
+   - Mock handlers and payloads are registered in `src/app/interceptors/mock-registry.ts` and loaded from `src/app/data/mock/` or service-level `mock/` directories.
+
+8. **Form Base, Loading & API Error Handling**:
+   - Forms extend `BaseLoading` (`src/app/components/forms/shared/component-base/base-loading.ts`) for signal-based loading state (`withLoading`) and cleanup (`destroy$`).
+   - API responses are validated using `checkAndToastError()` (`src/app/utils/api-utils.ts`). Tables and dependent fields should reset to empty states on API errors.
