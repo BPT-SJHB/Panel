@@ -137,30 +137,31 @@ export class LoadAllocationPriorityComponent
   }
 
   private async loadLoadsAllocation(): Promise<void> {
-    await this.withLoading(async () => {
-      const response = await this.loadsService.GetLoadAllocationOfDriver();
-      if (!checkAndToastError(response, this.toast)) {
-        this.loadsAllocations.set([]);
-        return;
-      }
-      this.loadsAllocations.set(response.data ?? []);
-    });
+    const response = await this.loadsService.GetLoadAllocationOfDriver();
+    if (!checkAndToastError(response, this.toast)) {
+      this.loadsAllocations.set([]);
+      return;
+    }
+    this.loadsAllocations.set(response.data ?? []);
   }
 
   async showTravelTime(ladId: number) {
     const time = this.getTimeTravel(ladId);
-    if (time) return;
-    this.loadingTimeTravels.update((lt) => lt.add(ladId));
+    if (time != null) return;
+    this.loadingTimeTravels.update((lt) => new Set(lt).add(ladId));
     try {
       const response =
         await this.loadsService.GetTravelTimeOfMyLoadAllocation(ladId);
       if (!checkAndToastError(response, this.toast)) return;
-      this.travelTime.update((map) => map.set(ladId, response.data.TravelTime));
+      this.travelTime.update(
+        (map) => new Map(map).set(ladId, response.data.TravelTime)
+      );
     } finally {
       setTimeout(() => {
         this.loadingTimeTravels.update((lt) => {
-          lt.delete(ladId);
-          return lt;
+          const next = new Set(lt);
+          next.delete(ladId);
+          return next;
         });
       }, 2000);
     }
@@ -191,7 +192,7 @@ export class LoadAllocationPriorityComponent
     return this.selection().length > 0 && this.selection()[0].LAId === ladId;
   }
 
-  async savePriorities($event: MouseEvent) {
+  async savePriorities() {
     await this.withLoading(async () => {
       const priorites: LoadAllocationPriority[] = this.loadsAllocations().map(
         (item, index) => ({ LAId: item.LAId, Priority: index + 1 })
@@ -200,8 +201,7 @@ export class LoadAllocationPriorityComponent
         await this.loadsService.ChangePriorityLoadAllocations(priorites);
       if (!checkAndToastError(response, this.toast)) return;
       this.toast.success('موفق', response.data.Message);
+      await this.loadLoadsAllocation();
     });
-
-    await this.loadLoadsAllocation();
   }
 }

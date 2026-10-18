@@ -28,6 +28,10 @@
   border-radius: 8px;
 }
 
+.allocation-item {
+  touch-action: pan-y;
+}
+
 .drag-handle {
   touch-action: none;
   cursor: grab;

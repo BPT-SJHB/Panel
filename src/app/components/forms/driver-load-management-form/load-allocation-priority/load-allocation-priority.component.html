@@ -120,7 +120,7 @@
                         }"
                       >
                         @if (!loadingTimeTravels().has(option.LAId)) {
-                          {{ getTimeTravel(option.LAId) || "==" }}
+                          {{ getTimeTravel(option.LAId) ?? "==" }}
                         } @else {
                           <i class="pi pi-spin pi-spinner"></i>
                         }
@@ -204,7 +204,8 @@
       <app-button
         styleClass="py-2 px-3"
         size="small"
-        (click)="savePriorities($event)"
+        [disabled]="loading()"
+        (click)="savePriorities()"
       >
         ذخیره‌سازی اولویت‌ها
       </app-button>
