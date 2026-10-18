@@ -151,7 +151,7 @@ export class TurnsListFormComponent
       return;
     }
 
-    const turns: TurnTableRow[] = resTurnsInfo.data.map((t) => ({
+    const turns: TurnTableRow[] = (resTurnsInfo.data ?? []).map((t) => ({
       ...t,
       OtaghdarTurnNumber: t.OtaghdarTurnNumber?.trim(),
       IsForCancellation: Boolean(t.IsForCancellation),
@@ -189,8 +189,11 @@ export class TurnsListFormComponent
       const response = await this.turnManagerService.GetTurnAccounting(
         row.TurnId
       );
-      if (!checkAndToastError(response, this.toast)) return;
-      this.turnsAccounting.set(response.data);
+      if (!checkAndToastError(response, this.toast)) {
+        this.turnsAccounting.set([]);
+        return;
+      }
+      this.turnsAccounting.set(response.data ?? []);
       this.headerTitle.set('لیست تراکنش ها');
       this.dialogTurnAccounting = true;
     });
