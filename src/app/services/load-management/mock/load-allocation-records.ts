@@ -17,6 +17,7 @@ export const mockLoadAllocationRecords: LoadAllocationInfo[] = [
     Address: 'اصفهان، منطقه صنعتی امیرکبیر',
     Recipient: 'شرکت فولاد تهران',
     TPTParamsJoint: '',
+    LANote: 'مجوز صادر شده',
   },
   {
     LAId: 3,
@@ -34,6 +35,7 @@ export const mockLoadAllocationRecords: LoadAllocationInfo[] = [
     Address: 'اصفهان، خیابان کهندژ',
     Recipient: 'کارگاه فلزات تهرانی',
     TPTParamsJoint: 'دو باسکوله (ذوب آهنی): 8,000,000',
+    LANote: 'در حال بارگیری',
   },
   {
     LAId: 9,
@@ -51,6 +53,7 @@ export const mockLoadAllocationRecords: LoadAllocationInfo[] = [
     Address: 'اصفهان، بلوار امام خمینی',
     Recipient: 'فروشگاه آهن پارسیان',
     TPTParamsJoint: '',
+    LANote: 'تایید شده',
   },
   {
     LAId: 4,
@@ -68,6 +71,7 @@ export const mockLoadAllocationRecords: LoadAllocationInfo[] = [
     Address: 'اصفهان، میدان آزادی',
     Recipient: 'پروژه ساختمانی پارک ملت',
     TPTParamsJoint: '',
+    LANote: 'در انتظار تایید',
   },
   {
     LAId: 5,
@@ -85,5 +89,6 @@ export const mockLoadAllocationRecords: LoadAllocationInfo[] = [
     Address: 'اصفهان، خیابان امام رضا',
     Recipient: 'شرکت توسعه سازه شرق',
     TPTParamsJoint: '',
+    LANote: 'ابطال شده',
   },
 ];

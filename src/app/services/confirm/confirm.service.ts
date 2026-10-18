@@ -144,14 +144,14 @@ export class AppConfirmService {
     const config = {
       activate: {
         header: 'تأیید احیا نوبت',
-        message: `آیا از احیا نوبت <b><u>${itemName}</u></b> مطمئن هستید؟`,
+        message: `آیا از احیا <b><u>${itemName}</u></b> مطمئن هستید؟`,
         icon: 'pi pi-refresh',
         acceptLabel: 'احیا نوبت',
         acceptSeverity: 'info' as const,
       },
       deactivate: {
         header: 'تأیید ابطال نوبت',
-        message: `آیا از ابطال نوبت <b><u>${itemName}</u></b> مطمئن هستید؟`,
+        message: `آیا از ابطال <b><u>${itemName}</u></b> مطمئن هستید؟`,
         icon: 'pi pi-times',
         acceptLabel: 'ابطال نوبت',
         acceptSeverity: 'danger' as const,

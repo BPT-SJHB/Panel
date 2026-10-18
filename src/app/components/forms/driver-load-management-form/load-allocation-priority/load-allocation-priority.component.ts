@@ -1,42 +1,51 @@
-import {
-  AfterViewInit,
-  Component,
-  inject,
-  OnInit,
-  signal,
-  ViewChild,
-} from '@angular/core';
-import { BaseLoading } from 'app/components/forms/shared/component-base/base-loading';
-import { LoadManagementService } from 'app/services/load-management/load-management.service';
-import { checkAndToastError } from 'app/utils/api-utils';
-import { LoadAllocationInfo } from 'app/services/load-management/model/load-allocation-info.model';
-import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
-import { OrderList, OrderListModule } from 'primeng/orderlist';
-import { ButtonComponent } from 'app/components/shared/button/button.component';
+/**
+ * Custom reorder list. Replaces PrimeNG OrderList.
+ *
+ * Spec
+ * - Same cards: title, company, priority badge, expandable body, cancel, save.
+ * - Circular chevron toggles the card. Grip handle reorders.
+ * - Phone: scroll the list; drag only from the grip. Desktop: both.
+ * - Order in `loadsAllocations` is the source of truth for save.
+ *
+ * Do not regress
+ * - Whole-row CDK drag sets touch-action:none → phone cannot scroll.
+ * - PrimeNG OrderList/Listbox owns CDK_DRAG_CONFIG; delay/handle hacks never stick.
+ * - forwardTouchScroll + preventDefault kills native scroll and CDK drag.
+ * - Fake sibling scrollbar gutter: RTL first-child is visual right; measure-before-paint → height 0; overlay thumbs hide.
+ * - document.querySelector into PrimeNG internals.
+ * - New list libraries.
+ */
+import { CdkDrag, CdkDragDrop, CdkDragHandle, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { NgClass } from '@angular/common';
-import { PanelModule } from 'primeng/panel';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, signal, viewChild } from '@angular/core';
+import { BaseLoading } from 'app/components/forms/shared/component-base/base-loading';
+import { ButtonComponent } from 'app/components/shared/button/button.component';
+import { OnViewActivated } from 'app/interfaces/on-view-activated.interface';
 import { AppConfirmService } from 'app/services/confirm/confirm.service';
+import { LoadManagementService } from 'app/services/load-management/load-management.service';
+import { LoadAllocationInfo } from 'app/services/load-management/model/load-allocation-info.model';
 import { LoadAllocationPriority } from 'app/services/load-management/model/load-allocation-priority';
+import { checkAndToastError } from 'app/utils/api-utils';
 
 @Component({
   selector: 'app-load-allocation-priority',
-  imports: [OrderListModule, ButtonComponent, NgClass, PanelModule],
+  imports: [CdkDropList, CdkDrag, CdkDragHandle, ButtonComponent, NgClass],
   templateUrl: './load-allocation-priority.component.html',
   styleUrl: './load-allocation-priority.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoadAllocationPriorityComponent
   extends BaseLoading
-  implements OnViewActivated, OnInit, AfterViewInit
+  implements OnViewActivated
 {
-  @ViewChild('orderlist', { static: true }) orderList!: OrderList;
-
   private readonly loadsService = inject(LoadManagementService);
   private readonly confirmDialog = inject(AppConfirmService);
   readonly loadsAllocations = signal<LoadAllocationInfo[]>([]);
   readonly travelTime = signal(new Map<number, number>());
   readonly loadingTimeTravels = signal(new Set<number>());
-  private destroyTouchScroll: (() => void) | null = null;
   readonly selection = signal<LoadAllocationInfo[]>([]);
+  readonly expandedIds = signal(new Set<number>());
+  private readonly listEl = viewChild<ElementRef<HTMLUListElement>>('list');
 
   onViewActivated(): void {
     this.withLoading(async () => {
@@ -45,76 +54,114 @@ export class LoadAllocationPriorityComponent
     });
   }
 
-  ngAfterViewInit(): void {
-    const parent = document.getElementById('orderlist');
-    const child = parent?.querySelector('.p-listbox-list-container');
-
-    this.destroyTouchScroll = this.forwardTouchScroll(
-      parent,
-      child as HTMLElement
-    );
+  drop(event: CdkDragDrop<LoadAllocationInfo[]>): void {
+    this.loadsAllocations.update((items) => {
+      const next = [...items];
+      moveItemInArray(next, event.previousIndex, event.currentIndex);
+      return next;
+    });
   }
 
-  override ngOnDestroy(): void {
-    this.destroyTouchScroll?.();
+  canMove(dir: 'up' | 'down' | 'top' | 'bottom'): boolean {
+    const from = this.selectedIndex();
+    if (from < 0) return false;
+    const last = this.loadsAllocations().length - 1;
+    if (last < 1) return false;
+    return dir === 'up' || dir === 'top' ? from > 0 : from < last;
   }
 
-  override ngOnInit(): void {
-    super.ngOnInit();
+  moveSelected(dir: 'up' | 'down' | 'top' | 'bottom'): void {
+    const from = this.selectedIndex();
+    if (from < 0) return;
+    const last = this.loadsAllocations().length - 1;
+    const dest =
+      dir === 'top' ? 0 : dir === 'bottom' ? last : dir === 'up' ? from - 1 : from + 1;
+    if (dest < 0 || dest > last || dest === from) return;
+    const before = this.snapshotRects();
+    this.loadsAllocations.update((items) => {
+      const next = [...items];
+      moveItemInArray(next, from, dest);
+      return next;
+    });
+    requestAnimationFrame(() => this.playFlip(before));
   }
 
-  private forwardTouchScroll(
-    parent?: HTMLElement | null,
-    child?: HTMLElement | null
-  ) {
-    if (!parent || !child) return null;
+  private snapshotRects(): Map<string, DOMRect> {
+    const map = new Map<string, DOMRect>();
+    const root = this.listEl()?.nativeElement;
+    if (!root) return map;
+    for (const el of Array.from(root.children) as HTMLElement[]) {
+      const id = el.dataset['id'];
+      if (id) map.set(id, el.getBoundingClientRect());
+    }
+    return map;
+  }
 
-    let startY = 0;
+  private playFlip(before: Map<string, DOMRect>): void {
+    const root = this.listEl()?.nativeElement;
+    if (!root) return;
+    for (const el of Array.from(root.children) as HTMLElement[]) {
+      const id = el.dataset['id'];
+      const prev = id ? before.get(id) : undefined;
+      if (!prev) continue;
+      const dy = prev.top - el.getBoundingClientRect().top;
+      if (Math.abs(dy) < 1) continue;
+      el.animate(
+        [{ transform: `translateY(${dy}px)` }, { transform: 'none' }],
+        { duration: 220, easing: 'ease' }
+      );
+    }
+  }
 
-    const onTouchStart = (e: TouchEvent) => {
-      startY = e.touches[0].clientY;
-    };
+  private selectedIndex(): number {
+    const id = this.selection()[0]?.LAId;
+    return id == null ? -1 : this.loadsAllocations().findIndex((x) => x.LAId === id);
+  }
 
-    const onTouchMove = (e: TouchEvent) => {
-      const currentY = e.touches[0].clientY;
-      const deltaY = startY - currentY;
-      child.scrollTop += deltaY;
-      startY = currentY;
-      e.preventDefault();
-    };
+  selectLoad(load: LoadAllocationInfo): void {
+    this.selection.update((cur) => (cur[0]?.LAId === load.LAId ? [] : [load]));
+  }
 
-    parent.addEventListener('touchstart', onTouchStart, { passive: true });
-    parent.addEventListener('touchmove', onTouchMove, { passive: false });
+  isExpanded(ladId: number): boolean {
+    return this.expandedIds().has(ladId);
+  }
 
-    // return cleanup function
-    return () => {
-      parent.removeEventListener('touchstart', onTouchStart);
-      parent.removeEventListener('touchmove', onTouchMove);
-    };
+  toggleExpand(ladId: number, event: Event): void {
+    event.stopPropagation();
+    this.expandedIds.update((ids) => {
+      const next = new Set(ids);
+      if (next.has(ladId)) next.delete(ladId);
+      else next.add(ladId);
+      return next;
+    });
   }
 
   private async loadLoadsAllocation(): Promise<void> {
-    await this.withLoading(async () => {
-      const response = await this.loadsService.GetLoadAllocationOfDriver();
-      if (!checkAndToastError(response, this.toast)) return;
-      this.loadsAllocations.set(response.data);
-    });
+    const response = await this.loadsService.GetLoadAllocationOfDriver();
+    if (!checkAndToastError(response, this.toast)) {
+      this.loadsAllocations.set([]);
+      return;
+    }
+    this.loadsAllocations.set(response.data ?? []);
   }
 
   async showTravelTime(ladId: number) {
     const time = this.getTimeTravel(ladId);
-    if (time) return;
-    this.loadingTimeTravels.update((lt) => lt.add(ladId));
+    if (time != null) return;
+    this.loadingTimeTravels.update((lt) => new Set(lt).add(ladId));
     try {
       const response =
         await this.loadsService.GetTravelTimeOfMyLoadAllocation(ladId);
       if (!checkAndToastError(response, this.toast)) return;
-      this.travelTime.update((map) => map.set(ladId, response.data.TravelTime));
+      this.travelTime.update(
+        (map) => new Map(map).set(ladId, response.data.TravelTime)
+      );
     } finally {
       setTimeout(() => {
         this.loadingTimeTravels.update((lt) => {
-          lt.delete(ladId);
-          return lt;
+          const next = new Set(lt);
+          next.delete(ladId);
+          return next;
         });
       }, 2000);
     }
@@ -138,29 +185,14 @@ export class LoadAllocationPriorityComponent
   }
 
   getTimeTravel(ladId: number) {
-    const time = this.travelTime().get(ladId);
-    return time;
-  }
-
-  selectionChanged(loads: LoadAllocationInfo[]) {
-    if (loads.length === 0) {
-      this.selection.set([]);
-      return;
-    }
-    for (const load of loads) {
-      if (
-        this.selection().length === 0 ||
-        this.selection()[0].LAId !== load.LAId
-      )
-        this.selection.set([load]);
-    }
+    return this.travelTime().get(ladId);
   }
 
   isLoadSelected(ladId: number): boolean {
     return this.selection().length > 0 && this.selection()[0].LAId === ladId;
   }
 
-  async savePriorities($event: MouseEvent) {
+  async savePriorities() {
     await this.withLoading(async () => {
       const priorites: LoadAllocationPriority[] = this.loadsAllocations().map(
         (item, index) => ({ LAId: item.LAId, Priority: index + 1 })
@@ -169,8 +201,7 @@ export class LoadAllocationPriorityComponent
         await this.loadsService.ChangePriorityLoadAllocations(priorites);
       if (!checkAndToastError(response, this.toast)) return;
       this.toast.success('موفق', response.data.Message);
+      await this.loadLoadsAllocation();
     });
-
-    await this.loadLoadsAllocation();
   }
 }

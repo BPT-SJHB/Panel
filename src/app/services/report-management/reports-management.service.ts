@@ -79,16 +79,13 @@ export class ReportsManagementService {
     //#endregion
   }
 
-  public async GetLoadPermissionsForDriver(
-    announcementGroupId: number,
-    announcementSubGroupId: number
-  ): Promise<ApiResponse<LoadPermissionForDriver[]>> {
+  public async GetLoadPermissionsForDriver(): Promise<
+    ApiResponse<LoadPermissionForDriver[]>
+  > {
     //#region Consts
     const apiUrl = API_ROUTES.Reports.Load.GetLoadPermissionsForDriver;
     const bodyValue = {
       SessionId: this.userAuth.getSessionId(),
-      AnnouncementGroupId: announcementGroupId,
-      AnnouncementSubGroupId: announcementSubGroupId,
     };
     //#endregion
 

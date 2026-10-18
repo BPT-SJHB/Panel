@@ -290,13 +290,28 @@ export function getMockResponseForUrl(url: string, _method: string): unknown {
     return mockShortResponse;
   }
 
+  // Load Allocations
+  if (url.includes('GetTruckDriverLoadAllocationsRecords')) return mockLoadAllocationRecords;
+  if (url.includes('GetTruckDriverLoadAllocations')) return mockLoadAllocationInfos;
+  if (url.includes('LoadAllocateToOther')) return mockLoadAllocatedToNextTurn;
+  if (url.includes('GetTravelTimeforLoadAllocationForMe')) return { TravelTime: 73 };
+  if (
+    url.includes('LoadAllocationRegisteringforTruckDriver') ||
+    url.includes('LoadAllocationRegisteringforTransportCompany') ||
+    url.includes('LoadAllocationRegisteringforAdministrator') ||
+    url.includes('LoadAllocationCancelling') ||
+    url.includes('LoadAllocationsChangePriority')
+  ) {
+    return mockShortResponse;
+  }
+
   // Driver & Truck
   if (url.includes('GetCargoTerminals') || url.includes('GetLoadAnnouncementPlaces')) return mockCargoTerminals;
   if (
     url.includes('GetTruckDriverFromRMTO') ||
     url.includes('GetTruckDriverFromWebsite') ||
     url.includes('GetTruckDriverBySoftwareUser') ||
-    url.includes('GetTruckDriver')
+    (url.includes('GetTruckDriver') && !url.includes('LoadAllocation'))
   ) {
     return mockTruckDriverInfo;
   }
@@ -393,19 +408,6 @@ export function getMockResponseForUrl(url: string, _method: string): unknown {
     url.includes('LoadCancelling') ||
     url.includes('LoadFreeLining') ||
     url.includes('LoadSedimenting')
-  ) {
-    return mockShortResponse;
-  }
-  if (url.includes('GetTruckDriverLoadAllocationsRecords')) return mockLoadAllocationRecords;
-  if (url.includes('GetTruckDriverLoadAllocations')) return mockLoadAllocationInfos;
-  if (url.includes('LoadAllocateToOther')) return mockLoadAllocatedToNextTurn;
-  if (url.includes('GetTravelTimeforLoadAllocationForMe')) return { TravelTime: 73 };
-  if (
-    url.includes('LoadAllocationRegisteringforTruckDriver') ||
-    url.includes('LoadAllocationRegisteringforTransportCompany') ||
-    url.includes('LoadAllocationRegisteringforAdministrator') ||
-    url.includes('LoadAllocationCancelling') ||
-    url.includes('LoadAllocationsChangePriority')
   ) {
     return mockShortResponse;
   }

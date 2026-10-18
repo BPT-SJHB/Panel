@@ -70,5 +70,6 @@ export const mockLoadAllocationInfos: LoadAllocationInfo[] = [
     Description: 'بارگیری فردا صبح',
     Address: 'خیابان چهارم',
     Recipient: 'زهرا احمدی',
+    LANote: 'در انتظار تخصیص',
   },
 ];
