@@ -18,10 +18,11 @@ Enterprise Angular management panel built with **Angular 21**, **PrimeNG 21**, *
 
 ```bash
 # Start local development server (port 4200)
+# ng serve defaultConfiguration is development (fileReplacements → environment.development.ts)
 npm start
 # or: ng serve
 
-# Production build
+# Production build (`npm run build` / `ng build` defaultConfiguration is production)
 npm run build
 # or: ng build --configuration production
 
@@ -31,6 +32,8 @@ npm run watch
 # Linting (Angular ESLint + ESLint 9)
 npm run lint
 
+# After code changes, agents should run: npm run lint && npm run build
+
 # Unit tests
 npm run test
 # Headless test run
@@ -38,7 +41,7 @@ npm test -- --watch=false --browsers=ChromeHeadless
 # Run a single unit test file
 npx ng test --include='src/app/pipes/minute-and-second.pipe.spec.ts' --watch=false --browsers=ChromeHeadless
 
-# Bundle analysis
+# Bundle analysis (needs a prior build with source maps)
 npm run explore
 
 # Documentation (Compodoc)
@@ -47,11 +50,14 @@ npm run doc
 
 CI (`.github/workflows/ci.yml`) runs Node 24, `npm ci`, then `npx ng build --configuration production --output-hashing=all`. Unit tests in CI are commented out.
 
+TypeScript `baseUrl` is `src/`, so imports use `app/...` and `environments/...`. Component selector prefix is `app`.
+
 ---
 
 ## ⚡ Standards & Skill References
 
 - Modern Angular standards: Follow `.claude/skills/angular-developer/SKILL.md` (Standalone components, Signals `input()`/`output()`/`model()`, `inject()`, `ChangeDetectionStrategy.OnPush`, `@if`/`@for`, typed forms).
+- After edits: follow `.claude/skills/post-change/SKILL.md` (`npm run lint && npm run build`; mock-registry if services/API changed).
 
 ---
 
@@ -88,9 +94,13 @@ CI (`.github/workflows/ci.yml`) runs Node 24, `npm ci`, then `npx ng build --con
    - Ticket APIs use `environment.ticketApiUrl` + `/api/v1/` (no port suffix). Dev host is in `src/environments/environment.development.ts`; prod host is in `src/environments/environment.ts`.
 
 7. **Offline Mock System**:
-   - When `environment.disableApi` is `true` (`src/environments/environment.development.ts`), `mockApiInterceptor` intercepts HTTP traffic.
+   - `provideHttpClient(withInterceptors([mockApiInterceptor]))` in `src/app/app.config.ts` always registers the interceptor; it only mocks when `environment.disableApi` is `true` (`src/environments/environment.development.ts`).
    - Mock handlers and payloads are registered in `src/app/interceptors/mock-registry.ts` and loaded from `src/app/data/mock/` or service-level `mock/` directories.
 
 8. **Form Base, Loading & API Error Handling**:
    - Forms extend `BaseLoading` (`src/app/components/forms/shared/component-base/base-loading.ts`) for signal-based loading state (`withLoading`) and cleanup (`destroy$`).
    - API responses are validated using `checkAndToastError()` (`src/app/utils/api-utils.ts`). Tables and dependent fields should reset to empty states on API errors.
+
+9. **New panel tool wiring** (not a route): add the form under `src/app/components/forms/`, register `TabComponentKey` + `TabConfig` in `tab-component-registry.ts`, add endpoints in `constants/api.ts` + a service under `src/app/services/`, and a mock handler in `mock-registry.ts`.
+
+10. **Print**: `PrintService` (`src/app/services/print/print.service.ts`) prints from data via an iframe — do not clone live DOM. Spec: `docs/reporting-and-print-service.md`.
